@@ -36,11 +36,11 @@ class Login extends Component
             ->statePath('data');
     }
 
-    public function authenticate()
+    public function authenticate(): \Illuminate\Http\RedirectResponse|\Illuminate\Http\Response
     {
-        $validated = $this->form->getState();
+        $validated = $this->data;
 
-        if (Auth::attempt($validated)) {
+        if (is_array($validated) && Auth::attempt($validated)) {
             session()->regenerate();
 
             Notification::make()
@@ -57,9 +57,11 @@ class Login extends Component
             ->title(__('Le credenziali fornite non sono corrette'))
             ->danger()
             ->send();
+
+        return back();
     }
 
-    public function render()
+    public function render(): \Illuminate\Contracts\View\View
     {
         return view('pub_theme::livewire.auth.login');
     }

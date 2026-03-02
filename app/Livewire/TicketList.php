@@ -11,11 +11,14 @@ class TicketList extends VoltComponent
 {
     use WithPagination;
 
-    public $search = '';
+    /** @var \Illuminate\Contracts\Pagination\LengthAwarePaginator */
+    public $tickets;
 
-    public $selectedCategory = '';
+    public string $search = '';
 
-    public $selectedStatus = '';
+    public string $selectedCategory = '';
+
+    public string $selectedStatus = '';
 
     public array $categories = [
         'Acqua, allagamenti, problemi fognari (21)',
@@ -31,16 +34,16 @@ class TicketList extends VoltComponent
         'Strade, marciapiedi, segnaletica e viabilità (302)',
     ];
 
-    public function getTicketsProperty()
+    public function getTicketsProperty(): \Illuminate\Contracts\Pagination\LengthAwarePaginator
     {
-        return Ticket::query()
-            ->when($this->search, fn ($q) => $q->where('title', 'like', "%{$this->search}%")
+        /** @var \Illuminate\Database\Eloquent\Builder<Ticket> $query */
+        $query = Ticket::query();
+
+        return $query
+            ->when($this->search, fn (\Illuminate\Database\Eloquent\Builder $q) => $q->where('title', 'like', "%{$this->search}%")
                 ->orWhere('content', 'like', "%{$this->search}%")
             )
-            ->when($this->selectedCategory, fn ($q) => $q->whereHas('category', fn ($q) => $q->where('name', $this->selectedCategory)
-            )
-            )
-            ->when($this->selectedStatus, fn ($q) => $q->where('status', $this->selectedStatus)
+            ->when($this->selectedStatus, fn (\Illuminate\Database\Eloquent\Builder $q) => $q->where('status', $this->selectedStatus)
             )
             ->latest()
             ->paginate(10);

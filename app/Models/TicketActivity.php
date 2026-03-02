@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace Modules\Fixcity\Models;
 
-use Illuminate\Support\Carbon;
-use Modules\User\Models\User;
-use Modules\Fixcity\Database\Factories\TicketActivityFactory;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Support\Carbon;
+use Modules\Fixcity\Database\Factories\TicketActivityFactory;
+use Modules\User\Models\User;
 use Modules\Xot\Datas\XotData;
 
 /**
@@ -52,6 +52,7 @@ use Modules\Xot\Datas\XotData;
  */
 class TicketActivity extends BaseModel
 {
+    /** @var list<string> */
     protected $fillable = [
         'ticket_id',
         'old_status_id',
@@ -59,24 +60,24 @@ class TicketActivity extends BaseModel
         'user_id',
     ];
 
+    /**
+     * Get the ticket that owns the activity.
+     *
+     * @return BelongsTo<Ticket, $this>
+     */
     public function ticket(): BelongsTo
     {
-        return $this->belongsTo(Ticket::class, 'ticket_id', 'id')->withTrashed();
+        return $this->belongsTo(Ticket::class, 'ticket_id', 'id');
     }
 
-    /*
-    public function oldStatus(): BelongsTo
-    {
-        return $this->belongsTo(TicketStatus::class, 'old_status_id', 'id')->withTrashed();
-    }
-
-    public function newStatus(): BelongsTo
-    {
-        return $this->belongsTo(TicketStatus::class, 'new_status_id', 'id')->withTrashed();
-    }
-    */
+    /**
+     * Get the user that owns the activity.
+     *
+     * @return BelongsTo<User, $this>
+     */
     public function user(): BelongsTo
     {
+        /** @var class-string<User> $user_class */
         $user_class = XotData::make()->getUserClass();
 
         return $this->belongsTo($user_class, 'user_id', 'id');

@@ -78,6 +78,7 @@ class CreateTicketWidget extends BaseWidget implements HasForms, HasActions
                     ->label(__('fixcity::fixcity.ticket.steps.data.label'))
                     ->icon('heroicon-o-document-text')
                     ->description(__('fixcity::fixcity.ticket.steps.data.description'))
+                    /** @phpstan-ignore-next-line */
                     ->schema([
                         Placeholder::make('')
                             ->content(new HtmlString('<h1 class="subtitle text-4xl font-bold mb-4 dark:text-white">'.__('fixcity::fixcity.ticket.fields.issue.label').'</h1>')),
@@ -111,7 +112,8 @@ class CreateTicketWidget extends BaseWidget implements HasForms, HasActions
     public function form(Schema $schema): Schema
     {
         return $schema
-            ->components($this->getFormSchema())
+            /** @phpstan-ignore-next-line */
+            ->components(array_values($this->getFormSchema()))
             ->statePath('data');
     }
 

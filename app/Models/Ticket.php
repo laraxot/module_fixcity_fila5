@@ -76,6 +76,7 @@ use Webmozart\Assert\Assert;
  * @property MediaCollection<int, Media> $media
  * @property int|null $media_count
  * @property User|null $owner
+ * @property User|null $assignee
  * @property TicketPriorityEnum|null $priority
  * @property Collection<int, TicketRelation> $relations
  * @property int|null $relations_count
@@ -89,49 +90,49 @@ use Webmozart\Assert\Assert;
  * @property TicketTypeEnum|null $type
  *
  * @method static TicketFactory factory($count = null, $state = [])
- * @method static Builder|Ticket newModelQuery()
- * @method static Builder|Ticket newQuery()
- * @method static Builder|Ticket onlyTrashed()
- * @method static Builder|Ticket query()
- * @method static Builder|Ticket whereCode($value)
- * @method static Builder|Ticket whereContent($value)
- * @method static Builder|Ticket whereCreatedAt($value)
- * @method static Builder|Ticket whereCreatedBy($value)
- * @method static Builder|Ticket whereDeletedAt($value)
- * @method static Builder|Ticket whereDeletedBy($value)
- * @method static Builder|Ticket whereEpicId($value)
- * @method static Builder|Ticket whereEstimation($value)
- * @method static Builder|Ticket whereId($value)
- * @method static Builder|Ticket whereLatitude($value)
- * @method static Builder|Ticket whereLongitude($value)
- * @method static Builder|Ticket whereName($value)
- * @method static Builder|Ticket whereOrder($value)
- * @method static Builder|Ticket whereOwnerId($value)
- * @method static Builder|Ticket wherePriorityId($value)
- * @method static Builder|Ticket whereProjectId($value)
- * @method static Builder|Ticket whereResponsibleId($value)
- * @method static Builder|Ticket whereSprintId($value)
- * @method static Builder|Ticket whereStatusId($value)
- * @method static Builder|Ticket whereTicketPrefix($value)
- * @method static Builder|Ticket whereTypeId($value)
- * @method static Builder|Ticket whereUpdatedAt($value)
- * @method static Builder|Ticket whereUpdatedBy($value)
- * @method static Builder|Ticket withTrashed()
- * @method static Builder|Ticket withoutTrashed()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Ticket newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Ticket newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Ticket onlyTrashed()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Ticket query()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Ticket whereCode($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Ticket whereContent($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Ticket whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Ticket whereCreatedBy($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Ticket whereDeletedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Ticket whereDeletedBy($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Ticket whereEpicId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Ticket whereEstimation($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Ticket whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Ticket whereLatitude($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Ticket whereLongitude($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Ticket whereName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Ticket whereOrder($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Ticket whereOwnerId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Ticket wherePriorityId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Ticket whereProjectId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Ticket whereResponsibleId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Ticket whereSprintId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Ticket whereStatusId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Ticket whereTicketPrefix($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Ticket whereTypeId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Ticket whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Ticket whereUpdatedBy($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Ticket withTrashed()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Ticket withoutTrashed()
  *
  * @property Collection<int, Status> $statuses
  * @property int|null $statuses_count
  *
- * @method static Builder|Ticket currentStatus(...$names)
- * @method static Builder|Ticket otherCurrentStatus(...$names)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Ticket currentStatus(...$names)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Ticket otherCurrentStatus(...$names)
  *
  * @property ProfileContract|null $creator
  * @property ProfileContract|null $updater
  *
- * @method static Builder|Ticket wherePriority($value)
- * @method static Builder|Ticket whereSlug($value)
- * @method static Builder|Ticket whereStatus($value)
- * @method static Builder|Ticket whereType($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Ticket wherePriority($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Ticket whereSlug($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Ticket whereStatus($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Ticket whereType($value)
  *
  * @property Collection<int, CommentNotificationSubscription> $notificationSubscriptions
  * @property int|null $notification_subscriptions_count
@@ -170,11 +171,7 @@ class Ticket extends XotBaseModel implements HasMedia
         // 'estimationProgress',
     ];
 
-    protected $casts = [
-        'status' => TicketStatusEnum::class,
-        'priority' => TicketPriorityEnum::class,
-        'type' => TicketTypeEnum::class,
-    ];
+
 
     public function casts(): array
     {
@@ -185,6 +182,14 @@ class Ticket extends XotBaseModel implements HasMedia
             'priority' => TicketPriorityEnum::class,
             'type' => TicketTypeEnum::class,
         ];
+    }
+
+    /**
+     * @return \Modules\Fixcity\Database\Factories\TicketFactory
+     */
+    protected static function newFactory(): \Modules\Fixcity\Database\Factories\TicketFactory
+    {
+        return \Modules\Fixcity\Database\Factories\TicketFactory::new();
     }
 
     public function getIconData(): array
@@ -334,12 +339,6 @@ class Ticket extends XotBaseModel implements HasMedia
         return $this->hasMany(TicketActivity::class, 'ticket_id', 'id');
     }
 
-    /*
-     public function comments(): HasMany
-     {
-         return $this->hasMany(TicketComment::class, 'ticket_id', 'id');
-     }
-         */
     /*-- e' in comment
     public function subscribers(): BelongsToMany
     {
@@ -481,21 +480,51 @@ class Ticket extends XotBaseModel implements HasMedia
         return '#';
     }
 
-    public function assignee(): BelongsTo
-    {
-        return $this->belongsTo(config('auth.providers.users.model'), 'assignee_id');
-    }
+    /**
+ * @return BelongsTo<User, $this>
+ */
+public function assignee(): BelongsTo
+{
+    /** @var class-string<User> $userModel */
+    $userModel = config('auth.providers.users.model');
 
+    return $this->belongsTo($userModel, 'assignee_id');
+}
+
+    /**
+     * @return HasMany<TicketComment, $this>
+     */
     public function comments(): HasMany
     {
         return $this->hasMany(TicketComment::class);
     }
 
-    public function subscribers(): BelongsToMany
+    /**
+     * Set the status of the ticket.
+     */
+    public function setStatus(string|TicketStatusEnum $status): void
     {
-        return $this->belongsToMany(config('auth.providers.users.model'), 'ticket_subscribers')
-            ->withTimestamps();
+        if (is_string($status)) {
+            $status = TicketStatusEnum::tryFrom($status);
+        }
+
+        if ($status instanceof TicketStatusEnum) {
+            $this->status = $status;
+            $this->save();
+        }
     }
+
+/**
+ * @return BelongsToMany<User, $this>
+ */
+public function subscribers(): BelongsToMany
+{
+    /** @var class-string<User> $userModel */
+    $userModel = config('auth.providers.users.model');
+
+    return $this->belongsToMany($userModel, 'ticket_subscribers')
+        ->withTimestamps();
+}
 
     public function registerMediaCollections(): void
     {

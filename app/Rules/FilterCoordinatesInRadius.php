@@ -24,10 +24,22 @@ class FilterCoordinatesInRadius implements ValidationRule
         $latitude = (float) $value['lat'];
         $longitude = (float) $value['lng'];
 
-        $coordinatesArray = Ticket::where('latitude', '!=', null)
+        $rawCoordinates = Ticket::where('latitude', '!=', null)
             ->where('longitude', '!=', null)
-            ->select('id', 'latitude', 'longitude')->get()->toArray();
-        // $ticket_vicini = app(CoordinatesFilter::class)->execute($value['lat'], $value['lng'], $coordinatesArray, 1);
+            ->select('id', 'latitude', 'longitude')
+            ->get()
+            ->toArray();
+
+        /** @var array<array{latitude: string, longitude: string}> $coordinatesArray */
+        $coordinatesArray = array_map(
+            /** @param mixed $row */
+            static fn (mixed $row): array => [
+                'latitude' => (string) (is_array($row) ? ($row['latitude'] ?? '0') : '0'),
+                'longitude' => (string) (is_array($row) ? ($row['longitude'] ?? '0') : '0'),
+            ],
+            $rawCoordinates
+        );
+
         $ticket_vicini = app(CoordinatesFilter::class)->execute($latitude, $longitude, $coordinatesArray, 1);
 
         // dddx([$value['lat'], $value['lng'], $coordinatesArray, $ticket_vicini]);

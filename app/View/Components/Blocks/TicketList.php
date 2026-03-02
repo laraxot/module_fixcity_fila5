@@ -9,6 +9,7 @@ class TicketList extends Component
 {
     public array $categories;
 
+    /** @var \Illuminate\Contracts\Pagination\LengthAwarePaginator<int, Ticket> */
     public $tickets;
 
     public function __construct()
@@ -27,7 +28,9 @@ class TicketList extends Component
             'Strade, marciapiedi, segnaletica e viabilità (302)',
         ];
 
-        $this->tickets = Ticket::query()
+        /** @var \Illuminate\Database\Eloquent\Builder<Ticket> $query */
+        $query = Ticket::query();
+        $this->tickets = $query
             ->latest()
             ->paginate(10);
     }

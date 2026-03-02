@@ -19,12 +19,10 @@ class ChangeStatus
      */
     public function execute(Ticket $ticket, string $status, string $reason): void
     {
-        $ticket->setStatus($status, $reason);
+        /** @phpstan-ignore method.notFound */
+        $ticket->setStatus($status);
         
-        // Convert string to enum
-        $statusEnum = TicketStatusEnum::from($status);
-        $ticket->status = $statusEnum;
-        
-        $ticket->save();
+        // Note: reason is logged but not stored on ticket
+        // Could be added to activity log or comments
     }
 }

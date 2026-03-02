@@ -48,9 +48,9 @@ class TicketPolicy
      *
      * @return Response|bool
      */
-    public function create(UserContract $user)
+    public function create(UserContract $user): Response|bool
     {
-        return $user->can('Create ticket');
+        return $user->hasPermissionTo('Create ticket');
     }
 
     /**
@@ -77,8 +77,8 @@ class TicketPolicy
      *
      * @return Response|bool
      */
-    public function delete(UserContract $user, Ticket $ticket)
+    public function delete(UserContract $user, Ticket $ticket): Response|bool
     {
-        return $user->can('Delete ticket');
+        return $user->hasPermissionTo('Delete ticket');
     }
 }
