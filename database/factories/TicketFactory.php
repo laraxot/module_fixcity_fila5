@@ -1,60 +1,84 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Modules\Fixcity\Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
-use Modules\Category\Models\Category;
+use Modules\Fixcity\Enums\TicketPriorityEnum;
+use Modules\Fixcity\Enums\TicketStatusEnum;
+use Modules\Fixcity\Enums\TicketTypeEnum;
 use Modules\Fixcity\Models\Ticket;
 use Modules\User\Models\User;
 
+/**
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<Ticket>
+ */
 class TicketFactory extends Factory
 {
     protected $model = Ticket::class;
 
+    /**
+     * @return array<string, mixed>
+     */
     public function definition(): array
     {
         return [
-            'title' => $this->faker->sentence(),
-            'content' => $this->faker->paragraphs(3, true),
-            'status' => $this->faker->randomElement(['open', 'in_progress', 'resolved', 'closed']),
-            'priority' => $this->faker->randomElement(['low', 'medium', 'high', 'urgent']),
-            'category_id' => Category::factory(),
-            'user_id' => User::factory(),
-            'created_at' => $this->faker->dateTimeBetween('-1 month', 'now'),
-            'updated_at' => function (array $attributes) {
-                return $this->faker->dateTimeBetween($attributes['created_at'], 'now');
-            },
+            'name' => fake()->sentence(),
+            'slug' => fake()->slug(),
+            'content' => fake()->paragraph(),
+            'owner_id' => User::factory(),
+            'responsible_id' => User::factory(),
+            'status_id' => fake()->numberBetween(1, 10),
+            'code' => fake()->unique()->numerify('TCK-#####'),
+            'ticket_prefix' => 'TCK',
+            'order' => fake()->numberBetween(0, 100),
+            'priority_id' => fake()->numberBetween(1, 5),
+            'project_id' => null,
+            'estimation' => fake()->optional()->randomFloat(1, 0, 100),
+            'epic_id' => null,
+            'sprint_id' => null,
+            'type_id' => fake()->optional()->numberBetween(1, 5),
+            'latitude' => fake()->optional()->latitude,
+            'longitude' => fake()->optional()->longitude,
+            'created_by' => fake()->optional()->userName(),
+            'updated_by' => fake()->optional()->userName(),
         ];
     }
 
     /**
-     * Indica un ticket aperto.
+     * Indica che il ticket è aperto.
+     *
+     * @return static
      */
-    public function open(): self
+    public function open(): static
     {
         return $this->state(fn (array $attributes) => [
-            'status' => 'open',
+            'status' => TicketStatusEnum::OPEN,
         ]);
     }
 
     /**
-     * Indica un ticket urgente.
+     * Indica che il ticket è urgente.
+     *
+     * @return static
      */
-    public function urgent(): self
+    public function urgent(): static
     {
         return $this->state(fn (array $attributes) => [
-            'priority' => 'urgent',
-            'status' => 'open',
+            'priority' => TicketPriorityEnum::URGENT,
         ]);
     }
 
     /**
-     * Indica un ticket risolto.
+     * Indica che il ticket è risolto.
+     *
+     * @return static
      */
-    public function resolved(): self
+    public function resolved(): static
     {
         return $this->state(fn (array $attributes) => [
-            'status' => 'resolved',
+            'status' => TicketStatusEnum::RESOLVED,
         ]);
     }
 }

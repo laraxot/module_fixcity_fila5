@@ -25,8 +25,9 @@ use Modules\User\Models\OauthAccessToken;
 use Modules\User\Database\Factories\UserFactory;
 use Illuminate\Database\Eloquent\Builder as EloquentBuilder;
 use Modules\User\Models\User as BaseUser;
-use Spatie\Comments\Models\Concerns\InteractsWithComments;
-use Spatie\Comments\Models\Concerns\Interfaces\CanComment;
+// Temporarily disabled due to conflict with BaseUser's notifications() method
+// use Spatie\Comments\Models\Concerns\InteractsWithComments;
+// use Spatie\Comments\Models\Concerns\Interfaces\CanComment;
 
 /**
  * @property string $id
@@ -108,7 +109,8 @@ use Spatie\Comments\Models\Concerns\Interfaces\CanComment;
  *
  * @mixin \Eloquent
  */
-class User extends BaseUser implements CanComment
+class User extends BaseUser
+// implements CanComment // Temporarily disabled
 {
-    use InteractsWithComments;
+    // use InteractsWithComments; // Temporarily disabled
 }

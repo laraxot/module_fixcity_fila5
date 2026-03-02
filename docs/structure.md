@@ -10,7 +10,7 @@ Modules\\Fixcity\\Database\\Seeders
 Workbench\\App
 Workbench\\Database\\Factories
 Workbench\\Database\\Seeders
-- **Pacchetto Composer**: laraxot/module_fixcity_fila3
+- **Pacchetto Composer**: laraxot/module_fixcity_fila5
 Marco Sottana
 - **Dipendenze**: repositories type path url ../Xot type path url ../Tenant type path url ../UI scripts 
 - **Totale file PHP**: 465

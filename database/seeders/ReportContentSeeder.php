@@ -8,6 +8,8 @@ use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use Modules\Fixcity\Enums\ReportStatusEnum;
 
+use function Safe\json_encode;
+
 class ReportContentSeeder extends Seeder
 {
     private array $realReports = [
@@ -61,6 +63,7 @@ class ReportContentSeeder extends Seeder
     public function run(): void
     {
         foreach ($this->realReports as $report) {
+            /** @var array<string, mixed> $report */
             DB::table('reports')->insert([
                 'title' => $report['title'],
                 'description' => $report['description'],

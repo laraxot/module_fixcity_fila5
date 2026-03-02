@@ -47,13 +47,14 @@ class TicketDatabaseSeeder extends Seeder
     public function run(): void
     {
         foreach ($this->realTickets as $ticket) {
+            /** @var array<string, mixed> $ticket */
             DB::table('tickets')->insertOrIgnore([
                 'name' => $ticket['name'],
                 'content' => $ticket['content'],
                 'status' => $ticket['status'],
                 'priority' => $ticket['priority'],
                 'owner_id' => User::first()->id ?? 1,
-                'slug' => Str::slug($ticket['name']),
+                'slug' => Str::slug((string) $ticket['name']),
                 'created_at' => now(),
                 'updated_at' => now(),
             ]);
