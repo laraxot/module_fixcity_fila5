@@ -45,7 +45,6 @@ use Modules\User\Models\SocialiteUser;
  * @property Carbon|null $updated_at
  * @property string|null $updated_by
  * @property string|null $created_by
- *
  * @method static Builder|Profile whereCreatedAt($value)
  * @method static Builder|Profile whereCreatedBy($value)
  * @method static Builder|Profile whereFirstName($value)
@@ -53,7 +52,6 @@ use Modules\User\Models\SocialiteUser;
  * @method static Builder|Profile whereLastName($value)
  * @method static Builder|Profile whereUpdatedAt($value)
  * @method static Builder|Profile whereUpdatedBy($value)
- *
  * @property Collection<int, TicketHour> $hours
  * @property int|null $hours_count
  * @property Collection<int, SocialiteUser> $socials
@@ -86,7 +84,6 @@ use Modules\User\Models\SocialiteUser;
  * @property Collection<int, Team> $teams
  * @property int|null $teams_count
  * @property string|null $user_name
- *
  * @method static ProfileFactory factory($count = null, $state = [])
  * @method static Builder|Profile whereCredits($value)
  * @method static Builder|Profile whereDeletedAt($value)
@@ -98,12 +95,19 @@ use Modules\User\Models\SocialiteUser;
  * @method static Builder|\Modules\User\Models\BaseProfile withExtraAttributes()
  * @method static Builder|\Modules\User\Models\BaseProfile withoutPermission($permissions)
  * @method static Builder|\Modules\User\Models\BaseProfile withoutRole($roles, $guard = null)
- *
  * @property DeviceUser $pivot
  * @property Membership $membership
  * @property \Modules\Fixcity\Models\Profile|null $creator
  * @property \Modules\Fixcity\Models\Profile|null $updater
- *
+ * @property-read Profile|null $deleter
+ * @method static Builder<static>|Profile byUuid(string $uuid)
+ * @method static Builder<static>|Profile childrenWith(array $relations)
+ * @method static Builder<static>|Profile childrenWithCount(array $relations)
+ * @method static Builder<static>|Profile newModelQuery()
+ * @method static Builder<static>|Profile newQuery()
+ * @method static Builder<static>|Profile permission($permissions, bool $without = false)
+ * @method static Builder<static>|Profile query()
+ * @method static Builder<static>|Profile role($roles, ?string $guard = null, bool $without = false)
  * @mixin \Eloquent
  */
 class Profile extends UserBaseProfile

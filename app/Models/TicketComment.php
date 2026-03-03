@@ -26,7 +26,6 @@ use Webmozart\Assert\Assert;
  * @property string|null $deleted_by
  * @property Ticket|null $ticket
  * @property User|null $user
- *
  * @method static TicketCommentFactory factory($count = null, $state = [])
  * @method static Builder|TicketComment newModelQuery()
  * @method static Builder|TicketComment newQuery()
@@ -44,10 +43,9 @@ use Webmozart\Assert\Assert;
  * @method static Builder|TicketComment whereUserId($value)
  * @method static Builder|TicketComment withTrashed()
  * @method static Builder|TicketComment withoutTrashed()
- *
  * @property-read Profile|null $creator
  * @property-read Profile|null $updater
- *
+ * @property-read \Modules\Fixcity\Models\Profile|null $deleter
  * @mixin \Eloquent
  */
 class TicketComment extends BaseModel

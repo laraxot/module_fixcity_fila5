@@ -23,7 +23,6 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  * @property string|null $deleted_by
  * @property Ticket|null $relation
  * @property Ticket|null $ticket
- *
  * @method static TicketRelationFactory factory($count = null, $state = [])
  * @method static Builder|TicketRelation newModelQuery()
  * @method static Builder|TicketRelation newQuery()
@@ -42,10 +41,9 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  * @method static Builder|TicketRelation whereUpdatedBy($value)
  * @method static Builder|TicketRelation withTrashed()
  * @method static Builder|TicketRelation withoutTrashed()
- *
  * @property-read Profile|null $creator
  * @property-read Profile|null $updater
- *
+ * @property-read \Modules\Fixcity\Models\Profile|null $deleter
  * @mixin \Eloquent
  */
 class TicketRelation extends BaseModel
