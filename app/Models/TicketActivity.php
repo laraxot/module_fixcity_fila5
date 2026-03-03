@@ -25,7 +25,6 @@ use Modules\Xot\Datas\XotData;
  * @property string|null $deleted_by
  * @property Ticket|null $ticket
  * @property User|null $user
- *
  * @method static TicketActivityFactory factory($count = null, $state = [])
  * @method static Builder|TicketActivity newModelQuery()
  * @method static Builder|TicketActivity newQuery()
@@ -44,10 +43,9 @@ use Modules\Xot\Datas\XotData;
  * @method static Builder|TicketActivity whereUserId($value)
  * @method static Builder|TicketActivity withTrashed()
  * @method static Builder|TicketActivity withoutTrashed()
- *
  * @property-read Profile|null $creator
  * @property-read Profile|null $updater
- *
+ * @property-read \Modules\Fixcity\Models\Profile|null $deleter
  * @mixin \Eloquent
  */
 class TicketActivity extends BaseModel

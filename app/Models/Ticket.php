@@ -88,7 +88,6 @@ use Webmozart\Assert\Assert;
  * @property mixed $total_logged_in_hours
  * @property mixed $total_logged_seconds
  * @property TicketTypeEnum|null $type
- *
  * @method static TicketFactory factory($count = null, $state = [])
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Ticket newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Ticket newQuery()
@@ -119,24 +118,19 @@ use Webmozart\Assert\Assert;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Ticket whereUpdatedBy($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Ticket withTrashed()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Ticket withoutTrashed()
- *
  * @property Collection<int, Status> $statuses
  * @property int|null $statuses_count
- *
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Ticket currentStatus(...$names)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Ticket otherCurrentStatus(...$names)
- *
  * @property ProfileContract|null $creator
  * @property ProfileContract|null $updater
- *
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Ticket wherePriority($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Ticket whereSlug($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Ticket whereStatus($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Ticket whereType($value)
- *
  * @property Collection<int, CommentNotificationSubscription> $notificationSubscriptions
  * @property int|null $notification_subscriptions_count
- *
+ * @property-read \Modules\Fixcity\Models\Profile|null $deleter
  * @mixin \Eloquent
  */
 class Ticket extends XotBaseModel implements HasMedia

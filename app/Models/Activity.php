@@ -15,10 +15,9 @@ use Illuminate\Database\Eloquent\Builder;
  * @method static Builder|Activity query()
  * @method static Builder|Activity withTrashed()
  * @method static Builder|Activity withoutTrashed()
- *
  * @property-read Profile|null $creator
  * @property-read Profile|null $updater
- *
+ * @property-read \Modules\Fixcity\Models\Profile|null $deleter
  * @mixin \Eloquent
  */
 class Activity extends BaseModel
