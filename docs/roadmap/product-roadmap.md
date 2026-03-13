@@ -1,6 +1,5 @@
 # 🗺️ Fixcity Product Roadmap
 
-> **Last Updated**: 2026-03-13  
 > **Owner**: FixCity Product Team  
 > **Status**: 🔄 In Progress (75% Complete)  
 > **Timeframe**: Q1 2026 - Q4 2027
