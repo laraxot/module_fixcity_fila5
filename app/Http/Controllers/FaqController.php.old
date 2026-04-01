@@ -1,0 +1,87 @@
+<?php
+
+declare(strict_types=1);
+
+namespace Modules\Fixcity\Http\Controllers;
+
+use Illuminate\Http\Request;
+use Illuminate\Routing\Controller;
+use Illuminate\View\View;
+use Modules\Fixcity\Models\Faq;
+use Modules\Fixcity\Models\FaqCategory;
+
+class FaqController extends Controller
+{
+    /**
+     * Display FAQ index page.
+     */
+    public function index(Request $request): View
+    {
+        $search = (string) $request->input('q', '');
+
+        $query = FaqCategory::active()
+            ->ordered()
+            ->with(['publishedFaqs' => function ($query) use ($search): void {
+                if ($search) {
+                    /** @var \Illuminate\Database\Eloquent\Builder $query */
+                    $query->where(function ($q) use ($search): void {
+                        /** @var \Illuminate\Database\Eloquent\Builder $q */
+                        $searchPattern = "%{$search}%";
+                        $q->where('question', 'like', $searchPattern)
+                            ->orWhere('answer', 'like', $searchPattern);
+                    });
+                }
+            }]);
+
+        if ($search) {
+            // Filter out categories with no matching FAQs
+            $categories = $query->get()->filter(function ($category) {
+                return $category->publishedFaqs->isNotEmpty();
+            });
+        } else {
+            $categories = $query->get();
+        }
+
+        $faqsByCategory = $categories->mapWithKeys(function ($category) {
+            return [$category->name => $category->publishedFaqs];
+        });
+
+        return view('fixcity::pages.faq.index', [
+            'faqsByCategory' => $faqsByCategory,
+            'search' => $search,
+            'totalFaqs' => $faqsByCategory->flatten()->count(),
+        ]);
+    }
+
+    /**
+     * Search FAQs (AJAX endpoint).
+     */
+    public function search(Request $request): array
+    {
+        $search = (string) $request->input('q', '');
+
+        if (strlen($search) < 2) {
+            return ['results' => []];
+        }
+
+        $faqs = Faq::published()
+            ->where(function ($query) use ($search): void {
+                $query->where('question', 'like', "%{$search}%")
+                    ->orWhere('answer', 'like', "%{$search}%");
+            })
+            ->with('category')
+            ->limit(10)
+            ->get();
+
+        return [
+            'results' => $faqs->map(function ($faq) {
+                return [
+                    'id' => $faq->id,
+                    'question' => $faq->question,
+                    'answer' => strip_tags($faq->answer),
+                    'category' => $faq->category->name,
+                ];
+            }),
+        ];
+    }
+}
