@@ -1,86 +1,150 @@
-# Modulo FixCity
+---
+title: Fixcity
+module: fixcity
+related: Xot, User
+status: production
+---
 
-## Descrizione
-FixCity è un modulo Laravel progettato per la gestione delle segnalazioni e dei problemi urbani. Permette ai cittadini di segnalare problematiche nella loro città e alle amministrazioni di gestirle in modo efficiente.
+# Fixcity Module
 
-## Caratteristiche Principali
-- Gestione segnalazioni cittadine
-- Sistema di ticketing avanzato
-- Gestione profili utente
-- Pannello amministrativo Filament
-- Supporto multilingua
+**Module**: `fixcity`
+**Namespace**: `Modules\Fixcity\`
+**Status**: ✅ Production
 
-## Requisiti
-- PHP 8.2+
-- Laravel 11.x
-- Filament 3.x
-- Modulo Xot installato
+---
 
-## Installazione
+## Overview
+
+TODO: Add overview for Fixcity module
+
+### Key Features
+
+- Feature 1
+- Feature 2
+- Feature 3
+
+### Module Dependencies
+
+- [Xot](../Xot/README.md) (required)
+- [User](../User/README.md) (required)
+
+---
+
+## Quick Start
+
+### Installation
+
 ```bash
-composer require modules/fixcity
-php artisan module:migrate Fixcity
-php artisan module:seed Fixcity
+# Already included in main project
+# No additional setup required
 ```
 
-## Struttura
-```
-Modules/Fixcity/
-├── app/
-│   ├── Models/         # Modelli del dominio
-│   ├── Providers/      # Service providers
-│   └── Filament/       # Risorse Filament
-├── config/            # Configurazioni
-├── database/         # Migrazioni e seeders
-├── resources/        # Views e assets
-└── routes/           # Definizioni delle route
+### Basic Usage
+
+```php
+use Modules\Fixcity\Models\YourModel;
+
+$item = YourModel::first();
 ```
 
-## Modelli Principali
-- `Profile`: Gestione profili utente
-- `User`: Gestione utenti
-- `Ticket`: Gestione segnalazioni
+### Configuration
 
-## Integrazione con Filament
-Il modulo utilizza Filament per il pannello amministrativo, offrendo:
-- Dashboard personalizzata
-- Gestione segnalazioni
-- Gestione utenti
-- Report e statistiche
+Configuration file: `config/fixcity.php`
 
-## API
+Key settings:
+- `setting1` - Description
+- `setting2` - Description
+
+---
+
+## Architecture
+
+### Directory Structure
+
+```
+Fixcity/
+├── src/
+│   ├── Models/
+│   ├── Controllers/
+│   ├── Resources/
+│   ├── Actions/
+│   └── Traits/
+├── routes/
+│   ├── api.php
+│   └── web.php
+├── database/
+│   ├── migrations/
+│   └── seeders/
+├── tests/
+│   ├── Unit/
+│   └── Feature/
+├── config/
+│   └── fixcity.php
+├── docs/
+│   └── README.md
+└── composer.json
+```
+
+### Key Components
+
+
+
+---
+
+## API Reference
+
+Reference
+
 Il modulo espone API RESTful per:
 - Creazione segnalazioni
 - Aggiornamento stato
 - Recupero informazioni
 - Gestione profili
 
-## Configurazione
+---
+
+---
+
+## Usage Examples
+
+### Common Tasks
+
+#### Task 1: Description
+
 ```php
-// config/fixcity.php
-return [
-    'notifications' => [
-        'email' => true,
-        'push' => false,
-    ],
-    'moderation' => [
-        'enabled' => true,
-        'auto_approve' => false,
-    ]
-];
+// Code example
 ```
+
+---
 
 ## Testing
+
+### Running Tests
+
 ```bash
-php artisan test --filter=Fixcity
+# Run all module tests
+composer test -- Modules/Fixcity
 ```
 
-## Contribuire
-1. Fork il repository
-2. Crea un branch (`git checkout -b feature/nome-feature`)
-3. Commit le modifiche (`git commit -am 'Aggiunta feature'`)
-4. Push al branch (`git push origin feature/nome-feature`)
-5. Crea una Pull Request
+---
 
-## Licenza
-MIT License
+## Troubleshooting
+
+### Common Issues
+
+#### Issue: Problem description
+
+**Solution**: How to fix this issue
+
+---
+
+## Related Modules
+
+### Dependencies
+
+- [Xot](../Xot/README.md) - Required module
+- [User](../User/README.md) - Required module
+
+---
+
+Navigation: [Project Home](../../docs/INDEX.md) | [Modules](../../docs/modules/README.md)
