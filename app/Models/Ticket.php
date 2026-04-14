@@ -18,6 +18,7 @@ use Modules\Fixcity\Enums\TicketStatusEnum;
 use Modules\Fixcity\Enums\TicketTypeEnum;
 use Modules\Fixcity\Notifications\TicketCreated;
 use Modules\Fixcity\Notifications\TicketStatusUpdated;
+use Modules\Geo\Models\Traits\HasAddress;
 use Modules\Media\Models\Media;
 use Modules\User\Models\User;
 use Modules\Xot\Actions\File\AssetAction;
@@ -145,10 +146,13 @@ class Ticket extends XotBaseModel implements HasMedia
     use HasSlug;
     use HasStatuses;
     use InteractsWithMedia;
+    
 
     protected $fillable = [
         'name',
         'content',
+        'address',
+        'email',
         'owner_id',
         'responsible_id',
         'project_id',
@@ -161,9 +165,9 @@ class Ticket extends XotBaseModel implements HasMedia
         'longitude', // GEO
         // 'status_id', 'type_id', 'priority_id', //OLD
         'status',
-        'type',
+        'type_id',
         'priority',
-        'slu  g',
+        'slug',
     ];
 
     protected $appends = [
@@ -178,23 +182,18 @@ class Ticket extends XotBaseModel implements HasMedia
             'estimationProgress' => 'float',
             'status' => TicketStatusEnum::class,
             'priority' => TicketPriorityEnum::class,
-            'type' => TicketTypeEnum::class,
+            'type_id' => TicketTypeEnum::class,
         ];
-    }
-
-    protected static function newFactory(): \Modules\Fixcity\Database\Factories\TicketFactory
-    {
-        return \Modules\Fixcity\Database\Factories\TicketFactory::new();
     }
 
     public function getIconData(): array
     {
-        if ($this->type == null) {
+        if ($this->type_id == null) {
             return [];
         }
 
-        Assert::isInstanceOf($this->type, TicketTypeEnum::class, '['.__LINE__.']['.__FILE__.']');
-        $url = $this->type->getIcon();
+        Assert::isInstanceOf($this->type_id, TicketTypeEnum::class, '['.__LINE__.']['.__FILE__.']');
+        $url = $this->type_id->getIcon();
         $url = Str::of((string) $url)->after('heroicon-o-')->append('.svg')->toString();
         $url = app(AssetAction::class)->execute('ui::svg/'.$url);
 

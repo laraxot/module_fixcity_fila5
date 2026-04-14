@@ -1,0 +1,105 @@
+<?php
+
+declare(strict_types=1);
+
+namespace Modules\Fixcity\Filament\Widgets;
+
+use Filament\Forms\Components\Checkbox;
+use Filament\Forms\Components\Placeholder;
+use Filament\Forms\Components\Textarea;
+use Filament\Forms\Components\TextInput;
+use Filament\Schemas\Components\Wizard;
+use Filament\Schemas\Components\Wizard\Step;
+use Filament\Schemas\Schema;
+use Illuminate\Support\HtmlString;
+use Modules\Xot\Filament\Widgets\XotBaseWidget;
+
+/**
+ * @property Schema $form
+ */
+class CreateSegnalazioneWizardWidget extends XotBaseWidget
+{
+    protected string $view = 'fixcity::filament.widgets.create-segnalazione-wizard';
+
+    public ?string $title = null;
+
+    public ?string $description = null;
+
+    /** @var array<int, array<string, mixed>> */
+    public array $wizardSteps = [];
+
+    public function mount(?string $title = null, ?string $description = null, array $wizardSteps = []): void
+    {
+        $this->title = $title;
+        $this->description = $description;
+        $this->wizardSteps = $wizardSteps;
+
+        $this->form->fill([
+            'privacy_accepted' => false,
+            'report_title' => null,
+            'report_details' => null,
+            'contact_email' => null,
+        ]);
+    }
+
+    public function getFormSchema(): array
+    {
+        return [
+            Wizard::make([
+                Step::make(__('fixcity::segnalazione.wizard.steps.privacy.label'))
+                    ->description(__('fixcity::segnalazione.wizard.steps.privacy.description.label'))
+                    ->schema([
+                        Placeholder::make('privacy_intro')
+                            ->hiddenLabel()
+                            ->content(new HtmlString(
+                                '<div class="space-y-3">'
+                                .'<h2 class="text-xl font-semibold">'.e(__('fixcity::segnalazione.wizard.privacy.title.label')).'</h2>'
+                                .'<p>'.e(__('fixcity::segnalazione.wizard.privacy.description.label')).'</p>'
+                                .'</div>'
+                            )),
+                        Checkbox::make('privacy_accepted')
+                            ->label(__('fixcity::segnalazione.wizard.privacy.acceptance.label'))
+                            ->required(),
+                    ]),
+                Step::make(__('fixcity::segnalazione.wizard.steps.data.label'))
+                    ->description(__('fixcity::segnalazione.wizard.steps.data.description.label'))
+                    ->schema([
+                        TextInput::make('report_title')
+                            ->label(__('fixcity::segnalazione.fields.title.label'))
+                            ->placeholder(__('fixcity::segnalazione.fields.title.placeholder'))
+                            ->required(),
+                        Textarea::make('report_details')
+                            ->label(__('fixcity::segnalazione.fields.details.label'))
+                            ->placeholder(__('fixcity::segnalazione.fields.details.placeholder'))
+                            ->rows(5)
+                            ->required(),
+                    ]),
+                Step::make(__('fixcity::segnalazione.wizard.steps.summary.label'))
+                    ->description(__('fixcity::segnalazione.wizard.steps.summary.description.label'))
+                    ->schema([
+                        Placeholder::make('summary_text')
+                            ->hiddenLabel()
+                            ->content(__('fixcity::segnalazione.wizard.summary.text.label')),
+                        TextInput::make('contact_email')
+                            ->label(__('fixcity::segnalazione.fields.email.label'))
+                            ->email(),
+                    ]),
+                Step::make(__('fixcity::segnalazione.wizard.steps.confirmation.label'))
+                    ->description(__('fixcity::segnalazione.wizard.steps.confirmation.description.label'))
+                    ->schema([
+                        Placeholder::make('confirmation_text')
+                            ->hiddenLabel()
+                            ->content(__('fixcity::segnalazione.wizard.confirmation.text.label')),
+                    ]),
+            ])
+                ->persistStepInQueryString('step')
+                ->skippable(false)
+                ->columnSpanFull(),
+        ];
+    }
+
+    public function save(): void
+    {
+        // Scaffold del wizard unificato: la persistenza reale verra' collegata dopo.
+    }
+}

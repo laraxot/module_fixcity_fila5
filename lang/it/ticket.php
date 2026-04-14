@@ -197,12 +197,53 @@ return array (
       'label' => 'generateTickets',
     ),
   ),
-  'messages' => 
+  'messages' =>
   array (
-    'created' => 'Ticket creato con successo',
-    'updated' => 'Ticket aggiornato con successo',
-    'deleted' => 'Ticket eliminato con successo',
-    'no_tickets' => 'Nessun ticket trovato.',
+    'created' =>
+    array (
+      'text' => 'Ticket creato con successo',
+    ),
+    'updated' =>
+    array (
+      'text' => 'Ticket aggiornato con successo',
+    ),
+    'deleted' =>
+    array (
+      'text' => 'Ticket eliminato con successo',
+    ),
+    'no_tickets' =>
+    array (
+      'text' => 'Nessun ticket trovato.',
+    ),
+    'images_uploaded' =>
+    array (
+      'text' => '{0} Nessuna immagine caricata|{1} :count immagine caricata|[2,*] :count immagini caricate',
+    ),
+  ),
+  'sections' =>
+  array (
+    'empty' =>
+    array (
+      'heading' => 'empty',
+      'label' => 'empty',
+    ),
+    'summary' =>
+    array (
+      'label' => 'Riepilogo Segnalazione',
+      'description' => 'Verifica i dati prima dell\'invio',
+    ),
+    'images' =>
+    array (
+      'label' => 'Immagini Allegate',
+    ),
+  ),
+  'notifications' =>
+  array (
+    'submit_failed' =>
+    array (
+      'title' => 'Errore',
+      'body' => 'Si è verificato un errore durante l\'invio. Riprova.',
+    ),
   ),
   'navigation' => 
   array (
@@ -213,12 +254,12 @@ return array (
   array (
     'label' => 'ticket.model',
   ),
-  'sections' => 
+  'rules' =>
   array (
-    'empty' => 
+    'image' =>
     array (
-      'heading' => 'empty',
-      'label' => 'empty',
+      'max_files' => 10,
+      'allowed_types' => 'jpeg, png, jpg, gif, webp',
     ),
   ),
 );
