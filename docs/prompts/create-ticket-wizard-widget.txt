@@ -1,0 +1,28 @@
+/bmad-create-story studia @laravel/Modules/Fixcity/app/Filament/Widgets/CreateTicketWizardWidget.php e applica governance wizard:
+- no ->label() / ->tooltip() hardcoded (LangServiceProvider/AutoLabel first)
+- no Log::error() nel submit frontoffice, usare addError + Notification
+- sposta comportamento cross-cutting in XotBaseWizardWidget, lascia business logic in Fixcity
+- aggiorna docs modulo/tema e indici con link bidirezionali relativi
+- evita duplicazioni e file ridondanti
+
+Riferimenti:
+- laravel/Modules/Fixcity/docs/stories/wizard-governance-langserviceprovider-and-xotbase-refactor.md
+- laravel/Modules/Fixcity/docs/rules/filament-wizard-rules.md
+- laravel/Modules/Xot/app/Filament/Widgets/XotBaseWizardWidget.php
+/bmad-create-story studia @/var/www/_bases/base_fixcity_fila5/laravel/Modules/Fixcity/app/Filament/Widgets/CreateTicketWizardWidget.php   ti ho detto molte volte che ->label( e ->tooltip( non sono da usare perche'  vengono auto configurate tramite langserviceprovider , poi ci sono molti metodi che secondo me andrebbero  spostati in XotBaseWizardWidget i  Log::error( non li voglio cerca di capire il perche', la regola, la  visione, lo scopo, la filosofia, la religione, la politica, lo zen,   installati e configurati tutto quello che vuoi per completare questo task, cerca anche in internet aiuto,  poi aggiorna, studia e migliora le cartelle docs dentro i moduli e dentro i temi, le tue rules, le tue memories, le tue skills, aggiorna utilizzando indici e quello che vuoi per cercare piu' velocemente quello che ti serve e per prevenire files doppi e rindondanze
+
+
+
+/bmad-create-story http://127.0.0.1:8000/it/tests/segnalazione-crea?step=form.dati-della-segnalazione%3A%3Adata%3A%3Awizard-step deve avere sia un html parity alto che un visual parity
+  altissimo  con https://italia.github.io/design-comuni-pagine-statiche/sito/segnalazione-02-dati.html , a sinistra nella colonna non si legge nulla , lo spazio della colonna di
+  sinistra e della colonna centrale son troppo piccole c'e' troppo spazio in verticale , anche nell'header si legge male accedi all'area personale, aiutati con screenshots o con
+  qualsiasi altro strumento tu voglia per migliorare il tuo pessimo lavoro, ricorda che il sito e' multilingua, non utilizziamo ->label( o ->placeholder( o ->tooltip( tutto quello che
+  facciamo lo facciamo con bmad+gsd controllando a fondo dry + kiss + controllo avanzato rindondanza + clean code , puntiamo alla perfezione , il wizard deve essere fatto con filament, i
+  placeholder con le infolist cerca di capire il perche', la regola, la visione, lo scopo, la filosofia, la religione, la politica, lo zen
+  installati e configurati tutto quello che vuoi per completare questo task, cerca anche in internet aiuto, poi aggiorna, studia e migliora le cartelle docs dentro i moduli e dentro i
+  temi, le tue rules, le tue memories, le tue skills, aggiorna utilizzando indici e quello che vuoi per cercare piu' velocemente quello che ti serve e per prevenire files doppi e rindondanze, ti ricordo che phpmd non va installato con composer ma devi installare la versione standalone .phar , se pest ha errori di configurazioni devi risolverli , quando devi creare un file .md il nome del file .md deve seguire delle regole, se non trovi le regole te le crei e poi le fai usare a tutti gli altri agenti ai , l'header si legge male accedi all'area riservata sotto informazioni richeste non si legge nulla sopra lo stepper ci sono cose che non ci dovrebbero stare , lo spazio verticale fra un elemento e l'altro e' troppo, si vede male ! utilizza screenshots, installa e configura tutto quello che vuoi.. cosi' e' fatto male 
+
+
+/bmad-create-story http://127.0.0.1:8000/it/tests/segnalazione-02-dati e https://italia.github.io/design-comuni-pagine-statiche/sito/segnalazione-02-dati.html devono avere una altissama html parity e una altissima visual parity , controlla html e controlla css e js, devi studiare a fondo come e' stato fatto https://github.com/italia/design-comuni-pagine-statiche , per convertire quel css compilato nel nostro css , che ti ricordo che noi non utilizziamo bootstrap ma utilizziamo tailwind + alpine ma teniamo html semantico e i nomi delle classi css , fa screenshots, utilizza strumenti di analisi visiva, fa quello che vuoi .. ma stiamo perdendo troppo tempo 
+mancano traduzioni a http://127.0.0.1:8000/it/tests/segnalazione-02-dati, poi si vede esposto ['data' => []])  poi sotto informazioni richieste non si legge nulla , c'e' troppo spazio
+  verticale tra una section e quella dopo , il wizard appare 2 volte .. Accedi all'area personale si vede male e molti altri problemi

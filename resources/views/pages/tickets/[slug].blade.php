@@ -86,7 +86,7 @@ render(function (View $view, string $slug) {
 
                 <div class="mb-4">
                     <p class="font-semibold">Tipo di disservizio</p>
-                    <p class="text-gray-700">{{ $ticket->type?->getLabel() ?? 'N/A' }}</p>
+                    <p class="text-gray-700">{{ $ticket->type_id?->getLabel() ?? 'N/A' }}</p>
                     <hr class="my-2 border-gray-300">
                 </div>
 

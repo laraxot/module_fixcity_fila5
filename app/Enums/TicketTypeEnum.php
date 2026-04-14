@@ -11,6 +11,7 @@ namespace Modules\Fixcity\Enums;
 use Filament\Support\Contracts\HasColor;
 use Filament\Support\Contracts\HasIcon;
 use Filament\Support\Contracts\HasLabel;
+use Modules\Xot\Traits\EnumTrait;
 
 /*
 Tipologie di Riparazioni Segnalabili
@@ -89,6 +90,7 @@ Icona: 🛡️ (Heroicons: Shield)
 
 enum TicketTypeEnum: string implements HasColor, HasIcon, HasLabel
 {
+    use EnumTrait;
     case ROAD_MAINTENANCE = 'road_maintenance';
     case PUBLIC_LIGHTING = 'public_lighting';
     case WASTE_COLLECTION = 'waste_collection';
@@ -104,92 +106,6 @@ enum TicketTypeEnum: string implements HasColor, HasIcon, HasLabel
     case REPORT = 'report';
     case REQUEST = 'request';
     case OTHER = 'other';
-
-    public function getLabel(): string
-    {
-        return match ($this) {
-            self::ROAD_MAINTENANCE => 'Manutenzione Stradale',
-            self::PUBLIC_LIGHTING => 'Illuminazione Pubblica',
-            self::WASTE_COLLECTION => 'Raccolta Rifiuti',
-            self::PARKS_AND_GARDENS => 'Aree Verdi e Parchi',
-            self::SEWAGE_AND_DRAINAGE => 'Fognature e Drenaggi',
-            self::PUBLIC_BUILDINGS => 'Edifici Pubblici',
-            self::ENVIRONMENTAL_REPORTS => 'Segnalazioni Ambientali',
-            self::PUBLIC_TRANSPORT => 'Trasporti Pubblici',
-            self::URBAN_FURNITURE => 'Arredo Urbano',
-            self::PUBLIC_SAFETY => 'Sicurezza Pubblica',
-            self::COMPLAINT => 'Complaint',
-            self::SUGGESTION => 'Suggestion',
-            self::REPORT => 'Report',
-            self::REQUEST => 'Request',
-            self::OTHER => 'Other',
-        };
-    }
-
-    public function getColor(): string
-    {
-        return match ($this) {
-            self::ROAD_MAINTENANCE => '#ff9800',
-            self::PUBLIC_LIGHTING => '#fbc02d',
-            // 50 => '254, 242, 242',
-            // self::PUBLIC_LIGHTING => 'green',
-            self::WASTE_COLLECTION => '#4caf50',
-            self::PARKS_AND_GARDENS => '#8bc34a',
-            self::SEWAGE_AND_DRAINAGE => '#2196f3',
-            self::PUBLIC_BUILDINGS => '#3f51b5',
-            self::ENVIRONMENTAL_REPORTS => '#f44336',
-            self::PUBLIC_TRANSPORT => '#9c27b0',
-            self::URBAN_FURNITURE => '#00bcd4',
-            self::PUBLIC_SAFETY => '#ff5722',
-            self::COMPLAINT => 'danger',
-            self::SUGGESTION => 'success',
-            self::REPORT => 'warning',
-            self::REQUEST => 'info',
-            self::OTHER => 'gray',
-        };
-    }
-
-    public function getIcon(): string
-    {
-        return match ($this) {
-            self::ROAD_MAINTENANCE => 'heroicon-o-wrench',
-            self::PUBLIC_LIGHTING => 'heroicon-o-light-bulb',
-            self::WASTE_COLLECTION => 'heroicon-o-trash',
-            self::PARKS_AND_GARDENS => 'heroicon-o-sparkles',
-            self::SEWAGE_AND_DRAINAGE => 'heroicon-o-archive-box',
-            self::PUBLIC_BUILDINGS => 'heroicon-o-building-office',
-            self::ENVIRONMENTAL_REPORTS => 'heroicon-o-globe-alt',
-            self::PUBLIC_TRANSPORT => 'fas-bus',
-            self::URBAN_FURNITURE => 'fas-couch',
-            self::PUBLIC_SAFETY => 'heroicon-o-shield-check',
-            self::COMPLAINT => 'heroicon-o-exclamation-triangle',
-            self::SUGGESTION => 'heroicon-o-light-bulb',
-            self::REPORT => 'heroicon-o-document-report',
-            self::REQUEST => 'heroicon-o-document',
-            self::OTHER => 'heroicon-o-question-mark-circle',
-        };
-    }
-
-    public function label(): string
-    {
-        return match ($this) {
-            self::ROAD_MAINTENANCE => trans('fixcity::ticket.fields.type.options.road_maintenance'),
-            self::PUBLIC_LIGHTING => trans('fixcity::ticket.fields.type.options.public_lighting'),
-            self::WASTE_COLLECTION => trans('fixcity::ticket.fields.type.options.waste_collection'),
-            self::PARKS_AND_GARDENS => trans('fixcity::ticket.fields.type.options.parks_and_gardens'),
-            self::SEWAGE_AND_DRAINAGE => trans('fixcity::ticket.fields.type.options.sewage_and_drainage'),
-            self::PUBLIC_BUILDINGS => trans('fixcity::ticket.fields.type.options.public_buildings'),
-            self::ENVIRONMENTAL_REPORTS => trans('fixcity::ticket.fields.type.options.environmental_reports'),
-            self::PUBLIC_TRANSPORT => trans('fixcity::ticket.fields.type.options.public_transport'),
-            self::URBAN_FURNITURE => trans('fixcity::ticket.fields.type.options.urban_furniture'),
-            self::PUBLIC_SAFETY => trans('fixcity::ticket.fields.type.options.public_safety'),
-            self::COMPLAINT => trans('fixcity::ticket.fields.type.options.complaint'),
-            self::SUGGESTION => trans('fixcity::ticket.fields.type.options.suggestion'),
-            self::REPORT => trans('fixcity::ticket.fields.type.options.report'),
-            self::REQUEST => trans('fixcity::ticket.fields.type.options.request'),
-            self::OTHER => trans('fixcity::ticket.fields.type.options.other'),
-        };
-    }
 
     public static function default(): static
     {
