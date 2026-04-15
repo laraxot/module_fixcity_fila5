@@ -49,6 +49,11 @@ class CreateTicketWizardWidget extends XotBaseWizardWidget
     }
 
     /**
+     * Stato iniziale completo per tutti i campi del wizard.
+     *
+     * Senza chiavi presenti su `$data`, Livewire genera errori «Entangle» sui campi
+     * (es. `data.content`) perché Alpine non trova la proprietà annidata.
+     *
      * @return array<string, mixed>
      */
     #[\Override]
@@ -56,6 +61,15 @@ class CreateTicketWizardWidget extends XotBaseWizardWidget
     {
         return [
             'privacyAccepted' => false,
+            'type_id' => null,
+            'name' => '',
+            'content' => '',
+            'images' => [],
+            'email' => '',
+            'location' => [
+                'latitude' => null,
+                'longitude' => null,
+            ],
         ];
     }
 
