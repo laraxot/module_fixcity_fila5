@@ -1,12 +1,13 @@
-{{-- Design Comuni parity: wizard single-column, stepper orizzontale --}}
-<div class="segnalazione-wizard-root ticket-wizard-root">
-    @php
-        $stepQuery = (string) request()->query('step', '');
-        $isDataStep = str_contains($stepQuery, 'dati-della-segnalazione');
-        $isSummaryStep = str_contains($stepQuery, 'riepilogo');
-        $currentStep = $isSummaryStep ? 3 : ($isDataStep ? 2 : 1);
-        $progressPercent = (int) round(($currentStep / 3) * 100);
-    @endphp
+{{-- Design Comuni parity: Blade wrapper only, Filament Wizard remains source of truth --}}
+@php
+    $stepQuery = (string) request()->query('step', '');
+    $isDataStep = str_contains($stepQuery, 'dati-della-segnalazione') || $stepQuery === '2';
+    $isSummaryStep = str_contains($stepQuery, 'riepilogo') || $stepQuery === '3';
+    $currentStep = $isSummaryStep ? 3 : ($isDataStep ? 2 : 1);
+    $progressPercent = (int) round(($currentStep / 3) * 100);
+@endphp
+
+<div class="segnalazione-wizard-root ticket-wizard-root" data-wizard-step="{{ $currentStep }}">
     <div class="container" id="main-container">
         <div class="row">
             @if($isDataStep)
@@ -27,7 +28,7 @@
                 <h1 class="title-xxxlarge mb-4">{{ $pageTitle ?? __('fixcity::segnalazione.page.title.label') }}</h1>
 
                 {{-- Stepper orizzontale Bootstrap Italia --}}
-                <div class="steppers mb-4">
+                <div class="steppers wizard-stepper mb-4" aria-label="{{ __('fixcity::segnalazione.page.title.label') }}">
                     <ul class="step-list">
                         @foreach($this->getWizardSteps() as $index => $step)
                         @php
@@ -43,7 +44,9 @@
                         @endforeach
                     </ul>
                     <div class="progress-step">
-                        <div class="progress-bar" style="width: {{ $progressPercent }}%" role="progressbar" aria-valuenow="{{ $progressPercent }}" aria-valuemin="0" aria-valuemax="100">{{ $currentStep }}/3</div>
+                        <div class="progress-bar" style="width: {{ $progressPercent }}%" role="progressbar" aria-valuenow="{{ $progressPercent }}" aria-valuemin="0" aria-valuemax="100">
+                            <span class="progress-bar-label">{{ $currentStep }}/3</span>
+                        </div>
                     </div>
                 </div>
 

@@ -99,7 +99,7 @@ class CreateTicketWizardWidget extends XotBaseWizardWidget
                 ->extraAttributes(['id' => 'report-place', 'data-step-section' => 'place'])
                 ->schema([
                     LatitudeLongitudeInput::make('location')
-                        ->label(__('fixcity::segnalazione.fields.place.section.label'))
+                        ->hiddenLabel()
                         ->defaultCenter(41.9028, 12.4964)
                         ->defaultZoom(13)
                         ->mapHeight('340px')

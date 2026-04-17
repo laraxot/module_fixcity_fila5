@@ -36,7 +36,7 @@ La creazione ticket lato **pannello** (operatori) segue le pagine resource Filam
 
 ### ⚠️ Regole Critiche
 
-**Filament Wizard Rule**: MAI gestione manuale step in Blade. Usa `Filament\Schemas\Components\Wizard`. Vedi [Filament Wizard Rule](filament-wizard-rule.md).
+**Filament Wizard Rule**: MAI gestione manuale step in Blade. Usa `Filament\Schemas\Components\Wizard`; la Blade resta wrapper e parity layer, non state machine. Vedi [Rules / Filament Wizard Rules](./rules/filament-wizard-rules.md).
 
 **Body Plain Rule**: Il tag `<body>` deve essere SEMPRE plain — SENZA classi, SENZA attributi. Vedi [HTML Body Parity Rule](html-body-parity-rule.md).
 
@@ -92,7 +92,7 @@ php artisan db:seed --class=FixcitySeeder
 - [Links](links.md) - Link utili nel modulo
 
 ### 🎨 Filament & Wizard
-- [Filament Wizard Rule](filament-wizard-rule.md) — ⚠️ REGOLA: MAI gestione manuale step in Blade, usa Filament Wizard
+- [Rules / Filament Wizard Rules](./rules/filament-wizard-rules.md) — ⚠️ REGOLA: MAI gestione manuale step in Blade, usa Filament Wizard
 - [Wizard Governance Philosophy](wizard-governance-philosophy.md) - Perche/regola/visione/politica/zen su wizard
 - [CreateTicketWizardWidget](CreateTicketWizardWidget.md) - Widget dettaglio
 - [Ticket Wizard Frontoffice](ticket-wizard-frontoffice.md) - Architettura wizard
@@ -102,7 +102,7 @@ php artisan db:seed --class=FixcitySeeder
 
 ### 📏 Regole & Standard
 - [HTML Body Parity Rule](html-body-parity-rule.md) - Body plain, no classi
-- [Filament Wizard Rule](filament-wizard-rule.md) - Wizard implementation pattern
+- [Rules / Filament Wizard Rules](./rules/filament-wizard-rules.md) - Wizard implementation pattern
 - [Clean Code Wizard Steps](../../Xot/docs/clean-code-wizard-steps.md) - Step come funzioni (Xot)
 
 ### 🐛 PHPStan & Quality
@@ -118,6 +118,12 @@ php artisan db:seed --class=FixcitySeeder
 - [Launch Plan](launch.md) - Piano di lancio
 - [Sprint Planning](sprint.md) - Sprint correnti
 - [User Research](research.md) - Ricerca utenti
+
+## LLM Wiki Workflow
+
+- Canonical wiki layer: [../../../../docs/wiki/README.md](../../../../docs/wiki/README.md)
+- Compiled index: [../../../../docs/wiki/index.md](../../../../docs/wiki/index.md)
+- Governance page: [../../../../docs/wiki/concepts/llm-wiki-governance.md](../../../../docs/wiki/concepts/llm-wiki-governance.md)
 
 ### 🔧 Technical
 - [MCP Servers](MCP_SERVERS.md) - Server MCP configurati

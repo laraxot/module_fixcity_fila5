@@ -182,16 +182,15 @@ Placeholder::make('name')
 
 La geolocalizzazione appartiene al **modulo Geo** come Filament Form Component.
 
-**Component**: `Modules\Geo\Filament\Forms\Components\LeafletMarkerMapInput`
-**Classe**: `laravel/Modules/Geo/app/Filament/Forms/Components/LeafletMarkerMapInput.php`
-**View**: `laravel/Modules/Geo/resources/views/filament/forms/components/leaflet-marker-map-input.blade.php`
+**Component**: `Modules\Geo\Filament\Forms\Components\LatitudeLongitudeInput`
+**Classe**: `laravel/Modules/Geo/app/Filament/Forms/Components/LatitudeLongitudeInput.php`
+**View**: `laravel/Modules/Geo/resources/views/filament/forms/components/latitude-longitude-input.blade.php`
 
 Usage in wizard:
 ```php
-use Modules\Geo\Filament\Forms\Components\LeafletMarkerMapInput;
+use Modules\Geo\Filament\Forms\Components\LatitudeLongitudeInput;
 
-LeafletMarkerMapInput::make('location')
-    ->required()
+LatitudeLongitudeInput::make('location')
     ->defaultCenter(41.9028, 12.4964)
     ->defaultZoom(13)
     ->mapHeight('340px')
@@ -202,8 +201,33 @@ LeafletMarkerMapInput::make('location')
 - **Domain-Driven Design**: Ogni modulo possiede il suo dominio. Geo = geolocalizzazione
 - **Filament Way**: Componenti form propri che si integrano con Livewire state
 - **Single Responsibility**: Geolocation è geo-spaziale, non logica ticket
-- **Reusability**: Qualsiasi modulo può consumare `LeafletMarkerMapInput` senza copiare codice
-- **Data Precision**: Salva direttamente le coordinate latitude/longitude invece di indirizzi testuali attraverso reverse geocoding
+- **Reusability**: Qualsiasi modulo può consumare `LatitudeLongitudeInput` senza copiare codice
+- **Data Precision**: Salva direttamente le coordinate latitude/longitude nel field state annidato
+
+### Rule: no destructive live sync on interactive map drag
+
+- Nei field mappa interattivi, `drag` del marker non deve generare persistenza Livewire aggressiva.
+- Il sync continuo durante il drag deve restare **locale** al componente.
+- La persistenza verso Livewire va eseguita su eventi stabili (`dragend`, click mappa, geolocalizzazione, `change` input).
+- Se il field espone input numerici visibili, questi devono usare un binding non distruttivo per JS interop, preferendo `wire:model.change` rispetto a `wire:model.live` quando il valore viene mosso anche da Leaflet.
+
+**Perché**:
+- evita refresh distruttivi e perdita della shell `wire:ignore`;
+- mantiene marker, input e center nella stessa verità;
+- preserva l'integrazione Filament/Livewire senza degradare UX mobile.
+
+## Rule: Blade wrapper only, Wizard state never manual
+
+- La view Blade del widget può aggiungere titolo, sidebar editoriale, wrapper parity e pulsanti custom.
+- La view Blade **non** deve essere la fonte di verità dello step corrente.
+- Lo step corrente appartiene al `Wizard` Filament e ai suoi hook (`startOnStep`, `persistStepInQueryString`, `nextStep`, `previousStep`).
+- Se serve parity sullo stepper, si preferisce lo styling dell'header Filament o un layer visuale che non sostituisca la navigazione del Wizard.
+
+**Perché**:
+- **Regola**: una sola state machine per i passi.
+- **Visione**: Blade descrive il frame, Filament governa il flusso.
+- **Politica**: niente doppia verità tra query string, Livewire e markup.
+- **Zen**: parity sì, reimplementazione no.
 
 ## Rule: Translations
 
