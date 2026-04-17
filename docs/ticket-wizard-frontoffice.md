@@ -18,7 +18,7 @@ Le pagine statiche legacy restano disponibili per riferimento o test di parità 
 ## Architettura
 Il widget segue i principi Laraxot ed estende `XotBaseWizardWidget`.
 
-**Implementazione (Filament way)**: il flusso multi-step è definito in **`Filament\Schemas\Components\Wizard`** + **`Wizard\Step`** dentro `CreateTicketWizardWidget::getFormSchema()`, con stato form in `data` tramite `XotBaseWizardWidget::form()` (vedi [documentazione Filament v5 — Wizards](https://filamentphp.com/docs/5.x/schemas/wizards)). La vista Blade `ticket-create-wizard.blade.php` è un **wrapper** (titolo, stepper, sidebar solo step «dati») + `{{ $this->form }}` dentro `<form wire:submit="submit">`; la parity HTML Design Comuni su stepper/card va recuperata con CSS tema (`segnalazione-parity.css`) e/o field custom, non con centinaia di righe di markup duplicato.
+**Implementazione (Filament way)**: il flusso multi-step è definito in **`Filament\Schemas\Components\Wizard`** + **`Wizard\Step`** dentro `CreateTicketWizardWidget::getFormSchema()`, con stato form in `data` tramite `XotBaseWizardWidget::form()` (vedi [documentazione Filament v5 — Wizards](https://filamentphp.com/docs/5.x/schemas/wizards)). La vista Blade `ticket-create-wizard.blade.php` è un **wrapper**: titolo, sidebar editoriale e parity layer attorno a `{{ $this->form }}` dentro `<form wire:submit="submit">`. Regola: **la macchina a stati degli step resta in Filament**, non in Blade.
 
 **Risoluzione vista**: `GetViewByClassAction` prova per primo `pub_theme::filament.widgets.createticketwizard` (wrapper tema senza sidebar). Il widget imposta esplicitamente `protected string $view = 'fixcity::filament.widgets.ticket-create-wizard'` così il frontoffice usa sempre il layout modulo (colonna «informazioni richieste» allo step 2). Regola anti-regressione: non rimuovere questa proprietà senza verificare parity e [story 7-52](../../../../_bmad-output/implementation-artifacts/7-52-segnalazione-crea-wizard-ultra-parity.md).
 
@@ -36,7 +36,7 @@ Il widget segue i principi Laraxot ed estende `XotBaseWizardWidget`.
 ### Caratteristiche principali:
 - **Base Class**: `Modules\Fixcity\Filament\Widgets\CreateTicketWizardWidget`
 - **Estensione**: `Modules\Xot\Filament\Widgets\XotBaseWizardWidget` (a sua volta `XotBaseWidget`); documentazione: [xot-base-wizard-widget.md](../../Xot/docs/filament/widgets/xot-base-wizard-widget.md)
-- **Navigazione**: `Wizard` Filament (next/previous, validazione per step); `persistStepInQueryString('step')` quando l’override query è consentito. I pulsanti custom in `ticket-create-wizard.blade.php` usano `wire:click="nextStep"` / `previousStep`: i metodi sono definiti su `XotBaseWizardWidget` e delegano a `callSchemaComponentMethod(<chiave wizard>, 'nextStep'|'previousStep', …)` — non sono metodi «magici» Livewire.
+- **Navigazione**: `Wizard` Filament (next/previous, validazione per step); `persistStepInQueryString('step')` quando l’override query è consentito. Anche se `ticket-create-wizard.blade.php` usa pulsanti custom parity con `wire:click="nextStep"` / `previousStep`, i metodi sono definiti su `XotBaseWizardWidget` e delegano a `callSchemaComponentMethod(<chiave wizard>, 'nextStep'|'previousStep', …)`: quindi non è navigazione manuale, è sempre il Wizard Filament che governa il flusso.
 - **Campo tipologia**: lo schema usa `Select::make('type_id')` allineato a `Ticket::$fillable` e al cast `type_id` → `TicketTypeEnum`. Un campo nome `type` risultava fuori dal contratto del modello e poteva fallire la validazione o il salvataggio.
 - **Validazione**: step tramite validazione nativa del wizard; submit finale con `Ticket::query()->create()` dopo `normalizeWizardFormState()` e arricchimenti (`owner_id`); upload `images` escluso dal payload create come da logica esistente.
 - **Naming**: Usa sempre `Ticket` invece di `Segnalazione` nel codice PHP.
@@ -67,23 +67,20 @@ Quando `$usesFrontendLivewire` è true (route `tests/segnalazione-crea`), il lay
 
 ### Geolocalizzazione — mappa + coordinate (step 2)
 
-Lo scopo è **localizzare il disservizio** sul dominio `Ticket` con **`latitude` / `longitude`** (colonne in `fillable`). Il flusso frontoffice usa **`LeafletMarkerMapInput`** (Geo): tile OpenStreetMap, marker trascinabile, click sulla mappa, pulsante **«Usa la tua posizione»** (Geolocation API dopo gesto utente). Il componente aggiorna automaticamente i campi sibling `latitude` e `longitude` nello stesso schema quando l'utente interagisce con la mappa.
+Lo scopo è **localizzare il disservizio** sul dominio `Ticket` con **`latitude` / `longitude`** (colonne in `fillable`). Il flusso frontoffice usa oggi **`LatitudeLongitudeInput`** (Geo): input annidati nello stato `location`, mappa interattiva, marker trascinabile, click sulla mappa, geolocalizzazione e fullscreen. Il componente deve mantenere **sincronizzazione bidirezionale** tra marker, center mappa e input visibili di latitudine/longitudine, senza refresh distruttivi durante il drag.
 
-**Componente**: `Modules\Geo\Filament\Forms\Components\LeafletMarkerMapInput` — owned by **Geo module**. Vedi [Geo: Filament forms components](../../Geo/docs/filament-forms-components.md).
+**Componente**: `Modules\Geo\Filament\Forms\Components\LatitudeLongitudeInput` — owned by **Geo module**. Vedi [Geo: Filament forms components](../../Geo/docs/filament-forms-components.md).
 
 **Utilizzo nel wizard** (estratto):
 ```php
-use Modules\Geo\Filament\Forms\Components\LeafletMarkerMapInput;
+use Modules\Geo\Filament\Forms\Components\LatitudeLongitudeInput;
 
-LeafletMarkerMapInput::make('location')
-    ->label(__('fixcity::segnalazione.fields.place.section.label'))
+LatitudeLongitudeInput::make('location')
+    ->hiddenLabel()
     ->defaultCenter(41.9028, 12.4964) // Roma di default
     ->defaultZoom(13)
     ->mapHeight('340px')
     ->showMap(true),
-// Campi sibling nascosti che verranno automaticamente aggiornati dal componente:
-TextInput::make('latitude')->numeric()->hidden(),
-TextInput::make('longitude')->numeric()->hidden(),
 ```
 
 ### Struttura canonica step 2
@@ -122,11 +119,21 @@ Implementazione corrente: `Section` + `Grid` + `Text` read-only + input email co
 - leggibilita insufficiente nell'header generale della pagina (es. area `Accedi all'area personale`).
 Per il passaggio finale a parity estrema vedere [7-51 segnalazione-crea step2 columns header ultra parity](../../../../_bmad-output/implementation-artifacts/7-51-segnalazione-crea-step2-columns-header-ultra-parity.md), che stringe i criteri su larghezze colonne, leggibilita header, spazi verticali e divieto di `->label()/->placeholder()/->tooltip()` runtime.
 
-**Nota runtime hardening (step 2)**: nel widget usare solo componenti `Schemas` (`Text`, `Section`, `Grid`) e API realmente supportate dai custom field Geo (`LeafletMarkerMapInput`, oppure `AddressInput` dove serve indirizzo testuale). Regressioni tipiche da evitare: `Placeholder::make()`/`TextEntry::make()` in schema form e chiamate non supportate (`->placeholder()` su componenti custom non compatibili).
+**Nota runtime hardening (step 2)**: nel widget usare solo componenti `Schemas` (`Text`, `Section`, `Grid`) e API realmente supportate dai custom field Geo (`LatitudeLongitudeInput`, oppure `AddressInput` dove serve indirizzo testuale). Regressioni tipiche da evitare: `Placeholder::make()`/`TextEntry::make()` in schema form, reimplementazione manuale degli step in Blade e chiamate non supportate sui componenti custom.
+
+**Regola mappa step 2** (story [8-10](../../../../_bmad-output/implementation-artifacts/8-10-segnalazione-crea-map-bidirectional-sync-and-no-refresh-on-marker-drag.md)):
+Il protocollo corretto è:
+- **preview locale durante `drag`**: aggiorna DOM inputs throttled ogni ~200ms, niente Livewire
+- **persistenza Livewire su `dragend`**: chiama `commitCoordinates()` che dispatches change event → `wire:model.change` syncs
+- **click mappa / geolocalizzazione**: stesso flusso di dragend
+- **input manuali**: ricentrano mappa e spostano marker; change event syncs a Livewire
+- **idempotenza**: global instance registry, `wire:ignore` shell, `isProgrammaticInputUpdate` flag evitano doppie inizializzazioni e sync circolari
+- **nessun `wire.set()` diretto**: usiamo change event per attivare `wire:model.change` — questo evita re-render aggressivi
+- **nessun `wire:model.live`** che causi churn su marker drag continuo
 
 **Traduzioni pagina test `segnalazione-02-dati`**: mantenere allineate le chiavi `fixcity::segnalazione.breadcrumb.*`, `fixcity::segnalazione.fields.required.note.*`, `fixcity::segnalazione.actions.save*`, `fixcity::segnalazione.actions.remove_*` e `fixcity::segnalazione.inefficiency_types.*` per evitare fallback raw key nella UI.
 
-**Parità checkbox (step 1)**: gli stili del checkbox privacy sono allineati a `segnalazione-01-privacy` tramite regole CSS page-scoped su `div.page-content[data-slug="tests.segnalazione-crea"] .ticket-wizard-root .form-check`. Non aggiungere classi al `<body>` per forzare la parity.
+**Parità checkbox (step 1)**: gli stili del checkbox privacy devono usare hook stabili del widget e del layout (`.ticket-wizard-root`, classi strutturali reali, classi Filament/Bootstrap Italia compatibili), evitando selettori fragili basati sullo slug runtime della pagina.
 
 ### Stato form (`data`):
 I campi del wizard vivono nello stato Filament con `statePath('data')` (vedi `XotBaseWidget`), con wrapper `wizard` (vedi `XotBaseWizardWidget::getWizardSchemaWrapperKey()`). Chiavi persistite sul ticket dopo `normalizeWizardFormState`: `latitude`, `longitude`, `type_id`, `name`, `content`, `email`, `images` (poi `unset` in `prepareTicketData` dove serve). Chiavi solo UX: `location_map` (`dehydrated(false)`), `privacyAccepted`, ecc. `blockData` resta per CMS (titolo pagina, contatti).
