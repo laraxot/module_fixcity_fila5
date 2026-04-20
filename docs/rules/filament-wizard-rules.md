@@ -193,8 +193,7 @@ use Modules\Geo\Filament\Forms\Components\LatitudeLongitudeInput;
 LatitudeLongitudeInput::make('location')
     ->defaultCenter(41.9028, 12.4964)
     ->defaultZoom(13)
-    ->mapHeight('340px')
-    ->showMap(true),
+    ->mapHeight('340px'),
 ```
 
 **Zen**: 

@@ -14,15 +14,19 @@ use Filament\Schemas\Components\Section;
 use Filament\Schemas\Components\Text;
 use Filament\Schemas\Components\Utilities\Get;
 use Filament\Schemas\Components\Wizard\Step;
+use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Contracts\View\View;
-use Illuminate\Support\HtmlString;
 use Illuminate\Support\Arr;
+use Illuminate\Support\HtmlString;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 use Modules\Fixcity\Enums\TicketTypeEnum;
 use Modules\Fixcity\Events\TicketCreatedEvent;
 use Modules\Fixcity\Models\Ticket;
+use Modules\Geo\Filament\Forms\Components\CoordinatePicker;
 use Modules\Geo\Filament\Forms\Components\LatitudeLongitudeInput;
-use Illuminate\Contracts\Auth\Authenticatable;
+use Modules\Geo\Filament\Forms\Components\MapPicker;
+use Modules\Geo\Filament\Forms\Components\MapPositioner;
+use Modules\Geo\Filament\Forms\Components\PlacePicker;
 use Modules\Xot\Filament\Widgets\XotBaseWizardWidget;
 
 class CreateTicketWizardWidget extends XotBaseWizardWidget
@@ -66,10 +70,8 @@ class CreateTicketWizardWidget extends XotBaseWizardWidget
             'content' => '',
             'images' => [],
             'email' => '',
-            'location' => [
-                'latitude' => null,
-                'longitude' => null,
-            ],
+            'latitude' => null,
+            'longitude' => null,
         ];
     }
 
@@ -98,12 +100,41 @@ class CreateTicketWizardWidget extends XotBaseWizardWidget
                 ->compact()
                 ->extraAttributes(['id' => 'report-place', 'data-step-section' => 'place'])
                 ->schema([
-                    LatitudeLongitudeInput::make('location')
+                    /*
+                    // NON CANCELLARE - LatitudeLongitudeInput attivo
+                    LatitudeLongitudeInput::make('location0')
                         ->hiddenLabel()
                         ->defaultCenter(41.9028, 12.4964)
                         ->defaultZoom(13)
-                        ->mapHeight('340px')
-                        ->showMap(true),
+                        ->mapHeight('340px'),
+                    //*/
+                    //*
+                    // NON CANCELLARE
+                    MapPicker::make('location1')
+                        ->hiddenLabel()
+                        ->zoom(15)
+                        ->height('340px'),
+                        // Auto-geolocation will be used if latitude and longitude are null
+                    //*/
+                    /*
+                    // NON CANCELLARE
+                    PlacePicker::make('location2'),
+                    
+                    // NON CANCELLARE
+                    CoordinatePicker::make('location3'),
+
+                    // NON CANCELLARE
+                    MapPositioner::make('location4')
+                        ->hiddenLabel()
+                        ->defaultLocation(41.9028, 12.4964)
+                        ->zoom(13)
+                        ->height('400px'),
+                    // NON CANCELLARE
+                    LeafletMarkerMapInput::make('location5'),
+                    //*/
+
+
+                        
                 ]),
 
             Section::make((string) __('fixcity::segnalazione.fields.inefficiency.section.label'))

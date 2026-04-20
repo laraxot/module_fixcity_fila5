@@ -122,7 +122,6 @@ LeafletMarkerMapInput::make('location')
     ->defaultCenter(41.9028, 12.4964) // Roma di default
     ->defaultZoom(13)
     ->mapHeight('340px')
-    ->showMap(true)
 ```
 
 **Note**: The `LeafletMarkerMapInput` component automatically updates sibling `latitude` and `longitude` fields in the same form scope when the marker is moved, eliminating the need for separate coordinate fields.
@@ -140,7 +139,7 @@ This component provides:
 - Two numeric fields for latitude (-90 to 90) and longitude (-180 to 180)
 - Range validation with real-time feedback
 - Design Comuni UI styling
-- Optional map display integration point (`->showMap()`)
+- Fixed integrated map plus numeric inputs, without presentation toggles on the same field
 
 ## Files
 

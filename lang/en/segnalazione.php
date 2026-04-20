@@ -69,6 +69,14 @@ return [
             'label' => 'Type of issue*',
             'description' => 'Select the type of issue',
         ],
+        'map_reference' => [
+            'label' => 'Map (MapPicker — comparison)',
+            'description' => 'Same Lit component as LocationPicker; coordinates are not saved on the report.',
+        ],
+        'location' => [
+            'label' => 'Map (LocationPicker)',
+            'description' => 'Pick the point on the map; coordinates are persisted on the report.',
+        ],
         'details' => [
             'label' => 'Details**',
             'char_limit' => 'Enter a maximum of 200 characters',

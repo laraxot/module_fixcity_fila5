@@ -79,8 +79,7 @@ LatitudeLongitudeInput::make('location')
     ->hiddenLabel()
     ->defaultCenter(41.9028, 12.4964) // Roma di default
     ->defaultZoom(13)
-    ->mapHeight('340px')
-    ->showMap(true),
+    ->mapHeight('340px'),
 ```
 
 ### Struttura canonica step 2
