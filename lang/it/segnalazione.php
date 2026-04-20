@@ -69,6 +69,16 @@ return [
             'label' => 'Tipo di disservizio*',
             'description' => 'Seleziona il tipo di disservizio',
         ],
+        /** Wizard test: MapPicker mirror; non salvato su Ticket (dehydrated false). */
+        'map_reference' => [
+            'label' => 'Mappa (MapPicker — confronto)',
+            'description' => 'Stesso componente Lit di LocationPicker; coordinate non salvate sulla segnalazione.',
+        ],
+        /** Coordinate ufficiali per il ticket. */
+        'location' => [
+            'label' => 'Mappa (LocationPicker)',
+            'description' => 'Indica il punto sulla mappa: coordinate salvate sulla segnalazione.',
+        ],
         'details' => [
             'label' => 'Dettagli**',
             'char_limit' => 'Inserire al massimo 200 caratteri',

@@ -20,6 +20,7 @@ return new class extends XotBaseMigration
             static function (Blueprint $table): void {
                 $table->increments('id');
                 $table->integer('user_id')->nullable()->index();
+                $table->uuid('uuid')->nullable()->index();
                 $table->string('first_name')->nullable();
                 $table->string('last_name')->nullable();
                 $table->string('email')->nullable();
@@ -38,6 +39,10 @@ return new class extends XotBaseMigration
                     $table->string('user_id')->change();
                 }
 
+                if (! $this->hasColumn('uuid')) {
+                    $table->uuid('uuid')->nullable()->index();
+                }
+
                 if (! $this->hasColumn('credits')) {
                     $table->decimal('credits')->default(0);
                 }
@@ -52,6 +57,9 @@ return new class extends XotBaseMigration
 
                 if ($this->hasColumn('credits')) {
                     $table->decimal('credits')->change();
+                }
+                if ($this->hasColumn('uuid')) {
+                    $table->uuid('uuid')->nullable()->change();
                 }
                 $this->updateTimestamps(table: $table, hasSoftDeletes: true);
             }

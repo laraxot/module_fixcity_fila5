@@ -185,6 +185,42 @@ return [
             'placeholder' => 'location',
             'label' => 'location',
         ],
+        'map_reference' => [
+            'description' => 'map_reference',
+            'helper_text' => 'map_reference',
+            'placeholder' => 'map_reference',
+            'label' => 'map_reference',
+        ],
+        'location3' => [
+            'description' => 'location3',
+            'helper_text' => 'location3',
+            'placeholder' => 'location3',
+            'label' => 'location3',
+        ],
+        'location2' => [
+            'description' => 'location2',
+            'helper_text' => 'location2',
+            'placeholder' => 'location2',
+            'label' => 'location2',
+        ],
+        'location0' => [
+            'description' => 'location0',
+            'helper_text' => 'location0',
+            'placeholder' => 'location0',
+            'label' => 'location0',
+        ],
+        'location1' => [
+            'description' => 'location1',
+            'helper_text' => 'location1',
+            'placeholder' => 'location1',
+            'label' => 'location1',
+        ],
+        'location4' => [
+            'description' => 'location4',
+            'helper_text' => 'location4',
+            'placeholder' => 'location4',
+            'label' => 'location4',
+        ],
     ],
     'sections' => [
         'Immagini allegate' => [

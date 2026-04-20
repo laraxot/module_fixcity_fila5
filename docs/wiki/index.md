@@ -20,6 +20,7 @@ wiki/
 | Pagina | Tipo | Argomento |
 |--------|------|-----------|
 | [fixcity-module](./overviews/fixcity-module.md) | overview | Ticket system, wizard frontoffice cittadini, pannello operatori |
+| [profiles-uuid-contract](./concepts/profiles-uuid-contract.md) | concept | Contratto schema `profiles`: `id` intero + `uuid` separato nella migrazione owner |
 
 ## Raw Sources
 
