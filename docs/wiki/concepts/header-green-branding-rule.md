@@ -1,26 +1,23 @@
 # header green branding rule
 
-## Regola di Branding Locale
+## Ambito (KISS)
 
-Nonostante i riferimenti standard di Design Comuni (Bootstrap Italia) utilizzino il Blu (#0066CC), il modulo Fixcity adotta per questa istanza una **Branding Agnostica basata sul Logo del Comune**.
+Questa nota descrive **token verdi** usati nel perimetro Fixcity / test quando serve continuità con il **modello segnalazioni** del kit. **Non** sostituisce il riferimento visivo ufficiale del flusso HTML statico.
 
-### Definizione Colori
+**Parità con [Design Comuni — segnalazione-02-dati](https://italia.github.io/design-comuni-pagine-statiche/sito/segnalazione-02-dati.html):** la fascia menu (`.it-header-navbar-wrapper`) nel wizard test è **chiara** (link scuri, hover/active verde), non una barra intera verde con testo bianco. Fonte di implementazione nel tema: [header color parity](../../../../../../Themes/Sixteen/docs/wiki/concepts/header-color-parity.md).
 
-1. **Sfondo Logo Comune (Verde)**: Rappresenta il colore primario dell'amministrazione.
-   - Token: `var(--dc-green)` -> `#007A52`.
-2. **Sfondo Top Slim (Verde Scuro)**: Utilizzato per la barra istituzionale superiore.
-   - Token: `var(--dc-green-dark)` -> `#00402B`.
+## Token (riferimento)
 
-### Applicazione Obbligatoria (Parity Parity)
+- `var(--dc-green)` / `#007A52` — accento, CTA, stati attivi dove coerente con il kit.
+- `var(--dc-green-dark)` / `#00402B` — fascia slim nel flusso segnalazione, dove previsto.
 
-Tutti i componenti dell'header devono seguire questa scala cromatica per garantire la parità con l'identità del Comune:
+## Cosa non fare
 
-- **Slim Header Wrapper**: Verde Scuro (#00402B).
-- **Center Header Wrapper**: Verde (#007A52).
-- **Navbar Header Wrapper**: Verde (#007A52).
-- **CTA "Accedi all'area personale"**: Deve utilizzare lo sfondo Verde (#007A52) per non creare "Blue Spots" incongruenti.
-- **Link Secondari (Iscrizioni, Estate, etc.)**: Sfondo Verde (#007A52).
+- Forzare `#007A52` come **sfondo unico** di tutta la `.navbar-nav` / `.navbar-secondary` per “parity”: è fuori dal prototipo statico e peggiora contrasto gerarchico.
+- Duplicare regole CSS in Blade `<style>`: un solo posto nel tema (`app.css` + classe BI `theme-light-desk` sul wrapper).
 
-## Rationale
+## Collegamenti
 
-La parità visuale non è solo copiare i token di un framework, ma rispettare la **gerarchia cromatica dell'ente locale** all'interno della struttura architettonica del framework.
+- [visual parity report](./visual-parity-report.md)
+- [segnalazione runtime asset integrity](./segnalazione-runtime-asset-integrity.md)
+- [Wiki indice Fixcity](../index.md)

@@ -103,24 +103,25 @@
                         {{ $this->form }}
 
                         <nav aria-label="Step" class="steppers-nav mt-4">
-                            @if(!$isPrivacyStep)
-                                <button type="button" class="btn btn-sm p-0 steppers-btn-prev" wire:click="previousStep">
-                                    <svg aria-hidden="true" class="icon icon-sm me-1"><use href="{{ $sprite }}#it-chevron-left"></use></svg>
-                                    <span class="visually-hidden">{{ __('fixcity::segnalazione.actions.back.label') }}</span>
-                                    <span aria-hidden="true">{{ __('fixcity::segnalazione.actions.back.label') }}</span>
-                                </button>
-                            @endif
+                            <div class="d-flex flex-column gap-3 align-items-stretch w-100">
+                                @if(!$isPrivacyStep)
+                                    <button type="button" class="btn btn-outline-primary btn-sm fw-bold steppers-btn-prev btn-prev w-100 mb-2" wire:click="previousStep">
+                                        <svg aria-hidden="true" class="icon icon-sm me-1" style="width:16px;height:16px;"><use href="{{ $sprite }}#it-chevron-left"></use></svg>
+                                        <span class="visually-hidden">{{ __('fixcity::segnalazione.actions.back.label') }}</span>
+                                        <span aria-hidden="true">{{ __('fixcity::segnalazione.actions.back.label') }}</span>
+                                    </button>
+                                @endif
 
-                            @if($isSummaryStep)
-                                <button type="button" class="btn btn-primary btn-sm steppers-btn-confirm" wire:click="submit">
-                                    {{ __('fixcity::segnalazione.actions.submit.label') }}
-                                </button>
-                            @else
-                                <button type="button" class="btn btn-primary btn-sm steppers-btn-confirm" wire:click="nextStep">
-                                    {{ __('fixcity::segnalazione.actions.next.label') }}
-                                    <svg aria-hidden="true" class="icon icon-sm ms-1"><use href="{{ $sprite }}#it-chevron-right"></use></svg>
-                                </button>
-                            @endif
+                                @if($isSummaryStep)
+                                    <button type="button" class="btn btn-primary btn-sm fw-bold steppers-btn-confirm btn-next segnalazione-next-btn" wire:click="submit">
+                                        {{ __('fixcity::segnalazione.actions.submit.label') }}
+                                    </button>
+                                @else
+                                    <button type="button" class="btn btn-primary btn-sm fw-bold steppers-btn-confirm btn-next segnalazione-next-btn" wire:click="nextStep">
+                                        {{ __('fixcity::segnalazione.actions.next.label') }}
+                                    </button>
+                                @endif
+                            </div>
                         </nav>
                     </div>
                     <x-filament-actions::modals />
@@ -132,6 +133,72 @@
 </div>
 
 @once
+    <style>
+        /* Parity Design Comuni: keep one visible navigation row only. */
+        .fi-sc-wizard-footer {
+            display: none !important;
+        }
+
+        .segnalazione-next-btn {
+            width: 100% !important;
+            min-height: 48px !important;
+            min-width: 100% !important;
+            align-self: flex-start !important;
+            margin-top: 0.5rem !important;
+        }
+
+        .segnalazione-wizard-root .steppers-nav {
+            width: 100% !important;
+            display: block !important;
+        }
+
+        .segnalazione-wizard-root .fi-sc,
+        .segnalazione-wizard-root .fi-sc-wizard {
+            width: 100% !important;
+            min-width: 0 !important;
+            max-width: none !important;
+        }
+
+        .segnalazione-wizard-root .steppers-content {
+            display: block !important;
+            width: 100% !important;
+        }
+
+        @media (max-width: 991.98px) {
+            .segnalazione-wizard-root .fi-grid {
+                grid-template-columns: minmax(0, 1fr) !important;
+            }
+        }
+
+        @media (min-width: 768px) {
+            .segnalazione-next-btn {
+                width: 348px !important;
+                min-width: 348px !important;
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .segnalazione-next-btn {
+                width: 428px !important;
+                min-width: 428px !important;
+            }
+        }
+
+        /* Header parity: vedi `Sixteen/.../layouts/main.blade.php` (style fine <head>) + `header/v1.blade.php` (`theme-light-desk` su wrapper BI 2.18). */
+
+        /* Allineamento hamburger/menu e logo */
+        .navbar-custom {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        /* Nascondi la riga verde del stepper */
+        .it-navscroll-progressbar {
+            display: none !important;
+        }
+    </style>
+
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             const root = document.querySelector('.page-content[data-slug]');
@@ -145,6 +212,24 @@
             const slug = root.getAttribute('data-slug');
             if (slug !== null && /\|---LINE:\d+---\|/.test(slug)) {
                 root.setAttribute('data-slug', slug.replace(/\|---LINE:\d+---\|/g, ''));
+            }
+
+            // Parity hard-stop: hide Filament default footer actions.
+            document.querySelectorAll('.fi-sc-wizard-footer').forEach((el) => {
+                el.style.setProperty('display', 'none', 'important');
+            });
+
+            // Header: niente colori inline — `.it-header-wrapper.is-segnalazione-crea` in tema Sixteen (`app.css`) + token slim; lo style inline batteva il CSS (!important) e rompeva parity (navbar vs fascia logo).
+            if (root.getAttribute('data-slug') === 'tests.segnalazione-crea') {
+                // Keep "Avanti" immediately under privacy checkbox on first step.
+                const stepIndex = document.querySelector('.steppers-index')?.textContent?.trim() ?? '';
+                if (stepIndex.startsWith('1/')) {
+                    const nav = document.querySelector('.steppers-nav');
+                    const privacyField = document.querySelector('[wire\\:partial$=\"privacyAccepted\"]');
+                    if (nav && privacyField && privacyField.parentElement) {
+                        privacyField.parentElement.insertBefore(nav, privacyField.nextSibling);
+                    }
+                }
             }
         });
     </script>

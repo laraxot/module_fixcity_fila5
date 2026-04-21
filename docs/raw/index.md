@@ -10,7 +10,7 @@ Il layer raw per questo modulo/tema è **l'intera cartella `docs/`** (esclusa `d
 |----------------|------|
 | `docs/*.md` | Documentazione operativa, regole, guide |
 | `docs/stories/` | User stories e specifiche |
-| `docs/archive/` | Documenti superati ma consultabili |
+| `docs/archived/` | Documenti superati ma consultabili |
 | `docs/raw/` | Dump HTML, JSON, asset di analisi (questa cartella) |
 | `docs/prompts/` | Prompt e istruzioni agentiche |
 
