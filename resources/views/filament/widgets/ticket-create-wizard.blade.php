@@ -99,9 +99,8 @@
                 {{-- Form Filament — single column --}}
                 <x-filament-widgets::widget class="cmp-wizard-widget">
                     <div aria-live="polite" class="steppers-content">
-                        <form wire:submit="submit">
-                            {{ $this->form }}
-                        </form>
+                        {{-- Un solo <form>: Filament Schema già emette fi-sc-form; annidare <form> rompe DOM/Livewire. --}}
+                        {{ $this->form }}
 
                         <nav aria-label="Step" class="steppers-nav mt-4">
                             @if(!$isPrivacyStep)
@@ -113,7 +112,7 @@
                             @endif
 
                             @if($isSummaryStep)
-                                <button type="submit" form="wizard-form" class="btn btn-primary btn-sm steppers-btn-confirm" wire:click="submit">
+                                <button type="button" class="btn btn-primary btn-sm steppers-btn-confirm" wire:click="submit">
                                     {{ __('fixcity::segnalazione.actions.submit.label') }}
                                 </button>
                             @else
