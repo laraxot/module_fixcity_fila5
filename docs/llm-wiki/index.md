@@ -1,53 +1,49 @@
-# Fixcity Module Wiki Index
+# Fixcity Module — Indice Documentazione
 
-> **Module**: Fixcity
-> **Purpose**: Module-specific knowledge catalog
-> **Created**: 2026-04-15
+Modulo Laravel responsabile della gestione delle segnalazioni cittadine (Ticket).
 
 ---
 
-## Concepts
+## 🏛 Architettura e Governance
 
-_No concept pages created yet_
-
-## Entities
-
-_No entity pages created yet_
-
-## Sources
-
-_No source summaries created yet_
-
-## Patterns
-
-_No pattern pages created yet_
-
-## Decisions
-
-_No architecture decision records yet_
-
-## Troubleshooting
-
-_No troubleshooting pages created yet_
+| Documento | Descrizione |
+|-----------|-------------|
+| **[Filament Wizard Pattern](./filament-wizard-pattern.md)** | **Guida principale** per wizard multi-step con Filament v5. |
+| [Rules / Filament Wizard Rules](./rules/filament-wizard-rules.md) | Regole operative: docs-first, concorrenza agenti, Infolist vs Form Schema, anti-duplicazione. |
+| [Wizard Governance Philosophy](./wizard-governance-philosophy.md) | Perché/regola/visione/zen: confini modulo-base-tema e anti-duplicazione. |
+| [Structure](./structure.md) | Struttura moduli e directory. |
+| [Module Boundary Philosophy](./MODULE-BOUNDARY-PHILOSOPHY.md) | **Zen dei confini tra moduli**: Geo possiede geolocation, Fixcity consuma. |
 
 ---
 
-## Statistics
+## 🧩 Widgets e Componenti
 
-- **Total Pages**: 0
-- **Last Ingestion**: None yet
-- **Last Lint**: None yet
+| Documento | Descrizione |
+|-----------|-------------|
+| **[CreateTicketWizardWidget](./CreateTicketWizardWidget.md)** | Widget Filament 3-step per creazione ticket: campi, metodi, traduzioni. |
+| **[Filament Components Guidelines](./filament-components-guidelines.md)** | Guida corretta: Placeholder vs TextEntry, imports, anti-pattern verificati. |
+| **[Wizard Visual Parity](./wizard-visual-parity.md)** | CSS scoped overrides per Bootstrap Italia parity. Entry point `app-test.css`. |
+| [Wizard Single Next CTA Rule](./wiki/concepts/wizard-single-next-cta-rule.md) | Regola di UI parity: un solo tasto "Avanti" per step. |
+| [Wizard Nav Responsive Alignment](./wiki/concepts/wizard-nav-responsive-alignment.md) | Analisi posizionamento CTA (Vertical stack + stretch per mobile). |
+| [Livewire Cache Table Rule](./wiki/concepts/livewire-cache-table-rate-limiter.md) | Gestione backend cache per Rate Limiter e Checksum. |
+| [Segnalazione Runtime Asset Integrity](./wiki/concepts/segnalazione-runtime-asset-integrity.md) | Catena fix su 404 asset + bootstrap Livewire/Alpine coerente. |
+| **[Select Enum Best Practices](./filament-select-enum-best-practices.md)** | Come usare correttamente Select con enum in Filament: evita codice complesso! |
+| [AddressInput (Geo)](../../Geo/docs/address-input-component.md) | Componente Filament per input indirizzi con mappa. |
 
-## Project Wiki Cross-References
+---
 
-### Related Project Concepts
+## 📚 Altri Riferimenti
 
-- [Laraxot Architecture](../../docs/wiki/concepts/laraxot-architecture.md)
-- [Actions Over Services](../../docs/wiki/concepts/actions-over-services.md)
-- [PHPStan Level 10](../../docs/wiki/concepts/phpstan-level10.md)
+- [Traduzioni IT](../lang/it/create_ticket_wizard.php) / [Traduzioni EN](../lang/en/create_ticket_wizard.php)
+- [Storie di Sviluppo](./stories/index.md)
+- [PHPStan Fixes](./phpstan/index.md)
+- [Sixteen Theme Documentation](../../Themes/Sixteen/docs/00-index.md)
 
-## Module's Role in Project
+---
 
-_Fixcity provides specific functionality for the Laraxot ecosystem._
+## 🧘 Xot Base Patterns (Global)
 
-See [project wiki](../../docs/wiki/index.md) for cross-module integration.
+- [XotBaseWizardWidget Philosophy](../../Xot/docs/filament/widgets/xot-base-wizard-widget-philosophy.md)
+- [Infolists for Summary](../../Xot/docs/filament/widgets/infolists-for-summary.md)
+- [Schemas Unified Religion](../../../../docs/schemas-unified-religion.md)
+- [AutoLabel Guidelines](../../UI/docs/autolabel-guidelines.md)

@@ -1,9 +1,8 @@
 <?php
 
 declare(strict_types=1);
-use Modules\Fixcity\Filament\Widgets\CreateTicketWizardWidget;
 
-/**
+/*
  * Traduzioni per {@see CreateTicketWizardWidget}.
  * Chiave namespace: fixcity::create_ticket_wizard (da GetTransKeyAction).
  */
@@ -137,7 +136,7 @@ return [
             'icon' => '',
         ],
         'previous' => [
-            'label' => 'Precedente',
+            'label' => 'Indietro',
             'tooltip' => 'Torna al passaggio precedente',
             'icon' => '',
         ],
