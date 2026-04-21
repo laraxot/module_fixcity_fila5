@@ -1,15 +1,15 @@
-# 🎫 Modulo Fixcity - Sistema di Gestione Ticket
+# 🎫 Modulo [PROJECT_NAME] - Sistema di Gestione Ticket
 
 [![PHPStan Level 10](https://img.shields.io/badge/PHPStan-Level%2010-brightgreen.svg)](https://phpstan.org/)
 [![Laravel 12.x](https://img.shields.io/badge/Laravel-12.x-red.svg)](https://laravel.com/)
 [![Filament 5.x](https://img.shields.io/badge/Filament-5.x-blue.svg)](https://filamentphp.com/)
 [![Translation Ready](https://img.shields.io/badge/Translation-IT%20%7C%20EN-green.svg)](https://laravel.com/docs/localization)
 
-> **🚀 Modulo Fixcity**: Sistema completo per la gestione di ticket, segnalazioni e supporto tecnico con interfaccia Filament avanzata.
+> **🚀 Modulo [PROJECT_NAME]**: Sistema completo per la gestione di ticket, segnalazioni e supporto tecnico con interfaccia Filament avanzata.
 
 ## 📋 Panoramica
 
-Il modulo **Fixcity** è il sistema di ticketing dell'applicazione, fornendo:
+Il modulo **[PROJECT_NAME]** è il sistema di ticketing dell'applicazione, fornendo:
 
 - 🎫 **Gestione Ticket Completa** - Creazione, assegnazione e tracking ticket
 - 👥 **Gestione Utenti e Ruoli** - Sistema di autorizzazione granulare
@@ -73,13 +73,13 @@ $ticket = Ticket::create([
 
 ```bash
 # Abilitare il modulo
-php artisan module:enable Fixcity
+php artisan module:enable [PROJECT_NAME]
 
 # Eseguire le migrazioni
 php artisan migrate
 
 # Popolare dati di test
-php artisan db:seed --class=FixcitySeeder
+php artisan db:seed --class=[PROJECT_NAME]Seeder
 ```
 
 ## 📚 Documentazione Completa
@@ -155,3 +155,10 @@ File: `lang/{locale}/segnalazione.php`
 **🐛 PHPStan Level**: 10 ✅
 **🌐 Translation Standards**: IT/EN complete ✅
 **✨ Filament 5.x**: Integrato e funzionante ✅
+
+
+## Standard Rules & Workflow
+
+- [[BMAD Method](../../../../docs/wiki/concepts/bmad-method.md)]
+- [[Context Engineering](../../../../docs/wiki/concepts/context-engineering.md)]
+- [[LLM Wiki Governance](../../../../docs/wiki/concepts/llm-wiki-governance.md)]

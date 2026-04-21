@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Modules\Fixcity\Filament\Widgets;
 
+use Filament\Actions\Action;
 use Filament\Forms\Components\Checkbox;
 use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\Select;
@@ -16,17 +17,12 @@ use Filament\Schemas\Components\Utilities\Get;
 use Filament\Schemas\Components\Wizard\Step;
 use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Contracts\View\View;
-use Illuminate\Support\Arr;
 use Illuminate\Support\HtmlString;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 use Modules\Fixcity\Enums\TicketTypeEnum;
 use Modules\Fixcity\Events\TicketCreatedEvent;
 use Modules\Fixcity\Models\Ticket;
-use Modules\Geo\Filament\Forms\Components\CoordinatePicker;
-use Modules\Geo\Filament\Forms\Components\LatitudeLongitudeInput;
 use Modules\Geo\Filament\Forms\Components\MapPicker;
-use Modules\Geo\Filament\Forms\Components\MapPositioner;
-use Modules\Geo\Filament\Forms\Components\PlacePicker;
 use Modules\Xot\Filament\Widgets\XotBaseWizardWidget;
 
 class CreateTicketWizardWidget extends XotBaseWizardWidget
@@ -70,8 +66,10 @@ class CreateTicketWizardWidget extends XotBaseWizardWidget
             'content' => '',
             'images' => [],
             'email' => '',
-            'latitude' => null,
-            'longitude' => null,
+            'location' => [
+                'latitude' => null,
+                'longitude' => null,
+            ],
         ];
     }
 
@@ -100,41 +98,10 @@ class CreateTicketWizardWidget extends XotBaseWizardWidget
                 ->compact()
                 ->extraAttributes(['id' => 'report-place', 'data-step-section' => 'place'])
                 ->schema([
-                    /*
-                    // NON CANCELLARE - LatitudeLongitudeInput attivo
-                    LatitudeLongitudeInput::make('location0')
-                        ->hiddenLabel()
-                        ->defaultCenter(41.9028, 12.4964)
-                        ->defaultZoom(13)
-                        ->mapHeight('340px'),
-                    //*/
-                    //*
-                    // NON CANCELLARE
-                    MapPicker::make('location1')
+                    MapPicker::make('location')
                         ->hiddenLabel()
                         ->zoom(15)
                         ->height('340px'),
-                        // Auto-geolocation will be used if latitude and longitude are null
-                    //*/
-                    /*
-                    // NON CANCELLARE
-                    PlacePicker::make('location2'),
-                    
-                    // NON CANCELLARE
-                    CoordinatePicker::make('location3'),
-
-                    // NON CANCELLARE
-                    MapPositioner::make('location4')
-                        ->hiddenLabel()
-                        ->defaultLocation(41.9028, 12.4964)
-                        ->zoom(13)
-                        ->height('400px'),
-                    // NON CANCELLARE
-                    LeafletMarkerMapInput::make('location5'),
-                    //*/
-
-
-                        
                 ]),
 
             Section::make((string) __('fixcity::segnalazione.fields.inefficiency.section.label'))
@@ -197,11 +164,11 @@ class CreateTicketWizardWidget extends XotBaseWizardWidget
                 ->extraAttributes(['data-step-section' => 'summary'])
                 ->schema([
                     Grid::make(['default' => 1, 'lg' => 2])->schema([
-                        Text::make(fn (Get $get): string => (string) ($get('name') ?? ''))
+                        Text::make(static fn (Get $get): string => (string) ($get('name') ?? ''))
                             ->weight('bold')
                             ->icon('heroicon-o-document'),
 
-                        Text::make(function (Get $get): string {
+                        Text::make(static function (Get $get): string {
                             $raw = $get('type_id');
                             $type = $raw instanceof TicketTypeEnum
                                 ? $raw
@@ -212,10 +179,10 @@ class CreateTicketWizardWidget extends XotBaseWizardWidget
                             ->badge()
                             ->icon('heroicon-o-tag'),
 
-                        Text::make(function (Get $get): string {
+                        Text::make(static function (Get $get): string {
                             $lat = trim((string) ($get('latitude') ?? ''));
                             $lng = trim((string) ($get('longitude') ?? ''));
-                            if ($lat === '' && $lng === '') {
+                            if ('' === $lat && '' === $lng) {
                                 return '';
                             }
 
@@ -224,11 +191,11 @@ class CreateTicketWizardWidget extends XotBaseWizardWidget
                             ->columnSpanFull()
                             ->icon('heroicon-o-map-pin'),
 
-                        Text::make(fn (Get $get): string => (string) ($get('content') ?? ''))
+                        Text::make(static fn (Get $get): string => (string) ($get('content') ?? ''))
                             ->columnSpanFull()
                             ->icon('heroicon-o-chat-bubble-left-ellipsis'),
 
-                        Text::make(fn (Get $get): string => (string) ($get('email') ?? ''))
+                        Text::make(static fn (Get $get): string => (string) ($get('email') ?? ''))
                             ->icon('heroicon-o-envelope'),
                     ]),
                 ]),
@@ -246,7 +213,6 @@ class CreateTicketWizardWidget extends XotBaseWizardWidget
             $this->dispatchEvents($ticket);
 
             $this->redirectAfterSuccess($ticket);
-
         } catch (\Throwable $e) {
             $this->handleSubmissionError($e);
         }
@@ -275,7 +241,7 @@ class CreateTicketWizardWidget extends XotBaseWizardWidget
         unset($state['images'], $state['privacyAccepted']);
 
         // Estrarre latitude e longitude dal campo location se presente
-        if (isset($state['location']) && is_array($state['location'])) {
+        if (isset($state['location']) && \is_array($state['location'])) {
             if (isset($state['location']['latitude']) && is_numeric($state['location']['latitude'])) {
                 $state['latitude'] = (string) $state['location']['latitude'];
             }
@@ -305,7 +271,7 @@ class CreateTicketWizardWidget extends XotBaseWizardWidget
     /**
      * Crea il record nel database.
      *
-     * @param  array<string, mixed>  $state
+     * @param array<string, mixed> $state
      */
     protected function createTicket(array $state): Ticket
     {
@@ -372,6 +338,16 @@ class CreateTicketWizardWidget extends XotBaseWizardWidget
      *
      * @return array<int, Step>
      */
+    public function configureWizardNextAction(Action $nextAction): Action
+    {
+        return $nextAction->hidden();
+    }
+
+    public function configureWizardPreviousAction(Action $previousAction): Action
+    {
+        return $previousAction->hidden();
+    }
+
     public function getWizardSteps(): array
     {
         return [
@@ -391,7 +367,7 @@ class CreateTicketWizardWidget extends XotBaseWizardWidget
         $detailPrefix = (string) __('fixcity::segnalazione.privacy.detail_prefix.text');
         $linkLabel = (string) __('fixcity::segnalazione.privacy.link.label');
 
-        return new HtmlString(sprintf(
+        return new HtmlString(\sprintf(
             '<p class="mb-3">%s</p><p>%s<a href="%s" class="text-primary text-decoration-underline">%s</a></p>',
             e($intro),
             e($detailPrefix),
@@ -411,7 +387,7 @@ class CreateTicketWizardWidget extends XotBaseWizardWidget
     protected function getAuthUserName(): string
     {
         $user = $this->getAuthUser();
-        if ($user === null) {
+        if (null === $user) {
             return '';
         }
 
@@ -423,7 +399,7 @@ class CreateTicketWizardWidget extends XotBaseWizardWidget
     protected function getAuthUserFiscalCode(): string
     {
         $user = $this->getAuthUser();
-        if ($user === null) {
+        if (null === $user) {
             return '';
         }
 
@@ -435,7 +411,7 @@ class CreateTicketWizardWidget extends XotBaseWizardWidget
     protected function getAuthUserPhone(): string
     {
         $user = $this->getAuthUser();
-        if ($user === null) {
+        if (null === $user) {
             return '';
         }
 
