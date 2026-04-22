@@ -79,3 +79,9 @@ Questa distinzione evita il falso dogma "tutto diventa Infolist" e mantiene chia
 - [Filament Prime Components](https://filamentphp.com/docs/5.x/schemas/primes)
 - [7-47 segnalazione-crea step1 privacy notice parity](../../../../_bmad-output/implementation-artifacts/7-47-segnalazione-crea-step1-privacy-notice-design-comuni-parity.md)
 - [7-48 segnalazione-crea step2 visual parity via sections and infolist](../../../../_bmad-output/implementation-artifacts/7-48-segnalazione-crea-step2-visual-parity-via-sections-and-infolist.md)
+
+## Update: Summary Infolist Migration
+
+- Implementation commit: see [_bmad-output/implementation-artifacts/9-01-summary-infolist-migration.md](/_bmad-output/implementation-artifacts/9-01-summary-infolist-migration.md)
+- Purpose: migrate getSummarySchema() to use Filament Infolist components (TextEntry/ImageEntry) mapped via Get utilities to wizard state.
+- QA: Syntax-checked and smoke-tested locally; please run UI smoke tests and update screenshots in docs if needed.

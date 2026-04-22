@@ -21,6 +21,7 @@ Modulo Laravel responsabile della gestione delle segnalazioni cittadine (Ticket)
 | Documento | Descrizione |
 |-----------|-------------|
 | **[CreateTicketWizardWidget](./CreateTicketWizardWidget.md)** | Widget Filament 3-step per creazione ticket: campi, metodi, traduzioni. |
+| **[Filament Summary Infolist Guidance](./filament-summary-infolist-guidance.md)** | Guida: usare Filament Infolists (TextEntry/ImageEntry) per lo step summary, evitare SchemaView/Placeholder. |
 | **[Filament Components Guidelines](./filament-components-guidelines.md)** | Guida corretta: Placeholder vs TextEntry, imports, anti-pattern verificati. |
 | **[Wizard Visual Parity](./wizard-visual-parity.md)** | CSS scoped overrides per Bootstrap Italia parity. Entry point `app-test.css`. |
 | [Wizard Single Next CTA Rule](./wiki/concepts/wizard-single-next-cta-rule.md) | Regola di UI parity: un solo tasto "Avanti" per step. |
