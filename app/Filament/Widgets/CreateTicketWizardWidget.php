@@ -22,15 +22,12 @@ use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 use Modules\Fixcity\Enums\TicketTypeEnum;
 use Modules\Fixcity\Events\TicketCreatedEvent;
 use Modules\Fixcity\Models\Ticket;
-<<<<<<< HEAD
-=======
 use Modules\Geo\Filament\Forms\Components\CoordinatePicker;
 use Modules\Geo\Filament\Forms\Components\GeopointPicker;
 use Modules\Geo\Filament\Forms\Components\LatitudeLongitudeInput;
 use Modules\Geo\Filament\Forms\Components\LeafletMarkerMapInput;
 use Modules\Geo\Filament\Forms\Components\LocationPicker;
 use Modules\Geo\Filament\Forms\Components\MapLocationInput;
->>>>>>> c47c663 (.)
 use Modules\Geo\Filament\Forms\Components\MapPicker;
 use Modules\Xot\Filament\Widgets\XotBaseWizardWidget;
 
@@ -78,8 +75,6 @@ class CreateTicketWizardWidget extends XotBaseWizardWidget
             'location' => [
                 'latitude' => null,
                 'longitude' => null,
-<<<<<<< HEAD
-=======
                 'address' => '',
                 'address_details' => null,
                 'street' => '',
@@ -91,7 +86,6 @@ class CreateTicketWizardWidget extends XotBaseWizardWidget
                 'country' => '',
                 'country_code' => '',
                 'suburb' => '',
->>>>>>> c47c663 (.)
             ],
         ];
     }
@@ -121,15 +115,9 @@ class CreateTicketWizardWidget extends XotBaseWizardWidget
                 ->compact()
                 ->extraAttributes(['id' => 'report-place', 'data-step-section' => 'place'])
                 ->schema([
-<<<<<<< HEAD
-                    MapPicker::make('location')
-                        ->hiddenLabel()
-                        ->zoom(15)
-                        ->height('340px'),
-=======
                     // *
-                    // NON CANCELLARE QUESTO
-                    CoordinatePicker::make('location0')
+                    // NON CANCELLARE QUESTO - Active Picker
+                    CoordinatePicker::make('location')
                         ->hiddenLabel()
                         ->zoom(15)
                         ->height('340px')
@@ -194,7 +182,6 @@ class CreateTicketWizardWidget extends XotBaseWizardWidget
                         ->height('340px')
                         ->reverseGeocoding(),
                     // */
->>>>>>> c47c663 (.)
                 ]),
 
             Section::make((string) __('fixcity::segnalazione.fields.inefficiency.section.label'))
@@ -430,7 +417,7 @@ class CreateTicketWizardWidget extends XotBaseWizardWidget
     protected function createTicket(array $state): Ticket
     {
         // Set default status if not provided
-        if (!isset($state['status'])) {
+        if (! isset($state['status'])) {
             $state['status'] = \Modules\Fixcity\Enums\TicketStatusEnum::PENDING->value;
         }
 
