@@ -10,14 +10,13 @@ use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
-use Filament\Forms\Components\Wizard\Step;
-use Filament\Forms\Components\Form;
 use Filament\Infolists\Components\ImageEntry;
 use Filament\Infolists\Components\TextEntry;
 use Filament\Schemas\Components\Grid;
 use Filament\Schemas\Components\Section;
 use Filament\Schemas\Components\Text;
 use Filament\Schemas\Components\Utilities\Get;
+use Filament\Schemas\Components\Wizard\Step;
 use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Contracts\View\View;
 use Illuminate\Support\HtmlString;
@@ -25,6 +24,7 @@ use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 use Modules\Fixcity\Enums\TicketTypeEnum;
 use Modules\Fixcity\Events\TicketCreatedEvent;
 use Modules\Fixcity\Models\Ticket;
+use Modules\Geo\Filament\Forms\Components\CoordinatePicker;
 use Modules\Xot\Filament\Widgets\XotBaseWizardWidget;
 
 class CreateTicketWizardWidget extends XotBaseWizardWidget
@@ -33,7 +33,7 @@ class CreateTicketWizardWidget extends XotBaseWizardWidget
      * Vista modulo (layout Design Comuni: sidebar step 2, stepper, parity CSS).
      * Override del default view di XotBaseWizardWidget per mantenere HTML parity.
      */
-    protected string $view = 'fixcity::filament.widgets.createticketwizard';
+    protected string $view = 'fixcity::filament.widgets.ticket-create-wizard';
 
     public array $blockData = [];
 

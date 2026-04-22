@@ -102,16 +102,6 @@
                         {{-- Un solo <form>: Filament Schema già emette fi-sc-form; annidare <form> rompe DOM/Livewire. --}}
                         {{ $this->form }}
 
-                        {{-- Map component (ensure visibility) --}}
-                        @if($isDataStep)
-                            @include('pub_theme::components.map-picker')
-                        @endif
-
-                        {{-- Author infolist (replace placeholder) --}}
-                        @if(!$isPrivacyStep)
-                            <x-filament-infolists::components::section :schema="$this->authorInfolistSchema()" />
-                        @endif
-
                         {{-- Navigation buttons placed under form and map for proper layout --}}
                         <nav aria-label="Step" class="steppers-nav mt-4">
                             <div class="d-flex flex-column gap-3 align-items-stretch w-100">
@@ -149,28 +139,3 @@
 </div>
 
 {{-- Inline wizard script removed. See docs/wiki/concepts/no-inline-blade-style-rule.md --}}
-                                            const walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT);
-            const nodes = [];
-            while (walker.nextNode()) {
-                if (/\|---LINE:\d+---\|/.test(walker.currentNode.textContent ?? '')) nodes.push(walker.currentNode);
-            }
-            nodes.forEach(n => { n.textContent = (n.textContent ?? '').replace(/\|---LINE:\d+---\|/g, ''); });
-            const slug = root.getAttribute('data-slug');
-            if (slug !== null && /\|---LINE:\d+---\|/.test(slug)) {
-                root.setAttribute('data-slug', slug.replace(/\|---LINE:\d+---\|/g, ''));
-            }
-
-            // Header: niente colori inline — `.it-header-wrapper.is-segnalazione-crea` in tema Sixteen (`app.css`) + token slim; lo style inline batteva il CSS (!important) e rompeva parity (navbar vs fascia logo).
-            if (root.getAttribute('data-slug') === 'tests.segnalazione-crea') {
-                // Keep "Avanti" immediately under privacy checkbox on first step.
-                const stepIndex = document.querySelector('.steppers-index')?.textContent?.trim() ?? '';
-                if (stepIndex.startsWith('1/')) {
-                    const nav = document.querySelector('.steppers-nav');
-                    const privacyField = document.querySelector('[wire\\:partial$=\"privacyAccepted\"]');
-                    if (nav && privacyField && privacyField.parentElement) {
-                        privacyField.parentElement.insertBefore(nav, privacyField.nextSibling);
-                    }
-                }
-            }
-        });
-    </script>
