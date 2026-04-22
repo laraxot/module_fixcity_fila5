@@ -252,6 +252,9 @@ return [
         'save_short' => [
             'label' => 'Salva',
         ],
+        'save_draft' => [
+            'label' => 'Salva bozza',
+        ],
         'next' => [
             'label' => 'Avanti',
         ],
