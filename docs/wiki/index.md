@@ -39,6 +39,7 @@ wiki/
 | [context-compression-plugin-runtime](../context-compression-plugin-runtime.md) | source | Regola operativa Fixcity per evitare overflow contesto e distinzione plugin OpenRouter/context-mode |
 | [filament5-schema-namespaces-and-wizard-summary](./concepts/filament5-schema-namespaces-and-wizard-summary.md) | concept | Namespace Filament 5.x corretti + pattern TextEntry+Get per getSummarySchema + linter alias anti-pattern |
 | [filament5-schema-section-namespace-rule](./concepts/filament5-schema-section-namespace-rule.md) | concept | `Section` viene da Schemas, non da Infolists; entries read-only restano Infolists |
+| [design-comuni-wizard-css-generalization-rule](./concepts/design-comuni-wizard-css-generalization-rule.md) | concept | Il wizard ticket non deve avere CSS/comportamenti speciali rispetto agli altri wizard; usare component hooks |
 | [design-comuni-theme-css-only-rule](./concepts/design-comuni-theme-css-only-rule.md) | concept | Fixcity espone markup/stato; Sixteen possiede CSS parity, niente `<style>` nel widget wizard |
 | [filament-multiple-forms](./concepts/filament-multiple-forms.md) | concept | Documentazione su Filament Multiple Forms
 | [context-compression-discipline](../../../../docs/wiki/concepts/context-compression-discipline.md) | concept | Recupero docs/story con context-mode + QMD per evitare errore BMAD 131k token |
