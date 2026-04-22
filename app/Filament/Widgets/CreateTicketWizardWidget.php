@@ -13,7 +13,7 @@ use Filament\Forms\Components\TextInput;
 use Filament\Schemas\Components\Grid;
 use Filament\Schemas\Components\Section;
 use Filament\Schemas\Components\Text;
-use Filament\Schemas\Components\Utilities\Get;
+use Filament\Schemas\Components\View as SchemaView;
 use Filament\Schemas\Components\Wizard\Step;
 use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Contracts\View\View;
@@ -239,73 +239,8 @@ class CreateTicketWizardWidget extends XotBaseWizardWidget
     public function getSummarySchema(): array
     {
         return [
-            Section::make((string) __('fixcity::segnalazione.sections.summary.label'))
-                ->compact()
-                ->extraAttributes(['data-step-section' => 'summary'])
-                ->schema([
-                    Grid::make(['default' => 1, 'lg' => 2])->schema([
-                        Text::make(static fn (Get $get): string => (string) ($get('name') ?? ''))
-                            ->weight('bold')
-                            ->icon('heroicon-o-document'),
-
-                        Text::make(static function (Get $get): string {
-                            $raw = $get('type_id');
-                            $type = $raw instanceof TicketTypeEnum
-                                ? $raw
-                                : TicketTypeEnum::tryFrom((string) ($raw ?? ''));
-
-                            return $type?->getLabel() ?? '';
-                        })
-                            ->badge()
-                            ->icon('heroicon-o-tag'),
-
-                        Text::make(static function (Get $get): string {
-                            $location = $get('location');
-                            if (! \is_array($location)) {
-                                return '';
-                            }
-
-                            $lat = trim((string) ($location['latitude'] ?? ''));
-                            $lng = trim((string) ($location['longitude'] ?? ''));
-                            $address = trim((string) ($location['address'] ?? ''));
-                            $street = trim((string) ($location['street'] ?? ''));
-                            $number = trim((string) ($location['street_number'] ?? ''));
-                            $city = trim((string) ($location['city'] ?? ''));
-
-                            if ('' === $lat && '' === $lng) {
-                                return '';
-                            }
-
-                            // Build a human-readable summary
-                            $parts = [];
-                            if ('' !== $street) {
-                                $parts[] = $street.('' !== $number ? ' '.$number : '');
-                            }
-                            if ('' !== $city) {
-                                $parts[] = $city;
-                            }
-
-                            if ([] !== $parts) {
-                                return implode(', ', $parts).' ('.$lat.', '.$lng.')';
-                            }
-
-                            if ('' !== $address) {
-                                return $address;
-                            }
-
-                            return $lat.', '.$lng;
-                        })
-                            ->columnSpanFull()
-                            ->icon('heroicon-o-map-pin'),
-
-                        Text::make(static fn (Get $get): string => (string) ($get('content') ?? ''))
-                            ->columnSpanFull()
-                            ->icon('heroicon-o-chat-bubble-left-ellipsis'),
-
-                        Text::make(static fn (Get $get): string => (string) ($get('email') ?? ''))
-                            ->icon('heroicon-o-envelope'),
-                    ]),
-                ]),
+            SchemaView::make('fixcity::filament.widgets.wizard.steps.summary')
+                ->data(['formData' => $this->form->getState()]),
         ];
     }
 

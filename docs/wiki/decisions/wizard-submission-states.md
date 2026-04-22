@@ -25,8 +25,8 @@ Abbiamo deciso di implementare due canali di persistenza finale nello step di Ri
 
 2.  **Salva richiesta (Save Draft)**:
     - **Azione**: Salva i dati correnti senza chiudere il wizard o notificare l'ente.
-    - **Stato Modello**: `pending` (ma senza l'evento di notifica di "nuova segnalazione ricevuta"). 
-    - *Nota*: Se implementeremo un vero stato `draft`, verrà usato quello. Al momento `pending` senza dispaccio eventi funge da bozza persistente.
+    - **Stato Modello**: `draft` ( TicketStatusEnum::DRAFT )
+    - **Evento**: Nessuno (solo save su DB)
     - **Zen**: Rispetto per il tempo dell'utente. Permette di raccogliere dati e decidere in un secondo momento se l'istituzione debba essere coinvolta.
 
 ## Logica e Visione
