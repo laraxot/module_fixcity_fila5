@@ -13,7 +13,7 @@ use Filament\Forms\Components\TextInput;
 use Filament\Schemas\Components\Grid;
 use Filament\Schemas\Components\Section;
 use Filament\Schemas\Components\Text;
-use Filament\Schemas\Components\Utilities\Get;
+use Filament\Schemas\Components\View as SchemaView;
 use Filament\Schemas\Components\Wizard\Step;
 use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Contracts\View\View;
@@ -22,6 +22,12 @@ use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 use Modules\Fixcity\Enums\TicketTypeEnum;
 use Modules\Fixcity\Events\TicketCreatedEvent;
 use Modules\Fixcity\Models\Ticket;
+use Modules\Geo\Filament\Forms\Components\CoordinatePicker;
+use Modules\Geo\Filament\Forms\Components\GeopointPicker;
+use Modules\Geo\Filament\Forms\Components\LatitudeLongitudeInput;
+use Modules\Geo\Filament\Forms\Components\LeafletMarkerMapInput;
+use Modules\Geo\Filament\Forms\Components\LocationPicker;
+use Modules\Geo\Filament\Forms\Components\MapLocationInput;
 use Modules\Geo\Filament\Forms\Components\MapPicker;
 use Modules\Xot\Filament\Widgets\XotBaseWizardWidget;
 
@@ -69,6 +75,17 @@ class CreateTicketWizardWidget extends XotBaseWizardWidget
             'location' => [
                 'latitude' => null,
                 'longitude' => null,
+                'address' => '',
+                'address_details' => null,
+                'street' => '',
+                'street_number' => '',
+                'city' => '',
+                'postcode' => '',
+                'state' => '',
+                'province' => '',
+                'country' => '',
+                'country_code' => '',
+                'suburb' => '',
             ],
         ];
     }
@@ -98,10 +115,73 @@ class CreateTicketWizardWidget extends XotBaseWizardWidget
                 ->compact()
                 ->extraAttributes(['id' => 'report-place', 'data-step-section' => 'place'])
                 ->schema([
-                    MapPicker::make('location')
+                    // *
+                    // NON CANCELLARE QUESTO - Active Picker
+                    CoordinatePicker::make('location')
                         ->hiddenLabel()
                         ->zoom(15)
-                        ->height('340px'),
+                        ->height('340px')
+                        ->reverseGeocoding(),
+                    // */
+                    /*
+                    // NON CANCELLARE QUESTO
+                    GeopointPicker::make('location1')
+                        ->hiddenLabel()
+                        ->zoom(15)
+                        ->height('340px')
+                        ->reverseGeocoding(),
+                    // */
+                    /*
+                    // NON CANCELLARE QUESTO
+                    LatitudeLongitudeInput::make('location2')
+                        ->hiddenLabel()
+                        ->zoom(15)
+                        ->height('340px')
+                        ->reverseGeocoding(),
+                    // */
+                    /*
+                    // NON CANCELLARE QUESTO
+                    LeafletMarkerMapInput::make('location3')
+                        ->hiddenLabel()
+                        ->zoom(15)
+                        ->height('340px')
+                        ->reverseGeocoding(),
+                    // */
+                    /*
+                    LocationPicker::make('location4')
+                        ->hiddenLabel()
+                        ->zoom(15)
+                        ->height('340px')
+                        ->reverseGeocoding(),
+                    // */
+                    /*
+                    MapLocationInput::make('location5')
+                        ->hiddenLabel()
+                        ->zoom(15)
+                        ->height('340px')
+                        ->reverseGeocoding(),
+                    // */
+                    /*
+                    MapPicker::make('location6')
+                        ->hiddenLabel()
+                        ->zoom(15)
+                        ->height('340px')
+                        ->reverseGeocoding(),
+                    // */
+                    /*
+                    MapPositioner::make('location7')
+                        ->hiddenLabel()
+                        ->zoom(15)
+                        ->height('340px')
+                        ->reverseGeocoding(),
+                    // */
+                    /*
+                    PlacePicker::make('location8')
+                        ->hiddenLabel()
+                        ->zoom(15)
+                        ->height('340px')
+                        ->reverseGeocoding(),
+                    // */
                 ]),
 
             Section::make((string) __('fixcity::segnalazione.fields.inefficiency.section.label'))
@@ -159,46 +239,8 @@ class CreateTicketWizardWidget extends XotBaseWizardWidget
     public function getSummarySchema(): array
     {
         return [
-            Section::make((string) __('fixcity::segnalazione.sections.summary.label'))
-                ->compact()
-                ->extraAttributes(['data-step-section' => 'summary'])
-                ->schema([
-                    Grid::make(['default' => 1, 'lg' => 2])->schema([
-                        Text::make(static fn (Get $get): string => (string) ($get('name') ?? ''))
-                            ->weight('bold')
-                            ->icon('heroicon-o-document'),
-
-                        Text::make(static function (Get $get): string {
-                            $raw = $get('type_id');
-                            $type = $raw instanceof TicketTypeEnum
-                                ? $raw
-                                : TicketTypeEnum::tryFrom((string) ($raw ?? ''));
-
-                            return $type?->getLabel() ?? '';
-                        })
-                            ->badge()
-                            ->icon('heroicon-o-tag'),
-
-                        Text::make(static function (Get $get): string {
-                            $lat = trim((string) ($get('latitude') ?? ''));
-                            $lng = trim((string) ($get('longitude') ?? ''));
-                            if ('' === $lat && '' === $lng) {
-                                return '';
-                            }
-
-                            return $lat.', '.$lng;
-                        })
-                            ->columnSpanFull()
-                            ->icon('heroicon-o-map-pin'),
-
-                        Text::make(static fn (Get $get): string => (string) ($get('content') ?? ''))
-                            ->columnSpanFull()
-                            ->icon('heroicon-o-chat-bubble-left-ellipsis'),
-
-                        Text::make(static fn (Get $get): string => (string) ($get('email') ?? ''))
-                            ->icon('heroicon-o-envelope'),
-                    ]),
-                ]),
+            SchemaView::make('fixcity::filament.widgets.wizard.steps.summary')
+                ->data(['formData' => $this->form->getState()]),
         ];
     }
 
@@ -269,12 +311,51 @@ class CreateTicketWizardWidget extends XotBaseWizardWidget
     }
 
     /**
+     * Salva la segnalazione come bozza (draft).
+     */
+    public function saveDraft(): void
+    {
+        $this->validateWizardSubmission();
+
+        try {
+            $state = $this->prepareTicketData();
+
+            // Force status to draft
+            $state['status'] = \Modules\Fixcity\Enums\TicketStatusEnum::DRAFT->value;
+
+            $ticket = $this->createTicket($state);
+
+            $this->dispatchEvents($ticket);
+
+            // Redirect to draft confirmation page
+            $slug = $this->blockData['draft_confirmation_slug']
+                ?? $this->blockData['confirmation_slug']
+                ?? config('fixcity.wizard.draft_confirmation_slug', 'segnalazione-04-conferma');
+
+            $url = route('tests.view', ['slug' => $slug]);
+            $localizedUrl = LaravelLocalization::getLocalizedURL(
+                LaravelLocalization::getCurrentLocale(),
+                $url
+            ) ?: $url;
+
+            $this->redirect($localizedUrl);
+        } catch (\Throwable $e) {
+            $this->handleSubmissionError($e);
+        }
+    }
+
+    /**
      * Crea il record nel database.
      *
      * @param array<string, mixed> $state
      */
     protected function createTicket(array $state): Ticket
     {
+        // Set default status if not provided
+        if (! isset($state['status'])) {
+            $state['status'] = \Modules\Fixcity\Enums\TicketStatusEnum::PENDING->value;
+        }
+
         return Ticket::query()->create($state);
     }
 
