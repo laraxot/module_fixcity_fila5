@@ -114,8 +114,8 @@
 
                                 @if($isSummaryStep)
                                     <div class="d-flex gap-2 w-100">
-                                        <button type="button" class="btn btn-outline-secondary btn-sm fw-bold flex-fill" wire:click="saveDraft">
-                                            {{ __('fixcity::segnalazione.actions.save_draft.label') }}
+                                        <button type="button" class="btn btn-outline-primary btn-sm fw-bold flex-fill" wire:click="saveDraft">
+                                            {{ __('fixcity::segnalazione.actions.save.label') }}
                                         </button>
                                         <button type="button" class="btn btn-primary btn-sm fw-bold flex-fill" wire:click="submit">
                                             {{ __('fixcity::segnalazione.actions.submit.label') }}
