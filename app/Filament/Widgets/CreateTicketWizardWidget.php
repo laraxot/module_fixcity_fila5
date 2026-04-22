@@ -22,6 +22,15 @@ use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 use Modules\Fixcity\Enums\TicketTypeEnum;
 use Modules\Fixcity\Events\TicketCreatedEvent;
 use Modules\Fixcity\Models\Ticket;
+<<<<<<< HEAD
+=======
+use Modules\Geo\Filament\Forms\Components\CoordinatePicker;
+use Modules\Geo\Filament\Forms\Components\GeopointPicker;
+use Modules\Geo\Filament\Forms\Components\LatitudeLongitudeInput;
+use Modules\Geo\Filament\Forms\Components\LeafletMarkerMapInput;
+use Modules\Geo\Filament\Forms\Components\LocationPicker;
+use Modules\Geo\Filament\Forms\Components\MapLocationInput;
+>>>>>>> c47c663 (.)
 use Modules\Geo\Filament\Forms\Components\MapPicker;
 use Modules\Xot\Filament\Widgets\XotBaseWizardWidget;
 
@@ -69,6 +78,20 @@ class CreateTicketWizardWidget extends XotBaseWizardWidget
             'location' => [
                 'latitude' => null,
                 'longitude' => null,
+<<<<<<< HEAD
+=======
+                'address' => '',
+                'address_details' => null,
+                'street' => '',
+                'street_number' => '',
+                'city' => '',
+                'postcode' => '',
+                'state' => '',
+                'province' => '',
+                'country' => '',
+                'country_code' => '',
+                'suburb' => '',
+>>>>>>> c47c663 (.)
             ],
         ];
     }
@@ -98,10 +121,80 @@ class CreateTicketWizardWidget extends XotBaseWizardWidget
                 ->compact()
                 ->extraAttributes(['id' => 'report-place', 'data-step-section' => 'place'])
                 ->schema([
+<<<<<<< HEAD
                     MapPicker::make('location')
                         ->hiddenLabel()
                         ->zoom(15)
                         ->height('340px'),
+=======
+                    // *
+                    // NON CANCELLARE QUESTO
+                    CoordinatePicker::make('location0')
+                        ->hiddenLabel()
+                        ->zoom(15)
+                        ->height('340px')
+                        ->reverseGeocoding(),
+                    // */
+                    /*
+                    // NON CANCELLARE QUESTO
+                    GeopointPicker::make('location1')
+                        ->hiddenLabel()
+                        ->zoom(15)
+                        ->height('340px')
+                        ->reverseGeocoding(),
+                    // */
+                    /*
+                    // NON CANCELLARE QUESTO
+                    LatitudeLongitudeInput::make('location2')
+                        ->hiddenLabel()
+                        ->zoom(15)
+                        ->height('340px')
+                        ->reverseGeocoding(),
+                    // */
+                    /*
+                    // NON CANCELLARE QUESTO
+                    LeafletMarkerMapInput::make('location3')
+                        ->hiddenLabel()
+                        ->zoom(15)
+                        ->height('340px')
+                        ->reverseGeocoding(),
+                    // */
+                    /*
+                    LocationPicker::make('location4')
+                        ->hiddenLabel()
+                        ->zoom(15)
+                        ->height('340px')
+                        ->reverseGeocoding(),
+                    // */
+                    /*
+                    MapLocationInput::make('location5')
+                        ->hiddenLabel()
+                        ->zoom(15)
+                        ->height('340px')
+                        ->reverseGeocoding(),
+                    // */
+                    /*
+                    MapPicker::make('location6')
+                        ->hiddenLabel()
+                        ->zoom(15)
+                        ->height('340px')
+                        ->reverseGeocoding(),
+                    // */
+                    /*
+                    MapPositioner::make('location7')
+                        ->hiddenLabel()
+                        ->zoom(15)
+                        ->height('340px')
+                        ->reverseGeocoding(),
+                    // */
+                    /*
+                    PlacePicker::make('location8')
+                        ->hiddenLabel()
+                        ->zoom(15)
+                        ->height('340px')
+                        ->reverseGeocoding(),
+                    // */
+>>>>>>> c47c663 (.)
                 ]),
 
             Section::make((string) __('fixcity::segnalazione.fields.inefficiency.section.label'))
@@ -180,10 +273,37 @@ class CreateTicketWizardWidget extends XotBaseWizardWidget
                             ->icon('heroicon-o-tag'),
 
                         Text::make(static function (Get $get): string {
-                            $lat = trim((string) ($get('latitude') ?? ''));
-                            $lng = trim((string) ($get('longitude') ?? ''));
+                            $location = $get('location');
+                            if (! \is_array($location)) {
+                                return '';
+                            }
+
+                            $lat = trim((string) ($location['latitude'] ?? ''));
+                            $lng = trim((string) ($location['longitude'] ?? ''));
+                            $address = trim((string) ($location['address'] ?? ''));
+                            $street = trim((string) ($location['street'] ?? ''));
+                            $number = trim((string) ($location['street_number'] ?? ''));
+                            $city = trim((string) ($location['city'] ?? ''));
+
                             if ('' === $lat && '' === $lng) {
                                 return '';
+                            }
+
+                            // Build a human-readable summary
+                            $parts = [];
+                            if ('' !== $street) {
+                                $parts[] = $street.('' !== $number ? ' '.$number : '');
+                            }
+                            if ('' !== $city) {
+                                $parts[] = $city;
+                            }
+
+                            if ([] !== $parts) {
+                                return implode(', ', $parts).' ('.$lat.', '.$lng.')';
+                            }
+
+                            if ('' !== $address) {
+                                return $address;
                             }
 
                             return $lat.', '.$lng;
@@ -269,12 +389,51 @@ class CreateTicketWizardWidget extends XotBaseWizardWidget
     }
 
     /**
+     * Salva la segnalazione come bozza (draft).
+     */
+    public function saveDraft(): void
+    {
+        $this->validateWizardSubmission();
+
+        try {
+            $state = $this->prepareTicketData();
+
+            // Force status to draft
+            $state['status'] = \Modules\Fixcity\Enums\TicketStatusEnum::DRAFT->value;
+
+            $ticket = $this->createTicket($state);
+
+            $this->dispatchEvents($ticket);
+
+            // Redirect to draft confirmation page
+            $slug = $this->blockData['draft_confirmation_slug']
+                ?? $this->blockData['confirmation_slug']
+                ?? config('fixcity.wizard.draft_confirmation_slug', 'segnalazione-04-conferma');
+
+            $url = route('tests.view', ['slug' => $slug]);
+            $localizedUrl = LaravelLocalization::getLocalizedURL(
+                LaravelLocalization::getCurrentLocale(),
+                $url
+            ) ?: $url;
+
+            $this->redirect($localizedUrl);
+        } catch (\Throwable $e) {
+            $this->handleSubmissionError($e);
+        }
+    }
+
+    /**
      * Crea il record nel database.
      *
      * @param array<string, mixed> $state
      */
     protected function createTicket(array $state): Ticket
     {
+        // Set default status if not provided
+        if (!isset($state['status'])) {
+            $state['status'] = \Modules\Fixcity\Enums\TicketStatusEnum::PENDING->value;
+        }
+
         return Ticket::query()->create($state);
     }
 

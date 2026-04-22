@@ -15,6 +15,7 @@ use Filament\Support\Contracts\HasLabel;
 enum TicketStatusEnum: string implements HasColor, HasIcon, HasLabel
 {
     // case NEW = 'new';
+    case DRAFT = 'draft';
     case PENDING = 'pending';
     case IN_REVIEW = 'in_review';
     case IN_PROGRESS = 'in_progress';
@@ -28,6 +29,7 @@ enum TicketStatusEnum: string implements HasColor, HasIcon, HasLabel
     {
         return match ($this) {
             // self::NEW => 'yellow',
+            self::DRAFT => 'gray',
             self::PENDING => 'yellow',
             self::IN_REVIEW => 'blue',
             self::IN_PROGRESS => 'orange',
@@ -44,6 +46,7 @@ enum TicketStatusEnum: string implements HasColor, HasIcon, HasLabel
         return match ($this) {
             // self::NEW => 'heroicon-o-plus-circle',
             // self::PENDING => 'heroicon-o-plus-circle',
+            self::DRAFT => 'heroicon-o-pencil-square',
             self::PENDING => 'ui-hourglass',
             self::IN_REVIEW => 'heroicon-o-clock',
             self::IN_PROGRESS => 'heroicon-o-arrow-path',
@@ -61,6 +64,7 @@ enum TicketStatusEnum: string implements HasColor, HasIcon, HasLabel
 
         return match ($this) {
             // self::NEW => 'New',
+            self::DRAFT => 'Draft',
             self::PENDING => 'Pending',
             self::IN_REVIEW => 'In Review',
             self::IN_PROGRESS => 'In Progress',
@@ -76,6 +80,7 @@ enum TicketStatusEnum: string implements HasColor, HasIcon, HasLabel
     public function getColorClass(): string
     {
         return match ($this) {
+            self::DRAFT => 'badge-secondary',
             self::PENDING => 'badge-warning',
             self::IN_REVIEW => 'badge-info',
             self::IN_PROGRESS => 'badge-info',
@@ -90,6 +95,7 @@ enum TicketStatusEnum: string implements HasColor, HasIcon, HasLabel
     public function label(): string
     {
         return match ($this) {
+            self::DRAFT => trans('fixcity::ticket.fields.status.options.draft'),
             self::PENDING => trans('fixcity::ticket.fields.status.options.pending'),
             self::IN_REVIEW => trans('fixcity::ticket.fields.status.options.in_review'),
             self::IN_PROGRESS => trans('fixcity::ticket.fields.status.options.in_progress'),
@@ -114,6 +120,7 @@ enum TicketStatusEnum: string implements HasColor, HasIcon, HasLabel
     public static function canNoViewByAll(): array
     {
         return [
+            self::DRAFT,
             self::PENDING,
             self::IN_REVIEW,
             self::IN_PROGRESS,

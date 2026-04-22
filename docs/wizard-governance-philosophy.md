@@ -17,6 +17,7 @@ Se il widget dominio contiene anche policy tecniche trasversali (label, logging,
 - Nessun `->label()` / `->tooltip()` hardcoded nel widget dominio.
 - Nessun `Log::error()` locale nel flusso submit frontoffice; errore gestito lato UX (`addError` + notification).
 - Lo step riepilogo usa Infolist entries (`TextEntry`) invece di view custom generiche.
+- **Geo Stability**: Ogni componente geografico integrato nel wizard deve supportare il pattern **Guarded Light DOM** e **ResizeObserver** per garantire che la mappa non scompaia o appaia vuota durante i cambi di step.
 
 ## visione
 
@@ -42,6 +43,7 @@ Questa separazione riduce accoppiamento e rende i cambiamenti piu' prevedibili.
 - **zen**: `module=body, theme=dress` e `log once at final handler`.
 - **religione (metafora tecnica)**: nessun hardcode testuale quando esiste un sistema di traduzione canonico.
 - **dogma clean code**: no metodi pass-through senza semantica (`createXFromY()` che fa solo una riga senza valore).
+- **Submission Lifecycle**: La distinzione tra `draft` e `pending` segue il decision record [Wizard Submission States](./wiki/decisions/wizard-submission-states.md).
 
 ## fonti esterne (supporto decisioni)
 
