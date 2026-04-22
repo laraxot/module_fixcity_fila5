@@ -1,3 +1,7 @@
+# 2026-04-22
+
+- Recepito runbook context-mode/QMD per `/bmad-create-story`: in caso di errore `maximum context length is 131072 tokens`, usare retrieval selettivo e sintesi wiki invece di rilanciare prompt massivi. Riferimenti: `docs/wiki/concepts/context-mode-mcp.md`, `docs/wiki/concepts/context-compression-discipline.md`, `bashscripts/docs/wiki/concepts/bmad-context-compression-operations.md`.
+
 ## [2026-04-21] story | 8-40 segnalazione dati — mappa Livewire + header parity
 - **artifact:** `_bmad-output/implementation-artifacts/8-40-segnalazione-dati-map-header-parity.md`
 - **Geo:** `map-picker.blade.php` usa `$wire.entangle` + `map-picker-lit` (stesso pattern di `coordinate-picker`); Lit: `IntersectionObserver` visibilità + sync props `latitude`/`longitude`; attributo `geolocate-when-empty`; traduzioni `geo::map-picker.status.*`; `map-picker-styles.js` — min-height su `.leaflet-container` dentro `map-picker-lit`.
@@ -74,3 +78,27 @@
 - Layer wiki: `docs/wiki/` — LLM-maintained, sintesi ad alto riuso.
 - Schema: `docs/.schema/WIKI_SCHEMA.md`
 - Adozione moduli: `docs/project/llm-wiki-module-adoption.md`
+# 2026-04-22
+
+- Ingestita decisione `wizard-summary-infolist-runtime-fix-2026-04-22`: per `CreateTicketWizardWidget::getSummarySchema()` usare entry Infolist (`TextEntry`, `ImageEntry`) dentro layout schema, non `SchemaView` e non `Livewire\Forms\Form`.
+- Ingestita nota `context-compression-plugin-runtime`: evitare caricamenti massivi di docs/debug HTML; OpenRouter context-compression e' configurazione client API, non codice Fixcity.
+
+## [2026-04-22] fix | getSummarySchema implementato con pattern Infolist (story 8-41)
+- **Problema**: `getSummarySchema()` aveva corpo commentato con `SchemaView` (pattern errato).
+- **Errori PHP**: story 8-41 auto-applicata aveva introdotto `use` duplicati (TextEntry×2, ImageEntry×2), `use Livewire\Forms\Form`, `use Filament\Infolists\Components\Infolist` — tutti rimossi.
+- **Fix**: implementato pattern `TextEntry::make()->state(fn(Get $get): string => ...)` con `Get` da `Filament\Schemas\Components\Utilities\Get`.
+- **Namespaces corretti**: `TextEntry`/`ImageEntry` ← `Filament\Infolists\Components\*`; `Section`/`Grid`/`Get` ← `Filament\Schemas\Components\*`.
+- **Regola permanente**: `bashscripts/ai/.claude/rules/filament5-infolist-wizard-summary.md`.
+- **Concetto wiki**: `concepts/filament5-schema-namespaces-and-wizard-summary.md`.
+- **Verifica**: HTTP 200 su `http://127.0.0.1:8000/it/tests/segnalazione-crea`.
+
+## [2026-04-22] rule | Design Comuni CSS solo nel tema
+- **Problema**: CSS inline nel widget wizard Fixcity rompe la parity HTML e duplica responsabilita' del tema.
+- **Regola**: `ticket-create-wizard.blade.php` espone markup/classi stabili; le regole visuali vivono in `Themes/Sixteen/resources/css/`.
+- **Build**: dopo CSS tema eseguire `npm run build` e `npm run copy` da `laravel/Themes/Sixteen`.
+- **Concetto wiki**: `concepts/design-comuni-theme-css-only-rule.md`.
+# 2026-04-22 - Wizard Fixcity markup-only
+
+- Aggiunta `concepts/theme-owned-wizard-css-parity-rule.md`.
+- Regola: `resources/views/filament/widgets/ticket-create-wizard.blade.php` non deve contenere `<style>` o `style=""` per parity visuale.
+- Owner CSS: tema Sixteen; owner markup/stato/schema: modulo Fixcity.

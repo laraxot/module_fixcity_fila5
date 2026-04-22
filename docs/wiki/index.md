@@ -30,9 +30,17 @@ wiki/
 | [segnalazione-privacy-parity-audit](./concepts/segnalazione-privacy-parity-audit.md) | concept | Audit parity visuale step privacy (colori header, CTA, responsive) |
 | [segnalazione-runtime-asset-integrity](./concepts/segnalazione-runtime-asset-integrity.md) | concept | Integrità asset runtime (404 CSS/JS, Livewire/Alpine bootstrap coerente) |
 | [livewire-cache-table-rate-limiter](./concepts/livewire-cache-table-rate-limiter.md) | concept | Fix QueryException su `cache` mancante durante update Livewire |
+| [context-compression-and-summary-infolist-rule](./concepts/context-compression-and-summary-infolist-rule.md) | concept | Regola permanente: summary wizard via Infolist entries, niente `SchemaView`; disciplina context compression |
+| [theme-owned-wizard-css-parity-rule](./concepts/theme-owned-wizard-css-parity-rule.md) | concept | Il Blade wizard Fixcity resta markup-only; CSS parity nel tema Sixteen con build/copy |
 | [header-green-branding-rule](./concepts/header-green-branding-rule.md) | concept | Token verdi vs parity kit: navbar chiara nel flusso segnalazione (vedi tema Sixteen) |
 | [visual-parity-report](./concepts/visual-parity-report.md) | concept | Report parity visuale Design Comuni |
 | [geo-unified-architecture](../../Geo/docs/wiki/concepts/coordinate-picker-architecture.md) | concept | Unificazione componenti mappa (MapPicker, CoordinatePicker) |
+| [wizard-summary-infolist-runtime-fix-2026-04-22](../stories/wizard-summary-infolist-runtime-fix-2026-04-22.md) | story | Fix runtime: summary wizard con entry Infolist e senza `SchemaView` |
+| [context-compression-plugin-runtime](../context-compression-plugin-runtime.md) | source | Regola operativa Fixcity per evitare overflow contesto e distinzione plugin OpenRouter/context-mode |
+| [filament5-schema-namespaces-and-wizard-summary](./concepts/filament5-schema-namespaces-and-wizard-summary.md) | concept | Namespace Filament 5.x corretti + pattern TextEntry+Get per getSummarySchema |
+| [design-comuni-theme-css-only-rule](./concepts/design-comuni-theme-css-only-rule.md) | concept | Fixcity espone markup/stato; Sixteen possiede CSS parity, niente `<style>` nel widget wizard |
+| [filament-multiple-forms](./concepts/filament-multiple-forms.md) | concept | Documentazione su Filament Multiple Forms
+| [context-compression-discipline](../../../../docs/wiki/concepts/context-compression-discipline.md) | concept | Recupero docs/story con context-mode + QMD per evitare errore BMAD 131k token |
 
 ## Raw Sources
 
@@ -44,4 +52,4 @@ Vedi [[../../../../docs/wiki/index|Index Globale Wiki]]
 
 ---
 
-*Ultimo aggiornamento: 2026-04-21*
+*Ultimo aggiornamento: 2026-04-22*
