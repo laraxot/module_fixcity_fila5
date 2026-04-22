@@ -97,6 +97,17 @@
 - **Regola**: `ticket-create-wizard.blade.php` espone markup/classi stabili; le regole visuali vivono in `Themes/Sixteen/resources/css/`.
 - **Build**: dopo CSS tema eseguire `npm run build` e `npm run copy` da `laravel/Themes/Sixteen`.
 - **Concetto wiki**: `concepts/design-comuni-theme-css-only-rule.md`.
+
+## [2026-04-22] fix | Filament Section namespace corretto
+- **Problema**: `Filament\Infolists\Components\Section` non esiste nel runtime Filament 5 installato.
+- **Regola**: layout `Section`/`Grid` da `Filament\Schemas\Components`; read-only entries `TextEntry`/`ImageEntry` da `Filament\Infolists\Components`.
+- **Fonti**: Filament 5 `schemas/sections` e `components/form#using-multiple-forms`.
+- **Concetto wiki**: `concepts/filament5-schema-section-namespace-rule.md`.
+
+## [2026-04-22] ui | mappa step dati e spacing Disservizio
+- **Problema**: nello step dati la mappa puo' essere inizializzata mentre lo step wizard non e' ancora visibile; lo spacing fra `Disservizio` e `Tipo di disservizio` e' eccessivo.
+- **Owner**: logica Leaflet nel modulo Geo; spacing/z-index/parity visuale nel tema Sixteen.
+- **Regola**: niente CSS inline nel widget Fixcity; usare classi e `data-step-section`.
 # 2026-04-22 - Wizard Fixcity markup-only
 
 - Aggiunta `concepts/theme-owned-wizard-css-parity-rule.md`.

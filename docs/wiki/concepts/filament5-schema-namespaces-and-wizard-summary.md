@@ -78,6 +78,19 @@ di Filament 5.x — NON richiede un record Eloquent.
 - Base wizard: `laravel/Modules/Xot/app/Filament/Widgets/XotBaseWizardWidget.php`
 - Widget segnalazione: `laravel/Modules/Fixcity/app/Filament/Widgets/CreateTicketWizardWidget.php`
 
+## Anti-pattern linter (Pint/PHP-CS-Fixer)
+
+Se il linter trova più `Section` da namespace diversi, li aliasa tutti e tre — `Section::make()` non risolve più:
+
+```php
+// ❌ Prodotto dal linter — SBAGLIATO
+use Filament\Forms\Components\Section as FormSection;
+use Filament\Infolists\Components\Section as InfolistSection;
+use Filament\Schemas\Components\Section as SchemaSection;
+```
+
+**Fix**: rimuovere tutti gli alias errati, tenere SOLO `use Filament\Schemas\Components\Section;`.
+
 ## Storia
 
 - Story 8-41: refactor getSummarySchema da SchemaView a View::make()
