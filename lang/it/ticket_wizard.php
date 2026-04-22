@@ -221,6 +221,28 @@ return [
             'placeholder' => 'location4',
             'label' => 'location4',
         ],
+        'location8' => [
+            'description' => 'location8',
+            'helper_text' => 'location8',
+            'placeholder' => 'location8',
+            'label' => 'location8',
+        ],
+        'location7' => [
+            'description' => 'location7',
+            'helper_text' => 'location7',
+            'placeholder' => 'location7',
+            'label' => 'location7',
+        ],
+        'location5' => [
+            'description' => 'location5',
+            'helper_text' => 'location5',
+            'placeholder' => 'location5',
+            'label' => 'location5',
+        ],
+        'location6' => [
+            'description' => 'location6',
+            'helper_text' => 'location6',
+        ],
     ],
     'sections' => [
         'Immagini allegate' => [
