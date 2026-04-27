@@ -3,6 +3,7 @@
 ## elenco
 
 - [wizard-navigation-confusion-and-header-color-parity.md](./wizard-navigation-confusion-and-header-color-parity.md)
+- [wizard-map-runtime-asset-chain.md](./wizard-map-runtime-asset-chain.md)
 - [fix-segnalazione-crea-form-visibility.md](./fix-segnalazione-crea-form-visibility.md)
 - [wizard-governance-langserviceprovider-and-xotbase-refactor.md](./wizard-governance-langserviceprovider-and-xotbase-refactor.md)
 - [wizard-summary-infolist-alignment.md](./wizard-summary-infolist-alignment.md)

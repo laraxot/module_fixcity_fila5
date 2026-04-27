@@ -25,6 +25,8 @@ use Modules\Fixcity\Enums\TicketTypeEnum;
 use Modules\Fixcity\Events\TicketCreatedEvent;
 use Modules\Fixcity\Models\Ticket;
 use Modules\Geo\Filament\Forms\Components\CoordinatePicker;
+use Modules\Geo\Filament\Forms\Components\GeopointPicker;
+use Modules\UI\Filament\Forms\Components\EnumSelect;
 use Modules\Xot\Filament\Widgets\XotBaseWizardWidget;
 
 class CreateTicketWizardWidget extends XotBaseWizardWidget
@@ -116,6 +118,7 @@ class CreateTicketWizardWidget extends XotBaseWizardWidget
                             ->hiddenLabel()
                             ->zoom(15)
                             ->height('340px')
+                            ->geolocateWhenEmpty()
                             ->reverseGeocoding(),
                         // */
                         /*
@@ -184,7 +187,7 @@ class CreateTicketWizardWidget extends XotBaseWizardWidget
                     ->compact()
                     ->extraAttributes(['id' => 'report-info', 'data-step-section' => 'inefficiency'])
                     ->schema([
-                        Select::make('type_id')
+                        EnumSelect::make('type_id')
                             ->options(TicketTypeEnum::class)
                             ->required()
                             ->native(false),
@@ -334,9 +337,7 @@ class CreateTicketWizardWidget extends XotBaseWizardWidget
      */
     protected function validateWizardSubmission(): void
     {
-        // Filament gestisce automaticamente la validation dei form fields
-        // Qui possiamo aggiungere logiche custom se necessario
-        $this->getForm('form')->validate();
+        $this->form->getState();
     }
 
     /**
@@ -346,7 +347,7 @@ class CreateTicketWizardWidget extends XotBaseWizardWidget
      */
     protected function prepareTicketData(): array
     {
-        $state = $this->normalizeWizardFormState($this->getForm('form')->getState());
+        $state = $this->normalizeWizardFormState($this->form->getState());
 
         // Rimuovere fields non necessari per il model
         unset($state['images'], $state['privacyAccepted']);
@@ -484,9 +485,7 @@ class CreateTicketWizardWidget extends XotBaseWizardWidget
     }
 
     /**
-     * Step con label (Lang) e description come da [Filament wizard su CreateRecord](https://filamentphp.com/docs/5.x/resources/creating-records#using-a-wizard).
-     *
-     * @return array<int, Step>
+     * Nasconde il pulsante "Avanti" — il wizard usa una CTA submit personalizzata.
      */
     public function configureWizardNextAction(Action $nextAction): Action
     {

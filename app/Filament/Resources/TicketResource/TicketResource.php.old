@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Modules\Fixcity\Filament\Resources;
+namespace Modules\Fixcity\Filament\Resources\TicketResource;
 
 use Dotswan\MapPicker\Fields\Map;
 use Filament\Facades\Filament;
@@ -24,9 +24,8 @@ use Modules\Fixcity\Filament\Resources\TicketResource\Pages\ListTickets;
 use Modules\Fixcity\Filament\Resources\TicketResource\Pages\ViewTicket;
 use Modules\Fixcity\Models\Ticket;
 use Modules\Fixcity\Rules\FilterCoordinatesInRadius;
-use Modules\Xot\Filament\Resources\XotBaseResource;
 
-class TicketResource extends XotBaseResource
+class TicketResource extends Resource
 {
     protected static ?string $model = Ticket::class;
 

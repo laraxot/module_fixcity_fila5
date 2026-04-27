@@ -29,6 +29,7 @@ Modulo Laravel responsabile della gestione delle segnalazioni cittadine (Ticket)
 | [Livewire Cache Table Rule](./wiki/concepts/livewire-cache-table-rate-limiter.md) | Gestione backend cache per Rate Limiter e Checksum. |
 | **[Select Enum Best Practices](./filament-select-enum-best-practices.md)** | Come usare correttamente Select con enum in Filament: evita codice complesso! |
 | [AddressInput (Geo)](../../Geo/docs/address-input-component.md) | Componente Filament per input indirizzi con mappa. |
+| **[Coordinate Picker Lit](./coordinate-picker-lit.md)** | Componente mappa Lit.dev + Leaflet per wizard ticket. |
 
 ---
 

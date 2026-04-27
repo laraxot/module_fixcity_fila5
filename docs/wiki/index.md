@@ -24,6 +24,9 @@ wiki/
 | Pagina | Tipo | Argomento |
 |--------|------|-----------|
 | [fixcity-module](./overviews/fixcity-module.md) | overview | Ticket system, wizard frontoffice cittadini, pannello operatori |
+| [admin-ticket-create-map-visual-contract](./concepts/admin-ticket-create-map-visual-contract.md) | concept | Contratto mappa route admin `fixcity/admin/tickets/create` e boundary runtime |
+| [admin-map-asset-registry-mismatch](./concepts/admin-map-asset-registry-mismatch.md) | concept | mismatch tra asset registry Filament e file effettivamente deployati |
+| [obsidian-skills-and-ingest-checklist](./concepts/obsidian-skills-and-ingest-checklist.md) | concept | Checklist continua su Obsidian, skills, ingest e allineamento docs |
 | [profiles-uuid-contract](./concepts/profiles-uuid-contract.md) | concept | Contratto schema `profiles`: `id` intero + `uuid` separato nella migrazione owner |
 | [wizard-single-next-cta-rule](./concepts/wizard-single-next-cta-rule.md) | concept | Wizard segnalazione: CTA primaria unica `Avanti` |
 | [wizard-nav-responsive-alignment](./concepts/wizard-nav-responsive-alignment.md) | concept | Allineamento responsivo navigazione wizard |
@@ -36,6 +39,7 @@ wiki/
 | [visual-parity-report](./concepts/visual-parity-report.md) | concept | Report parity visuale Design Comuni |
 | [geo-unified-architecture](../../Geo/docs/wiki/concepts/coordinate-picker-architecture.md) | concept | Unificazione componenti mappa (MapPicker, CoordinatePicker) |
 | [wizard-summary-infolist-runtime-fix-2026-04-22](../stories/wizard-summary-infolist-runtime-fix-2026-04-22.md) | story | Fix runtime: summary wizard con entry Infolist e senza `SchemaView` |
+| [wizard-map-runtime-asset-chain](../stories/wizard-map-runtime-asset-chain.md) | story | Analisi catena asset runtime della mappa su admin ticket create |
 | [context-compression-plugin-runtime](../context-compression-plugin-runtime.md) | source | Regola operativa Fixcity per evitare overflow contesto e distinzione plugin OpenRouter/context-mode |
 | [filament5-schema-namespaces-and-wizard-summary](./concepts/filament5-schema-namespaces-and-wizard-summary.md) | concept | Namespace Filament 5.x corretti + pattern TextEntry+Get per getSummarySchema + linter alias anti-pattern |
 | [filament5-schema-section-namespace-rule](./concepts/filament5-schema-section-namespace-rule.md) | concept | `Section` viene da Schemas, non da Infolists; entries read-only restano Infolists |
@@ -55,3 +59,9 @@ Vedi [[../../../../docs/wiki/index|Index Globale Wiki]]
 ---
 
 *Ultimo aggiornamento: 2026-04-22*
+
+- [context overflow compression rule](./concepts/context-overflow-compression-rule.md): workflow Fixcity anti overflow contesto BMAD
+- [fix complete only after target route recheck](./concepts/fix-complete-only-after-target-route-recheck.md): un fix Fixcity e' chiuso solo dopo verifica della URL finale reale con step/query corretti
+- [phpstan-runtime-priority-rule](./concepts/phpstan-runtime-priority-rule.md): su `segnalazione-crea` il ripristino runtime verificato ha priorita' sul cleanup statico diffuso
+- [wizard-runtime-lessons-learned](./concepts/wizard-runtime-lessons-learned.md): lezioni da merge conflict, EnumSelect signature fix, e namespace CoordinatePicker
+- [visual-parity-verification-rule](../../../Themes/Sixteen/docs/wiki/concepts/visual-parity-verification-rule.md): dopo ogni modifica — verificare nel browser all'URL di riferimento, mai dichiarare fix completo senza verifica visuale

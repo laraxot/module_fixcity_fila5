@@ -1,4 +1,31 @@
+## [2026-04-27] analysis | admin tickets create map runtime asset chain
+- verificata route reale `http://127.0.0.1:8000/fixcity/admin/tickets/create` con login operatore.
+- evidenziata catena asset incoerente: `map-picker.js`/`map-picker.css` `200`, ma `geo-map-widget.js` e `geo.js` `404`.
+- identificato fallback runtime verso `/themes/Geo/js/map-picker-component.js` come percorso legacy non equivalente alla catena canonica.
+- creata story operativa: `../stories/wizard-map-runtime-asset-chain.md`.
+- collegamenti cross-owner confermati: `../../Geo/docs/wiki/index.md`, `../../../Themes/Sixteen/docs/wiki/index.md`, `../../../../docs/wiki/index.md`.
+
+## [2026-04-27] governance | obsidian + skills + ingest discipline
+- aggiunta checklist stabile `concepts/obsidian-skills-and-ingest-checklist.md`.
+- formalizzata routine: update docs modulo/tema + rules/memory/skills + `qmd update` + query smoke.
+- ingest eseguito con `qmd update` dopo creazione nuovi documenti.
+
+## [2026-04-27] root-cause | admin map asset registry mismatch
+- documentato mismatch tra registry asset panel (`/modules/geo/*`) e file deployati reali.
+- evidenza: `public_html/modules/geo/geo-map-widget.js` assente, mentre `map-picker.css/js` presenti.
+- evidenza: `geo.js` presente in `public_html/themes/Geo/js/`, quindi catena parzialmente su path differente.
+- nuova pagina: `concepts/admin-map-asset-registry-mismatch.md`.
+- fix runtime applicato nel loader `public_html/modules/geo/map-picker.js`: registrazione alias `map-picker-lit` anche nel ramo `resp.ok === false`.
+- verifica visuale reale effettuata su route admin con step wizard `form.data::data::wizard-step`.
+- riscontro network: `geo-map-widget.js` e `geo.js` su `/modules/geo/` in 404, fallback a `themes/Geo/js/map-picker-component.js` attivo.
+- hardening applicato dopo analisi browser automation + ricerca tecnica: rimossa registry asset inesistente, loader allineato a `themes/Geo/js/geo.js`, fallback Leaflet prioritizzato su asset locali.
+- recheck visuale+network ok: `HEAD/GET /themes/Geo/js/geo.js` 200, nessun 404 sulla vecchia chain.
+
 # 2026-04-22
+
+- Ingestita regola `fix-complete-only-after-target-route-recheck`: un fix Fixcity e' concluso solo dopo recheck della URL finale reale con step/query corretti e controllo del componente coinvolto.
+- Ingestito contratto route admin `fixcity/admin/tickets/create`: nuova pagina `concepts/admin-ticket-create-map-visual-contract.md` con boundary tra owner form/resource e runtime picker Geo.
+- Tracciato blocker operativo: verifica browser automatica non disponibile in sessione corrente, da eseguire nel ciclo dev della story.
 
 - Recepito runbook context-mode/QMD per `/bmad-create-story`: in caso di errore `maximum context length is 131072 tokens`, usare retrieval selettivo e sintesi wiki invece di rilanciare prompt massivi. Riferimenti: `docs/wiki/concepts/context-mode-mcp.md`, `docs/wiki/concepts/context-compression-discipline.md`, `bashscripts/docs/wiki/concepts/bmad-context-compression-operations.md`.
 
@@ -33,13 +60,22 @@
 
 ## [2026-04-20] fix | profiles.uuid riportato nella migrazione owner
 - sources:
-  - `database/migrations/2026_04_20_000009_create_profiles_table.php`
+  - `database/migrations/2026_04_27_190000_create_profiles_table.php`
 - pages:
   - `concepts/profiles-uuid-contract.md` (new)
 - summary:
   - la migrazione owner `create_profiles_table` di Fixcity ora dichiara `uuid` nello schema base
   - aggiunto anche guard idempotente in `tableUpdate()` per installazioni legacy con tabella `profiles` senza colonna `uuid`
   - timestamp migrazione riallineato per mantenere la regola "1 modello = 1 migrazione"
+
+## [2026-04-27] fix | profiles.credits nullable per create profilo minimale
+- sources:
+  - `database/migrations/2026_04_27_190000_create_profiles_table.php`
+- pages:
+  - `concepts/profiles-uuid-contract.md` (updated)
+- summary:
+  - `credits` e' opzionale e quindi nullable nel contratto schema
+  - evitato blocco su insert con soli `user_id`, `uuid` e timestamps
 
 ## [2026-04-21] ui | wizard segnalazione cta unica (avanti)
 - Identificata duplicazione CTA nello step privacy/data: footer wizard Filament (`Successivo`) + nav custom (`Avanti`).
@@ -113,3 +149,18 @@
 - Aggiunta `concepts/theme-owned-wizard-css-parity-rule.md`.
 - Regola: `resources/views/filament/widgets/ticket-create-wizard.blade.php` non deve contenere `<style>` o `style=""` per parity visuale.
 - Owner CSS: tema Sixteen; owner markup/stato/schema: modulo Fixcity.
+
+# 2026-04-23
+
+- Ingestita regola `phpstan-runtime-priority-rule`: quando il wizard `segnalazione-crea` e' in errore runtime, la priorita' e' ripristinare la URL reale e solo dopo affrontare i cluster PHPStan non bloccanti.
+
+## [2026-04-27] governance | profiles owner rule reinforced after User additive migration
+- rilevata e rimossa migrazione errata nel modulo User: `add_credits_to_profiles_table`.
+- ribadito che `profiles` e' caso particolare con owner migration unica nel modulo Fixcity.
+- riferimento operativo aggiornato: `concepts/profiles-uuid-contract.md`.
+
+## [2026-04-27] fix | executed profiles migration to resolve credits NOT NULL violation
+- eseguita migrazione `2026_04_27_190000_create_profiles_table.php` su connessione `fixcity`.
+- risolto errore SQLSTATE 23000 su insert profilo senza credits.
+- verificata nullabilita' colonna `credits` tramite tinker e reproduction script.
+- infrastruttura LLM Wiki (Karpathy pattern) configurata in tutti i moduli e temi.
