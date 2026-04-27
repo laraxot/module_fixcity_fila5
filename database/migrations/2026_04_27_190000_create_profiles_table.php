@@ -24,6 +24,7 @@ return new class extends XotBaseMigration
                 $table->string('first_name')->nullable();
                 $table->string('last_name')->nullable();
                 $table->string('email')->nullable();
+                $table->decimal('credits', 10, 2)->nullable()->index();
             }
         );
         // -- UPDATE --
@@ -44,7 +45,7 @@ return new class extends XotBaseMigration
                 }
 
                 if (! $this->hasColumn('credits')) {
-                    $table->decimal('credits')->default(0);
+                    $table->decimal('credits', 10, 2)->nullable()->index();
                 }
 
                 if (! $this->hasColumn('slug')) {
@@ -55,9 +56,6 @@ return new class extends XotBaseMigration
                     $table->schemalessAttributes('extra');
                 }
 
-                if ($this->hasColumn('credits')) {
-                    $table->decimal('credits')->change();
-                }
                 if ($this->hasColumn('uuid')) {
                     $table->uuid('uuid')->nullable()->change();
                 }
