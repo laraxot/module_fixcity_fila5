@@ -241,41 +241,6 @@ class CreateTicketWizardWidget extends XotBaseWizardWidget
         }
     }
 
-    /**
-     * Salva la segnalazione come bozza (draft).
-     */
-    public function saveDraft(): void
-    {
-        $this->validateWizardSubmission();
-
-        try {
-            $state = $this->prepareTicketData();
-
-            // Force status to draft
-            $state['status'] = TicketStatusEnum::DRAFT->value;
-
-            $this->createTicket($state);
-
-            // non faccio partire il dispatch perchè qui salvo solo una bozza
-            // $this->dispatchEvents($ticket);
-
-            // Redirect to draft confirmation page
-            $slug = $this->blockData['draft_confirmation_slug']
-                ?? $this->blockData['confirmation_slug']
-                ?? config('fixcity.wizard.draft_confirmation_slug', 'segnalazione-04-conferma');
-
-            $url = route('tests.view', ['slug' => $slug]);
-            $localizedUrl = LaravelLocalization::getLocalizedURL(
-                LaravelLocalization::getCurrentLocale(),
-                $url
-            ) ?: $url;
-
-            $this->redirect($localizedUrl);
-        } catch (\Throwable $e) {
-            $this->handleSubmissionError($e);
-        }
-    }
-
     public function render(): View
     {
         return view($this->view, [
@@ -418,41 +383,13 @@ class CreateTicketWizardWidget extends XotBaseWizardWidget
     protected function prepareTicketData(): array
     {
         $state = $this->normalizeWizardFormState($this->form->getState());
+        $location = $this->findWizardStateValue($state, 'location');
 
         // Rimuovere fields non necessari per il model
         unset($state['images'], $state['privacyAccepted'], $state['email']);
 
-        // Estrarre latitude e longitude dal campo location se presente
-        // Il campo location può essere un array o una stringa JSON (dal map picker)
-        if (isset($state['location'])) {
-            $location = $state['location'];
-            if (\is_string($location)) {
-                $decoded = \json_decode($location, true);
-                if (\is_array($decoded)) {
-                    $location = $decoded;
-                }
-            }
-            if (\is_array($location)) {
-                if (isset($location['latitude']) && is_numeric($location['latitude'])) {
-                    $state['latitude'] = (string) $location['latitude'];
-                }
-                if (isset($location['longitude']) && is_numeric($location['longitude'])) {
-                    $state['longitude'] = (string) $location['longitude'];
-                }
-                if (isset($location['address']) && \is_string($location['address'])) {
-                    $state['address'] = $location['address'];
-                }
-            }
-            // NON fare unset($state['location']) — serve al model come JSON
-        }
-
-        // Assicurarsi che latitude e longitude siano presenti e siano stringhe
-        foreach (['latitude', 'longitude'] as $coord) {
-            if (isset($state[$coord]) && is_numeric($state[$coord])) {
-                $state[$coord] = (string) $state[$coord];
-            }
-        }
-
+        $normalizedLocation = $this->normalizeLocationPayload($location);
+        $state['location'] = $normalizedLocation !== [] ? $normalizedLocation : null;
         unset($state['address']);
 
         // Aggiungere owner_id se utente autenticato
@@ -461,6 +398,119 @@ class CreateTicketWizardWidget extends XotBaseWizardWidget
         }
 
         return $state;
+    }
+
+    /**
+     * Normalizza il payload mappa mantenendo `location` come source of truth.
+     *
+     * @return array<string, mixed>
+     */
+    protected function normalizeLocationPayload(mixed $location): array
+    {
+        if (\is_string($location)) {
+            $decoded = \json_decode($location, true);
+            $location = \is_array($decoded) ? $decoded : [];
+        }
+
+        if (! \is_array($location)) {
+            return [];
+        }
+
+        $lat = $location['lat'] ?? $location['latitude'] ?? null;
+        $lng = $location['lng'] ?? $location['longitude'] ?? null;
+
+        return array_filter([
+            'lat' => is_numeric($lat) ? (string) $lat : null,
+            'lng' => is_numeric($lng) ? (string) $lng : null,
+            'address' => $this->normalizeLocationText($location['address'] ?? $location['display_name'] ?? null),
+            'provider' => $this->normalizeLocationText($location['provider'] ?? null),
+            'address_details' => \is_array($location['address_details'] ?? null) ? $location['address_details'] : null,
+            'display_name' => $this->normalizeLocationText($location['display_name'] ?? null),
+            'street' => $this->normalizeLocationText($location['street'] ?? null),
+            'street_number' => $this->normalizeLocationText($location['street_number'] ?? null),
+            'city' => $this->normalizeLocationText($location['city'] ?? null),
+            'postcode' => $this->normalizeLocationText($location['postcode'] ?? null),
+            'state' => $this->normalizeLocationText($location['state'] ?? null),
+            'province' => $this->normalizeLocationText($location['province'] ?? null),
+            'country' => $this->normalizeLocationText($location['country'] ?? null),
+            'country_code' => $this->normalizeLocationText($location['country_code'] ?? null),
+            'suburb' => $this->normalizeLocationText($location['suburb'] ?? null),
+            'structured' => \is_array($location['structured'] ?? null) ? $location['structured'] : null,
+            'raw' => $location['raw'] ?? null,
+        ], static fn (mixed $item): bool => $item !== null && $item !== '' && $item !== []);
+    }
+
+    protected function normalizeLocationText(mixed $value): ?string
+    {
+        if (! \is_string($value)) {
+            return null;
+        }
+
+        $value = trim($value);
+
+        return $value !== '' ? $value : null;
+    }
+
+    /**
+     * Cerca un valore nello stato Filament anche quando il Wizard lo annida per step/container.
+     *
+     * @param array<string, mixed> $state
+     */
+    protected function findWizardStateValue(array $state, string $key): mixed
+    {
+        if (array_key_exists($key, $state)) {
+            return $state[$key];
+        }
+
+        foreach ($state as $value) {
+            if (\is_array($value)) {
+                $found = $this->findWizardStateValue($this->stringKeyed($value), $key);
+                if ($found !== null) {
+                    return $found;
+                }
+            }
+        }
+
+        return null;
+    }
+
+    /**
+     * Salva la segnalazione come bozza (draft).
+     */
+    public function saveDraft(): void
+    {
+        $this->validateWizardSubmission();
+
+        try {
+            $state = $this->prepareTicketData();
+
+            // Force status to draft
+            $state['status'] = TicketStatusEnum::DRAFT->value;
+
+            $ticket = $this->createTicket($state);
+
+            if ($ticket->status !== TicketStatusEnum::DRAFT) {
+                $ticket->forceFill(['status' => TicketStatusEnum::DRAFT])->saveQuietly();
+            }
+
+            // non faccio partire il dispatch perchè qui salvo solo una bozza
+            // $this->dispatchEvents($ticket);
+
+            // Redirect to draft confirmation page
+            $slug = $this->blockData['draft_confirmation_slug']
+                ?? $this->blockData['confirmation_slug']
+                ?? config('fixcity.wizard.draft_confirmation_slug', 'segnalazione-04-conferma');
+
+            $url = route('tests.view', ['slug' => $slug]);
+            $localizedUrl = LaravelLocalization::getLocalizedURL(
+                LaravelLocalization::getCurrentLocale(),
+                $url
+            ) ?: $url;
+
+            $this->redirect($localizedUrl);
+        } catch (\Throwable $e) {
+            $this->handleSubmissionError($e);
+        }
     }
 
     /**

@@ -1,3 +1,8 @@
+## [2026-04-28] governance | second brain bootstrap recepito nel modulo
+- recepito il bootstrap operativo root: `../../../../bashscripts/docs/second-brain-session-bootstrap.sh`.
+- aggiunto backlink in index locale verso `../../../../docs/wiki/concepts/second-brain-session-bootstrap.md`.
+- regola applicata: prima retrieval wiki/QMD, poi analisi e fix runtime del modulo.
+
 ## [2026-04-27] analysis | admin tickets create map runtime asset chain
 - verificata route reale `http://127.0.0.1:8000/fixcity/admin/tickets/create` con login operatore.
 - evidenziata catena asset incoerente: `map-picker.js`/`map-picker.css` `200`, ma `geo-map-widget.js` e `geo.js` `404`.
@@ -178,3 +183,17 @@
 - risolto errore SQLSTATE 23000 su insert profilo senza credits.
 - verificata nullabilita' colonna `credits` tramite tinker e reproduction script.
 - infrastruttura LLM Wiki (Karpathy pattern) configurata in tutti i moduli e temi.
+
+# 2026-04-28
+
+## [2026-04-28] cms | draft ticket confirmation page
+- Aggiunta pagina CMS `tests.segnalazione-bozza-salvata` per il redirect dopo `saveDraft()`.
+- Il wizard `segnalazione-crea` ora puo' usare `draft_confirmation_slug` distinto da `confirmation_slug`.
+- La pagina bozza riusa il blocco tema `pub_theme::components.blocks.flow.segnalazione.04-conferma` con copy dedicato, senza nuova route Laravel e senza duplicare Blade.
+
+## [2026-04-28] fix | story 8-59 — ticket location JSON canonica
+- Creata e validata story BMAD `8-59-ticket-location-json-persistence`.
+- Aggiunta colonna JSON nullable `tickets.location` nella migrazione canonica Fixcity.
+- Aggiornato `CreateTicketWizardWidget::prepareTicketData()` per mantenere `location` nel payload di draft e submit, senza estrarre solo `latitude` / `longitude`.
+- Aggiornato `Ticket::location()` per salvare il JSON `location` e mantenere `latitude` / `longitude` come mirror legacy.
+- Aggiornata troubleshooting page `ticket-location-not-saved-mass-assignment.md`: la regola "nessuna colonna location" e' ora solo contesto storico, non contratto corrente.

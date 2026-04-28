@@ -59,6 +59,7 @@ use Webmozart\Assert\Assert;
  * @property int|null $type_id
  * @property string|null $latitude
  * @property string|null $longitude
+ * @property array<string, mixed>|null $location
  * @property string|null $updated_by
  * @property string|null $created_by
  * @property string|null $deleted_by
@@ -180,10 +181,91 @@ class Ticket extends XotBaseModel implements HasMedia
         return [
             'estimationInSeconds' => 'int',
             'estimationProgress' => 'float',
-            'location' => 'json:unicode',
             'status' => TicketStatusEnum::class,
             'type_id' => TicketTypeEnum::class,
         ];
+    }
+
+    /**
+     * Canonical source of truth is the JSON `location` payload.
+     * Legacy `latitude` / `longitude` columns are mirrored for backward compatibility.
+     *
+     * @return Attribute<array<string, mixed>, array<string, mixed>>
+     */
+    protected function location(): Attribute
+    {
+        return Attribute::make(
+            get: function (mixed $value, array $attributes): array {
+                $location = [];
+
+                if (\is_string($value) && $value !== '') {
+                    $decoded = \json_decode($value, true);
+                    if (\is_array($decoded)) {
+                        $location = $decoded;
+                    }
+                } elseif (\is_array($value)) {
+                    $location = $value;
+                }
+
+                $location['lat'] = self::normalizeCoordinateString($location['lat'] ?? $location['latitude'] ?? $attributes['latitude'] ?? null);
+                $location['lng'] = self::normalizeCoordinateString($location['lng'] ?? $location['longitude'] ?? $attributes['longitude'] ?? null);
+                $location['address'] = self::normalizeText($location['address'] ?? $location['display_name'] ?? $attributes['address'] ?? null);
+                $location['provider'] = self::normalizeNullableText($location['provider'] ?? null);
+
+                return array_filter(
+                    $location,
+                    static fn (mixed $item): bool => $item !== null && $item !== ''
+                );
+            },
+            set: function (mixed $value): array {
+                if (! is_array($value)) {
+                    return [];
+                }
+
+                $location = $value;
+                $location['lat'] = self::normalizeCoordinateString($value['lat'] ?? $value['latitude'] ?? null);
+                $location['lng'] = self::normalizeCoordinateString($value['lng'] ?? $value['longitude'] ?? null);
+                $location['address'] = self::normalizeText($value['address'] ?? $value['display_name'] ?? null);
+                $location['provider'] = self::normalizeNullableText($value['provider'] ?? null);
+                unset($location['latitude'], $location['longitude']);
+
+                $location = array_filter(
+                    $location,
+                    static fn (mixed $item): bool => $item !== null && $item !== ''
+                );
+
+                return [
+                    'location' => $location !== [] ? \json_encode($location, JSON_THROW_ON_ERROR) : null,
+                    'latitude' => $location['lat'] ?? null,
+                    'longitude' => $location['lng'] ?? null,
+                ];
+            },
+        );
+    }
+
+    private static function normalizeCoordinateString(mixed $value): ?string
+    {
+        if ($value === null || $value === '') {
+            return null;
+        }
+
+        if (is_int($value) || is_float($value) || (is_string($value) && is_numeric($value))) {
+            return (string) $value;
+        }
+
+        return null;
+    }
+
+    private static function normalizeText(mixed $value): string
+    {
+        return is_string($value) ? trim($value) : '';
+    }
+
+    private static function normalizeNullableText(mixed $value): ?string
+    {
+        $normalized = self::normalizeText($value);
+
+        return $normalized !== '' ? $normalized : null;
     }
 
     /**
@@ -548,80 +630,5 @@ class Ticket extends XotBaseModel implements HasMedia
         $this->addMediaCollection('attachments')
             ->acceptsMimeTypes(['image/jpeg', 'image/png', 'application/pdf']);
         // ->maxFileSize(10 * 1024 * 1024); // 10MB
-    }
-
-    /**
-     * Canonical source of truth is the JSON `location` payload.
-     * Legacy `latitude` / `longitude` columns are mirrored for backward compatibility.
-     *
-     * @return Attribute<array<string, mixed>, array<string, mixed>>
-     */
-    protected function location(): Attribute
-    {
-        return Attribute::make(
-            get: static function (mixed $value, array $attributes): array {
-                $location = [];
-
-                if (\is_string($value) && $value !== '') {
-                    $decoded = \json_decode($value, true);
-                    if (\is_array($decoded)) {
-                        $location = $decoded;
-                    }
-                } elseif (\is_array($value)) {
-                    $location = $value;
-                }
-
-                $location['lat'] = self::normalizeCoordinateString($location['lat'] ?? $location['latitude'] ?? $attributes['latitude'] ?? null);
-                $location['lng'] = self::normalizeCoordinateString($location['lng'] ?? $location['longitude'] ?? $attributes['longitude'] ?? null);
-                $location['address'] = self::normalizeText($location['address'] ?? $location['display_name'] ?? $attributes['address'] ?? null);
-                $location['provider'] = self::normalizeNullableText($location['provider'] ?? null);
-
-                return $location;
-            },
-            set: static function (mixed $value): array {
-                if (! is_array($value)) {
-                    return [];
-                }
-
-                $location = $value;
-                $location['lat'] = self::normalizeCoordinateString($value['lat'] ?? $value['latitude'] ?? null);
-                $location['lng'] = self::normalizeCoordinateString($value['lng'] ?? $value['longitude'] ?? null);
-                $location['address'] = self::normalizeText($value['address'] ?? $value['display_name'] ?? null);
-                $location['provider'] = self::normalizeNullableText($value['provider'] ?? null);
-                unset($location['latitude'], $location['longitude']);
-
-                return [
-                    'location' => $location,
-                    'latitude' => $location['lat'],
-                    'longitude' => $location['lng'],
-                    'address' => $location['address'],
-                ];
-            },
-        );
-    }
-
-    private static function normalizeCoordinateString(mixed $value): ?string
-    {
-        if ($value === null || $value === '') {
-            return null;
-        }
-
-        if (is_int($value) || is_float($value) || (is_string($value) && is_numeric($value))) {
-            return (string) $value;
-        }
-
-        return null;
-    }
-
-    private static function normalizeText(mixed $value): string
-    {
-        return is_string($value) ? trim($value) : '';
-    }
-
-    private static function normalizeNullableText(mixed $value): ?string
-    {
-        $normalized = self::normalizeText($value);
-
-        return $normalized !== '' ? $normalized : null;
     }
 }

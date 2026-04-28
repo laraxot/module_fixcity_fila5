@@ -41,7 +41,7 @@ class Category extends BaseModel
      *
      * @var list<string>
      */
-    protected array $fillable = [
+    protected $fillable = [
         'id',
         'name',
         'description',

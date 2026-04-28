@@ -49,6 +49,9 @@ return new class() extends XotBaseMigration {
                 if (! $this->hasColumn('longitude')) {
                     $table->decimal('longitude', 20, 18)->nullable();
                 }
+                if (! $this->hasColumn('location')) {
+                    $table->json('location')->nullable();
+                }
                 if (! $this->hasColumn('status')) {
                     $table->string('status')->nullable();
                 }

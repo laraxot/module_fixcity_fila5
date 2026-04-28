@@ -117,10 +117,8 @@ use Spatie\SchemalessAttributes\SchemalessAttributes;
  */
 class Profile extends UserBaseProfile
 {
-    protected string $connection = 'fixcity';
-
-    /** @var list<string> */
-    protected array $fillable = ['id', 'user_id', 'phone', 'email', 'bio'];
+    /** @var string */
+    protected $connection = 'fixcity';
 
     // ------- RELATIONSHIP ----------
 

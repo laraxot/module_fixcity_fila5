@@ -78,3 +78,41 @@ Vedi `laravel/Modules/Geo/docs/wiki/concepts/coordinate-picker-filament5-save-pa
 - `laravel/Modules/Fixcity/app/Models/Ticket.php` — mutator `location()` aggiunto
 - `laravel/Modules/Fixcity/app/Filament/Resources/TicketResource/Schemas/TicketForm.php` — usa `CoordinatePicker::make('location')`
 - `laravel/Modules/Fixcity/app/Filament/Widgets/CreateTicketWizardWidget.php` — frontoffice (ha `prepareTicketData()` come strato aggiuntivo, non conflittuale)
+
+## Aggiornamento 2026-04-28 — draft frontoffice
+
+Nel flusso frontoffice `saveDraft()`, il picker invia chiavi `lat` / `lng` dentro `location`.
+`prepareTicketData()` deve quindi:
+
+- leggere sia `lat` / `lng` sia `latitude` / `longitude`;
+- cercare `location` anche in modo ricorsivo nello stato Filament, perche' il Wizard puo' annidare i campi in container/step;
+- copiare i valori su `latitude` / `longitude`;
+- rimuovere `location` prima di `Ticket::create()`, perche' la tabella `tickets` non ha una colonna `location`.
+
+Il mutator `Ticket::location()` resta utile per i form Filament admin che fanno `fill(['location' => [...]])`, ma deve restituire solo colonne reali.
+
+## Aggiornamento 2026-04-28 — story 8-59 location JSON canonica
+
+La decisione architetturale e' cambiata: la tabella `tickets` deve avere una colonna JSON nullable `location`.
+Da questo punto in avanti `location` e' la source of truth per i nuovi salvataggi del wizard, mentre `latitude` e `longitude` restano solo mirror legacy/backward-compatible.
+
+Il flusso frontoffice deve quindi:
+
+- mantenere `location` nel payload di `Ticket::create()`;
+- normalizzare `lat` / `lng` e anche `latitude` / `longitude` dentro `location`;
+- non fare piu' `unset($state['location'])`;
+- salvare draft e submit con lo stesso mapping;
+- usare il mutator `Ticket::location()` per persistere il JSON e, se necessario, aggiornare anche le colonne legacy.
+
+La regola precedente "la tabella `tickets` non ha una colonna `location`" resta solo come contesto storico del bug, non come contratto corrente.
+
+## Aggiornamento 2026-04-28 — bridge Lit/Livewire
+
+Il tema Sixteen importa `coordinate-picker-lit-stable.js`, che emette l'evento:
+
+```js
+detail: { latitude, longitude, source }
+```
+
+La Blade `Geo/resources/views/filament/forms/components/coordinate-picker.blade.php` deve quindi accettare sia `{lat, lng}` sia `{latitude, longitude}`.
+Inoltre deve sincronizzare esplicitamente Livewire con `$wire.set(...)`, non limitarsi ad aggiornare lo stato Alpine entangled, altrimenti al click su `saveDraft()` il backend puo' ricevere `location` ancora vuoto.
