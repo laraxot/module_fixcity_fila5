@@ -23,6 +23,12 @@
 
 # 2026-04-22
 
+## [2026-04-27] analysis | scopo e utilita' mappa admin ticket create
+- analizzato il ruolo della mappa nello step `data` della route admin `fixcity/admin/tickets/create`.
+- chiarito il fine business: ridurre ambiguita' della segnalazione, accelerare dispatch operativo, aumentare qualita' dati territoriali.
+- allineato il boundary owner: dominio `location` in Fixcity, runtime picker in Geo, parity visuale nel tema Sixteen.
+- aggiornata pagina di riferimento: `concepts/location-capture-map-wizard.md`.
+
 - Ingestita regola `fix-complete-only-after-target-route-recheck`: un fix Fixcity e' concluso solo dopo recheck della URL finale reale con step/query corretti e controllo del componente coinvolto.
 - Ingestito contratto route admin `fixcity/admin/tickets/create`: nuova pagina `concepts/admin-ticket-create-map-visual-contract.md` con boundary tra owner form/resource e runtime picker Geo.
 - Tracciato blocker operativo: verifica browser automatica non disponibile in sessione corrente, da eseguire nel ciclo dev della story.
