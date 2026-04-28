@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Modules\Fixcity\Livewire;
 
 use Illuminate\Contracts\View\View;
@@ -11,8 +13,7 @@ class TicketList extends VoltComponent
 {
     use WithPagination;
 
-    /** @var \Illuminate\Contracts\Pagination\LengthAwarePaginator */
-    public $tickets;
+    public \Illuminate\Contracts\Pagination\LengthAwarePaginator $tickets;
 
     public string $search = '';
 
@@ -40,10 +41,14 @@ class TicketList extends VoltComponent
         $query = Ticket::query();
 
         return $query
-            ->when($this->search, fn (\Illuminate\Database\Eloquent\Builder $q) => $q->where('title', 'like', "%{$this->search}%")
-                ->orWhere('content', 'like', "%{$this->search}%")
+            ->when(
+                $this->search,
+                fn (\Illuminate\Database\Eloquent\Builder $q) => $q->where('title', 'like', "%{$this->search}%")
+                    ->orWhere('content', 'like', "%{$this->search}%")
             )
-            ->when($this->selectedStatus, fn (\Illuminate\Database\Eloquent\Builder $q) => $q->where('status', $this->selectedStatus)
+            ->when(
+                $this->selectedStatus,
+                fn (\Illuminate\Database\Eloquent\Builder $q) => $q->where('status', $this->selectedStatus)
             )
             ->latest()
             ->paginate(10);

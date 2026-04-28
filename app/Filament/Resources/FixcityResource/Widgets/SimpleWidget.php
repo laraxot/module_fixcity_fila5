@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Modules\Fixcity\Filament\Resources\FixcityResource\Widgets;
 
 use Modules\Xot\Filament\Widgets\XotBaseWidget;

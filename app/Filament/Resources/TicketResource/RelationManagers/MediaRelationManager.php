@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Modules\Fixcity\Filament\Resources\TicketResource\RelationManagers;
 
 use Filament\Actions\BulkActionGroup;
@@ -48,7 +50,7 @@ class MediaRelationManager extends RelationManager
                     ->dateTime(),
             ])
             ->filters([
-                //
+
             ])
             ->headerActions([
                 CreateAction::make(),

@@ -35,13 +35,10 @@ class ActivitySeeder extends Seeder
 
     /**
      * Run the database seeds.
-     *
-     * @return void
      */
-    public function run()
+    public function run(): void
     {
         foreach ($this->data as $item) {
-
             Assert::isArray($item);
             Assert::allString(array_keys($item));
             Assert::isMap($item);

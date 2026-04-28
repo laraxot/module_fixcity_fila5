@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace Modules\Fixcity\Providers;
 
-use BezhanSalleh\FilamentLanguageSwitch\Http\Middleware\SwitchLanguageLocale;
-use Illuminate\Routing\Router;
 use Modules\Xot\Providers\XotBaseRouteServiceProvider;
 
 class RouteServiceProvider extends XotBaseRouteServiceProvider
 {
+
+    public string $name = 'Fixcity';
     /**
      * The module namespace to assume when generating URLs to actions.
      */
@@ -18,8 +18,6 @@ class RouteServiceProvider extends XotBaseRouteServiceProvider
     protected string $module_dir = __DIR__;
 
     protected string $module_ns = __NAMESPACE__;
-
-    public string $name = 'Fixcity';
 
     public function boot(): void
     {

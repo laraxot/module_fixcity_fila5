@@ -1,10 +1,9 @@
 {{-- Design Comuni parity: Blade wrapper only, Filament Wizard remains source of truth --}}
 @php
-    $stepQuery = (string) request()->query('step', '');
-    $isDataStep = str_contains($stepQuery, 'dati-della-segnalazione') || $stepQuery === '2';
-    $isSummaryStep = str_contains($stepQuery, 'riepilogo') || $stepQuery === '3';
+    $currentStep = $this->wizardStartStep;
+    $isDataStep = $currentStep === 2;
+    $isSummaryStep = $currentStep === 3;
     $isPrivacyStep = !$isDataStep && !$isSummaryStep;
-    $currentStep = $isSummaryStep ? 3 : ($isDataStep ? 2 : 1);
     $sprite = '/themes/Sixteen/design-comuni/assets/bootstrap-italia/dist/svg/sprites.svg';
 @endphp
 

@@ -4,9 +4,7 @@ declare(strict_types=1);
 
 namespace Modules\Fixcity\Events;
 
-use Illuminate\Broadcasting\Channel;
 use Illuminate\Broadcasting\InteractsWithSockets;
-use Illuminate\Broadcasting\PrivateChannel;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
 use Modules\Fixcity\Models\Ticket;
@@ -22,7 +20,8 @@ class TicketCreatedEvent
      */
     public function __construct(
         public Ticket $ticket
-    ) {}
+    ) {
+    }
 
     /*
      * Get the channels the event should be broadcast on.

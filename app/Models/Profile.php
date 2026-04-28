@@ -8,8 +8,6 @@ namespace Modules\Fixcity\Models;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Collection;
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Notifications\DatabaseNotification;
 use Illuminate\Notifications\DatabaseNotificationCollection;
@@ -103,6 +101,7 @@ use Spatie\SchemalessAttributes\SchemalessAttributes;
  * @property Membership $membership
  * @property \Modules\Fixcity\Models\Profile|null $creator
  * @property \Modules\Fixcity\Models\Profile|null $updater
+ *
  * @property-read Profile|null $deleter
  *
  * @method static Builder<static>|Profile byUuid(string $uuid)
@@ -118,11 +117,10 @@ use Spatie\SchemalessAttributes\SchemalessAttributes;
  */
 class Profile extends UserBaseProfile
 {
-    /** @var string */
-    protected $connection = 'fixcity';
+    protected string $connection = 'fixcity';
 
     /** @var list<string> */
-    protected $fillable = ['id', 'user_id', 'phone', 'email', 'bio'];
+    protected array $fillable = ['id', 'user_id', 'phone', 'email', 'bio'];
 
     // ------- RELATIONSHIP ----------
 

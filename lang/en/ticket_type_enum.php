@@ -2,8 +2,6 @@
 
 declare(strict_types=1);
 
-use Modules\Fixcity\Enums\TicketTypeEnum;
-
 /**
  * Translations for {@see TicketTypeEnum}.
  *

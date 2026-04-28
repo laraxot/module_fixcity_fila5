@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Modules\Fixcity\Actions;
 
 use Faker\Factory;
@@ -31,14 +33,12 @@ class GenerateTicketsAction
                     $factory = Ticket::factory();
 
                     /** @var Ticket $ticket */
-                    $ticket = match ($state) {
+                    return match ($state) {
                         'open' => $factory->open()->create(),  // @phpstan-ignore method.nonObject
                         'urgent' => $factory->urgent()->create(),  // @phpstan-ignore method.nonObject
                         'resolved' => $factory->resolved()->create(),  // @phpstan-ignore method.nonObject
                         default => $factory->create(),  // @phpstan-ignore method.nonObject
                     };
-
-                    return $ticket;
                 })
         )->dispatch();
     }

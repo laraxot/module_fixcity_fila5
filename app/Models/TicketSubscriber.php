@@ -41,6 +41,7 @@ use Modules\Xot\Datas\XotData;
  * @method static Builder|TicketSubscriber withoutTrashed()
  *
  * @property User|null $user
+ *
  * @property-read Profile|null $creator
  * @property-read Profile|null $updater
  * @property-read \Modules\Fixcity\Models\Profile|null $deleter

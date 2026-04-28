@@ -20,8 +20,7 @@ class ChangeStatus extends Action
 
         $this->translateLabel()
             ->action(
-                function (Ticket $record, array $data): void {
-
+                static function (Ticket $record, array $data): void {
                     Assert::string($data['status']);
                     Assert::string($data['reason']);
 

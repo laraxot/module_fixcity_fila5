@@ -1,9 +1,11 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Modules\Fixcity\Database\Factories;
 
-use Modules\Fixcity\Models\Profile;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Modules\Fixcity\Models\Profile;
 
 class ProfileFactory extends Factory
 {

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Modules\Fixcity\Filament\Resources\TicketResource\Pages;
 
 use Filament\Resources\Pages\ViewRecord;

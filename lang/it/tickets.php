@@ -4905,7 +4905,7 @@ return [
         'placeholder' => 'Utente ripristinato correttamente',
     ],
 
-    /*** updates 28-11-2016***/
+    /* updates 28-11-2016*/
     'apply' => [
         'label' => 'Applica',
         'placeholder' => 'Applica',

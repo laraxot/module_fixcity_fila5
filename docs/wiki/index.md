@@ -27,6 +27,8 @@ wiki/
 | [admin-ticket-create-map-visual-contract](./concepts/admin-ticket-create-map-visual-contract.md) | concept | Contratto mappa route admin `fixcity/admin/tickets/create` e boundary runtime |
 | [map-component-purpose-architecture](../../Geo/docs/wiki/concepts/map-component-purpose-architecture.md) | concept | Scopo business mappa admin ticket wizard + architettura Geo/Fixcity/Sixteen | 2026-04-27 |
 | [location-capture-map-wizard](./concepts/location-capture-map-wizard.md) | concept | Scopo business e utilita' operativa della mappa nel wizard ticket |
+| [ticket-location-not-saved-mass-assignment](./troubleshooting/ticket-location-not-saved-mass-assignment.md) | troubleshooting | Location non persistita: ROOT CAUSE `dehydrated(false)` nel trait + mutator mancante (fix: story 8-65, supersede 8-64) | 2026-04-28 |
+| [filament5-entangle-contract](../../Geo/docs/wiki/concepts/filament5-custom-field-entangle-contract.md) | concept | Perché `$applyStateBindingModifiers` è OBBLIGATORIO per entangle — prova vendor Filament 5 | 2026-04-28 |
 | [admin-map-asset-registry-mismatch](./concepts/admin-map-asset-registry-mismatch.md) | concept | mismatch tra asset registry Filament e file effettivamente deployati |
 | [obsidian-skills-and-ingest-checklist](./concepts/obsidian-skills-and-ingest-checklist.md) | concept | Checklist continua su Obsidian, skills, ingest e allineamento docs |
 | [profiles-uuid-contract](./concepts/profiles-uuid-contract.md) | concept | Contratto schema `profiles`: `id` intero + `uuid` separato nella migrazione owner |

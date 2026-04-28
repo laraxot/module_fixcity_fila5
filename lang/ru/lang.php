@@ -1522,7 +1522,7 @@ return [
     'restore' => 'Восстановить',
     'user_restore_successfully' => 'Пользователь успешно восстановлен',
 
-    /*** updates 28-11-2016***/
+    /* updates 28-11-2016*/
     'apply' => 'Apply',
 
     /* updates 2-12-2016 * */

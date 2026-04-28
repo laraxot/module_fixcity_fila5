@@ -34,11 +34,11 @@ class CreateTicketWidget extends BaseWidget implements HasActions, HasForms
     use InteractsWithActions;
     use InteractsWithForms;
 
+    public ?array $data = [];
+
     protected string $view = 'fixcity::filament.widgets.create-ticket';
 
     protected int|string|array $columnSpan = 'full';
-
-    public ?array $data = [];
 
     public function mount(): void
     {
@@ -67,7 +67,7 @@ class CreateTicketWidget extends BaseWidget implements HasActions, HasForms
                             ->default(false)
                             ->extraAttributes(['class' => 'text-green-500 text-lg checked:bg-green-500 checked:hover:bg-green-500 focus:ring-green-500'])
                             ->rules(['accepted'])
-                            ->afterStateUpdated(function ($state) {
+                            ->afterStateUpdated(function ($state): void {
                                 if (! $state) {
                                     $this->addError('data.accept_terms', __('fixcity::fixcity.ticket.validation.accept_terms'));
                                 }
@@ -86,7 +86,7 @@ class CreateTicketWidget extends BaseWidget implements HasActions, HasForms
                     ]),
             ])
                 ->nextAction(
-                    fn (Action $action) => $action
+                    static fn (Action $action) => $action
                         ->label(__('fixcity::fixcity.ticket.actions.next.label'))
                         ->icon('heroicon-m-arrow-right')
                         ->color('primary')

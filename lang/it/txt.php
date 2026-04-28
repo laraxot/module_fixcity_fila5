@@ -1513,7 +1513,7 @@ return [
     'restore' => 'Ripristina',
     'user_restore_successfully' => 'Utente ripristinato correttamente',
 
-    /*** updates 28-11-2016***/
+    /* updates 28-11-2016*/
     'apply' => 'Applica',
 
     /* updates 2-12-2016 * */

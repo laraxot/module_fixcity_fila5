@@ -7,7 +7,6 @@ namespace Modules\Fixcity\Database\Factories;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Modules\Fixcity\Enums\TicketPriorityEnum;
 use Modules\Fixcity\Enums\TicketStatusEnum;
-use Modules\Fixcity\Enums\TicketTypeEnum;
 use Modules\Fixcity\Models\Ticket;
 use Modules\User\Models\User;
 
@@ -53,7 +52,7 @@ class TicketFactory extends Factory
      */
     public function open(): static
     {
-        return $this->state(fn (array $attributes) => [
+        return $this->state(static fn (array $attributes) => [
             'status' => TicketStatusEnum::OPEN,
         ]);
     }
@@ -65,7 +64,7 @@ class TicketFactory extends Factory
      */
     public function urgent(): static
     {
-        return $this->state(fn (array $attributes) => [
+        return $this->state(static fn (array $attributes) => [
             'priority' => TicketPriorityEnum::URGENT,
         ]);
     }
@@ -77,7 +76,7 @@ class TicketFactory extends Factory
      */
     public function resolved(): static
     {
-        return $this->state(fn (array $attributes) => [
+        return $this->state(static fn (array $attributes) => [
             'status' => TicketStatusEnum::RESOLVED,
         ]);
     }
