@@ -183,6 +183,7 @@ class Ticket extends XotBaseModel implements HasMedia
             'status' => TicketStatusEnum::class,
             'priority' => TicketPriorityEnum::class,
             'type_id' => TicketTypeEnum::class,
+            'location' => 'array',
         ];
     }
 
@@ -225,16 +226,8 @@ class Ticket extends XotBaseModel implements HasMedia
             ->usingSeparator('_');
     }
 
-    public function getSlugAttribute(?string $value): ?string
-    {
-        if ($value != null) {
-            return $value;
-        }
-        $value = Str::of($this->name)->slug()->toString();
-        $this->update(['slug' => $value]);
-
-        return $value;
-    }
+    // Slug generation handled by Spatie HasSlug trait via getSlugOptions().
+    // Removed getSlugAttribute() that caused circular update during create.
 
     public static function boot()
     {

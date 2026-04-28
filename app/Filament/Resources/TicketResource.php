@@ -90,28 +90,8 @@ class TicketResource extends XotBaseResource
                         ->cols(10)
                         ->helperText(__('fixcity::fixcity.ticket.content.helper_text')),
 
-                    // Hidden Latitude and Longitude
-                    TextInput::make('latitude')
-                        ->hidden(function () {
-                            $user = Filament::auth()->user();
-                            if (! $user || ! $user->profile) {
-                                return true; // nascondi se non loggato o senza profilo
-                            }
-
-                            return ! $user->profile->isSuperAdmin();
-                        })
-                        ->readOnly(),
-
-                    TextInput::make('longitude')
-                        ->hidden(function () {
-                            $user = Filament::auth()->user();
-                            if (! $user || ! $user->profile) {
-                                return true;
-                            }
-
-                            return ! $user->profile->isSuperAdmin();
-                        })
-                        ->readOnly(),
+                    // No latitude/longitude fields here — they are handled by the wizard (CreateTicketWizardWidget)
+                    // Empty strings on these fields cause Grammar::parameterize() errors in admin create
 
                     // Map Section - DISABLED: Package Dotswan\MapPicker not installed
                     // NOTA BENE, ASSICURATI DI ABILITARE LA LOCALIZZAZIONE NEL BROWSER

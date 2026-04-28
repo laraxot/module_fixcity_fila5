@@ -239,7 +239,7 @@ class TicketForm extends XotBaseResourceForm
                                 //->state(fn (Get $get): string => $this->formatLocationSummary($get('location')))
                                 ,
                             ImageEntry::make('review_images')
-                                //->state(fn (Get $get): array => $this->normalizeSummaryImages($get('images')))
+                                ->state(fn (Get $get): array => $this->normalizeSummaryImages($get('images')))
                                 ->disk('public')
                                 ->limit(4)
                                 ->limitedRemainingText()
@@ -247,5 +247,43 @@ class TicketForm extends XotBaseResourceForm
                         ]),
                 ]),
         ];
+    }
+
+    protected function formatTicketTypeSummary(mixed $value): string
+    {
+        if (! $value) {
+            return '';
+        }
+        $type = \Modules\Fixcity\Enums\TicketTypeEnum::tryFrom((string) $value);
+        return $type?->getLabel() ?? (string) $value;
+    }
+
+    protected function formatLocationSummary(mixed $location): string
+    {
+        if (! is_array($location)) {
+            return '';
+        }
+
+        $address = trim((string) ($location['address'] ?? ''));
+        if ('' !== $address) {
+            return $address;
+        }
+
+        $latitude = $location['latitude'] ?? null;
+        $longitude = $location['longitude'] ?? null;
+        if (is_numeric($latitude) && is_numeric($longitude)) {
+            return sprintf('%s, %s', (string) $latitude, (string) $longitude);
+        }
+
+        return '';
+    }
+
+    protected function normalizeSummaryImages(mixed $images): array
+    {
+        if (! is_array($images)) {
+            return [];
+        }
+
+        return array_values(array_filter($images, static fn (mixed $image): bool => is_string($image) && '' !== $image));
     }
 }

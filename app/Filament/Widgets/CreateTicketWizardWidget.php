@@ -353,14 +353,27 @@ class CreateTicketWizardWidget extends XotBaseWizardWidget
         unset($state['images'], $state['privacyAccepted']);
 
         // Estrarre latitude e longitude dal campo location se presente
-        if (isset($state['location']) && \is_array($state['location'])) {
-            if (isset($state['location']['latitude']) && is_numeric($state['location']['latitude'])) {
-                $state['latitude'] = (string) $state['location']['latitude'];
+        // Il campo location può essere un array o una stringa JSON (dal map picker)
+        if (isset($state['location'])) {
+            $location = $state['location'];
+            if (\is_string($location)) {
+                $decoded = \json_decode($location, true);
+                if (\is_array($decoded)) {
+                    $location = $decoded;
+                }
             }
-            if (isset($state['location']['longitude']) && is_numeric($state['location']['longitude'])) {
-                $state['longitude'] = (string) $state['location']['longitude'];
+            if (\is_array($location)) {
+                if (isset($location['latitude']) && is_numeric($location['latitude'])) {
+                    $state['latitude'] = (string) $location['latitude'];
+                }
+                if (isset($location['longitude']) && is_numeric($location['longitude'])) {
+                    $state['longitude'] = (string) $location['longitude'];
+                }
+                if (isset($location['address']) && \is_string($location['address'])) {
+                    $state['address'] = $location['address'];
+                }
             }
-            unset($state['location']);
+            // NON fare unset($state['location']) — serve al model come JSON
         }
 
         // Assicurarsi che latitude e longitude siano presenti e siano stringhe
