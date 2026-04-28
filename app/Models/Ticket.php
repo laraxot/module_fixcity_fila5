@@ -207,6 +207,7 @@ class Ticket extends XotBaseModel implements HasMedia
             'status' => TicketStatusEnum::class,
             'type' => TicketTypeEnum::class,
             'type_id' => TicketTypeEnum::class,
+            'location' => 'array',
         ];
     }
 
