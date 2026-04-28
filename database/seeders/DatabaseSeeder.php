@@ -43,7 +43,7 @@ class DatabaseSeeder extends Seeder
                 'description' => 'Problemi di verde pubblico',
                 'icon' => 'tree',
             ],
-            
+
             // ... altre categorie
         ]);
 

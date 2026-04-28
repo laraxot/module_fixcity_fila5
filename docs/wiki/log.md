@@ -5,6 +5,14 @@
 - creata story operativa: `../stories/wizard-map-runtime-asset-chain.md`.
 - collegamenti cross-owner confermati: `../../Geo/docs/wiki/index.md`, `../../../Themes/Sixteen/docs/wiki/index.md`, `../../../../docs/wiki/index.md`.
 
+## [2026-04-28] fix | story 8-64 — admin ticket location non persistita (mutator mancante)
+- **diagnosi precedente errata**: il doc originale indicava `location` mancante da `$fillable` — SBAGLIATO. `location` era già in `$fillable` ma i dati venivano persi lo stesso.
+- **root-cause reale**: `CoordinatePicker::make('location')` invia array composito `{latitude, longitude}` a `Ticket::fill(['location' => [...]])`, ma il DB ha colonne separate `latitude`/`longitude` senza colonna `location`. Il cast `'location' => 'array'` tentava di salvare su una colonna inesistente.
+- **fix**: aggiunto `location(): Attribute` (mutator Eloquent multi-colonna) in `Ticket.php`; rimosso `'location' => 'array'` da `casts()`.
+- **pattern di riferimento**: `laravel/Modules/Geo/docs/wiki/concepts/coordinate-picker-filament5-save-pattern.md`.
+- **regola permanente**: `bashscripts/ai/.claude/rules/coordinatepicker-multi-column-save.md`.
+- aggiornata pagina: `troubleshooting/ticket-location-not-saved-mass-assignment.md` con root-cause corretto.
+
 ## [2026-04-27] governance | obsidian + skills + ingest discipline
 - aggiunta checklist stabile `concepts/obsidian-skills-and-ingest-checklist.md`.
 - formalizzata routine: update docs modulo/tema + rules/memory/skills + `qmd update` + query smoke.

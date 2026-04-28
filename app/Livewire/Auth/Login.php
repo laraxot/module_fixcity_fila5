@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Modules\Fixcity\Livewire\Auth;
 
 use Filament\Forms\Components\Checkbox;

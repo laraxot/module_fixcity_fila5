@@ -4,10 +4,7 @@ declare(strict_types=1);
 
 namespace Modules\Fixcity\Providers\Filament;
 
-use Filament\Panel;
-use Filament\SpatieLaravelTranslatablePlugin;
 use Modules\Xot\Providers\Filament\XotBasePanelProvider;
-use Pboivin\FilamentPeek\FilamentPeekPlugin;
 
 class AdminPanelProvider extends XotBasePanelProvider
 {

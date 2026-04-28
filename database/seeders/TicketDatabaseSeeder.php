@@ -6,14 +6,13 @@ namespace Modules\Fixcity\Database\Seeders;
 
 use DB;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Str;
 use Modules\Fixcity\Enums\TicketPriorityEnum;
 use Modules\Fixcity\Enums\TicketStatusEnum;
 use Modules\Fixcity\Models\User;
-use Illuminate\Support\Str;
 
 class TicketDatabaseSeeder extends Seeder
 {
-
     private array $realTickets = [
         [
             'name' => 'Buca in via Solferino',
@@ -38,7 +37,7 @@ class TicketDatabaseSeeder extends Seeder
             'content' => 'Il cestino dei rifiuti non viene svuotato da giorni e sta creando problemi di igiene',
             'status' => TicketStatusEnum::PENDING->value,
             'priority' => TicketPriorityEnum::MEDIUM->value,
-        ]
+        ],
     ];
 
     /**

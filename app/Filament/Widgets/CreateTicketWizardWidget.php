@@ -7,43 +7,307 @@ namespace Modules\Fixcity\Filament\Widgets;
 use Filament\Actions\Action;
 use Filament\Forms\Components\Checkbox;
 use Filament\Forms\Components\FileUpload;
-use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
 use Filament\Infolists\Components\ImageEntry;
 use Filament\Infolists\Components\TextEntry;
+use Filament\Notifications\Notification;
+use Filament\Schemas\Components\Component;
 use Filament\Schemas\Components\Grid;
 use Filament\Schemas\Components\Section;
 use Filament\Schemas\Components\Text;
 use Filament\Schemas\Components\Utilities\Get;
-use Filament\Schemas\Components\Wizard\Step;
 use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Contracts\View\View;
 use Illuminate\Support\HtmlString;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
+use Modules\Fixcity\Enums\TicketStatusEnum;
 use Modules\Fixcity\Enums\TicketTypeEnum;
 use Modules\Fixcity\Events\TicketCreatedEvent;
 use Modules\Fixcity\Models\Ticket;
 use Modules\Geo\Filament\Forms\Components\CoordinatePicker;
-use Modules\Geo\Filament\Forms\Components\GeopointPicker;
 use Modules\UI\Filament\Forms\Components\EnumSelect;
 use Modules\Xot\Filament\Widgets\XotBaseWizardWidget;
 
 class CreateTicketWizardWidget extends XotBaseWizardWidget
 {
+
+    public array $blockData = [];
     /**
      * Vista modulo (layout Design Comuni: sidebar step 2, stepper, parity CSS).
      * Override del default view di XotBaseWizardWidget per mantenere HTML parity.
      */
     protected string $view = 'fixcity::filament.widgets.ticket-create-wizard';
 
-    public array $blockData = [];
-
     /** @param array<string, mixed> $blockData */
     public function mount(array $blockData = []): void
     {
         $this->blockData = $blockData;
         $this->initWizardState();
+    }
+
+    /**
+     * @return array<int, Component>
+     */
+    public function getPrivacySchema(): array
+    {
+        return [
+            Text::make(fn (): HtmlString => $this->getPrivacyNoticeHtml())
+                ->columnSpanFull(),
+            Checkbox::make('privacyAccepted')
+                ->accepted()
+                ->dehydrated(false),
+        ];
+    }
+
+    /**
+     * @return array<int, Component>
+     */
+    public function getDataSchema(): array
+    {
+        return [
+            Section::make((string) __('fixcity::segnalazione.fields.place.section.label'))
+                ->description((string) __('fixcity::segnalazione.sections.place.description'))
+                ->compact()
+                ->extraAttributes(['id' => 'report-place', 'data-step-section' => 'place'])
+                ->schema([
+                    CoordinatePicker::make('location')
+                        ->hiddenLabel()
+                        ->zoom(15)
+                        ->height('340px')
+                        ->geolocateWhenEmpty()
+                        ->reverseGeocoding(),
+                    /*
+                        // NON CANCELLARE QUESTO
+                        GeopointPicker::make('location1')
+                            ->hiddenLabel()
+                            ->zoom(15)
+                            ->height('340px')
+                            ->reverseGeocoding(),
+                        // */
+                    /*
+                        // NON CANCELLARE QUESTO
+                        LatitudeLongitudeInput::make('location2')
+                            ->hiddenLabel()
+                            ->zoom(15)
+                            ->height('340px')
+                            ->reverseGeocoding(),
+                        // */
+                    /*
+                        // NON CANCELLARE QUESTO
+                        LeafletMarkerMapInput::make('location3')
+                            ->hiddenLabel()
+                            ->zoom(15)
+                            ->height('340px')
+                            ->reverseGeocoding(),
+                        // */
+                    /*
+                        LocationPicker::make('location4')
+                            ->hiddenLabel()
+                            ->zoom(15)
+                            ->height('340px')
+                            ->reverseGeocoding(),
+                        // */
+                    /*
+                        MapLocationInput::make('location5')
+                            ->hiddenLabel()
+                            ->zoom(15)
+                            ->height('340px')
+                            ->reverseGeocoding(),
+                        // */
+                    /*
+                        MapPicker::make('location6')
+                            ->hiddenLabel()
+                            ->zoom(15)
+                            ->height('340px')
+                            ->reverseGeocoding(),
+                        // */
+                    /*
+                        MapPositioner::make('location7')
+                            ->hiddenLabel()
+                            ->zoom(15)
+                            ->height('340px')
+                            ->reverseGeocoding(),
+                        // */
+                    /*
+                        PlacePicker::make('location8')
+                            ->hiddenLabel()
+                            ->zoom(15)
+                            ->height('340px')
+                            ->reverseGeocoding(),
+                        // */
+                ]),
+
+            Section::make((string) __('fixcity::segnalazione.fields.inefficiency.section.label'))
+                ->description((string) __('fixcity::segnalazione.sections.inefficiency.description'))
+                ->compact()
+                ->extraAttributes(['id' => 'report-info', 'data-step-section' => 'inefficiency'])
+                ->schema([
+                    EnumSelect::make('type_id')
+                        ->options(TicketTypeEnum::class)
+                        ->required()
+                        ->native(false),
+                    TextInput::make('name')
+                        ->required()
+                        ->maxLength(255),
+                    Textarea::make('content')
+                        ->required()
+                        ->maxLength(200)
+                        ->rows(3)
+                        ->helperText((string) __('fixcity::segnalazione.fields.details.max_chars.label')),
+                    FileUpload::make('images')
+                        ->helperText((string) __('fixcity::segnalazione.fields.images.help_text'))
+                        ->multiple()
+                        ->image()
+                        ->disk('public')
+                        ->directory('tickets/images')
+                        ->maxFiles(10)
+                        ->openable(),
+                ]),
+
+            Section::make((string) __('fixcity::segnalazione.sections.author.label'))
+                ->description((string) __('fixcity::segnalazione.sections.author.description'))
+                ->compact()
+                ->extraAttributes(['id' => 'report-author', 'data-step-section' => 'author'])
+                ->schema([
+                    Grid::make(['default' => 1, 'lg' => 3])->schema([
+                        TextEntry::make('author_name')
+                            ->state(fn (): string => $this->getAuthUserName())
+                            ->icon('heroicon-o-user'),
+                        TextEntry::make('author_fiscal_code')
+                            ->state(fn (): string => $this->getAuthUserFiscalCode())
+                            ->icon('heroicon-o-identification'),
+                        TextEntry::make('author_phone')
+                            ->state(fn (): string => $this->getAuthUserPhone())
+                            ->icon('heroicon-o-phone'),
+                    ]),
+
+                    TextInput::make('email')
+                        ->helperText((string) __('fixcity::create_ticket_wizard.fields.email.helper_text'))
+                        ->email()
+                        ->maxLength(255),
+                ]),
+        ];
+    }
+
+    /**
+     * @return array<int, Component>
+     */
+    public function getSummarySchema(): array
+    {
+        return [
+            Section::make((string) __('fixcity::ticket_wizard.steps.summary.label'))
+                ->description((string) __('fixcity::ticket_wizard.steps.summary.description'))
+                ->compact()
+                ->extraAttributes(['id' => 'report-summary', 'data-step-section' => 'summary'])
+                ->schema([
+                    Grid::make(['default' => 1, 'lg' => 2])
+                        ->schema([
+                            TextEntry::make('review_type')
+                                ->state(fn (Get $get): string => $this->formatTicketTypeSummary($get('type_id'))),
+                            TextEntry::make('review_name')
+                                ->state(static fn (Get $get): string => (string) ($get('name') ?? '')),
+                            TextEntry::make('review_content')
+                                ->state(static fn (Get $get): string => (string) ($get('content') ?? ''))
+                                ->columnSpanFull(),
+                            TextEntry::make('review_email')
+                                ->state(static fn (Get $get): string => (string) ($get('email') ?? '')),
+                            TextEntry::make('review_location')
+                                ->state(fn (Get $get): string => $this->formatLocationSummary($get('location'))),
+                            ImageEntry::make('review_images')
+                                ->state(fn (Get $get): array => $this->normalizeSummaryImages($get('images')))
+                                ->disk('public')
+                                ->limit(4)
+                                ->limitedRemainingText()
+                                ->columnSpanFull(),
+                        ]),
+                ]),
+        ];
+    }
+
+    public function submit(): void
+    {
+        $this->validateWizardSubmission();
+
+        try {
+            $state = $this->prepareTicketData();
+
+            $ticket = $this->createTicket($state);
+            $this->dispatchEvents($ticket);
+
+            $this->redirectAfterSuccess($ticket);
+        } catch (\Throwable $e) {
+            $this->handleSubmissionError($e);
+        }
+    }
+
+    /**
+     * Salva la segnalazione come bozza (draft).
+     */
+    public function saveDraft(): void
+    {
+        $this->validateWizardSubmission();
+
+        try {
+            $state = $this->prepareTicketData();
+
+            // Force status to draft
+            $state['status'] = TicketStatusEnum::DRAFT->value;
+
+            $this->createTicket($state);
+
+            // non faccio partire il dispatch perchè qui salvo solo una bozza
+            // $this->dispatchEvents($ticket);
+
+            // Redirect to draft confirmation page
+            $slug = $this->blockData['draft_confirmation_slug']
+                ?? $this->blockData['confirmation_slug']
+                ?? config('fixcity.wizard.draft_confirmation_slug', 'segnalazione-04-conferma');
+
+            $url = route('tests.view', ['slug' => $slug]);
+            $localizedUrl = LaravelLocalization::getLocalizedURL(
+                LaravelLocalization::getCurrentLocale(),
+                $url
+            ) ?: $url;
+
+            $this->redirect($localizedUrl);
+        } catch (\Throwable $e) {
+            $this->handleSubmissionError($e);
+        }
+    }
+
+    public function render(): View
+    {
+        return view($this->view, [
+            'blockData' => $this->blockData,
+            'pageTitle' => (string) ($this->blockData['title'] ?? __('fixcity::segnalazione.page.title.label')),
+            'pageDescription' => (string) ($this->blockData['description'] ?? ''),
+        ]);
+    }
+
+    /**
+     * Nasconde il pulsante "Avanti" — il wizard usa una CTA submit personalizzata.
+     */
+    public function configureWizardNextAction(Action $nextAction): Action
+    {
+        return $nextAction->hidden();
+    }
+
+    public function configureWizardPreviousAction(Action $previousAction): Action
+    {
+        return $previousAction->hidden();
+    }
+
+    public function getWizardSteps(): array
+    {
+        return [
+            $this->getStepByName('privacy')
+                ->description((string) __('fixcity::ticket_wizard.steps.privacy.description')),
+            $this->getStepByName('data')
+                ->description((string) __('fixcity::ticket_wizard.steps.data.description')),
+            $this->getStepByName('summary')
+                ->description((string) __('fixcity::ticket_wizard.steps.summary.description')),
+        ];
     }
 
     protected function getFormModel(): ?string
@@ -70,10 +334,12 @@ class CreateTicketWizardWidget extends XotBaseWizardWidget
             'images' => [],
             'email' => '',
             'location' => [
-                'latitude' => null,
-                'longitude' => null,
+                'lat' => null,
+                'lng' => null,
                 'address' => '',
-                'address_details' => null,
+                'provider' => null,
+                'address_details' => [],
+                'display_name' => '',
                 'street' => '',
                 'street_number' => '',
                 'city' => '',
@@ -83,189 +349,9 @@ class CreateTicketWizardWidget extends XotBaseWizardWidget
                 'country' => '',
                 'country_code' => '',
                 'suburb' => '',
+                'structured' => [],
+                'raw' => null,
             ],
-        ];
-    }
-
-    /**
-     * @return array<int, \Filament\Schemas\Components\Component>
-     */
-    public function getPrivacySchema(): array
-    {
-        return [
-            Text::make(fn (): HtmlString => $this->getPrivacyNoticeHtml())
-                ->columnSpanFull(),
-            Checkbox::make('privacyAccepted')
-                ->accepted()
-                ->dehydrated(false),
-        ];
-    }
-
-    /**
-     * @return array<int, \Filament\Schemas\Components\Component>
-     */
-    public function getDataSchema(): array
-    {
-        return [
-                            Section::make((string) __('fixcity::segnalazione.fields.place.section.label'))
-                    ->description((string) __('fixcity::segnalazione.sections.place.description'))
-                    ->compact()
-                    ->extraAttributes(['id' => 'report-place', 'data-step-section' => 'place'])
-                    ->schema([
-                        // *
-                        // NON CANCELLARE QUESTO - Active Picker
-                        CoordinatePicker::make('location')
-                            ->hiddenLabel()
-                            ->zoom(15)
-                            ->height('340px')
-                            ->geolocateWhenEmpty()
-                            ->reverseGeocoding(),
-                        // */
-                        /*
-                        // NON CANCELLARE QUESTO
-                        GeopointPicker::make('location1')
-                            ->hiddenLabel()
-                            ->zoom(15)
-                            ->height('340px')
-                            ->reverseGeocoding(),
-                        // */
-                        /*
-                        // NON CANCELLARE QUESTO
-                        LatitudeLongitudeInput::make('location2')
-                            ->hiddenLabel()
-                            ->zoom(15)
-                            ->height('340px')
-                            ->reverseGeocoding(),
-                        // */
-                        /*
-                        // NON CANCELLARE QUESTO
-                        LeafletMarkerMapInput::make('location3')
-                            ->hiddenLabel()
-                            ->zoom(15)
-                            ->height('340px')
-                            ->reverseGeocoding(),
-                        // */
-                        /*
-                        LocationPicker::make('location4')
-                            ->hiddenLabel()
-                            ->zoom(15)
-                            ->height('340px')
-                            ->reverseGeocoding(),
-                        // */
-                        /*
-                        MapLocationInput::make('location5')
-                            ->hiddenLabel()
-                            ->zoom(15)
-                            ->height('340px')
-                            ->reverseGeocoding(),
-                        // */
-                        /*
-                        MapPicker::make('location6')
-                            ->hiddenLabel()
-                            ->zoom(15)
-                            ->height('340px')
-                            ->reverseGeocoding(),
-                        // */
-                        /*
-                        MapPositioner::make('location7')
-                            ->hiddenLabel()
-                            ->zoom(15)
-                            ->height('340px')
-                            ->reverseGeocoding(),
-                        // */
-                        /*
-                        PlacePicker::make('location8')
-                            ->hiddenLabel()
-                            ->zoom(15)
-                            ->height('340px')
-                            ->reverseGeocoding(),
-                        // */
-                    ]),
-
-                Section::make((string) __('fixcity::segnalazione.fields.inefficiency.section.label'))
-                    ->description((string) __('fixcity::segnalazione.sections.inefficiency.description'))
-                    ->compact()
-                    ->extraAttributes(['id' => 'report-info', 'data-step-section' => 'inefficiency'])
-                    ->schema([
-                        EnumSelect::make('type_id')
-                            ->options(TicketTypeEnum::class)
-                            ->required()
-                            ->native(false),
-                        TextInput::make('name')
-                            ->required()
-                            ->maxLength(255),
-                        Textarea::make('content')
-                            ->required()
-                            ->maxLength(200)
-                            ->rows(3)
-                            ->helperText((string) __('fixcity::segnalazione.fields.details.max_chars.label')),
-                        FileUpload::make('images')
-                            ->helperText((string) __('fixcity::segnalazione.fields.images.help_text'))
-                            ->multiple()
-                            ->image()
-                            ->disk('public')
-                            ->directory('tickets/images')
-                            ->maxFiles(10)
-                            ->openable(),
-                    ]),
-
-                Section::make((string) __('fixcity::segnalazione.sections.author.label'))
-                    ->description((string) __('fixcity::segnalazione.sections.author.description'))
-                    ->compact()
-                    ->extraAttributes(['id' => 'report-author', 'data-step-section' => 'author'])
-                    ->schema([
-                        Grid::make(['default' => 1, 'lg' => 3])->schema([
-                            TextEntry::make('author_name')
-                                ->state(fn (): string => $this->getAuthUserName())
-                                ->icon('heroicon-o-user'),
-                            TextEntry::make('author_fiscal_code')
-                                ->state(fn (): string => $this->getAuthUserFiscalCode())
-                                ->icon('heroicon-o-identification'),
-                            TextEntry::make('author_phone')
-                                ->state(fn (): string => $this->getAuthUserPhone())
-                                ->icon('heroicon-o-phone'),
-                        ]),
-
-                        TextInput::make('email')
-                            ->helperText((string) __('fixcity::create_ticket_wizard.fields.email.helper_text'))
-                            ->email()
-                            ->maxLength(255),
-                    ]),
-        ];
-    }
-
-    /**
-     * @return array<int, \Filament\Schemas\Components\Component>
-     */
-    public function getSummarySchema(): array
-    {
-        return [
-            Section::make((string) __('fixcity::ticket_wizard.steps.summary.label'))
-                ->description((string) __('fixcity::ticket_wizard.steps.summary.description'))
-                ->compact()
-                ->extraAttributes(['id' => 'report-summary', 'data-step-section' => 'summary'])
-                ->schema([
-                    Grid::make(['default' => 1, 'lg' => 2])
-                        ->schema([
-                            TextEntry::make('review_type')
-                                ->state(fn (Get $get): string => $this->formatTicketTypeSummary($get('type_id'))),
-                            TextEntry::make('review_name')
-                                ->state(fn (Get $get): string => (string) ($get('name') ?? '')),
-                            TextEntry::make('review_content')
-                                ->state(fn (Get $get): string => (string) ($get('content') ?? ''))
-                                ->columnSpanFull(),
-                            TextEntry::make('review_email')
-                                ->state(fn (Get $get): string => (string) ($get('email') ?? '')),
-                            TextEntry::make('review_location')
-                                ->state(fn (Get $get): string => $this->formatLocationSummary($get('location'))),
-                            ImageEntry::make('review_images')
-                                ->state(fn (Get $get): array => $this->normalizeSummaryImages($get('images')))
-                                ->disk('public')
-                                ->limit(4)
-                                ->limitedRemainingText()
-                                ->columnSpanFull(),
-                        ]),
-                ]),
         ];
     }
 
@@ -275,7 +361,7 @@ class CreateTicketWizardWidget extends XotBaseWizardWidget
             return $value->getLabel();
         }
 
-        if (null === $value || '' === $value) {
+        if ($value === null || $value === '') {
             return '';
         }
 
@@ -291,14 +377,14 @@ class CreateTicketWizardWidget extends XotBaseWizardWidget
         }
 
         $address = trim((string) ($location['address'] ?? ''));
-        if ('' !== $address) {
+        if ($address !== '') {
             return $address;
         }
 
-        $latitude = $location['latitude'] ?? null;
-        $longitude = $location['longitude'] ?? null;
-        if (is_numeric($latitude) && is_numeric($longitude)) {
-            return \sprintf('%s, %s', (string) $latitude, (string) $longitude);
+        $lat = $location['lat'] ?? $location['latitude'] ?? null;
+        $lng = $location['lng'] ?? $location['longitude'] ?? null;
+        if (is_numeric($lat) && is_numeric($lng)) {
+            return \sprintf('%s, %s', (string) $lat, (string) $lng);
         }
 
         return '';
@@ -313,23 +399,7 @@ class CreateTicketWizardWidget extends XotBaseWizardWidget
             return [];
         }
 
-        return array_values(array_filter($images, static fn (mixed $image): bool => \is_string($image) && '' !== $image));
-    }
-
-    public function submit(): void
-    {
-        $this->validateWizardSubmission();
-
-        try {
-            $state = $this->prepareTicketData();
-
-            $ticket = $this->createTicket($state);
-            $this->dispatchEvents($ticket);
-
-            $this->redirectAfterSuccess($ticket);
-        } catch (\Throwable $e) {
-            $this->handleSubmissionError($e);
-        }
+        return array_values(array_filter($images, static fn (mixed $image): bool => \is_string($image) && $image !== ''));
     }
 
     /**
@@ -350,7 +420,7 @@ class CreateTicketWizardWidget extends XotBaseWizardWidget
         $state = $this->normalizeWizardFormState($this->form->getState());
 
         // Rimuovere fields non necessari per il model
-        unset($state['images'], $state['privacyAccepted']);
+        unset($state['images'], $state['privacyAccepted'], $state['email']);
 
         // Estrarre latitude e longitude dal campo location se presente
         // Il campo location può essere un array o una stringa JSON (dal map picker)
@@ -394,49 +464,15 @@ class CreateTicketWizardWidget extends XotBaseWizardWidget
     }
 
     /**
-     * Salva la segnalazione come bozza (draft).
-     */
-    public function saveDraft(): void
-    {
-        $this->validateWizardSubmission();
-
-        try {
-            $state = $this->prepareTicketData();
-
-            // Force status to draft
-            $state['status'] = \Modules\Fixcity\Enums\TicketStatusEnum::DRAFT->value;
-
-            $ticket = $this->createTicket($state);
-
-            $this->dispatchEvents($ticket);
-
-            // Redirect to draft confirmation page
-            $slug = $this->blockData['draft_confirmation_slug']
-                ?? $this->blockData['confirmation_slug']
-                ?? config('fixcity.wizard.draft_confirmation_slug', 'segnalazione-04-conferma');
-
-            $url = route('tests.view', ['slug' => $slug]);
-            $localizedUrl = LaravelLocalization::getLocalizedURL(
-                LaravelLocalization::getCurrentLocale(),
-                $url
-            ) ?: $url;
-
-            $this->redirect($localizedUrl);
-        } catch (\Throwable $e) {
-            $this->handleSubmissionError($e);
-        }
-    }
-
-    /**
      * Crea il record nel database.
      *
-     * @param array<string, mixed> $state
+     * @param  array<string, mixed>  $state
      */
     protected function createTicket(array $state): Ticket
     {
         // Set default status if not provided
         if (! isset($state['status'])) {
-            $state['status'] = \Modules\Fixcity\Enums\TicketStatusEnum::PENDING->value;
+            $state['status'] = TicketStatusEnum::PENDING->value;
         }
 
         return Ticket::query()->create($state);
@@ -476,7 +512,7 @@ class CreateTicketWizardWidget extends XotBaseWizardWidget
         $this->addError('submit', $e->getMessage());
 
         // Invia notifica all'utente
-        \Filament\Notifications\Notification::make()
+        Notification::make()
             ->danger()
             ->title(__('fixcity::segnalazione.errors.submit.title'))
             ->body($e->getMessage())
@@ -486,40 +522,6 @@ class CreateTicketWizardWidget extends XotBaseWizardWidget
         if (app()->isLocal()) {
             report($e);
         }
-    }
-
-    public function render(): View
-    {
-        return view($this->view, [
-            'blockData' => $this->blockData,
-            'pageTitle' => (string) ($this->blockData['title'] ?? __('fixcity::segnalazione.page.title.label')),
-            'pageDescription' => (string) ($this->blockData['description'] ?? ''),
-        ]);
-    }
-
-    /**
-     * Nasconde il pulsante "Avanti" — il wizard usa una CTA submit personalizzata.
-     */
-    public function configureWizardNextAction(Action $nextAction): Action
-    {
-        return $nextAction->hidden();
-    }
-
-    public function configureWizardPreviousAction(Action $previousAction): Action
-    {
-        return $previousAction->hidden();
-    }
-
-    public function getWizardSteps(): array
-    {
-        return [
-            $this->getStepByName('privacy')
-                ->description((string) __('fixcity::ticket_wizard.steps.privacy.description')),
-            $this->getStepByName('data')
-                ->description((string) __('fixcity::ticket_wizard.steps.data.description')),
-            $this->getStepByName('summary')
-                ->description((string) __('fixcity::ticket_wizard.steps.summary.description')),
-        ];
     }
 
     protected function getPrivacyNoticeHtml(): HtmlString
@@ -549,19 +551,18 @@ class CreateTicketWizardWidget extends XotBaseWizardWidget
     protected function getAuthUserName(): string
     {
         $user = $this->getAuthUser();
-        if (null === $user) {
+        if ($user === null) {
             return '';
         }
 
         return (string) (data_get($user, 'name')
-            ?? trim(((string) data_get($user, 'first_name', '')).' '.((string) data_get($user, 'last_name', '')))
-        );
+            ?? trim((string) data_get($user, 'first_name', '').' '.(string) data_get($user, 'last_name', '')));
     }
 
     protected function getAuthUserFiscalCode(): string
     {
         $user = $this->getAuthUser();
-        if (null === $user) {
+        if ($user === null) {
             return '';
         }
 
@@ -573,7 +574,7 @@ class CreateTicketWizardWidget extends XotBaseWizardWidget
     protected function getAuthUserPhone(): string
     {
         $user = $this->getAuthUser();
-        if (null === $user) {
+        if ($user === null) {
             return '';
         }
 

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Modules\Fixcity\View\Components\Blocks;
 
 use Illuminate\View\Component;
@@ -10,7 +12,7 @@ class TicketList extends Component
     public array $categories;
 
     /** @var \Illuminate\Contracts\Pagination\LengthAwarePaginator<int, Ticket> */
-    public $tickets;
+    public \Illuminate\Contracts\Pagination\LengthAwarePaginator $tickets;
 
     public function __construct()
     {

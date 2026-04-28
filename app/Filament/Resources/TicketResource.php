@@ -4,14 +4,10 @@ declare(strict_types=1);
 
 namespace Modules\Fixcity\Filament\Resources;
 
-use Dotswan\MapPicker\Fields\Map;
-use Filament\Facades\Filament;
-use Filament\Forms;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\SpatieMediaLibraryFileUpload;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
-use Filament\Resources\Resource;
 use Filament\Schemas\Components\Section;
 use Filament\Schemas\Components\Utilities\Get;
 use Filament\Schemas\Components\Utilities\Set;
@@ -23,7 +19,7 @@ use Modules\Fixcity\Filament\Resources\TicketResource\Pages\EditTicket;
 use Modules\Fixcity\Filament\Resources\TicketResource\Pages\ListTickets;
 use Modules\Fixcity\Filament\Resources\TicketResource\Pages\ViewTicket;
 use Modules\Fixcity\Models\Ticket;
-use Modules\Fixcity\Rules\FilterCoordinatesInRadius;
+use Modules\Geo\Filament\Forms\Components\CoordinatePicker;
 use Modules\Xot\Filament\Resources\XotBaseResource;
 
 class TicketResource extends XotBaseResource
@@ -42,7 +38,7 @@ class TicketResource extends XotBaseResource
                         ->columnSpanFull() // Occupa tutta la larghezza disponibile
                         ->required()
                         ->maxLength(255)
-                        ->afterStateUpdated(function (Set $set, Get $get, string $state) {
+                        ->afterStateUpdated(static function (Set $set, Get $get, string $state): void {
                             if ($get('slug')) {
                                 return;
                             }
@@ -90,43 +86,13 @@ class TicketResource extends XotBaseResource
                         ->cols(10)
                         ->helperText(__('fixcity::fixcity.ticket.content.helper_text')),
 
-                    // No latitude/longitude fields here — they are handled by the wizard (CreateTicketWizardWidget)
-                    // Empty strings on these fields cause Grammar::parameterize() errors in admin create
-
-                    // Map Section - DISABLED: Package Dotswan\MapPicker not installed
-                    // NOTA BENE, ASSICURATI DI ABILITARE LA LOCALIZZAZIONE NEL BROWSER
-                    // Map::make('location')
-                    //     ->label(__('fixcity::fixcity.ticket.your-location'))
-                    //     ->columnSpanFull() // Occupare l'intera larghezza disponibile
-                    //     ->default([
-                    //         'lat' => 40.4168,
-                    //         'lng' => -3.7038,
-                    //     ])
-                    //     ->afterStateHydrated(function ($state, $record, Set $set): void {
-                    //         // Se sto EDITANDO e il record ha già coordinate, le imposto.
-                    //         if ($record?->latitude !== null && $record?->longitude !== null) {
-                    //             $set('location', [
-                    //                 'lat' => $record->latitude,
-                    //                 'lng' => $record->longitude,
-                    //             ]);
-                    //         }
-                    //     })
-                    //     ->afterStateHydrated(function ($state, $record, Set $set): void {
-                    //         $set('location', ['lat' => $record?->latitude, 'lng' => $record?->longitude]);
-                    //     })
-                    //     ->rules([new FilterCoordinatesInRadius])
-                    //     ->liveLocation()
-                    //     ->showMarker(true) // https://github.com/dotswan/filament-map-picker/pull/51
-                    //     ->markerColor('#22c55eff')
-                    //     ->showFullscreenControl()
-                    //     ->showZoomControl()
-                    //     ->draggable()
-                    //     ->clickable(true)
-                    //     ->tilesUrl('https://tile.openstreetmap.de/{z}/{x}/{y}.png')
-                    //     ->zoom(15)
-                    //     ->detectRetina()
-                    //     ->showMyLocationButton()
-                    //     ->extraAttributes(['class' => 'max-w-full', 'style' => 'min-height: 300px; padding: 0; margin: 0;'])
+                    CoordinatePicker::make('location')
+                        ->label(__('fixcity::fixcity.ticket.your-location'))
+                        ->columnSpanFull()
+                        ->zoom(15)
+                        ->height('340px')
+                        ->geolocateWhenEmpty()
+                        ->reverseGeocoding(),
 
                     // Image Upload
                     // SpatieMediaLibraryFileUpload::make('images')

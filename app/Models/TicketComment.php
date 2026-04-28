@@ -8,10 +8,8 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Support\Carbon;
 use Modules\Fixcity\Database\Factories\TicketCommentFactory;
-use Modules\Fixcity\Notifications\TicketCommented;
 use Modules\User\Models\User;
 use Modules\Xot\Datas\XotData;
-use Webmozart\Assert\Assert;
 
 /**
  * @property int $id
@@ -57,7 +55,7 @@ class TicketComment extends BaseModel
         'user_id', 'ticket_id', 'content',
     ];
 
-    public static function boot()
+    public static function boot(): void
     {
         parent::boot();
         /*

@@ -16,40 +16,32 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  */
 class Category extends BaseModel
 {
-    /**
-     * The table associated with the model.
-     *
-     * @var string
-     */
-    protected $table = 'categories';
-
-    /**
-     * The primary key for the model.
-     *
-     * @var string
-     */
-    protected $primaryKey = 'id';
 
     /**
      * Indicates if the model's ID is auto-incrementing.
-     *
-     * @var bool
      */
-    public $incrementing = false;
+    public bool $incrementing = false;
+    /**
+     * The table associated with the model.
+     */
+    protected string $table = 'categories';
+
+    /**
+     * The primary key for the model.
+     */
+    protected string $primaryKey = 'id';
 
     /**
      * The data type of the auto-incrementing ID.
-     *
-     * @var string
      */
-    protected $keyType = 'string';
+    protected string $keyType = 'string';
 
     /**
      * The attributes that are mass assignable.
      *
      * @var list<string>
      */
-    protected $fillable = [
+    protected array $fillable = [
         'id',
         'name',
         'description',
@@ -58,21 +50,6 @@ class Category extends BaseModel
         'is_active',
         'sort_order',
     ];
-
-    /**
-     * The attributes that should be cast.
-     *
-     * Get the attributes that should be cast.
-     *
-     * @return array<string, string>
-     */
-    protected function casts(): array
-    {
-        return [
-            'is_active' => 'boolean',
-            'sort_order' => 'integer',
-        ];
-    }
 
     /**
      * Get the parent category.
@@ -143,5 +120,20 @@ class Category extends BaseModel
     public function descendants(): HasMany
     {
         return $this->children()->with('descendants');
+    }
+
+    /**
+     * The attributes that should be cast.
+     *
+     * Get the attributes that should be cast.
+     *
+     * @return array<string, string>
+     */
+    protected function casts(): array
+    {
+        return [
+            'is_active' => 'boolean',
+            'sort_order' => 'integer',
+        ];
     }
 }

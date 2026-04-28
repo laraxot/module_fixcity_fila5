@@ -8,7 +8,6 @@ use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
 use Illuminate\View\Component;
 use Modules\Fixcity\Enums\ReportStatusEnum;
-
 use function Safe\json_decode;
 
 class Agid extends Component
@@ -29,7 +28,7 @@ class Agid extends Component
             ])
             ->orderBy('created_at', 'desc')
             ->get()
-            ->map(function (object $report): array {
+            ->map(static function (object $report): array {
                 return [
                     'id' => $report->id,
                     'title' => $report->title,
@@ -54,7 +53,7 @@ class Agid extends Component
                 'icon',
             ])
             ->get()
-            ->mapWithKeys(function (object $category) {
+            ->mapWithKeys(static function (object $category) {
                 /** @var int|string $key */
                 $key = is_int($category->id) || is_string($category->id) ? $category->id : (int) $category->id;
 

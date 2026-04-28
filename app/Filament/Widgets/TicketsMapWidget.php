@@ -21,17 +21,6 @@ final class TicketsMapWidget extends Component
     public ?float $longitude = null;
 
     /**
-     * @return array<string, string|array<int, string>>
-     */
-    protected function getListeners(): array
-    {
-        return [
-            'updateMapCenter' => 'updateMapCenter',
-            'categoryFilterUpdated' => 'rerender',
-        ];
-    }
-
-    /**
      * @param  array<string>  $categoryFilter
      */
     public function mount(?float $latitude = null, ?float $longitude = null, array $categoryFilter = []): void
@@ -55,5 +44,16 @@ final class TicketsMapWidget extends Component
     public function render(): ViewContract
     {
         return view('fixcity::filament.widgets.tickets-map-widget');
+    }
+
+    /**
+     * @return array<string, string|array<int, string>>
+     */
+    protected function getListeners(): array
+    {
+        return [
+            'updateMapCenter' => 'updateMapCenter',
+            'categoryFilterUpdated' => 'rerender',
+        ];
     }
 }

@@ -9,7 +9,7 @@ use Modules\Fixcity\Models\Category;
 
 /**
  * Class CategorySeeder.
- * 
+ *
  * Seeder per popolare la tabella categories con dati di esempio
  * per il sistema di gestione segnalazioni cittadini.
  */

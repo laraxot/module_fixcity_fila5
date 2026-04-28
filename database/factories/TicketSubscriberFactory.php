@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Modules\Fixcity\Database\Factories;
 
-use Modules\Fixcity\Models\TicketSubscriber;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Modules\Fixcity\Models\TicketSubscriber;
 
 class TicketSubscriberFactory extends Factory
 {

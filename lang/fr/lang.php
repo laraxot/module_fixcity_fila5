@@ -1346,13 +1346,13 @@ return [
     'reopen' => 'Réouvrir',
     'invalid_attempt' => 'Tentative invalide',
 
-    /**--------------------------------------------------------------------------------------------
+    /*--------------------------------------------------------------------------------------------
      * Attachment Updated
      * --------------------------------------------------------------------------------------------
      */
     'unable_to_load_file_type' => 'Impossible de charger le type de fichier',
 
-    /************************************Translation required after this line**************************/
+    /*Translation required after this line*/
     /* ---------------------------------------------------------------------------------------
      * Latest update 27-07-2016
      * -----------------------------------------------------------------------------------
@@ -1486,7 +1486,7 @@ return [
     'restore' => 'Restaurer',
     'user_restore_successfully' => 'Utilisateur restauré avec succès',
 
-    /*** updates 28-11-2016***/
+    /* updates 28-11-2016*/
     'apply' => 'Appliquer',
 
     /* updates 2-12-2016 * */
