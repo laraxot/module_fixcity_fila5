@@ -2,6 +2,41 @@
 
 Generated on: Wed Apr 22 14:04:36 CEST 2026
 
+## Run 2026-04-28 19:41:39 UTC
+
+### Snapshot conflitti Git reali (pre-fix)
+
+Rilevati con:
+
+`git diff --name-only --diff-filter=U`
+
+- `laravel/Modules/Fixcity/app/Filament/Widgets/CreateTicketWizardWidget.php`
+- `laravel/Modules/Fixcity/app/Models/Ticket.php`
+
+### File selezionato casualmente e risolto
+
+- file: `laravel/Modules/Fixcity/app/Models/Ticket.php`
+- criterio random: scelta casuale tra i file `U` della snapshot
+
+### Errore osservato
+
+- durante il merge erano presenti due versioni sovrapposte della stessa logica `location()` e dei metodi helper (`normalizeCoordinateString`, `normalizeText`, `normalizeNullableText`);
+- il file conteneva quindi metodi duplicati nella stessa classe, con rischio di errore fatale per ridefinizione metodi.
+
+### Risoluzione applicata
+
+- mantenuta la versione canonica gia presente nella parte alta della classe (gestione JSON location con normalizzazione e filtro coerente);
+- rimosso il blocco duplicato nella parte finale del file;
+- marcato il file come risolto (`git add`).
+
+### Stato post-fix
+
+Comando di verifica:
+
+`git diff --name-only --diff-filter=U`
+
+Output: nessun conflitto `U` residuo.
+
 ## Affected Files
 
 * ./Modules/Geo/docs/wiki/README.md

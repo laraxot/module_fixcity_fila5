@@ -36,10 +36,10 @@ abstract class BaseModel extends Model
 
     protected int $perPage = 30;
 
-    protected string $connection = 'fixcity';
+    protected $connection = 'fixcity';
 
     /** @var list<string> */
-    protected array $fillable = ['id'];
+    protected $fillable = ['id'];
 
     /**
      * @var array<string>

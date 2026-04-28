@@ -54,7 +54,7 @@ use Modules\Xot\Datas\XotData;
 class TicketActivity extends BaseModel
 {
     /** @var list<string> */
-    protected array $fillable = [
+    protected $fillable = [
         'ticket_id',
         'old_status_id',
         'new_status_id',
