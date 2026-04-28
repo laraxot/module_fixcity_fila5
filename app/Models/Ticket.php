@@ -181,6 +181,7 @@ class Ticket extends XotBaseModel implements HasMedia
         return [
             'estimationInSeconds' => 'int',
             'estimationProgress' => 'float',
+            'location' => 'json:unicode',
             'status' => TicketStatusEnum::class,
             'priority' => TicketPriorityEnum::class,
             'type_id' => TicketTypeEnum::class,
@@ -188,23 +189,50 @@ class Ticket extends XotBaseModel implements HasMedia
     }
 
     /**
-     * @return Attribute<array{latitude: string|null, longitude: string|null}, array{latitude: string|null, longitude: string|null}>
+     * Canonical source of truth is the JSON `location` payload.
+     * Legacy `latitude` / `longitude` columns are mirrored for backward compatibility.
+     *
+     * @return Attribute<array<string, mixed>, array<string, mixed>>
      */
     protected function location(): Attribute
     {
         return Attribute::make(
-            get: fn (mixed $value, array $attributes): array => [
-                'latitude' => $attributes['latitude'] ?? null,
-                'longitude' => $attributes['longitude'] ?? null,
-            ],
+            get: function (mixed $value, array $attributes): array {
+                $location = [];
+
+                if (\is_string($value) && $value !== '') {
+                    $decoded = \json_decode($value, true);
+                    if (\is_array($decoded)) {
+                        $location = $decoded;
+                    }
+                } elseif (\is_array($value)) {
+                    $location = $value;
+                }
+
+                $location['lat'] = self::normalizeCoordinateString($location['lat'] ?? $location['latitude'] ?? $attributes['latitude'] ?? null);
+                $location['lng'] = self::normalizeCoordinateString($location['lng'] ?? $location['longitude'] ?? $attributes['longitude'] ?? null);
+                $location['address'] = self::normalizeText($location['address'] ?? $location['display_name'] ?? $attributes['address'] ?? null);
+                $location['provider'] = self::normalizeNullableText($location['provider'] ?? null);
+
+                return $location;
+            },
             set: function (mixed $value): array {
                 if (! is_array($value)) {
                     return [];
                 }
 
+                $location = $value;
+                $location['lat'] = self::normalizeCoordinateString($value['lat'] ?? $value['latitude'] ?? null);
+                $location['lng'] = self::normalizeCoordinateString($value['lng'] ?? $value['longitude'] ?? null);
+                $location['address'] = self::normalizeText($value['address'] ?? $value['display_name'] ?? null);
+                $location['provider'] = self::normalizeNullableText($value['provider'] ?? null);
+                unset($location['latitude'], $location['longitude']);
+
                 return [
-                    'latitude' => self::normalizeCoordinateString($value['latitude'] ?? null),
-                    'longitude' => self::normalizeCoordinateString($value['longitude'] ?? null),
+                    'location' => $location,
+                    'latitude' => $location['lat'],
+                    'longitude' => $location['lng'],
+                    'address' => $location['address'],
                 ];
             },
         );
@@ -221,6 +249,18 @@ class Ticket extends XotBaseModel implements HasMedia
         }
 
         return null;
+    }
+
+    private static function normalizeText(mixed $value): string
+    {
+        return is_string($value) ? trim($value) : '';
+    }
+
+    private static function normalizeNullableText(mixed $value): ?string
+    {
+        $normalized = self::normalizeText($value);
+
+        return $normalized !== '' ? $normalized : null;
     }
 
     /**

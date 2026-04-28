@@ -72,10 +72,12 @@ class CreateTicketWizardWidget extends XotBaseWizardWidget
             'images' => [],
             'email' => '',
             'location' => [
-                'latitude' => null,
-                'longitude' => null,
+                'lat' => null,
+                'lng' => null,
                 'address' => '',
-                'address_details' => null,
+                'provider' => null,
+                'address_details' => [],
+                'display_name' => '',
                 'street' => '',
                 'street_number' => '',
                 'city' => '',
@@ -85,6 +87,8 @@ class CreateTicketWizardWidget extends XotBaseWizardWidget
                 'country' => '',
                 'country_code' => '',
                 'suburb' => '',
+                'structured' => [],
+                'raw' => null,
             ],
         ];
     }
@@ -294,10 +298,10 @@ class CreateTicketWizardWidget extends XotBaseWizardWidget
             return $address;
         }
 
-        $latitude = $location['latitude'] ?? null;
-        $longitude = $location['longitude'] ?? null;
-        if (is_numeric($latitude) && is_numeric($longitude)) {
-            return \sprintf('%s, %s', (string) $latitude, (string) $longitude);
+        $lat = $location['lat'] ?? $location['latitude'] ?? null;
+        $lng = $location['lng'] ?? $location['longitude'] ?? null;
+        if (is_numeric($lat) && is_numeric($lng)) {
+            return \sprintf('%s, %s', (string) $lat, (string) $lng);
         }
 
         return '';
@@ -349,7 +353,7 @@ class CreateTicketWizardWidget extends XotBaseWizardWidget
         $state = $this->normalizeWizardFormState($this->form->getState());
 
         // Rimuovere fields non necessari per il model
-        unset($state['images'], $state['privacyAccepted']);
+        unset($state['images'], $state['privacyAccepted'], $state['email']);
 
         // Estrarre latitude e longitude dal campo location se presente
         // Il campo location può essere un array o una stringa JSON (dal map picker)
@@ -407,7 +411,8 @@ class CreateTicketWizardWidget extends XotBaseWizardWidget
 
             $ticket = $this->createTicket($state);
 
-            $this->dispatchEvents($ticket);
+            // non faccio partire il dispatch perchè qui salvo solo una bozza
+            // $this->dispatchEvents($ticket);
 
             // Redirect to draft confirmation page
             $slug = $this->blockData['draft_confirmation_slug']

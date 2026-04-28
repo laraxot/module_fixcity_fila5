@@ -254,10 +254,10 @@ class TicketForm extends XotBaseResourceForm
             return $address;
         }
 
-        $latitude = $location['latitude'] ?? null;
-        $longitude = $location['longitude'] ?? null;
-        if (is_numeric($latitude) && is_numeric($longitude)) {
-            return sprintf('%s, %s', (string) $latitude, (string) $longitude);
+        $lat = $location['lat'] ?? $location['latitude'] ?? null;
+        $lng = $location['lng'] ?? $location['longitude'] ?? null;
+        if (is_numeric($lat) && is_numeric($lng)) {
+            return sprintf('%s, %s', (string) $lat, (string) $lng);
         }
 
         return '';

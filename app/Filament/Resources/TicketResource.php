@@ -4,14 +4,10 @@ declare(strict_types=1);
 
 namespace Modules\Fixcity\Filament\Resources;
 
-use Dotswan\MapPicker\Fields\Map;
-use Filament\Facades\Filament;
-use Filament\Forms;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\SpatieMediaLibraryFileUpload;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
-use Filament\Resources\Resource;
 use Filament\Schemas\Components\Section;
 use Filament\Schemas\Components\Utilities\Get;
 use Filament\Schemas\Components\Utilities\Set;
@@ -24,6 +20,7 @@ use Modules\Fixcity\Filament\Resources\TicketResource\Pages\ListTickets;
 use Modules\Fixcity\Filament\Resources\TicketResource\Pages\ViewTicket;
 use Modules\Fixcity\Models\Ticket;
 use Modules\Fixcity\Rules\FilterCoordinatesInRadius;
+use Modules\Geo\Filament\Forms\Components\CoordinatePicker;
 use Modules\Xot\Filament\Resources\XotBaseResource;
 
 class TicketResource extends XotBaseResource
