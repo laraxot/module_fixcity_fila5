@@ -7,6 +7,7 @@ namespace Modules\Fixcity\Models;
 use Carbon\CarbonInterval;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -18,11 +19,11 @@ use Modules\Fixcity\Enums\TicketStatusEnum;
 use Modules\Fixcity\Enums\TicketTypeEnum;
 use Modules\Fixcity\Notifications\TicketCreated;
 use Modules\Fixcity\Notifications\TicketStatusUpdated;
-use Modules\Geo\Models\Traits\HasAddress;
 use Modules\Media\Models\Media;
 use Modules\User\Models\User;
 use Modules\Xot\Actions\File\AssetAction;
 use Modules\Xot\Contracts\ProfileContract;
+use Modules\Xot\Contracts\UserContract;
 use Modules\Xot\Datas\XotData;
 use Modules\Xot\Models\XotBaseModel;
 use Spatie\Comments\Models\CommentNotificationSubscription;
@@ -136,7 +137,7 @@ use Webmozart\Assert\Assert;
  *
  * @property Collection<int, CommentNotificationSubscription> $notificationSubscriptions
  * @property int|null $notification_subscriptions_count
- * @property-read \Modules\Fixcity\Models\Profile|null $deleter
+ * @property-read Profile|null $deleter
  *
  * @mixin \Eloquent
  */
@@ -146,7 +147,6 @@ class Ticket extends XotBaseModel implements HasMedia
     use HasSlug;
     use HasStatuses;
     use InteractsWithMedia;
-    
 
     protected $fillable = [
         'name',
@@ -163,6 +163,7 @@ class Ticket extends XotBaseModel implements HasMedia
         'sprint_id',
         'latitude',
         'longitude', // GEO
+        'location',
         // 'status_id', 'type_id', 'priority_id', //OLD
         'status',
         'type_id',
@@ -186,6 +187,45 @@ class Ticket extends XotBaseModel implements HasMedia
         ];
     }
 
+    /**
+     * @return Attribute<array{latitude: string|null, longitude: string|null}, array{latitude: string|null, longitude: string|null}>
+     */
+    protected function location(): Attribute
+    {
+        return Attribute::make(
+            get: fn (mixed $value, array $attributes): array => [
+                'latitude' => $attributes['latitude'] ?? null,
+                'longitude' => $attributes['longitude'] ?? null,
+            ],
+            set: function (mixed $value): array {
+                if (! is_array($value)) {
+                    return [];
+                }
+
+                return [
+                    'latitude' => self::normalizeCoordinateString($value['latitude'] ?? null),
+                    'longitude' => self::normalizeCoordinateString($value['longitude'] ?? null),
+                ];
+            },
+        );
+    }
+
+    private static function normalizeCoordinateString(mixed $value): ?string
+    {
+        if ($value === null || $value === '') {
+            return null;
+        }
+
+        if (is_int($value) || is_float($value) || (is_string($value) && is_numeric($value))) {
+            return (string) $value;
+        }
+
+        return null;
+    }
+
+    /**
+     * @return array{url: string, type: 'svg', scale: array{0: int, 1: int}}|array{}
+     */
     public function getIconData(): array
     {
         if ($this->type_id == null) {
@@ -194,7 +234,8 @@ class Ticket extends XotBaseModel implements HasMedia
 
         Assert::isInstanceOf($this->type_id, TicketTypeEnum::class, '['.__LINE__.']['.__FILE__.']');
         $url = $this->type_id->getIcon();
-        $url = Str::of((string) $url)->after('heroicon-o-')->append('.svg')->toString();
+        Assert::string($url, '['.__LINE__.']['.__FILE__.']');
+        $url = Str::of($url)->after('heroicon-o-')->append('.svg')->toString();
         $url = app(AssetAction::class)->execute('ui::svg/'.$url);
 
         return [
@@ -204,6 +245,9 @@ class Ticket extends XotBaseModel implements HasMedia
         ];
     }
 
+    /**
+     * @return array{lat: string, lng: string}
+     */
     public static function getLatLngAttributes(): array
     {
         return [
@@ -225,16 +269,8 @@ class Ticket extends XotBaseModel implements HasMedia
             ->usingSeparator('_');
     }
 
-    public function getSlugAttribute(?string $value): ?string
-    {
-        if ($value != null) {
-            return $value;
-        }
-        $value = Str::of($this->name)->slug()->toString();
-        $this->update(['slug' => $value]);
-
-        return $value;
-    }
+    // Slug generation handled by Spatie HasSlug trait via getSlugOptions().
+    // Removed getSlugAttribute() that caused circular update during create.
 
     public static function boot()
     {
@@ -294,6 +330,9 @@ class Ticket extends XotBaseModel implements HasMedia
         // });
     }
 
+    /**
+     * @return BelongsTo<Model&UserContract, $this>
+     */
     public function owner(): BelongsTo
     {
         $user_class = XotData::make()->getUserClass();
@@ -301,6 +340,9 @@ class Ticket extends XotBaseModel implements HasMedia
         return $this->belongsTo($user_class, 'owner_id', 'id');
     }
 
+    /**
+     * @return BelongsTo<Model&UserContract, $this>
+     */
     public function responsible(): BelongsTo
     {
         $user_class = XotData::make()->getUserClass();
@@ -328,6 +370,9 @@ class Ticket extends XotBaseModel implements HasMedia
     //    return $this->belongsTo(TicketPriority::class, 'priority_id', 'id')->withTrashed();
     // }
 
+    /**
+     * @return HasMany<TicketActivity, $this>
+     */
     public function activities(): HasMany
     {
         return $this->hasMany(TicketActivity::class, 'ticket_id', 'id');
@@ -341,11 +386,17 @@ class Ticket extends XotBaseModel implements HasMedia
         return $this->belongsToMany($user_class, 'ticket_subscribers', 'ticket_id', 'user_id');
     }
     */
+    /**
+     * @return HasMany<TicketRelation, $this>
+     */
     public function relations(): HasMany
     {
         return $this->hasMany(TicketRelation::class, 'ticket_id', 'id');
     }
 
+    /**
+     * @return HasMany<TicketHour, $this>
+     */
     public function hours(): HasMany
     {
         return $this->hasMany(TicketHour::class, 'ticket_id', 'id');
@@ -403,21 +454,30 @@ class Ticket extends XotBaseModel implements HasMedia
     //     );
     // }
 
+    /**
+     * @return Attribute<float|int, never>
+     */
     public function totalLoggedInHours(): Attribute
     {
-        return new Attribute(
-            get: function () {
-                return $this->hours->sum('value');
-            }
+        return Attribute::make(
+            get: function (): float {
+                return (float) $this->hours()->sum('value');
+            },
         );
     }
 
+    /**
+     * @return Attribute<string, never>
+     */
     public function estimationForHumans(): Attribute
     {
-        return new Attribute(
-            get: function () {
-                return CarbonInterval::seconds($this->estimation_in_seconds)->cascade()->forHumans();
-            }
+        return Attribute::make(
+            get: function (): string {
+                $seconds = $this->estimation_in_seconds;
+                $secondsInt = is_numeric($seconds) ? (int) $seconds : 0;
+
+                return CarbonInterval::seconds($secondsInt)->cascade()->forHumans();
+            },
         );
     }
     /*

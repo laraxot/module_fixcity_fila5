@@ -74,6 +74,9 @@ Select::make('type_id')->options(TicketTypeEnum::class)
 - Evitare `SchemaView` come soluzione primaria del riepilogo: accettabile solo per casi visuali eccezionali, documentati.
 - Per `ImageEntry` con limite immagini usare API Filament supportate: `->limit()` + `->limitedRemainingText()`.
 - Non usare `->limitMessage()` su `ImageEntry`: il metodo non esiste in Filament Infolists v5.
+- Le sezioni layout sono **sempre** `Filament\Schemas\Components\Section` come da Filament 5 `schemas/sections`.
+- Non importare `Filament\Infolists\Components\Section`: nel runtime installato non esiste.
+- Pattern corretto: `Section`/`Grid` da Schemas, `TextEntry`/`ImageEntry` da Infolists.
 
 ### Rule: Infolist is not a universal Placeholder replacement
 
@@ -93,6 +96,7 @@ Select::make('type_id')->options(TicketTypeEnum::class)
 - Ogni modifica al wizard Fixcity deve eseguire `composer run-script guard:fixcity-wizard` dalla cartella `laravel/`.
 - Il guard blocca simboli/regressioni che hanno gia' causato fatal runtime:
   - `InfolistSection::make(...)`
+  - `Filament\Infolists\Components\Section`
   - fallback a namespace locale `Modules\Fixcity\Filament\Widgets\*` per componenti Filament
   - assenza di entry Infolist (`TextEntry`/`ImageEntry`) nel riepilogo
 - Script: `../../../../bashscripts/quality/check-fixcity-wizard-guards.sh`

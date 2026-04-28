@@ -24,8 +24,9 @@ use Modules\Fixcity\Filament\Resources\TicketResource\Pages\ListTickets;
 use Modules\Fixcity\Filament\Resources\TicketResource\Pages\ViewTicket;
 use Modules\Fixcity\Models\Ticket;
 use Modules\Fixcity\Rules\FilterCoordinatesInRadius;
+use Modules\Xot\Filament\Resources\XotBaseResource;
 
-class TicketResource extends Resource
+class TicketResource extends XotBaseResource
 {
     protected static ?string $model = Ticket::class;
 
@@ -89,63 +90,13 @@ class TicketResource extends Resource
                         ->cols(10)
                         ->helperText(__('fixcity::fixcity.ticket.content.helper_text')),
 
-                    // Hidden Latitude and Longitude
-                    TextInput::make('latitude')
-                        ->hidden(function () {
-                            $user = Filament::auth()->user();
-                            if (! $user || ! $user->profile) {
-                                return true; // nascondi se non loggato o senza profilo
-                            }
-
-                            return ! $user->profile->isSuperAdmin();
-                        })
-                        ->readOnly(),
-
-                    TextInput::make('longitude')
-                        ->hidden(function () {
-                            $user = Filament::auth()->user();
-                            if (! $user || ! $user->profile) {
-                                return true;
-                            }
-
-                            return ! $user->profile->isSuperAdmin();
-                        })
-                        ->readOnly(),
-
-                    // Map Section - DISABLED: Package Dotswan\MapPicker not installed
-                    // NOTA BENE, ASSICURATI DI ABILITARE LA LOCALIZZAZIONE NEL BROWSER
-                    // Map::make('location')
-                    //     ->label(__('fixcity::fixcity.ticket.your-location'))
-                    //     ->columnSpanFull() // Occupare l'intera larghezza disponibile
-                    //     ->default([
-                    //         'lat' => 40.4168,
-                    //         'lng' => -3.7038,
-                    //     ])
-                    //     ->afterStateHydrated(function ($state, $record, Set $set): void {
-                    //         // Se sto EDITANDO e il record ha già coordinate, le imposto.
-                    //         if ($record?->latitude !== null && $record?->longitude !== null) {
-                    //             $set('location', [
-                    //                 'lat' => $record->latitude,
-                    //                 'lng' => $record->longitude,
-                    //             ]);
-                    //         }
-                    //     })
-                    //     ->afterStateHydrated(function ($state, $record, Set $set): void {
-                    //         $set('location', ['lat' => $record?->latitude, 'lng' => $record?->longitude]);
-                    //     })
-                    //     ->rules([new FilterCoordinatesInRadius])
-                    //     ->liveLocation()
-                    //     ->showMarker(true) // https://github.com/dotswan/filament-map-picker/pull/51
-                    //     ->markerColor('#22c55eff')
-                    //     ->showFullscreenControl()
-                    //     ->showZoomControl()
-                    //     ->draggable()
-                    //     ->clickable(true)
-                    //     ->tilesUrl('https://tile.openstreetmap.de/{z}/{x}/{y}.png')
-                    //     ->zoom(15)
-                    //     ->detectRetina()
-                    //     ->showMyLocationButton()
-                    //     ->extraAttributes(['class' => 'max-w-full', 'style' => 'min-height: 300px; padding: 0; margin: 0;'])
+                    CoordinatePicker::make('location')
+                        ->label(__('fixcity::fixcity.ticket.your-location'))
+                        ->columnSpanFull()
+                        ->zoom(15)
+                        ->height('340px')
+                        ->geolocateWhenEmpty()
+                        ->reverseGeocoding(),
 
                     // Image Upload
                     // SpatieMediaLibraryFileUpload::make('images')

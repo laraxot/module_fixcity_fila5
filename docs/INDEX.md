@@ -21,6 +21,7 @@ Modulo Laravel responsabile della gestione delle segnalazioni cittadine (Ticket)
 | Documento | Descrizione |
 |-----------|-------------|
 | **[CreateTicketWizardWidget](./CreateTicketWizardWidget.md)** | Widget Filament 3-step per creazione ticket: campi, metodi, traduzioni. |
+| **[Filament Summary Infolist Guidance](./filament-summary-infolist-guidance.md)** | Guida: usare Filament Infolists (TextEntry/ImageEntry) per lo step summary, evitare SchemaView/Placeholder. |
 | **[Filament Components Guidelines](./filament-components-guidelines.md)** | Guida corretta: Placeholder vs TextEntry, imports, anti-pattern verificati. |
 | **[Wizard Visual Parity](./wizard-visual-parity.md)** | CSS scoped overrides per Bootstrap Italia parity. Entry point `app-test.css`. |
 | [Wizard Single Next CTA Rule](./wiki/concepts/wizard-single-next-cta-rule.md) | Regola di UI parity: un solo tasto "Avanti" per step. |
@@ -28,6 +29,7 @@ Modulo Laravel responsabile della gestione delle segnalazioni cittadine (Ticket)
 | [Livewire Cache Table Rule](./wiki/concepts/livewire-cache-table-rate-limiter.md) | Gestione backend cache per Rate Limiter e Checksum. |
 | **[Select Enum Best Practices](./filament-select-enum-best-practices.md)** | Come usare correttamente Select con enum in Filament: evita codice complesso! |
 | [AddressInput (Geo)](../../Geo/docs/address-input-component.md) | Componente Filament per input indirizzi con mappa. |
+| **[Coordinate Picker Lit](./coordinate-picker-lit.md)** | Componente mappa Lit.dev + Leaflet per wizard ticket. |
 
 ---
 

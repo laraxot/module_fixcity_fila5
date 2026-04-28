@@ -1,3 +1,48 @@
+## [2026-04-27] analysis | admin tickets create map runtime asset chain
+- verificata route reale `http://127.0.0.1:8000/fixcity/admin/tickets/create` con login operatore.
+- evidenziata catena asset incoerente: `map-picker.js`/`map-picker.css` `200`, ma `geo-map-widget.js` e `geo.js` `404`.
+- identificato fallback runtime verso `/themes/Geo/js/map-picker-component.js` come percorso legacy non equivalente alla catena canonica.
+- creata story operativa: `../stories/wizard-map-runtime-asset-chain.md`.
+- collegamenti cross-owner confermati: `../../Geo/docs/wiki/index.md`, `../../../Themes/Sixteen/docs/wiki/index.md`, `../../../../docs/wiki/index.md`.
+
+## [2026-04-28] fix | story 8-64 — admin ticket location non persistita (mutator mancante)
+- **diagnosi precedente errata**: il doc originale indicava `location` mancante da `$fillable` — SBAGLIATO. `location` era già in `$fillable` ma i dati venivano persi lo stesso.
+- **root-cause reale**: `CoordinatePicker::make('location')` invia array composito `{latitude, longitude}` a `Ticket::fill(['location' => [...]])`, ma il DB ha colonne separate `latitude`/`longitude` senza colonna `location`. Il cast `'location' => 'array'` tentava di salvare su una colonna inesistente.
+- **fix**: aggiunto `location(): Attribute` (mutator Eloquent multi-colonna) in `Ticket.php`; rimosso `'location' => 'array'` da `casts()`.
+- **pattern di riferimento**: `laravel/Modules/Geo/docs/wiki/concepts/coordinate-picker-filament5-save-pattern.md`.
+- **regola permanente**: `bashscripts/ai/.claude/rules/coordinatepicker-multi-column-save.md`.
+- aggiornata pagina: `troubleshooting/ticket-location-not-saved-mass-assignment.md` con root-cause corretto.
+
+## [2026-04-27] governance | obsidian + skills + ingest discipline
+- aggiunta checklist stabile `concepts/obsidian-skills-and-ingest-checklist.md`.
+- formalizzata routine: update docs modulo/tema + rules/memory/skills + `qmd update` + query smoke.
+- ingest eseguito con `qmd update` dopo creazione nuovi documenti.
+
+## [2026-04-27] root-cause | admin map asset registry mismatch
+- documentato mismatch tra registry asset panel (`/modules/geo/*`) e file deployati reali.
+- evidenza: `public_html/modules/geo/geo-map-widget.js` assente, mentre `map-picker.css/js` presenti.
+- evidenza: `geo.js` presente in `public_html/themes/Geo/js/`, quindi catena parzialmente su path differente.
+- nuova pagina: `concepts/admin-map-asset-registry-mismatch.md`.
+- fix runtime applicato nel loader `public_html/modules/geo/map-picker.js`: registrazione alias `map-picker-lit` anche nel ramo `resp.ok === false`.
+- verifica visuale reale effettuata su route admin con step wizard `form.data::data::wizard-step`.
+- riscontro network: `geo-map-widget.js` e `geo.js` su `/modules/geo/` in 404, fallback a `themes/Geo/js/map-picker-component.js` attivo.
+- hardening applicato dopo analisi browser automation + ricerca tecnica: rimossa registry asset inesistente, loader allineato a `themes/Geo/js/geo.js`, fallback Leaflet prioritizzato su asset locali.
+- recheck visuale+network ok: `HEAD/GET /themes/Geo/js/geo.js` 200, nessun 404 sulla vecchia chain.
+
+# 2026-04-22
+
+## [2026-04-27] analysis | scopo e utilita' mappa admin ticket create
+- analizzato il ruolo della mappa nello step `data` della route admin `fixcity/admin/tickets/create`.
+- chiarito il fine business: ridurre ambiguita' della segnalazione, accelerare dispatch operativo, aumentare qualita' dati territoriali.
+- allineato il boundary owner: dominio `location` in Fixcity, runtime picker in Geo, parity visuale nel tema Sixteen.
+- aggiornata pagina di riferimento: `concepts/location-capture-map-wizard.md`.
+
+- Ingestita regola `fix-complete-only-after-target-route-recheck`: un fix Fixcity e' concluso solo dopo recheck della URL finale reale con step/query corretti e controllo del componente coinvolto.
+- Ingestito contratto route admin `fixcity/admin/tickets/create`: nuova pagina `concepts/admin-ticket-create-map-visual-contract.md` con boundary tra owner form/resource e runtime picker Geo.
+- Tracciato blocker operativo: verifica browser automatica non disponibile in sessione corrente, da eseguire nel ciclo dev della story.
+
+- Recepito runbook context-mode/QMD per `/bmad-create-story`: in caso di errore `maximum context length is 131072 tokens`, usare retrieval selettivo e sintesi wiki invece di rilanciare prompt massivi. Riferimenti: `docs/wiki/concepts/context-mode-mcp.md`, `docs/wiki/concepts/context-compression-discipline.md`, `bashscripts/docs/wiki/concepts/bmad-context-compression-operations.md`.
+
 ## [2026-04-21] story | 8-40 segnalazione dati — mappa Livewire + header parity
 - **artifact:** `_bmad-output/implementation-artifacts/8-40-segnalazione-dati-map-header-parity.md`
 - **Geo:** `map-picker.blade.php` usa `$wire.entangle` + `map-picker-lit` (stesso pattern di `coordinate-picker`); Lit: `IntersectionObserver` visibilità + sync props `latitude`/`longitude`; attributo `geolocate-when-empty`; traduzioni `geo::map-picker.status.*`; `map-picker-styles.js` — min-height su `.leaflet-container` dentro `map-picker-lit`.
@@ -29,13 +74,22 @@
 
 ## [2026-04-20] fix | profiles.uuid riportato nella migrazione owner
 - sources:
-  - `database/migrations/2026_04_20_000009_create_profiles_table.php`
+  - `database/migrations/2026_04_27_190000_create_profiles_table.php`
 - pages:
   - `concepts/profiles-uuid-contract.md` (new)
 - summary:
   - la migrazione owner `create_profiles_table` di Fixcity ora dichiara `uuid` nello schema base
   - aggiunto anche guard idempotente in `tableUpdate()` per installazioni legacy con tabella `profiles` senza colonna `uuid`
   - timestamp migrazione riallineato per mantenere la regola "1 modello = 1 migrazione"
+
+## [2026-04-27] fix | profiles.credits nullable per create profilo minimale
+- sources:
+  - `database/migrations/2026_04_27_190000_create_profiles_table.php`
+- pages:
+  - `concepts/profiles-uuid-contract.md` (updated)
+- summary:
+  - `credits` e' opzionale e quindi nullable nel contratto schema
+  - evitato blocco su insert con soli `user_id`, `uuid` e timestamps
 
 ## [2026-04-21] ui | wizard segnalazione cta unica (avanti)
 - Identificata duplicazione CTA nello step privacy/data: footer wizard Filament (`Successivo`) + nav custom (`Avanti`).
@@ -74,3 +128,53 @@
 - Layer wiki: `docs/wiki/` — LLM-maintained, sintesi ad alto riuso.
 - Schema: `docs/.schema/WIKI_SCHEMA.md`
 - Adozione moduli: `docs/project/llm-wiki-module-adoption.md`
+# 2026-04-22
+
+- Ingestita decisione `wizard-summary-infolist-runtime-fix-2026-04-22`: per `CreateTicketWizardWidget::getSummarySchema()` usare entry Infolist (`TextEntry`, `ImageEntry`) dentro layout schema, non `SchemaView` e non `Livewire\Forms\Form`.
+- Ingestita nota `context-compression-plugin-runtime`: evitare caricamenti massivi di docs/debug HTML; OpenRouter context-compression e' configurazione client API, non codice Fixcity.
+
+## [2026-04-22] fix | getSummarySchema implementato con pattern Infolist (story 8-41)
+- **Problema**: `getSummarySchema()` aveva corpo commentato con `SchemaView` (pattern errato).
+- **Errori PHP**: story 8-41 auto-applicata aveva introdotto `use` duplicati (TextEntry×2, ImageEntry×2), `use Livewire\Forms\Form`, `use Filament\Infolists\Components\Infolist` — tutti rimossi.
+- **Fix**: implementato pattern `TextEntry::make()->state(fn(Get $get): string => ...)` con `Get` da `Filament\Schemas\Components\Utilities\Get`.
+- **Namespaces corretti**: `TextEntry`/`ImageEntry` ← `Filament\Infolists\Components\*`; `Section`/`Grid`/`Get` ← `Filament\Schemas\Components\*`.
+- **Regola permanente**: `bashscripts/ai/.claude/rules/filament5-infolist-wizard-summary.md`.
+- **Concetto wiki**: `concepts/filament5-schema-namespaces-and-wizard-summary.md`.
+- **Verifica**: HTTP 200 su `http://127.0.0.1:8000/it/tests/segnalazione-crea`.
+
+## [2026-04-22] rule | Design Comuni CSS solo nel tema
+- **Problema**: CSS inline nel widget wizard Fixcity rompe la parity HTML e duplica responsabilita' del tema.
+- **Regola**: `ticket-create-wizard.blade.php` espone markup/classi stabili; le regole visuali vivono in `Themes/Sixteen/resources/css/`.
+- **Build**: dopo CSS tema eseguire `npm run build` e `npm run copy` da `laravel/Themes/Sixteen`.
+- **Concetto wiki**: `concepts/design-comuni-theme-css-only-rule.md`.
+
+## [2026-04-22] fix | Filament Section namespace corretto
+- **Problema**: `Filament\Infolists\Components\Section` non esiste nel runtime Filament 5 installato.
+- **Regola**: layout `Section`/`Grid` da `Filament\Schemas\Components`; read-only entries `TextEntry`/`ImageEntry` da `Filament\Infolists\Components`.
+- **Fonti**: Filament 5 `schemas/sections` e `components/form#using-multiple-forms`.
+- **Concetto wiki**: `concepts/filament5-schema-section-namespace-rule.md`.
+
+## [2026-04-22] ui | mappa step dati e spacing Disservizio
+- **Problema**: nello step dati la mappa puo' essere inizializzata mentre lo step wizard non e' ancora visibile; lo spacing fra `Disservizio` e `Tipo di disservizio` e' eccessivo.
+- **Owner**: logica Leaflet nel modulo Geo; spacing/z-index/parity visuale nel tema Sixteen.
+- **Regola**: niente CSS inline nel widget Fixcity; usare classi e `data-step-section`.
+# 2026-04-22 - Wizard Fixcity markup-only
+
+- Aggiunta `concepts/theme-owned-wizard-css-parity-rule.md`.
+- Regola: `resources/views/filament/widgets/ticket-create-wizard.blade.php` non deve contenere `<style>` o `style=""` per parity visuale.
+- Owner CSS: tema Sixteen; owner markup/stato/schema: modulo Fixcity.
+
+# 2026-04-23
+
+- Ingestita regola `phpstan-runtime-priority-rule`: quando il wizard `segnalazione-crea` e' in errore runtime, la priorita' e' ripristinare la URL reale e solo dopo affrontare i cluster PHPStan non bloccanti.
+
+## [2026-04-27] governance | profiles owner rule reinforced after User additive migration
+- rilevata e rimossa migrazione errata nel modulo User: `add_credits_to_profiles_table`.
+- ribadito che `profiles` e' caso particolare con owner migration unica nel modulo Fixcity.
+- riferimento operativo aggiornato: `concepts/profiles-uuid-contract.md`.
+
+## [2026-04-27] fix | executed profiles migration to resolve credits NOT NULL violation
+- eseguita migrazione `2026_04_27_190000_create_profiles_table.php` su connessione `fixcity`.
+- risolto errore SQLSTATE 23000 su insert profilo senza credits.
+- verificata nullabilita' colonna `credits` tramite tinker e reproduction script.
+- infrastruttura LLM Wiki (Karpathy pattern) configurata in tutti i moduli e temi.
