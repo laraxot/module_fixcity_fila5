@@ -24,6 +24,7 @@ wiki/
 | Pagina | Tipo | Argomento |
 |--------|------|-----------|
 | [fixcity-module](./overviews/fixcity-module.md) | overview | Ticket system, wizard frontoffice cittadini, pannello operatori |
+| [segnalazione-crea-step-dati-screenshot-audit-2026-04-28](./comparisons/segnalazione-crea-step-dati-screenshot-audit-2026-04-28.md) | comparison | Audit screenshot runtime step `Dati della segnalazione`: box laterale vuoto, search clipping, mappa con testo grezzo sovrapposto |
 | [admin-ticket-create-map-visual-contract](./concepts/admin-ticket-create-map-visual-contract.md) | concept | Contratto mappa route admin `fixcity/admin/tickets/create` e boundary runtime |
 | [map-component-purpose-architecture](../../Geo/docs/wiki/concepts/map-component-purpose-architecture.md) | concept | Scopo business mappa admin ticket wizard + architettura Geo/Fixcity/Sixteen | 2026-04-27 |
 | [location-capture-map-wizard](./concepts/location-capture-map-wizard.md) | concept | Scopo business e utilita' operativa della mappa nel wizard ticket |

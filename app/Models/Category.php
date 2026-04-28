@@ -20,21 +20,21 @@ class Category extends BaseModel
     /**
      * Indicates if the model's ID is auto-incrementing.
      */
-    public bool $incrementing = false;
+    public $incrementing = false;
     /**
      * The table associated with the model.
      */
-    protected string $table = 'categories';
+    protected $table = 'categories';
 
     /**
      * The primary key for the model.
      */
-    protected string $primaryKey = 'id';
+    protected $primaryKey = 'id';
 
     /**
      * The data type of the auto-incrementing ID.
      */
-    protected string $keyType = 'string';
+    protected $keyType = 'string';
 
     /**
      * The attributes that are mass assignable.

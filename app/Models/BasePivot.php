@@ -22,21 +22,21 @@ abstract class BasePivot extends Pivot
      *
      * @see  https://laravel-news.com/6-eloquent-secrets
      */
-    public static bool $snakeAttributes = true;
+    public static $snakeAttributes = true;
 
-    public bool $incrementing = true;
+    public $incrementing = true;
 
-    protected int $perPage = 30;
+    protected $perPage = 30;
 
     // use Searchable;
 
-    protected string $connection = 'fixcity';
+    protected $connection = 'fixcity';
 
     /** @var list<string> */
-    protected array $appends = [];
+    protected $appends = [];
 
     /** @var array<string, string> */
-    protected array $casts = [
+    protected $casts = [
         'id' => 'string', // must be string else primary key of related model will be typed as int
         'created_at' => 'datetime',
         'updated_at' => 'datetime',
@@ -46,5 +46,5 @@ abstract class BasePivot extends Pivot
     /**
      * Undocumented variable.
      */
-    protected string $primaryKey = 'id';
+    protected $primaryKey = 'id';
 }
