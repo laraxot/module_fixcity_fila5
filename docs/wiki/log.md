@@ -1,3 +1,13 @@
+## [2026-04-28] tooling | playwright mcp verification + screenshot audit refinement
+- verificata disponibilita' Playwright MCP in runtime locale con `npx -y @playwright/mcp@latest --help`.
+- aggiornato audit screenshot step `Dati della segnalazione` con evidenza file immagine e piano fix owner-side modulo.
+- pagina aggiornata: `comparisons/segnalazione-crea-step-dati-screenshot-audit-2026-04-28.md`.
+
+## [2026-04-28] audit | screenshot runtime segnalazione-crea step dati
+- documentato audit da screenshot utente sulla URL `http://127.0.0.1:8001/it/tests/segnalazione-crea?step=form.dati-della-segnalazione%3A%3Adata%3A%3Awizard-step`.
+- rilevati: box laterale `Informazioni richieste` vuoto ma ingombrante, spacing verticale eccessivo, clipping del campo search, mappa con testo grezzo sovrapposto e controlli non leggibili.
+- nuova pagina: `comparisons/segnalazione-crea-step-dati-screenshot-audit-2026-04-28.md`.
+
 ## [2026-04-28] governance | second brain bootstrap recepito nel modulo
 - recepito il bootstrap operativo root: `../../../../bashscripts/docs/second-brain-session-bootstrap.sh`.
 - aggiunto backlink in index locale verso `../../../../docs/wiki/concepts/second-brain-session-bootstrap.md`.

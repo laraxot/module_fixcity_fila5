@@ -28,13 +28,13 @@ abstract class BaseModel extends Model
      *
      * @see  https://laravel-news.com/6-eloquent-secrets
      */
-    public static bool $snakeAttributes = true;
+    public static $snakeAttributes = true;
 
-    public bool $incrementing = true;
+    public $incrementing = true;
 
-    public bool $timestamps = true;
+    public $timestamps = true;
 
-    protected int $perPage = 30;
+    protected $perPage = 30;
 
     protected $connection = 'fixcity';
 
@@ -44,12 +44,12 @@ abstract class BaseModel extends Model
     /**
      * @var array<string>
      */
-    protected array $dates = ['published_at', 'created_at', 'updated_at'];
+    protected $dates = ['published_at', 'created_at', 'updated_at'];
 
-    protected string $primaryKey = 'id';
+    protected $primaryKey = 'id';
 
     /** @var list<string> */
-    protected array $hidden = [
+    protected $hidden = [
         // 'password'
     ];
 

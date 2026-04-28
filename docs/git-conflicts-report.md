@@ -37,6 +37,19 @@ Comando di verifica:
 
 Output: nessun conflitto `U` residuo.
 
+### Quality gate PHPStan (run richiesto)
+
+Comando eseguito da `laravel/`:
+
+`./vendor/bin/phpstan analyse Modules`
+
+Esito:
+
+- risolto blocco fatale nel perimetro Fixcity:
+  - duplicate method `saveDraft()` in `CreateTicketWizardWidget`;
+  - incompatibilita' type-hints su proprieta' ereditate nei model base Fixcity (`BaseModel`, `BasePivot`, `Category`).
+- run ora arriva al termine scansione, ma resta **non verde** per errori parse pre-esistenti in altri moduli (Cms, Lang, Tenant, User, Xot) e internal error su test Geo.
+
 ## Affected Files
 
 * ./Modules/Geo/docs/wiki/README.md
