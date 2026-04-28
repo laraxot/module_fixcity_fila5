@@ -6,12 +6,13 @@ Nel modulo Fixcity, `profiles` deve avere:
 
 - `id` intero auto-increment come chiave primaria relazionale
 - `uuid` separato come identificatore esterno stabile
+- `credits` nullable (campo opzionale)
 
 ## Fonte di verita'
 
 La fonte di verita' non e' una migrazione additiva, ma:
 
-- `laravel/Modules/Fixcity/database/migrations/2026_04_20_000009_create_profiles_table.php`
+- `laravel/Modules/Fixcity/database/migrations/2026_04_27_190000_create_profiles_table.php`
 
 ## Regola operativa
 

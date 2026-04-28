@@ -243,6 +243,9 @@ return [
             'description' => 'location6',
             'helper_text' => 'location6',
         ],
+        'review_location' => [
+            'label' => 'review_location',
+        ],
     ],
     'sections' => [
         'Immagini allegate' => [
@@ -323,6 +326,10 @@ return [
         'Disservizio!!' => [
             'heading' => 'Disservizio!!',
             'label' => 'Disservizio!!',
+        ],
+        'empty' => [
+            'heading' => 'empty',
+            'label' => 'empty',
         ],
     ],
 ];
