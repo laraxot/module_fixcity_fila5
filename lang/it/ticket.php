@@ -201,6 +201,9 @@ return [
             'icon' => 'heroicon-o-plus-circle',
             'label' => 'Salva e crea un\'altra',
         ],
+        'resetColumnManager' => [
+            'tooltip' => 'resetColumnManager',
+        ],
     ],
     'messages' => [
         'created' => [

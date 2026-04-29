@@ -10,45 +10,64 @@ use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
 use Filament\Infolists\Components\ImageEntry;
 use Filament\Infolists\Components\TextEntry;
+use Filament\Schemas\Components\Component;
 use Filament\Schemas\Components\Grid;
 use Filament\Schemas\Components\Section;
 use Filament\Schemas\Components\Text;
 use Filament\Schemas\Components\Utilities\Get;
 use Filament\Schemas\Components\Wizard;
+use Filament\Schemas\Components\Wizard\Step;
 use Illuminate\Support\HtmlString;
 use Modules\Fixcity\Enums\TicketTypeEnum;
 use Modules\Geo\Filament\Forms\Components\CoordinatePicker;
 use Modules\UI\Filament\Forms\Components\EnumSelect;
+use Modules\Xot\Actions\Cast\SafeStringCastAction;
 use Modules\Xot\Filament\Resources\Schemas\XotBaseResourceForm;
 
 class TicketForm extends XotBaseResourceForm
 {
+    /**
+     * @return array<int, Component>
+     */
     public static function getFormSchema(): array
     {
         return [
             Wizard::make(static::getWizardSteps())
                 ->skippable()
-            // ->startOnStep(2)
                 ->persistStepInQueryString(),
         ];
     }
 
+    /**
+     * @return array<int, Step>
+     */
     public static function getWizardSteps(): array
     {
         return [
             static::getStepByName('privacy')
-                ->description((string) __('fixcity::ticket_wizard.steps.privacy.description')),
+                ->description(SafeStringCastAction::cast(__('fixcity::ticket_wizard.steps.privacy.description'))),
             static::getStepByName('data')
-                ->description((string) __('fixcity::ticket_wizard.steps.data.description')),
+                ->description(SafeStringCastAction::cast(__('fixcity::ticket_wizard.steps.data.description'))),
             static::getStepByName('summary')
-                ->description((string) __('fixcity::ticket_wizard.steps.summary.description')),
+                ->description(SafeStringCastAction::cast(__('fixcity::ticket_wizard.steps.summary.description'))),
         ];
     }
 
+    /**
+     * @return array<int, Component>
+     */
     public static function getPrivacySchema(): array
     {
+        return static::getFrontofficePrivacySchema('#');
+    }
+
+    /**
+     * @return array<int, Component>
+     */
+    public static function getFrontofficePrivacySchema(string $privacyLink): array
+    {
         return [
-            Text::make(static fn (): HtmlString => static::getPrivacyNoticeHtml())
+            Text::make(static fn (): HtmlString => static::getPrivacyNoticeHtml($privacyLink))
                 ->columnSpanFull(),
             Checkbox::make('privacyAccepted')
                 ->accepted()
@@ -56,11 +75,14 @@ class TicketForm extends XotBaseResourceForm
         ];
     }
 
+    /**
+     * @return array<int, Component>
+     */
     public static function getDataSchema(): array
     {
         return [
-            Section::make((string) __('fixcity::segnalazione.fields.place.section.label'))
-                ->description((string) __('fixcity::segnalazione.sections.place.description'))
+            Section::make(SafeStringCastAction::cast(__('fixcity::segnalazione.fields.place.section.label')))
+                ->description(SafeStringCastAction::cast(__('fixcity::segnalazione.sections.place.description')))
                 ->compact()
                 ->extraAttributes(['id' => 'report-place', 'data-step-section' => 'place'])
                 ->schema([
@@ -70,69 +92,10 @@ class TicketForm extends XotBaseResourceForm
                         ->height('340px')
                         ->geolocateWhenEmpty()
                         ->reverseGeocoding(),
-                    /*
-                        // NON CANCELLARE QUESTO
-                        GeopointPicker::make('location1')
-                            ->hiddenLabel()
-                            ->zoom(15)
-                            ->height('340px')
-                            ->reverseGeocoding(),
-                        // */
-                    /*
-                        // NON CANCELLARE QUESTO
-                        LatitudeLongitudeInput::make('location2')
-                            ->hiddenLabel()
-                            ->zoom(15)
-                            ->height('340px')
-                            ->reverseGeocoding(),
-                        // */
-                    /*
-                        // NON CANCELLARE QUESTO
-                        LeafletMarkerMapInput::make('location3')
-                            ->hiddenLabel()
-                            ->zoom(15)
-                            ->height('340px')
-                            ->reverseGeocoding(),
-                        // */
-                    /*
-                        LocationPicker::make('location4')
-                            ->hiddenLabel()
-                            ->zoom(15)
-                            ->height('340px')
-                            ->reverseGeocoding(),
-                        // */
-                    /*
-                        MapLocationInput::make('location5')
-                            ->hiddenLabel()
-                            ->zoom(15)
-                            ->height('340px')
-                            ->reverseGeocoding(),
-                        // */
-                    /*
-                        MapPicker::make('location6')
-                            ->hiddenLabel()
-                            ->zoom(15)
-                            ->height('340px')
-                            ->reverseGeocoding(),
-                        // */
-                    /*
-                        MapPositioner::make('location7')
-                            ->hiddenLabel()
-                            ->zoom(15)
-                            ->height('340px')
-                            ->reverseGeocoding(),
-                        // */
-                    /*
-                        PlacePicker::make('location8')
-                            ->hiddenLabel()
-                            ->zoom(15)
-                            ->height('340px')
-                            ->reverseGeocoding(),
-                        // */
                 ]),
 
-            Section::make((string) __('fixcity::segnalazione.fields.inefficiency.section.label'))
-                ->description((string) __('fixcity::segnalazione.sections.inefficiency.description'))
+            Section::make(SafeStringCastAction::cast(__('fixcity::segnalazione.fields.inefficiency.section.label')))
+                ->description(SafeStringCastAction::cast(__('fixcity::segnalazione.sections.inefficiency.description')))
                 ->compact()
                 ->extraAttributes(['id' => 'report-info', 'data-step-section' => 'inefficiency'])
                 ->schema([
@@ -147,9 +110,9 @@ class TicketForm extends XotBaseResourceForm
                         ->required()
                         ->maxLength(200)
                         ->rows(3)
-                        ->helperText((string) __('fixcity::segnalazione.fields.details.max_chars.label')),
+                        ->helperText(SafeStringCastAction::cast(__('fixcity::segnalazione.fields.details.max_chars.label'))),
                     FileUpload::make('images')
-                        ->helperText((string) __('fixcity::segnalazione.fields.images.help_text'))
+                        ->helperText(SafeStringCastAction::cast(__('fixcity::segnalazione.fields.images.help_text')))
                         ->multiple()
                         ->image()
                         ->disk('public')
@@ -158,56 +121,57 @@ class TicketForm extends XotBaseResourceForm
                         ->openable(),
                 ]),
 
-            Section::make((string) __('fixcity::segnalazione.sections.author.label'))
-                ->description((string) __('fixcity::segnalazione.sections.author.description'))
+            Section::make(SafeStringCastAction::cast(__('fixcity::segnalazione.sections.author.label')))
+                ->description(SafeStringCastAction::cast(__('fixcity::segnalazione.sections.author.description')))
                 ->compact()
                 ->extraAttributes(['id' => 'report-author', 'data-step-section' => 'author'])
                 ->schema([
                     Grid::make(['default' => 1, 'lg' => 3])->schema([
                         TextEntry::make('author_name')
-                            // ->state(fn (): string => $this->getAuthUserName())
+                            ->state(static fn (): string => static::getAuthUserName())
                             ->icon('heroicon-o-user'),
                         TextEntry::make('author_fiscal_code')
-                            // ->state(fn (): string => $this->getAuthUserFiscalCode())
+                            ->state(static fn (): string => static::getAuthUserFiscalCode())
                             ->icon('heroicon-o-identification'),
                         TextEntry::make('author_phone')
-                            // ->state(fn (): string => $this->getAuthUserPhone())
+                            ->state(static fn (): string => static::getAuthUserPhone())
                             ->icon('heroicon-o-phone'),
                     ]),
 
                     TextInput::make('email')
-                        ->helperText((string) __('fixcity::create_ticket_wizard.fields.email.helper_text'))
+                        ->helperText(SafeStringCastAction::cast(__('fixcity::create_ticket_wizard.fields.email.helper_text')))
                         ->email()
                         ->maxLength(255),
                 ]),
         ];
     }
 
+    /**
+     * @return array<int, Component>
+     */
     public static function getSummarySchema(): array
     {
         return [
-            Section::make((string) __('fixcity::ticket_wizard.steps.summary.label'))
-                ->description((string) __('fixcity::ticket_wizard.steps.summary.description'))
+            Section::make(SafeStringCastAction::cast(__('fixcity::ticket_wizard.steps.summary.label')))
+                ->description(SafeStringCastAction::cast(__('fixcity::ticket_wizard.steps.summary.description')))
                 ->compact()
                 ->extraAttributes(['id' => 'report-summary', 'data-step-section' => 'summary'])
                 ->schema([
                     Grid::make(['default' => 1, 'lg' => 2])
                         ->schema([
                             TextEntry::make('review_type')
-                            // ->state(fn (Get $get): string => $this->formatTicketTypeSummary($get('type_id')))
-                            ,
+                                ->state(static fn (Get $get): string => static::formatTicketTypeSummary($get('type_id'))),
                             TextEntry::make('review_name')
-                                ->state(static fn (Get $get): string => (string) ($get('name') ?? '')),
+                                ->state(static fn (Get $get): string => SafeStringCastAction::cast($get('name'))),
                             TextEntry::make('review_content')
-                                ->state(static fn (Get $get): string => (string) ($get('content') ?? ''))
+                                ->state(static fn (Get $get): string => SafeStringCastAction::cast($get('content')))
                                 ->columnSpanFull(),
                             TextEntry::make('review_email')
-                                ->state(static fn (Get $get): string => (string) ($get('email') ?? '')),
+                                ->state(static fn (Get $get): string => SafeStringCastAction::cast($get('email'))),
                             TextEntry::make('review_location')
-                            // ->state(fn (Get $get): string => $this->formatLocationSummary($get('location')))
-                            ,
+                                ->state(static fn (Get $get): string => static::formatLocationSummary($get('location'))),
                             ImageEntry::make('review_images')
-                                ->state(fn (Get $get): array => $this->normalizeSummaryImages($get('images')))
+                                ->state(static fn (Get $get): array => static::normalizeSummaryImages($get('images')))
                                 ->disk('public')
                                 ->limit(4)
                                 ->limitedRemainingText()
@@ -217,13 +181,11 @@ class TicketForm extends XotBaseResourceForm
         ];
     }
 
-    protected static function getPrivacyNoticeHtml(): HtmlString
+    protected static function getPrivacyNoticeHtml(string $privacyLink = '#'): HtmlString
     {
-        // $privacyLink = (string) ($this->blockData['privacy_link'] ?? '#');
-        $privacyLink = '#';
-        $intro = (string) __('fixcity::segnalazione.privacy.intro.text');
-        $detailPrefix = (string) __('fixcity::segnalazione.privacy.detail_prefix.text');
-        $linkLabel = (string) __('fixcity::segnalazione.privacy.link.label');
+        $intro = SafeStringCastAction::cast(__('fixcity::segnalazione.privacy.intro.text'));
+        $detailPrefix = SafeStringCastAction::cast(__('fixcity::segnalazione.privacy.detail_prefix.text'));
+        $linkLabel = SafeStringCastAction::cast(__('fixcity::segnalazione.privacy.link.label'));
 
         return new HtmlString(\sprintf(
             '<p class="mb-3">%s</p><p>%s<a href="%s" class="text-primary text-decoration-underline">%s</a></p>',
@@ -234,23 +196,28 @@ class TicketForm extends XotBaseResourceForm
         ));
     }
 
-    protected function formatTicketTypeSummary(mixed $value): string
+    protected static function formatTicketTypeSummary(mixed $value): string
     {
-        if (! $value) {
+        if ($value instanceof TicketTypeEnum) {
+            return $value->getLabel();
+        }
+
+        if ($value === null || $value === '') {
             return '';
         }
-        $type = TicketTypeEnum::tryFrom((string) $value);
 
-        return $type?->getLabel() ?? (string) $value;
+        $type = TicketTypeEnum::tryFrom(SafeStringCastAction::cast($value));
+
+        return $type?->getLabel() ?? SafeStringCastAction::cast($value);
     }
 
-    protected function formatLocationSummary(mixed $location): string
+    protected static function formatLocationSummary(mixed $location): string
     {
-        if (! is_array($location)) {
+        if (! \is_array($location)) {
             return '';
         }
 
-        $address = trim((string) ($location['address'] ?? ''));
+        $address = trim(SafeStringCastAction::cast($location['address'] ?? ''));
         if ($address !== '') {
             return $address;
         }
@@ -258,18 +225,57 @@ class TicketForm extends XotBaseResourceForm
         $lat = $location['lat'] ?? $location['latitude'] ?? null;
         $lng = $location['lng'] ?? $location['longitude'] ?? null;
         if (is_numeric($lat) && is_numeric($lng)) {
-            return sprintf('%s, %s', (string) $lat, (string) $lng);
+            return \sprintf('%s, %s', SafeStringCastAction::cast($lat), SafeStringCastAction::cast($lng));
         }
 
         return '';
     }
 
-    protected function normalizeSummaryImages(mixed $images): array
+    /**
+     * @return array<int, string>
+     */
+    protected static function normalizeSummaryImages(mixed $images): array
     {
-        if (! is_array($images)) {
+        if (! \is_array($images)) {
             return [];
         }
 
-        return array_values(array_filter($images, static fn (mixed $image): bool => is_string($image) && $image !== ''));
+        return array_values(array_filter($images, static fn (mixed $image): bool => \is_string($image) && $image !== ''));
+    }
+
+    protected static function getAuthUserName(): string
+    {
+        $user = auth()->user();
+        if ($user === null) {
+            return '';
+        }
+
+        return SafeStringCastAction::cast(data_get($user, 'name')
+            ?? trim(SafeStringCastAction::cast(data_get($user, 'first_name', '')).' '.SafeStringCastAction::cast(data_get($user, 'last_name', ''))));
+    }
+
+    protected static function getAuthUserFiscalCode(): string
+    {
+        $user = auth()->user();
+        if ($user === null) {
+            return '';
+        }
+
+        return SafeStringCastAction::cast(data_get($user, 'fiscal_code')
+            ?? data_get($user, 'codice_fiscale')
+            ?? '');
+    }
+
+    protected static function getAuthUserPhone(): string
+    {
+        $user = auth()->user();
+        if ($user === null) {
+            return '';
+        }
+
+        return SafeStringCastAction::cast(data_get($user, 'phone')
+            ?? data_get($user, 'mobile')
+            ?? data_get($user, 'telefono')
+            ?? '');
     }
 }

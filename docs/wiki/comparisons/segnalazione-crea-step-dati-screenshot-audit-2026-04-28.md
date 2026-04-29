@@ -11,7 +11,7 @@ status: active
 
 - URL osservata: `http://127.0.0.1:8001/it/tests/segnalazione-crea?step=form.dati-della-segnalazione%3A%3Adata%3A%3Awizard-step`
 - Fonte: screenshot runtime fornito dall'utente il `2026-04-28`
-- Evidenza file: `/home/zorin/.cursor/projects/var-www-bases-base-fixcity-fila5/assets/c__Users_Marco_AppData_Roaming_Cursor_User_workspaceStorage_438e91e0bb0c7d9358628aa4b245213e_images_1-54d11cac-0e83-4f97-96fa-eb4889da33c8.png`
+- Evidenza file locale recheck: [`../../assets/segnalazione-step-dati-after-fix-2026-04-28-full-recheck.png`](../../assets/segnalazione-step-dati-after-fix-2026-04-28-full-recheck.png)
 - Step: `Dati della segnalazione` (`2/3`)
 
 ## Findings
@@ -45,3 +45,33 @@ status: active
 2. normalizzare la gerarchia contenuti (`nota obbligatorieta'` -> `titolo Luogo` -> `search` -> `mappa`) riducendo gap verticali nel markup;
 3. validare che il blocco mappa non emetta stringhe grezze lato widget prima dell'hydration del componente Geo;
 4. rieseguire audit screenshot dopo fix con Playwright MCP sulla stessa URL e stesso step query.
+
+## Implementazione eseguita (owner modulo)
+
+- file aggiornato: `../../../resources/views/filament/widgets/ticket-create-wizard.blade.php`
+- rimosso doppio stato accordion (Bootstrap collapse + Alpine `x-show`) nella sidebar dello step dati;
+- lasciato un solo meccanismo di apertura/chiusura (`data-bs-toggle="collapse"`), eliminando condizioni che potevano produrre box apparentemente vuoto;
+- mantenuto il contratto business dello step (stesse sezioni informative, stesso percorso wizard), riducendo solo ambiguita' di rendering.
+
+## Verifica richiesta
+
+- eseguire screenshot before/after su `segnalazione-crea` step `Dati della segnalazione`;
+- confermare che `Informazioni richieste` mostri sempre i link quando il pannello e' in stato aperto.
+
+## Verifica after fix (2026-04-28)
+
+- url verificata: `http://127.0.0.1:8001/it/tests/segnalazione-crea?step=form.dati-della-segnalazione%3A%3Adata%3A%3Awizard-step&v=20260428b`
+- screenshot full-page: [`../../assets/segnalazione-step-dati-after-fix-2026-04-28-full-recheck.png`](../../assets/segnalazione-step-dati-after-fix-2026-04-28-full-recheck.png)
+
+| Check | Esito | Nota |
+|---|---|---|
+| Sidebar `Informazioni richieste` visibile e non vuota | parziale | il blocco non e' piu' ambiguo, ma resta visivamente troppo stretto e con testo poco respirato |
+| Search `Cerca un luogo` senza overlap icona/testo | pass | non si vede piu' sovrapposizione della lente sul placeholder |
+| Spacing verticale in apertura sezione `Luogo` | pass | gap ridotto e sequenza piu' leggibile |
+| Mappa senza testo grezzo sovrapposto | pass | artefatto testuale rimosso dopo rebuild asset Geo |
+| Mappa con stato visivo attivo (no faded/disabled) | pass | contrasto e controlli ora coerenti con stato operativo |
+
+## Residuo owner-side modulo
+
+1. ridurre ulteriormente la densita' della sidebar per evitare effetto "box tecnico" su colonna stretta;
+2. valutare fallback "compact nav" quando lo spazio utile laterale non supera la soglia minima.

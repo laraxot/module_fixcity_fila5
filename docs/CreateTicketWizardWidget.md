@@ -12,12 +12,11 @@ The widget follows the **Laraxot Convention-over-Configuration** (Religion):
 
 1.  **Step Generation**: Steps are defined via `$this->getStepByName('name')` in `getWizardSteps()`, which automatically maps to `get{Name}Schema()`. Ogni step può usare `->description()` come nella [Filament doc “Using a wizard”](https://filamentphp.com/docs/5.x/resources/creating-records#using-a-wizard); testi in `fixcity::ticket_wizard.steps.{privacy|data|summary}.description`.
 2.  **Schema Definition**:
-    - `getPrivacySchema()`: Step 1 (privacy notice read-only + privacy checkbox).
-    - `getDataSchema()`: Step 2 structured in three Design Comuni sections:
-      - `place` (luogo): `LeafletMarkerMapInput` che aggiorna automaticamente i campi nascosti `latitude` e `longitude`
-      - `inefficiency` (disservizio)
-      - `author` (autore della segnalazione, read-only info + contatto email)
-    - `getSummarySchema()`: Step 3 (read-only review built con visualizzazione coordinate e altre informazioni).
+    - `TicketForm` (`Modules/Fixcity/app/Filament/Resources/TicketResource/Schemas/TicketForm.php`) e' la sorgente canonica dello schema ticket.
+    - `CreateTicketWizardWidget::getPrivacySchema()`, `getDataSchema()` e `getSummarySchema()` delegano a `TicketForm`.
+    - Per il link privacy proveniente dal CMS, il widget usa `TicketForm::getFrontofficePrivacySchema($privacyLink)`: e' una variante esplicita, non una firma convenzionale parametrizzata.
+    - Il widget costruisce gli step con `$this->getStepByName(...)` per mantenere i parametri runtime del blocco CMS, ad esempio `privacy_link`.
+    - Il widget non deve ridefinire campi ticket gia' presenti in `TicketForm`: eventuali modifiche a privacy, data step o summary partono da `TicketForm`.
 3.  **Submission**: `submit()` valida il form (`validateWizardSubmission()`), poi `prepareTicketData()` (`normalizeWizardFormState` + unset `images`/`privacyAccepted` + assicurarsi che `latitude` e `longitude` siano presenti come stringhe + `owner_id` se auth), `createTicket()`, `TicketCreatedEvent`, redirect. Errori: `handleSubmissionError()` (notifica + `addError('submit', …)`; in local anche `report($e)`).
 4.  **Tipologia (`type_id`)**: `Select::make('type_id')->options(TicketTypeEnum::class)` — Filament (`HasOptions`) costruisce `[value => getLabel()]`. **IMPORTANTE**: Mai usare `TicketTypeEnum::cases()` come `options`: non è il contratto previsto da Filament. Nel summary, il tipo viene gestito controllando se il valore è già un'istanza di `TicketTypeEnum` prima della conversione. Dettaglio: [filament-select-enum-best-practices.md](filament-select-enum-best-practices.md).
 5.  **Auto-Labeling**: No `->label()` calls are used. Translations sono risolte via `LangServiceProvider` usando le chiavi `fixcity::create_ticket_wizard.fields.{name}.label` e `fixcity::segnalazione.fields.*` dove applicabile.
@@ -58,6 +57,10 @@ Questa distinzione evita il falso dogma "tutto diventa Infolist" e mantiene chia
 - Prima di modificare il widget, aggiornare e riallineare docs/memory/rules canoniche dell'area.
 - Evitare nuovi file docs se una regola può vivere meglio in una memoria o documento già esistente.
 - Lavorare assumendo agenti paralleli: cambi piccoli, espliciti, facili da fondere.
+- `TicketForm` è il riferimento canonico per lo schema del ticket wizard. Il widget frontoffice deve delegare a `TicketForm` e non duplicare campi o summary.
+- Le firme convenzionali `get{Name}Schema()` restano senza argomenti perché sono scoperte da `XotBaseResourceForm::getStepByName()` / `XotBaseWizardWidget::getStepByName()`. I parametri runtime usano metodi espliciti non convenzionali, ad esempio `getFrontofficePrivacySchema()`, non `getPrivacySchema($param)`.
+- Non introdurre micro-helper tipo `authorTextEntry()` per tre entry leggibili: sarebbe un'astrazione cosmetica, non DRY utile. Il DRY corretto è condividere il provider schema (`TicketForm`) o isolare un vero comportamento riusabile, non nascondere tre righe dichiarative.
+- La differenza tra admin resource e widget frontoffice deve rimanere esplicita: lo schema comune vive in `TicketForm`; stato Livewire, dati autenticati, redirect, submit e payload persistence restano nel widget.
 
 ---
 

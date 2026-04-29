@@ -64,6 +64,9 @@ return new class() extends XotBaseMigration {
                 if (! $this->hasColumn('slug')) {
                     $table->string('slug')->unique();
                 }
+                if (! $this->hasColumn('email')) {
+                    $table->string('email')->nullable();
+                }
 
                 $this->updateTimestamps(table: $table, hasSoftDeletes: true);
             }
