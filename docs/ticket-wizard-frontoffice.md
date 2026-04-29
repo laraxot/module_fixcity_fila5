@@ -20,6 +20,10 @@ Il widget segue i principi Laraxot ed estende `XotBaseWizardWidget`.
 
 **Implementazione (Filament way)**: il flusso multi-step è definito in **`Filament\Schemas\Components\Wizard`** + **`Wizard\Step`** dentro `CreateTicketWizardWidget::getFormSchema()`, con stato form in `data` tramite `XotBaseWizardWidget::form()` (vedi [documentazione Filament v5 — Wizards](https://filamentphp.com/docs/5.x/schemas/wizards)). La vista Blade `ticket-create-wizard.blade.php` è un **wrapper**: titolo, sidebar editoriale e parity layer attorno a `{{ $this->form }}` dentro `<form wire:submit="submit">`. Regola: **la macchina a stati degli step resta in Filament**, non in Blade.
 
+**Schema SSoT**: il provider canonico dei campi è `TicketResource/Schemas/TicketForm`. `CreateTicketWizardWidget` usa `TicketForm::getDataSchema()` e `TicketForm::getSummarySchema()`; per la privacy frontoffice usa `TicketForm::getFrontofficePrivacySchema($privacyLink)` perché il link arriva dal blocco CMS. Non deve creare un secondo schema parallelo per il frontoffice. Nel widget restano solo contesto CMS (`blockData`), stato Livewire, submit/draft, normalizzazione payload e redirect.
+
+**Picker Geo sibling**: i componenti mappa alternativi commentati con `NON CANCELLARE QUESTO` vivono nello schema owner `TicketForm`, non nel widget. Servono come memoria tecnica per confronti/runtime Geo senza reintrodurre duplicazione nel frontoffice.
+
 **Risoluzione vista**: `GetViewByClassAction` prova per primo `pub_theme::filament.widgets.createticketwizard` (wrapper tema senza sidebar). Il widget imposta esplicitamente `protected string $view = 'fixcity::filament.widgets.ticket-create-wizard'` così il frontoffice usa sempre il layout modulo (colonna «informazioni richieste» allo step 2). Regola anti-regressione: non rimuovere questa proprietà senza verificare parity e [story 7-52](../../../../_bmad-output/implementation-artifacts/7-52-segnalazione-crea-wizard-ultra-parity.md).
 
 **Storia**: prima della migrazione lo step era gestito in Blade con `$currentStep` e `nextStep()` manuali; la story **[7-34](../../../../_bmad-output/implementation-artifacts/7-34-create-ticket-wizard-filament-schema-wizard-refactor.md)** documenta il passaggio.
@@ -36,6 +40,7 @@ Il widget segue i principi Laraxot ed estende `XotBaseWizardWidget`.
 ### Caratteristiche principali:
 - **Base Class**: `Modules\Fixcity\Filament\Widgets\CreateTicketWizardWidget`
 - **Estensione**: `Modules\Xot\Filament\Widgets\XotBaseWizardWidget` (a sua volta `XotBaseWidget`); documentazione: [xot-base-wizard-widget.md](../../Xot/docs/filament/widgets/xot-base-wizard-widget.md)
+- **Schema owner**: `Modules\Fixcity\Filament\Resources\TicketResource\Schemas\TicketForm`
 - **Navigazione**: `Wizard` Filament (next/previous, validazione per step); `persistStepInQueryString('step')` quando l’override query è consentito. Anche se `ticket-create-wizard.blade.php` usa pulsanti custom parity con `wire:click="nextStep"` / `previousStep`, i metodi sono definiti su `XotBaseWizardWidget` e delegano a `callSchemaComponentMethod(<chiave wizard>, 'nextStep'|'previousStep', …)`: quindi non è navigazione manuale, è sempre il Wizard Filament che governa il flusso.
 - **Campo tipologia**: lo schema usa `Select::make('type_id')` allineato a `Ticket::$fillable` e al cast `type_id` → `TicketTypeEnum`. Un campo nome `type` risultava fuori dal contratto del modello e poteva fallire la validazione o il salvataggio.
 - **Validazione**: step tramite validazione nativa del wizard; submit finale con `Ticket::query()->create()` dopo `normalizeWizardFormState()` e arricchimenti (`owner_id`); upload `images` escluso dal payload create come da logica esistente.

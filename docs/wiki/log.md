@@ -1,3 +1,56 @@
+## [2026-04-29] governance | TicketForm SSoT senza firme schema parametrizzate
+- decisione: `TicketForm` resta il provider canonico degli schema del ticket wizard, consumabile dal widget frontoffice quando possibile.
+- implementazione: `CreateTicketWizardWidget` delega privacy/data/summary a `TicketForm`; il link privacy CMS passa da `TicketForm::getFrontofficePrivacySchema($privacyLink)`, lasciando `getPrivacySchema()` senza argomenti.
+- memoria Geo: i picker sibling commentati con `NON CANCELLARE QUESTO` restano nello schema owner `TicketForm`, non nel widget.
+- anti-pattern respinto: cambiare firme convenzionali come `getPrivacySchema()` in `getPrivacySchema(?HtmlString $privacyNotice = null)`. Anche con default, rompe la pulizia del contratto `get{Name}Schema()` usato da Xot/Filament e accoppia schema statico a valori runtime.
+- anti-pattern respinto: helper cosmetici per tre `TextEntry` autore. DRY non significa nascondere dichiarazioni semplici dietro micro-metodi; significa eliminare duplicazione reale mantenendo leggibile il comportamento.
+- regola operativa: differenze runtime del widget (`blockData`, auth user, redirect, submit, normalizzazione payload) restano nel widget; lo schema condiviso e deterministico resta in `TicketForm`.
+
+## [2026-04-29] fix | admin create ticket non deve persistere `address` top-level
+- errore target: `SQLSTATE[HY000]: table tickets has no column named address` su route admin `fixcity/admin/tickets/create`.
+- root cause: nella pipeline create resource poteva arrivare payload con `address` top-level; su schema sqlite `xot` la colonna non esiste.
+- fix owner-side applicato:
+  - `app/Filament/Resources/TicketResource/Pages/CreateTicket.php`: `mutateFormDataBeforeCreate()` ora usa `NormalizeTicketLocationDataAction` e rimuove sempre `address` top-level, mantenendo `location` canonica;
+  - `app/Actions/NormalizeTicketLocationDataAction.php`: normalizzazione unica `location` (`lat/lng`, `address`, `street`, `street_number`, `zip`, `postcode`, `city`, `province`, `state`, `country`, `country_code`, `suburb`, `address_details`) e `unset($state['address'])`;
+  - `app/Models/Ticket.php`: mutator `location()` hardenizzato con guardie schema (`latitude`, `longitude`, `location`) + split componenti indirizzo da `addressdetails/address_components`.
+- decisione business: il blocco geografico vive in `location` (source of truth), con mirror retrocompatibile su `latitude`/`longitude`.
+- riferimento story: `../../../../_bmad-output/implementation-artifacts/8-73-ticket-location-address-column-mismatch-and-structured-components.md`.
+
+## [2026-04-28] sync | geo controls visibility hardening for admin map
+- recepito fix owner-side Geo sui controlli mappa mancanti in admin rispetto al frontoffice.
+- il wizard/frontoffice resta invariato funzionalmente; lato admin viene hardenizzata la visibilita' dei controlli (`fullscreen`, `zoom`, `current position`) tramite fallback e z-index robusti.
+- riferimento owner-side: `../../Geo/docs/wiki/log.md`.
+
+## [2026-04-28] fix | ticket location payload compatibile con sqlite senza colonna `location`
+- errore runtime su submit wizard/admin: `SQLSTATE ... table tickets has no column named location`.
+- root cause: mutator `Ticket::location()` serializzava sempre il campo DB `location`, ma su connessione `xot` sqlite la tabella `tickets` non ha quella colonna.
+- fix applicato in `app/Models/Ticket.php`:
+  - aggiunta guardia schema `hasLocationColumn()` con cache per connessione/tabella;
+  - il mutator salva sempre `latitude`/`longitude`, e salva `location` solo se la colonna esiste.
+- verifica tecnica:
+  - `php -l Modules/Fixcity/app/Models/Ticket.php` OK;
+  - tinker: `fill(['location'=>...])` produce payload con sole `latitude`/`longitude` su sqlite.
+
+## [2026-04-28] fix | ticket create schema - closure summary immagini senza contesto oggetto
+- errore runtime su `/fixcity/admin/tickets/create`: `Using $this when not in object context`.
+- root cause in `TicketForm::getSummarySchema()`: closure di `ImageEntry::state()` usava `$this` dentro contesto statico.
+- fix applicato in `app/Filament/Resources/TicketResource/Schemas/TicketForm.php`:
+  - `->state(static fn (Get $get): array => self::normalizeSummaryImages(...))`
+  - `normalizeSummaryImages()` resa `protected static`.
+- verifica: `php -l Modules/Fixcity/app/Filament/Resources/TicketResource/Schemas/TicketForm.php` OK.
+
+## [2026-04-28] recheck | screenshot after fix step dati (sidebar/search/map)
+- eseguito recheck visuale con Playwright CLI sulla stessa URL/step del bug report.
+- evidenza aggiornata: `../../assets/segnalazione-step-dati-after-fix-2026-04-28-full-recheck.png`.
+- esito: overlap search risolto, overlay testuale mappa risolto, opacita' mappa coerente; sidebar migliorata ma ancora comprimibile.
+- pagina aggiornata: `comparisons/segnalazione-crea-step-dati-screenshot-audit-2026-04-28.md`.
+
+## [2026-04-28] fix | step dati segnalazione — sidebar accordion state semplificato
+- source: `../../../resources/views/filament/widgets/ticket-create-wizard.blade.php`
+- rimosso doppio controllo stato (`collapse` Bootstrap + `x-show` Alpine) nella sidebar `Informazioni richieste`.
+- obiettivo: evitare rendering ambiguo/box vuoto e mantenere comportamento deterministico nello step dati.
+- pagina aggiornata: `comparisons/segnalazione-crea-step-dati-screenshot-audit-2026-04-28.md`.
+
 ## [2026-04-28] tooling | playwright mcp verification + screenshot audit refinement
 - verificata disponibilita' Playwright MCP in runtime locale con `npx -y @playwright/mcp@latest --help`.
 - aggiornato audit screenshot step `Dati della segnalazione` con evidenza file immagine e piano fix owner-side modulo.
@@ -207,3 +260,8 @@
 - Aggiornato `CreateTicketWizardWidget::prepareTicketData()` per mantenere `location` nel payload di draft e submit, senza estrarre solo `latitude` / `longitude`.
 - Aggiornato `Ticket::location()` per salvare il JSON `location` e mantenere `latitude` / `longitude` come mirror legacy.
 - Aggiornata troubleshooting page `ticket-location-not-saved-mass-assignment.md`: la regola "nessuna colonna location" e' ora solo contesto storico, non contratto corrente.
+- 2026-04-28: Added troubleshooting note `ticket-location-column-mismatch` after ticket create failed on SQLite because the active schema had no `location` column. Persist location payload through `latitude`/`longitude`/`address` instead.
+## [2026-04-29] story | segnalazione-crea map fullscreen refinement
+- Creata story BMAD `8-74-segnalazione-crea-map-fullscreen-refinement` per migliorare fullscreen mappa sull'URL esatto con `step=form.dati-della-segnalazione`.
+- Aggiornati contratto fullscreen Fixcity e story docs modulo.
+- Boundary confermato: Fixcity verifica wizard, Geo possiede runtime Lit/Leaflet, Sixteen possiede CSS/parity.

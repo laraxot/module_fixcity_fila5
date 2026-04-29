@@ -12,6 +12,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Str;
 use Modules\Fixcity\Database\Factories\TicketFactory;
 use Modules\Fixcity\Enums\TicketPriorityEnum;
@@ -38,58 +39,58 @@ use Webmozart\Assert\Assert;
 /**
  * Modules\Fixcity\Models\Ticket.
  *
- * @property string $name
- * @property string $slug
- * @property int $id
- * @property string $content
- * @property int $owner_id
- * @property int|null $responsible_id
- * @property int $status_id
- * @property string|null $code
- * @property string|null $ticket_prefix
- * @property int $order
- * @property int $priority_id
- * @property int|null $project_id
- * @property float|null $estimation
- * @property int|null $epic_id
- * @property int|null $sprint_id
- * @property Carbon|null $deleted_at
- * @property Carbon|null $created_at
- * @property Carbon|null $updated_at
- * @property int|null $type_id
- * @property string|null $latitude
- * @property string|null $longitude
- * @property array<string, mixed>|null $location
- * @property string|null $updated_by
- * @property string|null $created_by
- * @property string|null $deleted_by
+ * @property string                          $name
+ * @property string                          $slug
+ * @property int                             $id
+ * @property string                          $content
+ * @property int                             $owner_id
+ * @property int|null                        $responsible_id
+ * @property int                             $status_id
+ * @property string|null                     $code
+ * @property string|null                     $ticket_prefix
+ * @property int                             $order
+ * @property int                             $priority_id
+ * @property int|null                        $project_id
+ * @property float|null                      $estimation
+ * @property int|null                        $epic_id
+ * @property int|null                        $sprint_id
+ * @property Carbon|null                     $deleted_at
+ * @property Carbon|null                     $created_at
+ * @property Carbon|null                     $updated_at
+ * @property int|null                        $type_id
+ * @property string|null                     $latitude
+ * @property string|null                     $longitude
+ * @property array<string, mixed>|null       $location
+ * @property string|null                     $updated_by
+ * @property string|null                     $created_by
+ * @property string|null                     $deleted_by
  * @property Collection<int, TicketActivity> $activities
- * @property int|null $activities_count
- * @property Collection<int, TicketComment> $comments
- * @property int|null $comments_count
- * @property mixed $completude_percentage
- * @property mixed $estimation_for_humans
- * @property mixed $estimation_in_seconds
- * @property mixed $estimation_progress
- * @property Collection<int, TicketHour> $hours
- * @property int|null $hours_count
- * @property MediaCollection<int, Media> $media
- * @property int|null $media_count
- * @property User|null $owner
- * @property User|null $assignee
- * @property TicketPriorityEnum|null $priority
+ * @property int|null                        $activities_count
+ * @property Collection<int, TicketComment>  $comments
+ * @property int|null                        $comments_count
+ * @property mixed                           $completude_percentage
+ * @property mixed                           $estimation_for_humans
+ * @property mixed                           $estimation_in_seconds
+ * @property mixed                           $estimation_progress
+ * @property Collection<int, TicketHour>     $hours
+ * @property int|null                        $hours_count
+ * @property MediaCollection<int, Media>     $media
+ * @property int|null                        $media_count
+ * @property User|null                       $owner
+ * @property User|null                       $assignee
+ * @property TicketPriorityEnum|null         $priority
  * @property Collection<int, TicketRelation> $relations
- * @property int|null $relations_count
- * @property User|null $responsible
- * @property TicketStatusEnum|null $status
- * @property Collection<int, User> $subscribers
- * @property int|null $subscribers_count
- * @property mixed $total_logged_hours
- * @property mixed $total_logged_in_hours
- * @property mixed $total_logged_seconds
- * @property TicketTypeEnum|null $type
+ * @property int|null                        $relations_count
+ * @property User|null                       $responsible
+ * @property TicketStatusEnum|null           $status
+ * @property Collection<int, User>           $subscribers
+ * @property int|null                        $subscribers_count
+ * @property mixed                           $total_logged_hours
+ * @property mixed                           $total_logged_in_hours
+ * @property mixed                           $total_logged_seconds
+ * @property TicketTypeEnum|null             $type
  *
- * @method static TicketFactory factory($count = null, $state = [])
+ * @method static TicketFactory                                        factory($count = null, $state = [])
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Ticket newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Ticket newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Ticket onlyTrashed()
@@ -121,7 +122,7 @@ use Webmozart\Assert\Assert;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Ticket withoutTrashed()
  *
  * @property Collection<int, Status> $statuses
- * @property int|null $statuses_count
+ * @property int|null                $statuses_count
  *
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Ticket currentStatus(...$names)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Ticket otherCurrentStatus(...$names)
@@ -135,9 +136,8 @@ use Webmozart\Assert\Assert;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Ticket whereType($value)
  *
  * @property Collection<int, CommentNotificationSubscription> $notificationSubscriptions
- * @property int|null $notification_subscriptions_count
- *
- * @property-read Profile|null $deleter
+ * @property int|null                                         $notification_subscriptions_count
+ * @property Profile|null                                     $deleter
  *
  * @mixin \Eloquent
  */
@@ -148,10 +148,12 @@ class Ticket extends XotBaseModel implements HasMedia
     use HasStatuses;
     use InteractsWithMedia;
 
+    /** @var array<string, bool> */
+    private static array $columnAvailabilityCache = [];
+
     protected $fillable = [
         'name',
         'content',
-        'address',
         'email',
         'owner_id',
         'responsible_id',
@@ -191,7 +193,6 @@ class Ticket extends XotBaseModel implements HasMedia
      * Legacy `latitude` / `longitude` columns are mirrored for backward compatibility.
      *
      * @return Attribute<array<string, mixed>, array<string, mixed>>
-     */
     protected function location(): Attribute
     {
         return Attribute::make(
@@ -209,7 +210,7 @@ class Ticket extends XotBaseModel implements HasMedia
 
                 $location['lat'] = self::normalizeCoordinateString($location['lat'] ?? $location['latitude'] ?? $attributes['latitude'] ?? null);
                 $location['lng'] = self::normalizeCoordinateString($location['lng'] ?? $location['longitude'] ?? $attributes['longitude'] ?? null);
-                $location['address'] = self::normalizeText($location['address'] ?? $location['display_name'] ?? $attributes['address'] ?? null);
+                $location['address'] = self::normalizeText($location['address'] ?? $location['display_name'] ?? null);
                 $location['provider'] = self::normalizeNullableText($location['provider'] ?? null);
 
                 return array_filter(
@@ -225,31 +226,80 @@ class Ticket extends XotBaseModel implements HasMedia
                 $location = $value;
                 $location['lat'] = self::normalizeCoordinateString($value['lat'] ?? $value['latitude'] ?? null);
                 $location['lng'] = self::normalizeCoordinateString($value['lng'] ?? $value['longitude'] ?? null);
-                $location['address'] = self::normalizeText($value['address'] ?? $value['display_name'] ?? null);
+                $location['address'] = self::normalizeNullableText($value['address'] ?? $value['display_name'] ?? null);
                 $location['provider'] = self::normalizeNullableText($value['provider'] ?? null);
-                unset($location['latitude'], $location['longitude']);
+
+                $location = array_merge($location, self::extractAddressComponents(self::stringKeyed($value)));
+
+                unset($location['latitude'], $location['longitude'], $location['address_components'], $location['addressdetails']);
 
                 $location = array_filter(
                     $location,
                     static fn (mixed $item): bool => $item !== null && $item !== ''
                 );
 
-                return [
-                    'location' => $location !== [] ? \json_encode($location, JSON_THROW_ON_ERROR) : null,
-                    'latitude' => $location['lat'] ?? null,
-                    'longitude' => $location['lng'] ?? null,
-                ];
+                $payload = [];
+
+                if (self::hasTableColumn('latitude')) {
+                    $payload['latitude'] = $location['lat'] ?? null;
+                }
+
+                if (self::hasTableColumn('longitude')) {
+                    $payload['longitude'] = $location['lng'] ?? null;
+                }
+
+                if (self::hasTableColumn('location')) {
+                    $payload['location'] = $location !== [] ? \json_encode($location) : null;
+                }
+
+                return $payload;
             },
         );
+    }
+     */
+    /**
+<<<<<<< HEAD
+     * @param array<string, mixed> $value
+     *
+     * @return array<string, string|array<string, mixed>|null>
+=======
+     * @param  array<string, mixed>  $value
+     * @return array<string, mixed>
+>>>>>>> 4e9b7799b (.)
+     */
+    private static function extractAddressComponents(array $value): array
+    {
+        $details = $value['address_components'] ?? $value['addressdetails'] ?? $value['address_details'] ?? null;
+        if (! \is_array($details) || [] === $details) {
+            return [];
+        }
+
+        return array_filter([
+            'street' => self::normalizeNullableText($value['street'] ?? $details['road'] ?? $details['street'] ?? null),
+            'street_number' => self::normalizeNullableText($value['street_number'] ?? $details['house_number'] ?? null),
+            'zip' => self::normalizeNullableText($value['zip'] ?? $value['postcode'] ?? $details['postcode'] ?? null),
+            'postcode' => self::normalizeNullableText($value['postcode'] ?? $details['postcode'] ?? null),
+            'city' => self::normalizeNullableText($value['city'] ?? $details['city'] ?? $details['town'] ?? $details['village'] ?? $details['municipality'] ?? null),
+            'province' => self::normalizeNullableText($value['province'] ?? $details['county'] ?? $details['state_district'] ?? null),
+            'state' => self::normalizeNullableText($value['state'] ?? $details['state'] ?? $details['region'] ?? null),
+            'country' => self::normalizeNullableText($value['country'] ?? $details['country'] ?? null),
+            'country_code' => self::normalizeNullableText($value['country_code'] ?? $details['country_code'] ?? null),
+            'suburb' => self::normalizeNullableText($value['suburb'] ?? $details['suburb'] ?? $details['neighbourhood'] ?? null),
+            'address_details' => $details,
+<<<<<<< HEAD
+        ], static fn (mixed $item): bool => null !== $item && '' !== $item && [] !== $item);
+=======
+        ], static fn (mixed $item): bool => $item !== null && $item !== '');
+>>>>>>> 4e9b7799b (.)
     }
 
     private static function normalizeCoordinateString(mixed $value): ?string
     {
-        if ($value === null || $value === '') {
+        if (null === $value || '' === $value) {
             return null;
         }
 
-        if (is_int($value) || is_float($value) || (is_string($value) && is_numeric($value))) {
+        if (\is_int($value) || \is_float($value) || (\is_string($value) && is_numeric($value))) {
             return (string) $value;
         }
 
@@ -258,14 +308,48 @@ class Ticket extends XotBaseModel implements HasMedia
 
     private static function normalizeText(mixed $value): string
     {
-        return is_string($value) ? trim($value) : '';
+        return \is_string($value) ? trim($value) : '';
     }
 
     private static function normalizeNullableText(mixed $value): ?string
     {
         $normalized = self::normalizeText($value);
 
-        return $normalized !== '' ? $normalized : null;
+        return '' !== $normalized ? $normalized : null;
+    }
+    /*
+    private static function hasTableColumn(string $column): bool
+    {
+        $model = new self();
+        $connection = (string) $model->getConnectionName();
+        $table = $model->getTable();
+        $cacheKey = $connection.'|'.$table.'|'.$column;
+
+        if (array_key_exists($cacheKey, self::$columnAvailabilityCache)) {
+            return self::$columnAvailabilityCache[$cacheKey];
+        }
+
+        self::$columnAvailabilityCache[$cacheKey] = Schema::connection($connection)->hasColumn($table, $column);
+
+        return self::$columnAvailabilityCache[$cacheKey];
+    }
+        */
+
+    /**
+     * @param  array<mixed>  $value
+     * @return array<string, mixed>
+     */
+    private static function stringKeyed(array $value): array
+    {
+        $normalized = [];
+
+        foreach ($value as $key => $item) {
+            if (\is_string($key)) {
+                $normalized[$key] = $item;
+            }
+        }
+
+        return $normalized;
     }
 
     /**
@@ -273,7 +357,7 @@ class Ticket extends XotBaseModel implements HasMedia
      */
     public function getIconData(): array
     {
-        if ($this->type_id === null) {
+        if (null === $this->type_id) {
             return [];
         }
 
@@ -603,7 +687,7 @@ class Ticket extends XotBaseModel implements HasMedia
      */
     public function setStatus(string|TicketStatusEnum $status): void
     {
-        if (is_string($status)) {
+        if (\is_string($status)) {
             $status = TicketStatusEnum::tryFrom($status);
         }
 

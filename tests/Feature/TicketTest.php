@@ -2,6 +2,11 @@
 
 declare(strict_types=1);
 
+use Illuminate\Foundation\Testing\RefreshDatabase;
+use Tests\TestCase;
+
+uses(TestCase::class, RefreshDatabase::class);
+
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Spatie\MediaLibrary\HasMedia;
@@ -69,6 +74,75 @@ describe('Ticket Model', function () {
         expect($ticket)
             ->latitude->toBe('45.4642')
             ->longitude->toBe('9.1900');
+    });
+
+    it('stores location as JSON and mirrors lat/lng columns', function () {
+        $ticket = Ticket::factory()->create([
+            'name' => 'Location JSON Test',
+            'owner_id' => $this->user->id,
+            'location' => [
+                'lat' => '45.562246',
+                'lng' => '12.249756',
+                'address' => 'Via Rodolfo Morandi, Mogliano Veneto',
+                'provider' => 'nominatim',
+            ],
+        ]);
+
+        expect($ticket->latitude)->toBe('45.562246')
+            ->and($ticket->longitude)->toBe('12.249756')
+            ->and($ticket->location)->toBeArray()
+            ->and($ticket->location['lat'])->toBe('45.562246')
+            ->and($ticket->location['lng'])->toBe('12.249756')
+            ->and($ticket->location['address'])->toBe('Via Rodolfo Morandi, Mogliano Veneto');
+    });
+
+    it('parses Nominatim addressdetails into structured location fields', function () {
+        $ticket = Ticket::factory()->create([
+            'name' => 'Nominatim Test',
+            'owner_id' => $this->user->id,
+            'location' => [
+                'lat' => '45.562246',
+                'lng' => '12.249756',
+                'address' => 'Via Rodolfo Morandi 5, Mogliano Veneto',
+                'addressdetails' => [
+                    'road' => 'Via Rodolfo Morandi',
+                    'house_number' => '5',
+                    'postcode' => '31021',
+                    'city' => 'Mogliano Veneto',
+                    'state' => 'Veneto',
+                    'country' => 'Italia',
+                    'country_code' => 'it',
+                ],
+            ],
+        ]);
+
+        $location = $ticket->location;
+
+        expect($location)->toBeArray()
+            ->and($location['street'])->toBe('Via Rodolfo Morandi')
+            ->and($location['street_number'])->toBe('5')
+            ->and($location['zip'])->toBe('31021')
+            ->and($location['city'])->toBe('Mogliano Veneto')
+            ->and($location['region'])->toBe('Veneto')
+            ->and($location['country'])->toBe('Italia')
+            ->and($location['country_code'])->toBe('it');
+    });
+
+    it('does not write address column — only location, latitude, longitude', function () {
+        $ticket = Ticket::factory()->create([
+            'name' => 'No Address Column Test',
+            'owner_id' => $this->user->id,
+            'location' => [
+                'lat' => '41.9028',
+                'lng' => '12.4964',
+                'address' => 'Roma',
+            ],
+        ]);
+
+        // Must not throw "no column named address"
+        expect($ticket->id)->toBeInt()
+            ->and($ticket->latitude)->toBe('41.9028')
+            ->and($ticket->longitude)->toBe('12.4964');
     });
 });
 
