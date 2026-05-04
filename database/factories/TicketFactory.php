@@ -11,7 +11,7 @@ use Modules\Fixcity\Models\Ticket;
 use Modules\User\Models\User;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<Ticket>
+ * @extends Factory<Ticket>
  */
 class TicketFactory extends Factory
 {
@@ -47,8 +47,6 @@ class TicketFactory extends Factory
 
     /**
      * Indica che il ticket è aperto.
-     *
-     * @return static
      */
     public function open(): static
     {
@@ -59,8 +57,6 @@ class TicketFactory extends Factory
 
     /**
      * Indica che il ticket è urgente.
-     *
-     * @return static
      */
     public function urgent(): static
     {
@@ -71,8 +67,6 @@ class TicketFactory extends Factory
 
     /**
      * Indica che il ticket è risolto.
-     *
-     * @return static
      */
     public function resolved(): static
     {

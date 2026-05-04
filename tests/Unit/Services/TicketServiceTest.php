@@ -5,17 +5,16 @@ declare(strict_types=1);
 namespace Modules\Fixcity\Tests\Unit\Services;
 
 use InvalidArgumentException;
+use Modules\Fixcity\Enums\TicketPriorityEnum;
+use Modules\Fixcity\Enums\TicketStatusEnum;
+use Modules\Fixcity\Enums\TicketTypeEnum;
 use Modules\Fixcity\Models\Ticket;
 use Modules\Fixcity\Services\TicketService;
-use Modules\Fixcity\Enums\TicketStatusEnum;
-use Modules\Fixcity\Enums\TicketPriorityEnum;
-use Modules\Fixcity\Enums\TicketTypeEnum;
 use Modules\User\Models\User;
-use Tests\TestCase;
 
 describe('TicketService', function () {
     beforeEach(function () {
-        $this->service = new TicketService();
+        $this->service = new TicketService;
         $this->user = User::factory()->create();
     });
 
@@ -73,7 +72,7 @@ describe('TicketService', function () {
             $ticket = Ticket::factory()->create([
                 'status' => TicketStatusEnum::PENDING,
             ]);
-            
+
             $assignee = User::factory()->create();
 
             $result = $this->service->assignTicket($ticket, $assignee);
@@ -87,7 +86,7 @@ describe('TicketService', function () {
             $ticket = Ticket::factory()->create([
                 'status' => TicketStatusEnum::IN_PROGRESS,
             ]);
-            
+
             $assignee = User::factory()->create();
 
             expect(function () use ($ticket, $assignee) {
@@ -193,7 +192,7 @@ describe('TicketService', function () {
                 'name' => 'Road maintenance issue',
                 'content' => 'Pothole in via Roma',
             ]);
-            
+
             $ticket2 = Ticket::factory()->create([
                 'name' => 'Lighting problem',
                 'content' => 'Street light not working',
@@ -221,7 +220,7 @@ describe('TicketService', function () {
             $pendingTicket = Ticket::factory()->create([
                 'status' => TicketStatusEnum::PENDING,
             ]);
-            
+
             $inProgressTicket = Ticket::factory()->create([
                 'status' => TicketStatusEnum::IN_PROGRESS,
             ]);
@@ -238,7 +237,7 @@ describe('TicketService', function () {
             $highPriorityTicket = Ticket::factory()->create([
                 'priority' => TicketPriorityEnum::HIGH,
             ]);
-            
+
             $lowPriorityTicket = Ticket::factory()->create([
                 'priority' => TicketPriorityEnum::LOW,
             ]);
@@ -255,7 +254,7 @@ describe('TicketService', function () {
             $roadTicket = Ticket::factory()->create([
                 'type' => TicketTypeEnum::ROAD_MAINTENANCE,
             ]);
-            
+
             $lightingTicket = Ticket::factory()->create([
                 'type' => TicketTypeEnum::PUBLIC_LIGHTING,
             ]);
@@ -271,11 +270,11 @@ describe('TicketService', function () {
         it('returns tickets owned by specific user', function () {
             $user1 = User::factory()->create();
             $user2 = User::factory()->create();
-            
+
             $ticket1 = Ticket::factory()->create([
                 'owner_id' => $user1->id,
             ]);
-            
+
             $ticket2 = Ticket::factory()->create([
                 'owner_id' => $user2->id,
             ]);
@@ -291,11 +290,11 @@ describe('TicketService', function () {
         it('returns tickets assigned to specific user', function () {
             $assignee1 = User::factory()->create();
             $assignee2 = User::factory()->create();
-            
+
             $ticket1 = Ticket::factory()->create([
                 'responsible_id' => $assignee1->id,
             ]);
-            
+
             $ticket2 = Ticket::factory()->create([
                 'responsible_id' => $assignee2->id,
             ]);

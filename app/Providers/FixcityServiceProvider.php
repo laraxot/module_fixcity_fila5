@@ -8,8 +8,8 @@ use Modules\Xot\Providers\XotBaseServiceProvider;
 
 class FixcityServiceProvider extends XotBaseServiceProvider
 {
-
     public string $name = 'Fixcity';
+
     protected string $module_dir = __DIR__;
 
     protected string $module_ns = __NAMESPACE__;

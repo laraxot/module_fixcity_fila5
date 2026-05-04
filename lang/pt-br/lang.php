@@ -1340,7 +1340,7 @@ return [
     'use_subject' => 'Use Assunto',
     'reopen' => 'Reabrir',
 
-    /*New updated */
+    /* New updated */
     /*                       Translation Required */
 
     'invalid_attempt' => 'Tentativa inválida',
@@ -1473,7 +1473,7 @@ return [
     'restore' => 'Restaurar',
     'user_restore_successfully' => 'Usuário restaurado com sucesso',
 
-    /* updates 28-11-2016*/
+    /* updates 28-11-2016 */
     'apply' => 'Aplicar',
 
     /* updates 2-12-2016 * */

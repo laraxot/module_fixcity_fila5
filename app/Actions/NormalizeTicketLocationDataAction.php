@@ -8,7 +8,6 @@ final class NormalizeTicketLocationDataAction
 {
     /**
      * @param  array<string, mixed>  $state
-     *
      * @return array<string, mixed>
      */
     public function execute(array $state): array

@@ -16,10 +16,10 @@ return [
             'helper_text' => 'Devi accettare la privacy policy per procedere',
         ],
         'privacyAccepted' => [
-            'label' => 'Accetto la privacy',
-            'placeholder' => 'Accetto la privacy policy',
-            'helper_text' => 'Devi accettare per procedere con la segnalazione',
-            'description' => 'Accettazione dell\'informativa sulla privacy',
+            'label' => 'Ho letto e compreso l\'informativa sulla privacy',
+            'placeholder' => '',
+            'helper_text' => 'Obbligatorio per inviare la segnalazione',
+            'description' => 'Allineato a Design Comuni segnalazione-01-privacy',
         ],
         'email' => [
             'label' => 'Email',

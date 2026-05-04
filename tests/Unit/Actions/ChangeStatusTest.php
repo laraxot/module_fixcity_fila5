@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace Modules\Fixcity\Tests\Unit\Actions;
 
-use ValueError;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use Modules\Fixcity\Actions\ChangeStatus;
 use Modules\Fixcity\Enums\TicketStatusEnum;
 use Modules\Fixcity\Models\Ticket;
 use Tests\TestCase;
-use Illuminate\Foundation\Testing\RefreshDatabase;
+use ValueError;
 
 class ChangeStatusTest extends TestCase
 {
@@ -20,7 +20,7 @@ class ChangeStatusTest extends TestCase
     protected function setUp(): void
     {
         parent::setUp();
-        $this->action = new ChangeStatus();
+        $this->action = new ChangeStatus;
     }
 
     /** @test */
@@ -82,9 +82,9 @@ class ChangeStatusTest extends TestCase
             'title' => 'Original Title',
             'description' => 'Original Description',
             'priority' => 'high',
-            'assigned_to' => 'user123'
+            'assigned_to' => 'user123',
         ];
-        
+
         $ticket = Ticket::factory()->create($originalData);
         $newStatus = 'in_progress';
         $reason = 'Work started on this ticket';
@@ -111,7 +111,7 @@ class ChangeStatusTest extends TestCase
         $reason = 'Testing invalid status handling';
 
         // Act & Assert
-        expect(fn() => $this->action->execute($ticket, $invalidStatus, $reason))
+        expect(fn () => $this->action->execute($ticket, $invalidStatus, $reason))
             ->toThrow(ValueError::class);
     }
 
@@ -121,10 +121,10 @@ class ChangeStatusTest extends TestCase
         // Arrange
         $ticket = Ticket::factory()->create(['status' => TicketStatusEnum::OPEN]);
         $originalUpdatedAt = $ticket->updated_at;
-        
+
         // Wait a moment to ensure timestamp difference
         sleep(1);
-        
+
         $newStatus = 'resolved';
         $reason = 'Status change test';
 

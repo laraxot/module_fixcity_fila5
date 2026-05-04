@@ -45,6 +45,11 @@ return [
             'placeholder' => '',
             'help' => 'Skip navigation and go directly to the report form.',
         ],
+        'main_region' => [
+            'label' => 'Report form',
+            'placeholder' => '',
+            'help' => 'Wizard steps and submission form.',
+        ],
     ],
 
     /*

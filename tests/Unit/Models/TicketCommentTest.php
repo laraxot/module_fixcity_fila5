@@ -9,13 +9,12 @@ use Illuminate\Support\Collection;
 use Modules\Fixcity\Models\Ticket;
 use Modules\Fixcity\Models\TicketComment;
 use Modules\User\Models\User;
-use Tests\TestCase;
 
 describe('TicketComment Model', function () {
     it('can be created with valid data', function () {
         $user = User::factory()->create();
         $ticket = Ticket::factory()->create();
-        
+
         $comment = TicketComment::create([
             'ticket_id' => $ticket->id,
             'user_id' => $user->id,
@@ -80,13 +79,13 @@ describe('TicketComment Model', function () {
 
     it('tracks creation and update times', function () {
         $comment = TicketComment::factory()->create();
-        
+
         expect($comment->created_at)->not->toBeNull();
         expect($comment->updated_at)->not->toBeNull();
-        
+
         // Update the comment
         $comment->update(['content' => 'Updated content']);
-        
+
         expect($comment->updated_at)->toBeGreaterThan($comment->created_at);
     });
 
@@ -97,7 +96,7 @@ describe('TicketComment Model', function () {
         ]);
 
         $ticketComments = TicketComment::where('ticket_id', $ticket->id)->get();
-        
+
         expect($ticketComments)->toHaveCount(3);
         foreach ($ticketComments as $comment) {
             expect($comment->ticket_id)->toBe($ticket->id);
@@ -111,7 +110,7 @@ describe('TicketComment Model', function () {
         ]);
 
         $userComments = TicketComment::factory()->where('user_id', $user->id)->get();
-        
+
         expect($userComments)->toHaveCount(3);
         foreach ($userComments as $comment) {
             expect($comment->user_id)->toBe($user->id);
@@ -123,12 +122,12 @@ describe('TicketComment Model', function () {
             'is_internal' => false,
             'is_private' => false,
         ]);
-        
+
         $internalComment = TicketComment::factory()->create([
             'is_internal' => true,
             'is_private' => false,
         ]);
-        
+
         $privateComment = TicketComment::factory()->create([
             'is_internal' => false,
             'is_private' => true,
@@ -153,13 +152,13 @@ describe('TicketComment Model', function () {
         $oldComment = TicketComment::factory()->create([
             'created_at' => now()->subDays(2),
         ]);
-        
+
         $newComment = TicketComment::factory()->create([
             'created_at' => now(),
         ]);
 
         $orderedComments = TicketComment::orderBy('created_at', 'desc')->get();
-        
+
         expect($orderedComments->first()->id)->toBe($newComment->id);
         expect($orderedComments->last()->id)->toBe($oldComment->id);
     });
@@ -170,7 +169,7 @@ describe('TicketComment Model', function () {
         ]);
 
         $searchResults = TicketComment::where('content', 'like', '%search term%')->get();
-        
+
         expect($searchResults)->toContain($comment);
     });
 
@@ -183,26 +182,26 @@ describe('TicketComment Model', function () {
 
     it('can be soft deleted if implemented', function () {
         $comment = TicketComment::factory()->create();
-        
+
         // Check if soft deletes are implemented
         if (method_exists($comment, 'trashed')) {
             $comment->delete();
             expect($comment->trashed())->toBeTrue();
-            
+
             $trashedComment = TicketComment::withTrashed()->find($comment->id);
             expect($trashedComment)->not->toBeNull();
         } else {
             // If no soft deletes, test regular deletion
             $commentId = $comment->id;
             $comment->delete();
-            
+
             expect(TicketComment::find($commentId))->toBeNull();
         }
     });
 
     it('can be associated with attachments if implemented', function () {
         $comment = TicketComment::factory()->create();
-        
+
         // Test if media library is implemented
         if (method_exists($comment, 'getMedia')) {
             expect($comment->getMedia())->toBeInstanceOf(Collection::class);

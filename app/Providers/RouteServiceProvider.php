@@ -8,8 +8,8 @@ use Modules\Xot\Providers\XotBaseRouteServiceProvider;
 
 class RouteServiceProvider extends XotBaseRouteServiceProvider
 {
-
     public string $name = 'Fixcity';
+
     /**
      * The module namespace to assume when generating URLs to actions.
      */

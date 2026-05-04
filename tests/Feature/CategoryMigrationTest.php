@@ -11,7 +11,7 @@ use Tests\TestCase;
 
 /**
  * Class CategoryMigrationTest.
- * 
+ *
  * Test per verificare la corretta struttura della tabella categories
  * e il funzionamento del modello Category.
  */
@@ -59,7 +59,7 @@ class CategoryMigrationTest extends TestCase
     public function test_categories_table_has_required_indexes(): void
     {
         $indexes = Schema::getIndexes('categories');
-        
+
         $requiredIndexes = [
             'categories_name_idx',
             'categories_parent_id_idx',

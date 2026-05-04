@@ -4,10 +4,12 @@ declare(strict_types=1);
 
 namespace Modules\Fixcity\Filament\Widgets;
 
-use Illuminate\Contracts\View\View;
+use Filament\Schemas\Components\Wizard;
+use Filament\Schemas\Components\Wizard\Step;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 use Modules\Fixcity\Actions\CreateTicketAction;
 use Modules\Fixcity\Filament\Resources\TicketResource\Schemas\TicketForm;
+use Modules\Fixcity\Filament\Schemas\Components\PubThemeWizard;
 use Modules\Xot\Actions\Cast\SafeStringCastAction;
 use Modules\Xot\Filament\Widgets\XotBaseWizardWidget;
 
@@ -29,6 +31,8 @@ use Modules\Xot\Filament\Widgets\XotBaseWizardWidget;
  */
 class CreateTicketWizardWidget extends XotBaseWizardWidget
 {
+    protected string $view = 'fixcity::filament.widgets.ticket-create-wizard';
+
     /** @var array<string, mixed> */
     public array $blockData = [];
 
@@ -40,7 +44,7 @@ class CreateTicketWizardWidget extends XotBaseWizardWidget
     }
 
     /**
-     * @return array<int, \Filament\Schemas\Components\Wizard\Step>
+     * @return array<int, Step>
      */
     public function getWizardSteps(): array
     {
@@ -71,12 +75,50 @@ class CreateTicketWizardWidget extends XotBaseWizardWidget
         $this->redirect($localizedUrl !== false ? $localizedUrl : $url);
     }
 
-    public function render(): View
+    /**
+     * @return array<string, mixed>
+     */
+    protected function getViewData(): array
     {
-        return view($this->view, [
+        return [
             'blockData' => $this->blockData,
             'pageTitle' => SafeStringCastAction::cast($this->blockData['title'] ?? __('fixcity::segnalazione.page.title.label')),
             'pageDescription' => SafeStringCastAction::cast($this->blockData['description'] ?? ''),
-        ]);
+        ];
+    }
+
+    /**
+     * @param  array<int, Step>  $steps
+     */
+    protected function makeWizard(array $steps): Wizard
+    {
+        $wizard = PubThemeWizard::make($steps)
+            ->startOnStep(fn (): int => $this->wizardStartStep)
+            ->columnSpanFull()
+            ->skippable($this->hasSkippableWizardSteps());
+
+        if ($this->queryStepOverrideAllowed()) {
+            $wizard->persistStepInQueryString('step');
+        }
+
+        return $wizard;
+    }
+
+    /**
+     * Step 1-based per layout pagina (sidebar Design Comuni, griglia): allineato allo stato del Wizard Filament.
+     */
+    public function getWizardDisplayStep(): int
+    {
+        try {
+            $key = $this->getWizardComponentKey();
+            $wizard = $this->getSchemaComponent($key);
+            if ($wizard instanceof Wizard) {
+                return min($this->wizardMaxStep(), max(1, $wizard->getCurrentStepIndex() + 1));
+            }
+        } catch (\Throwable) {
+            // Schema non ancora risolto (primo paint): fallback allo step iniziale.
+        }
+
+        return $this->wizardStartStep;
     }
 }

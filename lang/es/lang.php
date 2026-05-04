@@ -1527,7 +1527,7 @@ Puede ingresar el número de días de registros de base de datos que se eliminar
     'restore' => 'Restaurar',
     'user_restore_successfully' => 'Usuario restaurado con éxito',
 
-    /* updates 28-11-2016*/
+    /* updates 28-11-2016 */
     'apply' => 'Apply',
 
     /* updates 2-12-2016 * */

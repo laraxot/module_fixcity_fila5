@@ -18,7 +18,7 @@ use Modules\Fixcity\Database\Factories\ActivityFactory;
  *
  * @property-read Profile|null $creator
  * @property-read Profile|null $updater
- * @property-read \Modules\Fixcity\Models\Profile|null $deleter
+ * @property-read Profile|null $deleter
  *
  * @mixin \Eloquent
  */

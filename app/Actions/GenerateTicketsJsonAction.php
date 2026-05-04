@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Modules\Fixcity\Actions;
 
 use Illuminate\Support\Facades\File;
+use Modules\Fixcity\Enums\TicketTypeEnum;
 use Modules\Fixcity\Models\Ticket;
 use Spatie\QueueableAction\QueueableAction;
 
@@ -48,7 +49,7 @@ class GenerateTicketsJsonAction
             $typeEnum = null;
 
             try {
-                $typeEnum = \Modules\Fixcity\Enums\TicketTypeEnum::from($typeValue);
+                $typeEnum = TicketTypeEnum::from($typeValue);
             } catch (\ValueError) {
                 // unknown type, leave null
             }
@@ -68,7 +69,7 @@ class GenerateTicketsJsonAction
                     'address' => $location['address'] ?? $location['display_name'] ?? '',
                     'city' => $location['city'] ?? '',
                     'status' => $ticket->status?->value ?? $ticket->status ?? 'pending',
-                    'url' => '/it/tests/segnalazione-dettaglio/' . $ticket->id,
+                    'url' => '/it/tests/segnalazione-dettaglio/'.$ticket->id,
                 ],
             ];
         })->filter()->values()->all();

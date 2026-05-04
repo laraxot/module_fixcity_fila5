@@ -8,6 +8,9 @@ use Filament\Forms\Components\Checkbox;
 use Filament\Forms\Components\TextInput;
 use Filament\Notifications\Notification;
 use Filament\Schemas\Schema;
+use Illuminate\Contracts\View\View;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 
@@ -38,7 +41,7 @@ class Login extends Component
             ->statePath('data');
     }
 
-    public function authenticate(): \Illuminate\Http\RedirectResponse|\Illuminate\Http\Response
+    public function authenticate(): RedirectResponse|Response
     {
         $validated = $this->data;
 
@@ -63,7 +66,7 @@ class Login extends Component
         return back();
     }
 
-    public function render(): \Illuminate\Contracts\View\View
+    public function render(): View
     {
         return view('pub_theme::livewire.auth.login');
     }

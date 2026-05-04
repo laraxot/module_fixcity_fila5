@@ -7,12 +7,11 @@ namespace Modules\Fixcity\Tests\Unit\Models;
 use Illuminate\Database\QueryException;
 use Modules\Fixcity\Models\Profile;
 use Modules\User\Models\User;
-use Tests\TestCase;
 
 describe('Profile Model', function () {
     it('can be created with valid data', function () {
         $user = User::factory()->create();
-        
+
         $profile = Profile::create([
             'user_id' => $user->id,
             'first_name' => 'Mario',
@@ -61,7 +60,7 @@ describe('Profile Model', function () {
             'last_name' => 'Verdi',
         ]);
 
-        $fullName = $profile->first_name . ' ' . $profile->last_name;
+        $fullName = $profile->first_name.' '.$profile->last_name;
         expect($fullName)->toBe('Antonio Verdi');
     });
 
@@ -84,7 +83,7 @@ describe('Profile Model', function () {
         ]);
 
         $userProfile = Profile::where('user_id', $user->id)->first();
-        
+
         expect($userProfile)
             ->toBeInstanceOf(Profile::class)
             ->id->toBe($profile->id);
@@ -99,7 +98,7 @@ describe('Profile Model', function () {
         $searchResults = Profile::where('first_name', 'like', '%Roberto%')
             ->orWhere('last_name', 'like', '%Gialli%')
             ->get();
-        
+
         expect($searchResults)->toContain($profile);
     });
 
@@ -109,7 +108,7 @@ describe('Profile Model', function () {
         ]);
 
         $phoneResults = Profile::where('phone', 'like', '%555%')->get();
-        
+
         expect($phoneResults)->toContain($profile);
     });
 
@@ -119,7 +118,7 @@ describe('Profile Model', function () {
         ]);
 
         $addressResults = Profile::where('address', 'like', '%Torino%')->get();
-        
+
         expect($addressResults)->toContain($profile);
     });
 
@@ -132,19 +131,19 @@ describe('Profile Model', function () {
 
     it('can be soft deleted if implemented', function () {
         $profile = Profile::factory()->create();
-        
+
         // Check if soft deletes are implemented
         if (method_exists($profile, 'trashed')) {
             $profile->delete();
             expect($profile->trashed())->toBeTrue();
-            
+
             $trashedProfile = Profile::withTrashed()->find($profile->id);
             expect($trashedProfile)->not->toBeNull();
         } else {
             // If no soft deletes, test regular deletion
             $profileId = $profile->id;
             $profile->delete();
-            
+
             expect(Profile::find($profileId))->toBeNull();
         }
     });
@@ -166,13 +165,13 @@ describe('Profile Model', function () {
 
     it('tracks creation and update times', function () {
         $profile = Profile::factory()->create();
-        
+
         expect($profile->created_at)->not->toBeNull();
         expect($profile->updated_at)->not->toBeNull();
-        
+
         // Update the profile
         $profile->update(['first_name' => 'Updated']);
-        
+
         expect($profile->updated_at)->toBeGreaterThan($profile->created_at);
     });
 

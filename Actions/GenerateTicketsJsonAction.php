@@ -2,6 +2,7 @@
 
 namespace Modules\Fixcity\Actions;
 
+use Modules\Fixcity\Enums\TicketTypeEnum;
 use Modules\Fixcity\Models\Ticket;
 
 class GenerateTicketsJsonAction
@@ -30,7 +31,7 @@ class GenerateTicketsJsonAction
                 $typeColor = '#e63946';
 
                 try {
-                    $typeEnum = \Modules\Fixcity\Enums\TicketTypeEnum::from($typeValue);
+                    $typeEnum = TicketTypeEnum::from($typeValue);
                     $typeLabel = $typeEnum->getLabel();
                     $typeColor = is_string($typeEnum->getColor()) ? $typeEnum->getColor() : '#e63946';
                 } catch (\ValueError) {
@@ -74,7 +75,7 @@ class GenerateTicketsJsonAction
         if (! is_dir($jsDir)) {
             mkdir(directory: $jsDir, permissions: 0755, recursive: true);
         }
-        $jsContent = "window.geoMapDatasets = window.geoMapDatasets || {}; window.geoMapDatasets.tickets = " . $encoded . ";";
+        $jsContent = 'window.geoMapDatasets = window.geoMapDatasets || {}; window.geoMapDatasets.tickets = '.$encoded.';';
         file_put_contents($jsPath, $jsContent);
 
         // Pure JSON — fetched directly by geo-map-lit via data-url="/data/tickets.json"

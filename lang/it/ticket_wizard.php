@@ -5,25 +5,16 @@ declare(strict_types=1);
 return [
     'steps' => [
         'privacy' => [
-            'label' => 'Privacy e condizioni',
+            'label' => 'Autorizzazioni e condizioni',
             'description' => 'Leggi l\'informativa e conferma il consenso prima di proseguire.',
         ],
         'data' => [
-            'label' => 'Dati della segnalazione',
+            'label' => 'Dati di segnalazione',
             'description' => 'Indica luogo, tipologia di disservizio e dettagli.',
         ],
         'summary' => [
             'label' => 'Riepilogo',
             'description' => 'Controlla i dati inseriti prima di inviare la segnalazione.',
-        ],
-        1 => [
-            'label' => 'Autorizzazioni e condizioni',
-        ],
-        [
-            'label' => 'Dati di segnalazione',
-        ],
-        [
-            'label' => 'Riepilogo',
         ],
     ],
     'actions' => [
@@ -108,6 +99,11 @@ return [
             'placeholder' => '',
             'helper_text' => 'Leggi la privacy policy',
             'description' => 'Accettazione obbligatoria per procedere',
+        ],
+        'privacy_notice' => [
+            'intro' => 'Il Comune di Firenze gestisce i dati personali forniti e liberamente comunicati sulla base dell\'articolo 13 del Regolamento (UE) 2016/679 General Data Protection Regulation (GDPR) e degli articoli 13 e successive modifiche e integrazione del decreto legislativo (di seguito d.lgs) 267/2000 (Testo unico enti locali).',
+            'detail_prefix' => 'Per i dettagli sul trattamento dei dati personali consulta l\'',
+            'link_label' => 'informativa sulla privacy.',
         ],
         'summary_notice' => [
             'label' => '',

@@ -7,11 +7,10 @@ namespace Modules\Fixcity\Tests\Unit\Services;
 use Modules\Fixcity\Models\Ticket;
 use Modules\Fixcity\Services\WorkflowService;
 use Modules\User\Models\User;
-use Tests\TestCase;
 
 describe('WorkflowService', function () {
     beforeEach(function () {
-        $this->service = new WorkflowService();
+        $this->service = new WorkflowService;
         $this->user = User::factory()->create();
         $this->ticket = Ticket::factory()->create([
             'owner_id' => $this->user->id,

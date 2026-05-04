@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Modules\Fixcity\Enums\TicketStatusEnum;
 use Modules\Fixcity\Enums\TicketTypeEnum;
-use Illuminate\Database\Eloquent\Relations\HasMany;
 use Modules\Fixcity\Models\Ticket;
 use Modules\Fixcity\Models\TicketHour;
 use Modules\User\Models\User;
