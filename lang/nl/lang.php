@@ -1523,7 +1523,7 @@ return [
     'select_another_user' => 'Selecteer een andere gebruiker',
     'agent_delete_successfully_and_ticket_assign_to_another_user' => 'Medewerker succesvol verwijderd, het ticket is aan een andere gebruiker toegewezen',
 
-    /*New updates*/
+    /* New updates */
     /*                             Translation Required */
 
     'deleted_user' => 'Deleted User',
@@ -1531,7 +1531,7 @@ return [
     'restore' => 'Restore',
     'user_restore_successfully' => 'User restore successfully',
 
-    /* updates 28-11-2016*/
+    /* updates 28-11-2016 */
     'apply' => 'Apply',
 
     /* updates 2-12-2016 * */

@@ -135,7 +135,7 @@ describe('CreateTicketWidget User Association', function () {
             ->call('submit');
 
         $ticket = Ticket::latest()->first();
-        
+
         if ($ticket) {
             expect($ticket->owner_id)->toBe($this->user->id);
         }

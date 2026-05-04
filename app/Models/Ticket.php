@@ -39,58 +39,58 @@ use Webmozart\Assert\Assert;
 /**
  * Modules\Fixcity\Models\Ticket.
  *
- * @property string                          $name
- * @property string                          $slug
- * @property int                             $id
- * @property string                          $content
- * @property int                             $owner_id
- * @property int|null                        $responsible_id
- * @property int                             $status_id
- * @property string|null                     $code
- * @property string|null                     $ticket_prefix
- * @property int                             $order
- * @property int                             $priority_id
- * @property int|null                        $project_id
- * @property float|null                      $estimation
- * @property int|null                        $epic_id
- * @property int|null                        $sprint_id
- * @property Carbon|null                     $deleted_at
- * @property Carbon|null                     $created_at
- * @property Carbon|null                     $updated_at
- * @property int|null                        $type_id
- * @property string|null                     $latitude
- * @property string|null                     $longitude
- * @property array<string, mixed>|null       $location
- * @property string|null                     $updated_by
- * @property string|null                     $created_by
- * @property string|null                     $deleted_by
+ * @property string $name
+ * @property string $slug
+ * @property int $id
+ * @property string $content
+ * @property int $owner_id
+ * @property int|null $responsible_id
+ * @property int $status_id
+ * @property string|null $code
+ * @property string|null $ticket_prefix
+ * @property int $order
+ * @property int $priority_id
+ * @property int|null $project_id
+ * @property float|null $estimation
+ * @property int|null $epic_id
+ * @property int|null $sprint_id
+ * @property Carbon|null $deleted_at
+ * @property Carbon|null $created_at
+ * @property Carbon|null $updated_at
+ * @property int|null $type_id
+ * @property string|null $latitude
+ * @property string|null $longitude
+ * @property array<string, mixed>|null $location
+ * @property string|null $updated_by
+ * @property string|null $created_by
+ * @property string|null $deleted_by
  * @property Collection<int, TicketActivity> $activities
- * @property int|null                        $activities_count
- * @property Collection<int, TicketComment>  $comments
- * @property int|null                        $comments_count
- * @property mixed                           $completude_percentage
- * @property mixed                           $estimation_for_humans
- * @property mixed                           $estimation_in_seconds
- * @property mixed                           $estimation_progress
- * @property Collection<int, TicketHour>     $hours
- * @property int|null                        $hours_count
- * @property MediaCollection<int, Media>     $media
- * @property int|null                        $media_count
- * @property User|null                       $owner
- * @property User|null                       $assignee
- * @property TicketPriorityEnum|null         $priority
+ * @property int|null $activities_count
+ * @property Collection<int, TicketComment> $comments
+ * @property int|null $comments_count
+ * @property mixed $completude_percentage
+ * @property mixed $estimation_for_humans
+ * @property mixed $estimation_in_seconds
+ * @property mixed $estimation_progress
+ * @property Collection<int, TicketHour> $hours
+ * @property int|null $hours_count
+ * @property MediaCollection<int, Media> $media
+ * @property int|null $media_count
+ * @property User|null $owner
+ * @property User|null $assignee
+ * @property TicketPriorityEnum|null $priority
  * @property Collection<int, TicketRelation> $relations
- * @property int|null                        $relations_count
- * @property User|null                       $responsible
- * @property TicketStatusEnum|null           $status
- * @property Collection<int, User>           $subscribers
- * @property int|null                        $subscribers_count
- * @property mixed                           $total_logged_hours
- * @property mixed                           $total_logged_in_hours
- * @property mixed                           $total_logged_seconds
- * @property TicketTypeEnum|null             $type
+ * @property int|null $relations_count
+ * @property User|null $responsible
+ * @property TicketStatusEnum|null $status
+ * @property Collection<int, User> $subscribers
+ * @property int|null $subscribers_count
+ * @property mixed $total_logged_hours
+ * @property mixed $total_logged_in_hours
+ * @property mixed $total_logged_seconds
+ * @property TicketTypeEnum|null $type
  *
- * @method static TicketFactory                                        factory($count = null, $state = [])
+ * @method static TicketFactory factory($count = null, $state = [])
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Ticket newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Ticket newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Ticket onlyTrashed()
@@ -122,7 +122,7 @@ use Webmozart\Assert\Assert;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Ticket withoutTrashed()
  *
  * @property Collection<int, Status> $statuses
- * @property int|null                $statuses_count
+ * @property int|null $statuses_count
  *
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Ticket currentStatus(...$names)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Ticket otherCurrentStatus(...$names)
@@ -136,8 +136,8 @@ use Webmozart\Assert\Assert;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Ticket whereType($value)
  *
  * @property Collection<int, CommentNotificationSubscription> $notificationSubscriptions
- * @property int|null                                         $notification_subscriptions_count
- * @property Profile|null                                     $deleter
+ * @property int|null $notification_subscriptions_count
+ * @property Profile|null $deleter
  *
  * @mixin \Eloquent
  */
@@ -194,7 +194,7 @@ class Ticket extends XotBaseModel implements HasMedia
      * Legacy `latitude` / `longitude` columns are mirrored for backward compatibility.
      *
      * @return Attribute<array<string, mixed>, array<string, mixed>>
-     
+
     protected function location(): Attribute
     {
         return Attribute::make(
@@ -261,14 +261,13 @@ class Ticket extends XotBaseModel implements HasMedia
         */
 
     /**
-     * @param array<string, mixed> $value
-     *
+     * @param  array<string, mixed>  $value
      * @return array<string, string|array<string, mixed>|null>
      */
     private static function extractAddressComponents(array $value): array
     {
         $details = $value['address_components'] ?? $value['addressdetails'] ?? $value['address_details'] ?? null;
-        if (! \is_array($details) || [] === $details) {
+        if (! \is_array($details) || $details === []) {
             return [];
         }
 
@@ -284,12 +283,12 @@ class Ticket extends XotBaseModel implements HasMedia
             'country_code' => self::normalizeNullableText($value['country_code'] ?? $details['country_code'] ?? null),
             'suburb' => self::normalizeNullableText($value['suburb'] ?? $details['suburb'] ?? $details['neighbourhood'] ?? null),
             'address_details' => $details,
-        ], static fn (mixed $item): bool => null !== $item && '' !== $item && [] !== $item);
+        ], static fn (mixed $item): bool => $item !== null && $item !== '' && $item !== []);
     }
 
     private static function normalizeCoordinateString(mixed $value): ?string
     {
-        if (null === $value || '' === $value) {
+        if ($value === null || $value === '') {
             return null;
         }
 
@@ -309,7 +308,7 @@ class Ticket extends XotBaseModel implements HasMedia
     {
         $normalized = self::normalizeText($value);
 
-        return '' !== $normalized ? $normalized : null;
+        return $normalized !== '' ? $normalized : null;
     }
     /*
     private static function hasTableColumn(string $column): bool
@@ -351,7 +350,7 @@ class Ticket extends XotBaseModel implements HasMedia
      */
     public function getIconData(): array
     {
-        if (null === $this->type_id) {
+        if ($this->type_id === null) {
             return [];
         }
 

@@ -8,7 +8,11 @@ La pagina pubblica `tests.segnalazione-crea` è l'entrypoint unificato del fluss
 2. `segnalazione-crea` → widget wizard (questo)
 3. `contacts-card` → sezione "Contatta il comune"
 
-**Nota parity DOM**: per allineare il markup al reference Design Comuni, il tag `<body>` sulle pagine test non deve accumulare classi tipo `page-tests-{slug}`; gli stili di parity restano su wrapper/`data-tests-slug` (vedi [html-parity-body-policy.md](../../Themes/Sixteen/docs/html-parity-body-policy.md)).
+**Nota parity DOM**: per allineare il markup al reference Design Comuni, il tag `<body>` sulle pagine test non deve accumulare classi tipo `page-tests-{slug}`; gli stili di parity restano su wrapper/`data-tests-slug` (vedi [html-parity-body-policy.md](../../../Themes/Sixteen/docs/html-parity-body-policy.md)).
+
+**Id `main-container` (unicità)**: nel layout Sixteen l’`id="main-container"` è sul `<main>`. Il wrapper Blade del wizard (`Themes/Sixteen/resources/views/filament/widgets/create-ticket-wizard.blade.php`) **non** deve ripetere lo stesso id sul `div.container` (HTML invalido e selettori CSS `main #main-container` che non matchano). Usare una classe dedicata (es. `wizard-dc-heading-shell`) per lo shell interno.
+
+**Testo checkbox privacy**: la label mostrata allo step 1 è la stringa `fixcity::segnalazione.privacy.checkbox.label` (passata esplicitamente in `TicketForm::getFrontofficePrivacySchema()`). I file `create_ticket_wizard` / `ticket_form` devono restare allineati per fallback LangService.
 Le pagine statiche legacy restano disponibili per riferimento o test di parità HTML:
 - `segnalazione-01-privacy`
 - `segnalazione-02-dati`
@@ -45,6 +49,18 @@ Il widget segue i principi Laraxot ed estende `XotBaseWizardWidget`.
 - **Campo tipologia**: lo schema usa `Select::make('type_id')` allineato a `Ticket::$fillable` e al cast `type_id` → `TicketTypeEnum`. Un campo nome `type` risultava fuori dal contratto del modello e poteva fallire la validazione o il salvataggio.
 - **Validazione**: step tramite validazione nativa del wizard; submit finale con `Ticket::query()->create()` dopo `normalizeWizardFormState()` e arricchimenti (`owner_id`); upload `images` escluso dal payload create come da logica esistente.
 - **Naming**: Usa sempre `Ticket` invece di `Segnalazione` nel codice PHP.
+
+### `Wizard::make` + `inAdmin()->view()` vs `PubThemeWizard`
+
+In una story BMAD (artifact **7-112**) era descritto uno snippet con `Wizard::make(static::getWizardSteps())`, `skippable()`, `persistStepInQueryString()` e ramo `if (! inAdmin()) { $wizard = $wizard->view('pub_theme::components.wizard'); }`.
+
+**Perché non è stato applicato letteralmente in `TicketForm::getFormSchema()`**
+
+1. **SSoT / DRY**: la vista tema è fissata una sola volta in `Modules\Fixcity\Filament\Schemas\Components\PubThemeWizard` (estende `Wizard`, proprietà `$view = 'pub_theme::components.wizard'`). Evita di ripetere stringa vista e `inAdmin()` in ogni entrypoint.
+2. **Due entrypoint**: il widget frontoffice costruisce il root wizard in `CreateTicketWizardWidget::makeWizard()` con `PubThemeWizard::make($steps)` (non passa dal blocco `getFormSchema()` di `TicketForm` per l’istanza wizard sul widget, che segue `XotBaseWizardWidget`). `TicketForm::getFormSchema()` resta il blueprint riusabile dove serve lo stesso wizard (stessi step + stessa skin).
+3. **Admin CRUD**: il form risorsa Filament del ticket non riusa questo wizard multi-step; il ramo “vista default in admin” dello snippet originale non aggiunge valore sul percorso attuale.
+
+**Equivalente funzionale allo snippet**: `PubThemeWizard::make(...)` + `skippable()` + `persistStepInQueryString()` (dove consentito dalla policy query step).
 
 ### Step del Wizard (3):
 1. **Privacy** (step id `1`): privacy notice read-only + link informativa + checkbox finale (`privacyAccepted`).

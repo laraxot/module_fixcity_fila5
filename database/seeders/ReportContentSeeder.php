@@ -7,6 +7,7 @@ namespace Modules\Fixcity\Database\Seeders;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use Modules\Fixcity\Enums\ReportStatusEnum;
+
 use function Safe\json_encode;
 
 class ReportContentSeeder extends Seeder

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Modules\Fixcity\Tests\Feature\Filament;
 
+use Filament\Facades\Filament;
 use Livewire\Livewire;
 use Modules\Fixcity\Enums\TicketPriorityEnum;
 use Modules\Fixcity\Enums\TicketStatusEnum;
@@ -20,17 +21,18 @@ use Tests\TestCase;
 class TicketResourceTest extends TestCase
 {
     protected User $admin;
+
     protected User $user;
 
     protected function setUp(): void
     {
         parent::setUp();
-        
+
         $this->admin = User::factory()->create();
         $this->user = User::factory()->create();
-        
+
         // Set admin panel for testing
-        \Filament\Facades\Filament::setCurrentPanel('fixcity::admin');
+        Filament::setCurrentPanel('fixcity::admin');
         $this->actingAs($this->admin);
     }
 
@@ -251,9 +253,9 @@ class TicketResourceTest extends TestCase
         $ticket = Ticket::factory()->create();
 
         $this->get("/admin/tickets/{$ticket->id}")
-             ->assertSuccessful()
-             ->assertSee($ticket->title)
-             ->assertSee($ticket->description);
+            ->assertSuccessful()
+            ->assertSee($ticket->title)
+            ->assertSee($ticket->description);
     }
 
     /** @test */
@@ -308,7 +310,7 @@ class TicketResourceTest extends TestCase
         $ticket = Ticket::factory()->create();
 
         $this->delete("/admin/tickets/{$ticket->id}")
-             ->assertRedirect('/admin/tickets');
+            ->assertRedirect('/admin/tickets');
 
         $this->assertDatabaseMissing('tickets', [
             'id' => $ticket->id,
@@ -376,8 +378,8 @@ class TicketResourceTest extends TestCase
         Ticket::factory()->count(5)->create();
 
         $this->get('/admin/tickets/export')
-             ->assertSuccessful()
-             ->assertHeader('Content-Type', 'text/csv; charset=UTF-8');
+            ->assertSuccessful()
+            ->assertHeader('Content-Type', 'text/csv; charset=UTF-8');
     }
 
     /** @test */
@@ -399,19 +401,19 @@ class TicketResourceTest extends TestCase
     public function user_can_view_own_tickets(): void
     {
         $this->actingAs($this->user);
-        
+
         $ownTicket = Ticket::factory()->create([
             'owner_id' => $this->user->id,
         ]);
-        
+
         $otherTicket = Ticket::factory()->create([
             'owner_id' => $this->admin->id,
         ]);
 
         $this->get('/admin/tickets')
-             ->assertSuccessful()
-             ->assertSee($ownTicket->title)
-             ->assertDontSee($otherTicket->title);
+            ->assertSuccessful()
+            ->assertSee($ownTicket->title)
+            ->assertDontSee($otherTicket->title);
     }
 
     /** @test */
@@ -427,7 +429,7 @@ class TicketResourceTest extends TestCase
         ];
 
         $this->post('/admin/tickets', $ticketData)
-             ->assertRedirect('/admin/tickets');
+            ->assertRedirect('/admin/tickets');
 
         $this->assertDatabaseHas('tickets', [
             'title' => 'User Ticket',
@@ -440,20 +442,20 @@ class TicketResourceTest extends TestCase
     public function user_cannot_delete_other_tickets(): void
     {
         $this->actingAs($this->user);
-        
+
         $otherTicket = Ticket::factory()->create([
             'owner_id' => $this->admin->id,
         ]);
 
         $this->delete("/admin/tickets/{$otherTicket->id}")
-             ->assertStatus(403);
+            ->assertStatus(403);
     }
 
     /** @test */
     public function user_cannot_assign_tickets(): void
     {
         $this->actingAs($this->user);
-        
+
         $ticket = Ticket::factory()->create([
             'owner_id' => $this->user->id,
         ]);

@@ -45,6 +45,11 @@ return [
             'placeholder' => '',
             'help' => 'Salta intestazione e vai direttamente al modulo di segnalazione.',
         ],
+        'main_region' => [
+            'label' => 'Modulo segnalazione',
+            'placeholder' => '',
+            'help' => 'Area con i passi del wizard e il modulo di invio.',
+        ],
     ],
 
     /*
@@ -409,8 +414,23 @@ return [
      * Privacy keys - used by widget
      */
     'privacy' => [
+        'title' => [
+            'label' => 'Segnalazione disservizio',
+        ],
+        'description' => [
+            'text' => 'Leggi l\'informativa sulla privacy e acconsenti al trattamento dei dati personali.',
+        ],
+        'details' => [
+            'text' => 'Per i dettagli sul trattamento dei dati personali consulta l\'',
+            'link' => [
+                'label' => 'informativa sulla privacy.',
+            ],
+        ],
+        'accept' => [
+            'label' => 'Ho letto e compreso l\'informativa sulla privacy',
+        ],
         'intro' => [
-            'text' => 'Il Comune di Firenze gestisce i dati personali forniti e liberamente comunicati sulla base dell\'articolo 13 del Regolamento (UE) 2016/679 General data protection regulation (Gdpr) e degli articoli 13 e successive modifiche e integrazione del decreto legislativo (di seguito d.lgs) 267/2000 (Testo unico enti locali).',
+            'text' => 'Il Comune di Firenze gestisce i dati personali forniti e liberamente comunicati sulla base dell\'articolo 13 del Regolamento (UE) 2016/679 General Data Protection Regulation (GDPR) e degli articoli 13 e successive modifiche e integrazione del decreto legislativo (di seguito d.lgs) 267/2000 (Testo unico enti locali).',
         ],
         'detail_prefix' => [
             'text' => 'Per i dettagli sul trattamento dei dati personali consulta l\'',

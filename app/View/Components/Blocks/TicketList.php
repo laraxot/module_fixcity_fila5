@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Modules\Fixcity\View\Components\Blocks;
 
+use Illuminate\Contracts\Pagination\LengthAwarePaginator;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\View\Component;
 use Modules\Fixcity\Models\Ticket;
 
@@ -11,8 +13,8 @@ class TicketList extends Component
 {
     public array $categories;
 
-    /** @var \Illuminate\Contracts\Pagination\LengthAwarePaginator<int, Ticket> */
-    public \Illuminate\Contracts\Pagination\LengthAwarePaginator $tickets;
+    /** @var LengthAwarePaginator<int, Ticket> */
+    public LengthAwarePaginator $tickets;
 
     public function __construct()
     {
@@ -30,7 +32,7 @@ class TicketList extends Component
             'Strade, marciapiedi, segnaletica e viabilità (302)',
         ];
 
-        /** @var \Illuminate\Database\Eloquent\Builder<Ticket> $query */
+        /** @var Builder<Ticket> $query */
         $query = Ticket::query();
         $this->tickets = $query
             ->latest()

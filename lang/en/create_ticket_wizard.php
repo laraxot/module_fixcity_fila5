@@ -67,10 +67,11 @@ return [
             'label' => 'Phone',
         ],
         'privacyAccepted' => [
-            'label' => 'I have read and understood the privacy notice',
-            'validation_attribute' => 'the privacy notice',
-            'description' => 'Privacy acceptance',
-            'helper_text' => 'Read the privacy policy',
+            'label' => 'I have read and understood the privacy policy',
+            'placeholder' => '',
+            'helper_text' => 'Required to submit the report',
+            'description' => 'Aligned with Design Comuni prototype (segnalazione-01-privacy)',
+            'validation_attribute' => 'the privacy policy',
         ],
         'address' => [
             'label' => 'Location',

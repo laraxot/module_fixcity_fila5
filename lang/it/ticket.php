@@ -208,6 +208,8 @@ return [
         ],
         'applyTableColumnManager' => [
             'tooltip' => 'applyTableColumnManager',
+            'icon' => 'applyTableColumnManager',
+            'label' => 'applyTableColumnManager',
         ],
     ],
     'messages' => [

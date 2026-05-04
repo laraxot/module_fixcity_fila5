@@ -2,8 +2,6 @@
 
 namespace Modules\Fixcity\Actions;
 
-use Illuminate\Support\Facades\Storage;
-
 /**
  * Generate a GeoJSON with MANY points in the SAME area (Rome center)
  * to properly test marker clustering.

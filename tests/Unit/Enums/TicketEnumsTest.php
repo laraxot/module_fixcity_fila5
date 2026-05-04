@@ -10,13 +10,13 @@ describe('TicketStatusEnum', function () {
     it('has all required status values', function () {
         $expectedStatuses = [
             'pending',
-            'in_progress', 
+            'in_progress',
             'resolved',
             'closed',
             'cancelled',
         ];
 
-        $actualStatuses = array_map(fn($case) => $case->value, TicketStatusEnum::cases());
+        $actualStatuses = array_map(fn ($case) => $case->value, TicketStatusEnum::cases());
 
         foreach ($expectedStatuses as $status) {
             expect($actualStatuses)->toContain($status);
@@ -44,10 +44,10 @@ describe('TicketStatusEnum', function () {
 
     it('can get all cases', function () {
         $cases = TicketStatusEnum::cases();
-        
+
         expect($cases)->toBeArray();
         expect(count($cases))->toBeGreaterThan(0);
-        
+
         foreach ($cases as $case) {
             expect($case)->toBeInstanceOf(TicketStatusEnum::class);
         }
@@ -71,7 +71,7 @@ describe('TicketPriorityEnum', function () {
             'urgent',
         ];
 
-        $actualPriorities = array_map(fn($case) => $case->value, TicketPriorityEnum::cases());
+        $actualPriorities = array_map(fn ($case) => $case->value, TicketPriorityEnum::cases());
 
         foreach ($expectedPriorities as $priority) {
             expect($actualPriorities)->toContain($priority);
@@ -112,7 +112,7 @@ describe('TicketPriorityEnum', function () {
     it('can get priority level for sorting', function () {
         // Assuming priorities have numeric values for sorting
         $priorities = TicketPriorityEnum::cases();
-        
+
         expect($priorities)->toBeArray();
         expect(count($priorities))->toBe(4);
     });
@@ -128,7 +128,7 @@ describe('TicketTypeEnum', function () {
             'question',
         ];
 
-        $actualTypes = array_map(fn($case) => $case->value, TicketTypeEnum::cases());
+        $actualTypes = array_map(fn ($case) => $case->value, TicketTypeEnum::cases());
 
         foreach ($expectedTypes as $type) {
             expect($actualTypes)->toContain($type);
@@ -157,7 +157,7 @@ describe('TicketTypeEnum', function () {
     it('can get icon for each type', function () {
         // Test that each type can provide an icon (if implemented)
         $types = TicketTypeEnum::cases();
-        
+
         foreach ($types as $type) {
             expect($type)->toBeInstanceOf(TicketTypeEnum::class);
             // If getIcon method exists: expect($type->getIcon())->toBeString();
@@ -165,9 +165,9 @@ describe('TicketTypeEnum', function () {
     });
 
     it('can get color for each type', function () {
-        // Test that each type can provide a color (if implemented)  
+        // Test that each type can provide a color (if implemented)
         $types = TicketTypeEnum::cases();
-        
+
         foreach ($types as $type) {
             expect($type)->toBeInstanceOf(TicketTypeEnum::class);
             // If getColor method exists: expect($type->getColor())->toBeString();
@@ -201,7 +201,7 @@ describe('Enum Integration', function () {
             'type' => TicketTypeEnum::BUG,
         ];
 
-        $values = array_map(fn($enum) => $enum->value, $enums);
+        $values = array_map(fn ($enum) => $enum->value, $enums);
 
         expect($values)->toBe([
             'status' => 'pending',
@@ -225,9 +225,9 @@ describe('Enum Integration', function () {
 
     it('validates enum consistency', function () {
         // Test that all enum values are unique within their type
-        $statusValues = array_map(fn($case) => $case->value, TicketStatusEnum::cases());
-        $priorityValues = array_map(fn($case) => $case->value, TicketPriorityEnum::cases());
-        $typeValues = array_map(fn($case) => $case->value, TicketTypeEnum::cases());
+        $statusValues = array_map(fn ($case) => $case->value, TicketStatusEnum::cases());
+        $priorityValues = array_map(fn ($case) => $case->value, TicketPriorityEnum::cases());
+        $typeValues = array_map(fn ($case) => $case->value, TicketTypeEnum::cases());
 
         expect($statusValues)->toBe(array_unique($statusValues));
         expect($priorityValues)->toBe(array_unique($priorityValues));

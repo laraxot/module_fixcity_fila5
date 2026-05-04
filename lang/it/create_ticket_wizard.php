@@ -40,8 +40,8 @@ return [
         'privacyAccepted' => [
             'label' => 'Ho letto e compreso l\'informativa sulla privacy',
             'placeholder' => '',
-            'helper_text' => '',
-            'description' => 'Accettazione obbligatoria per procedere',
+            'helper_text' => 'Obbligatorio per inviare la segnalazione',
+            'description' => 'Allineato al prototipo Design Comuni (segnalazione-01-privacy)',
             'validation_attribute' => 'l\'informativa sulla privacy',
         ],
         'address' => [

@@ -4,9 +4,8 @@ declare(strict_types=1);
 
 namespace Modules\Fixcity\Tests\Unit\Enums;
 
-use ReflectionEnum;
 use Modules\Fixcity\Enums\TicketTypeEnum;
-use Tests\TestCase;
+use ReflectionEnum;
 
 describe('TicketTypeEnum', function () {
     it('has all required type values', function () {
@@ -29,7 +28,7 @@ describe('TicketTypeEnum', function () {
         ];
 
         $actualTypes = array_column(TicketTypeEnum::cases(), 'name');
-        
+
         expect($actualTypes)->toHaveCount(count($expectedTypes));
         foreach ($expectedTypes as $type) {
             expect($actualTypes)->toContain($type);
@@ -114,7 +113,7 @@ describe('TicketTypeEnum', function () {
     it('implements required Filament interfaces', function () {
         $reflection = new ReflectionEnum(TicketTypeEnum::class);
         $interfaces = $reflection->getInterfaceNames();
-        
+
         expect($interfaces)->toContain('Filament\Support\Contracts\HasColor');
         expect($interfaces)->toContain('Filament\Support\Contracts\HasIcon');
         expect($interfaces)->toContain('Filament\Support\Contracts\HasLabel');
@@ -123,24 +122,24 @@ describe('TicketTypeEnum', function () {
     it('can be used in string context', function () {
         $type = TicketTypeEnum::ROAD_MAINTENANCE;
         $stringValue = (string) $type;
-        
+
         expect($stringValue)->toBe('road_maintenance');
         expect($type->value)->toBe('road_maintenance');
     });
 
     it('provides consistent behavior across all methods', function () {
         $types = TicketTypeEnum::cases();
-        
+
         foreach ($types as $type) {
             // All methods should return non-empty values
             expect($type->getColor())->not->toBeEmpty();
             expect($type->getIcon())->not->toBeEmpty();
             expect($type->getLabel())->not->toBeEmpty();
-            
+
             // Colors should be valid CSS color names or Tailwind classes
             $validColors = ['red', 'green', 'blue', 'purple', 'gray', 'orange', 'yellow', 'indigo'];
             expect($validColors)->toContain($type->getColor());
-            
+
             // Icons should contain valid icon identifiers
             expect($type->getIcon())->toContain('heroicon-o-');
         }
@@ -150,11 +149,11 @@ describe('TicketTypeEnum', function () {
         // Environmental and Safety should be red/orange (urgent)
         expect(TicketTypeEnum::ENVIRONMENTAL_REPORTS->getColor())->toBe('#f44336');
         expect(TicketTypeEnum::PUBLIC_SAFETY->getColor())->toBe('#ff5722');
-        
+
         // Waste Collection and Parks should be green (positive)
         expect(TicketTypeEnum::WASTE_COLLECTION->getColor())->toBe('#4caf50');
         expect(TicketTypeEnum::PARKS_AND_GARDENS->getColor())->toBe('#8bc34a');
-        
+
         // Road Maintenance and Public Lighting should be orange/yellow (attention)
         expect(TicketTypeEnum::ROAD_MAINTENANCE->getColor())->toBe('#ff9800');
         expect(TicketTypeEnum::PUBLIC_LIGHTING->getColor())->toBe('#fbc02d');

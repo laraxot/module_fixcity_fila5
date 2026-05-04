@@ -1088,7 +1088,7 @@ return [
     'restore' => 'Wiederherstellen',
     'user_restore_successfully' => 'Benutzerwiederherstellung erfolgreich',
 
-    /* updates 28-11-2016*/
+    /* updates 28-11-2016 */
     'apply' => 'anwenden',
 
     /* updates 2-12-2016 * */

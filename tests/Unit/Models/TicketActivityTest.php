@@ -8,13 +8,12 @@ use Illuminate\Database\QueryException;
 use Modules\Fixcity\Models\Ticket;
 use Modules\Fixcity\Models\TicketActivity;
 use Modules\User\Models\User;
-use Tests\TestCase;
 
 describe('TicketActivity Model', function () {
     it('can be created with valid data', function () {
         $user = User::factory()->create();
         $ticket = Ticket::factory()->create();
-        
+
         $activity = TicketActivity::create([
             'ticket_id' => $ticket->id,
             'old_status_id' => 1,
@@ -103,7 +102,7 @@ describe('TicketActivity Model', function () {
         ]);
 
         $ticketActivities = TicketActivity::where('ticket_id', $ticket->id)->get();
-        
+
         expect($ticketActivities)->toHaveCount(3);
         foreach ($ticketActivities as $activity) {
             expect($activity->ticket_id)->toBe($ticket->id);
@@ -117,7 +116,7 @@ describe('TicketActivity Model', function () {
         ]);
 
         $userActivities = TicketActivity::where('user_id', $user->id)->get();
-        
+
         expect($userActivities)->toHaveCount(3);
         foreach ($userActivities as $activity) {
             expect($activity->user_id)->toBe($user->id);
@@ -126,9 +125,9 @@ describe('TicketActivity Model', function () {
 
     it('can be queried by date range', function () {
         $activity = TicketActivity::factory()->create();
-        
+
         $recentActivities = TicketActivity::where('created_at', '>=', now()->subDays(7))->get();
-        
+
         expect($recentActivities)->toContain($activity);
     });
 
@@ -141,19 +140,19 @@ describe('TicketActivity Model', function () {
 
     it('can be soft deleted if implemented', function () {
         $activity = TicketActivity::factory()->create();
-        
+
         // Check if soft deletes are implemented
         if (method_exists($activity, 'trashed')) {
             $activity->delete();
             expect($activity->trashed())->toBeTrue();
-            
+
             $trashedActivity = TicketActivity::withTrashed()->find($activity->id);
             expect($trashedActivity)->not->toBeNull();
         } else {
             // If no soft deletes, test regular deletion
             $activityId = $activity->id;
             $activity->delete();
-            
+
             expect(TicketActivity::find($activityId))->toBeNull();
         }
     });

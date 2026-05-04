@@ -4,14 +4,13 @@ declare(strict_types=1);
 
 namespace Modules\Fixcity\Tests\Unit\Models;
 
-use Modules\Fixcity\Models\Profile;
-use Modules\User\Models\Team;
-use Modules\User\Models\Tenant;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\QueryException;
+use Modules\Fixcity\Models\Profile;
 use Modules\Fixcity\Models\Ticket;
 use Modules\Fixcity\Models\User;
-use Tests\TestCase;
+use Modules\User\Models\Team;
+use Modules\User\Models\Tenant;
 
 describe('User Model (Fixcity)', function () {
     it('can be created with valid data', function () {
@@ -53,7 +52,7 @@ describe('User Model (Fixcity)', function () {
 
     it('can have a profile', function () {
         $user = User::factory()->create();
-        
+
         // Create profile for user
         $profile = $user->profile()->create([
             'first_name' => 'Mario',
@@ -69,7 +68,7 @@ describe('User Model (Fixcity)', function () {
     it('can subscribe to tickets', function () {
         $user = User::factory()->create();
         $ticket = Ticket::factory()->create();
-        
+
         // Subscribe user to ticket
         $user->subscribedTickets()->attach($ticket->id);
 
@@ -80,7 +79,7 @@ describe('User Model (Fixcity)', function () {
     it('can track ticket activities', function () {
         $user = User::factory()->create();
         $ticket = Ticket::factory()->create();
-        
+
         // Create activity for user
         $activity = $ticket->activities()->create([
             'user_id' => $user->id,
@@ -95,7 +94,7 @@ describe('User Model (Fixcity)', function () {
     it('can log hours on tickets', function () {
         $user = User::factory()->create();
         $ticket = Ticket::factory()->create();
-        
+
         // Log hours for user
         $hour = $ticket->hours()->create([
             'user_id' => $user->id,
@@ -111,7 +110,7 @@ describe('User Model (Fixcity)', function () {
     it('can comment on tickets', function () {
         $user = User::factory()->create();
         $ticket = Ticket::factory()->create();
-        
+
         // Create comment for user
         $comment = $ticket->comments()->create([
             'user_id' => $user->id,
@@ -124,7 +123,7 @@ describe('User Model (Fixcity)', function () {
 
     it('can have multiple roles', function () {
         $user = User::factory()->create();
-        
+
         // Assign roles to user
         $user->assignRole('citizen');
         $user->assignRole('moderator');
@@ -136,7 +135,7 @@ describe('User Model (Fixcity)', function () {
 
     it('can have permissions', function () {
         $user = User::factory()->create();
-        
+
         // Give permission to user
         $user->givePermissionTo('create_tickets');
         $user->givePermissionTo('edit_tickets');
@@ -148,13 +147,13 @@ describe('User Model (Fixcity)', function () {
 
     it('can be part of teams', function () {
         $user = User::factory()->create();
-        
+
         // Create team and add user
         $team = Team::create([
             'name' => 'Test Team',
             'personal_team' => false,
         ]);
-        
+
         $user->teams()->attach($team->id);
 
         expect($user->teams)->toHaveCount(1);
@@ -163,12 +162,12 @@ describe('User Model (Fixcity)', function () {
 
     it('can have tenants', function () {
         $user = User::factory()->create();
-        
+
         // Create tenant and add user
         $tenant = Tenant::create([
             'name' => 'Test Tenant',
         ]);
-        
+
         $user->tenants()->attach($tenant->id);
 
         expect($user->tenants)->toHaveCount(1);
@@ -177,7 +176,7 @@ describe('User Model (Fixcity)', function () {
 
     it('can track authentication logs', function () {
         $user = User::factory()->create();
-        
+
         // Check if authentication logging is implemented
         if (method_exists($user, 'authentications')) {
             expect($user->authentications)->toBeInstanceOf(HasMany::class);
@@ -190,7 +189,7 @@ describe('User Model (Fixcity)', function () {
         ]);
 
         $searchResults = User::where('name', 'like', '%Searchable%')->get();
-        
+
         expect($searchResults)->toContain($user);
     });
 
@@ -200,7 +199,7 @@ describe('User Model (Fixcity)', function () {
         ]);
 
         $searchResults = User::where('email', 'like', '%searchable%')->get();
-        
+
         expect($searchResults)->toContain($user);
     });
 
@@ -213,19 +212,19 @@ describe('User Model (Fixcity)', function () {
 
     it('can be soft deleted if implemented', function () {
         $user = User::factory()->create();
-        
+
         // Check if soft deletes are implemented
         if (method_exists($user, 'trashed')) {
             $user->delete();
             expect($user->trashed())->toBeTrue();
-            
+
             $trashedUser = User::withTrashed()->find($user->id);
             expect($trashedUser)->not->toBeNull();
         } else {
             // If no soft deletes, test regular deletion
             $userId = $user->id;
             $user->delete();
-            
+
             expect(User::find($userId))->toBeNull();
         }
     });
@@ -244,13 +243,13 @@ describe('User Model (Fixcity)', function () {
 
     it('tracks creation and update times', function () {
         $user = User::factory()->create();
-        
+
         expect($user->created_at)->not->toBeNull();
         expect($user->updated_at)->not->toBeNull();
-        
+
         // Update the user
         $user->update(['name' => 'Updated']);
-        
+
         expect($user->updated_at)->toBeGreaterThan($user->created_at);
     });
 

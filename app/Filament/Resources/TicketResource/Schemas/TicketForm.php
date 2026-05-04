@@ -15,8 +15,8 @@ use Filament\Schemas\Components\Grid;
 use Filament\Schemas\Components\Section;
 use Filament\Schemas\Components\Text;
 use Filament\Schemas\Components\Utilities\Get;
-use Filament\Schemas\Components\Wizard;
 use Filament\Schemas\Components\Wizard\Step;
+use Modules\Fixcity\Filament\Schemas\Components\PubThemeWizard;
 use Illuminate\Support\HtmlString;
 use Modules\Fixcity\Enums\TicketTypeEnum;
 use Modules\Fixcity\Filament\Concerns\HasTicketAuthorData;
@@ -34,10 +34,14 @@ class TicketForm extends XotBaseResourceForm
      */
     public static function getFormSchema(): array
     {
+        // Zen: Blueprint (Schema) definisce il vestito, non il Widget
+        // PubThemeWizard estende Wizard e setta già $view = 'pub_theme::components.wizard'
+        $wizard = PubThemeWizard::make(static::getWizardSteps())
+            ->skippable()
+            ->persistStepInQueryString();
+
         return [
-            Wizard::make(static::getWizardSteps())
-                ->skippable()
-                ->persistStepInQueryString(),
+            $wizard,
         ];
     }
 
@@ -47,12 +51,10 @@ class TicketForm extends XotBaseResourceForm
     public static function getWizardSteps(): array
     {
         return [
-            static::getStepByName('privacy')
-                ->description(SafeStringCastAction::cast(__('fixcity::ticket_wizard.steps.privacy.description'))),
-            static::getStepByName('data')
-                ->description(SafeStringCastAction::cast(__('fixcity::ticket_wizard.steps.data.description'))),
-            static::getStepByName('summary')
-                ->description(SafeStringCastAction::cast(__('fixcity::ticket_wizard.steps.summary.description'))),
+            static::getStepByName('privacy'),
+            static::getStepByName('data'),
+            static::getStepByName('summary'),
+                
         ];
     }
 
@@ -69,6 +71,8 @@ class TicketForm extends XotBaseResourceForm
      */
     public static function getFrontofficePrivacySchema(string $privacyLink): array
     {
+        // Zen: LangServiceProvider owns labels — no ->label() here
+        // The key 'fixcity::segnalazione.privacy.checkbox.label' is auto-resolved
         return [
             Text::make(static fn (): HtmlString => static::getPrivacyNoticeHtml($privacyLink))
                 ->columnSpanFull(),

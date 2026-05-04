@@ -4,13 +4,13 @@ declare(strict_types=1);
 
 namespace Modules\Fixcity\Tests\Feature\Livewire;
 
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Http\UploadedFile;
-use Modules\Tenant\Models\Tenant;
+use Livewire\Livewire;
 use Modules\Fixcity\Models\Ticket;
+use Modules\Tenant\Models\Tenant;
 use Modules\User\Models\User;
 use Tests\TestCase;
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use Livewire\Livewire;
 
 class TicketFormTest extends TestCase
 {
@@ -21,7 +21,7 @@ class TicketFormTest extends TestCase
     protected function setUp(): void
     {
         parent::setUp();
-        
+
         $this->user = User::factory()->create();
     }
 
@@ -31,12 +31,12 @@ class TicketFormTest extends TestCase
         $this->actingAs($this->user);
 
         Livewire::test('ticket-form')
-                ->assertSee('Create Ticket')
-                ->assertSee('Title')
-                ->assertSee('Description')
-                ->assertSee('Type')
-                ->assertSee('Priority')
-                ->assertSee('Location');
+            ->assertSee('Create Ticket')
+            ->assertSee('Title')
+            ->assertSee('Description')
+            ->assertSee('Type')
+            ->assertSee('Priority')
+            ->assertSee('Location');
     }
 
     /** @test */
@@ -55,16 +55,16 @@ class TicketFormTest extends TestCase
         ];
 
         Livewire::test('ticket-form')
-                ->set('title', $ticketData['title'])
-                ->set('description', $ticketData['description'])
-                ->set('type', $ticketData['type'])
-                ->set('priority', $ticketData['priority'])
-                ->set('location', $ticketData['location'])
-                ->set('latitude', $ticketData['latitude'])
-                ->set('longitude', $ticketData['longitude'])
-                ->call('save')
-                ->assertRedirect()
-                ->assertSessionHas('success');
+            ->set('title', $ticketData['title'])
+            ->set('description', $ticketData['description'])
+            ->set('type', $ticketData['type'])
+            ->set('priority', $ticketData['priority'])
+            ->set('location', $ticketData['location'])
+            ->set('latitude', $ticketData['latitude'])
+            ->set('longitude', $ticketData['longitude'])
+            ->call('save')
+            ->assertRedirect()
+            ->assertSessionHas('success');
 
         $this->assertDatabaseHas('tickets', [
             'title' => 'Test Ticket',
@@ -82,15 +82,15 @@ class TicketFormTest extends TestCase
         $this->actingAs($this->user);
 
         Livewire::test('ticket-form')
-                ->set('title', '')
-                ->set('description', '')
-                ->set('type', '')
-                ->call('save')
-                ->assertHasErrors([
-                    'title' => 'required',
-                    'description' => 'required',
-                    'type' => 'required',
-                ]);
+            ->set('title', '')
+            ->set('description', '')
+            ->set('type', '')
+            ->call('save')
+            ->assertHasErrors([
+                'title' => 'required',
+                'description' => 'required',
+                'type' => 'required',
+            ]);
     }
 
     /** @test */
@@ -99,11 +99,11 @@ class TicketFormTest extends TestCase
         $this->actingAs($this->user);
 
         Livewire::test('ticket-form')
-                ->set('title', str_repeat('a', 256))
-                ->call('save')
-                ->assertHasErrors([
-                    'title' => 'max',
-                ]);
+            ->set('title', str_repeat('a', 256))
+            ->call('save')
+            ->assertHasErrors([
+                'title' => 'max',
+            ]);
     }
 
     /** @test */
@@ -112,11 +112,11 @@ class TicketFormTest extends TestCase
         $this->actingAs($this->user);
 
         Livewire::test('ticket-form')
-                ->set('description', str_repeat('a', 1001))
-                ->call('save')
-                ->assertHasErrors([
-                    'description' => 'max',
-                ]);
+            ->set('description', str_repeat('a', 1001))
+            ->call('save')
+            ->assertHasErrors([
+                'description' => 'max',
+            ]);
     }
 
     /** @test */
@@ -125,11 +125,11 @@ class TicketFormTest extends TestCase
         $this->actingAs($this->user);
 
         Livewire::test('ticket-form')
-                ->set('type', 'invalid_type')
-                ->call('save')
-                ->assertHasErrors([
-                    'type' => 'in',
-                ]);
+            ->set('type', 'invalid_type')
+            ->call('save')
+            ->assertHasErrors([
+                'type' => 'in',
+            ]);
     }
 
     /** @test */
@@ -138,11 +138,11 @@ class TicketFormTest extends TestCase
         $this->actingAs($this->user);
 
         Livewire::test('ticket-form')
-                ->set('priority', 'invalid_priority')
-                ->call('save')
-                ->assertHasErrors([
-                    'priority' => 'in',
-                ]);
+            ->set('priority', 'invalid_priority')
+            ->call('save')
+            ->assertHasErrors([
+                'priority' => 'in',
+            ]);
     }
 
     /** @test */
@@ -151,28 +151,28 @@ class TicketFormTest extends TestCase
         $this->actingAs($this->user);
 
         Livewire::test('ticket-form')
-                ->set('latitude', 91.0)
-                ->set('longitude', 181.0)
-                ->call('save')
-                ->assertHasErrors([
-                    'latitude' => 'between',
-                    'longitude' => 'between',
-                ]);
+            ->set('latitude', 91.0)
+            ->set('longitude', 181.0)
+            ->call('save')
+            ->assertHasErrors([
+                'latitude' => 'between',
+                'longitude' => 'between',
+            ]);
     }
 
     /** @test */
     public function it_can_edit_existing_ticket()
     {
         $this->actingAs($this->user);
-        
+
         $ticket = Ticket::factory()->create(['owner_id' => $this->user->id]);
 
         Livewire::test('ticket-form', ['ticket' => $ticket])
-                ->set('title', 'Updated Title')
-                ->set('description', 'Updated Description')
-                ->call('save')
-                ->assertRedirect()
-                ->assertSessionHas('success');
+            ->set('title', 'Updated Title')
+            ->set('description', 'Updated Description')
+            ->call('save')
+            ->assertRedirect()
+            ->assertSessionHas('success');
 
         $this->assertDatabaseHas('tickets', [
             'id' => $ticket->id,
@@ -189,13 +189,13 @@ class TicketFormTest extends TestCase
         $file = UploadedFile::fake()->image('photo.jpg');
 
         Livewire::test('ticket-form')
-                ->set('title', 'Test Ticket')
-                ->set('description', 'Test Description')
-                ->set('type', 'road_maintenance')
-                ->set('attachments', [$file])
-                ->call('save')
-                ->assertRedirect()
-                ->assertSessionHas('success');
+            ->set('title', 'Test Ticket')
+            ->set('description', 'Test Description')
+            ->set('type', 'road_maintenance')
+            ->set('attachments', [$file])
+            ->call('save')
+            ->assertRedirect()
+            ->assertSessionHas('success');
 
         // Verify file was uploaded
         $this->assertDatabaseHas('media', [
@@ -211,14 +211,14 @@ class TicketFormTest extends TestCase
         $invalidFile = UploadedFile::fake()->create('document.exe', 100);
 
         Livewire::test('ticket-form')
-                ->set('title', 'Test Ticket')
-                ->set('description', 'Test Description')
-                ->set('type', 'road_maintenance')
-                ->set('attachments', [$invalidFile])
-                ->call('save')
-                ->assertHasErrors([
-                    'attachments.*' => 'mimes',
-                ]);
+            ->set('title', 'Test Ticket')
+            ->set('description', 'Test Description')
+            ->set('type', 'road_maintenance')
+            ->set('attachments', [$invalidFile])
+            ->call('save')
+            ->assertHasErrors([
+                'attachments.*' => 'mimes',
+            ]);
     }
 
     /** @test */
@@ -229,14 +229,14 @@ class TicketFormTest extends TestCase
         $largeFile = UploadedFile::fake()->create('large.jpg', 10241); // 10MB + 1KB
 
         Livewire::test('ticket-form')
-                ->set('title', 'Test Ticket')
-                ->set('description', 'Test Description')
-                ->set('type', 'road_maintenance')
-                ->set('attachments', [$largeFile])
-                ->call('save')
-                ->assertHasErrors([
-                    'attachments.*' => 'max',
-                ]);
+            ->set('title', 'Test Ticket')
+            ->set('description', 'Test Description')
+            ->set('type', 'road_maintenance')
+            ->set('attachments', [$largeFile])
+            ->call('save')
+            ->assertHasErrors([
+                'attachments.*' => 'max',
+            ]);
     }
 
     /** @test */
@@ -247,13 +247,13 @@ class TicketFormTest extends TestCase
         $dueDate = now()->addDays(7)->toDateString();
 
         Livewire::test('ticket-form')
-                ->set('title', 'Test Ticket')
-                ->set('description', 'Test Description')
-                ->set('type', 'road_maintenance')
-                ->set('due_date', $dueDate)
-                ->call('save')
-                ->assertRedirect()
-                ->assertSessionHas('success');
+            ->set('title', 'Test Ticket')
+            ->set('description', 'Test Description')
+            ->set('type', 'road_maintenance')
+            ->set('due_date', $dueDate)
+            ->call('save')
+            ->assertRedirect()
+            ->assertSessionHas('success');
 
         $this->assertDatabaseHas('tickets', [
             'title' => 'Test Ticket',
@@ -269,14 +269,14 @@ class TicketFormTest extends TestCase
         $pastDate = now()->subDays(1)->toDateString();
 
         Livewire::test('ticket-form')
-                ->set('title', 'Test Ticket')
-                ->set('description', 'Test Description')
-                ->set('type', 'road_maintenance')
-                ->set('due_date', $pastDate)
-                ->call('save')
-                ->assertHasErrors([
-                    'due_date' => 'after',
-                ]);
+            ->set('title', 'Test Ticket')
+            ->set('description', 'Test Description')
+            ->set('type', 'road_maintenance')
+            ->set('due_date', $pastDate)
+            ->call('save')
+            ->assertHasErrors([
+                'due_date' => 'after',
+            ]);
     }
 
     /** @test */
@@ -285,13 +285,13 @@ class TicketFormTest extends TestCase
         $this->actingAs($this->user);
 
         Livewire::test('ticket-form')
-                ->set('title', 'Test Ticket')
-                ->set('description', 'Test Description')
-                ->set('type', 'road_maintenance')
-                ->set('estimated_hours', 4.5)
-                ->call('save')
-                ->assertRedirect()
-                ->assertSessionHas('success');
+            ->set('title', 'Test Ticket')
+            ->set('description', 'Test Description')
+            ->set('type', 'road_maintenance')
+            ->set('estimated_hours', 4.5)
+            ->call('save')
+            ->assertRedirect()
+            ->assertSessionHas('success');
 
         $this->assertDatabaseHas('tickets', [
             'title' => 'Test Ticket',
@@ -305,14 +305,14 @@ class TicketFormTest extends TestCase
         $this->actingAs($this->user);
 
         Livewire::test('ticket-form')
-                ->set('title', 'Test Ticket')
-                ->set('description', 'Test Description')
-                ->set('type', 'road_maintenance')
-                ->set('estimated_hours', -1)
-                ->call('save')
-                ->assertHasErrors([
-                    'estimated_hours' => 'min',
-                ]);
+            ->set('title', 'Test Ticket')
+            ->set('description', 'Test Description')
+            ->set('type', 'road_maintenance')
+            ->set('estimated_hours', -1)
+            ->call('save')
+            ->assertHasErrors([
+                'estimated_hours' => 'min',
+            ]);
     }
 
     /** @test */
@@ -321,15 +321,15 @@ class TicketFormTest extends TestCase
         $this->actingAs($this->user);
 
         Livewire::test('ticket-form')
-                ->set('title', 'Test Ticket')
-                ->set('description', 'Test Description')
-                ->set('type', 'road_maintenance')
-                ->set('contact_name', 'John Doe')
-                ->set('contact_phone', '+39 123 456 7890')
-                ->set('contact_email', 'john@example.com')
-                ->call('save')
-                ->assertRedirect()
-                ->assertSessionHas('success');
+            ->set('title', 'Test Ticket')
+            ->set('description', 'Test Description')
+            ->set('type', 'road_maintenance')
+            ->set('contact_name', 'John Doe')
+            ->set('contact_phone', '+39 123 456 7890')
+            ->set('contact_email', 'john@example.com')
+            ->call('save')
+            ->assertRedirect()
+            ->assertSessionHas('success');
 
         $this->assertDatabaseHas('tickets', [
             'title' => 'Test Ticket',
@@ -345,14 +345,14 @@ class TicketFormTest extends TestCase
         $this->actingAs($this->user);
 
         Livewire::test('ticket-form')
-                ->set('title', 'Test Ticket')
-                ->set('description', 'Test Description')
-                ->set('type', 'road_maintenance')
-                ->set('contact_email', 'invalid-email')
-                ->call('save')
-                ->assertHasErrors([
-                    'contact_email' => 'email',
-                ]);
+            ->set('title', 'Test Ticket')
+            ->set('description', 'Test Description')
+            ->set('type', 'road_maintenance')
+            ->set('contact_email', 'invalid-email')
+            ->call('save')
+            ->assertHasErrors([
+                'contact_email' => 'email',
+            ]);
     }
 
     /** @test */
@@ -361,16 +361,16 @@ class TicketFormTest extends TestCase
         $this->actingAs($this->user);
 
         Livewire::test('ticket-form')
-                ->set('title', 'Test Ticket')
-                ->set('description', 'Test Description')
-                ->set('type', 'road_maintenance')
-                ->set('custom_fields', [
-                    'severity' => 'high',
-                    'area' => 'downtown',
-                ])
-                ->call('save')
-                ->assertRedirect()
-                ->assertSessionHas('success');
+            ->set('title', 'Test Ticket')
+            ->set('description', 'Test Description')
+            ->set('type', 'road_maintenance')
+            ->set('custom_fields', [
+                'severity' => 'high',
+                'area' => 'downtown',
+            ])
+            ->call('save')
+            ->assertRedirect()
+            ->assertSessionHas('success');
 
         $this->assertDatabaseHas('tickets', [
             'title' => 'Test Ticket',
@@ -387,13 +387,13 @@ class TicketFormTest extends TestCase
         $this->actingAs($this->user);
 
         Livewire::test('ticket-form')
-                ->set('title', 'Test Ticket')
-                ->set('description', 'Test Description')
-                ->set('type', 'road_maintenance')
-                ->set('tags', ['urgent', 'infrastructure'])
-                ->call('save')
-                ->assertRedirect()
-                ->assertSessionHas('success');
+            ->set('title', 'Test Ticket')
+            ->set('description', 'Test Description')
+            ->set('type', 'road_maintenance')
+            ->set('tags', ['urgent', 'infrastructure'])
+            ->call('save')
+            ->assertRedirect()
+            ->assertSessionHas('success');
 
         $this->assertDatabaseHas('tickets', [
             'title' => 'Test Ticket',
@@ -409,17 +409,17 @@ class TicketFormTest extends TestCase
     public function it_can_set_related_tickets()
     {
         $this->actingAs($this->user);
-        
+
         $relatedTicket = Ticket::factory()->create(['owner_id' => $this->user->id]);
 
         Livewire::test('ticket-form')
-                ->set('title', 'Test Ticket')
-                ->set('description', 'Test Description')
-                ->set('type', 'road_maintenance')
-                ->set('related_ticket_ids', [$relatedTicket->id])
-                ->call('save')
-                ->assertRedirect()
-                ->assertSessionHas('success');
+            ->set('title', 'Test Ticket')
+            ->set('description', 'Test Description')
+            ->set('type', 'road_maintenance')
+            ->set('related_ticket_ids', [$relatedTicket->id])
+            ->call('save')
+            ->assertRedirect()
+            ->assertSessionHas('success');
 
         $this->assertDatabaseHas('tickets', [
             'title' => 'Test Ticket',
@@ -434,20 +434,20 @@ class TicketFormTest extends TestCase
     public function it_can_set_team_assignment()
     {
         $this->actingAs($this->user);
-        
+
         $team = $this->user->teams()->create([
             'name' => 'Test Team',
             'personal_team' => false,
         ]);
 
         Livewire::test('ticket-form')
-                ->set('title', 'Test Ticket')
-                ->set('description', 'Test Description')
-                ->set('type', 'road_maintenance')
-                ->set('team_id', $team->id)
-                ->call('save')
-                ->assertRedirect()
-                ->assertSessionHas('success');
+            ->set('title', 'Test Ticket')
+            ->set('description', 'Test Description')
+            ->set('type', 'road_maintenance')
+            ->set('team_id', $team->id)
+            ->call('save')
+            ->assertRedirect()
+            ->assertSessionHas('success');
 
         $this->assertDatabaseHas('tickets', [
             'title' => 'Test Ticket',
@@ -459,17 +459,17 @@ class TicketFormTest extends TestCase
     public function it_can_set_tenant_assignment()
     {
         $this->actingAs($this->user);
-        
+
         $tenant = Tenant::factory()->create();
 
         Livewire::test('ticket-form')
-                ->set('title', 'Test Ticket')
-                ->set('description', 'Test Description')
-                ->set('type', 'road_maintenance')
-                ->set('tenant_id', $tenant->id)
-                ->call('save')
-                ->assertRedirect()
-                ->assertSessionHas('success');
+            ->set('title', 'Test Ticket')
+            ->set('description', 'Test Description')
+            ->set('type', 'road_maintenance')
+            ->set('tenant_id', $tenant->id)
+            ->call('save')
+            ->assertRedirect()
+            ->assertSessionHas('success');
 
         $this->assertDatabaseHas('tickets', [
             'title' => 'Test Ticket',
@@ -483,14 +483,14 @@ class TicketFormTest extends TestCase
         $this->actingAs($this->user);
 
         Livewire::test('ticket-form')
-                ->set('title', 'Test Ticket')
-                ->set('description', 'Test Description')
-                ->set('type', 'road_maintenance')
-                ->set('is_public', true)
-                ->set('is_featured', true)
-                ->call('save')
-                ->assertRedirect()
-                ->assertSessionHas('success');
+            ->set('title', 'Test Ticket')
+            ->set('description', 'Test Description')
+            ->set('type', 'road_maintenance')
+            ->set('is_public', true)
+            ->set('is_featured', true)
+            ->call('save')
+            ->assertRedirect()
+            ->assertSessionHas('success');
 
         $this->assertDatabaseHas('tickets', [
             'title' => 'Test Ticket',
@@ -505,15 +505,15 @@ class TicketFormTest extends TestCase
         $this->actingAs($this->user);
 
         Livewire::test('ticket-form')
-                ->set('title', 'Test Ticket')
-                ->set('description', 'Test Description')
-                ->set('type', 'road_maintenance')
-                ->set('notify_on_update', true)
-                ->set('notify_on_comment', true)
-                ->set('notify_on_resolution', true)
-                ->call('save')
-                ->assertRedirect()
-                ->assertSessionHas('success');
+            ->set('title', 'Test Ticket')
+            ->set('description', 'Test Description')
+            ->set('type', 'road_maintenance')
+            ->set('notify_on_update', true)
+            ->set('notify_on_comment', true)
+            ->set('notify_on_resolution', true)
+            ->call('save')
+            ->assertRedirect()
+            ->assertSessionHas('success');
 
         $this->assertDatabaseHas('tickets', [
             'title' => 'Test Ticket',
@@ -529,13 +529,13 @@ class TicketFormTest extends TestCase
         $this->actingAs($this->user);
 
         Livewire::test('ticket-form')
-                ->set('title', 'Test Ticket')
-                ->set('description', 'Test Description')
-                ->set('type', 'road_maintenance')
-                ->call('resetForm')
-                ->assertSet('title', '')
-                ->assertSet('description', '')
-                ->assertSet('type', '');
+            ->set('title', 'Test Ticket')
+            ->set('description', 'Test Description')
+            ->set('type', 'road_maintenance')
+            ->call('resetForm')
+            ->assertSet('title', '')
+            ->assertSet('description', '')
+            ->assertSet('type', '');
     }
 
     /** @test */
@@ -544,15 +544,15 @@ class TicketFormTest extends TestCase
         $this->actingAs($this->user);
 
         Livewire::test('ticket-form')
-                ->call('cancel')
-                ->assertRedirect();
+            ->call('cancel')
+            ->assertRedirect();
     }
 
     /** @test */
     public function it_requires_authentication()
     {
         Livewire::test('ticket-form')
-                ->assertRedirect('/login');
+            ->assertRedirect('/login');
     }
 
     /** @test */
@@ -561,12 +561,12 @@ class TicketFormTest extends TestCase
         $this->actingAs($this->user);
 
         Livewire::test('ticket-form')
-                ->set('title', 'Test Ticket')
-                ->set('description', 'Test Description')
-                ->set('type', 'road_maintenance')
-                ->call('preview')
-                ->assertSee('Test Ticket')
-                ->assertSee('Test Description')
-                ->assertSee('road_maintenance');
+            ->set('title', 'Test Ticket')
+            ->set('description', 'Test Description')
+            ->set('type', 'road_maintenance')
+            ->call('preview')
+            ->assertSee('Test Ticket')
+            ->assertSee('Test Description')
+            ->assertSee('road_maintenance');
     }
 }

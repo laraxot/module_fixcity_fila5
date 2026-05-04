@@ -5,7 +5,9 @@ declare(strict_types=1);
 namespace Modules\Fixcity\Actions;
 
 use Faker\Factory;
+use Faker\Generator;
 use Illuminate\Support\Facades\Bus;
+use Modules\Fixcity\Database\Factories\TicketFactory;
 use Modules\Fixcity\Models\Ticket;
 use Spatie\QueueableAction\QueueableAction;
 
@@ -13,7 +15,7 @@ class GenerateTicketsAction
 {
     use QueueableAction;
 
-    protected \Faker\Generator $faker;
+    protected Generator $faker;
 
     public function __construct()
     {
@@ -29,7 +31,7 @@ class GenerateTicketsAction
                 ->map(fn (): callable => function () use ($states): Ticket {
                     $state = $this->faker->randomElement($states);
 
-                    /** @var \Modules\Fixcity\Database\Factories\TicketFactory $factory */
+                    /** @var TicketFactory $factory */
                     $factory = Ticket::factory();
 
                     /** @var Ticket $ticket */

@@ -28,7 +28,7 @@ class ListTickets extends ListRecords
                     Notification::make()
                         ->success()
                         ->title('JSON mappa generato')
-                        ->body('File scritto in ' . basename(dirname($path)) . '/' . basename($path))
+                        ->body('File scritto in '.basename(dirname($path)).'/'.basename($path))
                         ->send();
                 }),
         ];

@@ -1,3 +1,24 @@
+## [2026-05-04] Story 8-111: Wizard Theme Component Architecture
+
+- **Story**: `_bmad-output/implementation-artifacts/8-111-fixcity-wizard-theme-component-architecture.md`
+- **Architecture Fix**: Corregge errore architetturale in 8-110 (logica hardcoded nel tema)
+- **New Pattern**: `pub_theme::wizard` Blade component - tema riceve wizard da modulo via props
+- **Contract**: Fixcity espone `CreateTicketWizardWidget::getFormSchema()`, Sixteen wrappa con Design Comuni
+- **Docs**: `concepts/wizard-theme-integration.md` - API contract, data flow, anti-patterns
+- **Philosophy**: Modulo = Logica (PHP), Tema = Vestito (Blade/CSS)
+
+## [2026-05-04] Story 8-110: Segnalazione-Crea Step 1 Privacy Parity
+
+- **Story**: `_bmad-output/implementation-artifacts/8-110-segnalazione-crea-step1-privacy-design-comuni-parity.md`
+- **Module**: Fixcity (wizard) + Sixteen (CSS/theme)
+- **Scope**: Step 1 privacy del wizard segnalazione - stepper, checkbox phrase, font parity
+- **Translation Keys Verified**:
+  - `create_ticket_wizard.fields.privacyAccepted.label` = "Ho letto e compreso l'informativa sulla privacy" (IT)
+  - `create_ticket_wizard.fields.privacyAccepted.label` = "I have read and understood the privacy policy" (EN)
+- **Widget**: `CreateTicketWizardWidget` (Filament v5 + Livewire)
+- **Form Schema**: `TicketForm::getFrontofficePrivacySchema()`
+- **Sprint Status**: `ready-for-dev` in epic-8
+
 ## [2026-05-04] optimization | AI Directory Optimization & Second Brain Sync
 - Project-wide cleanup of `bashscripts/ai/.agents` and `.claude`.
 - Local module knowledge (memories, guidelines, docs) migrated to the modular Wiki.
@@ -8,6 +29,11 @@
 - Story BMAD: `_bmad-output/implementation-artifacts/7-105-design-comuni-segnalazione-static-pages-bootstrap-to-tailwind-class-map.md` (`ready-for-dev`).
 - Sette URL Design Comuni statici (dettaglio, wizard 01–04, area personale, elenco): estrazione classi verso tabella wiki + implementazione in `Themes/Sixteen/resources/css/app.css`.
 - Backlink: `concepts/segnalazione-design-comuni-comparison.md`, `comparisons/segnalazione-01-privacy-design-comuni-vs-local-wizard.md`; tema `segnalazione-visual-parity-correction-plan.md`.
+
+## [2026-05-04] bmad-create-story | 7-110 step1 — stepper, checkbox frase ufficiale, font
+
+- Story: `_bmad-output/implementation-artifacts/7-110-segnalazione-01-privacy-stepper-checkbox-typography-parity.md`
+- Sprint: `7-110-segnalazione-01-privacy-stepper-checkbox-typography-parity` → ready-for-dev
 
 ## [2026-05-04] visual-diff | segnalazione-crea step 1 — screenshot Playwright + story 7-77
 - screenshot comparativo Playwright: ref `segnalazione-01-privacy.html` vs locale `segnalazione-crea`.

@@ -7,11 +7,10 @@ namespace Modules\Fixcity\Tests\Unit\Services;
 use Modules\Fixcity\Models\Ticket;
 use Modules\Fixcity\Services\NotificationService;
 use Modules\User\Models\User;
-use Tests\TestCase;
 
 describe('NotificationService', function () {
     beforeEach(function () {
-        $this->service = new NotificationService();
+        $this->service = new NotificationService;
         $this->user = User::factory()->create();
         $this->ticket = Ticket::factory()->create([
             'owner_id' => $this->user->id,
@@ -176,7 +175,7 @@ describe('NotificationService', function () {
             $subscriber = User::factory()->create();
             $commenter = User::factory()->create();
             $this->ticket->subscribers()->attach($subscriber->id);
-            
+
             $comment = $this->ticket->comments()->create([
                 'user_id' => $commenter->id,
                 'content' => 'Test comment',

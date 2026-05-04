@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Modules\Fixcity\Models;
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
@@ -16,11 +17,11 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  */
 class Category extends BaseModel
 {
-
     /**
      * Indicates if the model's ID is auto-incrementing.
      */
     public $incrementing = false;
+
     /**
      * The table associated with the model.
      */
@@ -78,7 +79,7 @@ class Category extends BaseModel
     /**
      * Scope a query to only include active categories.
      */
-    public function scopeActive(\Illuminate\Database\Eloquent\Builder $query): \Illuminate\Database\Eloquent\Builder
+    public function scopeActive(Builder $query): Builder
     {
         return $query->where('is_active', true);
     }
@@ -86,7 +87,7 @@ class Category extends BaseModel
     /**
      * Scope a query to only include root categories (no parent).
      */
-    public function scopeRoot(\Illuminate\Database\Eloquent\Builder $query): \Illuminate\Database\Eloquent\Builder
+    public function scopeRoot(Builder $query): Builder
     {
         return $query->whereNull('parent_id');
     }

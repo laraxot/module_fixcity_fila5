@@ -8,13 +8,12 @@ use Illuminate\Database\QueryException;
 use Modules\Fixcity\Models\Ticket;
 use Modules\Fixcity\Models\TicketHour;
 use Modules\User\Models\User;
-use Tests\TestCase;
 
 describe('TicketHour Model', function () {
     it('can be created with valid data', function () {
         $user = User::factory()->create();
         $ticket = Ticket::factory()->create();
-        
+
         $hour = TicketHour::create([
             'ticket_id' => $ticket->id,
             'user_id' => $user->id,
@@ -102,7 +101,7 @@ describe('TicketHour Model', function () {
         ]);
 
         $ticketHours = TicketHour::where('ticket_id', $ticket->id)->get();
-        
+
         expect($ticketHours)->toHaveCount(3);
         foreach ($ticketHours as $hour) {
             expect($hour->ticket_id)->toBe($ticket->id);
@@ -116,7 +115,7 @@ describe('TicketHour Model', function () {
         ]);
 
         $userHours = TicketHour::where('user_id', $user->id)->get();
-        
+
         expect($userHours)->toHaveCount(3);
         foreach ($userHours as $hour) {
             expect($hour->user_id)->toBe($user->id);
@@ -126,54 +125,54 @@ describe('TicketHour Model', function () {
     it('can be queried by date range', function () {
         $today = now()->toDateString();
         $yesterday = now()->subDay()->toDateString();
-        
+
         $todayHour = TicketHour::factory()->create(['date' => $today]);
         $yesterdayHour = TicketHour::factory()->create(['date' => $yesterday]);
-        
+
         $recentHours = TicketHour::where('date', '>=', $yesterday)->get();
-        
+
         expect($recentHours)->toContain($todayHour);
         expect($recentHours)->toContain($yesterdayHour);
     });
 
     it('can calculate total hours for a ticket', function () {
         $ticket = Ticket::factory()->create();
-        
+
         TicketHour::factory()->create([
             'ticket_id' => $ticket->id,
             'value' => 2.5,
         ]);
-        
+
         TicketHour::factory()->create([
             'ticket_id' => $ticket->id,
             'value' => 1.75,
         ]);
-        
+
         TicketHour::factory()->create([
             'ticket_id' => $ticket->id,
             'value' => 3.0,
         ]);
 
         $totalHours = TicketHour::where('ticket_id', $ticket->id)->sum('value');
-        
+
         expect($totalHours)->toBe(7.25);
     });
 
     it('can calculate total hours for a user', function () {
         $user = User::factory()->create();
-        
+
         TicketHour::factory()->create([
             'user_id' => $user->id,
             'value' => 4.0,
         ]);
-        
+
         TicketHour::factory()->create([
             'user_id' => $user->id,
             'value' => 2.5,
         ]);
 
         $totalHours = TicketHour::where('user_id', $user->id)->sum('value');
-        
+
         expect($totalHours)->toBe(6.5);
     });
 
@@ -181,13 +180,13 @@ describe('TicketHour Model', function () {
         $oldHour = TicketHour::factory()->create([
             'date' => now()->subDays(3)->toDateString(),
         ]);
-        
+
         $newHour = TicketHour::factory()->create([
             'date' => now()->toDateString(),
         ]);
 
         $orderedHours = TicketHour::orderBy('date', 'desc')->get();
-        
+
         expect($orderedHours->first()->id)->toBe($newHour->id);
         expect($orderedHours->last()->id)->toBe($oldHour->id);
     });
@@ -198,7 +197,7 @@ describe('TicketHour Model', function () {
         TicketHour::factory()->create(['value' => 4.5]);
 
         $significantHours = TicketHour::where('value', '>=', 2.0)->get();
-        
+
         expect($significantHours)->toHaveCount(2);
         foreach ($significantHours as $hour) {
             expect($hour->value)->toBeGreaterThanOrEqual(2.0);
@@ -214,19 +213,19 @@ describe('TicketHour Model', function () {
 
     it('can be soft deleted if implemented', function () {
         $hour = TicketHour::factory()->create();
-        
+
         // Check if soft deletes are implemented
         if (method_exists($hour, 'trashed')) {
             $hour->delete();
             expect($hour->trashed())->toBeTrue();
-            
+
             $trashedHour = TicketHour::withTrashed()->find($hour->id);
             expect($trashedHour)->not->toBeNull();
         } else {
             // If no soft deletes, test regular deletion
             $hourId = $hour->id;
             $hour->delete();
-            
+
             expect(TicketHour::find($hourId))->toBeNull();
         }
     });

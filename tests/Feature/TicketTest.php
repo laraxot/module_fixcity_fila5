@@ -7,15 +7,14 @@ use Tests\TestCase;
 
 uses(TestCase::class, RefreshDatabase::class);
 
-use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
-use Spatie\MediaLibrary\HasMedia;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Modules\Fixcity\Enums\TicketPriorityEnum;
 use Modules\Fixcity\Enums\TicketStatusEnum;
 use Modules\Fixcity\Enums\TicketTypeEnum;
 use Modules\Fixcity\Models\Ticket;
 use Modules\User\Models\User;
-use Modules\Xot\Datas\XotData;
+use Spatie\MediaLibrary\HasMedia;
 
 beforeEach(function () {
     $this->user = User::factory()->create();

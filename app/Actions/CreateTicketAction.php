@@ -4,16 +4,15 @@ declare(strict_types=1);
 
 namespace Modules\Fixcity\Actions;
 
-use Modules\Fixcity\Models\Ticket;
 use Modules\Fixcity\Events\TicketCreatedEvent;
+use Modules\Fixcity\Models\Ticket;
 
 class CreateTicketAction
 {
     /**
      * Executes the ticket creation logic.
      *
-     * @param array<string, mixed> $data
-     * @return Ticket
+     * @param  array<string, mixed>  $data
      */
     public function execute(array $data): Ticket
     {

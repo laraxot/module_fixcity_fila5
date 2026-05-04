@@ -4,9 +4,8 @@ declare(strict_types=1);
 
 namespace Modules\Fixcity\Tests\Unit\Enums;
 
-use ReflectionEnum;
 use Modules\Fixcity\Enums\TicketStatusEnum;
-use Tests\TestCase;
+use ReflectionEnum;
 
 describe('TicketStatusEnum', function () {
     it('has all required status values', function () {
@@ -22,7 +21,7 @@ describe('TicketStatusEnum', function () {
         ];
 
         $actualStatuses = array_column(TicketStatusEnum::cases(), 'name');
-        
+
         expect($actualStatuses)->toHaveCount(count($expectedStatuses));
         foreach ($expectedStatuses as $status) {
             expect($actualStatuses)->toContain($status);
@@ -103,7 +102,7 @@ describe('TicketStatusEnum', function () {
 
     it('provides translated labels for each status', function () {
         $statuses = TicketStatusEnum::cases();
-        
+
         foreach ($statuses as $status) {
             $translatedLabel = $status->label();
             expect($translatedLabel)->not->toBeEmpty();
@@ -114,7 +113,7 @@ describe('TicketStatusEnum', function () {
     it('implements required Filament interfaces', function () {
         $reflection = new ReflectionEnum(TicketStatusEnum::class);
         $interfaces = $reflection->getInterfaceNames();
-        
+
         expect($interfaces)->toContain('Filament\Support\Contracts\HasColor');
         expect($interfaces)->toContain('Filament\Support\Contracts\HasIcon');
         expect($interfaces)->toContain('Filament\Support\Contracts\HasLabel');
@@ -123,21 +122,21 @@ describe('TicketStatusEnum', function () {
     it('can be used in string context', function () {
         $status = TicketStatusEnum::PENDING;
         $stringValue = (string) $status;
-        
+
         expect($stringValue)->toBe('pending');
         expect($status->value)->toBe('pending');
     });
 
     it('can be compared with string values', function () {
         $status = TicketStatusEnum::PENDING;
-        
+
         expect($status->value === 'pending')->toBeTrue();
         expect($status === TicketStatusEnum::from('pending'))->toBeTrue();
     });
 
     it('provides consistent behavior across all methods', function () {
         $statuses = TicketStatusEnum::cases();
-        
+
         foreach ($statuses as $status) {
             // All methods should return non-empty values
             expect($status->getColor())->not->toBeEmpty();
@@ -145,11 +144,11 @@ describe('TicketStatusEnum', function () {
             expect($status->getLabel())->not->toBeEmpty();
             expect($status->getColorClass())->not->toBeEmpty();
             expect($status->label())->not->toBeEmpty();
-            
+
             // Colors should be valid CSS color names or Tailwind classes
             $validColors = ['yellow', 'blue', 'orange', 'red', 'green', 'gray', 'pink', 'warning'];
             expect($validColors)->toContain($status->getColor());
-            
+
             // Icons should contain valid icon identifiers
             expect($status->getIcon())->toContain('heroicon-o-')->or->toContain('ui-');
         }

@@ -4,7 +4,9 @@ declare(strict_types=1);
 
 namespace Modules\Fixcity\Livewire;
 
+use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Contracts\View\View;
+use Illuminate\Database\Eloquent\Builder;
 use Livewire\Volt\Component as VoltComponent;
 use Livewire\WithPagination;
 use Modules\Fixcity\Models\Ticket;
@@ -13,7 +15,7 @@ class TicketList extends VoltComponent
 {
     use WithPagination;
 
-    public \Illuminate\Contracts\Pagination\LengthAwarePaginator $tickets;
+    public LengthAwarePaginator $tickets;
 
     public string $search = '';
 
@@ -35,20 +37,20 @@ class TicketList extends VoltComponent
         'Strade, marciapiedi, segnaletica e viabilità (302)',
     ];
 
-    public function getTicketsProperty(): \Illuminate\Contracts\Pagination\LengthAwarePaginator
+    public function getTicketsProperty(): LengthAwarePaginator
     {
-        /** @var \Illuminate\Database\Eloquent\Builder<Ticket> $query */
+        /** @var Builder<Ticket> $query */
         $query = Ticket::query();
 
         return $query
             ->when(
                 $this->search,
-                fn (\Illuminate\Database\Eloquent\Builder $q) => $q->where('title', 'like', "%{$this->search}%")
+                fn (Builder $q) => $q->where('title', 'like', "%{$this->search}%")
                     ->orWhere('content', 'like', "%{$this->search}%")
             )
             ->when(
                 $this->selectedStatus,
-                fn (\Illuminate\Database\Eloquent\Builder $q) => $q->where('status', $this->selectedStatus)
+                fn (Builder $q) => $q->where('status', $this->selectedStatus)
             )
             ->latest()
             ->paginate(10);
