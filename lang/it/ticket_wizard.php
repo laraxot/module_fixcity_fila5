@@ -38,6 +38,16 @@ return [
             'icon' => 'edit_contacts',
             'label' => 'edit_contacts',
         ],
+        'cancel' => [
+            'tooltip' => 'cancel',
+            'icon' => 'cancel',
+            'label' => 'cancel',
+        ],
+        'save' => [
+            'tooltip' => 'save',
+            'icon' => 'save',
+            'label' => 'save',
+        ],
     ],
     'fields' => [
         'address' => [
@@ -101,9 +111,7 @@ return [
             'description' => 'Accettazione obbligatoria per procedere',
         ],
         'privacy_notice' => [
-            'intro' => 'Il Comune di Firenze gestisce i dati personali forniti e liberamente comunicati sulla base dell\'articolo 13 del Regolamento (UE) 2016/679 General Data Protection Regulation (GDPR) e degli articoli 13 e successive modifiche e integrazione del decreto legislativo (di seguito d.lgs) 267/2000 (Testo unico enti locali).',
-            'detail_prefix' => 'Per i dettagli sul trattamento dei dati personali consulta l\'',
-            'link_label' => 'informativa sulla privacy.',
+            'label' => 'privacy_notice',
         ],
         'summary_notice' => [
             'label' => '',
@@ -160,9 +168,6 @@ return [
             'label' => 'author_fiscal_code',
             'description' => 'author_fiscal_code',
             'helper_text' => 'author_fiscal_code',
-        ],
-        'privacy_notice' => [
-            'label' => 'privacy_notice',
         ],
         'type_id' => [
             'label' => 'Tipo di disservizio*',

@@ -242,6 +242,19 @@ return [
             'label' => 'Immagini Allegate',
         ],
     ],
+    'ticket-form' => [
+        'steps' => [
+            'privacy' => [
+                'label' => 'Privacy',
+            ],
+            'data' => [
+                'label' => 'Dati della segnalazione',
+            ],
+            'summary' => [
+                'label' => 'Riepilogo',
+            ],
+        ],
+    ],
     'notifications' => [
         'submit_failed' => [
             'title' => 'Errore',

@@ -243,6 +243,11 @@ return [
         'sidebar_title' => [
             'label' => 'REQUIRED INFORMATION',
         ],
+        'sidebar_hint' => [
+            'label' => 'Fill in the form in the main column to continue.',
+            'placeholder' => '',
+            'help' => 'Use the Next and Back buttons below the form; the wizard is not duplicated in the sidebar.',
+        ],
         'step' => [
             'privacy' => [
                 'label' => 'Privacy Policy',

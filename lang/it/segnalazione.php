@@ -245,6 +245,11 @@ return [
         'sidebar_title' => [
             'label' => 'INFORMAZIONI RICHIESTE',
         ],
+        'sidebar_hint' => [
+            'label' => 'Compila il modulo nella colonna principale per procedere.',
+            'placeholder' => '',
+            'help' => 'Usa i pulsanti «Avanti» e «Indietro» sotto il modulo; non duplicare il wizard nella barra laterale.',
+        ],
         'step' => [
             'privacy' => [
                 'label' => 'Autorizzazioni e condizioni',

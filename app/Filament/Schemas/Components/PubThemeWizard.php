@@ -7,13 +7,22 @@ namespace Modules\Fixcity\Filament\Schemas\Components;
 use Filament\Schemas\Components\Wizard;
 
 /**
- * Wizard schema component che usa la vista tema {@see pub_theme::components.wizard}
- * (allineata al markup vendor Filament) per il frontoffice Fixcity.
+ * PubThemeWizard - Wizard with Design Comuni styling for public frontend.
+ *
+ * This class extends Filament's Wizard component and overrides the view
+ * to use the pub_theme::components.wizard template which implements
+ * Design Comuni styling patterns.
+ *
+ * Architecture:
+ * - Module provides: Wizard schema (steps, validation, actions)
+ * - PubThemeWizard provides: View override to pub_theme::components.wizard
+ * - pub_theme::components.wizard provides: Design Comuni stepper + footer
  */
-final class PubThemeWizard extends Wizard
+class PubThemeWizard extends Wizard
 {
     /**
-     * @var view-string
+     * The view for the wizard component.
+     * This enables Design Comuni styling on the public frontend.
      */
     protected string $view = 'pub_theme::components.wizard';
 }
