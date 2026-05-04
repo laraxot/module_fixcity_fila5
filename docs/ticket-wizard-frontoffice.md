@@ -50,17 +50,17 @@ Il widget segue i principi Laraxot ed estende `XotBaseWizardWidget`.
 - **Validazione**: step tramite validazione nativa del wizard; submit finale con `Ticket::query()->create()` dopo `normalizeWizardFormState()` e arricchimenti (`owner_id`); upload `images` escluso dal payload create come da logica esistente.
 - **Naming**: Usa sempre `Ticket` invece di `Segnalazione` nel codice PHP.
 
-### `Wizard::make` + `inAdmin()->view()` vs `PubThemeWizard`
+### `Wizard` (admin) vs `PubThemeWizard` (frontoffice)
 
-In una story BMAD (artifact **7-112**) era descritto uno snippet con `Wizard::make(static::getWizardSteps())`, `skippable()`, `persistStepInQueryString()` e ramo `if (! inAdmin()) { $wizard = $wizard->view('pub_theme::components.wizard'); }`.
+**Regola**: nel **backoffice** (pannello Filament) il wizard deve usare **`Filament\Schemas\Components\Wizard`** senza vista `pub_theme` — è la skin standard del pannello. Nel **frontoffice** (pagina cittadino con `pub_theme`) si usa **`PubThemeWizard`** (o equivalente `Wizard::make(...)->view('pub_theme::components.wizard')`), perché il “vestito” è quello del tema pubblico, non quello dell’admin.
 
-**Perché non è stato applicato letteralmente in `TicketForm::getFormSchema()`**
+`TicketForm::getFormSchema()` applica questo ramo con **`inAdmin()`**: admin → `Wizard::make($steps)`; non admin → `PubThemeWizard::make($steps)` (stessi `skippable()` e `persistStepInQueryString()` dove consentito).
 
-1. **SSoT / DRY**: la vista tema è fissata una sola volta in `Modules\Fixcity\Filament\Schemas\Components\PubThemeWizard` (estende `Wizard`, proprietà `$view = 'pub_theme::components.wizard'`). Evita di ripetere stringa vista e `inAdmin()` in ogni entrypoint.
-2. **Due entrypoint**: il widget frontoffice costruisce il root wizard in `CreateTicketWizardWidget::makeWizard()` con `PubThemeWizard::make($steps)` (non passa dal blocco `getFormSchema()` di `TicketForm` per l’istanza wizard sul widget, che segue `XotBaseWizardWidget`). `TicketForm::getFormSchema()` resta il blueprint riusabile dove serve lo stesso wizard (stessi step + stessa skin).
-3. **Admin CRUD**: il form risorsa Filament del ticket non riusa questo wizard multi-step; il ramo “vista default in admin” dello snippet originale non aggiunge valore sul percorso attuale.
+Il widget `CreateTicketWizardWidget` resta un entrypoint **solo frontoffice** e continua a costruire il wizard in `makeWizard()` con `PubThemeWizard` (coerente con la regola sopra).
 
-**Equivalente funzionale allo snippet**: `PubThemeWizard::make(...)` + `skippable()` + `persistStepInQueryString()` (dove consentito dalla policy query step).
+**Anti-pattern**: usare `PubThemeWizard` ovunque, incluso contesto admin — mescola la skin del tema pubblico con il layout Filament del pannello.
+
+Riferimento wiki: [filament-admin-pub-theme-wizard-boundary](../../../../docs/wiki/concepts/filament-admin-pub-theme-wizard-boundary.md). Story BMAD correlata: **7-113**.
 
 ### Step del Wizard (3):
 1. **Privacy** (step id `1`): privacy notice read-only + link informativa + checkbox finale (`privacyAccepted`).

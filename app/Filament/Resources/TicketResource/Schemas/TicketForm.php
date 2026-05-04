@@ -15,8 +15,8 @@ use Filament\Schemas\Components\Grid;
 use Filament\Schemas\Components\Section;
 use Filament\Schemas\Components\Text;
 use Filament\Schemas\Components\Utilities\Get;
+use Filament\Schemas\Components\Wizard;
 use Filament\Schemas\Components\Wizard\Step;
-use Modules\Fixcity\Filament\Schemas\Components\PubThemeWizard;
 use Illuminate\Support\HtmlString;
 use Modules\Fixcity\Enums\TicketTypeEnum;
 use Modules\Fixcity\Filament\Concerns\HasTicketAuthorData;
@@ -34,9 +34,10 @@ class TicketForm extends XotBaseResourceForm
      */
     public static function getFormSchema(): array
     {
-        // Zen: Blueprint (Schema) definisce il vestito, non il Widget
-        // PubThemeWizard estende Wizard e setta già $view = 'pub_theme::components.wizard'
-        $wizard = PubThemeWizard::make(static::getWizardSteps())
+        $steps = static::getWizardSteps();
+
+        // Wizard configuration: skin controlled by theme CSS, not by module
+        $wizard = Wizard::make($steps)
             ->skippable()
             ->persistStepInQueryString();
 
@@ -54,7 +55,7 @@ class TicketForm extends XotBaseResourceForm
             static::getStepByName('privacy'),
             static::getStepByName('data'),
             static::getStepByName('summary'),
-                
+
         ];
     }
 
@@ -107,8 +108,9 @@ class TicketForm extends XotBaseResourceForm
                 ->extraAttributes(['id' => 'report-info', 'data-step-section' => 'inefficiency'])
                 ->schema([
                     EnumSelect::make('type_id')
-                        ->options(TicketTypeEnum::class)
+                        ->enum(TicketTypeEnum::class)
                         ->required()
+                        ->live()
                         ->native(false),
                     TextInput::make('name')
                         ->required()

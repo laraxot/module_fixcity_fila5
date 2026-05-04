@@ -1,3 +1,55 @@
+## [2026-05-04] architecture | XotBaseWizardWidget View Calculation Rule
+
+- **Story**: `_bmad-output/implementation-artifacts/8-115-xotbasewizardwidget-view-calculation-rule.md`
+- **Rule**: Sottoclassi di `XotBaseWizardWidget` (come `CreateTicketWizardWidget`) NON devono definire `$view` property
+- **View Resolution**: La view viene calcolata automaticamente:
+  - Admin: `filament/components/wizard` (default Filament)
+  - Frontoffice: `pub_theme::components.wizard` (Design Comuni styled)
+- **Audit**: `CreateTicketWizardWidget` compliant - nessuna `$view` property definita ✅
+- **Docs**: Xot module wiki + regola Windsurf aggiornati
+
+## [2026-05-04] architecture | Wizard Filament Theme Boundary - Fixed BadMethodCallException
+
+- **Problem**: `BadMethodCallException: getWizardDisplayStep does not exist` on `/it/tests/segnalazione-crea`
+- **Root Cause**: Blade template called `$this->getWizardDisplayStep()` which already existed at line 100, but the widget had duplicated code from earlier edits
+- **Fix**: Method already exists properly implemented - removed duplicate declaration
+- **Architecture**: Documented Filament wizard architecture boundary in `concepts/wizard-architecture-filament-theme-boundary.md`
+- **Key Learning**: Theme should override `pub_theme::components.wizard` for CSS parity, not create custom blade wrappers in module
+
+- **Prima**: «non usare inAdmin() in TicketForm» e solo `PubThemeWizard` nello schema.
+- **Dopo**: admin → `Wizard` Filament; frontoffice → `PubThemeWizard`; link a `filament-admin-pub-theme-wizard-boundary` (root wiki) e `theme-owned-wizard-css-parity-rule`.
+- **Motivo**: `PubThemeWizard` nel backoffice è errato; il vestito `pub_theme` vale solo sul sito pubblico.
+
+## [2026-05-04] Story 8-114: XotBaseWizardWidget vs Filament HasWizard Parity
+
+- **Story**: `_bmad-output/implementation-artifacts/8-114-xotbasewizard-filament-haswizard-parity.md`
+- **Problem**: `XotBaseWizardWidget` reinventa logica già presente in Filament Concerns (`HasWizard` Actions + Pages)
+- **Visual Issues**: ~~Frontoffice manca tasto "Avanti"~~ ✅ **FIXED** - Architettura corretta:
+  - `XotBaseWizardWidget` configura `->view('pub_theme::components.wizard')`
+  - View tema renderizza: stepper + contenuto + azioni
+  - `create-ticket-wizard.blade.php` wrapper solo titolo/container
+- **Architecture Docs**: `Themes/Sixteen/concepts/wizard-custom-view-architecture.md`
+- **URLs**: `/it/tests/segnalazione-crea` vs `/fixcity/admin/tickets/create`
+- **Widget**: `CreateTicketWizardWidget` extends `XotBaseWizardWidget`
+- **Status**: in-progress
+
+## [2026-05-04] Story 8-113: Correct Wizard Implementation Approach
+
+- **Story**: `_bmad-output/implementation-artifacts/8-113-correct-wizard-implementation-approach.md`
+- **Fix**: Rimosso `PubThemeWizard` - violava separazione modulo/tema
+- **TicketForm**: Ora usa `Wizard::make()` standard (no condizionale, no PubThemeWizard)
+- **Philosophy**: Modulo crea componenti standard, Tema gestisce presentazione via CSS/Blade
+- **Status**: done
+
+## [2026-05-04] Story 8-112: Wizard Custom View Pattern
+
+- **Story**: `_bmad-output/implementation-artifacts/8-112-wizard-view-custom-theme-pattern.md`
+- **Pattern**: `PubThemeWizard` estende Wizard e imposta `view('pub_theme::components.wizard')`
+- **TicketForm**: Condizionale `inAdmin() ? Wizard : PubThemeWizard`
+- **Location**: `TicketForm::getFormSchema()` linee 42-48
+- **Files**: `PubThemeWizard.php` + `TicketForm.php` (già implementati)
+- **Status**: done - documenta pattern esistente
+
 ## [2026-05-04] Story 8-111: Wizard Theme Component Architecture
 
 - **Story**: `_bmad-output/implementation-artifacts/8-111-fixcity-wizard-theme-component-architecture.md`

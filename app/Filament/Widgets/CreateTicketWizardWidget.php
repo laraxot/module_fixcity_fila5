@@ -4,43 +4,30 @@ declare(strict_types=1);
 
 namespace Modules\Fixcity\Filament\Widgets;
 
-use Filament\Schemas\Components\Wizard;
+use Filament\Actions\Action;
 use Filament\Schemas\Components\Wizard\Step;
+use Illuminate\Support\Facades\Auth;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 use Modules\Fixcity\Actions\CreateTicketAction;
 use Modules\Fixcity\Filament\Resources\TicketResource\Schemas\TicketForm;
-use Modules\Fixcity\Filament\Schemas\Components\PubThemeWizard;
+use Modules\Fixcity\Models\Ticket;
 use Modules\Xot\Actions\Cast\SafeStringCastAction;
 use Modules\Xot\Filament\Widgets\XotBaseWizardWidget;
 
-/**
- * CreateTicketWizardWidget.
- *
- * This widget handles the ticket creation process in a multi-step wizard.
- *
- * Non-Negotiable Guard - DO NOT DELETE:
- * - CoordinatePicker
- * - GeopointPicker
- * - LatitudeLongitudeInput
- * - LeafletMarkerMapInput
- * - LocationPicker
- * - MapLocationInput
- * - MapPicker
- * - MapPositioner
- * - PlacePicker
- */
 class CreateTicketWizardWidget extends XotBaseWizardWidget
 {
-    protected string $view = 'fixcity::filament.widgets.ticket-create-wizard';
-
     /** @var array<string, mixed> */
     public array $blockData = [];
 
-    /** @param array<string, mixed> $blockData */
+    protected function wizardAllowStepQueryExtra(): bool
+    {
+        return true;
+    }
+
     public function mount(array $blockData = []): void
     {
         $this->blockData = $blockData;
-        $this->initWizardState();
+        $this->form->fill();
     }
 
     /**
@@ -51,10 +38,21 @@ class CreateTicketWizardWidget extends XotBaseWizardWidget
         return TicketForm::getWizardSteps();
     }
 
-    public function submit(CreateTicketAction $createTicketAction): void
+    /**
+     * @return array<int, \Filament\Schemas\Components\Component>
+     */
+    public function getFormSchema(): array
     {
+        return TicketForm::getFormSchema();
+    }
+
+    public function submit(): void
+    {
+        
+
         $data = $this->form->getState();
-        $ticket = $createTicketAction->execute($data);
+        $data['owner_id'] = Auth::id();
+        $ticket=Ticket::create($data);
 
         $this->redirectAfterSuccess();
     }
@@ -87,38 +85,18 @@ class CreateTicketWizardWidget extends XotBaseWizardWidget
         ];
     }
 
-    /**
-     * @param  array<int, Step>  $steps
-     */
-    protected function makeWizard(array $steps): Wizard
+    protected function getCancelFormAction(): Action
     {
-        $wizard = PubThemeWizard::make($steps)
-            ->startOnStep(fn (): int => $this->wizardStartStep)
-            ->columnSpanFull()
-            ->skippable($this->hasSkippableWizardSteps());
+        $cancelUrl = route('tests.view', ['slug' => config('fixcity.wizard.cancel_slug', 'segnalazione-01-inizio')]);
+        $localizedCancel = LaravelLocalization::getLocalizedURL(
+            LaravelLocalization::getCurrentLocale(),
+            $cancelUrl
+        );
+        $cancelHref = $localizedCancel !== false ? $localizedCancel : $cancelUrl;
 
-        if ($this->queryStepOverrideAllowed()) {
-            $wizard->persistStepInQueryString('step');
-        }
-
-        return $wizard;
-    }
-
-    /**
-     * Step 1-based per layout pagina (sidebar Design Comuni, griglia): allineato allo stato del Wizard Filament.
-     */
-    public function getWizardDisplayStep(): int
-    {
-        try {
-            $key = $this->getWizardComponentKey();
-            $wizard = $this->getSchemaComponent($key);
-            if ($wizard instanceof Wizard) {
-                return min($this->wizardMaxStep(), max(1, $wizard->getCurrentStepIndex() + 1));
-            }
-        } catch (\Throwable) {
-            // Schema non ancora risolto (primo paint): fallback allo step iniziale.
-        }
-
-        return $this->wizardStartStep;
+        return Action::make('cancel')
+            ->url($cancelHref)
+            ->button()
+            ->color('secondary');
     }
 }

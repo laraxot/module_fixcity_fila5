@@ -43,7 +43,8 @@ wiki/
 | [segnalazione-runtime-asset-integrity](./concepts/segnalazione-runtime-asset-integrity.md) | concept | Integrità asset runtime (404 CSS/JS, Livewire/Alpine bootstrap coerente) |
 | [livewire-cache-table-rate-limiter](./concepts/livewire-cache-table-rate-limiter.md) | concept | Fix QueryException su `cache` mancante durante update Livewire |
 | [context-compression-and-summary-infolist-rule](./concepts/context-compression-and-summary-infolist-rule.md) | concept | Regola permanente: summary wizard via Infolist entries, niente `SchemaView`; disciplina context compression |
-| [theme-owned-wizard-css-parity-rule](./concepts/theme-owned-wizard-css-parity-rule.md) | concept | Il Blade wizard Fixcity resta markup-only; CSS parity nel tema Sixteen con build/copy |
+| [wizard-architecture-filament-theme-boundary](./concepts/wizard-architecture-filament-theme-boundary.md) | concept | Filament wizard theme boundary - module markup, theme CSS, no logic duplication | 2026-05-04 |
+| [filament-admin-pub-theme-wizard-boundary](../../../../docs/wiki/concepts/filament-admin-pub-theme-wizard-boundary.md) | concept | Admin: `Wizard` Filament; frontoffice: `PubThemeWizard`; vedi `TicketForm::getFormSchema()` | 2026-05-04 |
 | [header-green-branding-rule](./concepts/header-green-branding-rule.md) | concept | Token verdi vs parity kit: navbar chiara nel flusso segnalazione (vedi tema Sixteen) |
 | [visual-parity-report](./concepts/visual-parity-report.md) | concept | Report parity visuale Design Comuni |
 | [segnalazione-crea-step1-diff-2026-05-04](./concepts/segnalazione-crea-step1-diff-2026-05-04.md) | concept | Diff visivo Playwright 2026-05-04: stepper, bottone, checkbox, bottoni spurii — story 7-77 | 2026-05-04 |
