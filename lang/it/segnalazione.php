@@ -19,6 +19,9 @@ return [
         'services' => [
             'label' => 'Servizi',
         ],
+        'elenco' => [
+            'label' => 'Segnalazioni',
+        ],
     ],
 
     'inefficiency_types' => [
@@ -36,6 +39,14 @@ return [
         ],
     ],
 
+    'wizard_a11y' => [
+        'skip_to_main' => [
+            'label' => 'Vai al contenuto principale',
+            'placeholder' => '',
+            'help' => 'Salta intestazione e vai direttamente al modulo di segnalazione.',
+        ],
+    ],
+
     /*
      * Heading keys
      */
@@ -49,6 +60,103 @@ return [
         ],
         'contacts' => [
             'label' => 'Contatti',
+        ],
+        'title' => [
+            'label' => 'Segnalazioni',
+        ],
+        'subtitle' => [
+            'text' => 'Consulta le segnalazioni aperte nel territorio e filtra i risultati per categoria.',
+        ],
+    ],
+
+    /*
+     * Segnalazioni elenco page keys
+     */
+    'filters' => [
+        'legend' => [
+            'label' => 'Filtra per categoria',
+        ],
+    ],
+
+    'results' => [
+        'count' => [
+            'text' => ':count segnalazioni trovate',
+        ],
+        'empty' => 'Nessuna segnalazione trovata.',
+    ],
+
+    'filter' => [
+        'button' => [
+            'label' => 'Filtra',
+        ],
+        'remove' => [
+            'label' => 'Rimuovi filtri',
+        ],
+    ],
+
+    'tabs' => [
+        'map' => [
+            'label' => 'Mappa',
+        ],
+        'list' => [
+            'label' => 'Elenco',
+        ],
+    ],
+
+    'map' => [
+        'image' => [
+            'alt' => 'Mappa delle segnalazioni',
+        ],
+        'cta' => [
+            'title' => [
+                'label' => 'Hai notato un disservizio?',
+            ],
+            'text' => [
+                'label' => 'Invia una nuova segnalazione e aiuta il Comune a intervenire in modo più rapido.',
+            ],
+            'button' => [
+                'label' => 'Segnala un disservizio',
+            ],
+        ],
+    ],
+
+    'card' => [
+        'type' => [
+            'label' => 'Tipo di segnalazione',
+            'short' => 'Segnalazione',
+        ],
+        'expand' => [
+            'button' => [
+                'label' => 'Mostra dettagli',
+            ],
+        ],
+        'address' => [
+            'label' => 'Indirizzo',
+        ],
+        'detail' => [
+            'label' => 'Dettagli',
+        ],
+        'edit' => [
+            'link' => [
+                'label' => 'Modifica',
+            ],
+        ],
+    ],
+
+    'load-more' => [
+        'button' => [
+            'label' => 'Carica altre segnalazioni',
+        ],
+    ],
+
+    'contacts' => [
+        'title' => [
+            'label' => 'Hai bisogno di aiuto?',
+        ],
+        'faq' => [
+            'link' => [
+                'label' => 'Leggi le domande frequenti',
+            ],
         ],
     ],
 

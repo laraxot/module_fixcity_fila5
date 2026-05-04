@@ -19,6 +19,7 @@ use Filament\Schemas\Components\Wizard;
 use Filament\Schemas\Components\Wizard\Step;
 use Illuminate\Support\HtmlString;
 use Modules\Fixcity\Enums\TicketTypeEnum;
+use Modules\Fixcity\Filament\Concerns\HasTicketAuthorData;
 use Modules\Geo\Filament\Forms\Components\CoordinatePicker;
 use Modules\UI\Filament\Forms\Components\EnumSelect;
 use Modules\Xot\Actions\Cast\SafeStringCastAction;
@@ -26,6 +27,8 @@ use Modules\Xot\Filament\Resources\Schemas\XotBaseResourceForm;
 
 class TicketForm extends XotBaseResourceForm
 {
+    use HasTicketAuthorData;
+
     /**
      * @return array<int, Component>
      */
@@ -126,7 +129,7 @@ class TicketForm extends XotBaseResourceForm
                 ->compact()
                 ->extraAttributes(['id' => 'report-author', 'data-step-section' => 'author'])
                 ->schema([
-                    Grid::make(['default' => 1, 'lg' => 3])->schema([
+                    Grid::make(['default' => 1, 'lg' => 2])->schema([
                         TextEntry::make('author_name')
                             ->state(static fn (): string => static::getAuthUserName())
                             ->icon('heroicon-o-user'),
@@ -136,12 +139,10 @@ class TicketForm extends XotBaseResourceForm
                         TextEntry::make('author_phone')
                             ->state(static fn (): string => static::getAuthUserPhone())
                             ->icon('heroicon-o-phone'),
+                        TextEntry::make('author_email')
+                            ->state(static fn (): string => static::getAuthUserEmail())
+                            ->icon('heroicon-o-envelope'),
                     ]),
-
-                    TextInput::make('email')
-                        ->helperText(SafeStringCastAction::cast(__('fixcity::create_ticket_wizard.fields.email.helper_text')))
-                        ->email()
-                        ->maxLength(255),
                 ]),
         ];
     }
@@ -166,8 +167,6 @@ class TicketForm extends XotBaseResourceForm
                             TextEntry::make('review_content')
                                 ->state(static fn (Get $get): string => SafeStringCastAction::cast($get('content')))
                                 ->columnSpanFull(),
-                            TextEntry::make('review_email')
-                                ->state(static fn (Get $get): string => SafeStringCastAction::cast($get('email'))),
                             TextEntry::make('review_location')
                                 ->state(static fn (Get $get): string => static::formatLocationSummary($get('location'))),
                             ImageEntry::make('review_images')
@@ -241,41 +240,5 @@ class TicketForm extends XotBaseResourceForm
         }
 
         return array_values(array_filter($images, static fn (mixed $image): bool => \is_string($image) && $image !== ''));
-    }
-
-    protected static function getAuthUserName(): string
-    {
-        $user = auth()->user();
-        if ($user === null) {
-            return '';
-        }
-
-        return SafeStringCastAction::cast(data_get($user, 'name')
-            ?? trim(SafeStringCastAction::cast(data_get($user, 'first_name', '')).' '.SafeStringCastAction::cast(data_get($user, 'last_name', ''))));
-    }
-
-    protected static function getAuthUserFiscalCode(): string
-    {
-        $user = auth()->user();
-        if ($user === null) {
-            return '';
-        }
-
-        return SafeStringCastAction::cast(data_get($user, 'fiscal_code')
-            ?? data_get($user, 'codice_fiscale')
-            ?? '');
-    }
-
-    protected static function getAuthUserPhone(): string
-    {
-        $user = auth()->user();
-        if ($user === null) {
-            return '';
-        }
-
-        return SafeStringCastAction::cast(data_get($user, 'phone')
-            ?? data_get($user, 'mobile')
-            ?? data_get($user, 'telefono')
-            ?? '');
     }
 }

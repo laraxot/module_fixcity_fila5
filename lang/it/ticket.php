@@ -203,6 +203,11 @@ return [
         ],
         'resetColumnManager' => [
             'tooltip' => 'resetColumnManager',
+            'icon' => 'resetColumnManager',
+            'label' => 'resetColumnManager',
+        ],
+        'applyTableColumnManager' => [
+            'tooltip' => 'applyTableColumnManager',
         ],
     ],
     'messages' => [

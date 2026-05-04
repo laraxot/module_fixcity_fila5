@@ -22,7 +22,7 @@ Il modulo Fixcity è il **core business** dell'applicazione FixCity:
 - Gestisce il ciclo di vita dei `Ticket` (segnalazioni civiche)
 - Fornisce un **Wizard frontoffice** guidato per i cittadini (`CreateTicketWizardWidget`)
 - Espone il pannello operatori Filament per gestione interna
-- Si integra con `Geo` (geolocalizzazione), `Sixteen` (CSS Design Comuni), `Xot` (base classes)
+- Si integra con `Geo` (geolocalizzazione), `Sixteen` (CSS Design Comuni — parity header/navbar owner del tema, vedi [header design comuni code analysis](../../../../../Themes/Sixteen/docs/wiki/concepts/header-design-comuni-code-analysis.md)), `Xot` (base classes)
 - Multi-lingua completo (`fixcity::` namespace, tutte le lingue)
 
 ## Modelli Core

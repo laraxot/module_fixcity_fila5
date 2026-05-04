@@ -34,6 +34,7 @@ wiki/
 | [filament5-entangle-contract](../../Geo/docs/wiki/concepts/filament5-custom-field-entangle-contract.md) | concept | Perché `$applyStateBindingModifiers` è OBBLIGATORIO per entangle — prova vendor Filament 5 | 2026-04-28 |
 | [admin-map-asset-registry-mismatch](./concepts/admin-map-asset-registry-mismatch.md) | concept | mismatch tra asset registry Filament e file effettivamente deployati |
 | [obsidian-skills-and-ingest-checklist](./concepts/obsidian-skills-and-ingest-checklist.md) | concept | Checklist continua su Obsidian, skills, ingest e allineamento docs |
+| [segnalazioni-elenco-map-architecture](./concepts/segnalazioni-elenco-map-architecture.md) | concept | Architettura pagina elenco segnalazioni: Lit map + GeoJSON statico (farmshops pattern) + filtri TicketTypeEnum | 2026-04-29 |
 | [second-brain-session-bootstrap](../../../../docs/wiki/concepts/second-brain-session-bootstrap.md) | concept | Bootstrap always-on: verifica stack + update + smoke search root/moduli prima del lavoro applicativo |
 | [profiles-uuid-contract](./concepts/profiles-uuid-contract.md) | concept | Contratto schema `profiles`: `id` intero + `uuid` separato nella migrazione owner |
 | [wizard-single-next-cta-rule](./concepts/wizard-single-next-cta-rule.md) | concept | Wizard segnalazione: CTA primaria unica `Avanti` |
@@ -45,6 +46,10 @@ wiki/
 | [theme-owned-wizard-css-parity-rule](./concepts/theme-owned-wizard-css-parity-rule.md) | concept | Il Blade wizard Fixcity resta markup-only; CSS parity nel tema Sixteen con build/copy |
 | [header-green-branding-rule](./concepts/header-green-branding-rule.md) | concept | Token verdi vs parity kit: navbar chiara nel flusso segnalazione (vedi tema Sixteen) |
 | [visual-parity-report](./concepts/visual-parity-report.md) | concept | Report parity visuale Design Comuni |
+| [segnalazione-crea-step1-diff-2026-05-04](./concepts/segnalazione-crea-step1-diff-2026-05-04.md) | concept | Diff visivo Playwright 2026-05-04: stepper, bottone, checkbox, bottoni spurii — story 7-77 | 2026-05-04 |
+| [segnalazione-design-comuni-comparison](./concepts/segnalazione-design-comuni-comparison.md) | comparison | Full diff matrix: Fixcity vs Design Comuni reference (privacy, dati, riepilogo, conferma, elenco) | 2026-05-04 |
+| [segnalazione-visual-parity-correction-plan](../../../../Themes/Sixteen/docs/wiki/concepts/segnalazione-visual-parity-correction-plan.md) | decision | Detailed fix plan: Bootstrap→Tailwind mapping, elenco layout, stepper labels, CTAs | 2026-05-04 |
+| [segnalazione-01-privacy-design-comuni-vs-local-wizard](./comparisons/segnalazione-01-privacy-design-comuni-vs-local-wizard.md) | comparison | Step 1 privacy: reference [Design Comuni statiche](https://italia.github.io/design-comuni-pagine-statiche/sito/segnalazione-01-privacy.html) vs wizard locale; HTML parity, no `<style>` in Blade, asset tema + `npm run build && npm run copy` | 2026-05-04 |
 | [geo-unified-architecture](../../Geo/docs/wiki/concepts/coordinate-picker-architecture.md) | concept | Unificazione componenti mappa (MapPicker, CoordinatePicker) |
 | [wizard-summary-infolist-runtime-fix-2026-04-22](../stories/wizard-summary-infolist-runtime-fix-2026-04-22.md) | story | Fix runtime: summary wizard con entry Infolist e senza `SchemaView` |
 | [wizard-map-runtime-asset-chain](../stories/wizard-map-runtime-asset-chain.md) | story | Analisi catena asset runtime della mappa su admin ticket create |
@@ -66,10 +71,12 @@ Vedi [[../../../../docs/wiki/index|Index Globale Wiki]]
 
 ---
 
-*Ultimo aggiornamento: 2026-04-22*
+*Ultimo aggiornamento: 2026-05-04*
 
 - [context overflow compression rule](./concepts/context-overflow-compression-rule.md): workflow Fixcity anti overflow contesto BMAD
 - [fix complete only after target route recheck](./concepts/fix-complete-only-after-target-route-recheck.md): un fix Fixcity e' chiuso solo dopo verifica della URL finale reale con step/query corretti
 - [phpstan-runtime-priority-rule](./concepts/phpstan-runtime-priority-rule.md): su `segnalazione-crea` il ripristino runtime verificato ha priorita' sul cleanup statico diffuso
 - [wizard-runtime-lessons-learned](./concepts/wizard-runtime-lessons-learned.md): lezioni da merge conflict, EnumSelect signature fix, e namespace CoordinatePicker
 - [visual-parity-verification-rule](../../../Themes/Sixteen/docs/wiki/concepts/visual-parity-verification-rule.md): dopo ogni modifica — verificare nel browser all'URL di riferimento, mai dichiarare fix completo senza verifica visuale
+
+| [segnalazione-bootstrap-tailwind-conversion](./concepts/segnalazione-bootstrap-tailwind-conversion.md) | concept | Conversione completata Bootstrap→Tailwind per 6 pagine Design Comuni (01-04, area-personale, elenco) | 2026-05-04 |

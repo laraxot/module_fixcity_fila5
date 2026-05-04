@@ -181,6 +181,7 @@ class Ticket extends XotBaseModel implements HasMedia
     public function casts(): array
     {
         return [
+            'location' => 'array',
             'estimationInSeconds' => 'int',
             'estimationProgress' => 'float',
             'status' => TicketStatusEnum::class,
@@ -188,11 +189,12 @@ class Ticket extends XotBaseModel implements HasMedia
         ];
     }
 
-    /**
+    /*
      * Canonical source of truth is the JSON `location` payload.
      * Legacy `latitude` / `longitude` columns are mirrored for backward compatibility.
      *
      * @return Attribute<array<string, mixed>, array<string, mixed>>
+     
     protected function location(): Attribute
     {
         return Attribute::make(
@@ -256,16 +258,12 @@ class Ticket extends XotBaseModel implements HasMedia
             },
         );
     }
-     */
+        */
+
     /**
-<<<<<<< HEAD
      * @param array<string, mixed> $value
      *
      * @return array<string, string|array<string, mixed>|null>
-=======
-     * @param  array<string, mixed>  $value
-     * @return array<string, mixed>
->>>>>>> 4e9b7799b (.)
      */
     private static function extractAddressComponents(array $value): array
     {
@@ -286,11 +284,7 @@ class Ticket extends XotBaseModel implements HasMedia
             'country_code' => self::normalizeNullableText($value['country_code'] ?? $details['country_code'] ?? null),
             'suburb' => self::normalizeNullableText($value['suburb'] ?? $details['suburb'] ?? $details['neighbourhood'] ?? null),
             'address_details' => $details,
-<<<<<<< HEAD
         ], static fn (mixed $item): bool => null !== $item && '' !== $item && [] !== $item);
-=======
-        ], static fn (mixed $item): bool => $item !== null && $item !== '');
->>>>>>> 4e9b7799b (.)
     }
 
     private static function normalizeCoordinateString(mixed $value): ?string

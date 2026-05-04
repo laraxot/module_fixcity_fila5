@@ -1,3 +1,36 @@
+## [2026-05-04] optimization | AI Directory Optimization & Second Brain Sync
+- Project-wide cleanup of `bashscripts/ai/.agents` and `.claude`.
+- Local module knowledge (memories, guidelines, docs) migrated to the modular Wiki.
+- Improved agent reactivity and search performance.
+
+## [2026-05-04] bmad-create-story | 7-105 — inventario classi Bootstrap Italia (7 pagine DC) → Tailwind Sixteen
+
+- Story BMAD: `_bmad-output/implementation-artifacts/7-105-design-comuni-segnalazione-static-pages-bootstrap-to-tailwind-class-map.md` (`ready-for-dev`).
+- Sette URL Design Comuni statici (dettaglio, wizard 01–04, area personale, elenco): estrazione classi verso tabella wiki + implementazione in `Themes/Sixteen/resources/css/app.css`.
+- Backlink: `concepts/segnalazione-design-comuni-comparison.md`, `comparisons/segnalazione-01-privacy-design-comuni-vs-local-wizard.md`; tema `segnalazione-visual-parity-correction-plan.md`.
+
+## [2026-05-04] visual-diff | segnalazione-crea step 1 — screenshot Playwright + story 7-77
+- screenshot comparativo Playwright: ref `segnalazione-01-privacy.html` vs locale `segnalazione-crea`.
+- identificate 4 DIFF attive: stepper orizzontale, bottone colore/larghezza, checkbox label, bottoni spurii.
+- header colori confermati OK (slim `#00402b`, navbar `#007a52`).
+- creata entry `concepts/segnalazione-crea-step1-diff-2026-05-04.md`.
+- aggiornata `concepts/segnalazione-design-comuni-comparison.md` con dati reali screenshot.
+- story 7-77 creata in `_bmad-output/implementation-artifacts/`, sprint-status aggiornato.
+
+## [2026-05-04] wiki | segnalazione-01-privacy — confronto + link index
+- Creato `comparisons/segnalazione-01-privacy-design-comuni-vs-local-wizard.md` (stub locale + backlink Sixteen; story 7-103 audit HTML/Tailwind/Lit).
+- Corretti path relativi verso `_bmad-output`, Sixteen e theme correction plan (`index.md` riga `segnalazione-visual-parity-correction-plan`: da `docs/wiki/` = `../../../../Themes/Sixteen/...`).
+- Aggiornati `docs/wiki/index.md` (tabella + `Ultimo aggiornamento: 2026-05-04`).
+
+## [2026-05-04] documentation | Segnalazione vs Design Comuni — Full Comparison + Correction Plan
+- Studied: `https://italia.github.io/design-comuni-pagine-statiche/sito/segnalazione-01-privacy.html` (Step 1-4, elenco)
+- Created: `concepts/segnalazione-design-comuni-comparison.md` (full diff matrix: visual, technical, HTML vs Blade)
+- Created: theme-side correction plan `../../../../Themes/Sixteen/docs/wiki/concepts/segnalazione-visual-parity-correction-plan.md`
+- Key findings: elenco layout (side-by-side→stacked), map height (400px), stepper labels, CTAs missing
+- Strategy: **visual parity** e **HTML parity** dove fattibile, con **Tailwind + Alpine + Lit** (no Bootstrap Italia come UI base)
+- Rules: NO blocchi `<style>` in Blade, CSS/JS nel tema, `npm run build && npm run copy`
+- Updated: index.md, log.md (this file)
+
 ## [2026-04-29] governance | TicketForm SSoT senza firme schema parametrizzate
 - decisione: `TicketForm` resta il provider canonico degli schema del ticket wizard, consumabile dal widget frontoffice quando possibile.
 - implementazione: `CreateTicketWizardWidget` delega privacy/data/summary a `TicketForm`; il link privacy CMS passa da `TicketForm::getFrontofficePrivacySchema($privacyLink)`, lasciando `getPrivacySchema()` senza argomenti.
@@ -265,3 +298,19 @@
 - Creata story BMAD `8-74-segnalazione-crea-map-fullscreen-refinement` per migliorare fullscreen mappa sull'URL esatto con `step=form.dati-della-segnalazione`.
 - Aggiornati contratto fullscreen Fixcity e story docs modulo.
 - Boundary confermato: Fixcity verifica wizard, Geo possiede runtime Lit/Leaflet, Sixteen possiede CSS/parity.
+
+## [2026-04-29] feature | story 8-75 — segnalazioni-elenco mappa Lit + lista live
+- Implementato `GenerateTicketsJsonAction`: scrive `public_html/data/tickets.json` (GeoJSON FeatureCollection)
+- Creato `ticket-map-lit.js`: Lit Web Component (HTMLElement puro, no LitElement dep) con Leaflet + MarkerCluster CDN
+- Aggiornato `layout.blade.php` Sixteen: filtri dinamici da `TicketTypeEnum::cases()`, tab mappa → `<ticket-map-lit>`, tab lista → ticket reali DB
+- HeaderAction "Esporta JSON mappa" aggiunto a `ListTickets.php` nel pannello admin
+- Pattern: farmshops.eu — file JSON statico fetch dal componente Lit, no API controller, no Livewire
+- Regola rispettata: `class="map-container"` mai `id="map"` nel componente Lit
+
+## [2026-05-04] comparison | segnalazione-01-privacy delta modulo — HTML parity audit
+- Aggiornato `comparisons/segnalazione-01-privacy-design-comuni-vs-local-wizard.md` (modulo) con 5 delta critici operativi
+- Critico: `create-ticket.blade.php` ha `<style>` inline massivo — da rimuovere e portare in tema
+- Etichette stepper: verificare `lang/it/segnalazione.php` step keys vs reference Design Comuni
+- Larghezza form body: da `col-lg-10` a Tailwind `lg:w-2/3` (parity `col-lg-8` reference)
+- Sezione "Contatta il comune" mancante: azione = CMS block nel JSON tests.segnalazione-crea
+- Story BMAD: 7-103 (ready-for-dev)

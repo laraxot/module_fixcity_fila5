@@ -5,43 +5,51 @@ declare(strict_types=1);
 return [
     'fields' => [
         'name' => [
-            'label' => 'name',
-            'placeholder' => 'name',
-            'helper_text' => 'name',
-            'description' => 'name',
+            'label' => 'Nome',
+            'placeholder' => 'Inserisci il nome',
+            'helper_text' => 'Inserisci un nome identificativo',
+            'description' => 'Nome identificativo della segnalazione',
         ],
         'privacy' => [
-            'description' => 'privacy',
+            'description' => 'Accettazione informativa sulla privacy',
+            'label' => 'Privacy',
+            'helper_text' => 'Devi accettare la privacy policy per procedere',
         ],
         'privacyAccepted' => [
-            'description' => 'privacyAccepted',
-            'helper_text' => 'privacyAccepted',
-            'placeholder' => 'privacyAccepted',
-            'label' => 'privacyAccepted',
+            'label' => 'Accetto la privacy',
+            'placeholder' => 'Accetto la privacy policy',
+            'helper_text' => 'Devi accettare per procedere con la segnalazione',
+            'description' => 'Accettazione dell\'informativa sulla privacy',
         ],
         'email' => [
-            'description' => 'email',
-            'helper_text' => 'email',
-            'placeholder' => 'email',
-            'label' => 'email',
+            'label' => 'Email',
+            'placeholder' => 'Inserisci la tua email',
+            'helper_text' => 'La tua email per essere contattato',
+            'description' => 'Indirizzo email dell\'autore della segnalazione',
         ],
         'review_images' => [
-            'label' => 'review_images',
+            'label' => 'Immagini allegate',
+            'description' => 'Anteprima delle immagini allegate alla segnalazione',
         ],
         'review_location' => [
-            'label' => 'review_location',
+            'label' => 'Posizione',
+            'description' => 'Anteprima della posizione geografica indicata',
         ],
         'review_email' => [
-            'label' => 'review_email',
+            'label' => 'Email di contatto',
+            'description' => 'Anteprima dell\'indirizzo email indicato',
         ],
         'review_content' => [
-            'label' => 'review_content',
+            'label' => 'Dettaglio segnalazione',
+            'description' => 'Anteprima del contenuto della segnalazione',
         ],
         'review_name' => [
-            'label' => 'review_name',
+            'label' => 'Nome segnalazione',
+            'description' => 'Anteprima del nome identificativo',
         ],
         'review_type' => [
-            'label' => 'review_type',
+            'label' => 'Tipo segnalazione',
+            'description' => 'Anteprima della tipologia scelta',
         ],
         'author_phone' => [
             'label' => 'author_phone',
@@ -69,6 +77,9 @@ return [
             'placeholder' => 'images',
             'helper_text' => 'images',
             'description' => 'images',
+        ],
+        'author_email' => [
+            'label' => 'author_email',
         ],
     ],
     'sections' => [
