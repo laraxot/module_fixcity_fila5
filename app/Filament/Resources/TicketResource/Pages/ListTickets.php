@@ -4,9 +4,12 @@ declare(strict_types=1);
 
 namespace Modules\Fixcity\Filament\Resources\TicketResource\Pages;
 
+use Filament\Actions\Action;
 use Filament\Actions\CreateAction;
+use Filament\Notifications\Notification;
 use Filament\Resources\Pages\ListRecords;
 use Filament\Tables\Columns\TextColumn;
+use Modules\Fixcity\Actions\GenerateTicketsJsonAction;
 use Modules\Fixcity\Filament\Resources\TicketResource;
 
 class ListTickets extends ListRecords
@@ -17,6 +20,17 @@ class ListTickets extends ListRecords
     {
         return [
             CreateAction::make(),
+            Action::make('export_map_json')
+                ->icon('heroicon-o-map')
+                ->color('success')
+                ->action(function (): void {
+                    $path = app(GenerateTicketsJsonAction::class)->execute();
+                    Notification::make()
+                        ->success()
+                        ->title('JSON mappa generato')
+                        ->body('File scritto in ' . basename(dirname($path)) . '/' . basename($path))
+                        ->send();
+                }),
         ];
     }
 

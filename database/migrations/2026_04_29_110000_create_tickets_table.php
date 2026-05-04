@@ -22,12 +22,12 @@ return new class() extends XotBaseMigration {
                 $table->longText('content');
                 $table->foreignId('owner_id'); // ->constrained('users');
                 $table->foreignId('responsible_id')->nullable(); // ->constrained('users');
-                $table->foreignId('status_id'); // ->constrained('ticket_statuses');
+                $table->foreignId('status_id')->nullable(); // ->constrained('ticket_statuses');
                 // $table->foreignId('project_id')->constrained('projects');
                 $table->string('code')->nullable();
                 $table->string('ticket_prefix')->nullable();
                 $table->integer('order')->default(0);
-                $table->foreignId('priority_id'); // ->constrained('ticket_priorities');
+                $table->foreignId('priority_id')->nullable(); // ->constrained('ticket_priorities');
                 $table->foreignId('project_id')->nullable(); // ->constrained('projects');
                 $table->float('estimation')->nullable();
                 $table->foreignId('epic_id')->nullable(); // ->constrained('epics');
@@ -40,6 +40,12 @@ return new class() extends XotBaseMigration {
         // -- UPDATE --
         $this->tableUpdate(
             function (Blueprint $table): void {
+                if ($this->hasColumn('status_id')) {
+                    $table->foreignId('status_id')->nullable()->change();
+                }
+                if ($this->hasColumn('priority_id')) {
+                    $table->foreignId('priority_id')->nullable()->change();
+                }
                 if (! $this->hasColumn('type_id')) {
                     $table->integer('type_id')->nullable()->index();
                 }

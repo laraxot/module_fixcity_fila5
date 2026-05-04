@@ -19,6 +19,9 @@ return [
         'services' => [
             'label' => 'Services',
         ],
+        'elenco' => [
+            'label' => 'Reports',
+        ],
     ],
 
     'inefficiency_types' => [
@@ -36,6 +39,14 @@ return [
         ],
     ],
 
+    'wizard_a11y' => [
+        'skip_to_main' => [
+            'label' => 'Skip to main content',
+            'placeholder' => '',
+            'help' => 'Skip navigation and go directly to the report form.',
+        ],
+    ],
+
     /*
      * Heading keys
      */
@@ -49,6 +60,103 @@ return [
         ],
         'contacts' => [
             'label' => 'Contacts',
+        ],
+        'title' => [
+            'label' => 'Reports',
+        ],
+        'subtitle' => [
+            'text' => 'Browse local reports on the map or filter the list by category.',
+        ],
+    ],
+
+    /*
+     * Segnalazioni elenco page keys
+     */
+    'filters' => [
+        'legend' => [
+            'label' => 'Filter by category',
+        ],
+    ],
+
+    'results' => [
+        'count' => [
+            'text' => ':count reports found',
+        ],
+        'empty' => 'No reports found.',
+    ],
+
+    'filter' => [
+        'button' => [
+            'label' => 'Filter',
+        ],
+        'remove' => [
+            'label' => 'Clear filters',
+        ],
+    ],
+
+    'tabs' => [
+        'map' => [
+            'label' => 'Map',
+        ],
+        'list' => [
+            'label' => 'List',
+        ],
+    ],
+
+    'map' => [
+        'image' => [
+            'alt' => 'Reports map',
+        ],
+        'cta' => [
+            'title' => [
+                'label' => 'Have you noticed a service issue?',
+            ],
+            'text' => [
+                'label' => 'Send a new report and help the municipality respond faster.',
+            ],
+            'button' => [
+                'label' => 'Report an issue',
+            ],
+        ],
+    ],
+
+    'card' => [
+        'type' => [
+            'label' => 'Report type',
+            'short' => 'Report',
+        ],
+        'expand' => [
+            'button' => [
+                'label' => 'Show details',
+            ],
+        ],
+        'address' => [
+            'label' => 'Address',
+        ],
+        'detail' => [
+            'label' => 'Details',
+        ],
+        'edit' => [
+            'link' => [
+                'label' => 'Edit',
+            ],
+        ],
+    ],
+
+    'load-more' => [
+        'button' => [
+            'label' => 'Load more reports',
+        ],
+    ],
+
+    'contacts' => [
+        'title' => [
+            'label' => 'Need help?',
+        ],
+        'faq' => [
+            'link' => [
+                'label' => 'Read the frequently asked questions',
+            ],
         ],
     ],
 
@@ -249,6 +357,9 @@ return [
         ],
         'save_short' => [
             'label' => 'Save',
+        ],
+        'save_draft' => [
+            'label' => 'Save draft',
         ],
         'next' => [
             'label' => 'Next',
