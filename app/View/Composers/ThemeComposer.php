@@ -7,4 +7,6 @@ namespace Modules\Fixcity\View\Composers;
 /**
  * -----.
  */
-class ThemeComposer {}
+class ThemeComposer
+{
+}

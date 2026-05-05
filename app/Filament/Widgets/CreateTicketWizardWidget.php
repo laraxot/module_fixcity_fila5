@@ -5,10 +5,10 @@ declare(strict_types=1);
 namespace Modules\Fixcity\Filament\Widgets;
 
 use Filament\Actions\Action;
+use Filament\Schemas\Components\Component;
 use Filament\Schemas\Components\Wizard\Step;
 use Illuminate\Support\Facades\Auth;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
-use Modules\Fixcity\Actions\CreateTicketAction;
 use Modules\Fixcity\Filament\Resources\TicketResource\Schemas\TicketForm;
 use Modules\Fixcity\Models\Ticket;
 use Modules\Xot\Actions\Cast\SafeStringCastAction;
@@ -19,15 +19,23 @@ class CreateTicketWizardWidget extends XotBaseWizardWidget
     /** @var array<string, mixed> */
     public array $blockData = [];
 
+    public function getWizardDisplayStep(): int
+    {
+        return (int) $this->wizardStartStep;
+    }
+
     protected function wizardAllowStepQueryExtra(): bool
     {
         return true;
     }
 
+    /**
+     * @param  array<string, mixed>  $blockData
+     */
     public function mount(array $blockData = []): void
     {
         $this->blockData = $blockData;
-        $this->form->fill();
+        $this->initWizardState();
     }
 
     /**
@@ -39,7 +47,7 @@ class CreateTicketWizardWidget extends XotBaseWizardWidget
     }
 
     /**
-     * @return array<int, \Filament\Schemas\Components\Component>
+     * @return array<int, Component>
      */
     public function getFormSchema(): array
     {
@@ -48,11 +56,14 @@ class CreateTicketWizardWidget extends XotBaseWizardWidget
 
     public function submit(): void
     {
-        
+        $authUser = Auth::user();
+        if ($authUser === null) {
+            return;
+        }
 
         $data = $this->form->getState();
-        $data['owner_id'] = Auth::id();
-        $ticket=Ticket::create($data);
+        $data['owner_id'] = $authUser->id;
+        Ticket::create($data);
 
         $this->redirectAfterSuccess();
     }
@@ -61,7 +72,7 @@ class CreateTicketWizardWidget extends XotBaseWizardWidget
     {
         $slug = SafeStringCastAction::cast(
             $this->blockData['confirmation_slug']
-            ?? config('fixcity.wizard.confirmation_slug', 'segnalazione-04-conferma')
+                ?? config('fixcity.wizard.confirmation_slug', 'segnalazione-04-conferma')
         );
 
         $url = route('tests.view', ['slug' => $slug]);

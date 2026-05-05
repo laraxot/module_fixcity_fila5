@@ -1,6 +1,11 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Modules\Fixcity\Actions;
+
+use function Safe\file_put_contents;
+use function Safe\json_encode;
 
 /**
  * Generate a GeoJSON with MANY points in the SAME area (Rome center)

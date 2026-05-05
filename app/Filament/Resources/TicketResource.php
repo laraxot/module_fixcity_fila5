@@ -29,7 +29,7 @@ class TicketResource extends XotBaseResource
     public static function getFormSchema(): array
     {
         return [
-            Section::make()
+            'main' => Section::make()
                 ->schema([
                     // Ticket Name
                     TextInput::make('name')

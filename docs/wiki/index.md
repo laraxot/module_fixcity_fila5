@@ -56,11 +56,10 @@ wiki/
 | [wizard-map-runtime-asset-chain](../stories/wizard-map-runtime-asset-chain.md) | story | Analisi catena asset runtime della mappa su admin ticket create |
 | [context-compression-plugin-runtime](../context-compression-plugin-runtime.md) | source | Regola operativa Fixcity per evitare overflow contesto e distinzione plugin OpenRouter/context-mode |
 | [filament5-schema-namespaces-and-wizard-summary](./concepts/filament5-schema-namespaces-and-wizard-summary.md) | concept | Namespace Filament 5.x corretti + pattern TextEntry+Get per getSummarySchema + linter alias anti-pattern |
-| [filament5-schema-section-namespace-rule](./concepts/filament5-schema-section-namespace-rule.md) | concept | `Section` viene da Schemas, non da Infolists; entries read-only restano Infolists |
-| [design-comuni-wizard-css-generalization-rule](./concepts/design-comuni-wizard-css-generalization-rule.md) | concept | Il wizard ticket non deve avere CSS/comportamenti speciali rispetto agli altri wizard; usare component hooks |
-| [design-comuni-theme-css-only-rule](./concepts/design-comuni-theme-css-only-rule.md) | concept | Fixcity espone markup/stato; Sixteen possiede CSS parity, niente `<style>` nel widget wizard |
-| [filament-multiple-forms](./concepts/filament-multiple-forms.md) | concept | Documentazione su Filament Multiple Forms
-| [context-compression-discipline](../../../../docs/wiki/concepts/context-compression-discipline.md) | concept | Recupero docs/story con context-mode + QMD per evitare errore BMAD 131k token |
+| [ticketform-pattern-reference](./concepts/ticketform-pattern-reference.md) | concept | TicketForm pattern di riferimento - XotBaseResourceForm + LangServiceProvider + Wizard + Infolist entries | 2026-05-05 |
+| [ticketinfolist-pattern-reference](./concepts/ticketinfolist-pattern-reference.md) | concept | TicketInfolist pattern di riferimento - XotBaseResourceInfolist + Infolist entries | 2026-05-05 |
+| [ticket-infolist-filament-v5-pattern](./concepts/ticket-infolist-filament-v5-pattern.md) | concept | TicketInfolist Filament v5 Hybrid Pattern - configure() + getInfolistSchema() dual API | 2026-05-05 |
+| [tickets-table-filament-v5-pattern](./concepts/tickets-table-filament-v5-pattern.md) | concept | TicketsTable Filament v5 Hybrid Pattern - configure() + table() dual API | 2026-05-05 |
 
 ## Raw Sources
 
@@ -81,3 +80,4 @@ Vedi [[../../../../docs/wiki/index|Index Globale Wiki]]
 - [visual-parity-verification-rule](../../../Themes/Sixteen/docs/wiki/concepts/visual-parity-verification-rule.md): dopo ogni modifica — verificare nel browser all'URL di riferimento, mai dichiarare fix completo senza verifica visuale
 
 | [segnalazione-bootstrap-tailwind-conversion](./concepts/segnalazione-bootstrap-tailwind-conversion.md) | concept | Conversione completata Bootstrap→Tailwind per 6 pagine Design Comuni (01-04, area-personale, elenco) | 2026-05-04 |
+| [ticketinfolist-pattern-reference](./concepts/ticketinfolist-pattern-reference.md) | concept | Pattern Filament `Schemas/<Model>Infolist` applicato a `TicketResource` con estensione `XotBaseResourceInfolist` | 2026-05-05 |

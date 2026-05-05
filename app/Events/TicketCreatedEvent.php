@@ -20,7 +20,8 @@ class TicketCreatedEvent
      */
     public function __construct(
         public Ticket $ticket
-    ) {}
+    ) {
+    }
 
     /*
      * Get the channels the event should be broadcast on.

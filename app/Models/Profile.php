@@ -101,6 +101,7 @@ use Spatie\SchemalessAttributes\SchemalessAttributes;
  * @property Membership $membership
  * @property Profile|null $creator
  * @property Profile|null $updater
+ *
  * @property-read Profile|null $deleter
  *
  * @method static Builder<static>|Profile byUuid(string $uuid)
@@ -116,7 +117,6 @@ use Spatie\SchemalessAttributes\SchemalessAttributes;
  */
 class Profile extends UserBaseProfile
 {
-    /** @var string */
     protected $connection = 'fixcity';
 
     // ------- RELATIONSHIP ----------
