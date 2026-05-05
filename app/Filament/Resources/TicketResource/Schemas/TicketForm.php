@@ -16,6 +16,7 @@ use Filament\Schemas\Components\Wizard\Step;
 use Illuminate\Support\HtmlString;
 use Modules\Fixcity\Enums\TicketPriorityEnum;
 use Modules\Fixcity\Enums\TicketTypeEnum;
+use Modules\Fixcity\Filament\Concerns\HasTicketAuthorData;
 use Modules\Geo\Filament\Forms\Components\CoordinatePicker;
 use Modules\Xot\Filament\Resources\Schemas\XotBaseResourceForm;
 
@@ -149,6 +150,16 @@ class TicketForm extends XotBaseResourceForm
      */
     public static function getPrivacySchema(): array
     {
+        return static::getFrontofficePrivacySchema('#');
+    }
+
+    /**
+     * @return array<int, Component>
+     */
+    public static function getFrontofficePrivacySchema(string $privacyLink): array
+    {
+        // Zen: LangServiceProvider owns labels — no ->label() here
+        // The key 'fixcity::segnalazione.privacy.checkbox.label' is auto-resolved
         return [
             'gdprNotice' => Html::make(static::getGdprHtml())
                 ->columnSpanFull(),

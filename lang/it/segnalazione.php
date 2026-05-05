@@ -429,7 +429,7 @@ return [
             'label' => 'Ho letto e compreso l\'informativa sulla privacy',
         ],
         'intro' => [
-            'text' => 'Il Comune di Firenze gestisce i dati personali forniti e liberamente comunicati sulla base dell\'articolo 13 del Regolamento (UE) 2016/679 General data protection regulation (Gdpr) e degli articoli 13 e successive modifiche e integrazione del decreto legislativo (di seguito d.lgs) 267/2000 (Testo unico enti locali).',
+            'text' => 'Il Comune di Firenze gestisce i dati personali forniti e liberamente comunicati sulla base dell\'articolo 13 del Regolamento (UE) 2016/679 General Data Protection Regulation (GDPR) e degli articoli 13 e successive modifiche e integrazione del decreto legislativo (di seguito d.lgs) 267/2000 (Testo unico enti locali).',
         ],
         'detail_prefix' => [
             'text' => 'Per i dettagli sul trattamento dei dati personali consulta l\'',
