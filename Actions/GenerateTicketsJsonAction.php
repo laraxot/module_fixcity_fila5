@@ -1,9 +1,14 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Modules\Fixcity\Actions;
 
 use Modules\Fixcity\Enums\TicketTypeEnum;
 use Modules\Fixcity\Models\Ticket;
+use function Safe\file_put_contents;
+use function Safe\json_encode;
+use function Safe\mkdir;
 
 class GenerateTicketsJsonAction
 {
@@ -26,25 +31,32 @@ class GenerateTicketsJsonAction
                     && is_numeric($loc['longitude']);
             })
             ->map(function (Ticket $t): array {
-                $typeValue = (string) $t->type;
+                $rawType = $t->type;
+                $typeValue = $rawType instanceof \BackedEnum
+                    ? (string) $rawType->value
+                    : (is_string($rawType) ? $rawType : (is_int($rawType) ? (string) $rawType : ''));
                 $typeLabel = $typeValue;
                 $typeColor = '#e63946';
 
-                try {
-                    $typeEnum = TicketTypeEnum::from($typeValue);
-                    $typeLabel = $typeEnum->getLabel();
-                    $typeColor = is_string($typeEnum->getColor()) ? $typeEnum->getColor() : '#e63946';
-                } catch (\ValueError) {
-                    // leave defaults
+                if ($typeValue !== '') {
+                    try {
+                        $typeEnum = TicketTypeEnum::from($typeValue);
+                        $typeLabel = $typeEnum->getLabel();
+                        $typeColor = is_string($typeEnum->getColor()) ? $typeEnum->getColor() : '#e63946';
+                    } catch (\ValueError) {
+                        // leave defaults
+                    }
                 }
+
+                $location = is_array($t->location) ? $t->location : [];
 
                 return [
                     'type' => 'Feature',
                     'geometry' => [
                         'type' => 'Point',
                         'coordinates' => [
-                            (float) $t->location['longitude'],
-                            (float) $t->location['latitude'],
+                            (float) ($location['longitude'] ?? 0),
+                            (float) ($location['latitude'] ?? 0),
                         ],
                     ],
                     'properties' => [
@@ -53,9 +65,9 @@ class GenerateTicketsJsonAction
                         'type' => $typeValue,
                         'type_label' => $typeLabel,
                         'type_color' => $typeColor,
-                        'status' => (string) ($t->status ?? ''),
+                        'status' => is_scalar($t->status) ? (string) $t->status : '',
                         'created_at' => $t->created_at?->toIso8601String() ?? '',
-                        'address' => $t->location['address'] ?? $t->location['street'] ?? '',
+                        'address' => is_string($location['address'] ?? null) ? $location['address'] : (is_string($location['street'] ?? null) ? $location['street'] : ''),
                     ],
                 ];
             })

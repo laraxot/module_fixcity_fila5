@@ -1,3 +1,37 @@
+## [2026-05-05] architecture | filament v5 hybrid pattern - complete schema stack
+
+- **TicketInfolist** evolved to Filament v5 Hybrid Pattern: `configure(Schema $schema): Schema` + `getInfolistSchema(): array` dual API.
+- **TicketsTable** created with Hybrid Pattern: `configure(Table $table): Table` + `table(Table $table): Table` dual API.
+  - Columns: ID, name, status, priority, type, owner, assignee, dates
+  - Filters: Status, priority, type
+  - Auto-resolved by XotBaseResource (no manual wiring needed)
+- **TicketForm** already followed pattern (wizard-based with steps)
+- Complete schema stack now follows Filament v5 Demo structure:
+  - `Schemas/TicketForm.php` ✅
+  - `Schemas/TicketInfolist.php` ✅
+  - `Tables/TicketsTable.php` ✅ (NEW)
+- Documentation created:
+  - `concepts/ticket-infolist-filament-v5-pattern.md` (Infolist guide)
+  - `concepts/tickets-table-filament-v5-pattern.md` (Table guide - NEW)
+  - `concepts/ticketinfolist-pattern-reference.md` (updated)
+  - Theme reference: `Themes/Sixteen/docs/wiki/concepts/filament-v5-hybrid-pattern-reference.md`
+- All patterns follow Filament v5 Demo: https://github.com/filamentphp/demo/tree/5.x/app/Filament/Resources
+- Maintains XotBase extension for auto-label via LangServiceProvider (NO `->label()` calls).
+
+## [2026-05-05] governance | wizard vendor parity + safe + quality gates story
+
+- Added BMAD story artifact: `_bmad-output/implementation-artifacts/8-124-wizard-vendor-parity-theme-vestito-safe-quality-gates.md`.
+- Scope formalized: vendor `HasWizard` parity, frontoffice/admin shared wizard engine with different skins, skiplink/next-button visual checks.
+- Reinforced contract: preserve `Safe\...` imports where required and run full quality gates after changes.
+
+## [2026-05-05] architecture | ticket resource infolist xotbase pattern
+
+- Added `TicketInfolist` in `Modules/Fixcity/app/Filament/Resources/TicketResource/Schemas/TicketInfolist.php`.
+- Pattern adopted: Filament demo structure (`Schemas/<Model>Infolist`) with Laraxot extension `XotBaseResourceInfolist`.
+- Runtime wiring remains DRY via `XotBaseResource::infolist()` auto-resolution.
+- Documentation aligned on existing reference: `concepts/ticketinfolist-pattern-reference.md`.
+- Theme boundary documented in Sixteen: `concepts/fixcity-ticket-infolist-theme-boundary.md`.
+
 ## [2026-05-04] architecture | XotBaseWizardWidget View Calculation Rule
 
 - **Story**: `_bmad-output/implementation-artifacts/8-115-xotbasewizardwidget-view-calculation-rule.md`

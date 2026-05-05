@@ -35,12 +35,7 @@ class GenerateTicketsAction
                     $factory = Ticket::factory();
 
                     /** @var Ticket $ticket */
-                    return match ($state) {
-                        'open' => $factory->open()->create(),  // @phpstan-ignore method.nonObject
-                        'urgent' => $factory->urgent()->create(),  // @phpstan-ignore method.nonObject
-                        'resolved' => $factory->resolved()->create(),  // @phpstan-ignore method.nonObject
-                        default => $factory->create(),  // @phpstan-ignore method.nonObject
-                    };
+                    return $factory->state(['status' => $state])->create();
                 })
         )->dispatch();
     }

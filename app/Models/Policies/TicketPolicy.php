@@ -6,4 +6,6 @@ namespace Modules\Fixcity\Models\Policies;
 
 use Modules\User\Models\Policies\UserBasePolicy;
 
-class TicketPolicy extends UserBasePolicy {}
+class TicketPolicy extends UserBasePolicy
+{
+}

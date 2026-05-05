@@ -4,10 +4,13 @@ declare(strict_types=1);
 
 namespace Modules\Fixcity\Actions;
 
+use function Safe\json_decode;
+
 final class NormalizeTicketLocationDataAction
 {
     /**
      * @param  array<string, mixed>  $state
+     *
      * @return array<string, mixed>
      */
     public function execute(array $state): array
@@ -15,7 +18,7 @@ final class NormalizeTicketLocationDataAction
         $location = $state['location'] ?? null;
 
         if (\is_string($location)) {
-            $decoded = \json_decode($location, true);
+            $decoded = json_decode($location, true);
 
             if (\is_array($decoded)) {
                 $location = $decoded;
@@ -51,6 +54,7 @@ final class NormalizeTicketLocationDataAction
 
     /**
      * @param  array<string, mixed>  $location
+     *
      * @return array<string, mixed>
      */
     private function normalizeLocationPayload(array $location): array
@@ -102,6 +106,7 @@ final class NormalizeTicketLocationDataAction
 
     /**
      * @param  array<mixed>  $value
+     *
      * @return array<string, mixed>
      */
     private function stringKeyed(array $value): array

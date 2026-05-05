@@ -7,6 +7,7 @@ namespace Modules\Fixcity\Actions;
 use Illuminate\Support\Facades\File;
 use Modules\Fixcity\Enums\TicketTypeEnum;
 use Modules\Fixcity\Models\Ticket;
+use function Safe\json_encode;
 use Spatie\QueueableAction\QueueableAction;
 
 /**
@@ -30,7 +31,7 @@ class GenerateTicketsJsonAction
             ->latest()
             ->get();
 
-        $features = $tickets->map(static function (Ticket $ticket): array {
+        $features = $tickets->map(static function (Ticket $ticket): ?array {
             $location = $ticket->location;
 
             if (! \is_array($location)) {
@@ -45,7 +46,7 @@ class GenerateTicketsJsonAction
             }
 
             $rawType = $ticket->getAttribute('type');
-            $typeValue = $rawType instanceof \BackedEnum ? $rawType->value : (string) ($rawType ?? 'other');
+            $typeValue = $rawType instanceof \BackedEnum ? $rawType->value : (is_scalar($rawType) ? (string) $rawType : 'other');
             $typeEnum = null;
 
             try {
@@ -68,7 +69,9 @@ class GenerateTicketsJsonAction
                     'type_color' => $typeEnum !== null ? (string) $typeEnum->getColor() : '#607d8b',
                     'address' => $location['address'] ?? $location['display_name'] ?? '',
                     'city' => $location['city'] ?? '',
-                    'status' => $ticket->status?->value ?? $ticket->status ?? 'pending',
+                    'status' => $ticket->status instanceof \BackedEnum
+                        ? (string) $ticket->status->value
+                        : (is_scalar($ticket->status) ? (string) $ticket->status : 'pending'),
                     'url' => '/it/tests/segnalazione-dettaglio/'.$ticket->id,
                 ],
             ];
