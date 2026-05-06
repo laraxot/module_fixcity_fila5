@@ -12,10 +12,11 @@ use Filament\Actions\Action;
 use Filament\Actions\Concerns\InteractsWithActions;
 use Filament\Actions\Contracts\HasActions;
 use Filament\Forms\Components\Checkbox;
-use Filament\Forms\Components\Placeholder;
 use Filament\Forms\Components\RichEditor;
 use Filament\Forms\Concerns\InteractsWithForms;
 use Filament\Forms\Contracts\HasForms;
+use Filament\Schemas\Components\Component;
+use Filament\Schemas\Components\Text;
 use Filament\Schemas\Components\Wizard;
 use Filament\Schemas\Components\Wizard\Step;
 use Filament\Schemas\Schema;
@@ -45,10 +46,13 @@ class CreateTicketWidget extends BaseWidget implements HasActions, HasForms
         $this->form->fill();
     }
 
+    /**
+     * @return array<string, Component>
+     */
     public function getFormSchema(): array
     {
         return [
-            Wizard::make([
+            'wizard' => Wizard::make([
                 Step::make('step-1')
                     ->label(__('fixcity::fixcity.ticket.steps.auth.label'))
                     ->icon('heroicon-o-shield-check')
@@ -78,10 +82,14 @@ class CreateTicketWidget extends BaseWidget implements HasActions, HasForms
                     ->label(__('fixcity::fixcity.ticket.steps.data.label'))
                     ->icon('heroicon-o-document-text')
                     ->description(__('fixcity::fixcity.ticket.steps.data.description'))
-                    /** @phpstan-ignore-next-line */
                     ->schema([
-                        Placeholder::make('')
-                            ->content(new HtmlString('<h1 class="subtitle text-4xl font-bold mb-4 dark:text-white">'.__('fixcity::fixcity.ticket.fields.issue.label').'</h1>')),
+                        'issue_heading' => Text::make(
+                            new HtmlString(
+                                '<h1 class="subtitle text-4xl font-bold mb-4 dark:text-white">'
+                                .e(__('fixcity::fixcity.ticket.fields.issue.label'))
+                                .'</h1>'
+                            )
+                        )->columnSpanFull(),
                         ...TicketResource::getFormSchema(),
                     ]),
             ])
@@ -112,8 +120,7 @@ class CreateTicketWidget extends BaseWidget implements HasActions, HasForms
     public function form(Schema $schema): Schema
     {
         return $schema
-            /** @phpstan-ignore-next-line */
-            ->components(array_values($this->getFormSchema()))
+            ->components($this->getFormSchema())
             ->statePath('data');
     }
 

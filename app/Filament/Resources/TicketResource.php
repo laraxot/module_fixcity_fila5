@@ -8,6 +8,7 @@ use Filament\Forms\Components\Select;
 use Filament\Forms\Components\SpatieMediaLibraryFileUpload;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
+use Filament\Schemas\Components\Component;
 use Filament\Schemas\Components\Section;
 use Filament\Schemas\Components\Utilities\Get;
 use Filament\Schemas\Components\Utilities\Set;
@@ -26,6 +27,9 @@ class TicketResource extends XotBaseResource
 {
     protected static ?string $model = Ticket::class;
 
+    /**
+     * @return array<string, Component>
+     */
     public static function getFormSchema(): array
     {
         return [
