@@ -26,17 +26,16 @@ class GenerateTicketsAction
     {
         $states = ['open', 'urgent', 'resolved'];
 
-        Bus::batch(
-            collect(range(1, $count))
-                ->map(fn (): callable => function () use ($states): Ticket {
-                    $state = $this->faker->randomElement($states);
+        $closures = collect(range(1, $count))
+            ->map(fn (int $i): callable => function () use ($states): void {
+                $state = $this->faker->randomElement($states);
 
-                    /** @var TicketFactory $factory */
-                    $factory = Ticket::factory();
+                /** @var TicketFactory $factory */
+                $factory = Ticket::factory();
+                $factory->state(['status' => $state])->create();
+            })
+            ->all();
 
-                    /** @var Ticket $ticket */
-                    return $factory->state(['status' => $state])->create();
-                })
-        )->dispatch();
+        Bus::batch($closures)->dispatch();
     }
 }

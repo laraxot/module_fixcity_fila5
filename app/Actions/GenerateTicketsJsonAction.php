@@ -7,8 +7,9 @@ namespace Modules\Fixcity\Actions;
 use Illuminate\Support\Facades\File;
 use Modules\Fixcity\Enums\TicketTypeEnum;
 use Modules\Fixcity\Models\Ticket;
-use function Safe\json_encode;
 use Spatie\QueueableAction\QueueableAction;
+
+use function Safe\json_encode;
 
 /**
  * Generates a GeoJSON-like JSON file of all tickets with location data.

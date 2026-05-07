@@ -4,104 +4,58 @@ declare(strict_types=1);
 
 namespace Modules\Fixcity\Filament\Resources\TicketResource\Tables;
 
+use Filament\Tables\Columns\Column;
 use Filament\Tables\Columns\TextColumn;
-use Filament\Tables\Columns\IconColumn;
+use Filament\Tables\Filters\BaseFilter;
 use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Table;
-use Modules\Fixcity\Enums\TicketStatusEnum;
 use Modules\Fixcity\Enums\TicketPriorityEnum;
+use Modules\Fixcity\Enums\TicketStatusEnum;
 use Modules\Fixcity\Enums\TicketTypeEnum;
 use Modules\Xot\Filament\Resources\Tables\XotBaseResourceTable;
 
 /**
- * Tickets Table Schema - Filament v5 Hybrid Pattern.
+ * TicketsTable Schema - XotBaseResourceTable Zen Pattern.
  *
- * **Pattern**: Extends XotBaseResourceTable with dual API support:
- * - `configure(Table $table): Table` - Filament v5 fluent API (NEW)
- * - `table(Table $table): Table` - Legacy API (backward compatibility)
+ * **Zen Philosophy**: No `configure()` override - XotBaseResourceTable base class handles table setup.
+ * Subclass only provides static `getTable*()` methods.
  *
  * **Architecture**:
  * - Columns: ID, name, status, priority, type, owner, assignee, dates
  * - Filters: Status, priority, type
- * - Actions: Edit, Delete (standard Filament)
  * - Auto-label via LangServiceProvider (NO `->label()` calls)
  *
- * @see https://github.com/filamentphp/demo/blob/5.x/app/Filament/Resources/HR/Departments/Tables/DepartmentsTable.php
- * @see \Modules\Xot\Filament\Resources\Tables\XotBaseResourceTable
+ * @see XotBaseResourceTable
  */
 class TicketsTable extends XotBaseResourceTable
 {
     /**
-     * Filament v5 style: Fluent Table configuration.
-     *
-     * **Philosophy**: Use fluent API for table structure.
-     * **NO ->label() calls**: LangServiceProvider auto-resolves translations.
-     *
-     * @see https://filamentphp.com/docs/5.x/schemas/tables
+     * @return array<string, Column>
      */
-    public static function configure(Table $table): Table
+    public static function getTableColumns(): array
     {
-        return $table
-            ->columns([
-                TextColumn::make('id')
-                    ->sortable(),
-
-                TextColumn::make('name')
-                    ->searchable()
-                    ->sortable()
-                    ->limit(50),
-
-                TextColumn::make('status')
-                    ->badge()
-                    ->sortable(),
-
-                TextColumn::make('priority')
-                    ->badge()
-                    ->sortable(),
-
-                TextColumn::make('type.name')
-                    ->placeholder('-'),
-
-                TextColumn::make('owner.name')
-                    ->placeholder('-'),
-
-                TextColumn::make('assignee.name')
-                    ->placeholder('-'),
-
-                TextColumn::make('created_at')
-                    ->dateTime()
-                    ->sortable(),
-
-                TextColumn::make('updated_at')
-                    ->dateTime()
-                    ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
-            ])
-            ->filters([
-                SelectFilter::make('status')
-                    ->options(TicketStatusEnum::class),
-
-                SelectFilter::make('priority')
-                    ->options(TicketPriorityEnum::class),
-
-                SelectFilter::make('type_id')
-                    ->options(TicketTypeEnum::class)
-                    ->native(false),
-            ])
-            ->defaultSort('created_at', 'desc')
-            ->striped();
+        return [
+            'id' => TextColumn::make('id')->sortable(),
+            'name' => TextColumn::make('name')->searchable()->sortable()->limit(50),
+            'status' => TextColumn::make('status')->badge()->sortable(),
+            'priority' => TextColumn::make('priority')->badge()->sortable(),
+            'type.name' => TextColumn::make('type.name')->placeholder('-'),
+            'owner.name' => TextColumn::make('owner.name')->placeholder('-'),
+            'assignee.name' => TextColumn::make('assignee.name')->placeholder('-'),
+            'created_at' => TextColumn::make('created_at')->dateTime()->sortable(),
+            'updated_at' => TextColumn::make('updated_at')->dateTime()->sortable()->toggleable(isToggledHiddenByDefault: true),
+        ];
     }
 
     /**
-     * Legacy API - backward compatibility.
-     *
-     * **Deprecation**: Marked for removal in v6.0
-     * **Current usage**: Resources still call table()
-     *
-     * Delegates to configure() to avoid code duplication.
+     * @return array<string, BaseFilter>
      */
-    public static function table(Table $table): Table
+    public static function getTableFilters(): array
     {
-        return static::configure($table);
+        return [
+            'status' => SelectFilter::make('status')->options(TicketStatusEnum::class),
+            'priority' => SelectFilter::make('priority')->options(TicketPriorityEnum::class),
+            'type_id' => SelectFilter::make('type_id')->options(TicketTypeEnum::class)->native(false),
+        ];
     }
 }

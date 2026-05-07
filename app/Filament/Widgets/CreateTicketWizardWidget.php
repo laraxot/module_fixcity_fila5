@@ -8,6 +8,7 @@ use Filament\Actions\Action;
 use Filament\Schemas\Components\Component;
 use Filament\Schemas\Components\Wizard\Step;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 use Modules\Fixcity\Filament\Resources\TicketResource\Schemas\TicketForm;
 use Modules\Fixcity\Models\Ticket;
@@ -21,7 +22,7 @@ class CreateTicketWizardWidget extends XotBaseWizardWidget
 
     public function getWizardDisplayStep(): int
     {
-        return (int) $this->wizardStartStep;
+        return $this->getWizardStartStep();
     }
 
     protected function wizardAllowStepQueryExtra(): bool
@@ -51,18 +52,30 @@ class CreateTicketWizardWidget extends XotBaseWizardWidget
      */
     public function getFormSchema(): array
     {
-        return TicketForm::getFormSchema();
+        $wizard = $this->makeWizard($this->getWizardSteps())
+            ->submitAction($this->getWizardSubmitAction());
+
+        return [
+            $wizard,
+        ];
     }
 
     public function submit(): void
     {
-        $authUser = Auth::user();
-        if ($authUser === null) {
-            return;
-        }
+        // TEMPORANEO: bypass auth per debug salvataggio ticket da utente anonimo.
+        // Ripristinare il blocco auth/redirect login dopo il collaudo campi.
+        // $authUser = Auth::user();
+        // if ($authUser === null) {
+        //     Session::put('url.intended', url()->full());
+        //     $this->redirect(route('login'));
+        //     return;
+        // }
 
         $data = $this->form->getState();
-        $data['owner_id'] = $authUser->id;
+        $authUser = Auth::user();
+        if ($authUser !== null) {
+            $data['owner_id'] = $authUser->id;
+        }
         Ticket::create($data);
 
         $this->redirectAfterSuccess();

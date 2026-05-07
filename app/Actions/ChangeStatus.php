@@ -17,7 +17,6 @@ class ChangeStatus
      */
     public function execute(Ticket $ticket, string $status, string $reason): void
     {
-        /** @phpstan-ignore method.notFound */
         $ticket->setStatus($status);
 
         // Note: reason is logged but not stored on ticket

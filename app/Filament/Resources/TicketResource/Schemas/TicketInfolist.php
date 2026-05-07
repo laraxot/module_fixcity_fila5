@@ -6,9 +6,10 @@ namespace Modules\Fixcity\Filament\Resources\TicketResource\Schemas;
 
 use Filament\Infolists\Components\SpatieMediaLibraryImageEntry;
 use Filament\Infolists\Components\TextEntry;
+use Filament\Schemas\Components\Component;
 use Filament\Schemas\Components\Section;
 use Filament\Schemas\Components\Tabs;
-use Filament\Schemas\Schema;
+use Illuminate\Contracts\Support\Htmlable;
 use Modules\Xot\Filament\Resources\Schemas\XotBaseResourceInfolist;
 
 /**
@@ -29,33 +30,12 @@ use Modules\Xot\Filament\Resources\Schemas\XotBaseResourceInfolist;
 class TicketInfolist extends XotBaseResourceInfolist
 {
     /**
-     * Filament v5 style: Fluent Schema configuration.
+     * Array-style schema for Infolist view.
      *
-     * **Philosophy**: Use fluent API for layout structure.
-     * **NO ->label() calls**: LangServiceProvider auto-resolves translations.
+     * **Regola**: classi che estendono XotBaseResourceInfolist NON devono avere configure()
+     * **Pattern**: usa solo getInfolistSchema()
      *
-     * @see https://filamentphp.com/docs/5.x/schemas/infolists
-     */
-    public static function configure(Schema $schema): Schema
-    {
-        return $schema
-            ->components([
-                Tabs::make('ticket')
-                    ->schema([
-                        static::getTabByName('overview', static::getOverviewSchema(), 'heroicon-o-information-circle', 2),
-                        static::getTabByName('location', static::getLocationSchema(), 'heroicon-o-map-pin', 2),
-                    ])
-                    ->columnSpanFull(),
-            ]);
-    }
-
-    /**
-     * Legacy array-style for backward compatibility.
-     *
-     * **Deprecation**: Marked for removal in v6.0
-     * **Current usage**: Resources still call getInfolistSchema()
-     *
-     * @return array<int, \Filament\Schemas\Components\Component|\Illuminate\Contracts\Support\Htmlable|string>
+     * @return array<int, Component|Htmlable|string>
      */
     public static function getInfolistSchema(): array
     {
@@ -70,7 +50,7 @@ class TicketInfolist extends XotBaseResourceInfolist
     }
 
     /**
-     * @return array<int, \Filament\Schemas\Components\Component|\Illuminate\Contracts\Support\Htmlable|string>
+     * @return array<int, Component|Htmlable|string>
      */
     public static function getOverviewSchema(): array
     {
@@ -105,7 +85,7 @@ class TicketInfolist extends XotBaseResourceInfolist
     }
 
     /**
-     * @return array<int, \Filament\Schemas\Components\Component|\Illuminate\Contracts\Support\Htmlable|string>
+     * @return array<int, Component|Htmlable|string>
      */
     public static function getLocationSchema(): array
     {
