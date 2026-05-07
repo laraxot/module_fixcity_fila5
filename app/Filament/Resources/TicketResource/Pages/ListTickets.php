@@ -23,7 +23,7 @@ class ListTickets extends ListRecords
             Action::make('export_map_json')
                 ->icon('heroicon-o-map')
                 ->color('success')
-                ->action(function(): void {
+                ->action(function (): void {
                     $path = app(GenerateTicketsJsonAction::class)->execute();
                     Notification::make()
                         ->success()

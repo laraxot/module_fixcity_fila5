@@ -424,7 +424,7 @@ class Ticket extends XotBaseModel implements HasMedia
     public function totalLoggedInHours(): Attribute
     {
         return Attribute::make(
-            get: function(): float {
+            get: function (): float {
                 return (float) $this->hours()->sum('value');
             },
         );
@@ -436,7 +436,7 @@ class Ticket extends XotBaseModel implements HasMedia
     public function estimationForHumans(): Attribute
     {
         return Attribute::make(
-            get: function(): string {
+            get: function (): string {
                 $seconds = $this->estimation_in_seconds;
                 $secondsInt = is_numeric($seconds) ? (int) $seconds : 0;
 
@@ -624,7 +624,6 @@ class Ticket extends XotBaseModel implements HasMedia
 
     /**
      * @param  array<string, mixed>  $value
-     *
      * @return array<string, string|array<string, mixed>|null>
      */
     private static function extractAddressComponents(array $value): array
@@ -702,7 +701,6 @@ class Ticket extends XotBaseModel implements HasMedia
 
     /**
      * @param  array<mixed>  $value
-     *
      * @return array<string, mixed>
      */
     private static function stringKeyed(array $value): array
