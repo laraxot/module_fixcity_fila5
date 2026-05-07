@@ -10,6 +10,7 @@ final class NormalizeTicketLocationDataAction
 {
     /**
      * @param  array<string, mixed>  $state
+     *
      * @return array<string, mixed>
      */
     public function execute(array $state): array
@@ -53,6 +54,7 @@ final class NormalizeTicketLocationDataAction
 
     /**
      * @param  array<string, mixed>  $location
+     *
      * @return array<string, mixed>
      */
     private function normalizeLocationPayload(array $location): array
@@ -104,6 +106,7 @@ final class NormalizeTicketLocationDataAction
 
     /**
      * @param  array<mixed>  $value
+     *
      * @return array<string, mixed>
      */
     private function stringKeyed(array $value): array

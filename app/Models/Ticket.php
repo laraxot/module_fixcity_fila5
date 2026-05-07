@@ -12,7 +12,6 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\Carbon;
-use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Str;
 use Modules\Fixcity\Database\Factories\TicketFactory;
 use Modules\Fixcity\Enums\TicketPriorityEnum;
@@ -147,9 +146,6 @@ class Ticket extends XotBaseModel implements HasMedia
     use HasSlug;
     use HasStatuses;
     use InteractsWithMedia;
-
-    /** @var array<string, bool> */
-    private static array $columnAvailabilityCache = [];
 
     protected $fillable = [
         'name',
@@ -515,7 +511,7 @@ class Ticket extends XotBaseModel implements HasMedia
     public function totalLoggedInHours(): Attribute
     {
         return Attribute::make(
-            get: function (): float {
+            get: function(): float {
                 return (float) $this->hours()->sum('value');
             },
         );
@@ -527,7 +523,7 @@ class Ticket extends XotBaseModel implements HasMedia
     public function estimationForHumans(): Attribute
     {
         return Attribute::make(
-            get: function (): string {
+            get: function(): string {
                 $seconds = $this->estimation_in_seconds;
                 $secondsInt = is_numeric($seconds) ? (int) $seconds : 0;
 

@@ -8,7 +8,6 @@ use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
 use Illuminate\View\Component;
 use Modules\Fixcity\Enums\ReportStatusEnum;
-
 use function Safe\json_decode;
 
 class Agid extends Component
