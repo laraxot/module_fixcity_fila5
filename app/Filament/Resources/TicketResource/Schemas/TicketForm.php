@@ -16,7 +16,7 @@ use Filament\Schemas\Components\Wizard\Step;
 use Illuminate\Support\HtmlString;
 use Modules\Fixcity\Enums\TicketPriorityEnum;
 use Modules\Fixcity\Enums\TicketTypeEnum;
-use Modules\Fixcity\Filament\Concerns\HasTicketAuthorData;
+use Modules\Fixcity\Models\Ticket;
 use Modules\Geo\Filament\Forms\Components\CoordinatePicker;
 use Modules\Xot\Filament\Resources\Schemas\XotBaseResourceForm;
 

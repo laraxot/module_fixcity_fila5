@@ -7,6 +7,7 @@ namespace Modules\Fixcity\Actions;
 use Faker\Factory;
 use Faker\Generator;
 use Illuminate\Support\Facades\Bus;
+use Modules\Fixcity\Database\Factories\TicketFactory;
 use Modules\Fixcity\Models\Ticket;
 use Spatie\QueueableAction\QueueableAction;
 
@@ -21,9 +22,6 @@ class GenerateTicketsAction
         $this->faker = Factory::create();
     }
 
-    /**
-     * @return void
-     */
     public function execute(int $count): void
     {
         $states = ['open', 'urgent', 'resolved'];
