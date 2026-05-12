@@ -39,8 +39,8 @@ SAME Wizard Component ≠ SAME Visual Presentation
 // ✅ CORRECT - Module handles business logic ONLY
 class CreateTicketWizardWidget extends XotBaseWizardWidget {
     // Business rules
-    public function getWizardSteps(): array {
-        return TicketForm::getWizardSteps();
+    public function getSteps(): array {
+        return TicketForm::getSteps();
     }
     
     // State management
@@ -124,7 +124,7 @@ class Wizard extends Component {
 **Visual Requirements:**
 - Standard Filament wizard styling
 - Admin panel layout (sidebar, topbar)
-- Same `TicketForm::getWizardSteps()` logic
+- Same `TicketForm::getSteps()` logic
 - Different visual presentation (admin vs frontoffice)
 
 ## Key Implementation Details

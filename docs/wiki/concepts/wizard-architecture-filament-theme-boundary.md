@@ -36,7 +36,7 @@ Wizard::make($steps)
 public function getFormSchema(): array
 {
     return [
-        Wizard::make($this->getWizardSteps())
+        Wizard::make($this->getSteps())
             ->view('pub_theme::components.wizard'),  // Theme view injection
     ];
 }

@@ -16,6 +16,9 @@ return [
             'label' => 'Riepilogo',
             'description' => 'Controlla i dati inseriti prima di inviare la segnalazione.',
         ],
+        'dati-segnalazione' => [
+            'label' => 'dati-segnalazione',
+        ],
     ],
     'actions' => [
         'previous' => [
@@ -246,6 +249,9 @@ return [
         ],
         'review_location' => [
             'label' => 'review_location',
+        ],
+        'accept_terms' => [
+            'description' => 'accept_terms',
         ],
     ],
     'sections' => [

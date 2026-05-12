@@ -44,14 +44,14 @@ TextInput::make('name')
 
 ```php
 public static function getFormSchema(): array {
-    $steps = static::getWizardSteps();
+    $steps = static::getSteps();
     $wizard = Wizard::make($steps)
         ->skippable()
         ->persistStepInQueryString();
     return [$wizard];
 }
 
-public static function getWizardSteps(): array {
+public static function getSteps(): array {
     return [
         static::getStepByName('privacy'),
         static::getStepByName('data'),
@@ -99,7 +99,7 @@ TextEntry::make('review_location')
 
 1. **Always extend XotBaseResourceForm**
 2. **Never use `->label()` or `->tooltip()`**
-3. **For wizards: implement `getWizardSteps()` and `getStepByName()`**
+3. **For wizards: implement `getSteps()` and `getStepByName()`**
 4. **For summaries: use Infolist entries (TextEntry, ImageEntry, Grid)**
 5. **Use SafeStringCastAction for translation casting**
 6. **Use Get $get and Set $set for dynamic values**
@@ -123,7 +123,7 @@ class YourForm extends XotBaseResourceForm {
         // Your schema here (NO ->label(), use LangServiceProvider)
     }
     
-    public static function getWizardSteps(): array {
+    public static function getSteps(): array {
         return [
             static::getStepByName('first_step'),
             static::getStepByName('second_step'),

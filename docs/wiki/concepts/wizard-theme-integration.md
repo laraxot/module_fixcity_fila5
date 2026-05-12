@@ -28,14 +28,14 @@ class CreateTicketWizardWidget extends XotBaseWizardWidget
     public function getFormSchema(): array
     {
         return [
-            Wizard::make($this->getWizardSteps())
+            Wizard::make($this->getSteps())
                 ->key('wizard')  // Key for theme to access
                 ->startOnStep(fn () => $this->wizardStartStep)
                 ->skippable($this->hasSkippableWizardSteps()),
         ];
     }
     
-    public function getWizardSteps(): array
+    public function getSteps(): array
     {
         return [
             Step::make(__('fixcity::ticket_wizard.steps.privacy.label'))
@@ -56,7 +56,7 @@ class CreateTicketWizardWidget extends XotBaseWizardWidget
 
 **Module provides:**
 1. `getFormSchema()` - Returns form with Wizard component
-2. `getWizardSteps()` - Returns array of Step components
+2. `getSteps()` - Returns array of Step components
 3. `$this->form` - Livewire property available in Blade
 4. `wizardStartStep` - Current step index (1-based)
 5. Translations via `fixcity::ticket_wizard.steps.{name}.label`
@@ -121,7 +121,7 @@ class CreateTicketWizardWidget extends XotBaseWizardWidget
 |----------------|------|-------------|
 | `$this->form` | `Form` | Livewire form containing wizard |
 | `getFormSchema()` | `array` | Form schema definition |
-| `getWizardSteps()` | `Step[]` | Array of wizard steps |
+| `getSteps()` | `Step[]` | Array of wizard steps |
 | `wizardStartStep` | `int` | Current step (1-based) |
 | `wizardMaxStep()` | `int` | Total number of steps |
 
@@ -182,7 +182,7 @@ $steps = $wizard?->getSteps() ?? [];
 public function test_wizard_has_three_steps()
 {
     $widget = new CreateTicketWizardWidget();
-    $steps = $widget->getWizardSteps();
+    $steps = $widget->getSteps();
     
     $this->assertCount(3, $steps);
     $this->assertEquals('privacy', $steps[0]->getId());
@@ -193,7 +193,7 @@ public function test_wizard_has_three_steps()
 public function test_step_labels_are_translated()
 {
     $widget = new CreateTicketWizardWidget();
-    $steps = $widget->getWizardSteps();
+    $steps = $widget->getSteps();
     
     $this->assertEquals(
         __('fixcity::ticket_wizard.steps.privacy.label'),
@@ -238,7 +238,7 @@ $steps = ['Privacy', 'Data', 'Summary']; // ❌
 ```blade
 {{-- WRONG: Direct access instead of component --}}
 <div class="custom-stepper">
-    @foreach($this->getWizardSteps() as $step) {{-- ❌ --}}
+    @foreach($this->getSteps() as $step) {{-- ❌ --}}
         ...
     @endforeach
 </div>
@@ -255,7 +255,7 @@ $steps = ['Privacy', 'Data', 'Summary']; // ❌
 
 ### Module Side
 - [ ] `getFormSchema()` returns Wizard with key 'wizard'
-- [ ] `getWizardSteps()` returns translated Step components
+- [ ] `getSteps()` returns translated Step components
 - [ ] `wizardStartStep` tracks current step
 - [ ] Translations in `fixcity::ticket_wizard.steps.{name}.label`
 

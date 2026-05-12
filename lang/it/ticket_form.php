@@ -34,6 +34,8 @@ return [
         'review_location' => [
             'label' => 'Posizione',
             'description' => 'Anteprima della posizione geografica indicata',
+            'helper_text' => 'review_location',
+            'placeholder' => 'review_location',
         ],
         'review_email' => [
             'label' => 'Email di contatto',
@@ -42,14 +44,20 @@ return [
         'review_content' => [
             'label' => 'Dettaglio segnalazione',
             'description' => 'Anteprima del contenuto della segnalazione',
+            'helper_text' => 'review_content',
+            'placeholder' => 'review_content',
         ],
         'review_name' => [
             'label' => 'Nome segnalazione',
             'description' => 'Anteprima del nome identificativo',
+            'helper_text' => 'review_name',
+            'placeholder' => 'review_name',
         ],
         'review_type' => [
             'label' => 'Tipo segnalazione',
             'description' => 'Anteprima della tipologia scelta',
+            'helper_text' => 'review_type',
+            'placeholder' => 'review_type',
         ],
         'author_phone' => [
             'label' => 'author_phone',
@@ -81,6 +89,53 @@ return [
         'author_email' => [
             'label' => 'author_email',
         ],
+        'priority' => [
+            'description' => 'priority',
+            'helper_text' => 'priority',
+<<<<<<< HEAD
+            'label' => 'priority',
+            'placeholder' => 'priority',
+        ],
+        'slug' => [
+            'label' => 'slug',
+            'placeholder' => 'slug',
+            'helper_text' => 'slug',
+            'description' => 'slug',
+        ],
+        'type' => [
+            'label' => 'type',
+            'placeholder' => 'type',
+            'helper_text' => 'type',
+            'description' => 'type',
+=======
+            'placeholder' => 'priority',
+            'label' => 'priority',
+        ],
+        'type' => [
+            'description' => 'type',
+            'helper_text' => 'type',
+            'placeholder' => 'type',
+            'label' => 'type',
+        ],
+        'slug' => [
+            'description' => 'slug',
+            'helper_text' => 'slug',
+            'placeholder' => 'slug',
+            'label' => 'slug',
+        ],
+        'accept_terms' => [
+            'description' => 'accept_terms',
+            'helper_text' => 'accept_terms',
+            'placeholder' => 'accept_terms',
+            'label' => 'accept_terms',
+        ],
+        'privacy_notice' => [
+            'description' => 'privacy_notice',
+            'helper_text' => 'privacy_notice',
+            'placeholder' => 'privacy_notice',
+            'label' => 'privacy_notice',
+>>>>>>> 123bd69b8 (refactor: standardize wizard method from getWizardSteps() to Filament's native getSteps() across Fixcity module)
+        ],
     ],
     'sections' => [
         'Riepilogo' => [
@@ -98,6 +153,39 @@ return [
         'Disservizio' => [
             'label' => 'Disservizio',
             'heading' => 'Disservizio',
+        ],
+<<<<<<< HEAD
+        'fixcity::segnalazione' => [
+            'summary' => [
+                'title' => [
+                    'label' => 'fixcity::segnalazione.summary.title',
+                    'heading' => 'fixcity::segnalazione.summary.title',
+                ],
+            ],
+        ],
+    ],
+    'steps' => [
+        'privacy' => [
+            'label' => 'privacy',
+        ],
+        'dati-di-segnalazione' => [
+            'label' => 'dati-di-segnalazione',
+        ],
+        'riepilogo' => [
+            'label' => 'riepilogo',
+=======
+        'empty' => [
+            'heading' => 'empty',
+            'label' => 'empty',
+        ],
+    ],
+    'steps' => [
+        'step-2' => [
+            'label' => 'step-2',
+        ],
+        'step-1' => [
+            'label' => 'step-1',
+>>>>>>> 123bd69b8 (refactor: standardize wizard method from getWizardSteps() to Filament's native getSteps() across Fixcity module)
         ],
     ],
 ];

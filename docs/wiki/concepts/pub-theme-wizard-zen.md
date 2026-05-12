@@ -43,7 +43,7 @@ Il blueprint può e deve distinguere **contesto pannello vs pubblico** con `inAd
 // Modules/Fixcity/app/Filament/Resources/TicketResource/Schemas/TicketForm.php
 public static function getFormSchema(): array
 {
-    $steps = static::getWizardSteps();
+    $steps = static::getSteps();
 
     $wizard = inAdmin()
         ? \Filament\Schemas\Components\Wizard::make($steps)
