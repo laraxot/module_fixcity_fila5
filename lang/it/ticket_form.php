@@ -92,7 +92,6 @@ return [
         'priority' => [
             'description' => 'priority',
             'helper_text' => 'priority',
-<<<<<<< HEAD
             'label' => 'priority',
             'placeholder' => 'priority',
         ],
@@ -107,34 +106,12 @@ return [
             'placeholder' => 'type',
             'helper_text' => 'type',
             'description' => 'type',
-=======
-            'placeholder' => 'priority',
-            'label' => 'priority',
         ],
-        'type' => [
-            'description' => 'type',
-            'helper_text' => 'type',
-            'placeholder' => 'type',
-            'label' => 'type',
-        ],
-        'slug' => [
-            'description' => 'slug',
-            'helper_text' => 'slug',
-            'placeholder' => 'slug',
-            'label' => 'slug',
-        ],
-        'accept_terms' => [
-            'description' => 'accept_terms',
-            'helper_text' => 'accept_terms',
-            'placeholder' => 'accept_terms',
-            'label' => 'accept_terms',
-        ],
-        'privacy_notice' => [
-            'description' => 'privacy_notice',
-            'helper_text' => 'privacy_notice',
-            'placeholder' => 'privacy_notice',
-            'label' => 'privacy_notice',
->>>>>>> 123bd69b8 (refactor: standardize wizard method from getWizardSteps() to Filament's native getSteps() across Fixcity module)
+        'type_id' => [
+            'description' => 'type_id',
+            'helper_text' => 'type_id',
+            'label' => 'type_id',
+            'placeholder' => 'type_id',
         ],
     ],
     'sections' => [
@@ -154,7 +131,6 @@ return [
             'label' => 'Disservizio',
             'heading' => 'Disservizio',
         ],
-<<<<<<< HEAD
         'fixcity::segnalazione' => [
             'summary' => [
                 'title' => [
@@ -162,6 +138,10 @@ return [
                     'heading' => 'fixcity::segnalazione.summary.title',
                 ],
             ],
+        ],
+        'empty' => [
+            'heading' => 'empty',
+            'label' => 'empty',
         ],
     ],
     'steps' => [
@@ -173,19 +153,12 @@ return [
         ],
         'riepilogo' => [
             'label' => 'riepilogo',
-=======
-        'empty' => [
-            'heading' => 'empty',
-            'label' => 'empty',
         ],
-    ],
-    'steps' => [
-        'step-2' => [
-            'label' => 'step-2',
+        'summary' => [
+            'label' => 'summary',
         ],
-        'step-1' => [
-            'label' => 'step-1',
->>>>>>> 123bd69b8 (refactor: standardize wizard method from getWizardSteps() to Filament's native getSteps() across Fixcity module)
+        'data' => [
+            'label' => 'data',
         ],
     ],
 ];

@@ -15,9 +15,11 @@ use Modules\Xot\Filament\Widgets\XotBaseWizardWidget;
 
 class CreateTicketWizardWidget extends XotBaseWizardWidget
 {
+    protected static string $resource = \Modules\Fixcity\Filament\Resources\TicketResource::class;
+    
     /** @var array<string, mixed> */
     public array $blockData = [];
-
+    /*
     public function getWizardDisplayStep(): int
     {
         return $this->getWizardStartStep();
@@ -27,6 +29,7 @@ class CreateTicketWizardWidget extends XotBaseWizardWidget
     {
         return true;
     }
+    */
 
     /**
      * @param  array<string, mixed>  $blockData
@@ -42,7 +45,14 @@ class CreateTicketWizardWidget extends XotBaseWizardWidget
      */
     public function getSteps(): array
     {
-        return TicketForm::getSteps();
+        $steps = TicketForm::getSteps();
+
+        // Hide the first step if we are not on the first step
+        if ($this->wizardStartStep > 1) {
+            $steps[0] = $steps[0]->hidden();
+        }
+
+        return $steps;
     }
 
     public function submit(): void
@@ -93,19 +103,5 @@ class CreateTicketWizardWidget extends XotBaseWizardWidget
             'pageDescription' => SafeStringCastAction::cast($this->blockData['description'] ?? ''),
         ];
     }
-
-    public function getCancelFormAction(): Action
-    {
-        $cancelUrl = route('tests.view', ['slug' => config('fixcity.wizard.cancel_slug', 'segnalazione-01-inizio')]);
-        $localizedCancel = LaravelLocalization::getLocalizedURL(
-            LaravelLocalization::getCurrentLocale(),
-            $cancelUrl
-        );
-        $cancelHref = $localizedCancel !== false ? $localizedCancel : $cancelUrl;
-
-        return Action::make('cancel')
-            ->url($cancelHref)
-            ->button()
-            ->color('secondary');
-    }
+  
 }
