@@ -1,14 +1,14 @@
 # Filament Infolist Guidance for Wizard Summary (Fixcity)
 
-Overview
+## Regola
 
-In Filament 5, the wizard summary step must expose read-only structured data. Use `Filament\Infolists\Components` entries (`TextEntry`, `ImageEntry`, etc.) inside schema layout components, mapped to wizard state via `Filament\Schemas\Components\Utilities\Get`. Do **not** use `SchemaView`, `View::make()` or `Placeholder` for primary structured summary data.
+Nel wizard summary step usare `Filament\Infolists\Components\TextEntry` con `->state(fn(Get $get))`.
+**MAI** usare `TextInput`/`Textarea` disabilitati come riepilogo.
+**MAI** usare `->label()`, `->placeholder()`, `->helperText()` — gestiti da `LangServiceProvider`.
 
-References
+## Implementazione attuale
 
-- Official Filament docs: https://filamentphp.com/docs/5.x/infolists/overview
-
-Recommended pattern (example)
+File: `Modules/Fixcity/app/Filament/Resources/TicketResource/Schemas/TicketForm::getSummarySchema()`
 
 ```php
 use Filament\Infolists\Components\TextEntry;
@@ -16,32 +16,54 @@ use Filament\Schemas\Components\Grid;
 use Filament\Schemas\Components\Section;
 use Filament\Schemas\Components\Utilities\Get;
 
-public function getSummarySchema(): array
+public static function getSummarySchema(): array
 {
     return [
-        Section::make((string) __('fixcity::create_ticket_wizard.summary.section.label'))
+        Section::make()
             ->schema([
-                Grid::make(['default' => 1, 'md' => 2])->schema([
-                    TextEntry::make('review_name')
-                        ->state(fn (Get $get): string => (string) ($get('name') ?? '')),
-                    TextEntry::make('review_content')
-                        ->state(fn (Get $get): string => (string) ($get('content') ?? '')),
-                ]),
+                Grid::make(['default' => 1, 'md' => 2])
+                    ->schema([
+                        TextEntry::make('review_type')
+                            ->state(static function (Get $get): string {
+                                $type = $get('type');
+                                if ($type instanceof \BackedEnum) {
+                                    return (string) $type->value;
+                                }
+                                return (string) ($type ?? '');
+                            }),
+                        TextEntry::make('review_name')
+                            ->state(static fn (Get $get): string => (string) ($get('name') ?? '')),
+                        TextEntry::make('review_content')
+                            ->columnSpanFull()
+                            ->state(static fn (Get $get): string => (string) ($get('content') ?? '')),
+                        TextEntry::make('review_location')
+                            ->columnSpanFull()
+                            ->state(static function (Get $get): string {
+                                $location = $get('location');
+                                if (! is_array($location)) { return ''; }
+                                if (isset($location['address']) && is_string($location['address']) && '' !== $location['address']) {
+                                    return $location['address'];
+                                }
+                                $lat = $location['lat'] ?? $location['latitude'] ?? null;
+                                $lng = $location['lng'] ?? $location['longitude'] ?? null;
+                                if (null !== $lat && null !== $lng) {
+                                    return (string) $lat.', '.(string) $lng;
+                                }
+                                return '';
+                            }),
+                    ]),
             ]),
     ];
 }
 ```
 
-Implementation notes
+## Note
 
-- Import entry classes from `Filament\Infolists\Components` and layout classes from `Filament\Schemas\Components`.
-- There is no `Filament\Infolists\Components\Infolist` component to put inside `Step::schema()`.
-- Map state using `Get $get` in closures for robust server-driven state resolution.
-- Do not call `->label()` or `->placeholder()` in this project; translation/autolabel rules own labels.
-- For purely static HTML content (privacy notices, disclaimers), keep using Filament\Schemas prime components (Text) or dedicated theme views.
+- Import da `Filament\Infolists\Components` (entries) e `Filament\Schemas\Components` (layout).
+- `BackedEnum` → usare `->value` (non `(string)` diretto).
+- Per contenuto HTML statico (privacy, disclaimer) usare blade view dedicata.
 
-Acceptance criteria
+## Riferimenti
 
-- Summary step uses Infolist components with proper state mapping.
-- No `SchemaView`, `View::make()`, Placeholder, or disabled input fields used as primary summary content.
-- Docs updated and indexed in LLM wiki.
+- `Modules/Fixcity/app/Filament/Resources/TicketResource/Schemas/TicketInfolist.php`
+- https://filamentphp.com/docs/5.x/infolists/overview
