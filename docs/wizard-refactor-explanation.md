@@ -2,16 +2,16 @@
 
 ## Issue Summary
 The `CreateTicketWizardWidget` had two main issues:
-1. Syntax error due to duplicate `getWizardSteps()` method
+1. Syntax error due to duplicate `getSteps()` method
 2. Missing "next" button in frontoffice wizard interface
 
 ## Changes Made
 
 ### 1. Fixed Syntax Error
-Removed duplicate `getWizardSteps()` method that was causing a fatal PHP error:
+Removed duplicate `getSteps()` method that was causing a fatal PHP error:
 ```php
 // BEFORE (broken)
-public function getWizardSteps(): array
+public function getSteps(): array
 {
     return [
         Step::make('privacy')->label(__('fixcity::segnalazione.privacy.label')),
@@ -20,13 +20,13 @@ public function getWizardSteps(): array
     ];
 }
 {
-    return TicketForm::getWizardSteps();
+    return TicketForm::getSteps();
 }
 
 // AFTER (fixed)
-public function getWizardSteps(): array
+public function getSteps(): array
 {
-    return TicketForm::getWizardSteps();
+    return TicketForm::getSteps();
 }
 ```
 

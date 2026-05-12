@@ -176,7 +176,7 @@ Per questo wizard il criterio di accettazione minimo non è solo la correttezza 
 ### Metodi chiave:
 - `defaultFormData()`: inizializza **tutte** le chiavi dei campi degli step (anche vuote), non solo `privacyAccepted`. Se manca una chiave (es. `content`, `type_id`, `images`), Livewire segnala errori **Entangle** in console perché Alpine non trova `data.<campo>` su `$data`. Lo stato deve essere coerente con ciò che va persistito su `Ticket` dopo normalizzazione.
 - `submit()`: legge lo stato Filament, aggiunge `owner_id` se disponibile, crea `Ticket`, salva relazioni upload, dispatch evento, redirect a conferma
-- `getWizardSteps()`: compone i 3 step nel loro ordine
+- `getSteps()`: compone i 3 step nel loro ordine
 
 ### Classe naming convention:
 - **CORRETTO**: `CreateTicketWizardWidget` (Ticket, non Segnalazione)

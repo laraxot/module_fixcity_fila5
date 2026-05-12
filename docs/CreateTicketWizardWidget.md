@@ -10,7 +10,7 @@
 
 The widget follows the **Laraxot Convention-over-Configuration** (Religion):
 
-1.  **Step Generation**: Steps are defined via `$this->getStepByName('name')` in `getWizardSteps()`, which automatically maps to `get{Name}Schema()`. Ogni step può usare `->description()` come nella [Filament doc “Using a wizard”](https://filamentphp.com/docs/5.x/resources/creating-records#using-a-wizard); testi in `fixcity::ticket_wizard.steps.{privacy|data|summary}.description`.
+1.  **Step Generation**: Steps are defined via `$this->getStepByName('name')` in `getSteps()`, which automatically maps to `get{Name}Schema()`. Ogni step può usare `->description()` come nella [Filament doc “Using a wizard”](https://filamentphp.com/docs/5.x/resources/creating-records#using-a-wizard); testi in `fixcity::ticket_wizard.steps.{privacy|data|summary}.description`.
 2.  **Schema Definition**:
     - `TicketForm` (`Modules/Fixcity/app/Filament/Resources/TicketResource/Schemas/TicketForm.php`) e' la sorgente canonica dello schema ticket.
     - `CreateTicketWizardWidget::getPrivacySchema()`, `getDataSchema()` e `getSummarySchema()` delegano a `TicketForm`.

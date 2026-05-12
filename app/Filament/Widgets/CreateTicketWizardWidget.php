@@ -5,10 +5,8 @@ declare(strict_types=1);
 namespace Modules\Fixcity\Filament\Widgets;
 
 use Filament\Actions\Action;
-use Filament\Schemas\Components\Component;
 use Filament\Schemas\Components\Wizard\Step;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Session;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 use Modules\Fixcity\Filament\Resources\TicketResource\Schemas\TicketForm;
 use Modules\Fixcity\Models\Ticket;
@@ -42,22 +40,9 @@ class CreateTicketWizardWidget extends XotBaseWizardWidget
     /**
      * @return array<int, Step>
      */
-    public function getWizardSteps(): array
+    public function getSteps(): array
     {
-        return TicketForm::getWizardSteps();
-    }
-
-    /**
-     * @return array<int, Component>
-     */
-    public function getFormSchema(): array
-    {
-        $wizard = $this->makeWizard($this->getWizardSteps())
-            ->submitAction($this->getWizardSubmitAction());
-
-        return [
-            $wizard,
-        ];
+        return TicketForm::getSteps();
     }
 
     public function submit(): void
@@ -109,7 +94,7 @@ class CreateTicketWizardWidget extends XotBaseWizardWidget
         ];
     }
 
-    protected function getCancelFormAction(): Action
+    public function getCancelFormAction(): Action
     {
         $cancelUrl = route('tests.view', ['slug' => config('fixcity.wizard.cancel_slug', 'segnalazione-01-inizio')]);
         $localizedCancel = LaravelLocalization::getLocalizedURL(
