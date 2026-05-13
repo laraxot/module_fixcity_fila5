@@ -18,6 +18,7 @@ use Filament\Schemas\Components\Wizard\Step;
 use Modules\Fixcity\Enums\TicketPriorityEnum;
 use Modules\Fixcity\Enums\TicketTypeEnum;
 use Modules\Geo\Filament\Forms\Components\CoordinatePicker;
+
 use Modules\Xot\Filament\Resources\Schemas\XotBaseResourceForm;
 
 class TicketForm extends XotBaseResourceForm
@@ -214,5 +215,10 @@ class TicketForm extends XotBaseResourceForm
         return [];
     }
 
-    
+    public static function getDataSchemaOld(): array
+    {
+        return [];
+    }
 }
+
+

@@ -3,7 +3,11 @@
 ## Overview
 
 La pagina `/it/tests/segnalazioni-elenco` mostra l'elenco delle segnalazioni (ticket) in due viste:
+<<<<<<< HEAD
 - **Mappa**: componente Lit Web Component `<map-lit>` con Leaflet + MarkerCluster
+=======
+- **Mappa**: componente Lit Web Component `<ticket-map-lit>` con Leaflet + MarkerCluster
+>>>>>>> 01dce8d29 (initial commit)
 - **Lista**: card Bootstrap Italia con dati reali dal DB (top 20 + load more futuro)
 
 ## Pattern: Static JSON File (farmshops.eu)
@@ -15,7 +19,11 @@ Ispirato a https://github.com/CodeforKarlsruhe/farmshops.eu
     └─ scrive: public_html/data/tickets.json
 
 [Frontend]
+<<<<<<< HEAD
     └─ <map-lit data-url="/data/tickets.json">
+=======
+    └─ <ticket-map-lit data-url="/data/tickets.json">
+>>>>>>> 01dce8d29 (initial commit)
            └─ fetch() → L.geoJSON() → MarkerCluster
 ```
 
@@ -29,6 +37,7 @@ Il file è **statico** e **leggero** — anche con migliaia di punti resta < 1MB
 - **Output**: `public_html/data/tickets.json` (GeoJSON FeatureCollection)
 - **Filtro**: solo ticket con `location` non null e coordinate valide
 
+<<<<<<< HEAD
 ### map-lit.js (canonical)
 - **Path**: `Modules/Geo/resources/js/components/map-lit.js` — LitElement web component (estende `LitElement` con import `lit`)
 - **Custom Element**: `<map-lit>` — registrato via `customElements.define('map-lit', MapLit)` con guard `if (!customElements.get('map-lit'))`
@@ -40,12 +49,24 @@ Il file è **statico** e **leggero** — anche con migliaia di punti resta < 1MB
 > **Storico nomi (deprecati — NON usare nei Blade nuovi):**
 > - `<ticket-map-lit>` (mai esistito come file, riferimento errato della wiki precedente)
 > - `<geo-map-lit>` (componente alternativo in `Modules/Geo/resources/js/components/geo-map-lit.js`, da NON usare per `segnalazioni-elenco`; il canonico è `<map-lit>` per decisione 2026-05-07)
+=======
+### ticket-map-lit.js
+- **Path**: `Modules/Geo/resources/js/components/ticket-map-lit.js` — Lit Web Component (no LitElement dependency, plain HTMLElement) — vive in Geo perché riutilizzabile
+- **Custom Element**: `<ticket-map-lit>`
+- **Attributi**: `data-url` (URL del JSON), `style="height:450px"`
+- **API pubblica**: `element.filterByType(type)` / `element.filterByType(null)`
+- **Regola**: usa `class="map-container"` mai `id="map"` (regola leaflet-class-selector)
+>>>>>>> 01dce8d29 (initial commit)
 
 ### layout.blade.php (Themes/Sixteen)
 - **Path**: `Themes/Sixteen/resources/views/components/blocks/segnalazioni/layout.blade.php`
 - **Filtri sidebar**: generati dinamicamente da `TicketTypeEnum::cases()` + conteggi reali
 - **Lista**: query `Ticket::latest()->take(20)->get()` (no mock)
+<<<<<<< HEAD
 - **Leaflet**: caricato via npm/Vite dal modulo Geo, non via CDN
+=======
+- **Leaflet**: caricato via CDN (unpkg) — no Vite dependency
+>>>>>>> 01dce8d29 (initial commit)
 
 ## JSON Format
 
