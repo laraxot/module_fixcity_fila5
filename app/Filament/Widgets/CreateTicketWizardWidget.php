@@ -15,7 +15,6 @@ use Modules\Xot\Filament\Widgets\XotBaseWizardWidget;
 
 class CreateTicketWizardWidget extends XotBaseWizardWidget
 {
-    protected static string $resource = \Modules\Fixcity\Filament\Resources\TicketResource::class;
     
     /** @var array<string, mixed> */
     public array $blockData = [];
@@ -37,7 +36,8 @@ class CreateTicketWizardWidget extends XotBaseWizardWidget
     public function mount(array $blockData = []): void
     {
         $this->blockData = $blockData;
-        $this->initWizardState();
+        $this->wizardStartStep = 1;
+        $this->form->fill(TicketForm::getDefaultFormState());
     }
 
     /**
@@ -46,11 +46,6 @@ class CreateTicketWizardWidget extends XotBaseWizardWidget
     public function getSteps(): array
     {
         $steps = TicketForm::getSteps();
-
-        // Hide the first step if we are not on the first step
-        if ($this->wizardStartStep > 1) {
-            $steps[0] = $steps[0]->hidden();
-        }
 
         return $steps;
     }

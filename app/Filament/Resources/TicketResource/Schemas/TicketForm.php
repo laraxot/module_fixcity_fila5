@@ -13,8 +13,8 @@ use Filament\Infolists\Components\TextEntry;
 use Filament\Schemas\Components\Component as SchemaComponent;
 use Filament\Schemas\Components\Grid;
 use Filament\Schemas\Components\Section;
-use Filament\Schemas\Components\Wizard\Step;
 use Filament\Schemas\Components\Utilities\Get;
+use Filament\Schemas\Components\Wizard\Step;
 use Modules\Fixcity\Enums\TicketPriorityEnum;
 use Modules\Fixcity\Enums\TicketTypeEnum;
 use Modules\Geo\Filament\Forms\Components\CoordinatePicker;
@@ -35,6 +35,31 @@ class TicketForm extends XotBaseResourceForm
     }
 
     /**
+     * Stato iniziale del form wizard richiesto da Livewire per l'entangle Alpine.
+     * Tutti i campi di $fillable che il wizard gestisce, con valori null/vuoti.
+     * `location` allineato alle chiavi di CoordinatePicker (latitude/longitude).
+     * `priority` è stringa nel DB (non castata a enum nel modello).
+     * `type_id` è integer nel DB, castato a TicketTypeEnum nel modello.
+     *
+     * @return array<string, mixed>
+     */
+    public static function getDefaultFormState(): array
+    {
+        return [
+            'privacyAccepted' => false,
+            'name' => '',
+            'type_id' => null,
+            'priority' => TicketPriorityEnum::default()->value,
+            'content' => '',
+            'location' => [
+                'latitude' => null,
+                'longitude' => null,
+                'address' => null,
+            ],
+        ];
+    }
+
+    /**
      * @return array<int, SchemaComponent>
      */
     public static function getPrivacySchema(): array
@@ -48,6 +73,14 @@ class TicketForm extends XotBaseResourceForm
     }
 
     /**
+     * Campi del form dati del ticket.
+     * - `name`: obbligatorio, $fillable
+     * - `type_id`: integer nel DB, castato a TicketTypeEnum; Select con options enum
+     * - `priority`: stringa nel DB ($fillable), NON castata a enum nel modello; Select con options enum
+     * - `content`: longText nel DB, $fillable
+     * - `location`: JSON nel DB, castato array; gestito da CoordinatePicker con chiavi latitude/longitude
+     * - `images`: media collection 'attachments' tramite Spatie MediaLibrary
+     *
      * @return array<int, SchemaComponent>
      */
     public static function getDataSchema(): array
@@ -58,10 +91,6 @@ class TicketForm extends XotBaseResourceForm
                 ->columnSpanFull()
                 ->required()
                 ->maxLength(255),
-            TextInput::make('slug')
-                ->columnSpanFull()
-                ->required()
-                ->hidden(),
             Select::make('type_id')
                 ->hiddenLabel()
                 ->searchable()
@@ -71,26 +100,23 @@ class TicketForm extends XotBaseResourceForm
                 ->hiddenLabel()
                 ->searchable()
                 ->options(TicketPriorityEnum::class)
-                ->default(TicketPriorityEnum::default())
+                ->default(TicketPriorityEnum::default()->value)
                 ->columnSpanFull(),
             Textarea::make('content')
                 ->hiddenLabel()
-                ->rows(2)
-                ->cols(10),
+                ->rows(4)
+                ->columnSpanFull(),
             CoordinatePicker::make('location')
                 ->hiddenLabel()
                 ->columnSpanFull()
                 ->zoom(15)
-                ->height('340px')
-                ->reverseGeocoding(),
+                ->height('340px'),
             SpatieMediaLibraryFileUpload::make('images')
                 ->hiddenLabel()
                 ->collection('attachments')
                 ->directory('attachments')
                 ->disk('uploads')
-                ->responsiveImages()
                 ->multiple()
-                ->required()
                 ->maxFiles(5)
                 ->maxSize(10240)
                 ->columnSpanFull(),
@@ -98,8 +124,9 @@ class TicketForm extends XotBaseResourceForm
     }
 
     /**
-     * Riepilogo wizard — Infolist entries (read-only) invece di form inputs disabilitati.
-     * Pattern: {@see TextEntry} con `->state(fn(Get $get))` per leggere lo stato wizard.
+     * Riepilogo wizard — TextEntry read-only con ->state() che legge $get() dal form state.
+     * NON usa form inputs disabilitati (causano errori di cast enum→string).
+     * I nomi degli entry hanno prefisso 'review_' per evitare conflitti con i field del form.
      *
      * @return array<int, SchemaComponent>
      */
@@ -110,16 +137,17 @@ class TicketForm extends XotBaseResourceForm
                 ->schema([
                     Grid::make(['default' => 1, 'md' => 2])
                         ->schema([
-                            TextEntry::make('type_id')
+                            TextEntry::make('review_type')
                                 ->state(static fn (Get $get): string => static::formatTicketType($get('type_id'))),
-                            TextEntry::make('priority')
+                            TextEntry::make('review_priority')
                                 ->state(static fn (Get $get): string => static::formatTicketPriority($get('priority'))),
-                            TextEntry::make('name')
+                            TextEntry::make('review_name')
+                                ->columnSpanFull()
                                 ->state(static fn (Get $get): string => (string) ($get('name') ?? '')),
-                            TextEntry::make('content')
+                            TextEntry::make('review_content')
                                 ->columnSpanFull()
                                 ->state(static fn (Get $get): string => (string) ($get('content') ?? '')),
-                            TextEntry::make('location')
+                            TextEntry::make('review_location')
                                 ->columnSpanFull()
                                 ->state(static function (Get $get): string {
                                     $location = $get('location');
@@ -131,8 +159,8 @@ class TicketForm extends XotBaseResourceForm
                                         return $location['address'];
                                     }
 
-                                    $lat = $location['lat'] ?? $location['latitude'] ?? null;
-                                    $lng = $location['lng'] ?? $location['longitude'] ?? null;
+                                    $lat = $location['latitude'] ?? $location['lat'] ?? null;
+                                    $lng = $location['longitude'] ?? $location['lng'] ?? null;
 
                                     if (null !== $lat && null !== $lng) {
                                         return (string) $lat.', '.(string) $lng;
@@ -151,8 +179,12 @@ class TicketForm extends XotBaseResourceForm
             return $value->getLabel();
         }
 
-        if (is_string($value)) {
-            return TicketTypeEnum::tryFrom($value)?->getLabel() ?? $value;
+        if (is_string($value) || is_int($value)) {
+            $enum = is_int($value)
+                ? TicketTypeEnum::tryFrom((string) $value)
+                : TicketTypeEnum::tryFrom($value);
+
+            return $enum?->getLabel() ?? (string) $value;
         }
 
         return '';
@@ -172,11 +204,14 @@ class TicketForm extends XotBaseResourceForm
     }
 
     /**
+     * Wizard: getFormSchema() deve restituire array vuoto.
+     * Il wizard usa getSteps() → getStepByName() → get{Name}Schema().
+     *
      * @return array<int|string, SchemaComponent>
      */
     public static function getFormSchema(): array
     {
-        return static::getDataSchema();
+        return [];
     }
 
     
