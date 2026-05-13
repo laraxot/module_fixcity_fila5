@@ -41,9 +41,13 @@ class TicketInfolist extends XotBaseResourceInfolist
     {
         return [
             Tabs::make('ticket')
-                ->schema([
-                    static::getTabByName('overview', static::getOverviewSchema(), 'heroicon-o-information-circle', 2),
-                    static::getTabByName('location', static::getLocationSchema(), 'heroicon-o-map-pin', 2),
+                ->tabs([
+                    Tabs\Tab::make('overview')
+                        ->icon('heroicon-o-information-circle')
+                        ->schema(static::getOverviewSchema()),
+                    Tabs\Tab::make('location')
+                        ->icon('heroicon-o-map-pin')
+                        ->schema(static::getLocationSchema()),
                 ])
                 ->columnSpanFull(),
         ];
