@@ -113,6 +113,9 @@ return [
             'label' => 'type_id',
             'placeholder' => 'type_id',
         ],
+        'review_priority' => [
+            'label' => 'review_priority',
+        ],
     ],
     'sections' => [
         'Riepilogo' => [

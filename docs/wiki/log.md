@@ -1,9 +1,12 @@
+<<<<<<< HEAD
 ## [2026-05-08] architecture | segnalazioni-elenco map-lit canonical
 
 - Aggiornata architettura mappa/lista: la vista pubblica usa `<map-lit>`, non `<ticket-map-lit>` e non `<geo-map-lit>`.
 - Confermato boundary: Fixcity genera `/data/tickets.json`, Geo renderizza il componente, Sixteen monta layout e filtri.
 - Corretto falso storico: Leaflet arriva dal bundle npm/Vite del modulo Geo, non da CDN nel Blade.
 
+=======
+>>>>>>> 01dce8d29 (initial commit)
 ## [2026-05-05] architecture | filament v5 hybrid pattern - complete schema stack
 
 - **TicketInfolist** evolved to Filament v5 Hybrid Pattern: `configure(Schema $schema): Schema` + `getInfolistSchema(): array` dual API.

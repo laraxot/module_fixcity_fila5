@@ -7,6 +7,7 @@ namespace Modules\Fixcity\Filament\Widgets;
 use Filament\Actions\Action;
 use Filament\Schemas\Components\Wizard\Step;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 use Modules\Fixcity\Filament\Resources\TicketResource\Schemas\TicketForm;
 use Modules\Fixcity\Models\Ticket;
