@@ -137,6 +137,33 @@ return [
         'gdpr_text' => [
             'label' => 'gdpr_text',
         ],
+        'priority' => [
+            'description' => 'priority',
+            'helper_text' => 'priority',
+            'label' => 'priority',
+            'placeholder' => 'priority',
+        ],
+        'slug' => [
+            'label' => 'slug',
+            'placeholder' => 'slug',
+            'helper_text' => 'slug',
+            'description' => 'slug',
+        ],
+        'type' => [
+            'label' => 'type',
+            'placeholder' => 'type',
+            'helper_text' => 'type',
+            'description' => 'type',
+        ],
+        'type_id' => [
+            'description' => 'type_id',
+            'helper_text' => 'type_id',
+            'label' => 'type_id',
+            'placeholder' => 'type_id',
+        ],
+        'review_priority' => [
+            'label' => 'review_priority',
+        ],
     ],
     'sections' => [
         'Riepilogo' => [
