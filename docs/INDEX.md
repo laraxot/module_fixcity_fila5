@@ -1,50 +1,107 @@
-# Fixcity Module — Indice Documentazione
+# Fixcity Module Documentation Index
 
-Modulo Laravel responsabile della gestione delle segnalazioni cittadine (Ticket).
+## Documentation Overview
+
+This directory contains comprehensive documentation for the Fixcity application, including module architecture, theme guidelines, and development best practices.
+
+## Documentation Structure
+
+### 📁 Module Documentation
+- **[Module README](README.md)** - Complete overview of the Fixcity module architecture and features
+- **[Wizard System](wizard-system.md)** - Detailed documentation for the multi-step wizard system
+- **[API Documentation](api/)** - API endpoints and integration patterns
+
+### 📁 Theme Documentation
+- **[Sixteen Theme](../Themes/Sixteen/docs/README.md)** - Complete theme documentation for Design Comuni integration
+
+### 📁 Development Guidelines
+- **[Best Practices](development/best-practices.md)** - Development standards and patterns
+- **[Code Standards](development/code-standards.md)** - Coding standards and conventions
+- **[Testing Guidelines](development/testing.md)** - Testing strategies and guidelines
+
+### 📁 Integration Guides
+- **[Filament Integration](integrations/filament.md)** - Filament widget integration patterns
+- **[Localization](integrations/localization.md)** - Translation and internationalization
+- **[Asset Management](integrations/assets.md)** - Frontend asset management
+
+## Quick Navigation
+
+### For Developers
+- Start with the [Module README](README.md) for an overview
+- Read [Wizard System](wizard-system.md) for form development
+- Check [Theme Documentation](../Themes/Sixteen/docs/README.md) for frontend development
+- Follow [Best Practices](development/best-practices.md) for consistent coding
+
+### For Designers
+- Review [Theme Documentation](../Themes/Sixteen/docs/README.md) for Design Comuni integration
+- Check [Component Library](Themes/Sixteen/docs/components.md) for available components
+- Follow [Style Guide](Themes/Sixteen/docs/style-guide.md) for consistent design
+
+### For Project Managers
+- Read [Module README](README.md) for feature overview
+- Check [Roadmap](development/roadmap.md) for planned features
+- Review [Performance Guidelines](development/performance.md) for optimization
+
+## Key Topics
+
+### 🚀 Getting Started
+- [Module Overview](README.md#overview)
+- [Architecture](README.md#architecture)
+- [Quick Start Guide](README.md#development-guidelines)
+
+### 🎨 Frontend Development
+- [Design Comuni Integration](../Themes/Sixteen/docs/README.md#design-comuni-integration)
+- [Component Development](../Themes/Sixteen/docs/README.md#component-development)
+- [Asset Management](../Themes/Sixteen/docs/README.md#asset-management)
+
+### 📝 Backend Development
+- [Form Development](README.md#form-development)
+- [Widget Development](README.md#widget-development)
+- [Translation Management](README.md#translation-management)
+
+### 🔧 Configuration
+- [Environment Variables](README.md#configuration)
+- [Routes](README.md#routes)
+- [Database Schema](database/schema.md)
+
+## Documentation Updates
+
+### Latest Updates (May 2026)
+- ✅ Added complete wizard system documentation
+- ✅ Created comprehensive theme documentation
+- ✅ Updated module architecture documentation
+- ✅ Added integration guidelines
+- ✅ Enhanced development best practices
+
+### Future Updates
+- 📋 API documentation completion
+- 📋 Testing guidelines expansion
+- 📋 Performance optimization guide
+- 📋 Security documentation
+
+## Contributing
+
+### Adding New Documentation
+1. Create documents in appropriate directories
+2. Follow the existing structure and formatting
+3. Update this index for navigation
+4. Review with team before merging
+
+### Documentation Standards
+- Use clear, concise language
+- Include code examples where appropriate
+- Provide practical examples and use cases
+- Keep content up-to-date with code changes
+
+## Support
+
+For questions or issues with documentation:
+- Check existing documentation first
+- Search through [CHANGELOG.md](../../CHANGELOG.md)
+- Review [troubleshooting guides](README.md#troubleshooting)
+- Contact the development team
 
 ---
 
-## 🏛 Architettura e Governance
-
-| Documento | Descrizione |
-|-----------|-------------|
-| **[Filament Wizard Pattern](./filament-wizard-pattern.md)** | **Guida principale** per wizard multi-step con Filament v5. |
-| [Rules / Filament Wizard Rules](./rules/filament-wizard-rules.md) | Regole operative: docs-first, concorrenza agenti, Infolist vs Form Schema, anti-duplicazione. |
-| [Wizard Governance Philosophy](./wizard-governance-philosophy.md) | Perché/regola/visione/zen: confini modulo-base-tema e anti-duplicazione. |
-| [Structure](./structure.md) | Struttura moduli e directory. |
-| [Module Boundary Philosophy](./MODULE-BOUNDARY-PHILOSOPHY.md) | **Zen dei confini tra moduli**: Geo possiede geolocation, Fixcity consuma. |
-
----
-
-## 🧩 Widgets e Componenti
-
-| Documento | Descrizione |
-|-----------|-------------|
-| **[CreateTicketWizardWidget](./CreateTicketWizardWidget.md)** | Widget Filament 3-step per creazione ticket: campi, metodi, traduzioni. |
-| **[Filament Summary Infolist Guidance](./filament-summary-infolist-guidance.md)** | Guida: usare Filament Infolists (TextEntry/ImageEntry) per lo step summary, evitare SchemaView/Placeholder. |
-| **[Filament Components Guidelines](./filament-components-guidelines.md)** | Guida corretta: Placeholder vs TextEntry, imports, anti-pattern verificati. |
-| **[Wizard Visual Parity](./wizard-visual-parity.md)** | CSS scoped overrides per Bootstrap Italia parity. Entry point `app-test.css`. |
-| [Wizard Single Next CTA Rule](./wiki/concepts/wizard-single-next-cta-rule.md) | Regola di UI parity: un solo tasto "Avanti" per step. |
-| [Wizard Nav Responsive Alignment](./wiki/concepts/wizard-nav-responsive-alignment.md) | Analisi posizionamento CTA (Vertical stack + stretch per mobile). |
-| [Livewire Cache Table Rule](./wiki/concepts/livewire-cache-table-rate-limiter.md) | Gestione backend cache per Rate Limiter e Checksum. |
-| **[Select Enum Best Practices](./filament-select-enum-best-practices.md)** | Come usare correttamente Select con enum in Filament: evita codice complesso! |
-| [AddressInput (Geo)](../../Geo/docs/address-input-component.md) | Componente Filament per input indirizzi con mappa. |
-| **[Coordinate Picker Lit](./coordinate-picker-lit.md)** | Componente mappa Lit.dev + Leaflet per wizard ticket. |
-
----
-
-## 📚 Altri Riferimenti
-
-- [Traduzioni IT](../lang/it/create_ticket_wizard.php) / [Traduzioni EN](../lang/en/create_ticket_wizard.php)
-- [Storie di Sviluppo](./stories/index.md)
-- [PHPStan Fixes](./phpstan/index.md)
-- [Sixteen Theme Documentation](../../Themes/Sixteen/docs/00-index.md)
-
----
-
-## 🧘 Xot Base Patterns (Global)
-
-- [XotBaseWizardWidget Philosophy](../../Xot/docs/filament/widgets/xot-base-wizard-widget-philosophy.md)
-- [Infolists for Summary](../../Xot/docs/filament/widgets/infolists-for-summary.md)
-- [Schemas Unified Religion](../../../../docs/schemas-unified-religion.md)
-- [AutoLabel Guidelines](../../UI/docs/autolabel-guidelines.md)
+*Last Updated: May 2026*  
+*Version: 1.0.0*

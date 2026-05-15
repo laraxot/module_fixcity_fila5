@@ -128,19 +128,19 @@ return [
         'content' => [
             'label' => 'content',
             'description' => 'content',
-            'helper_text' => 'content',
+            'helper_text' => '',
             'placeholder' => 'content',
         ],
         'type' => [
             'label' => 'type',
             'description' => 'type',
-            'helper_text' => 'type',
+            'helper_text' => '',
             'placeholder' => 'type',
         ],
         'name' => [
             'label' => 'name',
             'description' => 'name',
-            'helper_text' => 'name',
+            'helper_text' => '',
             'placeholder' => 'name',
         ],
         'review_email' => [

@@ -1,174 +1,184 @@
-# 🎫 Modulo [PROJECT_NAME] - Sistema di Gestione Ticket
+# Fixcity Module Documentation
 
-[![PHPStan Level 10](https://img.shields.io/badge/PHPStan-Level%2010-brightgreen.svg)](https://phpstan.org/)
-[![Laravel 12.x](https://img.shields.io/badge/Laravel-12.x-red.svg)](https://laravel.com/)
-[![Filament 5.x](https://img.shields.io/badge/Filament-5.x-blue.svg)](https://filamentphp.com/)
-[![Translation Ready](https://img.shields.io/badge/Translation-IT%20%7C%20EN-green.svg)](https://laravel.com/docs/localization)
+## Overview
+The Fixcity module is responsible for managing ticket reports and segnalazioni in the Fixcity application. It provides the core functionality for users to create, manage, and track municipal service requests.
 
-> **🚀 Modulo [PROJECT_NAME]**: Sistema completo per la gestione di ticket, segnalazioni e supporto tecnico con interfaccia Filament avanzata.
+## Architecture
 
-## 📋 Panoramica
+### Core Components
 
-Il modulo **[PROJECT_NAME]** è il sistema di ticketing dell'applicazione, fornendo:
+#### 1. Ticket Management
+- **Ticket Model**: Main entity representing service requests
+- **Ticket Resource**: Filament resource for CRUD operations
+- **TicketForm**: Schema definition for ticket creation forms
 
-- 🎫 **Gestione Ticket Completa** - Creazione, assegnazione e tracking ticket
-- 👥 **Gestione Utenti e Ruoli** - Sistema di autorizzazione granulare
-- 📊 **Dashboard e Reporting** - Statistiche e metriche avanzate
-- 🔔 **Sistema Notifiche** - Notifiche real-time per aggiornamenti
-- 🎨 **Interfaccia Filament** - UI moderna e responsive
-- 🌐 **Multi-lingua** - Traduzioni complete IT/EN
-- 🧙 **Wizard Frontoffice** - Creazione guidata unificata per i cittadini
+#### 2. Wizard System
+- **CreateTicketWizardWidget**: Multi-step wizard for ticket creation
+- **Step Management**: Privacy → Data → Summary workflow
+- **Form Validation**: Step-specific validation rules
 
-## 🧙 Wizard Unificato (Segnalazione Crea)
+#### 3. Localization
+- **Italian Language Support**: Complete Italian translations
+- **Dynamic Labels**: Automatic label generation via LangServiceProvider
+- **Translation Keys**: Structured translation files in `lang/it/`
 
-Il modulo include un wizard unificato per la creazione di segnalazioni lato cittadino, che unifica le fasi di privacy, inserimento dati e riepilogo in un'unica esperienza fluida.
+### File Structure
 
-- **URL**: `/it/tests/segnalazione-crea`
-- **Widget**: `CreateTicketWizardWidget`
-- **Schema**: [Filament v5 `Wizard` + `Step`](https://filamentphp.com/docs/5.x/schemas/wizards) in `getFormSchema()`; base widget [`XotBaseWizardWidget`](../../Xot/docs/filament/widgets/xot-base-wizard-widget.md); `CreateTicketWizardWidget` usa `makeWizard()` per ereditare policy comuni Xot; vista Blade solo wrapper (titolo, contatti) + form (`{{ $this->form }}`)
-- **Layout / parity**: Design Comuni (CSS tema Sixteen); story refactor completata: [7-34](../../../../_bmad-output/implementation-artifacts/7-34-create-ticket-wizard-filament-schema-wizard-refactor.md)
-- **Privacy step semantics**: lo step 1 deve contenere copy GDPR first-class e non il solo checkbox; criterio di scelta componente e story: [7-47](../../../../_bmad-output/implementation-artifacts/7-47-segnalazione-crea-step1-privacy-notice-design-comuni-parity.md)
-- **Data step semantics**: lo step 2 deve usare `Section` per la gerarchia visiva dei tre blocchi (`Luogo`, `Disservizio`, `Autore`) e `Infolist` solo per i dati read-only strutturati; story: [7-48](../../../../_bmad-output/implementation-artifacts/7-48-segnalazione-crea-step2-visual-parity-via-sections-and-infolist.md)
-
-Per dettagli sull'architettura consulta: [Ticket Wizard Frontoffice](ticket-wizard-frontoffice.md) (`?step=` per QA; geolocalizzazione step 2 — story [7-33](../../../../_bmad-output/implementation-artifacts/7-33-segnalazione-crea-step2-geolocation-use-my-location-and-step-query.md)).
-
-La creazione ticket lato **pannello** (operatori) segue le pagine resource Filament (`XotBaseCreateRecord`, pipeline `CreateRecord`): vedi [create-record-page](../../Xot/docs/filament/pages/create-record-page.md). Non è il flusso del wizard cittadino.
-
-### ⚠️ Regole Critiche
-
-**Filament Wizard Rule**: MAI gestione manuale step in Blade. Usa `Filament\Schemas\Components\Wizard`; la Blade resta wrapper e parity layer, non state machine. Vedi [Rules / Filament Wizard Rules](./rules/filament-wizard-rules.md).
-
-**Body Plain Rule**: Il tag `<body>` deve essere SEMPRE plain — SENZA classi, SENZA attributi. Vedi [HTML Body Parity Rule](html-body-parity-rule.md).
-
-**Route `/tests/[slug]` Rule**: per le pagine test Design Comuni lo scoping CSS/JS deve usare il wrapper canonico `.page-content[data-slug][data-side]`.
-
-**Stepper Responsive**: Mobile-first con media queries. Vedi [Stepper Component](../../Themes/Sixteen/docs/design-comuni/stepper-component.md).
-
-**Multilingua**: TUTTO il testo deve usare chiavi traduzione (`fixcity::...`) e gli slug di contenuto devono vivere in CMS/config — MAI hardcoded italiano nel PHP runtime.
-
-**Clean Code Wizard Steps**: Ogni step = funzione dedicata. Vedi [Xot clean-code-wizard-steps](../../Xot/docs/clean-code-wizard-steps.md).
-
-## ⚡ Funzionalità Core
-
-### 🎫 **Ticket Management**
-```php
-// Creazione ticket con informazioni complete
-$ticket = Ticket::create([
-    'name' => 'Problema sistema',
-    'content' => 'Descrizione dettagliata del problema',
-    'priority' => TicketPriorityEnum::HIGH,
-    'status' => TicketStatusEnum::OPEN,
-    'type' => TicketTypeEnum::TECHNICAL,
-    'owner_id' => $user->id,
-]);
+```
+Modules/Fixcity/
+├── app/
+│   ├── Filament/
+│   │   ├── Resources/
+│   │   │   └── TicketResource/
+│   │   │       ├── Schemas/
+│   │   │       │   └── TicketForm.php
+│   │   │       └── TicketResource.php
+│   │   └── Widgets/
+│   │       └── CreateTicketWizardWidget.php
+│   ├── Models/
+│   │   └── Ticket.php
+│   └── Actions/
+│       └── NormalizeTicketLocationDataAction.php
+├── resources/
+│   ├── views/
+│   │   └── filament/
+│   │       └── widgets/
+│   │           └── create-ticket-wizard.blade.php
+│   └── lang/
+│       └── it/
+│           └── segnalazione.php
+└── routes/
+    └── web.php
 ```
 
-## 🎯 Stato Qualità
+### Key Features
 
-- **PHPStan**: Level 10 Compliance ✅
-- **Test Coverage**: 85%+ ✅
-- **Architettura**: Modular Monolith con Laraxot Base ✅
+#### 1. Multi-Step Wizard
+- **Step 1 - Privacy**: Acceptance of privacy terms
+- **Step 2 - Data**: Ticket information collection
+- **Step 3 - Summary**: Review and submission
 
-## 🚀 Quick Start
+#### 2. Form Schema System
+- **TicketForm::getSteps()**: Dynamic step generation
+- **Schema Components**: Reusable form components
+- **Validation**: Step-specific validation rules
 
-```bash
-# Abilitare il modulo
-php artisan module:enable [PROJECT_NAME]
+#### 3. Location Management
+- **Geolocation Support**: Automatic location detection
+- **Address Normalization**: Standardized address formatting
+- **Map Integration**: Visual location selection
 
-# Eseguire le migrazioni
-php artisan migrate
+#### 4. User Management
+- **Anonymous Support**: Ticket creation without registration
+- **Authenticated Users**: Automatic user association
+- **Permission Handling**: Role-based access control
 
-# Popolare dati di test
-php artisan db:seed --class=[PROJECT_NAME]Seeder
+### Configuration
+
+#### Environment Variables
+```env
+# Ticket confirmation page slug
+FIXCITY_WIZARD_CONFIRMATION_SLUG=segnalazione-04-conferma
+
+# Google Maps API Key for location services
+GOOGLE_MAPS_API_KEY=your_api_key_here
 ```
 
-## 📚 Documentazione Completa
+#### Routes
+- `tests.view`: Display test pages including segnalazione creation
+- `ticket.create`: Direct ticket creation endpoint
 
-### 🏗️ Architettura
-- [Struttura Modulo](structure.md) - Panoramica architettura
-- [Modelli e Relazioni](models.md) - Documentazione modelli
-- [Enum e Stati](enums.md) - Gestione stati e tipi
-- [Componenti](components.md) - Componenti Blade e Filament
-- [Links](links.md) - Link utili nel modulo
+### Development Guidelines
 
-### 🎨 Filament & Wizard
-- [Rules / Filament Wizard Rules](./rules/filament-wizard-rules.md) — ⚠️ REGOLA: MAI gestione manuale step in Blade, usa Filament Wizard
-- [Wizard Governance Philosophy](wizard-governance-philosophy.md) - Perche/regola/visione/politica/zen su wizard
-- [CreateTicketWizardWidget](CreateTicketWizardWidget.md) - Widget dettaglio
-- [Ticket Wizard Frontoffice](ticket-wizard-frontoffice.md) - Architettura wizard
-- [Resources](resources.md) - Gestione risorse Filament
-- [Pages](pages.md) - Pagine personalizzate
-- [Widgets](widgets.md) - Widget dashboard
+#### 1. Form Development
+- Use `TicketForm` for consistency
+- Follow the step-based approach
+- Implement proper validation
+- Use Italian translations
 
-### 📏 Regole & Standard
-- [HTML Body Parity Rule](html-body-parity-rule.md) - Body plain, no classi
-- [Rules / Filament Wizard Rules](./rules/filament-wizard-rules.md) - Wizard implementation pattern
-- [Clean Code Wizard Steps](../../Xot/docs/clean-code-wizard-steps.md) - Step come funzioni (Xot)
+#### 2. Widget Development
+- Extend `FilamentWidget` for new widgets
+- Use the `getCurrentStepIndex()` method for step detection
+- Implement proper form state management
+- Follow the Design Comuni CSS framework
 
-### 🐛 PHPStan & Quality
-- [PHPStan Fix Plan](phpstan-fix-plan.md) - Piano risoluzione errori
-- [PHPStan Fixes](phpstan-fixes.md) - Fix applicati
-- [PHPStan Immediate Fixes](phpstan-immediate-fixes.md) - Fix urgenti
-- [PHPStan Level 10 Fixes](phpstan-level-10-fixes.md) - Fix level 10
+#### 3. Translation Management
+- Add all translations to `lang/it/segnalazione.php`
+- Use the LangServiceProvider for automatic labels
+- Follow the existing translation key structure
+- Test translations thoroughly
 
-### 🚀 Product & Planning
-- [PRD](prd.md) - Product Requirements Document
-- [Roadmap](roadmap/) - Roadmap del progetto
-- [Strategy](strategy.md) - Strategia prodotto
-- [Launch Plan](launch.md) - Piano di lancio
-- [Sprint Planning](sprint.md) - Sprint correnti
-- [User Research](research.md) - Ricerca utenti
+#### 4. Testing
+- Test each wizard step individually
+- Validate form submissions
+- Test both authenticated and anonymous users
+- Verify location functionality
 
-## LLM Wiki Workflow
+### Integration Patterns
 
-- Canonical wiki layer: [../../../../docs/wiki/README.md](../../../../docs/wiki/README.md)
-- Compiled index: [../../../../docs/wiki/index.md](../../../../docs/wiki/index.md)
-- Governance page: [../../../../docs/wiki/concepts/llm-wiki-governance.md](../../../../docs/wiki/concepts/llm-wiki-governance.md)
+#### 1. With Xot Base Widgets
+- Use `XotBaseWizardWidget` as base when available
+- Implement required abstract methods
+- Follow the widget inheritance hierarchy
 
-### 🔧 Technical
-- [MCP Servers](MCP_SERVERS.md) - Server MCP configurati
-- [Logging Performance](LOGGING_PERFORMANCE.md) - Performance logging
-- [Boost Skill Fix](BOOST_SKILL_FIX_SUMMARY.md) - Fix Boost skill
+#### 2. With Filament
+- Use Filament form components
+- Follow Filament best practices
+- Implement proper validation
+- Use Filament actions for form submission
 
-### 🌐 Cross-Module Dependencies
+#### 3. With Design Comuni
+- Use Bootstrap-Italia classes
+- Follow Design Comuni layout patterns
+- Implement proper accessibility
+- Use the pub_theme components
 
-| Module | Purpose | Link |
-|--------|---------|------|
-| **Geo** | Address field con geolocalizzazione | [Geo Address Field](../../Geo/docs/address-field-component.md) |
-| **Xot** | Base classes (XotBaseWizardWidget) | [XotBaseWizardWidget](../../Xot/docs/filament/widgets/xot-base-wizard-widget.md) |
-| **Sixteen** | Theme CSS, Design Comuni parity | [Sixteen Docs](../../Themes/Sixteen/docs/README.md) |
+### Troubleshooting
 
-### 🌐 Traduzioni
+#### Common Issues
+1. **Form Not Showing**: Check widget inheritance and view paths
+2. **Translation Errors**: Verify translation file syntax and keys
+3. **Step Navigation**: Ensure proper step management logic
+4. **Location Issues**: Check Google Maps API configuration
 
-Pattern: `fixcity::segnalazione.*`
-File: `lang/{locale}/segnalazione.php`
+#### Debugging Tips
+- Use Laravel DebugBar for form debugging
+- Check Livewire components for form state
+- Verify routes and permissions
+- Test in different environments
 
-## 📞 Support & Maintainers
+### Performance Considerations
 
-- **🏢 Team**: Laraxot Development Team
-- **📧 Email**: fixcity@laraxot.com
+#### 1. Database Optimization
+- Use appropriate indexes on ticket tables
+- Implement proper relationships
+- Use Eloquent lazy loading where appropriate
+
+#### 2. Frontend Performance
+- Minimize CSS/JS bundle size
+- Use proper caching strategies
+- Implement lazy loading for heavy components
+
+#### 3. API Optimization
+- Use proper HTTP caching
+- Implement rate limiting
+- Use efficient data serialization
+
+### Future Enhancements
+
+#### Planned Features
+1. **User Registration**: Integrated user accounts
+2. **Ticket Status Tracking**: Real-time status updates
+3. **Notification System**: Email and SMS notifications
+4. **Advanced Search**: Complex filtering and search capabilities
+
+#### Technical Improvements
+1. **API Integration**: External service integrations
+2. **Mobile Support**: Responsive design improvements
+3. **Performance Monitoring**: Analytics and monitoring
+4. **Security Enhancements**: Additional security layers
 
 ---
 
-**🔄 Ultimo aggiornamento**: 9 Aprile 2026
-**📦 Versione**: 2.0.0
-**🐛 PHPStan Level**: 10 ✅
-**🌐 Translation Standards**: IT/EN complete ✅
-**✨ Filament 5.x**: Integrato e funzionante ✅
-
-
-## Standard Rules & Workflow
-
-- [[BMAD Method](../../../../docs/wiki/concepts/bmad-method.md)]
-- [[Context Engineering](../../../../docs/wiki/concepts/context-engineering.md)]
-- [[LLM Wiki Governance](../../../../docs/wiki/concepts/llm-wiki-governance.md)]
-<<<<<<< HEAD
-
-## Documentation
-
-- [On-Demand Pattern](./ON-DEMAND-PATTERN.md) — Pattern per caricamento efficiente
-- [QMD Setup](./QMD-SETUP.md) — Configurazione ricerca locale
-- [Performance](./PERFORMANCE-OPTIMIZATION.md) — Metriche e best practice
-- [Project Structure](./PROJECT-STRUCTURE.md) — Directory layout
-=======
->>>>>>> 01dce8d29 (initial commit)
+*Last Updated: May 2026*  
+*Version: 1.0.0*

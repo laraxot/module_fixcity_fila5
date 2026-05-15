@@ -70,7 +70,7 @@ class TicketInfolist extends XotBaseResourceInfolist
                         ->badge(),
                     TextEntry::make('priority')
                         ->badge(),
-                    TextEntry::make('type_id')
+                    TextEntry::make('type')
                         ->badge(),
                     TextEntry::make('owner.name')
                         ->placeholder('-'),

@@ -57,6 +57,7 @@ use Webmozart\Assert\Assert;
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
  * @property int|null $type_id
+ * @property TicketTypeEnum|null $type
  * @property string|null $latitude
  * @property string|null $longitude
  * @property array<string, mixed>|null $location
@@ -87,7 +88,6 @@ use Webmozart\Assert\Assert;
  * @property mixed $total_logged_hours
  * @property mixed $total_logged_in_hours
  * @property mixed $total_logged_seconds
- * @property TicketTypeEnum|null $type
  *
  * @method static TicketFactory factory($count = null, $state = [])
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Ticket newModelQuery()
@@ -164,6 +164,7 @@ class Ticket extends XotBaseModel implements HasMedia
         'location',
         // 'status_id', 'type_id', 'priority_id', //OLD
         'status',
+        'type',
         'type_id',
         'priority',
         'slug',
@@ -174,6 +175,29 @@ class Ticket extends XotBaseModel implements HasMedia
         // 'estimationProgress',
     ];
 
+    protected function typeLabel(): Attribute
+    {
+        return Attribute::make(
+            get: function (): string {
+                $type = $this->type ?? $this->type_id;
+
+                if ($type instanceof TicketTypeEnum) {
+                    return $type->getLabel();
+                }
+
+                if (\is_string($type) && $type !== '') {
+                    try {
+                        return TicketTypeEnum::from($type)->getLabel();
+                    } catch (\ValueError) {
+                        return $type;
+                    }
+                }
+
+                return '';
+            },
+        );
+    }
+
     public function casts(): array
     {
         return [
@@ -181,6 +205,7 @@ class Ticket extends XotBaseModel implements HasMedia
             'estimationInSeconds' => 'int',
             'estimationProgress' => 'float',
             'status' => TicketStatusEnum::class,
+            'type' => TicketTypeEnum::class,
             'type_id' => TicketTypeEnum::class,
         ];
     }
@@ -190,12 +215,13 @@ class Ticket extends XotBaseModel implements HasMedia
      */
     public function getIconData(): array
     {
-        if ($this->type_id === null) {
+        $type = $this->type ?? $this->type_id;
+        if ($type === null) {
             return [];
         }
 
-        Assert::isInstanceOf($this->type_id, TicketTypeEnum::class, '['.__LINE__.']['.__FILE__.']');
-        $url = self::normalizeNullableText($this->type_id->getIcon());
+        Assert::isInstanceOf($type, TicketTypeEnum::class, '['.__LINE__.']['.__FILE__.']');
+        $url = self::normalizeNullableText($type->getIcon());
         if ($url === null) {
             return [];
         }

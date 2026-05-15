@@ -5,7 +5,7 @@ declare(strict_types=1);
 return [
     'steps' => [
         'privacy' => [
-            'label' => 'Privacy',
+            'label' => 'Autorizzazioni e condizioni',
         ],
         'data' => [
             'label' => 'Dati di segnalazione',
