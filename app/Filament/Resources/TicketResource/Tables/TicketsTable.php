@@ -39,7 +39,7 @@ class TicketsTable extends XotBaseResourceTable
             'name' => TextColumn::make('name')->searchable()->sortable()->limit(50),
             'status' => TextColumn::make('status')->badge()->sortable(),
             'priority' => TextColumn::make('priority')->badge()->sortable(),
-            'type.name' => TextColumn::make('type.name')->placeholder('-'),
+            'type' => TextColumn::make('type')->badge()->placeholder('-'),
             'owner.name' => TextColumn::make('owner.name')->placeholder('-'),
             'assignee.name' => TextColumn::make('assignee.name')->placeholder('-'),
             'created_at' => TextColumn::make('created_at')->dateTime()->sortable(),
@@ -55,7 +55,7 @@ class TicketsTable extends XotBaseResourceTable
         return [
             'status' => SelectFilter::make('status')->options(TicketStatusEnum::class),
             'priority' => SelectFilter::make('priority')->options(TicketPriorityEnum::class),
-            'type_id' => SelectFilter::make('type_id')->options(TicketTypeEnum::class)->native(false),
+            'type' => SelectFilter::make('type')->options(TicketTypeEnum::class)->native(false),
         ];
     }
 }

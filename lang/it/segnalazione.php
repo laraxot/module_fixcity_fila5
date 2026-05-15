@@ -234,6 +234,29 @@ return [
         'email' => [
             'label' => 'Email',
         ],
+        'priority' => [
+            'label' => 'Priorità*',
+            'description' => 'Indica la priorità della segnalazione',
+        ],
+        'content' => [
+            'label' => 'Contenuto*',
+            'description' => 'Descrivi il disservizio in dettaglio',
+            'char_limit' => 'Inserire al massimo 500 caratteri',
+            'max_chars' => [
+                'label' => 'Inserire al massimo 500 caratteri',
+            ],
+        ],
+        'summary' => [
+            'warning' => 'Attenzione',
+            'declaration' => 'Le informazioni che hai fornito hanno valore di dichiarazione. Verifica che siano corrette.',
+            'segnalazione_section' => 'Segnalazione Disservizio',
+            'dati_generali_section' => 'Dati Generali',
+            'author' => 'Autore della segnalazione',
+            'cf' => 'Codice Fiscale',
+            'contacts' => 'Contatti',
+            'phone' => 'Telefono',
+            'email' => 'Email',
+        ],
         'required_note' => [
             'label' => 'I campi contraddistinti dal simbolo asterisco sono obbligatori',
         ],
@@ -358,44 +381,7 @@ return [
     ],
 
     /*
-     * Actions keys - used by widget
-     */
-    'actions' => [
-        'back' => [
-            'label' => 'Indietro',
-        ],
-        'save' => [
-            'label' => 'Salva Richiesta',
-        ],
-        'save_short' => [
-            'label' => 'Salva',
-        ],
-        'save_draft' => [
-            'label' => 'Salva bozza',
-        ],
-        'next' => [
-            'label' => 'Avanti',
-        ],
-        'show_all' => [
-            'label' => 'Mostra tutto',
-        ],
-        'remove_file' => [
-            'aria' => [
-                'label' => 'Rimuovi file',
-            ],
-        ],
-        'remove_image' => [
-            'aria' => [
-                'label' => 'Rimuovi immagine',
-            ],
-        ],
-        'submit' => [
-            'label' => 'Conferma e invia',
-        ],
-    ],
-
-    /*
-     * Steps keys - used by widget
+     * Wizard step labels
      */
     'steps' => [
         'active' => [
@@ -416,9 +402,17 @@ return [
     ],
 
     /*
-     * Privacy keys - used by widget
+    * GDPR Notice keys - used by wizard privacy step
+    */
+    'gdpr_notice' => [
+        'text' => 'Il Comune di :municipality gestisce i dati personali forniti e liberamente comunicati sulla base dell\'articolo 13 del Regolamento (UE) 2016/679 General Data Protection Regulation (GDPR) e degli articoli 13 e successive modifiche e integrazione del decreto legislativo (di seguito d.lgs) 267/2000 (Testo unico enti locali).',
+        'privacy_link' => 'informativa sulla privacy.',
+    ],
+
+    /*
+     * Geolocation keys - used by address-field component
      */
-    'privacy' => [
+    'privacy_geolocation' => [
         'title' => [
             'label' => 'Segnalazione disservizio',
         ],
@@ -435,7 +429,7 @@ return [
             'label' => 'Ho letto e compreso l\'informativa sulla privacy',
         ],
         'intro' => [
-            'text' => 'Il Comune di Firenze gestisce i dati personali forniti e liberamente comunicati sulla base dell\'articolo 13 del Regolamento (UE) 2016/679 General Data Protection Regulation (GDPR) e degli articoli 13 e successive modifiche e integrazione del decreto legislativo (di seguito d.lgs) 267/2000 (Testo unico enti locali).',
+            'text' => 'Il Comune di Firenze gestisce i dati personali forniti e liberamente comunicati sulla base dell\'articolo 13 del Regolamento (UE) 2016/679 General data protection regulation (Gdpr) e degli articoli 13 e successive modifiche e integrazione del decreto legislativo (di seguito d.lgs) 267/2000 (Testo unico enti locali).',
         ],
         'detail_prefix' => [
             'text' => 'Per i dettagli sul trattamento dei dati personali consulta l\'',
@@ -455,10 +449,13 @@ return [
      * Geolocation keys - used by address-field component
      */
     'geolocation' => [
-        'not_supported' => 'La geolocalizzazione non è supportata dal tuo browser.',
-        'address_not_found' => 'Indirizzo non trovato. Prova a inserirlo manualmente.',
-        'error' => 'Errore durante il recupero della posizione. Riprova.',
-        'permission_denied' => 'Permesso di geolocalizzazione negato. Consenti l\'accesso alla posizione nelle impostazioni del browser.',
+        'label' => 'Autorizzazioni e condizioni',
+        'data' => [
+            'label' => 'Dati di segnalazione',
+        ],
+        'summary' => [
+            'label' => 'Riepilogo',
+        ],
     ],
 
     /*
@@ -494,6 +491,9 @@ return [
         ],
         'message_extra' => [
             'label' => 'I campi con asterisco sono obbligatori',
+        ],
+        'summary_declaration' => [
+            'text' => 'Le informazioni che hai fornito hanno valore di dichiarazione. Verifica che siano corrette.',
         ],
     ],
 

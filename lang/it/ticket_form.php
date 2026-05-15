@@ -12,7 +12,7 @@ return [
         ],
         'privacy' => [
             'description' => 'Accettazione informativa sulla privacy',
-            'label' => 'Privacy',
+            'label' => 'Autorizzazioni e condizioni',
             'helper_text' => 'Devi accettare la privacy policy per procedere',
         ],
         'privacyAccepted' => [
@@ -61,23 +61,38 @@ return [
         ],
         'author_phone' => [
             'label' => 'author_phone',
+            'description' => 'author_phone',
+            'helper_text' => 'author_phone',
+            'placeholder' => 'author_phone',
         ],
         'author_fiscal_code' => [
             'label' => 'author_fiscal_code',
+            'description' => 'author_fiscal_code',
+            'helper_text' => 'author_fiscal_code',
+            'placeholder' => 'author_fiscal_code',
         ],
         'author_name' => [
             'label' => 'author_name',
+            'description' => 'author_name',
+            'helper_text' => 'author_name',
+            'placeholder' => 'author_name',
         ],
         'location' => [
             'label' => 'location',
             'placeholder' => 'location',
             'helper_text' => 'location',
             'description' => 'location',
+            'address' => [
+                'label' => 'location.address',
+                'description' => 'location.address',
+                'helper_text' => 'location.address',
+                'placeholder' => 'location.address',
+            ],
         ],
         'content' => [
             'label' => 'content',
             'placeholder' => 'content',
-            'helper_text' => 'content',
+            'helper_text' => '',
             'description' => 'content',
         ],
         'images' => [
@@ -88,33 +103,39 @@ return [
         ],
         'author_email' => [
             'label' => 'author_email',
+            'description' => 'author_email',
+            'helper_text' => 'author_email',
+            'placeholder' => 'author_email',
         ],
         'priority' => [
             'description' => 'priority',
-            'helper_text' => 'priority',
+            'helper_text' => '',
             'label' => 'priority',
             'placeholder' => 'priority',
         ],
         'slug' => [
             'label' => 'slug',
             'placeholder' => 'slug',
-            'helper_text' => 'slug',
+            'helper_text' => '',
             'description' => 'slug',
         ],
         'type' => [
             'label' => 'type',
             'placeholder' => 'type',
-            'helper_text' => 'type',
+            'helper_text' => '',
             'description' => 'type',
         ],
         'type_id' => [
             'description' => 'type_id',
-            'helper_text' => 'type_id',
+            'helper_text' => '',
             'label' => 'type_id',
             'placeholder' => 'type_id',
         ],
         'review_priority' => [
             'label' => 'review_priority',
+        ],
+        'gdpr_text' => [
+            'label' => 'gdpr_text',
         ],
     ],
     'sections' => [
@@ -146,22 +167,73 @@ return [
             'heading' => 'empty',
             'label' => 'empty',
         ],
+        'Contatti' => [
+            'heading' => 'Contatti',
+        ],
     ],
     'steps' => [
         'privacy' => [
-            'label' => 'privacy',
+            'label' => 'Autorizzazioni e condizioni',
+            'tooltip' => 'Accettazione informativa sulla privacy',
+            'description' => 'Leggi e accetta l\'informativa sulla privacy',
+            'color' => 'success',
+            'icon' => 'heroicon-o-shield-check',
         ],
         'dati-di-segnalazione' => [
-            'label' => 'dati-di-segnalazione',
+            'label' => 'Dati di segnalazione',
+            'tooltip' => 'Compila i dati della segnalazione',
+            'description' => 'Inserisci i dettagli del disservizio',
+            'color' => 'primary',
+            'icon' => 'heroicon-o-document-text',
         ],
         'riepilogo' => [
-            'label' => 'riepilogo',
+            'label' => 'Riepilogo',
+            'tooltip' => 'Riepilogo finale della segnalazione',
+            'description' => 'Verifica i dati prima dell\'invio',
+            'color' => 'primary',
+            'icon' => 'heroicon-o-check-circle',
         ],
         'summary' => [
-            'label' => 'summary',
+            'label' => 'Riepilogo',
+            'tooltip' => 'Riepilogo finale della segnalazione',
+            'description' => 'Verifica i dati prima dell\'invio',
+            'color' => 'primary',
+            'icon' => 'heroicon-o-check-circle',
         ],
         'data' => [
-            'label' => 'data',
+            'label' => 'Dati di segnalazione',
+            'tooltip' => 'Compila i dati della segnalazione',
+            'description' => 'Inserisci i dettagli del disservizio',
+            'color' => 'primary',
+            'icon' => 'heroicon-o-document-text',
+        ],
+        'Riepilogo' => [
+            'label' => 'Riepilogo',
+        ],
+        'Dati di segnalazione' => [
+            'label' => 'Dati di segnalazione',
+        ],
+        'Autorizzazioni e condizioni' => [
+            'label' => 'Autorizzazioni e condizioni',
+        ],
+        'fixcity::ticket_form' => [
+            'steps' => [
+                'summary' => [
+                    'label' => [
+                        'label' => 'fixcity::ticket_form.steps.summary.label',
+                    ],
+                ],
+                'privacy' => [
+                    'label' => [
+                        'label' => 'fixcity::ticket_form.steps.privacy.label',
+                    ],
+                ],
+                'data' => [
+                    'label' => [
+                        'label' => 'fixcity::ticket_form.steps.data.label',
+                    ],
+                ],
+            ],
         ],
     ],
 ];

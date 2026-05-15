@@ -54,7 +54,7 @@
             {{-- Wizard content --}}
             <div class="col-12 {{ $isDataStep ? 'col-lg-9' : 'col-lg-8' }} col-xl-9" id="wizard-main-content">
                 <x-filament-widgets::widget>
-                    {{ $this->form }}
+                    {{ $this->getWizardComponent() }}
                 </x-filament-widgets::widget>
             </div>
         </div>

@@ -6,7 +6,7 @@ use Livewire\Livewire;
 use Modules\Fixcity\Enums\TicketPriorityEnum;
 use Modules\Fixcity\Enums\TicketStatusEnum;
 use Modules\Fixcity\Enums\TicketTypeEnum;
-use Modules\Fixcity\Filament\Widgets\CreateTicketWidget;
+use Modules\Fixcity\Filament\Widgets\CreateTicketWizardWidget;
 use Modules\Fixcity\Models\Ticket;
 use Modules\User\Models\User;
 

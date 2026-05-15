@@ -9,6 +9,7 @@ use Filament\Forms\Components\Select;
 use Filament\Forms\Components\SpatieMediaLibraryFileUpload;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
+use Filament\Infolists\Components\TextEntry;
 use Filament\Schemas\Components\Component as SchemaComponent;
 use Filament\Schemas\Components\Html;
 use Filament\Schemas\Components\Section;
@@ -38,6 +39,9 @@ class TicketForm extends XotBaseResourceForm
      */
     public static function getSummarySchema(): array
     {
+        $warningTitle = (string) __('fixcity::segnalazione.warning.title.label');
+        $warningText = (string) __('fixcity::segnalazione.warning.summary_declaration.text');
+
         return [
             'warningSection' => Section::make()
                 ->schema(static::getWarningSectionSchema())
@@ -62,11 +66,8 @@ class TicketForm extends XotBaseResourceForm
      */
     protected static function getWarningSectionSchema(): array
     {
-        $warningTitle = (string) __('fixcity::segnalazione.warning.title.label');
-        $warningText = (string) __('fixcity::segnalazione.warning.summary_declaration.text');
-
         return [
-            'warningContent' => Html::make(fn () => new HtmlString(
+            Html::make(fn () => new HtmlString(
                 '<div class="alert alert-warning" role="alert">'
                 .'<h4 class="alert-heading">'.e($warningTitle).'</h4>'
                 .'<p class="mb-0">'.e($warningText).'</p>'
@@ -81,10 +82,10 @@ class TicketForm extends XotBaseResourceForm
     protected static function getSummarySectionSchema(): array
     {
         return [
-            'locationAddress' => TextInput::make('location.address'),
-            'type' => TextInput::make('type'),
-            'name' => TextInput::make('name'),
-            'content' => Textarea::make('content')
+            TextEntry::make('location.address'),
+            TextEntry::make('type'),
+            TextEntry::make('name'),
+            TextEntry::make('content')
                 ->columnSpanFull(),
         ];
     }
@@ -95,8 +96,8 @@ class TicketForm extends XotBaseResourceForm
     protected static function getAuthorSectionSchema(): array
     {
         return [
-            'authorName' => TextInput::make('author_name'),
-            'authorFiscalCode' => TextInput::make('author_fiscal_code'),
+            TextEntry::make('author_name'),
+            TextEntry::make('author_fiscal_code'),
         ];
     }
 
@@ -106,8 +107,8 @@ class TicketForm extends XotBaseResourceForm
     protected static function getContactsSectionSchema(): array
     {
         return [
-            'authorPhone' => TextInput::make('author_phone'),
-            'authorEmail' => TextInput::make('author_email'),
+            TextEntry::make('author_phone'),
+            TextEntry::make('author_email'),
         ];
     }
 
@@ -150,7 +151,11 @@ class TicketForm extends XotBaseResourceForm
     public static function getPrivacySchema(): array
     {
         return [
-            'gdprNotice' => Html::make(static::getGdprHtml())
+            'gdprSection' => Section::make()
+                ->schema([
+                    Html::make(static::getGdprHtml())
+                        ->columnSpanFull(),
+                ])
                 ->columnSpanFull(),
             'privacyAccepted' => Checkbox::make('privacyAccepted')
                 ->accepted()

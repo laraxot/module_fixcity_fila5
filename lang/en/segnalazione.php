@@ -232,6 +232,29 @@ return [
         'email' => [
             'label' => 'Email',
         ],
+        'priority' => [
+            'label' => 'Priority*',
+            'description' => 'Indicate the priority of the report',
+        ],
+        'content' => [
+            'label' => 'Content*',
+            'description' => 'Describe the service issue in detail',
+            'char_limit' => 'Enter a maximum of 500 characters',
+            'max_chars' => [
+                'label' => 'Enter a maximum of 500 characters',
+            ],
+        ],
+        'summary' => [
+            'warning' => 'Warning',
+            'declaration' => 'The information you have provided is a statement. Verify that it is correct.',
+            'segnalazione_section' => 'Service Issue Report',
+            'dati_generali_section' => 'General Data',
+            'author' => 'Report Author',
+            'cf' => 'Tax Code',
+            'contacts' => 'Contacts',
+            'phone' => 'Phone',
+            'email' => 'Email',
+        ],
         'required_note' => [
             'label' => 'Fields marked with an asterisk are required',
         ],
@@ -414,9 +437,32 @@ return [
     ],
 
     /*
-     * Privacy keys - used by widget
-     */
+    * GDPR Notice keys - used by wizard privacy step
+    */
+    'gdpr_notice' => [
+        'text' => 'The Municipality of :municipality manages the personal data provided and freely communicated on the basis of Article 13 of Regulation (EU) 2016/679 General Data Protection Regulation (GDPR) and Articles 13 and subsequent amendments and additions of Legislative Decree (hereinafter d.lgs) 267/2000 (Consolidated Law on Local Authorities).',
+        'privacy_link' => 'privacy policy.',
+    ],
+
+    /*
+    * Privacy keys - used by widget
+    */
     'privacy' => [
+        'title' => [
+            'label' => 'Service Report',
+        ],
+        'description' => [
+            'text' => 'Read the privacy policy and consent to the processing of personal data.',
+        ],
+        'details' => [
+            'text' => 'For details on the processing of personal data, see the ',
+            'link' => [
+                'label' => 'privacy policy.',
+            ],
+        ],
+        'accept' => [
+            'label' => 'I have read and understood the privacy policy',
+        ],
         'intro' => [
             'text' => 'The Municipality of Florence manages the personal data provided and freely communicated on the basis of Article 13 of Regulation (EU) 2016/679 General data protection regulation (Gdpr) and Articles 13 and subsequent amendments and additions of Legislative Decree (hereinafter Legislative Decree) 267/2000 (Consolidated Law on Local Authorities).',
         ],

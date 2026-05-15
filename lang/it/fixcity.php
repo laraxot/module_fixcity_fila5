@@ -29,6 +29,10 @@ return [
                 'label' => 'Dati di segnalazione',
                 'description' => 'Inserisci i dettagli della segnalazione',
             ],
+            'summary' => [
+                'label' => ':label',
+                'description' => 'Riepilogo della segnalazione',
+            ],
         ],
         'fields' => [
             'accept_terms' => [

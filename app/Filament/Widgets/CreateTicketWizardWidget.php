@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace Modules\Fixcity\Filament\Widgets;
 
-use Filament\Actions\Action;
 use Filament\Schemas\Components\Wizard\Step;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Session;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
+use Modules\Fixcity\Actions\NormalizeTicketLocationDataAction;
+use Modules\Fixcity\Filament\Resources\TicketResource;
 use Modules\Fixcity\Filament\Resources\TicketResource\Schemas\TicketForm;
 use Modules\Fixcity\Models\Ticket;
 use Modules\Xot\Actions\Cast\SafeStringCastAction;
@@ -16,20 +16,10 @@ use Modules\Xot\Filament\Widgets\XotBaseWizardWidget;
 
 class CreateTicketWizardWidget extends XotBaseWizardWidget
 {
-    
     /** @var array<string, mixed> */
     public array $blockData = [];
-    /*
-    public function getWizardDisplayStep(): int
-    {
-        return $this->getWizardStartStep();
-    }
 
-    protected function wizardAllowStepQueryExtra(): bool
-    {
-        return true;
-    }
-    */
+    public static string $resource = TicketResource::class;
 
     /**
      * @param  array<string, mixed>  $blockData
@@ -37,32 +27,25 @@ class CreateTicketWizardWidget extends XotBaseWizardWidget
     public function mount(array $blockData = []): void
     {
         $this->blockData = $blockData;
-        $this->wizardStartStep = 1;
         $this->form->fill(TicketForm::getDefaultFormState());
     }
 
     /**
-     * @return array<int, Step>
+     * @return array<string, Step>
      */
     public function getSteps(): array
     {
-        $steps = TicketForm::getSteps();
-
-        return $steps;
+        return TicketForm::getSteps();
     }
 
     public function submit(): void
     {
-        // TEMPORANEO: bypass auth per debug salvataggio ticket da utente anonimo.
-        // Ripristinare il blocco auth/redirect login dopo il collaudo campi.
-        // $authUser = Auth::user();
-        // if ($authUser === null) {
-        //     Session::put('url.intended', url()->full());
-        //     $this->redirect(route('login'));
-        //     return;
-        // }
+        $data = app(NormalizeTicketLocationDataAction::class)->execute($this->form->getState());
+        if (\array_key_exists('type_id', $data) && ! \array_key_exists('type', $data)) {
+            $data['type'] = $data['type_id'];
+        }
+        unset($data['type_id']);
 
-        $data = $this->form->getState();
         $authUser = Auth::user();
         if ($authUser !== null) {
             $data['owner_id'] = $authUser->id;
@@ -70,6 +53,11 @@ class CreateTicketWizardWidget extends XotBaseWizardWidget
         Ticket::create($data);
 
         $this->redirectAfterSuccess();
+    }
+
+    public function save(): void
+    {
+        $this->submit();
     }
 
     protected function redirectAfterSuccess(): void
@@ -99,5 +87,4 @@ class CreateTicketWizardWidget extends XotBaseWizardWidget
             'pageDescription' => SafeStringCastAction::cast($this->blockData['description'] ?? ''),
         ];
     }
-  
 }

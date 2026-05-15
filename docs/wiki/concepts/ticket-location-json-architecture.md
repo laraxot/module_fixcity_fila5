@@ -22,18 +22,44 @@ The `Ticket::location()` Attribute `set` closure:
 {
   "lat": "45.562246",
   "lng": "12.249756",
+  "latitude": "45.562246",
+  "longitude": "12.249756",
   "address": "Via Rodolfo Morandi 5, Mogliano Veneto",
+  "display_name": "Via Rodolfo Morandi 5, 31021 Mogliano Veneto TV, Italia",
   "provider": "nominatim",
+  "place_id": 12345678,
+  "osm_type": "node",
+  "osm_id": 9876543210,
+  "licence": "Data © OpenStreetMap contributors, ODbL 1.0.",
+  "importance": 0.42,
+  "type": "house",
+  "class": "place",
+  "boundingbox": ["45.5621", "45.5623", "12.2496", "12.2499"],
   "street": "Via Rodolfo Morandi",
   "street_number": "5",
   "zip": "31021",
+  "postcode": "31021",
   "city": "Mogliano Veneto",
+  "suburb": null,
+  "province": "Treviso",
   "state": "Veneto",
   "country": "Italia",
   "country_code": "it",
-  "address_details": { ... }
+  "address_details": { "...": "..." },
+  "structured": { "...": "..." },
+  "raw": { "...": "intero JSON Nominatim originale (search o reverse)" }
 }
 ```
+
+## Full-payload capture rule (2026-05-13)
+
+Il `CoordinatePicker` cattura **l'intero** payload del provider (search +
+reverse-geocode). La UI mostra solo `lat`, `lng` e `address`, ma il JSON
+salvato deve contenere `raw`, `address_details`, `place_id`, `boundingbox`
+per analisi futura.
+
+Vedi [`Geo/docs/wiki/concepts/full-geocoding-payload.md`](../../../../Geo/docs/wiki/concepts/full-geocoding-payload.md)
+per il contratto del payload e i punti di cattura.
 
 ## Nominatim key mapping
 
