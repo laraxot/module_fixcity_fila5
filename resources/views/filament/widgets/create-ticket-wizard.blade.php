@@ -11,7 +11,7 @@
 --}}
 @php
     // Step 2 is the "Dati della segnalazione" step
-    $currentStep = $this->getCurrentStepIndex() + 1;
+    $currentStep = (int) ($this->wizardStartStep ?? 1);
     $isDataStep = $currentStep === 2;
 @endphp
 
@@ -51,12 +51,27 @@
                 </div>
             @endif
 
+<<<<<<< HEAD
             {{-- Wizard content --}}
-            <div class="col-12 {{ $isDataStep ? 'col-lg-9' : 'col-lg-8' }} col-xl-9" id="wizard-main-content">
-                <x-filament-widgets::widget>
-                    {{ $this->getWizardComponent() }}
-                </x-filament-widgets::widget>
-            </div>
+                <div class="col-12 {{ $isDataStep ? 'col-lg-9' : 'col-lg-8' }} col-xl-9" id="wizard-main-content">
+                    <x-filament-widgets::widget>
+                        <form wire:submit="submit">
+                            {{ $this->form }}
+                        </form>
+                        <x-filament-actions::modals />
+                    </x-filament-widgets::widget>
+                </div>
+=======
+             {{-- Wizard content --}}
+             <div class="col-12 {{ $isDataStep ? 'col-lg-9' : 'col-lg-8' }} col-xl-9" id="wizard-main-content">
+                 <x-filament-widgets::widget>
+                     <form wire:submit="submit">
+                         {{ $this->form }}
+                     </form>
+                 </x-filament-widgets::widget>
+                 <x-filament-actions::modals />
+             </div>
+>>>>>>> 2f766bf44 (chore: update agent coordination index and standing rule reference)
         </div>
     </div>
 </div>
