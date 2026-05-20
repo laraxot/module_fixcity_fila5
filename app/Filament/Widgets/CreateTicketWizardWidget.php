@@ -6,7 +6,6 @@ namespace Modules\Fixcity\Filament\Widgets;
 
 use Filament\Schemas\Components\Wizard\Step;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Session;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 use Modules\Fixcity\Actions\NormalizeTicketLocationDataAction;
 use Modules\Fixcity\Filament\Resources\TicketResource;
@@ -38,7 +37,7 @@ class CreateTicketWizardWidget extends XotBaseWizardWidget
     }
 
     /**
-     * @return array<int, Step>
+     * @return array<string, Step>
      */
     public function getSteps(): array
     {
