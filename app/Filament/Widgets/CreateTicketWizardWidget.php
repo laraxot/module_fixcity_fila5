@@ -37,9 +37,9 @@ class CreateTicketWizardWidget extends XotBaseWizardWidget
     }
 
     /**
-     * @return array<string, Step>
+     * @return array<int, Step>
      */
-    public function getSteps(): array
+    public function getWizardSteps(): array
     {
         return array_values(TicketForm::getSteps());
     }
