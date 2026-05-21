@@ -167,6 +167,27 @@ Consolidamento attuale: nel widget non restano `Placeholder`; anche la notice pr
 
 Per questo wizard il criterio di accettazione minimo non è solo la correttezza semantica del codice. Dopo ogni refactor del render path servono anche smoke check runtime reali: il widget compila solo davvero se `/it/tests/segnalazione-crea` risponde `200` entro timeout ragionevole. Mount, model binding e summary pre-submit devono restare minimali.
 
+### Verifica automatica (Issue #75)
+
+| Layer | File | Cosa verifica |
+|-------|------|---------------|
+| Pest unit | `Modules/Fixcity/tests/Unit/CreateTicketWizardWidgetViewTest.php` | view fallback modulo, `getFormSubmitAction`, modals **fuori** dal `<form>` |
+| Pest feature | `Modules/Fixcity/tests/Feature/Filament/CreateTicketWizardWidgetTest.php` | risoluzione view runtime via `GetViewByClassAction`, metodi `submit()` / `save()` |
+| Playwright | `Modules/Fixcity/tests/Playwright/segnalazione-crea-wizard.spec.js` | pagina `200`, form con `wire:submit="submit"`, bottone `button.steppers-btn-confirm[type="submit"]` allo step 3 |
+
+Comandi:
+
+```bash
+cd laravel && ./vendor/bin/pest \
+  Modules/Fixcity/tests/Unit/CreateTicketWizardWidgetViewTest.php \
+  Modules/Fixcity/tests/Feature/Filament/CreateTicketWizardWidgetTest.php
+
+cd laravel/Modules/Fixcity && PLAYWRIGHT_BASE_URL=http://127.0.0.1:8000 \
+  npx playwright test tests/Playwright/segnalazione-crea-wizard.spec.js
+```
+
+**Debito test**: submit Livewire end-to-end con auth e creazione `Ticket` resta bloccato dal test harness multi-connessione (`user` vs `fixcity`).
+
 ### Regola multilingua runtime
 
 - Nel PHP runtime non devono comparire label o frasi in italiano.
