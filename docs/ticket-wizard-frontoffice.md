@@ -22,13 +22,13 @@ Le pagine statiche legacy restano disponibili per riferimento o test di parità 
 ## Architettura
 Il widget segue i principi Laraxot ed estende `XotBaseWizardWidget`.
 
-**Implementazione (Filament way)**: il flusso multi-step è definito in **`Filament\Schemas\Components\Wizard`** + **`Wizard\Step`** dentro `CreateTicketWizardWidget::getFormSchema()`, con stato form in `data` tramite `XotBaseWizardWidget::form()` (vedi [documentazione Filament v5 — Wizards](https://filamentphp.com/docs/5.x/schemas/wizards)). La vista Blade `ticket-create-wizard.blade.php` è un **wrapper**: titolo, sidebar editoriale e parity layer attorno a `{{ $this->form }}` dentro `<form wire:submit="submit">`. Regola: **la macchina a stati degli step resta in Filament**, non in Blade.
+**Implementazione (Filament way)**: il flusso multi-step è definito in **`Filament\Schemas\Components\Wizard`** + **`Wizard\Step`** dentro `CreateTicketWizardWidget::getFormSchema()`, con stato form in `data` tramite `XotBaseWizardWidget::form()` (vedi [documentazione Filament v5 — Wizards](https://filamentphp.com/docs/5.x/schemas/wizards)). La vista Blade `create-ticket-wizard.blade.php` è un **wrapper**: titolo, sidebar editoriale e parity layer attorno a `{{ $this->form }}` dentro `<form wire:submit="submit">`. Regola: **la macchina a stati degli step resta in Filament**, non in Blade.
 
 **Schema SSoT**: il provider canonico dei campi è `TicketResource/Schemas/TicketForm`. `CreateTicketWizardWidget` usa `TicketForm::getDataSchema()` e `TicketForm::getSummarySchema()`; per la privacy frontoffice usa `TicketForm::getFrontofficePrivacySchema($privacyLink)` perché il link arriva dal blocco CMS. Non deve creare un secondo schema parallelo per il frontoffice. Nel widget restano solo contesto CMS (`blockData`), stato Livewire, submit/draft, normalizzazione payload e redirect.
 
 **Picker Geo sibling**: i componenti mappa alternativi commentati con `NON CANCELLARE QUESTO` vivono nello schema owner `TicketForm`, non nel widget. Servono come memoria tecnica per confronti/runtime Geo senza reintrodurre duplicazione nel frontoffice.
 
-**Risoluzione vista**: `GetViewByClassAction` prova per primo `pub_theme::filament.widgets.createticketwizard` (wrapper tema senza sidebar). Il widget imposta esplicitamente `protected string $view = 'fixcity::filament.widgets.ticket-create-wizard'` così il frontoffice usa sempre il layout modulo (colonna «informazioni richieste» allo step 2). Regola anti-regressione: non rimuovere questa proprietà senza verificare parity e [story 7-52](../../../../_bmad-output/implementation-artifacts/7-52-segnalazione-crea-wizard-ultra-parity.md).
+**Risoluzione vista (Source of Truth runtime)**: per `segnalazione-crea` la view canonica è **`fixcity::filament.widgets.create-ticket-wizard`** (file `Modules/Fixcity/resources/views/filament/widgets/create-ticket-wizard.blade.php`), impostata esplicitamente nel widget tramite `protected static string $view`. Le view omonime nel tema (`Themes/Sixteen/resources/views/filament/widgets/create-ticket-wizard.blade.php` e `createticketwizard.blade.php`) non sono la source-of-truth del runtime widget. Regola anti-regressione: non rimuovere questa proprietà senza verificare parity e [story 7-52](../../../../_bmad-output/implementation-artifacts/7-52-segnalazione-crea-wizard-ultra-parity.md).
 
 **Storia**: prima della migrazione lo step era gestito in Blade con `$currentStep` e `nextStep()` manuali; la story **[7-34](../../../../_bmad-output/implementation-artifacts/7-34-create-ticket-wizard-filament-schema-wizard-refactor.md)** documenta il passaggio.
 
@@ -166,6 +166,27 @@ Consolidamento attuale: nel widget non restano `Placeholder`; anche la notice pr
 ### Guardrail runtime
 
 Per questo wizard il criterio di accettazione minimo non è solo la correttezza semantica del codice. Dopo ogni refactor del render path servono anche smoke check runtime reali: il widget compila solo davvero se `/it/tests/segnalazione-crea` risponde `200` entro timeout ragionevole. Mount, model binding e summary pre-submit devono restare minimali.
+
+### Verifica automatica (Issue #75)
+
+| Layer | File | Cosa verifica |
+|-------|------|---------------|
+| Pest unit | `Modules/Fixcity/tests/Unit/CreateTicketWizardWidgetViewTest.php` | view fallback modulo, `getFormSubmitAction`, modals **fuori** dal `<form>` |
+| Pest feature | `Modules/Fixcity/tests/Feature/Filament/CreateTicketWizardWidgetTest.php` | risoluzione view runtime via `GetViewByClassAction`, metodi `submit()` / `save()` |
+| Playwright | `Modules/Fixcity/tests/Playwright/segnalazione-crea-wizard.spec.js` | pagina `200`, form con `wire:submit="submit"`, bottone `button.steppers-btn-confirm[type="submit"]` allo step 3 |
+
+Comandi:
+
+```bash
+cd laravel && ./vendor/bin/pest \
+  Modules/Fixcity/tests/Unit/CreateTicketWizardWidgetViewTest.php \
+  Modules/Fixcity/tests/Feature/Filament/CreateTicketWizardWidgetTest.php
+
+cd laravel/Modules/Fixcity && PLAYWRIGHT_BASE_URL=http://127.0.0.1:8000 \
+  npx playwright test tests/Playwright/segnalazione-crea-wizard.spec.js
+```
+
+**Debito test**: submit Livewire end-to-end con auth e creazione `Ticket` resta bloccato dal test harness multi-connessione (`user` vs `fixcity`).
 
 ### Regola multilingua runtime
 

@@ -16,6 +16,12 @@ use Modules\Xot\Filament\Widgets\XotBaseWizardWidget;
 
 class CreateTicketWizardWidget extends XotBaseWizardWidget
 {
+    /**
+     * Runtime source-of-truth view for frontoffice ticket wizard.
+     * This avoids ambiguity with theme files that share the same basename.
+     */
+    protected string $view = 'fixcity::filament.widgets.create-ticket-wizard';
+
     /** @var array<string, mixed> */
     public array $blockData = [];
 
@@ -31,11 +37,11 @@ class CreateTicketWizardWidget extends XotBaseWizardWidget
     }
 
     /**
-     * @return array<string, Step>
+     * @return array<int, Step>
      */
-    public function getSteps(): array
+    public function getWizardSteps(): array
     {
-        return TicketForm::getSteps();
+        return array_values(TicketForm::getSteps());
     }
 
     public function submit(): void

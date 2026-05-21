@@ -11,7 +11,7 @@
 --}}
 @php
     // Step 2 is the "Dati della segnalazione" step
-    $currentStep = $this->getCurrentStepIndex() + 1;
+    $currentStep = (int) ($this->wizardStartStep ?? 1);
     $isDataStep = $currentStep === 2;
 @endphp
 
@@ -51,10 +51,13 @@
                 </div>
             @endif
 
-            {{-- Wizard content --}}
+            {{-- Wizard content: form Livewire + modals Filament fuori dal form (#75) --}}
             <div class="col-12 {{ $isDataStep ? 'col-lg-9' : 'col-lg-8' }} col-xl-9" id="wizard-main-content">
                 <x-filament-widgets::widget>
-                    {{ $this->getWizardComponent() }}
+                    <form wire:submit="{{ $this->getFormSubmitAction() }}">
+                        {{ $this->form }}
+                    </form>
+                    <x-filament-actions::modals />
                 </x-filament-widgets::widget>
             </div>
         </div>
