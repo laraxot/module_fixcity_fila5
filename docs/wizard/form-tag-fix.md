@@ -18,54 +18,26 @@ Fixed the view by adding the required form wrapper:
 </form>
 ```
 
-**Correct Implementation Pattern**:
-For Filament wizard widgets, the Blade view should follow this structure:
+**Correct Implementation Pattern** (allineato a `vendor/filament/forms/stubs/LivewireFormView.stub`):
 
 ```blade
 <x-filament-widgets::widget>
-    <!-- Design Comuni wrapper -->
-    <div class="cmp-wizard-widget">
-        <!-- Title and description -->
-        <div class="container">
-            <div class="row justify-content-center">
-                <div class="col-12 col-lg-10">
-                    <div class="cmp-heading pb-3 pb-lg-4">
-                        <h1 class="title-xxxlarge">{{ $pageTitle }}</h1>
-                        @if($pageDescription !== '')
-                            <p class="text-paragraph mb-0">{{ $pageDescription }}</p>
-                        @endif
-                    </div>
-                </div>
-            </div>
-        </div>
+    <form wire:submit="{{ $this->getFormSubmitAction() }}">
+        {{ $this->form }}
+    </form>
 
-        <!-- Wizard Form with proper wrapper -->
-        <div class="container wizard-dc-form-shell">
-            <div class="row justify-content-center">
-                <div class="col-12">
-                    <div class="wizard-dc-form">
-                        @if ($errors->has('data.submit') || $errors->has('submit'))
-                            <div class="alert alert-danger mb-4" role="alert">
-                                {{ $errors->first('data.submit') ?: $errors->first('submit') }}
-                            </div>
-                        @endif
-                        <form wire:submit="submit">
-                            {{ $this->form }}
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
     <x-filament-actions::modals />
 </x-filament-widgets::widget>
 ```
 
+`getFormSubmitAction()` è definito su `XotBaseWizardWidget` (default `submit`; `save()` resta alias Filament).
+
 **Key Rules**:
-1. **Must have**: `<form wire:submit="submit">` wrapper
-2. **Cannot have**: Custom form submission logic in the view
-3. **Must preserve**: Widget structure and Design Comuni styling
-4. **Must include**: Error handling and modal actions
+1. **Must have**: `<form wire:submit="{{ $this->getFormSubmitAction() }}">` (equivalente stub `submitAction`)
+2. **Must render**: `{{ $this->form }}` — mai `getWizardComponent()` (inesistente)
+3. **Must include**: `<x-filament-actions::modals />` **fuori** dal tag `<form>` (dialog Filament ≠ input del form)
+4. **Must preserve**: Widget structure and Design Comuni styling
+5. **Cannot have**: Custom form submission logic in the view
 
 **Related Files**:
 - `Themes/Sixteen/resources/views/filament/widgets/create-ticket-wizard.blade.php` - Fixed
