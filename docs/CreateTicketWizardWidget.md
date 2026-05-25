@@ -17,16 +17,16 @@ The widget follows the **Laraxot Convention-over-Configuration** (Religion):
     - Per il link privacy proveniente dal CMS, il widget usa `TicketForm::getFrontofficePrivacySchema($privacyLink)`: e' una variante esplicita, non una firma convenzionale parametrizzata.
     - Il widget costruisce gli step con `$this->getStepByName(...)` per mantenere i parametri runtime del blocco CMS, ad esempio `privacy_link`.
     - Il widget non deve ridefinire campi ticket gia' presenti in `TicketForm`: eventuali modifiche a privacy, data step o summary partono da `TicketForm`.
-3.  **Submission**: `submit()` valida il form (`validateWizardSubmission()`), poi `prepareTicketData()` (`normalizeWizardFormState` + unset `images`/`privacyAccepted` + assicurarsi che `latitude` e `longitude` siano presenti come stringhe + `owner_id` se auth), `createTicket()`, `TicketCreatedEvent`, redirect. Errori: `handleSubmissionError()` (notifica + `addError('submit', …)`; in local anche `report($e)`).
-4.  **Tipologia (`type_id`)**: `Select::make('type_id')->options(TicketTypeEnum::class)` — Filament (`HasOptions`) costruisce `[value => getLabel()]`. **IMPORTANTE**: Mai usare `TicketTypeEnum::cases()` come `options`: non è il contratto previsto da Filament. Nel summary, il tipo viene gestito controllando se il valore è già un'istanza di `TicketTypeEnum` prima della conversione. Dettaglio: [filament-select-enum-best-practices.md](filament-select-enum-best-practices.md).
+3.  **Submission**: `submit()` usa **`$this->form->getState()`** tale e quale (dehydrate Filament + forma definita da `TicketForm`/schema); merge **`owner_id`** solo se l'utente è autenticato (`??=`); poi `Ticket::create($data)`. **Non** viene chiamato `TicketResource::prepareFormDataBeforePersist()` — quella rimane sulla create nel pannello.
+4.  **Tipologia (`type`)**: `TicketForm` usa `Select::make('type')->options(TicketTypeEnum::class)` — Filament (`HasOptions`) costruisce `[value => getLabel()]`. **IMPORTANTE**: Mai usare `TicketTypeEnum::cases()` come `options`: non è il contratto previsto da Filament.
 5.  **Auto-Labeling**: No `->label()` calls are used. Translations sono risolte via `LangServiceProvider` usando le chiavi `fixcity::create_ticket_wizard.fields.{name}.label` e `fixcity::segnalazione.fields.*` dove applicabile.
 
 ---
 
 ## 🧘 Religion & Rules
 
-- **DRY**: Stato wizard normalizzato una sola volta (`normalizeWizardFormState`); persistenza ticket nel widget finché non esiste un’Action modulo condivisa documentata.
-- **KISS**: No "merda" methods or complex payload builders. The form state maps directly to the model attributes.
+- **DRY**: Nessun helper intermedio sul payload tra `getState()` e `create`: la forma delle chiavi è responsabilità di **schema / dehydrate Filament**, non del widget.
+- **KISS**: No metodi che riscrirono lo stato dopo `getState()`. Il dominio usa il contratto Filament così com’è salvo merge esplicito di campi auth.
 - **Unified schemas, distinct semantics**: in un wizard Filament v5 si possono mescolare `Forms`, `Infolists` e `Schemas`, ma ogni famiglia va usata per il proprio scopo.
 - **Component semantics**:
   - dati read-only strutturati -> `Infolists` (`TextEntry`, `ImageEntry`, ...)
@@ -61,12 +61,13 @@ Questa distinzione evita il falso dogma "tutto diventa Infolist" e mantiene chia
 - Le firme convenzionali `get{Name}Schema()` restano senza argomenti perché sono scoperte da `XotBaseResourceForm::getStepByName()` / `XotBaseWizardWidget::getStepByName()`. I parametri runtime usano metodi espliciti non convenzionali, ad esempio `getFrontofficePrivacySchema()`, non `getPrivacySchema($param)`.
 - Non introdurre micro-helper tipo `authorTextEntry()` per tre entry leggibili: sarebbe un'astrazione cosmetica, non DRY utile. Il DRY corretto è condividere il provider schema (`TicketForm`) o isolare un vero comportamento riusabile, non nascondere tre righe dichiarative.
 - La differenza tra admin resource e widget frontoffice deve rimanere esplicita: lo schema comune vive in `TicketForm`; stato Livewire, dati autenticati, redirect, submit e payload persistence restano nel widget.
+- Non dichiarare `protected string $view` nel widget se il nome segue la convenzione: `XotBaseWidget` calcola `pub_theme::filament.widgets.create-ticket-wizard` e poi il fallback `fixcity::filament.widgets.create-ticket-wizard`. Nel PHP può restare solo un commento di promemoria.
 
 ---
 
 ## 🎨 Frontend Integration
 
-- **View**: `fixcity::filament.widgets.ticket-create-wizard`
+- **View**: auto-risolta da `XotBaseWidget` / `GetViewByClassAction`: `pub_theme::filament.widgets.create-ticket-wizard`, fallback `fixcity::filament.widgets.create-ticket-wizard`.
 - **Theme**: Sixteen (Design Comuni styling applied via CSS scoping).
 - **Redirect**: Localized redirect to the confirmation page defined in `blockData['confirmation_slug']`.
 

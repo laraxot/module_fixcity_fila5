@@ -153,6 +153,14 @@ return [
             'placeholder' => 'Es. 41.9028',
             'label' => 'Latitudine',
         ],
+        'address' => [
+            'label' => 'Luogo',
+            'description' => 'Indirizzo o punto sul territorio della segnalazione',
+        ],
+        'email' => [
+            'label' => 'Email',
+            'description' => 'Indirizzo email per aggiornamenti sulla segnalazione',
+        ],
     ],
     'actions' => [
         'create' => [
@@ -229,6 +237,25 @@ return [
             'text' => '{0} Nessuna immagine caricata|{1} :count immagine caricata|[2,*] :count immagini caricate',
         ],
     ],
+    'warning' => [
+        'title' => [
+            'label' => 'Attenzione',
+        ],
+        'summary_declaration' => [
+            'text' => 'Le informazioni che hai fornito hanno valore di dichiarazione. Verifica che siano corrette.',
+        ],
+    ],
+    'privacy' => [
+        'intro' => [
+            'text' => 'Il Comune di Firenze gestisce i dati personali forniti e liberamente comunicati sulla base dell\'articolo 13 del Regolamento (UE) 2016/679 General data protection regulation (Gdpr) e degli articoli 13 e successive modifiche e integrazione del decreto legislativo (di seguito d.lgs) 267/2000 (Testo unico enti locali).',
+        ],
+        'detail_prefix' => [
+            'text' => 'Per i dettagli sul trattamento dei dati personali consulta l\'',
+        ],
+        'link' => [
+            'label' => 'informativa sulla privacy.',
+        ],
+    ],
     'sections' => [
         'empty' => [
             'heading' => 'Nessuna segnalazione',
@@ -237,6 +264,23 @@ return [
         'summary' => [
             'label' => 'Riepilogo Segnalazione',
             'description' => 'Verifica i dati prima dell\'invio',
+        ],
+        'summary_cosa' => [
+            'label' => '1. Cosa',
+        ],
+        'summary_dove' => [
+            'label' => '2. Dove',
+        ],
+        'summary_dettagli' => [
+            'label' => '3. Dettagli',
+        ],
+        'author' => [
+            'label' => 'Autore della segnalazione',
+            'description' => 'Informazione su di te',
+        ],
+        'contacts' => [
+            'label' => 'Contatti',
+            'edit_action' => 'Modifica',
         ],
         'images' => [
             'label' => 'Immagini Allegate',

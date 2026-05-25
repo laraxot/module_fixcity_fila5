@@ -48,7 +48,8 @@ protected function validateWizardSubmission(): void
 
 protected function prepareTicketData(): array
 {
-    $state = $this->normalizeWizardFormState($this->form->getState());
+    /** @var array<string, mixed> $state */
+    $state = $this->form->getState();
 
     // ...
 }

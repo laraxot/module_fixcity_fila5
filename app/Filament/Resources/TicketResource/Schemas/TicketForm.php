@@ -43,15 +43,15 @@ class TicketForm extends XotBaseResourceForm
                 ->schema(static::getWarningSectionSchema())
                 ->columnSpanFull(),
             'summarySection' => Section::make()
-                ->heading(__('fixcity::segnalazione.sections.summary.label'))
+                ->heading((string) __('fixcity::ticket.sections.summary.label'))
                 ->schema(static::getSummarySectionSchema())
                 ->columnSpanFull(),
             'authorSection' => Section::make()
-                ->heading(__('fixcity::segnalazione.heading.report_author.label'))
+                ->heading((string) __('fixcity::ticket.sections.author.label'))
                 ->schema(static::getAuthorSectionSchema())
                 ->columnSpanFull(),
             'contactsSection' => Section::make()
-                ->heading(__('fixcity::segnalazione.heading.contacts.label'))
+                ->heading((string) __('fixcity::ticket.sections.contacts.label'))
                 ->schema(static::getContactsSectionSchema())
                 ->columnSpanFull(),
         ];
@@ -62,8 +62,8 @@ class TicketForm extends XotBaseResourceForm
      */
     protected static function getWarningSectionSchema(): array
     {
-        $warningTitle = (string) __('fixcity::segnalazione.warning.title.label');
-        $warningText = (string) __('fixcity::segnalazione.warning.summary_declaration.text');
+        $warningTitle = (string) __('fixcity::ticket.warning.title.label');
+        $warningText = (string) __('fixcity::ticket.warning.summary_declaration.text');
 
         return [
             'warningContent' => Html::make(fn () => new HtmlString(
@@ -76,20 +76,16 @@ class TicketForm extends XotBaseResourceForm
     }
 
     /**
-     * @return array<string, SchemaComponent>
+     * @return list<SchemaComponent>
      */
     protected static function getSummarySectionSchema(): array
     {
-        return [
-            'locationAddress' => TextInput::make('location.address'),
-            'type' => TextInput::make('type'),
-            'name' => TextInput::make('name'),
-            'content' => Textarea::make('content')
-                ->columnSpanFull(),
-        ];
+        return array_values(TicketFormReviewInfolist::summarySectionEntries());
     }
 
     /**
+     * Dati autore: input (non Infolist) — si compilano nello stesso step del riepilogo.
+     *
      * @return array<string, SchemaComponent>
      */
     protected static function getAuthorSectionSchema(): array
@@ -107,7 +103,8 @@ class TicketForm extends XotBaseResourceForm
     {
         return [
             'authorPhone' => TextInput::make('author_phone'),
-            'authorEmail' => TextInput::make('author_email'),
+            'authorEmail' => TextInput::make('author_email')
+                ->email(),
         ];
     }
 
@@ -136,6 +133,10 @@ class TicketForm extends XotBaseResourceForm
             'type' => null,
             'priority' => TicketPriorityEnum::default()->value,
             'content' => '',
+            'author_name' => '',
+            'author_fiscal_code' => '',
+            'author_phone' => '',
+            'author_email' => '',
             'location' => [
                 'latitude' => null,
                 'longitude' => null,
@@ -161,9 +162,9 @@ class TicketForm extends XotBaseResourceForm
     public static function getGdprHtml(): HtmlString
     {
         return new HtmlString(view('fixcity::components.gdpr-notice', [
-            'intro' => (string) __('fixcity::segnalazione.privacy.intro.text'),
-            'detailsPrefix' => (string) __('fixcity::segnalazione.privacy.detail_prefix.text'),
-            'privacyLabel' => (string) __('fixcity::segnalazione.privacy.link.label'),
+            'intro' => (string) __('fixcity::ticket.privacy.intro.text'),
+            'detailsPrefix' => (string) __('fixcity::ticket.privacy.detail_prefix.text'),
+            'privacyLabel' => (string) __('fixcity::ticket.privacy.link.label'),
             'privacyUrl' => '/privacy',
         ])->render());
     }

@@ -45,11 +45,11 @@ File: `laravel/Themes/Sixteen/resources/views/components/blocks/tests/segnalazio
 ### Step 4 — Widget → Template vestito
 
 Widget: `laravel/Modules/Fixcity/app/Filament/Widgets/CreateTicketWizardWidget.php`
-- `$view = 'fixcity::filament.widgets.ticket-create-wizard'`
 - Estende `XotBaseWizardWidget`
+- Non dichiara `$view`: `XotBaseWidget` calcola `pub_theme::filament.widgets.create-ticket-wizard`, poi `fixcity::filament.widgets.create-ticket-wizard`
 - 3 step: privacy → data → summary
 
-Template: `laravel/Modules/Fixcity/resources/views/filament/widgets/ticket-create-wizard.blade.php`
+Template: `laravel/Themes/Sixteen/resources/views/filament/widgets/create-ticket-wizard.blade.php` con fallback `laravel/Modules/Fixcity/resources/views/filament/widgets/create-ticket-wizard.blade.php`
 
 ## Architettura: Due percorsi separati
 

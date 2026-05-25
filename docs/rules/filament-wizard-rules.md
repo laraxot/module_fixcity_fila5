@@ -103,9 +103,11 @@ Select::make('type_id')->options(TicketTypeEnum::class)
 
 ### Submit Action
 
-- `submitAction` resta centralizzato in `XotBaseWizardWidget::getWizardSubmitAction()`.
-- Il widget dominio non deve overrideare `getWizardSubmitAction()`.
+- `submitAction` resta centralizzato in `XotBaseWizardWidget::getWizardSubmitAction()` (bottone ultimo step).
+- `getFormSubmitAction()` restituisce il metodo Livewire per `wire:submit` nel Blade (default `submit`; stub Filament: `submitAction`).
+- Il widget dominio non deve overrideare `getWizardSubmitAction()` salvo casi documentati.
 - Eventuali variazioni visuali passano dal tema (`pub_theme::filament.wizard.submit-button`) o dalla base.
+- View wrapper: `form` + `{{ $this->form }}`; `<x-filament-actions::modals />` **fuori** dal tag `<form>` (regola Laraxot wizard frontoffice, #75).
 
 ### Step Navigation
 
