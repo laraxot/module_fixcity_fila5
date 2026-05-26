@@ -20,7 +20,7 @@ BadMethodCallException: Method Modules\Fixcity\Filament\Widgets\CreateTicketWiza
 
 - Render Blade: `{{ $this->form }}`
 - Validazione/lettura stato: `$this->form->getState()`
-- Normalizzazione wizard: `normalizeWizardFormState($this->form->getState())`
+- Il submit legge **`$this->form->getState()`** così come esposto dallo schema; eventuali trasformazioni strutturali vanno pianificate sullo **schema** (state path, component mapping), non con helper PHP post‑`getState()` nel widget, salvo decisione documentata di dominio.
 
 ## Caso submit riepilogo
 

@@ -4,6 +4,24 @@ declare(strict_types=1);
 
 return [
     'fields' => [
+        'type' => [
+            'label' => 'Issue type',
+        ],
+        'title' => [
+            'label' => 'Title',
+        ],
+        'content' => [
+            'label' => 'Details',
+        ],
+        'name' => [
+            'label' => 'Full name',
+        ],
+        'email' => [
+            'label' => 'Email',
+        ],
+        'address' => [
+            'label' => 'Location',
+        ],
         'images' => [
             'label' => 'Images',
         ],
@@ -20,6 +38,23 @@ return [
         'summary' => [
             'label' => 'Report Summary',
             'description' => 'Verify your data before submission',
+        ],
+        'summary_cosa' => [
+            'label' => '1. What',
+        ],
+        'summary_dove' => [
+            'label' => '2. Where',
+        ],
+        'summary_dettagli' => [
+            'label' => '3. Details',
+        ],
+        'author' => [
+            'label' => 'Report author',
+            'description' => 'About you',
+        ],
+        'contacts' => [
+            'label' => 'Contact details',
+            'edit_action' => 'Edit',
         ],
         'images' => [
             'label' => 'Attached Images',

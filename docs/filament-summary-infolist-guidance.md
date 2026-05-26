@@ -1,57 +1,41 @@
-# Filament Infolist Guidance for Wizard Summary (Fixcity)
+# Filament Infolist — step riepilogo wizard (Fixcity)
 
-## Regole
+## Decisione architetturale
 
-- Nel wizard summary step usare `Filament\Infolists\Components\TextEntry` con `->state(fn(Get $get))`.
-- **MAI** usare `TextInput`/`Textarea` disabilitati come riepilogo (causano errori di cast enum→string).
-- **MAI** usare `->label()`, `->placeholder()`, `->helperText()` — gestiti da `LangServiceProvider`.
-- I nomi degli entry DEVONO avere prefisso `review_` per evitare conflitti con i field del form nello stesso wizard state.
-- Usare helper statici `formatTicketType()` / `formatTicketPriority()` per il display delle enum (gestiscono sia `TicketTypeEnum|string|int`).
+- Lo step **`form.summary::data::wizard-step`** (deeplink anche come `?step=form.summary%3A%3Adata%3A%3Awizard-step`) deve mostrare **dati già compilati**, non input.
+- In **Filament v5** questo pattern è **`Filament\Infolists\Components\TextEntry`** (ed entry affini) **dentro il flusso schema** del Wizard, NON `TextInput::disabled()`, NON `Placeholder`, NON [`SchemaView`](https://filamentphp.com/docs/5.x/schemas/overview).
+- Doc ufficiale Infolists: https://filamentphp.com/docs/5.x/infolists/overview · schema unificato: https://filamentphp.com/docs/5.x/schemas/overview
 
-## Implementazione attuale
+## Dove sta il codice (SSoT)
 
-File: `Modules/Fixcity/app/Filament/Resources/TicketResource/Schemas/TicketForm::getSummarySchema()`
+| File | Ruolo |
+|------|--------|
+| [`TicketFormReviewInfolist.php`](../app/Filament/Resources/TicketResource/Schemas/TicketFormReviewInfolist.php) | Costruisce le `TextEntry` con stato via `state(fn (Get $get): …)`, prefissi **`review_*`**, formattazioni enum/geo/allegati. |
+| [`TicketForm.php`](../app/Filament/Resources/TicketResource/Schemas/TicketForm.php) | Assembla il wizard; `getSummarySectionSchema()` delega gli entry read-only tramite **`array_values(...)`** (lista ordinata compatibile PHPStan/`Section::schema()`). |
+| [`summary.blade.php`](../resources/views/filament/widgets/wizard/steps/summary.blade.php) | Parity Blade riepilogo (se ancora inclusa nel flusso): stesse chiavi **`fixcity::ticket.*`**, mai `segnalazione` sul dominio modulo Filament/ticket. |
 
-```php
-TextEntry::make('review_type')
-    ->state(static fn (Get $get): string => static::formatTicketType($get('type_id'))),
-TextEntry::make('review_priority')
-    ->state(static fn (Get $get): string => static::formatTicketPriority($get('priority'))),
-TextEntry::make('review_name')
-    ->columnSpanFull()
-    ->state(static fn (Get $get): string => (string) ($get('name') ?? '')),
-TextEntry::make('review_content')
-    ->columnSpanFull()
-    ->state(static fn (Get $get): string => (string) ($get('content') ?? '')),
-TextEntry::make('review_location')
-    ->columnSpanFull()
-    ->state(static function (Get $get): string {
-        $location = $get('location');
-        if (! is_array($location)) { return ''; }
-        if (isset($location['address']) && is_string($location['address']) && '' !== $location['address']) {
-            return $location['address'];
-        }
-        $lat = $location['latitude'] ?? $location['lat'] ?? null;
-        $lng = $location['longitude'] ?? $location['lng'] ?? null;
-        if (null !== $lat && null !== $lng) {
-            return (string) $lat.', '.(string) $lng;
-        }
-        return '';
-    }),
-```
+## Namespace traduzioni (heading sezione)
 
-## Note sui campi Ticket
+- **Titoli `Section`** dello schema (`TicketForm::getSummarySchema()`) → **`fixcity::ticket.sections.*`** (`lang/*/ticket.php`). Il contesto è il **bounded context Filament + modello `Ticket`**: stesse chiavi usate dalla resource (create/edit) e dal wizard che riusa `TicketForm`.
+- **`fixcity::segnalazione.*`** serve al **canale pubblico** (copy Design Comuni, pagine `segnalazione-*`, testi nei blocchi CMS). Non è la SSoT per gli heading tecnici delle `Section` ticket: usando `ticket` si evita drift e si rispetta la “religione” namespace-per-dominio (vedi [`translation-namespace-religion.md`](../../../../docs/translation-namespace-religion.md) e [Fixcity: `ticket` vs `segnalazione`](./wiki/concepts/fixcity-ticket-vs-segnalazione-lang.md)).
 
-| Campo | DB | Modello cast | Form field |
-|---|---|---|---|
-| `type_id` | `integer` nullable | `TicketTypeEnum::class` | `Select::make('type_id')->options(TicketTypeEnum::class)` |
-| `priority` | `string` nullable | nessun cast (stringa raw) | `Select::make('priority')->options(TicketPriorityEnum::class)` |
-| `location` | `json` nullable | `'array'` | `CoordinatePicker::make('location')` — chiavi: `latitude`, `longitude`, `address` |
-| `images` | — | Spatie MediaLibrary | `SpatieMediaLibraryFileUpload::make('images')->collection('attachments')` |
+**Esempi**
 
-## Riferimenti
+| Dove | Chiave heading |
+|------|----------------|
+| `TicketForm::getSummarySchema()` (Section riepilogo) | **`__('fixcity::ticket.sections.summary.label')`** |
+| Parity HTML pagina pubblica `segnalazione-03-riepilogo` | `fixcity::segnalazione.*` (solo layer pubblico/marketing) |
 
-- `Modules/Fixcity/app/Filament/Resources/TicketResource/Schemas/TicketForm.php`
-- `Modules/Fixcity/app/Models/Ticket.php` (casts, fillable)
-- `Modules/Fixcity/database/migrations/2026_04_29_110000_create_tickets_table.php`
-- https://filamentphp.com/docs/5.x/infolists/overview
+## Regole operative
+
+1. **MAI** `->label()`, `->placeholder()`, `->helperText()` sugli entry: **AutoLabel** risolve **`fixcity::ticket_form.fields.<nome>.`** (vedi `lang/*/ticket_form.php`).
+2. Prefisso **`review_*`** sul blocco recap (location, type, priority, name, content, images). **Autore e contatti** nello stesso step sono **`TextInput`** in `TicketForm` (`getAuthorSectionSchema` / `getContactsSectionSchema`): sono dati da raccogliere, non da mostrare come Infolist.
+3. Enum leggibili: `formatTicketTypeDisplay` / `formatTicketPriorityDisplay` usando `TicketTypeEnum` / `TicketPriorityEnum` + `tryFrom` sullo stato wizard (campo `type`/`priority`).
+4. `review_content`: `->prose()` per contenuto lungo leggibile nel riepilogo.
+5. `review_images`: conteggio testuale tramite **`fixcity::ticket_form.summaries.*`** (`trans_choice`); anteprima binary non è richiesta allo step wizard (persistenza dopo submit gestisce Media Library).
+
+## Riferimenti incrociati
+
+- Pattern generico modulo Xot: [infolists-for-summary.md](../../Xot/docs/filament/widgets/infolists-for-summary.md).
+- Smoke E2E: `Modules/Fixcity/tests/Playwright/segnalazione-crea-wizard.spec.js` — URL canonico summary + assert `.fi-in-entry`.
+- Tema Sixteen parity visiva riepilogo: [wizard-review-parity.md](../../../Themes/Sixteen/docs/wiki/design/wizard-review-parity.md).
