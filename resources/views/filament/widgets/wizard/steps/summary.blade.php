@@ -14,20 +14,25 @@
 @endphp
 
 <div class="wizard-summary-parity" x-data="{}">
+    {{--
+        Lingua dominio Ticket (ticket.php): stesso bounded context di TicketForm / Filament —
+        NON usare qui fixcity::segnalazione.* (copy frontoffice/CMS).
+        Rif: laravel/Modules/Fixcity/docs/wiki/concepts/fixcity-ticket-vs-segnalazione-lang.md
+    --}}
     {{-- Sezione COSA --}}
     <section class="it-page-section mb-5" id="summary-section-cosa">
         <div class="d-flex justify-content-between align-items-center border-bottom pb-2 mb-3">
             <h3 class="h5 mb-0 fw-bold text-uppercase text-primary">
-                {{ __('fixcity::segnalazione.sections.summary_cosa.label') !== 'fixcity::segnalazione.sections.summary_cosa.label' ? __('fixcity::segnalazione.sections.summary_cosa.label') : '1. Cosa' }}
+                {{ __('fixcity::ticket.sections.summary_cosa.label') }}
             </h3>
             <a href="javascript:void(0)" class="btn btn-link btn-sm d-flex align-items-center gap-1" 
                wire:click="goToStep('data')">
                 <svg class="icon icon-xs"><use href="/themes/Sixteen/design-comuni/assets/bootstrap-italia/dist/svg/sprites.svg#it-pencil"></use></svg>
-                <span>{{ __('fixcity::segnalazione.actions.edit_action.label') ?? __('fixcity::segnalazione.sections.contacts.edit_action') ?? 'Modifica' }}</span>
+                <span>{{ __('fixcity::ticket.sections.contacts.edit_action') }}</span>
             </a>
         </div>
         <dl class="row g-0">
-            <dt class="col-sm-3 fw-semibold text-muted small uppercase">{{ __('fixcity::segnalazione.fields.type.label')  }}</dt>
+            <dt class="col-sm-3 fw-semibold text-muted small uppercase">{{ __('fixcity::ticket.fields.type.label')  }}</dt>
             <dd class="col-sm-9 text-dark">{{ $typeName }}</dd>
         </dl>
     </section>
@@ -36,16 +41,16 @@
     <section class="it-page-section mb-5" id="summary-section-dove">
         <div class="d-flex justify-content-between align-items-center border-bottom pb-2 mb-3">
             <h3 class="h5 mb-0 fw-bold text-uppercase text-primary">
-                {{ __('fixcity::segnalazione.sections.summary_dove.label') !== 'fixcity::segnalazione.sections.summary_dove.label' ? __('fixcity::segnalazione.sections.summary_dove.label') : '2. Dove' }}
+                {{ __('fixcity::ticket.sections.summary_dove.label') }}
             </h3>
             <a href="javascript:void(0)" class="btn btn-link btn-sm d-flex align-items-center gap-1" 
                wire:click="goToStep('data')">
                 <svg class="icon icon-xs"><use href="/themes/Sixteen/design-comuni/assets/bootstrap-italia/dist/svg/sprites.svg#it-pencil"></use></svg>
-                <span>{{ __('fixcity::segnalazione.actions.edit_action.label') ?? __('fixcity::segnalazione.sections.contacts.edit_action') ?? 'Modifica' }}</span>
+                <span>{{ __('fixcity::ticket.sections.contacts.edit_action') }}</span>
             </a>
         </div>
         <dl class="row g-0">
-            <dt class="col-sm-3 fw-semibold text-muted small uppercase">{{ __('fixcity::segnalazione.fields.address.label') }}</dt>
+            <dt class="col-sm-3 fw-semibold text-muted small uppercase">{{ __('fixcity::ticket.fields.address.label') }}</dt>
             <dd class="col-sm-9 text-dark">
                 {{ $location['address'] ?? ($location['latitude'] . ', ' . $location['longitude']) }}
             </dd>
@@ -66,23 +71,23 @@
     <section class="it-page-section mb-5" id="summary-section-dettagli">
         <div class="d-flex justify-content-between align-items-center border-bottom pb-2 mb-3">
             <h3 class="h5 mb-0 fw-bold text-uppercase text-primary">
-                {{ __('fixcity::segnalazione.sections.summary_dettagli.label') !== 'fixcity::segnalazione.sections.summary_dettagli.label' ? __('fixcity::segnalazione.sections.summary_dettagli.label') : '3. Dettagli' }}
+                {{ __('fixcity::ticket.sections.summary_dettagli.label') }}
             </h3>
             <a href="javascript:void(0)" class="btn btn-link btn-sm d-flex align-items-center gap-1" 
                wire:click="goToStep('data')">
                 <svg class="icon icon-xs"><use href="/themes/Sixteen/design-comuni/assets/bootstrap-italia/dist/svg/sprites.svg#it-pencil"></use></svg>
-                <span>{{ __('fixcity::segnalazione.actions.edit_action.label') ?? __('fixcity::segnalazione.sections.contacts.edit_action') ?? 'Modifica' }}</span>
+                <span>{{ __('fixcity::ticket.sections.contacts.edit_action') }}</span>
             </a>
         </div>
         <dl class="row g-0">
-            <dt class="col-sm-3 fw-semibold text-muted small uppercase">{{ __('fixcity::segnalazione.fields.title.label') }}</dt>
+            <dt class="col-sm-3 fw-semibold text-muted small uppercase">{{ __('fixcity::ticket.fields.title.label') }}</dt>
             <dd class="col-sm-9 text-dark fw-bold">{{ $formData['name'] ?? '' }}</dd>
             
-            <dt class="col-sm-3 fw-semibold text-muted small uppercase mt-2">{{ __('fixcity::segnalazione.fields.details.label') }}</dt>
+            <dt class="col-sm-3 fw-semibold text-muted small uppercase mt-2">{{ __('fixcity::ticket.fields.content.label') }}</dt>
             <dd class="col-sm-9 text-dark mt-2">{{ $formData['content'] ?? '' }}</dd>
 
             @if(count($images) > 0)
-            <dt class="col-sm-3 fw-semibold text-muted small uppercase mt-3">{{ __('fixcity::segnalazione.fields.images.label') }}</dt>
+            <dt class="col-sm-3 fw-semibold text-muted small uppercase mt-3">{{ __('fixcity::ticket.fields.images.label') }}</dt>
             <dd class="col-sm-9 mt-3">
                 <div class="row row-cols-2 row-cols-md-4 g-2">
                     @foreach($images as $image)
@@ -104,19 +109,19 @@
     <section class="it-page-section mb-4" id="summary-section-segnalatore">
         <div class="d-flex justify-content-between align-items-center border-bottom pb-2 mb-3">
             <h3 class="h5 mb-0 fw-bold text-uppercase text-primary">
-                {{ __('fixcity::segnalazione.sections.author.label') }}
+                {{ __('fixcity::ticket.sections.author.label') }}
             </h3>
             <a href="javascript:void(0)" class="btn btn-link btn-sm d-flex align-items-center gap-1" 
                wire:click="goToStep('data')">
                 <svg class="icon icon-xs"><use href="/themes/Sixteen/design-comuni/assets/bootstrap-italia/dist/svg/sprites.svg#it-pencil"></use></svg>
-                <span>{{ __('fixcity::segnalazione.actions.edit_action.label') ?? __('fixcity::segnalazione.sections.contacts.edit_action') ?? 'Modifica' }}</span>
+                <span>{{ __('fixcity::ticket.sections.contacts.edit_action') }}</span>
             </a>
         </div>
         <dl class="row g-0">
-            <dt class="col-sm-3 fw-semibold text-muted small uppercase">{{ __('fixcity::segnalazione.fields.name.label') }}</dt>
+            <dt class="col-sm-3 fw-semibold text-muted small uppercase">{{ __('fixcity::ticket.fields.name.label') }}</dt>
             <dd class="col-sm-9 text-dark">{{ $this->getAuthUserName() }}</dd>
             
-            <dt class="col-sm-3 fw-semibold text-muted small uppercase mt-2">{{ __('fixcity::segnalazione.fields.email.label') }}</dt>
+            <dt class="col-sm-3 fw-semibold text-muted small uppercase mt-2">{{ __('fixcity::ticket.fields.email.label') }}</dt>
             <dd class="col-sm-9 text-dark mt-2">{{ $formData['email'] ?? '-' }}</dd>
         </dl>
     </section>

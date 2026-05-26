@@ -1,23 +1,33 @@
 import { test, expect } from '@playwright/test';
 
 test.describe('Segnalazione crea wizard submit wiring', () => {
-    test('page exposes livewire form with wire submit handler', async ({ page }) => {
+    test('page exposes filament wizard alpine submit wired to Livewire save', async ({ page }) => {
         const response = await page.goto('/it/tests/segnalazione-crea', {
-            waitUntil: 'domcontentloaded',
+            waitUntil: 'networkidle',
         });
 
         expect(response?.ok()).toBeTruthy();
 
-        const form = page.locator('form[wire\\:submit="submit"]');
-        await expect(form).toHaveCount(1, { timeout: 20000 });
+        const html = await page.content();
+
+        expect(html).toContain('$wire.save()');
+        expect(html).toContain('fi-sc-wizard');
     });
 
-    test('theme submit button view is present on last wizard step markup', async ({ page }) => {
-        await page.goto('/it/tests/segnalazione-crea?step=3', {
-            waitUntil: 'domcontentloaded',
+    test('summary step uses Filament Infolist markup (TextEntry rows) via canonical Filament step id', async ({ page }) => {
+        const canonicalStepId = encodeURIComponent('form.summary::data::wizard-step');
+
+        await page.goto(`/it/tests/segnalazione-crea?step=${canonicalStepId}`, {
+            waitUntil: 'networkidle',
         });
 
-        const submitButton = page.locator('button.steppers-btn-confirm[type="submit"]');
-        await expect(submitButton.first()).toBeVisible({ timeout: 20000 });
+        await expect(page.locator('.fi-sc-wizard')).toBeAttached();
+
+        await expect.poll(async () => await page.locator('.fi-in-entry').count()).toBeGreaterThan(3);
+
+        // Footer Filament wizard: pulsante conferma usa label dalla Resource / Lang auto-label (locale it).
+        await expect(
+            page.getByRole('button', { name: /Conferma e invia|Salva|Save/i }).first(),
+        ).toBeVisible({ timeout: 25000 });
     });
 });

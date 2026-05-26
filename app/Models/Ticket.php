@@ -197,33 +197,6 @@ class Ticket extends XotBaseModel implements HasMedia
             },
         );
     }
-        */
-
-    /**
-     * @param  array<string, mixed>  $value
-     * @return array<string, string|array<string, mixed>|null>
-     */
-    private static function extractAddressComponents(array $value): array
-    {
-        $details = $value['address_components'] ?? $value['addressdetails'] ?? $value['address_details'] ?? null;
-        if (! \is_array($details) || $details === []) {
-            return [];
-        }
-
-        return array_filter([
-            'street' => self::normalizeNullableText($value['street'] ?? $details['road'] ?? $details['street'] ?? null),
-            'street_number' => self::normalizeNullableText($value['street_number'] ?? $details['house_number'] ?? null),
-            'zip' => self::normalizeNullableText($value['zip'] ?? $value['postcode'] ?? $details['postcode'] ?? null),
-            'postcode' => self::normalizeNullableText($value['postcode'] ?? $details['postcode'] ?? null),
-            'city' => self::normalizeNullableText($value['city'] ?? $details['city'] ?? $details['town'] ?? $details['village'] ?? $details['municipality'] ?? null),
-            'province' => self::normalizeNullableText($value['province'] ?? $details['county'] ?? $details['state_district'] ?? null),
-            'state' => self::normalizeNullableText($value['state'] ?? $details['state'] ?? $details['region'] ?? null),
-            'country' => self::normalizeNullableText($value['country'] ?? $details['country'] ?? null),
-            'country_code' => self::normalizeNullableText($value['country_code'] ?? $details['country_code'] ?? null),
-            'suburb' => self::normalizeNullableText($value['suburb'] ?? $details['suburb'] ?? $details['neighbourhood'] ?? null),
-            'address_details' => $details,
-        ], static fn (mixed $item): bool => $item !== null && $item !== '' && $item !== []);
-    }
 
     public function casts(): array
     {
@@ -235,40 +208,6 @@ class Ticket extends XotBaseModel implements HasMedia
             'type' => TicketTypeEnum::class,
             'type_id' => TicketTypeEnum::class,
         ];
-    }
-    /*
-    private static function hasTableColumn(string $column): bool
-    {
-        $model = new self();
-        $connection = (string) $model->getConnectionName();
-        $table = $model->getTable();
-        $cacheKey = $connection.'|'.$table.'|'.$column;
-
-        if (array_key_exists($cacheKey, self::$columnAvailabilityCache)) {
-            return self::$columnAvailabilityCache[$cacheKey];
-        }
-
-        self::$columnAvailabilityCache[$cacheKey] = Schema::connection($connection)->hasColumn($table, $column);
-
-        return self::$columnAvailabilityCache[$cacheKey];
-    }
-        */
-
-    /**
-     * @param  array<mixed>  $value
-     * @return array<string, mixed>
-     */
-    private static function stringKeyed(array $value): array
-    {
-        $normalized = [];
-
-        foreach ($value as $key => $item) {
-            if (\is_string($key)) {
-                $normalized[$key] = $item;
-            }
-        }
-
-        return $normalized;
     }
 
     /**

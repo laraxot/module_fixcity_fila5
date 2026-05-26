@@ -74,9 +74,11 @@ di Filament 5.x — NON richiede un record Eloquent.
 
 ## Riferimento codice
 
+- **`TicketFormReviewInfolist`** (recap step 3): `laravel/Modules/Fixcity/app/Filament/Resources/TicketResource/Schemas/TicketFormReviewInfolist.php`
 - Pattern ViewRecord corretto: `laravel/Modules/Xot/app/Filament/Resources/LogResource/Pages/ViewLog.php`
 - Base wizard: `laravel/Modules/Xot/app/Filament/Widgets/XotBaseWizardWidget.php`
 - Widget segnalazione: `laravel/Modules/Fixcity/app/Filament/Widgets/CreateTicketWizardWidget.php`
+- i18n heading `Section`: [fixcity-ticket-vs-segnalazione-lang](./fixcity-ticket-vs-segnalazione-lang.md) — usare `fixcity::ticket.sections.*` nello schema `TicketForm`
 
 ## Anti-pattern linter (Pint/PHP-CS-Fixer)
 

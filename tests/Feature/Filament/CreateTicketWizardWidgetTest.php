@@ -20,7 +20,7 @@ describe('CreateTicketWizardWidget view resolution', function (): void {
                 'title' => 'Segnalazione disservizio',
                 'description' => '',
             ],
-        ])->assertSeeHtml('wire:submit="submit"');
+        ])->assertSeeHtml('$wire.save()');
     });
 });
 

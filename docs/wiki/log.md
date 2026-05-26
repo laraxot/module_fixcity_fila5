@@ -1,12 +1,70 @@
-<<<<<<< HEAD
+
+
+
+## [2026-05-25] docs | redundanza superfici cross-modulo — Fixcity ⇄ Rating
+
+- Nuovo indice modulo: [`wiki/redundancy/fixcity-cross-module-duplicate-surfaces.md`](./redundancy/fixcity-cross-module-duplicate-surfaces.md); hub trasversale [`audit-profondo-ridondanze-holistic.md`](../../../Xot/docs/wiki/redundancy/audit-profondo-ridondanze-holistic.md).
+
+## [2026-05-22] refactor | Blade `wizard/steps/summary` — lingua `ticket` solo
+
+- [`resources/views/filament/widgets/wizard/steps/summary.blade.php`](../../resources/views/filament/widgets/wizard/steps/summary.blade.php): rimossi **`fixcity::segnalazione.*`**; chiavi **`fixcity::ticket.sections.summary_*`**, **`fields.*`**, **`sections.contacts.edit_action`** (`lang/it|en/ticket.php`).
+
+## [2026-05-22] docs | second brain — `ticket` vs `segnalazione` per heading `TicketForm`
+
+- Nuova synthesis: [`concepts/fixcity-ticket-vs-segnalazione-lang.md`](./concepts/fixcity-ticket-vs-segnalazione-lang.md); puntatori in [`filament-summary-infolist-guidance.md`](../filament-summary-infolist-guidance.md), root [`translation-namespace-religion.md`](../../../../../docs/translation-namespace-religion.md).
+
+## [2026-05-22] fix | Wizard summary — autore/contatti come TextInput + recap Infolist
+
+- **Regression**: aver messo **`TextEntry`** anche su nome/CF/email/telefono bloccava la compilazione nello step finale.
+- **Fix**: recap dati **`TicketFormReviewInfolist`** (`TextEntry` + `badge` tipo/priorità, **`TicketPriorityEnum::label()`**, luogo **indirizzo · coordinate**); **`TicketForm::getAuthorSectionSchema` / `getContactsSectionSchema`** = **`TextInput`** (+ `email()` sul contatto).
+- **Test Pest**: [`TicketFormWizardSummarySchemaTest.php`](../../tests/Unit/TicketFormWizardSummarySchemaTest.php).
+
+## [2026-05-22] refactor | Wizard riepilogo — `TicketFormReviewInfolist` (Filament TextEntry)
+
+- **`TicketFormReviewInfolist`**: definisce **`TextEntry`** con `state(Get)` sullo stato wizard (`review_*`), enum formattati, riepilogo allegati tramite **`fixcity::ticket_form.summaries.*`**; `review_content` in **`prose()`**.
+- **`TicketForm`** consuma liste ordinate **`array_values(...)`** per compatibilità `Section::schema()` / PHPStan.
+- **Playwright**: URL canonico **`form.summary::data::wizard-step`** + assert `.fi-in-entry`.
+- **Qualità (follow-up codice-style)**: niente **`mixed`** esplicito nelle firme (phpinsights Slevomat); **Yoda** evitati; coercion tipo/priorità in **`coerceTicketTypeValue` / `coerceTicketPriorityValue`** (`@param mixed` solo in PHPDoc). **phpinsights** su singolo file: usare **`--no-interaction -s`** e **`--min-complexity=-100`** perché il punteggio *Complexity* per file isolato può essere negativo anche con media cicli accettabile.
+- **Doc/module**: [`filament-summary-infolist-guidance.md`](../filament-summary-infolist-guidance.md) · tema [`wizard-review-parity.md`](../../../../Themes/Sixteen/docs/wiki/design/wizard-review-parity.md)
+
+## [2026-05-22] decision | Heading wizard riepilogo — namespace `fixcity::ticket.sections.summary`
+
+- **Regola**: in `TicketForm::getSummarySchema()`, heading sezione summary (e correlate author/contacts nello schema Resource) usa **`__('fixcity::ticket.sections.summary.label')`**, **`author`**, **`contacts`** definite in **`lang/*/ticket.php`**, non `fixcity::segnalazione.sections.summary`.
+- **Perché**: `segnalazione.php` serve al frontoffice pubblico / copy pagine; **`ticket.php`** è il file lingua del **modello/resource Filament Ticket** — stesso bounded context degli infolist/read-only wizard.
+- Riferimento: [`filament-summary-infolist-guidance.md`](../filament-summary-infolist-guidance.md) § namespace traduzioni.
+
+## [2026-05-23] troubleshooting | Wizard segnalazione-crea — step 1 assente / `?step=form.privacy`
+- **500 / pagina Laravel**: se nel widget compare **`use Modules\Xot\Filament\Traits\NormalizesWizardFormState`** (o storici alias), **elimina la riga**: quel trait **non fa parte del progetto e non deve esistere**. Poi **`composer dump-autoload`** da `laravel/` e verifica che **`submit()`** usi solo **`$this->form->getState()`** (senza normalizzatori).
+- **`?step=form.privacy` non deeplinka Filament**: `persistStepInQueryString` usa l’ **`id`/key canonico Filament**, es. `form.privacy::data::wizard-step` — vedi campo nascosto `stepsData` + doc [`ticket-wizard-frontoffice.md`](../ticket-wizard-frontoffice.md) (sezione query `step` aggiornata).
+
+## [2026-05-23] architecture | Wizard frontoffice — persistenza stato form senza `TicketResource::prepareFormDataBeforePersist()`
+
+- **Scopo**: il widget pubblico deve salvare ciò che esce dal form (dopo dehydrate Filament), non passare dall’helper della Resource pensata per la create nel pannello.
+- **`CreateTicketWizardWidget::save()` / `submit()`** (stesso corpo **`persistFromFormState()`**) : **`$this->form->getState()`** senza normalizzatori; merge **`owner_id`** solo se auth (`??=`); `Ticket::create($data)`. Il wizard Filament invoca Alpine **`$wire.save()`** sull’ultimo step (`getSubmitFormLivewireMethodName()` dal trait Xot). La pipeline `PrepareTicketFormDataForPersistAction` resta usata da `CreateTicket::mutateFormDataBeforeCreate` nel backoffice.
+
+## [2026-05-22] refactor | Ticket — pipeline persistenza Resource condivisa (wizard + Filament create)
+
+- **Prima**: `CreateTicketWizardWidget::submit()` chiamava direttamente `NormalizeTicketLocationDataAction` + riconciliazione `type_id`/`owner_id` nella UI del wizard.
+- **Dopo**: `PrepareTicketFormDataForPersistAction` + `TicketResource::prepareFormDataBeforePersist()` su **`CreateTicket::mutateFormDataBeforeCreate`** nel pannello; il **wizard frontoffice** (`CreateTicketWizardWidget::submit`) usa **`$this->form->getState()`** + `Ticket::create` senza quella pipeline — vedi voce architettura **Wizard frontoffice** sopra.
+- Percorsi: [`PrepareTicketFormDataForPersistAction`](../app/Actions/PrepareTicketFormDataForPersistAction.php), [`TicketResource`](../app/Filament/Resources/TicketResource.php), [`CreateTicket`](../app/Filament/Resources/TicketResource/Pages/CreateTicket.php), [`CreateTicketWizardWidget`](../app/Filament/Widgets/CreateTicketWizardWidget.php).
+
+## [2026-05-23] docs | wizard Fixcity — niente `$view` sul widget + docblock tolto errore modulo
+
+- `CreateTicketWizardWidget`: **no** proprietà `$view`; docblock per pigrizia leggibile espone solo la catena risolta (`pub_theme::…`, `fixcity::…`). Aggiornato [`ticket-wizard-frontoffice`](../ticket-wizard-frontoffice.md): rimossa ricetta sbagliata `protected static string $view` / only-fixcity fisso senza tema.
+- Concept modulo: [`xotbasewidget-child-no-explicit-widget-view`](concepts/xotbasewidget-child-no-explicit-widget-view.md).
+
+## [2026-05-22] troubleshooting | debugbar iniettata, errore reale in asset Sixteen/Alpine
+
+- Aggiornata [segnalazione-runtime-asset-integrity](concepts/segnalazione-runtime-asset-integrity.md): su `/it/segnalazione-crea` Debugbar era presente (`phpdebugbar-id`, `_debugbar`, `window.phpdebugbar`), ma il bundle Sixteen vecchio rompeva il runtime con `geoMapPickerField is not defined`.
+- Regola operativa: prima di toccare Composer/debugbar, verificare HTML reale + manifest runtime + `public_path()`.
+- Issue: [#115](https://github.com/laraxot/base_fixcity_fila5/issues/115).
+
 ## [2026-05-08] architecture | segnalazioni-elenco map-lit canonical
 
 - Aggiornata architettura mappa/lista: la vista pubblica usa `<map-lit>`, non `<ticket-map-lit>` e non `<geo-map-lit>`.
 - Confermato boundary: Fixcity genera `/data/tickets.json`, Geo renderizza il componente, Sixteen monta layout e filtri.
 - Corretto falso storico: Leaflet arriva dal bundle npm/Vite del modulo Geo, non da CDN nel Blade.
 
-=======
->>>>>>> 01dce8d29 (initial commit)
 ## [2026-05-05] architecture | filament v5 hybrid pattern - complete schema stack
 
 - **TicketInfolist** evolved to Filament v5 Hybrid Pattern: `configure(Schema $schema): Schema` + `getInfolistSchema(): array` dual API.

@@ -1,77 +1,38 @@
-{{--
-  Wizard widget template for Fixcity ticket creation.
-  
-  Architecture:
-  - Module provides: page title, description (via getViewData in widget)
-  - XotBaseWizardWidget provides: form schema with Wizard component
-  - pub_theme::components.wizard provides: Design Comuni visual styling
-  
-  The template provides wrapper for page content; the Wizard component
-  renders via {{ $this->form }} which delegates to theme for appearance.
---}}
-@php
-    // Step 2 is the "Dati della segnalazione" step
-    $currentStep = (int) ($this->wizardStartStep ?? 1);
-    $isDataStep = $currentStep === 2;
-@endphp
-
-<div class="segnalazione-wizard-container" data-wizard-step="{{ $currentStep }}">
-    {{-- Skip link for accessibility --}}
-    <a class="skip-link visually-hidden focusable" href="#wizard-main-content">
-        {{ __('fixcity::segnalazione.wizard_a11y.skip_to_main.label') }}
-    </a>
-
+<x-filament-widgets::widget>
+{{-- Design Comuni wrapper --}}
+<div class="cmp-wizard-widget">
+    {{-- Heading - max-width 1166px centered --}}
     <div class="container">
-        {{-- Page heading --}}
-        <div class="row">
-            <div class="col-12">
-                <h1 class="title-xxlarge mb-4">
-                    {{ $pageTitle ?? __('fixcity::segnalazione.page.title.label') }}
-                </h1>
-                @if(!empty($pageDescription))
-                    <p class="text-description mb-4">{{ $pageDescription }}</p>
-                @endif
+        <div class="row justify-content-center">
+            <div class="col-12 col-lg-10">
+                <div class="cmp-heading pb-3 pb-lg-4">
+                    <h1 class="title-xxxlarge">{{ $pageTitle }}</h1>
+                    @if($pageDescription !== '')
+                        <p class="text-paragraph mb-0">{{ $pageDescription }}</p>
+                    @endif
+                </div>
             </div>
         </div>
+    </div>
 
-        {{-- Required fields note --}}
-        <p class="text-sm text-muted mb-3">
-            <span class="text-danger">*</span> {{ __('fixcity::segnalazione.fields.required_note.label') }}
-        </p>
-
-        {{-- Main content grid --}}
-        <div class="row">
-            {{-- Sidebar for data step --}}
-            @if($isDataStep)
-                <div class="col-lg-3 d-none d-lg-block">
-                    @include('pub_theme::components.wizard.sidebar', [
-                        'steps' => [],
-                        'currentStep' => $currentStep,
-                    ])
+    {{-- Wizard Form - stepper full row; step content constrained by neutral Design Comuni CSS hooks --}}
+    <div class="container wizard-dc-form-shell">
+        <div class="row justify-content-center">
+            <div class="col-12">
+                <div class="wizard-dc-form-shell p-4 bg-white rounded-lg shadow-sm">
+                    {{-- NO <form> qui: ogni Step Filament è già un <form>; form annidate invalidano il DOM. --}}
+                    <div>
+                        @if (isset($errors) && ($errors->has('data.submit') || $errors->has('submit')))
+                            <div class="alert alert-danger mb-4" role="alert">
+                                {{ $errors->first('data.submit') ?: $errors->first('submit') }}
+                            </div>
+                        @endif
+                        {{ $this->form }}
+                    </div>
                 </div>
-            @endif
-
-<<<<<<< HEAD
-            {{-- Wizard content --}}
-                <div class="col-12 {{ $isDataStep ? 'col-lg-9' : 'col-lg-8' }} col-xl-9" id="wizard-main-content">
-                    <x-filament-widgets::widget>
-                        <form wire:submit="submit">
-                            {{ $this->form }}
-                        </form>
-                        <x-filament-actions::modals />
-                    </x-filament-widgets::widget>
-                </div>
-=======
-             {{-- Wizard content --}}
-             <div class="col-12 {{ $isDataStep ? 'col-lg-9' : 'col-lg-8' }} col-xl-9" id="wizard-main-content">
-                 <x-filament-widgets::widget>
-                     <form wire:submit="submit">
-                         {{ $this->form }}
-                     </form>
-                 </x-filament-widgets::widget>
-                 <x-filament-actions::modals />
-             </div>
->>>>>>> 2f766bf44 (chore: update agent coordination index and standing rule reference)
+            </div>
         </div>
     </div>
 </div>
+<x-filament-actions::modals />
+</x-filament-widgets::widget>

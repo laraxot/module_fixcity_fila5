@@ -95,12 +95,11 @@ Wizard\Step::make('dati')
 
 **4. `persistStepInQueryString('step')`** — usato solo in env locale/debug per QA; non in produzione.
 
-**5. Geolocalizzazione via Geo module** — `LeafletMarkerMapInput` (mai implementazione custom nel wizard).
-**5. Geolocalizzazione via Geo module** — `LatitudeLongitudeInput` (mai implementazione custom nel wizard).
+**5. Geolocalizzazione via Geo module** — `LeafletMarkerMapInput` / `LatitudeLongitudeInput` (mai implementazione custom nel wizard).
 
 **6. Multilingua obbligatoria** — tutto il testo usa chiavi `fixcity::...`; slug CMS via config (MAI hardcoded italiano nel PHP).
 
-**7. `normalizeWizardFormState()`** — chiamato prima di `Ticket::query()->create()` allo step submit.
+**7. Submit wizard frontoffice** — `CreateTicketWizardWidget::submit()` passa a **`Ticket::create`** l’output di **`$this->form->getState()`** (più **`owner_id`** se sessione auth, senza sovrascrivere valori già nello stato), **senza** `TicketResource::prepareFormDataBeforePersist()` (riservata al backoffice).
 
 ### Composizione CMS Pagina
 

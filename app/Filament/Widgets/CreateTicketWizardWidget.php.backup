@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Modules\Fixcity\Filament\Widgets;
 
 use Filament\Schemas\Components\Wizard\Step;
-use Illuminate\Support\Facades\Auth;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 use Modules\Fixcity\Filament\Resources\TicketResource;
 use Modules\Fixcity\Filament\Resources\TicketResource\Schemas\TicketForm;
@@ -15,12 +14,8 @@ use Modules\Xot\Filament\Widgets\XotBaseWizardWidget;
 
 class CreateTicketWizardWidget extends XotBaseWizardWidget
 {
-    /**
-     * Runtime source-of-truth view for frontoffice ticket wizard.
-     * This avoids ambiguity with theme files that share the same basename.
-     * $view = 'fixcity::filament.widgets.create-ticket-wizard';
-     */
-    
+    // View auto-resolved by XotBaseWidget/GetViewByClassAction:
+    // pub_theme::filament.widgets.create-ticket-wizard, then fixcity::filament.widgets.create-ticket-wizard.
 
     /** @var array<string, mixed> */
     public array $blockData = [];
@@ -45,24 +40,15 @@ class CreateTicketWizardWidget extends XotBaseWizardWidget
     }
 
     /**
-     * Compat con template o link che chiamano ancora `submit` (il wizard Filament usa `$wire.save()` di default).
+     * Persistenza sullo stato restituito da Filament (`getState`), senza passaggi intermedi sul payload.
+     * Merge opzionale `owner_id` solo se l'utente è autenticato (non sovrascrive un valore già nello stato).
      */
     public function submit(): void
-    {
-        $this->persistFromFormState();
-    }
-
-    public function save(): void
-    {
-        $this->persistFromFormState();
-    }
-
-    private function persistFromFormState(): void
     {
         /** @var array<string, mixed> $data */
         $data = $this->form->getState();
 
-        $userId = Auth::id();
+        $userId = auth()->id();
         if ($userId !== null) {
             $data['owner_id'] ??= $userId;
         }
@@ -72,6 +58,10 @@ class CreateTicketWizardWidget extends XotBaseWizardWidget
         $this->redirectAfterSuccess();
     }
 
+    public function save(): void
+    {
+        $this->submit();
+    }
 
     protected function redirectAfterSuccess(): void
     {

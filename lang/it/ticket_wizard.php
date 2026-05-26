@@ -308,8 +308,8 @@ return [
             'sections' => [
                 'summary' => [
                     'label' => [
-                        'heading' => 'fixcity::segnalazione.sections.summary.label',
-                        'label' => 'fixcity::segnalazione.sections.summary.label',
+                        'heading' => 'fixcity::ticket.sections.summary.label',
+                        'label' => 'fixcity::ticket.sections.summary.label',
                     ],
                 ],
                 'place' => [
@@ -335,8 +335,8 @@ return [
             'label' => 'Disservizio!!',
         ],
         'empty' => [
-            'heading' => 'empty',
-            'label' => 'empty',
+            'heading' => 'empty7',
+            'label' => 'empty8',
         ],
     ],
 ];
