@@ -1,6 +1,13 @@
 
 
 
+## [2026-05-26] fix | Wizard step 3 (`Salva/Invia`) non esegue submit — rimosso form wrapper esterno
+
+- **Sintomo**: nello step finale di `segnalazione-crea` il click su `Salva/Invia` non produceva alcuna azione.
+- **Causa**: nella view tema del widget era stato reintrodotto un `<form wire:submit="submit">` attorno a `{{ $this->form }}`; con gli step Filament (`fi-sc-wizard-step`) questo crea annidamento form e rompe la submit chain.
+- **Fix applicato**: in [`laravel/Themes/Sixteen/resources/views/filament/widgets/create-ticket-wizard.blade.php`](../../../../Themes/Sixteen/resources/views/filament/widgets/create-ticket-wizard.blade.php) rimosso il wrapper `<form ...>` esterno, lasciando solo `{{ $this->form }}` e il blocco errori.
+- **Regola confermata**: seguire `wizard-step-visibility.md` (nessun form esterno sul widget wizard tema; submit gestito dal wizard Filament + metodi Livewire `save/submit` del widget).
+
 ## [2026-05-26] docs | verifica sorgente — BaseModel già su XotBaseModel
 
 - **`fixcity-cross-module-duplicate-surfaces.md`**: aggiornato dopo lettura [`app/Models/BaseModel.php`](../../app/Models/BaseModel.php): niente più claim “extends Model”; resta cluster **`BasePivot`** vs **`XotBasePivot`** e Blade dashboard **byte-identico** con Rating.
