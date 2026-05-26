@@ -1,4 +1,14 @@
 
+
+
+## [2026-05-26] docs | verifica sorgente — BaseModel già su XotBaseModel
+
+- **`fixcity-cross-module-duplicate-surfaces.md`**: aggiornato dopo lettura [`app/Models/BaseModel.php`](../../app/Models/BaseModel.php): niente più claim “extends Model”; resta cluster **`BasePivot`** vs **`XotBasePivot`** e Blade dashboard **byte-identico** con Rating.
+
+## [2026-05-25] docs | redundanza superfici cross-modulo — Fixcity ⇄ Rating
+
+- Nuovo indice modulo: [`wiki/redundancy/fixcity-cross-module-duplicate-surfaces.md`](./redundancy/fixcity-cross-module-duplicate-surfaces.md); hub trasversale [`audit-profondo-ridondanze-holistic.md`](../../../Xot/docs/wiki/redundancy/audit-profondo-ridondanze-holistic.md).
+
 ## [2026-05-22] refactor | Blade `wizard/steps/summary` — lingua `ticket` solo
 
 - [`resources/views/filament/widgets/wizard/steps/summary.blade.php`](../../resources/views/filament/widgets/wizard/steps/summary.blade.php): rimossi **`fixcity::segnalazione.*`**; chiavi **`fixcity::ticket.sections.summary_*`**, **`fields.*`**, **`sections.contacts.edit_action`** (`lang/it|en/ticket.php`).

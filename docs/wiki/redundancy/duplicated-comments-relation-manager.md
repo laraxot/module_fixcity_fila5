@@ -8,6 +8,7 @@ issues:
   - "https://github.com/laraxot/base_fixcity_fila5/issues/90"
 related:
   - ../../../Comment/docs/redundancy-report.md
+  - ./fixcity-cross-module-duplicate-surfaces.md
 ---
 
 # CommentsRelationManager — due path nello stesso modulo

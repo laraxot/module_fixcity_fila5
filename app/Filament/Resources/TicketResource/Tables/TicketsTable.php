@@ -18,7 +18,7 @@ use Modules\Xot\Filament\Resources\Tables\XotBaseResourceTable;
  * TicketsTable Schema - XotBaseResourceTable Zen Pattern.
  *
  * **Zen Philosophy**: No `configure()` override - XotBaseResourceTable base class handles table setup.
- * Subclass only provides static `getTable*()` methods.
+ * Subclass only provides `getTable*()` methods.
  *
  * **Architecture**:
  * - Columns: ID, name, status, priority, type, owner, assignee, dates
@@ -32,7 +32,7 @@ class TicketsTable extends XotBaseResourceTable
     /**
      * @return array<string, Column>
      */
-    public static function getTableColumns(): array
+    public function getTableColumns(): array
     {
         return [
             'id' => TextColumn::make('id')->sortable(),
@@ -50,7 +50,7 @@ class TicketsTable extends XotBaseResourceTable
     /**
      * @return array<string, BaseFilter>
      */
-    public static function getTableFilters(): array
+    public function getTableFilters(): array
     {
         return [
             'status' => SelectFilter::make('status')->options(TicketStatusEnum::class),
