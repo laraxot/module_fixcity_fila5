@@ -7,7 +7,6 @@ namespace Modules\Fixcity\Filament\Resources\TicketResource\Schemas;
 use Filament\Infolists\Components\TextEntry;
 use Filament\Schemas\Components\Component as SchemaComponent;
 use Filament\Schemas\Components\Utilities\Get;
-use Modules\Fixcity\Enums\TicketPriorityEnum;
 use Modules\Fixcity\Enums\TicketTypeEnum;
 
 /**
@@ -20,7 +19,7 @@ use Modules\Fixcity\Enums\TicketTypeEnum;
 final class TicketFormReviewInfolist
 {
     /**
-     * Blocco riepilogo segnalazione (luogo, tipo, priorità, testi, allegati sintetici).
+     * Blocco riepilogo segnalazione (luogo, tipo, testi, allegati sintetici).
      *
      * @return array<string, SchemaComponent>
      */
@@ -33,9 +32,6 @@ final class TicketFormReviewInfolist
             'review_type' => TextEntry::make('review_type')
                 ->badge()
                 ->state(static fn (Get $get): string => static::formatTicketTypeDisplay(static::coerceTicketTypeValue($get('type')))),
-            'review_priority' => TextEntry::make('review_priority')
-                ->badge()
-                ->state(static fn (Get $get): string => static::formatTicketPriorityDisplay(static::coerceTicketPriorityValue($get('priority')))),
             'review_name' => TextEntry::make('review_name')
                 ->columnSpanFull()
                 ->state(static fn (Get $get): string => (string) ($get('name') ?? '')),
@@ -75,26 +71,6 @@ final class TicketFormReviewInfolist
         return is_scalar($raw) ? (string) $raw : null;
     }
 
-    /**
-     * @param  mixed  $raw
-     */
-    private static function coerceTicketPriorityValue($raw): TicketPriorityEnum|string|null
-    {
-        if ($raw instanceof TicketPriorityEnum) {
-            return $raw;
-        }
-
-        if ($raw === null || $raw === '') {
-            return null;
-        }
-
-        if (is_string($raw)) {
-            return $raw;
-        }
-
-        return is_scalar($raw) ? (string) $raw : null;
-    }
-
     protected static function formatTicketTypeDisplay(TicketTypeEnum|string|null $raw): string
     {
         if ($raw instanceof TicketTypeEnum) {
@@ -108,21 +84,6 @@ final class TicketFormReviewInfolist
         $enum = TicketTypeEnum::tryFrom($raw);
 
         return $enum?->getLabel() ?? $raw;
-    }
-
-    protected static function formatTicketPriorityDisplay(TicketPriorityEnum|string|null $raw): string
-    {
-        if ($raw instanceof TicketPriorityEnum) {
-            return $raw->label();
-        }
-
-        if ($raw === null || $raw === '') {
-            return '';
-        }
-
-        $enum = TicketPriorityEnum::tryFrom($raw);
-
-        return $enum?->label() ?? $raw;
     }
 
     protected static function formatLocationReviewState(Get $get): string

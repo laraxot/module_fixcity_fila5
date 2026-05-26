@@ -2,6 +2,8 @@
 
 declare(strict_types=1);
 
+use Filament\Forms\Components\Hidden;
+use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Infolists\Components\TextEntry;
 use Modules\Fixcity\Filament\Resources\TicketResource\Schemas\TicketForm;
@@ -39,5 +41,13 @@ describe('ticket wizard summary step schema', function (): void {
             ->and($author['authorFiscalCode'] ?? null)->toBeInstanceOf(TextInput::class)
             ->and($contacts['authorPhone'] ?? null)->toBeInstanceOf(TextInput::class)
             ->and($contacts['authorEmail'] ?? null)->toBeInstanceOf(TextInput::class);
+    });
+
+    it('keeps priority as an internal default instead of a visible data-step select', function (): void {
+        $schema = TicketForm::getDataSchema();
+
+        expect($schema['type'] ?? null)->toBeInstanceOf(Select::class)
+            ->and($schema['priority'] ?? null)->toBeInstanceOf(Hidden::class)
+            ->and($schema['priority'] ?? null)->not->toBeInstanceOf(Select::class);
     });
 });
