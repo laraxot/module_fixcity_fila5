@@ -1,82 +1,17 @@
-- Inventario [ridondanze cross-modulo](../docs/redundancy-report.md)
-- Concetti [ridondanze cross-cutting](../Xot/docs/wiki/concepts/ridondanze-cross-cutting-codebase.md)
+# Redundancy Report – Fixcity Module
 
-# Redundancy Report — Modulo Fixcity
+## 1. Translation Namespace Inconsistency
+- **Namespace `fixcity::ticket`** – Used throughout backend code, Filament resources, enums, and internal forms (e.g., `Modules/Fixcity/app/Filament/Resources/TicketResource/Schemas/TicketForm.php`, `summary.blade.php`).
+- **Namespace `fixcity::segnalazione`** – Used in front‑office Blade components under `Themes/Sixteen` (e.g., `resources/views/components/blocks/tests/segnalazione-01-privacy.blade.php`) and some legacy wizard steps.
+- **Impact:** Two parallel namespaces for essentially the same domain lead to duplicated key files, potential drift, and extra translation maintenance.
+- **Recommendation:** Decide on a single source of truth:
+  - Keep `fixcity::ticket` for all backend and shared UI components.
+  - Either migrate front‑office templates to `fixcity::ticket` or maintain a thin mapping layer that forwards `fixcity::segnalazione` keys to the `ticket` equivalents.
+  - Update documentation to reflect the chosen namespace and remove obsolete keys.
 
-> Generato: 2026-05-21 | Analisi automatica deep-scan
+## 2. Duplicate Blade Shim for Alpine Global Functions (related to Geo)
+- The Blade shim defined in `Themes/Sixteen/resources/views/partials/alpine-livewire-bootstrap-header.blade.php` duplicates the `geoMapPickerField` registration performed in `Modules/Geo/resources/js/filament/map-picker.js`.
+- **Impact:** Redundant global function definitions increase bundle size and risk inconsistent behavior.
+- **Recommendation:** Remove the shim after confirming the shared JS module is loaded before any markup that calls the function.
 
-## Problemi Trovati
-
-### 1. 🔴 BaseModel NON estende XotBaseModel
-
-**File**: `app/Models/BaseModel.php`
-
-```php
-// ATTUALE (NON conforme)
-abstract class BaseModel extends Model
-{
-    use HasFactory;
-    use SoftDeletes;
-    use Updater;
-}
-
-// CORRETTO (conforme Laraxot)
-abstract class BaseModel extends XotBaseModel
-{
-    use SoftDeletes; // se necessario
-}
-```
-
-`XotBaseModel` include già `HasFactory`, `Updater` e la logica factory tramite `GetFactoryAction`. Estendere `Model` direttamente duplica funzionalità e viola la regola Laraxot.
-
-### 2. 🔴 BasePivot NON estende XotBasePivot
-
-**File**: `app/Models/BasePivot.php`
-
-```php
-// ATTUALE
-abstract class BasePivot extends Pivot
-{
-    use HasFactory;
-    use Updater;
-}
-
-// CORRETTO
-abstract class BasePivot extends XotBasePivot {}
-```
-
-### 3. 🟠 CommentsRelationManager — 2 copie identiche
-
-| File | Namespace |
-|------|-----------|
-| `app/Filament/Resources/RelationManagers/CommentsRelationManager.php` | `Modules\Fixcity\Filament\Resources\RelationManagers` |
-| `app/Filament/Resources/TicketResource/RelationManagers/CommentsRelationManager.php` | `Modules\Fixcity\Filament\Resources\TicketResource\RelationManagers` |
-
-Entrambe hanno import identici, stessa logica, estendono `RelationManager`. Solo il namespace differisce.
-
-**Azione**: Eliminare `Resources/RelationManagers/CommentsRelationManager.php` e usare solo quella in `TicketResource/RelationManagers/`.
-
-### 4. 🟡 TicketForm.php — Import duplicato (RISOLTO 2026-05-21)
-
-**File**: `app/Filament/Resources/TicketResource/Schemas/TicketForm.php`
-
-Aveva un import duplicato di `XotBaseResourceForm` (una dal namespace locale e una da Xot) che causava un fatal error PHP. Rimossa la riga ridondante.
-
-### 5. 🟡 ChangeStatus — 2 versioni
-
-| File | Tipo |
-|------|------|
-| `app/Actions/ChangeStatus.php` | Action class |
-| `app/Filament/Actions/ChangeStatus.php` | Filament Action |
-
-Potenziale confusione. Verificare se entrambe sono necessarie o se l'Action Filament dovrebbe usare l'Action class internamente.
-
-## Riepilogo
-
-| Priorità | Problema | Stato |
-|----------|----------|-------|
-| 🔴 | BaseModel non conforme | Da risolvere |
-| 🔴 | BasePivot non conforme | Da risolvere |
-| 🟠 | CommentsRelationManager duplicato | Da eliminare copia |
-| 🟡 | TicketForm import duplicato | ✅ Risolto |
-| 🟡 | ChangeStatus 2 versioni | Da verificare |
+*Other minor redundancies (e.g., repeated comment blocks) were not deemed critical for this analysis.*
