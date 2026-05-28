@@ -60,6 +60,7 @@ wiki/
 | [ticketinfolist-pattern-reference](./concepts/ticketinfolist-pattern-reference.md) | concept | TicketInfolist pattern di riferimento - XotBaseResourceInfolist + Infolist entries | 2026-05-05 |
 | [ticket-infolist-filament-v5-pattern](./concepts/ticket-infolist-filament-v5-pattern.md) | concept | TicketInfolist Filament v5 Hybrid Pattern - configure() + getInfolistSchema() dual API | 2026-05-05 |
 | [tickets-table-filament-v5-pattern](./concepts/tickets-table-filament-v5-pattern.md) | concept | TicketsTable Filament v5 Hybrid Pattern - configure() + table() dual API | 2026-05-05 |
+| [ux-design-fixcity](../../../../docs/ux-design-fixcity.md) | concept | Specifiche UX canoniche (stack no bootstrap, form=filament, boundary body/dress, gates) |  |
 
 ## Raw Sources
 

@@ -24,7 +24,7 @@ Il file è **statico** e **leggero** — anche con migliaia di punti resta < 1MB
 ## Componenti
 
 ### GenerateTicketsJsonAction
-- **Path**: `Modules/Fixcity/app/Actions/GenerateTicketsJsonAction.php`
+- **Path**: `Modules/Fixcity/app/Actions/GenerateTicketsJsonAction.php` (nwidart: **solo** sotto `app/` — vedi [incident-nwidart-class-outside-app.md](../../../../../docs/wiki/memories/incident-nwidart-class-outside-app.md))
 - **Trigger**: HeaderAction "Esporta JSON mappa" nel pannello admin Filament (ListTickets)
 - **Output**: `public_html/data/tickets.json` (GeoJSON FeatureCollection)
 - **Filtro**: solo ticket con `location` non null e coordinate valide
@@ -43,9 +43,12 @@ Il file è **statico** e **leggero** — anche con migliaia di punti resta < 1MB
 
 ### layout.blade.php (Themes/Sixteen)
 - **Path**: `Themes/Sixteen/resources/views/components/blocks/segnalazioni/layout.blade.php`
-- **Filtri sidebar**: generati dinamicamente da `TicketTypeEnum::cases()` + conteggi reali
-- **Lista**: query `Ticket::latest()->take(20)->get()` (no mock)
+- **Mappa**: `<map-lit data-url="/data/tickets.json">` — legge `public_html/data/tickets.json`
+- **Filtri sidebar (stato attuale)**: conteggi da query DB `Ticket::query()` — **da allineare** a facet sullo stesso JSON (STORY-051)
+- **Lista**: query DB `$filteredTicketsQuery` — target: subset coerente con JSON filtrato
 - **Leaflet**: caricato via npm/Vite dal modulo Geo, non via CDN
+
+Vedi story: [docs/stories/segnalazioni-elenco-marker-type-icon-parity.md](../../../../../docs/stories/segnalazioni-elenco-marker-type-icon-parity.md) — perché mappa e filtri devono condividere `tickets.json`.
 
 ## JSON Format
 
@@ -58,8 +61,14 @@ Il file è **statico** e **leggero** — anche con migliaia di punti resta < 1MB
     "type": "Feature",
     "geometry": { "type": "Point", "coordinates": [12.251, 45.562] },
     "properties": {
-      "id": 1, "title": "...", "type": "waste_collection",
-      "type_label": "Raccolta Rifiuti", "type_color": "#4caf50",
+      "id": 1, "title": "...",
+      "type": {
+        "value": "waste_collection",
+        "label": "Raccolta Rifiuti",
+        "color": "#4caf50",
+        "icon": "heroicon-o-trash",
+        "iconUrl": "/assets/ui/svg/trash.svg"
+      },
       "address": "Via ...", "status": "pending", "url": "/it/tests/..."
     }
   }]
@@ -68,8 +77,11 @@ Il file è **statico** e **leggero** — anche con migliaia di punti resta < 1MB
 
 ## Filtri per tipo
 
-I checkbox nella sidebar hanno `value="{{ $case->value }}"` (TicketTypeEnum value).
-Il click chiama `ticketMap.filterByType(value)` che re-renderizza i marker senza reload.
+**Target (STORY-051):** facet costruiti aggregando `features[]` di `tickets.json` (`type.value`, conteggio N per tipologia). Label/color/icon dal oggetto `properties.type`.
+
+**Oggi:** checkbox con `value` enum + conteggio da DB; submit GET `?types[]=`; script chiama `map.filterByTypes(selectedTypes)` sul JSON già caricato.
+
+I checkbox usano `TicketTypeEnum::value`; devono coincidere con `properties.type.value` nel GeoJSON.
 
 ## Note sull'autenticazione header
 

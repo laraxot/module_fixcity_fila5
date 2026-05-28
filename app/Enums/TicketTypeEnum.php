@@ -94,6 +94,12 @@ enum TicketTypeEnum: string implements HasColor, HasIcon, HasLabel
     case ROAD_MAINTENANCE = 'road_maintenance';
     case PUBLIC_LIGHTING = 'public_lighting';
     case WASTE_COLLECTION = 'waste_collection';
+
+    // Legacy values found in DB
+    case WASTE = 'waste';
+    case LIGHTING = 'lighting';
+    case ROAD_DAMAGE = 'road_damage';
+
     case PARKS_AND_GARDENS = 'parks_and_gardens';
     case SEWAGE_AND_DRAINAGE = 'sewage_and_drainage';
     case PUBLIC_BUILDINGS = 'public_buildings';
