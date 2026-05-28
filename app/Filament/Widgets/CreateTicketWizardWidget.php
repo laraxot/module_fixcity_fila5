@@ -44,28 +44,14 @@ class CreateTicketWizardWidget extends XotBaseWizardWidget
         return TicketForm::getSteps();
     }
 
-    /**
-     * Compat con template o link che chiamano ancora `submit` (il wizard Filament usa `$wire.save()` di default).
-     */
-    public function submit(): void
-    {
-        $this->persistFromFormState();
-    }
+    
 
     public function save(): void
-    {
-        $this->persistFromFormState();
-    }
-
-    private function persistFromFormState(): void
     {
         /** @var array<string, mixed> $data */
         $data = $this->form->getState();
 
-        $userId = Auth::id();
-        if ($userId !== null) {
-            $data['owner_id'] ??= $userId;
-        }
+        $data['owner_id'] = Auth::id();;
 
         Ticket::create($data);
 

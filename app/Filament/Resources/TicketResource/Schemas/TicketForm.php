@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Modules\Fixcity\Filament\Resources\TicketResource\Schemas;
 
 use Filament\Forms\Components\Checkbox;
+use Filament\Forms\Components\Hidden;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\SpatieMediaLibraryFileUpload;
 use Filament\Forms\Components\Textarea;
@@ -14,7 +15,6 @@ use Filament\Schemas\Components\Html;
 use Filament\Schemas\Components\Section;
 use Filament\Schemas\Components\Wizard\Step;
 use Illuminate\Support\HtmlString;
-use Modules\Fixcity\Enums\TicketPriorityEnum;
 use Modules\Fixcity\Enums\TicketTypeEnum;
 use Modules\Geo\Filament\Forms\Components\CoordinatePicker;
 use Modules\Xot\Filament\Resources\Schemas\XotBaseResourceForm;
@@ -131,7 +131,6 @@ class TicketForm extends XotBaseResourceForm
             'privacyAccepted' => false,
             'name' => '',
             'type' => null,
-            'priority' => TicketPriorityEnum::default()->value,
             'content' => '',
             'author_name' => '',
             'author_fiscal_code' => '',
@@ -184,11 +183,6 @@ class TicketForm extends XotBaseResourceForm
                 ->hiddenLabel()
                 ->searchable()
                 ->options(TicketTypeEnum::class)
-                ->columnSpanFull(),
-            'priority' => Select::make('priority')
-                ->hiddenLabel()
-                ->searchable()
-                ->options(TicketPriorityEnum::class)
                 ->columnSpanFull(),
             'content' => Textarea::make('content')
                 ->hiddenLabel()
