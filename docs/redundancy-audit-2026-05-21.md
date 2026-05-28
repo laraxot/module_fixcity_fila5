@@ -13,7 +13,7 @@ related:
 Static metrics: 1045 files scanned, 4 case-only groups, 16 duplicate hash groups, 1 duplicate FQCN.
 
 Findings:
-- Duplicate FQCN `Modules\Fixcity\Actions\GenerateTicketsJsonAction` exists in both `Actions/GenerateTicketsJsonAction.php` and `app/Actions/GenerateTicketsJsonAction.php`.
+- ~~Duplicate FQCN `GenerateTicketsJsonAction`~~ **Risolto 2026-05-28**: rimossa cartella `Modules/Fixcity/Actions/`; canonico solo `app/Actions/`.
 - `docs/llm-wiki/concepts/*` duplicates `docs/wiki/concepts/*` for wizard parity rules and audits.
 - Case-only `.github` files duplicate `CONTRIBUTING`, `FUNDING`, and `SECURITY`.
 - `resources/css/app.css` and `resources/assets/js/app.js` are byte-identical empty boilerplate.

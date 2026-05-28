@@ -219,6 +219,31 @@ return [
             'icon' => 'applyTableColumnManager',
             'label' => 'applyTableColumnManager',
         ],
+        'openColumnManager' => [
+            'tooltip' => 'openColumnManager',
+            'icon' => 'openColumnManager',
+            'label' => 'openColumnManager',
+        ],
+        'export_map_json' => [
+            'label' => 'export_map_json',
+            'icon' => 'export_map_json',
+            'tooltip' => 'export_map_json',
+        ],
+        'applyFilters' => [
+            'label' => 'applyFilters',
+            'icon' => 'applyFilters',
+            'tooltip' => 'applyFilters',
+        ],
+        'openFilters' => [
+            'label' => 'openFilters',
+            'icon' => 'openFilters',
+            'tooltip' => 'openFilters',
+        ],
+        'resetFilters' => [
+            'label' => 'resetFilters',
+            'icon' => 'resetFilters',
+            'tooltip' => 'resetFilters',
+        ],
     ],
     'messages' => [
         'created' => [

@@ -1,6 +1,19 @@
 
 
 
+## [2026-05-28] arch | nwidart — `Actions/` fuori da `app/` (GenerateTicketsJsonAction)
+
+- **Errore:** path `Modules/Fixcity/Actions/` invece di `Modules/Fixcity/app/Actions/` (non autoloadato da PSR-4 del modulo).
+- **Fix:** canonico solo `app/Actions/GenerateTicketsJsonAction.php`; cartella `Actions/` alla radice modulo rimossa.
+- **Second brain:** [docs/wiki/memories/incident-nwidart-class-outside-app.md](../../../../../docs/wiki/memories/incident-nwidart-class-outside-app.md), [bmad-laraxot-implementation-guardrails.md](../../../../../docs/wiki/concepts/bmad-laraxot-implementation-guardrails.md).
+
+## [2026-05-28] FIX | EnumTrait enforcement & Component naming consolidation
+
+- **EnumTrait refactoring (STORY-050):** TicketStatusEnum/TicketPriorityEnum rimosse definizioni hardcode `getColor()/getIcon()/getLabel()` in favore del trait. Creati lang files `ticket_status_enum.php` e `ticket_priority_enum.php` (it/en). PHPStan verde.
+- **Component naming violation:** Rimosse `geo-map-lit-*.js` duplicati in `Modules/Geo/resources/js/components/` in favore del canonic `map-lit.js` (usato da `<map-lit>` nel blade).
+- **Lezione ARCHITETTONICA:** Un solo componente per responsabilità. Mai duplicare JS nel tema o in moduli. Il tema importa da modulo, non fork.
+- **Regola:** `modules/Geo/.../map-lit.js` è l'unico componente mappa per segnalazioni-elenco. Tutti gli altri `geo-map-lit*.js` sono fork vietati (v. `no-theme-map-lit-fork.md`).
+
 ## [2026-05-26] fix | Wizard step 3 (`Salva/Invia`) non esegue submit — rimosso form wrapper esterno
 
 - **Sintomo**: nello step finale di `segnalazione-crea` il click su `Salva/Invia` non produceva alcuna azione.

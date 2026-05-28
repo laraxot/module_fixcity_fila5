@@ -8,9 +8,8 @@ use function Safe\file_put_contents;
 use function Safe\json_encode;
 
 /**
- * Generate a GeoJSON with MANY points in the SAME area (Rome center)
- * to properly test marker clustering.
- * All points are within ~2km radius to ensure clustering at zoom < 12.
+ * GeoJSON di test per clustering (Roma) — solo dev/QA.
+ * Path canonico: app/Actions/ (modulo nwidart).
  */
 class GenerateClusterTestJsonAction
 {
@@ -28,9 +27,7 @@ class GenerateClusterTestJsonAction
         $features = [];
         $id = 1;
 
-        // Generate 50 points in Rome center (within ~1km radius)
         for ($i = 0; $i < 50; $i++) {
-            // Random offset within ~1km (0.009 degrees ≈ 1km)
             $lat = $baseLat + (rand(-100, 100) / 10000);
             $lng = $baseLng + (rand(-100, 100) / 10000);
             $type = $types[$i % 3];
@@ -54,7 +51,6 @@ class GenerateClusterTestJsonAction
             ];
         }
 
-        // Add a few more points slightly further away (within ~2km)
         for ($i = 0; $i < 20; $i++) {
             $lat = $baseLat + (rand(-200, 200) / 10000);
             $lng = $baseLng + (rand(-200, 200) / 10000);
@@ -84,7 +80,6 @@ class GenerateClusterTestJsonAction
             'features' => $features,
         ];
 
-        // Write to public_html/data/cluster-test.json
         $path = public_path('data/cluster-test.json');
         file_put_contents($path, json_encode($geojson, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES));
 
