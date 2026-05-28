@@ -5,6 +5,7 @@ owner: Modules/Fixcity
 severity: low-medium
 confidence: medium
 created: 2026-05-25
+updated: 2026-05-26
 related:
   - ../../redundancy-report.md
   - ./duplicated-comments-relation-manager.md
@@ -27,12 +28,14 @@ Il modulo [**Fixcity**](../../overviews/fixcity-module.md) concentra segnalazion
 
 **Possibile intento storico**: stesso markup riusato nella dashboard Filament modular-reuse; rischio mantenimento doppio se il markup viene patchato solo in un modulo.
 
-## Evidenza strutturale già nel report modulo
+## Evidenza strutturale (verificata su sorgenti)
 
-Riassunto tratto da [`Fixcity/docs/redundancy-report.md`](../../redundancy-report.md) (priorità alta interne):
+Riallineamento con il codice attuale [`BaseModel`](../../../app/Models/BaseModel.php) e [`BasePivot`](../../../app/Models/BasePivot.php):
 
-- **`BaseModel`** / **`BasePivot`** dovrebbero estendere rispettivamente `XotBaseModel` / `XotBasePivot` — non è duplicate file ma **duplicate concern** nel layer dati Laraxot.
-- **`CommentsRelationManager`** duplicato in due path dentro Fixcity → scheda dedicata **[`duplicated-comments-relation-manager.md`](./duplicated-comments-relation-manager.md)**.
+- **`BaseModel` Fixcity**: estende già **`XotBaseModel`** con `declare(strict_types=1)` — nessun debito tipo “extends `Model` puro”; restano configurazioni modulo (`$connection`, `SoftDeletes`).
+- **`BasePivot` Fixcity**: oggi estende **`Illuminate\Database\Eloquent\Pivot`** con `Updater`/`HasFactory`, mentre altri domini (**Cms, Gdpr, Comment, Blog**) montano **`XotBasePivot`**. Analoghi Pivot “minimali” compaiono anche in Geo/Notify/User. Non sono file gemelli ma **famiglia frammentata** sullo stesso bounded context Laravel: decidere converge verso **`XotBasePivot`** modulo-per-modulo.
+- **Namespace lingua** backend vs frontoffice: sintesi in **[`Fixcity/docs/redundancy-report.md`](../../redundancy-report.md)** (`fixcity::ticket` vs fixcity pubblico storico).
+- **`CommentsRelationManager`** due path dentro Fixcity → **[`duplicated-comments-relation-manager.md`](./duplicated-comments-relation-manager.md)**.
 
 ## Boundary doc / tema Sixteen / wizard
 
@@ -42,5 +45,5 @@ Riduzione duplicazioni **non richiede** copiare `TicketForm` nel tema — anzi. 
 
 ## Azioni suggerite (business)
 
-1. Ogni volta che si tocca **`admin/dashboard/item.blade.php`** Fixcity confrontare Rating (e altri dashboard item module) prima del merge — o estrarre view condivisa sotto modulo **UI/Xot Filament**.
-2. Portare BaseModel/BasePivot allo standard Laraxot (vedi redundancy report) prima di refactor UI che dipendono da factory/trait sul modello.
+1. Ogni volta che si tocca **`admin/dashboard/item.blade.php`** Fixcity confrontare **Rating** (byte-identico allo scan 2026-05-26) prima del merge — o estrarre view condivisa sotto modulo **UI / Filament tema Xot**.
+2. Valutare **`BasePivot` → `XotBasePivot`** in Fixcity dopo audit migration/cast/`$connection`; non toccare `BaseModel` (già allineato a Xot).
