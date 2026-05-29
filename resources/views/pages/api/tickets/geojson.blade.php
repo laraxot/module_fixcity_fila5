@@ -1,18 +1,26 @@
-@php
-    use function Laravel\Folio\name;
+<?php
 
-    name('api.tickets.geojson');
+declare(strict_types=1);
 
+use Illuminate\Http\JsonResponse;
+use Modules\Fixcity\Actions\BuildPublicTicketsQueryAction;
+use Modules\Fixcity\Actions\BuildTicketsGeoJsonAction;
+use function Laravel\Folio\name;
+use function Laravel\Folio\render;
+
+name('api.tickets.geojson');
+
+render(function (): JsonResponse {
+    /** @var array<int, string> $types */
     $types = request()->collect('types')
-        ->filter(fn ($type): bool => is_string($type) && $type !== '')
+        ->filter(static fn ($type): bool => is_string($type) && $type !== '')
         ->values()
         ->all();
 
-    $payload = app(\Modules\Fixcity\Actions\BuildTicketsGeoJsonAction::class)
-        ->execute(
-            app(\Modules\Fixcity\Actions\BuildPublicTicketsQueryAction::class)->execute(),
-            $types
-        );
+    $payload = app(BuildTicketsGeoJsonAction::class)->execute(
+        app(BuildPublicTicketsQueryAction::class)->execute(),
+        $types,
+    );
 
-    echo json_encode($payload, JSON_UNESCAPED_UNICODE);
-@endphp
+    return response()->json($payload);
+});

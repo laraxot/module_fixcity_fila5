@@ -6,12 +6,15 @@ namespace Modules\Fixcity\Actions;
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\ValidationException;
+use Modules\Fixcity\Actions\TicketCitizenRating\EnsureTicketCitizenRatingDefinitionAction;
+use Modules\Fixcity\Actions\TicketCitizenRating\GetTicketCitizenRatingMorphAction;
 use Modules\Fixcity\Enums\TicketStatusEnum;
 use Modules\Fixcity\Models\Ticket;
+use Modules\Rating\Models\RatingMorph;
 use Modules\Xot\Contracts\UserContract;
 
 /**
- * Valutazione cittadino 1–5 su ticket risolto (FR-021 / STORY-043).
+ * Valutazione cittadino 1–5 su ticket risolto — persistenza RatingMorph (modulo Rating).
  */
 final class SubmitCitizenTicketRatingAction
 {
@@ -30,7 +33,16 @@ final class SubmitCitizenTicketRatingAction
             ]);
         }
 
-        if ($ticket->citizen_rating !== null) {
+        $userId = $user->getKey();
+        if ($userId === null) {
+            throw ValidationException::withMessages([
+                'auth' => [__('fixcity::ticket_citizen_rating.validation.auth_required.label')],
+            ]);
+        }
+
+        $userIdString = (string) $userId;
+
+        if (app(GetTicketCitizenRatingMorphAction::class)->executeForTicket($ticket, $userIdString) !== null) {
             throw ValidationException::withMessages([
                 'rating' => [__('fixcity::ticket_citizen_rating.validation.already_rated.label')],
             ]);
@@ -48,9 +60,15 @@ final class SubmitCitizenTicketRatingAction
             ]);
         }
 
-        $ticket->citizen_rating = $rating;
-        $ticket->citizen_rated_at = now();
-        $ticket->save();
+        $definition = app(EnsureTicketCitizenRatingDefinitionAction::class)->execute();
+
+        RatingMorph::query()->create([
+            'rating_id' => $definition->id,
+            'model_type' => $ticket->getMorphClass(),
+            'model_id' => $ticket->getKey(),
+            'user_id' => $userIdString,
+            'value' => $rating,
+        ]);
 
         return $ticket->refresh();
     }

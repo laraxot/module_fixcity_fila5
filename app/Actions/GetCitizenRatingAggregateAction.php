@@ -4,10 +4,12 @@ declare(strict_types=1);
 
 namespace Modules\Fixcity\Actions;
 
+use Modules\Fixcity\Actions\TicketCitizenRating\EnsureTicketCitizenRatingDefinitionAction;
 use Modules\Fixcity\Models\Ticket;
+use Modules\Rating\Models\RatingMorph;
 
 /**
- * KPI aggregati valutazioni cittadino su ticket risolti (STORY-044 / FR-021).
+ * KPI aggregati valutazioni cittadino — query su RatingMorph (modulo Rating).
  */
 final class GetCitizenRatingAggregateAction
 {
@@ -16,12 +18,20 @@ final class GetCitizenRatingAggregateAction
      */
     public function execute(): array
     {
-        $count = Ticket::query()->whereNotNull('citizen_rating')->count();
+        $definition = app(EnsureTicketCitizenRatingDefinitionAction::class)->execute();
+
+        $query = RatingMorph::query()
+            ->where('rating_id', $definition->id)
+            ->where('model_type', (new Ticket)->getMorphClass())
+            ->whereNotNull('user_id')
+            ->whereNotNull('value');
+
+        $count = $query->count();
         if ($count === 0) {
             return ['count' => 0, 'average' => null];
         }
 
-        $average = Ticket::query()->whereNotNull('citizen_rating')->avg('citizen_rating');
+        $average = (clone $query)->avg('value');
 
         return [
             'count' => $count,

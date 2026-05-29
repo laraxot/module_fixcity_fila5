@@ -32,17 +32,6 @@ class BuildSegnalazioniFilterAggregateAction
         $features = [];
 
         foreach ($tickets as $ticket) {
-            $location = $ticket->location;
-            if (! \is_array($location)) {
-                continue;
-            }
-
-            $lat = (float) ($location['lat'] ?? $location['latitude'] ?? 0);
-            $lng = (float) ($location['lng'] ?? $location['longitude'] ?? 0);
-            if ($lat === 0.0 && $lng === 0.0) {
-                continue;
-            }
-
             $rawType = $ticket->getAttribute('type');
             $typeValue = $rawType instanceof \BackedEnum
                 ? (string) $rawType->value
@@ -60,6 +49,17 @@ class BuildSegnalazioniFilterAggregateAction
                 ];
             }
 
+            $location = $ticket->location;
+            if (! \is_array($location)) {
+                continue;
+            }
+
+            $lat = (float) ($location['lat'] ?? $location['latitude'] ?? $ticket->getAttribute('latitude') ?? 0);
+            $lng = (float) ($location['lng'] ?? $location['longitude'] ?? $ticket->getAttribute('longitude') ?? 0);
+            if ($lat === 0.0 && $lng === 0.0) {
+                continue;
+            }
+
             $features[] = [
                 'properties' => [
                     'id' => $ticket->id,
@@ -75,7 +75,7 @@ class BuildSegnalazioniFilterAggregateAction
             'features' => $features,
             'countsPerType' => $counts,
             'uniqueTypes' => array_values($typesMap),
-            'totalCount' => \count($features),
+            'totalCount' => $tickets->count(),
         ];
     }
 }

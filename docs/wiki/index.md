@@ -84,3 +84,15 @@ Vedi [[../../../../docs/wiki/index|Index Globale Wiki]]
 
 | [segnalazione-bootstrap-tailwind-conversion](./concepts/segnalazione-bootstrap-tailwind-conversion.md) | concept | Conversione completata Bootstrap→Tailwind per 6 pagine Design Comuni (01-04, area-personale, elenco) | 2026-05-04 |
 | [ticketinfolist-pattern-reference](./concepts/ticketinfolist-pattern-reference.md) | concept | Pattern Filament `Schemas/<Model>Infolist` applicato a `TicketResource` con estensione `XotBaseResourceInfolist` | 2026-05-05 |
+
+## Sprint 6–7 (post-sprint sync — STORY-047)
+
+| Concept | File |
+|---------|------|
+| API JSON Folio (no Controller) | [folio-api-no-controllers](./concepts/folio-api-no-controllers.md) |
+| Rating cittadino → modulo Rating | [ticket-citizen-rating-via-rating-module](./concepts/ticket-citizen-rating-via-rating-module.md) |
+| Modelli → `BaseModel` modulo | [module-basemodel-rule](./concepts/module-basemodel-rule.md) |
+| Checklist sync doc | [post-sprint-docs-sync](./overviews/post-sprint-docs-sync.md) |
+| Story BMAD repo | [../../../../docs/stories/index.md](../../../../docs/stories/index.md) |
+
+*Aggiornamento STORY-047: 2026-05-29*

@@ -72,4 +72,137 @@ return [
             'allowed_types' => 'jpeg, png, jpg, gif, webp',
         ],
     ],
+
+    /*
+     * Frontoffice (Design Comuni) — domain: ticket, UI label: reports
+     */
+    'breadcrumb' => [
+        'home' => [
+            'label' => 'Home',
+        ],
+        'elenco' => [
+            'label' => 'Reports',
+        ],
+    ],
+
+    'heading' => [
+        'title' => [
+            'label' => 'Reports',
+        ],
+        'subtitle' => [
+            'text' => 'Browse open reports in your area and filter by category.',
+        ],
+    ],
+
+    'filters' => [
+        'legend' => [
+            'label' => 'Filter by category',
+        ],
+        'empty' => 'No categories available at the moment.',
+    ],
+
+    'results' => [
+        'count' => [
+            'text' => ':count reports found',
+        ],
+        'empty' => 'No reports found.',
+    ],
+
+    'filter' => [
+        'button' => [
+            'label' => 'Filter',
+        ],
+        'remove' => [
+            'label' => 'Clear filters',
+        ],
+    ],
+
+    'tabs' => [
+        'aria' => [
+            'label' => 'Map and list view',
+        ],
+        'map' => [
+            'label' => 'Map',
+        ],
+        'list' => [
+            'label' => 'List',
+        ],
+    ],
+
+    'map' => [
+        'image' => [
+            'alt' => 'Reports map',
+        ],
+        'cta' => [
+            'title' => [
+                'label' => 'Noticed an issue?',
+            ],
+            'text' => [
+                'label' => 'Submit a new report to help the municipality respond faster.',
+            ],
+            'button' => [
+                'label' => 'Report an issue',
+            ],
+        ],
+    ],
+
+    'contacts' => [
+        'block_title' => [
+            'label' => 'Contact the municipality',
+        ],
+        'title' => [
+            'label' => 'Need help?',
+        ],
+        'faq' => [
+            'link' => [
+                'label' => 'Read the FAQ',
+            ],
+        ],
+        'assistenza' => [
+            'link' => [
+                'label' => 'Request support',
+            ],
+        ],
+        'phone' => [
+            'link' => [
+                'label' => 'Call the toll-free number :phone',
+            ],
+        ],
+        'appointment' => [
+            'link' => [
+                'label' => 'Book an appointment',
+            ],
+        ],
+    ],
+
+    'modal' => [
+        'detail' => [
+            'title' => [
+                'label' => 'Report details',
+            ],
+            'cta' => [
+                'label' => 'Close',
+            ],
+            'image' => [
+                'alt' => 'Report image',
+            ],
+            'fields' => [
+                'title' => [
+                    'label' => 'Title',
+                ],
+                'type' => [
+                    'label' => 'Type',
+                ],
+                'address' => [
+                    'label' => 'Address',
+                ],
+                'detail' => [
+                    'label' => 'Details',
+                ],
+                'images' => [
+                    'label' => 'Images',
+                ],
+            ],
+        ],
+    ],
 ];
