@@ -12,3 +12,4 @@ Concetti specifici del modulo Fixcity. Carica on-demand via `qmd search` o consu
 
 - [xotbasewidget-child-no-explicit-widget-view](./xotbasewidget-child-no-explicit-widget-view.md) — widget che estende `XotBaseWidget`: niente `$view` sul figlio; docblock pigro ok
 - [fixcity-ticket-vs-segnalazione-lang](./fixcity-ticket-vs-segnalazione-lang.md) — `fixcity::ticket.*` per schema Filament Ticket vs `segnalazione` pubblico
+- [no-controllers-folio-volt-filament](./no-controllers-folio-volt-filament.md) — VIETATO usare Controllers; stack ufficiale Folio + Volt + Filament + Actions

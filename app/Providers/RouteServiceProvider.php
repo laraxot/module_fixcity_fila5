@@ -10,38 +10,13 @@ class RouteServiceProvider extends XotBaseRouteServiceProvider
 {
     public string $name = 'Fixcity';
 
-    /**
-     * The module namespace to assume when generating URLs to actions.
-     */
-    protected string $moduleNamespace = 'Modules\Fixcity\Http\Controllers';
-
     protected string $module_dir = __DIR__;
 
     protected string $module_ns = __NAMESPACE__;
 
-    public function boot(): void
+    protected function mapApiRoutes(): void
     {
-        parent::boot();
-        // 36     Cannot access offset 'router' on Illuminate\Contracts\Foundation\Application
-        // $router = $this->app['router'];
-        // $router = app('router');
-        // dddx([$router, $router1]);
-
-        // $this->registerLang();
-        // $this->registerRoutePattern($router);
-        // $this->registerMyMiddleware($router);
+        // No API routes — Fixcity uses Folio for API endpoints.
+        // Controllers are not used in this project (Folio + Volt + Filament).
     }
-
-    public function register(): void
-    {
-        parent::register();
-        // dddx('b');
-    }
-
-    // public function registerMyMiddleware(Router $router): void
-    // {
-    // $router->pushMiddlewareToGroup('web', SetDefaultLocaleForUrlsMiddleware::class);
-    // $router->appendMiddlewareToGroup('web', SwitchLanguageLocale::class);
-    // $router->appendMiddlewareToGroup('api', SwitchLanguageLocale::class);
-    // }
 }

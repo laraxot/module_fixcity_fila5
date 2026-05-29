@@ -168,6 +168,8 @@ class Ticket extends XotBaseModel implements HasMedia
         'type_id',
         'priority',
         'slug',
+        'citizen_rating',
+        'citizen_rated_at',
     ];
 
     protected $appends = [
@@ -207,7 +209,63 @@ class Ticket extends XotBaseModel implements HasMedia
             'status' => TicketStatusEnum::class,
             'type' => TicketTypeEnum::class,
             'type_id' => TicketTypeEnum::class,
+            'citizen_rated_at' => 'datetime',
+            'citizen_rating' => 'integer',
         ];
+    }
+
+    public function resolveTicketStatusValue(): string
+    {
+        $currentStatus = $this->currentStatus();
+        if (is_object($currentStatus) && isset($currentStatus->name) && is_string($currentStatus->name)) {
+            return $currentStatus->name;
+        }
+
+        $raw = $this->getRawOriginal('status');
+
+        return is_string($raw) ? $raw : '';
+    }
+
+    public function isOwnedByAuthenticatedUser(): bool
+    {
+        $uid = auth()->id();
+        if ($uid === null) {
+            return false;
+        }
+
+        if ($this->owner_id !== null && (string) $this->owner_id === (string) $uid) {
+            return true;
+        }
+
+        return in_array((string) $uid, [(string) $this->created_by, (string) $this->updated_by], true);
+    }
+
+    public function isVisibleOnPublicFrontoffice(): bool
+    {
+        $statusValue = $this->resolveTicketStatusValue();
+        if ($statusValue !== '') {
+            $status = TicketStatusEnum::tryFrom($statusValue);
+            if ($status instanceof TicketStatusEnum && in_array($status, TicketStatusEnum::canViewByAll(), true)) {
+                return true;
+            }
+        }
+
+        return auth()->check() && $this->isOwnedByAuthenticatedUser();
+    }
+
+    public function needsCitizenRatingPrompt(): bool
+    {
+        if ($this->citizen_rating !== null) {
+            return false;
+        }
+
+        if (! auth()->check() || ! $this->isOwnedByAuthenticatedUser()) {
+            return false;
+        }
+
+        $status = TicketStatusEnum::tryFrom($this->resolveTicketStatusValue());
+
+        return $status === TicketStatusEnum::RESOLVED || $status === TicketStatusEnum::CLOSED;
     }
 
     /**
