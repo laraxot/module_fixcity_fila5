@@ -100,6 +100,9 @@ return [
     ],
 
     'tabs' => [
+        'aria' => [
+            'label' => 'Map and list view of reports',
+        ],
         'map' => [
             'label' => 'Map',
         ],

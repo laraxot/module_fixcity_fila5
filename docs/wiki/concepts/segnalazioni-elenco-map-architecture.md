@@ -8,7 +8,7 @@ La pagina `/it/tests/segnalazioni-elenco` mostra l'elenco delle segnalazioni (ti
 
 ## Pattern: Static JSON File (farmshops.eu)
 
-Ispirato a https://github.com/CodeforKarlsruhe/farmshops.eu
+Ispirato a https://github.com/CodeforKarlsruhe/farmshops.eu — matrice dettagliata: [farmshops-eu-applicability-fixcity.md](../../../../Geo/docs/wiki/concepts/farmshops-eu-applicability-fixcity.md)
 
 ```
 [Backoffice Action] → GenerateTicketsJsonAction
@@ -29,12 +29,19 @@ Il file è **statico** e **leggero** — anche con migliaia di punti resta < 1MB
 - **Output**: `public_html/data/tickets.json` (GeoJSON FeatureCollection)
 - **Filtro**: solo ticket con `location` non null e coordinate valide
 
-### map-filter-lit.js (filtri client-side)
+### Filtri sidebar (STORY-053 — SSoT `tickets.json`)
+
+- **ViewModel**: `Modules/Fixcity/app/ViewModels/SegnalazioniFilterViewModel.php` — legge `public_html/data/tickets.json`, aggrega facet per `properties.type.value`.
+- **Blade**: `Themes/Sixteen/.../segnalazioni/filters-sidebar.blade.php` — fieldset/legend/checkbox Design Comuni (desktop + modale mobile).
+- **JS**: `initSegnalazioniFilters()` in `Themes/Sixteen/resources/js/app.js` — `map-lit.filterByTypes()` + aggiornamento `#segnalazioni-results-count`.
+- **Non usare** query DB solo per conteggi filtri in `layout.blade.php`.
+- **Test**: `Modules/Fixcity/tests/Unit/ViewModels/SegnalazioniFilterViewModelTest.php`; Playwright `Modules/Geo/tests/Playwright/segnalazioni-elenco-filters-parity.spec.js`.
+- **Story**: [STORY-053-segnalazioni-elenco-filtri-tickets-json.md](../../../../../docs/stories/STORY-053-segnalazioni-elenco-filtri-tickets-json.md)
+
+### map-filter-lit.js (legacy / altri layout)
 
 - **Path**: `Modules/Geo/resources/js/components/map-filter-lit.js`
-- **Custom element**: `<map-filter-lit map-id="ticket-map" filters="…" …>`
-- **Ruolo**: checkbox tipologia senza reload; chiama `map-lit.filterByTypes()` e aggiorna conteggio risultati.
-- **Dati facet**: passati dal server (`SegnalazioniFilterViewModel` → JSON in attributo), stessa origine di `tickets.json`.
+- **Nota**: su `/it` (sprint 6) i filtri sono **fieldset Blade** + `initSegnalazioniFilters`, non `map-filter-lit` nel layout monolitico.
 
 ### map-lit.js (canonical)
 - **Path**: `Modules/Geo/resources/js/components/map-lit.js` — LitElement web component (estende `LitElement` con import `lit`)

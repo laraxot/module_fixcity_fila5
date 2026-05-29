@@ -82,6 +82,10 @@ class GenerateTicketsJsonAction
             ->values()
             ->all();
 
+        if ($features === [] && File::exists($outputPath)) {
+            return $outputPath;
+        }
+
         $geojson = [
             'type' => 'FeatureCollection',
             'generated_at' => now()->toISOString(),
