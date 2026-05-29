@@ -80,6 +80,12 @@ class TicketInfolist extends XotBaseResourceInfolist
                         ->dateTime(),
                     TextEntry::make('updated_at')
                         ->dateTime(),
+                    TextEntry::make('citizen_rating')
+                        ->formatStateUsing(static fn (?int $state): string => $state !== null ? $state.'/5' : '—')
+                        ->placeholder('—'),
+                    TextEntry::make('citizen_rated_at')
+                        ->dateTime()
+                        ->placeholder('—'),
                     TextEntry::make('content')
                         ->prose()
                         ->columnSpanFull()

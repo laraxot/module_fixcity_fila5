@@ -56,12 +56,24 @@ public function getSummarySchema(): array {
 [data-slug="segnalazione-crea"] { color: var(--dc-green); }
 ```
 
-### 4. Verifica sempre l'URL finale dopo il fix
-```bash
-# ✅ SI - verifica visuale obbligatoria
-open https://fixcity.it/fixcity/admin/tickets/create
-# Controlla: mappa visibile, coordinate salvate, CSS corretto
+### 4. NO Controller — Folio + Volt + Filament
+```php
+// ❌ VIETATO: Http/Controllers/
+final class TicketsGeoJsonController { }
+
+// ✅ SI - Folio page per API JSON
+// resources/views/pages/api/tickets/geojson.blade.php
+@php
+use function Laravel\Folio\name;
+name('api.tickets.geojson');
+echo json_encode($payload);
+@endphp
+
+// ✅ SI - Action per logica di business
+final class BuildTicketsGeoJsonAction { }
 ```
+
+### 5. Verifica sempre l'URL finale dopo il fix
 
 ## ❌ Bad Practices
 

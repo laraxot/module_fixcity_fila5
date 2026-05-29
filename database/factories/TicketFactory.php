@@ -50,7 +50,7 @@ class TicketFactory extends Factory
      */
     public function open(): static
     {
-        return $this->state(static fn (array $attributes) => [
+        return $this->state(fn (array $attributes): array => [
             'status' => TicketStatusEnum::OPEN,
         ]);
     }
@@ -60,7 +60,7 @@ class TicketFactory extends Factory
      */
     public function urgent(): static
     {
-        return $this->state(static fn (array $attributes) => [
+        return $this->state(fn (array $attributes): array => [
             'priority' => TicketPriorityEnum::URGENT,
         ]);
     }
@@ -70,7 +70,7 @@ class TicketFactory extends Factory
      */
     public function resolved(): static
     {
-        return $this->state(static fn (array $attributes) => [
+        return $this->state(fn (array $attributes): array => [
             'status' => TicketStatusEnum::RESOLVED,
         ]);
     }

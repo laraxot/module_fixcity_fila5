@@ -98,12 +98,15 @@ Fixcity/
 ### Widgets
 - **CreateTicketWizardWidget** - Wizard frontoffice cittadini
 - **DashboardWidget** - KPI e statistiche
-- **TicketStatsWidget** - Contatori per status/priorità
+- **TicketOverview** — KPI volumi (totali, backlog, in lavorazione, risolte) — STORY-025/040
+- **TicketSlaOverviewWidget** — tempi medi risoluzione — STORY-041
+- **CitizenRatingOverviewWidget** — aggregato rating cittadino — STORY-044
 
 ### Actions
 - `CreateTicketAction` - Logica creazione ticket
 - `UpdateTicketStatusAction` - Cambio status
-- `ExportTicketReportAction` - Export PDF/Excel
+- `GetTicketKpiAggregateAction` / `GetTicketSlaMetricsAction` — analytics dashboard
+- `TicketExporter` (Filament) — export CSV/XLSX lista ticket con filtri tabella — STORY-024
 
 ## Implementation Guide
 

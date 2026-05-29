@@ -4,13 +4,12 @@ declare(strict_types=1);
 
 namespace Modules\Fixcity\ViewModels;
 
-use Illuminate\Support\Facades\File;
+use Modules\Fixcity\Actions\BuildSegnalazioniFilterAggregateAction;
 
 /**
  * ViewModel per i filtri della pagina segnalazioni elenco.
  *
- * Legge i dati da /data/tickets.json (SSoT) invece di fare query al DB.
- * Questo garantisce coerenza tra filtri e mappa che leggono la stessa fonte.
+ * Aggrega dalla stessa query pubblica usata da GET /api/tickets/geojson (STORY-029).
  */
 class SegnalazioniFilterViewModel
 {
@@ -27,83 +26,11 @@ class SegnalazioniFilterViewModel
 
     public function __construct()
     {
-        $this->loadFromJson();
-    }
-
-    /**
-     * Carica dati dal JSON /data/tickets.json
-     */
-    private function loadFromJson(): void
-    {
-        $jsonPath = base_path('../public_html/data/tickets.json');
-
-        if (! File::exists($jsonPath)) {
-            return;
-        }
-
-        $content = File::get($jsonPath);
-        $data = json_decode($content, true);
-
-        if (! is_array($data) || ! isset($data['features']) || ! is_array($data['features'])) {
-            return;
-        }
-
-        /** @var array<int, array<string, mixed>> $features */
-        $features = $data['features'];
-        $this->features = $features;
-        $this->aggregateData();
-    }
-
-    /**
-     * Aggrega dati per tipo dal GeoJSON
-     */
-    private function aggregateData(): void
-    {
-        /** @var array<string, int> $counts */
-        $counts = [];
-        /** @var array<string, array<string, mixed>> $typesMap */
-        $typesMap = [];
-
-        foreach ($this->features as $feature) {
-            /** @var array<string, mixed> $properties */
-            $properties = $feature['properties'] ?? [];
-
-            // Supporta sia struttura annidata (new) che flat (legacy)
-            $typeObj = $properties['type'] ?? null;
-
-            if (is_array($typeObj)) {
-                // Struttura annidata: type: {value, label, color, icon, iconUrl}
-                $typeValue = (string) ($typeObj['value'] ?? 'other');
-                $typeLabel = (string) ($typeObj['label'] ?? $typeValue);
-                $typeColor = (string) ($typeObj['color'] ?? '#607d8b');
-                $typeIcon = (string) ($typeObj['icon'] ?? '');
-            } else {
-                // Struttura flat legacy
-                $typeValue = is_string($typeObj) ? $typeObj : 'other';
-                $typeLabel = (string) ($properties['type_label'] ?? $typeValue);
-                $typeColor = (string) ($properties['type_color'] ?? '#607d8b');
-                $typeIcon = (string) ($properties['type_icon'] ?? '');
-            }
-
-            // Incrementa conteggio
-            $counts[$typeValue] = ($counts[$typeValue] ?? 0) + 1;
-
-            // Salva info tipo (solo prima occorrenza)
-            if (! isset($typesMap[$typeValue])) {
-                $typesMap[$typeValue] = [
-                    'value' => $typeValue,
-                    'label' => $typeLabel,
-                    'color' => $typeColor,
-                    'icon' => $typeIcon,
-                ];
-            }
-        }
-
-        $this->countsPerType = $counts;
-        /** @var array<int, array<string, mixed>> $uniqueTypes */
-        $uniqueTypes = array_values($typesMap);
-        $this->uniqueTypes = $uniqueTypes;
-        $this->totalCount = count($this->features);
+        $aggregate = app(BuildSegnalazioniFilterAggregateAction::class)->execute();
+        $this->features = $aggregate['features'];
+        $this->countsPerType = $aggregate['countsPerType'];
+        $this->uniqueTypes = $aggregate['uniqueTypes'];
+        $this->totalCount = $aggregate['totalCount'];
     }
 
     /**

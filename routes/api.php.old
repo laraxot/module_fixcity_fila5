@@ -1,0 +1,14 @@
+<?php
+
+declare(strict_types=1);
+
+use Illuminate\Support\Facades\Route;
+use Modules\Fixcity\Http\Controllers\Api\TicketDetailsApiController;
+use Modules\Fixcity\Http\Controllers\Api\TicketsGeoJsonController;
+
+Route::middleware('web')->group(static function (): void {
+    Route::get('tickets/geojson', TicketsGeoJsonController::class)->name('api.tickets.geojson');
+    Route::get('ticket-details/{ticket}', TicketDetailsApiController::class)
+        ->whereNumber('ticket')
+        ->name('api.ticket-details');
+});
