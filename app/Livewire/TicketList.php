@@ -4,6 +4,11 @@ declare(strict_types=1);
 
 namespace Modules\Fixcity\Livewire;
 
+/**
+ * @deprecated Non usare su frontoffice. Livewire solo in Filament Widgets.
+ *             Elenco segnalazioni: pub_theme::components.blocks.segnalazioni.layout via CMS (slug home).
+ * @see docs/wiki/concepts/no-pure-livewire-outside-filament-widgets.md
+ */
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Contracts\View\View;
 use Illuminate\Database\Eloquent\Builder;
@@ -14,8 +19,6 @@ use Modules\Fixcity\Models\Ticket;
 class TicketList extends VoltComponent
 {
     use WithPagination;
-
-    public LengthAwarePaginator $tickets;
 
     public string $search = '';
 
@@ -59,7 +62,7 @@ class TicketList extends VoltComponent
     public function render(): View
     {
         return view('fixcity::components.blocks.ticket_list.agid', [
-            'tickets' => $this->tickets,
+            'tickets' => $this->getTicketsProperty(),
         ]);
     }
 }

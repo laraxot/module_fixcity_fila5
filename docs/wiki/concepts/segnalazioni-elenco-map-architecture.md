@@ -29,6 +29,13 @@ Il file è **statico** e **leggero** — anche con migliaia di punti resta < 1MB
 - **Output**: `public_html/data/tickets.json` (GeoJSON FeatureCollection)
 - **Filtro**: solo ticket con `location` non null e coordinate valide
 
+### map-filter-lit.js (filtri client-side)
+
+- **Path**: `Modules/Geo/resources/js/components/map-filter-lit.js`
+- **Custom element**: `<map-filter-lit map-id="ticket-map" filters="…" …>`
+- **Ruolo**: checkbox tipologia senza reload; chiama `map-lit.filterByTypes()` e aggiorna conteggio risultati.
+- **Dati facet**: passati dal server (`SegnalazioniFilterViewModel` → JSON in attributo), stessa origine di `tickets.json`.
+
 ### map-lit.js (canonical)
 - **Path**: `Modules/Geo/resources/js/components/map-lit.js` — LitElement web component (estende `LitElement` con import `lit`)
 - **Custom Element**: `<map-lit>` — registrato via `customElements.define('map-lit', MapLit)` con guard `if (!customElements.get('map-lit'))`
