@@ -23,7 +23,8 @@ use Modules\Xot\Actions\File\AssetAction;
 use Modules\Xot\Contracts\ProfileContract;
 use Modules\Xot\Contracts\UserContract;
 use Modules\Xot\Datas\XotData;
-use Modules\Xot\Models\XotBaseModel;
+use Modules\Fixcity\Models\Concerns\InteractsWithTicketCitizenRating;
+use Modules\Rating\Models\Contracts\HasRatingContract;
 use Spatie\Comments\Models\CommentNotificationSubscription;
 use Spatie\Comments\Models\Concerns\HasComments;
 use Spatie\MediaLibrary\HasMedia;
@@ -140,12 +141,13 @@ use Webmozart\Assert\Assert;
  *
  * @mixin \Eloquent
  */
-class Ticket extends XotBaseModel implements HasMedia
+class Ticket extends BaseModel implements HasMedia, HasRatingContract
 {
     use HasComments;
     use HasSlug;
     use HasStatuses;
     use InteractsWithMedia;
+    use InteractsWithTicketCitizenRating;
 
     protected $fillable = [
         'name',
@@ -168,8 +170,6 @@ class Ticket extends XotBaseModel implements HasMedia
         'type_id',
         'priority',
         'slug',
-        'citizen_rating',
-        'citizen_rated_at',
     ];
 
     protected $appends = [
@@ -209,8 +209,6 @@ class Ticket extends XotBaseModel implements HasMedia
             'status' => TicketStatusEnum::class,
             'type' => TicketTypeEnum::class,
             'type_id' => TicketTypeEnum::class,
-            'citizen_rated_at' => 'datetime',
-            'citizen_rating' => 'integer',
         ];
     }
 
@@ -251,21 +249,6 @@ class Ticket extends XotBaseModel implements HasMedia
         }
 
         return auth()->check() && $this->isOwnedByAuthenticatedUser();
-    }
-
-    public function needsCitizenRatingPrompt(): bool
-    {
-        if ($this->citizen_rating !== null) {
-            return false;
-        }
-
-        if (! auth()->check() || ! $this->isOwnedByAuthenticatedUser()) {
-            return false;
-        }
-
-        $status = TicketStatusEnum::tryFrom($this->resolveTicketStatusValue());
-
-        return $status === TicketStatusEnum::RESOLVED || $status === TicketStatusEnum::CLOSED;
     }
 
     /**

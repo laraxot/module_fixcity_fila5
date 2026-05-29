@@ -1,29 +1,21 @@
-@php
-    use function Laravel\Folio\name;
-    use Modules\Fixcity\Models\Ticket;
+<?php
 
-    name('api.ticket-details');
+declare(strict_types=1);
 
-    $ticket = $ticket ?? null;
+use Illuminate\Http\JsonResponse;
+use Modules\Fixcity\Actions\BuildTicketPublicDetailsPayloadAction;
+use Modules\Fixcity\Models\Ticket;
+use function Laravel\Folio\name;
+use function Laravel\Folio\render;
 
+name('api.ticket-details');
+
+render(function (?Ticket $ticket): JsonResponse {
     if (! $ticket instanceof Ticket || ! $ticket->isVisibleOnPublicFrontoffice()) {
         abort(404);
     }
 
-    $images = $ticket->getMedia('attachments');
-    if ($images->isEmpty()) {
-        $images = $ticket->getMedia('ticket');
-    }
-
-    $imageUrls = $images
-        ->map(fn ($media): string => $media->getFullUrl())
-        ->values()
-        ->all();
-
-    echo json_encode([
-        'id' => $ticket->id,
-        'title' => $ticket->name,
-        'description' => (string) $ticket->content,
-        'images' => $imageUrls,
-    ], JSON_UNESCAPED_UNICODE);
-@endphp
+    return response()->json(
+        app(BuildTicketPublicDetailsPayloadAction::class)->execute($ticket),
+    );
+});

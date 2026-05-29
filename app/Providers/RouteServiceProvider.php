@@ -16,7 +16,7 @@ class RouteServiceProvider extends XotBaseRouteServiceProvider
 
     protected function mapApiRoutes(): void
     {
-        // No API routes — Fixcity uses Folio for API endpoints.
-        // Controllers are not used in this project (Folio + Volt + Filament).
+        // API HTTP: Folio pages/api/ + Actions (see docs/wiki/concepts/folio-api-no-controllers.md).
+        // No Route:: / Controllers — Folio + Volt + Filament only.
     }
 }

@@ -11,6 +11,7 @@ use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Filters\TernaryFilter;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
+use Modules\Fixcity\Actions\TicketCitizenRating\GetTicketIdsWithCitizenRatingAction;
 use Modules\Fixcity\Enums\TicketPriorityEnum;
 use Modules\Fixcity\Enums\TicketStatusEnum;
 use Modules\Fixcity\Enums\TicketTypeEnum;
@@ -45,12 +46,10 @@ class TicketsTable extends XotBaseResourceTable
             'owner.name' => TextColumn::make('owner.name')->placeholder('-'),
             'assignee.name' => TextColumn::make('assignee.name')->placeholder('-'),
             'citizen_rating' => TextColumn::make('citizen_rating')
-                ->sortable()
                 ->placeholder('-')
                 ->formatStateUsing(static fn (?int $state): string => $state !== null ? $state.'/5' : '-'),
             'citizen_rated_at' => TextColumn::make('citizen_rated_at')
                 ->dateTime()
-                ->sortable()
                 ->toggleable(isToggledHiddenByDefault: true),
             'created_at' => TextColumn::make('created_at')->dateTime()->sortable(),
             'updated_at' => TextColumn::make('updated_at')->dateTime()->sortable()->toggleable(isToggledHiddenByDefault: true),
@@ -68,8 +67,22 @@ class TicketsTable extends XotBaseResourceTable
             'type' => SelectFilter::make('type')->options(TicketTypeEnum::class)->native(false),
             'has_citizen_rating' => TernaryFilter::make('has_citizen_rating')
                 ->queries(
-                    true: static fn (Builder $query): Builder => $query->whereNotNull('citizen_rating'),
-                    false: static fn (Builder $query): Builder => $query->whereNull('citizen_rating'),
+                    true: static function (Builder $query): Builder {
+                        $ids = app(GetTicketIdsWithCitizenRatingAction::class)->execute();
+                        if ($ids->isEmpty()) {
+                            return $query->whereRaw('1 = 0');
+                        }
+
+                        return $query->whereIn('id', $ids->all());
+                    },
+                    false: static function (Builder $query): Builder {
+                        $ids = app(GetTicketIdsWithCitizenRatingAction::class)->execute();
+                        if ($ids->isEmpty()) {
+                            return $query;
+                        }
+
+                        return $query->whereNotIn('id', $ids->all());
+                    },
                 ),
         ];
     }

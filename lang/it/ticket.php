@@ -346,4 +346,137 @@ return [
         ],
     ],
     'label' => 'Segnalazione',
+
+    /*
+     * Frontoffice (Design Comuni) — dominio: ticket, label UI: segnalazioni
+     */
+    'breadcrumb' => [
+        'home' => [
+            'label' => 'Home',
+        ],
+        'elenco' => [
+            'label' => 'Segnalazioni',
+        ],
+    ],
+
+    'heading' => [
+        'title' => [
+            'label' => 'Segnalazioni',
+        ],
+        'subtitle' => [
+            'text' => 'Consulta le segnalazioni aperte nel territorio e filtra i risultati per categoria.',
+        ],
+    ],
+
+    'filters' => [
+        'legend' => [
+            'label' => 'Filtra per categoria',
+        ],
+        'empty' => 'Nessuna categoria disponibile al momento.',
+    ],
+
+    'results' => [
+        'count' => [
+            'text' => ':count segnalazioni trovate',
+        ],
+        'empty' => 'Nessuna segnalazione trovata.',
+    ],
+
+    'filter' => [
+        'button' => [
+            'label' => 'Filtra',
+        ],
+        'remove' => [
+            'label' => 'Rimuovi filtri',
+        ],
+    ],
+
+    'tabs' => [
+        'aria' => [
+            'label' => 'Vista mappa ed elenco segnalazioni',
+        ],
+        'map' => [
+            'label' => 'Mappa',
+        ],
+        'list' => [
+            'label' => 'Elenco',
+        ],
+    ],
+
+    'map' => [
+        'image' => [
+            'alt' => 'Mappa delle segnalazioni',
+        ],
+        'cta' => [
+            'title' => [
+                'label' => 'Hai notato un disservizio?',
+            ],
+            'text' => [
+                'label' => 'Invia una nuova segnalazione e aiuta il Comune a intervenire in modo più rapido.',
+            ],
+            'button' => [
+                'label' => 'Segnala un disservizio',
+            ],
+        ],
+    ],
+
+    'contacts' => [
+        'block_title' => [
+            'label' => 'Contatta il comune',
+        ],
+        'title' => [
+            'label' => 'Hai bisogno di aiuto?',
+        ],
+        'faq' => [
+            'link' => [
+                'label' => 'Leggi le domande frequenti',
+            ],
+        ],
+        'assistenza' => [
+            'link' => [
+                'label' => 'Richiedi assistenza',
+            ],
+        ],
+        'phone' => [
+            'link' => [
+                'label' => 'Chiama il numero verde :phone',
+            ],
+        ],
+        'appointment' => [
+            'link' => [
+                'label' => 'Prenota appuntamento',
+            ],
+        ],
+    ],
+
+    'modal' => [
+        'detail' => [
+            'title' => [
+                'label' => 'Dettaglio segnalazione',
+            ],
+            'cta' => [
+                'label' => 'Chiudi',
+            ],
+            'image' => [
+                'alt' => 'Immagine della segnalazione',
+            ],
+            'fields' => [
+                'title' => [
+                    'label' => 'Titolo',
+                ],
+                'type' => [
+                    'label' => 'Tipologia di segnalazione',
+                ],
+                'address' => [
+                    'label' => 'Indirizzo',
+                ],
+                'detail' => [
+                    'label' => 'Dettaglio',
+                ],
+                'images' => [
+                    'label' => 'Immagini',
+                ],
+            ],
+        ],
+    ],
 ];

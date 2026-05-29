@@ -81,6 +81,7 @@ return [
         'legend' => [
             'label' => 'Filtra per categoria',
         ],
+        'empty' => 'Nessuna categoria disponibile al momento.',
     ],
 
     'results' => [
