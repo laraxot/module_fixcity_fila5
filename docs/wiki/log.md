@@ -1,6 +1,11 @@
 
 
 
+## [2026-05-29] fix | GenerateTicketsJsonAction — non svuotare JSON se DB senza ticket geolocalizzati
+
+- Se `features === []` e `tickets.json` esiste → skip write (evita regressione dev/demo).
+- STORY-053 chiusa: Playwright `segnalazioni-elenco-filters-parity.spec.js`, wiki architettura aggiornata.
+
 ## [2026-05-28] arch | nwidart — `Actions/` fuori da `app/` (GenerateTicketsJsonAction)
 
 - **Errore:** path `Modules/Fixcity/Actions/` invece di `Modules/Fixcity/app/Actions/` (non autoloadato da PSR-4 del modulo).

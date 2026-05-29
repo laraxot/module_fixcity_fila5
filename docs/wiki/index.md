@@ -36,6 +36,7 @@ wiki/
 | [obsidian-skills-and-ingest-checklist](./concepts/obsidian-skills-and-ingest-checklist.md) | concept | Checklist continua su Obsidian, skills, ingest e allineamento docs |
 | [segnalazioni-elenco-map-architecture](./concepts/segnalazioni-elenco-map-architecture.md) | concept | Architettura pagina elenco segnalazioni: Lit map + GeoJSON statico (farmshops pattern) + filtri TicketTypeEnum | 2026-04-29 |
 | [frontoffice-no-standalone-livewire](./concepts/frontoffice-no-standalone-livewire.md) | concept | No Livewire puro fuori widget Filament; `/it` via CMS `segnalazioni-layout` | 2026-05-28 |
+| [filament-first-ui-boundary](./concepts/filament-first-ui-boundary.md) | concept | Filament-first: tab/UI FO vs admin ticket; link STORY-065 | 2026-05-28 |
 | [second-brain-session-bootstrap](../../../../docs/wiki/concepts/second-brain-session-bootstrap.md) | concept | Bootstrap always-on: verifica stack + update + smoke search root/moduli prima del lavoro applicativo |
 | [profiles-uuid-contract](./concepts/profiles-uuid-contract.md) | concept | Contratto schema `profiles`: `id` intero + `uuid` separato nella migrazione owner |
 | [wizard-single-next-cta-rule](./concepts/wizard-single-next-cta-rule.md) | concept | Wizard segnalazione: CTA primaria unica `Avanti` |

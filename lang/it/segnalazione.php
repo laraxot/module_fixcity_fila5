@@ -100,6 +100,9 @@ return [
     ],
 
     'tabs' => [
+        'aria' => [
+            'label' => 'Vista mappa ed elenco segnalazioni',
+        ],
         'map' => [
             'label' => 'Mappa',
         ],
@@ -146,6 +149,9 @@ return [
                 'label' => 'Modifica',
             ],
         ],
+        'photos' => [
+            'label' => 'Immagini',
+        ],
     ],
 
     'load-more' => [
@@ -158,9 +164,58 @@ return [
         'title' => [
             'label' => 'Hai bisogno di aiuto?',
         ],
+        'block_title' => [
+            'label' => 'Contatta il comune',
+        ],
         'faq' => [
             'link' => [
                 'label' => 'Leggi le domande frequenti',
+            ],
+        ],
+        'assistenza' => [
+            'link' => [
+                'label' => 'Richiedi assistenza',
+            ],
+        ],
+        'phone' => [
+            'link' => [
+                'label' => 'Chiama il numero verde 05 0505',
+            ],
+        ],
+        'appointment' => [
+            'link' => [
+                'label' => 'Prenota appuntamento',
+            ],
+        ],
+    ],
+
+    'modal' => [
+        'detail' => [
+            'title' => [
+                'label' => 'Dettaglio segnalazione',
+            ],
+            'fields' => [
+                'title' => [
+                    'label' => 'Titolo',
+                ],
+                'type' => [
+                    'label' => 'Tipologia di segnalazione',
+                ],
+                'address' => [
+                    'label' => 'Indirizzo',
+                ],
+                'detail' => [
+                    'label' => 'Dettaglio',
+                ],
+                'images' => [
+                    'label' => 'Immagini',
+                ],
+            ],
+            'cta' => [
+                'label' => 'Chiudi',
+            ],
+            'image' => [
+                'alt' => 'Immagine del disservizio segnalato',
             ],
         ],
     ],

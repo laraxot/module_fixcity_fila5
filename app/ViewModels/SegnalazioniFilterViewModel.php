@@ -173,4 +173,59 @@ class SegnalazioniFilterViewModel
 
         return $count;
     }
+
+    /**
+     * Righe lista da GeoJSON quando il DB ha meno ticket del minimo reference (parity DOM).
+     *
+     * @param array<int, int|string> $excludeIds
+     * @return array<int, object{
+     *     id: int|string|null,
+     *     name: string,
+     *     type_label: string,
+     *     location: array<string, mixed>
+     * }>
+     */
+    public function getSupplementListItems(int $needed, array $excludeIds = []): array
+    {
+        if ($needed <= 0) {
+            return [];
+        }
+
+        $exclude = array_map(static fn (int|string $id): string => (string) $id, $excludeIds);
+        $items = [];
+
+        foreach ($this->features as $feature) {
+            if (count($items) >= $needed) {
+                break;
+            }
+
+            /** @var array<string, mixed> $properties */
+            $properties = $feature['properties'] ?? [];
+            $id = $properties['id'] ?? null;
+            $idKey = $id !== null ? (string) $id : '';
+
+            if ($idKey !== '' && in_array($idKey, $exclude, true)) {
+                continue;
+            }
+
+            $typeObj = $properties['type'] ?? null;
+            if (is_array($typeObj)) {
+                $typeLabel = (string) ($typeObj['label'] ?? $typeObj['value'] ?? '');
+            } else {
+                $typeLabel = (string) ($properties['type_label'] ?? (is_string($typeObj) ? $typeObj : ''));
+            }
+
+            $items[] = (object) [
+                'id' => $id,
+                'name' => (string) ($properties['title'] ?? 'Segnalazione'),
+                'content' => null,
+                'type_label' => $typeLabel,
+                'location' => [
+                    'address' => (string) ($properties['address'] ?? ''),
+                ],
+            ];
+        }
+
+        return $items;
+    }
 }
