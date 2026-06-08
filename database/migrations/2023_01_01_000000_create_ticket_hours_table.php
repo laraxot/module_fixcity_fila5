@@ -24,7 +24,6 @@ return new class extends XotBaseMigration
                 $table->foreignId('activity_id')->nullable(); // ->constrained('activities');
                 $table->float('value');
                 $table->longText('comment')->nullable();
-                $table->timestamps();
             }
         );
         // -- UPDATE --

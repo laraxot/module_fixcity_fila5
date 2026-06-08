@@ -15,6 +15,7 @@ final class BuildTicketsGeoJsonAction
 {
     public function __construct(
         private readonly ResolveTicketTypeMarkerPropertiesAction $resolveTypeMarker,
+        private readonly ResolveTicketStatusMarkerPropertiesAction $resolveStatusMarker,
     ) {
     }
 
@@ -77,6 +78,7 @@ final class BuildTicketsGeoJsonAction
         $typeProps = $this->resolveTypeMarker->executeFromValue($typeValue);
 
         $statusValue = $ticket->resolveTicketStatusValue();
+        $statusProps = $this->resolveStatusMarker->executeFromValue($statusValue);
 
         return [
             'type' => 'Feature',
@@ -90,9 +92,9 @@ final class BuildTicketsGeoJsonAction
                 'type' => $typeProps,
                 'address' => $location['address'] ?? $location['display_name'] ?? '',
                 'city' => $location['city'] ?? '',
-                'status' => $statusValue,
-                'url' => '/it/tests/segnalazione-dettaglio?id='.$ticket->id,
-                'detail_url' => '/it/tests/segnalazione-dettaglio?id='.$ticket->id,
+                'status' => $statusProps,
+                'url' => '/it/tickets/'.$ticket->id,
+                'detail_url' => '/it/tickets/'.$ticket->id,
             ],
         ];
     }

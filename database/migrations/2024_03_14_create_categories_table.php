@@ -16,7 +16,6 @@ return new class extends XotBaseMigration
                 $table->string('name');
                 $table->text('description');
                 $table->string('icon');
-                $table->timestamps();
 
                 // Indici espliciti
                 $table->index('name', 'categories_name_idx');

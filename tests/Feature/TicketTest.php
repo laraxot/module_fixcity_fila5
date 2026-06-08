@@ -194,13 +194,13 @@ describe('Ticket Relationships', function () {
             ->toBeInstanceOf(HasMany::class);
     });
 
-    it('can have comments', function () {
+    it('can have spatie comments', function () {
         $ticket = Ticket::factory()->create([
             'owner_id' => $this->user->id,
         ]);
 
         expect($ticket->comments())
-            ->toBeInstanceOf(HasMany::class);
+            ->toBeInstanceOf(\Illuminate\Database\Eloquent\Relations\MorphMany::class);
     });
 
     it('can have subscribers', function () {

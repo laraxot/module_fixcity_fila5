@@ -1,4 +1,30 @@
+---
+title: "Fixcity Module Wiki Index"
+type: index
+created: 2026-04-15
+updated: 2026-06-05
+tags: [fixcity, wiki, index, ticket, wizard]
+qmd: "fixcity module wiki index ticket wizard profiles parity"
+issues:
+  - "https://github.com/laraxot/module_fixcity_fila5/issues/29"
+discussions:
+  - "https://github.com/laraxot/module_fixcity_fila5/discussions/30"
+related:
+  - ./concepts/ai-harness-fixcity-discipline.md
+  - ../../../../docs/wiki/concepts/hackernoon-ai-coding-tips-fixcity-map.md
+  - ../../../../docs/wiki/rules/wiki-markdown-frontmatter-mandatory.md
+  - ../../../../docs/wiki/rules/migration-update-timestamps-only.md
+---
+
 # Wiki Locale - Modulo Fixcity
+
+## AI / second brain (root)
+
+- [hackernoon-ai-coding-tips-fixcity-map](../../../../docs/wiki/concepts/hackernoon-ai-coding-tips-fixcity-map.md) — tips 001–022 adattati
+- [ai-harness-fixcity-discipline](./concepts/ai-harness-fixcity-discipline.md) — harness locale Fixcity
+- [second-brain-local-discipline](./concepts/second-brain-local-discipline.md) — stub → canon Xot
+- [llm-wiki prompt](../../../../bashscripts/tools/prompts/llm-wiki.txt) — router agente
+- [bmad/architecture](../../../../docs/wiki/bmad/architecture.md) — pilastri schema/doc
 
 ## Schema di Riferimento
 
@@ -35,10 +61,15 @@ wiki/
 | [admin-map-asset-registry-mismatch](./concepts/admin-map-asset-registry-mismatch.md) | concept | mismatch tra asset registry Filament e file effettivamente deployati |
 | [obsidian-skills-and-ingest-checklist](./concepts/obsidian-skills-and-ingest-checklist.md) | concept | Checklist continua su Obsidian, skills, ingest e allineamento docs |
 | [segnalazioni-elenco-map-architecture](./concepts/segnalazioni-elenco-map-architecture.md) | concept | Architettura pagina elenco segnalazioni: Lit map + GeoJSON statico (farmshops pattern) + filtri TicketTypeEnum | 2026-04-29 |
+| [tickets-view-cms-folio-page](./concepts/tickets-view-cms-folio-page.md) | concept | FO `/it/tickets/{id}` — CMS `tickets.view`, widget `Ticket\ViewWidget` + Infolist | 2026-06-03 |
+| [ticket-view-fo-enrichment-map-media-comments](./concepts/ticket-view-fo-enrichment-map-media-comments.md) | concept | Dettaglio FO: no tab, mappa 1 marker, Spatie comments — STORY-157 | 2026-06-05 |
 | [frontoffice-no-standalone-livewire](./concepts/frontoffice-no-standalone-livewire.md) | concept | No Livewire puro fuori widget Filament; `/it` via CMS `segnalazioni-layout` | 2026-05-28 |
 | [filament-first-ui-boundary](./concepts/filament-first-ui-boundary.md) | concept | Filament-first: tab/UI FO vs admin ticket; link STORY-065 | 2026-05-28 |
 | [second-brain-session-bootstrap](../../../../docs/wiki/concepts/second-brain-session-bootstrap.md) | concept | Bootstrap always-on: verifica stack + update + smoke search root/moduli prima del lavoro applicativo |
 | [profiles-uuid-contract](./concepts/profiles-uuid-contract.md) | concept | Contratto schema `profiles`: `id` intero + `uuid` separato nella migrazione owner |
+| [one-migration-per-model-rule](./concepts/one-migration-per-model-rule.md) | concept | 1 modello = 1 `create_*`; bump timestamp; owner Fixcity per `profiles` |
+| [module-artifact-parity-audit](./concepts/module-artifact-parity-audit.md) | concept | N modelli = N migrate/factory/seeder; script audit + gap 2026-06 |
+| [data-sacred-migrations](./concepts/data-sacred-migrations.md) | concept | Mai `migrate --force` / `--path` / `RefreshDatabase` — dati sacri |
 | [wizard-single-next-cta-rule](./concepts/wizard-single-next-cta-rule.md) | concept | Wizard segnalazione: CTA primaria unica `Avanti` |
 | [wizard-nav-responsive-alignment](./concepts/wizard-nav-responsive-alignment.md) | concept | Allineamento responsivo navigazione wizard |
 | [segnalazione-privacy-parity-audit](./concepts/segnalazione-privacy-parity-audit.md) | concept | Audit parity visuale step privacy (colori header, CTA, responsive) |
