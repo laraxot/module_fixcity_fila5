@@ -21,7 +21,6 @@ return new class extends XotBaseMigration
                 $table->id();
                 $table->foreignId('user_id'); // ->constrained('users');
                 $table->foreignId('ticket_id'); // ->constrained('tickets');
-                $table->timestamps();
             }
         );
         // -- UPDATE --

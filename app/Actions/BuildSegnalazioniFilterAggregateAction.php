@@ -4,8 +4,10 @@ declare(strict_types=1);
 
 namespace Modules\Fixcity\Actions;
 
+use Modules\Fixcity\Enums\TicketStatusEnum;
+
 /**
- * Aggregati filtri elenco segnalazioni dalla stessa query pubblica della mappa (STORY-029).
+ * Aggregati filtri elenco segnalazioni da tickets.json — SSoT unico per mappa + filtri.
  */
 class BuildSegnalazioniFilterAggregateAction
 {
@@ -14,68 +16,159 @@ class BuildSegnalazioniFilterAggregateAction
      *     features: array<int, array<string, mixed>>,
      *     countsPerType: array<string, int>,
      *     uniqueTypes: array<int, array<string, mixed>>,
+     *     countsPerStatus: array<string, int>,
+     *     uniqueStatuses: array<int, array<string, mixed>>,
      *     totalCount: int
      * }
      */
     public function execute(): array
     {
-        $tickets = app(BuildPublicTicketsQueryAction::class)
-            ->execute()
-            ->latest()
-            ->get();
+        $geoJson = app(LoadPublicTicketsGeoJsonAction::class)->execute();
+        $features = $geoJson['features'] ?? [];
 
         /** @var array<string, int> $counts */
         $counts = [];
         /** @var array<string, array<string, mixed>> $typesMap */
         $typesMap = [];
-        /** @var array<int, array<string, mixed>> $features */
-        $features = [];
+        /** @var array<string, int> $statusCounts */
+        $statusCounts = [];
+        /** @var array<string, array<string, mixed>> $statusesMap */
+        $statusesMap = [];
 
-        foreach ($tickets as $ticket) {
-            $rawType = $ticket->getAttribute('type');
-            $typeValue = $rawType instanceof \BackedEnum
-                ? (string) $rawType->value
-                : (is_string($rawType) ? $rawType : 'other');
+        foreach ($features as $feature) {
+            if (! is_array($feature)) {
+                continue;
+            }
 
-            $typeProps = app(ResolveTicketTypeMarkerPropertiesAction::class)->executeFromValue($typeValue);
+            $props = $feature['properties'] ?? [];
+            if (! is_array($props)) {
+                continue;
+            }
+
+            $typeMeta = $this->resolveTypeMeta($props);
+            if ($typeMeta === null) {
+                continue;
+            }
+
+            $typeValue = (string) ($typeMeta['value'] ?? '');
+            if ($typeValue === '') {
+                continue;
+            }
 
             $counts[$typeValue] = ($counts[$typeValue] ?? 0) + 1;
             if (! isset($typesMap[$typeValue])) {
-                $typesMap[$typeValue] = [
-                    'value' => $typeValue,
-                    'label' => (string) ($typeProps['label'] ?? $typeValue),
-                    'color' => (string) ($typeProps['color'] ?? '#607d8b'),
-                    'icon' => (string) ($typeProps['icon'] ?? ''),
-                ];
+                $typesMap[$typeValue] = $typeMeta;
             }
 
-            $location = $ticket->location;
-            if (! \is_array($location)) {
-                continue;
+            $statusMeta = $this->resolveStatusMeta($props);
+            if ($statusMeta !== null) {
+                $statusValue = (string) ($statusMeta['value'] ?? '');
+                if ($statusValue !== '') {
+                    $statusCounts[$statusValue] = ($statusCounts[$statusValue] ?? 0) + 1;
+                    if (! isset($statusesMap[$statusValue])) {
+                        $statusesMap[$statusValue] = $statusMeta;
+                    }
+                }
             }
-
-            $lat = (float) ($location['lat'] ?? $location['latitude'] ?? $ticket->getAttribute('latitude') ?? 0);
-            $lng = (float) ($location['lng'] ?? $location['longitude'] ?? $ticket->getAttribute('longitude') ?? 0);
-            if ($lat === 0.0 && $lng === 0.0) {
-                continue;
-            }
-
-            $features[] = [
-                'properties' => [
-                    'id' => $ticket->id,
-                    'title' => $ticket->name,
-                    'type' => $typeProps,
-                    'address' => $location['address'] ?? $location['display_name'] ?? '',
-                    'type_label' => (string) ($typeProps['label'] ?? $typeValue),
-                ],
-            ];
         }
 
         return [
             'features' => $features,
             'countsPerType' => $counts,
             'uniqueTypes' => array_values($typesMap),
-            'totalCount' => $tickets->count(),
+            'countsPerStatus' => $statusCounts,
+            'uniqueStatuses' => $this->sortStatusesByEnumOrder($statusesMap),
+            'totalCount' => (int) ($geoJson['total'] ?? count($features)),
         ];
+    }
+
+    /**
+     * Contratto GeoJSON properties.type (oggetto annidato o flat legacy).
+     *
+     * @param  array<string, mixed>  $properties
+     * Solo tipologia (TicketTypeEnum): icona per legenda filtri — niente colore (riservato allo status).
+     *
+     * @return array{value: string, label: string, iconUrl: string}|null
+     */
+    private function resolveTypeMeta(array $properties): ?array
+    {
+        $typeRaw = $properties['type'] ?? null;
+
+        if (is_array($typeRaw)) {
+            $value = (string) ($typeRaw['value'] ?? '');
+            if ($value === '') {
+                return null;
+            }
+
+            $iconUrl = (string) ($typeRaw['iconUrl'] ?? $typeRaw['icon_url'] ?? '');
+            if ($iconUrl === '') {
+                return null;
+            }
+
+            return [
+                'value' => $value,
+                'label' => (string) ($typeRaw['label'] ?? $value),
+                'iconUrl' => $iconUrl,
+            ];
+        }
+
+        if (is_string($typeRaw) && $typeRaw !== '') {
+            return app(ResolveTicketTypeMarkerPropertiesAction::class)->executeFromValue($typeRaw);
+        }
+
+        return null;
+    }
+
+    /**
+     * @param  array<string, mixed>  $properties
+     * @return array{value: string, label: string, color: string}|null
+     */
+    private function resolveStatusMeta(array $properties): ?array
+    {
+        $statusRaw = $properties['status'] ?? null;
+
+        if (is_array($statusRaw)) {
+            $value = (string) ($statusRaw['value'] ?? '');
+            if ($value === '') {
+                return null;
+            }
+
+            $color = (string) ($statusRaw['color'] ?? '');
+
+            return [
+                'value' => $value,
+                'label' => (string) ($statusRaw['label'] ?? $value),
+                'color' => $color !== '' ? $color : app(ResolveTicketStatusMarkerPropertiesAction::class)
+                    ->executeFromValue($value)['color'],
+            ];
+        }
+
+        if (is_string($statusRaw) && $statusRaw !== '') {
+            return app(ResolveTicketStatusMarkerPropertiesAction::class)->executeFromValue($statusRaw);
+        }
+
+        return null;
+    }
+
+    /**
+     * @param  array<string, array<string, mixed>>  $statusesMap
+     * @return array<int, array<string, mixed>>
+     */
+    private function sortStatusesByEnumOrder(array $statusesMap): array
+    {
+        $order = [];
+        foreach (TicketStatusEnum::cases() as $index => $case) {
+            $order[$case->value] = $index;
+        }
+
+        $values = array_values($statusesMap);
+        usort($values, static function (array $a, array $b) use ($order): int {
+            $posA = $order[(string) ($a['value'] ?? '')] ?? PHP_INT_MAX;
+            $posB = $order[(string) ($b['value'] ?? '')] ?? PHP_INT_MAX;
+
+            return $posA <=> $posB;
+        });
+
+        return $values;
     }
 }

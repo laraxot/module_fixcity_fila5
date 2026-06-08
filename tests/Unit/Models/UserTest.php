@@ -112,7 +112,7 @@ describe('User Model (Fixcity)', function () {
         $ticket = Ticket::factory()->create();
 
         // Create comment for user
-        $comment = $ticket->comments()->create([
+        $comment = $ticket->ticketComments()->create([
             'user_id' => $user->id,
             'content' => 'This is a comment',
         ]);

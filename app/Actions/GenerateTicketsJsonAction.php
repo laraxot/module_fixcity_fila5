@@ -20,7 +20,7 @@ class GenerateTicketsJsonAction
 
     public function execute(): string
     {
-        $outputPath = base_path('../public_html/data/tickets.json');
+        $outputPath = base_path(LoadPublicTicketsGeoJsonAction::RELATIVE_PATH);
 
         $geojson = app(BuildTicketsGeoJsonAction::class)->execute(
             app(BuildPublicTicketsQueryAction::class)->execute(),

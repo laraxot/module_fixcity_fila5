@@ -20,15 +20,12 @@ use Modules\User\Models\Team;
 use Modules\User\Models\Tenant;
 use Modules\User\Models\TenantUser;
 use Modules\User\Models\User as BaseUser;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Modules\Xot\Contracts\ProfileContract;
 use Spatie\Comments\Models\Collections\ReactionCollection;
 use Spatie\Comments\Models\Comment;
 use Spatie\Comments\Models\CommentNotificationSubscription;
 use Spatie\Comments\Models\Reaction;
-
-// Temporarily disabled due to conflict with BaseUser's notifications() method
-// use Spatie\Comments\Models\Concerns\InteractsWithComments;
-// use Spatie\Comments\Models\Concerns\Interfaces\CanComment;
 
 /**
  * @property string $id
@@ -111,7 +108,21 @@ use Spatie\Comments\Models\Reaction;
  * @mixin \Eloquent
  */
 class User extends BaseUser
-    // implements CanComment // Temporarily disabled
 {
-    // use InteractsWithComments; // Temporarily disabled
+    /** @var array<string, class-string<self>> */
+    protected $childTypes = [
+        'master_admin' => self::class,
+        'backoffice_user' => self::class,
+        'customer_user' => self::class,
+        'system' => self::class,
+        'technician' => self::class,
+    ];
+
+    /**
+     * @return HasMany<TicketComment, $this>
+     */
+    public function ticketComments(): HasMany
+    {
+        return $this->hasMany(TicketComment::class, 'user_id');
+    }
 }

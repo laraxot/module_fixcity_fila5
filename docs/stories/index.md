@@ -25,6 +25,7 @@
 - [wizard-step-2-high-html-visual-parity.md](./wizard-step-2-high-html-visual-parity.md)
 - [../../../../../_bmad-output/implementation-artifacts/7-51-segnalazione-crea-step2-columns-header-ultra-parity.md](../../../../../_bmad-output/implementation-artifacts/7-51-segnalazione-crea-step2-columns-header-ultra-parity.md)
 - [wizard-privacy-notice-parity-step-1.md](./wizard-privacy-notice-parity-step-1.md)
+- [STORY-029.md](./STORY-029.md)
 - [wizard-timeout-recurrence-import-and-infolist-guard.md](./wizard-timeout-recurrence-import-and-infolist-guard.md)
 - [../../../../../_bmad-output/implementation-artifacts/7-42-segnalazione-crea-use-my-location-busy-feedback.md](../../../../../_bmad-output/implementation-artifacts/7-42-segnalazione-crea-use-my-location-busy-feedback.md)
 - [../../../../../_bmad-output/implementation-artifacts/7-43-segnalazione-crea-step2-three-sections-parity-and-author-infolist.md](../../../../../_bmad-output/implementation-artifacts/7-43-segnalazione-crea-step2-three-sections-parity-and-author-infolist.md)

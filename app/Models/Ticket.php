@@ -11,8 +11,10 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Str;
+use Modules\Fixcity\Actions\ResolveTicketTypeMarkerPropertiesAction;
 use Modules\Fixcity\Database\Factories\TicketFactory;
 use Modules\Fixcity\Enums\TicketPriorityEnum;
 use Modules\Fixcity\Enums\TicketStatusEnum;
@@ -25,8 +27,10 @@ use Modules\Xot\Contracts\UserContract;
 use Modules\Xot\Datas\XotData;
 use Modules\Fixcity\Models\Concerns\InteractsWithTicketCitizenRating;
 use Modules\Rating\Models\Contracts\HasRatingContract;
-use Spatie\Comments\Models\CommentNotificationSubscription;
-use Spatie\Comments\Models\Concerns\HasComments;
+use Modules\Comment\Models\Concerns\HasComments;
+use Modules\Comment\Models\Contracts\Commentable;
+use Modules\Comment\Models\CommentNotificationSubscription;
+use Modules\Comment\Models\Reaction;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 use Spatie\MediaLibrary\MediaCollections\Models\Collections\MediaCollection;
@@ -67,8 +71,10 @@ use Webmozart\Assert\Assert;
  * @property string|null $deleted_by
  * @property Collection<int, TicketActivity> $activities
  * @property int|null $activities_count
- * @property Collection<int, TicketComment> $comments
+ * @property Collection<int, \Spatie\Comments\Models\Comment> $comments
  * @property int|null $comments_count
+ * @property Collection<int, TicketComment> $ticketComments
+ * @property int|null $ticket_comments_count
  * @property mixed $completude_percentage
  * @property mixed $estimation_for_humans
  * @property mixed $estimation_in_seconds
@@ -141,7 +147,7 @@ use Webmozart\Assert\Assert;
  *
  * @mixin \Eloquent
  */
-class Ticket extends BaseModel implements HasMedia, HasRatingContract
+class Ticket extends BaseModel implements Commentable, HasMedia, HasRatingContract
 {
     use HasComments;
     use HasSlug;
@@ -262,12 +268,7 @@ class Ticket extends BaseModel implements HasMedia, HasRatingContract
         }
 
         Assert::isInstanceOf($type, TicketTypeEnum::class, '['.__LINE__.']['.__FILE__.']');
-        $url = self::normalizeNullableText($type->getIcon());
-        if ($url === null) {
-            return [];
-        }
-        $url = Str::of($url)->after('heroicon-o-')->append('.svg')->toString();
-        $url = app(AssetAction::class)->execute('ui::svg/'.$url);
+        $url = app(ResolveTicketTypeMarkerPropertiesAction::class)->execute($type)['iconUrl'];
 
         return [
             'url' => $url,
@@ -562,7 +563,13 @@ class Ticket extends BaseModel implements HasMedia, HasRatingContract
      */
     public function commentUrl(): string
     {
-        return '#';
+        $path = '/tickets/'.(string) $this->getKey();
+        $localized = LaravelLocalization::getLocalizedURL(
+            LaravelLocalization::getCurrentLocale(),
+            $path
+        );
+
+        return is_string($localized) && $localized !== '' ? $localized : url($path);
     }
 
     /**
@@ -577,9 +584,11 @@ class Ticket extends BaseModel implements HasMedia, HasRatingContract
     }
 
     /**
+     * Commenti legacy admin (tabella ticket_comments).
+     *
      * @return HasMany<TicketComment, $this>
      */
-    public function comments(): HasMany
+    public function ticketComments(): HasMany
     {
         return $this->hasMany(TicketComment::class);
     }
@@ -615,6 +624,8 @@ class Ticket extends BaseModel implements HasMedia, HasRatingContract
     {
         $this->addMediaCollection('attachments')
             ->acceptsMimeTypes(['image/jpeg', 'image/png', 'application/pdf']);
+        $this->addMediaCollection('ticket')
+            ->acceptsMimeTypes(['image/jpeg', 'image/png']);
         // ->maxFileSize(10 * 1024 * 1024); // 10MB
     }
 

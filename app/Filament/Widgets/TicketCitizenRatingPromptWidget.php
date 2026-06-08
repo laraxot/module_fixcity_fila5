@@ -8,12 +8,10 @@ use Filament\Schemas\Components\Component;
 use Illuminate\Validation\ValidationException;
 use Modules\Fixcity\Actions\SubmitCitizenTicketRatingAction;
 use Modules\Fixcity\Models\Ticket;
-use Modules\Xot\Filament\Widgets\XotBaseWidget;
-
 /**
  * Prompt valutazione 1–5 dopo risoluzione ticket (STORY-043).
  */
-class TicketCitizenRatingPromptWidget extends XotBaseWidget
+class TicketCitizenRatingPromptWidget extends \Modules\Xot\Filament\Widgets\XotBaseSchemaWidget
 {
     protected string $view = 'fixcity::filament.widgets.ticket-citizen-rating-prompt';
 
@@ -25,16 +23,16 @@ class TicketCitizenRatingPromptWidget extends XotBaseWidget
 
     public bool $showPrompt = false;
 
-    public function mount(int $ticketId): void
+    public function mount(int $ticketId = 0): void
     {
+        parent::mount();
         $this->ticketId = $ticketId;
         $this->refreshPromptState();
     }
 
     /**
-     * @return array<string, Component>
+     * @return array<int|string, Component>
      */
-    #[\Override]
     public function getFormSchema(): array
     {
         return [];

@@ -105,3 +105,8 @@ For questions or issues with documentation:
 
 *Last Updated: May 2026*  
 *Version: 1.0.0*
+---
+
+## ⚠️ Architectural Rules
+
+- **[No Http Controllers — Folio + Actions + Filament](../../../docs/wiki/rules/no-controllers-rule.md)** — Absolute rule: no `Http/Controllers/` in app/ or modules. Use Folio for API, Actions for business logic, Filament for admin.

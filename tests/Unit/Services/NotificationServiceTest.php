@@ -160,7 +160,7 @@ describe('NotificationService', function () {
     describe('notifyCommentAdded', function () {
         it('sends notification to ticket owner when comment is added', function () {
             $commenter = User::factory()->create();
-            $comment = $this->ticket->comments()->create([
+            $comment = $this->ticket->ticketComments()->create([
                 'user_id' => $commenter->id,
                 'content' => 'Test comment',
             ]);
@@ -176,7 +176,7 @@ describe('NotificationService', function () {
             $commenter = User::factory()->create();
             $this->ticket->subscribers()->attach($subscriber->id);
 
-            $comment = $this->ticket->comments()->create([
+            $comment = $this->ticket->ticketComments()->create([
                 'user_id' => $commenter->id,
                 'content' => 'Test comment',
             ]);
@@ -189,7 +189,7 @@ describe('NotificationService', function () {
 
         it('does not send notification to comment author', function () {
             $commenter = User::factory()->create();
-            $comment = $this->ticket->comments()->create([
+            $comment = $this->ticket->ticketComments()->create([
                 'user_id' => $commenter->id,
                 'content' => 'Test comment',
             ]);

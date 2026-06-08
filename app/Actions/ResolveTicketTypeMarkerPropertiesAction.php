@@ -4,15 +4,19 @@ declare(strict_types=1);
 
 namespace Modules\Fixcity\Actions;
 
-use Illuminate\Support\Str;
+use Illuminate\Support\Facades\File;
 use Modules\Fixcity\Enums\TicketTypeEnum;
 use Modules\Xot\Actions\File\AssetAction;
+use Modules\Xot\Actions\File\GetModulePathAction;
 use Spatie\QueueableAction\QueueableAction;
 
 /**
- * Costruisce l'oggetto {@code properties.type} per GeoJSON ticket (mappa elenco).
+ * Oggetto {@code properties.type} per GeoJSON — una sola icona per tipologia.
  *
- * @phpstan-type TicketTypeGeoJson array{value: string, label: string, color: string, icon: string, iconUrl: string|null}
+ * Sorgente canonica: `laravel/Modules/Fixcity/resources/svg/`
+ * Riferimento: `fixcity::svg/{nome-file}.svg` via {@see AssetAction}.
+ *
+ * @phpstan-type TicketTypeGeoJson array{value: string, label: string, iconUrl: string}
  */
 class ResolveTicketTypeMarkerPropertiesAction
 {
@@ -23,15 +27,10 @@ class ResolveTicketTypeMarkerPropertiesAction
      */
     public function execute(TicketTypeEnum $typeEnum): array
     {
-        $typeIcon = (string) $typeEnum->getIcon();
-        $typeColor = (string) $typeEnum->getColor();
-
         return [
             'value' => $typeEnum->value,
             'label' => $typeEnum->getLabel(),
-            'color' => $typeColor !== '' ? $typeColor : '#607d8b',
-            'icon' => $typeIcon,
-            'iconUrl' => $this->resolveIconUrl($typeIcon),
+            'iconUrl' => $this->resolveTypeIconUrl($typeEnum),
         ];
     }
 
@@ -46,40 +45,37 @@ class ResolveTicketTypeMarkerPropertiesAction
             return [
                 'value' => $typeValue,
                 'label' => $typeValue,
-                'color' => '#607d8b',
-                'icon' => '',
-                'iconUrl' => null,
+                'iconUrl' => app(AssetAction::class)->execute('fixcity::svg/other.svg'),
             ];
         }
     }
 
-    private function resolveIconUrl(string $icon): ?string
+    private function resolveTypeIconUrl(TicketTypeEnum $typeEnum): string
     {
-        $icon = trim($icon);
-        if ($icon === '') {
-            return null;
+        $filename = $this->canonicalTypeSvgFilename($typeEnum);
+
+        if ($this->moduleSvgExists($filename)) {
+            return app(AssetAction::class)->execute('fixcity::svg/'.$filename);
         }
 
-        if (str_starts_with($icon, 'heroicon-o-')) {
-            return $this->tryAsset('ui::svg/'.Str::after($icon, 'heroicon-o-').'.svg');
-        }
-
-        if (str_starts_with($icon, 'fas-')) {
-            $slug = Str::after($icon, 'fas-');
-
-            return $this->tryAsset('ui::svg/brands/'.$slug.'.svg')
-                ?? $this->tryAsset('ui::svg/'.$slug.'.svg');
-        }
-
-        return null;
+        return app(AssetAction::class)->execute('fixcity::svg/other.svg');
     }
 
-    private function tryAsset(string $path): ?string
+    /**
+     * Una sola icona per enum: {value-kebab}.svg in resources/svg/.
+     * Il nome del modulo è autoregistrato come prefisso (fixcity::svg/...).
+     * Vietato fallback heroicon → trash.svg / light-bulb.svg (seconda icona diversa).
+     */
+    private function canonicalTypeSvgFilename(TicketTypeEnum $typeEnum): string
     {
-        try {
-            return app(AssetAction::class)->execute($path);
-        } catch (\Exception) {
-            return null;
-        }
+        return str_replace('_', '-', $typeEnum->value).'.svg';
+    }
+
+    private function moduleSvgExists(string $filename): bool
+    {
+        $modulePath = app(GetModulePathAction::class)->execute('fixcity');
+        $modulePath = rtrim($modulePath, '/');
+
+        return File::exists($modulePath.'/resources/svg/'.$filename);
     }
 }

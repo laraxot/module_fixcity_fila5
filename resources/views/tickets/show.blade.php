@@ -2,115 +2,82 @@
 
 @section('content')
 @php
-$ticket=$row;
+    $ticket = $row;
+    $latitude = $ticket->latitude;
+    $longitude = $ticket->longitude;
 @endphp
 
-
-<div class="container">
+<div class="container py-4 py-md-5">
     <div class="row justify-content-center">
-        <div class="col-md-10">
+        <div class="col-lg-10">
             @if(session('status'))
                 <div class="alert alert-success" role="alert">
                     {{ session('status') }}
                 </div>
             @endif
-            <div class="card">
-                <div class="card-header">Ticket #{{ $ticket->id }}</div>
+
+            {{-- Ticket Info Card --}}
+            <article class="card mb-4 shadow-sm">
+                <div class="card-header bg-primary text-white">
+                    <h1 class="h4 mb-0">
+                        Ticket #{{ $ticket->id }}: {{ $ticket->title }}
+                    </h1>
+                </div>
 
                 <div class="card-body">
-                    <table class="table table-bordered table-striped">
-                        <tbody>
-                            <tr>
-                                <th>
-                                    {{ trans('cruds.ticket.fields.title') }}
-                                </th>
-                                <td>
-                                    {{ $ticket->title }}
-                                </td>
-                            </tr>
-                            <tr>
-                                <th>
-                                    {{ trans('cruds.ticket.fields.content') }}
-                                </th>
-                                <td>
-                                    {!! $ticket->content !!}
-                                </td>
-                            </tr>
-                            <tr>
-                                <th>
-                                    {{ trans('cruds.ticket.fields.attachments') }}
-                                </th>
-                                <td>
-                                    @foreach($ticket->attachments as $attachment)
-                                        <a href="{{ $attachment->getUrl() }}">{{ $attachment->file_name }}</a>
-                                    @endforeach
-                                </td>
-                            </tr>
-                            <tr>
-                                <th>
-                                    {{ trans('cruds.ticket.fields.status') }}
-                                </th>
-                                <td>
-                                    {{ $ticket->status->name ?? '' }}
-                                </td>
-                            </tr>
-                            <tr>
-                                <th>
-                                    {{ trans('cruds.ticket.fields.author_name') }}
-                                </th>
-                                <td>
-                                    {{ $ticket->author_name }}
-                                </td>
-                            </tr>
-                            <tr>
-                                <th>
-                                    {{ trans('cruds.ticket.fields.author_email') }}
-                                </th>
-                                <td>
-                                    {{ $ticket->author_email }}
-                                </td>
-                            </tr>
-                            <tr>
-                                <th>
-                                    {{ trans('cruds.ticket.fields.comments') }}
-                                </th>
-                                <td>
-                                    @forelse ($ticket->comments as $comment)
-                                        <div class="row">
-                                            <div class="col">
-                                                <p class="font-weight-bold"><a href="mailto:{{ $comment->author_email }}">{{ $comment->author_name }}</a> ({{ $comment->created_at }})</p>
-                                                <p>{{ $comment->comment_text }}</p>
-                                            </div>
-                                        </div>
-                                        @if(!$loop->last)
-                                            <hr />
-                                        @endif
-                                    @empty
-                                        <div class="row">
-                                            <div class="col">
-                                                <p>There are no comments.</p>
-                                            </div>
-                                        </div>
-                                    @endforelse
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                    <form action="{{ route('tickets.storeComment', $ticket->id) }}" method="POST">
-                        @csrf
-                        <div class="form-group">
-                            <label for="comment_text">Leave a comment</label>
-                            <textarea class="form-control @error('comment_text') is-invalid @enderror" id="comment_text" name="comment_text" rows="3" required></textarea>
-                            @error('comment_text')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
+                    <div class="row g-4">
+                        {{-- Left column: Details --}}
+                        <div class="col-lg-8">
+                            <dl class="row mb-0">
+                                <dt class="col-sm-3 text-muted">{{ trans('cruds.ticket.fields.content') }}</dt>
+                                <dd class="col-sm-9">{!! $ticket->content !!}</dd>
+
+                                @if($ticket->attachments->isNotEmpty())
+                                    <dt class="col-sm-3 text-muted">{{ trans('cruds.ticket.fields.attachments') }}</dt>
+                                    <dd class="col-sm-9">
+                                        <ul class="list-unstyled mb-0">
+                                            @foreach($ticket->attachments as $attachment)
+                                                <li>
+                                                    <a href="{{ $attachment->getUrl() }}" class="text-decoration-none">
+                                                        {{ $attachment->file_name }}
+                                                    </a>
+                                                </li>
+                                            @endforeach
+                                        </ul>
+                                    </dd>
+                                @endif
+                            </dl>
                         </div>
-                        <button type="submit" class="btn btn-primary">@lang('global.submit')</button>
-                    </form>
+
+                        {{-- Right column: Map --}}
+                        <div class="col-lg-4">
+                            @include('pub_theme::components.ticket-location-map', [
+                                'latitude' => $latitude,
+                                'longitude' => $longitude,
+                                'ticketTitle' => $ticket->title,
+                            ])
+                        </div>
+                    </div>
                 </div>
-            </div>
+
+                <div class="card-footer bg-light">
+                    <div class="row text-muted small">
+                        <div class="col-sm-6">
+                            <strong>Status:</strong>
+                            <span class="badge bg-{{ $ticket->status->color ?? 'secondary' }}">
+                                {{ $ticket->status->name ?? 'Unknown' }}
+                            </span>
+                        </div>
+                        <div class="col-sm-6 text-sm-end">
+                            <strong>{{ trans('cruds.ticket.fields.author_name') }}:</strong>
+                            {{ $ticket->author_name }}
+                        </div>
+                    </div>
+                </div>
+            </article>
+
+            {{-- Comments Section --}}
+            @include('pub_theme::components.ticket-comments', ['ticket' => $ticket])
         </div>
     </div>
 </div>

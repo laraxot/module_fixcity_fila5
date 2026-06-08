@@ -23,7 +23,6 @@ return new class extends XotBaseMigration
                 $table->foreignId('relation_id')->nullable(); // ->constrained('tickets');
                 $table->string('type');
                 $table->integer('sort')->default(1);
-                $table->timestamps();
             }
         );
         // -- UPDATE --

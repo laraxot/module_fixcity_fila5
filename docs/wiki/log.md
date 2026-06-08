@@ -1,5 +1,89 @@
+## [2026-06-05] ux | STORY-157 — dettaglio ticket no tab, mappa statica, commenti Spatie
+
+- UX: `_bmad-output/ux-design-ticket-detail-fo.md`, STORY-157 aggiornata
+- Comment: [concepts/spatie-comments-fo-ticket-integration.md](../../../Comment/docs/wiki/concepts/spatie-comments-fo-ticket-integration.md)
+- Fix blade: `ticket-location-map` — no `data-url` in `detailMode`
+
+## [2026-06-05] docs | HackerNoon harness — tips 001-022 in wiki locale
+
+- Stub/checklist: second-brain → canon Xot, ai-harness, [hackernoon map](../../../../../docs/wiki/concepts/hackernoon-ai-coding-tips-fixcity-map.md), [llm-wiki.txt](../../../../../bashscripts/tools/prompts/llm-wiki.txt)
+- GitHub: [#272](https://github.com/laraxot/base_fixcity_fila5/issues/272) / [D#273](https://github.com/laraxot/base_fixcity_fila5/discussions/273)
 
 
+
+## [2026-06-05] docs | AI harness Fixcity + link HackerNoon
+
+- [ai-harness-fixcity-discipline.md](concepts/ai-harness-fixcity-discipline.md) in index
+- Canon: [hackernoon-ai-coding-tips-fixcity-map](../../../../docs/wiki/concepts/hackernoon-ai-coding-tips-fixcity-map.md)
+
+## [2026-06-05] architecture | dati sacri — migrate senza force/path
+
+- policy: solo `php artisan migrate`; vietati `--force`, `migrate --path` singolo file, `RefreshDatabase`
+- allineati `profiles-uuid-contract`, `livewire-cache-table-rate-limiter`, root rule + BMAD architecture
+
+## [2026-06-04] fix | parità artefatti — 3 seeder stub creati
+
+- Creati: `TicketHourSeeder`, `TicketRelationSeeder`, `TicketSubscriberSeeder` (stub, dati sacri)
+- Eccezione documentata: `create_exports_table` = Filament infrastruttura, non modello owner
+- Audit post-fix: migrate=10 (9 owner + 1 Filament), factory=9, seeder=9 → quasi-OK
+- Concept aggiornato: [module-artifact-parity-audit](./concepts/module-artifact-parity-audit.md)
+
+## [2026-06-05] arch | migrazioni — solo updateTimestamps (no ridondanza)
+
+- Regola: [migration-update-timestamps-only](../../../../docs/wiki/rules/migration-update-timestamps-only.md); audit `audit-migration-timestamp-redundancy.sh`
+- Fixcity: rimossi `timestamps()`/`softDeletes()` duplicati in ticket_*, categories; profiles → solo helper in tableUpdate
+- Concept: [migration-update-timestamps-only](./concepts/migration-update-timestamps-only.md)
+
+## [2026-06-05] governance | parità artefatti modulo (N modelli = N migrate/factory/seeder)
+
+- Audit: `bashscripts/tools/audit-module-artifact-parity.sh Fixcity` → migrate/factory 9/9 OK; seeders 2/9 GAP
+- Concept: [module-artifact-parity-audit](./concepts/module-artifact-parity-audit.md)
+- Canon root: [architecture-module-model-artifact-parity](../../../../docs/wiki/bmad/architecture-module-model-artifact-parity.md)
+
+## [2026-06-05] governance | profiles — una sola migrazione owner (1 modello = 1 file)
+
+- **Violazione**: due file `create_profiles_table` in `Modules/Fixcity/database/migrations/`
+- **Fix**: consolidato in `2026_06_05_090000_create_profiles_table.php`; rimossi duplicati
+- **Second brain**: [profiles-uuid-contract](./concepts/profiles-uuid-contract.md), root [one-migration-per-model-bump-timestamp](../../../../docs/wiki/memories/one-migration-per-model-bump-timestamp.md), `.cursor/rules/one-migration-per-model.mdc`
+- **Migrate**: solo `php artisan migrate` — [dati sacri](../../../../docs/wiki/rules/data-sacred-no-destructive-db.md)
+
+## [2026-06-05] arch | parità artefatti modulo (N modelli = N migrazioni/factory/seeder)
+- script: `bashscripts/tools/audit-module-artifact-parity.sh`
+- pages: `concepts/module-artifact-parity-audit.md`, root `docs/wiki/bmad/architecture-module-model-artifact-parity.md`
+- audit Fixcity: 9 modelli / 9 mig / 9 factory / 2 seeder → GAP seeder + `Activity` senza migrazione
+- cursor: `.cursor/rules/module-model-artifact-parity.mdc` (alwaysApply)
+
+## [2026-06-05] arch | dati sacri — no migrate --force / --path / RefreshDatabase
+- pages: `concepts/data-sacred-migrations.md` (new), `docs/wiki/bmad/architecture.md`, rule `data-sacred-no-destructive-db.md`
+- vietato in doc e agenti: `migrate --path=.../create_profiles_table.php --force`
+- consentito: `php artisan migrate` / `php artisan migrate --database=fixcity`
+- cursor: `.cursor/rules/data-sacred-no-destructive-db.mdc` (alwaysApply); bootstrap TRIGGER_MAP aggiornato
+
+## [2026-06-05] arch | 1 modello = 1 migrazione `profiles` (consolidamento BMAD)
+- sources:
+  - `database/migrations/2026_06_05_090000_create_profiles_table.php`
+  - `database/migrations/_bak/*create_profiles*.merged` (User/Blog archiviati)
+- pages:
+  - `concepts/one-migration-per-model-rule.md` (new)
+  - `concepts/profiles-uuid-contract.md` (path canonico)
+  - `docs/wiki/bmad/architecture-one-migration-per-model.md` (new)
+- summary:
+  - rimossi duplicati `create_profiles_table` nello stesso modulo; owner unico Fixcity
+  - migrazioni `profiles` User/Blog spostate in `_bak/*.merged` per evitare Pending/run doppi
+  - regola: evoluzione schema = edit file owner + bump timestamp nel filename
+
+## [2026-06-04] bugfix | tabella tickets assente su fixcity sqlite (homepage 500)
+- errore dopo fix `profiles.uuid`: `no such table: tickets` su `GET /it` (blocco mappa in `grid/2col.blade.php`)
+- causa: migrazione canonica `2026_04_29_110000_create_tickets_table` in stato Pending su connection `fixcity`
+- ~~fix con `--path`~~ **storico — vietato oggi**; oggi: `php artisan migrate --database=fixcity` ([data-sacred-migrations](./concepts/data-sacred-migrations.md))
+- verifica: `GET /it` risponde HTTP 200
+
+## [2026-06-01] rule | Frontend stack canonico + naming blocchi CMS
+
+- **Regola**: `rules/frontend-stack-canonical.md` — stack Tailwind+Alpine+Lit+DaisyUI+Flowbite+Filament (NO Bootstrap)
+- **Regola**: `rules/cms-block-naming-tailwind-flowbite.md` — sottocartelle `blocks/` da Tailwind UI / Flowbite
+- **Story**: STORY-112 — `docs/stories/STORY-112-frontend-stack-canonical-rule.md`
+- **Issue**: [#197](https://github.com/laraxot/base_fixcity_fila5/issues/197) · **Discussion**: [#198](https://github.com/laraxot/base_fixcity_fila5/discussions/198)
 
 ## [2026-05-28] arch | nwidart — `Actions/` fuori da `app/` (GenerateTicketsJsonAction)
 
@@ -375,6 +459,11 @@
   - Unified root `docs/` as the "Raw" layer.
 - **Asset Integrity**: Asset pipeline synchronized with `npm run build && npm run copy` in `Themes/Sixteen`.
 - **Fixcity Integration**: `CreateTicketWizardWidget` refactored to use the new `MapPicker` with unified state.
+
+## [2026-06-05] governance | duplicate profiles migration removed (1 model = 1 file)
+- removed: `database/migrations/2026_04_27_190000_create_profiles_table.php`
+- canonical: `database/migrations/2026_06_05_090000_create_profiles_table.php`
+- updated: `concepts/profiles-uuid-contract.md`, llm-wiki mirror, root wiki memory + cursor rule
 
 ## [2026-04-20] fix | profiles.uuid riportato nella migrazione owner
 - sources:
