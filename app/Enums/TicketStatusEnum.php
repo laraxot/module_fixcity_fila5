@@ -30,6 +30,8 @@ enum TicketStatusEnum: string implements HasColor, HasIcon, HasLabel
     public static function canViewByAll(): array
     {
         return [
+            self::OPEN,
+            self::IN_PROGRESS,
             self::ON_HOLD,
             self::RESOLVED,
             self::CLOSED,

@@ -1,0 +1,113 @@
+<?php
+
+declare(strict_types=1);
+
+namespace Modules\Fixcity\Actions;
+
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Validation\ValidationException;
+use Modules\Fixcity\Actions\TicketCitizenRating\EnsureTicketCitizenRatingDefinitionAction;
+use Modules\Fixcity\Actions\TicketCitizenRating\GetTicketCitizenRatingMorphAction;
+use Modules\Fixcity\Enums\TicketStatusEnum;
+use Modules\Fixcity\Models\Ticket;
+use Modules\Rating\Models\RatingMorph;
+use Modules\Xot\Contracts\UserContract;
+
+/**
+ * Valutazione cittadino 1–5 su ticket risolto — persistenza RatingMorph (modulo Rating).
+ */
+final class SubmitCitizenTicketRatingAction
+{
+    public function execute(Ticket $ticket, int $rating): Ticket
+    {
+        if ($rating < 1 || $rating > 5) {
+            throw ValidationException::withMessages([
+                'rating' => [__('fixcity::ticket_citizen_rating.validation.rating_between.label')],
+            ]);
+        }
+
+        $user = Auth::user();
+        if (! $user instanceof UserContract) {
+            throw ValidationException::withMessages([
+                'auth' => [__('fixcity::ticket_citizen_rating.validation.auth_required.label')],
+            ]);
+        }
+
+        $userId = $user->getKey();
+        if ($userId === null) {
+            throw ValidationException::withMessages([
+                'auth' => [__('fixcity::ticket_citizen_rating.validation.auth_required.label')],
+            ]);
+        }
+
+        $userIdString = (string) $userId;
+
+        if (app(GetTicketCitizenRatingMorphAction::class)->executeForTicket($ticket, $userIdString) !== null) {
+            throw ValidationException::withMessages([
+                'rating' => [__('fixcity::ticket_citizen_rating.validation.already_rated.label')],
+            ]);
+        }
+
+        if (! $this->ticketAllowsCitizenRating($ticket)) {
+            throw ValidationException::withMessages([
+                'status' => [__('fixcity::ticket_citizen_rating.validation.status_not_resolved.label')],
+            ]);
+        }
+
+        if (! $this->userOwnsTicket($ticket, $user)) {
+            throw ValidationException::withMessages([
+                'owner' => [__('fixcity::ticket_citizen_rating.validation.not_owner.label')],
+            ]);
+        }
+
+        $definition = app(EnsureTicketCitizenRatingDefinitionAction::class)->execute();
+
+        RatingMorph::query()->create([
+            'rating_id' => $definition->id,
+            'model_type' => $ticket->getMorphClass(),
+            'model_id' => $ticket->getKey(),
+            'user_id' => $userIdString,
+            'value' => $rating,
+        ]);
+
+        return $ticket->refresh();
+    }
+
+    private function ticketAllowsCitizenRating(Ticket $ticket): bool
+    {
+        $statusValue = $this->resolveStatusValue($ticket);
+        if ($statusValue === '') {
+            return false;
+        }
+
+        $status = TicketStatusEnum::tryFrom($statusValue);
+
+        return $status === TicketStatusEnum::RESOLVED || $status === TicketStatusEnum::CLOSED;
+    }
+
+    private function resolveStatusValue(Ticket $ticket): string
+    {
+        $currentStatus = $ticket->currentStatus();
+        if (is_object($currentStatus) && isset($currentStatus->name) && is_string($currentStatus->name)) {
+            return $currentStatus->name;
+        }
+
+        $raw = $ticket->getRawOriginal('status');
+
+        return is_string($raw) ? $raw : '';
+    }
+
+    private function userOwnsTicket(Ticket $ticket, UserContract $user): bool
+    {
+        $userId = $user->getKey();
+        if ($userId === null) {
+            return false;
+        }
+
+        if ($ticket->owner_id !== null && (string) $ticket->owner_id === (string) $userId) {
+            return true;
+        }
+
+        return in_array((string) $userId, [(string) $ticket->created_by, (string) $ticket->updated_by], true);
+    }
+}

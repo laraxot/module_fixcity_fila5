@@ -2,26 +2,56 @@
 
 ## Contratto
 
-Nel modulo Fixcity, `profiles` deve avere:
+Nel modulo Fixcity, `profiles` (connessione `fixcity`) deve avere:
 
-- `id` intero auto-increment come chiave primaria relazionale
-- `uuid` separato come identificatore esterno stabile
-- `credits` nullable (campo opzionale, non bloccante in creazione profilo)
+- `id` intero auto-increment — chiave relazionale interna
+- `uuid` char(36) nullable indexed — identificatore esterno (`BaseProfile` lo genera in `creating`)
+- `credits` nullable — insert profilo minimale (`user_id` + `uuid`) non deve fallire
 
-## Fonte di verita'
+## Fonte di verità (unica)
 
-La fonte di verita' non e' una migrazione additiva, ma:
+**Un solo file migrazione owner** — regola [one migration per model](../../../../../../docs/wiki/agents/rules/one-migration-per-model.md):
 
-- `laravel/Modules/Fixcity/database/migrations/2026_04_27_190000_create_profiles_table.php`
+`laravel/Modules/Fixcity/database/migrations/2026_06_05_090000_create_profiles_table.php`
+
+- Model: `Modules\Fixcity\Models\Profile`
+- Pattern: `tableCreate` + `tableUpdate` idempotente + backfill `uuid` null
 
 ## Regola operativa
 
-- se manca `uuid`, si corregge la migrazione canonica
-- `credits` resta nullable sia nel create che nel change idempotente
-- non si crea `add_uuid_to_profiles_table`
-- non si crea `add_credits_nullable_to_profiles_table`
-- non si crea `repair_profiles_id_and_uuid_contract`
+| Azione | Consentito |
+|--------|------------|
+| Manca colonna su DB legacy | Edit file owner → **bump timestamp** nel nome file → `php artisan migrate` |
+| Nuovo campo | Stesso file owner + bump timestamp |
+| `add_uuid_to_profiles_table` | **Vietato** |
+| Secondo `create_profiles_table` | **Vietato** |
+| Migrazione `profiles` in User/Blog | **Vietato** (owner = Fixcity) |
 
-## Nota runtime
+## Bump timestamp (come)
 
-Se il DB locale e' stato creato prima del fix, modificare il file di migrazione da solo non riallinea automaticamente la tabella gia' esistente: serve una sincronizzazione forward-only dello schema reale.
+```bash
+cd laravel/Modules/Fixcity/database/migrations
+mv 2026_06_05_090000_create_profiles_table.php \
+   2026_06_05_120000_create_profiles_table.php
+cd ../../../..
+php artisan migrate
+```
+
+**Mai** `--force` — [dati sacri](../../../../../../docs/wiki/rules/data-sacred-no-destructive-db.md).
+
+Aggiornare questo concept e `docs/wiki/log.md` quando si bumpa.
+
+## Runtime
+
+```bash
+cd laravel
+php artisan migrate
+```
+
+Mai `--force`. Mai `migrate --path` su singolo file — [dati sacri](../../../../../../docs/wiki/rules/data-sacred-no-destructive-db.md).
+
+## Collegamenti
+
+- [profiles-ownership-boundary-rule](../../../User/docs/wiki/concepts/profiles-ownership-boundary-rule.md) (User module)
+- [one-migration-per-model-bump-timestamp](../../../../../../docs/wiki/memories/one-migration-per-model-bump-timestamp.md)
+- [Fixcity wiki log](../log.md)

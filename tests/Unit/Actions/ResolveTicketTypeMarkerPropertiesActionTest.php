@@ -8,17 +8,17 @@ use Tests\TestCase;
 uses(TestCase::class);
 
 use Modules\Fixcity\Enums\TicketTypeEnum;
-it('resolves heroicon marker properties for road maintenance', function (): void {
+it('resolves canonical fixcity svg for road maintenance', function (): void {
     $props = app(ResolveTicketTypeMarkerPropertiesAction::class)
         ->execute(TicketTypeEnum::ROAD_MAINTENANCE);
 
     expect($props['value'])->toBe('road_maintenance')
-        ->and($props['icon'])->toContain('heroicon-o-')
-        ->and($props['color'])->toBe('#ff9800')
         ->and($props['label'])->toBeString()
         ->not->toBeEmpty()
+        ->and($props)->not->toHaveKey('icon')
         ->and($props['iconUrl'])->toBeString()
-        ->not->toBeEmpty();
+        ->toContain('/assets/fixcity/svg/road-maintenance.svg')
+        ->not->toContain('/assets/ui/svg/');
 });
 
 it('returns safe defaults for unknown type value', function (): void {
@@ -26,5 +26,6 @@ it('returns safe defaults for unknown type value', function (): void {
         ->executeFromValue('not_a_real_type');
 
     expect($props['value'])->toBe('not_a_real_type')
-        ->and($props['iconUrl'])->toBeNull();
+        ->and($props['iconUrl'])->toBeString()
+        ->toContain('/assets/fixcity/svg/');
 });

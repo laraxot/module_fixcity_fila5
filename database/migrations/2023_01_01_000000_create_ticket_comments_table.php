@@ -22,8 +22,6 @@ return new class extends XotBaseMigration
                 $table->foreignId('ticket_id'); // ->constrained('tickets');
                 $table->foreignId('user_id'); // ->constrained('users');
                 $table->longText('content');
-                $table->softDeletes();
-                $table->timestamps();
             }
         );
         // -- UPDATE --

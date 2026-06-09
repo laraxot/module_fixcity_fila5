@@ -1,25 +1,12 @@
 # Profiles UUID Contract
 
-## Contratto
+> Mirror: [wiki/concepts/profiles-uuid-contract.md](../../wiki/concepts/profiles-uuid-contract.md)
 
-Nel modulo Fixcity, `profiles` deve avere:
+## Sintesi
 
-- `id` intero auto-increment come chiave primaria relazionale
-- `uuid` separato come identificatore esterno stabile
-- `credits` nullable (campo opzionale)
+- Owner: modulo **Fixcity**, connessione `fixcity`
+- **1 modello = 1 migrazione**: `2026_06_05_090000_create_profiles_table.php` (unico file `create_profiles_table`)
+- Contratto: `id` bigint, `uuid` nullable, `credits` nullable
+- Evoluzione: edit + **rename timestamp** — no `add_*` / no secondo `create_*`
 
-## Fonte di verita'
-
-La fonte di verita' non e' una migrazione additiva, ma:
-
-- `laravel/Modules/Fixcity/database/migrations/2026_04_27_190000_create_profiles_table.php`
-
-## Regola operativa
-
-- se manca `uuid`, si corregge la migrazione canonica
-- non si crea `add_uuid_to_profiles_table`
-- non si crea `repair_profiles_id_and_uuid_contract`
-
-## Nota runtime
-
-Se il DB locale e' stato creato prima del fix, modificare il file di migrazione da solo non riallinea automaticamente la tabella gia' esistente: serve una sincronizzazione forward-only dello schema reale.
+Migrate: solo `php artisan migrate` — mai `--force`, mai `--path` su singolo file ([dati sacri](../../../../../../docs/wiki/rules/data-sacred-no-destructive-db.md)).

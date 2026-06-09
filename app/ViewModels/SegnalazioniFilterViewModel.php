@@ -4,106 +4,63 @@ declare(strict_types=1);
 
 namespace Modules\Fixcity\ViewModels;
 
-use Illuminate\Support\Facades\File;
-
 /**
  * ViewModel per i filtri della pagina segnalazioni elenco.
  *
- * Legge i dati da /data/tickets.json (SSoT) invece di fare query al DB.
- * Questo garantisce coerenza tra filtri e mappa che leggono la stessa fonte.
+ * Filtri sidebar: stesso file GeoJSON della mappa (/data/tickets.json).
+ * NO dati statici: la sorgente unica e' public_html/data/tickets.json.
+ * NO pattern Services: usa solo Spatie Queueable Actions (spatie/laravel-queueable-action).
  */
 class SegnalazioniFilterViewModel
 {
+    private int $totalCount;
+
     /** @var array<int, array<string, mixed>> */
     private array $features = [];
 
     /** @var array<string, int> */
     private array $countsPerType = [];
 
-    /** @var array<int, array<string, mixed>> */
-    private array $uniqueTypes = [];
+    /** @var array<string, array<string, mixed>> */
+    private array $typesMap = [];
 
-    private int $totalCount = 0;
+    /** @var array<string, int> */
+    private array $countsPerStatus = [];
+
+    /** @var array<string, array<string, mixed>> */
+    private array $statusesMap = [];
 
     public function __construct()
     {
-        $this->loadFromJson();
-    }
-
-    /**
-     * Carica dati dal JSON /data/tickets.json
-     */
-    private function loadFromJson(): void
-    {
-        $jsonPath = base_path('../public_html/data/tickets.json');
-
-        if (! File::exists($jsonPath)) {
-            return;
-        }
-
-        $content = File::get($jsonPath);
-        $data = json_decode($content, true);
-
-        if (! is_array($data) || ! isset($data['features']) || ! is_array($data['features'])) {
-            return;
-        }
-
-        /** @var array<int, array<string, mixed>> $features */
-        $features = $data['features'];
-        $this->features = $features;
-        $this->aggregateData();
-    }
-
-    /**
-     * Aggrega dati per tipo dal GeoJSON
-     */
-    private function aggregateData(): void
-    {
-        /** @var array<string, int> $counts */
-        $counts = [];
-        /** @var array<string, array<string, mixed>> $typesMap */
-        $typesMap = [];
-
-        foreach ($this->features as $feature) {
-            /** @var array<string, mixed> $properties */
-            $properties = $feature['properties'] ?? [];
-
-            // Supporta sia struttura annidata (new) che flat (legacy)
-            $typeObj = $properties['type'] ?? null;
-
-            if (is_array($typeObj)) {
-                // Struttura annidata: type: {value, label, color, icon, iconUrl}
-                $typeValue = (string) ($typeObj['value'] ?? 'other');
-                $typeLabel = (string) ($typeObj['label'] ?? $typeValue);
-                $typeColor = (string) ($typeObj['color'] ?? '#607d8b');
-                $typeIcon = (string) ($typeObj['icon'] ?? '');
-            } else {
-                // Struttura flat legacy
-                $typeValue = is_string($typeObj) ? $typeObj : 'other';
-                $typeLabel = (string) ($properties['type_label'] ?? $typeValue);
-                $typeColor = (string) ($properties['type_color'] ?? '#607d8b');
-                $typeIcon = (string) ($properties['type_icon'] ?? '');
-            }
-
-            // Incrementa conteggio
-            $counts[$typeValue] = ($counts[$typeValue] ?? 0) + 1;
-
-            // Salva info tipo (solo prima occorrenza)
-            if (! isset($typesMap[$typeValue])) {
-                $typesMap[$typeValue] = [
-                    'value' => $typeValue,
-                    'label' => $typeLabel,
-                    'color' => $typeColor,
-                    'icon' => $typeIcon,
-                ];
+        $aggregate = app(\Modules\Fixcity\Actions\BuildSegnalazioniFilterAggregateAction::class)->execute();
+        $this->features = $aggregate['features'] ?? [];
+        $this->countsPerType = $aggregate['countsPerType'] ?? [];
+        $this->countsPerStatus = $aggregate['countsPerStatus'] ?? [];
+        $this->typesMap = [];
+        foreach ($aggregate['uniqueTypes'] ?? [] as $type) {
+            $value = (string) ($type['value'] ?? '');
+            if ($value !== '') {
+                $this->typesMap[$value] = $type;
             }
         }
+        $this->statusesMap = [];
+        foreach ($aggregate['uniqueStatuses'] ?? [] as $status) {
+            $value = (string) ($status['value'] ?? '');
+            if ($value !== '') {
+                $this->statusesMap[$value] = $status;
+            }
+        }
+        $this->totalCount = $aggregate['totalCount'] ?? 0;
+    }
 
-        $this->countsPerType = $counts;
-        /** @var array<int, array<string, mixed>> $uniqueTypes */
-        $uniqueTypes = array_values($typesMap);
-        $this->uniqueTypes = $uniqueTypes;
-        $this->totalCount = count($this->features);
+    public function getCatalogLegend(): string
+    {
+        return (string) __('fixcity::ticket.filters.legend.label');
+    }
+
+    public function getStatusCatalogLegend(): string
+    {
+        return (string) __('fixcity::ticket.filters.status.legend.label');
     }
 
     /**
@@ -112,17 +69,49 @@ class SegnalazioniFilterViewModel
     public function getFilterItems(): array
     {
         $items = [];
+        foreach ($this->typesMap as $type) {
+            $value = (string) ($type['value'] ?? '');
+            if ($value === '') {
+                continue;
+            }
+            $count = $this->countsPerType[$value] ?? 0;
+            $label = (string) ($type['label'] ?? $value);
 
-        foreach ($this->uniqueTypes as $type) {
-            /** @var string $value */
-            $value = (string) $type['value'];
+            $iconUrl = (string) ($type['iconUrl'] ?? $type['icon_url'] ?? '');
+
             $items[] = [
-                'id' => 'filter-' . $value,
+                'id' => $value,
                 'value' => $value,
-                'label' => (string) $type['label'],
-                'color' => (string) $type['color'],
-                'icon' => (string) $type['icon'],
-                'count' => $this->countsPerType[$value] ?? 0,
+                'label' => $label,
+                'display_label' => $label,
+                'count' => $count,
+                'iconUrl' => $iconUrl,
+            ];
+        }
+
+        return $items;
+    }
+
+    /**
+     * @return array<int, array<string, mixed>>
+     */
+    public function getStatusFilterItems(): array
+    {
+        $items = [];
+        foreach ($this->statusesMap as $status) {
+            $value = (string) ($status['value'] ?? '');
+            if ($value === '') {
+                continue;
+            }
+            $label = (string) ($status['label'] ?? $value);
+
+            $items[] = [
+                'id' => 'status-'.$value,
+                'value' => $value,
+                'label' => $label,
+                'display_label' => $label,
+                'count' => $this->countsPerStatus[$value] ?? 0,
+                'color' => (string) ($status['color'] ?? '#607d8b'),
             ];
         }
 
@@ -135,9 +124,21 @@ class SegnalazioniFilterViewModel
     public function getFiltersData(string $title = ''): array
     {
         return [
-            'title' => $title,
+            'title' => $title !== '' ? $title : $this->getCatalogLegend(),
             'items' => $this->getFilterItems(),
-            'total' => $this->totalCount,
+            'total' => $this->getTotalCount(),
+        ];
+    }
+
+    /**
+     * @return array<string, mixed>
+     */
+    public function getStatusFiltersData(string $title = ''): array
+    {
+        return [
+            'title' => $title !== '' ? $title : $this->getStatusCatalogLegend(),
+            'items' => $this->getStatusFilterItems(),
+            'total' => $this->getTotalCount(),
         ];
     }
 
@@ -155,22 +156,167 @@ class SegnalazioniFilterViewModel
     }
 
     /**
-     * Conta filtrata per tipi selezionati
-     *
-     * @param array<int, string> $selectedTypes
+     * @return array<string, int>
      */
-    public function getFilteredCount(array $selectedTypes): int
+    public function getCountsPerStatus(): array
     {
-        if ($selectedTypes === []) {
+        return $this->countsPerStatus;
+    }
+
+    /**
+     * @param  array<int, string>  $selectedTypes
+     * @param  array<int, string>  $selectedStatuses
+     */
+    public function getFilteredCount(array $selectedTypes, array $selectedStatuses = []): int
+    {
+        return $this->countFeaturesMatching($selectedTypes, $selectedStatuses);
+    }
+
+    /**
+     * @param  array<int, string>  $selectedTypes
+     * @param  array<int, string>  $selectedStatuses
+     */
+    private function countFeaturesMatching(array $selectedTypes, array $selectedStatuses): int
+    {
+        if ($this->features === []) {
+            if ($selectedTypes === [] && $selectedStatuses === []) {
+                return $this->totalCount;
+            }
+
+            $count = 0;
+            if ($selectedTypes !== []) {
+                foreach ($selectedTypes as $type) {
+                    $count += $this->countsPerType[$type] ?? 0;
+                }
+            } elseif ($selectedStatuses !== []) {
+                foreach ($selectedStatuses as $status) {
+                    $count += $this->countsPerStatus[$status] ?? 0;
+                }
+            }
+
+            return $count > 0 ? $count : $this->totalCount;
+        }
+
+        $typeSet = $selectedTypes === [] ? null : array_fill_keys($selectedTypes, true);
+        $statusSet = $selectedStatuses === [] ? null : array_fill_keys($selectedStatuses, true);
+
+        if ($typeSet === null && $statusSet === null) {
             return $this->totalCount;
         }
 
-        $count = 0;
-        foreach ($selectedTypes as $type) {
-            $typeKey = (string) $type;
-            $count += $this->countsPerType[$typeKey] ?? 0;
+        $matched = 0;
+        foreach ($this->features as $feature) {
+            if (! is_array($feature)) {
+                continue;
+            }
+
+            $props = $feature['properties'] ?? [];
+            if (! is_array($props)) {
+                continue;
+            }
+
+            if ($typeSet !== null) {
+                $typeValue = $this->extractTypeValue($props);
+                if ($typeValue === '' || ! isset($typeSet[$typeValue])) {
+                    continue;
+                }
+            }
+
+            if ($statusSet !== null) {
+                $statusValue = $this->extractStatusValue($props);
+                if ($statusValue === '' || ! isset($statusSet[$statusValue])) {
+                    continue;
+                }
+            }
+
+            $matched++;
         }
 
-        return $count;
+        return $matched;
+    }
+
+    /**
+     * @param  array<string, mixed>  $properties
+     */
+    private function extractTypeValue(array $properties): string
+    {
+        $typeRaw = $properties['type'] ?? null;
+        if (is_array($typeRaw)) {
+            return (string) ($typeRaw['value'] ?? '');
+        }
+
+        return is_string($typeRaw) ? $typeRaw : '';
+    }
+
+    /**
+     * @param  array<string, mixed>  $properties
+     */
+    private function extractStatusValue(array $properties): string
+    {
+        $statusRaw = $properties['status'] ?? null;
+        if (is_array($statusRaw)) {
+            return (string) ($statusRaw['value'] ?? '');
+        }
+
+        return is_string($statusRaw) ? $statusRaw : '';
+    }
+
+    /**
+     * @param  array<int, int|string>  $excludeIds
+     * @return array<int, object{
+     *     id: int|string|null,
+     *     name: string,
+     *     type_label: string,
+     *     location: array<string, mixed>
+     * }>
+     */
+    public function getSupplementListItems(int $needed, array $excludeIds = []): array
+    {
+        if ($needed <= 0) {
+            return [];
+        }
+
+        $exclude = array_map(static fn (int|string $id): string => (string) $id, $excludeIds);
+        $items = [];
+
+        foreach ($this->features as $feature) {
+            if (count($items) >= $needed) {
+                break;
+            }
+
+            $properties = $feature['properties'] ?? [];
+            $geom = $feature['geometry'] ?? [];
+            $coords = $geom['coordinates'] ?? [];
+
+            if (! is_array($coords) || count($coords) < 2) {
+                continue;
+            }
+
+            $id = $properties['id'] ?? null;
+            $idKey = $id !== null ? (string) $id : '';
+
+            if ($idKey !== '' && in_array($idKey, $exclude, true)) {
+                continue;
+            }
+
+            $typeObj = $properties['type'] ?? null;
+            if (is_array($typeObj)) {
+                $typeLabel = (string) ($typeObj['label'] ?? $typeObj['value'] ?? '');
+            } else {
+                $typeLabel = (string) ($properties['type_label'] ?? '');
+            }
+
+            $items[] = (object) [
+                'id' => $id,
+                'name' => (string) ($properties['title'] ?? 'Segnalazione'),
+                'content' => null,
+                'type_label' => $typeLabel,
+                'location' => [
+                    'address' => (string) ($properties['address'] ?? ''),
+                ],
+            ];
+        }
+
+        return $items;
     }
 }
