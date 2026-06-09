@@ -1,10 +1,8 @@
 name: Release
 
+# Deprecato: usare semantic-release.yml (STORY-131). Mantenuto solo dispatch manuale.
 on:
-  push:
-    branches:
-      - main
-      - master
+  workflow_dispatch:
 
 permissions:
   contents: write # to push tags/releases

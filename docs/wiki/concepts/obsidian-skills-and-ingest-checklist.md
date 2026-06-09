@@ -1,3 +1,20 @@
+---
+title: "Checklist Obsidian, skills e ingest QMD"
+type: concept
+module: Fixcity
+tags: [obsidian, skills, qmd, ingest, second-brain]
+created: 2026-06-05
+updated: 2026-06-05
+qmd: "fixcity obsidian skills ingest checklist qmd frontmatter github"
+issues:
+  - "https://github.com/laraxot/base_fixcity_fila5/issues/256"
+discussions:
+  - "https://github.com/laraxot/base_fixcity_fila5/discussions/257"
+related:
+  - ./module-artifact-parity-audit.md
+  - ../../../../../../docs/wiki/rules/wiki-markdown-frontmatter-mandatory.md
+---
+
 # Obsidian skills and ingest checklist
 
 ## Scopo
@@ -6,27 +23,26 @@ Standardizzare il controllo periodico "skills + Obsidian + ingest" in ottica DRY
 
 ## Checklist operativa
 
-1. verificare i documenti Obsidian disponibili (`docs/.obsidian/README.md`)
-2. allineare i concetti modulo/tema con link bidirezionali
-3. aggiornare `index.md` e `log.md` del modulo owner
-4. aggiornare rule + memory + skill quando emerge una nuova regola stabile
-5. eseguire ingest (`qmd update`) dopo nuove pagine wiki
-6. fare una query smoke (`qmd search`) sui nuovi termini chiave
+1. Verificare i documenti Obsidian disponibili (`docs/.obsidian/README.md`)
+2. **Frontmatter** su ogni `.md` toccato: `title`, `type`, `tags`, `qmd`, `issues`, `discussions`
+3. Audit parità modulo: `bashscripts/tools/audit-module-artifact-parity.sh <Module>` (vedi [module-artifact-parity-audit](./module-artifact-parity-audit.md))
+4. Allineare i concetti modulo/tema con link bidirezionali (`related:` nel frontmatter)
+5. Aggiornare `index.md` e `log.md` del modulo owner
+6. Aggiornare rule + memory + skill quando emerge una nuova regola stabile
+7. Eseguire ingest (`bashscripts/docs/llm-wiki-qmd.sh update`) dopo nuove pagine wiki
+8. Query smoke (`bashscripts/docs/llm-wiki-qmd.sh search "<termine>"`) sui nuovi termini `qmd`
 
 ## Boundary
 
-- Obsidian e' strumento di navigazione/knowledge graph
-- la fonte di verita' resta la struttura `docs/raw` + `docs/wiki`
-- le correzioni runtime non si considerano complete senza aggiornamento wiki+ingest
+- Obsidian è strumento di navigazione/knowledge graph
+- La fonte di verità resta `docs/raw` + `docs/wiki`
+- Le correzioni runtime non sono complete senza wiki + ingest + GitHub tracciato
 
 ## False friends
 
-- "ho scritto il documento, quindi e' gia' ingestito"
-- "basta aggiornare solo il root wiki"
-- "skills aggiornate senza traccia in log/index"
+- "Ho scritto il documento, quindi è già ingestito"
+- "Issue citata nel testo senza URL in frontmatter"
 
-## Riferimenti
+## Collegamenti
 
-- [admin ticket create map visual contract](./admin-ticket-create-map-visual-contract.md)
-- [filament admin panel map visibility contract](../../../Geo/docs/wiki/concepts/filament-admin-panel-map-visibility-contract.md)
-- [filament admin style ownership boundary](../../../../Themes/Sixteen/docs/wiki/concepts/filament-admin-style-ownership-boundary.md)
+- [architecture-wiki-frontmatter-github.md](../../../../../../docs/wiki/bmad/architecture-wiki-frontmatter-github.md)

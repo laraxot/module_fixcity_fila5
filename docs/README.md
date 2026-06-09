@@ -1,7 +1,21 @@
+---
+title: "Fixcity Module Documentation"
+type: documentation
+tags: [fixcity, module, tickets]
+created: 2026-06-05
+updated: 2026-06-05
+issues:
+  - "https://github.com/laraxot/module_fixcity_fila5/issues/21"
+discussions:
+  - "https://github.com/laraxot/module_fixcity_fila5/discussions/23"
+---
+
 # Fixcity Module Documentation
 
+> 🇮🇹 [Biglietto da visita (IT)](../README.md) · 🇬🇧 [Business card (EN)](./readme-en.md)
+
 ## Overview
-The Fixcity module is responsible for managing ticket reports and segnalazioni in the Fixcity application. It provides the core functionality for users to create, manage, and track municipal service requests.
+The Fixcity module is responsible for managing ticket reports and service requests in the Fixcity application. It provides the core functionality for users to create, manage, and track municipal service requests.
 
 ## Architecture
 

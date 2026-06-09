@@ -242,11 +242,11 @@ class TicketControllerTest extends TestCase
         $this->actingAs($this->user);
 
         $ticket = Ticket::factory()->create(['owner_id' => $this->user->id]);
-        $ticket->comments()->create([
+        $ticket->ticketComments()->create([
             'user_id' => $this->user->id,
             'content' => 'Test comment 1',
         ]);
-        $ticket->comments()->create([
+        $ticket->ticketComments()->create([
             'user_id' => $this->user->id,
             'content' => 'Test comment 2',
         ]);

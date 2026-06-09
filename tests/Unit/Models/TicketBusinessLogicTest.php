@@ -236,9 +236,13 @@ describe('Ticket Relationships Business Logic', function () {
             ->first()->id->toBe($subscriber->id);
     });
 
-    it('can have comments', function () {
-        // Assuming comments relationship is implemented
+    it('can have spatie comments', function () {
         expect($this->ticket->comments())
+            ->toBeInstanceOf(\Illuminate\Database\Eloquent\Relations\MorphMany::class);
+    });
+
+    it('can have legacy ticket comments', function () {
+        expect($this->ticket->ticketComments())
             ->toBeInstanceOf(HasMany::class);
     });
 });

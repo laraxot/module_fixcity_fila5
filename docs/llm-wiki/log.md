@@ -48,6 +48,16 @@
   ripristinato `public_html/themes/Geo/js/geo.js`,
   riallineati asset `livewire:publish --assets` + `filament:assets`.
 - **Stability**:
-  registrazione `geoMapPickerField` resa robusta (init immediata + fallback `alpine:init`).
+   registrazione `geoMapPickerField` resa robusta (init immediata + fallback `alpine:init`).
 - **Knowledge update**:
-  linked concept `../wiki/concepts/segnalazione-runtime-asset-integrity.md`.
+   linked concept `../wiki/concepts/segnalazione-runtime-asset-integrity.md`.
+
+---
+
+## [2026-06-02] visual-parity | /it/# Design Comuni alignment improvements
+
+- **heading.blade.php**: changed column from col-lg-10 to col-lg-8 for better side margins
+- **Built theme assets**: with markercluster support for proper map visualization
+- **home.json**: updated to use asset() helper for tickets.json path
+- **SSoT architecture**: LoadTicketsGeoJsonAction → BuildSegnalazioniFilterAggregateAction → SegnalazioniFilterViewModel
+- **Documentation**: rules/no-services-rule.md created

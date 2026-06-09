@@ -8,6 +8,7 @@ Modulo Laravel responsabile della gestione delle segnalazioni cittadine (Ticket)
 
 | Documento | Descrizione |
 |-----------|-------------|
+| [Profiles UUID contract](./concepts/profiles-uuid-contract.md) | Owner `profiles`: 1 migrazione Fixcity, `uuid` + `credits` nullable |
 | **[Filament Wizard Pattern](./filament-wizard-pattern.md)** | **Guida principale** per wizard multi-step con Filament v5. |
 | [Rules / Filament Wizard Rules](./rules/filament-wizard-rules.md) | Regole operative: docs-first, concorrenza agenti, Infolist vs Form Schema, anti-duplicazione. |
 | [Wizard Governance Philosophy](./wizard-governance-philosophy.md) | Perché/regola/visione/zen: confini modulo-base-tema e anti-duplicazione. |

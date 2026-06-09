@@ -154,7 +154,8 @@ class TicketForm extends XotBaseResourceForm
                 ->columnSpanFull(),
             'privacyAccepted' => Checkbox::make('privacyAccepted')
                 ->accepted()
-                ->dehydrated(false),
+                ->dehydrated(false)
+                ->extraAttributes(['data-element' => 'privacy-consent']),
         ];
     }
 
@@ -178,18 +179,23 @@ class TicketForm extends XotBaseResourceForm
                 ->hiddenLabel()
                 ->columnSpanFull()
                 ->required()
+                ->minLength(3)
                 ->maxLength(255),
             'type' => Select::make('type')
                 ->hiddenLabel()
                 ->searchable()
+                ->required()
                 ->options(TicketTypeEnum::class)
                 ->columnSpanFull(),
             'content' => Textarea::make('content')
                 ->hiddenLabel()
                 ->columnSpanFull()
+                ->required()
+                ->minLength(10)
                 ->rows(4),
             'location' => CoordinatePicker::make('location')
                 ->columnSpanFull()
+                ->required()
                 ->reverseGeocoding(),
             'images' => SpatieMediaLibraryFileUpload::make('images')
                 ->hiddenLabel()
