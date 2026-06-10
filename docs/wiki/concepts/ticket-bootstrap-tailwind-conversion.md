@@ -17,7 +17,7 @@ related:
 # Segnalazione Bootstrap → Tailwind Conversion
 
 > **Purpose**: Document conversion of ALL Bootstrap classes from Design Comuni pages to Tailwind CSS
-> **Pages converted**: segnalazione-01-privacy, 02-dati, 03-riepilogo, 04-conferma, area-personale, segnalazioni-elenco
+> **Pages converted**: segnalazione-01-privacy, 02-dati, 03-riepilogo, 04-conferma, area-personale, ticket-list
 > **Implementation**: `laravel/Themes/Sixteen/resources/css/app.css` (NO inline CSS!)
 
 ## Conversion Complete ✅

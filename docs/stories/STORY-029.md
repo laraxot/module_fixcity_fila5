@@ -1,4 +1,4 @@
-# STORY-029: Pagina segnalazioni-elenco map-lit
+# STORY-029: Pagina ticket-list map-lit
 
 **Epic:** EPIC-005  
 **Priority:** Should  
@@ -21,7 +21,7 @@ So that **I can find nearby issues and understand problem types in my area**
 ## Description
 
 ### Background
-La pagina segnalazioni-elenco deve mostrare una mappa interattiva con segnalazioni puntuali e un filtro laterale per tipologie. HTML parity con Design Comuni richiede filtri funzionanti su desktop/mobile e tab mappa/lista operativi.
+La pagina ticket-list deve mostrare una mappa interattiva con segnalazioni puntuali e un filtro laterale per tipologie. HTML parity con Design Comuni richiede filtri funzionanti su desktop/mobile e tab mappa/lista operativi.
 
 ### Scope
 **In scope:**
@@ -29,7 +29,7 @@ La pagina segnalazioni-elenco deve mostrare una mappa interattiva con segnalazio
 - Toggle desktop ↔ mobile filter sync
 - Pulsante filtro mobile (it-funnel icon)
 - Tab mappa/lista con `x-data` Alpine wrapper
-- Dati filtri da JSON (home.json, tests.segnalazioni-elenco.json)
+- Dati filtri da JSON (home.json, tests.ticket-list.json)
 - Fallback a dati vivo dal DB via SegnalazioniFilterViewModel
 
 **Out of scope:**
@@ -38,7 +38,7 @@ La pagina segnalazioni-elenco deve mostrare una mappa interattiva con segnalazio
 - Filtro per intervallo data
 
 ### User Flow
-1. Cittadino naviga su `/it` o `/it/tests/segnalazioni-elenco`
+1. Cittadino naviga su `/it` o `/it/tests/ticket-list`
 2. Vede heading con breadcrumb, tabs mappa/lista
 3. Desktop: filtri visibili in sidebar con checkbox
 4. Mobile: icona funnel apre modale filtri
@@ -72,7 +72,7 @@ La pagina segnalazioni-elenco deve mostrare una mappa interattiva con segnalazio
 - **VM:** `Modules/Fixcity/app/ViewModels/TicketLayoutViewModel.php`
 - **VM:** `Modules/Fixcity/app/ViewModels/SegnalazioniFilterViewModel.php`
 - **JSON:** `laravel/config/local/fixcity/database/content/pages/home.json`
-- **JSON:** `laravel/config/local/fixcity/database/content/pages/tests.segnalazioni-elenco.json`
+- **JSON:** `laravel/config/local/fixcity/database/content/pages/tests.ticket-list.json`
 
 ### Data Flow
 ```
@@ -84,7 +84,7 @@ page.blade.php → $blocks = Page::getBlocksBySlug() →
 ### Changes Made
 1. `filters-sidebar.blade.php` - Fixato typo `categoy-list` → `category-list`
 2. `home.json` - Aggiunto block ticket-layout con filtri (color/icon)
-3. `tests.segnalazioni-elenco.json` - Aggiunti `color` e `icon` ai filtri
+3. `tests.ticket-list.json` - Aggiunti `color` e `icon` ai filtri
 4. `x-page.blade.php` - Modificato per `$block->data` diretto (tests/[slug])
 5. `page.blade.php` - Già corretto con merge dati
 6. SVG icon - Rimosse dimensioni width/height per rendering corretto

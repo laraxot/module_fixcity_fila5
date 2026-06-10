@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Modules\Fixcity\Actions;
 
+use Modules\Fixcity\Models\Ticket;
 use function Safe\json_decode;
 
 final class NormalizeTicketLocationDataAction
@@ -29,13 +30,13 @@ final class NormalizeTicketLocationDataAction
         }
 
         /** @var array<string, mixed> $locationPayload */
-        $locationPayload = $this->stringKeyed($location);
+        $locationPayload = Ticket::stringKeyed($location);
 
         $latitude = $locationPayload['latitude'] ?? $locationPayload['lat'] ?? null;
         $longitude = $locationPayload['longitude'] ?? $locationPayload['lng'] ?? null;
 
-        $normalizedLatitude = $this->normalizeCoordinate($latitude);
-        $normalizedLongitude = $this->normalizeCoordinate($longitude);
+        $normalizedLatitude = Ticket::normalizeCoordinateString($latitude);
+        $normalizedLongitude = Ticket::normalizeCoordinateString($longitude);
 
         if ($normalizedLatitude !== null) {
             $state['latitude'] = $normalizedLatitude;
@@ -62,9 +63,9 @@ final class NormalizeTicketLocationDataAction
             $details = [];
         }
 
-        return array_filter([
-            'lat' => $this->normalizeCoordinate($location['lat'] ?? $location['latitude'] ?? null),
-            'lng' => $this->normalizeCoordinate($location['lng'] ?? $location['longitude'] ?? null),
+        return array_filter(array_merge([
+            'lat' => Ticket::normalizeCoordinateString($location['lat'] ?? $location['latitude'] ?? null),
+            'lng' => Ticket::normalizeCoordinateString($location['lng'] ?? $location['longitude'] ?? null),
             'address' => $this->normalizeText($location['address'] ?? $location['display_name'] ?? null),
             'display_name' => $this->normalizeText($location['display_name'] ?? null),
             'provider' => $this->normalizeText($location['provider'] ?? null),
@@ -79,16 +80,7 @@ final class NormalizeTicketLocationDataAction
             'country_code' => $this->normalizeText($location['country_code'] ?? $details['country_code'] ?? null),
             'suburb' => $this->normalizeText($location['suburb'] ?? $details['suburb'] ?? $details['neighbourhood'] ?? null),
             'address_details' => $details !== [] ? $details : null,
-        ], static fn (mixed $item): bool => $item !== null && $item !== '');
-    }
-
-    private function normalizeCoordinate(mixed $value): ?string
-    {
-        if ($value === null || $value === '' || ! \is_numeric($value)) {
-            return null;
-        }
-
-        return (string) $value;
+        ], Ticket::extractAddressComponents($location)), static fn (mixed $item): bool => $item !== null && $item !== '');
     }
 
     private function normalizeText(mixed $value): ?string
@@ -102,20 +94,4 @@ final class NormalizeTicketLocationDataAction
         return $normalized !== '' ? $normalized : null;
     }
 
-    /**
-     * @param  array<mixed>  $value
-     * @return array<string, mixed>
-     */
-    private function stringKeyed(array $value): array
-    {
-        $normalized = [];
-
-        foreach ($value as $key => $item) {
-            if (\is_string($key)) {
-                $normalized[$key] = $item;
-            }
-        }
-
-        return $normalized;
-    }
 }

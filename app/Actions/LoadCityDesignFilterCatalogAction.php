@@ -5,17 +5,20 @@ declare(strict_types=1);
 namespace Modules\Fixcity\Actions;
 
 use Illuminate\Support\Facades\File;
+use Modules\Xot\Actions\Cast\SafeStringCastAction;
+use function Safe\preg_match;
+use function Safe\preg_replace;
 
 /**
- * Catalogo filtri sidebar allineato a disservizio-lista.json (Design Comuni reference).
+ * Sidebar filter catalog aligned with disservizio-lista.json (Design Comuni reference).
  *
- * @see https://italia.github.io/design-comuni-pagine-statiche/sito/segnalazioni-elenco.html
+ * @see https://italia.github.io/design-comuni-pagine-statiche/sito/ticket-list.html
  */
-final class LoadDesignComuniElencoFilterCatalogAction
+final class LoadCityDesignFilterCatalogAction
 {
     public const REFERENCE_RESULTS_TOTAL = 645;
 
-    /** Conteggio reference sottotitolo H1 (12 mesi risolte). */
+    /** Reference count for H1 subtitle (12 months resolved). */
     public const REFERENCE_RESOLVED_LAST_12_MONTHS = 73;
 
     /**
@@ -31,19 +34,23 @@ final class LoadDesignComuniElencoFilterCatalogAction
         /** @var array<string, mixed> $payload */
         $payload = json_decode(File::get($path), true, 512, JSON_THROW_ON_ERROR);
 
+        /** @var array<int, mixed> $categories */
+        $categories = is_array($payload['categories'] ?? null) ? $payload['categories'] : [];
+        $firstRaw = $categories[0] ?? null;
+        $firstCategory = is_array($firstRaw) ? $firstRaw : [];
         /** @var array<int, array<string, mixed>> $list */
-        $list = $payload['categories'][0]['list'] ?? [];
-        $legend = (string) ($payload['categories'][0]['title'] ?? 'categoria');
+        $list = is_array($firstCategory['list'] ?? null) ? $firstCategory['list'] : [];
+        $legend = SafeStringCastAction::cast($firstCategory['title'] ?? 'categoria');
 
         $items = [];
         $sumCounts = 0;
 
         foreach ($list as $entry) {
-            $rawLabel = (string) ($entry['label'] ?? '');
+            $rawLabel = SafeStringCastAction::cast($entry['label'] ?? '');
             $count = 0;
             $label = $rawLabel;
 
-            if (preg_match('/\((\d+)\)\s*$/', $rawLabel, $matches) === 1) {
+            if (preg_match('/\((\d+)\)\s*$/', $rawLabel, $matches) === 1 && isset($matches[1])) {
                 $count = (int) $matches[1];
                 $label = trim((string) preg_replace('/\s*\(\d+\)\s*$/', '', $rawLabel));
             }
@@ -51,8 +58,8 @@ final class LoadDesignComuniElencoFilterCatalogAction
             $sumCounts += $count;
 
             $items[] = [
-                'id' => (string) ($entry['id'] ?? 'filter'),
-                'value' => (string) ($entry['value'] ?? ''),
+                'id' => SafeStringCastAction::cast($entry['id'] ?? 'filter'),
+                'value' => SafeStringCastAction::cast($entry['value'] ?? ''),
                 'label' => $label,
                 'display_label' => $rawLabel,
                 'count' => $count,

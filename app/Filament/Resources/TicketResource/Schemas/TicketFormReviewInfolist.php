@@ -8,6 +8,7 @@ use Filament\Infolists\Components\TextEntry;
 use Filament\Schemas\Components\Component as SchemaComponent;
 use Filament\Schemas\Components\Utilities\Get;
 use Modules\Fixcity\Enums\TicketTypeEnum;
+use Modules\Xot\Actions\Cast\SafeStringCastAction;
 
 /**
  * Entry Filament {@see TextEntry} per lo step wizard di riepilogo (readonly).
@@ -34,11 +35,11 @@ final class TicketFormReviewInfolist
                 ->state(static fn (Get $get): string => static::formatTicketTypeDisplay(static::coerceTicketTypeValue($get('type')))),
             'review_name' => TextEntry::make('review_name')
                 ->columnSpanFull()
-                ->state(static fn (Get $get): string => (string) ($get('name') ?? '')),
+                ->state(static fn (Get $get): string => SafeStringCastAction::cast($get('name') ?? '')),
             'review_content' => TextEntry::make('review_content')
                 ->columnSpanFull()
                 ->prose()
-                ->state(static fn (Get $get): string => (string) ($get('content') ?? '')),
+                ->state(static fn (Get $get): string => SafeStringCastAction::cast($get('content') ?? '')),
             'review_images' => TextEntry::make('review_images')
                 ->columnSpanFull()
                 ->state(static function (Get $get): string {
@@ -68,7 +69,7 @@ final class TicketFormReviewInfolist
             return $raw;
         }
 
-        return is_scalar($raw) ? (string) $raw : null;
+        return is_scalar($raw) ? SafeStringCastAction::cast($raw) : null;
     }
 
     protected static function formatTicketTypeDisplay(TicketTypeEnum|string|null $raw): string
@@ -114,7 +115,7 @@ final class TicketFormReviewInfolist
         $lng = $location['longitude'] ?? $location['lng'] ?? null;
 
         if ($lat !== null && $lat !== '' && $lng !== null && $lng !== '') {
-            $parts[] = (string) $lat.', '.(string) $lng;
+            $parts[] = SafeStringCastAction::cast($lat).', '.SafeStringCastAction::cast($lng);
         }
 
         return $parts === [] ? '' : implode(' · ', $parts);

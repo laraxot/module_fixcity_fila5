@@ -46,10 +46,12 @@ class TicketsTable extends XotBaseResourceTable
             'owner.name' => TextColumn::make('owner.name')->placeholder('-'),
             'assignee.name' => TextColumn::make('assignee.name')->placeholder('-'),
             'citizen_rating' => TextColumn::make('citizen_rating')
+                ->sortable()
                 ->placeholder('-')
                 ->formatStateUsing(static fn (?int $state): string => $state !== null ? $state.'/5' : '-'),
             'citizen_rated_at' => TextColumn::make('citizen_rated_at')
                 ->dateTime()
+                ->sortable()
                 ->toggleable(isToggledHiddenByDefault: true),
             'created_at' => TextColumn::make('created_at')->dateTime()->sortable(),
             'updated_at' => TextColumn::make('updated_at')->dateTime()->sortable()->toggleable(isToggledHiddenByDefault: true),

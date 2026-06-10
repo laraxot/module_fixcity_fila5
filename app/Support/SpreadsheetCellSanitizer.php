@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Modules\Fixcity\Support;
 
+use function Safe\preg_match;
+
 /**
  * Mitiga CSV formula injection per export Filament (FR-024).
  */

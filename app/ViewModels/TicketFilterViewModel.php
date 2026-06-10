@@ -4,14 +4,16 @@ declare(strict_types=1);
 
 namespace Modules\Fixcity\ViewModels;
 
+use Modules\Xot\Actions\Cast\SafeStringCastAction;
+
 /**
- * ViewModel per i filtri della pagina segnalazioni elenco.
+ * ViewModel per i filtri della pagina ticket elenco.
  *
  * Filtri sidebar: stesso file GeoJSON della mappa (/data/tickets.json).
  * NO dati statici: la sorgente unica e' public_html/data/tickets.json.
  * NO pattern Services: usa solo Spatie Queueable Actions (spatie/laravel-queueable-action).
  */
-class SegnalazioniFilterViewModel
+class TicketFilterViewModel
 {
     private int $totalCount;
 
@@ -32,20 +34,20 @@ class SegnalazioniFilterViewModel
 
     public function __construct()
     {
-        $aggregate = app(\Modules\Fixcity\Actions\BuildSegnalazioniFilterAggregateAction::class)->execute();
+        $aggregate = app(\Modules\Fixcity\Actions\BuildTicketFilterAggregateAction::class)->execute();
         $this->features = $aggregate['features'] ?? [];
         $this->countsPerType = $aggregate['countsPerType'] ?? [];
         $this->countsPerStatus = $aggregate['countsPerStatus'] ?? [];
         $this->typesMap = [];
         foreach ($aggregate['uniqueTypes'] ?? [] as $type) {
-            $value = (string) ($type['value'] ?? '');
+            $value = SafeStringCastAction::cast($type['value'] ?? '');
             if ($value !== '') {
                 $this->typesMap[$value] = $type;
             }
         }
         $this->statusesMap = [];
         foreach ($aggregate['uniqueStatuses'] ?? [] as $status) {
-            $value = (string) ($status['value'] ?? '');
+            $value = SafeStringCastAction::cast($status['value'] ?? '');
             if ($value !== '') {
                 $this->statusesMap[$value] = $status;
             }
@@ -70,14 +72,14 @@ class SegnalazioniFilterViewModel
     {
         $items = [];
         foreach ($this->typesMap as $type) {
-            $value = (string) ($type['value'] ?? '');
+            $value = SafeStringCastAction::cast($type['value'] ?? '');
             if ($value === '') {
                 continue;
             }
             $count = $this->countsPerType[$value] ?? 0;
-            $label = (string) ($type['label'] ?? $value);
+            $label = SafeStringCastAction::cast($type['label'] ?? $value);
 
-            $iconUrl = (string) ($type['iconUrl'] ?? $type['icon_url'] ?? '');
+            $iconUrl = SafeStringCastAction::cast($type['iconUrl'] ?? $type['icon_url'] ?? '');
 
             $items[] = [
                 'id' => $value,
@@ -99,11 +101,11 @@ class SegnalazioniFilterViewModel
     {
         $items = [];
         foreach ($this->statusesMap as $status) {
-            $value = (string) ($status['value'] ?? '');
+            $value = SafeStringCastAction::cast($status['value'] ?? '');
             if ($value === '') {
                 continue;
             }
-            $label = (string) ($status['label'] ?? $value);
+            $label = SafeStringCastAction::cast($status['label'] ?? $value);
 
             $items[] = [
                 'id' => 'status-'.$value,
@@ -111,7 +113,7 @@ class SegnalazioniFilterViewModel
                 'label' => $label,
                 'display_label' => $label,
                 'count' => $this->countsPerStatus[$value] ?? 0,
-                'color' => (string) ($status['color'] ?? '#607d8b'),
+                'color' => SafeStringCastAction::cast($status['color'] ?? '#607d8b'),
             ];
         }
 
@@ -216,14 +218,18 @@ class SegnalazioniFilterViewModel
             }
 
             if ($typeSet !== null) {
-                $typeValue = $this->extractTypeValue($props);
+                /** @var array<string, mixed> $typedProps */
+                $typedProps = $props;
+                $typeValue = $this->extractTypeValue($typedProps);
                 if ($typeValue === '' || ! isset($typeSet[$typeValue])) {
                     continue;
                 }
             }
 
             if ($statusSet !== null) {
-                $statusValue = $this->extractStatusValue($props);
+                /** @var array<string, mixed> $typedProps */
+                $typedProps = $props;
+                $statusValue = $this->extractStatusValue($typedProps);
                 if ($statusValue === '' || ! isset($statusSet[$statusValue])) {
                     continue;
                 }
@@ -242,7 +248,7 @@ class SegnalazioniFilterViewModel
     {
         $typeRaw = $properties['type'] ?? null;
         if (is_array($typeRaw)) {
-            return (string) ($typeRaw['value'] ?? '');
+            return SafeStringCastAction::cast($typeRaw['value'] ?? '');
         }
 
         return is_string($typeRaw) ? $typeRaw : '';
@@ -255,7 +261,7 @@ class SegnalazioniFilterViewModel
     {
         $statusRaw = $properties['status'] ?? null;
         if (is_array($statusRaw)) {
-            return (string) ($statusRaw['value'] ?? '');
+            return SafeStringCastAction::cast($statusRaw['value'] ?? '');
         }
 
         return is_string($statusRaw) ? $statusRaw : '';
@@ -276,7 +282,7 @@ class SegnalazioniFilterViewModel
             return [];
         }
 
-        $exclude = array_map(static fn (int|string $id): string => (string) $id, $excludeIds);
+        $exclude = array_map(static fn (int|string $id): string => SafeStringCastAction::cast($id), $excludeIds);
         $items = [];
 
         foreach ($this->features as $feature) {
@@ -284,8 +290,14 @@ class SegnalazioniFilterViewModel
                 break;
             }
 
-            $properties = $feature['properties'] ?? [];
-            $geom = $feature['geometry'] ?? [];
+            if (! is_array($feature)) {
+                continue;
+            }
+
+            /** @var array<string, mixed> $properties */
+            $properties = is_array($feature['properties'] ?? null) ? $feature['properties'] : [];
+            /** @var array<string, mixed> $geom */
+            $geom = is_array($feature['geometry'] ?? null) ? $feature['geometry'] : [];
             $coords = $geom['coordinates'] ?? [];
 
             if (! is_array($coords) || count($coords) < 2) {
@@ -293,7 +305,7 @@ class SegnalazioniFilterViewModel
             }
 
             $id = $properties['id'] ?? null;
-            $idKey = $id !== null ? (string) $id : '';
+            $idKey = is_int($id) || is_string($id) ? SafeStringCastAction::cast($id) : '';
 
             if ($idKey !== '' && in_array($idKey, $exclude, true)) {
                 continue;
@@ -301,18 +313,17 @@ class SegnalazioniFilterViewModel
 
             $typeObj = $properties['type'] ?? null;
             if (is_array($typeObj)) {
-                $typeLabel = (string) ($typeObj['label'] ?? $typeObj['value'] ?? '');
+                $typeLabel = SafeStringCastAction::cast($typeObj['label'] ?? $typeObj['value'] ?? '');
             } else {
-                $typeLabel = (string) ($properties['type_label'] ?? '');
+                $typeLabel = SafeStringCastAction::cast($properties['type_label'] ?? '');
             }
 
             $items[] = (object) [
-                'id' => $id,
-                'name' => (string) ($properties['title'] ?? 'Segnalazione'),
-                'content' => null,
+                'id' => is_int($id) || is_string($id) ? $id : null,
+                'name' => SafeStringCastAction::cast($properties['title'] ?? 'Ticket'),
                 'type_label' => $typeLabel,
                 'location' => [
-                    'address' => (string) ($properties['address'] ?? ''),
+                    'address' => SafeStringCastAction::cast($properties['address'] ?? ''),
                 ],
             ];
         }

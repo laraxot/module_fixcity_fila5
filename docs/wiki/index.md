@@ -60,7 +60,7 @@ wiki/
 | [filament5-entangle-contract](../../Geo/docs/wiki/concepts/filament5-custom-field-entangle-contract.md) | concept | Perché `$applyStateBindingModifiers` è OBBLIGATORIO per entangle — prova vendor Filament 5 | 2026-04-28 |
 | [admin-map-asset-registry-mismatch](./concepts/admin-map-asset-registry-mismatch.md) | concept | mismatch tra asset registry Filament e file effettivamente deployati |
 | [obsidian-skills-and-ingest-checklist](./concepts/obsidian-skills-and-ingest-checklist.md) | concept | Checklist continua su Obsidian, skills, ingest e allineamento docs |
-| [segnalazioni-elenco-map-architecture](./concepts/segnalazioni-elenco-map-architecture.md) | concept | Architettura pagina elenco segnalazioni: Lit map + GeoJSON statico (farmshops pattern) + filtri TicketTypeEnum | 2026-04-29 |
+| [ticket-list-map-architecture](./concepts/ticket-list-map-architecture.md) | concept | Architettura pagina elenco segnalazioni: Lit map + GeoJSON statico (farmshops pattern) + filtri TicketTypeEnum | 2026-04-29 |
 | [tickets-view-cms-folio-page](./concepts/tickets-view-cms-folio-page.md) | concept | FO `/it/tickets/{id}` — CMS `tickets.view`, widget `Ticket\ViewWidget` + Infolist | 2026-06-03 |
 | [ticket-view-fo-enrichment-map-media-comments](./concepts/ticket-view-fo-enrichment-map-media-comments.md) | concept | Dettaglio FO: no tab, mappa 1 marker, Spatie comments — STORY-157 | 2026-06-05 |
 | [frontoffice-no-standalone-livewire](./concepts/frontoffice-no-standalone-livewire.md) | concept | No Livewire puro fuori widget Filament; `/it` via CMS `segnalazioni-layout` | 2026-05-28 |

@@ -8,6 +8,7 @@ use Closure;
 use Illuminate\Contracts\Validation\ValidationRule;
 use Modules\Fixcity\Models\Ticket;
 use Modules\Geo\Actions\FilterCoordinatesInRadiusAction as CoordinatesFilter;
+use Modules\Xot\Actions\Cast\SafeStringCastAction;
 use Webmozart\Assert\Assert;
 
 class FilterCoordinatesInRadius implements ValidationRule
@@ -35,8 +36,8 @@ class FilterCoordinatesInRadius implements ValidationRule
         /** @var array<array{latitude: string, longitude: string}> $coordinatesArray */
         $coordinatesArray = array_map(
             static fn (mixed $row): array => [
-                'latitude' => (string) (is_array($row) ? ($row['latitude'] ?? '0') : '0'),
-                'longitude' => (string) (is_array($row) ? ($row['longitude'] ?? '0') : '0'),
+                'latitude' => SafeStringCastAction::cast(is_array($row) ? ($row['latitude'] ?? '0') : '0'),
+                'longitude' => SafeStringCastAction::cast(is_array($row) ? ($row['longitude'] ?? '0') : '0'),
             ],
             $rawCoordinates
         );

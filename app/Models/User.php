@@ -22,10 +22,9 @@ use Modules\User\Models\TenantUser;
 use Modules\User\Models\User as BaseUser;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Modules\Xot\Contracts\ProfileContract;
-use Spatie\Comments\Models\Collections\ReactionCollection;
-use Spatie\Comments\Models\Comment;
-use Spatie\Comments\Models\CommentNotificationSubscription;
-use Spatie\Comments\Models\Reaction;
+use Modules\Comment\Models\Comment;
+use Modules\Comment\Models\CommentNotificationSubscription;
+use Modules\Comment\Models\Reaction;
 
 /**
  * @property string $id
@@ -63,7 +62,7 @@ use Spatie\Comments\Models\Reaction;
  * @property Collection<int, Permission> $permissions
  * @property int|null $permissions_count
  * @property ProfileContract|null $profile
- * @property ReactionCollection<int, Reaction> $reactions
+ * @property Collection<int, Reaction> $reactions
  * @property int|null $reactions_count
  * @property Collection<int, Role> $roles
  * @property int|null $roles_count

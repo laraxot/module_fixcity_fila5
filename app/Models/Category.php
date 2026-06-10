@@ -7,6 +7,7 @@ namespace Modules\Fixcity\Models;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Modules\Xot\Actions\Cast\SafeStringCastAction;
 
 /**
  * Class Category.
@@ -55,6 +56,7 @@ class Category extends BaseModel
     /**
      * Get the parent category.
      */
+    /** @return BelongsTo<Category, $this> */
     public function parent(): BelongsTo
     {
         return $this->belongsTo(Category::class, 'parent_id');
@@ -62,6 +64,8 @@ class Category extends BaseModel
 
     /**
      * Get the child categories.
+     *
+     * @return HasMany<Category, $this>
      */
     public function children(): HasMany
     {
@@ -70,6 +74,8 @@ class Category extends BaseModel
 
     /**
      * Get all tickets for this category.
+     *
+     * @return HasMany<Ticket, $this>
      */
     public function tickets(): HasMany
     {
@@ -78,6 +84,9 @@ class Category extends BaseModel
 
     /**
      * Scope a query to only include active categories.
+     *
+     * @param  Builder<Category>  $query
+     * @return Builder<Category>
      */
     public function scopeActive(Builder $query): Builder
     {
@@ -86,6 +95,9 @@ class Category extends BaseModel
 
     /**
      * Scope a query to only include root categories (no parent).
+     *
+     * @param  Builder<Category>  $query
+     * @return Builder<Category>
      */
     public function scopeRoot(Builder $query): Builder
     {
@@ -98,13 +110,13 @@ class Category extends BaseModel
     public function getFullNameAttribute(): string
     {
         if ($this->parent) {
-            $parentName = (string) $this->parent->getAttribute('name');
-            $currentName = (string) $this->getAttribute('name');
+            $parentName = SafeStringCastAction::cast($this->parent->getAttribute('name'));
+            $currentName = SafeStringCastAction::cast($this->getAttribute('name'));
 
             return $parentName.' > '.$currentName;
         }
 
-        return (string) $this->getAttribute('name');
+        return SafeStringCastAction::cast($this->getAttribute('name'));
     }
 
     /**
@@ -118,6 +130,7 @@ class Category extends BaseModel
     /**
      * Get all descendants of this category.
      */
+    /** @return HasMany<Category, $this> */
     public function descendants(): HasMany
     {
         return $this->children()->with('descendants');

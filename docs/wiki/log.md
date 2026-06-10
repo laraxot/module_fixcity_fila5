@@ -96,7 +96,7 @@
 - **EnumTrait refactoring (STORY-050):** TicketStatusEnum/TicketPriorityEnum rimosse definizioni hardcode `getColor()/getIcon()/getLabel()` in favore del trait. Creati lang files `ticket_status_enum.php` e `ticket_priority_enum.php` (it/en). PHPStan verde.
 - **Component naming violation:** Rimosse `geo-map-lit-*.js` duplicati in `Modules/Geo/resources/js/components/` in favore del canonic `map-lit.js` (usato da `<map-lit>` nel blade).
 - **Lezione ARCHITETTONICA:** Un solo componente per responsabilità. Mai duplicare JS nel tema o in moduli. Il tema importa da modulo, non fork.
-- **Regola:** `modules/Geo/.../map-lit.js` è l'unico componente mappa per segnalazioni-elenco. Tutti gli altri `geo-map-lit*.js` sono fork vietati (v. `no-theme-map-lit-fork.md`).
+- **Regola:** `modules/Geo/.../map-lit.js` è l'unico componente mappa per ticket-list. Tutti gli altri `geo-map-lit*.js` sono fork vietati (v. `no-theme-map-lit-fork.md`).
 
 ## [2026-05-26] fix | Wizard step 3 (`Salva/Invia`) non esegue submit — rimosso form wrapper esterno
 
@@ -167,7 +167,7 @@
 - Regola operativa: prima di toccare Composer/debugbar, verificare HTML reale + manifest runtime + `public_path()`.
 - Issue: [#115](https://github.com/laraxot/base_fixcity_fila5/issues/115).
 
-## [2026-05-08] architecture | segnalazioni-elenco map-lit canonical
+## [2026-05-08] architecture | ticket-list map-lit canonical
 
 - Aggiornata architettura mappa/lista: la vista pubblica usa `<map-lit>`, non `<ticket-map-lit>` e non `<geo-map-lit>`.
 - Confermato boundary: Fixcity genera `/data/tickets.json`, Geo renderizza il componente, Sixteen monta layout e filtri.
@@ -577,7 +577,7 @@
 ## [2026-04-28] cms | draft ticket confirmation page
 - Aggiunta pagina CMS `tests.segnalazione-bozza-salvata` per il redirect dopo `saveDraft()`.
 - Il wizard `segnalazione-crea` ora puo' usare `draft_confirmation_slug` distinto da `confirmation_slug`.
-- La pagina bozza riusa il blocco tema `pub_theme::components.blocks.flow.segnalazione.04-conferma` con copy dedicato, senza nuova route Laravel e senza duplicare Blade.
+- La pagina bozza riusa il blocco tema `pub_theme::components.blocks.flow.ticket.04-conferma` con copy dedicato, senza nuova route Laravel e senza duplicare Blade.
 
 ## [2026-04-28] fix | story 8-59 — ticket location JSON canonica
 - Creata e validata story BMAD `8-59-ticket-location-json-persistence`.
@@ -591,7 +591,7 @@
 - Aggiornati contratto fullscreen Fixcity e story docs modulo.
 - Boundary confermato: Fixcity verifica wizard, Geo possiede runtime Lit/Leaflet, Sixteen possiede CSS/parity.
 
-## [2026-04-29] feature | story 8-75 — segnalazioni-elenco mappa Lit + lista live
+## [2026-04-29] feature | story 8-75 — ticket-list mappa Lit + lista live
 - Implementato `GenerateTicketsJsonAction`: scrive `public_html/data/tickets.json` (GeoJSON FeatureCollection)
 - Creato `ticket-map-lit.js`: Lit Web Component (HTMLElement puro, no LitElement dep) con Leaflet + MarkerCluster CDN
 - Aggiornato `layout.blade.php` Sixteen: filtri dinamici da `TicketTypeEnum::cases()`, tab mappa → `<ticket-map-lit>`, tab lista → ticket reali DB

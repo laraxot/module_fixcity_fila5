@@ -35,7 +35,7 @@ related:
 ```
 // ❌ SBAGLIATO
 blocks/ticket-layout/
-blocks/segnalazioni-elenco/
+blocks/ticket-list/
 
 // ✅ CORRETTO
 blocks/hero/

@@ -6,7 +6,7 @@ created: 2026-06-03
 updated: 2026-06-03
 tags: [fixcity, ticket-type, svg, map, architecture]
 related:
-  - ./segnalazioni-elenco-map-architecture.md
+  - ./ticket-list-map-architecture.md
   - ../../../../Geo/docs/wiki/concepts/map-legend-status-semantics.md
   - ../../../../../docs/wiki/architecture/frontoffice-map-filters-ssot-architecture.md
   - ../../../../../docs/wiki/agents/agents-project-rules.md

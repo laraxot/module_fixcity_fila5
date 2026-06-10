@@ -5,11 +5,13 @@ declare(strict_types=1);
 namespace Modules\Fixcity\Actions;
 
 use Modules\Fixcity\Enums\TicketStatusEnum;
+use Modules\Xot\Actions\Cast\SafeIntCastAction;
+use Modules\Xot\Actions\Cast\SafeStringCastAction;
 
 /**
- * Aggregati filtri elenco segnalazioni da tickets.json — SSoT unico per mappa + filtri.
+ * Aggregati filtri elenco ticket da tickets.json — SSoT unico per mappa + filtri.
  */
-class BuildSegnalazioniFilterAggregateAction
+class BuildTicketFilterAggregateAction
 {
     /**
      * @return array{
@@ -45,12 +47,14 @@ class BuildSegnalazioniFilterAggregateAction
                 continue;
             }
 
-            $typeMeta = $this->resolveTypeMeta($props);
+            /** @var array<string, mixed> $typedProps */
+            $typedProps = $props;
+            $typeMeta = $this->resolveTypeMeta($typedProps);
             if ($typeMeta === null) {
                 continue;
             }
 
-            $typeValue = (string) ($typeMeta['value'] ?? '');
+            $typeValue = SafeStringCastAction::cast($typeMeta['value'] ?? '');
             if ($typeValue === '') {
                 continue;
             }
@@ -60,9 +64,9 @@ class BuildSegnalazioniFilterAggregateAction
                 $typesMap[$typeValue] = $typeMeta;
             }
 
-            $statusMeta = $this->resolveStatusMeta($props);
+            $statusMeta = $this->resolveStatusMeta($typedProps);
             if ($statusMeta !== null) {
-                $statusValue = (string) ($statusMeta['value'] ?? '');
+                $statusValue = SafeStringCastAction::cast($statusMeta['value'] ?? '');
                 if ($statusValue !== '') {
                     $statusCounts[$statusValue] = ($statusCounts[$statusValue] ?? 0) + 1;
                     if (! isset($statusesMap[$statusValue])) {
@@ -78,7 +82,7 @@ class BuildSegnalazioniFilterAggregateAction
             'uniqueTypes' => array_values($typesMap),
             'countsPerStatus' => $statusCounts,
             'uniqueStatuses' => $this->sortStatusesByEnumOrder($statusesMap),
-            'totalCount' => (int) ($geoJson['total'] ?? count($features)),
+            'totalCount' => SafeIntCastAction::cast($geoJson['total'] ?? count($features)),
         ];
     }
 
@@ -95,19 +99,19 @@ class BuildSegnalazioniFilterAggregateAction
         $typeRaw = $properties['type'] ?? null;
 
         if (is_array($typeRaw)) {
-            $value = (string) ($typeRaw['value'] ?? '');
+            $value = SafeStringCastAction::cast($typeRaw['value'] ?? '');
             if ($value === '') {
                 return null;
             }
 
-            $iconUrl = (string) ($typeRaw['iconUrl'] ?? $typeRaw['icon_url'] ?? '');
+            $iconUrl = SafeStringCastAction::cast($typeRaw['iconUrl'] ?? $typeRaw['icon_url'] ?? '');
             if ($iconUrl === '') {
                 return null;
             }
 
             return [
                 'value' => $value,
-                'label' => (string) ($typeRaw['label'] ?? $value),
+                'label' => SafeStringCastAction::cast($typeRaw['label'] ?? $value),
                 'iconUrl' => $iconUrl,
             ];
         }
@@ -128,16 +132,16 @@ class BuildSegnalazioniFilterAggregateAction
         $statusRaw = $properties['status'] ?? null;
 
         if (is_array($statusRaw)) {
-            $value = (string) ($statusRaw['value'] ?? '');
+            $value = SafeStringCastAction::cast($statusRaw['value'] ?? '');
             if ($value === '') {
                 return null;
             }
 
-            $color = (string) ($statusRaw['color'] ?? '');
+            $color = SafeStringCastAction::cast($statusRaw['color'] ?? '');
 
             return [
                 'value' => $value,
-                'label' => (string) ($statusRaw['label'] ?? $value),
+                'label' => SafeStringCastAction::cast($statusRaw['label'] ?? $value),
                 'color' => $color !== '' ? $color : app(ResolveTicketStatusMarkerPropertiesAction::class)
                     ->executeFromValue($value)['color'],
             ];
@@ -163,8 +167,8 @@ class BuildSegnalazioniFilterAggregateAction
 
         $values = array_values($statusesMap);
         usort($values, static function (array $a, array $b) use ($order): int {
-            $posA = $order[(string) ($a['value'] ?? '')] ?? PHP_INT_MAX;
-            $posB = $order[(string) ($b['value'] ?? '')] ?? PHP_INT_MAX;
+            $posA = $order[SafeStringCastAction::cast($a['value'] ?? '')] ?? PHP_INT_MAX;
+            $posB = $order[SafeStringCastAction::cast($b['value'] ?? '')] ?? PHP_INT_MAX;
 
             return $posA <=> $posB;
         });

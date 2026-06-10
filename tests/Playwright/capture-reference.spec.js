@@ -1,6 +1,6 @@
 const { test } = require('@playwright/test');
 
-const REF_URL = 'https://italia.github.io/design-comuni-pagine-statiche/sito/segnalazioni-elenco.html';
+const REF_URL = 'https://italia.github.io/design-comuni-pagine-statiche/sito/ticket-list.html';
 
 const viewports = [
   { name: 'desktop', width: 1280, height: 900 },

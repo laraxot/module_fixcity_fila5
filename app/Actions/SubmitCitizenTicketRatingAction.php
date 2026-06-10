@@ -11,6 +11,7 @@ use Modules\Fixcity\Actions\TicketCitizenRating\GetTicketCitizenRatingMorphActio
 use Modules\Fixcity\Enums\TicketStatusEnum;
 use Modules\Fixcity\Models\Ticket;
 use Modules\Rating\Models\RatingMorph;
+use Modules\Xot\Actions\Cast\SafeStringCastAction;
 use Modules\Xot\Contracts\UserContract;
 
 /**
@@ -40,7 +41,7 @@ final class SubmitCitizenTicketRatingAction
             ]);
         }
 
-        $userIdString = (string) $userId;
+        $userIdString = SafeStringCastAction::cast($userId);
 
         if (app(GetTicketCitizenRatingMorphAction::class)->executeForTicket($ticket, $userIdString) !== null) {
             throw ValidationException::withMessages([
@@ -104,10 +105,13 @@ final class SubmitCitizenTicketRatingAction
             return false;
         }
 
-        if ($ticket->owner_id !== null && (string) $ticket->owner_id === (string) $userId) {
+        if ($ticket->owner_id !== null && SafeStringCastAction::cast($ticket->owner_id) === SafeStringCastAction::cast($userId)) {
             return true;
         }
 
-        return in_array((string) $userId, [(string) $ticket->created_by, (string) $ticket->updated_by], true);
+        return in_array(SafeStringCastAction::cast($userId), [
+            SafeStringCastAction::cast($ticket->created_by),
+            SafeStringCastAction::cast($ticket->updated_by),
+        ], true);
     }
 }
