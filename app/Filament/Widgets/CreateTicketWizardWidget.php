@@ -7,6 +7,7 @@ namespace Modules\Fixcity\Filament\Widgets;
 use Filament\Schemas\Components\Wizard\Step;
 use Illuminate\Support\Facades\Auth;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
+use Modules\Fixcity\Filament\Concerns\HasTicketAuthorData;
 use Modules\Fixcity\Filament\Resources\TicketResource;
 use Modules\Fixcity\Filament\Resources\TicketResource\Schemas\TicketForm;
 use Modules\Fixcity\Models\Ticket;
@@ -15,6 +16,7 @@ use Modules\Xot\Filament\Widgets\XotBaseWizardWidget;
 
 class CreateTicketWizardWidget extends XotBaseWizardWidget
 {
+    use HasTicketAuthorData;
     /**
      * Runtime source-of-truth view for frontoffice ticket wizard.
      * This avoids ambiguity with theme files that share the same basename.

@@ -27,6 +27,7 @@ enum TicketStatusEnum: string implements HasColor, HasIcon, HasLabel
     case REOPENED = 'reopened';
     case OPEN = 'open';
 
+    /** @return list<self> */
     public static function canViewByAll(): array
     {
         return [
@@ -39,6 +40,7 @@ enum TicketStatusEnum: string implements HasColor, HasIcon, HasLabel
         ];
     }
 
+    /** @return list<self> */
     public static function canNoViewByAll(): array
     {
         return [

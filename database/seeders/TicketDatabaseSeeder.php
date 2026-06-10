@@ -12,6 +12,7 @@ use Modules\Fixcity\Enums\TicketTypeEnum;
 use Modules\Fixcity\Models\Ticket;
 use Modules\User\Models\User;
 use Illuminate\Support\Facades\File;
+use Modules\Xot\Actions\Cast\SafeStringCastAction;
 
 /**
  * Ticket dimostrativi per presentazione FO: mappa, elenco, dettaglio /it/tickets/{id}.
@@ -24,7 +25,9 @@ class TicketDatabaseSeeder extends Seeder
     {
         $ownerId = $this->resolveOwnerId();
         if ($ownerId === null) {
-            $this->command?->warn('TicketDatabaseSeeder: nessun utente nel DB — seed ticket saltato.');
+            if ($this->command !== null) {
+                $this->command->warn('TicketDatabaseSeeder: nessun utente nel DB — seed ticket saltato.');
+            }
 
             return;
         }
@@ -34,7 +37,9 @@ class TicketDatabaseSeeder extends Seeder
         }
 
         $path = app(GenerateTicketsJsonAction::class)->execute();
-        $this->command?->info('TicketDatabaseSeeder: GeoJSON aggiornato in '.$path);
+        if ($this->command !== null) {
+            $this->command->info('TicketDatabaseSeeder: GeoJSON aggiornato in '.$path);
+        }
     }
 
     private function resolveOwnerId(): int|string|null
@@ -55,9 +60,9 @@ class TicketDatabaseSeeder extends Seeder
      */
     private function upsertPresentationTicket(array $record, int|string $ownerId): void
     {
-        $lat = (string) $record['lat'];
-        $lng = (string) $record['lng'];
-        $address = (string) $record['address'];
+        $lat = SafeStringCastAction::cast($record['lat']);
+        $lng = SafeStringCastAction::cast($record['lng']);
+        $address = SafeStringCastAction::cast($record['address']);
 
         $location = [
             'lat' => $lat,
@@ -67,29 +72,38 @@ class TicketDatabaseSeeder extends Seeder
             'address' => $address,
             'display_name' => $address.', Veneto, Italia',
             'provider' => 'seed',
-            'city' => (string) ($record['city'] ?? 'Mogliano Veneto'),
+            'city' => SafeStringCastAction::cast($record['city'] ?? 'Mogliano Veneto'),
             'province' => 'Treviso',
             'country' => 'Italia',
             'country_code' => 'it',
         ];
 
-        $demoCode = (string) ($record['code'] ?? '');
-        $desiredSlug = (string) $record['slug'];
+        $demoCode = SafeStringCastAction::cast($record['code'] ?? '');
+        $desiredSlug = SafeStringCastAction::cast($record['slug']);
 
         /** @var Ticket $ticket */
         $ticket = Ticket::query()->updateOrCreate(
             ['code' => $demoCode],
             [
-                'name' => (string) $record['name'],
-                'content' => (string) $record['content'],
+                'name' => SafeStringCastAction::cast($record['name']),
+                'content' => SafeStringCastAction::cast($record['content']),
                 'owner_id' => $ownerId,
                 'ticket_prefix' => 'DEMO',
             ],
         );
 
-        $ticket->status = $record['status'];
-        $ticket->priority = $record['priority'];
-        $ticket->type = $record['type'];
+        $status = $record['status'] ?? null;
+        $priority = $record['priority'] ?? null;
+        $type = $record['type'] ?? null;
+        if ($status instanceof TicketStatusEnum) {
+            $ticket->status = $status;
+        }
+        if ($priority instanceof TicketPriorityEnum) {
+            $ticket->priority = $priority;
+        }
+        if ($type instanceof TicketTypeEnum) {
+            $ticket->type = $type;
+        }
         $ticket->location = $location;
         $ticket->latitude = $lat;
         $ticket->longitude = $lng;

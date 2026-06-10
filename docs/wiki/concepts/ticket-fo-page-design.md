@@ -1,10 +1,10 @@
 ---
 title: "Ticket FO page design — mappa statica + comments"
 type: concept
-tags: [ticket, folio, leaflet, spatie-comments, frontoffice]
+tags: [ticket, folio, leaflet, comments, frontoffice]
 created: 2026-06-05
-updated: 2026-06-05
-qmd: "ticket frontoffice folio mappa statica spatie-comments"
+updated: 2026-06-09
+qmd: "ticket frontoffice folio mappa statica comments"
 issues:
   - "https://github.com/laraxot/base_fixcity_fila5/issues/284"
 ---
@@ -16,13 +16,13 @@ issues:
 Pagina `/it/tickets/{id}` con:
 1. **Nessuna tab** (rimuovere tabs esistenti)
 2. **Mappa statica Leaflet** con solo il marker del ticket
-3. **Spatie Comments** sotto la mappa
+3. **Commenti nativi** sotto la mappa
 
 ## Stato attuale
 
-- Pagina admin: `Modules/Fixcity/resources/views/tickets/show.blade.php`
+- Pagina legacy admin/tema: `Modules/Fixcity/resources/views/tickets/show.blade.php`
 - Modello: `Modules/Fixcity/Models/Ticket.php` con `location` (Point)
-- Comments: relazione `comments` esistente
+- Comments: relazione `comments()` nativa esistente; `ticketComments()` legacy
 
 ## File owner (vietato `pages/tickets/`)
 
@@ -35,16 +35,16 @@ Pagina `/it/tickets/{id}` con:
 | Widget FO | `Modules/Fixcity/.../Widgets/Ticket/ViewWidget.php` |
 | Schema UI | `TicketInfolist::getPublicFrontofficeSchema()` |
 | Mappa | `fixcity::filament.infolist.ticket-location-map` |
-| Commenti | `fixcity::filament.infolist.ticket-comments` + Spatie `HasComments` |
+| Commenti | `fixcity::filament.infolist.ticket-comments` + `Modules\\Comment` `HasComments` |
 
-## Spatie Comments integration
+## Commenti nativi integration
 
 ```php
-// In [Ticket].blade.php
-@comments(['model' => $ticket])
+// In ticket-comments.blade.php
+@livewire(\Modules\Comment\Http\Livewire\CommentsComponent::class, ['model' => $ticket])
 ```
 
-Modulo esistente: `Modules/Comment` → `Modules/Xot/Data/Models/Comment.php`
+Modulo esistente: `Modules/Comment` → `Modules/Comment/Models/Comment.php`
 
 ## Mappa statica
 

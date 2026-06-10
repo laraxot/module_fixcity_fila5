@@ -4,14 +4,14 @@ declare(strict_types=1);
 
 namespace Modules\Fixcity\Tests\Unit\Actions;
 
-use Modules\Fixcity\Actions\LoadDesignComuniElencoFilterCatalogAction;
+use Modules\Fixcity\Actions\LoadCityDesignFilterCatalogAction;
 use Tests\TestCase;
 
-class LoadDesignComuniElencoFilterCatalogActionTest extends TestCase
+class LoadCityDesignFilterCatalogActionTest extends TestCase
 {
-    public function test_it_loads_eleven_design_comuni_categories(): void
+    public function test_it_loads_eleven_city_design_categories(): void
     {
-        $catalog = app(LoadDesignComuniElencoFilterCatalogAction::class)->execute();
+        $catalog = app(LoadCityDesignFilterCatalogAction::class)->execute();
 
         $this->assertSame('categoria', $catalog['legend']);
         $this->assertCount(11, $catalog['items']);

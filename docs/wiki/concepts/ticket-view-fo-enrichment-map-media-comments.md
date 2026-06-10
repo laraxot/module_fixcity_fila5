@@ -2,10 +2,10 @@
 title: "FO dettaglio ticket — mappa, foto, commenti"
 type: concept
 module: Fixcity
-tags: [fixcity, ticket, fo, map-lit, spatie-comments, infolist]
+tags: [fixcity, ticket, fo, map-lit, comments, infolist]
 created: 2026-05-01
-updated: 2026-06-05
-qmd: "ticket detail frontoffice map single marker spatie comments no tabs infolist"
+updated: 2026-06-09
+qmd: "ticket detail frontoffice map single marker native comments no tabs infolist"
 issues:
   - "https://github.com/laraxot/base_fixcity_fila5/issues/294"
   - "https://github.com/laraxot/module_fixcity_fila5/issues/37"
@@ -36,7 +36,7 @@ Completare `/it/tickets/{id}` (widget `Ticket\ViewWidget` + `TicketInfolist`) co
 | Layout | `getFrontofficeInfolistSchema()` — **no tab**, 3 sezioni verticali | Skin Design Comuni / navscroll opzionale |
 | Mappa | `map-lit` + `detail-mode` + `ticket-id` | **`data-url` ancora in blade** → fetch inutile; preferire marker solo da lat/lng |
 | Foto | `attachments` + fallback `ticket` | Seed media su ticket demo |
-| Commenti | `<livewire:comments>` Spatie (auth scrive, guest legge) | Skin DC / policy ruoli cittadino |
+| Commenti | `Modules\\Comment` Livewire nativo (auth scrive, guest legge) | Skin DC / policy ruoli cittadino |
 
 UX canon: [STORY-157](../../../../../docs/stories/STORY-157-ux-design-ticket-detail-no-tabs-map-comments.md) · `_bmad-output/ux-design-ticket-detail-fo.md`
 
@@ -59,7 +59,7 @@ flowchart TB
         I[TicketInfolist getPublicFrontofficeSchema]
         I --> O[Section overview + foto]
         I --> L[Section mappa statica]
-        I --> C[Section commenti Spatie]
+        I --> C[Section commenti nativi]
     end
     W --> I
     L --> ML[map-lit detail-mode ticket-id]
@@ -81,11 +81,11 @@ flowchart TB
 
 ### 3. Commenti (modulo Comment) ✅ STORY-160
 
-- `Ticket::comments()` = morph; `Ticket::ticketComments()` = legacy admin
+- `Ticket::comments()` = morph nativo; `Ticket::ticketComments()` = legacy admin
 - FO: `ticket-comments.blade.php` → `@livewire(CommentsComponent::class)` nativo
 - Insert + lista FO: [STORY-160](../../../../../../docs/stories/STORY-160-ticket-detail-comments-not-working.md)
 - Guest: read-only + login `/it/auth/login`
-- ADR: [ticket-fo-spatie-comments](../../../../../../docs/wiki/decisions/ticket-fo-spatie-comments.md)
+- ADR: [ticket-fo-spatie-comments](../../../../../../docs/wiki/decisions/ticket-fo-spatie-comments.md) (contesto storico)
 
 ## Cosa non fare
 

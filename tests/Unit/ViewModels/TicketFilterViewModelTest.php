@@ -4,15 +4,15 @@ declare(strict_types=1);
 
 namespace Modules\Fixcity\Tests\Unit\ViewModels;
 
-use Modules\Fixcity\Actions\BuildSegnalazioniFilterAggregateAction;
-use Modules\Fixcity\ViewModels\SegnalazioniFilterViewModel;
+use Modules\Fixcity\Actions\BuildTicketFilterAggregateAction;
+use Modules\Fixcity\ViewModels\TicketFilterViewModel;
 use Tests\TestCase;
 
-class SegnalazioniFilterViewModelTest extends TestCase
+class TicketFilterViewModelTest extends TestCase
 {
     public function test_it_exposes_filter_items_from_aggregate_action(): void
     {
-        $this->mock(BuildSegnalazioniFilterAggregateAction::class, function ($mock): void {
+        $this->mock(BuildTicketFilterAggregateAction::class, function ($mock): void {
             $mock->shouldReceive('execute')->once()->andReturn([
                 'features' => [
                     [
@@ -38,7 +38,7 @@ class SegnalazioniFilterViewModelTest extends TestCase
             ]);
         });
 
-        $viewModel = new SegnalazioniFilterViewModel();
+        $viewModel = new TicketFilterViewModel();
 
         $this->assertSame(3, $viewModel->getTotalCount());
         $this->assertSame(['waste' => 2, 'other' => 1], $viewModel->getCountsPerType());
@@ -53,7 +53,7 @@ class SegnalazioniFilterViewModelTest extends TestCase
 
     public function test_it_supplements_list_items_from_aggregate_features(): void
     {
-        $this->mock(BuildSegnalazioniFilterAggregateAction::class, function ($mock): void {
+        $this->mock(BuildTicketFilterAggregateAction::class, function ($mock): void {
             $mock->shouldReceive('execute')->once()->andReturn([
                 'features' => [
                     [
@@ -71,7 +71,7 @@ class SegnalazioniFilterViewModelTest extends TestCase
             ]);
         });
 
-        $viewModel = new SegnalazioniFilterViewModel();
+        $viewModel = new TicketFilterViewModel();
         $items = $viewModel->getSupplementListItems(2, [1]);
 
         $this->assertCount(1, $items);

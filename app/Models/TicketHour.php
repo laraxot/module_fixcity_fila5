@@ -7,6 +7,7 @@ namespace Modules\Fixcity\Models;
 use Carbon\CarbonInterval;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Casts\Attribute;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Support\Carbon;
 use Modules\Fixcity\Database\Factories\TicketHourFactory;
@@ -63,6 +64,7 @@ class TicketHour extends BaseModel
         'user_id', 'ticket_id', 'value', 'comment', 'activity_id',
     ];
 
+    /** @return BelongsTo<Model&\Modules\Xot\Contracts\UserContract, $this> */
     public function user(): BelongsTo
     {
         $user_class = XotData::make()->getUserClass();
@@ -70,24 +72,27 @@ class TicketHour extends BaseModel
         return $this->belongsTo($user_class, 'user_id', 'id');
     }
 
+    /** @return BelongsTo<Ticket, $this> */
     public function ticket(): BelongsTo
     {
         return $this->belongsTo(Ticket::class, 'ticket_id', 'id');
     }
 
+    /** @return BelongsTo<Activity, $this> */
     public function activity(): BelongsTo
     {
         return $this->belongsTo(Activity::class, 'activity_id', 'id');
     }
 
+    /** @return Attribute<string, never> */
     public function forHumans(): Attribute
     {
-        return new Attribute(
-            get: function () {
+        return Attribute::make(
+            get: function (): string {
                 $seconds = $this->value * 3600;
 
                 return CarbonInterval::seconds($seconds)->cascade()->forHumans();
-            }
+            },
         );
     }
 }

@@ -74,6 +74,67 @@ return [
         ],
     ],
 
+    'status' => [
+        'label' => 'Stato',
+        'placeholder' => 'Seleziona stato',
+        'options' => [
+            'open' => 'Aperto',
+            'in_progress' => 'In Lavorazione',
+            'resolved' => 'Risolto',
+            'closed' => 'Chiuso',
+        ],
+    ],
+    'priority' => [
+        'label' => 'Priorità',
+        'placeholder' => 'Seleziona la priorità',
+        'help' => 'Indica l\'urgenza del ticket',
+        'options' => [
+            'low' => 'Bassa',
+            'medium' => 'Media',
+            'high' => 'Alta',
+            'urgent' => 'Urgente',
+        ],
+        'description' => 'Livello di priorità della segnalazione',
+        'helper_text' => 'Scegli in base all\'urgenza del problema riscontrato',
+    ],
+    'content' => [
+        'label' => 'Contenuto',
+        'placeholder' => 'Descrivi il problema...',
+        'help' => 'Fornisci una descrizione dettagliata',
+        'description' => 'Descrizione dettagliata del problema segnalato',
+        'helper_text' => 'Fornisci quanti più dettagli possibili per facilitare la gestione',
+    ],
+    'created_at' => [
+        'label' => 'Data Creazione',
+    ],
+    'updated_at' => [
+        'label' => 'Ultima Modifica',
+    ],
+    'citizen_rating' => [
+        'label' => 'Valutazione cittadino',
+        'placeholder' => '—',
+        'description' => 'Stelle 1–5 dopo risoluzione',
+    ],
+    'citizen_rated_at' => [
+        'label' => 'Data valutazione',
+        'placeholder' => '—',
+    ],
+    'has_citizen_rating' => [
+        'label' => 'Con valutazione cittadino',
+    ],
+    'applyFilters' => [
+        'label' => 'Applica filtri',
+    ],
+    'toggleColumns' => [
+        'label' => 'Mostra/nascondi colonne',
+    ],
+    'value' => [
+        'label' => 'Valore',
+    ],
+    'reorderRecords' => [
+        'label' => 'Riordina elementi',
+    ],
+
     /*
      * Segnalazioni elenco page keys
      */

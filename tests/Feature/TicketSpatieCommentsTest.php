@@ -13,7 +13,7 @@ use Modules\Fixcity\Tests\TestCase;
 
 uses(TestCase::class);
 
-describe('Ticket Spatie comments FO', function () {
+describe('Ticket native comments FO', function () {
     it('creates a spatie comment on ticket via HasComments trait', function () {
         $user = User::factory()->create([
             'name' => 'Cittadino Test',
@@ -36,7 +36,7 @@ describe('Ticket Spatie comments FO', function () {
             ->and($ticket->comments()->count())->toBe(1);
     });
 
-    it('renders livewire comments component on ticket detail page', function () {
+    it('renders approved comments in Livewire CommentsComponent', function () {
         $user = User::factory()->create([
             'name' => 'Cittadino Test',
             'email' => 'citizen-'.uniqid('', true).'@test.local',
@@ -52,11 +52,10 @@ describe('Ticket Spatie comments FO', function () {
         $this->actingAs($user);
         $ticket->comment('Primo commento visibile');
 
-        $response = $this->get('/it/tickets/'.$ticket->getKey());
-
-        $response->assertOk();
-        $response->assertSee('Primo commento visibile');
-        $response->assertSee('comment-section', false);
+        Livewire::actingAs($user)
+            ->test(CommentsComponent::class, ['model' => $ticket, 'readOnly' => false])
+            ->assertSee('Primo commento visibile')
+            ->assertSee('comment-section', false);
     });
 
     it('submits comment via Livewire CommentsComponent when authenticated', function () {

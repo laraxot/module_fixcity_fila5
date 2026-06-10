@@ -16,6 +16,7 @@ use Livewire\Component;
 
 class Login extends Component
 {
+    /** @var array<string, mixed>|null */
     public ?array $data = [];
 
     public function form(Schema $schema): Schema
