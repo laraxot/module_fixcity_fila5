@@ -1,5 +1,5 @@
 ---
-title: "Performance Optimization — Module Fixcity"
+title: "Performance Optimization — Root root"
 type: documentation
 created: 2026-05-11
 updated: 2026-05-11
@@ -8,7 +8,7 @@ related:
   - ../../docs/wiki/concepts/llm-wiki-operational-discipline.md
 ---
 
-# Performance Optimization — Module **Fixcity**
+# Performance Optimization — Root **root**
 
 ## Ottimizzazioni Applicate
 
@@ -17,17 +17,17 @@ related:
 **Prima**: Bootstrap caricava tutte le rules (50K+ token)
 **Dopo**: Carico solo what's needed (~2K startup)
 
-```diff
+\`\`\`diff
 - 150+ rules embeddate in AGENTS.md
 + 0 rules embeddate — tutte on-demand
-```
+\`\`\`
 
 ### 2. Cache Esterna al Repo
 
-```diff
+\`\`\`diff
 - .cache/ (8KB nel repo)
 + ~/.cache/qmd-cache/ (fuori da git)
-```
+\`\`\`
 
 **Risultato**:
 - Clone più veloce (nessuna cache da scaricare)
@@ -36,14 +36,14 @@ related:
 
 ### 3. Node Modules Puliti
 
-```diff
+\`\`\`diff
 - bashscripts/ai/.agents/node_modules/ (58MB)
 + laravel/node_modules/ (singola installazione)
-```
+\`\`\`
 
 ### 4. Wiki Indici Locali
 
-Ogni modulo ha i propri :
+Ogni modulo ha i propri `rules/skills/commands/memories/INDEX.md`:
 - Ricerca più rapida (scope limitato)
 - Context rilevante per il modulo
 - Non mischia contenuti eterogenei
@@ -62,7 +62,7 @@ Ogni modulo ha i propri :
 
 ### Caricamento Efficiente
 
-```python
+\`\`\`python
 # ❌ MAI fare così
 Read all_rules = Read docs/wiki/rules/*.md  # TOO MANY TOKENS
 
@@ -70,27 +70,27 @@ Read all_rules = Read docs/wiki/rules/*.md  # TOO MANY TOKENS
 trigger = detect_task_trigger()
 if trigger in trigger_map:
     Read specific_rule = Read docs/wiki/rules/$trigger.md
-```
+\`\`\`
 
 ### Query QMD Efficienti
 
-```bash
+\`\`\`bash
 # ❌ Troppo generico — risultati enormi
 qmd search "form"
 
 # ✅ Specifico — risultati precisi
 qmd search "filament form schema conventions"
-```
+\`\`\`
 
 ### Limitare lo Scope
 
-```bash
+\`\`\`bash
 # Cerca solo nel modulo corrente
-qmd search "validation" -c Fixcity
+qmd search "validation" -c root
 
 # Cerca globalmente (solo se necessario)
 qmd search "global validation rules"
-```
+\`\`\`
 
 ## Prossimi Miglioramenti (TODO)
 
@@ -103,13 +103,13 @@ qmd search "global validation rules"
 
 Controlla performance attuali:
 
-```bash
+\`\`\`bash
 # Dimensione cache
 du -sh ~/.cache/qmd-cache/
 
 # Token usage (se disponibile)
 context-mode ctx-stats
-```
+\`\`\`
 
 ## Riferimenti
 

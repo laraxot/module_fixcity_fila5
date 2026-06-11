@@ -4,33 +4,30 @@ declare(strict_types=1);
 
 namespace Modules\Fixcity\Tests\Feature\Controllers;
 
+use Modules\Fixcity\Database\Factories\TicketFactory;
+use Modules\User\Database\Factories\UserFactory;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Modules\Fixcity\Models\Ticket;
 use Modules\User\Models\User;
-use Tests\TestCase;
+use Modules\Fixcity\Tests\TestCase;
 
 class TicketControllerTest extends TestCase
 {
     use RefreshDatabase;
 
-    protected User $user;
-
-    protected User $admin;
-
     protected function setUp(): void
     {
         parent::setUp();
 
-        $this->user = User::factory()->create();
-        $this->admin = User::factory()->create()->assignRole('admin');
+        $this->user = UserFactory::new()->createOne();
+        $this->admin = UserFactory::new()->createOne()->assignRole('admin');
     }
 
     /** @test */
-    public function it_can_list_tickets_for_authenticated_user()
-    {
-        $this->actingAs($this->user);
+    public function it_can_list_tickets_for_authenticated_user(): void {
+        $this->actingAs($this->authUser());
 
-        Ticket::factory()->count(3)->create(['owner_id' => $this->user->id]);
+        TicketFactory::new()->count(3)->create(['owner_id' => $this->authUser()->id]);
 
         $response = $this->getJson('/api/tickets');
 
@@ -52,11 +49,10 @@ class TicketControllerTest extends TestCase
     }
 
     /** @test */
-    public function it_can_show_ticket_details()
-    {
-        $this->actingAs($this->user);
+    public function it_can_show_ticket_details(): void {
+        $this->actingAs($this->authUser());
 
-        $ticket = Ticket::factory()->create(['owner_id' => $this->user->id]);
+        $ticket = TicketFactory::new()->createOne(['owner_id' => $this->authUser()->id]);
 
         $response = $this->getJson("/api/tickets/{$ticket->id}");
 
@@ -64,20 +60,19 @@ class TicketControllerTest extends TestCase
             ->assertJson([
                 'data' => [
                     'id' => $ticket->id,
-                    'title' => $ticket->title,
-                    'description' => $ticket->description,
+                    'name' => $ticket->name,
+                    'content' => $ticket->content,
                 ],
             ]);
     }
 
     /** @test */
-    public function it_can_create_new_ticket()
-    {
-        $this->actingAs($this->user);
+    public function it_can_create_new_ticket(): void {
+        $this->actingAs($this->authUser());
 
         $ticketData = [
-            'title' => 'Test Ticket',
-            'description' => 'Test Description',
+            'name' => 'Test Ticket',
+            'content' => 'Test Description',
             'type' => 'road_maintenance',
             'priority' => 'medium',
             'location' => 'Via Roma 123',
@@ -90,24 +85,23 @@ class TicketControllerTest extends TestCase
         $response->assertStatus(201)
             ->assertJson([
                 'data' => [
-                    'title' => 'Test Ticket',
-                    'description' => 'Test Description',
+                    'name' => 'Test Ticket',
+                    'content' => 'Test Description',
                     'type' => 'road_maintenance',
                     'priority' => 'medium',
                 ],
             ]);
 
         $this->assertDatabaseHas('tickets', [
-            'title' => 'Test Ticket',
-            'owner_id' => $this->user->id,
+            'name' => 'Test Ticket',
+            'owner_id' => $this->authUser()->id,
             'status' => 'pending',
         ]);
     }
 
     /** @test */
-    public function it_validates_required_fields_when_creating_ticket()
-    {
-        $this->actingAs($this->user);
+    public function it_validates_required_fields_when_creating_ticket(): void {
+        $this->actingAs($this->authUser());
 
         $response = $this->postJson('/api/tickets', []);
 
@@ -116,15 +110,14 @@ class TicketControllerTest extends TestCase
     }
 
     /** @test */
-    public function it_can_update_ticket()
-    {
-        $this->actingAs($this->user);
+    public function it_can_update_ticket(): void {
+        $this->actingAs($this->authUser());
 
-        $ticket = Ticket::factory()->create(['owner_id' => $this->user->id]);
+        $ticket = TicketFactory::new()->createOne(['owner_id' => $this->authUser()->id]);
 
         $updateData = [
-            'title' => 'Updated Title',
-            'description' => 'Updated Description',
+            'name' => 'Updated Title',
+            'content' => 'Updated Description',
         ];
 
         $response = $this->putJson("/api/tickets/{$ticket->id}", $updateData);
@@ -132,23 +125,22 @@ class TicketControllerTest extends TestCase
         $response->assertStatus(200)
             ->assertJson([
                 'data' => [
-                    'title' => 'Updated Title',
-                    'description' => 'Updated Description',
+                    'name' => 'Updated Title',
+                    'content' => 'Updated Description',
                 ],
             ]);
 
         $this->assertDatabaseHas('tickets', [
             'id' => $ticket->id,
-            'title' => 'Updated Title',
+            'name' => 'Updated Title',
         ]);
     }
 
     /** @test */
-    public function it_can_delete_ticket()
-    {
-        $this->actingAs($this->user);
+    public function it_can_delete_ticket(): void {
+        $this->actingAs($this->authUser());
 
-        $ticket = Ticket::factory()->create(['owner_id' => $this->user->id]);
+        $ticket = TicketFactory::new()->createOne(['owner_id' => $this->authUser()->id]);
 
         $response = $this->deleteJson("/api/tickets/{$ticket->id}");
 
@@ -158,12 +150,11 @@ class TicketControllerTest extends TestCase
     }
 
     /** @test */
-    public function it_can_assign_ticket_to_user()
-    {
-        $this->actingAs($this->admin);
+    public function it_can_assign_ticket_to_user(): void {
+        $this->actingAs($this->authAdmin());
 
-        $ticket = Ticket::factory()->create();
-        $assignee = User::factory()->create();
+        $ticket = TicketFactory::new()->createOne();
+        $assignee = UserFactory::new()->createOne();
 
         $response = $this->postJson("/api/tickets/{$ticket->id}/assign", [
             'user_id' => $assignee->id,
@@ -183,11 +174,10 @@ class TicketControllerTest extends TestCase
     }
 
     /** @test */
-    public function it_can_change_ticket_status()
-    {
-        $this->actingAs($this->admin);
+    public function it_can_change_ticket_status(): void {
+        $this->actingAs($this->authAdmin());
 
-        $ticket = Ticket::factory()->create(['status' => 'pending']);
+        $ticket = TicketFactory::new()->createOne(['status' => 'pending']);
 
         $response = $this->postJson("/api/tickets/{$ticket->id}/status", [
             'status' => 'in_progress',
@@ -207,11 +197,10 @@ class TicketControllerTest extends TestCase
     }
 
     /** @test */
-    public function it_can_add_comment_to_ticket()
-    {
-        $this->actingAs($this->user);
+    public function it_can_add_comment_to_ticket(): void {
+        $this->actingAs($this->authUser());
 
-        $ticket = Ticket::factory()->create(['owner_id' => $this->user->id]);
+        $ticket = TicketFactory::new()->createOne(['owner_id' => $this->authUser()->id]);
 
         $commentData = [
             'content' => 'Test comment',
@@ -225,29 +214,28 @@ class TicketControllerTest extends TestCase
             ->assertJson([
                 'data' => [
                     'content' => 'Test comment',
-                    'user_id' => $this->user->id,
+                    'user_id' => $this->authUser()->id,
                 ],
             ]);
 
         $this->assertDatabaseHas('ticket_comments', [
             'ticket_id' => $ticket->id,
-            'user_id' => $this->user->id,
+            'user_id' => $this->authUser()->id,
             'content' => 'Test comment',
         ]);
     }
 
     /** @test */
-    public function it_can_list_ticket_comments()
-    {
-        $this->actingAs($this->user);
+    public function it_can_list_ticket_comments(): void {
+        $this->actingAs($this->authUser());
 
-        $ticket = Ticket::factory()->create(['owner_id' => $this->user->id]);
+        $ticket = TicketFactory::new()->createOne(['owner_id' => $this->authUser()->id]);
         $ticket->ticketComments()->create([
-            'user_id' => $this->user->id,
+            'user_id' => $this->authUser()->id,
             'content' => 'Test comment 1',
         ]);
         $ticket->ticketComments()->create([
-            'user_id' => $this->user->id,
+            'user_id' => $this->authUser()->id,
             'content' => 'Test comment 2',
         ]);
 
@@ -268,17 +256,16 @@ class TicketControllerTest extends TestCase
     }
 
     /** @test */
-    public function it_can_search_tickets()
-    {
-        $this->actingAs($this->user);
+    public function it_can_search_tickets(): void {
+        $this->actingAs($this->authUser());
 
-        Ticket::factory()->create([
-            'title' => 'Road pothole',
-            'owner_id' => $this->user->id,
+        TicketFactory::new()->createOne([
+            'name' => 'Road pothole',
+            'owner_id' => $this->authUser()->id,
         ]);
-        Ticket::factory()->create([
-            'title' => 'Street light broken',
-            'owner_id' => $this->user->id,
+        TicketFactory::new()->createOne([
+            'name' => 'Street light broken',
+            'owner_id' => $this->authUser()->id,
         ]);
 
         $response = $this->getJson('/api/tickets?search=road');
@@ -287,23 +274,22 @@ class TicketControllerTest extends TestCase
             ->assertJsonCount(1, 'data')
             ->assertJson([
                 'data' => [
-                    ['title' => 'Road pothole'],
+                    ['name' => 'Road pothole'],
                 ],
             ]);
     }
 
     /** @test */
-    public function it_can_filter_tickets_by_status()
-    {
-        $this->actingAs($this->user);
+    public function it_can_filter_tickets_by_status(): void {
+        $this->actingAs($this->authUser());
 
-        Ticket::factory()->create([
+        TicketFactory::new()->createOne([
             'status' => 'pending',
-            'owner_id' => $this->user->id,
+            'owner_id' => $this->authUser()->id,
         ]);
-        Ticket::factory()->create([
+        TicketFactory::new()->createOne([
             'status' => 'in_progress',
-            'owner_id' => $this->user->id,
+            'owner_id' => $this->authUser()->id,
         ]);
 
         $response = $this->getJson('/api/tickets?status=pending');
@@ -318,17 +304,16 @@ class TicketControllerTest extends TestCase
     }
 
     /** @test */
-    public function it_can_filter_tickets_by_priority()
-    {
-        $this->actingAs($this->user);
+    public function it_can_filter_tickets_by_priority(): void {
+        $this->actingAs($this->authUser());
 
-        Ticket::factory()->create([
+        TicketFactory::new()->createOne([
             'priority' => 'high',
-            'owner_id' => $this->user->id,
+            'owner_id' => $this->authUser()->id,
         ]);
-        Ticket::factory()->create([
+        TicketFactory::new()->createOne([
             'priority' => 'medium',
-            'owner_id' => $this->user->id,
+            'owner_id' => $this->authUser()->id,
         ]);
 
         $response = $this->getJson('/api/tickets?priority=high');
@@ -343,17 +328,16 @@ class TicketControllerTest extends TestCase
     }
 
     /** @test */
-    public function it_can_filter_tickets_by_type()
-    {
-        $this->actingAs($this->user);
+    public function it_can_filter_tickets_by_type(): void {
+        $this->actingAs($this->authUser());
 
-        Ticket::factory()->create([
+        TicketFactory::new()->createOne([
             'type' => 'road_maintenance',
-            'owner_id' => $this->user->id,
+            'owner_id' => $this->authUser()->id,
         ]);
-        Ticket::factory()->create([
+        TicketFactory::new()->createOne([
             'type' => 'public_lighting',
-            'owner_id' => $this->user->id,
+            'owner_id' => $this->authUser()->id,
         ]);
 
         $response = $this->getJson('/api/tickets?type=road_maintenance');
@@ -368,17 +352,16 @@ class TicketControllerTest extends TestCase
     }
 
     /** @test */
-    public function it_can_sort_tickets_by_creation_date()
-    {
-        $this->actingAs($this->user);
+    public function it_can_sort_tickets_by_creation_date(): void {
+        $this->actingAs($this->authUser());
 
-        $oldTicket = Ticket::factory()->create([
+        $oldTicket = TicketFactory::new()->createOne([
             'created_at' => now()->subDays(2),
-            'owner_id' => $this->user->id,
+            'owner_id' => $this->authUser()->id,
         ]);
-        $newTicket = Ticket::factory()->create([
+        $newTicket = TicketFactory::new()->createOne([
             'created_at' => now(),
-            'owner_id' => $this->user->id,
+            'owner_id' => $this->authUser()->id,
         ]);
 
         $response = $this->getJson('/api/tickets?sort=created_at&order=desc');
@@ -393,11 +376,10 @@ class TicketControllerTest extends TestCase
     }
 
     /** @test */
-    public function it_can_paginate_tickets()
-    {
-        $this->actingAs($this->user);
+    public function it_can_paginate_tickets(): void {
+        $this->actingAs($this->authUser());
 
-        Ticket::factory()->count(25)->create(['owner_id' => $this->user->id]);
+        TicketFactory::new()->count(25)->create(['owner_id' => $this->authUser()->id]);
 
         $response = $this->getJson('/api/tickets?per_page=10');
 
@@ -412,9 +394,8 @@ class TicketControllerTest extends TestCase
     }
 
     /** @test */
-    public function it_requires_authentication_for_ticket_operations()
-    {
-        $ticket = Ticket::factory()->create();
+    public function it_requires_authentication_for_ticket_operations(): void {
+        $ticket = TicketFactory::new()->createOne();
 
         $response = $this->getJson('/api/tickets');
         $response->assertStatus(401);
@@ -427,28 +408,26 @@ class TicketControllerTest extends TestCase
     }
 
     /** @test */
-    public function it_can_only_access_own_tickets_unless_admin()
-    {
-        $otherUser = User::factory()->create();
-        $otherTicket = Ticket::factory()->create(['owner_id' => $otherUser->id]);
+    public function it_can_only_access_own_tickets_unless_admin(): void {
+        $otherUser = UserFactory::new()->createOne();
+        $otherTicket = TicketFactory::new()->createOne(['owner_id' => $otherUser->id]);
 
-        $this->actingAs($this->user);
+        $this->actingAs($this->authUser());
 
         $response = $this->getJson("/api/tickets/{$otherTicket->id}");
         $response->assertStatus(403);
 
-        $this->actingAs($this->admin);
+        $this->actingAs($this->authAdmin());
 
         $response = $this->getJson("/api/tickets/{$otherTicket->id}");
         $response->assertStatus(200);
     }
 
     /** @test */
-    public function it_can_export_tickets()
-    {
-        $this->actingAs($this->admin);
+    public function it_can_export_tickets(): void {
+        $this->actingAs($this->authAdmin());
 
-        Ticket::factory()->count(5)->create();
+        TicketFactory::new()->count(5)->create();
 
         $response = $this->getJson('/api/tickets/export?format=csv');
 
@@ -457,13 +436,12 @@ class TicketControllerTest extends TestCase
     }
 
     /** @test */
-    public function it_can_get_ticket_statistics()
-    {
-        $this->actingAs($this->admin);
+    public function it_can_get_ticket_statistics(): void {
+        $this->actingAs($this->authAdmin());
 
-        Ticket::factory()->count(3)->create(['status' => 'pending']);
-        Ticket::factory()->count(2)->create(['status' => 'in_progress']);
-        Ticket::factory()->count(1)->create(['status' => 'resolved']);
+        TicketFactory::new()->count(3)->create(['status' => 'pending']);
+        TicketFactory::new()->count(2)->create(['status' => 'in_progress']);
+        TicketFactory::new()->count(1)->create(['status' => 'resolved']);
 
         $response = $this->getJson('/api/tickets/statistics');
 

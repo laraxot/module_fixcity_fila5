@@ -2,7 +2,7 @@
 
 ## Overview
 
-La pagina `/it/tests/segnalazioni-elenco` mostra l'elenco delle segnalazioni (ticket) in due viste:
+La pagina `/it/tests/ticket-list` mostra l'elenco delle segnalazioni (ticket) in due viste:
 - **Mappa**: componente Lit Web Component `<map-lit>` con Leaflet + MarkerCluster
 - **Lista**: card Bootstrap Italia con dati reali dal DB (top 20 + load more futuro)
 
@@ -47,7 +47,7 @@ Il file è **statico** e **leggero** — anche con migliaia di punti resta < 1MB
 
 > **Storico nomi (deprecati — NON usare nei Blade nuovi):**
 > - `<ticket-map-lit>` (mai esistito come file, riferimento errato della wiki precedente)
-> - `<geo-map-lit>` (componente alternativo in `Modules/Geo/resources/js/components/geo-map-lit.js`, da NON usare per `segnalazioni-elenco`; il canonico è `<map-lit>` per decisione 2026-05-07)
+> - `<geo-map-lit>` (componente alternativo in `Modules/Geo/resources/js/components/geo-map-lit.js`, da NON usare per `ticket-list`; il canonico è `<map-lit>` per decisione 2026-05-07)
 
 ### grid/2col + column-main (Themes/Sixteen) — pagina `/it`
 - **Path**: `Themes/Sixteen/resources/views/components/blocks/grid/2col.blade.php`, `ticket/column-main.blade.php`
@@ -56,7 +56,7 @@ Il file è **statico** e **leggero** — anche con migliaia di punti resta < 1MB
 - **Lista tab**: query DB live tickets (out of scope unificazione JSON — STORY-051 T7)
 - **Leaflet**: caricato via npm/Vite dal modulo Geo, non via CDN
 
-Vedi story: [docs/stories/segnalazioni-elenco-marker-type-icon-parity.md](../../../../../docs/stories/segnalazioni-elenco-marker-type-icon-parity.md) — perché mappa e filtri devono condividere `tickets.json`.
+Vedi story: [docs/stories/ticket-list-marker-type-icon-parity.md](../../../../../docs/stories/ticket-list-marker-type-icon-parity.md) — perché mappa e filtri devono condividere `tickets.json`.
 
 ## JSON Format
 
@@ -104,8 +104,8 @@ Se il codice JS/CSS/Blade va perso, ricostruire in ordine:
 
 ## Riferimenti
 
-- Story: `.planning/stories/8-75-segnalazioni-elenco-map-list.story.md`
-- Design Comuni reference: https://italia.github.io/design-comuni-pagine-statiche/sito/segnalazioni-elenco.html
+- Story: `.planning/stories/8-75-ticket-list-map-list.story.md`
+- Design Comuni reference: https://italia.github.io/design-comuni-pagine-statiche/sito/ticket-list.html
 - farmshops.eu pattern: https://github.com/CodeforKarlsruhe/farmshops.eu
 - Regola leaflet: `Modules/Geo/docs/MAP-COMPONENTS-ARCHITECTURE.md`
 - Root SSOT filtri: [frontoffice-map-filters-ssot-architecture.md](../../../../../docs/wiki/architecture/frontoffice-map-filters-ssot-architecture.md)

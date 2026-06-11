@@ -7,6 +7,7 @@ namespace Modules\Fixcity\Tests\Unit\Enums;
 use Modules\Fixcity\Enums\TicketPriorityEnum;
 use ReflectionEnum;
 
+use PHPUnit\Framework\Assert;
 describe('TicketPriorityEnum', function () {
     it('has all required priority values', function () {
         $expectedPriorities = [
@@ -19,54 +20,51 @@ describe('TicketPriorityEnum', function () {
 
         $actualPriorities = array_column(TicketPriorityEnum::cases(), 'name');
 
-        expect($actualPriorities)->toHaveCount(count($expectedPriorities));
+        Assert::assertCount(count($expectedPriorities), $actualPriorities);
         foreach ($expectedPriorities as $priority) {
-            expect($actualPriorities)->toContain($priority);
+            Assert::assertContains($priority, $actualPriorities);
         }
     });
 
     it('provides correct colors for each priority', function () {
-        $priorityColors = [
-            TicketPriorityEnum::LOW => 'gray',
-            TicketPriorityEnum::MEDIUM => 'blue',
-            TicketPriorityEnum::HIGH => 'orange',
-            TicketPriorityEnum::URGENT => 'red',
-            TicketPriorityEnum::CRITICAL => 'danger',
+                        $priorityColors = [
+            [TicketPriorityEnum::LOW, 'gray'],
+            [TicketPriorityEnum::MEDIUM, 'blue'],
+            [TicketPriorityEnum::HIGH, 'orange'],
+            [TicketPriorityEnum::URGENT, 'red'],
+            [TicketPriorityEnum::CRITICAL, 'danger'],
         ];
 
-        foreach ($priorityColors as $priority => $expectedColor) {
-            /** @var TicketPriorityEnum $priority */
-            expect($priority->getColor())->toBe($expectedColor);
+        foreach ($priorityColors as [$item, $expected]) {
+            Assert::assertSame($expected, $item->getColor());
         }
     });
 
     it('provides correct icons for each priority', function () {
-        $priorityIcons = [
-            TicketPriorityEnum::LOW => 'heroicon-o-arrow-down',
-            TicketPriorityEnum::MEDIUM => 'heroicon-o-minus',
-            TicketPriorityEnum::HIGH => 'heroicon-o-arrow-up',
-            TicketPriorityEnum::URGENT => 'heroicon-o-exclamation-triangle',
-            TicketPriorityEnum::CRITICAL => 'heroicon-o-exclamation-circle',
+                        $priorityIcons = [
+            [TicketPriorityEnum::LOW, 'heroicon-o-arrow-down'],
+            [TicketPriorityEnum::MEDIUM, 'heroicon-o-minus'],
+            [TicketPriorityEnum::HIGH, 'heroicon-o-arrow-up'],
+            [TicketPriorityEnum::URGENT, 'heroicon-o-exclamation-triangle'],
+            [TicketPriorityEnum::CRITICAL, 'heroicon-o-exclamation-circle'],
         ];
 
-        foreach ($priorityIcons as $priority => $expectedIcon) {
-            /** @var TicketPriorityEnum $priority */
-            expect($priority->getIcon())->toBe($expectedIcon);
+        foreach ($priorityIcons as [$item, $expected]) {
+            Assert::assertSame($expected, $item->getIcon());
         }
     });
 
     it('provides correct labels for each priority', function () {
-        $priorityLabels = [
-            TicketPriorityEnum::LOW => 'Low',
-            TicketPriorityEnum::MEDIUM => 'Medium',
-            TicketPriorityEnum::HIGH => 'High',
-            TicketPriorityEnum::URGENT => 'Urgent',
-            TicketPriorityEnum::CRITICAL => 'Critical',
+                        $priorityLabels = [
+            [TicketPriorityEnum::LOW, 'Low'],
+            [TicketPriorityEnum::MEDIUM, 'Medium'],
+            [TicketPriorityEnum::HIGH, 'High'],
+            [TicketPriorityEnum::URGENT, 'Urgent'],
+            [TicketPriorityEnum::CRITICAL, 'Critical'],
         ];
 
-        foreach ($priorityLabels as $priority => $expectedLabel) {
-            /** @var TicketPriorityEnum $priority */
-            expect($priority->getLabel())->toBe($expectedLabel);
+        foreach ($priorityLabels as [$item, $expected]) {
+            Assert::assertSame($expected, $item->getLabel());
         }
     });
 
@@ -74,17 +72,15 @@ describe('TicketPriorityEnum', function () {
         $reflection = new ReflectionEnum(TicketPriorityEnum::class);
         $interfaces = $reflection->getInterfaceNames();
 
-        expect($interfaces)->toContain('Filament\Support\Contracts\HasColor');
-        expect($interfaces)->toContain('Filament\Support\Contracts\HasIcon');
-        expect($interfaces)->toContain('Filament\Support\Contracts\HasLabel');
+        Assert::assertContains('Filament\Support\Contracts\HasColor', $interfaces);
+        Assert::assertContains('Filament\Support\Contracts\HasIcon', $interfaces);
+        Assert::assertContains('Filament\Support\Contracts\HasLabel', $interfaces);
     });
 
     it('can be used in string context', function () {
         $priority = TicketPriorityEnum::MEDIUM;
-        $stringValue = (string) $priority;
 
-        expect($stringValue)->toBe('medium');
-        expect($priority->value)->toBe('medium');
+        Assert::assertSame('medium', $priority->value);
     });
 
     it('provides consistent behavior across all methods', function () {
@@ -92,16 +88,14 @@ describe('TicketPriorityEnum', function () {
 
         foreach ($priorities as $priority) {
             // All methods should return non-empty values
-            expect($priority->getColor())->not->toBeEmpty();
-            expect($priority->getIcon())->not->toBeEmpty();
-            expect($priority->getLabel())->not->toBeEmpty();
-
+            Assert::assertNotEmpty($priority->getColor());
+            Assert::assertNotEmpty($priority->getIcon());
+            Assert::assertNotEmpty($priority->getLabel());
             // Colors should be valid CSS color names or Tailwind classes
             $validColors = ['gray', 'blue', 'orange', 'red', 'danger'];
-            expect($validColors)->toContain($priority->getColor());
-
+            Assert::assertContains($priority->getColor(), $validColors);
             // Icons should contain valid icon identifiers
-            expect($priority->getIcon())->toContain('heroicon-o-');
+            Assert::assertStringContainsString('heroicon-o-', (string) $priority->getIcon());
         }
     });
 });

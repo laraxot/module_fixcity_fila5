@@ -27,16 +27,16 @@ In code and technical artifacts, **always use `ticket`** instead of `segnalazion
 
 ### HTML/CSS IDs and wrapper classes → Match Design Comuni reference EXACTLY
 ```
-✓ id="segnalazioni-elenco-root" (Design Comuni reference)
-✓ class="segnalazioni-elenco" (in class attribute)
-✗ class="ticket-elenco" (breaks Playwright #segnalazioni-elenco-root selector)
+✓ id="ticket-list-root" (Design Comuni reference)
+✓ class="ticket-list" (in class attribute)
+✗ class="ticket-elenco" (breaks Playwright #ticket-list-root selector)
 ```
 
-**IMPORTANT**: Playwright and CSS theme tests expect `#segnalazioni-elenco-root`.
+**IMPORTANT**: Playwright and CSS theme tests expect `#ticket-list-root`.
 
 ## Affected Files to Refactor
 - `laravel/Themes/Sixteen/resources/views/components/blocks/tabs/map-list.blade.php` → rename class `segnalazioni-layout` to `ticket-layout`
-- `laravel/Themes/Sixteen/resources/css/` → all `.segnalazioni-elenco-*` classes
+- `laravel/Themes/Sixteen/resources/css/` → all `.ticket-list-*` classes
 - `laravel/Modules/Geo/tests/Playwright/` → test file names
 - `public_html/data/tickets.json` → canonical data source
 

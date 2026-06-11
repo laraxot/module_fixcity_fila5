@@ -45,6 +45,7 @@ class BuildSegnalazioniFilterAggregateAction
                 continue;
             }
 
+            /** @var array<string, mixed> $props */
             $typeMeta = $this->resolveTypeMeta($props);
             if ($typeMeta === null) {
                 continue;

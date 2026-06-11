@@ -10,6 +10,7 @@ use Filament\Actions\Exports\Exporter;
 use Filament\Actions\Exports\Models\Export;
 use Modules\Fixcity\Models\Ticket;
 use Modules\Fixcity\Support\SpreadsheetCellSanitizer;
+use Modules\Xot\Actions\Cast\SafeStringCastAction;
 
 /**
  * Export CSV/XLSX ticket per backoffice PA (STORY-024 / FR-024).
@@ -29,15 +30,15 @@ final class TicketExporter extends Exporter
                 ->formatStateUsing(static fn (?string $state): string => SpreadsheetCellSanitizer::sanitize($state)),
             ExportColumn::make('status')
                 ->formatStateUsing(static fn ($state): string => SpreadsheetCellSanitizer::sanitize(
-                    $state instanceof \BackedEnum ? $state->value : (string) $state,
+                    $state instanceof \BackedEnum ? $state->value : SafeStringCastAction::cast($state),
                 )),
             ExportColumn::make('priority')
                 ->formatStateUsing(static fn ($state): string => SpreadsheetCellSanitizer::sanitize(
-                    $state instanceof \BackedEnum ? $state->value : (string) $state,
+                    $state instanceof \BackedEnum ? $state->value : SafeStringCastAction::cast($state),
                 )),
             ExportColumn::make('type')
                 ->formatStateUsing(static fn ($state): string => SpreadsheetCellSanitizer::sanitize(
-                    $state instanceof \BackedEnum ? $state->value : (string) $state,
+                    $state instanceof \BackedEnum ? $state->value : SafeStringCastAction::cast($state),
                 )),
             ExportColumn::make('owner.name')
                 ->formatStateUsing(static fn (?string $state): string => SpreadsheetCellSanitizer::sanitize($state)),

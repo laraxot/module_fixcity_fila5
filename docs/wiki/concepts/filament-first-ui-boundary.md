@@ -7,7 +7,7 @@ tags: [filament, fixcity, segnalazioni, frontoffice]
 related:
   - ../../../../../../docs/wiki/rules/filament-first-rule.md
   - ./frontoffice-no-standalone-livewire.md
-  - ./segnalazioni-elenco-map-architecture.md
+  - ./ticket-list-map-architecture.md
   - ../../../../Themes/Sixteen/docs/wiki/concepts/filament-first-frontoffice.md
 ---
 

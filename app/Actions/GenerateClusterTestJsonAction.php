@@ -13,6 +13,7 @@ use function Safe\json_encode;
  */
 class GenerateClusterTestJsonAction
 {
+    /** @return array<string, mixed> */
     public function __invoke(): array
     {
         $types = [

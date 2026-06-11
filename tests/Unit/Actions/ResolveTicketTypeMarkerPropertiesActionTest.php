@@ -3,29 +3,30 @@
 declare(strict_types=1);
 
 use Modules\Fixcity\Actions\ResolveTicketTypeMarkerPropertiesAction;
-use Tests\TestCase;
+use Modules\Fixcity\Enums\TicketTypeEnum;
+use Modules\Fixcity\Tests\TestCase;
+use PHPUnit\Framework\Assert;
 
 uses(TestCase::class);
 
-use Modules\Fixcity\Enums\TicketTypeEnum;
 it('resolves canonical fixcity svg for road maintenance', function (): void {
     $props = app(ResolveTicketTypeMarkerPropertiesAction::class)
         ->execute(TicketTypeEnum::ROAD_MAINTENANCE);
 
-    expect($props['value'])->toBe('road_maintenance')
-        ->and($props['label'])->toBeString()
-        ->not->toBeEmpty()
-        ->and($props)->not->toHaveKey('icon')
-        ->and($props['iconUrl'])->toBeString()
-        ->toContain('/assets/fixcity/svg/road-maintenance.svg')
-        ->not->toContain('/assets/ui/svg/');
+    Assert::assertSame('road_maintenance', $props['value']);
+    Assert::assertIsString($props['label']);
+    Assert::assertNotEmpty($props['label']);
+    Assert::assertArrayNotHasKey('icon', $props);
+    Assert::assertIsString($props['iconUrl']);
+    Assert::assertStringContainsString('/assets/fixcity/svg/road-maintenance.svg', $props['iconUrl']);
+    Assert::assertStringNotContainsString('/assets/ui/svg/', $props['iconUrl']);
 });
 
 it('returns safe defaults for unknown type value', function (): void {
     $props = app(ResolveTicketTypeMarkerPropertiesAction::class)
         ->executeFromValue('not_a_real_type');
 
-    expect($props['value'])->toBe('not_a_real_type')
-        ->and($props['iconUrl'])->toBeString()
-        ->toContain('/assets/fixcity/svg/');
+    Assert::assertSame('not_a_real_type', $props['value']);
+    Assert::assertIsString($props['iconUrl']);
+    Assert::assertStringContainsString('/assets/fixcity/svg/', $props['iconUrl']);
 });

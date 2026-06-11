@@ -4,10 +4,11 @@ declare(strict_types=1);
 
 namespace Modules\Fixcity\Tests\Feature;
 
+use PHPUnit\Framework\Assert;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Schema;
 use Modules\Fixcity\Models\Category;
-use Tests\TestCase;
+use Modules\Fixcity\Tests\TestCase;
 
 /**
  * Class CategoryMigrationTest.
@@ -24,7 +25,7 @@ class CategoryMigrationTest extends TestCase
      */
     public function test_categories_table_exists(): void
     {
-        $this->assertTrue(Schema::hasTable('categories'));
+        Assert::assertTrue(Schema::hasTable('categories'));
     }
 
     /**
@@ -46,7 +47,7 @@ class CategoryMigrationTest extends TestCase
         ];
 
         foreach ($requiredColumns as $column) {
-            $this->assertTrue(
+            Assert::assertTrue(
                 Schema::hasColumn('categories', $column),
                 "Column '{$column}' is missing from categories table"
             );
@@ -68,7 +69,7 @@ class CategoryMigrationTest extends TestCase
         ];
 
         foreach ($requiredIndexes as $index) {
-            $this->assertTrue(
+            Assert::assertTrue(
                 in_array($index, $indexes, true),
                 "Index '{$index}' is missing from categories table"
             );
@@ -83,16 +84,16 @@ class CategoryMigrationTest extends TestCase
         $category = Category::create([
             'id' => 'test-category',
             'name' => 'Test Category',
-            'description' => 'Test description',
+            'content' => 'Test description',
             'icon' => 'test-icon',
             'is_active' => true,
             'sort_order' => 1,
         ]);
 
-        $this->assertInstanceOf(Category::class, $category);
-        $this->assertEquals('test-category', $category->id);
-        $this->assertEquals('Test Category', $category->name);
-        $this->assertTrue($category->is_active);
+        Assert::assertInstanceOf(Category::class, $category);
+        Assert::assertEquals('test-category', $category->id);
+        Assert::assertEquals('Test Category', $category->name);
+        Assert::assertTrue($category->is_active);
     }
 
     /**
@@ -104,7 +105,7 @@ class CategoryMigrationTest extends TestCase
         $parent = Category::create([
             'id' => 'parent-category',
             'name' => 'Parent Category',
-            'description' => 'Parent description',
+            'content' => 'Parent description',
             'icon' => 'parent-icon',
             'is_active' => true,
             'sort_order' => 1,
@@ -114,7 +115,7 @@ class CategoryMigrationTest extends TestCase
         $child = Category::create([
             'id' => 'child-category',
             'name' => 'Child Category',
-            'description' => 'Child description',
+            'content' => 'Child description',
             'icon' => 'child-icon',
             'parent_id' => 'parent-category',
             'is_active' => true,
@@ -122,13 +123,13 @@ class CategoryMigrationTest extends TestCase
         ]);
 
         // Test relazione padre
-        $this->assertEquals('parent-category', $child->parent_id);
-        $this->assertInstanceOf(Category::class, $child->parent);
-        $this->assertEquals('Parent Category', $child->parent->name);
+        Assert::assertEquals('parent-category', $child->parent_id);
+        Assert::assertInstanceOf(Category::class, $child->parent);
+        Assert::assertEquals('Parent Category', $child->parent->name);
 
         // Test relazione figli
-        $this->assertTrue($parent->children()->exists());
-        $this->assertEquals(1, $parent->children()->count());
+        Assert::assertTrue($parent->children()->exists());
+        Assert::assertEquals(1, $parent->children()->count());
     }
 
     /**
@@ -140,7 +141,7 @@ class CategoryMigrationTest extends TestCase
         Category::create([
             'id' => 'active-category',
             'name' => 'Active Category',
-            'description' => 'Active description',
+            'content' => 'Active description',
             'icon' => 'active-icon',
             'is_active' => true,
             'sort_order' => 1,
@@ -149,7 +150,7 @@ class CategoryMigrationTest extends TestCase
         Category::create([
             'id' => 'inactive-category',
             'name' => 'Inactive Category',
-            'description' => 'Inactive description',
+            'content' => 'Inactive description',
             'icon' => 'inactive-icon',
             'is_active' => false,
             'sort_order' => 2,
@@ -157,12 +158,14 @@ class CategoryMigrationTest extends TestCase
 
         // Test scope active
         $activeCategories = Category::active()->get();
-        $this->assertEquals(1, $activeCategories->count());
-        $this->assertEquals('active-category', $activeCategories->first()->id);
+        Assert::assertEquals(1, $activeCategories->count());
+        $firstActive = $activeCategories->first();
+        Assert::assertNotNull($firstActive);
+        Assert::assertEquals('active-category', $firstActive->id);
 
         // Test scope root
         $rootCategories = Category::root()->get();
-        $this->assertEquals(2, $rootCategories->count());
+        Assert::assertEquals(2, $rootCategories->count());
     }
 
     /**
@@ -174,7 +177,7 @@ class CategoryMigrationTest extends TestCase
         $parent = Category::create([
             'id' => 'parent',
             'name' => 'Parent',
-            'description' => 'Parent description',
+            'content' => 'Parent description',
             'icon' => 'parent-icon',
             'is_active' => true,
             'sort_order' => 1,
@@ -184,7 +187,7 @@ class CategoryMigrationTest extends TestCase
         $child = Category::create([
             'id' => 'child',
             'name' => 'Child',
-            'description' => 'Child description',
+            'content' => 'Child description',
             'icon' => 'child-icon',
             'parent_id' => 'parent',
             'is_active' => true,
@@ -192,8 +195,8 @@ class CategoryMigrationTest extends TestCase
         ]);
 
         // Test nome completo
-        $this->assertEquals('Parent', $parent->full_name);
-        $this->assertEquals('Parent > Child', $child->full_name);
+        Assert::assertEquals('Parent', $parent->full_name);
+        Assert::assertEquals('Parent > Child', $child->full_name);
     }
 
     /**
@@ -205,25 +208,27 @@ class CategoryMigrationTest extends TestCase
         $parent = Category::create([
             'id' => 'parent',
             'name' => 'Parent',
-            'description' => 'Parent description',
+            'content' => 'Parent description',
             'icon' => 'parent-icon',
             'is_active' => true,
             'sort_order' => 1,
         ]);
 
-        $this->assertFalse($parent->hasChildren());
+        Assert::assertFalse($parent->hasChildren());
 
         // Aggiungi figlio
         Category::create([
             'id' => 'child',
             'name' => 'Child',
-            'description' => 'Child description',
+            'content' => 'Child description',
             'icon' => 'child-icon',
             'parent_id' => 'parent',
             'is_active' => true,
             'sort_order' => 1,
         ]);
 
-        $this->assertTrue($parent->fresh()->hasChildren());
+        $refreshedParent = $parent->fresh();
+        Assert::assertNotNull($refreshedParent);
+        Assert::assertTrue($refreshedParent->hasChildren());
     }
 }

@@ -10,6 +10,7 @@ use Webmozart\Assert\Assert;
 
 class ActivitySeeder extends Seeder
 {
+    /** @var list<array<string, string>> */
     private array $data = [
         [
             'name' => 'Programming',

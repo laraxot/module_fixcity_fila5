@@ -4,8 +4,9 @@ declare(strict_types=1);
 
 namespace Modules\Fixcity\Tests\Unit\Actions;
 
+use PHPUnit\Framework\Assert;
 use Modules\Fixcity\Actions\LoadDesignComuniElencoFilterCatalogAction;
-use Tests\TestCase;
+use Modules\Fixcity\Tests\TestCase;
 
 class LoadDesignComuniElencoFilterCatalogActionTest extends TestCase
 {
@@ -13,17 +14,17 @@ class LoadDesignComuniElencoFilterCatalogActionTest extends TestCase
     {
         $catalog = app(LoadDesignComuniElencoFilterCatalogAction::class)->execute();
 
-        $this->assertSame('categoria', $catalog['legend']);
-        $this->assertCount(11, $catalog['items']);
-        $this->assertSame(645, $catalog['totalCount']);
-        $this->assertSame(
+        Assert::assertSame('categoria', $catalog['legend']);
+        Assert::assertCount(11, $catalog['items']);
+        Assert::assertSame(645, $catalog['totalCount']);
+        Assert::assertSame(
             'Acqua, allagamenti, problemi fognari',
             $catalog['items'][0]['label'],
         );
-        $this->assertStringContainsString(
+        Assert::assertStringContainsString(
             '(21)',
             (string) $catalog['items'][0]['display_label'],
         );
-        $this->assertSame(21, $catalog['items'][0]['count']);
+        Assert::assertSame(21, $catalog['items'][0]['count']);
     }
 }

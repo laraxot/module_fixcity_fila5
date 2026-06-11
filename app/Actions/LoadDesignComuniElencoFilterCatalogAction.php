@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace Modules\Fixcity\Actions;
 
 use Illuminate\Support\Facades\File;
+use function Safe\preg_match;
+use function Safe\preg_replace;
 
 /**
  * Catalogo filtri sidebar allineato a disservizio-lista.json (Design Comuni reference).
@@ -31,9 +33,14 @@ final class LoadDesignComuniElencoFilterCatalogAction
         /** @var array<string, mixed> $payload */
         $payload = json_decode(File::get($path), true, 512, JSON_THROW_ON_ERROR);
 
+        /** @var array{list?: array<int, array<string, mixed>>, title?: string} $firstCategory */
+        $firstCategory = is_array($payload['categories'] ?? null) && isset($payload['categories'][0]) && is_array($payload['categories'][0])
+            ? $payload['categories'][0]
+            : [];
+
         /** @var array<int, array<string, mixed>> $list */
-        $list = $payload['categories'][0]['list'] ?? [];
-        $legend = (string) ($payload['categories'][0]['title'] ?? 'categoria');
+        $list = $firstCategory['list'] ?? [];
+        $legend = (string) ($firstCategory['title'] ?? 'categoria');
 
         $items = [];
         $sumCounts = 0;
@@ -43,7 +50,7 @@ final class LoadDesignComuniElencoFilterCatalogAction
             $count = 0;
             $label = $rawLabel;
 
-            if (preg_match('/\((\d+)\)\s*$/', $rawLabel, $matches) === 1) {
+            if (preg_match('/\((\d+)\)\s*$/', $rawLabel, $matches) === 1 && isset($matches[1])) {
                 $count = (int) $matches[1];
                 $label = trim((string) preg_replace('/\s*\(\d+\)\s*$/', '', $rawLabel));
             }

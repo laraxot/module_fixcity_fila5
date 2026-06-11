@@ -7,6 +7,7 @@ namespace Modules\Fixcity\Actions;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Collection;
 use Modules\Fixcity\Models\Ticket;
+use Modules\Xot\Actions\Cast\SafeFloatCastAction;
 
 /**
  * GeoJSON FeatureCollection da ticket geolocalizzati (mappa pubblica).
@@ -47,7 +48,7 @@ final class BuildTicketsGeoJsonAction
 
         return [
             'type' => 'FeatureCollection',
-            'generated_at' => now()->toISOString(),
+            'generated_at' => (string) now()->toISOString(),
             'total' => \count($features),
             'features' => $features,
         ];
@@ -63,8 +64,8 @@ final class BuildTicketsGeoJsonAction
             return null;
         }
 
-        $lat = (float) ($location['lat'] ?? $location['latitude'] ?? $ticket->getAttribute('latitude') ?? 0);
-        $lng = (float) ($location['lng'] ?? $location['longitude'] ?? $ticket->getAttribute('longitude') ?? 0);
+        $lat = SafeFloatCastAction::cast($location['lat'] ?? $location['latitude'] ?? $ticket->getAttribute('latitude') ?? 0);
+        $lng = SafeFloatCastAction::cast($location['lng'] ?? $location['longitude'] ?? $ticket->getAttribute('longitude') ?? 0);
 
         if ($lat === 0.0 && $lng === 0.0) {
             return null;

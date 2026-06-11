@@ -8,7 +8,7 @@ declare(strict_types=1);
  * Translation namespace: fixcity::homepage.*
  * Format: namespace::context.collection.element.type (5 levels)
  *
- * Used by: Themes/Sixteen/resources/views/components/blocks/segnalazioni/map-preview.blade.php
+ * Used by: Themes/Sixteen/resources/views/components/blocks/ticket/map-preview.blade.php
  */
 return [
     'map_preview' => [

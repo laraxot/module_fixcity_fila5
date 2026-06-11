@@ -1,198 +1,65 @@
----
-title: "Fixcity Module Documentation"
-type: documentation
-tags: [fixcity, module, tickets]
-created: 2026-06-05
-updated: 2026-06-05
-issues:
-  - "https://github.com/laraxot/module_fixcity_fila5/issues/21"
-discussions:
-  - "https://github.com/laraxot/module_fixcity_fila5/discussions/23"
----
+# Laravel Modules Documentation
 
-# Fixcity Module Documentation
+This directory routes to the active documentation roots for the Laravel modules in this repository.
 
-> 🇮🇹 [Biglietto da visita (IT)](../README.md) · 🇬🇧 [Business card (EN)](./readme-en.md)
+## How To Use This Index
 
-## Overview
-The Fixcity module is responsible for managing ticket reports and service requests in the Fixcity application. It provides the core functionality for users to create, manage, and track municipal service requests.
+- Start here only to choose the module.
+- Then open that module's `docs/README.md`.
+- Use archive files only when the active docs do not answer the question.
 
-## Architecture
+The governing rule for all module docs is in
+[docs/project/docs-governance.md](../../../docs/project/docs-governance.md).
 
-### Core Components
+## Core Modules
 
-#### 1. Ticket Management
-- **Ticket Model**: Main entity representing service requests
-- **Ticket Resource**: Filament resource for CRUD operations
-- **TicketForm**: Schema definition for ticket creation forms
+| Module | Role | Docs |
+| --- | --- | --- |
+| `Xot` | shared base framework, conventions, base classes | [README](../Xot/docs/README.md) |
+| `User` | auth, profiles, permissions | [README](../User/docs/README.md) |
+| `Tenant` | tenant isolation and tenancy contracts | [README](../Tenant/docs/README.md) |
+| `UI` | shared UI components and Filament-facing primitives | [README](../UI/docs/README.md) |
+| `Lang` | translations and localization | [README](../Lang/docs/README.md) |
+| `Job` | queues and background processing | [README](../Job/docs/README.md) |
+| `Media` | uploads and media handling | [README](../Media/docs/README.md) |
+| `Notify` | notifications and templates | [README](../Notify/docs/README.md) |
+| `Activity` | audit trail and activity logging | [README](../Activity/docs/README.md) |
+| `Gdpr` | privacy and GDPR support | [README](../Gdpr/docs/README.md) |
 
-#### 2. Wizard System
-- **CreateTicketWizardWidget**: Multi-step wizard for ticket creation
-- **Step Management**: Privacy → Data → Summary workflow
-- **Form Validation**: Step-specific validation rules
+## Domain Modules
 
-#### 3. Localization
-- **Italian Language Support**: Complete Italian translations
-- **Dynamic Labels**: Automatic label generation via LangServiceProvider
-- **Translation Keys**: Structured translation files in `lang/it/`
+| Module | Role | Docs |
+| --- | --- | --- |
+| `Fixcity` | ticketing and frontoffice reporting flows | [README](../Fixcity/docs/README.md) |
+| `Cms` | CMS blocks, content modeling, frontoffice composition | [README](../Cms/docs/README.md) |
+| `Blog` | editorial content | [README](../Blog/docs/README.md) |
+| `Comment` | comments and moderation | [README](../Comment/docs/README.md) |
+| `Rating` | ratings and feedback | [README](../Rating/docs/README.md) |
+| `Seo` | metadata and SEO support | [README](../Seo/docs/README.md) |
+| `Geo` | geography, addresses, map-related concerns | [README](../Geo/docs/README.md) |
+| `AI` | AI integration and MCP-related work | [README](../AI/docs/README.md) |
 
-### File Structure
+## Documentation Rules For Modules
 
-```
-Modules/Fixcity/
-├── app/
-│   ├── Filament/
-│   │   ├── Resources/
-│   │   │   └── TicketResource/
-│   │   │       ├── Schemas/
-│   │   │       │   └── TicketForm.php
-│   │   │       └── TicketResource.php
-│   │   └── Widgets/
-│   │       └── CreateTicketWizardWidget.php
-│   ├── Models/
-│   │   └── Ticket.php
-│   └── Actions/
-│       └── NormalizeTicketLocationDataAction.php
-├── resources/
-│   ├── views/
-│   │   └── filament/
-│   │       └── widgets/
-│   │           └── create-ticket-wizard.blade.php
-│   └── lang/
-│       └── it/
-│           └── segnalazione.php
-└── routes/
-    └── web.php
-```
+- The active documentation home for a module is `laravel/Modules/<Module>/docs/README.md`.
+- Never create `lang/lang/` or `_docs/` in a module; see [directory-structure-rules.md](./directory-structure-rules.md).
+- Do not create new parallel entry files if `README.md` already exists.
+- Prefer links over copied explanations across modules.
+- Keep implementation details inside topic files, not inside indexes.
+- Treat `app/docs`, `resources/views/docs`, and nested `docs/docs` as non-canonical unless explicitly justified.
 
-### Key Features
+## Fast Paths
 
-#### 1. Multi-Step Wizard
-- **Step 1 - Privacy**: Acceptance of privacy terms
-- **Step 2 - Data**: Ticket information collection
-- **Step 3 - Summary**: Review and submission
+- Shared project rules: [docs/README.md](../../../docs/README.md)
+- Project documentation governance: [docs/project/docs-governance.md](../../../docs/project/docs-governance.md)
+- Theme index: [laravel/Themes/docs/README.md](../../Themes/docs/README.md)
+- LLM wiki workflow: [docs/wiki/README.md](../../../docs/wiki/README.md)
+- Modules note: [llm-wiki.md](./llm-wiki.md)
+- Agent rules: [AGENTS.md](../../../AGENTS.md)
 
-#### 2. Form Schema System
-- **TicketForm::getSteps()**: Dynamic step generation
-- **Schema Components**: Reusable form components
-- **Validation**: Step-specific validation rules
+## Documentation
 
-#### 3. Location Management
-- **Geolocation Support**: Automatic location detection
-- **Address Normalization**: Standardized address formatting
-- **Map Integration**: Visual location selection
-
-#### 4. User Management
-- **Anonymous Support**: Ticket creation without registration
-- **Authenticated Users**: Automatic user association
-- **Permission Handling**: Role-based access control
-
-### Configuration
-
-#### Environment Variables
-```env
-# Ticket confirmation page slug
-FIXCITY_WIZARD_CONFIRMATION_SLUG=segnalazione-04-conferma
-
-# Google Maps API Key for location services
-GOOGLE_MAPS_API_KEY=your_api_key_here
-```
-
-#### Routes
-- `tests.view`: Display test pages including segnalazione creation
-- `ticket.create`: Direct ticket creation endpoint
-
-### Development Guidelines
-
-#### 1. Form Development
-- Use `TicketForm` for consistency
-- Follow the step-based approach
-- Implement proper validation
-- Use Italian translations
-
-#### 2. Widget Development
-- Extend `FilamentWidget` for new widgets
-- Use the `getCurrentStepIndex()` method for step detection
-- Implement proper form state management
-- Follow the Design Comuni CSS framework
-
-#### 3. Translation Management
-- Add all translations to `lang/it/segnalazione.php`
-- Use the LangServiceProvider for automatic labels
-- Follow the existing translation key structure
-- Test translations thoroughly
-
-#### 4. Testing
-- Test each wizard step individually
-- Validate form submissions
-- Test both authenticated and anonymous users
-- Verify location functionality
-
-### Integration Patterns
-
-#### 1. With Xot Base Widgets
-- Use `XotBaseWizardWidget` as base when available
-- Implement required abstract methods
-- Follow the widget inheritance hierarchy
-
-#### 2. With Filament
-- Use Filament form components
-- Follow Filament best practices
-- Implement proper validation
-- Use Filament actions for form submission
-
-#### 3. With Design Comuni
-- Use Bootstrap-Italia classes
-- Follow Design Comuni layout patterns
-- Implement proper accessibility
-- Use the pub_theme components
-
-### Troubleshooting
-
-#### Common Issues
-1. **Form Not Showing**: Check widget inheritance and view paths
-2. **Translation Errors**: Verify translation file syntax and keys
-3. **Step Navigation**: Ensure proper step management logic
-4. **Location Issues**: Check Google Maps API configuration
-
-#### Debugging Tips
-- Use Laravel DebugBar for form debugging
-- Check Livewire components for form state
-- Verify routes and permissions
-- Test in different environments
-
-### Performance Considerations
-
-#### 1. Database Optimization
-- Use appropriate indexes on ticket tables
-- Implement proper relationships
-- Use Eloquent lazy loading where appropriate
-
-#### 2. Frontend Performance
-- Minimize CSS/JS bundle size
-- Use proper caching strategies
-- Implement lazy loading for heavy components
-
-#### 3. API Optimization
-- Use proper HTTP caching
-- Implement rate limiting
-- Use efficient data serialization
-
-### Future Enhancements
-
-#### Planned Features
-1. **User Registration**: Integrated user accounts
-2. **Ticket Status Tracking**: Real-time status updates
-3. **Notification System**: Email and SMS notifications
-4. **Advanced Search**: Complex filtering and search capabilities
-
-#### Technical Improvements
-1. **API Integration**: External service integrations
-2. **Mobile Support**: Responsive design improvements
-3. **Performance Monitoring**: Analytics and monitoring
-4. **Security Enhancements**: Additional security layers
-
----
-
-*Last Updated: May 2026*  
-*Version: 1.0.0*
+- [On-Demand Pattern](./ON-DEMAND-PATTERN.md) — Pattern per caricamento efficiente
+- [QMD Setup](./QMD-SETUP.md) — Configurazione ricerca locale
+- [Performance](./PERFORMANCE-OPTIMIZATION.md) — Metriche e best practice
+- [Project Structure](./PROJECT-STRUCTURE.md) — Directory layout

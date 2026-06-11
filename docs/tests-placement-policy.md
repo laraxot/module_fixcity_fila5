@@ -30,7 +30,7 @@ laravel/Modules/Fixcity/
   ├── tests/
   │   ├── Feature/         ← PHPUnit feature tests
   │   ├── Unit/            ← PHPUnit unit tests
-  │   └── Playwright/     ← Browser tests (segnalazioni-elenco.spec.js, etc.)
+  │   └── Playwright/     ← Browser tests (ticket-list.spec.js, etc.)
   ├── docs/
   │   ├── wiki/            ← LLM wiki
   │   └── tests-placement-policy.md  ← this file
@@ -48,10 +48,10 @@ laravel/Themes/Sixteen/
 
 ```
 ❌ WRONG:
-/var/www/_bases/base_fixcity_fila5/tests/Playwright/segnalazioni-elenco.spec.js
+/var/www/_bases/base_fixcity_fila5/tests/Playwright/ticket-list.spec.js
 
 ✅ CORRECT:
-laravel/Modules/Fixcity/tests/Playwright/segnalazioni-elenco.spec.js
+laravel/Modules/Fixcity/tests/Playwright/ticket-list.spec.js
 ```
 
 ### References

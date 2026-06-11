@@ -104,8 +104,8 @@ use Spatie\SchemalessAttributes\SchemalessAttributes;
  * @property-read Profile|null $deleter
  *
  * @method static Builder<static>|Profile byUuid(string $uuid)
- * @method static Builder<static>|Profile childrenWith(array $relations)
- * @method static Builder<static>|Profile childrenWithCount(array $relations)
+ * @method static Builder<static>|Profile childrenWith(array<int|string, mixed> $relations)
+ * @method static Builder<static>|Profile childrenWithCount(array<int|string, mixed> $relations)
  * @method static Builder<static>|Profile newModelQuery()
  * @method static Builder<static>|Profile newQuery()
  * @method static Builder<static>|Profile permission($permissions, bool $without = false)
@@ -135,30 +135,42 @@ class Profile extends UserBaseProfile
     //     return $this->belongsToMany(Project::class, 'project_favorites', 'user_id', 'project_id');
     // }
 
+    /** @return HasMany<Ticket, $this> */
     public function ticketsOwned(): HasMany
     {
         return $this->hasMany(Ticket::class, 'owner_id', 'user_id');
     }
 
+    /** @return HasMany<Ticket, $this> */
     public function ticketsResponsible(): HasMany
     {
         return $this->hasMany(Ticket::class, 'responsible_id', 'user_id');
     }
 
+    /** @return HasMany<SocialiteUser, $this> */
     public function socials(): HasMany
     {
         return $this->hasMany(SocialiteUser::class, 'user_id', 'user_id');
     }
 
+    /** @return HasMany<TicketHour, $this> */
     public function hours(): HasMany
     {
         return $this->hasMany(TicketHour::class, 'user_id', 'user_id');
     }
 
+    /** @return Attribute<float, never> */
     public function totalLoggedInHours(): Attribute
     {
-        return new Attribute(
-            get: fn () => $this->hours->sum('value')
+        return Attribute::make(
+            get: function (): float {
+                $total = 0.0;
+                foreach ($this->hours as $hour) {
+                    $total += (float) $hour->value;
+                }
+
+                return $total;
+            },
         );
     }
 }// end model

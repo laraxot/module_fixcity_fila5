@@ -21,16 +21,16 @@ use Modules\Fixcity\Enums\TicketStatusEnum;
 use Modules\Fixcity\Enums\TicketTypeEnum;
 use Modules\Media\Models\Media;
 use Modules\User\Models\User;
+use Modules\Xot\Actions\Cast\SafeStringCastAction;
 use Modules\Xot\Actions\File\AssetAction;
 use Modules\Xot\Contracts\ProfileContract;
 use Modules\Xot\Contracts\UserContract;
 use Modules\Xot\Datas\XotData;
 use Modules\Fixcity\Models\Concerns\InteractsWithTicketCitizenRating;
-use Modules\Rating\Models\Contracts\HasRatingContract;
 use Modules\Comment\Models\Concerns\HasComments;
-use Modules\Comment\Models\Contracts\Commentable;
 use Modules\Comment\Models\CommentNotificationSubscription;
 use Modules\Comment\Models\Reaction;
+use Modules\Comment\Models\Contracts\Commentable;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 use Spatie\MediaLibrary\MediaCollections\Models\Collections\MediaCollection;
@@ -71,7 +71,7 @@ use Webmozart\Assert\Assert;
  * @property string|null $deleted_by
  * @property Collection<int, TicketActivity> $activities
  * @property int|null $activities_count
- * @property Collection<int, \Spatie\Comments\Models\Comment> $comments
+ * @property Collection<int, \Modules\Comment\Models\Comment> $comments
  * @property int|null $comments_count
  * @property Collection<int, TicketComment> $ticketComments
  * @property int|null $ticket_comments_count
@@ -147,7 +147,7 @@ use Webmozart\Assert\Assert;
  *
  * @mixin \Eloquent
  */
-class Ticket extends BaseModel implements Commentable, HasMedia, HasRatingContract
+class Ticket extends BaseModel implements Commentable, HasMedia
 {
     use HasComments;
     use HasSlug;
@@ -176,6 +176,8 @@ class Ticket extends BaseModel implements Commentable, HasMedia, HasRatingContra
         'type_id',
         'priority',
         'slug',
+        'citizen_rating',
+        'citizen_rated_at',
     ];
 
     protected $appends = [
@@ -183,6 +185,7 @@ class Ticket extends BaseModel implements Commentable, HasMedia, HasRatingContra
         // 'estimationProgress',
     ];
 
+    /** @return Attribute<string, never> */
     protected function typeLabel(): Attribute
     {
         return Attribute::make(
@@ -215,6 +218,8 @@ class Ticket extends BaseModel implements Commentable, HasMedia, HasRatingContra
             'status' => TicketStatusEnum::class,
             'type' => TicketTypeEnum::class,
             'type_id' => TicketTypeEnum::class,
+            'citizen_rated_at' => 'datetime',
+            'citizen_rating' => 'integer',
         ];
     }
 
@@ -563,7 +568,7 @@ class Ticket extends BaseModel implements Commentable, HasMedia, HasRatingContra
      */
     public function commentUrl(): string
     {
-        $path = '/tickets/'.(string) $this->getKey();
+        $path = '/tickets/'.SafeStringCastAction::cast($this->getKey());
         $localized = LaravelLocalization::getLocalizedURL(
             LaravelLocalization::getCurrentLocale(),
             $path
@@ -704,7 +709,7 @@ class Ticket extends BaseModel implements Commentable, HasMedia, HasRatingContra
      * @param  array<string, mixed>  $value
      * @return array<string, string|array<string, mixed>|null>
      */
-    private static function extractAddressComponents(array $value): array
+    public static function extractAddressComponents(array $value): array
     {
         $details = $value['address_components'] ?? $value['addressdetails'] ?? $value['address_details'] ?? null;
         if (! \is_array($details) || $details === []) {
@@ -735,7 +740,7 @@ class Ticket extends BaseModel implements Commentable, HasMedia, HasRatingContra
         return $result;
     }
 
-    private static function normalizeCoordinateString(mixed $value): ?string
+    public static function normalizeCoordinateString(mixed $value): ?string
     {
         if ($value === null || $value === '') {
             return null;
@@ -759,6 +764,34 @@ class Ticket extends BaseModel implements Commentable, HasMedia, HasRatingContra
 
         return $normalized !== '' ? $normalized : null;
     }
+
+    /**
+     * Mostra il prompt valutazione al proprietario se il ticket è risolto/chiuso e non ancora valutato.
+     */
+    public function needsCitizenRatingPrompt(): bool
+    {
+        if ($this->citizen_rating !== null) {
+            return false;
+        }
+
+        if (! auth()->check()) {
+            return false;
+        }
+
+        if (! $this->isOwnedByAuthenticatedUser()) {
+            return false;
+        }
+
+        $statusValue = $this->resolveTicketStatusValue();
+        if ($statusValue === '') {
+            return false;
+        }
+
+        $status = TicketStatusEnum::tryFrom($statusValue);
+
+        return $status === TicketStatusEnum::RESOLVED || $status === TicketStatusEnum::CLOSED;
+    }
+
     /*
     private static function hasTableColumn(string $column): bool
     {
@@ -781,7 +814,7 @@ class Ticket extends BaseModel implements Commentable, HasMedia, HasRatingContra
      * @param  array<mixed>  $value
      * @return array<string, mixed>
      */
-    private static function stringKeyed(array $value): array
+    public static function stringKeyed(array $value): array
     {
         $normalized = [];
 

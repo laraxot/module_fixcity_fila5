@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Modules\Fixcity\Tests\Unit\Actions;
 
+use Modules\Fixcity\Database\Factories\TicketFactory;
+use PHPUnit\Framework\Assert;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
@@ -11,7 +13,7 @@ use Modules\Fixcity\Actions\GetTicketSlaMetricsAction;
 use Modules\Fixcity\Enums\TicketStatusEnum;
 use Modules\Fixcity\Enums\TicketTypeEnum;
 use Modules\Fixcity\Models\Ticket;
-use Tests\TestCase;
+use Modules\Fixcity\Tests\TestCase;
 
 class GetTicketSlaMetricsActionTest extends TestCase
 {
@@ -23,15 +25,15 @@ class GetTicketSlaMetricsActionTest extends TestCase
 
         $sla = app(GetTicketSlaMetricsAction::class)->execute();
 
-        $this->assertSame(0, $sla['resolved_count']);
-        $this->assertNull($sla['avg_resolution_hours']);
+        Assert::assertSame(0, $sla['resolved_count']);
+        Assert::assertNull($sla['avg_resolution_hours']);
     }
 
     public function test_it_computes_average_resolution_hours(): void
     {
         Carbon::setTestNow('2026-05-29 12:00:00');
 
-        $ticket = Ticket::factory()->create([
+        $ticket = TicketFactory::new()->createOne([
             'type' => TicketTypeEnum::COMPLAINT,
             'type_id' => null,
         ]);
@@ -44,16 +46,16 @@ class GetTicketSlaMetricsActionTest extends TestCase
 
         $sla = app(GetTicketSlaMetricsAction::class)->execute();
 
-        $this->assertSame(1, $sla['resolved_count']);
-        $this->assertSame(24.0, $sla['avg_resolution_hours']);
-        $this->assertSame(1, $sla['resolved_last_30_days']);
+        Assert::assertSame(1, $sla['resolved_count']);
+        Assert::assertSame(24.0, $sla['avg_resolution_hours']);
+        Assert::assertSame(1, $sla['resolved_last_30_days']);
 
         Carbon::setTestNow();
     }
 
     private function seedTicket(TicketStatusEnum $status): void
     {
-        $ticket = Ticket::factory()->create([
+        $ticket = TicketFactory::new()->createOne([
             'type' => TicketTypeEnum::COMPLAINT,
             'type_id' => null,
         ]);

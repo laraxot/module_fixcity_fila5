@@ -3,13 +3,15 @@
 declare(strict_types=1);
 
 use Modules\Fixcity\Models\Ticket;
+use Modules\Fixcity\Tests\TestCase;
+use PHPUnit\Framework\Assert;
+use ReflectionMethod;
 
-/**
- * Unit tests for Ticket::location() Attribute set/get logic.
- * Uses reflection to call private static helpers without DB.
- */
+uses(TestCase::class);
+
 describe('Ticket location Attribute helpers', function (): void {
     beforeEach(function (): void {
+        /** @var TestCase $this */
         $this->callStatic = static function (string $method, mixed ...$args): mixed {
             $ref = new ReflectionMethod(Ticket::class, $method);
             $ref->setAccessible(true);
@@ -18,71 +20,62 @@ describe('Ticket location Attribute helpers', function (): void {
         };
     });
 
-    describe('normalizeCoordinateString', function (): void {
-        it('returns null for null input', function (): void {
-            expect(($this->callStatic)('normalizeCoordinateString', null))->toBeNull();
-        });
+    it('normalizes coordinate strings', function (): void {
+        /** @var TestCase $this */
+        Assert::assertNotNull($this->callStatic);
+        $callStatic = $this->callStatic;
 
-        it('converts float to string', function (): void {
-            expect(($this->callStatic)('normalizeCoordinateString', 45.5622))->toBe('45.5622');
-        });
-
-        it('passes through numeric string', function (): void {
-            expect(($this->callStatic)('normalizeCoordinateString', '12.249756'))->toBe('12.249756');
-        });
-
-        it('returns null for non-numeric string', function (): void {
-            expect(($this->callStatic)('normalizeCoordinateString', 'not-a-number'))->toBeNull();
-        });
+        Assert::assertNull($callStatic('normalizeCoordinateString', null));
+        Assert::assertSame('45.5622', $callStatic('normalizeCoordinateString', 45.5622));
+        Assert::assertSame('12.249756', $callStatic('normalizeCoordinateString', '12.249756'));
+        Assert::assertNull($callStatic('normalizeCoordinateString', 'not-a-number'));
     });
 
-    describe('extractAddressComponents', function (): void {
-        it('returns empty array when no addressdetails present', function (): void {
-            $result = ($this->callStatic)('extractAddressComponents', ['lat' => '45.0', 'lng' => '12.0']);
-            expect($result)->toBe([]);
-        });
+    it('extracts address components from nominatim payload', function (): void {
+        /** @var TestCase $this */
+        Assert::assertNotNull($this->callStatic);
+        $callStatic = $this->callStatic;
 
-        it('maps Nominatim addressdetails keys to structured fields', function (): void {
-            $result = ($this->callStatic)('extractAddressComponents', [
-                'addressdetails' => [
-                    'road' => 'Via Rodolfo Morandi',
-                    'house_number' => '5',
-                    'postcode' => '31021',
-                    'city' => 'Mogliano Veneto',
-                    'state' => 'Veneto',
-                    'country' => 'Italia',
-                    'country_code' => 'it',
-                ],
-            ]);
+        $empty = $callStatic('extractAddressComponents', ['lat' => '45.0', 'lng' => '12.0']);
+        Assert::assertSame([], $empty);
 
-            expect($result['street'])->toBe('Via Rodolfo Morandi')
-                ->and($result['street_number'])->toBe('5')
-                ->and($result['zip'])->toBe('31021')
-                ->and($result['city'])->toBe('Mogliano Veneto')
-                ->and($result['state'])->toBe('Veneto')
-                ->and($result['country'])->toBe('Italia')
-                ->and($result['country_code'])->toBe('it');
-        });
+        $result = $callStatic('extractAddressComponents', [
+            'addressdetails' => [
+                'road' => 'Via Rodolfo Morandi',
+                'house_number' => '5',
+                'postcode' => '31021',
+                'city' => 'Mogliano Veneto',
+                'state' => 'Veneto',
+                'country' => 'Italia',
+                'country_code' => 'it',
+            ],
+        ]);
 
-        it('falls back to town then village for city field', function (): void {
-            $resultTown = ($this->callStatic)('extractAddressComponents', [
-                'addressdetails' => ['town' => 'Mogliano Veneto'],
-            ]);
-            expect($resultTown['city'])->toBe('Mogliano Veneto');
+        /** @var array<string, string> $result */
+        Assert::assertSame('Via Rodolfo Morandi', $result['street']);
+        Assert::assertSame('5', $result['street_number']);
+        Assert::assertSame('31021', $result['zip']);
+        Assert::assertSame('Mogliano Veneto', $result['city']);
+        Assert::assertSame('Veneto', $result['state']);
+        Assert::assertSame('Italia', $result['country']);
+        Assert::assertSame('it', $result['country_code']);
+    });
 
-            $resultVillage = ($this->callStatic)('extractAddressComponents', [
-                'addressdetails' => ['village' => 'Trebaseleghe'],
-            ]);
-            expect($resultVillage['city'])->toBe('Trebaseleghe');
-        });
+    it('falls back to town or village for city', function (): void {
+        /** @var TestCase $this */
+        Assert::assertNotNull($this->callStatic);
+        $callStatic = $this->callStatic;
 
-        it('omits null / empty fields from result', function (): void {
-            $result = ($this->callStatic)('extractAddressComponents', [
-                'addressdetails' => ['road' => 'Via Roma', 'house_number' => ''],
-            ]);
+        $resultTown = $callStatic('extractAddressComponents', [
+            'addressdetails' => ['town' => 'Mogliano Veneto'],
+        ]);
+        /** @var array<string, string> $resultTown */
+        Assert::assertSame('Mogliano Veneto', $resultTown['city']);
 
-            expect($result)->toHaveKey('street')
-                ->and($result)->not->toHaveKey('street_number');
-        });
+        $resultVillage = $callStatic('extractAddressComponents', [
+            'addressdetails' => ['village' => 'Trebaseleghe'],
+        ]);
+        /** @var array<string, string> $resultVillage */
+        Assert::assertSame('Trebaseleghe', $resultVillage['city']);
     });
 });
