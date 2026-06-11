@@ -73,7 +73,7 @@ use Webmozart\Assert\Assert;
  * @property int|null $activities_count
  * @property Collection<int, \Modules\Comment\Models\Comment> $comments
  * @property int|null $comments_count
- * @property Collection<int, TicketComment> $ticketComments
+ * @property Collection<int, TicketComment> $ticketComments Legacy relation, do not use in new FO flows.
  * @property int|null $ticket_comments_count
  * @property mixed $completude_percentage
  * @property mixed $estimation_for_humans
@@ -590,6 +590,8 @@ class Ticket extends BaseModel implements Commentable, HasMedia
 
     /**
      * Commenti legacy admin (tabella ticket_comments).
+     *
+     * @deprecated Use comments() from Modules\Comment for new ticket discussions.
      *
      * @return HasMany<TicketComment, $this>
      */

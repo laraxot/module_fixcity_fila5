@@ -48,6 +48,8 @@ use Modules\Xot\Datas\XotData;
  * @property-read Profile|null $updater
  * @property-read Profile|null $deleter
  *
+ * @deprecated Legacy ticket_comments model. Use Modules\Comment\Models\Comment for new ticket discussions.
+ *
  * @mixin \Eloquent
  */
 class TicketComment extends BaseModel
