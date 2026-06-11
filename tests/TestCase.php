@@ -34,7 +34,28 @@ abstract class TestCase extends XotBaseTestCase
     public ?\Closure $callStatic = null;
 
     /** @var list<string> */
-    protected $connectionsToTransact = ['sqlite', 'fixcity', 'user', 'comment', 'media'];
+    protected $connectionsToTransact = ['fixcity', 'user', 'comment', 'media'];
+
+    public function authUser(): AuthUser
+    {
+        Assert::assertNotNull($this->user);
+
+        return $this->user;
+    }
+
+    public function authAdmin(): AuthUser
+    {
+        Assert::assertNotNull($this->admin);
+
+        return $this->admin;
+    }
+
+    public function ticket(): Ticket
+    {
+        Assert::assertNotNull($this->ticket);
+
+        return $this->ticket;
+    }
 
     public function authUser(): AuthUser
     {
