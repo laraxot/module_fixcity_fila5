@@ -26,12 +26,9 @@ final class LoadTicketsGeoJsonAction
 
     /**
      * Get the public URL for the tickets GeoJSON file.
-     *
-     * @return string
      */
     public function publicUrl(): string
     {
         return '/data/tickets.json';
     }
-}
 }

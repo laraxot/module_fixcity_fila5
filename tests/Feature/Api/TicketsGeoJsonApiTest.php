@@ -4,11 +4,12 @@ declare(strict_types=1);
 
 namespace Modules\Fixcity\Tests\Feature\Api;
 
-use Tests\TestCase;
+use Modules\Fixcity\Tests\TestCase;
 
 uses(TestCase::class);
 
 it('returns geojson feature collection from live api', function (): void {
+    /** @var TestCase $this */
     $response = $this->getJson('/api/tickets/geojson');
 
     $response->assertOk()
@@ -22,6 +23,7 @@ it('returns geojson feature collection from live api', function (): void {
 });
 
 it('returns ticket details or not found for unknown id', function (): void {
+    /** @var TestCase $this */
     $response = $this->getJson('/api/ticket-details/999999999');
 
     $response->assertNotFound();

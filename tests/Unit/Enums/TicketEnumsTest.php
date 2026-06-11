@@ -2,6 +2,7 @@
 
 declare(strict_types=1);
 
+use PHPUnit\Framework\Assert;
 use Modules\Fixcity\Enums\TicketPriorityEnum;
 use Modules\Fixcity\Enums\TicketStatusEnum;
 use Modules\Fixcity\Enums\TicketTypeEnum;
@@ -19,46 +20,43 @@ describe('TicketStatusEnum', function () {
         $actualStatuses = array_map(fn ($case) => $case->value, TicketStatusEnum::cases());
 
         foreach ($expectedStatuses as $status) {
-            expect($actualStatuses)->toContain($status);
+            Assert::assertContains($status, $actualStatuses);
         }
     });
 
     it('can be instantiated from string values', function () {
-        expect(TicketStatusEnum::from('pending'))->toBe(TicketStatusEnum::PENDING);
-        expect(TicketStatusEnum::from('in_progress'))->toBe(TicketStatusEnum::IN_PROGRESS);
-        expect(TicketStatusEnum::from('resolved'))->toBe(TicketStatusEnum::RESOLVED);
-        expect(TicketStatusEnum::from('closed'))->toBe(TicketStatusEnum::CLOSED);
+        Assert::assertSame(TicketStatusEnum::PENDING, TicketStatusEnum::from('pending'));
+        Assert::assertSame(TicketStatusEnum::IN_PROGRESS, TicketStatusEnum::from('in_progress'));
+        Assert::assertSame(TicketStatusEnum::RESOLVED, TicketStatusEnum::from('resolved'));
+        Assert::assertSame(TicketStatusEnum::CLOSED, TicketStatusEnum::from('closed'));
     });
 
     it('can try from string values safely', function () {
-        expect(TicketStatusEnum::tryFrom('pending'))->toBe(TicketStatusEnum::PENDING);
-        expect(TicketStatusEnum::tryFrom('invalid'))->toBeNull();
+        Assert::assertSame(TicketStatusEnum::PENDING, TicketStatusEnum::tryFrom('pending'));
+        Assert::assertNull(TicketStatusEnum::tryFrom('invalid'));
     });
 
     it('has proper string representations', function () {
-        expect(TicketStatusEnum::PENDING->value)->toBe('pending');
-        expect(TicketStatusEnum::IN_PROGRESS->value)->toBe('in_progress');
-        expect(TicketStatusEnum::RESOLVED->value)->toBe('resolved');
-        expect(TicketStatusEnum::CLOSED->value)->toBe('closed');
+        Assert::assertSame('pending', TicketStatusEnum::PENDING->value);
+        Assert::assertSame('in_progress', TicketStatusEnum::IN_PROGRESS->value);
+        Assert::assertSame('resolved', TicketStatusEnum::RESOLVED->value);
+        Assert::assertSame('closed', TicketStatusEnum::CLOSED->value);
     });
 
     it('can get all cases', function () {
         $cases = TicketStatusEnum::cases();
-
-        expect($cases)->toBeArray();
-        expect(count($cases))->toBeGreaterThan(0);
-
+        Assert::assertGreaterThan(0, count($cases));
         foreach ($cases as $case) {
-            expect($case)->toBeInstanceOf(TicketStatusEnum::class);
+            Assert::assertInstanceOf(TicketStatusEnum::class, $case);
         }
     });
 
     it('can check if status is active', function () {
         // Assuming we have methods to check status states
-        expect(TicketStatusEnum::PENDING->value)->toBe('pending');
-        expect(TicketStatusEnum::IN_PROGRESS->value)->toBe('in_progress');
-        expect(TicketStatusEnum::RESOLVED->value)->toBe('resolved');
-        expect(TicketStatusEnum::CLOSED->value)->toBe('closed');
+        Assert::assertSame('pending', TicketStatusEnum::PENDING->value);
+        Assert::assertSame('in_progress', TicketStatusEnum::IN_PROGRESS->value);
+        Assert::assertSame('resolved', TicketStatusEnum::RESOLVED->value);
+        Assert::assertSame('closed', TicketStatusEnum::CLOSED->value);
     });
 });
 
@@ -74,30 +72,32 @@ describe('TicketPriorityEnum', function () {
         $actualPriorities = array_map(fn ($case) => $case->value, TicketPriorityEnum::cases());
 
         foreach ($expectedPriorities as $priority) {
-            expect($actualPriorities)->toContain($priority);
+            Assert::assertContains($priority, $actualPriorities);
         }
     });
 
     it('can be instantiated from string values', function () {
-        expect(TicketPriorityEnum::from('low'))->toBe(TicketPriorityEnum::LOW);
-        expect(TicketPriorityEnum::from('medium'))->toBe(TicketPriorityEnum::MEDIUM);
-        expect(TicketPriorityEnum::from('high'))->toBe(TicketPriorityEnum::HIGH);
-        expect(TicketPriorityEnum::from('urgent'))->toBe(TicketPriorityEnum::URGENT);
+        Assert::assertSame(TicketPriorityEnum::LOW, TicketPriorityEnum::from('low'));
+        Assert::assertSame(TicketPriorityEnum::MEDIUM, TicketPriorityEnum::from('medium'));
+        Assert::assertSame(TicketPriorityEnum::HIGH, TicketPriorityEnum::from('high'));
+        Assert::assertSame(TicketPriorityEnum::URGENT, TicketPriorityEnum::from('urgent'));
     });
 
     it('can try from string values safely', function () {
-        expect(TicketPriorityEnum::tryFrom('high'))->toBe(TicketPriorityEnum::HIGH);
-        expect(TicketPriorityEnum::tryFrom('invalid'))->toBeNull();
+        Assert::assertSame(TicketPriorityEnum::HIGH, TicketPriorityEnum::tryFrom('high'));
+        Assert::assertNull(TicketPriorityEnum::tryFrom('invalid'));
     });
 
     it('has proper string representations', function () {
-        expect(TicketPriorityEnum::LOW->value)->toBe('low');
-        expect(TicketPriorityEnum::MEDIUM->value)->toBe('medium');
-        expect(TicketPriorityEnum::HIGH->value)->toBe('high');
-        expect(TicketPriorityEnum::URGENT->value)->toBe('urgent');
+        Assert::assertSame('low', TicketPriorityEnum::LOW->value);
+        Assert::assertSame('medium', TicketPriorityEnum::MEDIUM->value);
+        Assert::assertSame('high', TicketPriorityEnum::HIGH->value);
+        Assert::assertSame('urgent', TicketPriorityEnum::URGENT->value);
     });
 
     it('maintains priority order', function () {
+        /** @var list<TicketPriorityEnum> $priorities */
+        /** @var list<TicketPriorityEnum> $priorities */
         $priorities = [
             TicketPriorityEnum::LOW,
             TicketPriorityEnum::MEDIUM,
@@ -106,52 +106,50 @@ describe('TicketPriorityEnum', function () {
         ];
 
         // Test that priorities can be ordered (implementation dependent)
-        expect($priorities)->toHaveCount(4);
+        Assert::assertCount(4, $priorities);
     });
 
     it('can get priority level for sorting', function () {
         // Assuming priorities have numeric values for sorting
         $priorities = TicketPriorityEnum::cases();
-
-        expect($priorities)->toBeArray();
-        expect(count($priorities))->toBe(4);
+        Assert::assertSame(4, count($priorities));
     });
 });
 
 describe('TicketTypeEnum', function () {
     it('has all required type values', function () {
         $expectedTypes = [
-            'bug',
-            'feature',
-            'improvement',
-            'task',
-            'question',
+            'road_maintenance',
+            'complaint',
+            'suggestion',
+            'request',
+            'other',
         ];
 
         $actualTypes = array_map(fn ($case) => $case->value, TicketTypeEnum::cases());
 
         foreach ($expectedTypes as $type) {
-            expect($actualTypes)->toContain($type);
+            Assert::assertContains($type, $actualTypes);
         }
     });
 
     it('can be instantiated from string values', function () {
-        expect(TicketTypeEnum::from('bug'))->toBe(TicketTypeEnum::BUG);
-        expect(TicketTypeEnum::from('feature'))->toBe(TicketTypeEnum::FEATURE);
-        expect(TicketTypeEnum::from('improvement'))->toBe(TicketTypeEnum::IMPROVEMENT);
-        expect(TicketTypeEnum::from('task'))->toBe(TicketTypeEnum::TASK);
+        Assert::assertSame(TicketTypeEnum::COMPLAINT, TicketTypeEnum::from('complaint'));
+        Assert::assertSame(TicketTypeEnum::REQUEST, TicketTypeEnum::from('request'));
+        Assert::assertSame(TicketTypeEnum::SUGGESTION, TicketTypeEnum::from('suggestion'));
+        Assert::assertSame(TicketTypeEnum::ROAD_MAINTENANCE, TicketTypeEnum::from('road_maintenance'));
     });
 
     it('can try from string values safely', function () {
-        expect(TicketTypeEnum::tryFrom('bug'))->toBe(TicketTypeEnum::BUG);
-        expect(TicketTypeEnum::tryFrom('invalid'))->toBeNull();
+        Assert::assertSame(TicketTypeEnum::COMPLAINT, TicketTypeEnum::tryFrom('complaint'));
+        Assert::assertNull(TicketTypeEnum::tryFrom('invalid'));
     });
 
     it('has proper string representations', function () {
-        expect(TicketTypeEnum::BUG->value)->toBe('bug');
-        expect(TicketTypeEnum::FEATURE->value)->toBe('feature');
-        expect(TicketTypeEnum::IMPROVEMENT->value)->toBe('improvement');
-        expect(TicketTypeEnum::TASK->value)->toBe('task');
+        Assert::assertSame('complaint', TicketTypeEnum::COMPLAINT->value);
+        Assert::assertSame('request', TicketTypeEnum::REQUEST->value);
+        Assert::assertSame('suggestion', TicketTypeEnum::SUGGESTION->value);
+        Assert::assertSame('road_maintenance', TicketTypeEnum::ROAD_MAINTENANCE->value);
     });
 
     it('can get icon for each type', function () {
@@ -159,7 +157,7 @@ describe('TicketTypeEnum', function () {
         $types = TicketTypeEnum::cases();
 
         foreach ($types as $type) {
-            expect($type)->toBeInstanceOf(TicketTypeEnum::class);
+            Assert::assertInstanceOf(TicketTypeEnum::class, $type);
             // If getIcon method exists: expect($type->getIcon())->toBeString();
         }
     });
@@ -169,17 +167,16 @@ describe('TicketTypeEnum', function () {
         $types = TicketTypeEnum::cases();
 
         foreach ($types as $type) {
-            expect($type)->toBeInstanceOf(TicketTypeEnum::class);
+            Assert::assertInstanceOf(TicketTypeEnum::class, $type);
             // If getColor method exists: expect($type->getColor())->toBeString();
         }
     });
 
     it('can categorize types', function () {
-        // Test type categorization (if implemented)
-        expect(TicketTypeEnum::BUG->value)->toBe('bug');
-        expect(TicketTypeEnum::FEATURE->value)->toBe('feature');
-        expect(TicketTypeEnum::IMPROVEMENT->value)->toBe('improvement');
-        expect(TicketTypeEnum::TASK->value)->toBe('task');
+        Assert::assertSame('complaint', TicketTypeEnum::COMPLAINT->value);
+        Assert::assertSame('request', TicketTypeEnum::REQUEST->value);
+        Assert::assertSame('suggestion', TicketTypeEnum::SUGGESTION->value);
+        Assert::assertSame('report', TicketTypeEnum::REPORT->value);
     });
 });
 
@@ -187,27 +184,29 @@ describe('Enum Integration', function () {
     it('can use all enums together', function () {
         $status = TicketStatusEnum::PENDING;
         $priority = TicketPriorityEnum::HIGH;
-        $type = TicketTypeEnum::BUG;
+        $type = TicketTypeEnum::COMPLAINT;
 
-        expect($status)->toBeInstanceOf(TicketStatusEnum::class);
-        expect($priority)->toBeInstanceOf(TicketPriorityEnum::class);
-        expect($type)->toBeInstanceOf(TicketTypeEnum::class);
+        Assert::assertInstanceOf(TicketStatusEnum::class, $status);
+        Assert::assertInstanceOf(TicketPriorityEnum::class, $priority);
+        Assert::assertInstanceOf(TicketTypeEnum::class, $type);
     });
 
     it('can serialize enums to array', function () {
+        /** @var array<string, TicketStatusEnum|TicketPriorityEnum|TicketTypeEnum> $enums */
+        /** @var array<string, TicketStatusEnum|TicketPriorityEnum|TicketTypeEnum> $enums */
         $enums = [
             'status' => TicketStatusEnum::PENDING,
             'priority' => TicketPriorityEnum::HIGH,
-            'type' => TicketTypeEnum::BUG,
+            'type' => TicketTypeEnum::COMPLAINT,
         ];
 
         $values = array_map(fn ($enum) => $enum->value, $enums);
 
-        expect($values)->toBe([
+        Assert::assertSame([
             'status' => 'pending',
             'priority' => 'high',
-            'type' => 'bug',
-        ]);
+            'type' => 'complaint',
+        ], $values);
     });
 
     it('can get all possible enum combinations', function () {
@@ -217,10 +216,10 @@ describe('Enum Integration', function () {
 
         $totalCombinations = $statusCount * $priorityCount * $typeCount;
 
-        expect($totalCombinations)->toBeGreaterThan(0);
-        expect($statusCount)->toBeGreaterThan(0);
-        expect($priorityCount)->toBeGreaterThan(0);
-        expect($typeCount)->toBeGreaterThan(0);
+        Assert::assertGreaterThan(0, $totalCombinations);
+        Assert::assertGreaterThan(0, $statusCount);
+        Assert::assertGreaterThan(0, $priorityCount);
+        Assert::assertGreaterThan(0, $typeCount);
     });
 
     it('validates enum consistency', function () {
@@ -229,8 +228,8 @@ describe('Enum Integration', function () {
         $priorityValues = array_map(fn ($case) => $case->value, TicketPriorityEnum::cases());
         $typeValues = array_map(fn ($case) => $case->value, TicketTypeEnum::cases());
 
-        expect($statusValues)->toBe(array_unique($statusValues));
-        expect($priorityValues)->toBe(array_unique($priorityValues));
-        expect($typeValues)->toBe(array_unique($typeValues));
+        Assert::assertSame(array_unique($statusValues), $statusValues);
+        Assert::assertSame(array_unique($priorityValues), $priorityValues);
+        Assert::assertSame(array_unique($typeValues), $typeValues);
     });
 });

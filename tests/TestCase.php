@@ -5,20 +5,57 @@ declare(strict_types=1);
 namespace Modules\Fixcity\Tests;
 
 use Illuminate\Foundation\Testing\DatabaseTransactions;
-use Illuminate\Foundation\Testing\TestCase as BaseTestCase;
 use Illuminate\Support\Facades\DB;
-use Modules\Xot\Tests\CreatesApplication;
+use Modules\Fixcity\Models\Ticket;
+use Modules\Fixcity\Models\User;
+use Modules\User\Models\User as AuthUser;
+use Modules\Xot\Tests\XotBaseTestCase;
+use PHPUnit\Framework\Assert;
 
 /**
  * Base test case Fixcity — DatabaseTransactions, no RefreshDatabase (dati sacri).
+ *
+ * @property \Modules\User\Models\User|null $user
+ * @property \Modules\User\Models\User|null $admin
+ * @property \Modules\Fixcity\Models\Ticket|null $ticket
+ * @property \Closure|null $callStatic
  */
-abstract class TestCase extends BaseTestCase
+abstract class TestCase extends XotBaseTestCase
 {
-    use CreatesApplication;
     use DatabaseTransactions;
+
+    public ?\Modules\User\Models\User $user = null;
+
+    public ?\Modules\User\Models\User $admin = null;
+
+    public ?\Modules\Fixcity\Models\Ticket $ticket = null;
+
+    /** @var \Closure|null */
+    public ?\Closure $callStatic = null;
 
     /** @var list<string> */
     protected $connectionsToTransact = ['sqlite', 'fixcity', 'user', 'comment', 'media'];
+
+    public function authUser(): AuthUser
+    {
+        Assert::assertNotNull($this->user);
+
+        return $this->user;
+    }
+
+    public function authAdmin(): AuthUser
+    {
+        Assert::assertNotNull($this->admin);
+
+        return $this->admin;
+    }
+
+    public function ticket(): Ticket
+    {
+        Assert::assertNotNull($this->ticket);
+
+        return $this->ticket;
+    }
 
     protected function setUp(): void
     {
@@ -38,6 +75,6 @@ abstract class TestCase extends BaseTestCase
             DB::purge($connection);
         }
 
-        config(['auth.providers.users.model' => \Modules\Fixcity\Models\User::class]);
+        config(['auth.providers.users.model' => User::class]);
     }
 }

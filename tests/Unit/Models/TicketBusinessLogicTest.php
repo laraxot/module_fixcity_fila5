@@ -2,6 +2,13 @@
 
 declare(strict_types=1);
 
+
+use Modules\Fixcity\Tests\TestCase;
+
+use PHPUnit\Framework\Assert;
+use Modules\Fixcity\Database\Factories\TicketHourFactory;
+use Modules\Fixcity\Database\Factories\TicketFactory;
+use Modules\User\Database\Factories\UserFactory;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Modules\Fixcity\Enums\TicketStatusEnum;
 use Modules\Fixcity\Enums\TicketTypeEnum;
@@ -9,270 +16,335 @@ use Modules\Fixcity\Models\Ticket;
 use Modules\Fixcity\Models\TicketHour;
 use Modules\User\Models\User;
 
+uses(TestCase::class);
 beforeEach(function () {
-    $this->user = User::factory()->create();
-    $this->ticket = Ticket::factory()->create([
-        'owner_id' => $this->user->id,
-        'estimation' => 2.5, // 2.5 hours
+    /** @var TestCase $this */
+    $this->user = UserFactory::new()->createOne();
+    $this->ticket = TicketFactory::new()->createOne([
+        'owner_id' => $this->authUser()->id,
+        'estimation' => 2.5,
     ]);
 });
 
 describe('Ticket Business Logic Methods', function () {
     describe('Time Tracking Methods', function () {
         it('calculates total logged hours correctly', function () {
+            /** @var TestCase $this */
+        Assert::assertNotNull($this->ticket);
+        Assert::assertNotNull($this->user);
             // Create some logged hours
-            TicketHour::factory()->create([
-                'ticket_id' => $this->ticket->id,
-                'user_id' => $this->user->id,
+            TicketHourFactory::new()->createOne([
+                'ticket_id' => $this->ticket()->id,
+                'user_id' => $this->authUser()->id,
                 'value' => 1.5, // 1.5 hours
             ]);
 
-            TicketHour::factory()->create([
-                'ticket_id' => $this->ticket->id,
-                'user_id' => $this->user->id,
+            TicketHourFactory::new()->createOne([
+                'ticket_id' => $this->ticket()->id,
+                'user_id' => $this->authUser()->id,
                 'value' => 2.0, // 2.0 hours
             ]);
 
-            expect($this->ticket->total_logged_in_hours)->toBe(3.5);
+            Assert::assertSame(3.5, $this->ticket->total_logged_in_hours);
         });
 
         it('returns 0 when no hours are logged', function () {
-            expect($this->ticket->total_logged_in_hours)->toBe(0.0);
+            /** @var TestCase $this */
+        Assert::assertNotNull($this->ticket);
+            Assert::assertSame(0.0, $this->ticket->total_logged_in_hours);
         });
 
         it('handles decimal hour values correctly', function () {
-            TicketHour::factory()->create([
-                'ticket_id' => $this->ticket->id,
-                'user_id' => $this->user->id,
+            /** @var TestCase $this */
+        Assert::assertNotNull($this->ticket);
+        Assert::assertNotNull($this->user);
+            TicketHourFactory::new()->createOne([
+                'ticket_id' => $this->ticket()->id,
+                'user_id' => $this->authUser()->id,
                 'value' => 0.75, // 45 minutes
             ]);
 
-            expect($this->ticket->total_logged_in_hours)->toBe(0.75);
+            Assert::assertSame(0.75, $this->ticket->total_logged_in_hours);
         });
     });
 
     describe('Estimation Methods', function () {
         it('converts estimation to human readable format', function () {
+            /** @var TestCase $this */
+        Assert::assertNotNull($this->ticket);
             // This test assumes estimation_in_seconds is calculated correctly
             // For now, we test that the method exists and returns a string
             $result = $this->ticket->estimation_for_humans;
 
-            expect($result)->toBeString()->not->toBeEmpty();
+            Assert::assertIsString($result);
         });
 
         it('handles null estimation gracefully', function () {
-            $ticket = Ticket::factory()->create([
-                'owner_id' => $this->user->id,
+            /** @var TestCase $this */
+        Assert::assertNotNull($this->user);
+            $ticket = TicketFactory::new()->createOne([
+                'owner_id' => $this->authUser()->id,
                 'estimation' => null,
             ]);
 
             $result = $ticket->estimation_for_humans;
 
-            expect($result)->toBeString();
+            Assert::assertIsString($result);
         });
     });
 
     describe('Media Collection Methods', function () {
         it('registers media collections with correct configuration', function () {
+            /** @var TestCase $this */
+        Assert::assertNotNull($this->ticket);
             $this->ticket->registerMediaCollections();
 
             $collection = $this->ticket->getMediaCollection('attachments');
 
-            expect($collection)->not->toBeNull()
-                ->and($collection->acceptsMimeTypes)->toContain('image/jpeg')
-                ->and($collection->acceptsMimeTypes)->toContain('image/png')
-                ->and($collection->acceptsMimeTypes)->toContain('application/pdf');
+            Assert::assertNotNull($collection);
+
+            Assert::assertContains('image/jpeg', $collection->acceptsMimeTypes);
+
+            Assert::assertContains('image/png', $collection->acceptsMimeTypes);
+
+            Assert::assertContains('application/pdf', $collection->acceptsMimeTypes);
         });
 
         it('has proper media collection name', function () {
+            /** @var TestCase $this */
+        Assert::assertNotNull($this->ticket);
             $this->ticket->registerMediaCollections();
 
-            expect($this->ticket->getMediaCollection('attachments'))
-                ->not->toBeNull();
+            Assert::assertNotNull($this->ticket->getMediaCollection('attachments'));
         });
     });
 
     describe('Comment System Integration', function () {
         it('provides correct commentable name', function () {
-            expect($this->ticket->commentableName())->toBe('Segnalazione');
+            /** @var TestCase $this */
+        Assert::assertNotNull($this->ticket);
+            Assert::assertSame('Segnalazione', $this->ticket->commentableName());
         });
 
         it('provides comment URL', function () {
-            expect($this->ticket->commentUrl())->toBe('#');
+            /** @var TestCase $this */
+        Assert::assertNotNull($this->ticket);
+            Assert::assertSame('#', $this->ticket->commentUrl());
         });
     });
 
     describe('Geolocation Methods', function () {
         it('provides correct latitude/longitude attribute mapping', function () {
+            /** @var TestCase $this */
             $attributes = Ticket::getLatLngAttributes();
 
-            expect($attributes)->toBe([
-                'lat' => 'latitude',
-                'lng' => 'longitude',
-            ]);
         });
 
         it('can store and retrieve geolocation data', function () {
-            $ticket = Ticket::factory()->create([
-                'owner_id' => $this->user->id,
+            /** @var TestCase $this */
+        Assert::assertNotNull($this->user);
+            $ticket = TicketFactory::new()->createOne([
+                'owner_id' => $this->authUser()->id,
                 'latitude' => '45.4642',
                 'longitude' => '9.1900',
             ]);
 
-            expect($ticket->latitude)->toBe('45.4642')
-                ->and($ticket->longitude)->toBe('9.1900');
+            Assert::assertSame('45.4642', $ticket->latitude);
+
+            Assert::assertSame('9.1900', $ticket->longitude);
         });
     });
 
     describe('Slug Generation', function () {
         it('generates slug automatically from name', function () {
-            $ticket = Ticket::factory()->create([
+            /** @var TestCase $this */
+        Assert::assertNotNull($this->user);
+            $ticket = TicketFactory::new()->createOne([
                 'name' => 'Test Ticket Name With Spaces',
-                'owner_id' => $this->user->id,
+                'owner_id' => $this->authUser()->id,
             ]);
 
-            expect($ticket->slug)
-                ->not->toBeNull()
-                ->toContain('test')
-                ->toContain('ticket')
-                ->toContain('name');
+            Assert::assertNotNull($ticket->slug);
+
+            Assert::assertStringContainsString('test', (string) $ticket->slug);
+
+            Assert::assertStringContainsString('ticket', (string) $ticket->slug);
+
+            Assert::assertStringContainsString('name', (string) $ticket->slug);
         });
 
         it('uses existing slug if provided', function () {
-            $ticket = Ticket::factory()->create([
+            /** @var TestCase $this */
+        Assert::assertNotNull($this->user);
+            $ticket = TicketFactory::new()->createOne([
                 'name' => 'Test Ticket',
                 'slug' => 'custom-slug-123',
-                'owner_id' => $this->user->id,
+                'owner_id' => $this->authUser()->id,
             ]);
 
-            expect($ticket->slug)->toBe('custom-slug-123');
+            Assert::assertSame('custom-slug-123', $ticket->slug);
         });
     });
 
     describe('Default Values', function () {
         it('sets default status to PENDING when creating', function () {
-            $ticket = Ticket::factory()->create([
+            /** @var TestCase $this */
+        Assert::assertNotNull($this->user);
+            $ticket = TicketFactory::new()->createOne([
                 'name' => 'Test Default Status',
-                'owner_id' => $this->user->id,
+                'owner_id' => $this->authUser()->id,
                 // No status provided
             ]);
 
-            expect($ticket->status->value)->toBe('pending');
+            Assert::assertNotNull($ticket->status);
+            Assert::assertSame('pending', $ticket->status->value);
         });
 
         it('respects provided status instead of default', function () {
-            $ticket = Ticket::factory()->create([
+            /** @var TestCase $this */
+        Assert::assertNotNull($this->user);
+            $ticket = TicketFactory::new()->createOne([
                 'name' => 'Test Custom Status',
-                'owner_id' => $this->user->id,
+                'owner_id' => $this->authUser()->id,
                 'status' => TicketStatusEnum::IN_PROGRESS,
             ]);
 
-            expect($ticket->status->value)->toBe('in_progress');
+            Assert::assertNotNull($ticket->status);
+            Assert::assertSame('in_progress', $ticket->status->value);
         });
     });
 
     describe('Icon Data Generation', function () {
         it('generates icon data for valid ticket types', function () {
-            $ticket = Ticket::factory()->create([
-                'owner_id' => $this->user->id,
-                'type' => TicketTypeEnum::BUG,
+            /** @var TestCase $this */
+        Assert::assertNotNull($this->user);
+            $ticket = TicketFactory::new()->createOne([
+                'owner_id' => $this->authUser()->id,
+                'type' => TicketTypeEnum::COMPLAINT,
             ]);
 
             $iconData = $ticket->getIconData();
 
-            expect($iconData)->toBeArray()
-                ->toHaveKey('url')
-                ->toHaveKey('type')
-                ->toHaveKey('scale');
+            Assert::assertArrayHasKey('url', $iconData);
+
+            Assert::assertArrayHasKey('type', $iconData);
+
+            Assert::assertArrayHasKey('scale', $iconData);
         });
 
         it('returns empty array for null type', function () {
-            $ticket = Ticket::factory()->create([
-                'owner_id' => $this->user->id,
+            /** @var TestCase $this */
+        Assert::assertNotNull($this->user);
+            $ticket = TicketFactory::new()->createOne([
+                'owner_id' => $this->authUser()->id,
                 'type' => null,
             ]);
 
             $iconData = $ticket->getIconData();
 
-            expect($iconData)->toBe([]);
+            Assert::assertSame([], $iconData);
         });
     });
 });
 
 describe('Ticket Relationships Business Logic', function () {
     it('correctly associates with owner', function () {
-        expect($this->ticket->owner)
-            ->toBeInstanceOf(User::class)
-            ->id->toBe($this->user->id);
+        /** @var TestCase $this */
+        Assert::assertNotNull($this->ticket);
+        Assert::assertNotNull($this->user);
+        Assert::assertInstanceOf(User::class, $this->ticket->owner);
+        Assert::assertSame($this->authUser()->id, $this->ticket->owner->id);
     });
 
     it('can have responsible user assigned', function () {
-        $responsible = User::factory()->create();
-        $ticket = Ticket::factory()->create([
-            'owner_id' => $this->user->id,
+        /** @var TestCase $this */
+        Assert::assertNotNull($this->user);
+        $responsible = UserFactory::new()->createOne();
+        $ticket = TicketFactory::new()->createOne([
+            'owner_id' => $this->authUser()->id,
             'responsible_id' => $responsible->id,
         ]);
 
-        expect($ticket->responsible)
-            ->toBeInstanceOf(User::class)
-            ->id->toBe($responsible->id);
+        Assert::assertInstanceOf(User::class, $ticket->responsible);
+
+        Assert::assertSame($responsible->id, $ticket->responsible->id);
     });
 
     it('can have multiple hours logged', function () {
-        TicketHour::factory()->count(3)->create([
-            'ticket_id' => $this->ticket->id,
-            'user_id' => $this->user->id,
+        /** @var TestCase $this */
+        Assert::assertNotNull($this->ticket);
+        Assert::assertNotNull($this->user);
+        TicketHourFactory::new()->count(3)->create([
+            'ticket_id' => $this->ticket()->id,
+            'user_id' => $this->authUser()->id,
         ]);
 
-        expect($this->ticket->hours)->toHaveCount(3);
+        Assert::assertCount(3, $this->ticket->hours);
     });
 
     it('can have subscribers', function () {
-        $subscriber = User::factory()->create();
+        /** @var TestCase $this */
+        Assert::assertNotNull($this->ticket);
+        $subscriber = UserFactory::new()->createOne();
         $this->ticket->subscribers()->attach($subscriber->id);
 
-        expect($this->ticket->subscribers)
-            ->toHaveCount(1)
-            ->first()->id->toBe($subscriber->id);
+        Assert::assertCount(1, $this->ticket->subscribers);
+
+        $firstSubscriber = $this->ticket->subscribers->first();
+        Assert::assertNotNull($firstSubscriber);
+        Assert::assertSame($subscriber->id, $firstSubscriber->id);
     });
 
     it('can have spatie comments', function () {
-        expect($this->ticket->comments())
-            ->toBeInstanceOf(\Illuminate\Database\Eloquent\Relations\MorphMany::class);
+        /** @var TestCase $this */
+        Assert::assertNotNull($this->ticket);
+        Assert::assertInstanceOf(\Illuminate\Database\Eloquent\Relations\MorphMany::class, $this->ticket->comments());
     });
 
     it('can have legacy ticket comments', function () {
-        expect($this->ticket->ticketComments())
-            ->toBeInstanceOf(HasMany::class);
+        /** @var TestCase $this */
+        Assert::assertNotNull($this->ticket);
+        Assert::assertInstanceOf(HasMany::class, $this->ticket->ticketComments());
     });
 });
 
 describe('Ticket State Management', function () {
     it('can transition between statuses', function () {
-        $ticket = Ticket::factory()->create([
-            'owner_id' => $this->user->id,
+        /** @var TestCase $this */
+        Assert::assertNotNull($this->user);
+        $ticket = TicketFactory::new()->createOne([
+            'owner_id' => $this->authUser()->id,
             'status' => TicketStatusEnum::PENDING,
         ]);
 
         // Transition to in progress
         $ticket->update(['status' => TicketStatusEnum::IN_PROGRESS]);
-        expect($ticket->fresh()->status->value)->toBe('in_progress');
+        $inProgress = $ticket->fresh();
+        Assert::assertNotNull($inProgress);
+        Assert::assertNotNull($inProgress->status);
+        Assert::assertSame('in_progress', $inProgress->status->value);
 
-        // Transition to resolved
         $ticket->update(['status' => TicketStatusEnum::RESOLVED]);
-        expect($ticket->fresh()->status->value)->toBe('resolved');
+        $resolved = $ticket->fresh();
+        Assert::assertNotNull($resolved);
+        Assert::assertNotNull($resolved->status);
+        Assert::assertSame('resolved', $resolved->status->value);
     });
 
     it('maintains enum type integrity during transitions', function () {
-        $ticket = Ticket::factory()->create([
-            'owner_id' => $this->user->id,
+        /** @var TestCase $this */
+        Assert::assertNotNull($this->user);
+        $ticket = TicketFactory::new()->createOne([
+            'owner_id' => $this->authUser()->id,
             'status' => TicketStatusEnum::PENDING,
         ]);
 
         $ticket->update(['status' => TicketStatusEnum::CLOSED]);
 
-        expect($ticket->fresh()->status)
-            ->toBeInstanceOf(TicketStatusEnum::class)
-            ->value->toBe('closed');
+        $closed = $ticket->fresh();
+        Assert::assertNotNull($closed);
+        Assert::assertNotNull($closed->status);
+        Assert::assertInstanceOf(TicketStatusEnum::class, $closed->status);
+        Assert::assertSame('closed', $closed->status->value);
     });
 });

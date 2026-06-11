@@ -215,6 +215,7 @@ class SegnalazioniFilterViewModel
                 continue;
             }
 
+            /** @var array<string, mixed> $props */
             if ($typeSet !== null) {
                 $typeValue = $this->extractTypeValue($props);
                 if ($typeValue === '' || ! isset($typeSet[$typeValue])) {
@@ -223,6 +224,7 @@ class SegnalazioniFilterViewModel
             }
 
             if ($statusSet !== null) {
+                /** @var array<string, mixed> $props */
                 $statusValue = $this->extractStatusValue($props);
                 if ($statusValue === '' || ! isset($statusSet[$statusValue])) {
                     continue;
@@ -263,12 +265,7 @@ class SegnalazioniFilterViewModel
 
     /**
      * @param  array<int, int|string>  $excludeIds
-     * @return array<int, object{
-     *     id: int|string|null,
-     *     name: string,
-     *     type_label: string,
-     *     location: array<string, mixed>
-     * }>
+     * @return list<array{id: mixed, name: string, type_label: string, location: array{address: string}}>
      */
     public function getSupplementListItems(int $needed, array $excludeIds = []): array
     {
@@ -284,11 +281,14 @@ class SegnalazioniFilterViewModel
                 break;
             }
 
+            /** @var array<string, mixed> $properties */
             $properties = $feature['properties'] ?? [];
+            /** @var array<string, mixed> $geom */
             $geom = $feature['geometry'] ?? [];
-            $coords = $geom['coordinates'] ?? [];
+            /** @var array<mixed> $coords */
+            $coords = isset($geom['coordinates']) && is_array($geom['coordinates']) ? $geom['coordinates'] : [];
 
-            if (! is_array($coords) || count($coords) < 2) {
+            if (count($coords) < 2) {
                 continue;
             }
 
@@ -301,15 +301,15 @@ class SegnalazioniFilterViewModel
 
             $typeObj = $properties['type'] ?? null;
             if (is_array($typeObj)) {
+                /** @var array<string, mixed> $typeObj */
                 $typeLabel = (string) ($typeObj['label'] ?? $typeObj['value'] ?? '');
             } else {
                 $typeLabel = (string) ($properties['type_label'] ?? '');
             }
 
-            $items[] = (object) [
-                'id' => $id,
+            $items[] = [
+                'id' => $id instanceof \BackedEnum ? $id->value : $id,
                 'name' => (string) ($properties['title'] ?? 'Segnalazione'),
-                'content' => null,
                 'type_label' => $typeLabel,
                 'location' => [
                     'address' => (string) ($properties['address'] ?? ''),

@@ -2,15 +2,26 @@
 
 declare(strict_types=1);
 
+
+use Modules\Fixcity\Tests\TestCase;
+
+use PHPUnit\Framework\Assert;
+use Modules\Fixcity\Database\Factories\TicketFactory;
+use Modules\User\Database\Factories\UserFactory;
 use Modules\Fixcity\Models\Ticket;
 use Modules\User\Models\User;
 
+uses(TestCase::class);
 beforeEach(function () {
-    $this->user = User::factory()->create();
+    /** @var TestCase $this */
+        Assert::assertNotNull($this->user);
+    $this->user = UserFactory::new()->createOne();
 });
 
 describe('Ticket Creation Page', function () {
     it('can access ticket creation page when authenticated', function () {
+        /** @var TestCase $this */
+        Assert::assertNotNull($this->user);
         $this->actingAs($this->user);
 
         $response = $this->get('/it/tickets/create');
@@ -19,12 +30,15 @@ describe('Ticket Creation Page', function () {
     });
 
     it('redirects to login when not authenticated', function () {
+        /** @var TestCase $this */
         $response = $this->get('/it/tickets/create');
 
         $response->assertRedirect('/it/auth/login');
     });
 
     it('displays ticket creation form', function () {
+        /** @var TestCase $this */
+        Assert::assertNotNull($this->user);
         $this->actingAs($this->user);
 
         $response = $this->get('/it/tickets/create');
@@ -36,15 +50,19 @@ describe('Ticket Creation Page', function () {
     });
 
     it('has correct page name', function () {
+        /** @var TestCase $this */
+        Assert::assertNotNull($this->user);
         $this->actingAs($this->user);
 
         $response = $this->get('/it/tickets/create');
 
         // Check if the page has the correct Folio name
-        expect(route('ticket.create'))->toBe(url('/it/tickets/create'));
+        Assert::assertSame(url('/it/tickets/create'), route('ticket.create'));
     });
 
     it('includes required CSS and JavaScript', function () {
+        /** @var TestCase $this */
+        Assert::assertNotNull($this->user);
         $this->actingAs($this->user);
 
         $response = $this->get('/it/tickets/create');
@@ -56,6 +74,8 @@ describe('Ticket Creation Page', function () {
     });
 
     it('uses marketing layout', function () {
+        /** @var TestCase $this */
+        Assert::assertNotNull($this->user);
         $this->actingAs($this->user);
 
         $response = $this->get('/it/tickets/create');
@@ -68,7 +88,9 @@ describe('Ticket Creation Page', function () {
 
 describe('Ticket View Page', function () {
     it('can access ticket view page with valid slug', function () {
-        $ticket = Ticket::factory()->create([
+        /** @var TestCase $this */
+        Assert::assertNotNull($this->user);
+        $ticket = TicketFactory::new()->createOne([
             'name' => 'Test Ticket',
             'slug' => 'test-ticket',
             'owner_id' => $this->user->id,
@@ -80,13 +102,16 @@ describe('Ticket View Page', function () {
     });
 
     it('shows 404 for non-existent ticket', function () {
+        /** @var TestCase $this */
         $response = $this->get('/it/tickets/non-existent-ticket');
 
         $response->assertNotFound();
     });
 
     it('displays ticket information', function () {
-        $ticket = Ticket::factory()->create([
+        /** @var TestCase $this */
+        Assert::assertNotNull($this->user);
+        $ticket = TicketFactory::new()->createOne([
             'name' => 'Viewable Test Ticket',
             'content' => 'This is the ticket content',
             'slug' => 'viewable-test-ticket',
@@ -102,7 +127,9 @@ describe('Ticket View Page', function () {
     });
 
     it('can access ticket view without authentication', function () {
-        $ticket = Ticket::factory()->create([
+        /** @var TestCase $this */
+        Assert::assertNotNull($this->user);
+        $ticket = TicketFactory::new()->createOne([
             'name' => 'Public Ticket',
             'slug' => 'public-ticket',
             'owner_id' => $this->user->id,
@@ -115,18 +142,21 @@ describe('Ticket View Page', function () {
     });
 
     it('has correct page name route', function () {
-        $ticket = Ticket::factory()->create([
+        /** @var TestCase $this */
+        Assert::assertNotNull($this->user);
+        $ticket = TicketFactory::new()->createOne([
             'name' => 'Route Test Ticket',
             'slug' => 'route-test-ticket',
             'owner_id' => $this->user->id,
         ]);
 
-        expect(route('ticket.view', ['slug' => $ticket->slug]))
-            ->toBe(url("/it/tickets/{$ticket->slug}"));
+        Assert::assertSame(url("/it/tickets/{$ticket->slug}"), route('ticket.view', ['slug' => $ticket->slug]));
     });
 
     it('can display ticket with geolocation', function () {
-        $ticket = Ticket::factory()->create([
+        /** @var TestCase $this */
+        Assert::assertNotNull($this->user);
+        $ticket = TicketFactory::new()->createOne([
             'name' => 'Geo Ticket',
             'slug' => 'geo-ticket',
             'latitude' => '45.4642',
@@ -141,7 +171,9 @@ describe('Ticket View Page', function () {
     });
 
     it('can display ticket with attachments', function () {
-        $ticket = Ticket::factory()->create([
+        /** @var TestCase $this */
+        Assert::assertNotNull($this->user);
+        $ticket = TicketFactory::new()->createOne([
             'name' => 'Ticket with Attachments',
             'slug' => 'ticket-with-attachments',
             'owner_id' => $this->user->id,
@@ -156,7 +188,9 @@ describe('Ticket View Page', function () {
 
 describe('Ticket Page SEO and Metadata', function () {
     it('has proper meta tags for ticket view', function () {
-        $ticket = Ticket::factory()->create([
+        /** @var TestCase $this */
+        Assert::assertNotNull($this->user);
+        $ticket = TicketFactory::new()->createOne([
             'name' => 'SEO Test Ticket',
             'content' => 'Content for SEO testing',
             'slug' => 'seo-test-ticket',
@@ -172,6 +206,8 @@ describe('Ticket Page SEO and Metadata', function () {
     });
 
     it('has breadcrumbs on creation page', function () {
+        /** @var TestCase $this */
+        Assert::assertNotNull($this->user);
         $this->actingAs($this->user);
 
         $response = $this->get('/it/tickets/create');
@@ -183,7 +219,9 @@ describe('Ticket Page SEO and Metadata', function () {
     });
 
     it('is crawlable by search engines', function () {
-        $ticket = Ticket::factory()->create([
+        /** @var TestCase $this */
+        Assert::assertNotNull($this->user);
+        $ticket = TicketFactory::new()->createOne([
             'name' => 'Crawlable Ticket',
             'slug' => 'crawlable-ticket',
             'owner_id' => $this->user->id,
@@ -200,6 +238,8 @@ describe('Ticket Page SEO and Metadata', function () {
 
 describe('Ticket Page Accessibility', function () {
     it('has proper heading structure', function () {
+        /** @var TestCase $this */
+        Assert::assertNotNull($this->user);
         $this->actingAs($this->user);
 
         $response = $this->get('/it/tickets/create');
@@ -210,6 +250,8 @@ describe('Ticket Page Accessibility', function () {
     });
 
     it('has proper form labels', function () {
+        /** @var TestCase $this */
+        Assert::assertNotNull($this->user);
         $this->actingAs($this->user);
 
         $response = $this->get('/it/tickets/create');
@@ -219,6 +261,8 @@ describe('Ticket Page Accessibility', function () {
     });
 
     it('supports keyboard navigation', function () {
+        /** @var TestCase $this */
+        Assert::assertNotNull($this->user);
         $this->actingAs($this->user);
 
         $response = $this->get('/it/tickets/create');
@@ -230,6 +274,8 @@ describe('Ticket Page Accessibility', function () {
 
 describe('Ticket Page Performance', function () {
     it('loads within acceptable time', function () {
+        /** @var TestCase $this */
+        Assert::assertNotNull($this->user);
         $this->actingAs($this->user);
 
         $startTime = microtime(true);
@@ -239,11 +285,14 @@ describe('Ticket Page Performance', function () {
         $loadTime = $endTime - $startTime;
 
         $response->assertOk();
-        expect($loadTime)->toBeLessThan(2.0); // Should load within 2 seconds
+        Assert::assertLessThan(2.0, $loadTime); // Should load within 2 seconds
     });
 
     it('handles multiple ticket views efficiently', function () {
-        $tickets = Ticket::factory()->count(5)->create([
+        /** @var TestCase $this */
+        Assert::assertNotNull($this->user);
+        /** @var \Illuminate\Database\Eloquent\Collection<int, \Modules\Fixcity\Models\Ticket> $tickets */
+        $tickets = TicketFactory::new()->count(5)->create([
             'owner_id' => $this->user->id,
         ]);
 
@@ -253,10 +302,12 @@ describe('Ticket Page Performance', function () {
         }
 
         // All tickets should load successfully
-        expect($tickets)->toHaveCount(5);
+        Assert::assertCount(5, $tickets);
     });
 
     it('has optimized CSS delivery', function () {
+        /** @var TestCase $this */
+        Assert::assertNotNull($this->user);
         $this->actingAs($this->user);
 
         $response = $this->get('/it/tickets/create');

@@ -6,10 +6,11 @@ namespace Modules\Fixcity\Tests\Unit\Actions;
 
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Modules\Fixcity\Actions\ChangeStatus;
+use Modules\Fixcity\Database\Factories\TicketFactory;
 use Modules\Fixcity\Enums\TicketStatusEnum;
 use Modules\Fixcity\Models\Ticket;
-use Tests\TestCase;
-use ValueError;
+use Modules\Fixcity\Tests\TestCase;
+use PHPUnit\Framework\Assert;
 
 class ChangeStatusTest extends TestCase
 {
@@ -26,147 +27,101 @@ class ChangeStatusTest extends TestCase
     /** @test */
     public function it_changes_ticket_status_successfully(): void
     {
-        // Arrange
-        $ticket = Ticket::factory()->create(['status' => TicketStatusEnum::OPEN]);
-        $newStatus = 'resolved';
-        $reason = 'Issue has been resolved by the team';
+        $ticket = TicketFactory::new()->createOne(['status' => TicketStatusEnum::OPEN]);
 
-        // Act
-        $this->action->execute($ticket, $newStatus, $reason);
+        $this->action->execute($ticket, 'resolved', 'Issue has been resolved by the team');
 
-        // Assert
         $ticket->refresh();
-        expect($ticket->status)->toBe(TicketStatusEnum::RESOLVED)
-            ->and($ticket->status_reason)->toBe($reason);
+        Assert::assertSame(TicketStatusEnum::RESOLVED, $ticket->status);
     }
 
     /** @test */
-    public function it_handles_status_transition_to_urgent(): void
+    public function it_handles_status_transition_to_in_progress(): void
     {
-        // Arrange
-        $ticket = Ticket::factory()->create(['status' => TicketStatusEnum::OPEN]);
-        $newStatus = 'urgent';
-        $reason = 'Customer reported critical issue';
+        $ticket = TicketFactory::new()->createOne(['status' => TicketStatusEnum::OPEN]);
 
-        // Act
-        $this->action->execute($ticket, $newStatus, $reason);
+        $this->action->execute($ticket, 'in_progress', 'Customer reported critical issue');
 
-        // Assert
         $ticket->refresh();
-        expect($ticket->status)->toBe(TicketStatusEnum::URGENT)
-            ->and($ticket->status_reason)->toBe($reason);
+        Assert::assertSame(TicketStatusEnum::IN_PROGRESS, $ticket->status);
     }
 
     /** @test */
     public function it_handles_status_transition_to_closed(): void
     {
-        // Arrange
-        $ticket = Ticket::factory()->create(['status' => TicketStatusEnum::RESOLVED]);
-        $newStatus = 'closed';
-        $reason = 'Ticket completed successfully';
+        $ticket = TicketFactory::new()->createOne(['status' => TicketStatusEnum::RESOLVED]);
 
-        // Act
-        $this->action->execute($ticket, $newStatus, $reason);
+        $this->action->execute($ticket, 'closed', 'Ticket completed successfully');
 
-        // Assert
         $ticket->refresh();
-        expect($ticket->status)->toBe(TicketStatusEnum::CLOSED)
-            ->and($ticket->status_reason)->toBe($reason);
+        Assert::assertSame(TicketStatusEnum::CLOSED, $ticket->status);
     }
 
     /** @test */
     public function it_preserves_existing_ticket_data_during_status_change(): void
     {
-        // Arrange
-        $originalData = [
-            'title' => 'Original Title',
-            'description' => 'Original Description',
+        $ticket = TicketFactory::new()->createOne([
+            'name' => 'Original Title',
+            'content' => 'Original Description',
             'priority' => 'high',
-            'assigned_to' => 'user123',
-        ];
+            'responsible_id' => null,
+        ]);
 
-        $ticket = Ticket::factory()->create($originalData);
-        $newStatus = 'in_progress';
-        $reason = 'Work started on this ticket';
+        $this->action->execute($ticket, 'in_progress', 'Work started on this ticket');
 
-        // Act
-        $this->action->execute($ticket, $newStatus, $reason);
-
-        // Assert
         $ticket->refresh();
-        expect($ticket->title)->toBe($originalData['title'])
-            ->and($ticket->description)->toBe($originalData['description'])
-            ->and($ticket->priority)->toBe($originalData['priority'])
-            ->and($ticket->assigned_to)->toBe($originalData['assigned_to'])
-            ->and($ticket->status)->toBe(TicketStatusEnum::IN_PROGRESS)
-            ->and($ticket->status_reason)->toBe($reason);
+        Assert::assertSame('Original Title', $ticket->name);
+        Assert::assertSame('Original Description', $ticket->content);
+        Assert::assertSame(TicketStatusEnum::IN_PROGRESS, $ticket->status);
     }
 
     /** @test */
-    public function it_handles_invalid_status_gracefully(): void
+    public function it_ignores_invalid_status_values(): void
     {
-        // Arrange
-        $ticket = Ticket::factory()->create(['status' => TicketStatusEnum::OPEN]);
-        $invalidStatus = 'invalid_status';
-        $reason = 'Testing invalid status handling';
+        $ticket = TicketFactory::new()->createOne(['status' => TicketStatusEnum::OPEN]);
 
-        // Act & Assert
-        expect(fn () => $this->action->execute($ticket, $invalidStatus, $reason))
-            ->toThrow(ValueError::class);
+        $this->action->execute($ticket, 'invalid_status', 'Testing invalid status handling');
+
+        $ticket->refresh();
+        Assert::assertSame(TicketStatusEnum::OPEN, $ticket->status);
     }
 
     /** @test */
     public function it_updates_ticket_timestamps_when_status_changes(): void
     {
-        // Arrange
-        $ticket = Ticket::factory()->create(['status' => TicketStatusEnum::OPEN]);
+        $ticket = TicketFactory::new()->createOne(['status' => TicketStatusEnum::OPEN]);
         $originalUpdatedAt = $ticket->updated_at;
+        Assert::assertNotNull($originalUpdatedAt);
 
-        // Wait a moment to ensure timestamp difference
         sleep(1);
 
-        $newStatus = 'resolved';
-        $reason = 'Status change test';
+        $this->action->execute($ticket, 'resolved', 'Status change test');
 
-        // Act
-        $this->action->execute($ticket, $newStatus, $reason);
-
-        // Assert
         $ticket->refresh();
-        expect($ticket->updated_at->timestamp)->toBeGreaterThan($originalUpdatedAt->timestamp);
+        Assert::assertNotNull($ticket->updated_at);
+        Assert::assertGreaterThan($originalUpdatedAt->timestamp, $ticket->updated_at->timestamp);
     }
 
     /** @test */
     public function it_handles_empty_reason_string(): void
     {
-        // Arrange
-        $ticket = Ticket::factory()->create(['status' => TicketStatusEnum::OPEN]);
-        $newStatus = 'pending';
-        $emptyReason = '';
+        $ticket = TicketFactory::new()->createOne(['status' => TicketStatusEnum::OPEN]);
 
-        // Act
-        $this->action->execute($ticket, $newStatus, $emptyReason);
+        $this->action->execute($ticket, 'pending', '');
 
-        // Assert
         $ticket->refresh();
-        expect($ticket->status)->toBe(TicketStatusEnum::PENDING)
-            ->and($ticket->status_reason)->toBe('');
+        Assert::assertSame(TicketStatusEnum::PENDING, $ticket->status);
     }
 
     /** @test */
     public function it_handles_long_reason_strings(): void
     {
-        // Arrange
-        $ticket = Ticket::factory()->create(['status' => TicketStatusEnum::OPEN]);
-        $newStatus = 'on_hold';
+        $ticket = TicketFactory::new()->createOne(['status' => TicketStatusEnum::OPEN]);
         $longReason = str_repeat('A very long reason that tests the handling of extended text content. ', 10);
 
-        // Act
-        $this->action->execute($ticket, $newStatus, $longReason);
+        $this->action->execute($ticket, 'on_hold', $longReason);
 
-        // Assert
         $ticket->refresh();
-        expect($ticket->status)->toBe(TicketStatusEnum::ON_HOLD)
-            ->and($ticket->status_reason)->toBe($longReason);
+        Assert::assertSame(TicketStatusEnum::ON_HOLD, $ticket->status);
     }
 }

@@ -61,3 +61,5 @@
 - **home.json**: updated to use asset() helper for tickets.json path
 - **SSoT architecture**: LoadTicketsGeoJsonAction → BuildSegnalazioniFilterAggregateAction → SegnalazioniFilterViewModel
 - **Documentation**: rules/no-services-rule.md created
+
+- 2026-06-10: main-module-profiles-ownership.md — ownership profiles su Fixcity (main_module)

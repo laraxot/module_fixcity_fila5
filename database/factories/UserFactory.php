@@ -1,22 +1,22 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Modules\Fixcity\Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Modules\Fixcity\Models\User;
 
+/**
+ * @extends Factory<User>
+ */
 class UserFactory extends Factory
 {
-    /**
-     * The name of the factory's corresponding model.
-     */
-    protected $model = \Modules\Fixcity\Models\User::class;
+    protected $model = User::class;
 
-    /**
-     * Define the model's default state.
-     */
+    /** @return array<string, mixed> */
     public function definition(): array
     {
         return [];
     }
 }
-

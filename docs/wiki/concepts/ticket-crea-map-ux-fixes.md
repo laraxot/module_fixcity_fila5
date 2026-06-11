@@ -10,7 +10,7 @@ tags: [fixcity, map, geolocation, search, coordinate-picker]
 related:
   - ../concepts/location-capture-map-wizard.md
   - ../concepts/segnalazione-crea-geolocate-when-empty.md
-  - ../concepts/segnalazioni-elenco-map-architecture.md
+  - ../concepts/ticket-list-map-architecture.md
 ---
 
 # Segnalazione Crea Map UX Fixes (2026-05-13)
@@ -131,4 +131,4 @@ php artisan test Modules/Geo
 - [[../Geo/docs/wiki/concepts/coordinate-picker-map-ux-fixes]] - Documentazione Geo module
 - [[location-capture-map-wizard]] - Workflow completo della mappa
 - [[segnalazione-crea-geolocate-when-empty]] - Contract precedente
-- [[segnalazioni-elenco-map-architecture]] - Architettura per segnalazioni-elenco
+- [[ticket-list-map-architecture]] - Architettura per ticket-list

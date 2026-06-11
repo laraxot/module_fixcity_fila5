@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Modules\Fixcity\Tests\Unit\Actions;
 
+use PHPUnit\Framework\Assert;
+use Modules\User\Database\Factories\UserFactory;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
@@ -11,7 +13,7 @@ use Modules\Fixcity\Actions\GetTicketKpiAggregateAction;
 use Modules\Fixcity\Enums\TicketStatusEnum;
 use Modules\Fixcity\Models\Ticket;
 use Modules\User\Models\User;
-use Tests\TestCase;
+use Modules\Fixcity\Tests\TestCase;
 
 class GetTicketKpiAggregateActionTest extends TestCase
 {
@@ -19,7 +21,7 @@ class GetTicketKpiAggregateActionTest extends TestCase
 
     public function test_it_aggregates_ticket_counts_by_status(): void
     {
-        $owner = User::factory()->create();
+        $owner = UserFactory::new()->createOne();
         $table = (new Ticket)->getTable();
         $now = now()->toDateTimeString();
 
@@ -41,9 +43,9 @@ class GetTicketKpiAggregateActionTest extends TestCase
 
         $kpi = app(GetTicketKpiAggregateAction::class)->execute();
 
-        $this->assertSame(3, $kpi['total']);
-        $this->assertSame(2, $kpi['backlog']);
-        $this->assertSame(1, $kpi['in_progress']);
-        $this->assertSame(1, $kpi['resolved']);
+        Assert::assertSame(3, $kpi['total']);
+        Assert::assertSame(2, $kpi['backlog']);
+        Assert::assertSame(1, $kpi['in_progress']);
+        Assert::assertSame(1, $kpi['resolved']);
     }
 }

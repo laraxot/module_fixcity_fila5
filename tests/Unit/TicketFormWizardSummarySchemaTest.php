@@ -8,6 +8,8 @@ use Filament\Forms\Components\TextInput;
 use Filament\Infolists\Components\TextEntry;
 use Modules\Fixcity\Filament\Resources\TicketResource\Schemas\TicketForm;
 use Modules\Fixcity\Filament\Resources\TicketResource\Schemas\TicketFormReviewInfolist;
+use PHPUnit\Framework\Assert;
+use ReflectionMethod;
 
 describe('ticket wizard summary step schema', function (): void {
     it('uses filament infolist text entries for the data recap block', function (): void {
@@ -23,8 +25,8 @@ describe('ticket wizard summary step schema', function (): void {
                 'review_images',
             ] as $key
         ) {
-            expect($entries)->toHaveKey($key)
-                ->and($entries[$key])->toBeInstanceOf(TextEntry::class);
+            Assert::assertArrayHasKey($key, $entries);
+            Assert::assertInstanceOf(TextEntry::class, $entries[$key]);
         }
     });
 
@@ -37,17 +39,17 @@ describe('ticket wizard summary step schema', function (): void {
         /** @var array<string, mixed> $contacts */
         $contacts = $contactsMethod->invoke(null);
 
-        expect($author['authorName'] ?? null)->toBeInstanceOf(TextInput::class)
-            ->and($author['authorFiscalCode'] ?? null)->toBeInstanceOf(TextInput::class)
-            ->and($contacts['authorPhone'] ?? null)->toBeInstanceOf(TextInput::class)
-            ->and($contacts['authorEmail'] ?? null)->toBeInstanceOf(TextInput::class);
+        Assert::assertInstanceOf(TextInput::class, $author['authorFiscalCode'] ?? null);
+        Assert::assertInstanceOf(TextInput::class, $author['authorName'] ?? null);
+        Assert::assertInstanceOf(TextInput::class, $contacts['authorPhone'] ?? null);
+        Assert::assertInstanceOf(TextInput::class, $contacts['authorEmail'] ?? null);
     });
 
     it('keeps priority as an internal default instead of a visible data-step select', function (): void {
         $schema = TicketForm::getDataSchema();
 
-        expect($schema['type'] ?? null)->toBeInstanceOf(Select::class)
-            ->and($schema['priority'] ?? null)->toBeInstanceOf(Hidden::class)
-            ->and($schema['priority'] ?? null)->not->toBeInstanceOf(Select::class);
+        Assert::assertInstanceOf(Hidden::class, $schema['priority'] ?? null);
+        Assert::assertNotInstanceOf(Select::class, $schema['priority'] ?? null);
+        Assert::assertInstanceOf(Select::class, $schema['type'] ?? null);
     });
 });

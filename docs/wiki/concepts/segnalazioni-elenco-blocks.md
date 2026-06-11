@@ -2,9 +2,9 @@
 
 ## Scopo
 
-La pagina canonica **Elenco segnalazioni** (`/it`, slug CMS `home`) deve replicare il [reference Design Comuni](https://italia.github.io/design-comuni-pagine-statiche/sito/segnalazioni-elenco.html) con **blocchi piccoli e riusabili**, non un unico `segnalazioni-layout`.
+La pagina canonica **Elenco segnalazioni** (`/it`, slug CMS `home`) deve replicare il [reference Design Comuni](https://italia.github.io/design-comuni-pagine-statiche/sito/ticket-list.html) con **blocchi piccoli e riusabili**, non un unico `segnalazioni-layout`.
 
-Story owner: [STORY-062](../../../../docs/stories/STORY-062-segnalazioni-elenco-cms-blocks-decomposition.md).
+Story owner: [STORY-062](../../../../docs/stories/STORY-062-ticket-list-cms-blocks-decomposition.md).
 
 ## Cosa non va nel monolite attuale
 
@@ -33,12 +33,12 @@ row
 └── div.col-lg-8       → toolbar risultati + nav-tabs + tab-content
 ```
 
-Fix P0: non omettere `aside` se facet vuoti — mostrare shell UI; popolare `public_html/data/tickets.json` (vedi [segnalazioni-elenco-map-architecture.md](./segnalazioni-elenco-map-architecture.md)).
+Fix P0: non omettere `aside` se facet vuoti — mostrare shell UI; popolare `public_html/data/tickets.json` (vedi [ticket-list-map-architecture.md](./ticket-list-map-architecture.md)).
 
 ## Collegamenti
 
-- [segnalazioni-elenco-map-architecture.md](./segnalazioni-elenco-map-architecture.md)
-- [it-vs-segnalazioni-elenco.md](../../../../../Themes/Sixteen/docs/design-comuni/visual-comparison/it-vs-segnalazioni-elenco.md)
+- [ticket-list-map-architecture.md](./ticket-list-map-architecture.md)
+- [it-vs-ticket-list.md](../../../../../Themes/Sixteen/docs/design-comuni/visual-comparison/it-vs-ticket-list.md)
 
 ### GitHub (discussion + issue — aggiornare a ogni PR)
 

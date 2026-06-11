@@ -23,17 +23,21 @@ final class BuildPublicTicketsQueryAction
         $currentUserId = auth()->id();
         if ($currentUserId !== null) {
             $query->where(function (Builder $q) use ($currentUserId): void {
+                /** @var list<TicketStatusEnum> $visibleStatuses */
+                $visibleStatuses = TicketStatusEnum::canViewByAll();
                 $q->whereIn('status', array_map(
                     static fn (TicketStatusEnum $status): string => $status->value,
-                    TicketStatusEnum::canViewByAll(),
+                    $visibleStatuses,
                 ))
                     ->orWhere('created_by', $currentUserId)
                     ->orWhere('updated_by', $currentUserId);
             });
         } else {
+            /** @var list<TicketStatusEnum> $visibleStatuses */
+            $visibleStatuses = TicketStatusEnum::canViewByAll();
             $query->whereIn('status', array_map(
                 static fn (TicketStatusEnum $status): string => $status->value,
-                TicketStatusEnum::canViewByAll(),
+                $visibleStatuses,
             ));
         }
 

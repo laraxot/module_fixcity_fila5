@@ -8,6 +8,7 @@ use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
 use Modules\Fixcity\Enums\TicketStatusEnum;
 use Modules\Fixcity\Models\Ticket;
+use Modules\Xot\Actions\Cast\SafeFloatCastAction;
 
 /**
  * Tempi medi risoluzione ticket (STORY-041 / FR-020).
@@ -78,6 +79,6 @@ final class GetTicketSlaMetricsAction
             return null;
         }
 
-        return ((float) $avgSeconds) / 3600;
+        return SafeFloatCastAction::cast($avgSeconds) / 3600;
     }
 }

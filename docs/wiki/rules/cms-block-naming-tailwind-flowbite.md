@@ -1,65 +1,71 @@
 ---
-title: "CMS Block naming — Tailwind UI / Flowbite (Fixcity)"
+title: "CMS Block naming — Tailwind UI / Flowbite"
 type: rule
 confidence: high
 created: 2026-06-01
-updated: 2026-06-01
-tags: [cms, blocks, naming-convention, tailwind, flowbite, views]
+updated: 2026-06-10
+tags: [cms, blocks, naming-convention, tailwind, flowbite, views, critical]
+issues:
+  - https://github.com/laraxot/base_fixcity_fila5/issues/194
+discussions:
+  - https://github.com/laraxot/base_fixcity_fila5/discussions/195
 related:
-  - rules/frontend-stack-canonical.md
+  - ../../../../Themes/Sixteen/docs/blocks/folder-vocabulary.md
+  - no-italian-component-names.md
+  - frontend-stack-canonical.md
 ---
 
 # CMS Block naming — Tailwind UI / Flowbite
 
-## Regola
+## Regola (obbligatoria)
 
-> Le sottocartelle di `resources/views/components/blocks/` **devono** prendere i nomi da:
-> - https://tailwindcss.com/plus/ui-blocks
-> - https://flowbite.com/blocks/
+Le **sottocartelle** di `resources/views/components/blocks/` devono usare nomi presi da:
 
-## Mapping principale
+- [Flowbite Blocks](https://flowbite.com/blocks/)
+- [Tailwind CSS UI Blocks](https://tailwindcss.com/plus/ui-blocks)
 
-| Sottocartella | Reference |
-|---------------|-----------|
-| `hero/` | [Tailwind — Hero sections](https://tailwindcss.com/plus/ui-blocks/marketing/sections/heroes) |
-| `grid/` | [Tailwind — Grids](https://tailwindcss.com/plus/ui-blocks/application-ui/layout/panels) |
-| `cta/` | [Tailwind — CTA sections](https://tailwindcss.com/plus/ui-blocks/marketing/sections/cta-sections) |
-| `rating/` | [Flowbite — Rating](https://flowbite.com/docs/components/rating/) |
-| `vertical-navigation/` | [Tailwind — Vertical navigation](https://tailwindcss.com/plus/ui-blocks/application-ui/navigation/vertical-navigation) |
-| `card/` | [Flowbite — Card](https://flowbite.com/docs/components/card/) |
-| `tabs/` | [Flowbite — Tabs](https://flowbite.com/docs/components/tabs/) |
-| `modal/` | [Flowbite — Modal](https://flowbite.com/docs/components/modal/) |
+**Inglese**, **kebab-case**, **no dominio** (`ticket`, `segnalazione`).  
+Vocabolario completo + contenuto ammesso: [folder-vocabulary.md](../../../../Themes/Sixteen/docs/blocks/folder-vocabulary.md).
 
-## Anti-pattern
+## Shape
 
 ```
-// ❌ SBAGLIATO
-blocks/ticket-layout/
-blocks/segnalazioni-elenco/
-
-// ✅ CORRETTO
-blocks/hero/
-blocks/grid/
-blocks/vertical-navigation/
+blocks/<categoria-tailwind-o-flowbite>/<variante>.blade.php
 ```
 
-## Story di riferimento
+JSON CMS:
 
-STORY-112: `docs/stories/STORY-112-frontend-stack-canonical-rule.md`
-
-## Architettura Actions
-
-> **Regola LARAXOT**: Useremo Actions di Spatie (`laravel-queueable-action`) invece di Services.
-> Ogni logica di business va in `app/Actions/` con metodo `execute()`.
-
-Esempio:
-```
-// ❌ SBAGLIATO
-app/Services/TicketCategoryService.php
-
-// ✅ CORRETTO
-app/Actions/TicketCategoryAction.php
-    public function execute()
+```json
+{
+  "type": "grid",
+  "data": {
+    "view": "pub_theme::components.blocks.grid.2col"
+  }
+}
 ```
 
-Reference: [[../../docs/wiki/rules/laraxot-actions-over-services.md]]
+## Esempi
+
+| ✅ Corretto | ❌ Vietato |
+|------------|-----------|
+| `blocks/hero/default.blade.php` | `blocks/segnalazioni/layout.blade.php` |
+| `blocks/grid/2col.blade.php` | `blocks/ticket-layout/layout.blade.php` (legacy) |
+| `blocks/vertical-navigation/contacts.blade.php` | `blocks/governance-calendario/` |
+| `blocks/cta/ticket.blade.php` | `__('Chiudi')` come chiave i18n |
+
+## Eccezioni legacy (non aggiungere)
+
+`tests/`, `flow/`, `design-comuni/`, `ticket/`, `ticket-layout/`, `ticket-list/`, `administration/`, `governance/`, `thematic/`, `feature_sections/`, `topics-grid/`
+
+Nuovi blocchi **sempre** su allowlist.
+
+## Verifica
+
+```bash
+bash bashscripts/quality-gates/check-blocks-folder-names.sh
+```
+
+## Riferimenti
+
+- STORY-111: `docs/stories/STORY-111-home-json-cms-blocks-refactor.md`
+- Script: `bashscripts/quality-gates/check-blocks-folder-names.sh`

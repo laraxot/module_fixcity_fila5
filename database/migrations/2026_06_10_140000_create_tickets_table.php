@@ -21,8 +21,8 @@ return new class extends XotBaseMigration
                 $table->id();
                 $table->string('name');
                 $table->longText('content');
-                $table->foreignId('owner_id'); // ->constrained('users');
-                $table->foreignId('responsible_id')->nullable(); // ->constrained('users');
+                $table->string('owner_id', 36); // ->constrained('users');
+                $table->string('responsible_id', 36)->nullable(); // ->constrained('users');
                 $table->foreignId('status_id')->nullable(); // ->constrained('ticket_statuses');
                 // $table->foreignId('project_id')->constrained('projects');
                 $table->string('code')->nullable();
@@ -71,6 +71,12 @@ return new class extends XotBaseMigration
                 }
                 if (! $this->hasColumn('email')) {
                     $table->string('email')->nullable();
+                }
+                if ($this->hasColumn('owner_id')) {
+                    $table->string('owner_id', 36)->change();
+                }
+                if ($this->hasColumn('responsible_id')) {
+                    $table->string('responsible_id', 36)->nullable()->change();
                 }
 
                 $this->updateTimestamps(table: $table, hasSoftDeletes: true);

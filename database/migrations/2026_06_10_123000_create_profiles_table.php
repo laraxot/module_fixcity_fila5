@@ -11,7 +11,8 @@ use Modules\Xot\Database\Migrations\XotBaseMigration;
 /*
  * Owner Fixcity — UNICA migrazione per `profiles` (connessione fixcity).
  * Evoluzione schema: modificare QUESTO file + bump timestamp nel nome (vietato secondo file create_*).
- * Contratto: docs/wiki/concepts/profiles-uuid-contract.md
+ * Contratto: laravel/Modules/Fixcity/docs/wiki/concepts/profiles-uuid-contract.md
+ * Ultimo bump: 2026_06_10_123000 — aggiunge uuid + allinea user_id string(36) su DB legacy
  */
 return new class extends XotBaseMigration
 {

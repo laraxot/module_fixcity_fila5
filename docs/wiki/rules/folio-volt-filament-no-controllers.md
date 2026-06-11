@@ -23,7 +23,7 @@ laravel/Modules/Fixcity/
 ├── routes/                 # Solo route file per API (se necessario)
 │   └── api.php            # API endpoints solo, mai web.php
 ├── resources/views/pages/  # Folio: pagina = blade
-│   └── segnalazioni-elenco.blade.php
+│   └── ticket-list.blade.php
 ├── resources/views/components/blocks/  # Blade components riusabili
 └── app/Filament/           # Widget admin Filament
 ```

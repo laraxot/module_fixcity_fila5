@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-use Modules\Comment\Http\Livewire\CommentsComponent;
+use Modules\Comment\Filament\Widgets\Commentable\CommentsWidget;
 use Modules\Fixcity\Models\Ticket;
 
 ?>
@@ -14,8 +14,9 @@ use Modules\Fixcity\Models\Ticket;
 @if ($record)
     <div class="ticket-comments-fo">
         @auth
-            @livewire(CommentsComponent::class, [
-                'model' => $record,
+            @livewire(CommentsWidget::class, [
+                'commentableType' => Ticket::class,
+                'commentableKey' => (string) $record->getKey(),
                 'readOnly' => false,
                 'hideNotificationOptions' => true,
                 'noReplies' => true,
@@ -24,8 +25,9 @@ use Modules\Fixcity\Models\Ticket;
         @endauth
 
         @guest
-            @livewire(CommentsComponent::class, [
-                'model' => $record,
+            @livewire(CommentsWidget::class, [
+                'commentableType' => Ticket::class,
+                'commentableKey' => (string) $record->getKey(),
                 'readOnly' => true,
                 'hideNotificationOptions' => true,
                 'noReplies' => true,

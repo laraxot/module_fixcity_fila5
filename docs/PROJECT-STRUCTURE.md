@@ -1,17 +1,17 @@
 ---
-title: "Project Structure — Module Fixcity"
+title: "Project Structure — Root root"
 type: documentation
 created: 2026-05-11
 updated: 2026-05-11
 tags: [structure, architecture, module]
 ---
 
-# Project Structure — Module **Fixcity**
+# Project Structure — Root **root**
 
 ## Directory Structure
 
-```
-./laravel/Modules/Fixcity/docs/
+\`\`\`
+./laravel/Modules/docs/
 ├── wiki/                          # Knowledge base locale (LLM Wiki)
 │   ├── index.md                  # Master catalog
 │   ├── log.md                    # Activity log
@@ -37,17 +37,17 @@ tags: [structure, architecture, module]
 ├── PERFORMANCE-OPTIMIZATION.md    # Metriche e best practice
 ├── ARCHITECTURE.md               # (opzionale) Architettura modulo
 └── README.md                     # (opzionale) Overview modulo
-```
+\`\`\`
 
 ## File Chiave
 
 | File | Purpose |
 |------|---------|
-|  | Catalogo di tutto il sapere del modulo |
-|  | Storico attività (ingest/query/lint) |
-|  | Regole + trigger map locale |
-|  | Concetti specifici del modulo |
-|  | **Leggi prima** — pattern da seguire |
+| `wiki/index.md` | Catalogo di tutto il sapere del modulo |
+| `wiki/log.md` | Storico attività (ingest/query/lint) |
+| `wiki/rules/` | Regole + trigger map locale |
+| `wiki/concepts/` | Concetti specifici del modulo |
+| `ON-DEMAND-PATTERN.md` | **Leggi prima** — pattern da seguire |
 
 ## Convenzioni
 
@@ -59,7 +59,7 @@ tags: [structure, architecture, module]
 
 ### Frontmatter Schema
 
-```yaml
+\`\`\`yaml
 ---
 title: "Page Title"
 type: concept|entity|source|comparison|decision|troubleshooting
@@ -71,7 +71,7 @@ tags: [tag1, tag2]
 related:
   - ../concepts/related.md
 ---
-```
+\`\`\`
 
 ### Link Rules
 
@@ -81,7 +81,7 @@ related:
 
 ## Workflow con On-Demand Pattern
 
-```mermaid
+\`\`\`mermaid
 graph TD
     A[Task Received] --> B{Has trigger?}
     B -->|Yes| C[Read trigger_map]
@@ -90,7 +90,7 @@ graph TD
     E --> D
     D --> F[Apply knowledge]
     F --> G[Update wiki/log]
-```
+\`\`\`
 
 ## Riferimenti Globali
 
@@ -100,15 +100,14 @@ graph TD
 - [Global Commands](../../docs/wiki/commands/)
 - [Global Memories](../../docs/wiki/memories/)
 
-## Setup Initiale (per nuovi moduli)
+## Setup Iniziale (per nuovi moduli)
 
-```bash
+\`\`\`bash
 # 1. Crea struttura wiki
 mkdir -p docs/wiki/{rules,skills,commands,memories,concepts,entities,decisions,troubleshooting}
 
-# 2. Crea INDEX files
+# 2. Crea INDEX files (già creati)
 cp docs/wiki/rules/INDEX.md docs/wiki/rules/
-cp docs/wiki/skills/INDEX.md docs/wiki/skills/
 # ... etc
 
 # 3. Aggiungi a QMD collection (opzionale, già incluso global)
@@ -116,8 +115,8 @@ cp docs/wiki/skills/INDEX.md docs/wiki/skills/
 
 # 4. Committa
 git add docs/
-git commit -m "docs: add wiki structure for Fixcity"
-```
+git commit -m "docs: add wiki structure for root"
+\`\`\`
 
 ---
 *Pattern: On-Demand | Source: docs/wiki/*

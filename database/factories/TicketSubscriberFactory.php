@@ -7,16 +7,14 @@ namespace Modules\Fixcity\Database\Factories;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Modules\Fixcity\Models\TicketSubscriber;
 
+/**
+ * @extends Factory<TicketSubscriber>
+ */
 class TicketSubscriberFactory extends Factory
 {
-    /**
-     * The name of the factory's corresponding model.
-     */
     protected $model = TicketSubscriber::class;
 
-    /**
-     * Define the model's default state.
-     */
+    /** @return array<string, mixed> */
     public function definition(): array
     {
         return [];

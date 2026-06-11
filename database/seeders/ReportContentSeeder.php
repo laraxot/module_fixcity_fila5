@@ -12,6 +12,7 @@ use function Safe\json_encode;
 
 class ReportContentSeeder extends Seeder
 {
+    /** @var list<array<string, mixed>> */
     private array $realReports = [
         [
             'title' => 'Buca in via Solferino',
