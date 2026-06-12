@@ -57,27 +57,6 @@ abstract class TestCase extends XotBaseTestCase
         return $this->ticket;
     }
 
-    public function authUser(): AuthUser
-    {
-        Assert::assertNotNull($this->user);
-
-        return $this->user;
-    }
-
-    public function authAdmin(): AuthUser
-    {
-        Assert::assertNotNull($this->admin);
-
-        return $this->admin;
-    }
-
-    public function ticket(): Ticket
-    {
-        Assert::assertNotNull($this->ticket);
-
-        return $this->ticket;
-    }
-
     protected function setUp(): void
     {
         parent::setUp();

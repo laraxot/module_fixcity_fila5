@@ -81,10 +81,10 @@ describe('User Model (Fixcity)', function () {
         $ticket = TicketFactory::new()->createOne();
 
         // Subscribe user to ticket
-        $ticket->subscribers()->attach($user->id);
+        $ticket->ticketSubscribers()->attach($user->id);
 
         $subscribedTickets = Ticket::query()
-            ->whereHas('subscribers', static fn ($query) => $query->where('users.id', $user->id))
+            ->whereHas('ticketSubscribers', static fn ($query) => $query->where('users.id', $user->id))
             ->get();
         Assert::assertCount(1, $subscribedTickets);
         Assert::assertSame($ticket->id, $subscribedTickets->first()?->id);

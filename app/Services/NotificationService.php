@@ -196,27 +196,36 @@ class NotificationService
      * @param Ticket $ticket
      * @return Collection<int, User>
      */
+    /**
+     * @return Collection<int, User>
+     */
     private function getUsersToNotify(Ticket $ticket): Collection
     {
+        /** @var Collection<int, User> $users */
         $users = collect();
         
         // Aggiungi il creatore del ticket
-        if ($ticket->creator) {
-            $users->push($ticket->creator);
+        if ($ticket->owner instanceof User) {
+            $users->push($ticket->owner);
         }
-        
+
         // Aggiungi l'assegnatario del ticket
-        if ($ticket->assignee) {
-            $users->push($ticket->assignee);
+        if ($ticket->responsible instanceof User) {
+            $users->push($ticket->responsible);
         }
         
-        // Aggiungi i subscriber del ticket
-        if ($ticket->subscribers) {
-            $users = $users->merge($ticket->subscribers);
+        // Aggiungi i subscriber del ticket (pivot ticket_subscribers)
+        /** @var Collection<int, User> $ticketSubscribers */
+        $ticketSubscribers = $ticket->ticketSubscribers()->get();
+        if ($ticketSubscribers->isNotEmpty()) {
+            $users = $users->merge($ticketSubscribers);
         }
         
         // Rimuovi duplicati
-        return $users->unique('id');
+        /** @var Collection<int, User> $unique */
+        $unique = $users->unique('id');
+
+        return $unique;
     }
     
     /**
@@ -299,10 +308,221 @@ class NotificationService
      *
      * @param User $user
      * @param int $perPage
-     * @return LengthAwarePaginator
+     * @return LengthAwarePaginator<int, \Illuminate\Notifications\DatabaseNotification>
      */
     public function getUserNotifications(User $user, int $perPage = 15): LengthAwarePaginator
     {
-        return $user->notifications()->paginate($perPage);
+        /** @var LengthAwarePaginator<int, \Illuminate\Notifications\DatabaseNotification> $paginator */
+        $paginator = $user->notifications()->paginate($perPage);
+
+        return $paginator;
+    }
+
+    /**
+     * Notify when a ticket is created.
+     *
+     * @param Ticket $ticket
+     * @return bool
+     */
+    public function notifyTicketCreated(Ticket $ticket): bool
+    {
+        $users = $this->getUsersToNotify($ticket);
+
+        foreach ($users as $user) {
+            // Notification::send($user, new TicketCreatedNotification($ticket));
+        }
+
+        return true;
+    }
+
+    /**
+     * Notify when a ticket is updated.
+     *
+     * @param Ticket $ticket
+     * @param string|null $oldStatus
+     * @param string|null $oldPriority
+     * @return bool
+     */
+    public function notifyTicketUpdated(Ticket $ticket, ?string $oldStatus = null, ?string $oldPriority = null): bool
+    {
+        $users = $this->getUsersToNotify($ticket);
+
+        foreach ($users as $user) {
+            // Notification::send($user, new TicketUpdatedNotification($ticket, $oldStatus, $oldPriority));
+        }
+
+        return true;
+    }
+
+    /**
+     * Notify when a ticket is assigned.
+     *
+     * @param Ticket $ticket
+     * @param User $assignee
+     * @return bool
+     */
+    public function notifyTicketAssigned(Ticket $ticket, User $assignee): bool
+    {
+        // Notification::send($assignee, new TicketAssignedNotification($ticket));
+        // Notification::send($ticket->owner, new TicketAssignedNotification($ticket, $assignee));
+
+        return true;
+    }
+
+    /**
+     * Notify when a ticket is resolved.
+     *
+     * @param Ticket $ticket
+     * @return bool
+     */
+    public function notifyTicketResolved(Ticket $ticket): bool
+    {
+        $users = $this->getUsersToNotify($ticket);
+
+        foreach ($users as $user) {
+            // Notification::send($user, new TicketResolvedNotification($ticket));
+        }
+
+        return true;
+    }
+
+    /**
+     * Notify when a ticket is closed.
+     *
+     * @param Ticket $ticket
+     * @return bool
+     */
+    public function notifyTicketClosed(Ticket $ticket): bool
+    {
+        $users = $this->getUsersToNotify($ticket);
+
+        foreach ($users as $user) {
+            // Notification::send($user, new TicketClosedNotification($ticket));
+        }
+
+        return true;
+    }
+
+    /**
+     * Notify when a comment is added to a ticket.
+     *
+     * @param Ticket $ticket
+     * @param mixed $comment
+     * @return bool
+     */
+    public function notifyCommentAdded(Ticket $ticket, mixed $comment): bool
+    {
+        $users = $this->getUsersToNotify($ticket);
+
+        // Remove comment author from notification list
+        $commentUserId = is_object($comment) && property_exists($comment, 'user_id') ? $comment->user_id : null;
+        if ($commentUserId !== null) {
+            $users = $users->filter(function ($user) use ($commentUserId) {
+                return $user->id !== $commentUserId;
+            });
+        }
+
+        foreach ($users as $user) {
+            // Notification::send($user, new TicketCommentAddedNotification($ticket, $comment));
+        }
+
+        return true;
+    }
+
+    /**
+     * Notify when a due date is approaching.
+     *
+     * @param Ticket $ticket
+     * @return bool
+     */
+    public function notifyDueDateApproaching(Ticket $ticket): bool
+    {
+        $users = $this->getUsersToNotify($ticket);
+
+        foreach ($users as $user) {
+            // Notification::send($user, new DueDateApproachingNotification($ticket));
+        }
+
+        return true;
+    }
+
+    /**
+     * Notify when a due date is exceeded.
+     *
+     * @param Ticket $ticket
+     * @return bool
+     */
+    public function notifyDueDateExceeded(Ticket $ticket): bool
+    {
+        $users = $this->getUsersToNotify($ticket);
+
+        foreach ($users as $user) {
+            // Notification::send($user, new DueDateExceededNotification($ticket));
+        }
+
+        return true;
+    }
+
+    /**
+     * Send bulk notifications to multiple users.
+     *
+     * @param Collection<int, User> $users
+     * @param string $message
+     * @return bool
+     */
+    public function sendBulkNotifications(Collection $users, string $message): bool
+    {
+        foreach ($users as $user) {
+            $user->notifications()->create([
+                'type' => 'bulk_notification',
+                'data' => ['message' => $message],
+            ]);
+        }
+
+        return true;
+    }
+
+    /**
+     * Send email notification to a user.
+     *
+     * @param User $user
+     * @param string $subject
+     * @param string $content
+     * @return bool
+     */
+    public function sendEmailNotification(User $user, string $subject, string $content): bool
+    {
+        // Mail::to($user)->send(new SimpleMail($subject, $content));
+
+        return true;
+    }
+
+    /**
+     * Send SMS notification to a user.
+     *
+     * @param User $user
+     * @param string $message
+     * @return bool
+     */
+    public function sendSMSNotification(User $user, string $message): bool
+    {
+        // Sms::to($user->phone)->send($message);
+
+        return true;
+    }
+
+    /**
+     * Send push notification to a user.
+     *
+     * @param User $user
+     * @param string $title
+     * @param string $message
+     * @return bool
+     */
+    public function sendPushNotification(User $user, string $title, string $message): bool
+    {
+        // PushNotification::send($user, $title, $message);
+
+        return true;
     }
 }

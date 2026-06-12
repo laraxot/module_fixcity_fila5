@@ -4,23 +4,11 @@ declare(strict_types=1);
 
 return [
     'fields' => [
-        'title' => [
-            'label' => 'title',
-        ],
-        'sub_title' => [
-            'label' => 'sub_title',
-        ],
-        'method' => [
-            'label' => 'method',
-        ],
-        'limit' => [
-            'label' => 'limit',
-        ],
-        '_tpl' => [
-            'label' => '_tpl',
-        ],
-        'view' => [
-            'label' => 'view',
-        ],
+        'title' => ['label' => 'title', 'placeholder' => 'title', 'helper_text' => 'title', 'description' => 'title'],
+        'sub_title' => ['label' => 'sub_title', 'placeholder' => 'sub_title', 'helper_text' => 'sub_title', 'description' => 'sub_title'],
+        'method' => ['label' => 'method', 'placeholder' => 'method', 'helper_text' => 'method', 'description' => 'method'],
+        'limit' => ['label' => 'limit', 'placeholder' => 'limit', 'helper_text' => 'limit', 'description' => 'limit'],
+        '_tpl' => ['label' => '_tpl'],
+        'view' => ['label' => 'view', 'placeholder' => 'view', 'helper_text' => 'view', 'description' => 'view'],
     ],
 ];

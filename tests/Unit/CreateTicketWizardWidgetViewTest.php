@@ -17,7 +17,6 @@ use Modules\Xot\Filament\Widgets\XotBaseWidget;
 
 uses(TestCase::class);
 test('create ticket wizard leaves view resolution to xot base widget', function (): void {
-    /** @var TestCase $this */
     $prop = new ReflectionProperty(CreateTicketWizardWidget::class, 'view');
 
     Assert::assertSame(XotBaseWidget::class, $prop->getDeclaringClass()->getName());
@@ -26,12 +25,10 @@ test('create ticket wizard leaves view resolution to xot base widget', function 
 });
 
 test('create ticket wizard binds ticket resource for filament wizard', function (): void {
-    /** @var TestCase $this */
     Assert::assertSame(TicketResource::class, CreateTicketWizardWidget::$resource);
 });
 
 test('sixteen theme wizard wrapper avoids nested form around filament wizard', function (): void {
-    /** @var TestCase $this */
     $path = dirname(__DIR__, 4).'/Themes/Sixteen/resources/views/filament/widgets/create-ticket-wizard.blade.php';
 
     Assert::assertTrue(is_file($path));
@@ -51,7 +48,6 @@ test('sixteen theme wizard wrapper avoids nested form around filament wizard', f
 });
 
 test('fixcity module wizard view avoids nested form around filament wizard', function (): void {
-    /** @var TestCase $this */
     $path = dirname(__DIR__, 2).'/resources/views/filament/widgets/create-ticket-wizard.blade.php';
 
     Assert::assertTrue(is_file($path));
@@ -69,14 +65,12 @@ test('fixcity module wizard view avoids nested form around filament wizard', fun
 });
 
 test('xot base wizard widget exposes submit action hook from has xot form trait', function (): void {
-    /** @var TestCase $this */
     $method = new ReflectionMethod(\Modules\Xot\Filament\Widgets\XotBaseWizardWidget::class, 'getSubmitFormAction');
 
     Assert::assertTrue($method->isProtected());
 });
 
 test('sixteen theme provides design comuni wizard submit button view', function (): void {
-    /** @var TestCase $this */
     $path = dirname(__DIR__, 4).'/Themes/Sixteen/resources/views/filament/wizard/submit-button.blade.php';
 
     Assert::assertTrue(is_file($path));

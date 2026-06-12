@@ -10,6 +10,7 @@ use Modules\Fixcity\Database\Factories\TicketHourFactory;
 use Modules\Fixcity\Database\Factories\TicketFactory;
 use Modules\User\Database\Factories\UserFactory;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Support\Collection;
 use Modules\Fixcity\Enums\TicketStatusEnum;
 use Modules\Fixcity\Enums\TicketTypeEnum;
 use Modules\Fixcity\Models\Ticket;
@@ -286,11 +287,13 @@ describe('Ticket Relationships Business Logic', function () {
         /** @var TestCase $this */
         Assert::assertNotNull($this->ticket);
         $subscriber = UserFactory::new()->createOne();
-        $this->ticket->subscribers()->attach($subscriber->id);
+        $this->ticket->ticketSubscribers()->attach($subscriber->id);
 
-        Assert::assertCount(1, $this->ticket->subscribers);
+        /** @var Collection<int, User> $subscribers */
+        $subscribers = $this->ticket->ticketSubscribers()->get();
+        Assert::assertCount(1, $subscribers);
 
-        $firstSubscriber = $this->ticket->subscribers->first();
+        $firstSubscriber = $subscribers->first();
         Assert::assertNotNull($firstSubscriber);
         Assert::assertSame($subscriber->id, $firstSubscriber->id);
     });

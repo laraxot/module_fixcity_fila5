@@ -231,18 +231,18 @@ class TicketService
     public function searchTickets(string $query): Collection
     {
         return Ticket::where(function (Builder $builder) use ($query) {
-            $builder->where('title', 'like', "%{$query}%")
-                   ->orWhere('description', 'like', "%{$query}%");
+            $builder->where('name', 'like', "%{$query}%")
+                   ->orWhere('content', 'like', "%{$query}%");
         })->get();
     }
-    
+
     /**
      * Get valid status transitions for a given status.
      *
      * @param string $currentStatus
      * @return array<string>
      */
-    private function getValidStatusTransitions(string $currentStatus): array
+    public function getValidStatusTransitions(string $currentStatus): array
     {
         $transitions = [
             'draft' => ['pending'],
@@ -260,5 +260,51 @@ class TicketService
         ];
         
         return $transitions[$currentStatus] ?? [];
+    }
+
+    /**
+     * Get tickets by type.
+     *
+     * @param string $type
+     * @return Collection<int, Ticket>
+     */
+    public function getTicketsByType(string $type): Collection
+    {
+        return Ticket::where('type', $type)->get();
+    }
+
+    /**
+     * Get tickets assigned to a specific user.
+     *
+     * @param User $user
+     * @return Collection<int, Ticket>
+     */
+    public function getTicketsByAssignee(User $user): Collection
+    {
+        return Ticket::where('responsible_id', $user->id)->get();
+    }
+
+    /**
+     * Get ticket statistics.
+     *
+     * @return array<string, int>
+     */
+    public function getTicketStatistics(): array
+    {
+        $total = Ticket::count();
+
+        /** @var array<string, int> $statuses */
+        $statuses = Ticket::selectRaw('status, count(*) as count')
+            ->groupBy('status')
+            ->pluck('count', 'status')
+            ->toArray();
+
+        return [
+            'total' => $total,
+            'pending' => $statuses['pending'] ?? 0,
+            'in_progress' => $statuses['in_progress'] ?? 0,
+            'resolved' => $statuses['resolved'] ?? 0,
+            'closed' => $statuses['closed'] ?? 0,
+        ];
     }
 }
