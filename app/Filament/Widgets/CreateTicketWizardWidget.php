@@ -46,7 +46,10 @@ class CreateTicketWizardWidget extends XotBaseWizardWidget
         return TicketForm::getSteps();
     }
 
-    
+    protected function hasSkippableSteps(): bool
+    {
+        return false;
+    }
 
     public function save(): void
     {
@@ -84,7 +87,7 @@ class CreateTicketWizardWidget extends XotBaseWizardWidget
     {
         return [
             'blockData' => $this->blockData,
-            'pageTitle' => SafeStringCastAction::cast($this->blockData['title'] ?? __('fixcity::segnalazione.page.title.label')),
+            'pageTitle' => SafeStringCastAction::cast($this->blockData['title'] ?? __('fixcity::ticket.page.title.label')),
             'pageDescription' => SafeStringCastAction::cast($this->blockData['description'] ?? ''),
         ];
     }

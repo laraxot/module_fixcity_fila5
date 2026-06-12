@@ -255,7 +255,7 @@ describe('Ticket Relationships', function () {
             'owner_id' => $this->user->id,
         ]);
 
-        Assert::assertInstanceOf(BelongsToMany::class, $ticket->subscribers());
+        Assert::assertInstanceOf(BelongsToMany::class, $ticket->ticketSubscribers());
     });
 });
 

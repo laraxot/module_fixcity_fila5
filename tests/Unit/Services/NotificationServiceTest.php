@@ -4,346 +4,364 @@ declare(strict_types=1);
 
 namespace Modules\Fixcity\Tests\Unit\Services;
 
+use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Collection;
+use Modules\Fixcity\Database\Factories\TicketFactory;
 use Modules\Fixcity\Models\Ticket;
 use Modules\Fixcity\Services\NotificationService;
+use Modules\User\Database\Factories\UserFactory;
 use Modules\User\Models\User;
+use Tests\TestCase;
 
-describe('NotificationService', function () {
-    beforeEach(function () {
+/**
+ * Test NotificationService methods.
+ *
+ * @group NotificationService
+ */
+class NotificationServiceTest extends TestCase
+{
+    use RefreshDatabase;
+
+    protected NotificationService $service;
+
+    protected User $user;
+
+    protected Ticket $ticket;
+
+    protected function setUp(): void
+    {
+        parent::setUp();
         $this->service = new NotificationService;
-        $this->user = User::factory()->create();
-        $this->ticket = Ticket::factory()->create([
+        $this->user = UserFactory::new()->createOne();
+        $this->ticket = TicketFactory::new()->createOne([
             'owner_id' => $this->user->id,
         ]);
-    });
+    }
 
-    describe('notifyTicketCreated', function () {
-        it('sends notification to ticket owner', function () {
-            $result = $this->service->notifyTicketCreated($this->ticket);
+    public function test_sends_notification_to_ticket_owner(): void
+    {
+        $result = $this->service->notifyTicketCreated($this->ticket);
 
-            expect($result)->toBeTrue();
-            // Verify notification was sent to owner
-            expect($this->user->notifications)->not->toBeEmpty();
-        });
+        $this->assertTrue($result);
+        $this->assertNotEmpty($this->user->notifications);
+    }
 
-        it('sends notification to subscribers', function () {
-            $subscriber = User::factory()->create();
-            $this->ticket->subscribers()->attach($subscriber->id);
+    public function test_sends_notification_to_subscribers(): void
+    {
+        $subscriber = UserFactory::new()->createOne();
+        $this->ticket->ticketSubscribers()->attach($subscriber->id);
 
-            $result = $this->service->notifyTicketCreated($this->ticket);
+        $result = $this->service->notifyTicketCreated($this->ticket);
 
-            expect($result)->toBeTrue();
-            // Verify notification was sent to subscriber
-            expect($subscriber->notifications)->not->toBeEmpty();
-        });
+        $this->assertTrue($result);
+        $this->assertNotEmpty($subscriber->notifications);
+    }
 
-        it('sends notification to team members if ticket is team-based', function () {
-            $teamMember = User::factory()->create();
-            $this->user->teams()->create([
-                'name' => 'Test Team',
-                'personal_team' => false,
-            ]);
-            $this->user->teams->first()->users()->attach($teamMember->id);
+    public function test_sends_notification_to_team_members_if_ticket_is_team_based(): void
+    {
+        $teamMember = UserFactory::new()->createOne();
+        $this->user->teams()->create([
+            'name' => 'Test Team',
+            'personal_team' => false,
+        ]);
+        $firstTeam = $this->user->teams->first();
+        $this->assertNotNull($firstTeam);
+        $firstTeam->users()->attach($teamMember->id);
 
-            $result = $this->service->notifyTicketCreated($this->ticket);
+        $result = $this->service->notifyTicketCreated($this->ticket);
+
+        $this->assertTrue($result);
+        $this->assertNotEmpty($teamMember->notifications);
+    }
 
-            expect($result)->toBeTrue();
-            // Verify notification was sent to team member
-            expect($teamMember->notifications)->not->toBeEmpty();
-        });
-    });
+    public function test_sends_notification_when_ticket_status_changes(): void
+    {
+        $oldStatus = $this->ticket->status;
+        $this->ticket->update(['status' => 'in_progress']);
+
+        $result = $this->service->notifyTicketUpdated($this->ticket, $oldStatus?->value);
 
-    describe('notifyTicketUpdated', function () {
-        it('sends notification when ticket status changes', function () {
-            $oldStatus = $this->ticket->status;
-            $this->ticket->update(['status' => 'in_progress']);
-
-            $result = $this->service->notifyTicketUpdated($this->ticket, $oldStatus);
-
-            expect($result)->toBeTrue();
-            expect($this->user->notifications)->not->toBeEmpty();
-        });
-
-        it('sends notification when ticket priority changes', function () {
-            $oldPriority = $this->ticket->priority;
-            $this->ticket->update(['priority' => 'high']);
-
-            $result = $this->service->notifyTicketUpdated($this->ticket, null, $oldPriority);
-
-            expect($result)->toBeTrue();
-            expect($this->user->notifications)->not->toBeEmpty();
-        });
-
-        it('sends notification when ticket is assigned', function () {
-            $assignee = User::factory()->create();
-            $this->ticket->update(['responsible_id' => $assignee->id]);
-
-            $result = $this->service->notifyTicketUpdated($this->ticket);
-
-            expect($result)->toBeTrue();
-            expect($assignee->notifications)->not->toBeEmpty();
-        });
-    });
-
-    describe('notifyTicketAssigned', function () {
-        it('sends notification to assignee', function () {
-            $assignee = User::factory()->create();
-            $this->ticket->update(['responsible_id' => $assignee->id]);
-
-            $result = $this->service->notifyTicketAssigned($this->ticket, $assignee);
-
-            expect($result)->toBeTrue();
-            expect($assignee->notifications)->not->toBeEmpty();
-        });
-
-        it('sends notification to ticket owner about assignment', function () {
-            $assignee = User::factory()->create();
-            $this->ticket->update(['responsible_id' => $assignee->id]);
-
-            $result = $this->service->notifyTicketAssigned($this->ticket, $assignee);
-
-            expect($result)->toBeTrue();
-            expect($this->user->notifications)->not->toBeEmpty();
-        });
-    });
-
-    describe('notifyTicketResolved', function () {
-        it('sends notification to ticket owner when resolved', function () {
-            $this->ticket->update(['status' => 'resolved']);
-
-            $result = $this->service->notifyTicketResolved($this->ticket);
-
-            expect($result)->toBeTrue();
-            expect($this->user->notifications)->not->toBeEmpty();
-        });
-
-        it('sends notification to subscribers when resolved', function () {
-            $subscriber = User::factory()->create();
-            $this->ticket->subscribers()->attach($subscriber->id);
-            $this->ticket->update(['status' => 'resolved']);
-
-            $result = $this->service->notifyTicketResolved($this->ticket);
-
-            expect($result)->toBeTrue();
-            expect($subscriber->notifications)->not->toBeEmpty();
-        });
-    });
-
-    describe('notifyTicketClosed', function () {
-        it('sends notification to ticket owner when closed', function () {
-            $this->ticket->update(['status' => 'closed']);
-
-            $result = $this->service->notifyTicketClosed($this->ticket);
-
-            expect($result)->toBeTrue();
-            expect($this->user->notifications)->not->toBeEmpty();
-        });
-
-        it('sends notification to all stakeholders when closed', function () {
-            $subscriber = User::factory()->create();
-            $assignee = User::factory()->create();
-            $this->ticket->subscribers()->attach($subscriber->id);
-            $this->ticket->update([
-                'responsible_id' => $assignee->id,
-                'status' => 'closed',
-            ]);
-
-            $result = $this->service->notifyTicketClosed($this->ticket);
-
-            expect($result)->toBeTrue();
-            expect($this->user->notifications)->not->toBeEmpty();
-            expect($subscriber->notifications)->not->toBeEmpty();
-            expect($assignee->notifications)->not->toBeEmpty();
-        });
-    });
-
-    describe('notifyCommentAdded', function () {
-        it('sends notification to ticket owner when comment is added', function () {
-            $commenter = User::factory()->create();
-            $comment = $this->ticket->ticketComments()->create([
-                'user_id' => $commenter->id,
-                'content' => 'Test comment',
-            ]);
-
-            $result = $this->service->notifyCommentAdded($this->ticket, $comment);
-
-            expect($result)->toBeTrue();
-            expect($this->user->notifications)->not->toBeEmpty();
-        });
-
-        it('sends notification to subscribers when comment is added', function () {
-            $subscriber = User::factory()->create();
-            $commenter = User::factory()->create();
-            $this->ticket->subscribers()->attach($subscriber->id);
-
-            $comment = $this->ticket->ticketComments()->create([
-                'user_id' => $commenter->id,
-                'content' => 'Test comment',
-            ]);
-
-            $result = $this->service->notifyCommentAdded($this->ticket, $comment);
-
-            expect($result)->toBeTrue();
-            expect($subscriber->notifications)->not->toBeEmpty();
-        });
-
-        it('does not send notification to comment author', function () {
-            $commenter = User::factory()->create();
-            $comment = $this->ticket->ticketComments()->create([
-                'user_id' => $commenter->id,
-                'content' => 'Test comment',
-            ]);
-
-            $result = $this->service->notifyCommentAdded($this->ticket, $comment);
-
-            expect($result)->toBeTrue();
-            // Comment author should not receive notification about their own comment
-            expect($commenter->notifications)->toBeEmpty();
-        });
-    });
-
-    describe('notifyDueDateApproaching', function () {
-        it('sends notification when due date is approaching', function () {
-            $this->ticket->update([
-                'due_date' => now()->addDays(1),
-            ]);
-
-            $result = $this->service->notifyDueDateApproaching($this->ticket);
-
-            expect($result)->toBeTrue();
-            expect($this->user->notifications)->not->toBeEmpty();
-        });
-
-        it('sends notification to assignee when due date is approaching', function () {
-            $assignee = User::factory()->create();
-            $this->ticket->update([
-                'responsible_id' => $assignee->id,
-                'due_date' => now()->addDays(1),
-            ]);
-
-            $result = $this->service->notifyDueDateApproaching($this->ticket);
-
-            expect($result)->toBeTrue();
-            expect($assignee->notifications)->not->toBeEmpty();
-        });
-    });
-
-    describe('notifyDueDateExceeded', function () {
-        it('sends notification when due date is exceeded', function () {
-            $this->ticket->update([
-                'due_date' => now()->subDays(1),
-            ]);
-
-            $result = $this->service->notifyDueDateExceeded($this->ticket);
-
-            expect($result)->toBeTrue();
-            expect($this->user->notifications)->not->toBeEmpty();
-        });
-
-        it('sends notification to assignee when due date is exceeded', function () {
-            $assignee = User::factory()->create();
-            $this->ticket->update([
-                'responsible_id' => $assignee->id,
-                'due_date' => now()->subDays(1),
-            ]);
-
-            $result = $this->service->notifyDueDateExceeded($this->ticket);
-
-            expect($result)->toBeTrue();
-            expect($assignee->notifications)->not->toBeEmpty();
-        });
-    });
-
-    describe('sendBulkNotifications', function () {
-        it('sends notifications to multiple users', function () {
-            $users = User::factory()->count(3)->create();
-            $message = 'System maintenance scheduled';
-
-            $result = $this->service->sendBulkNotifications($users, $message);
-
-            expect($result)->toBeTrue();
-            foreach ($users as $user) {
-                expect($user->notifications)->not->toBeEmpty();
-            }
-        });
-
-        it('handles empty user collection gracefully', function () {
-            $users = collect();
-            $message = 'Test message';
-
-            $result = $this->service->sendBulkNotifications($users, $message);
-
-            expect($result)->toBeTrue();
-        });
-    });
-
-    describe('sendEmailNotification', function () {
-        it('sends email notification successfully', function () {
-            $result = $this->service->sendEmailNotification(
-                $this->user,
-                'Test Subject',
-                'Test message content'
-            );
-
-            expect($result)->toBeTrue();
-        });
-
-        it('handles email sending errors gracefully', function () {
-            // Mock email service to throw exception
-            // This test would require mocking the email service
-            $result = $this->service->sendEmailNotification(
-                $this->user,
-                'Test Subject',
-                'Test message content'
-            );
-
-            expect($result)->toBeTrue();
-        });
-    });
-
-    describe('sendSMSNotification', function () {
-        it('sends SMS notification successfully', function () {
-            $result = $this->service->sendSMSNotification(
-                $this->user,
-                'Test SMS message'
-            );
-
-            expect($result)->toBeTrue();
-        });
-
-        it('handles SMS sending errors gracefully', function () {
-            // Mock SMS service to throw exception
-            // This test would require mocking the SMS service
-            $result = $this->service->sendSMSNotification(
-                $this->user,
-                'Test SMS message'
-            );
-
-            expect($result)->toBeTrue();
-        });
-    });
-
-    describe('sendPushNotification', function () {
-        it('sends push notification successfully', function () {
-            $result = $this->service->sendPushNotification(
-                $this->user,
-                'Test Push Title',
-                'Test push message'
-            );
-
-            expect($result)->toBeTrue();
-        });
-
-        it('handles push notification errors gracefully', function () {
-            // Mock push service to throw exception
-            // This test would require mocking the push service
-            $result = $this->service->sendPushNotification(
-                $this->user,
-                'Test Push Title',
-                'Test push message'
-            );
-
-            expect($result)->toBeTrue();
-        });
-    });
-});
+        $this->assertTrue($result);
+        $this->assertNotEmpty($this->user->notifications);
+    }
+
+    public function test_sends_notification_when_ticket_priority_changes(): void
+    {
+        $oldPriority = $this->ticket->priority;
+        $this->ticket->update(['priority' => 'high']);
+
+        $result = $this->service->notifyTicketUpdated($this->ticket, null, $oldPriority?->value);
+
+        $this->assertTrue($result);
+        $this->assertNotEmpty($this->user->notifications);
+    }
+
+    public function test_sends_notification_when_ticket_is_assigned(): void
+    {
+        $assignee = UserFactory::new()->createOne();
+        $this->ticket->update(['responsible_id' => $assignee->id]);
+
+        $result = $this->service->notifyTicketUpdated($this->ticket);
+
+        $this->assertTrue($result);
+        $this->assertNotEmpty($assignee->notifications);
+    }
+
+    public function test_sends_notification_to_assignee(): void
+    {
+        $assignee = UserFactory::new()->createOne();
+        $this->ticket->update(['responsible_id' => $assignee->id]);
+
+        $result = $this->service->notifyTicketAssigned($this->ticket, $assignee);
+
+        $this->assertTrue($result);
+        $this->assertNotEmpty($assignee->notifications);
+    }
+
+    public function test_sends_notification_to_ticket_owner_about_assignment(): void
+    {
+        $assignee = UserFactory::new()->createOne();
+        $this->ticket->update(['responsible_id' => $assignee->id]);
+
+        $result = $this->service->notifyTicketAssigned($this->ticket, $assignee);
+
+        $this->assertTrue($result);
+        $this->assertNotEmpty($this->user->notifications);
+    }
+
+    public function test_sends_notification_to_ticket_owner_when_resolved(): void
+    {
+        $this->ticket->update(['status' => 'resolved']);
+
+        $result = $this->service->notifyTicketResolved($this->ticket);
+
+        $this->assertTrue($result);
+        $this->assertNotEmpty($this->user->notifications);
+    }
+
+    public function test_sends_notification_to_subscribers_when_resolved(): void
+    {
+        $subscriber = UserFactory::new()->createOne();
+        $this->ticket->ticketSubscribers()->attach($subscriber->id);
+        $this->ticket->update(['status' => 'resolved']);
+
+        $result = $this->service->notifyTicketResolved($this->ticket);
+
+        $this->assertTrue($result);
+        $this->assertNotEmpty($subscriber->notifications);
+    }
+
+    public function test_sends_notification_to_ticket_owner_when_closed(): void
+    {
+        $this->ticket->update(['status' => 'closed']);
+
+        $result = $this->service->notifyTicketClosed($this->ticket);
+
+        $this->assertTrue($result);
+        $this->assertNotEmpty($this->user->notifications);
+    }
+
+    public function test_sends_notification_to_all_stakeholders_when_closed(): void
+    {
+        $subscriber = UserFactory::new()->createOne();
+        $assignee = UserFactory::new()->createOne();
+        $this->ticket->ticketSubscribers()->attach($subscriber->id);
+        $this->ticket->update([
+            'responsible_id' => $assignee->id,
+            'status' => 'closed',
+        ]);
+
+        $result = $this->service->notifyTicketClosed($this->ticket);
+
+        $this->assertTrue($result);
+        $this->assertNotEmpty($this->user->notifications);
+        $this->assertNotEmpty($subscriber->notifications);
+        $this->assertNotEmpty($assignee->notifications);
+    }
+
+    public function test_sends_notification_to_ticket_owner_when_comment_is_added(): void
+    {
+        $commenter = UserFactory::new()->createOne();
+        $comment = $this->ticket->ticketComments()->create([
+            'user_id' => $commenter->id,
+            'content' => 'Test comment',
+        ]);
+
+        $result = $this->service->notifyCommentAdded($this->ticket, $comment);
+
+        $this->assertTrue($result);
+        $this->assertNotEmpty($this->user->notifications);
+    }
+
+    public function test_sends_notification_to_subscribers_when_comment_is_added(): void
+    {
+        $subscriber = UserFactory::new()->createOne();
+        $commenter = UserFactory::new()->createOne();
+        $this->ticket->ticketSubscribers()->attach($subscriber->id);
+
+        $comment = $this->ticket->ticketComments()->create([
+            'user_id' => $commenter->id,
+            'content' => 'Test comment',
+        ]);
+
+        $result = $this->service->notifyCommentAdded($this->ticket, $comment);
+
+        $this->assertTrue($result);
+        $this->assertNotEmpty($subscriber->notifications);
+    }
+
+    public function test_does_not_send_notification_to_comment_author(): void
+    {
+        $commenter = UserFactory::new()->createOne();
+        $comment = $this->ticket->ticketComments()->create([
+            'user_id' => $commenter->id,
+            'content' => 'Test comment',
+        ]);
+
+        $result = $this->service->notifyCommentAdded($this->ticket, $comment);
+
+        $this->assertTrue($result);
+        $this->assertEmpty($commenter->notifications);
+    }
+
+    public function test_sends_notification_when_due_date_is_approaching(): void
+    {
+        $this->ticket->update([
+            'due_date' => now()->addDays(1),
+        ]);
+
+        $result = $this->service->notifyDueDateApproaching($this->ticket);
+
+        $this->assertTrue($result);
+        $this->assertNotEmpty($this->user->notifications);
+    }
+
+    public function test_sends_notification_to_assignee_when_due_date_is_approaching(): void
+    {
+        $assignee = UserFactory::new()->createOne();
+        $this->ticket->update([
+            'responsible_id' => $assignee->id,
+            'due_date' => now()->addDays(1),
+        ]);
+
+        $result = $this->service->notifyDueDateApproaching($this->ticket);
+
+        $this->assertTrue($result);
+        $this->assertNotEmpty($assignee->notifications);
+    }
+
+    public function test_sends_notification_when_due_date_is_exceeded(): void
+    {
+        $this->ticket->update([
+            'due_date' => now()->subDays(1),
+        ]);
+
+        $result = $this->service->notifyDueDateExceeded($this->ticket);
+
+        $this->assertTrue($result);
+        $this->assertNotEmpty($this->user->notifications);
+    }
+
+    public function test_sends_notification_to_assignee_when_due_date_is_exceeded(): void
+    {
+        $assignee = UserFactory::new()->createOne();
+        $this->ticket->update([
+            'responsible_id' => $assignee->id,
+            'due_date' => now()->subDays(1),
+        ]);
+
+        $result = $this->service->notifyDueDateExceeded($this->ticket);
+
+        $this->assertTrue($result);
+        $this->assertNotEmpty($assignee->notifications);
+    }
+
+    public function test_sends_notifications_to_multiple_users(): void
+    {
+        /** @var Collection<int, User> $users */
+        $users = UserFactory::new()->count(3)->create();
+        $message = 'System maintenance scheduled';
+
+        $result = $this->service->sendBulkNotifications($users, $message);
+
+        $this->assertTrue($result);
+        foreach ($users as $user) {
+            $this->assertNotEmpty($user->notifications);
+        }
+    }
+
+    public function test_handles_empty_user_collection_gracefully(): void
+    {
+        /** @var Collection<int, User> $users */
+        $users = collect();
+        $message = 'Test message';
+
+        $result = $this->service->sendBulkNotifications($users, $message);
+
+        $this->assertTrue($result);
+    }
+
+    public function test_sends_email_notification_successfully(): void
+    {
+        $result = $this->service->sendEmailNotification(
+            $this->user,
+            'Test Subject',
+            'Test message content'
+        );
+
+        $this->assertTrue($result);
+    }
+
+    public function test_handles_email_sending_errors_gracefully(): void
+    {
+        $result = $this->service->sendEmailNotification(
+            $this->user,
+            'Test Subject',
+            'Test message content'
+        );
+
+        $this->assertTrue($result);
+    }
+
+    public function test_sends_sms_notification_successfully(): void
+    {
+        $result = $this->service->sendSMSNotification(
+            $this->user,
+            'Test SMS message'
+        );
+
+        $this->assertTrue($result);
+    }
+
+    public function test_handles_sms_sending_errors_gracefully(): void
+    {
+        $result = $this->service->sendSMSNotification(
+            $this->user,
+            'Test SMS message'
+        );
+
+        $this->assertTrue($result);
+    }
+
+    public function test_sends_push_notification_successfully(): void
+    {
+        $result = $this->service->sendPushNotification(
+            $this->user,
+            'Test Push Title',
+            'Test push message'
+        );
+
+        $this->assertTrue($result);
+    }
+
+    public function test_handles_push_notification_errors_gracefully(): void
+    {
+        $result = $this->service->sendPushNotification(
+            $this->user,
+            'Test Push Title',
+            'Test push message'
+        );
+
+        $this->assertTrue($result);
+    }
+}

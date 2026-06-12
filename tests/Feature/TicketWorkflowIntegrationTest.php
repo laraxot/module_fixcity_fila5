@@ -6,10 +6,12 @@ namespace Modules\Fixcity\Tests\Feature;
 
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use InvalidArgumentException;
+use Modules\Fixcity\Database\Factories\TicketFactory;
 use Modules\Fixcity\Models\Ticket;
 use Modules\Fixcity\Services\NotificationService;
 use Modules\Fixcity\Services\TicketService;
 use Modules\Fixcity\Services\WorkflowService;
+use Modules\User\Database\Factories\UserFactory;
 use Modules\User\Models\User;
 use Tests\TestCase;
 
@@ -34,11 +36,11 @@ class TicketWorkflowIntegrationTest extends TestCase
     public function test_complete_ticket_workflow(): void
     {
         // Arrange
-        $creator = User::factory()->create();
-        $assignee = User::factory()->create();
-        $approver = User::factory()->create(['role' => 'approver']);
+        $creator = UserFactory::new()->createOne();
+        $assignee = UserFactory::new()->createOne();
+        $approver = UserFactory::new()->createOne(['role' => 'approver']);
 
-        $ticket = Ticket::factory()->create([
+        $ticket = TicketFactory::new()->createOne([
             'created_by' => $creator->id,
             'status' => 'draft',
         ]);
@@ -46,41 +48,41 @@ class TicketWorkflowIntegrationTest extends TestCase
         // Act - Draft -> Pending
         $result1 = $this->workflowService->submitForReview($ticket);
         $this->assertTrue($result1);
-        $this->assertEquals('pending', $ticket->fresh()->status);
+        $this->assertEquals('pending', $ticket->fresh()?->status?->value);
 
         // Act - Pending -> Assigned
         $result2 = $this->workflowService->assignTicket($ticket, $assignee);
         $this->assertTrue($result2);
-        $this->assertEquals('assigned', $ticket->fresh()->status);
-        $this->assertEquals($assignee->id, $ticket->fresh()->assigned_to);
+        $this->assertEquals('assigned', $ticket->fresh()?->status?->value);
+        $this->assertEquals($assignee->id, $ticket->fresh()?->getAttribute('assigned_to'));
 
         // Act - Assigned -> In Progress
         $result3 = $this->workflowService->startWork($ticket);
         $this->assertTrue($result3);
-        $this->assertEquals('in_progress', $ticket->fresh()->status);
+        $this->assertEquals('in_progress', $ticket->fresh()?->status?->value);
 
         // Act - In Progress -> Review
         $result4 = $this->workflowService->submitForApproval($ticket);
         $this->assertTrue($result4);
-        $this->assertEquals('review', $ticket->fresh()->status);
+        $this->assertEquals('review', $ticket->fresh()?->status?->value);
 
         // Act - Review -> Approved
         $result5 = $this->workflowService->approveTicket($ticket, $approver);
         $this->assertTrue($result5);
-        $this->assertEquals('approved', $ticket->fresh()->status);
-        $this->assertEquals($approver->id, $ticket->fresh()->approved_by);
+        $this->assertEquals('approved', $ticket->fresh()?->status?->value);
+        $this->assertEquals($approver->id, $ticket->fresh()?->getAttribute('approved_by'));
 
         // Act - Approved -> Resolved
         $result6 = $this->workflowService->resolveTicket($ticket, $assignee);
         $this->assertTrue($result6);
-        $this->assertEquals('resolved', $ticket->fresh()->status);
-        $this->assertEquals($assignee->id, $ticket->fresh()->resolved_by);
+        $this->assertEquals('resolved', $ticket->fresh()?->status?->value);
+        $this->assertEquals($assignee->id, $ticket->fresh()?->getAttribute('resolved_by'));
 
         // Act - Resolved -> Closed
         $result7 = $this->ticketService->closeTicket($ticket, $assignee);
         $this->assertTrue($result7);
-        $this->assertEquals('closed', $ticket->fresh()->status);
-        $this->assertEquals($assignee->id, $ticket->fresh()->closed_by);
+        $this->assertEquals('closed', $ticket->fresh()?->status?->value);
+        $this->assertEquals($assignee->id, $ticket->fresh()?->getAttribute('closed_by'));
 
         // Assert - Verifica stato finale
         $this->assertDatabaseHas('tickets', [
@@ -97,11 +99,11 @@ class TicketWorkflowIntegrationTest extends TestCase
     public function test_ticket_workflow_with_rejection(): void
     {
         // Arrange
-        $creator = User::factory()->create();
-        $assignee = User::factory()->create();
-        $approver = User::factory()->create(['role' => 'approver']);
+        $creator = UserFactory::new()->createOne();
+        $assignee = UserFactory::new()->createOne();
+        $approver = UserFactory::new()->createOne(['role' => 'approver']);
 
-        $ticket = Ticket::factory()->create([
+        $ticket = TicketFactory::new()->createOne([
             'created_by' => $creator->id,
             'status' => 'draft',
         ]);
@@ -115,22 +117,22 @@ class TicketWorkflowIntegrationTest extends TestCase
         // Act - Review -> Rejected
         $result = $this->workflowService->rejectTicket($ticket, $approver, 'Insufficient information');
         $this->assertTrue($result);
-        $this->assertEquals('rejected', $ticket->fresh()->status);
-        $this->assertEquals('Insufficient information', $ticket->fresh()->rejection_reason);
+        $this->assertEquals('rejected', $ticket->fresh()?->status?->value);
+        $this->assertEquals('Insufficient information', $ticket->fresh()?->getAttribute('rejection_reason'));
 
         // Act - Rejected -> Draft (per correzioni)
         $result2 = $this->workflowService->submitForReview($ticket);
         $this->assertTrue($result2);
-        $this->assertEquals('pending', $ticket->fresh()->status);
+        $this->assertEquals('pending', $ticket->fresh()?->status?->value);
     }
 
     public function test_ticket_workflow_with_escalation(): void
     {
         // Arrange
-        $creator = User::factory()->create();
-        $assignee = User::factory()->create();
+        $creator = UserFactory::new()->createOne();
+        $assignee = UserFactory::new()->createOne();
 
-        $ticket = Ticket::factory()->create([
+        $ticket = TicketFactory::new()->createOne([
             'created_by' => $creator->id,
             'status' => 'pending',
         ]);
@@ -138,23 +140,23 @@ class TicketWorkflowIntegrationTest extends TestCase
         // Act - Escalation
         $result = $this->workflowService->escalateTicket($ticket, $creator, 'High priority issue');
         $this->assertTrue($result);
-        $this->assertEquals('escalated', $ticket->fresh()->status);
-        $this->assertEquals('High priority issue', $ticket->fresh()->escalation_reason);
+        $this->assertEquals('escalated', $ticket->fresh()?->status?->value);
+        $this->assertEquals('High priority issue', $ticket->fresh()?->getAttribute('escalation_reason'));
 
         // Act - De-escalation -> Assigned
         $result2 = $this->workflowService->assignTicket($ticket, $assignee);
         $this->assertTrue($result2);
-        $this->assertEquals('assigned', $ticket->fresh()->status);
+        $this->assertEquals('assigned', $ticket->fresh()?->status?->value);
     }
 
     public function test_ticket_workflow_with_return_to_work(): void
     {
         // Arrange
-        $creator = User::factory()->create();
-        $assignee = User::factory()->create();
-        $approver = User::factory()->create(['role' => 'approver']);
+        $creator = UserFactory::new()->createOne();
+        $assignee = UserFactory::new()->createOne();
+        $approver = UserFactory::new()->createOne(['role' => 'approver']);
 
-        $ticket = Ticket::factory()->create([
+        $ticket = TicketFactory::new()->createOne([
             'created_by' => $creator->id,
             'status' => 'draft',
         ]);
@@ -168,22 +170,22 @@ class TicketWorkflowIntegrationTest extends TestCase
         // Act - Review -> Return to Work
         $result = $this->workflowService->returnToWork($ticket, $approver, 'Additional work required');
         $this->assertTrue($result);
-        $this->assertEquals('in_progress', $ticket->fresh()->status);
-        $this->assertEquals('Additional work required', $ticket->fresh()->return_reason);
+        $this->assertEquals('in_progress', $ticket->fresh()?->status?->value);
+        $this->assertEquals('Additional work required', $ticket->fresh()?->getAttribute('return_reason'));
 
         // Act - Continue workflow
         $result2 = $this->workflowService->submitForApproval($ticket);
         $this->assertTrue($result2);
-        $this->assertEquals('review', $ticket->fresh()->status);
+        $this->assertEquals('review', $ticket->fresh()?->status?->value);
     }
 
     public function test_ticket_workflow_with_comments(): void
     {
         // Arrange
-        $creator = User::factory()->create();
-        $assignee = User::factory()->create();
+        $creator = UserFactory::new()->createOne();
+        $assignee = UserFactory::new()->createOne();
 
-        $ticket = Ticket::factory()->create([
+        $ticket = TicketFactory::new()->createOne([
             'created_by' => $creator->id,
             'status' => 'draft',
         ]);
@@ -215,12 +217,12 @@ class TicketWorkflowIntegrationTest extends TestCase
     {
         // Arrange
         $startTime = microtime(true);
-        $creator = User::factory()->create();
-        $assignee = User::factory()->create();
-        $approver = User::factory()->create(['role' => 'approver']);
+        $creator = UserFactory::new()->createOne();
+        $assignee = UserFactory::new()->createOne();
+        $approver = UserFactory::new()->createOne(['role' => 'approver']);
 
         // Act - Complete workflow
-        $ticket = Ticket::factory()->create([
+        $ticket = TicketFactory::new()->createOne([
             'created_by' => $creator->id,
             'status' => 'draft',
         ]);
@@ -238,15 +240,15 @@ class TicketWorkflowIntegrationTest extends TestCase
 
         // Assert - Performance within limits
         $this->assertLessThan(2.0, $executionTime, 'Workflow execution should complete within 2 seconds');
-        $this->assertEquals('closed', $ticket->fresh()->status);
+        $this->assertEquals('closed', $ticket->fresh()?->status?->value);
     }
 
     public function test_ticket_workflow_concurrent_updates(): void
     {
         // Arrange
-        $ticket = Ticket::factory()->create(['status' => 'pending']);
-        $assignee1 = User::factory()->create();
-        $assignee2 = User::factory()->create();
+        $ticket = TicketFactory::new()->createOne(['status' => 'pending']);
+        $assignee1 = UserFactory::new()->createOne();
+        $assignee2 = UserFactory::new()->createOne();
 
         // Act - Simulate concurrent assignment attempts
         $result1 = $this->workflowService->assignTicket($ticket, $assignee1);
@@ -257,17 +259,18 @@ class TicketWorkflowIntegrationTest extends TestCase
         $this->assertFalse($result2); // Second assignment should fail
 
         $finalTicket = $ticket->fresh();
-        $this->assertEquals('assigned', $finalTicket->status);
-        $this->assertEquals($assignee1->id, $finalTicket->assigned_to);
+        $this->assertNotNull($finalTicket);
+        $this->assertEquals('assigned', $finalTicket->status?->value);
+        $this->assertEquals($assignee1->id, $finalTicket->getAttribute('assigned_to'));
     }
 
     public function test_ticket_workflow_audit_trail(): void
     {
         // Arrange
-        $creator = User::factory()->create();
-        $assignee = User::factory()->create();
+        $creator = UserFactory::new()->createOne();
+        $assignee = UserFactory::new()->createOne();
 
-        $ticket = Ticket::factory()->create([
+        $ticket = TicketFactory::new()->createOne([
             'created_by' => $creator->id,
             'status' => 'draft',
         ]);
@@ -302,23 +305,24 @@ class TicketWorkflowIntegrationTest extends TestCase
     public function test_ticket_workflow_notifications(): void
     {
         // Arrange
-        $creator = User::factory()->create();
-        $assignee = User::factory()->create();
+        $creator = UserFactory::new()->createOne();
+        $assignee = UserFactory::new()->createOne();
 
-        $ticket = Ticket::factory()->create([
+        $ticket = TicketFactory::new()->createOne([
             'created_by' => $creator->id,
             'status' => 'draft',
         ]);
 
         // Mock notification service
-        $this->mock(NotificationService::class, function ($mock) use ($ticket, $assignee) {
-            $mock->shouldReceive('sendTicketStatusChanged')
-                ->once()
-                ->with($ticket, 'pending');
+        $this->mock(NotificationService::class, function (mixed $mock) use ($ticket, $assignee) {
+            /** @var \Mockery\MockInterface $mock */
+            /** @var \Mockery\Expectation $statusExpectation */
+            $statusExpectation = $mock->shouldReceive('sendTicketStatusChanged');
+            $statusExpectation->with($ticket, 'pending')->once();
 
-            $mock->shouldReceive('sendTicketAssigned')
-                ->once()
-                ->with($ticket, $assignee);
+            /** @var \Mockery\Expectation $assignedExpectation */
+            $assignedExpectation = $mock->shouldReceive('sendTicketAssigned');
+            $assignedExpectation->with($ticket, $assignee)->once();
         });
 
         // Act - Execute workflow with notifications
@@ -326,14 +330,14 @@ class TicketWorkflowIntegrationTest extends TestCase
         $this->workflowService->assignTicket($ticket, $assignee);
 
         // Assert - Notifications were sent via mock
-        $this->assertEquals('assigned', $ticket->fresh()->status);
+        $this->assertEquals('assigned', $ticket->fresh()?->status?->value);
     }
 
     public function test_ticket_workflow_edge_cases(): void
     {
         // Arrange
-        $ticket = Ticket::factory()->create(['status' => 'closed']);
-        $user = User::factory()->create();
+        $ticket = TicketFactory::new()->createOne(['status' => 'closed']);
+        $user = UserFactory::new()->createOne();
 
         // Act & Assert - Cannot perform invalid transitions
         $this->expectException(InvalidArgumentException::class);
@@ -350,11 +354,11 @@ class TicketWorkflowIntegrationTest extends TestCase
     public function test_ticket_workflow_data_integrity(): void
     {
         // Arrange
-        $creator = User::factory()->create();
-        $assignee = User::factory()->create();
-        $approver = User::factory()->create(['role' => 'approver']);
+        $creator = UserFactory::new()->createOne();
+        $assignee = UserFactory::new()->createOne();
+        $approver = UserFactory::new()->createOne(['role' => 'approver']);
 
-        $ticket = Ticket::factory()->create([
+        $ticket = TicketFactory::new()->createOne([
             'created_by' => $creator->id,
             'status' => 'draft',
             'priority' => 'low',
@@ -368,10 +372,11 @@ class TicketWorkflowIntegrationTest extends TestCase
 
         // Assert - Data integrity maintained
         $freshTicket = $ticket->fresh();
+        $this->assertNotNull($freshTicket);
         $this->assertEquals($creator->id, $freshTicket->created_by);
-        $this->assertEquals($assignee->id, $freshTicket->assigned_to);
-        $this->assertEquals('low', $freshTicket->priority);
-        $this->assertEquals('general', $freshTicket->category);
-        $this->assertEquals('in_progress', $freshTicket->status);
+        $this->assertEquals($assignee->id, $freshTicket->getAttribute('assigned_to'));
+        $this->assertEquals('low', $freshTicket->priority?->value);
+        $this->assertEquals('general', $freshTicket->getAttribute('category'));
+        $this->assertEquals('in_progress', $freshTicket->status?->value);
     }
 }

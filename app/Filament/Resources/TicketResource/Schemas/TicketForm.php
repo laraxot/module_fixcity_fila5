@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Modules\Fixcity\Filament\Resources\TicketResource\Schemas;
 
 use Filament\Forms\Components\Checkbox;
-use Filament\Forms\Components\Hidden;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\SpatieMediaLibraryFileUpload;
 use Filament\Forms\Components\Textarea;
@@ -154,7 +153,7 @@ class TicketForm extends XotBaseResourceForm
                 ->columnSpanFull(),
             'privacyAccepted' => Checkbox::make('privacyAccepted')
                 ->accepted()
-                ->dehydrated(false)
+                ->required()
                 ->extraAttributes(['data-element' => 'privacy-consent']),
         ];
     }

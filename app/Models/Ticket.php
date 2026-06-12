@@ -90,8 +90,8 @@ use Webmozart\Assert\Assert;
  * @property int|null $relations_count
  * @property User|null $responsible
  * @property TicketStatusEnum|null $status
- * @property Collection<int, User> $subscribers
- * @property int|null $subscribers_count
+ * @property Collection<int, User> $ticketSubscribers
+ * @property int|null $ticket_subscribers_count
  * @property mixed $total_logged_hours
  * @property mixed $total_logged_in_hours
  * @property mixed $total_logged_seconds
@@ -415,14 +415,21 @@ class Ticket extends BaseModel implements Commentable, HasMedia
         return $this->hasMany(TicketActivity::class, 'ticket_id', 'id');
     }
 
-    /*-- e' in comment
-    public function subscribers(): BelongsToMany
+    /**
+     * Users subscribed to ticket workflow notifications (pivot ticket_subscribers).
+     * Distinct from HasComments::subscribers() (comment notification subscriptions).
+     *
+     * @return BelongsToMany<User, $this>
+     */
+    public function ticketSubscribers(): BelongsToMany
     {
-        $user_class = XotData::make()->getUserClass();
+        /** @var class-string<User> $userClass */
+        $userClass = XotData::make()->getUserClass();
 
-        return $this->belongsToMany($user_class, 'ticket_subscribers', 'ticket_id', 'user_id');
+        return $this->belongsToMany($userClass, 'ticket_subscribers', 'ticket_id', 'user_id')
+            ->withTimestamps();
     }
-    */
+
     /**
      * @return HasMany<TicketRelation, $this>
      */
@@ -613,18 +620,6 @@ class Ticket extends BaseModel implements Commentable, HasMedia
             $this->status = $status;
             $this->save();
         }
-    }
-
-    /**
-     * @return BelongsToMany<User, $this>
-     */
-    public function subscribers(): BelongsToMany
-    {
-        /** @var class-string<User> $userModel */
-        $userModel = config('auth.providers.users.model');
-
-        return $this->belongsToMany($userModel, 'ticket_subscribers')
-            ->withTimestamps();
     }
 
     public function registerMediaCollections(): void
