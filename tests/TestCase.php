@@ -8,6 +8,9 @@ use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Illuminate\Support\Facades\DB;
 use Modules\Fixcity\Models\Ticket;
 use Modules\Fixcity\Models\User;
+use Modules\Fixcity\Services\NotificationService;
+use Modules\Fixcity\Services\TicketService;
+use Modules\Fixcity\Services\WorkflowService;
 use Modules\User\Models\User as AuthUser;
 use Modules\Xot\Tests\XotBaseTestCase;
 use PHPUnit\Framework\Assert;
@@ -19,6 +22,9 @@ use PHPUnit\Framework\Assert;
  * @property \Modules\User\Models\User|null $admin
  * @property \Modules\Fixcity\Models\Ticket|null $ticket
  * @property \Closure|null $callStatic
+ * @property WorkflowService $workflowService
+ * @property TicketService|null $ticketService
+ * @property NotificationService|null $notificationService
  */
 abstract class TestCase extends XotBaseTestCase
 {
@@ -32,6 +38,12 @@ abstract class TestCase extends XotBaseTestCase
 
     /** @var \Closure|null */
     public ?\Closure $callStatic = null;
+
+    public WorkflowService $workflowService;
+
+    public ?TicketService $ticketService = null;
+
+    public ?NotificationService $notificationService = null;
 
     /** @var list<string> */
     protected $connectionsToTransact = ['fixcity', 'user', 'comment', 'media'];
@@ -55,6 +67,27 @@ abstract class TestCase extends XotBaseTestCase
         Assert::assertNotNull($this->ticket);
 
         return $this->ticket;
+    }
+
+    public function workflow(): WorkflowService
+    {
+        Assert::assertNotNull($this->workflowService);
+
+        return $this->workflowService;
+    }
+
+    public function ticketService(): TicketService
+    {
+        Assert::assertNotNull($this->ticketService);
+
+        return $this->ticketService;
+    }
+
+    public function notification(): NotificationService
+    {
+        Assert::assertNotNull($this->notificationService);
+
+        return $this->notificationService;
     }
 
     protected function setUp(): void

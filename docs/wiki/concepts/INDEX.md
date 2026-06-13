@@ -3,7 +3,7 @@ title: "concepts index — Fixcity"
 type: index
 tags: [concepts, Fixcity]
 created: 2026-05-11
-updated: 2026-06-05
+updated: 2026-06-13
 ---
 
 # concepts Index — Fixcity
@@ -18,3 +18,6 @@ Concetti specifici del modulo Fixcity. Carica on-demand via `qmd search` o consu
 - [folio-api-no-controllers](./folio-api-no-controllers.md) — API `/api/*` via Folio + Actions (STORY-069)
 - [ticket-citizen-rating-via-rating-module](./ticket-citizen-rating-via-rating-module.md) — RatingMorph, no colonne su tickets (STORY-071)
 - [module-basemodel-rule](./module-basemodel-rule.md) — Ticket extends Fixcity BaseModel (STORY-047)
+- [phpstan-pest-testcase-helpers](./phpstan-pest-testcase-helpers.md) — helper TestCase + PHPStan Pest (2026-06-13)
+- [testing](./testing.md) — quality gate Pest + PHPStan
+- [completion-roadmap](../overviews/completion-roadmap.md) — cosa resta per chiudere Fixcity

@@ -9,11 +9,12 @@ use PHPUnit\Framework\Assert;
 use Modules\Fixcity\ViewModels\SegnalazioniFilterViewModel;
 use Modules\Fixcity\Tests\TestCase;
 
-class SegnalazioniFilterViewModelTest extends TestCase
-{
-    public function test_it_exposes_filter_items_from_aggregate_action(): void
-    {
-        $this->instance(BuildSegnalazioniFilterAggregateAction::class, new class extends BuildSegnalazioniFilterAggregateAction
+uses(\Modules\Fixcity\Tests\TestCase::class);
+
+describe('Segnalazioni Filter View Model', function (): void {
+    test('_it_exposes_filter_items_from_aggregate_action', function (): void {
+        /** @var \Modules\Fixcity\Tests\TestCase $this */
+$this->bindInstance(BuildSegnalazioniFilterAggregateAction::class, new class extends BuildSegnalazioniFilterAggregateAction
         {
             public function execute(): array
             {
@@ -54,11 +55,10 @@ class SegnalazioniFilterViewModelTest extends TestCase
         Assert::assertCount(1, $viewModel->getStatusFilterItems());
         Assert::assertSame(1, $viewModel->getFilteredCount(['other'], ['open']));
         Assert::assertSame(0, $viewModel->getFilteredCount(['waste'], ['open']));
-    }
+    });
 
-    public function test_it_supplements_list_items_from_aggregate_features(): void
-    {
-        $this->instance(BuildSegnalazioniFilterAggregateAction::class, new class extends BuildSegnalazioniFilterAggregateAction
+    test('_it_supplements_list_items_from_aggregate_features', function (): void {
+$this->bindInstance(BuildSegnalazioniFilterAggregateAction::class, new class extends BuildSegnalazioniFilterAggregateAction
         {
             public function execute(): array
             {
@@ -87,5 +87,5 @@ class SegnalazioniFilterViewModelTest extends TestCase
 
         Assert::assertCount(1, $items);
         Assert::assertSame('Seconda supplement test', $items[0]['name']);
-    }
-}
+    });
+});

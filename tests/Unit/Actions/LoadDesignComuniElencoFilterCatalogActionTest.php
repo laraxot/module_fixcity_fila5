@@ -8,11 +8,11 @@ use PHPUnit\Framework\Assert;
 use Modules\Fixcity\Actions\LoadDesignComuniElencoFilterCatalogAction;
 use Modules\Fixcity\Tests\TestCase;
 
-class LoadDesignComuniElencoFilterCatalogActionTest extends TestCase
-{
-    public function test_it_loads_eleven_design_comuni_categories(): void
-    {
-        $catalog = app(LoadDesignComuniElencoFilterCatalogAction::class)->execute();
+uses(\Modules\Fixcity\Tests\TestCase::class);
+
+describe('Load Design Comuni Elenco Filter Catalog Action', function (): void {
+    test('_it_loads_eleven_design_comuni_categories', function (): void {
+$catalog = app(LoadDesignComuniElencoFilterCatalogAction::class)->execute();
 
         Assert::assertSame('categoria', $catalog['legend']);
         Assert::assertCount(11, $catalog['items']);
@@ -26,5 +26,5 @@ class LoadDesignComuniElencoFilterCatalogActionTest extends TestCase
             (string) $catalog['items'][0]['display_label'],
         );
         Assert::assertSame(21, $catalog['items'][0]['count']);
-    }
-}
+    });
+});

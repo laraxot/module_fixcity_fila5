@@ -4,450 +4,394 @@ declare(strict_types=1);
 
 namespace Modules\Fixcity\Tests\Unit\Services;
 
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use Modules\Fixcity\Database\Factories\TicketFactory;
 use Modules\Fixcity\Models\Ticket;
 use Modules\Fixcity\Models\TicketActivity;
 use Modules\Fixcity\Services\WorkflowService;
 use Modules\User\Database\Factories\UserFactory;
-use Modules\User\Models\User;
-use Tests\TestCase;
+use PHPUnit\Framework\Assert;
 
-/**
- * Test WorkflowService methods.
- *
- * @group WorkflowService
- */
-class WorkflowServiceTest extends TestCase
-{
-    use RefreshDatabase;
+uses(\Modules\Fixcity\Tests\TestCase::class);
 
-    protected WorkflowService $service;
-
-    protected User $user;
-
-    protected Ticket $ticket;
-
-    protected function setUp(): void
-    {
-        parent::setUp();
-        $this->service = new WorkflowService;
+beforeEach(function (): void {
+    /** @var \Modules\Fixcity\Tests\TestCase $this */
+$this->workflowService = new WorkflowService;
         $this->user = UserFactory::new()->createOne();
         $this->ticket = TicketFactory::new()->createOne([
             'owner_id' => $this->user->id,
             'status' => 'pending',
         ]);
-    }
+});
 
-    public function test_allows_transition_from_pending_to_in_review(): void
-    {
-        $result = $this->service->canTransitionTo($this->ticket, 'in_review');
+describe('Workflow Service', function (): void {
+    test('_allows_transition_from_pending_to_in_review', function (): void {
+        /** @var \Modules\Fixcity\Tests\TestCase $this */
+$result = $this->workflow()->canTransitionTo($this->ticket(), 'in_review');
 
-        $this->assertTrue($result);
-    }
+        Assert::assertTrue($result);
+    });
 
-    public function test_allows_transition_from_pending_to_in_progress(): void
-    {
-        $result = $this->service->canTransitionTo($this->ticket, 'in_progress');
+    test('_allows_transition_from_pending_to_in_progress', function (): void {
+$result = $this->workflow()->canTransitionTo($this->ticket(), 'in_progress');
 
-        $this->assertTrue($result);
-    }
+        Assert::assertTrue($result);
+    });
 
-    public function test_allows_transition_from_in_review_to_in_progress(): void
-    {
-        $this->ticket->update(['status' => 'in_review']);
-        $result = $this->service->canTransitionTo($this->ticket, 'in_progress');
+    test('_allows_transition_from_in_review_to_in_progress', function (): void {
+$this->ticket()->update(['status' => 'in_review']);
+        $result = $this->workflow()->canTransitionTo($this->ticket(), 'in_progress');
 
-        $this->assertTrue($result);
-    }
+        Assert::assertTrue($result);
+    });
 
-    public function test_allows_transition_from_in_progress_to_on_hold(): void
-    {
-        $this->ticket->update(['status' => 'in_progress']);
-        $result = $this->service->canTransitionTo($this->ticket, 'on_hold');
+    test('_allows_transition_from_in_progress_to_on_hold', function (): void {
+$this->ticket()->update(['status' => 'in_progress']);
+        $result = $this->workflow()->canTransitionTo($this->ticket(), 'on_hold');
 
-        $this->assertTrue($result);
-    }
+        Assert::assertTrue($result);
+    });
 
-    public function test_allows_transition_from_in_progress_to_resolved(): void
-    {
-        $this->ticket->update(['status' => 'in_progress']);
-        $result = $this->service->canTransitionTo($this->ticket, 'resolved');
+    test('_allows_transition_from_in_progress_to_resolved', function (): void {
+$this->ticket()->update(['status' => 'in_progress']);
+        $result = $this->workflow()->canTransitionTo($this->ticket(), 'resolved');
 
-        $this->assertTrue($result);
-    }
+        Assert::assertTrue($result);
+    });
 
-    public function test_allows_transition_from_resolved_to_closed(): void
-    {
-        $this->ticket->update(['status' => 'resolved']);
-        $result = $this->service->canTransitionTo($this->ticket, 'closed');
+    test('_allows_transition_from_resolved_to_closed', function (): void {
+$this->ticket()->update(['status' => 'resolved']);
+        $result = $this->workflow()->canTransitionTo($this->ticket(), 'closed');
 
-        $this->assertTrue($result);
-    }
+        Assert::assertTrue($result);
+    });
 
-    public function test_allows_transition_from_closed_to_reopened(): void
-    {
-        $this->ticket->update(['status' => 'closed']);
-        $result = $this->service->canTransitionTo($this->ticket, 'reopened');
+    test('_allows_transition_from_closed_to_reopened', function (): void {
+$this->ticket()->update(['status' => 'closed']);
+        $result = $this->workflow()->canTransitionTo($this->ticket(), 'reopened');
 
-        $this->assertTrue($result);
-    }
+        Assert::assertTrue($result);
+    });
 
-    public function test_prevents_invalid_transitions(): void
-    {
-        $result = $this->service->canTransitionTo($this->ticket, 'invalid_status');
+    test('_prevents_invalid_transitions', function (): void {
+$result = $this->workflow()->canTransitionTo($this->ticket(), 'invalid_status');
 
-        $this->assertFalse($result);
-    }
+        Assert::assertFalse($result);
+    });
 
-    public function test_prevents_transition_from_pending_to_resolved(): void
-    {
-        $result = $this->service->canTransitionTo($this->ticket, 'resolved');
+    test('_prevents_transition_from_pending_to_resolved', function (): void {
+$result = $this->workflow()->canTransitionTo($this->ticket(), 'resolved');
 
-        $this->assertFalse($result);
-    }
+        Assert::assertFalse($result);
+    });
 
-    public function test_prevents_transition_from_pending_to_closed(): void
-    {
-        $result = $this->service->canTransitionTo($this->ticket, 'closed');
+    test('_prevents_transition_from_pending_to_closed', function (): void {
+$result = $this->workflow()->canTransitionTo($this->ticket(), 'closed');
 
-        $this->assertFalse($result);
-    }
+        Assert::assertFalse($result);
+    });
 
-    public function test_returns_correct_transitions_for_pending_status(): void
-    {
-        $transitions = $this->service->getAvailableTransitions($this->ticket);
+    test('_returns_correct_transitions_for_pending_status', function (): void {
+$transitions = $this->workflow()->getAvailableTransitions($this->ticket());
 
-        $this->assertContains('in_review', $transitions);
-        $this->assertContains('in_progress', $transitions);
-        $this->assertNotContains('resolved', $transitions);
-        $this->assertNotContains('closed', $transitions);
-    }
+        Assert::assertContains('in_review', $transitions);
+        Assert::assertContains('in_progress', $transitions);
+        Assert::assertNotContains('resolved', $transitions);
+        Assert::assertNotContains('closed', $transitions);
+    });
 
-    public function test_returns_correct_transitions_for_in_review_status(): void
-    {
-        $this->ticket->update(['status' => 'in_review']);
-        $transitions = $this->service->getAvailableTransitions($this->ticket);
+    test('_returns_correct_transitions_for_in_review_status', function (): void {
+$this->ticket()->update(['status' => 'in_review']);
+        $transitions = $this->workflow()->getAvailableTransitions($this->ticket());
 
-        $this->assertContains('in_progress', $transitions);
-        $this->assertContains('on_hold', $transitions);
-        $this->assertNotContains('pending', $transitions);
-    }
+        Assert::assertContains('in_progress', $transitions);
+        Assert::assertContains('on_hold', $transitions);
+        Assert::assertNotContains('pending', $transitions);
+    });
 
-    public function test_returns_correct_transitions_for_in_progress_status(): void
-    {
-        $this->ticket->update(['status' => 'in_progress']);
-        $transitions = $this->service->getAvailableTransitions($this->ticket);
+    test('_returns_correct_transitions_for_in_progress_status', function (): void {
+$this->ticket()->update(['status' => 'in_progress']);
+        $transitions = $this->workflow()->getAvailableTransitions($this->ticket());
 
-        $this->assertContains('on_hold', $transitions);
-        $this->assertContains('resolved', $transitions);
-        $this->assertNotContains('pending', $transitions);
-    }
+        Assert::assertContains('on_hold', $transitions);
+        Assert::assertContains('resolved', $transitions);
+        Assert::assertNotContains('pending', $transitions);
+    });
 
-    public function test_returns_correct_transitions_for_resolved_status(): void
-    {
-        $this->ticket->update(['status' => 'resolved']);
-        $transitions = $this->service->getAvailableTransitions($this->ticket);
+    test('_returns_correct_transitions_for_resolved_status', function (): void {
+$this->ticket()->update(['status' => 'resolved']);
+        $transitions = $this->workflow()->getAvailableTransitions($this->ticket());
 
-        $this->assertContains('closed', $transitions);
-        $this->assertNotContains('in_progress', $transitions);
-    }
+        Assert::assertContains('closed', $transitions);
+        Assert::assertNotContains('in_progress', $transitions);
+    });
 
-    public function test_returns_correct_transitions_for_closed_status(): void
-    {
-        $this->ticket->update(['status' => 'closed']);
-        $transitions = $this->service->getAvailableTransitions($this->ticket);
+    test('_returns_correct_transitions_for_closed_status', function (): void {
+$this->ticket()->update(['status' => 'closed']);
+        $transitions = $this->workflow()->getAvailableTransitions($this->ticket());
 
-        $this->assertContains('reopened', $transitions);
-        $this->assertNotContains('resolved', $transitions);
-    }
+        Assert::assertContains('reopened', $transitions);
+        Assert::assertNotContains('resolved', $transitions);
+    });
 
-    public function test_successfully_transitions_ticket_status(): void
-    {
-        $result = $this->service->transitionTo($this->ticket, 'in_review');
+    test('_successfully_transitions_ticket_status', function (): void {
+$result = $this->workflow()->transitionTo($this->ticket(), 'in_review');
 
-        $this->assertTrue($result);
-        $freshTicket = $this->ticket->fresh();
-        $this->assertNotNull($freshTicket);
-        $this->assertSame('in_review', $freshTicket->status?->value);
-    }
+        Assert::assertTrue($result);
+        $freshTicket = $this->ticket()->fresh();
+        Assert::assertNotNull($freshTicket);
+        Assert::assertSame('in_review', $freshTicket->status?->value);
+    });
 
-    public function test_creates_activity_log_for_transition(): void
-    {
-        $result = $this->service->transitionTo($this->ticket, 'in_review');
+    test('_creates_activity_log_for_transition', function (): void {
+$result = $this->workflow()->transitionTo($this->ticket(), 'in_review');
 
-        $this->assertTrue($result);
-        $this->assertNotEmpty($this->ticket->activities);
+        Assert::assertTrue($result);
+        Assert::assertNotEmpty($this->ticket()->activities);
         /** @var TicketActivity $firstActivity */
-        $firstActivity = $this->ticket->activities->first();
-        $this->assertStringContainsString(
+        $firstActivity = $this->ticket()->activities->first();
+        Assert::assertStringContainsString(
             'Status changed from pending to in_review',
             (string) $firstActivity->getAttribute('description')
         );
-    }
+    });
 
-    public function test_prevents_invalid_transitions_for_transitionTo(): void
-    {
-        $result = $this->service->transitionTo($this->ticket, 'invalid_status');
+    test('_prevents_invalid_transitions_for_transition to', function (): void {
+$result = $this->workflow()->transitionTo($this->ticket(), 'invalid_status');
 
-        $this->assertFalse($result);
-        $freshTicket = $this->ticket->fresh();
-        $this->assertNotNull($freshTicket);
-        $this->assertSame('pending', $freshTicket->status?->value);
-    }
+        Assert::assertFalse($result);
+        $freshTicket = $this->ticket()->fresh();
+        Assert::assertNotNull($freshTicket);
+        Assert::assertSame('pending', $freshTicket->status?->value);
+    });
 
-    public function test_prevents_transition_from_pending_to_resolved_for_transitionTo(): void
-    {
-        $result = $this->service->transitionTo($this->ticket, 'resolved');
+    test('_prevents_transition_from_pending_to_resolved_for_transition to', function (): void {
+$result = $this->workflow()->transitionTo($this->ticket(), 'resolved');
 
-        $this->assertFalse($result);
-        $freshTicket = $this->ticket->fresh();
-        $this->assertNotNull($freshTicket);
-        $this->assertSame('pending', $freshTicket->status?->value);
-    }
+        Assert::assertFalse($result);
+        $freshTicket = $this->ticket()->fresh();
+        Assert::assertNotNull($freshTicket);
+        Assert::assertSame('pending', $freshTicket->status?->value);
+    });
 
-    public function test_updates_ticket_timestamps_on_transition(): void
-    {
-        $oldUpdatedAt = $this->ticket->updated_at;
+    test('_updates_ticket_timestamps_on_transition', function (): void {
+$oldUpdatedAt = $this->ticket()->updated_at;
         sleep(1);
 
-        $result = $this->service->transitionTo($this->ticket, 'in_review');
+        $result = $this->workflow()->transitionTo($this->ticket(), 'in_review');
 
-        $this->assertTrue($result);
-        $freshTicket = $this->ticket->fresh();
-        $this->assertNotNull($freshTicket);
+        Assert::assertTrue($result);
+        $freshTicket = $this->ticket()->fresh();
+        Assert::assertNotNull($freshTicket);
         $updatedAt = $freshTicket->updated_at;
-        $this->assertNotNull($updatedAt);
-        $this->assertNotNull($oldUpdatedAt);
-        $this->assertTrue($updatedAt->gt($oldUpdatedAt));
-    }
+        Assert::assertNotNull($updatedAt);
+        Assert::assertNotNull($oldUpdatedAt);
+        Assert::assertTrue($updatedAt->gt($oldUpdatedAt));
+    });
 
-    public function test_returns_workflow_rules_for_ticket_type(): void
-    {
-        $rules = $this->service->getWorkflowRules($this->ticket);
+    test('_returns_workflow_rules_for_ticket_type', function (): void {
+$rules = $this->workflow()->getWorkflowRules($this->ticket());
 
-        $this->assertArrayHasKey('transitions', $rules);
-        $this->assertArrayHasKey('constraints', $rules);
-    }
+        Assert::assertArrayHasKey('transitions', $rules);
+        Assert::assertArrayHasKey('constraints', $rules);
+    });
 
-    public function test_returns_different_rules_for_different_ticket_types(): void
-    {
-        $this->ticket->update(['type' => 'road_maintenance']);
-        $roadRules = $this->service->getWorkflowRules($this->ticket);
+    test('_returns_different_rules_for_different_ticket_types', function (): void {
+$this->ticket()->update(['type' => 'road_maintenance']);
+        $roadRules = $this->workflow()->getWorkflowRules($this->ticket());
 
-        $this->ticket->update(['type' => 'public_lighting']);
-        $lightingRules = $this->service->getWorkflowRules($this->ticket);
+        $this->ticket()->update(['type' => 'public_lighting']);
+        $lightingRules = $this->workflow()->getWorkflowRules($this->ticket());
 
         $this->assertNotSame($roadRules, $lightingRules);
-    }
+    });
 
-    public function test_includes_priority_based_rules(): void
-    {
-        $this->ticket->update(['priority' => 'urgent']);
-        $rules = $this->service->getWorkflowRules($this->ticket);
+    test('_includes_priority_based_rules', function (): void {
+$this->ticket()->update(['priority' => 'urgent']);
+        $rules = $this->workflow()->getWorkflowRules($this->ticket());
 
         /** @var array<string, mixed> $constraints */
         $constraints = $rules['constraints'];
-        $this->assertArrayHasKey('urgent_priority', $constraints);
-    }
+        Assert::assertArrayHasKey('urgent_priority', $constraints);
+    });
 
-    public function test_validates_transition_requirements(): void
-    {
-        $result = $this->service->validateTransition($this->ticket, 'in_progress');
+    test('_validates_transition_requirements', function (): void {
+$result = $this->workflow()->validateTransition($this->ticket(), 'in_progress');
 
-        $this->assertTrue($result['valid']);
-    }
+        Assert::assertTrue($result['valid']);
+    });
 
-    public function test_requires_assignee_for_in_progress_transition(): void
-    {
-        $result = $this->service->validateTransition($this->ticket, 'in_progress');
+    test('_requires_assignee_for_in_progress_transition', function (): void {
+$result = $this->workflow()->validateTransition($this->ticket(), 'in_progress');
 
-        $this->assertFalse($result['valid']);
+        Assert::assertFalse($result['valid']);
         /** @var list<string> $errors */
         $errors = $result['errors'];
-        $this->assertContains('Ticket must be assigned to proceed', $errors);
-    }
+        Assert::assertContains('Ticket must be assigned to proceed', $errors);
+    });
 
-    public function test_validates_transition_with_assignee(): void
-    {
-        $assignee = UserFactory::new()->createOne();
-        $this->ticket->update(['responsible_id' => $assignee->id]);
+    test('_validates_transition_with_assignee', function (): void {
+$assignee = UserFactory::new()->createOne();
+        $this->ticket()->update(['responsible_id' => $assignee->id]);
 
-        $result = $this->service->validateTransition($this->ticket, 'in_progress');
+        $result = $this->workflow()->validateTransition($this->ticket(), 'in_progress');
 
-        $this->assertTrue($result['valid']);
-    }
+        Assert::assertTrue($result['valid']);
+    });
 
-    public function test_requires_resolution_note_for_resolved_transition(): void
-    {
-        $this->ticket->update(['status' => 'in_progress']);
-        $result = $this->service->validateTransition($this->ticket, 'resolved');
+    test('_requires_resolution_note_for_resolved_transition', function (): void {
+$this->ticket()->update(['status' => 'in_progress']);
+        $result = $this->workflow()->validateTransition($this->ticket(), 'resolved');
 
-        $this->assertFalse($result['valid']);
+        Assert::assertFalse($result['valid']);
         /** @var list<string> $resolutionErrors */
         $resolutionErrors = $result['errors'];
-        $this->assertContains('Resolution note is required', $resolutionErrors);
-    }
+        Assert::assertContains('Resolution note is required', $resolutionErrors);
+    });
 
-    public function test_validates_resolved_transition_with_note(): void
-    {
-        $this->ticket->update([
+    test('_validates_resolved_transition_with_note', function (): void {
+$this->ticket()->update([
             'status' => 'in_progress',
             'resolution_note' => 'Issue has been resolved',
         ]);
-        $result = $this->service->validateTransition($this->ticket, 'resolved');
+        $result = $this->workflow()->validateTransition($this->ticket(), 'resolved');
 
-        $this->assertTrue($result['valid']);
-    }
+        Assert::assertTrue($result['valid']);
+    });
 
-    public function test_returns_transition_history_for_ticket(): void
-    {
-        $this->service->transitionTo($this->ticket, 'in_review');
-        $this->service->transitionTo($this->ticket, 'in_progress');
+    test('_returns_transition_history_for_ticket', function (): void {
+$this->workflow()->transitionTo($this->ticket(), 'in_review');
+        $this->workflow()->transitionTo($this->ticket(), 'in_progress');
 
-        $history = $this->service->getTransitionHistory($this->ticket);
+        $history = $this->workflow()->getTransitionHistory($this->ticket());
 
-        $this->assertCount(2, $history);
+        Assert::assertCount(2, $history);
         $first = $history->first();
-        $this->assertNotNull($first);
-        $this->assertSame('in_review', $first->getAttribute('to_status'));
+        Assert::assertNotNull($first);
+        Assert::assertSame('in_review', $first->getAttribute('to_status'));
         $last = $history->last();
-        $this->assertNotNull($last);
-        $this->assertSame('in_progress', $last->getAttribute('to_status'));
-    }
+        Assert::assertNotNull($last);
+        Assert::assertSame('in_progress', $last->getAttribute('to_status'));
+    });
 
-    public function test_orders_transitions_by_timestamp(): void
-    {
-        $this->service->transitionTo($this->ticket, 'in_review');
+    test('_orders_transitions_by_timestamp', function (): void {
+$this->workflow()->transitionTo($this->ticket(), 'in_review');
         sleep(1);
-        $this->service->transitionTo($this->ticket, 'in_progress');
+        $this->workflow()->transitionTo($this->ticket(), 'in_progress');
 
-        $history = $this->service->getTransitionHistory($this->ticket);
+        $history = $this->workflow()->getTransitionHistory($this->ticket());
 
         $first = $history->first();
         $last = $history->last();
-        $this->assertNotNull($first);
-        $this->assertNotNull($last);
-        $this->assertNotNull($first->created_at);
-        $this->assertNotNull($last->created_at);
-        $this->assertTrue($first->created_at->lt($last->created_at));
-    }
+        Assert::assertNotNull($first);
+        Assert::assertNotNull($last);
+        Assert::assertNotNull($first->created_at);
+        Assert::assertNotNull($last->created_at);
+        Assert::assertTrue($first->created_at->lt($last->created_at));
+    });
 
-    public function test_allows_reopening_closed_tickets(): void
-    {
-        $this->ticket->update(['status' => 'closed']);
-        $result = $this->service->canReopenTicket($this->ticket);
+    test('_allows_reopening_closed_tickets', function (): void {
+$this->ticket()->update(['status' => 'closed']);
+        $result = $this->workflow()->canReopenTicket($this->ticket());
 
-        $this->assertTrue($result);
-    }
+        Assert::assertTrue($result);
+    });
 
-    public function test_prevents_reopening_non_closed_tickets(): void
-    {
-        $result = $this->service->canReopenTicket($this->ticket);
+    test('_prevents_reopening_non_closed_tickets', function (): void {
+$result = $this->workflow()->canReopenTicket($this->ticket());
 
-        $this->assertFalse($result);
-    }
+        Assert::assertFalse($result);
+    });
 
-    public function test_prevents_reopening_tickets_closed_for_too_long(): void
-    {
-        $this->ticket->update([
+    test('_prevents_reopening_tickets_closed_for_too_long', function (): void {
+$this->ticket()->update([
             'status' => 'closed',
             'closed_at' => now()->subDays(31),
         ]);
-        $result = $this->service->canReopenTicket($this->ticket);
+        $result = $this->workflow()->canReopenTicket($this->ticket());
 
-        $this->assertFalse($result);
-    }
+        Assert::assertFalse($result);
+    });
 
-    public function test_successfully_reopens_closed_ticket(): void
-    {
-        $this->ticket->update(['status' => 'closed']);
-        $result = $this->service->reopenTicket($this->ticket, 'Reopening for additional work');
+    test('_successfully_reopens_closed_ticket', function (): void {
+$this->ticket()->update(['status' => 'closed']);
+        $result = $this->workflow()->reopenTicket($this->ticket(), 'Reopening for additional work');
 
-        $this->assertTrue($result);
-        $freshTicket = $this->ticket->fresh();
-        $this->assertNotNull($freshTicket);
-        $this->assertSame('reopened', $freshTicket->status?->value);
-    }
+        Assert::assertTrue($result);
+        $freshTicket = $this->ticket()->fresh();
+        Assert::assertNotNull($freshTicket);
+        Assert::assertSame('reopened', $freshTicket->status?->value);
+    });
 
-    public function test_creates_activity_log_for_reopening(): void
-    {
-        $this->ticket->update(['status' => 'closed']);
-        $result = $this->service->reopenTicket($this->ticket, 'Reopening for additional work');
+    test('_creates_activity_log_for_reopening', function (): void {
+$this->ticket()->update(['status' => 'closed']);
+        $result = $this->workflow()->reopenTicket($this->ticket(), 'Reopening for additional work');
 
-        $this->assertTrue($result);
-        $lastActivity = $this->ticket->activities->last();
-        $this->assertNotNull($lastActivity);
-        $this->assertStringContainsString(
+        Assert::assertTrue($result);
+        $lastActivity = $this->ticket()->activities->last();
+        Assert::assertNotNull($lastActivity);
+        Assert::assertStringContainsString(
             'Ticket reopened',
             (string) $lastActivity->getAttribute('description')
         );
-    }
+    });
 
-    public function test_prevents_reopening_non_closed_tickets_for_reopen(): void
-    {
-        $result = $this->service->reopenTicket($this->ticket, 'Test reason');
+    test('_prevents_reopening_non_closed_tickets_for_reopen', function (): void {
+$result = $this->workflow()->reopenTicket($this->ticket(), 'Test reason');
 
-        $this->assertFalse($result);
-        $freshTicket = $this->ticket->fresh();
-        $this->assertNotNull($freshTicket);
-        $this->assertSame('pending', $freshTicket->status?->value);
-    }
+        Assert::assertFalse($result);
+        $freshTicket = $this->ticket()->fresh();
+        Assert::assertNotNull($freshTicket);
+        Assert::assertSame('pending', $freshTicket->status?->value);
+    });
 
-    public function test_returns_workflow_performance_metrics(): void
-    {
-        $metrics = $this->service->getWorkflowMetrics($this->ticket);
+    test('_returns_workflow_performance_metrics', function (): void {
+$metrics = $this->workflow()->getWorkflowMetrics($this->ticket());
 
-        $this->assertArrayHasKey('avg_resolution_time', $metrics);
-        $this->assertArrayHasKey('transition_count', $metrics);
-        $this->assertArrayHasKey('workflow_efficiency', $metrics);
-    }
+        Assert::assertArrayHasKey('avg_resolution_time', $metrics);
+        Assert::assertArrayHasKey('transition_count', $metrics);
+        Assert::assertArrayHasKey('workflow_efficiency', $metrics);
+    });
 
-    public function test_calculates_average_resolution_time(): void
-    {
-        $freshTicket = $this->ticket->fresh();
-        $this->assertNotNull($freshTicket);
+    test('_calculates_average_resolution_time', function (): void {
+$freshTicket = $this->ticket()->fresh();
+        Assert::assertNotNull($freshTicket);
         $freshTicket->setAttribute('resolved_at', now()->subDays(1));
 
-        $metrics = $this->service->getWorkflowMetrics($freshTicket);
+        $metrics = $this->workflow()->getWorkflowMetrics($freshTicket);
 
-        $this->assertGreaterThan(0, $metrics['avg_resolution_time']);
-    }
+        Assert::assertGreaterThan(0, $metrics['avg_resolution_time']);
+    });
 
-    public function test_counts_total_transitions(): void
-    {
-        $this->service->transitionTo($this->ticket, 'in_review');
-        $this->service->transitionTo($this->ticket, 'in_progress');
+    test('_counts_total_transitions', function (): void {
+$this->workflow()->transitionTo($this->ticket(), 'in_review');
+        $this->workflow()->transitionTo($this->ticket(), 'in_progress');
 
-        $metrics = $this->service->getWorkflowMetrics($this->ticket);
+        $metrics = $this->workflow()->getWorkflowMetrics($this->ticket());
 
-        $this->assertSame(2, $metrics['transition_count']);
-    }
+        Assert::assertSame(2, $metrics['transition_count']);
+    });
 
-    public function test_automatically_assigns_high_priority_tickets(): void
-    {
-        $this->ticket->update(['priority' => 'urgent']);
-        $result = $this->service->applyWorkflowAutomation($this->ticket);
+    test('_automatically_assigns_high_priority_tickets', function (): void {
+$this->ticket()->update(['priority' => 'urgent']);
+        $result = $this->workflow()->applyWorkflowAutomation($this->ticket());
 
-        $this->assertTrue($result);
-    }
+        Assert::assertTrue($result);
+    });
 
-    public function test_automatically_escalates_overdue_tickets(): void
-    {
-        $this->ticket->update([
+    test('_automatically_escalates_overdue_tickets', function (): void {
+$this->ticket()->update([
             'due_date' => now()->subDays(2),
             'status' => 'in_progress',
         ]);
-        $result = $this->service->applyWorkflowAutomation($this->ticket);
+        $result = $this->workflow()->applyWorkflowAutomation($this->ticket());
 
-        $this->assertTrue($result);
-    }
+        Assert::assertTrue($result);
+    });
 
-    public function test_applies_type_specific_automation_rules(): void
-    {
-        $this->ticket->update(['type' => 'road_maintenance']);
-        $result = $this->service->applyWorkflowAutomation($this->ticket);
+    test('_applies_type_specific_automation_rules', function (): void {
+$this->ticket()->update(['type' => 'road_maintenance']);
+        $result = $this->workflow()->applyWorkflowAutomation($this->ticket());
 
-        $this->assertTrue($result);
-    }
-}
+        Assert::assertTrue($result);
+    });
+});

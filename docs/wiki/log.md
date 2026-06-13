@@ -1,3 +1,21 @@
+# Modules Wiki Log
+
+## [2026-06-13] docs | Gate chef — hub completamento + Activity/Xot test docs
+
+- Hub: [platform-completion-roadmap](../Xot/docs/wiki/overviews/platform-completion-roadmap.md)
+- Activity: 7 file test Assert; [completion-status](../Activity/docs/wiki/overviews/completion-status.md)
+- Temi: Barthelemy, TwentyOne, Meetup completion roadmaps
+- GitHub: [#372](https://github.com/laraxot/base_fixcity_fila5/issues/372)
+
+## [2026-06-13] docs | PHPStan Pest sessione — helper test + roadmap completamento
+
+- Fixcity: [phpstan-pest-testcase-helpers](../Fixcity/docs/wiki/concepts/phpstan-pest-testcase-helpers.md), [completion-roadmap](../Fixcity/docs/wiki/overviews/completion-roadmap.md)
+- Notify: [phpstan-pest-test-doubles](../Notify/docs/wiki/concepts/phpstan-pest-test-doubles.md)
+- Xot: aggiornato [phpstan-pest-bridge-discipline](../Xot/docs/wiki/concepts/phpstan-pest-bridge-discipline.md)
+- UI, Tenant, Cms: `testing.md` aggiornati
+- Sixteen: [theme-component-test-contract](../../Themes/Sixteen/docs/wiki/concepts/theme-component-test-contract.md), [completion-roadmap](../../Themes/Sixteen/docs/wiki/overviews/completion-roadmap.md)
+- GitHub: [Fixcity#52](https://github.com/laraxot/module_fixcity_fila5/issues/52) / [D#53](https://github.com/laraxot/module_fixcity_fila5/discussions/53)
+
 ## [2026-06-05] docs | HackerNoon harness — tips 001-022 in wiki locale
 
 - Stub/checklist: second-brain → canon Xot, ai-harness, [hackernoon map](../../../../docs/wiki/concepts/hackernoon-ai-coding-tips-fixcity-map.md), [llm-wiki.txt](../../../../bashscripts/tools/prompts/llm-wiki.txt)
