@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Modules\Fixcity\Tests\Unit\Enums;
 
 use Modules\Fixcity\Enums\TicketTypeEnum;
-use ReflectionEnum;
 
 use PHPUnit\Framework\Assert;
 describe('TicketTypeEnum', function () {
@@ -109,7 +108,7 @@ describe('TicketTypeEnum', function () {
     });
 
     it('implements required Filament interfaces', function () {
-        $reflection = new ReflectionEnum(TicketTypeEnum::class);
+        $reflection = new \ReflectionEnum(TicketTypeEnum::class);
         $interfaces = $reflection->getInterfaceNames();
 
         Assert::assertContains('Filament\Support\Contracts\HasColor', $interfaces);

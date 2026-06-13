@@ -14,7 +14,6 @@ use Modules\User\Models\User;
 uses(TestCase::class);
 beforeEach(function () {
     /** @var TestCase $this */
-        Assert::assertNotNull($this->user);
     $this->user = UserFactory::new()->createOne();
 });
 
