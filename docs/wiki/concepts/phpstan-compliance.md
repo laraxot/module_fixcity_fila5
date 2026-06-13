@@ -3,26 +3,35 @@ title: "Fixcity Module - PHPStan Type Compliance"
 type: concept
 tags: [fixcity, phpstan, types, compliance, quality, static-analysis]
 created: 2026-06-10
-updated: 2026-06-10
+updated: 2026-06-13
+qmd: "Fixcity PHPStan level max compliance tests green"
+issues:
+  - "https://github.com/laraxot/module_fixcity_fila5/issues/52"
+discussions:
+  - "https://github.com/laraxot/module_fixcity_fila5/discussions/53"
 related:
+  - ./phpstan-pest-testcase-helpers.md
+  - ../overviews/completion-roadmap.md
   - ../../../../Themes/Sixteen/docs/wiki/concepts/phpstan-compliance.md
-  - ../../../../../docs/wiki/concepts/phpstan-level-max-compliance.md
+  - ../../../../../../docs/wiki/concepts/phpstan-level-max-compliance.md
 ---
 
 # Fixcity Module — PHPStan Type Compliance
 
 ## Status
 
-✅ **COMPLIANT** — 0 errors in PHPStan level: max
+✅ **COMPLIANT** — 0 errori codice in PHPStan level max (2026-06-13)
 
 ```
 Module:   Fixcity
 Path:     laravel/Modules/Fixcity/
 Status:   GREEN
-Errors:   0
+Errors:   0 (codice + tests)
 Level:    max
-Updated:  2026-06-10
+Updated:  2026-06-13
 ```
+
+Sessione: 88 errori test → 0 via [phpstan-pest-testcase-helpers.md](./phpstan-pest-testcase-helpers.md). Issue [#52](https://github.com/laraxot/module_fixcity_fila5/issues/52).
 
 ## Module Structure
 
@@ -87,7 +96,7 @@ vendor/bin/phpstan analyse laravel/Modules/Fixcity --level=max
 | Controllers | ✅ PASS | 100% explicit types |
 | DTOs | ✅ PASS | Constructor properties typed |
 | Observers | ✅ PASS | Event handler types |
-| Tests | ✅ PASS | Test utilities typed |
+| Tests | ✅ PASS | Helper Pest + PHPStan L10 ([phpstan-pest-testcase-helpers](./phpstan-pest-testcase-helpers.md)) |
 
 ## Testing & Validation
 

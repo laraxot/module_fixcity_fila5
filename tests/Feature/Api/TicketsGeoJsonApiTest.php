@@ -6,7 +6,7 @@ namespace Modules\Fixcity\Tests\Feature\Api;
 
 use Modules\Fixcity\Tests\TestCase;
 
-uses(TestCase::class);
+uses(\Modules\Fixcity\Tests\TestCase::class);
 
 it('returns geojson feature collection from live api', function (): void {
     /** @var TestCase $this */

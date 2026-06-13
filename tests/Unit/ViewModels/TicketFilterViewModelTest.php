@@ -9,11 +9,12 @@ use PHPUnit\Framework\Assert;
 use Modules\Fixcity\ViewModels\TicketFilterViewModel;
 use Modules\Fixcity\Tests\TestCase;
 
-class TicketFilterViewModelTest extends TestCase
-{
-    public function test_it_exposes_filter_items_from_aggregate_action(): void
-    {
-        $this->instance(BuildTicketFilterAggregateAction::class, new class extends BuildTicketFilterAggregateAction
+uses(\Modules\Fixcity\Tests\TestCase::class);
+
+describe('Ticket Filter View Model', function (): void {
+    test('_it_exposes_filter_items_from_aggregate_action', function (): void {
+        /** @var \Modules\Fixcity\Tests\TestCase $this */
+$this->bindInstance(BuildTicketFilterAggregateAction::class, new class extends BuildTicketFilterAggregateAction
         {
             public function execute(): array
             {
@@ -54,11 +55,10 @@ class TicketFilterViewModelTest extends TestCase
         Assert::assertCount(1, $viewModel->getStatusFilterItems());
         Assert::assertSame(1, $viewModel->getFilteredCount(['other'], ['open']));
         Assert::assertSame(0, $viewModel->getFilteredCount(['waste'], ['open']));
-    }
+    });
 
-    public function test_it_supplements_list_items_from_aggregate_features(): void
-    {
-        $this->instance(BuildTicketFilterAggregateAction::class, new class extends BuildTicketFilterAggregateAction
+    test('_it_supplements_list_items_from_aggregate_features', function (): void {
+$this->bindInstance(BuildTicketFilterAggregateAction::class, new class extends BuildTicketFilterAggregateAction
         {
             public function execute(): array
             {
@@ -88,5 +88,5 @@ class TicketFilterViewModelTest extends TestCase
         Assert::assertCount(1, $items);
         $firstItem = $items[0];
         Assert::assertSame('Seconda supplement test', $firstItem->name);
-    }
-}
+    });
+});

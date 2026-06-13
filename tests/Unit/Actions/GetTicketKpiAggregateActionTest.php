@@ -15,13 +15,11 @@ use Modules\Fixcity\Models\Ticket;
 use Modules\User\Models\User;
 use Modules\Fixcity\Tests\TestCase;
 
-class GetTicketKpiAggregateActionTest extends TestCase
-{
-    use RefreshDatabase;
+uses(\Modules\Fixcity\Tests\TestCase::class);
 
-    public function test_it_aggregates_ticket_counts_by_status(): void
-    {
-        $owner = UserFactory::new()->createOne();
+describe('Get Ticket Kpi Aggregate Action', function (): void {
+    test('_it_aggregates_ticket_counts_by_status', function (): void {
+$owner = UserFactory::new()->createOne();
         $table = (new Ticket)->getTable();
         $now = now()->toDateTimeString();
 
@@ -47,5 +45,5 @@ class GetTicketKpiAggregateActionTest extends TestCase
         Assert::assertSame(2, $kpi['backlog']);
         Assert::assertSame(1, $kpi['in_progress']);
         Assert::assertSame(1, $kpi['resolved']);
-    }
-}
+    });
+});
