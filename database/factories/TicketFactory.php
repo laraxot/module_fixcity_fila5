@@ -7,6 +7,7 @@ namespace Modules\Fixcity\Database\Factories;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Modules\Fixcity\Enums\TicketPriorityEnum;
 use Modules\Fixcity\Enums\TicketStatusEnum;
+use Modules\Fixcity\Enums\TicketTypeEnum;
 use Modules\Fixcity\Models\Ticket;
 use Modules\User\Models\User;
 
@@ -28,16 +29,16 @@ class TicketFactory extends Factory
             'content' => fake()->paragraph(),
             'owner_id' => User::factory(),
             'responsible_id' => User::factory(),
-            'status_id' => fake()->numberBetween(1, 10),
+            'status' => TicketStatusEnum::PENDING,
             'code' => fake()->unique()->numerify('TCK-#####'),
             'ticket_prefix' => 'TCK',
             'order' => fake()->numberBetween(0, 100),
-            'priority_id' => fake()->numberBetween(1, 5),
+            'priority' => TicketPriorityEnum::MEDIUM,
             'project_id' => null,
             'estimation' => fake()->optional()->randomFloat(1, 0, 100),
             'epic_id' => null,
             'sprint_id' => null,
-            'type_id' => fake()->optional()->numberBetween(1, 5),
+            'type' => TicketTypeEnum::REPORT,
             'latitude' => fake()->optional()->latitude,
             'longitude' => fake()->optional()->longitude,
             'created_by' => fake()->optional()->userName(),

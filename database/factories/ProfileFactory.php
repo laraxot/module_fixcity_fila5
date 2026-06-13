@@ -17,6 +17,15 @@ class ProfileFactory extends Factory
     /** @return array<string, mixed> */
     public function definition(): array
     {
-        return [];
+        return [
+            'first_name' => fake()->firstName(),
+            'last_name' => fake()->lastName(),
+            'email' => fake()->unique()->safeEmail(),
+            'locale' => 'it',
+            'timezone' => 'Europe/Rome',
+            'is_active' => true,
+            'status' => 'active',
+            'type' => 'citizen',
+        ];
     }
 }

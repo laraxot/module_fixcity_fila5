@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 use Modules\Fixcity\Models\Ticket;
 use Modules\Fixcity\Tests\TestCase;
-use PHPUnit\Framework\Assert;
 use ReflectionMethod;
+use PHPUnit\Framework\Assert;
 
 uses(TestCase::class);
 
