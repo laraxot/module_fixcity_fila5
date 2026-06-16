@@ -528,6 +528,9 @@ return [
         'message_extra' => [
             'label' => 'Fields with an asterisk are required',
         ],
+        'summary_declaration' => [
+            'text' => 'The information you have provided is a statement. Verify that it is correct.',
+        ],
     ],
 
     /*

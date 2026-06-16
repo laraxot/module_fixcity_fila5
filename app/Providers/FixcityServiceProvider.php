@@ -31,7 +31,7 @@ class FixcityServiceProvider extends XotBaseServiceProvider
      */
     protected function registerFolioApiRoutes(): void
     {
-        $apiPages = dirname($this->module_dir, 2).'/resources/views/pages/api';
+        $apiPages = dirname($this->module_dir, 3).'/resources/views/pages/api';
 
         if (! File::isDirectory($apiPages)) {
             return;

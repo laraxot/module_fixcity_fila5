@@ -66,18 +66,16 @@ class CreateTicketWizardWidget extends XotBaseWizardWidget
 
     protected function redirectAfterSuccess(): void
     {
-        $slug = SafeStringCastAction::cast(
-            $this->blockData['confirmation_slug']
-                ?? config('fixcity.wizard.confirmation_slug', 'segnalazione-04-conferma')
+        $path = SafeStringCastAction::cast(
+            $this->blockData['confirmation_path'] ?? '/tickets/confirmation'
         );
 
-        $url = route('tests.view', ['slug' => $slug]);
         $localizedUrl = LaravelLocalization::getLocalizedURL(
             LaravelLocalization::getCurrentLocale(),
-            $url
+            $path
         );
 
-        $this->redirect($localizedUrl !== false ? $localizedUrl : $url);
+        $this->redirect($localizedUrl !== false ? $localizedUrl : $path);
     }
 
     /**
