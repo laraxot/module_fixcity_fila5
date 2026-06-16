@@ -207,6 +207,15 @@ return [
         'summary' => ['label' => 'Riepilogo'],
     ],
     'gdpr_notice' => ['text' => 'Il Comune di :municipality gestisce i dati personali forniti e liberamente comunicati sulla base dell\'articolo 13 del Regolamento (UE) 2016/679 General Data Protection Regulation (GDPR) e degli articoli 13 e successive modifiche e integrazione del decreto legislativo (di seguito d.lgs) 267/2000 (Testo unico enti locali).', 'privacy_link' => 'informativa sulla privacy.'],
+    'privacy' => [
+        'title' => ['label' => 'Segnalazione disservizio'],
+        'description' => ['text' => 'Leggi l\'informativa sulla privacy e acconsenti al trattamento dei dati personali.'],
+        'intro' => ['text' => 'Il Comune di Firenze gestisce i dati personali forniti e liberamente comunicati sulla base dell\'articolo 13 del Regolamento (UE) 2016/679 General data protection regulation (Gdpr) e degli articoli 13 e successive modifiche e integrazione del decreto legislativo (di seguito d.lgs) 267/2000 (Testo unico enti locali).'],
+        'detail_prefix' => ['text' => 'Per i dettagli sul trattamento dei dati personali consulta l\''],
+        'link' => ['label' => 'informativa sulla privacy.'],
+        'checkbox' => ['label' => 'Ho letto e compreso l\'informativa sulla privacy'],
+        'error' => ['not_accepted' => 'Devi accettare l\'informativa sulla privacy per continuare.'],
+    ],
     'privacy_geolocation' => [
         'title' => ['label' => 'Segnalazione disservizio'],
         'description' => ['text' => 'Leggi l\'informativa sulla privacy e acconsenti al trattamento dei dati personali.'],
