@@ -413,7 +413,7 @@ final class TicketLayoutViewModel
             'title' => $this->t($rawCta['title'] ?? '', __($this->ns . '.map.cta.title.label')),
             'text' => $this->t($rawCta['text'] ?? '', __($this->ns . '.map.cta.text.label')),
             'button_text' => $this->t($rawCta['button_text'] ?? '', __($this->ns . '.map.cta.button.label')),
-            'button_url' => (string) ($rawCta['button_url'] ?? '/it/tests/ticket-crea'),
+            'button_url' => SafeStringCastAction::cast($rawCta['button_url'] ?? '/it/tests/ticket-crea'),
         ];
     }
 

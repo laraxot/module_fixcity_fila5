@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace Modules\Fixcity\Actions;
 
 use Modules\Fixcity\Models\Ticket;
+use Modules\Xot\Actions\Cast\SafeIntCastAction;
+use Modules\Xot\Actions\Cast\SafeStringCastAction;
 
 /**
  * Payload JSON popup mappa (GET /api/ticket-details/{ticket}) — logica in Action, non Controller.
@@ -34,7 +36,7 @@ final class BuildTicketPublicDetailsPayloadAction
         return [
             'id' => $ticket->id,
             'title' => $ticket->name,
-            'description' => (string) $ticket->content,
+            'description' => SafeStringCastAction::cast($ticket->content),
             'images' => $imageUrls,
         ];
     }
@@ -60,9 +62,9 @@ final class BuildTicketPublicDetailsPayloadAction
         ));
 
         return [
-            'id' => (int) ($properties['id'] ?? 0),
-            'title' => (string) ($properties['title'] ?? $properties['name'] ?? ''),
-            'description' => (string) ($properties['description'] ?? $properties['content'] ?? ''),
+            'id' => SafeIntCastAction::cast($properties['id'] ?? 0),
+            'title' => SafeStringCastAction::cast($properties['title'] ?? $properties['name'] ?? ''),
+            'description' => SafeStringCastAction::cast($properties['description'] ?? $properties['content'] ?? ''),
             'images' => $imageUrls,
         ];
     }

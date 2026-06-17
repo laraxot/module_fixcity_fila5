@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace Modules\Fixcity\Actions;
 
 use Illuminate\Support\Facades\File;
+use Modules\Xot\Actions\Cast\SafeIntCastAction;
+use Modules\Xot\Actions\Cast\SafeStringCastAction;
 use function Safe\preg_match;
 use function Safe\preg_replace;
 
@@ -40,26 +42,26 @@ final class LoadDesignComuniElencoFilterCatalogAction
 
         /** @var array<int, array<string, mixed>> $list */
         $list = $firstCategory['list'] ?? [];
-        $legend = (string) ($firstCategory['title'] ?? 'categoria');
+        $legend = SafeStringCastAction::cast($firstCategory['title'] ?? 'categoria');
 
         $items = [];
         $sumCounts = 0;
 
         foreach ($list as $entry) {
-            $rawLabel = (string) ($entry['label'] ?? '');
+            $rawLabel = SafeStringCastAction::cast($entry['label'] ?? '');
             $count = 0;
             $label = $rawLabel;
 
             if (preg_match('/\((\d+)\)\s*$/', $rawLabel, $matches) === 1 && isset($matches[1])) {
-                $count = (int) $matches[1];
-                $label = trim((string) preg_replace('/\s*\(\d+\)\s*$/', '', $rawLabel));
+                $count = SafeIntCastAction::cast($matches[1]);
+                $label = trim(SafeStringCastAction::cast(preg_replace('/\s*\(\d+\)\s*$/', '', $rawLabel)));
             }
 
             $sumCounts += $count;
 
             $items[] = [
-                'id' => (string) ($entry['id'] ?? 'filter'),
-                'value' => (string) ($entry['value'] ?? ''),
+                'id' => SafeStringCastAction::cast($entry['id'] ?? 'filter'),
+                'value' => SafeStringCastAction::cast($entry['value'] ?? ''),
                 'label' => $label,
                 'display_label' => $rawLabel,
                 'count' => $count,

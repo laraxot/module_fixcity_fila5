@@ -7,6 +7,7 @@ namespace Modules\Fixcity\Tests\Unit\Actions;
 use PHPUnit\Framework\Assert;
 use Modules\Fixcity\Actions\LoadCityDesignFilterCatalogAction;
 use Modules\Fixcity\Tests\TestCase;
+use Modules\Xot\Actions\Cast\SafeStringCastAction;
 
 uses(\Modules\Fixcity\Tests\TestCase::class);
 
@@ -23,7 +24,7 @@ $catalog = app(LoadCityDesignFilterCatalogAction::class)->execute();
         );
         Assert::assertStringContainsString(
             '(21)',
-            (string) $catalog['items'][0]['display_label'],
+            SafeStringCastAction::cast($catalog['items'][0]['display_label']),
         );
         Assert::assertSame(21, $catalog['items'][0]['count']);
     });
