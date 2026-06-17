@@ -9,6 +9,7 @@ use Modules\Fixcity\Models\Ticket;
 use Modules\Fixcity\Models\TicketActivity;
 use Modules\Fixcity\Services\WorkflowService;
 use Modules\User\Database\Factories\UserFactory;
+use Modules\Xot\Actions\Cast\SafeStringCastAction;
 use PHPUnit\Framework\Assert;
 
 uses(\Modules\Fixcity\Tests\TestCase::class);
@@ -151,7 +152,7 @@ $result = $this->workflow()->transitionTo($this->ticket(), 'in_review');
         $firstActivity = $this->ticket()->activities->first();
         Assert::assertStringContainsString(
             'Status changed from pending to in_review',
-            (string) $firstActivity->getAttribute('description')
+            SafeStringCastAction::cast($firstActivity->getAttribute('description'))
         );
     });
 
@@ -331,7 +332,7 @@ $this->ticket()->update(['status' => 'closed']);
         Assert::assertNotNull($lastActivity);
         Assert::assertStringContainsString(
             'Ticket reopened',
-            (string) $lastActivity->getAttribute('description')
+            SafeStringCastAction::cast($lastActivity->getAttribute('description'))
         );
     });
 

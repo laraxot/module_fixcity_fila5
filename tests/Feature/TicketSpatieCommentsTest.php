@@ -3,12 +3,13 @@
 declare(strict_types=1);
 
 use Modules\Fixcity\Database\Factories\TicketFactory;
-use PHPUnit\Framework\Assert;
 use Modules\User\Database\Factories\UserFactory;
 use Modules\Comment\Models\Comment;
 use Modules\Fixcity\Enums\TicketStatusEnum;
 use Modules\Fixcity\Enums\TicketTypeEnum;
 use Modules\Fixcity\Tests\TestCase;
+use Modules\Xot\Actions\Cast\SafeStringCastAction;
+use PHPUnit\Framework\Assert;
 
 uses(TestCase::class);
 
@@ -32,7 +33,7 @@ describe('Ticket native comments FO', function () {
         $comment = $ticket->comment('Commento cittadino di test');
 
         Assert::assertInstanceOf(Comment::class, $comment);
-        Assert::assertSame((string) $ticket->getKey(), (string) $comment->commentable_id);
+        Assert::assertSame(SafeStringCastAction::cast($ticket->getKey()), SafeStringCastAction::cast($comment->commentable_id));
         Assert::assertSame(1, $ticket->comments()->count());
     });
 

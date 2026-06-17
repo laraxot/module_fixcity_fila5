@@ -8,6 +8,7 @@ use Modules\Fixcity\Database\Factories\TicketFactory;
 use Modules\Fixcity\Enums\TicketStatusEnum;
 use Modules\Fixcity\Enums\TicketTypeEnum;
 use Modules\Fixcity\Tests\TestCase;
+use Modules\Xot\Actions\Cast\SafeStringCastAction;
 
 uses(\Modules\Fixcity\Tests\TestCase::class);
 
@@ -48,7 +49,10 @@ it('returns details for a public ticket marker id', function (): void {
         'longitude' => 12.236,
     ]);
 
-    $response = $this->getJson('/api/ticket-details/'.$ticket->getKey());
+    $ticketKey = $ticket->getKey();
+    expect($ticketKey)->not->toBeNull();
+    $url = '/api/ticket-details/'.SafeStringCastAction::cast($ticketKey);
+    $response = $this->getJson($url);
 
     $response->assertOk()
         ->assertJsonPath('id', $ticket->getKey())

@@ -8,6 +8,7 @@ use Illuminate\Database\Seeder;
 use Illuminate\Support\Str;
 use Modules\Fixcity\Models\Profile;
 use Modules\User\Models\User;
+use Modules\Xot\Actions\Cast\SafeStringCastAction;
 use Modules\Xot\Datas\XotData;
 
 /**
@@ -49,8 +50,8 @@ class ProfileSeeder extends Seeder
 
             /** @var Profile $profile */
             $profile = Profile::query()->firstOrCreate(
-                ['user_id' => (string) $user->getKey()],
-                ['uuid' => (string) Str::uuid()],
+                ['user_id' => SafeStringCastAction::cast($user->getKey())],
+                ['uuid' => SafeStringCastAction::cast(Str::uuid())],
             );
 
             $profile->fill([
