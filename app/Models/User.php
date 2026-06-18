@@ -7,12 +7,14 @@ namespace Modules\Fixcity\Models;
 use Illuminate\Database\Eloquent\Builder as EloquentBuilder;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Notifications\DatabaseNotification;
 use Illuminate\Notifications\DatabaseNotificationCollection;
 use Illuminate\Support\Carbon;
 use Modules\Comment\Models\Comment;
 use Modules\Fixcity\Models\TicketComment;
 use Modules\Comment\Models\CommentNotificationSubscription;
+use Modules\Comment\Models\Concerns\InteractsWithComments;
 use Modules\Comment\Models\Contracts\CanComment;
 use Modules\Comment\Models\Reaction;
 use Modules\User\Database\Factories\UserFactory;
@@ -112,6 +114,8 @@ use Modules\Xot\Contracts\ProfileContract;
  */
 class User extends BaseUser implements CanComment
 {
+    use InteractsWithComments;
+
     /** @var array<string, class-string<self>> */
     protected $childTypes = [
         'master_admin' => self::class,
@@ -127,5 +131,29 @@ class User extends BaseUser implements CanComment
     public function ticketComments(): HasMany
     {
         return $this->hasMany(TicketComment::class, 'user_id');
+    }
+
+    /**
+     * @return MorphMany<Comment, $this>
+     */
+    public function commentatorComments(): MorphMany
+    {
+        return $this->morphMany(Comment::class, 'commentator');
+    }
+
+    /**
+     * @return MorphMany<Reaction, $this>
+     */
+    public function reactions(): MorphMany
+    {
+        return $this->morphMany(Reaction::class, 'commentator');
+    }
+
+    /**
+     * @return MorphMany<CommentNotificationSubscription, $this>
+     */
+    public function subscriberNotificationSubscriptions(): MorphMany
+    {
+        return $this->morphMany(CommentNotificationSubscription::class, 'subscriber');
     }
 }
