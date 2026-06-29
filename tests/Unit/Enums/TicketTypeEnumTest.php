@@ -73,7 +73,7 @@ describe('TicketTypeEnum', function () {
             [TicketTypeEnum::PUBLIC_SAFETY, 'heroicon-o-shield-check'],
             [TicketTypeEnum::COMPLAINT, 'heroicon-o-exclamation-triangle'],
             [TicketTypeEnum::SUGGESTION, 'heroicon-o-light-bulb'],
-            [TicketTypeEnum::REPORT, 'heroicon-o-document-report'],
+            [TicketTypeEnum::REPORT, 'heroicon-o-document-chart-bar'],
             [TicketTypeEnum::REQUEST, 'heroicon-o-document'],
             [TicketTypeEnum::OTHER, 'heroicon-o-question-mark-circle'],
         ];

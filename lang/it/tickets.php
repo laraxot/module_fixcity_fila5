@@ -9,13 +9,26 @@ return [
         'group' => ['name' => 'Management'],
     ],
     'fields' => [
-        'name' => 'Nome Area',
+        'name' => ['label' => 'name'],
         'parent' => 'Settore di appartenenza',
         'parent.name' => 'Settore di appartenenza',
         'parent_name' => 'Settore di appartenenza',
         'assets' => 'Quantità di asset',
         'has_citizen_rating' => ['label' => 'has_citizen_rating'],
         'type' => ['label' => 'type'],
+        'priority' => ['label' => 'priority'],
+        'status' => ['label' => 'status'],
+        'updated_at' => ['label' => 'updated_at'],
+        'created_at' => ['label' => 'created_at'],
+        'citizen_rated_at' => ['label' => 'citizen_rated_at'],
+        'citizen_rating' => ['label' => 'citizen_rating'],
+        'assignee' => [
+            'name' => ['label' => 'assignee.name'],
+        ],
+        'owner' => [
+            'name' => ['label' => 'owner.name'],
+        ],
+        'id' => ['label' => 'id'],
     ],
     'actions' => [
         'import' => [
@@ -27,6 +40,9 @@ return [
             'filename_prefix' => 'Aree al',
             'columns' => ['name' => 'Nome area', 'parent_name' => 'Nome area livello superiore'],
         ],
+        'delete' => ['tooltip' => 'delete', 'icon' => 'delete', 'label' => 'delete'],
+        'layout' => ['tooltip' => 'layout', 'icon' => 'layout', 'label' => 'layout'],
+        'create' => ['tooltip' => 'create', 'icon' => 'create', 'label' => 'create'],
     ],
     'success' => ['label' => 'Successo', 'placeholder' => 'Successo'],
     'fails' => ['label' => 'Fallito', 'placeholder' => 'Fallito'],

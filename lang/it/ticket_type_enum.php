@@ -83,7 +83,7 @@ return [
         'report' => [
             'label' => 'Segnalazione',
             'color' => 'warning',
-            'icon' => 'heroicon-o-document-report',
+            'icon' => 'heroicon-o-document-chart-bar',
         ],
         'request' => [
             'label' => 'Richiesta',
