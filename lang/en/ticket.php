@@ -547,4 +547,5 @@ return [
             'label' => 'Urban furniture',
         ],
     ],
+    'navigation' => ['sort' => 87, 'icon' => 'heroicon-o-ticket', 'label' => 'Reports', 'group' => ''],
 ];
