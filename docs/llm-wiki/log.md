@@ -63,3 +63,4 @@
 - **Documentation**: rules/no-services-rule.md created
 
 - 2026-06-10: main-module-profiles-ownership.md — ownership profiles su Fixcity (main_module)
+
