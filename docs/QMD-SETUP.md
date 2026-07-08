@@ -1,5 +1,5 @@
 ---
-title: "QMD Setup — Module Fixcity"
+title: "QMD Setup — Root root"
 type: documentation
 created: 2026-05-11
 updated: 2026-05-11
@@ -8,41 +8,27 @@ related:
   - ../../docs/wiki/concepts/llm-wiki-operational-discipline.md
 ---
 
-# QMD Setup per Module **Fixcity**
+# QMD Setup per Root **root**
 
-## Configurazione QMD per Questo Module
+## Configurazione QMD per Questo Root
 
 ### Collection Configuration
 
-Il progetto usa una collection QMD centralizzata in  che include:
-
-```yaml
-collection:
-  name: fixcity
-  source: docs/wiki  # Include tutti i moduli
-  
-paths:
-  include:
-    - docs/wiki/rules/**/*.md
-    - docs/wiki/skills/**/*.md
-    - docs/wiki/commands/**/*.md
-    - docs/wiki/memories/**/*.md
-    - ./laravel/Modules/Fixcity/docs/wiki/**/*.md  # ← Questo modulo
-```
+Il progetto usa una collection QMD centralizzata in `.qmd/index.yml` che include tutti i moduli.
 
 ### Ricerca Locale vs Globale
 
 **Ricerca locale** (solo questo modulo):
-```bash
-qmd search "<topic>" -c Fixcity
-# Cerca solo in ./laravel/Modules/Fixcity/docs/wiki/
-```
+\`\`\`bash
+qmd search "<topic>" -c root
+# Cerca solo in ./laravel/Modules/docs/wiki/
+\`\`\`
 
 **Ricerca globale** (tutto il progetto):
-```bash
+\`\`\`bash
 qmd search "<topic>"
 # Cerca in docs/wiki/ + tutti i moduli
-```
+\`\`\`
 
 ### Cache Location
 
@@ -53,35 +39,25 @@ qmd search "<topic>"
 ### Performance Tips
 
 1. **Rebuild index dopo modifiche**:
-```bash
+\`\`\`bash
 qmd index rebuild --force
-```
+\`\`\`
 
 2. **Usa -c per limitare scope**:
-```bash
-qmd search "form" -c Fixcity   # Solo questo modulo
-```
+\`\`\`bash
+qmd search "form" -c root  # Solo questo modulo
+\`\`\`
 
 3. **Evita query troppo generiche** — più specifico = risultati migliori
 
 ## Integrazione con l'On-Demand Pattern
-
-```mermaid
-graph TD
-    A[Task Trigger] --> B{Consult<br/>Trigger Map}
-    B -->|Match| C[Load Specific File]
-    B -->|No Match| D[qmd Search]
-    D --> E[BM25 Retrieval]
-    E --> C
-    C --> F[Apply Rule/Skill]
-```
 
 ## Troubleshooting
 
 | Problema | Soluzione |
 |----------|-----------|
 | Risultati non aggiornati | `qmd index rebuild --force` |
-| Ricerca lenta | Limita con `-c Fixcity` |
+| Ricerca lenta | Limita con `-c root` |
 | Cache corrotta | `rm -rf ~/.cache/qmd-cache/` |
 
 ## Riferimenti

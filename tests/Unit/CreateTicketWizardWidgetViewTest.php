@@ -2,70 +2,78 @@
 
 declare(strict_types=1);
 
+
+use function Safe\file_get_contents;
+use Modules\Fixcity\Tests\TestCase;
+
+use PHPUnit\Framework\Assert;
+use Modules\Fixcity\Filament\Resources\TicketResource;
 use Modules\Fixcity\Filament\Widgets\CreateTicketWizardWidget;
 use Modules\Xot\Filament\Widgets\XotBaseWidget;
 
-test('create ticket wizard declares module fallback view before theme resolution', function (): void {
+uses(TestCase::class);
+test('create ticket wizard leaves view resolution to xot base widget', function (): void {
     $prop = new ReflectionProperty(CreateTicketWizardWidget::class, 'view');
 
-    expect($prop->getDefaultValue())->toBe('fixcity::filament.widgets.create-ticket-wizard');
+    Assert::assertSame(XotBaseWidget::class, $prop->getDeclaringClass()->getName());
+
+    Assert::assertSame('xot::filament.widgets.base', $prop->getDefaultValue());
 });
 
-test('create ticket wizard extends xot base wizard widget', function (): void {
-    expect(is_subclass_of(CreateTicketWizardWidget::class, XotBaseWidget::class))->toBeTrue();
+test('create ticket wizard binds ticket resource for filament wizard', function (): void {
+    Assert::assertSame(TicketResource::class, CreateTicketWizardWidget::$resource);
 });
 
-test('sixteen theme wizard wrapper uses wire submit on form', function (): void {
+test('sixteen theme wizard wrapper avoids nested form around filament wizard', function (): void {
     $path = dirname(__DIR__, 4).'/Themes/Sixteen/resources/views/filament/widgets/create-ticket-wizard.blade.php';
 
-    expect(is_file($path))->toBeTrue();
+    Assert::assertTrue(is_file($path));
 
     $contents = (string) file_get_contents($path);
 
-    expect($contents)->toContain('wire:submit="{{ $this->getFormSubmitAction() }}"')
-        ->and($contents)->toContain('<x-filament-actions::modals />')
-        ->and($contents)->toContain('cmp-wizard-widget');
+    Assert::assertStringContainsString('{{ $this->form }}', $contents);
 
-    $formClose = strpos($contents, '</form>');
+    Assert::assertStringContainsString('<x-filament-actions::modals />', $contents);
+
+    Assert::assertStringContainsString('cmp-wizard-widget', $contents);
+
+    $formMarker = strpos($contents, '{{ $this->form }}');
     $modals = strpos($contents, '<x-filament-actions::modals');
 
-    expect($formClose)->not->toBeFalse()
-        ->and($modals)->not->toBeFalse()
-        ->and($formClose)->toBeLessThan($modals);
+    Assert::assertLessThan($modals, $formMarker);
 });
 
-test('fixcity module wizard view follows livewire form stub contract', function (): void {
+test('fixcity module wizard view avoids nested form around filament wizard', function (): void {
     $path = dirname(__DIR__, 2).'/resources/views/filament/widgets/create-ticket-wizard.blade.php';
 
-    expect(is_file($path))->toBeTrue();
+    Assert::assertTrue(is_file($path));
 
     $contents = (string) file_get_contents($path);
 
-    expect($contents)->toContain('wire:submit="{{ $this->getFormSubmitAction() }}"')
-        ->and($contents)->toContain('{{ $this->form }}')
-        ->and($contents)->toContain('<x-filament-actions::modals />');
+    Assert::assertStringContainsString('{{ $this->form }}', $contents);
 
-    $formClose = strpos($contents, '</form>');
+    Assert::assertStringContainsString('<x-filament-actions::modals />', $contents);
+
+    $formMarker = strpos($contents, '{{ $this->form }}');
     $modals = strpos($contents, '<x-filament-actions::modals');
 
-    expect($formClose)->not->toBeFalse()
-        ->and($modals)->not->toBeFalse()
-        ->and($formClose)->toBeLessThan($modals);
+    Assert::assertLessThan($modals, $formMarker);
 });
 
-test('xot base wizard widget exposes form submit action for blade stub', function (): void {
-    $method = new ReflectionMethod(\Modules\Xot\Filament\Widgets\XotBaseWizardWidget::class, 'getFormSubmitAction');
+test('xot base wizard widget exposes submit action hook from has xot form trait', function (): void {
+    $method = new ReflectionMethod(\Modules\Xot\Filament\Widgets\XotBaseWizardWidget::class, 'getSubmitFormAction');
 
-    expect($method->isPublic())->toBeTrue();
+    Assert::assertTrue($method->isProtected());
 });
 
 test('sixteen theme provides design comuni wizard submit button view', function (): void {
     $path = dirname(__DIR__, 4).'/Themes/Sixteen/resources/views/filament/wizard/submit-button.blade.php';
 
-    expect(is_file($path))->toBeTrue();
+    Assert::assertTrue(is_file($path));
 
     $contents = (string) file_get_contents($path);
 
-    expect($contents)->toContain('type="submit"')
-        ->and($contents)->toContain('steppers-btn-confirm');
+    Assert::assertStringContainsString('type="submit"', $contents);
+
+    Assert::assertStringContainsString('steppers-btn-confirm', $contents);
 });

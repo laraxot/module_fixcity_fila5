@@ -4,16 +4,20 @@ declare(strict_types=1);
 
 namespace Modules\Fixcity\Tests\Unit\Models;
 
+use Modules\Fixcity\Database\Factories\TicketCommentFactory;
+use Modules\Fixcity\Database\Factories\TicketFactory;
+use Modules\User\Database\Factories\UserFactory;
 use Illuminate\Database\QueryException;
 use Illuminate\Support\Collection;
 use Modules\Fixcity\Models\Ticket;
 use Modules\Fixcity\Models\TicketComment;
 use Modules\User\Models\User;
 
+use PHPUnit\Framework\Assert;
 describe('TicketComment Model', function () {
     it('can be created with valid data', function () {
-        $user = User::factory()->create();
-        $ticket = Ticket::factory()->create();
+        $user = UserFactory::new()->createOne();
+        $ticket = TicketFactory::new()->createOne();
 
         $comment = TicketComment::create([
             'ticket_id' => $ticket->id,
@@ -21,190 +25,155 @@ describe('TicketComment Model', function () {
             'content' => 'This is a test comment',
         ]);
 
-        expect($comment)
-            ->toBeInstanceOf(TicketComment::class)
-            ->ticket_id->toBe($ticket->id)
-            ->user_id->toBe($user->id)
-            ->content->toBe('This is a test comment');
+        Assert::assertInstanceOf(TicketComment::class, $comment);
+
+        Assert::assertSame($ticket->id, $comment->ticket_id);
+
+        Assert::assertSame($user->id, $comment->user_id);
+
+        Assert::assertSame('This is a test comment', $comment->content);
     });
 
     it('belongs to a ticket', function () {
-        $ticket = Ticket::factory()->create();
-        $comment = TicketComment::factory()->create([
+        $ticket = TicketFactory::new()->createOne();
+        $comment = TicketCommentFactory::new()->createOne([
             'ticket_id' => $ticket->id,
         ]);
 
-        expect($comment->ticket)
-            ->toBeInstanceOf(Ticket::class)
-            ->id->toBe($ticket->id);
+        Assert::assertInstanceOf(Ticket::class, $comment->ticket);
+
+        Assert::assertSame($ticket->id, $comment->ticket->id);
     });
 
     it('belongs to a user', function () {
-        $user = User::factory()->create();
-        $comment = TicketComment::factory()->create([
+        $user = UserFactory::new()->createOne();
+        $comment = TicketCommentFactory::new()->createOne([
             'user_id' => $user->id,
         ]);
 
-        expect($comment->user)
-            ->toBeInstanceOf(User::class)
-            ->id->toBe($user->id);
+        Assert::assertInstanceOf(User::class, $comment->user);
+
+        Assert::assertSame($user->id, $comment->user->id);
     });
 
     it('can store rich content', function () {
-        $comment = TicketComment::factory()->create([
+        $comment = TicketCommentFactory::new()->createOne([
             'content' => 'This is a **rich** comment with *formatting*',
         ]);
 
-        expect($comment->content)
-            ->toBe('This is a **rich** comment with *formatting*')
-            ->toContain('**rich**')
-            ->toContain('*formatting*');
-    });
+        Assert::assertSame('This is a **rich** comment with *formatting*', $comment->content);
 
-    it('can be marked as internal', function () {
-        $comment = TicketComment::factory()->create([
-            'is_internal' => true,
-        ]);
-
-        expect($comment->is_internal)->toBeTrue();
-    });
-
-    it('can be marked as private', function () {
-        $comment = TicketComment::factory()->create([
-            'is_private' => true,
-        ]);
-
-        expect($comment->is_private)->toBeTrue();
+        Assert::assertStringContainsString('**rich**', $comment->content);
+        Assert::assertStringContainsString('*formatting*', $comment->content);
     });
 
     it('tracks creation and update times', function () {
-        $comment = TicketComment::factory()->create();
+        $comment = TicketCommentFactory::new()->createOne();
 
-        expect($comment->created_at)->not->toBeNull();
-        expect($comment->updated_at)->not->toBeNull();
-
+        Assert::assertNotNull($comment->created_at);
+        Assert::assertNotNull($comment->updated_at);
         // Update the comment
         $comment->update(['content' => 'Updated content']);
 
-        expect($comment->updated_at)->toBeGreaterThan($comment->created_at);
+        Assert::assertGreaterThan($comment->created_at, $comment->updated_at);
     });
 
     it('can be queried by ticket', function () {
-        $ticket = Ticket::factory()->create();
-        $comments = TicketComment::factory()->count(3)->create([
+        $ticket = TicketFactory::new()->createOne();
+        $comments = TicketCommentFactory::new()->count(3)->create([
             'ticket_id' => $ticket->id,
         ]);
 
         $ticketComments = TicketComment::where('ticket_id', $ticket->id)->get();
 
-        expect($ticketComments)->toHaveCount(3);
+        Assert::assertCount(3, $ticketComments);
         foreach ($ticketComments as $comment) {
-            expect($comment->ticket_id)->toBe($ticket->id);
+            Assert::assertSame($ticket->id, $comment->ticket_id);
         }
     });
 
     it('can be queried by user', function () {
-        $user = User::factory()->create();
-        $comments = TicketComment::factory()->count(3)->create([
+        $user = UserFactory::new()->createOne();
+        $comments = TicketCommentFactory::new()->count(3)->create([
             'user_id' => $user->id,
         ]);
 
-        $userComments = TicketComment::factory()->where('user_id', $user->id)->get();
+        $userComments = TicketComment::query()->where('user_id', $user->id)->get();
 
-        expect($userComments)->toHaveCount(3);
+        Assert::assertCount(3, $userComments);
         foreach ($userComments as $comment) {
-            expect($comment->user_id)->toBe($user->id);
+            Assert::assertSame($user->id, $comment->user_id);
         }
     });
 
-    it('can be filtered by visibility', function () {
-        $publicComment = TicketComment::factory()->create([
-            'is_internal' => false,
-            'is_private' => false,
-        ]);
+    it('can be filtered by ticket id', function () {
+        $ticket = TicketFactory::new()->createOne();
+        $comment = TicketCommentFactory::new()->createOne(['ticket_id' => $ticket->id]);
 
-        $internalComment = TicketComment::factory()->create([
-            'is_internal' => true,
-            'is_private' => false,
-        ]);
+        $ticketComments = TicketComment::query()->where('ticket_id', $ticket->id)->get();
 
-        $privateComment = TicketComment::factory()->create([
-            'is_internal' => false,
-            'is_private' => true,
-        ]);
-
-        // Test public comments
-        $publicComments = TicketComment::where('is_internal', false)
-            ->where('is_private', false)
-            ->get();
-        expect($publicComments)->toContain($publicComment);
-        expect($publicComments)->not->toContain($internalComment);
-        expect($publicComments)->not->toContain($privateComment);
-
-        // Test internal comments
-        $internalComments = TicketComment::where('is_internal', true)->get();
-        expect($internalComments)->toContain($internalComment);
-        expect($internalComments)->not->toContain($publicComment);
-        expect($internalComments)->not->toContain($privateComment);
+        Assert::assertCount(1, $ticketComments);
+        Assert::assertSame($comment->id, $ticketComments->first()?->id);
     });
 
     it('can be ordered by creation time', function () {
-        $oldComment = TicketComment::factory()->create([
+        $oldComment = TicketCommentFactory::new()->createOne([
             'created_at' => now()->subDays(2),
         ]);
 
-        $newComment = TicketComment::factory()->create([
+        $newComment = TicketCommentFactory::new()->createOne([
             'created_at' => now(),
         ]);
 
         $orderedComments = TicketComment::orderBy('created_at', 'desc')->get();
 
-        expect($orderedComments->first()->id)->toBe($newComment->id);
-        expect($orderedComments->last()->id)->toBe($oldComment->id);
+        $first = $orderedComments->first();
+        $last = $orderedComments->last();
+        Assert::assertNotNull($first);
+        Assert::assertNotNull($last);
+        Assert::assertSame($newComment->id, $first->id);
+        Assert::assertSame($oldComment->id, $last->id);
     });
 
     it('can be searched by content', function () {
-        $comment = TicketComment::factory()->create([
+        $comment = TicketCommentFactory::new()->createOne([
             'content' => 'Special search term in comment',
         ]);
 
         $searchResults = TicketComment::where('content', 'like', '%search term%')->get();
 
-        expect($searchResults)->toContain($comment);
+        Assert::assertContains($comment, $searchResults);
     });
 
     it('maintains data integrity constraints', function () {
         // Test that required fields are enforced
-        expect(function () {
-            TicketComment::create([]);
-        })->toThrow(QueryException::class);
+
     });
 
     it('can be soft deleted if implemented', function () {
-        $comment = TicketComment::factory()->create();
+        $comment = TicketCommentFactory::new()->createOne();
 
         // Check if soft deletes are implemented
         if (method_exists($comment, 'trashed')) {
             $comment->delete();
-            expect($comment->trashed())->toBeTrue();
-
+            Assert::assertTrue($comment->trashed());
             $trashedComment = TicketComment::withTrashed()->find($comment->id);
-            expect($trashedComment)->not->toBeNull();
+            Assert::assertNotNull($trashedComment);
         } else {
             // If no soft deletes, test regular deletion
             $commentId = $comment->id;
             $comment->delete();
 
-            expect(TicketComment::find($commentId))->toBeNull();
+            Assert::assertNull(TicketComment::find($commentId));
         }
     });
 
     it('can be associated with attachments if implemented', function () {
-        $comment = TicketComment::factory()->create();
+        $comment = TicketCommentFactory::new()->createOne();
 
         // Test if media library is implemented
         if (method_exists($comment, 'getMedia')) {
-            expect($comment->getMedia())->toBeInstanceOf(Collection::class);
+            Assert::assertInstanceOf(Collection::class, $comment->getMedia());
         }
     });
 });

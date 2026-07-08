@@ -13,6 +13,7 @@ use Filament\Schemas\Components\Section;
 use Filament\Schemas\Components\Utilities\Get;
 use Filament\Schemas\Components\Utilities\Set;
 use Illuminate\Support\Str;
+use Modules\Fixcity\Actions\PrepareTicketFormDataForPersistAction;
 use Modules\Fixcity\Enums\TicketPriorityEnum;
 use Modules\Fixcity\Enums\TicketTypeEnum;
 use Modules\Fixcity\Filament\Resources\TicketResource\Pages\CreateTicket;
@@ -128,6 +129,18 @@ class TicketResource extends XotBaseResource
                 ->columns(1) // Imposta il layout su una colonna
                 ->extraAttributes(['class' => 'w-full max-w-full mx-auto', 'style' => 'padding: 0; margin: 0; !important;']), // Rimozione padding e margine
         ];
+    }
+
+    /**
+     * Normalizza stato form/schema verso gli attributi ammessi in creazione (`\Modules\Fixcity\Models\Ticket`) per il pannello Filament:
+     * `TicketResource\Pages\CreateTicket::mutateFormDataBeforeCreate`. Il wizard frontoffice (`CreateTicketWizardWidget`) non usa questa helper.
+     *
+     * @param  array<string, mixed>  $data
+     * @return array<string, mixed>
+     */
+    public static function prepareFormDataBeforePersist(array $data): array
+    {
+        return app(PrepareTicketFormDataForPersistAction::class)->execute($data);
     }
 
     public static function getPages(): array

@@ -3,34 +3,29 @@ title: "Ticket Wizard Steps in TicketForm Rule"
 type: concept
 confidence: high
 created: 2026-05-12
-updated: 2026-05-12
+updated: 2026-05-23
 tags: [filament, wizard, ticket, ticketform, haswizard, step]
 related:
   - concepts/filament5-schema-form-access-rule.md
   - concepts/filament5-widget-schema-submit-state-rule.md
 ---
 
-# Regola: Gli step del wizard Ticket stanno in TicketForm — metodo getSteps()
+# Regola: Gli step del wizard Ticket stanno in TicketForm
 
-## Status: ✅ VERIFICATO (2026-05-12)
+## Status: ✅ VERIFICATO (2026-05-12 · correzione naming widget 2026-05-23)
 
 ## Regola
 
-Il metodo SI CHIAMA `getSteps()` — allineato allo standard `HasWizard::getSteps()` di Filament.
-**`getSteps()` è ABOLITO** — era il vecchio nome non standard.
+- **SSoT degli step Filament**: metodo **`TicketForm::getSteps()`** (statico nello schema resource) — stesso contenuto riusabile dal widget e dalla pagina pannello.
+- **Contratto sulla base wizard**: solo **`getSteps()`** — stesso nome del trait **`HasWizard`** Filament. **Bandito:** qualsiasi alias storico con altro nome.
 
-Gli step del wizard `CreateTicketWizardWidget` DEVONO essere definiti in:
-
-```
-Modules/Fixcity/app/Filament/Resources/TicketResource/Schemas/TicketForm::getSteps()
-```
-
-Il widget **delega** — non ridefinisce:
+Il widget **`CreateTicketWizardWidget`** **delega** e non deve ridefinire a mano gli `Step::make()`:
 
 ```php
 // ✅ CORRETTO
 class CreateTicketWizardWidget extends XotBaseWizardWidget
 {
+    /** @return array<string, Step> */
     public function getSteps(): array
     {
         return TicketForm::getSteps();
@@ -39,8 +34,8 @@ class CreateTicketWizardWidget extends XotBaseWizardWidget
 ```
 
 ```php
-// ❌ VIETATO — inline nel widget, e nome sbagliato
-public function getSteps(): array  // NOME SBAGLIATO!
+// ❌ VIETATO — inline nel widget dominio Step::make
+public function getSteps(): array // ok come nome ma body vietato inline
 {
     return [
         Step::make('privacy')->schema([...]),
@@ -92,15 +87,16 @@ class TicketForm extends XotBaseResourceForm
 |--------|-------|-----|
 | `getSteps() does not exist` | Form non ha il metodo | Aggiungere a TicketForm |
 | `Cannot redeclare getSteps()` | Metodo definito due volte | Rimuovere duplicato |
-| `getSubmitFormAction() does not exist` | HasWizard usato senza override | Override getWizardComponent() in XotBaseWizardWidget |
+| Metodo pubblico wizard col nome sbagliato | Copia incolla da snippet vecchi | Solo **`getSteps()`** sulla base (**widget** + `*ResourceForm`) |
 
 ## File coinvolti
 
 - `Modules/Fixcity/app/Filament/Widgets/CreateTicketWizardWidget.php`
 - `Modules/Fixcity/app/Filament/Resources/TicketResource/Schemas/TicketForm.php`
-- `Modules/Xot/app/Filament/Widgets/XotBaseWizardWidget.php`
+- `Modules/Xot/app/Filament/Widgets/XotBaseWizardWidget.php` (wizard + policy `step` in URL; nessun helper di normalizzazione stato sulla base dopo `getState()`)
+- `Modules/Xot/app/Filament/Traits/DelegatesFilamentWizardSchemaMethods.php`
 
 ## Riferimenti
 
 - [[concepts/filament5-widget-schema-submit-state-rule.md]]
-- `Modules/Xot/docs/wiki/XotBaseWizardWidget-HasWizard-refactor.md`
+- `Modules/Xot/docs/wiki/filament-wizard-refactoring.md` (SSoT; alias stub: `…/XotBaseWizardWidget-HasWizard-refactor.md`)

@@ -55,11 +55,13 @@ class TicketRelation extends BaseModel
         'ticket_id', 'type', 'relation_id', 'sort',
     ];
 
+    /** @return BelongsTo<Ticket, $this> */
     public function ticket(): BelongsTo
     {
         return $this->belongsTo(Ticket::class, 'ticket_id', 'id');
     }
 
+    /** @return BelongsTo<Ticket, $this> */
     public function relation(): BelongsTo
     {
         return $this->belongsTo(Ticket::class, 'relation_id', 'id');

@@ -16,8 +16,8 @@ Laravel tenta di interrogare la tabella `cache`.
 
 È obbligatorio assicurarsi che le tabelle di supporto per la cache siano presenti nel database principale del modulo (`fixcity_data`).
 
-1. **Migrazione cache principale**:
-   - `php artisan migrate --path=database/migrations/2026_04_21_111944_create_cache_table.php --force --no-interaction`
+1. **Migrazione cache principale** (dati sacri: solo `migrate`, mai `--force` né `--path` singolo file):
+   - `cd laravel && php artisan migrate`
 2. **Hardening duplicati**:
    - resa idempotente `database/migrations/2026_04_21_112114_create_cache_table.php` con guard `hasTable('cache')`.
    - eseguita anche la migrazione duplicata in sicurezza

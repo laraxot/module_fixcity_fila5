@@ -47,7 +47,7 @@ class TicketForm extends XotBaseResourceForm
                 ->schema(static::getWarningSectionSchema())
                 ->columnSpanFull(),
             'summarySection' => Section::make()
-                ->heading(__('fixcity::segnalazione.sections.summary.label'))
+                ->heading(__('fixcity::ticket.sections.summary.label'))
                 ->schema(static::getSummarySectionSchema())
                 ->columnSpanFull(),
             'authorSection' => Section::make()

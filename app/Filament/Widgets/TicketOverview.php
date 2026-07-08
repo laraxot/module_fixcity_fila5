@@ -6,29 +6,36 @@ namespace Modules\Fixcity\Filament\Widgets;
 
 use Filament\Widgets\StatsOverviewWidget as BaseWidget;
 use Filament\Widgets\StatsOverviewWidget\Stat;
-use Modules\Fixcity\Models\Ticket;
+use Modules\Fixcity\Actions\GetTicketKpiAggregateAction;
 
+/**
+ * KPI volumi ticket — dashboard e analytics PA (STORY-025 / STORY-040).
+ */
 class TicketOverview extends BaseWidget
 {
     protected function getStats(): array
     {
+        $kpi = app(GetTicketKpiAggregateAction::class)->execute();
+
         return [
-            Stat::make('Segnalazioni Totali', Ticket::count())
-                ->description('Tutte le segnalazioni')
+            Stat::make(__('fixcity::ticket_kpi.stats.total.label'), (string) $kpi['total'])
+                ->description(__('fixcity::ticket_kpi.stats.total.description.label'))
                 ->descriptionIcon('heroicon-m-ticket')
-                ->chart([7, 2, 10, 3, 15, 4, 17])
                 ->color('primary'),
 
-            Stat::make('In Attesa', Ticket::where('status', 'open')->count())
-                ->description('Segnalazioni da gestire')
-                ->descriptionIcon('heroicon-m-clock')
-                ->chart([7, 2, 10, 3, 15, 4, 17])
+            Stat::make(__('fixcity::ticket_kpi.stats.backlog.label'), (string) $kpi['backlog'])
+                ->description(__('fixcity::ticket_kpi.stats.backlog.description.label'))
+                ->descriptionIcon('heroicon-m-inbox-stack')
                 ->color('danger'),
 
-            Stat::make('Risolte', Ticket::where('status', 'resolved')->count())
-                ->description('Segnalazioni completate')
+            Stat::make(__('fixcity::ticket_kpi.stats.in_progress.label'), (string) $kpi['in_progress'])
+                ->description(__('fixcity::ticket_kpi.stats.in_progress.description.label'))
+                ->descriptionIcon('heroicon-m-arrow-path')
+                ->color('warning'),
+
+            Stat::make(__('fixcity::ticket_kpi.stats.resolved.label'), (string) $kpi['resolved'])
+                ->description(__('fixcity::ticket_kpi.stats.resolved.description.label'))
                 ->descriptionIcon('heroicon-m-check-circle')
-                ->chart([7, 2, 10, 3, 15, 4, 17])
                 ->color('success'),
         ];
     }

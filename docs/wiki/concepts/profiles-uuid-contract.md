@@ -1,27 +1,46 @@
+---
+title: "profiles — contratto uuid (owner Fixcity)"
+type: concept
+tags: [fixcity, profiles, migration, uuid, main-module]
+created: 2026-06-10
+updated: 2026-06-10
+qmd: profiles uuid migration owner Fixcity main_module bump timestamp
+issues: []
+discussions: []
+---
+
 # Profiles UUID Contract
 
 ## Contratto
 
-Nel modulo Fixcity, `profiles` deve avere:
+Nel modulo Fixcity, `profiles` (connessione `fixcity`) deve avere:
 
-- `id` intero auto-increment come chiave primaria relazionale
-- `uuid` separato come identificatore esterno stabile
-- `credits` nullable (campo opzionale, non bloccante in creazione profilo)
+- `id` intero auto-increment — chiave relazionale interna
+- `uuid` char(36) nullable indexed — identificatore esterno (`BaseProfile` lo genera in `creating`)
+- `credits` nullable — insert profilo minimale (`user_id` + `uuid`) non deve fallire
+- `user_id` string(36) — allineato a `users.id` UUID/ULID
 
-## Fonte di verita'
+## Fonte di verità (unica)
 
-La fonte di verita' non e' una migrazione additiva, ma:
+`laravel/Modules/Fixcity/database/migrations/2026_06_10_123000_create_profiles_table.php`
 
-- `laravel/Modules/Fixcity/database/migrations/2026_04_27_190000_create_profiles_table.php`
+- Model: `Modules\Fixcity\Models\Profile`
+- Pattern: `tableCreate` + `tableUpdate` idempotente + backfill `uuid` null
 
 ## Regola operativa
 
-- se manca `uuid`, si corregge la migrazione canonica
-- `credits` resta nullable sia nel create che nel change idempotente
-- non si crea `add_uuid_to_profiles_table`
-- non si crea `add_credits_nullable_to_profiles_table`
-- non si crea `repair_profiles_id_and_uuid_contract`
+| Azione | Consentito |
+|--------|------------|
+| Manca colonna su DB legacy | Edit owner → **bump timestamp** → `php artisan migrate` |
+| Secondo `create_profiles_table` | **Vietato** |
+| Migrazione `profiles` in User/Blog | **Vietato** — owner = main_module Fixcity |
 
-## Nota runtime
+## Boundary User
 
-Se il DB locale e' stato creato prima del fix, modificare il file di migrazione da solo non riallinea automaticamente la tabella gia' esistente: serve una sincronizzazione forward-only dello schema reale.
+Runtime profilo può essere referenziato da User; **schema** resta in Fixcity.
+
+Vedi [profile-migration-uuid-contract](../../../User/docs/wiki/concepts/profile-migration-uuid-contract.md).
+
+## Collegamenti
+
+- Memoria root: [main-module-profiles-migration-owner.md](../../../../docs/wiki/memories/main-module-profiles-migration-owner.md)

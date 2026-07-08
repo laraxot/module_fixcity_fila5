@@ -4,68 +4,41 @@ declare(strict_types=1);
 
 namespace Modules\Fixcity\Models;
 
-use Illuminate\Database\Eloquent\Factories\Factory;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use Modules\Xot\Actions\Factory\GetFactoryAction;
-use Modules\Xot\Traits\Updater;
+use Modules\Xot\Models\XotBaseModel;
 
 /**
- * Class BaseModel.
+ * Base model modulo Fixcity: stack Xot (factory, RelationX, Updater).
  */
-abstract class BaseModel extends Model
+abstract class BaseModel extends XotBaseModel
 {
-    use HasFactory;
     use SoftDeletes;
-
-    // use Searchable;
-    // use Cachable;
-    use Updater;
-
-    /**
-     * Indicates whether attributes are snake cased on arrays.
-     *
-     * @see  https://laravel-news.com/6-eloquent-secrets
-     */
-    public static $snakeAttributes = true;
 
     public $incrementing = true;
 
     public $timestamps = true;
-
-    protected $perPage = 30;
 
     protected $connection = 'fixcity';
 
     /** @var list<string> */
     protected $fillable = ['id'];
 
-    /**
-     * @var array<string>
-     */
-    protected $dates = ['published_at', 'created_at', 'updated_at'];
-
     protected $primaryKey = 'id';
 
     /** @var list<string> */
-    protected $hidden = [
-        // 'password'
-    ];
+    protected $hidden = [];
 
     /** @return array<string, string> */
     protected function casts(): array
     {
         return [
-            // 'published_at' => 'datetime:Y-m-d', // da verificare
+            'published_at' => 'datetime',
+            'created_at' => 'datetime',
+            'updated_at' => 'datetime',
+            'deleted_at' => 'datetime',
+            'updated_by' => 'string',
+            'created_by' => 'string',
+            'deleted_by' => 'string',
         ];
-    }
-
-    /**
-     * Create a new factory instance for the model.
-     */
-    protected static function newFactory(): Factory
-    {
-        return app(GetFactoryAction::class)->execute(static::class);
     }
 }

@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace Modules\Fixcity\Filament\Widgets;
 
-use Modules\Xot\Filament\Widgets\XotBaseWidget;
+use Modules\Xot\Filament\Widgets\XotBaseSchemaWidget;
 
-class SimpleWidget extends XotBaseWidget
+class SimpleWidget extends XotBaseSchemaWidget
 {
     protected string $view = 'fixcity::filament.widgets.simple';
 

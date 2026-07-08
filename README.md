@@ -1,150 +1,56 @@
----
-title: Fixcity
-module: fixcity
-related: Xot, User
-status: production
----
+# 🏛️ Fixcity
 
-# Fixcity Module
+[![Domain-Ticket](https://img.shields.io/badge/Domain-Civic%20Tickets-008758.svg)](#)
+[![Laravel 12](https://img.shields.io/badge/Laravel-12-red.svg)](https://laravel.com/)
+[![Filament 5](https://img.shields.io/badge/Filament-5-ffab00.svg)](https://filamentphp.com/)
+[![PHP 8.4+](https://img.shields.io/badge/PHP-8.4+-777BB4.svg)](https://php.net/)
+[![PHPStan Level 10](https://img.shields.io/badge/PHPStan-Level%2010-brightgreen.svg)](https://phpstan.org/)
+[![PSR-12](https://img.shields.io/badge/Code-PSR--12-blue.svg)](https://www.php-fig.org/psr/psr-12/)
+[![Strict Types](https://img.shields.io/badge/PHP-strict__types-1-informational.svg)](#)
+[![Laraxot Modules](https://img.shields.io/badge/Architecture-Modular-purple.svg)](#)
+[![FixCity Platform](https://img.shields.io/badge/Platform-FixCity-008758.svg)](#)
 
-**Module**: `fixcity`
-**Namespace**: `Modules\Fixcity\`
-**Status**: ✅ Production
-
----
-
-## Overview
-
-TODO: Add overview for Fixcity module
-
-### Key Features
-
-- Feature 1
-- Feature 2
-- Feature 3
-
-### Module Dependencies
-
-- [Xot](../Xot/README.md) (required)
-- [User](../User/README.md) (required)
+> **Segnalazioni che funzionano.** Ticket, wizard multi-step, stati e workflow pensati per il comune — non per un altro SaaS.
 
 ---
 
-## Quick Start
+## Perché esiste
 
-### Installation
+È il modulo **dominio** di FixCity: trasforma la segnalazione del cittadino in ticket tracciabili, misurabili e gestibili dagli operatori.
 
-```bash
-# Already included in main project
-# No additional setup required
-```
+## Superpoteri
 
-### Basic Usage
+- Wizard creazione segnalazione (privacy → dati → riepilogo) con Filament 5
+- Stati ticket, tipologie e filtri allineati a Design Comuni
+- Actions Queable + ViewModel — zero Controller MVC
+- Integrazione mappa Geo e frontoffice tema Sixteen
 
-```php
-use Modules\Fixcity\Models\YourModel;
+## Certificazioni
 
-$item = YourModel::first();
-```
+| Certificazione | Stato |
+|----------------|-------|
+| PHPStan livello 10 | Target progetto |
+| `declare(strict_types=1)` | Su nuovo codice PHP |
+| Filament 5 + XotBase | Admin enterprise |
+| Test PHPUnit / Pest | Suite modulo |
+| Documentazione wiki | Cartella `docs/` |
 
-### Configuration
+## Vuoi entrare nel team?
 
-Configuration file: `config/fixcity.php`
+Se ami la **business logic civica** e il codice tipizzato, qui si gioca la partita.
 
-Key settings:
-- `setting1` - Description
-- `setting2` - Description
-
----
-
-## Architecture
-
-### Directory Structure
-
-```
-Fixcity/
-├── src/
-│   ├── Models/
-│   ├── Controllers/
-│   ├── Resources/
-│   ├── Actions/
-│   └── Traits/
-├── routes/
-│   ├── api.php
-│   └── web.php
-├── database/
-│   ├── migrations/
-│   └── seeders/
-├── tests/
-│   ├── Unit/
-│   └── Feature/
-├── config/
-│   └── fixcity.php
-├── docs/
-│   └── README.md
-└── composer.json
-```
-
-### Key Components
-
-
+Stack frontoffice: **Tailwind · Alpine · Lit · DaisyUI · Flowbite · Filament v5** — vedi [STORY-133](../../../docs/stories/STORY-133-frontend-stack-religion-tailwind-alpine-lit.md).
 
 ---
 
-## API Reference
+## Documentazione
 
-Reference
-
-Il modulo espone API RESTful per:
-- Creazione segnalazioni
-- Aggiornamento stato
-- Recupero informazioni
-- Gestione profili
+| Lingua | Link |
+|--------|------|
+| 🇮🇹 Presentazione | Questo file (`README.md`) |
+| 🇬🇧 Business card | [docs/readme-en.md](./docs/readme-en.md) |
+| 📚 Wiki tecnica | [./docs/wiki/](./docs/) |
 
 ---
 
----
-
-## Usage Examples
-
-### Common Tasks
-
-#### Task 1: Description
-
-```php
-// Code example
-```
-
----
-
-## Testing
-
-### Running Tests
-
-```bash
-# Run all module tests
-composer test -- Modules/Fixcity
-```
-
----
-
-## Troubleshooting
-
-### Common Issues
-
-#### Issue: Problem description
-
-**Solution**: How to fix this issue
-
----
-
-## Related Modules
-
-### Dependencies
-
-- [Xot](../Xot/README.md) - Required module
-- [User](../User/README.md) - Required module
-
----
-
-Navigation: [Project Home](../../docs/INDEX.md) | [Modules](../../docs/modules/README.md)
+**Modulo** `fixcity` · **Laraxot** · **FixCity Platform** · PHPStan 10 · Filament 5

@@ -11,7 +11,7 @@ related:
 
 # Memories Index
 
-Le Memories progettuali vivono qui, nel wiki del Module **Fixcity**, e vengono caricate **on-demand**.
+Le Memories progettuali vivono qui, nel wiki del Root **root**, e vengono caricate **on-demand**.
 
 > Vedi anche → [Trigger Map](../rules/00-TRIGGER_MAP.md)
 

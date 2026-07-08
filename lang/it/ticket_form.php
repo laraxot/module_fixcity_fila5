@@ -3,6 +3,11 @@
 declare(strict_types=1);
 
 return [
+    'summaries' => [
+        'images_none' => 'Nessuna immagine allegata',
+        'images_choice' => '{1} Una immagine allegata|[2,*] :count immagini allegate',
+    ],
+
     'fields' => [
         'name' => [
             'label' => 'Nome',
@@ -33,9 +38,7 @@ return [
         ],
         'review_location' => [
             'label' => 'Posizione',
-            'description' => 'Anteprima della posizione geografica indicata',
-            'helper_text' => 'review_location',
-            'placeholder' => 'review_location',
+            'description' => 'Luogo indicato o coordinate',
         ],
         'review_email' => [
             'label' => 'Email di contatto',
@@ -43,21 +46,35 @@ return [
         ],
         'review_content' => [
             'label' => 'Dettaglio segnalazione',
-            'description' => 'Anteprima del contenuto della segnalazione',
-            'helper_text' => 'review_content',
-            'placeholder' => 'review_content',
+            'description' => 'Descrizione del disservizio',
         ],
         'review_name' => [
-            'label' => 'Nome segnalazione',
-            'description' => 'Anteprima del nome identificativo',
-            'helper_text' => 'review_name',
-            'placeholder' => 'review_name',
+            'label' => 'Titolo / nome disservizio',
+            'description' => 'Titolo sintetico indicato dall’utente',
         ],
         'review_type' => [
             'label' => 'Tipo segnalazione',
             'description' => 'Anteprima della tipologia scelta',
-            'helper_text' => 'review_type',
-            'placeholder' => 'review_type',
+        ],
+        'review_priority' => [
+            'label' => 'Priorità',
+            'description' => 'Anteprima della priorità selezionata',
+        ],
+        'review_author_name' => [
+            'label' => 'Nome e cognome',
+            'description' => 'Riepilogo autore della segnalazione',
+        ],
+        'review_author_fiscal_code' => [
+            'label' => 'Codice fiscale',
+            'description' => 'Riepilogo codice fiscale autore',
+        ],
+        'review_contact_phone' => [
+            'label' => 'Telefono',
+            'description' => 'Riepilogo recapito telefonico',
+        ],
+        'review_contact_email' => [
+            'label' => 'Email di contatto',
+            'description' => 'Riepilogo indirizzo email',
         ],
         'author_phone' => [
             'label' => 'author_phone',
@@ -131,9 +148,6 @@ return [
             'label' => 'type_id',
             'placeholder' => 'type_id',
         ],
-        'review_priority' => [
-            'label' => 'review_priority',
-        ],
         'gdpr_text' => [
             'label' => 'gdpr_text',
         ],
@@ -164,8 +178,8 @@ return [
             ],
         ],
         'empty' => [
-            'heading' => 'empty',
-            'label' => 'empty',
+            'heading' => 'empty5',
+            'label' => 'empty6',
         ],
         'Contatti' => [
             'heading' => 'Contatti',

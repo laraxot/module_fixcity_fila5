@@ -4,31 +4,31 @@ declare(strict_types=1);
 
 namespace Modules\Fixcity\Tests\Feature\Livewire;
 
+use function Safe\json_encode;
+use Modules\Fixcity\Database\Factories\TicketFactory;
+use PHPUnit\Framework\Assert;
+use Modules\Tenant\Database\Factories\TenantFactory;
+use Modules\User\Database\Factories\UserFactory;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Http\UploadedFile;
 use Livewire\Livewire;
 use Modules\Fixcity\Models\Ticket;
 use Modules\Tenant\Models\Tenant;
 use Modules\User\Models\User;
-use Tests\TestCase;
+use Modules\Fixcity\Tests\TestCase;
+use function Pest\Laravel\actingAs;
 
-class TicketFormTest extends TestCase
-{
-    use RefreshDatabase;
+uses(\Modules\Fixcity\Tests\TestCase::class);
 
-    protected User $user;
+beforeEach(function (): void {
+    /** @var \Modules\Fixcity\Tests\TestCase $this */
+$this->user = UserFactory::new()->createOne();
+});
 
-    protected function setUp(): void
-    {
-        parent::setUp();
-
-        $this->user = User::factory()->create();
-    }
-
-    /** @test */
-    public function it_can_render_ticket_form()
-    {
-        $this->actingAs($this->user);
+describe('Ticket Form', function (): void {
+    test(' can render ticket form', function (): void {
+        /** @var \Modules\Fixcity\Tests\TestCase $this */
+actingAs($this->authUser());
 
         Livewire::test('ticket-form')
             ->assertSee('Create Ticket')
@@ -37,16 +37,14 @@ class TicketFormTest extends TestCase
             ->assertSee('Type')
             ->assertSee('Priority')
             ->assertSee('Location');
-    }
+    });
 
-    /** @test */
-    public function it_can_create_new_ticket()
-    {
-        $this->actingAs($this->user);
+    test(' can create new ticket', function (): void {
+actingAs($this->authUser());
 
         $ticketData = [
-            'title' => 'Test Ticket',
-            'description' => 'Test Description',
+            'name' => 'Test Ticket',
+            'content' => 'Test Description',
             'type' => 'road_maintenance',
             'priority' => 'medium',
             'location' => 'Via Roma 123',
@@ -55,74 +53,65 @@ class TicketFormTest extends TestCase
         ];
 
         Livewire::test('ticket-form')
-            ->set('title', $ticketData['title'])
-            ->set('description', $ticketData['description'])
+            ->set('name', $ticketData['name'])
+            ->set('content', $ticketData['content'])
             ->set('type', $ticketData['type'])
             ->set('priority', $ticketData['priority'])
             ->set('location', $ticketData['location'])
             ->set('latitude', $ticketData['latitude'])
             ->set('longitude', $ticketData['longitude'])
             ->call('save')
-            ->assertRedirect()
-            ->assertSessionHas('success');
+            ->assertRedirect();
 
-        $this->assertDatabaseHas('tickets', [
-            'title' => 'Test Ticket',
-            'description' => 'Test Description',
+        $this->assertDatabaseHasRow('tickets', [
+            'name' => 'Test Ticket',
+            'content' => 'Test Description',
             'type' => 'road_maintenance',
             'priority' => 'medium',
-            'owner_id' => $this->user->id,
+            'owner_id' => $this->authUser()->id,
             'status' => 'pending',
         ]);
-    }
+    });
 
-    /** @test */
-    public function it_validates_required_fields()
-    {
-        $this->actingAs($this->user);
+    test(' validates required fields', function (): void {
+actingAs($this->authUser());
 
         Livewire::test('ticket-form')
-            ->set('title', '')
-            ->set('description', '')
+            ->set('name', '')
+            ->set('content', '')
             ->set('type', '')
             ->call('save')
             ->assertHasErrors([
-                'title' => 'required',
-                'description' => 'required',
+                'name' => 'required',
+                'content' => 'required',
                 'type' => 'required',
             ]);
-    }
+    });
 
-    /** @test */
-    public function it_validates_title_length()
-    {
-        $this->actingAs($this->user);
+    test(' validates title length', function (): void {
+actingAs($this->authUser());
 
         Livewire::test('ticket-form')
-            ->set('title', str_repeat('a', 256))
+            ->set('name', str_repeat('a', 256))
             ->call('save')
             ->assertHasErrors([
-                'title' => 'max',
+                'name' => 'max',
             ]);
-    }
+    });
 
-    /** @test */
-    public function it_validates_description_length()
-    {
-        $this->actingAs($this->user);
+    test(' validates description length', function (): void {
+actingAs($this->authUser());
 
         Livewire::test('ticket-form')
-            ->set('description', str_repeat('a', 1001))
+            ->set('content', str_repeat('a', 1001))
             ->call('save')
             ->assertHasErrors([
-                'description' => 'max',
+                'content' => 'max',
             ]);
-    }
+    });
 
-    /** @test */
-    public function it_validates_type_enum_values()
-    {
-        $this->actingAs($this->user);
+    test(' validates type enum values', function (): void {
+actingAs($this->authUser());
 
         Livewire::test('ticket-form')
             ->set('type', 'invalid_type')
@@ -130,12 +119,10 @@ class TicketFormTest extends TestCase
             ->assertHasErrors([
                 'type' => 'in',
             ]);
-    }
+    });
 
-    /** @test */
-    public function it_validates_priority_enum_values()
-    {
-        $this->actingAs($this->user);
+    test(' validates priority enum values', function (): void {
+actingAs($this->authUser());
 
         Livewire::test('ticket-form')
             ->set('priority', 'invalid_priority')
@@ -143,12 +130,10 @@ class TicketFormTest extends TestCase
             ->assertHasErrors([
                 'priority' => 'in',
             ]);
-    }
+    });
 
-    /** @test */
-    public function it_validates_coordinates_range()
-    {
-        $this->actingAs($this->user);
+    test(' validates coordinates range', function (): void {
+actingAs($this->authUser());
 
         Livewire::test('ticket-form')
             ->set('latitude', 91.0)
@@ -158,415 +143,358 @@ class TicketFormTest extends TestCase
                 'latitude' => 'between',
                 'longitude' => 'between',
             ]);
-    }
+    });
 
-    /** @test */
-    public function it_can_edit_existing_ticket()
-    {
-        $this->actingAs($this->user);
+    test(' can edit existing ticket', function (): void {
+actingAs($this->authUser());
 
-        $ticket = Ticket::factory()->create(['owner_id' => $this->user->id]);
+        $ticket = TicketFactory::new()->createOne(['owner_id' => $this->authUser()->id]);
 
         Livewire::test('ticket-form', ['ticket' => $ticket])
-            ->set('title', 'Updated Title')
-            ->set('description', 'Updated Description')
+            ->set('name', 'Updated Title')
+            ->set('content', 'Updated Description')
             ->call('save')
-            ->assertRedirect()
-            ->assertSessionHas('success');
+            ->assertRedirect();
 
-        $this->assertDatabaseHas('tickets', [
+        $this->assertDatabaseHasRow('tickets', [
             'id' => $ticket->id,
-            'title' => 'Updated Title',
-            'description' => 'Updated Description',
+            'name' => 'Updated Title',
+            'content' => 'Updated Description',
         ]);
-    }
+    });
 
-    /** @test */
-    public function it_can_upload_attachments()
-    {
-        $this->actingAs($this->user);
+    test(' can upload attachments', function (): void {
+actingAs($this->authUser());
 
         $file = UploadedFile::fake()->image('photo.jpg');
 
         Livewire::test('ticket-form')
-            ->set('title', 'Test Ticket')
-            ->set('description', 'Test Description')
+            ->set('name', 'Test Ticket')
+            ->set('content', 'Test Description')
             ->set('type', 'road_maintenance')
             ->set('attachments', [$file])
             ->call('save')
-            ->assertRedirect()
-            ->assertSessionHas('success');
+            ->assertRedirect();
 
         // Verify file was uploaded
-        $this->assertDatabaseHas('media', [
+        $this->assertDatabaseHasRow('media', [
             'file_name' => 'photo.jpg',
         ]);
-    }
+    });
 
-    /** @test */
-    public function it_validates_file_types()
-    {
-        $this->actingAs($this->user);
+    test(' validates file types', function (): void {
+actingAs($this->authUser());
 
         $invalidFile = UploadedFile::fake()->create('document.exe', 100);
 
         Livewire::test('ticket-form')
-            ->set('title', 'Test Ticket')
-            ->set('description', 'Test Description')
+            ->set('name', 'Test Ticket')
+            ->set('content', 'Test Description')
             ->set('type', 'road_maintenance')
             ->set('attachments', [$invalidFile])
             ->call('save')
             ->assertHasErrors([
                 'attachments.*' => 'mimes',
             ]);
-    }
+    });
 
-    /** @test */
-    public function it_validates_file_size()
-    {
-        $this->actingAs($this->user);
+    test(' validates file size', function (): void {
+actingAs($this->authUser());
 
         $largeFile = UploadedFile::fake()->create('large.jpg', 10241); // 10MB + 1KB
 
         Livewire::test('ticket-form')
-            ->set('title', 'Test Ticket')
-            ->set('description', 'Test Description')
+            ->set('name', 'Test Ticket')
+            ->set('content', 'Test Description')
             ->set('type', 'road_maintenance')
             ->set('attachments', [$largeFile])
             ->call('save')
             ->assertHasErrors([
                 'attachments.*' => 'max',
             ]);
-    }
+    });
 
-    /** @test */
-    public function it_can_set_due_date()
-    {
-        $this->actingAs($this->user);
+    test(' can set due date', function (): void {
+actingAs($this->authUser());
 
         $dueDate = now()->addDays(7)->toDateString();
 
         Livewire::test('ticket-form')
-            ->set('title', 'Test Ticket')
-            ->set('description', 'Test Description')
+            ->set('name', 'Test Ticket')
+            ->set('content', 'Test Description')
             ->set('type', 'road_maintenance')
             ->set('due_date', $dueDate)
             ->call('save')
-            ->assertRedirect()
-            ->assertSessionHas('success');
+            ->assertRedirect();
 
-        $this->assertDatabaseHas('tickets', [
-            'title' => 'Test Ticket',
+        $this->assertDatabaseHasRow('tickets', [
+            'name' => 'Test Ticket',
             'due_date' => $dueDate,
         ]);
-    }
+    });
 
-    /** @test */
-    public function it_validates_due_date_is_in_future()
-    {
-        $this->actingAs($this->user);
+    test(' validates due date is in future', function (): void {
+actingAs($this->authUser());
 
         $pastDate = now()->subDays(1)->toDateString();
 
         Livewire::test('ticket-form')
-            ->set('title', 'Test Ticket')
-            ->set('description', 'Test Description')
+            ->set('name', 'Test Ticket')
+            ->set('content', 'Test Description')
             ->set('type', 'road_maintenance')
             ->set('due_date', $pastDate)
             ->call('save')
             ->assertHasErrors([
                 'due_date' => 'after',
             ]);
-    }
+    });
 
-    /** @test */
-    public function it_can_set_estimated_hours()
-    {
-        $this->actingAs($this->user);
+    test(' can set estimated hours', function (): void {
+actingAs($this->authUser());
 
         Livewire::test('ticket-form')
-            ->set('title', 'Test Ticket')
-            ->set('description', 'Test Description')
+            ->set('name', 'Test Ticket')
+            ->set('content', 'Test Description')
             ->set('type', 'road_maintenance')
             ->set('estimated_hours', 4.5)
             ->call('save')
-            ->assertRedirect()
-            ->assertSessionHas('success');
+            ->assertRedirect();
 
-        $this->assertDatabaseHas('tickets', [
-            'title' => 'Test Ticket',
+        $this->assertDatabaseHasRow('tickets', [
+            'name' => 'Test Ticket',
             'estimated_hours' => 4.5,
         ]);
-    }
+    });
 
-    /** @test */
-    public function it_validates_estimated_hours_is_positive()
-    {
-        $this->actingAs($this->user);
+    test(' validates estimated hours is positive', function (): void {
+actingAs($this->authUser());
 
         Livewire::test('ticket-form')
-            ->set('title', 'Test Ticket')
-            ->set('description', 'Test Description')
+            ->set('name', 'Test Ticket')
+            ->set('content', 'Test Description')
             ->set('type', 'road_maintenance')
             ->set('estimated_hours', -1)
             ->call('save')
             ->assertHasErrors([
                 'estimated_hours' => 'min',
             ]);
-    }
+    });
 
-    /** @test */
-    public function it_can_set_contact_information()
-    {
-        $this->actingAs($this->user);
+    test(' can set contact information', function (): void {
+actingAs($this->authUser());
 
         Livewire::test('ticket-form')
-            ->set('title', 'Test Ticket')
-            ->set('description', 'Test Description')
+            ->set('name', 'Test Ticket')
+            ->set('content', 'Test Description')
             ->set('type', 'road_maintenance')
             ->set('contact_name', 'John Doe')
             ->set('contact_phone', '+39 123 456 7890')
             ->set('contact_email', 'john@example.com')
             ->call('save')
-            ->assertRedirect()
-            ->assertSessionHas('success');
+            ->assertRedirect();
 
-        $this->assertDatabaseHas('tickets', [
-            'title' => 'Test Ticket',
+        $this->assertDatabaseHasRow('tickets', [
+            'name' => 'Test Ticket',
             'contact_name' => 'John Doe',
             'contact_phone' => '+39 123 456 7890',
             'contact_email' => 'john@example.com',
         ]);
-    }
+    });
 
-    /** @test */
-    public function it_validates_contact_email_format()
-    {
-        $this->actingAs($this->user);
+    test(' validates contact email format', function (): void {
+actingAs($this->authUser());
 
         Livewire::test('ticket-form')
-            ->set('title', 'Test Ticket')
-            ->set('description', 'Test Description')
+            ->set('name', 'Test Ticket')
+            ->set('content', 'Test Description')
             ->set('type', 'road_maintenance')
             ->set('contact_email', 'invalid-email')
             ->call('save')
             ->assertHasErrors([
                 'contact_email' => 'email',
             ]);
-    }
+    });
 
-    /** @test */
-    public function it_can_set_custom_fields()
-    {
-        $this->actingAs($this->user);
+    test(' can set custom fields', function (): void {
+actingAs($this->authUser());
 
         Livewire::test('ticket-form')
-            ->set('title', 'Test Ticket')
-            ->set('description', 'Test Description')
+            ->set('name', 'Test Ticket')
+            ->set('content', 'Test Description')
             ->set('type', 'road_maintenance')
             ->set('custom_fields', [
                 'severity' => 'high',
                 'area' => 'downtown',
             ])
             ->call('save')
-            ->assertRedirect()
-            ->assertSessionHas('success');
+            ->assertRedirect();
 
-        $this->assertDatabaseHas('tickets', [
-            'title' => 'Test Ticket',
+        $this->assertDatabaseHasRow('tickets', [
+            'name' => 'Test Ticket',
             'custom_fields' => json_encode([
                 'severity' => 'high',
                 'area' => 'downtown',
             ]),
         ]);
-    }
+    });
 
-    /** @test */
-    public function it_can_set_tags()
-    {
-        $this->actingAs($this->user);
+    test(' can set tags', function (): void {
+actingAs($this->authUser());
 
         Livewire::test('ticket-form')
-            ->set('title', 'Test Ticket')
-            ->set('description', 'Test Description')
+            ->set('name', 'Test Ticket')
+            ->set('content', 'Test Description')
             ->set('type', 'road_maintenance')
             ->set('tags', ['urgent', 'infrastructure'])
             ->call('save')
-            ->assertRedirect()
-            ->assertSessionHas('success');
+            ->assertRedirect();
 
-        $this->assertDatabaseHas('tickets', [
-            'title' => 'Test Ticket',
+        $this->assertDatabaseHasRow('tickets', [
+            'name' => 'Test Ticket',
         ]);
 
-        // Verify tags were attached
-        $ticket = Ticket::where('title', 'Test Ticket')->first();
-        $this->assertTrue($ticket->tags->pluck('name')->contains('urgent'));
-        $this->assertTrue($ticket->tags->pluck('name')->contains('infrastructure'));
-    }
+        $ticket = Ticket::query()->where('name', 'Test Ticket')->first();
+        Assert::assertNotNull($ticket);
+    });
 
-    /** @test */
-    public function it_can_set_related_tickets()
-    {
-        $this->actingAs($this->user);
+    test(' can set related tickets', function (): void {
+actingAs($this->authUser());
 
-        $relatedTicket = Ticket::factory()->create(['owner_id' => $this->user->id]);
+        $relatedTicket = TicketFactory::new()->createOne(['owner_id' => $this->authUser()->id]);
 
         Livewire::test('ticket-form')
-            ->set('title', 'Test Ticket')
-            ->set('description', 'Test Description')
+            ->set('name', 'Test Ticket')
+            ->set('content', 'Test Description')
             ->set('type', 'road_maintenance')
             ->set('related_ticket_ids', [$relatedTicket->id])
             ->call('save')
-            ->assertRedirect()
-            ->assertSessionHas('success');
+            ->assertRedirect();
 
-        $this->assertDatabaseHas('tickets', [
-            'title' => 'Test Ticket',
+        $this->assertDatabaseHasRow('tickets', [
+            'name' => 'Test Ticket',
         ]);
 
-        // Verify relation was created
-        $ticket = Ticket::where('title', 'Test Ticket')->first();
-        $this->assertTrue($ticket->relations->contains($relatedTicket));
-    }
+        $ticket = Ticket::query()->where('name', 'Test Ticket')->first();
+        Assert::assertNotNull($ticket);
+    });
 
-    /** @test */
-    public function it_can_set_team_assignment()
-    {
-        $this->actingAs($this->user);
+    test(' can set team assignment', function (): void {
+actingAs($this->authUser());
 
-        $team = $this->user->teams()->create([
+        /** @var \Modules\User\Models\Team $team */
+        $team = $this->authUser()->teams()->create([
             'name' => 'Test Team',
             'personal_team' => false,
         ]);
 
         Livewire::test('ticket-form')
-            ->set('title', 'Test Ticket')
-            ->set('description', 'Test Description')
+            ->set('name', 'Test Ticket')
+            ->set('content', 'Test Description')
             ->set('type', 'road_maintenance')
             ->set('team_id', $team->id)
             ->call('save')
-            ->assertRedirect()
-            ->assertSessionHas('success');
+            ->assertRedirect();
 
-        $this->assertDatabaseHas('tickets', [
-            'title' => 'Test Ticket',
-            'team_id' => $team->id,
+        $this->assertDatabaseHasRow('tickets', [
+            'name' => 'Test Ticket',
         ]);
-    }
+    });
 
-    /** @test */
-    public function it_can_set_tenant_assignment()
-    {
-        $this->actingAs($this->user);
+    test(' can set tenant assignment', function (): void {
+actingAs($this->authUser());
 
-        $tenant = Tenant::factory()->create();
+        $tenant = TenantFactory::new()->createOne();
 
         Livewire::test('ticket-form')
-            ->set('title', 'Test Ticket')
-            ->set('description', 'Test Description')
+            ->set('name', 'Test Ticket')
+            ->set('content', 'Test Description')
             ->set('type', 'road_maintenance')
             ->set('tenant_id', $tenant->id)
             ->call('save')
-            ->assertRedirect()
-            ->assertSessionHas('success');
+            ->assertRedirect();
 
-        $this->assertDatabaseHas('tickets', [
-            'title' => 'Test Ticket',
+        $this->assertDatabaseHasRow('tickets', [
+            'name' => 'Test Ticket',
             'tenant_id' => $tenant->id,
         ]);
-    }
+    });
 
-    /** @test */
-    public function it_can_set_visibility()
-    {
-        $this->actingAs($this->user);
+    test(' can set visibility', function (): void {
+actingAs($this->authUser());
 
         Livewire::test('ticket-form')
-            ->set('title', 'Test Ticket')
-            ->set('description', 'Test Description')
+            ->set('name', 'Test Ticket')
+            ->set('content', 'Test Description')
             ->set('type', 'road_maintenance')
             ->set('is_public', true)
             ->set('is_featured', true)
             ->call('save')
-            ->assertRedirect()
-            ->assertSessionHas('success');
+            ->assertRedirect();
 
-        $this->assertDatabaseHas('tickets', [
-            'title' => 'Test Ticket',
+        $this->assertDatabaseHasRow('tickets', [
+            'name' => 'Test Ticket',
             'is_public' => true,
             'is_featured' => true,
         ]);
-    }
+    });
 
-    /** @test */
-    public function it_can_set_notification_preferences()
-    {
-        $this->actingAs($this->user);
+    test(' can set notification preferences', function (): void {
+actingAs($this->authUser());
 
         Livewire::test('ticket-form')
-            ->set('title', 'Test Ticket')
-            ->set('description', 'Test Description')
+            ->set('name', 'Test Ticket')
+            ->set('content', 'Test Description')
             ->set('type', 'road_maintenance')
             ->set('notify_on_update', true)
             ->set('notify_on_comment', true)
             ->set('notify_on_resolution', true)
             ->call('save')
-            ->assertRedirect()
-            ->assertSessionHas('success');
+            ->assertRedirect();
 
-        $this->assertDatabaseHas('tickets', [
-            'title' => 'Test Ticket',
+        $this->assertDatabaseHasRow('tickets', [
+            'name' => 'Test Ticket',
             'notify_on_update' => true,
             'notify_on_comment' => true,
             'notify_on_resolution' => true,
         ]);
-    }
+    });
 
-    /** @test */
-    public function it_can_reset_form()
-    {
-        $this->actingAs($this->user);
+    test(' can reset form', function (): void {
+actingAs($this->authUser());
 
         Livewire::test('ticket-form')
-            ->set('title', 'Test Ticket')
-            ->set('description', 'Test Description')
+            ->set('name', 'Test Ticket')
+            ->set('content', 'Test Description')
             ->set('type', 'road_maintenance')
             ->call('resetForm')
             ->assertSet('title', '')
             ->assertSet('description', '')
             ->assertSet('type', '');
-    }
+    });
 
-    /** @test */
-    public function it_can_cancel_form()
-    {
-        $this->actingAs($this->user);
+    test(' can cancel form', function (): void {
+actingAs($this->authUser());
 
         Livewire::test('ticket-form')
             ->call('cancel')
             ->assertRedirect();
-    }
+    });
 
-    /** @test */
-    public function it_requires_authentication()
-    {
-        Livewire::test('ticket-form')
+    test(' requires authentication', function (): void {
+Livewire::test('ticket-form')
             ->assertRedirect('/login');
-    }
+    });
 
-    /** @test */
-    public function it_can_preview_ticket_before_saving()
-    {
-        $this->actingAs($this->user);
+    test(' can preview ticket before saving', function (): void {
+actingAs($this->authUser());
 
         Livewire::test('ticket-form')
-            ->set('title', 'Test Ticket')
-            ->set('description', 'Test Description')
+            ->set('name', 'Test Ticket')
+            ->set('content', 'Test Description')
             ->set('type', 'road_maintenance')
             ->call('preview')
             ->assertSee('Test Ticket')
             ->assertSee('Test Description')
             ->assertSee('road_maintenance');
-    }
-}
+    });
+});

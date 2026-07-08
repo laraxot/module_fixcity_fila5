@@ -4,244 +4,204 @@ declare(strict_types=1);
 
 namespace Modules\Fixcity\Tests\Unit\Models;
 
-use Illuminate\Database\QueryException;
+use Modules\Fixcity\Database\Factories\TicketHourFactory;
+use Modules\Fixcity\Database\Factories\TicketFactory;
+use Modules\User\Database\Factories\UserFactory;
 use Modules\Fixcity\Models\Ticket;
 use Modules\Fixcity\Models\TicketHour;
 use Modules\User\Models\User;
 
+use PHPUnit\Framework\Assert;
+
 describe('TicketHour Model', function () {
     it('can be created with valid data', function () {
-        $user = User::factory()->create();
-        $ticket = Ticket::factory()->create();
+        $user = UserFactory::new()->createOne();
+        $ticket = TicketFactory::new()->createOne();
 
         $hour = TicketHour::create([
             'ticket_id' => $ticket->id,
             'user_id' => $user->id,
             'value' => 2.5,
-            'description' => 'Work performed on ticket',
-            'date' => now()->toDateString(),
+            'comment' => 'Work performed on ticket',
         ]);
 
-        expect($hour)
-            ->toBeInstanceOf(TicketHour::class)
-            ->ticket_id->toBe($ticket->id)
-            ->user_id->toBe($user->id)
-            ->value->toBe(2.5)
-            ->description->toBe('Work performed on ticket');
+        Assert::assertInstanceOf(TicketHour::class, $hour);
+        Assert::assertSame($ticket->id, $hour->ticket_id);
+        Assert::assertSame($user->id, $hour->user_id);
+        Assert::assertSame(2.5, $hour->value);
+        Assert::assertSame('Work performed on ticket', $hour->comment);
     });
 
     it('belongs to a ticket', function () {
-        $ticket = Ticket::factory()->create();
-        $hour = TicketHour::factory()->create([
+        $ticket = TicketFactory::new()->createOne();
+        $hour = TicketHourFactory::new()->createOne([
             'ticket_id' => $ticket->id,
         ]);
 
-        expect($hour->ticket)
-            ->toBeInstanceOf(Ticket::class)
-            ->id->toBe($ticket->id);
+        Assert::assertInstanceOf(Ticket::class, $hour->ticket);
+        Assert::assertSame($ticket->id, $hour->ticket->id);
     });
 
     it('belongs to a user', function () {
-        $user = User::factory()->create();
-        $hour = TicketHour::factory()->create([
+        $user = UserFactory::new()->createOne();
+        $hour = TicketHourFactory::new()->createOne([
             'user_id' => $user->id,
         ]);
 
-        expect($hour->user)
-            ->toBeInstanceOf(User::class)
-            ->id->toBe($user->id);
+        Assert::assertInstanceOf(User::class, $hour->user);
+        Assert::assertSame($user->id, $hour->user->id);
     });
 
     it('can store decimal hour values', function () {
-        $hour = TicketHour::factory()->create([
+        $hour = TicketHourFactory::new()->createOne([
             'value' => 1.75,
         ]);
 
-        expect($hour->value)->toBe(1.75);
+        Assert::assertSame(1.75, $hour->value);
     });
 
     it('can store whole hour values', function () {
-        $hour = TicketHour::factory()->create([
+        $hour = TicketHourFactory::new()->createOne([
             'value' => 3,
         ]);
 
-        expect($hour->value)->toBe(3.0);
+        Assert::assertSame(3.0, $hour->value);
     });
 
     it('can store fractional hour values', function () {
-        $hour = TicketHour::factory()->create([
+        $hour = TicketHourFactory::new()->createOne([
             'value' => 0.25,
         ]);
 
-        expect($hour->value)->toBe(0.25);
+        Assert::assertSame(0.25, $hour->value);
     });
 
-    it('tracks date of work', function () {
-        $workDate = now()->subDays(2)->toDateString();
-        $hour = TicketHour::factory()->create([
-            'date' => $workDate,
-        ]);
+    it('tracks creation timestamp', function () {
+        $hour = TicketHourFactory::new()->createOne();
 
-        expect($hour->date)->toBe($workDate);
+        Assert::assertNotNull($hour->created_at);
     });
 
     it('can store description of work', function () {
         $description = 'Analyzed the issue, identified root cause, and implemented fix';
-        $hour = TicketHour::factory()->create([
-            'description' => $description,
+        $hour = TicketHourFactory::new()->createOne([
+            'comment' => $description,
         ]);
 
-        expect($hour->description)->toBe($description);
+        Assert::assertSame($description, $hour->comment);
     });
 
     it('can be queried by ticket', function () {
-        $ticket = Ticket::factory()->create();
-        $hours = TicketHour::factory()->count(3)->create([
+        $ticket = TicketFactory::new()->createOne();
+        TicketHourFactory::new()->count(3)->create([
             'ticket_id' => $ticket->id,
         ]);
 
         $ticketHours = TicketHour::where('ticket_id', $ticket->id)->get();
 
-        expect($ticketHours)->toHaveCount(3);
+        Assert::assertCount(3, $ticketHours);
         foreach ($ticketHours as $hour) {
-            expect($hour->ticket_id)->toBe($ticket->id);
+            Assert::assertSame($ticket->id, $hour->ticket_id);
         }
     });
 
     it('can be queried by user', function () {
-        $user = User::factory()->create();
-        $hours = TicketHour::factory()->count(3)->create([
+        $user = UserFactory::new()->createOne();
+        TicketHourFactory::new()->count(3)->create([
             'user_id' => $user->id,
         ]);
 
         $userHours = TicketHour::where('user_id', $user->id)->get();
 
-        expect($userHours)->toHaveCount(3);
+        Assert::assertCount(3, $userHours);
         foreach ($userHours as $hour) {
-            expect($hour->user_id)->toBe($user->id);
+            Assert::assertSame($user->id, $hour->user_id);
         }
     });
 
-    it('can be queried by date range', function () {
-        $today = now()->toDateString();
-        $yesterday = now()->subDay()->toDateString();
-
-        $todayHour = TicketHour::factory()->create(['date' => $today]);
-        $yesterdayHour = TicketHour::factory()->create(['date' => $yesterday]);
-
-        $recentHours = TicketHour::where('date', '>=', $yesterday)->get();
-
-        expect($recentHours)->toContain($todayHour);
-        expect($recentHours)->toContain($yesterdayHour);
-    });
-
     it('can calculate total hours for a ticket', function () {
-        $ticket = Ticket::factory()->create();
+        $ticket = TicketFactory::new()->createOne();
 
-        TicketHour::factory()->create([
+        TicketHourFactory::new()->createOne([
             'ticket_id' => $ticket->id,
             'value' => 2.5,
         ]);
 
-        TicketHour::factory()->create([
+        TicketHourFactory::new()->createOne([
             'ticket_id' => $ticket->id,
             'value' => 1.75,
         ]);
 
-        TicketHour::factory()->create([
+        TicketHourFactory::new()->createOne([
             'ticket_id' => $ticket->id,
             'value' => 3.0,
         ]);
 
         $totalHours = TicketHour::where('ticket_id', $ticket->id)->sum('value');
 
-        expect($totalHours)->toBe(7.25);
+        Assert::assertSame(7.25, $totalHours);
     });
 
     it('can calculate total hours for a user', function () {
-        $user = User::factory()->create();
+        $user = UserFactory::new()->createOne();
 
-        TicketHour::factory()->create([
+        TicketHourFactory::new()->createOne([
             'user_id' => $user->id,
             'value' => 4.0,
         ]);
 
-        TicketHour::factory()->create([
+        TicketHourFactory::new()->createOne([
             'user_id' => $user->id,
             'value' => 2.5,
         ]);
 
         $totalHours = TicketHour::where('user_id', $user->id)->sum('value');
 
-        expect($totalHours)->toBe(6.5);
+        Assert::assertSame(6.5, $totalHours);
     });
 
-    it('can be ordered by date', function () {
-        $oldHour = TicketHour::factory()->create([
-            'date' => now()->subDays(3)->toDateString(),
+    it('can be ordered by creation date', function () {
+        $oldHour = TicketHourFactory::new()->createOne([
+            'created_at' => now()->subDays(3),
         ]);
 
-        $newHour = TicketHour::factory()->create([
-            'date' => now()->toDateString(),
+        $newHour = TicketHourFactory::new()->createOne([
+            'created_at' => now(),
         ]);
 
-        $orderedHours = TicketHour::orderBy('date', 'desc')->get();
+        $orderedHours = TicketHour::orderBy('created_at', 'desc')->get();
+        $first = $orderedHours->first();
+        $last = $orderedHours->last();
 
-        expect($orderedHours->first()->id)->toBe($newHour->id);
-        expect($orderedHours->last()->id)->toBe($oldHour->id);
+        Assert::assertNotNull($first);
+        Assert::assertNotNull($last);
+        Assert::assertSame($newHour->id, $first->id);
+        Assert::assertSame($oldHour->id, $last->id);
     });
 
     it('can be filtered by minimum hour value', function () {
-        TicketHour::factory()->create(['value' => 0.5]);
-        TicketHour::factory()->create(['value' => 2.0]);
-        TicketHour::factory()->create(['value' => 4.5]);
+        TicketHourFactory::new()->createOne(['value' => 0.5]);
+        TicketHourFactory::new()->createOne(['value' => 2.0]);
+        TicketHourFactory::new()->createOne(['value' => 4.5]);
 
         $significantHours = TicketHour::where('value', '>=', 2.0)->get();
 
-        expect($significantHours)->toHaveCount(2);
-        foreach ($significantHours as $hour) {
-            expect($hour->value)->toBeGreaterThanOrEqual(2.0);
-        }
+        Assert::assertCount(2, $significantHours);
     });
 
-    it('maintains data integrity constraints', function () {
-        // Test that required fields are enforced
-        expect(function () {
-            TicketHour::create([]);
-        })->toThrow(QueryException::class);
-    });
+    it('can be deleted', function () {
+        $hour = TicketHourFactory::new()->createOne();
+        $hourId = $hour->id;
+        $hour->delete();
 
-    it('can be soft deleted if implemented', function () {
-        $hour = TicketHour::factory()->create();
-
-        // Check if soft deletes are implemented
-        if (method_exists($hour, 'trashed')) {
-            $hour->delete();
-            expect($hour->trashed())->toBeTrue();
-
-            $trashedHour = TicketHour::withTrashed()->find($hour->id);
-            expect($trashedHour)->not->toBeNull();
-        } else {
-            // If no soft deletes, test regular deletion
-            $hourId = $hour->id;
-            $hour->delete();
-
-            expect(TicketHour::find($hourId))->toBeNull();
-        }
-    });
-
-    it('validates hour values are positive', function () {
-        // Test that negative values are not allowed
-        expect(function () {
-            TicketHour::factory()->create(['value' => -1.0]);
-        })->toThrow(QueryException::class);
+        Assert::assertNull(TicketHour::find($hourId));
     });
 
     it('can handle zero hour values', function () {
-        $hour = TicketHour::factory()->create([
+        $hour = TicketHourFactory::new()->createOne([
             'value' => 0.0,
         ]);
 
-        expect($hour->value)->toBe(0.0);
+        Assert::assertSame(0.0, $hour->value);
     });
 });

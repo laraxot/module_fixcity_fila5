@@ -11,21 +11,26 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Str;
+use Modules\Fixcity\Actions\ResolveTicketTypeMarkerPropertiesAction;
 use Modules\Fixcity\Database\Factories\TicketFactory;
 use Modules\Fixcity\Enums\TicketPriorityEnum;
 use Modules\Fixcity\Enums\TicketStatusEnum;
 use Modules\Fixcity\Enums\TicketTypeEnum;
 use Modules\Media\Models\Media;
 use Modules\User\Models\User;
+use Modules\Xot\Actions\Cast\SafeStringCastAction;
 use Modules\Xot\Actions\File\AssetAction;
 use Modules\Xot\Contracts\ProfileContract;
 use Modules\Xot\Contracts\UserContract;
 use Modules\Xot\Datas\XotData;
-use Modules\Xot\Models\XotBaseModel;
-use Spatie\Comments\Models\CommentNotificationSubscription;
-use Spatie\Comments\Models\Concerns\HasComments;
+use Modules\Fixcity\Models\Concerns\InteractsWithTicketCitizenRating;
+use Modules\Comment\Models\Concerns\HasComments;
+use Modules\Comment\Models\CommentNotificationSubscription;
+use Modules\Comment\Models\Reaction;
+use Modules\Comment\Models\Contracts\Commentable;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 use Spatie\MediaLibrary\MediaCollections\Models\Collections\MediaCollection;
@@ -66,8 +71,10 @@ use Webmozart\Assert\Assert;
  * @property string|null $deleted_by
  * @property Collection<int, TicketActivity> $activities
  * @property int|null $activities_count
- * @property Collection<int, TicketComment> $comments
+ * @property Collection<int, \Modules\Comment\Models\Comment> $comments
  * @property int|null $comments_count
+ * @property Collection<int, TicketComment> $ticketComments Legacy relation, do not use in new FO flows.
+ * @property int|null $ticket_comments_count
  * @property mixed $completude_percentage
  * @property mixed $estimation_for_humans
  * @property mixed $estimation_in_seconds
@@ -83,8 +90,8 @@ use Webmozart\Assert\Assert;
  * @property int|null $relations_count
  * @property User|null $responsible
  * @property TicketStatusEnum|null $status
- * @property Collection<int, User> $subscribers
- * @property int|null $subscribers_count
+ * @property Collection<int, User> $ticketSubscribers
+ * @property int|null $ticket_subscribers_count
  * @property mixed $total_logged_hours
  * @property mixed $total_logged_in_hours
  * @property mixed $total_logged_seconds
@@ -140,12 +147,13 @@ use Webmozart\Assert\Assert;
  *
  * @mixin \Eloquent
  */
-class Ticket extends XotBaseModel implements HasMedia
+class Ticket extends BaseModel implements Commentable, HasMedia
 {
     use HasComments;
     use HasSlug;
     use HasStatuses;
     use InteractsWithMedia;
+    use InteractsWithTicketCitizenRating;
 
     protected $fillable = [
         'name',
@@ -168,6 +176,8 @@ class Ticket extends XotBaseModel implements HasMedia
         'type_id',
         'priority',
         'slug',
+        'citizen_rating',
+        'citizen_rated_at',
     ];
 
     protected $appends = [
@@ -175,6 +185,7 @@ class Ticket extends XotBaseModel implements HasMedia
         // 'estimationProgress',
     ];
 
+    /** @return Attribute<string, never> */
     protected function typeLabel(): Attribute
     {
         return Attribute::make(
@@ -207,7 +218,48 @@ class Ticket extends XotBaseModel implements HasMedia
             'status' => TicketStatusEnum::class,
             'type' => TicketTypeEnum::class,
             'type_id' => TicketTypeEnum::class,
+            'citizen_rated_at' => 'datetime',
+            'citizen_rating' => 'integer',
         ];
+    }
+
+    public function resolveTicketStatusValue(): string
+    {
+        $currentStatus = $this->currentStatus();
+        if (is_object($currentStatus) && isset($currentStatus->name) && is_string($currentStatus->name)) {
+            return $currentStatus->name;
+        }
+
+        $raw = $this->getRawOriginal('status');
+
+        return is_string($raw) ? $raw : '';
+    }
+
+    public function isOwnedByAuthenticatedUser(): bool
+    {
+        $uid = auth()->id();
+        if ($uid === null) {
+            return false;
+        }
+
+        if ($this->owner_id !== null && (string) $this->owner_id === (string) $uid) {
+            return true;
+        }
+
+        return in_array((string) $uid, [(string) $this->created_by, (string) $this->updated_by], true);
+    }
+
+    public function isVisibleOnPublicFrontoffice(): bool
+    {
+        $statusValue = $this->resolveTicketStatusValue();
+        if ($statusValue !== '') {
+            $status = TicketStatusEnum::tryFrom($statusValue);
+            if ($status instanceof TicketStatusEnum && in_array($status, TicketStatusEnum::canViewByAll(), true)) {
+                return true;
+            }
+        }
+
+        return auth()->check() && $this->isOwnedByAuthenticatedUser();
     }
 
     /**
@@ -221,12 +273,7 @@ class Ticket extends XotBaseModel implements HasMedia
         }
 
         Assert::isInstanceOf($type, TicketTypeEnum::class, '['.__LINE__.']['.__FILE__.']');
-        $url = self::normalizeNullableText($type->getIcon());
-        if ($url === null) {
-            return [];
-        }
-        $url = Str::of($url)->after('heroicon-o-')->append('.svg')->toString();
-        $url = app(AssetAction::class)->execute('ui::svg/'.$url);
+        $url = app(ResolveTicketTypeMarkerPropertiesAction::class)->execute($type)['iconUrl'];
 
         return [
             'url' => $url,
@@ -368,14 +415,21 @@ class Ticket extends XotBaseModel implements HasMedia
         return $this->hasMany(TicketActivity::class, 'ticket_id', 'id');
     }
 
-    /*-- e' in comment
-    public function subscribers(): BelongsToMany
+    /**
+     * Users subscribed to ticket workflow notifications (pivot ticket_subscribers).
+     * Distinct from HasComments::subscribers() (comment notification subscriptions).
+     *
+     * @return BelongsToMany<User, $this>
+     */
+    public function ticketSubscribers(): BelongsToMany
     {
-        $user_class = XotData::make()->getUserClass();
+        /** @var class-string<User> $userClass */
+        $userClass = XotData::make()->getUserClass();
 
-        return $this->belongsToMany($user_class, 'ticket_subscribers', 'ticket_id', 'user_id');
+        return $this->belongsToMany($userClass, 'ticket_subscribers', 'ticket_id', 'user_id')
+            ->withTimestamps();
     }
-    */
+
     /**
      * @return HasMany<TicketRelation, $this>
      */
@@ -521,7 +575,13 @@ class Ticket extends XotBaseModel implements HasMedia
      */
     public function commentUrl(): string
     {
-        return '#';
+        $path = '/tickets/'.SafeStringCastAction::cast($this->getKey());
+        $localized = LaravelLocalization::getLocalizedURL(
+            LaravelLocalization::getCurrentLocale(),
+            $path
+        );
+
+        return is_string($localized) && $localized !== '' ? $localized : url($path);
     }
 
     /**
@@ -536,9 +596,13 @@ class Ticket extends XotBaseModel implements HasMedia
     }
 
     /**
+     * Commenti legacy admin (tabella ticket_comments).
+     *
+     * @deprecated Use comments() from Modules\Comment for new ticket discussions.
+     *
      * @return HasMany<TicketComment, $this>
      */
-    public function comments(): HasMany
+    public function ticketComments(): HasMany
     {
         return $this->hasMany(TicketComment::class);
     }
@@ -558,22 +622,12 @@ class Ticket extends XotBaseModel implements HasMedia
         }
     }
 
-    /**
-     * @return BelongsToMany<User, $this>
-     */
-    public function subscribers(): BelongsToMany
-    {
-        /** @var class-string<User> $userModel */
-        $userModel = config('auth.providers.users.model');
-
-        return $this->belongsToMany($userModel, 'ticket_subscribers')
-            ->withTimestamps();
-    }
-
     public function registerMediaCollections(): void
     {
         $this->addMediaCollection('attachments')
             ->acceptsMimeTypes(['image/jpeg', 'image/png', 'application/pdf']);
+        $this->addMediaCollection('ticket')
+            ->acceptsMimeTypes(['image/jpeg', 'image/png']);
         // ->maxFileSize(10 * 1024 * 1024); // 10MB
     }
 
@@ -652,7 +706,7 @@ class Ticket extends XotBaseModel implements HasMedia
      * @param  array<string, mixed>  $value
      * @return array<string, string|array<string, mixed>|null>
      */
-    private static function extractAddressComponents(array $value): array
+    public static function extractAddressComponents(array $value): array
     {
         $details = $value['address_components'] ?? $value['addressdetails'] ?? $value['address_details'] ?? null;
         if (! \is_array($details) || $details === []) {
@@ -683,7 +737,7 @@ class Ticket extends XotBaseModel implements HasMedia
         return $result;
     }
 
-    private static function normalizeCoordinateString(mixed $value): ?string
+    public static function normalizeCoordinateString(mixed $value): ?string
     {
         if ($value === null || $value === '') {
             return null;
@@ -707,6 +761,34 @@ class Ticket extends XotBaseModel implements HasMedia
 
         return $normalized !== '' ? $normalized : null;
     }
+
+    /**
+     * Mostra il prompt valutazione al proprietario se il ticket è risolto/chiuso e non ancora valutato.
+     */
+    public function needsCitizenRatingPrompt(): bool
+    {
+        if ($this->citizen_rating !== null) {
+            return false;
+        }
+
+        if (! auth()->check()) {
+            return false;
+        }
+
+        if (! $this->isOwnedByAuthenticatedUser()) {
+            return false;
+        }
+
+        $statusValue = $this->resolveTicketStatusValue();
+        if ($statusValue === '') {
+            return false;
+        }
+
+        $status = TicketStatusEnum::tryFrom($statusValue);
+
+        return $status === TicketStatusEnum::RESOLVED || $status === TicketStatusEnum::CLOSED;
+    }
+
     /*
     private static function hasTableColumn(string $column): bool
     {
@@ -729,7 +811,7 @@ class Ticket extends XotBaseModel implements HasMedia
      * @param  array<mixed>  $value
      * @return array<string, mixed>
      */
-    private static function stringKeyed(array $value): array
+    public static function stringKeyed(array $value): array
     {
         $normalized = [];
 

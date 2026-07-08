@@ -26,10 +26,3 @@
 </div>
 
 @endsection
-
-@section('js')
-    <script>
-        // Wizard initialization logic
-        // (Add Livewire event handlers if needed)
-    </script>
-@endsection

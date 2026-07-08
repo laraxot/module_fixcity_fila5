@@ -34,8 +34,6 @@ return new class extends XotBaseMigration
                 $table->foreignId('epic_id')->nullable(); // ->constrained('epics');
                 // $table->longText('attachments')->nullable();
                 $table->foreignId('sprint_id')->nullable(); // ->constrained('sprints');
-                $table->softDeletes();
-                $table->timestamps();
             }
         );
         // -- UPDATE --
