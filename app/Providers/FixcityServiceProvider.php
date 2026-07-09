@@ -16,6 +16,11 @@ class FixcityServiceProvider extends XotBaseServiceProvider
 
     protected string $module_ns = __NAMESPACE__;
 
+    public function register(): void
+    {
+        parent::register();
+    }
+
     public function boot(): void
     {
         parent::boot();

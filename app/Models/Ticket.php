@@ -26,7 +26,9 @@ use Modules\Xot\Actions\File\AssetAction;
 use Modules\Xot\Contracts\ProfileContract;
 use Modules\Xot\Contracts\UserContract;
 use Modules\Xot\Datas\XotData;
+use Modules\Fixcity\Models\Concerns\HasTicketRelations;
 use Modules\Fixcity\Models\Concerns\InteractsWithTicketCitizenRating;
+use Modules\Fixcity\Models\Concerns\NormalizesTicketLocation;
 use Modules\Comment\Models\Concerns\HasComments;
 use Modules\Comment\Models\CommentNotificationSubscription;
 use Modules\Comment\Models\Reaction;
@@ -153,7 +155,9 @@ class Ticket extends BaseModel implements Commentable, HasMedia
     use HasSlug;
     use HasStatuses;
     use InteractsWithMedia;
+    use HasTicketRelations;
     use InteractsWithTicketCitizenRating;
+    use NormalizesTicketLocation;
 
     protected $fillable = [
         'name',
@@ -318,185 +322,7 @@ class Ticket extends BaseModel implements Commentable, HasMedia
                 $ticket->status = TicketStatusEnum::PENDING;
             }
         });
-        /*
-        static::creating(function (Ticket $item) {
-            $project = Project::where('id', $item->project_id)->first();
-            $count = Ticket::where('project_id', $project->id)->count();
-            $order = $project->tickets?->last()?->order ?? -1;
-            $item->code = $project->ticket_prefix . '-' . ($count + 1);
-            $item->order = $order + 1;
-        });
-        */
-        // static::created(function (Ticket $item) {
-        //     Assert::notNull($item->sprint);
-        //     if ($item->sprint_id && $item->sprint->epic_id) {
-        //         Ticket::where('id', $item->id)->update(['epic_id' => $item->sprint->epic_id]);
-        //     }
-        //     foreach ($item->watchers ?? [] as $user) {
-        //         $user->notify(new TicketCreated($item));
-        //     }
-        // });
-
-        // static::updating(function (Ticket $item) {
-        //     $old = Ticket::firstWhere(['id' => $item->id]);
-
-        //     // Ticket activity based on status
-        //     $oldStatus = $old?->status_id;
-        //     if ($oldStatus != $item->status_id) {
-        //         Assert::notNull(auth()->user());
-        //         TicketActivity::create([
-        //             'ticket_id' => $item->id,
-        //             'old_status_id' => $oldStatus,
-        //             'new_status_id' => $item->status_id,
-        //             'user_id' => authId(),
-        //         ]);
-        //         /*
-        //         foreach ($item->watchers as $user) {
-        //             $user->notify(new TicketStatusUpdated($item));
-        //         }
-        //             */
-        //     }
-
-        //     // Ticket sprint update
-        //     $oldSprint = $old?->sprint_id;
-        //     if ($oldSprint && ! $item->sprint_id) {
-        //         Ticket::where('id', $item->id)->update(['epic_id' => null]);
-        //     } elseif ($item->sprint_id && $item->sprint?->epic_id) {
-        //         Ticket::where('id', $item->id)->update(['epic_id' => $item->sprint->epic_id]);
-        //     }
-        // });
     }
-
-    /**
-     * @return BelongsTo<Model&UserContract, $this>
-     */
-    public function owner(): BelongsTo
-    {
-        $user_class = XotData::make()->getUserClass();
-
-        return $this->belongsTo($user_class, 'owner_id', 'id');
-    }
-
-    /**
-     * @return BelongsTo<Model&UserContract, $this>
-     */
-    public function responsible(): BelongsTo
-    {
-        $user_class = XotData::make()->getUserClass();
-
-        return $this->belongsTo($user_class, 'responsible_id', 'id');
-    }
-
-    // public function status(): BelongsTo
-    // {
-    //     return $this->belongsTo(TicketStatus::class, 'status_id', 'id')->withTrashed();
-    // }
-
-    // public function project(): BelongsTo
-    // {
-    //     return $this->belongsTo(Project::class, 'project_id', 'id')->withTrashed();
-    // }
-
-    // public function type(): BelongsTo
-    // {
-    //    return $this->belongsTo(TicketType::class, 'type_id', 'id')->withTrashed();
-    // }
-
-    // public function priority(): BelongsTo
-    // {
-    //    return $this->belongsTo(TicketPriority::class, 'priority_id', 'id')->withTrashed();
-    // }
-
-    /**
-     * @return HasMany<TicketActivity, $this>
-     */
-    public function activities(): HasMany
-    {
-        return $this->hasMany(TicketActivity::class, 'ticket_id', 'id');
-    }
-
-    /**
-     * Users subscribed to ticket workflow notifications (pivot ticket_subscribers).
-     * Distinct from HasComments::subscribers() (comment notification subscriptions).
-     *
-     * @return BelongsToMany<User, $this>
-     */
-    public function ticketSubscribers(): BelongsToMany
-    {
-        /** @var class-string<User> $userClass */
-        $userClass = XotData::make()->getUserClass();
-
-        return $this->belongsToMany($userClass, 'ticket_subscribers', 'ticket_id', 'user_id')
-            ->withTimestamps();
-    }
-
-    /**
-     * @return HasMany<TicketRelation, $this>
-     */
-    public function relations(): HasMany
-    {
-        return $this->hasMany(TicketRelation::class, 'ticket_id', 'id');
-    }
-
-    /**
-     * @return HasMany<TicketHour, $this>
-     */
-    public function hours(): HasMany
-    {
-        return $this->hasMany(TicketHour::class, 'ticket_id', 'id');
-    }
-
-    // public function epic(): BelongsTo
-    // {
-    //     return $this->belongsTo(Epic::class, 'epic_id', 'id');
-    // }
-
-    // public function sprint(): BelongsTo
-    // {
-    //     return $this->belongsTo(Sprint::class, 'sprint_id', 'id');
-    // }
-
-    // public function sprints(): BelongsTo
-    // {
-    //     return $this->belongsTo(Sprint::class, 'sprint_id', 'id');
-    // }
-
-    /*
-    public function watchers(): Attribute
-    {
-        return new Attribute(
-            get: function () {
-                $users = $this->project->profiles;
-                $users->push($this->owner);
-                if ($this->responsible) {
-                    $users->push($this->responsible);
-                }
-
-                return $users->unique('id');
-            }
-        );
-    }
-    */
-
-    // public function totalLoggedHours(): Attribute
-    // {
-    //     return new Attribute(
-    //         get: function () {
-    //             $seconds = $this->hours->sum('value') * 3600;
-
-    //             return CarbonInterval::seconds($seconds)->cascade()->forHumans();
-    //         }
-    //     );
-    // }
-
-    // public function totalLoggedSeconds(): Attribute
-    // {
-    //     return new Attribute(
-    //         get: function () {
-    //             return $this->hours->sum('value') * 3600;
-    //         }
-    //     );
-    // }
 
     /**
      * @return Attribute<float|int, never>
@@ -524,41 +350,6 @@ class Ticket extends BaseModel implements Commentable, HasMedia
             },
         );
     }
-    /*
-    public function estimationInSeconds(): Attribute
-    {
-        return new Attribute(
-            get: function(): ?int {
-                if (! $this->estimation) {
-                    return null;
-                }
-
-                return $this->estimation * 3600;
-            }
-        );
-    }
-    */
-
-    /*
-    public function estimationProgress(): Attribute
-    {
-        return new Attribute(
-            get: function(): float {
-                return (($this->totalLoggedSeconds ?? 0) / ($this->estimationInSeconds ?? 1)) * 100;
-            }
-        );
-    }
-    */
-
-    /*
-    public function completudePercentage(): Attribute
-    {
-        return new Attribute(
-            get: fn () => $this->estimationProgress
-        );
-    }
-
-    */
 
     /**
      * This string will be used in notifications on what a new comment
@@ -585,29 +376,6 @@ class Ticket extends BaseModel implements Commentable, HasMedia
     }
 
     /**
-     * @return BelongsTo<User, $this>
-     */
-    public function assignee(): BelongsTo
-    {
-        /** @var class-string<User> $userModel */
-        $userModel = config('auth.providers.users.model');
-
-        return $this->belongsTo($userModel, 'assignee_id');
-    }
-
-    /**
-     * Commenti legacy admin (tabella ticket_comments).
-     *
-     * @deprecated Use comments() from Modules\Comment for new ticket discussions.
-     *
-     * @return HasMany<TicketComment, $this>
-     */
-    public function ticketComments(): HasMany
-    {
-        return $this->hasMany(TicketComment::class);
-    }
-
-    /**
      * Set the status of the ticket.
      */
     public function setStatus(string|TicketStatusEnum $status): void
@@ -629,137 +397,6 @@ class Ticket extends BaseModel implements Commentable, HasMedia
         $this->addMediaCollection('ticket')
             ->acceptsMimeTypes(['image/jpeg', 'image/png']);
         // ->maxFileSize(10 * 1024 * 1024); // 10MB
-    }
-
-    /*
-     * Canonical source of truth is the JSON `location` payload.
-     * Legacy `latitude` / `longitude` columns are mirrored for backward compatibility.
-     *
-     * @return Attribute<array<string, mixed>, array<string, mixed>>
-
-    protected function location(): Attribute
-    {
-        return Attribute::make(
-            get: function (mixed $value, array $attributes): array {
-                $location = [];
-
-                if (\is_string($value) && $value !== '') {
-                    $decoded = \json_decode($value, true);
-                    if (\is_array($decoded)) {
-                        $location = $decoded;
-                    }
-                } elseif (\is_array($value)) {
-                    $location = $value;
-                }
-
-                $location['lat'] = self::normalizeCoordinateString($location['lat'] ?? $location['latitude'] ?? $attributes['latitude'] ?? null);
-                $location['lng'] = self::normalizeCoordinateString($location['lng'] ?? $location['longitude'] ?? $attributes['longitude'] ?? null);
-                $location['address'] = self::normalizeText($location['address'] ?? $location['display_name'] ?? null);
-                $location['provider'] = self::normalizeNullableText($location['provider'] ?? null);
-
-                return array_filter(
-                    $location,
-                    static fn (mixed $item): bool => $item !== null && $item !== ''
-                );
-            },
-            set: function (mixed $value): array {
-                if (! is_array($value)) {
-                    return [];
-                }
-
-                $location = $value;
-                $location['lat'] = self::normalizeCoordinateString($value['lat'] ?? $value['latitude'] ?? null);
-                $location['lng'] = self::normalizeCoordinateString($value['lng'] ?? $value['longitude'] ?? null);
-                $location['address'] = self::normalizeNullableText($value['address'] ?? $value['display_name'] ?? null);
-                $location['provider'] = self::normalizeNullableText($value['provider'] ?? null);
-
-                $location = array_merge($location, self::extractAddressComponents(self::stringKeyed($value)));
-
-                unset($location['latitude'], $location['longitude'], $location['address_components'], $location['addressdetails']);
-
-                $location = array_filter(
-                    $location,
-                    static fn (mixed $item): bool => $item !== null && $item !== ''
-                );
-
-                $payload = [];
-
-                if (self::hasTableColumn('latitude')) {
-                    $payload['latitude'] = $location['lat'] ?? null;
-                }
-
-                if (self::hasTableColumn('longitude')) {
-                    $payload['longitude'] = $location['lng'] ?? null;
-                }
-
-                if (self::hasTableColumn('location')) {
-                    $payload['location'] = $location !== [] ? \json_encode($location) : null;
-                }
-
-                return $payload;
-            },
-        );
-    }
-        */
-
-    /**
-     * @param  array<string, mixed>  $value
-     * @return array<string, string|array<string, mixed>|null>
-     */
-    public static function extractAddressComponents(array $value): array
-    {
-        $details = $value['address_components'] ?? $value['addressdetails'] ?? $value['address_details'] ?? null;
-        if (! \is_array($details) || $details === []) {
-            return [];
-        }
-
-        /** @var array<string, mixed> $filtered */
-        $filtered = array_filter([
-            'street' => self::normalizeNullableText($value['street'] ?? $details['street'] ?? null),
-            'street_number' => self::normalizeNullableText($value['street_number'] ?? $details['house_number'] ?? null),
-            'zip' => self::normalizeNullableText($value['zip'] ?? $value['postcode'] ?? $details['postcode'] ?? null),
-            'postcode' => self::normalizeNullableText($value['postcode'] ?? $details['postcode'] ?? null),
-            'city' => self::normalizeNullableText($value['city'] ?? $details['city'] ?? $details['village'] ?? $details['municipality'] ?? null),
-            'province' => self::normalizeNullableText($value['province'] ?? $details['county'] ?? $details['state_district'] ?? null),
-            'state' => self::normalizeNullableText($value['state'] ?? $details['state'] ?? $details['region'] ?? null),
-            'country' => self::normalizeNullableText($value['country'] ?? $details['country'] ?? null),
-            'country_code' => self::normalizeNullableText($value['country_code'] ?? $details['country_code'] ?? null),
-            'suburb' => self::normalizeNullableText($value['suburb'] ?? $details['suburb'] ?? $details['neighbourhood'] ?? null),
-            'address_details' => $details,
-        ], static fn (mixed $item): bool => $item !== null && $item !== '');
-
-        /** @var array<string, string|null> $result */
-        $result = [];
-        foreach ($filtered as $key => $value) {
-            $result[$key] = is_string($value) ? $value : null;
-        }
-
-        return $result;
-    }
-
-    public static function normalizeCoordinateString(mixed $value): ?string
-    {
-        if ($value === null || $value === '') {
-            return null;
-        }
-
-        if (\is_int($value) || \is_float($value) || (\is_string($value) && is_numeric($value))) {
-            return (string) $value;
-        }
-
-        return null;
-    }
-
-    private static function normalizeText(mixed $value): string
-    {
-        return \is_string($value) ? trim($value) : '';
-    }
-
-    private static function normalizeNullableText(mixed $value): ?string
-    {
-        $normalized = self::normalizeText($value);
-
-        return $normalized !== '' ? $normalized : null;
     }
 
     /**
@@ -787,40 +424,5 @@ class Ticket extends BaseModel implements Commentable, HasMedia
         $status = TicketStatusEnum::tryFrom($statusValue);
 
         return $status === TicketStatusEnum::RESOLVED || $status === TicketStatusEnum::CLOSED;
-    }
-
-    /*
-    private static function hasTableColumn(string $column): bool
-    {
-        $model = new self();
-        $connection = (string) $model->getConnectionName();
-        $table = $model->getTable();
-        $cacheKey = $connection.'|'.$table.'|'.$column;
-
-        if (array_key_exists($cacheKey, self::$columnAvailabilityCache)) {
-            return self::$columnAvailabilityCache[$cacheKey];
-        }
-
-        self::$columnAvailabilityCache[$cacheKey] = Schema::connection($connection)->hasColumn($table, $column);
-
-        return self::$columnAvailabilityCache[$cacheKey];
-    }
-        */
-
-    /**
-     * @param  array<mixed>  $value
-     * @return array<string, mixed>
-     */
-    public static function stringKeyed(array $value): array
-    {
-        $normalized = [];
-
-        foreach ($value as $key => $item) {
-            if (\is_string($key)) {
-                $normalized[$key] = $item;
-            }
-        }
-
-        return $normalized;
     }
 }

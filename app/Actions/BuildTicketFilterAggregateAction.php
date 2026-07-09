@@ -64,16 +64,7 @@ class BuildTicketFilterAggregateAction
                 $typesMap[$typeValue] = $typeMeta;
             }
 
-            $statusMeta = $this->resolveStatusMeta($typedProps);
-            if ($statusMeta !== null) {
-                $statusValue = SafeStringCastAction::cast($statusMeta['value'] ?? '');
-                if ($statusValue !== '') {
-                    $statusCounts[$statusValue] = ($statusCounts[$statusValue] ?? 0) + 1;
-                    if (! isset($statusesMap[$statusValue])) {
-                        $statusesMap[$statusValue] = $statusMeta;
-                    }
-                }
-            }
+            $this->accumulateStatusMeta($typedProps, $statusCounts, $statusesMap);
         }
 
         return [
@@ -84,6 +75,29 @@ class BuildTicketFilterAggregateAction
             'uniqueStatuses' => $this->sortStatusesByEnumOrder($statusesMap),
             'totalCount' => SafeIntCastAction::cast($geoJson['total'] ?? count($features)),
         ];
+    }
+
+    /**
+     * @param  array<string, mixed>  $props
+     * @param  array<string, int>  $statusCounts
+     * @param  array<string, array<string, mixed>>  $statusesMap
+     */
+    private function accumulateStatusMeta(array $props, array &$statusCounts, array &$statusesMap): void
+    {
+        $statusMeta = $this->resolveStatusMeta($props);
+        if ($statusMeta === null) {
+            return;
+        }
+
+        $statusValue = SafeStringCastAction::cast($statusMeta['value'] ?? '');
+        if ($statusValue === '') {
+            return;
+        }
+
+        $statusCounts[$statusValue] = ($statusCounts[$statusValue] ?? 0) + 1;
+        if (! isset($statusesMap[$statusValue])) {
+            $statusesMap[$statusValue] = $statusMeta;
+        }
     }
 
     /**

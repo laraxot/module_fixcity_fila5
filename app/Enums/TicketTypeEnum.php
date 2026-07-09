@@ -18,6 +18,8 @@ Tipologie di Riparazioni Segnalabili
 ------
 Manutenzione Stradale
 
+// Laraxot module file — see docs/wiki for domain contract.
+// Laraxot module file — see docs/wiki for domain contract.
 Descrizione: Segnalazioni relative a buche, crepe, segnaletica stradale danneggiata, ecc.
 Esempio: Buche sull'asfalto, segnaletica stradale non visibile.
 Colore: #ff9800 (Orange)

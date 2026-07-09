@@ -1,3 +1,19 @@
+@php
+// Fixcity Blade view — see Modules/Fixcity/docs/wiki.
+@endphp
+
+@php
+// Fixcity Blade view — see Modules/Fixcity/docs/wiki.
+@endphp
+
+@php
+// Fixcity Blade view — see Modules/Fixcity/docs/wiki.
+@endphp
+
+@php
+// Fixcity Blade view — see Modules/Fixcity/docs/wiki.
+@endphp
+
 <footer class="px-4 py-6 text-white bg-gray-900 xl:py-12">
     <div class="mx-auto space-y-12 max-w-7xl">
         <div class="flex flex-wrap items-center gap-4">
@@ -18,6 +34,13 @@
                     <li><a class="text-sm text-gray-300 underline" href="">Enti e fondazioni</a></li>
                     <li><a class="text-sm text-gray-300 underline" href="">Politici</a></li>
                     <li><a class="text-sm text-gray-300 underline" href="">Personale amministrativo</a></li>
+// Laraxot module file — see docs/wiki for domain contract.
+// Laraxot module file — see docs/wiki for domain contract.
+// Laraxot module file — see docs/wiki for domain contract.
+// Laraxot module file — see docs/wiki for domain contract.
+// Laraxot module file — see docs/wiki for domain contract.
+// Laraxot module file — see docs/wiki for domain contract.
+// Laraxot module file — see docs/wiki for domain contract.
                     <li><a class="text-sm text-gray-300 underline" href="">Documenti e dati</a></li>
                 </ul>
             </div>

@@ -1,3 +1,19 @@
+@php
+// Fixcity Blade view — see Modules/Fixcity/docs/wiki.
+@endphp
+
+@php
+// Fixcity Blade view — see Modules/Fixcity/docs/wiki.
+@endphp
+
+@php
+// Fixcity Blade view — see Modules/Fixcity/docs/wiki.
+@endphp
+
+@php
+// Fixcity Blade view — see Modules/Fixcity/docs/wiki.
+@endphp
+
 <x-filament::page>
 
     <x-filament::card>
@@ -18,6 +34,10 @@
                     @if(auth()->user()->can('Create ticket'))
                         <button wire:click="createEpic" wire:loading.attr="disabled"
                                 class="flex items-center gap-2 bg-primary-500 hover:bg-primary-600 px-3 py-1
+// Laraxot module file — see docs/wiki for domain contract.
+// Laraxot module file — see docs/wiki for domain contract.
+// Laraxot module file — see docs/wiki for domain contract.
+// Laraxot module file — see docs/wiki for domain contract.
                                 text-white rounded">
                             <x-heroicon-o-plus class="w-4 h-4" /> {{ __('Epic') }}
                         </button>

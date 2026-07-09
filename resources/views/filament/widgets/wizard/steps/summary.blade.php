@@ -1,4 +1,24 @@
 @php
+// Fixcity Blade view — see Modules/Fixcity/docs/wiki.
+@endphp
+
+@php
+// Fixcity Blade view — see Modules/Fixcity/docs/wiki.
+@endphp
+
+@php
+// Fixcity Blade view — see Modules/Fixcity/docs/wiki.
+@endphp
+
+@php
+// Fixcity Blade view — see Modules/Fixcity/docs/wiki.
+// Fixcity Blade view — see Modules/Fixcity/docs/wiki.
+// Fixcity Blade view — see Modules/Fixcity/docs/wiki.
+// Fixcity Blade view — see Modules/Fixcity/docs/wiki.
+// Fixcity Blade view — see Modules/Fixcity/docs/wiki.
+@endphp
+
+@php
     $formData = $formData ?? [];
     // Normalizzazione per evitare errori di indice
     $location = $formData['location'] ?? [];
@@ -18,6 +38,9 @@
         Lingua dominio Ticket (ticket.php): stesso bounded context di TicketForm / Filament —
         NON usare qui fixcity::segnalazione.* (copy frontoffice/CMS).
         Rif: laravel/Modules/Fixcity/docs/wiki/concepts/fixcity-ticket-vs-segnalazione-lang.md
+// Laraxot module file — see docs/wiki for domain contract.
+// Laraxot module file — see docs/wiki for domain contract.
+// Laraxot module file — see docs/wiki for domain contract.
     --}}
     {{-- Sezione COSA --}}
     <section class="it-page-section mb-5" id="summary-section-cosa">

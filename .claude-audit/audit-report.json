@@ -1,0 +1,95 @@
+{
+  "version": "0.2.2",
+  "timestamp": "2026-07-09T17:06:51.046Z",
+  "project": {
+    "name": "Fixcity",
+    "path": "/var/www/_bases/base_fixcity_fila5/laravel/Modules/Fixcity",
+    "languages": {
+      "Markdown": 306,
+      "JSON": 103,
+      "XML": 1,
+      "JavaScript": 18,
+      "PHP": 851,
+      "SQL": 1,
+      "CSS": 1,
+      "SCSS": 5
+    },
+    "frameworks": [],
+    "totalFiles": 1286,
+    "totalLines": 124946,
+    "hasTests": true,
+    "hasDependencyFile": true,
+    "dependencyFile": "package.json",
+    "dependencies": {
+      "axios": "^1.17.0",
+      "canvas": "^3.2.3",
+      "laravel-vite-plugin": "^1.2.0",
+      "pixelmatch": "^7.2.0",
+      "postcss": "^8.3.7",
+      "sass": "^1.69.5",
+      "vite": "^6.4.2"
+    },
+    "testFrameworks": [],
+    "packageManager": "npm"
+  },
+  "overallScore": 80,
+  "overallGrade": "B",
+  "categories": [
+    {
+      "category": "security",
+      "score": 80,
+      "grade": "B",
+      "findings": [],
+      "summary": ""
+    },
+    {
+      "category": "quality",
+      "score": 80,
+      "grade": "B",
+      "findings": [],
+      "summary": ""
+    },
+    {
+      "category": "performance",
+      "score": 80,
+      "grade": "B",
+      "findings": [],
+      "summary": ""
+    },
+    {
+      "category": "architecture",
+      "score": 80,
+      "grade": "B",
+      "findings": [],
+      "summary": ""
+    },
+    {
+      "category": "dependencies",
+      "score": 80,
+      "grade": "B",
+      "findings": [],
+      "summary": ""
+    },
+    {
+      "category": "testing",
+      "score": 80,
+      "grade": "B",
+      "findings": [],
+      "summary": ""
+    },
+    {
+      "category": "documentation",
+      "score": 80,
+      "grade": "B",
+      "findings": [],
+      "summary": ""
+    }
+  ],
+  "allFindings": [],
+  "criticalCount": 0,
+  "highCount": 0,
+  "mediumCount": 0,
+  "lowCount": 0,
+  "aiPowered": false,
+  "durationMs": 638
+}

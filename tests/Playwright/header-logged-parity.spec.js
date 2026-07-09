@@ -1,9 +1,5 @@
 import { test, expect } from '@playwright/test';
-
-const TEST_USER = {
-    email: 'test-header@fixcity.test',
-    password: 'testpassword123',
-};
+import { requirePlaywrightCredentials } from './support/credentials.js';
 
 const viewports = [
     { name: 'desktop', width: 1280, height: 900 },
@@ -46,6 +42,8 @@ test.describe('Header Logged Parity', () => {
 
     for (const vp of viewports) {
         test(`logged state ${vp.name}`, async ({ page }) => {
+            const TEST_USER = requirePlaywrightCredentials();
+
             await page.setViewportSize({ width: vp.width, height: vp.height });
 
             // Login via UI
@@ -87,6 +85,8 @@ test.describe('Header Logged Parity', () => {
 
     for (const vp of viewports) {
         test(`logged dropdown open ${vp.name}`, async ({ page }) => {
+            const TEST_USER = requirePlaywrightCredentials();
+
             await page.setViewportSize({ width: vp.width, height: vp.height });
 
             // Login
