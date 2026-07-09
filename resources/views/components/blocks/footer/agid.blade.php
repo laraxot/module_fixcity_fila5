@@ -14,6 +14,26 @@
 // Fixcity Blade view — see Modules/Fixcity/docs/wiki.
 @endphp
 
+@php
+// Fixcity Blade view — see Modules/Fixcity/docs/wiki.
+@endphp
+
+@php
+// Fixcity Blade view — see Modules/Fixcity/docs/wiki.
+@endphp
+
+@php
+// Fixcity Blade view — see Modules/Fixcity/docs/wiki.
+@endphp
+
+@php
+// Fixcity Blade view — see Modules/Fixcity/docs/wiki.
+@endphp
+
+@php
+// Fixcity Blade view — see Modules/Fixcity/docs/wiki.
+@endphp
+
 <footer class="px-4 py-6 text-white bg-gray-900 xl:py-12">
     <div class="mx-auto space-y-12 max-w-7xl">
         <div class="flex flex-wrap items-center gap-4">
