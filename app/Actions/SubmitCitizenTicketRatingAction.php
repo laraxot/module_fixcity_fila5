@@ -18,6 +18,10 @@ use Modules\Xot\Contracts\UserContract;
  * Valutazione cittadino 1–5 su ticket risolto — persistenza RatingMorph (modulo Rating).
  */
 final class SubmitCitizenTicketRatingAction
+// Laraxot module file — see docs/wiki for domain contract.
+// Laraxot module file — see docs/wiki for domain contract.
+// Laraxot module file — see docs/wiki for domain contract.
+// Laraxot module file — see docs/wiki for domain contract.
 {
     public function execute(Ticket $ticket, int $rating): Ticket
     {

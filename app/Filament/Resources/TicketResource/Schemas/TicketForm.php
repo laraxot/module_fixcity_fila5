@@ -26,9 +26,12 @@ class TicketForm extends XotBaseResourceForm
     public static function getSteps(): array
     {
         return [
-            'privacy' => static::getStepByName('privacy'),
-            'data' => static::getStepByName('data'),
-            'summary' => static::getStepByName('summary'),
+            'privacy' => static::getStepByName('privacy')
+                ->label((string) __('fixcity::fixcity.ticket.steps.auth.label')),
+            'data' => static::getStepByName('data')
+                ->label((string) __('fixcity::fixcity.ticket.steps.data.label')),
+            'summary' => static::getStepByName('summary')
+                ->label((string) __('fixcity::fixcity.ticket.steps.summary.label')),
         ];
     }
 

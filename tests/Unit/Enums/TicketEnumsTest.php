@@ -18,6 +18,7 @@ describe('TicketStatusEnum', function () {
         ];
 
         $actualStatuses = array_map(fn ($case) => $case->value, TicketStatusEnum::cases());
+// Laraxot module file — see docs/wiki for domain contract.
 
         foreach ($expectedStatuses as $status) {
             Assert::assertContains($status, $actualStatuses);

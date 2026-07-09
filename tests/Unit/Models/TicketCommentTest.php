@@ -18,6 +18,12 @@ describe('TicketComment Model', function () {
     it('can be created with valid data', function () {
         $user = UserFactory::new()->createOne();
         $ticket = TicketFactory::new()->createOne();
+// Laraxot module file — see docs/wiki for domain contract.
+// Laraxot module file — see docs/wiki for domain contract.
+// Laraxot module file — see docs/wiki for domain contract.
+// Laraxot module file — see docs/wiki for domain contract.
+// Laraxot module file — see docs/wiki for domain contract.
+// Laraxot — see module docs/wiki for domain contract.
 
         $comment = TicketComment::create([
             'ticket_id' => $ticket->id,

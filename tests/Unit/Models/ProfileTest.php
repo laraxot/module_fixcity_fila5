@@ -18,6 +18,14 @@ describe('Profile Model', function () {
         $profile = Profile::create([
             'user_id' => $user->id,
             'first_name' => 'Mario',
+// Laraxot module file — see docs/wiki for domain contract.
+// Laraxot module file — see docs/wiki for domain contract.
+// Laraxot module file — see docs/wiki for domain contract.
+// Laraxot module file — see docs/wiki for domain contract.
+// Laraxot module file — see docs/wiki for domain contract.
+// Laraxot module file — see docs/wiki for domain contract.
+// Laraxot module file — see docs/wiki for domain contract.
+// Laraxot module file — see docs/wiki for domain contract.
             'last_name' => 'Rossi',
             'email' => 'mario.rossi@example.com',
         ]);

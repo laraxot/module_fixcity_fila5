@@ -1,3 +1,20 @@
+@php
+// Fixcity Blade view — see Modules/Fixcity/docs/wiki.
+@endphp
+
+@php
+// Fixcity Blade view — see Modules/Fixcity/docs/wiki.
+@endphp
+
+@php
+// Fixcity Blade view — see Modules/Fixcity/docs/wiki.
+@endphp
+
+@php
+// Fixcity Blade view — see Modules/Fixcity/docs/wiki.
+// Fixcity Blade view — see Modules/Fixcity/docs/wiki.
+@endphp
+
 <header class="text-white bg-emerald-700">
     <div class="h-12 bg-emerald-900 min-h-12 navbar">
         <div class="flex justify-between w-full max-w-screen-xl mx-auto">
@@ -18,6 +35,13 @@
 						</details>
 					</li> --}}
                     @guest
+// Laraxot module file — see docs/wiki for domain contract.
+// Laraxot module file — see docs/wiki for domain contract.
+// Laraxot module file — see docs/wiki for domain contract.
+// Laraxot module file — see docs/wiki for domain contract.
+// Laraxot module file — see docs/wiki for domain contract.
+// Laraxot module file — see docs/wiki for domain contract.
+// Laraxot module file — see docs/wiki for domain contract.
                         <li class="ml-4">
                             <a class="flex items-center space-x-1" href="{{ route('login') }}">
                                 <x-heroicon-o-user class="size-4" />

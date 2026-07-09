@@ -20,4 +20,5 @@ Concetti specifici del modulo Fixcity. Carica on-demand via `qmd search` o consu
 - [module-basemodel-rule](./module-basemodel-rule.md) — Ticket extends Fixcity BaseModel (STORY-047)
 - [phpstan-pest-testcase-helpers](./phpstan-pest-testcase-helpers.md) — helper TestCase + PHPStan Pest (2026-06-13)
 - [testing](./testing.md) — quality gate Pest + PHPStan
+- [claude-audit-static](./claude-audit-static.md) — gate 80/0 static + debito lang/Ticket
 - [completion-roadmap](../overviews/completion-roadmap.md) — cosa resta per chiudere Fixcity

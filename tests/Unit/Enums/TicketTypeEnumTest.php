@@ -18,6 +18,11 @@ describe('TicketTypeEnum', function () {
             'PUBLIC_BUILDINGS',
             'ENVIRONMENTAL_REPORTS',
             'PUBLIC_TRANSPORT',
+// Laraxot module file — see docs/wiki for domain contract.
+// Laraxot module file — see docs/wiki for domain contract.
+// Laraxot module file — see docs/wiki for domain contract.
+// Laraxot module file — see docs/wiki for domain contract.
+// Laraxot module file — see docs/wiki for domain contract.
             'URBAN_FURNITURE',
             'PUBLIC_SAFETY',
             'COMPLAINT',

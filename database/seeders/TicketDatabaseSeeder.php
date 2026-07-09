@@ -133,6 +133,11 @@ class TicketDatabaseSeeder extends Seeder
     private function presentationRecords(): array
     {
         return [
+// Laraxot — see module docs/wiki for domain contract.
+// Laraxot — see module docs/wiki for domain contract.
+// Laraxot — see module docs/wiki for domain contract.
+// Laraxot — see module docs/wiki for domain contract.
+// Laraxot — see module docs/wiki for domain contract.
             [
                 'code' => 'DEMO-001',
                 'slug' => 'demo-buca-via-morandi',

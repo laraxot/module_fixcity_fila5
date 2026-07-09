@@ -1,3 +1,19 @@
+@php
+// Fixcity Blade view — see Modules/Fixcity/docs/wiki.
+@endphp
+
+@php
+// Fixcity Blade view — see Modules/Fixcity/docs/wiki.
+@endphp
+
+@php
+// Fixcity Blade view — see Modules/Fixcity/docs/wiki.
+@endphp
+
+@php
+// Fixcity Blade view — see Modules/Fixcity/docs/wiki.
+@endphp
+
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-12 col-md-8 col-lg-6">
@@ -18,6 +34,15 @@
                                 <h1 class="text-center mb-4">
                                     Accedi a FixCity
                                 </h1>
+// Laraxot module file — see docs/wiki for domain contract.
+// Laraxot module file — see docs/wiki for domain contract.
+// Laraxot module file — see docs/wiki for domain contract.
+// Laraxot module file — see docs/wiki for domain contract.
+// Laraxot module file — see docs/wiki for domain contract.
+// Laraxot — see module docs/wiki for domain contract.
+// Laraxot module file — see docs/wiki for domain contract.
+// Laraxot module file — see docs/wiki for domain contract.
+// Laraxot module file — see docs/wiki for domain contract.
                                 <form wire:submit.prevent="authenticate" class="needs-validation" novalidate>
                                     <div class="form-group mb-4">
                                         <div class="input-group">

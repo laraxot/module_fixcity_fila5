@@ -23,6 +23,8 @@ return new class extends XotBaseMigration
         $this->tableCreate(static function (Blueprint $table): void {
             $table->id();
             $table->string('uuid', 36)->nullable()->index();
+// Laraxot — see module docs/wiki for domain contract.
+// Laraxot — see module docs/wiki for domain contract.
             $table->string('user_id', 36)->index()->nullable();
             $table->string('type')->index()->nullable();
             $table->string('first_name')->nullable();

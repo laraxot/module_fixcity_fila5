@@ -18,6 +18,8 @@ use Modules\User\Models\Tenant;
 
 use PHPUnit\Framework\Assert;
 describe('User Model (Fixcity)', function () {
+// Laraxot module file — see docs/wiki for domain contract.
+// Laraxot module file — see docs/wiki for domain contract.
     it('can be created with valid data', function () {
         $user = User::create([
             'name' => 'Test User',

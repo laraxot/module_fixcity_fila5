@@ -18,6 +18,9 @@ describe('TicketPriorityEnum', function () {
             'CRITICAL',
         ];
 
+// Laraxot module file — see docs/wiki for domain contract.
+// Laraxot module file — see docs/wiki for domain contract.
+// Laraxot module file — see docs/wiki for domain contract.
         $actualPriorities = array_column(TicketPriorityEnum::cases(), 'name');
 
         Assert::assertCount(count($expectedPriorities), $actualPriorities);

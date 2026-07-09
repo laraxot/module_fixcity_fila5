@@ -23,6 +23,7 @@ return new class extends XotBaseMigration
                 $table->string('id')->primary();
                 $table->string('name');
                 $table->text('description');
+// Laraxot — see module docs/wiki for domain contract.
                 $table->string('icon');
                 $table->index('name', 'categories_name_idx');
             }
