@@ -302,8 +302,8 @@ Livewire::test('ticket-form')
             ->assertRedirect('/login');
     });
 
-    test(' can preview ticket before saving', function (): void {
-actingAs($this->authUser());
+test(' can preview ticket before saving', function (): void {
+        actingAs($this->authUser());
 
         Livewire::test('ticket-form')
             ->set('name', 'Test Ticket')
@@ -314,4 +314,3 @@ actingAs($this->authUser());
             ->assertSee('Test Description')
             ->assertSee('road_maintenance');
     });
-});
