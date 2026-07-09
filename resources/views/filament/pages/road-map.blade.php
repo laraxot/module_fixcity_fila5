@@ -34,6 +34,22 @@
 // Fixcity Blade view — see Modules/Fixcity/docs/wiki.
 @endphp
 
+@php
+// Fixcity Blade view — see Modules/Fixcity/docs/wiki.
+@endphp
+
+@php
+// Fixcity Blade view — see Modules/Fixcity/docs/wiki.
+@endphp
+
+@php
+// Fixcity Blade view — see Modules/Fixcity/docs/wiki.
+@endphp
+
+@php
+// Fixcity Blade view — see Modules/Fixcity/docs/wiki.
+@endphp
+
 <x-filament::page>
 
     <x-filament::card>

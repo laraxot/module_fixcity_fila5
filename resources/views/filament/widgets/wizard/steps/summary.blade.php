@@ -32,6 +32,22 @@
 
 @php
 // Fixcity Blade view — see Modules/Fixcity/docs/wiki.
+@endphp
+
+@php
+// Fixcity Blade view — see Modules/Fixcity/docs/wiki.
+@endphp
+
+@php
+// Fixcity Blade view — see Modules/Fixcity/docs/wiki.
+@endphp
+
+@php
+// Fixcity Blade view — see Modules/Fixcity/docs/wiki.
+@endphp
+
+@php
+// Fixcity Blade view — see Modules/Fixcity/docs/wiki.
 // Fixcity Blade view — see Modules/Fixcity/docs/wiki.
 // Fixcity Blade view — see Modules/Fixcity/docs/wiki.
 // Fixcity Blade view — see Modules/Fixcity/docs/wiki.
