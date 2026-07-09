@@ -16,3 +16,4 @@ docs/archive/agentdb.rvf
 !tests/**
 !audit-coverage/
 !audit-coverage/**
+audit-coverage/
