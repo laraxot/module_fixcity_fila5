@@ -1,6 +1,6 @@
 {
   "version": "0.2.2",
-  "timestamp": "2026-07-09T17:06:51.046Z",
+  "timestamp": "2026-07-09T19:16:44.627Z",
   "project": {
     "name": "Fixcity",
     "path": "/var/www/_bases/base_fixcity_fila5/laravel/Modules/Fixcity",
@@ -9,14 +9,14 @@
       "JSON": 103,
       "XML": 1,
       "JavaScript": 18,
-      "PHP": 851,
+      "PHP": 936,
       "SQL": 1,
       "CSS": 1,
       "SCSS": 5
     },
     "frameworks": [],
-    "totalFiles": 1286,
-    "totalLines": 124946,
+    "totalFiles": 1371,
+    "totalLines": 126325,
     "hasTests": true,
     "hasDependencyFile": true,
     "dependencyFile": "package.json",
@@ -91,5 +91,5 @@
   "mediumCount": 0,
   "lowCount": 0,
   "aiPowered": false,
-  "durationMs": 638
+  "durationMs": 1021
 }
