@@ -6,13 +6,18 @@ namespace Modules\Fixcity\Actions;
 
 use Illuminate\Support\Facades\File;
 use Modules\Xot\Actions\Cast\SafeIntCastAction;
+use Spatie\QueueableAction\QueueableAction;
 
 /**
  * Carica il GeoJSON pubblico servito come /data/tickets.json (SSoT mappa + filtri).
  */
 final class LoadPublicTicketsGeoJsonAction
 {
+    use QueueableAction;
+
     public const RELATIVE_PATH = '../public_html/data/tickets.json';
+
+    public const PUBLIC_URL = '/data/tickets.json';
 
     /**
      * @return array{
@@ -43,14 +48,7 @@ final class LoadPublicTicketsGeoJsonAction
 
         $payload['total'] = SafeIntCastAction::cast($payload['total'] ?? \count($payload['features']));
 
-        /** @var array{type?: string, generated_at?: string, total?: int, features: array<int, array<string, mixed>>} $result */
-        $result = $payload;
-
-        return $result;
-    }
-
-    public function publicUrl(): string
-    {
-        return '/data/tickets.json';
+        /** @var array{type?: string, generated_at?: string, total?: int, features: array<int, array<string, mixed>>} $payload */
+        return $payload;
     }
 }

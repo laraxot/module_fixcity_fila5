@@ -9,12 +9,15 @@ use Illuminate\Support\Facades\DB;
 use Modules\Fixcity\Enums\TicketStatusEnum;
 use Modules\Fixcity\Models\Ticket;
 use Modules\Xot\Actions\Cast\SafeFloatCastAction;
+use Spatie\QueueableAction\QueueableAction;
 
 /**
  * Tempi medi risoluzione ticket (STORY-041 / FR-020).
  */
 final class GetTicketSlaMetricsAction
 {
+    use QueueableAction;
+
     /**
      * @return array{
      *     resolved_count: int,

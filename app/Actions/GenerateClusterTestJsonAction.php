@@ -7,14 +7,17 @@ namespace Modules\Fixcity\Actions;
 use function Safe\file_put_contents;
 use function Safe\json_encode;
 
+use Spatie\QueueableAction\QueueableAction;
+
 /**
  * GeoJSON di test per clustering (Roma) — solo dev/QA.
- * Path canonico: app/Actions/ (modulo nwidart).
  */
 class GenerateClusterTestJsonAction
 {
+    use QueueableAction;
+
     /** @return array<string, mixed> */
-    public function __invoke(): array
+    public function execute(): array
     {
         $types = [
             ['type' => 'bug', 'label' => 'Bug', 'color' => '#e63946'],

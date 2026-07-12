@@ -7,12 +7,15 @@ namespace Modules\Fixcity\Actions;
 use Illuminate\Support\Facades\DB;
 use Modules\Fixcity\Enums\TicketStatusEnum;
 use Modules\Fixcity\Models\Ticket;
+use Spatie\QueueableAction\QueueableAction;
 
 /**
  * KPI volumi ticket per dashboard Filament (STORY-025 / STORY-040 / FR-020).
  */
 final class GetTicketKpiAggregateAction
 {
+    use QueueableAction;
+
     /**
      * @return array{
      *     total: int,

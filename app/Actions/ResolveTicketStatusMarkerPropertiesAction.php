@@ -12,20 +12,32 @@ use Spatie\QueueableAction\QueueableAction;
  *
  * @phpstan-type TicketStatusGeoJson array{value: string, label: string, color: string}
  */
-class ResolveTicketStatusMarkerPropertiesAction
+final class ResolveTicketStatusMarkerPropertiesAction
 {
     use QueueableAction;
 
     /**
      * @return TicketStatusGeoJson
      */
-    public function execute(TicketStatusEnum $statusEnum): array
+    public function execute(TicketStatusEnum|string $statusEnum): array
     {
+        if (is_string($statusEnum)) {
+            return $this->resolveFromValue($statusEnum);
+        }
+
         return [
             'value' => $statusEnum->value,
             'label' => $statusEnum->getLabel(),
             'color' => $this->resolveMapHexColor($statusEnum),
         ];
+    }
+
+    /**
+     * @return TicketStatusGeoJson
+     */
+    public function executeFromValue(string $statusValue): array
+    {
+        return $this->execute($statusValue);
     }
 
     /**
@@ -63,7 +75,7 @@ class ResolveTicketStatusMarkerPropertiesAction
     /**
      * @return TicketStatusGeoJson
      */
-    public function executeFromValue(string $statusValue): array
+    private function resolveFromValue(string $statusValue): array
     {
         $status = TicketStatusEnum::tryFrom($statusValue);
 

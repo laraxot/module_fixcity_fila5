@@ -2,16 +2,20 @@
 
 declare(strict_types=1);
 
-namespace Modules\Fixcity\Support;
+namespace Modules\Fixcity\Actions\Export;
+
+use Spatie\QueueableAction\QueueableAction;
 
 use function Safe\preg_match;
 
 /**
  * Mitiga CSV formula injection per export Filament (FR-024).
  */
-final class SpreadsheetCellSanitizer
+final class SanitizeSpreadsheetCellAction
 {
-    public static function sanitize(string|int|float|null $value): string
+    use QueueableAction;
+
+    public function execute(string|int|float|null $value): string
     {
         if ($value === null || $value === '') {
             return '';

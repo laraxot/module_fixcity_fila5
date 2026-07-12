@@ -7,13 +7,17 @@ namespace Modules\Fixcity\Actions;
 use Modules\Fixcity\Models\Ticket;
 use Modules\Xot\Actions\Cast\SafeIntCastAction;
 use Modules\Xot\Actions\Cast\SafeStringCastAction;
+use Spatie\QueueableAction\QueueableAction;
 
 /**
  * Payload JSON popup mappa (GET /api/ticket-details/{ticket}) — logica in Action, non Controller.
  */
 final class BuildTicketPublicDetailsPayloadAction
 {
+    use QueueableAction;
+
     /**
+     * @param  Ticket|array<string, mixed>  $ticket
      * @return array{
      *     id: int,
      *     title: string,
@@ -21,8 +25,12 @@ final class BuildTicketPublicDetailsPayloadAction
      *     images: list<string>
      * }
      */
-    public function execute(Ticket $ticket): array
+    public function execute(Ticket|array $ticket): array
     {
+        if (is_array($ticket)) {
+            return $this->payloadFromGeoJsonFeature($ticket);
+        }
+
         $images = $ticket->getMedia('attachments');
         if ($images->isEmpty()) {
             $images = $ticket->getMedia('ticket');
@@ -51,6 +59,20 @@ final class BuildTicketPublicDetailsPayloadAction
      * }
      */
     public function executeFromGeoJsonFeature(array $feature): array
+    {
+        return $this->execute($feature);
+    }
+
+    /**
+     * @param  array<string, mixed>  $feature
+     * @return array{
+     *     id: int,
+     *     title: string,
+     *     description: string,
+     *     images: list<string>
+     * }
+     */
+    private function payloadFromGeoJsonFeature(array $feature): array
     {
         $properties = is_array($feature['properties'] ?? null) ? $feature['properties'] : [];
         $images = is_array($properties['images'] ?? null) ? $properties['images'] : [];

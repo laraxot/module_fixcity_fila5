@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Modules\Fixcity\Actions;
 
+use Spatie\QueueableAction\QueueableAction;
+
 /**
  * Load GeoJSON tickets da public_html/data/tickets.json — SSoT unico per mappa + filtri.
  *
@@ -11,6 +13,8 @@ namespace Modules\Fixcity\Actions;
  */
 final class LoadTicketsGeoJsonAction
 {
+    use QueueableAction;
+
     /**
      * @return array{
      *     type?: string,
@@ -22,13 +26,5 @@ final class LoadTicketsGeoJsonAction
     public function execute(): array
     {
         return app(LoadPublicTicketsGeoJsonAction::class)->execute();
-    }
-
-    /**
-     * Get the public URL for the tickets GeoJSON file.
-     */
-    public function publicUrl(): string
-    {
-        return '/data/tickets.json';
     }
 }

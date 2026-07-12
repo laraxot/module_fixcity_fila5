@@ -31,7 +31,7 @@ render(function (int|string $ticket): JsonResponse {
         $properties = is_array($feature['properties'] ?? null) ? $feature['properties'] : [];
         if ((int) ($properties['id'] ?? 0) === $ticketId) {
             return response()->json(
-                $payloadAction->executeFromGeoJsonFeature($feature),
+                $payloadAction->execute($feature),
             );
         }
     }
