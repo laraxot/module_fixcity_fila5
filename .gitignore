@@ -14,5 +14,12 @@ docs/archive/agentdb.rvf
 # Pest + audit-coverage bridge (claude-audit legge .gitignore case-insensitive su WSL)
 !tests/
 !tests/**
+<<<<<<< HEAD
 !audit-coverage/
 !audit-coverage/**
+=======
+
+# claude-audit bridge (non committare)
+audit-coverage/
+tests/AuditCoverage/*
+>>>>>>> 8220a4f (.)

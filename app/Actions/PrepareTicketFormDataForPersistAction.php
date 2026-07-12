@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Modules\Fixcity\Actions;
 
 use Modules\Fixcity\Enums\TicketStatusEnum;
+use Spatie\QueueableAction\QueueableAction;
 
 /**
  * Trasforma lo stato Filament/schema (admin o wizard frontoffice) nel payload sicuro per `Ticket::create` / Creazione Filament Resource.
@@ -14,6 +15,8 @@ use Modules\Fixcity\Enums\TicketStatusEnum;
  */
 final class PrepareTicketFormDataForPersistAction
 {
+    use QueueableAction;
+
     /**
      * @param  array<string, mixed>  $data
      * @return array<string, mixed>

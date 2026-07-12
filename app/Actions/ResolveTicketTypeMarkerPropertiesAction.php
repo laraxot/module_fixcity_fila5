@@ -18,15 +18,19 @@ use Spatie\QueueableAction\QueueableAction;
  *
  * @phpstan-type TicketTypeGeoJson array{value: string, label: string, iconUrl: string}
  */
-class ResolveTicketTypeMarkerPropertiesAction
+final class ResolveTicketTypeMarkerPropertiesAction
 {
     use QueueableAction;
 
     /**
      * @return TicketTypeGeoJson
      */
-    public function execute(TicketTypeEnum $typeEnum): array
+    public function execute(TicketTypeEnum|string $typeEnum): array
     {
+        if (is_string($typeEnum)) {
+            return $this->resolveFromValue($typeEnum);
+        }
+
         return [
             'value' => $typeEnum->value,
             'label' => $typeEnum->getLabel(),
@@ -38,6 +42,14 @@ class ResolveTicketTypeMarkerPropertiesAction
      * @return TicketTypeGeoJson
      */
     public function executeFromValue(string $typeValue): array
+    {
+        return $this->execute($typeValue);
+    }
+
+    /**
+     * @return TicketTypeGeoJson
+     */
+    private function resolveFromValue(string $typeValue): array
     {
         try {
             return $this->execute(TicketTypeEnum::from($typeValue));

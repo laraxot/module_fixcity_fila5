@@ -7,12 +7,15 @@ namespace Modules\Fixcity\Actions;
 use Modules\Fixcity\Actions\TicketCitizenRating\EnsureTicketCitizenRatingDefinitionAction;
 use Modules\Fixcity\Models\Ticket;
 use Modules\Rating\Models\RatingMorph;
+use Spatie\QueueableAction\QueueableAction;
 
 /**
  * KPI aggregati valutazioni cittadino — query su RatingMorph (modulo Rating).
  */
 final class GetCitizenRatingAggregateAction
 {
+    use QueueableAction;
+
     /**
      * @return array{count: int, average: float|null}
      */

@@ -5,10 +5,13 @@ declare(strict_types=1);
 namespace Modules\Fixcity\Actions;
 
 use Modules\Fixcity\Models\Ticket;
+use Spatie\QueueableAction\QueueableAction;
 use function Safe\json_decode;
 
 final class NormalizeTicketLocationDataAction
 {
+    use QueueableAction;
+
     /**
      * @param  array<string, mixed>  $state
      * @return array<string, mixed>

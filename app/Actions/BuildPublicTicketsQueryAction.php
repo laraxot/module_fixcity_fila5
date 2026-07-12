@@ -7,12 +7,15 @@ namespace Modules\Fixcity\Actions;
 use Illuminate\Database\Eloquent\Builder;
 use Modules\Fixcity\Enums\TicketStatusEnum;
 use Modules\Fixcity\Models\Ticket;
+use Spatie\QueueableAction\QueueableAction;
 
 /**
  * Query ticket visibili in frontoffice (lista, mappa, filtri) — STORY-029.
  */
 final class BuildPublicTicketsQueryAction
 {
+    use QueueableAction;
+
     /**
      * @return Builder<Ticket>
      */

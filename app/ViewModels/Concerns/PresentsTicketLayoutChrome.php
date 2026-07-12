@@ -144,7 +144,11 @@ trait PresentsTicketLayoutChrome
 
     public function mapDataUrl(): string
     {
+<<<<<<< HEAD
         return app(LoadPublicTicketsGeoJsonAction::class)->publicUrl();
+=======
+        return LoadPublicTicketsGeoJsonAction::PUBLIC_URL;
+>>>>>>> 8220a4f (.)
     }
 
     /**

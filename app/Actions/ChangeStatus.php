@@ -5,9 +5,12 @@ declare(strict_types=1);
 namespace Modules\Fixcity\Actions;
 
 use Modules\Fixcity\Models\Ticket;
+use Spatie\QueueableAction\QueueableAction;
 
 class ChangeStatus
 {
+    use QueueableAction;
+
     /**
      * Execute the change status action.
      *

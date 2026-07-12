@@ -25,7 +25,7 @@ trait InteractsWithTicketCitizenRating
     {
         return Attribute::make(
             get: function (): ?int {
-                $morph = app(GetTicketCitizenRatingMorphAction::class)->executeForTicket($this);
+                $morph = app(GetTicketCitizenRatingMorphAction::class)->execute($this);
                 if ($morph === null || $morph->value === null) {
                     return null;
                 }
@@ -42,7 +42,7 @@ trait InteractsWithTicketCitizenRating
     {
         return Attribute::make(
             get: function (): ?Carbon {
-                $morph = app(GetTicketCitizenRatingMorphAction::class)->executeForTicket($this);
+                $morph = app(GetTicketCitizenRatingMorphAction::class)->execute($this);
 
                 return $morph?->created_at;
             },

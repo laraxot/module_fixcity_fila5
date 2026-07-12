@@ -7,9 +7,12 @@ namespace Modules\Fixcity\Actions\TicketCitizenRating;
 use Illuminate\Support\Collection;
 use Modules\Fixcity\Models\Ticket;
 use Modules\Rating\Models\RatingMorph;
+use Spatie\QueueableAction\QueueableAction;
 
 final class GetTicketIdsWithCitizenRatingAction
 {
+    use QueueableAction;
+
     /**
      * @return Collection<int, int|string>
      */

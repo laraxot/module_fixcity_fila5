@@ -7,12 +7,15 @@ namespace Modules\Fixcity\Actions;
 use Modules\Fixcity\Enums\TicketStatusEnum;
 use Modules\Xot\Actions\Cast\SafeIntCastAction;
 use Modules\Xot\Actions\Cast\SafeStringCastAction;
+use Spatie\QueueableAction\QueueableAction;
 
 /**
  * Aggregati filtri elenco ticket da tickets.json — SSoT unico per mappa + filtri.
  */
 class BuildTicketFilterAggregateAction
 {
+    use QueueableAction;
+
     /**
      * @return array{
      *     features: array<int, array<string, mixed>>,
@@ -131,7 +134,7 @@ class BuildTicketFilterAggregateAction
         }
 
         if (is_string($typeRaw) && $typeRaw !== '') {
-            return app(ResolveTicketTypeMarkerPropertiesAction::class)->executeFromValue($typeRaw);
+            return app(ResolveTicketTypeMarkerPropertiesAction::class)->execute($typeRaw);
         }
 
         return null;
@@ -157,12 +160,12 @@ class BuildTicketFilterAggregateAction
                 'value' => $value,
                 'label' => SafeStringCastAction::cast($statusRaw['label'] ?? $value),
                 'color' => $color !== '' ? $color : app(ResolveTicketStatusMarkerPropertiesAction::class)
-                    ->executeFromValue($value)['color'],
+                    ->execute($value)['color'],
             ];
         }
 
         if (is_string($statusRaw) && $statusRaw !== '') {
-            return app(ResolveTicketStatusMarkerPropertiesAction::class)->executeFromValue($statusRaw);
+            return app(ResolveTicketStatusMarkerPropertiesAction::class)->execute($statusRaw);
         }
 
         return null;

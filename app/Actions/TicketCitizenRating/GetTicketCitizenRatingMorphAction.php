@@ -6,10 +6,13 @@ namespace Modules\Fixcity\Actions\TicketCitizenRating;
 
 use Modules\Fixcity\Models\Ticket;
 use Modules\Rating\Models\RatingMorph;
+use Spatie\QueueableAction\QueueableAction;
 
 final class GetTicketCitizenRatingMorphAction
 {
-    public function executeForTicket(Ticket $ticket, ?string $userId = null): ?RatingMorph
+    use QueueableAction;
+
+    public function execute(Ticket $ticket, ?string $userId = null): ?RatingMorph
     {
         $definition = app(EnsureTicketCitizenRatingDefinitionAction::class)->execute();
 

@@ -9,7 +9,7 @@ use Filament\Actions\Exports\ExportColumn;
 use Filament\Actions\Exports\Exporter;
 use Filament\Actions\Exports\Models\Export;
 use Modules\Fixcity\Models\Ticket;
-use Modules\Fixcity\Support\SpreadsheetCellSanitizer;
+use Modules\Fixcity\Actions\Export\SanitizeSpreadsheetCellAction;
 use Modules\Xot\Actions\Cast\SafeStringCastAction;
 
 /**
@@ -27,23 +27,23 @@ final class TicketExporter extends Exporter
         return [
             ExportColumn::make('id'),
             ExportColumn::make('name')
-                ->formatStateUsing(static fn (?string $state): string => SpreadsheetCellSanitizer::sanitize($state)),
+                ->formatStateUsing(static fn (?string $state): string => app(SanitizeSpreadsheetCellAction::class)->execute($state)),
             ExportColumn::make('status')
-                ->formatStateUsing(static fn ($state): string => SpreadsheetCellSanitizer::sanitize(
+                ->formatStateUsing(static fn ($state): string => app(SanitizeSpreadsheetCellAction::class)->execute(
                     $state instanceof \BackedEnum ? $state->value : SafeStringCastAction::cast($state),
                 )),
             ExportColumn::make('priority')
-                ->formatStateUsing(static fn ($state): string => SpreadsheetCellSanitizer::sanitize(
+                ->formatStateUsing(static fn ($state): string => app(SanitizeSpreadsheetCellAction::class)->execute(
                     $state instanceof \BackedEnum ? $state->value : SafeStringCastAction::cast($state),
                 )),
             ExportColumn::make('type')
-                ->formatStateUsing(static fn ($state): string => SpreadsheetCellSanitizer::sanitize(
+                ->formatStateUsing(static fn ($state): string => app(SanitizeSpreadsheetCellAction::class)->execute(
                     $state instanceof \BackedEnum ? $state->value : SafeStringCastAction::cast($state),
                 )),
             ExportColumn::make('owner.name')
-                ->formatStateUsing(static fn (?string $state): string => SpreadsheetCellSanitizer::sanitize($state)),
+                ->formatStateUsing(static fn (?string $state): string => app(SanitizeSpreadsheetCellAction::class)->execute($state)),
             ExportColumn::make('assignee.name')
-                ->formatStateUsing(static fn (?string $state): string => SpreadsheetCellSanitizer::sanitize($state)),
+                ->formatStateUsing(static fn (?string $state): string => app(SanitizeSpreadsheetCellAction::class)->execute($state)),
             ExportColumn::make('citizen_rating'),
             ExportColumn::make('created_at'),
             ExportColumn::make('updated_at'),

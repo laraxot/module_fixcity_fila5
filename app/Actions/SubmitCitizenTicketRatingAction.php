@@ -13,6 +13,7 @@ use Modules\Fixcity\Models\Ticket;
 use Modules\Rating\Models\RatingMorph;
 use Modules\Xot\Actions\Cast\SafeStringCastAction;
 use Modules\Xot\Contracts\UserContract;
+use Spatie\QueueableAction\QueueableAction;
 
 /**
  * Valutazione cittadino 1–5 su ticket risolto — persistenza RatingMorph (modulo Rating).
@@ -23,6 +24,8 @@ final class SubmitCitizenTicketRatingAction
 // Laraxot module file — see docs/wiki for domain contract.
 // Laraxot module file — see docs/wiki for domain contract.
 {
+    use QueueableAction;
+
     public function execute(Ticket $ticket, int $rating): Ticket
     {
         if ($rating < 1 || $rating > 5) {
@@ -47,7 +50,7 @@ final class SubmitCitizenTicketRatingAction
 
         $userIdString = SafeStringCastAction::cast($userId);
 
-        if (app(GetTicketCitizenRatingMorphAction::class)->executeForTicket($ticket, $userIdString) !== null) {
+        if (app(GetTicketCitizenRatingMorphAction::class)->execute($ticket, $userIdString) !== null) {
             throw ValidationException::withMessages([
                 'rating' => [__('fixcity::ticket_citizen_rating.validation.already_rated.label')],
             ]);

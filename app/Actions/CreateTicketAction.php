@@ -6,9 +6,12 @@ namespace Modules\Fixcity\Actions;
 
 use Modules\Fixcity\Events\TicketCreatedEvent;
 use Modules\Fixcity\Models\Ticket;
+use Spatie\QueueableAction\QueueableAction;
 
 class CreateTicketAction
 {
+    use QueueableAction;
+
     /**
      * Executes the ticket creation logic.
      *
