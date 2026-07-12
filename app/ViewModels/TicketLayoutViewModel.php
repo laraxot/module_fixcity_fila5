@@ -34,10 +34,10 @@ final class TicketLayoutViewModel
     /** @var Builder<Ticket> */
     private Builder $filteredQuery;
 
-    /** @var Collection<int, mixed> */
+    /** @var Collection<int, Ticket|object> */
     private Collection $liveTickets;
 
-    /** @var array<int, string> */
+    /** @var list<string> */
     private array $selectedTypes;
 
     /** @var array<int, string> */
@@ -74,14 +74,13 @@ final class TicketLayoutViewModel
     }
 
     /**
-     * @return array<int, string>
+     * @return list<string>
      */
     private function parseSelectedTypes(): array
     {
-        return request()->collect('types')
+        return array_values(request()->collect('types')
             ->filter(static fn ($type): bool => is_string($type) && $type !== '')
-            ->values()
-            ->all();
+            ->all());
     }
 
     /**
@@ -106,11 +105,11 @@ final class TicketLayoutViewModel
         return $query;
     }
 
-    /** @return Collection<int, mixed> */
+    /** @return Collection<int, Ticket|object> */
     private function buildLiveTickets(): Collection
     {
         if ($this->useCityDesignListDemo()) {
-            /** @var Collection<int, mixed> $demoTickets */
+            /** @var Collection<int, object> $demoTickets */
             $demoTickets = Collection::make(app(LoadCityDesignDemoCardsAction::class)->execute());
 
             return $demoTickets;
@@ -132,7 +131,7 @@ final class TicketLayoutViewModel
             $tickets = $tickets->concat($supplements);
         }
 
-        /** @var Collection<int, mixed> $live */
+        /** @var Collection<int, Ticket|object> $live */
         $live = Collection::make($tickets->all());
 
         return $live;

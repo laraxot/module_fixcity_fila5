@@ -1,5 +1,13 @@
 # Modules Wiki Log
 
+## [2026-07-12] fix | PHPStan L10 — TicketLayoutViewModel trait types
+
+- `PresentsTicketLayoutChrome`: `@property-read` per `$blockData`, `$selectedTypes`, `$liveTickets`; shape `list<array{id,label,active}>` su tab/breadcrumb
+- `TicketLayoutViewModel`: `Collection<int, Ticket|object>` per demo Design Comuni + live query
+- Scopo: VM FO elenco segnalazioni — dati CMS in `$blockData`, tab attiva per pannelli mappa/lista
+- PHPStan: `vendor/bin/phpstan analyse Modules` → 0 errori
+- GitHub: [#372](https://github.com/laraxot/base_fixcity_fila5/issues/372)
+
 ## [2026-06-13] docs | Gate chef — hub completamento + Activity/Xot test docs
 
 - Hub: [platform-completion-roadmap](../Xot/docs/wiki/overviews/platform-completion-roadmap.md)

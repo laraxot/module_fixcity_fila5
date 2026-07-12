@@ -9,10 +9,19 @@ use Modules\Fixcity\Actions\LoadPublicTicketsGeoJsonAction;
 use Modules\Fixcity\Models\Ticket;
 use Modules\Xot\Actions\Cast\SafeStringCastAction;
 
+/**
+ * Chrome FO pagina elenco segnalazioni (breadcrumb, tab, CTA, contatti).
+ *
+ * @property-read string $ns
+ * @property-read array<string, mixed> $blockData
+ * @property-read string $phoneNumber
+ * @property-read list<string> $selectedTypes
+ * @property-read Collection<int, Ticket|object> $liveTickets
+ */
 trait PresentsTicketLayoutChrome
 {
     /**
-     * @return array<int, array{label: string, url: string|null, active: bool}>
+     * @return list<array{label: string, url: string|null, active: bool}>
      */
     public function breadcrumbItems(): array
     {
@@ -20,6 +29,9 @@ trait PresentsTicketLayoutChrome
         /** @var array<int, array<string, mixed>> $rawItems */
         $rawItems = is_array($this->blockData['breadcrumb'] ?? null) ? $this->blockData['breadcrumb'] : [];
         foreach ($rawItems as $item) {
+            if (! is_array($item)) {
+                continue;
+            }
             $items[] = [
                 'label' => $this->t($item['label'] ?? ''),
                 'url' => isset($item['url']) ? SafeStringCastAction::cast($item['url']) : null,
@@ -51,7 +63,7 @@ trait PresentsTicketLayoutChrome
     }
 
     /**
-     * @return array<int, array{id: string, label: string, active: bool}>
+     * @return list<array{id: string, label: string, active: bool}>
      */
     public function tabs(): array
     {
@@ -60,6 +72,9 @@ trait PresentsTicketLayoutChrome
         $rawTabs = is_array($tabsData['items'] ?? null) ? $tabsData['items'] : [];
         $tabs = [];
         foreach ($rawTabs as $tab) {
+            if (! is_array($tab)) {
+                continue;
+            }
             $tabs[] = [
                 'id' => SafeStringCastAction::cast($tab['id'] ?? 'map'),
                 'label' => $this->t($tab['label'] ?? ''),
@@ -86,8 +101,11 @@ trait PresentsTicketLayoutChrome
         }
 
         $tabs = $this->tabs();
+        if ($tabs === []) {
+            return 'map';
+        }
 
-        return $tabs[0]['id'] ?? 'map';
+        return $tabs[0]['id'];
     }
 
     public function mapTabId(): string
@@ -126,7 +144,7 @@ trait PresentsTicketLayoutChrome
         return '/themes/Sixteen/design-comuni/assets/images/map-placeholder.svg';
     }
 
-    /** @return array<int, string> */
+    /** @return list<string> */
     public function selectedTypes(): array
     {
         return $this->selectedTypes;
@@ -144,15 +162,11 @@ trait PresentsTicketLayoutChrome
 
     public function mapDataUrl(): string
     {
-<<<<<<< HEAD
-        return app(LoadPublicTicketsGeoJsonAction::class)->publicUrl();
-=======
         return LoadPublicTicketsGeoJsonAction::PUBLIC_URL;
->>>>>>> 8220a4f (.)
     }
 
     /**
-     * @return array<string, string>|array{}
+     * @return array{title: string, text: string, button_text: string, button_url: string}|array{}
      */
     public function cta(): array
     {
@@ -171,7 +185,7 @@ trait PresentsTicketLayoutChrome
     }
 
     /**
-     * @return array{title: string, items: array<int, array{label: string, url: string, icon: string}>}
+     * @return array{title: string, items: list<array{label: string, url: string, icon: string}>}
      */
     public function contacts(): array
     {
@@ -183,18 +197,24 @@ trait PresentsTicketLayoutChrome
             $rawItems = $this->defaultContactItems();
         }
 
+        $items = [];
+        foreach ($rawItems as $contact) {
+            if (! is_array($contact)) {
+                continue;
+            }
+            $items[] = [
+                'label' => $this->t($contact['label'] ?? ''),
+                'url' => SafeStringCastAction::cast($contact['url'] ?? '#'),
+                'icon' => SafeStringCastAction::cast($contact['icon'] ?? 'it-help-circle'),
+            ];
+        }
+
         return [
             'title' => $this->t(
                 $contactsData['contact_title'] ?? '',
                 __($this->ns.'.contacts.block_title.label'),
             ),
-            'items' => collect($rawItems)->map(
-                fn (array $contact): array => [
-                    'label' => $this->t($contact['label'] ?? ''),
-                    'url' => SafeStringCastAction::cast($contact['url'] ?? '#'),
-                    'icon' => SafeStringCastAction::cast($contact['icon'] ?? 'it-help-circle'),
-                ],
-            )->all(),
+            'items' => $items,
         ];
     }
 
@@ -234,7 +254,7 @@ trait PresentsTicketLayoutChrome
         return SafeStringCastAction::cast($contacts['id'] ?? 'info-contacts');
     }
 
-    /** @return Collection<int, mixed> */
+    /** @return Collection<int, Ticket|object> */
     public function liveTickets(): Collection
     {
         return $this->liveTickets;
