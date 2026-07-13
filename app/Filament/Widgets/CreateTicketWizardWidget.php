@@ -17,12 +17,16 @@ use Modules\Xot\Filament\Widgets\XotBaseWizardWidget;
 class CreateTicketWizardWidget extends XotBaseWizardWidget
 {
     use HasTicketAuthorData;
+
     /**
-     * Runtime source-of-truth view for frontoffice ticket wizard.
-     * This avoids ambiguity with theme files that share the same basename.
-     * $view = 'fixcity::filament.widgets.create-ticket-wizard';
+     * View resolution is intentionally left to XotBaseWidget::resolveView(),
+     * which picks 'pub_theme::filament.widgets.create-ticket-wizard'
+     * (Themes/Sixteen) when it exists, falling back to
+     * 'fixcity::filament.widgets.create-ticket-wizard' (this module)
+     * otherwise. Do not declare a $view property here: it would bypass
+     * that convention-based lookup (see GetViewByClassAction) and the
+     * theme override would silently stop being used.
      */
-    
 
     /** @var array<string, mixed> */
     public array $blockData = [];

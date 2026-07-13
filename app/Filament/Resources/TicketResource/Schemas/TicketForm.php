@@ -178,19 +178,16 @@ class TicketForm extends XotBaseResourceForm
     {
         return [
             'name' => TextInput::make('name')
-                ->hiddenLabel()
                 ->columnSpanFull()
                 ->required()
                 ->minLength(3)
                 ->maxLength(255),
             'type' => Select::make('type')
-                ->hiddenLabel()
                 ->searchable()
                 ->required()
                 ->options(TicketTypeEnum::class)
                 ->columnSpanFull(),
             'content' => Textarea::make('content')
-                ->hiddenLabel()
                 ->columnSpanFull()
                 ->required()
                 ->minLength(10)
@@ -200,7 +197,6 @@ class TicketForm extends XotBaseResourceForm
                 ->required()
                 ->reverseGeocoding(),
             'images' => SpatieMediaLibraryFileUpload::make('images')
-                ->hiddenLabel()
                 ->columnSpanFull()
                 ->collection('attachments')
                 ->imageEditor()

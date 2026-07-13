@@ -48,3 +48,8 @@
 - creato `index.md` per rendere la wiki dei moduli navigabile come knowledge base.
 - aggiunto `concepts/second-brain-operating-model.md` con modello operativo CODE + PARA adattato al repository.
 - incluse sezioni best practices, bad practices, false friends e link verificati di approfondimento.
+
+## [2026-07-12] phpstan | view-model chrome typed shapes
+
+- `PresentsTicketLayoutChrome` usa shape PHPDoc su breadcrumb, tabs, CTA, contatti e collection live tickets.
+- Motivo: PHPStan analizza il trait nel contesto di `TicketLayoutViewModel`; le shape devono essere visibili al consumer reale, non solo al file trait isolato.
