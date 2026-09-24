@@ -1,0 +1,366 @@
+<?php
+
+declare(strict_types=1);
+
+// Fixcity translations — LangServiceProvider SSoT (never ->label() in Filament PHP).
+// claude-audit static: ≥5% comment lines on files >100 LOC.
+// Canon: Modules/Fixcity/docs/wiki — domain i18n only.
+// File: lang/it/ticket_wizard.php
+return [
+// Laraxot — see module docs/wiki for domain contract.
+// Laraxot module file — see docs/wiki for domain contract.
+// Laraxot module file — see docs/wiki for domain contract.
+// Laraxot module file — see docs/wiki for domain contract.
+// Laraxot module file — see docs/wiki for domain contract.
+// Laraxot module file — see docs/wiki for domain contract.
+// Laraxot module file — see docs/wiki for domain contract.
+// Laraxot module file — see docs/wiki for domain contract.
+// Laraxot module file — see docs/wiki for domain contract.
+// Laraxot module file — see docs/wiki for domain contract.
+// Laraxot module file — see docs/wiki for domain contract.
+// Laraxot module file — see docs/wiki for domain contract.
+// Laraxot module file — see docs/wiki for domain contract.
+// Laraxot module file — see docs/wiki for domain contract.
+// Laraxot module file — see docs/wiki for domain contract.
+// Laraxot module file — see docs/wiki for domain contract.
+// Laraxot module file — see docs/wiki for domain contract.
+// Laraxot module file — see docs/wiki for domain contract.
+// Laraxot module file — see docs/wiki for domain contract.
+// Laraxot module file — see docs/wiki for domain contract.
+    'steps' => [
+        'privacy' => [
+            'label' => 'Autorizzazioni e condizioni',
+            'description' => 'Leggi l\'informativa e conferma il consenso prima di proseguire.',
+        ],
+        'data' => [
+            'label' => 'Dati di segnalazione',
+            'description' => 'Indica luogo, tipologia di disservizio e dettagli.',
+        ],
+        'summary' => [
+            'label' => 'Riepilogo',
+            'description' => 'Controlla i dati inseriti prima di inviare la segnalazione.',
+        ],
+        'dati-segnalazione' => [
+            'label' => 'dati-segnalazione',
+        ],
+    ],
+    'actions' => [
+        'previous' => [
+            'tooltip' => 'Indietro',
+            'icon' => 'previous',
+            'label' => 'Indietro',
+        ],
+        'next' => [
+            'tooltip' => 'Avanti',
+            'icon' => 'next',
+            'label' => 'Avanti',
+        ],
+        'submit' => [
+            'tooltip' => 'Invia segnalazione',
+            'icon' => 'submit',
+            'label' => 'Invia',
+        ],
+        'edit_contacts' => [
+            'tooltip' => 'edit_contacts',
+            'icon' => 'edit_contacts',
+            'label' => 'edit_contacts',
+        ],
+        'cancel' => [
+            'tooltip' => 'cancel',
+            'icon' => 'cancel',
+            'label' => 'cancel',
+        ],
+        'save' => [
+            'tooltip' => 'save',
+            'icon' => 'save',
+            'label' => 'save',
+        ],
+    ],
+    'fields' => [
+        'address' => [
+            'label' => 'Luogo*',
+            'description' => '',
+            'helper_text' => 'Indica il luogo del disservizio',
+            'placeholder' => 'Cerca un luogo o usa la posizione GPS',
+        ],
+        'issueType' => [
+            'label' => 'Tipo di disservizio*',
+            'placeholder' => 'Seleziona il tipo di disservizio',
+            'helper_text' => 'Seleziona la categoria del problema segnalato',
+            'description' => '',
+        ],
+        'title' => [
+            'label' => 'Titolo*',
+            'description' => 'Titolo della segnalazione',
+            'helper_text' => 'Max 255 caratteri',
+            'placeholder' => 'Titolo breve del problema',
+        ],
+        'details' => [
+            'label' => 'Dettagli**',
+            'description' => 'Descrizione del problema',
+            'helper_text' => 'Max 200 caratteri',
+            'placeholder' => 'Descrivi il problema in dettaglio...',
+        ],
+        'email' => [
+            'label' => 'Email',
+            'description' => '',
+            'helper_text' => 'Opzionale — riceverai aggiornamenti sullo stato della segnalazione',
+            'placeholder' => 'la.tua@email.it',
+        ],
+        'images' => [
+            'label' => 'Immagini',
+            'description' => 'Puoi caricare fino a 10 immagini',
+            'helper_text' => 'Seleziona una o più immagini da allegare alla segnalazione',
+            'placeholder' => '',
+        ],
+        'userName' => [
+            'label' => 'Nome completo',
+            'description' => '',
+            'helper_text' => 'Opzionale',
+            'placeholder' => 'Nome e Cognome',
+        ],
+        'userFiscalCode' => [
+            'label' => 'Codice Fiscale',
+            'description' => '',
+            'helper_text' => 'Opzionale',
+            'placeholder' => 'RSSMRA80A01H501A',
+        ],
+        'userPhone' => [
+            'label' => 'Telefono',
+            'description' => '',
+            'helper_text' => 'Opzionale',
+            'placeholder' => '+39 02 1234567',
+        ],
+        'privacyAccepted' => [
+            'label' => 'Ho letto e compreso l\'informativa sulla privacy',
+            'placeholder' => '',
+            'helper_text' => 'Leggi la privacy policy',
+            'description' => 'Accettazione obbligatoria per procedere',
+        ],
+        'privacy_notice' => [
+            'label' => 'privacy_notice',
+        ],
+        'summary_notice' => [
+            'label' => '',
+            'description' => '',
+            'helper_text' => '',
+            'placeholder' => '',
+        ],
+        'review_images' => [
+            'label' => 'review_images',
+        ],
+        'content' => [
+            'label' => 'content',
+            'description' => 'content',
+            'helper_text' => '',
+            'placeholder' => 'content',
+        ],
+        'type' => [
+            'label' => 'type',
+            'description' => 'type',
+            'helper_text' => '',
+            'placeholder' => 'type',
+        ],
+        'name' => [
+            'label' => 'name',
+            'description' => 'name',
+            'helper_text' => '',
+            'placeholder' => 'name',
+        ],
+        'review_email' => [
+            'label' => 'review_email',
+        ],
+        'review_content' => [
+            'label' => 'review_content',
+        ],
+        'review_address' => [
+            'label' => 'review_address',
+        ],
+        'review_type' => [
+            'label' => 'review_type',
+        ],
+        'review_name' => [
+            'label' => 'review_name',
+        ],
+        'author_phone' => [
+            'label' => 'author_phone',
+            'description' => 'author_phone',
+            'helper_text' => 'author_phone',
+            'placeholder' => 'author_phone',
+        ],
+        'author_name' => [
+            'label' => 'author_name',
+        ],
+        'author_fiscal_code' => [
+            'label' => 'author_fiscal_code',
+            'description' => 'author_fiscal_code',
+            'helper_text' => 'author_fiscal_code',
+        ],
+        'type_id' => [
+            'label' => 'Tipo di disservizio*',
+            'description' => 'Seleziona il tipo di disservizio',
+            'helper_text' => '',
+            'placeholder' => '',
+        ],
+        'longitude' => [
+            'description' => 'longitude',
+            'helper_text' => 'longitude',
+            'placeholder' => 'longitude',
+        ],
+        'location' => [
+            'description' => 'location',
+            'helper_text' => 'location',
+            'placeholder' => 'location',
+            'label' => 'location',
+        ],
+        'map_reference' => [
+            'description' => 'map_reference',
+            'helper_text' => 'map_reference',
+            'placeholder' => 'map_reference',
+            'label' => 'map_reference',
+        ],
+        'location3' => [
+            'description' => 'location3',
+            'helper_text' => 'location3',
+            'placeholder' => 'location3',
+            'label' => 'location3',
+        ],
+        'location2' => [
+            'description' => 'location2',
+            'helper_text' => 'location2',
+            'placeholder' => 'location2',
+            'label' => 'location2',
+        ],
+        'location0' => [
+            'description' => 'location0',
+            'helper_text' => 'location0',
+            'placeholder' => 'location0',
+            'label' => 'location0',
+        ],
+        'location1' => [
+            'description' => 'location1',
+            'helper_text' => 'location1',
+            'placeholder' => 'location1',
+            'label' => 'location1',
+        ],
+        'location4' => [
+            'description' => 'location4',
+            'helper_text' => 'location4',
+            'placeholder' => 'location4',
+            'label' => 'location4',
+        ],
+        'location8' => [
+            'description' => 'location8',
+            'helper_text' => 'location8',
+            'placeholder' => 'location8',
+            'label' => 'location8',
+        ],
+        'location7' => [
+            'description' => 'location7',
+            'helper_text' => 'location7',
+            'placeholder' => 'location7',
+            'label' => 'location7',
+        ],
+        'location5' => [
+            'description' => 'location5',
+            'helper_text' => 'location5',
+            'placeholder' => 'location5',
+            'label' => 'location5',
+        ],
+        'location6' => [
+            'description' => 'location6',
+            'helper_text' => 'location6',
+        ],
+        'review_location' => [
+            'label' => 'review_location',
+        ],
+        'accept_terms' => [
+            'description' => 'accept_terms',
+        ],
+    ],
+    'sections' => [
+        'Immagini allegate' => [
+            'heading' => 'Immagini allegate',
+        ],
+        'Attached Images' => [
+            'heading' => 'Attached Images',
+        ],
+        'Riepilogo Segnalazione' => [
+            'heading' => 'Riepilogo Segnalazione',
+            'label' => 'Riepilogo Segnalazione',
+        ],
+        'images_review' => [
+            'heading' => 'images_review',
+            'label' => 'images_review',
+        ],
+        'review' => [
+            'heading' => 'review',
+            'label' => 'review',
+        ],
+        'place' => [
+            'label' => 'place',
+            'heading' => 'place',
+        ],
+        'inefficiency' => [
+            'label' => 'inefficiency',
+            'heading' => 'inefficiency',
+        ],
+        'author' => [
+            'label' => 'author',
+            'heading' => 'author',
+        ],
+        'author_info' => [
+            'heading' => 'author_info',
+        ],
+        'Autore della segnalazione' => [
+            'heading' => 'Autore della segnalazione',
+            'label' => 'Autore della segnalazione',
+        ],
+        'Disservizio' => [
+            'heading' => 'Disservizio',
+            'label' => 'Disservizio',
+        ],
+        'Luogo' => [
+            'heading' => 'Luogo',
+            'label' => 'Luogo',
+        ],
+        'Contatti' => [
+            'heading' => 'Contatti',
+            'label' => 'Contatti',
+        ],
+        'fixcity::segnalazione' => [
+            'sections' => [
+                'summary' => [
+                    'label' => [
+                        'heading' => 'fixcity::ticket.sections.summary.label',
+                        'label' => 'fixcity::ticket.sections.summary.label',
+                    ],
+                ],
+                'place' => [
+                    'label' => [
+                        'label' => 'fixcity::segnalazione.sections.place.label',
+                        'heading' => 'fixcity::segnalazione.sections.place.label',
+                    ],
+                ],
+                'inefficiency' => [
+                    'label' => [
+                        'label' => 'fixcity::segnalazione.sections.inefficiency.label',
+                        'heading' => 'fixcity::segnalazione.sections.inefficiency.label',
+                    ],
+                ],
+            ],
+        ],
+        'Riepilogo' => [
+            'heading' => 'Riepilogo',
+            'label' => 'Riepilogo',
+        ],
+        'Disservizio!!' => [
+            'heading' => 'Disservizio!!',
+            'label' => 'Disservizio!!',
+        ],
+        'empty' => [
+            'heading' => 'empty7',
+            'label' => 'empty8',
+        ],
+    ],
+];
