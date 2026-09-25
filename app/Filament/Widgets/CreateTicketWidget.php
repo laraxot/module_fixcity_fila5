@@ -35,6 +35,12 @@ class CreateTicketWidget extends BaseWidget implements HasActions, HasForms
     use InteractsWithActions;
     use InteractsWithForms;
 
+<<<<<<< HEAD
+=======
+    /** @var array<string, mixed>|null */
+    public ?array $data = [];
+
+>>>>>>> 54ffa6d (.)
     protected string $view = 'fixcity::filament.widgets.create-ticket';
 
     protected int|string|array $columnSpan = 'full';
