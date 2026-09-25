@@ -32,7 +32,11 @@ describe('Ticket Creation Page', function () {
         /** @var TestCase $this */
         $response = $this->get('/it/tickets/create');
 
+<<<<<<< HEAD
         $response->assertRedirectContains('/it/auth/login');
+=======
+        $response->assertRedirect('/it/auth/login');
+>>>>>>> 54ffa6d (.)
     });
 
     it('displays ticket creation form', function () {

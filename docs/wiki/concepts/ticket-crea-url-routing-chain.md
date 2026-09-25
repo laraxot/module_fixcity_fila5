@@ -1,4 +1,5 @@
 ---
+<<<<<<< HEAD
 title: "ticket create URL — routing chain CMS + PageSlugMiddleware"
 type: concept
 tags: [fixcity, tickets, create, folio, cms, pageslugmiddleware]
@@ -58,6 +59,14 @@ Se `GetTenantNameAction` fallisce → 0 pagine Sushi → middleware JSON ignorat
 ---
 
 # Segnalazione-Crea URL Routing Chain (sandbox)
+=======
+name: segnalazione-crea-url-routing-chain
+description: "URL /it/tests/segnalazione-crea è gestito dal CMS JSON block chain, NON dal Folio page segnalaizione-crea.blade.php"
+type: discovery
+---
+
+# Segnalazione-Crea URL Routing Chain
+>>>>>>> 54ffa6d (.)
 
 ## URL in questione
 

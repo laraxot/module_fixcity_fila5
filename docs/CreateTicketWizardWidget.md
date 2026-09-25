@@ -69,7 +69,10 @@ Questa distinzione evita il falso dogma "tutto diventa Infolist" e mantiene chia
 
 - **View**: auto-risolta da `XotBaseWidget` / `GetViewByClassAction`: `pub_theme::filament.widgets.create-ticket-wizard`, fallback `fixcity::filament.widgets.create-ticket-wizard`.
 - **Theme**: Sixteen (Design Comuni styling applied via CSS scoping).
+<<<<<<< HEAD
 - **Auth**: the CMS JSON `tickets.create.json` declares `"middleware": ["auth"]` so `PageSlugMiddleware` redirects guests to `/it/auth/login` before the wizard is rendered (`web` is already in the HTTP/Folio stack — do not add it to JSON).
+=======
+>>>>>>> 54ffa6d (.)
 - **Redirect**: Localized redirect to the confirmation page defined in `blockData['confirmation_slug']`.
 
 ---

@@ -1,8 +1,11 @@
 # Ticket Wizard Frontoffice
 
 ## Decisione
+<<<<<<< HEAD
 La pagina produttiva `tickets.create` (`/it/tickets/create`) e protetta dal JSON CMS `config/local/fixcity/database/content/pages/tickets.create.json`: il campo `middleware` deve restare `["auth"]`. Non aggiungere `web` qui: `web` e gia nella pipeline Folio/HTTP, mentre `PageSlugMiddleware` esegue middleware singoli e deve ricevere solo alias risolvibili come `auth`. Utente anonimo => redirect alla route login localizzata (`/it/auth/login`); utente autenticato => render del `CreateTicketWizardWidget`.
 
+=======
+>>>>>>> 54ffa6d (.)
 La pagina pubblica `tests.segnalazione-crea` è l'entrypoint unificato del flusso utente per la creazione di segnalazioni (Ticket).
 
 **Composizione CMS-driven**: la pagina è composta da **blocchi JSON** (`content_blocks`), non da markup hardcoded:
