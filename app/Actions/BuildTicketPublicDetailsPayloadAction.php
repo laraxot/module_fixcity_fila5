@@ -38,7 +38,7 @@ final class BuildTicketPublicDetailsPayloadAction
 
         /** @var list<string> $imageUrls */
         $imageUrls = array_values($images
-            ->map(static fn ($media): string => $media->getFullUrl())
+            ->map(static fn (mixed $media): string => $media->getFullUrl())
             ->all());
 
         return [

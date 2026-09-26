@@ -4,26 +4,25 @@ declare(strict_types=1);
 
 namespace Modules\Fixcity\Tests\Unit\Models;
 
+use Illuminate\Support\Collection;
 use Modules\Fixcity\Database\Factories\TicketCommentFactory;
 use Modules\Fixcity\Database\Factories\TicketFactory;
-use Modules\User\Database\Factories\UserFactory;
-use Illuminate\Database\QueryException;
-use Illuminate\Support\Collection;
 use Modules\Fixcity\Models\Ticket;
 use Modules\Fixcity\Models\TicketComment;
+use Modules\User\Database\Factories\UserFactory;
 use Modules\User\Models\User;
-
 use PHPUnit\Framework\Assert;
+
 describe('TicketComment Model', function () {
     it('can be created with valid data', function () {
         $user = UserFactory::new()->createOne();
         $ticket = TicketFactory::new()->createOne();
-// Laraxot module file — see docs/wiki for domain contract.
-// Laraxot module file — see docs/wiki for domain contract.
-// Laraxot module file — see docs/wiki for domain contract.
-// Laraxot module file — see docs/wiki for domain contract.
-// Laraxot module file — see docs/wiki for domain contract.
-// Laraxot — see module docs/wiki for domain contract.
+        // Laraxot module file — see docs/wiki for domain contract.
+        // Laraxot module file — see docs/wiki for domain contract.
+        // Laraxot module file — see docs/wiki for domain contract.
+        // Laraxot module file — see docs/wiki for domain contract.
+        // Laraxot module file — see docs/wiki for domain contract.
+        // Laraxot — see module docs/wiki for domain contract.
 
         $comment = TicketComment::create([
             'ticket_id' => $ticket->id,
@@ -151,10 +150,7 @@ describe('TicketComment Model', function () {
         Assert::assertContains($comment, $searchResults);
     });
 
-    it('maintains data integrity constraints', function () {
-        // Test that required fields are enforced
-
-    });
+    it('maintains data integrity constraints')->todo();
 
     it('can be soft deleted if implemented', function () {
         $comment = TicketCommentFactory::new()->createOne();

@@ -2,14 +2,12 @@
 
 declare(strict_types=1);
 
-
-use Modules\Fixcity\Tests\TestCase;
-
-use PHPUnit\Framework\Assert;
+use Illuminate\Database\Eloquent\Collection;
 use Modules\Fixcity\Database\Factories\TicketFactory;
-use Modules\User\Database\Factories\UserFactory;
 use Modules\Fixcity\Models\Ticket;
-use Modules\User\Models\User;
+use Modules\Fixcity\Tests\TestCase;
+use Modules\User\Database\Factories\UserFactory;
+use PHPUnit\Framework\Assert;
 
 uses(TestCase::class);
 beforeEach(function () {
@@ -32,11 +30,7 @@ describe('Ticket Creation Page', function () {
         /** @var TestCase $this */
         $response = $this->get('/it/tickets/create');
 
-<<<<<<< HEAD
         $response->assertRedirectContains('/it/auth/login');
-=======
-        $response->assertRedirect('/it/auth/login');
->>>>>>> 54ffa6d (.)
     });
 
     it('displays ticket creation form', function () {
@@ -85,7 +79,7 @@ describe('Ticket Creation Page', function () {
 
         $response
             ->assertOk()
-            ->assertViewIs('pages.tickets.create');
+            ->assertViewIs('fixcity::pages.tickets.create');
     });
 });
 
@@ -294,7 +288,7 @@ describe('Ticket Page Performance', function () {
     it('handles multiple ticket views efficiently', function () {
         /** @var TestCase $this */
         Assert::assertNotNull($this->user);
-        /** @var \Illuminate\Database\Eloquent\Collection<int, \Modules\Fixcity\Models\Ticket> $tickets */
+        /** @var Collection<int, Ticket> $tickets */
         $tickets = TicketFactory::new()->count(5)->create([
             'owner_id' => $this->user->id,
         ]);

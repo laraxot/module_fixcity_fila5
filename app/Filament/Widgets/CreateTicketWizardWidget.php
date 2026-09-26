@@ -47,7 +47,7 @@ class CreateTicketWizardWidget extends XotBaseWizardWidget
      */
     public function getSteps(): array
     {
-        return TicketForm::getSteps();
+        return app(TicketForm::class)->getSteps();
     }
 
     protected function hasSkippableSteps(): bool
@@ -60,13 +60,12 @@ class CreateTicketWizardWidget extends XotBaseWizardWidget
         /** @var array<string, mixed> $data */
         $data = $this->form->getState();
 
-        $data['owner_id'] = Auth::id();;
+        $data['owner_id'] = Auth::id();
 
         Ticket::create($data);
 
         $this->redirectAfterSuccess();
     }
-
 
     protected function redirectAfterSuccess(): void
     {

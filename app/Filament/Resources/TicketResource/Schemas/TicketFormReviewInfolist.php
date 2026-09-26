@@ -29,10 +29,10 @@ final class TicketFormReviewInfolist
         return [
             'review_location' => TextEntry::make('review_location')
                 ->columnSpanFull()
-                ->state(static fn (Get $get): string => static::formatLocationReviewState($get)),
+                ->state(static fn (Get $get): string => self::formatLocationReviewState($get)),
             'review_type' => TextEntry::make('review_type')
                 ->badge()
-                ->state(static fn (Get $get): string => static::formatTicketTypeDisplay(static::coerceTicketTypeValue($get('type')))),
+                ->state(static fn (Get $get): string => self::formatTicketTypeDisplay(self::coerceTicketTypeValue($get('type')))),
             'review_name' => TextEntry::make('review_name')
                 ->columnSpanFull()
                 ->state(static fn (Get $get): string => SafeStringCastAction::cast($get('name') ?? '')),
@@ -52,10 +52,8 @@ final class TicketFormReviewInfolist
 
     /**
      * Normalizza campo `type` da {@see Get} verso formato accettato da {@see self::formatTicketTypeDisplay()}.
-     *
-     * @param  mixed  $raw
      */
-    private static function coerceTicketTypeValue($raw): TicketTypeEnum|string|null
+    private static function coerceTicketTypeValue(mixed $raw): TicketTypeEnum|string|null
     {
         if ($raw instanceof TicketTypeEnum) {
             return $raw;
@@ -92,7 +90,7 @@ final class TicketFormReviewInfolist
         /** @var mixed $location */
         $location = $get('location');
         if (is_array($location)) {
-            return static::summarizeLocationArray($location);
+            return self::summarizeLocationArray($location);
         }
 
         $address = $get('location.address');

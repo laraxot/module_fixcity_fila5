@@ -5,10 +5,9 @@ declare(strict_types=1);
 namespace Modules\Fixcity\Tests\Unit\Models;
 
 use Modules\Fixcity\Database\Factories\ProfileFactory;
-use Modules\User\Database\Factories\UserFactory;
 use Modules\Fixcity\Models\Profile;
+use Modules\User\Database\Factories\UserFactory;
 use Modules\User\Models\User;
-
 use PHPUnit\Framework\Assert;
 
 describe('Profile Model', function () {
@@ -18,14 +17,14 @@ describe('Profile Model', function () {
         $profile = Profile::create([
             'user_id' => $user->id,
             'first_name' => 'Mario',
-// Laraxot module file — see docs/wiki for domain contract.
-// Laraxot module file — see docs/wiki for domain contract.
-// Laraxot module file — see docs/wiki for domain contract.
-// Laraxot module file — see docs/wiki for domain contract.
-// Laraxot module file — see docs/wiki for domain contract.
-// Laraxot module file — see docs/wiki for domain contract.
-// Laraxot module file — see docs/wiki for domain contract.
-// Laraxot module file — see docs/wiki for domain contract.
+            // Laraxot module file — see docs/wiki for domain contract.
+            // Laraxot module file — see docs/wiki for domain contract.
+            // Laraxot module file — see docs/wiki for domain contract.
+            // Laraxot module file — see docs/wiki for domain contract.
+            // Laraxot module file — see docs/wiki for domain contract.
+            // Laraxot module file — see docs/wiki for domain contract.
+            // Laraxot module file — see docs/wiki for domain contract.
+            // Laraxot module file — see docs/wiki for domain contract.
             'last_name' => 'Rossi',
             'email' => 'mario.rossi@example.com',
         ]);
@@ -112,9 +111,7 @@ describe('Profile Model', function () {
         Assert::assertContains($profile, $emailResults);
     });
 
-    it('maintains data integrity constraints', function () {
-        // Test that required fields are enforced
-    });
+    it('maintains data integrity constraints')->todo();
 
     it('can be deleted', function () {
         $profile = ProfileFactory::new()->createOne();

@@ -4,22 +4,23 @@ declare(strict_types=1);
 
 namespace Modules\Fixcity\Tests\Unit\Models;
 
-use Modules\Fixcity\Database\Factories\TicketFactory;
-use Modules\User\Database\Factories\UserFactory;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Relations\HasMany;
-use Illuminate\Database\QueryException;
+use Modules\Fixcity\Database\Factories\TicketFactory;
 use Modules\Fixcity\Models\Profile;
 use Modules\Fixcity\Models\Ticket;
 use Modules\Fixcity\Models\TicketActivity;
+use Modules\Fixcity\Models\TicketComment;
 use Modules\Fixcity\Models\TicketHour;
 use Modules\Fixcity\Models\User;
+use Modules\User\Database\Factories\UserFactory;
 use Modules\User\Models\Team;
 use Modules\User\Models\Tenant;
-
 use PHPUnit\Framework\Assert;
+
 describe('User Model (Fixcity)', function () {
-// Laraxot module file — see docs/wiki for domain contract.
-// Laraxot module file — see docs/wiki for domain contract.
+    // Laraxot module file — see docs/wiki for domain contract.
+    // Laraxot module file — see docs/wiki for domain contract.
     it('can be created with valid data', function () {
         $user = User::create([
             'name' => 'Test User',
@@ -36,7 +37,7 @@ describe('User Model (Fixcity)', function () {
 
     it('can own tickets', function () {
         $user = UserFactory::new()->createOne();
-        /** @var \Illuminate\Database\Eloquent\Collection<int, \Modules\Fixcity\Models\Ticket> $tickets */
+        /** @var Collection<int, Ticket> $tickets */
         $tickets = TicketFactory::new()->count(3)->create([
             'owner_id' => $user->id,
         ]);
@@ -50,7 +51,7 @@ describe('User Model (Fixcity)', function () {
 
     it('can be responsible for tickets', function () {
         $user = UserFactory::new()->createOne();
-        /** @var \Illuminate\Database\Eloquent\Collection<int, \Modules\Fixcity\Models\Ticket> $tickets */
+        /** @var Collection<int, Ticket> $tickets */
         $tickets = TicketFactory::new()->count(2)->create([
             'responsible_id' => $user->id,
         ]);
@@ -135,7 +136,7 @@ describe('User Model (Fixcity)', function () {
             'content' => 'This is a comment',
         ]);
 
-        $comments = \Modules\Fixcity\Models\TicketComment::query()->where('user_id', $user->id)->get();
+        $comments = TicketComment::query()->where('user_id', $user->id)->get();
         Assert::assertCount(1, $comments);
         Assert::assertSame($comment->id, $comments->first()?->id);
     });
@@ -226,10 +227,7 @@ describe('User Model (Fixcity)', function () {
         Assert::assertContains($user, $searchResults);
     });
 
-    it('maintains data integrity constraints', function () {
-        // Test that required fields are enforced
-
-    });
+    it('maintains data integrity constraints')->todo();
 
     it('can be deleted', function () {
         $user = UserFactory::new()->createOne();

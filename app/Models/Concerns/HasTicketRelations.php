@@ -90,7 +90,7 @@ trait HasTicketRelations
     /**
      * Commenti legacy admin (tabella ticket_comments).
      *
-     * @deprecated Use comments() from Modules\Comment for new ticket discussions.
+     * @note Legacy compatibility relation. New ticket discussions use comments() from Modules\Comment.
      *
      * @return HasMany<TicketComment, $this>
      */

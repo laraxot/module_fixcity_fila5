@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Modules\Fixcity\Datas;
 
 use Webmozart\Assert\Assert;
+use Webmozart\Assert\InvalidArgumentException;
 
 /**
  * Data Transfer Object for Ticket updates.
@@ -27,15 +28,15 @@ final class TicketUpdateData extends BaseData
     /**
      * Create a new TicketUpdateData instance.
      *
-     * @param string|null $name Ticket title/name
-     * @param string|null $content Ticket description
-     * @param int|null $priority_id Priority level
-     * @param int|null $status_id Current status
-     * @param int|null $responsible_id Assigned user ID
-     * @param int|null $type_id Ticket type
-     * @param string|null $latitude Geographic latitude
-     * @param string|null $longitude Geographic longitude
-     * @param array<string, mixed>|null $metadata Additional metadata
+     * @param  string|null  $name  Ticket title/name
+     * @param  string|null  $content  Ticket description
+     * @param  int|null  $priority_id  Priority level
+     * @param  int|null  $status_id  Current status
+     * @param  int|null  $responsible_id  Assigned user ID
+     * @param  int|null  $type_id  Ticket type
+     * @param  string|null  $latitude  Geographic latitude
+     * @param  string|null  $longitude  Geographic longitude
+     * @param  array<string, mixed>|null  $metadata  Additional metadata
      */
     public function __construct(
         public readonly ?string $name = null,
@@ -54,7 +55,7 @@ final class TicketUpdateData extends BaseData
     /**
      * Validate TicketUpdateData.
      *
-     * @throws \Webmozart\Assert\InvalidArgumentException
+     * @throws InvalidArgumentException
      */
     public function validate(): void
     {
@@ -110,7 +111,7 @@ final class TicketUpdateData extends BaseData
             'latitude' => $this->latitude,
             'longitude' => $this->longitude,
             'metadata' => $this->metadata,
-        ], static fn ($value) => $value !== null);
+        ], static fn (mixed $value) => $value !== null);
     }
 
     /**
