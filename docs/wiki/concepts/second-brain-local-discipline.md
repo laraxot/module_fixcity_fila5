@@ -4,7 +4,7 @@ type: concept
 module: Fixcity
 tags: [second-brain, stub, hackernoon, harness, fixcity]
 created: 2026-06-05
-updated: 2026-06-05
+updated: 2026-09-26
 qmd: "fixcity second brain stub canonical xot harness hackernoon ticket migration"
 issues:
   - "https://github.com/laraxot/module_fixcity_fila5/issues/29"
@@ -31,3 +31,5 @@ related:
 | **Prompt router** | [llm-wiki.txt](../../../../../../bashscripts/tools/prompts/llm-wiki.txt) |
 
 Ticket, migrazioni owner, Actions Queueable — solo qui; pilastri DB in [bmad/architecture](../../../../../../docs/wiki/bmad/architecture.md).
+
+Per le decisioni attuali del dominio consultare prima [il contratto architetturale canonico Fixcity](./fixcity-architecture-contract-2026-09-26.md); questo file resta il router operativo locale.

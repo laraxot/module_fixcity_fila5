@@ -2,12 +2,19 @@
 title: "STORY-401: Ticket Timeline & Audit Trail"
 type: story
 tags: [fixcity, ticket, timeline, audit-trail, workflow, sla]
-status: draft
+status: superseded
 priority: critical
 assignee: TBD
 created: 2026-06-17
-updated: 2026-06-17
+updated: 2026-09-26
+issues:
+  - "https://github.com/laraxot/base_fixcity_fila5/issues/420"
+discussions:
+  - "https://github.com/laraxot/base_fixcity_fila5/discussions/421"
 ---
+
+
+> **Proposta storica superseduta.** La sezione API/controller è incompatibile con l’architettura corrente. Implementazioni nuove usano Folio + Actions; consultare `docs/stories/STORY-503-citizen-public-ticket-tracking.md` e la story workflow collegata al ticket. Il contenuto seguente resta come contesto storico, non come piano tecnico attivo.
 
 # STORY-401: Ticket Timeline & Audit Trail
 
@@ -136,21 +143,21 @@ Schema::table('tickets', function (Blueprint $table) {
     $table->datetime('completed_at')->nullable();
     $table->datetime('verified_at')->nullable();
     $table->datetime('closed_at')->nullable();
-    $table->foreignId('acknowledged_by')->nullable()->constrained('users');
-    $table->foreignId('assigned_by')->nullable()->constrained('users');
-    $table->foreignId('assigned_to')->nullable()->constrained('users'); // tecnico
-    $table->foreignId('completed_by')->nullable()->constrained('users');
-    $table->foreignId('verified_by')->nullable()->constrained('users');
-    $table->foreignId('closed_by')->nullable()->constrained('users');
+    $table->foreignIdFor(\Modules\Xot\\Datas\\XotData::make()->getUserClass(), 'acknowledged_by')->nullable()->index();
+    $table->foreignIdFor(\Modules\Xot\\Datas\\XotData::make()->getUserClass(), 'assigned_by')->nullable()->index();
+    $table->foreignIdFor(\Modules\Xot\\Datas\\XotData::make()->getUserClass(), 'assigned_to')->nullable()->index(); // tecnico
+    $table->foreignIdFor(\Modules\Xot\\Datas\\XotData::make()->getUserClass(), 'completed_by')->nullable()->index();
+    $table->foreignIdFor(\Modules\Xot\\Datas\\XotData::make()->getUserClass(), 'verified_by')->nullable()->index();
+    $table->foreignIdFor(\Modules\Xot\\Datas\\XotData::make()->getUserClass(), 'closed_by')->nullable()->index();
 });
 
 // Nuova migration ticket_status_history
 Schema::create('ticket_status_history', function (Blueprint $table) {
     $table->id();
-    $table->foreignId('ticket_id')->constrained()->cascadeOnDelete();
+    $table->foreignIdFor(\Modules\Fixcity\\Models\\Ticket::class, 'ticket_id')->constrained()->cascadeOnDelete();
     $table->string('from_status', 50);
     $table->string('to_status', 50);
-    $table->foreignId('changed_by')->nullable()->constrained('users');
+    $table->foreignIdFor(\Modules\Xot\\Datas\\XotData::make()->getUserClass(), 'changed_by')->nullable()->index();
     $table->datetime('changed_at');
     $table->text('notes')->nullable();
     $table->json('metadata')->nullable();

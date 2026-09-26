@@ -17,7 +17,7 @@ The widget follows the **Laraxot Convention-over-Configuration** (Religion):
     - Per il link privacy proveniente dal CMS, il widget usa `TicketForm::getFrontofficePrivacySchema($privacyLink)`: e' una variante esplicita, non una firma convenzionale parametrizzata.
     - Il widget costruisce gli step con `$this->getStepByName(...)` per mantenere i parametri runtime del blocco CMS, ad esempio `privacy_link`.
     - Il widget non deve ridefinire campi ticket gia' presenti in `TicketForm`: eventuali modifiche a privacy, data step o summary partono da `TicketForm`.
-3.  **Submission**: `submit()` usa **`$this->form->getState()`** tale e quale (dehydrate Filament + forma definita da `TicketForm`/schema); merge **`owner_id`** solo se l'utente è autenticato (`??=`); poi `Ticket::create($data)`. **Non** viene chiamato `TicketResource::prepareFormDataBeforePersist()` — quella rimane sulla create nel pannello.
+3.  **Submission**: `submit()` usa **`$this->form->getState()`** tale e quale (dehydrate Filament + forma definita da `TicketForm`/schema); merge **`owner_id`** solo se l'utente è autenticato (`??=`); poi `Ticket::create($data)`. Il frontoffice non dipende dal Resource Filament né dal relativo hook di normalizzazione backoffice.
 4.  **Tipologia (`type`)**: `TicketForm` usa `Select::make('type')->options(TicketTypeEnum::class)` — Filament (`HasOptions`) costruisce `[value => getLabel()]`. **IMPORTANTE**: Mai usare `TicketTypeEnum::cases()` come `options`: non è il contratto previsto da Filament.
 5.  **Auto-Labeling**: No `->label()` calls are used. Translations sono risolte via `LangServiceProvider` usando le chiavi `fixcity::create_ticket_wizard.fields.{name}.label` e `fixcity::segnalazione.fields.*` dove applicabile.
 

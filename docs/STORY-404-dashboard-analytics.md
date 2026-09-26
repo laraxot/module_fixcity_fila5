@@ -9,6 +9,8 @@ created: 2026-06-17
 updated: 2026-06-17
 ---
 
+> Migration snippets are design sketches only: implementation must follow the current `XotBaseMigration` contract and use `foreignIdFor()` for model relations. The current rules are in `docs/wiki/concepts/fixcity-architecture-contract-2026-09-26.md`.
+
 # STORY-404: Dashboard & Analytics Admin
 
 ## User Story
@@ -161,7 +163,7 @@ Schema::create('ticket_statistics_hourly', function (Blueprint $table) {
 Schema::create('operator_performance_daily', function (Blueprint $table) {
     $table->id();
     $table->date('date');
-    $table->foreignId('user_id')->constrained();
+    $table->foreignIdFor(XotData::make()->getUserClass(), 'user_id');
     $table->integer('tickets_assigned')->default(0);
     $table->integer('tickets_completed')->default(0);
     $table->integer('avg_resolution_minutes')->nullable();

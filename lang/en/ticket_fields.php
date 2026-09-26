@@ -20,6 +20,10 @@ return array (
 // Fixcity — translation section (claude-audit doc ratio).
   'fields' => 
   array (
+    'responsible_id' => 
+    array (
+      'label' => 'Assigned operator',
+    ),
     'title' => 
     array (
       'label' => 'Title*',

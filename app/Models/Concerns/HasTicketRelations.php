@@ -12,36 +12,37 @@ use Modules\Fixcity\Models\TicketActivity;
 use Modules\Fixcity\Models\TicketComment;
 use Modules\Fixcity\Models\TicketHour;
 use Modules\Fixcity\Models\TicketRelation;
-use Modules\User\Models\User;
-use Modules\Xot\Contracts\UserContract;
+use Modules\Fixcity\Models\Ticket;
 use Modules\Xot\Datas\XotData;
 
 trait HasTicketRelations
 {
     /**
-     * @return BelongsTo<Model&UserContract, $this, string, string, string>
+     * @return BelongsTo<Model, Ticket>
      */
     public function owner(): BelongsTo
     {
-        /** @var class-string<Model&UserContract> $userClass */
+        /** @var class-string<Model> $userClass */
         $userClass = XotData::make()->getUserClass();
 
+        /** @var BelongsTo<Model, Ticket> */
         return $this->belongsTo($userClass, 'owner_id', 'id');
     }
 
     /**
-     * @return BelongsTo<Model&UserContract, $this, string, string, string>
+     * @return BelongsTo<Model, Ticket>
      */
     public function responsible(): BelongsTo
     {
-        /** @var class-string<Model&UserContract> $userClass */
+        /** @var class-string<Model> $userClass */
         $userClass = XotData::make()->getUserClass();
 
+        /** @var BelongsTo<Model, Ticket> */
         return $this->belongsTo($userClass, 'responsible_id', 'id');
     }
 
     /**
-     * @return HasMany<TicketActivity, $this, string, string>
+     * @return HasMany<TicketActivity, Ticket>
      */
     public function activities(): HasMany
     {
@@ -51,19 +52,20 @@ trait HasTicketRelations
     /**
      * Users subscribed to ticket workflow notifications (pivot ticket_subscribers).
      *
-     * @return BelongsToMany<User, $this, ticket_subscribers, string, string>
+     * @return BelongsToMany<Model, Ticket>
      */
     public function ticketSubscribers(): BelongsToMany
     {
-        /** @var class-string<User> $userClass */
+        /** @var class-string<Model> $userClass */
         $userClass = XotData::make()->getUserClass();
 
+        /** @var BelongsToMany<Model, Ticket> */
         return $this->belongsToMany($userClass, 'ticket_subscribers', 'ticket_id', 'user_id')
             ->withTimestamps();
     }
 
     /**
-     * @return HasMany<TicketRelation, $this, string, string>
+     * @return HasMany<TicketRelation, Ticket>
      */
     public function relations(): HasMany
     {
@@ -71,7 +73,7 @@ trait HasTicketRelations
     }
 
     /**
-     * @return HasMany<TicketHour, $this, string, string>
+     * @return HasMany<TicketHour, Ticket>
      */
     public function hours(): HasMany
     {
@@ -79,14 +81,15 @@ trait HasTicketRelations
     }
 
     /**
-     * @return BelongsTo<User, $this, string, string, string>
+     * @return BelongsTo<Model, Ticket>
      */
     public function assignee(): BelongsTo
     {
-        /** @var class-string<User> $userModel */
-        $userModel = config('auth.providers.users.model');
+        /** @var class-string<Model> $userClass */
+        $userClass = XotData::make()->getUserClass();
 
-        return $this->belongsTo($userModel, 'assignee_id');
+        /** @var BelongsTo<Model, Ticket> */
+        return $this->belongsTo($userClass, 'responsible_id', 'id');
     }
 
     /**
@@ -94,7 +97,7 @@ trait HasTicketRelations
      *
      * @note Legacy compatibility relation. New ticket discussions use comments() from Modules\Comment.
      *
-     * @return HasMany<TicketComment, $this, string, string>
+     * @return HasMany<TicketComment, Ticket>
      */
     public function ticketComments(): HasMany
     {

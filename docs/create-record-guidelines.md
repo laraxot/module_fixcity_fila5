@@ -1,7 +1,9 @@
-# Filament `CreateRecord` – Guideline & Architecture Overview
+# XotBase `CreateRecord` – Guideline & Architecture Overview
+
+Le pagine create del progetto estendono `Modules\Xot\Filament\Resources\Pages\XotBaseCreateRecord`; questa guida descrive i relativi hook, non autorizza l’estensione diretta della classe Filament.
 
 ## What is `CreateRecord`
-`CreateRecord` (\Filament\Resources\Pages\CreateRecord) is the **base page class** that powers every *resource create* page in Filament.  It implements the full lifecycle of a record creation form:
+`XotBaseCreateRecord` è la base di progetto per le pagine create delle Resource e fornisce il lifecycle del record. I suoi hook permettono di aggiungere comportamento specifico:
 
 1. **Authorization** – `authorizeAccess()` ensures the current user can create the resource.
 2. **Form hydration** – `fillForm()` calls the resource's `form()` definition and populates default values.
@@ -15,7 +17,7 @@
 | Principle | Why it matters |
 |-----------|----------------|
 | **Single source of truth** – All wizard‑style logic (step handling, DB transaction scope, form actions) lives here. Sub‑classes only supply **what** fields exist, never **how** the form works. | Guarantees consistency across every resource page and prevents accidental duplication of transaction handling. |
-| **Hooks, not overrides** – `callHook('beforeValidate')`, `mutateFormDataBeforeCreate()`, etc. allow you to inject behaviour without touching the core flow. | Keeps the base class stable; future Filament upgrades rarely break custom pages that rely on hooks. |
+| **Hooks, not overrides** – `beforeValidate`, `mutateFormDataBeforeCreate()` e gli altri hook permettono di aggiungere comportamento senza cambiare il core flow. | Mantiene stabile la base Xot. |
 | **Safety first** – Uses `CanUseDatabaseTransactions` and rolls back on any exception. The `$isCreating` flag (locked by `#[Locked]`) prevents double submissions. | Protects data integrity and avoids race conditions in a Livewire environment. |
 | **Internationalisation** – All UI strings are pulled from Filament language files (`__('filament‑panels::resources/pages/create‑record…')`). | Guarantees a multilingual UI without hard‑coded text. |
 | **Extensibility** – Methods like `preserveFormDataWhenCreatingAnother()` and `mutateFormDataBeforeCreate()` are *intended* extension points. | Enables “Create + New” workflows without custom copy‑pasting of form state. |
@@ -27,7 +29,7 @@
 | `beforeValidate` / `afterValidate` | Add custom Livewire/JS validation or manipulate the raw state before Filament validates it. |
 | `mutateFormDataBeforeCreate(array $data)` | Convert UI‑friendly values to DB‑ready values (e.g. explode a comma‑separated list, map a human‑readable enum to its key). |
 | `preserveFormDataWhenCreatingAnother(array $data)` | Keep certain fields (like `category_id`) when the user clicks **Create Another**. |
-| `handleRecordCreation(array $data)` | Replace the default `new Model($data)` with a factory or a service‑layer call. |
+| `handleRecordCreation(array $data)` | Sostituire la persistenza predefinita solo se necessario, delegando la logica a una Action. |
 | `getRedirectUrl()` / `getRedirectUrlParameters()` | Custom post‑create routing, e.g. sending the user to a thank‑you page. |
 | `getCreatedNotification()` | Override the toast message or change its style. |
 
@@ -35,7 +37,7 @@
 1. **Never duplicate transaction code** – rely on the `beginDatabaseTransaction` / `commitDatabaseTransaction` flow.
 2. **Prefer hooks over overriding `create()`** – only override if you need to change the entire flow.
 3. **Keep form schemas declarative** – define all fields in the resource’s `form()` method; avoid mutating the schema in the page class.
-4. **Use `mutateFormDataBeforeCreate` for data massaging** – e.g. converting a `type_id` enum to the enum class, or normalising phone numbers.
+4. **Use `mutateFormDataBeforeCreate` for page-specific preparation**. Per normalizzazioni riusabili, chiamare direttamente l’Action proprietaria dal hook; non aggiungere metodi statici pass-through al Resource e non duplicare la logica nel Resource.
 5. **Leverage the notifications system** – calling `$this->getCreatedNotification()?->send()` gives a consistent UI experience.
 6. **Add phpdoc for generic `TModel`** – improves IDE support and static analysis.
 7. **Write a feature test** that exercises the whole lifecycle (`Livewire::test(...)->set(...)->call('create')`).
@@ -50,18 +52,14 @@ protected function beforeFill(): void
 
 protected function mutateFormDataBeforeCreate(array $data): array
 {
-    // Cast the incoming enum string to the actual enum instance.
-    if (isset($data['type_id'])) {
-        $data['type_id'] = \Modules\Fixcity\Enums\TicketTypeEnum::tryFrom($data['type_id']) ?? \Modules\Fixcity\Enums\TicketTypeEnum::default();
-    }
-    return $data;
+    return app(GetTicketFormDataForPersistAction::class)->execute($data);
 }
 ```
-The above follows the **DRY** rule: we do not touch `handleRecordCreation` or the transaction logic.
+La Page adatta il lifecycle XotBase, l’Action possiede la trasformazione e il Resource configura schema e route. Il frontoffice non dipende dal Resource Filament.
 
 ---
 **Where this lives**
-- Core class: `vendor/filament/filament/src/Resources/Pages/CreateRecord.php`
+- Core class: `Modules/Xot/app/Filament/Resources/Pages/XotBaseCreateRecord.php`
 - Extension example: `Modules/Fixcity/app/Filament/Widgets/CreateTicketWizardWidget.php`
 - Guidelines added here: `Modules/Fixcity/docs/create-record-guidelines.md`
 

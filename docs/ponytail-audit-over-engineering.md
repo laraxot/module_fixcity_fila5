@@ -1,6 +1,7 @@
 # Ponytail audit — Fixcity (over-engineering)
 
-**Ultimo run:** 2026-07-09  
+**Ultimo run storico:** 2026-07-09  
+**Recheck filesystem:** 2026-09-26 — `app/Services/` assente (0 file)  
 **Modulo:** dominio ticket/segnalazioni, workflow PA.
 
 **Hub:** [../../../../docs/project/ponytail-audit-hub.md](../../../../docs/project/ponytail-audit-hub.md)  
@@ -11,7 +12,7 @@
 
 | Regola | Stato |
 |--------|-------|
-| No `app/Services/*` per business logic | ⚠️ 3 classi legacy |
+| No `app/Services/*` per business logic | ✅ nessuna directory `app/Services/` al recheck 2026-09-26 |
 | No `Http/Controllers` | ✅ Folio + Actions |
 | No `app/Repositories/` | ✅ rimosso 2026-07-09 (STORY-489) |
 | QueueableAction owner | ✅ pattern target |
@@ -20,14 +21,14 @@
 
 | # | Tag | Cosa | Sostituzione | Path | Stato |
 |---|-----|------|--------------|------|-------|
-| F1 | `delete` | `WorkflowService` — orchestrazione stati | `TicketStatusEnum` + Action/eventi | `app/Services/WorkflowService.php` | aperto → STORY-392 |
-| F2 | `delete` | `TicketService` — CRUD/wrapper | `Ticket::` + Actions esistenti | `app/Services/TicketService.php` | aperto → STORY-392 |
-| F3 | `delete` | `NotificationService` — notifiche | `Notify` Actions / eventi | `app/Services/NotificationService.php` | aperto → STORY-402 |
+| F1 | `delete` | `WorkflowService` — orchestrazione stati | `TicketStatusEnum` + Action/eventi | `app/Services/WorkflowService.php` | ✅ assente al recheck 2026-09-26 |
+| F2 | `delete` | `TicketService` — CRUD/wrapper | `Ticket::` + Actions esistenti | `app/Services/TicketService.php` | ✅ assente al recheck 2026-09-26 |
+| F3 | `delete` | `NotificationService` — notifiche | `Notify` Actions / eventi | `app/Services/NotificationService.php` | ✅ assente al recheck 2026-09-26 |
 | F4 | `reuse` | GeoJSON / filtri già in Actions | Non duplicare Service | `LoadPublicTicketsGeoJsonAction`, ecc. | ✅ canon |
 
 ## Wave 1 (non toccare in audit automatico)
 
-- Migrazione Services → Actions è **multi-story** (392, 402); non delete cieco senza test Pest.
+- Migrazione Services → Actions completata nel filesystem osservato; questa fotografia non sostituisce test/regressione dei flussi.
 - `SegnalazioniFilterViewModel` — OK (no Services layer).
 
 ## Collegamenti

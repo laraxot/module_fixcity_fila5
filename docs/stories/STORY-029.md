@@ -4,6 +4,8 @@
 **Priority:** Should  
 **Story Points:** 8  
 **Status:** Completed  
+
+> Story di modulo per l’implementazione Fixcity; il racconto piattaforma condiviso è [STORY-029 map-lit](../../../../../docs/stories/STORY-029-pagina-segnalazioni-elenco-map-lit.md). Tracciamento parent: [issue #383](https://github.com/laraxot/base_fixcity_fila5/issues/383) · [discussion #392](https://github.com/laraxot/base_fixcity_fila5/discussions/392).
 **Assigned To:** Kilo  
 **Created:** 2026-06-01  
 **Sprint:** Sprint 6
