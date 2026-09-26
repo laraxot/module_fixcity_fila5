@@ -10,7 +10,7 @@ use Modules\Fixcity\Database\Factories\TicketFactory;
 use Modules\Fixcity\Models\Profile;
 use Modules\Fixcity\Models\Ticket;
 use Modules\Fixcity\Models\TicketActivity;
-use Modules\Fixcity\Models\TicketComment;
+use Modules\Comment\Models\Comment;
 use Modules\Fixcity\Models\TicketHour;
 use Modules\Fixcity\Models\User;
 use Modules\User\Database\Factories\UserFactory;
@@ -136,7 +136,7 @@ describe('User Model (Fixcity)', function () {
             'content' => 'This is a comment',
         ]);
 
-        $comments = TicketComment::query()->where('user_id', $user->id)->get();
+        $comments = Comment::query()->where('user_id', $user->id)->get();
         Assert::assertCount(1, $comments);
         Assert::assertSame($comment->id, $comments->first()?->id);
     });

@@ -12,7 +12,6 @@ use Illuminate\Notifications\DatabaseNotification;
 use Illuminate\Notifications\DatabaseNotificationCollection;
 use Illuminate\Support\Carbon;
 use Modules\Comment\Models\Comment;
-use Modules\Fixcity\Models\TicketComment;
 use Modules\Comment\Models\CommentNotificationSubscription;
 use Modules\Comment\Models\Concerns\InteractsWithComments;
 use Modules\Comment\Models\Contracts\CanComment;
