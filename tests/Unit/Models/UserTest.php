@@ -13,10 +13,13 @@ use Modules\Fixcity\Models\TicketActivity;
 use Modules\Comment\Models\Comment;
 use Modules\Fixcity\Models\TicketHour;
 use Modules\Fixcity\Models\User;
+use Modules\Fixcity\Tests\TestCase;
 use Modules\User\Database\Factories\UserFactory;
 use Modules\User\Models\Team;
 use Modules\User\Models\Tenant;
 use PHPUnit\Framework\Assert;
+
+uses(TestCase::class);
 
 describe('User Model (Fixcity)', function () {
     // Laraxot module file — see docs/wiki for domain contract.
@@ -130,7 +133,6 @@ describe('User Model (Fixcity)', function () {
         $user = UserFactory::new()->createOne();
         $ticket = TicketFactory::new()->createOne();
 
-<<<<<<< HEAD
         $comment = $ticket->comments()->create([
             'commentator_id' => $user->getKey(),
             'commentator_type' => $user->getMorphClass(),
@@ -143,15 +145,6 @@ describe('User Model (Fixcity)', function () {
             ->where('commentable_id', $ticket->getKey())
             ->where('commentator_id', $user->getKey())
             ->get();
-=======
-        // Create comment for user
-        $comment = $ticket->ticketComments()->create([
-            'user_id' => $user->id,
-            'content' => 'This is a comment',
-        ]);
-
-        $comments = Comment::query()->where('user_id', $user->id)->get();
->>>>>>> laraxot/dev
         Assert::assertCount(1, $comments);
         Assert::assertSame($comment->id, $comments->first()?->id);
     });
