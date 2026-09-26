@@ -25,51 +25,56 @@ describe('TicketComment Model', function () {
         // Laraxot — see module docs/wiki for domain contract.
 
         $comment = Comment::create([
-            'ticket_id' => $ticket->id,
-            'user_id' => $user->id,
-            'content' => 'This is a test comment',
+            'commentable_id' => $ticket->id,
+            'commentable_type' => $ticket->getMorphClass(),
+            'commentator_id' => $user->id,
+            'commentator_type' => $user->getMorphClass(),
+            'original_text' => 'This is a test comment',
+            'text' => 'This is a test comment',
         ]);
 
         Assert::assertInstanceOf(Comment::class, $comment);
 
-        Assert::assertSame($ticket->id, $comment->ticket_id);
+        Assert::assertSame($ticket->id, $comment->commentable_id);
 
-        Assert::assertSame($user->id, $comment->user_id);
+        Assert::assertSame($user->id, $comment->commentator_id);
 
-        Assert::assertSame('This is a test comment', $comment->content);
+        Assert::assertSame('This is a test comment', $comment->original_text);
     });
 
     it('belongs to a ticket', function () {
         $ticket = TicketFactory::new()->createOne();
         $comment = CommentFactory::new()->createOne([
-            'ticket_id' => $ticket->id,
+            'commentable_id' => $ticket->id,
+            'commentable_type' => $ticket->getMorphClass(),
         ]);
 
-        Assert::assertInstanceOf(Ticket::class, $comment->ticket);
+        Assert::assertInstanceOf(Ticket::class, $comment->commentable);
 
-        Assert::assertSame($ticket->id, $comment->ticket->id);
+        Assert::assertSame($ticket->id, $comment->commentable->id);
     });
 
     it('belongs to a user', function () {
         $user = UserFactory::new()->createOne();
         $comment = CommentFactory::new()->createOne([
-            'user_id' => $user->id,
+            'commentator_id' => $user->id,
+            'commentator_type' => $user->getMorphClass(),
         ]);
 
-        Assert::assertInstanceOf(User::class, $comment->user);
+        Assert::assertInstanceOf(User::class, $comment->commentator);
 
-        Assert::assertSame($user->id, $comment->user->id);
+        Assert::assertSame($user->id, $comment->commentator->id);
     });
 
     it('can store rich content', function () {
         $comment = CommentFactory::new()->createOne([
-            'content' => 'This is a **rich** comment with *formatting*',
+            'original_text' => 'This is a **rich** comment with *formatting*',
         ]);
 
-        Assert::assertSame('This is a **rich** comment with *formatting*', $comment->content);
+        Assert::assertSame('This is a **rich** comment with *formatting*', $comment->original_text);
 
-        Assert::assertStringContainsString('**rich**', $comment->content);
-        Assert::assertStringContainsString('*formatting*', $comment->content);
+        Assert::assertStringContainsString('**rich**', $comment->original_text);
+        Assert::assertStringContainsString('*formatting*', $comment->original_text);
     });
 
     it('tracks creation and update times', function () {
@@ -78,7 +83,7 @@ describe('TicketComment Model', function () {
         Assert::assertNotNull($comment->created_at);
         Assert::assertNotNull($comment->updated_at);
         // Update the comment
-        $comment->update(['content' => 'Updated content']);
+        $comment->update(['original_text' => 'Updated content']);
 
         Assert::assertGreaterThan($comment->created_at, $comment->updated_at);
     });
@@ -86,36 +91,48 @@ describe('TicketComment Model', function () {
     it('can be queried by ticket', function () {
         $ticket = TicketFactory::new()->createOne();
         $comments = CommentFactory::new()->count(3)->create([
-            'ticket_id' => $ticket->id,
+            'commentable_id' => $ticket->id,
+            'commentable_type' => $ticket->getMorphClass(),
         ]);
 
-        $ticketComments = Comment::where('ticket_id', $ticket->id)->get();
+        $ticketComments = Comment::where('commentable_id', $ticket->id)
+            ->where('commentable_type', $ticket->getMorphClass())
+            ->get();
 
         Assert::assertCount(3, $ticketComments);
         foreach ($ticketComments as $comment) {
-            Assert::assertSame($ticket->id, $comment->ticket_id);
+            Assert::assertSame($ticket->id, $comment->commentable_id);
         }
     });
 
     it('can be queried by user', function () {
         $user = UserFactory::new()->createOne();
         $comments = CommentFactory::new()->count(3)->create([
-            'user_id' => $user->id,
+            'commentator_id' => $user->id,
+            'commentator_type' => $user->getMorphClass(),
         ]);
 
-        $userComments = Comment::query()->where('user_id', $user->id)->get();
+        $userComments = Comment::query()->where('commentator_id', $user->id)
+            ->where('commentator_type', $user->getMorphClass())
+            ->get();
 
         Assert::assertCount(3, $userComments);
         foreach ($userComments as $comment) {
-            Assert::assertSame($user->id, $comment->user_id);
+            Assert::assertSame($user->id, $comment->commentator_id);
         }
     });
 
     it('can be filtered by ticket id', function () {
         $ticket = TicketFactory::new()->createOne();
-        $comment = CommentFactory::new()->createOne(['ticket_id' => $ticket->id]);
+        $comment = CommentFactory::new()->createOne([
+            'commentable_id' => $ticket->id,
+            'commentable_type' => $ticket->getMorphClass(),
+        ]);
 
-        $ticketComments = Comment::query()->where('ticket_id', $ticket->id)->get();
+        $ticketComments = Comment::query()
+            ->where('commentable_id', $ticket->id)
+            ->where('commentable_type', $ticket->getMorphClass())
+            ->get();
 
         Assert::assertCount(1, $ticketComments);
         Assert::assertSame($comment->id, $ticketComments->first()?->id);
@@ -142,32 +159,23 @@ describe('TicketComment Model', function () {
 
     it('can be searched by content', function () {
         $comment = CommentFactory::new()->createOne([
-            'content' => 'Special search term in comment',
+            'original_text' => 'Special search term in comment',
         ]);
 
-        $searchResults = Comment::where('content', 'like', '%search term%')->get();
+        $searchResults = Comment::where('original_text', 'like', '%search term%')->get();
 
         Assert::assertContains($comment, $searchResults);
     });
 
     it('maintains data integrity constraints')->todo();
 
-    it('can be soft deleted if implemented', function () {
+    it('can be deleted', function () {
         $comment = CommentFactory::new()->createOne();
+        $commentId = $comment->id;
 
-        // Check if soft deletes are implemented
-        if (method_exists($comment, 'trashed')) {
-            $comment->delete();
-            Assert::assertTrue($comment->trashed());
-            $trashedComment = Comment::withTrashed()->find($comment->id);
-            Assert::assertNotNull($trashedComment);
-        } else {
-            // If no soft deletes, test regular deletion
-            $commentId = $comment->id;
-            $comment->delete();
+        $comment->delete();
 
-            Assert::assertNull(Comment::find($commentId));
-        }
+        Assert::assertNull(Comment::find($commentId));
     });
 
     it('can be associated with attachments if implemented', function () {

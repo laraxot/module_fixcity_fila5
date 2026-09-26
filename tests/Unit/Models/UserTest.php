@@ -130,13 +130,18 @@ describe('User Model (Fixcity)', function () {
         $user = UserFactory::new()->createOne();
         $ticket = TicketFactory::new()->createOne();
 
-        // Create comment for user
-        $comment = $ticket->ticketComments()->create([
-            'user_id' => $user->id,
-            'content' => 'This is a comment',
+        $comment = $ticket->comments()->create([
+            'commentator_id' => $user->getKey(),
+            'commentator_type' => $user->getMorphClass(),
+            'original_text' => 'This is a comment',
+            'text' => 'This is a comment',
         ]);
 
-        $comments = Comment::query()->where('user_id', $user->id)->get();
+        $comments = Comment::query()
+            ->where('commentable_type', $ticket->getMorphClass())
+            ->where('commentable_id', $ticket->getKey())
+            ->where('commentator_id', $user->getKey())
+            ->get();
         Assert::assertCount(1, $comments);
         Assert::assertSame($comment->id, $comments->first()?->id);
     });

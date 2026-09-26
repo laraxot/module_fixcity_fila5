@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Modules\Fixcity\Models\TicketActivity;
-use Modules\Comment\Models\Comment;
+use Modules\Fixcity\Models\TicketComment;
 use Modules\Fixcity\Models\TicketHour;
 use Modules\Fixcity\Models\TicketRelation;
 use Modules\User\Models\User;
@@ -96,6 +96,6 @@ trait HasTicketRelations
      */
     public function ticketComments(): HasMany
     {
-        return $this->hasMany(Comment::class);
+        return $this->hasMany(TicketComment::class, 'ticket_id', 'id');
     }
 }
