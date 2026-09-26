@@ -37,12 +37,12 @@ class TicketInfolist extends XotBaseResourceInfolist
      * **Regola**: classi che estendono XotBaseResourceInfolist NON devono avere configure()
      * **Pattern**: usa solo getInfolistSchema()
      *
-     * @return array<int, Component|Htmlable|string>
+     * @return array<string, Component>
      */
-    public static function getInfolistSchema(): array
+    public function getInfolistSchema(): array
     {
         return [
-            Tabs::make('ticket')
+            'ticket' => Tabs::make('ticket')
                 ->tabs([
                     Tabs\Tab::make('overview')
                         ->icon('heroicon-o-information-circle')

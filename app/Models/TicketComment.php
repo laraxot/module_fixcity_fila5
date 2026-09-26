@@ -10,6 +10,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Support\Carbon;
 use Modules\Fixcity\Database\Factories\TicketCommentFactory;
 use Modules\User\Models\User;
+use Modules\Xot\Contracts\UserContract;
 use Modules\Xot\Datas\XotData;
 
 /**
@@ -48,7 +49,7 @@ use Modules\Xot\Datas\XotData;
  * @property-read Profile|null $updater
  * @property-read Profile|null $deleter
  *
- * @deprecated Legacy ticket_comments model. Use Modules\Comment\Models\Comment for new ticket discussions.
+ * @note Legacy ticket_comments compatibility model. New ticket discussions use Modules\Comment\Models\Comment.
  *
  * @mixin \Eloquent
  */
@@ -71,7 +72,7 @@ class TicketComment extends BaseModel
         */
     }
 
-    /** @return BelongsTo<Model&\Modules\Xot\Contracts\UserContract, $this> */
+    /** @return BelongsTo<Model&UserContract, $this> */
     public function user(): BelongsTo
     {
         $user_class = XotData::make()->getUserClass();

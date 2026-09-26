@@ -14,7 +14,7 @@ final class EnsureTicketCitizenRatingDefinitionAction
 {
     use QueueableAction;
 
-    public const SLUG = 'fixcity-ticket-citizen-satisfaction';
+    public const string SLUG = 'fixcity-ticket-citizen-satisfaction';
 
     public function execute(): Rating
     {

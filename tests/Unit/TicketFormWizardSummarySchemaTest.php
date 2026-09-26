@@ -49,7 +49,7 @@ describe('ticket wizard summary step schema', function (): void {
         $schema = TicketForm::getDataSchema();
 
         Assert::assertInstanceOf(Hidden::class, $schema['priority'] ?? null);
-        Assert::assertNotInstanceOf(Select::class, $schema['priority'] ?? null);
+        Assert::assertNotInstanceOf(Select::class, $schema['priority']);
         Assert::assertInstanceOf(Select::class, $schema['type'] ?? null);
     });
 });

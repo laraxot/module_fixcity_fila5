@@ -23,7 +23,7 @@ class TicketForm extends XotBaseResourceForm
     /**
      * @return array<string, Step>
      */
-    public static function getSteps(): array
+    public function getSteps(): array
     {
         return [
             'privacy' => static::getStepByName('privacy')
@@ -115,7 +115,7 @@ class TicketForm extends XotBaseResourceForm
      *
      * @return array<string, SchemaComponent>
      */
-    public static function getFormSchema(): array
+    public function getFormSchema(): array
     {
         return array_merge(
             static::getPrivacySchema(),

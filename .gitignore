@@ -1,25 +1,15 @@
+
+audit-coverage/
+build/
+cache/
+# claude-audit bridge (non committare)
+docs/archive/agentdb.rvf
+docs/cache/
+# Legacy PHPUnit (solo cartella maiuscola Tests/ — non confondere con Pest tests/)
 node_modules
+# Pest + audit-coverage bridge (claude-audit legge .gitignore case-insensitive su WSL)
+# Second brain: no-docs-archive (wiki) — non tracciare albero legacy docs/archive/
+/Tests/
+tests/AuditCoverage/
 vendor
 vendor/
-build/
-docs/cache/
-cache/
-
-# Second brain: no-docs-archive (wiki) — non tracciare albero legacy docs/archive/
-docs/archive/agentdb.rvf
-
-# Legacy PHPUnit (solo cartella maiuscola Tests/ — non confondere con Pest tests/)
-/Tests/
-
-# Pest + audit-coverage bridge (claude-audit legge .gitignore case-insensitive su WSL)
-!tests/
-!tests/**
-<<<<<<< HEAD
-!audit-coverage/
-!audit-coverage/**
-=======
-
-# claude-audit bridge (non committare)
-audit-coverage/
-tests/AuditCoverage/*
->>>>>>> 8220a4f (.)

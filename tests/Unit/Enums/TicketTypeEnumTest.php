@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace Modules\Fixcity\Tests\Unit\Enums;
 
 use Modules\Fixcity\Enums\TicketTypeEnum;
-
 use PHPUnit\Framework\Assert;
+
 describe('TicketTypeEnum', function () {
     it('has all required type values', function () {
         $expectedTypes = [
@@ -18,11 +18,11 @@ describe('TicketTypeEnum', function () {
             'PUBLIC_BUILDINGS',
             'ENVIRONMENTAL_REPORTS',
             'PUBLIC_TRANSPORT',
-// Laraxot module file — see docs/wiki for domain contract.
-// Laraxot module file — see docs/wiki for domain contract.
-// Laraxot module file — see docs/wiki for domain contract.
-// Laraxot module file — see docs/wiki for domain contract.
-// Laraxot module file — see docs/wiki for domain contract.
+            // Laraxot module file — see docs/wiki for domain contract.
+            // Laraxot module file — see docs/wiki for domain contract.
+            // Laraxot module file — see docs/wiki for domain contract.
+            // Laraxot module file — see docs/wiki for domain contract.
+            // Laraxot module file — see docs/wiki for domain contract.
             'URBAN_FURNITURE',
             'PUBLIC_SAFETY',
             'COMPLAINT',
@@ -41,7 +41,7 @@ describe('TicketTypeEnum', function () {
     });
 
     it('provides correct colors for each type', function () {
-                        $typeColors = [
+        $typeColors = [
             [TicketTypeEnum::ROAD_MAINTENANCE, '#ff9800'],
             [TicketTypeEnum::PUBLIC_LIGHTING, '#fbc02d'],
             [TicketTypeEnum::WASTE_COLLECTION, '#4caf50'],
@@ -65,7 +65,7 @@ describe('TicketTypeEnum', function () {
     });
 
     it('provides correct icons for each type', function () {
-                        $typeIcons = [
+        $typeIcons = [
             [TicketTypeEnum::ROAD_MAINTENANCE, 'heroicon-o-wrench'],
             [TicketTypeEnum::PUBLIC_LIGHTING, 'heroicon-o-light-bulb'],
             [TicketTypeEnum::WASTE_COLLECTION, 'heroicon-o-trash'],
@@ -89,7 +89,7 @@ describe('TicketTypeEnum', function () {
     });
 
     it('provides correct labels for each type', function () {
-                        $typeLabels = [
+        $typeLabels = [
             [TicketTypeEnum::ROAD_MAINTENANCE, 'Manutenzione Stradale'],
             [TicketTypeEnum::PUBLIC_LIGHTING, 'Illuminazione Pubblica'],
             [TicketTypeEnum::WASTE_COLLECTION, 'Raccolta Rifiuti'],
@@ -123,7 +123,6 @@ describe('TicketTypeEnum', function () {
 
     it('can be used in string context', function () {
         $type = TicketTypeEnum::ROAD_MAINTENANCE;
-        Assert::assertSame('road_maintenance', $type->value);
         Assert::assertSame('road_maintenance', $type->value);
     });
 

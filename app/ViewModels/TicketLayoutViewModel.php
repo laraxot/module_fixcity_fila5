@@ -53,7 +53,7 @@ final class TicketLayoutViewModel
         $this->phoneNumber = SafeStringCastAction::cast($this->blockData['phone'] ?? '05 0505');
         $this->selectedTypes = $this->parseSelectedTypes();
         $this->selectedStatuses = $this->parseSelectedStatuses();
-        $this->filterViewModel = new TicketFilterViewModel();
+        $this->filterViewModel = new TicketFilterViewModel;
         $this->baseQuery = app(BuildPublicTicketsQueryAction::class)->execute();
         $this->filteredQuery = $this->buildFilteredQuery();
         $this->liveTickets = $this->buildLiveTickets();
@@ -79,7 +79,7 @@ final class TicketLayoutViewModel
     private function parseSelectedTypes(): array
     {
         return array_values(request()->collect('types')
-            ->filter(static fn ($type): bool => is_string($type) && $type !== '')
+            ->filter(static fn (mixed $type): bool => is_string($type) && $type !== '')
             ->all());
     }
 
@@ -89,7 +89,7 @@ final class TicketLayoutViewModel
     private function parseSelectedStatuses(): array
     {
         return request()->collect('statuses')
-            ->filter(static fn ($status): bool => is_string($status) && $status !== '')
+            ->filter(static fn (mixed $status): bool => is_string($status) && $status !== '')
             ->values()
             ->all();
     }

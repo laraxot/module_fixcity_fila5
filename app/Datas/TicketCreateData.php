@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Modules\Fixcity\Datas;
 
-use Carbon\Carbon;
 use Webmozart\Assert\Assert;
+use Webmozart\Assert\InvalidArgumentException;
 
 /**
  * Data Transfer Object for Ticket creation.
@@ -27,14 +27,14 @@ final class TicketCreateData extends BaseData
     /**
      * Create a new TicketCreateData instance.
      *
-     * @param string $name Ticket title/name
-     * @param int $owner_id Creator user ID
-     * @param string|null $content Ticket description
-     * @param int|null $priority_id Priority level
-     * @param int|null $type_id Ticket type
-     * @param string|null $latitude Geographic latitude
-     * @param string|null $longitude Geographic longitude
-     * @param array<string, mixed>|null $metadata Additional metadata
+     * @param  string  $name  Ticket title/name
+     * @param  int  $owner_id  Creator user ID
+     * @param  string|null  $content  Ticket description
+     * @param  int|null  $priority_id  Priority level
+     * @param  int|null  $type_id  Ticket type
+     * @param  string|null  $latitude  Geographic latitude
+     * @param  string|null  $longitude  Geographic longitude
+     * @param  array<string, mixed>|null  $metadata  Additional metadata
      */
     public function __construct(
         public readonly string $name,
@@ -52,7 +52,7 @@ final class TicketCreateData extends BaseData
     /**
      * Validate TicketCreateData.
      *
-     * @throws \Webmozart\Assert\InvalidArgumentException
+     * @throws InvalidArgumentException
      */
     public function validate(): void
     {
@@ -99,6 +99,6 @@ final class TicketCreateData extends BaseData
             'latitude' => $this->latitude,
             'longitude' => $this->longitude,
             'metadata' => $this->metadata,
-        ], static fn ($value) => $value !== null);
+        ], static fn (mixed $value) => $value !== null);
     }
 }

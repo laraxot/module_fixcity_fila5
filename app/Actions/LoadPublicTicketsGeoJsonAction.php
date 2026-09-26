@@ -15,9 +15,9 @@ final class LoadPublicTicketsGeoJsonAction
 {
     use QueueableAction;
 
-    public const RELATIVE_PATH = '../public_html/data/tickets.json';
+    public const string RELATIVE_PATH = '../public_html/data/tickets.json';
 
-    public const PUBLIC_URL = '/data/tickets.json';
+    public const string PUBLIC_URL = '/data/tickets.json';
 
     /**
      * @return array{

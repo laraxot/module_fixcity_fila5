@@ -8,8 +8,8 @@ use Filament\Actions\Exports\Enums\ExportFormat;
 use Filament\Actions\Exports\ExportColumn;
 use Filament\Actions\Exports\Exporter;
 use Filament\Actions\Exports\Models\Export;
-use Modules\Fixcity\Models\Ticket;
 use Modules\Fixcity\Actions\Export\SanitizeSpreadsheetCellAction;
+use Modules\Fixcity\Models\Ticket;
 use Modules\Xot\Actions\Cast\SafeStringCastAction;
 
 /**
@@ -29,15 +29,15 @@ final class TicketExporter extends Exporter
             ExportColumn::make('name')
                 ->formatStateUsing(static fn (?string $state): string => app(SanitizeSpreadsheetCellAction::class)->execute($state)),
             ExportColumn::make('status')
-                ->formatStateUsing(static fn ($state): string => app(SanitizeSpreadsheetCellAction::class)->execute(
+                ->formatStateUsing(static fn (mixed $state): string => app(SanitizeSpreadsheetCellAction::class)->execute(
                     $state instanceof \BackedEnum ? $state->value : SafeStringCastAction::cast($state),
                 )),
             ExportColumn::make('priority')
-                ->formatStateUsing(static fn ($state): string => app(SanitizeSpreadsheetCellAction::class)->execute(
+                ->formatStateUsing(static fn (mixed $state): string => app(SanitizeSpreadsheetCellAction::class)->execute(
                     $state instanceof \BackedEnum ? $state->value : SafeStringCastAction::cast($state),
                 )),
             ExportColumn::make('type')
-                ->formatStateUsing(static fn ($state): string => app(SanitizeSpreadsheetCellAction::class)->execute(
+                ->formatStateUsing(static fn (mixed $state): string => app(SanitizeSpreadsheetCellAction::class)->execute(
                     $state instanceof \BackedEnum ? $state->value : SafeStringCastAction::cast($state),
                 )),
             ExportColumn::make('owner.name')
