@@ -19,27 +19,29 @@ use Modules\Xot\Datas\XotData;
 trait HasTicketRelations
 {
     /**
-     * @return BelongsTo<Model&UserContract, $this>
+     * @return BelongsTo<Model&UserContract, $this, string, string, string>
      */
     public function owner(): BelongsTo
     {
+        /** @var class-string<Model&UserContract> $userClass */
         $userClass = XotData::make()->getUserClass();
 
         return $this->belongsTo($userClass, 'owner_id', 'id');
     }
 
     /**
-     * @return BelongsTo<Model&UserContract, $this>
+     * @return BelongsTo<Model&UserContract, $this, string, string, string>
      */
     public function responsible(): BelongsTo
     {
+        /** @var class-string<Model&UserContract> $userClass */
         $userClass = XotData::make()->getUserClass();
 
         return $this->belongsTo($userClass, 'responsible_id', 'id');
     }
 
     /**
-     * @return HasMany<TicketActivity, $this>
+     * @return HasMany<TicketActivity, $this, string, string>
      */
     public function activities(): HasMany
     {
@@ -49,7 +51,7 @@ trait HasTicketRelations
     /**
      * Users subscribed to ticket workflow notifications (pivot ticket_subscribers).
      *
-     * @return BelongsToMany<User, $this>
+     * @return BelongsToMany<User, $this, ticket_subscribers, string, string>
      */
     public function ticketSubscribers(): BelongsToMany
     {
@@ -61,7 +63,7 @@ trait HasTicketRelations
     }
 
     /**
-     * @return HasMany<TicketRelation, $this>
+     * @return HasMany<TicketRelation, $this, string, string>
      */
     public function relations(): HasMany
     {
@@ -69,7 +71,7 @@ trait HasTicketRelations
     }
 
     /**
-     * @return HasMany<TicketHour, $this>
+     * @return HasMany<TicketHour, $this, string, string>
      */
     public function hours(): HasMany
     {
@@ -77,7 +79,7 @@ trait HasTicketRelations
     }
 
     /**
-     * @return BelongsTo<User, $this>
+     * @return BelongsTo<User, $this, string, string, string>
      */
     public function assignee(): BelongsTo
     {
@@ -92,7 +94,7 @@ trait HasTicketRelations
      *
      * @note Legacy compatibility relation. New ticket discussions use comments() from Modules\Comment.
      *
-     * @return HasMany<TicketComment, $this>
+     * @return HasMany<TicketComment, $this, string, string>
      */
     public function ticketComments(): HasMany
     {
