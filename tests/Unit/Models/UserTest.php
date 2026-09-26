@@ -109,7 +109,12 @@ describe('User Model (Fixcity)', function () {
 
         $activities = TicketActivity::query()->where('user_id', $user->id)->get();
         Assert::assertCount(1, $activities);
-        Assert::assertSame($activity->id, $activities->first()?->id);
+        $firstActivity = $activities->first();
+        Assert::assertInstanceOf(TicketActivity::class, $firstActivity);
+        if (! $firstActivity instanceof TicketActivity) {
+            throw new \LogicException('Expected a TicketActivity result.');
+        }
+        Assert::assertSame($activity->id, $firstActivity->id);
     });
 
     it('can log hours on tickets', function () {
@@ -126,7 +131,12 @@ describe('User Model (Fixcity)', function () {
 
         $hours = TicketHour::query()->where('user_id', $user->id)->get();
         Assert::assertCount(1, $hours);
-        Assert::assertSame($hour->id, $hours->first()?->id);
+        $firstHour = $hours->first();
+        Assert::assertInstanceOf(TicketHour::class, $firstHour);
+        if (! $firstHour instanceof TicketHour) {
+            throw new \LogicException('Expected a TicketHour result.');
+        }
+        Assert::assertSame($hour->id, $firstHour->id);
     });
 
     it('can comment on tickets', function () {
