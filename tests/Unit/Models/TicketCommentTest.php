@@ -5,10 +5,10 @@ declare(strict_types=1);
 namespace Modules\Fixcity\Tests\Unit\Models;
 
 use Illuminate\Support\Collection;
-use Modules\Fixcity\Database\Factories\TicketCommentFactory;
+use Modules\Comment\Database\Factories\CommentFactory;
 use Modules\Fixcity\Database\Factories\TicketFactory;
 use Modules\Fixcity\Models\Ticket;
-use Modules\Fixcity\Models\TicketComment;
+use Modules\Comment\Models\Comment;
 use Modules\User\Database\Factories\UserFactory;
 use Modules\User\Models\User;
 use PHPUnit\Framework\Assert;
@@ -24,13 +24,13 @@ describe('TicketComment Model', function () {
         // Laraxot module file — see docs/wiki for domain contract.
         // Laraxot — see module docs/wiki for domain contract.
 
-        $comment = TicketComment::create([
+        $comment = Comment::create([
             'ticket_id' => $ticket->id,
             'user_id' => $user->id,
             'content' => 'This is a test comment',
         ]);
 
-        Assert::assertInstanceOf(TicketComment::class, $comment);
+        Assert::assertInstanceOf(Comment::class, $comment);
 
         Assert::assertSame($ticket->id, $comment->ticket_id);
 
@@ -41,7 +41,7 @@ describe('TicketComment Model', function () {
 
     it('belongs to a ticket', function () {
         $ticket = TicketFactory::new()->createOne();
-        $comment = TicketCommentFactory::new()->createOne([
+        $comment = CommentFactory::new()->createOne([
             'ticket_id' => $ticket->id,
         ]);
 
@@ -52,7 +52,7 @@ describe('TicketComment Model', function () {
 
     it('belongs to a user', function () {
         $user = UserFactory::new()->createOne();
-        $comment = TicketCommentFactory::new()->createOne([
+        $comment = CommentFactory::new()->createOne([
             'user_id' => $user->id,
         ]);
 
@@ -62,7 +62,7 @@ describe('TicketComment Model', function () {
     });
 
     it('can store rich content', function () {
-        $comment = TicketCommentFactory::new()->createOne([
+        $comment = CommentFactory::new()->createOne([
             'content' => 'This is a **rich** comment with *formatting*',
         ]);
 
@@ -73,7 +73,7 @@ describe('TicketComment Model', function () {
     });
 
     it('tracks creation and update times', function () {
-        $comment = TicketCommentFactory::new()->createOne();
+        $comment = CommentFactory::new()->createOne();
 
         Assert::assertNotNull($comment->created_at);
         Assert::assertNotNull($comment->updated_at);
@@ -85,11 +85,11 @@ describe('TicketComment Model', function () {
 
     it('can be queried by ticket', function () {
         $ticket = TicketFactory::new()->createOne();
-        $comments = TicketCommentFactory::new()->count(3)->create([
+        $comments = CommentFactory::new()->count(3)->create([
             'ticket_id' => $ticket->id,
         ]);
 
-        $ticketComments = TicketComment::where('ticket_id', $ticket->id)->get();
+        $ticketComments = Comment::where('ticket_id', $ticket->id)->get();
 
         Assert::assertCount(3, $ticketComments);
         foreach ($ticketComments as $comment) {
@@ -99,11 +99,11 @@ describe('TicketComment Model', function () {
 
     it('can be queried by user', function () {
         $user = UserFactory::new()->createOne();
-        $comments = TicketCommentFactory::new()->count(3)->create([
+        $comments = CommentFactory::new()->count(3)->create([
             'user_id' => $user->id,
         ]);
 
-        $userComments = TicketComment::query()->where('user_id', $user->id)->get();
+        $userComments = Comment::query()->where('user_id', $user->id)->get();
 
         Assert::assertCount(3, $userComments);
         foreach ($userComments as $comment) {
@@ -113,24 +113,24 @@ describe('TicketComment Model', function () {
 
     it('can be filtered by ticket id', function () {
         $ticket = TicketFactory::new()->createOne();
-        $comment = TicketCommentFactory::new()->createOne(['ticket_id' => $ticket->id]);
+        $comment = CommentFactory::new()->createOne(['ticket_id' => $ticket->id]);
 
-        $ticketComments = TicketComment::query()->where('ticket_id', $ticket->id)->get();
+        $ticketComments = Comment::query()->where('ticket_id', $ticket->id)->get();
 
         Assert::assertCount(1, $ticketComments);
         Assert::assertSame($comment->id, $ticketComments->first()?->id);
     });
 
     it('can be ordered by creation time', function () {
-        $oldComment = TicketCommentFactory::new()->createOne([
+        $oldComment = CommentFactory::new()->createOne([
             'created_at' => now()->subDays(2),
         ]);
 
-        $newComment = TicketCommentFactory::new()->createOne([
+        $newComment = CommentFactory::new()->createOne([
             'created_at' => now(),
         ]);
 
-        $orderedComments = TicketComment::orderBy('created_at', 'desc')->get();
+        $orderedComments = Comment::orderBy('created_at', 'desc')->get();
 
         $first = $orderedComments->first();
         $last = $orderedComments->last();
@@ -141,11 +141,11 @@ describe('TicketComment Model', function () {
     });
 
     it('can be searched by content', function () {
-        $comment = TicketCommentFactory::new()->createOne([
+        $comment = CommentFactory::new()->createOne([
             'content' => 'Special search term in comment',
         ]);
 
-        $searchResults = TicketComment::where('content', 'like', '%search term%')->get();
+        $searchResults = Comment::where('content', 'like', '%search term%')->get();
 
         Assert::assertContains($comment, $searchResults);
     });
@@ -153,25 +153,25 @@ describe('TicketComment Model', function () {
     it('maintains data integrity constraints')->todo();
 
     it('can be soft deleted if implemented', function () {
-        $comment = TicketCommentFactory::new()->createOne();
+        $comment = CommentFactory::new()->createOne();
 
         // Check if soft deletes are implemented
         if (method_exists($comment, 'trashed')) {
             $comment->delete();
             Assert::assertTrue($comment->trashed());
-            $trashedComment = TicketComment::withTrashed()->find($comment->id);
+            $trashedComment = Comment::withTrashed()->find($comment->id);
             Assert::assertNotNull($trashedComment);
         } else {
             // If no soft deletes, test regular deletion
             $commentId = $comment->id;
             $comment->delete();
 
-            Assert::assertNull(TicketComment::find($commentId));
+            Assert::assertNull(Comment::find($commentId));
         }
     });
 
     it('can be associated with attachments if implemented', function () {
-        $comment = TicketCommentFactory::new()->createOne();
+        $comment = CommentFactory::new()->createOne();
 
         // Test if media library is implemented
         if (method_exists($comment, 'getMedia')) {
