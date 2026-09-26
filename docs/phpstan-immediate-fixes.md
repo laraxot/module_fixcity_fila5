@@ -1,3 +1,11 @@
+> **Documento storico — 2026-03-02.** Il conteggio di errori e gli esempi seguenti
+> descrivono una fotografia passata, non lo stato corrente. Non copiare soluzioni da
+> questo file senza verificarle contro le regole attuali: niente `app/Services`, le
+> policy usano `Modules\Xot\Contracts\UserContract`, i namespace seguono il
+> `composer.json` del modulo e le pagine Filament estendono la XotBase specifica.
+> Per le regole correnti consultare [il contratto architetturale Fixcity](wiki/concepts/fixcity-architecture-contract-2026-09-26.md)
+> e per lo stato PHPStan eseguire `cd laravel && ./vendor/bin/phpstan analyse Modules`.
+
 # Fixcity Module - Immediate PHPStan Fixes
 
 ## Analysis Date: 2026-03-02

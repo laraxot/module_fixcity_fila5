@@ -7,8 +7,12 @@ declare(strict_types=1);
 // Canon: Modules/Fixcity/docs/wiki/concepts/claude-audit-static.md
 // File: lang/en/ticket_actions.php
 return array (
-  'actions' => 
+    'actions' => 
   array (
+    'assign' => 
+    array (
+      'label' => 'Assign operator',
+    ),
     'back' => 
     array (
       'label' => 'Back',

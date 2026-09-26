@@ -1,3 +1,5 @@
+> **Esempio legacy non conforme — non copiare.** Il routing applicativo segue Folio e Actions; non introdurre `TestController` o route Controller. Per il contratto corrente consultare `wiki/concepts/no-controllers-folio-volt-filament.md`.
+
 # Wizard Architecture Documentation
 
 ## Critical Architecture Pattern: URL State Persistence

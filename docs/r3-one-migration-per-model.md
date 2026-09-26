@@ -89,34 +89,47 @@ public function tableCreate(Blueprint $table): void
 ❌ wrapper Action su `Model::create()` (es. `app(CreateTicketAction::class)->execute($data)`)
 ❌ `'type' => 'standard'` o magic values per `parental/HasChildren` (causa `Class "standard" not found`)
 
+## Foreign key su model Eloquent
+
+Per ogni relazione Eloquent usare `foreignIdFor(Model::class, 'column')`; per User usare `XotData::make()->getUserClass()`. Aggiungere `constrained()` solo quando i modelli condividono la stessa connessione/database; sui riferimenti cross-connection definire invece type/index senza vincolo fisico. Non usare `foreignId()` nudo.
+
 ## Pattern corretto (R3 religion)
 
-```bash
-# 1. Crea modello + migration insieme
-php artisan make:model Ticket -mfs  # -m migration, -f factory, -s seeder
+```php
+use Illuminate\Database\Schema\Blueprint;
+use Modules\Fixcity\Models\Category;
+use Modules\Fixcity\Models\Ticket;
+use Modules\Xot\Datas\XotData;
+use Modules\Xot\Database\Migrations\XotBaseMigration;
 
-# 2. Migration UNICA con tableCreate + tableUpdate
-# 2026_06_05_100000_create_tickets_table.php
-public function up(): void
-{
-    $this->tableCreate('tickets', function (Blueprint $table): void {
-        $table->id();
-        $table->string('title');
-        $table->text('description');
-        $table->string('status', 32)->default('open');
-        $table->string('priority', 16)->default('normal');
-        $table->string('uuid', 36)->nullable()->index();
-        $table->foreignId('user_id')->constrained();
-        $table->foreignId('category_id')->nullable()->constrained();
-    });
-    $this->tableUpdate('tickets', function (Blueprint $table): void {
-        $this->updateTimestamps(table: $table, hasSoftDeletes: true);
-    });
-}
+return new class extends XotBaseMigration {
+    protected ?string $model_class = Ticket::class;
 
-# 3. Per evolvere lo schema: BUMP TIMESTAMP
-# 2026_06_15_100000_create_tickets_table.php  (più recente, sostituisce)
+    public function up(): void
+    {
+        $userClass = XotData::make()->getUserClass();
+
+        $this->tableCreate(static function (Blueprint $table) use ($userClass): void {
+            $table->id();
+            $table->string('title');
+            $table->text('description');
+            $table->string('status', 32)->default('open');
+            $table->string('priority', 16)->default('normal');
+            $table->string('uuid', 36)->nullable()->index();
+            // User may live on another connection: no physical FK constraint.
+            $table->foreignIdFor($userClass, 'user_id')->nullable()->index();
+            // Category shares the Fixcity connection: the physical constraint is valid.
+            $table->foreignIdFor(Category::class, 'category_id')->nullable()->constrained();
+        });
+
+        $this->tableUpdate(function (Blueprint $table): void {
+            $this->updateTimestamps($table, hasSoftDeletes: true);
+        });
+    }
+};
 ```
+
+Per nuove entità seguire il modello e la migration owner in `XotBaseMigration`; non usare `Schema::create()` o la base Laravel `Migration`. Per evoluzioni rispettare la regola forward-only e aggiornare solo la migration owner secondo la convenzione timestamp del progetto.
 
 ## R3 religion enforcement (R20 verifier)
 

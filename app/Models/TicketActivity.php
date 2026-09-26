@@ -14,9 +14,13 @@ use Modules\Xot\Datas\XotData;
 /**
  * @property int $id
  * @property int $ticket_id
- * @property int $old_status_id
- * @property int $new_status_id
- * @property int $user_id
+ * @property int|null $old_status_id
+ * @property int|null $new_status_id
+ * @property int|null $user_id
+ * @property string $event_type
+ * @property array<string, mixed>|null $payload
+ * @property string $visibility
+ * @property string|null $reason
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
  * @property string|null $updated_by
@@ -59,7 +63,17 @@ class TicketActivity extends BaseModel
         'old_status_id',
         'new_status_id',
         'user_id',
+        'event_type',
+        'payload',
+        'visibility',
+        'reason',
     ];
+
+    /** @return array<string, string> */
+    protected function casts(): array
+    {
+        return parent::casts() + ['payload' => 'array'];
+    }
 
     /**
      * Get the ticket that owns the activity.

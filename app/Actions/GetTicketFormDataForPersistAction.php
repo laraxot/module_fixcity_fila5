@@ -8,12 +8,12 @@ use Modules\Fixcity\Enums\TicketStatusEnum;
 use Spatie\QueueableAction\QueueableAction;
 
 /**
- * Trasforma lo stato Filament/schema (admin o wizard frontoffice) nel payload sicuro per `Ticket::create` / Creazione Filament Resource.
+ * Normalizza il payload raccolto dal form Filament prima della creazione del ticket nel backoffice.
  *
- * Usata solo da {@see \Modules\Fixcity\Filament\Resources\TicketResource::prepareFormDataBeforePersist()}
- * (pagina Filament crea ticket). Il widget wizard frontoffice **non** passa da questa Action.
+ * Chiamata dall'hook di `CreateTicket`, unico adapter del lifecycle XotBaseCreateRecord.
+ * Il wizard frontoffice mantiene il proprio flusso di submit e non dipende dal Resource Filament.
  */
-final class PrepareTicketFormDataForPersistAction
+final class GetTicketFormDataForPersistAction
 {
     use QueueableAction;
 

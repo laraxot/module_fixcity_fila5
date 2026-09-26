@@ -3,12 +3,18 @@ title: "Redundancy and Documentation Sprawl — Final Overview"
 type: comparison
 tags: [redundancy, documentation, sprawl, dry, overview]
 created: "2026-05-25"
-updated: "2026-05-25"
+updated: "2026-09-26"
 ---
 
 # Redundancy and Documentation Sprawl — Final Overview
 
 ## Summary
+
+Il report specifico con conteggi, hash e gruppi di duplicati è
+[`redundancy-audit-2026-09-26.md`](./redundancy-audit-2026-09-26.md). Questo overview
+resta il punto d'ingresso per gli audit trasversali; non replica metriche del report.
+I conteggi includono storico, `root-md-files`, wiki e report e non equivalgono al numero
+di decisioni uniche. La classificazione precede ogni consolidamento.
 
 A deep scan of the codebase has revealed significant redundancies in both code and documentation. While some technical redundancies (like `BaseModel`) have been addressed, others (like `BasePivot` and `FilterBuilder` usage) remain open. Documentation sprawl is reaching critical levels in modules like `Geo` and themes like `Sixteen`.
 
