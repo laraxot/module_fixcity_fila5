@@ -6,6 +6,7 @@ namespace Modules\Fixcity\Database\Seeders\Support;
 
 use Faker\Generator;
 use Modules\Geo\Models\Comune;
+use Modules\Xot\Actions\Cast\SafeIntCastAction;
 
 /**
  * Comuni italiani per la demo investitori: coordinate WGS84, CAP, provincia, regione.
@@ -401,7 +402,9 @@ final class DemoMunicipalityProvider
      */
     public static function pick(Generator $faker): array
     {
-        return $faker->randomElement(self::all());
+        $all = self::all();
+
+        return $all[SafeIntCastAction::cast($faker->randomElement(array_keys($all)), 0)];
     }
 
     /**
@@ -412,7 +415,9 @@ final class DemoMunicipalityProvider
      */
     public static function pickWeighted(Generator $faker): array
     {
+        /** @var non-empty-list<array{name: non-empty-string, region: non-empty-string, province: non-empty-string, province_code: non-empty-string, postal_code: non-empty-string, lat: float, lng: float, population: int}> $municipalities */
         $municipalities = self::all();
+        /** @var non-empty-list<int> $weights */
         $weights = array_map(
             static fn (array $municipality): int => max(1, (int) round($municipality['population'] / 1000)),
             $municipalities,
@@ -430,17 +435,19 @@ final class DemoMunicipalityProvider
     public static function streetAddress(Generator $faker, array $municipality): array
     {
         $street = $faker->boolean(22)
-            ? $faker->randomElement(self::LANDMARKS)
-            : $faker->randomElement(self::STREETS);
+            ? DemoText::pick($faker, self::LANDMARKS)
+            : DemoText::pick($faker, self::STREETS);
         $streetNumber = $faker->numberBetween(1, 218);
+        $postalCode = $faker->boolean(70)
+            ? $municipality['postal_code']
+            // Stesso CAP di zona con le due cifre finali diverse: resta un CAP valido.
+            : substr($municipality['postal_code'], 0, 3).str_pad((string) $faker->numberBetween(10, 99), 2, '0', STR_PAD_LEFT);
 
         return [
             'address' => $street.' '.$streetNumber.', '.$municipality['name'],
             'street' => $street,
             'street_number' => (string) $streetNumber,
-            'postal_code' => $faker->boolean(70)
-                ? $municipality['postal_code']
-                : (string) (($municipality['postal_code'] > 0 ? (int) $municipality['postal_code'] : 0) + $faker->numberBetween(1, 40)).'0',
+            'postal_code' => $postalCode,
         ];
     }
 

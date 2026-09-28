@@ -9,13 +9,13 @@ use Faker\Generator;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Carbon;
-use Illuminate\Support\Facades\Schema;
 use Modules\Comment\Models\Comment;
 use Modules\Fixcity\Database\Seeders\Support\DemoNarrative;
 use Modules\Fixcity\Database\Seeders\Support\DemoPeopleProvider;
 use Modules\Fixcity\Enums\TicketStatusEnum;
 use Modules\Fixcity\Models\Ticket;
 use Modules\User\Models\User;
+use Modules\Xot\Actions\Cast\SafeIntCastAction;
 use Modules\Xot\Actions\Cast\SafeStringCastAction;
 use Modules\Xot\Datas\XotData;
 
@@ -114,7 +114,13 @@ class TicketCommentSeeder extends Seeder
         $operatorId = $citizenClass::query()->where('email', DemoUsersSeeder::OPERATOR_EMAIL)->value('id');
         $citizenId = $citizenClass::query()->where('email', DemoUsersSeeder::CITIZEN_EMAIL)->value('id');
 
-        if ($operatorId === null || $citizenId === null) {
+        if (! is_int($operatorId) && ! is_string($operatorId)) {
+            $this->command?->warn('TicketCommentSeeder: utenti demo assenti — saltato.');
+
+            return;
+        }
+
+        if (! is_int($citizenId) && ! is_string($citizenId)) {
             $this->command?->warn('TicketCommentSeeder: utenti demo assenti — saltato.');
 
             return;
@@ -126,7 +132,7 @@ class TicketCommentSeeder extends Seeder
 
             foreach ($comments as $index => $commentData) {
                 $this->writeComment(
-                    (int) $ticket->getKey(),
+                    SafeIntCastAction::cast($ticket->getKey()),
                     $index % 2 === 0 ? $operatorId : $citizenId,
                     $commentData['body'],
                     $ticket->created_at instanceof Carbon ? $ticket->created_at->copy() : Carbon::now(),
@@ -142,13 +148,13 @@ class TicketCommentSeeder extends Seeder
     /**
      * Discussione del dataset investitori DMO-*.
      *
-     * @param  list<int|string>|null  $ticketIds se null, prende tutti i ticket DMO-*
+     * @param  list<int|string>|null  $ticketIds  se null, prende tutti i ticket DMO-*
      * @return int numero di messaggi scritti
      */
     public function seedDatasetComments(?array $ticketIds = null, int $randomSeed = self::RANDOM_SEED): int
     {
-        if (! Schema::connection('fixcity')->hasTable('comments')) {
-            $this->command?->warn('TicketCommentSeeder: tabella comments non migrata, saltato.');
+        if (! $this->commentsTableExists()) {
+            $this->command?->warn('TicketCommentSeeder: tabella comments non raggiungibile, saltato.');
 
             return 0;
         }
@@ -169,11 +175,12 @@ class TicketCommentSeeder extends Seeder
         $faker->seed($randomSeed);
 
         // I messaggi precedenti vanno rimossi: senza una chiave naturale stabile
-        // un secondo lancio duplicherebbe la discussione.
+        // un secondo lancio duplicherebbe la discussione. Comment non usa
+        // SoftDeletes, quindi `delete()` e' una rimozione definitiva.
         Comment::query()
             ->where('commentable_type', Ticket::class)
             ->whereIn('commentable_id', $tickets->modelKeys())
-            ->forceDelete();
+            ->delete();
 
         $written = 0;
         foreach ($tickets as $ticket) {
@@ -211,13 +218,15 @@ class TicketCommentSeeder extends Seeder
         foreach (range(0, $turns - 1) as $position) {
             $moment = $moments[min($position, count($moments) - 1)];
             $isStaff = $position % 2 === 1;
-            $author = $isStaff ? ($staffId ?? DemoPeopleProvider::staffFor($faker, 'Servizio Sicurezza Urbana')['id']) : $citizenId;
+            $author = $isStaff
+                ? SafeStringCastAction::cast($staffId ?? DemoPeopleProvider::staff($faker)[0]['id'])
+                : $citizenId;
             $text = $isStaff
                 ? DemoNarrative::staffComment($faker, $moment['status'])
                 : DemoNarrative::citizenComment($faker, $moment['status']);
 
             $commentId = $this->writeComment(
-                (int) $ticket->getKey(),
+                SafeIntCastAction::cast($ticket->getKey()),
                 $author,
                 $text,
                 $moment['at'],
@@ -227,15 +236,26 @@ class TicketCommentSeeder extends Seeder
                 ['source' => 'fixcity-demo', 'role' => $isStaff ? 'staff' : 'citizen', 'status' => $moment['status']->value],
             );
 
-            if ($commentId === null) {
-                continue;
-            }
-
             $written++;
             $parentId = $commentId;
         }
 
         return $written;
+    }
+
+    /**
+     * Il modello Comment vive su una connessione propria (non quella di Fixcity):
+     * la tabella va verificata li', altrimenti il controllo passerebbe sempre.
+     */
+    private function commentsTableExists(): bool
+    {
+        try {
+            $schema = (new Comment)->getConnection()->getSchemaBuilder();
+
+            return $schema->hasTable('comments');
+        } catch (\Throwable) {
+            return false;
+        }
     }
 
     /**
@@ -274,7 +294,7 @@ class TicketCommentSeeder extends Seeder
         Carbon $at,
         ?int $parentId,
         array $extra,
-    ): ?int {
+    ): int {
         $commentatorClass = XotData::make()->getUserClass();
 
         /** @var Comment $comment */
@@ -291,7 +311,7 @@ class TicketCommentSeeder extends Seeder
 
         $comment->forceFill(['created_at' => $at, 'updated_at' => $at])->save();
 
-        return (int) $comment->getKey();
+        return SafeIntCastAction::cast($comment->getKey());
     }
 
     /**

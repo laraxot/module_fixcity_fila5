@@ -19,6 +19,7 @@ use Modules\Fixcity\Enums\TicketStatusEnum;
  *     resolve_due_at: string,
  *     acknowledged_at: string|null,
  *     resolved_at: string|null,
+ *     resolve_breached: bool,
  *     breached: bool,
  *     breach_minutes: int,
  *     priority: string
@@ -172,11 +173,10 @@ final class DemoSlaTimeline
             'payload' => self::slaPayload($createdAt, $resolveDueAt, null, $path[0], $resolveAt, $priority),
         ]];
 
-        for ($index = 1; $index <= $steps; ++$index) {
+        for ($index = 1; $index <= $steps; $index++) {
             $status = $path[$index];
-            $at = $span > 0 && $steps > 0
-                ? $acknowledgeAt->copy()->addSeconds((int) round($span * $index / $steps))
-                : $acknowledgeAt->copy();
+            // La divisione e' sicura: il ciclo parte da 1, quindi $steps >= 1.
+            $at = $acknowledgeAt->copy()->addSeconds((int) round($span * $index / $steps));
 
             if ($status === TicketStatusEnum::RESOLVED || $status === TicketStatusEnum::CLOSED) {
                 $at = $at->lessThan($resolveFloor) ? $resolveFloor->copy() : $at;
