@@ -154,22 +154,22 @@ final class DemoNarrative
 
     public static function staffComment(Generator $faker, TicketStatusEnum $status): string
     {
-        return $faker->randomElement(self::STAFF_BY_STATUS[$status->value] ?? self::STAFF_BY_STATUS['pending']);
+        return DemoText::pick($faker, self::STAFF_BY_STATUS[$status->value] ?? self::STAFF_BY_STATUS['pending']);
     }
 
     public static function citizenComment(Generator $faker, TicketStatusEnum $status): string
     {
-        return $faker->randomElement(self::CITIZEN_BY_STATUS[$status->value] ?? self::CITIZEN_BY_STATUS['open']);
+        return DemoText::pick($faker, self::CITIZEN_BY_STATUS[$status->value] ?? self::CITIZEN_BY_STATUS['open']);
     }
 
     public static function activityReason(Generator $faker, TicketStatusEnum $status): string
     {
-        return $faker->randomElement(self::ACTIVITY_REASONS[$status->value] ?? self::ACTIVITY_REASONS['pending']);
+        return DemoText::pick($faker, self::ACTIVITY_REASONS[$status->value] ?? self::ACTIVITY_REASONS['pending']);
     }
 
     public static function hourNote(Generator $faker): string
     {
-        return $faker->randomElement(self::HOUR_NOTES);
+        return DemoText::pick($faker, self::HOUR_NOTES);
     }
 
     /**
@@ -182,7 +182,7 @@ final class DemoNarrative
             'critical' => 'Condizioni che compromettono la sicurezza o la fruibilita\' dello spazio pubblico.',
             'high' => 'Disfunzione con ricadute su un tratto ampio di utenti o su un servizio essenziale.',
             'medium' => 'Manutenzione programmabile che impatta su un numero limitato di cittadini.',
-            default => $faker->randomElement([
+            default => DemoText::pick($faker, [
                 'Miglioria del decoro urbano, non condiziona la sicurezza.',
                 'Segnalazione di miglioramento, puo\' attendere la programmazione ordinaria.',
             ]),
@@ -199,7 +199,7 @@ final class DemoNarrative
             'Buongiorno, segnalo quanto segue dalla segnalazione cittadina. %s Il punto interessato e\' in %s e si verifica %s. Resto a disposizione per qualsiasi verifica sul posto.',
             $issue,
             $street,
-            $faker->randomElement([
+            DemoText::pick($faker, [
                 'tutti i giorni, soprattutto nelle ore di punta',
                 'da diverse settimane, ma e\' peggiorato negli ultimi giorni',
                 'dopo ogni pioggia',

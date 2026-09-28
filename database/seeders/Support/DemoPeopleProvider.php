@@ -4,12 +4,16 @@ declare(strict_types=1);
 
 namespace Modules\Fixcity\Database\Seeders\Support;
 
+use Faker\Factory;
 use Faker\Generator;
 use Illuminate\Database\Eloquent\Model;
 use Modules\Fixcity\Database\Seeders\DemoUsersSeeder;
 use Modules\User\Database\Factories\UserFactory;
+use Modules\Xot\Actions\Cast\SafeStringCastAction;
 use Modules\Xot\Contracts\UserContract;
 use Modules\Xot\Datas\XotData;
+
+use function Safe\preg_replace;
 
 /**
  * Utenze demo per la demo investitori: pool di cittadini segnalatori e di operatori
@@ -29,6 +33,12 @@ final class DemoPeopleProvider
     public const string STAFF_PREFIX = 'demo.operatore.';
 
     public const int CITIZEN_POOL_SIZE = 60;
+
+    /**
+     * Base del seed per i nomi delle utenze demo: ogni persona ha il suo,
+     * quindi il pool e' identico a ogni esecuzione e su qualunque macchina.
+     */
+    private const int NAME_SEED = 8100;
 
     /**
      * @var list<PersonRecord>|null
@@ -52,9 +62,9 @@ final class DemoPeopleProvider
         }
 
         $records = [];
-        for ($index = 1; $index <= self::CITIZEN_POOL_SIZE; ++$index) {
+        for ($index = 1; $index <= self::CITIZEN_POOL_SIZE; $index++) {
             $records[] = self::ensureUser(
-                $faker,
+                $index,
                 self::CITIZEN_PREFIX.$index.'@fixcity.demo',
                 'customer_user',
                 null,
@@ -77,9 +87,10 @@ final class DemoPeopleProvider
 
         $records = [];
         foreach (DemoCategoryCatalog::DEPARTMENTS as $offset => $department) {
+            $index = $offset + 1;
             $records[] = self::ensureUser(
-                $faker,
-                self::STAFF_PREFIX.($offset + 1).'@fixcity.demo',
+                $index,
+                self::STAFF_PREFIX.$index.'@fixcity.demo',
                 // Un quarto degli uffici opera sul campo: tecnico, non impiegato.
                 $offset % 4 === 0 ? 'technician' : 'backoffice_user',
                 $department,
@@ -116,7 +127,9 @@ final class DemoPeopleProvider
         /** @var class-string<Model&UserContract> $userModel */
         $userModel = XotData::make()->getUserClass();
 
-        return $userModel::query()->where('email', DemoUsersSeeder::OPERATOR_EMAIL)->value('id');
+        $id = $userModel::query()->where('email', DemoUsersSeeder::OPERATOR_EMAIL)->value('id');
+
+        return is_int($id) || (is_string($id) && $id !== '') ? $id : null;
     }
 
     /**
@@ -129,10 +142,12 @@ final class DemoPeopleProvider
     }
 
     /**
+     * @param  non-empty-string  $email
+     * @param  non-empty-string|null  $department
      * @return PersonRecord
      */
     private static function ensureUser(
-        Generator $faker,
+        int $index,
         string $email,
         string $type,
         ?string $department,
@@ -142,11 +157,10 @@ final class DemoPeopleProvider
 
         $existing = $userModel::query()->where('email', $email)->first();
         if ($existing !== null) {
-            return ['id' => $existing->getKey(), 'email' => $email, 'department' => $department];
+            return ['id' => self::keyOf($existing), 'email' => $email, 'department' => $department];
         }
 
-        $firstName = self::cleanName($faker->firstName());
-        $lastName = self::cleanName($faker->lastName());
+        [$firstName, $lastName] = self::nameFor($index);
 
         /** @var Model&UserContract $user */
         $user = UserFactory::new()->createOne([
@@ -160,16 +174,45 @@ final class DemoPeopleProvider
             'state' => 'active',
         ]);
 
-        return ['id' => $user->getKey(), 'email' => $email, 'department' => $department];
+        return ['id' => self::keyOf($user), 'email' => $email, 'department' => $department];
+    }
+
+    /**
+     * Nome e cognome della persona numero `$index`, estratti da un generatore
+     * dedicato: il pool non deve consumare numeri casuali del generatore condiviso,
+     * altrimenti il dataset cambierebbe a seconda delle utenze gia' presenti nel
+     * database e due esecuzioni darebbero elenchi diversi.
+     *
+     * @return array{0: non-empty-string, 1: non-empty-string}
+     */
+    private static function nameFor(int $index): array
+    {
+        $faker = Factory::create('it_IT');
+        $faker->seed(self::NAME_SEED + $index);
+
+        return [self::cleanName($faker->firstName()), self::cleanName($faker->lastName())];
+    }
+
+    /**
+     * Chiave primaria dello stesso utente: su questo progetto e' un uuid stringa,
+     * ma il contratto resta aperto a uno schema legacy con intero.
+     */
+    private static function keyOf(Model $user): int|string
+    {
+        $key = $user->getKey();
+
+        return is_int($key) || is_string($key) ? $key : SafeStringCastAction::cast($key);
     }
 
     /**
      * Faker it_IT prepende talvolta titoli onorifici ("Dr.", "Sig.ra"): non ci
      * stanno in un elenco di operatori comunali.
+     *
+     * @return non-empty-string
      */
     private static function cleanName(string $name): string
     {
-        $name = trim((string) preg_replace('/\b(Dr|Dott|Sig|Sigra|Sigg|Ing|Avv|Rag|Mssa|Prof)\.?\s+/u', '', $name));
+        $name = trim(preg_replace('/\b(Dr|Dott|Sig|Sigra|Sigg|Ing|Avv|Rag|Mssa|Prof)\.?\s+/u', '', $name));
 
         return $name !== '' ? $name : 'Utente';
     }

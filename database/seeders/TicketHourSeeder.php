@@ -34,11 +34,16 @@ class TicketHourSeeder extends Seeder
     public const int RANDOM_SEED = 20260929;
 
     /**
-     * Ore per intervento: squadre da cantiere, non singoli minuti.
-     *
-     * @var array{0: float, 1: float}
+     * Quante mezze ore vale un'ora: il conteggio delle voci gira su interi per
+     * non accumulare errori di floating point sul totale a confronto con la stima.
      */
-    private const array HOURS_PER_ENTRY = [0.5, 7.5];
+    private const int UNITS_PER_HOUR = 2;
+
+    /** Una voce non dura meno di mezz'ora. */
+    private const int MIN_UNITS = 1;
+
+    /** Ne' piu' di sette ore e mezza: una giornata di squadra, non un turno. */
+    private const int MAX_UNITS = 15;
 
     /**
      * Quante voci di ore genera una pratica lavorata sul campo.
@@ -85,7 +90,7 @@ class TicketHourSeeder extends Seeder
     /**
      * Ore di cantiere sul dataset investitori DMO-*.
      *
-     * @param  list<int|string>|null  $ticketIds se null, prende tutti i ticket DMO-*
+     * @param  list<int|string>|null  $ticketIds  se null, prende tutti i ticket DMO-*
      * @return int numero di voci scritte
      */
     public function seedDatasetHours(?array $ticketIds = null, int $randomSeed = self::RANDOM_SEED): int
@@ -145,28 +150,35 @@ class TicketHourSeeder extends Seeder
         $entries = min($faker->numberBetween($min, $max), count($workMoments));
         $moments = array_slice($workMoments, 0, $entries);
 
-        $remaining = max(0.5, (float) $ticket->estimation);
+        // Il totale e' contato in mezz'ore intere: `estimation` arriva dalla stima
+        // in ore decimali, e sommare 0.5 + 7.0 in floating point lascia un resto
+        // che fa superare la stima di qualche ul. Le mezze ore sono esatte in
+        // base 2, quindi il totale resta <= estimation senza arrotondamenti.
+        $left = (int) floor(((float) $ticket->estimation) * self::UNITS_PER_HOUR);
+        $left = max(self::MIN_UNITS, $left);
         $written = 0;
 
         foreach ($moments as $position => $moment) {
             $isLast = $position === count($moments) - 1;
             $share = $isLast
-                ? $remaining
-                : round($remaining / (count($moments) - $position) * $faker->randomFloat(2, 0.7, 1.3), 2);
+                ? $left
+                : (int) round($left / (count($moments) - $position) * $faker->randomFloat(2, 0.7, 1.3));
 
             // Una voce non puo' durare meno di mezz'ora ne' eccedere la giornata:
             // una riga da 40 ore in tabella non e' credibile a una demo.
-            [$minHours, $maxHours] = self::HOURS_PER_ENTRY;
-            $value = min($remaining, min($maxHours, max($minHours, $share)));
-            $remaining = max(0.0, $remaining - $value);
+            $units = min($left, min(self::MAX_UNITS, max(self::MIN_UNITS, $share)));
+            $left -= $units;
 
-            $this->writeHour($ticket, $assignee['id'], $moment, $value, $faker, $activityIds);
+            $this->writeHour($ticket, $assignee['id'], $moment, $units / self::UNITS_PER_HOUR, $faker, $activityIds);
             $written++;
         }
 
         return $written;
     }
 
+    /**
+     * @param  list<int>  $activityIds
+     */
     private function writeHour(
         Ticket $ticket,
         int|string $assigneeId,

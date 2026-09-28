@@ -19,7 +19,7 @@ final class DemoWeightedChoice
     /**
      * Indice dell'elemento estratto, proporzionale al peso.
      *
-     * @param  non-empty-list<int>  $weights pesi positivi, gia' allineati alla lista
+     * @param  non-empty-list<int>  $weights  pesi positivi, gia' allineati alla lista
      */
     public static function index(Generator $faker, array $weights): int
     {

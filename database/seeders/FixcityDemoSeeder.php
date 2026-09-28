@@ -74,22 +74,42 @@ class FixcityDemoSeeder extends Seeder
 
         $ticketIds = [];
         $this->step('4/6 Segnalazioni', function () use (&$ticketIds): void {
-            $ticketIds = app(TicketSeeder::class)->seedTickets(self::DEFAULT_TICKET_COUNT);
+            $ticketIds = $this->seeder(TicketSeeder::class)->seedTickets(self::DEFAULT_TICKET_COUNT);
         });
 
         $commentCount = 0;
-        $this->step('5/6 Commenti', function () use (&$commentCount): void {
-            $commentCount = app(TicketCommentSeeder::class)->seedDatasetComments($ticketIds);
-            $this->command?->info('  '.$commentCount.' messaggi di discussione.');
+        $this->step('5/6 Commenti', function () use (&$ticketIds, &$commentCount): void {
+            $commentCount = $this->seeder(TicketCommentSeeder::class)->seedDatasetComments($ticketIds);
         });
 
         $hourCount = 0;
-        $this->step('6/6 Ore lavorate', function () use (&$hourCount): void {
-            $hourCount = app(TicketHourSeeder::class)->seedDatasetHours($ticketIds);
-            $this->command?->info('  '.$hourCount.' voci di ore di cantiere.');
+        $this->step('6/6 Ore lavorate', function () use (&$ticketIds, &$hourCount): void {
+            $hourCount = $this->seeder(TicketHourSeeder::class)->seedDatasetHours($ticketIds);
         });
 
         $this->summary($ticketIds, $commentCount, $hourCount, microtime(true) - $started);
+    }
+
+    /**
+     * Istanzia il seeder dal container e gli inoltra l'output: risolto dal container
+     * il seeder non ha un command, quindi i suoi messaggi andrebbero persi.
+     *
+     * @template T of Seeder
+     *
+     * @param  class-string<T>  $seeder
+     * @return T
+     */
+    private function seeder(string $seeder): Seeder
+    {
+        $instance = app($seeder);
+        if (! $instance instanceof Seeder) {
+            throw new \RuntimeException("Il seeder {$seeder} non e' risolvibile dal container.");
+        }
+
+        /** @var T $instance */
+        $instance->setCommand($this->command);
+
+        return $instance;
     }
 
     private function isAllowedEnvironment(): bool

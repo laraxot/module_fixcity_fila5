@@ -13,3 +13,8 @@ node_modules
 tests/AuditCoverage/
 vendor
 vendor/
+graphify-out/
+.claude/
+.claude-audit/
+test-results/
+fixcity.code-workspace
