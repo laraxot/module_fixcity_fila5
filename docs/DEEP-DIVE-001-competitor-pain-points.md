@@ -1,4 +1,8 @@
 ---
+updated: 2026-09-26
+qmd: "DEEP DIVE 001 competitor pain points"
+issues: []
+discussions: []
 title: "Deep Dive: Competitor Pain Points & Real Failures"
 type: analysis
 tags: [fixcity, competitor-analysis, pain-points, failures, real-world]

@@ -4,33 +4,35 @@ declare(strict_types=1);
 
 namespace Modules\Fixcity\Tests\Unit\Models;
 
-use Modules\Fixcity\Database\Factories\TicketHourFactory;
 use Modules\Fixcity\Database\Factories\TicketFactory;
-use Modules\User\Database\Factories\UserFactory;
+use Modules\Fixcity\Database\Factories\TicketHourFactory;
 use Modules\Fixcity\Models\Ticket;
 use Modules\Fixcity\Models\TicketHour;
+use Modules\Fixcity\Tests\TestCase;
+use Modules\User\Database\Factories\UserFactory;
 use Modules\User\Models\User;
-
 use PHPUnit\Framework\Assert;
+
+uses(TestCase::class);
 
 describe('TicketHour Model', function () {
     it('can be created with valid data', function () {
         $user = UserFactory::new()->createOne();
         $ticket = TicketFactory::new()->createOne();
 
-// Laraxot module file — see docs/wiki for domain contract.
-// Laraxot module file — see docs/wiki for domain contract.
-// Laraxot module file — see docs/wiki for domain contract.
-// Laraxot module file — see docs/wiki for domain contract.
-// Laraxot module file — see docs/wiki for domain contract.
-// Laraxot — see module docs/wiki for domain contract.
-// Laraxot module file — see docs/wiki for domain contract.
-// Laraxot module file — see docs/wiki for domain contract.
-// Laraxot module file — see docs/wiki for domain contract.
-// Laraxot module file — see docs/wiki for domain contract.
-// Laraxot module file — see docs/wiki for domain contract.
-// Laraxot module file — see docs/wiki for domain contract.
-// Laraxot module file — see docs/wiki for domain contract.
+        // Laraxot module file — see docs/wiki for domain contract.
+        // Laraxot module file — see docs/wiki for domain contract.
+        // Laraxot module file — see docs/wiki for domain contract.
+        // Laraxot module file — see docs/wiki for domain contract.
+        // Laraxot module file — see docs/wiki for domain contract.
+        // Laraxot — see module docs/wiki for domain contract.
+        // Laraxot module file — see docs/wiki for domain contract.
+        // Laraxot module file — see docs/wiki for domain contract.
+        // Laraxot module file — see docs/wiki for domain contract.
+        // Laraxot module file — see docs/wiki for domain contract.
+        // Laraxot module file — see docs/wiki for domain contract.
+        // Laraxot module file — see docs/wiki for domain contract.
+        // Laraxot module file — see docs/wiki for domain contract.
         $hour = TicketHour::create([
             'ticket_id' => $ticket->id,
             'user_id' => $user->id,
@@ -78,7 +80,7 @@ describe('TicketHour Model', function () {
             'value' => 3,
         ]);
 
-        Assert::assertSame(3.0, $hour->value);
+        Assert::assertEquals(3.0, $hour->value);
     });
 
     it('can store fractional hour values', function () {

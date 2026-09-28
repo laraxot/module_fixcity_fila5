@@ -68,7 +68,7 @@
                         <div class="col-12">
                             <div class="it-hero-text-wrapper bg-dark px-4 py-5">
                                 <h1 class="text-center mb-4">
-                                    Accedi a FixCity
+                                    {{ __('fixcity::auth.title') }}
                                 </h1>
 // Laraxot module file — see docs/wiki for domain contract.
 // Laraxot module file — see docs/wiki for domain contract.
@@ -90,7 +90,7 @@
                                             <input type="email" 
                                                 class="form-control @error('email') is-invalid @enderror" 
                                                 wire:model.defer="email"
-                                                placeholder="Email"
+                                                placeholder="{{ __('fixcity::auth.email') }}"
                                                 required>
                                             @error('email')
                                                 <div class="invalid-feedback">{{ $message }}</div>
@@ -108,7 +108,7 @@
                                             <input type="password" 
                                                 class="form-control @error('password') is-invalid @enderror" 
                                                 wire:model.defer="password"
-                                                placeholder="Password"
+                                                placeholder="{{ __('fixcity::auth.password') }}"
                                                 required>
                                             @error('password')
                                                 <div class="invalid-feedback">{{ $message }}</div>
@@ -122,7 +122,7 @@
                                             wire:model.defer="remember"
                                             id="remember">
                                         <label class="form-check-label" for="remember">
-                                            Ricordami
+                                            {{ __('fixcity::auth.remember') }}
                                         </label>
                                     </div>
 
@@ -136,24 +136,24 @@
                                         <button type="submit" 
                                             class="btn btn-primary btn-lg"
                                             wire:loading.attr="disabled">
-                                            <span wire:loading.remove>Accedi</span>
+                                                <span wire:loading.remove>{{ __('fixcity::auth.submit') }}</span>
                                             <span wire:loading>
                                                 <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
-                                                Accesso in corso...
+                                                {{ __('fixcity::auth.loading') }}
                                             </span>
                                         </button>
 
                                         @if (Route::has('password.request'))
                                             <a href="{{ route('password.request') }}" class="btn btn-outline-primary">
-                                                Password dimenticata?
+                                                {{ __('fixcity::auth.forgot_password') }}
                                             </a>
                                         @endif
                                     </div>
 
                                     <div class="text-center mt-4">
-                                        <p class="mb-0">Non hai un account?</p>
+                                        <p class="mb-0">{{ __('fixcity::auth.no_account') }}</p>
                                         <a href="{{ route('register') }}" class="btn btn-link">
-                                            Registrati
+                                            {{ __('fixcity::auth.register') }}
                                         </a>
                                     </div>
                                 </form>

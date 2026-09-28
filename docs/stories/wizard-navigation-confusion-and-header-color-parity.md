@@ -1,3 +1,14 @@
+---
+title: "wizard navigation confusion and header color parity"
+type: note
+tags: [documentation]
+created: 2026-09-26
+updated: 2026-09-26
+qmd: "wizard navigation confusion and header color parity"
+issues: []
+discussions: []
+---
+
 # wizard navigation confusion and header color parity
 
 ## Problem Statement

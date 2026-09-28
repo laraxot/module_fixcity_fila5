@@ -1,3 +1,14 @@
+---
+title: "ticket runtime asset integrity"
+type: note
+tags: [documentation]
+created: 2026-09-26
+updated: 2026-09-26
+qmd: "ticket runtime asset integrity"
+issues: []
+discussions: []
+---
+
 # segnalazione runtime asset integrity
 
 ## Problema

@@ -1,4 +1,11 @@
 ---
+title: "wizard riepilogo parity audit"
+tags: [documentation]
+created: 2026-09-26
+updated: 2026-09-26
+qmd: "wizard riepilogo parity audit"
+issues: []
+discussions: []
 name: wizard-riepilogo-parity-audit
 description: Audit visual parity step riepilogo (step 3) vs Design Comuni segnalazione-03-riepilogo.html
 type: concept

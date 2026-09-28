@@ -6,20 +6,17 @@ declare(strict_types=1);
 // claude-audit static: split from ticket.php for maintainability (<500 LOC).
 // Canon: Modules/Fixcity/docs/wiki/concepts/claude-audit-static.md
 // File: lang/en/ticket_wizard_a11y.php
-return array (
-  'wizard_a11y' => 
-  array (
-    'skip_to_main' => 
-    array (
-      'label' => 'Skip to main content',
-      'placeholder' => '',
-      'help' => 'Skip navigation and go directly to the report form.',
-    ),
-    'main_region' => 
-    array (
-      'label' => 'Report form',
-      'placeholder' => '',
-      'help' => 'Wizard steps and submission form.',
-    ),
-  ),
-);
+return [
+    'wizard_a11y' => [
+        'skip_to_main' => [
+            'label' => 'Skip to main content',
+            'placeholder' => '',
+            'help' => 'Skip navigation and go directly to the report form.',
+        ],
+        'main_region' => [
+            'label' => 'Report form',
+            'placeholder' => '',
+            'help' => 'Wizard steps and submission form.',
+        ],
+    ],
+];

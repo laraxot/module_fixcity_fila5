@@ -7,10 +7,11 @@ namespace Modules\Fixcity\Filament\Widgets;
 use Filament\Schemas\Components\Wizard\Step;
 use Illuminate\Support\Facades\Auth;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
+use Modules\Fixcity\Actions\CreateTicketAction;
+use Modules\Fixcity\Actions\GetPublishedPrivacyPolicyAction;
 use Modules\Fixcity\Filament\Concerns\HasTicketAuthorData;
 use Modules\Fixcity\Filament\Resources\TicketResource;
 use Modules\Fixcity\Filament\Resources\TicketResource\Schemas\TicketForm;
-use Modules\Fixcity\Models\Ticket;
 use Modules\Xot\Actions\Cast\SafeStringCastAction;
 use Modules\Xot\Filament\Widgets\XotBaseWizardWidget;
 
@@ -31,6 +32,8 @@ class CreateTicketWizardWidget extends XotBaseWizardWidget
     /** @var array<string, mixed> */
     public array $blockData = [];
 
+    public string $confirmationLocale = 'it';
+
     public static string $resource = TicketResource::class;
 
     /**
@@ -39,6 +42,7 @@ class CreateTicketWizardWidget extends XotBaseWizardWidget
     public function mount(array $blockData = []): void
     {
         $this->blockData = $blockData;
+        $this->confirmationLocale = LaravelLocalization::getCurrentLocale();
         $this->form->fill(TicketForm::getDefaultFormState());
     }
 
@@ -57,14 +61,33 @@ class CreateTicketWizardWidget extends XotBaseWizardWidget
 
     public function save(): void
     {
+        if (app(GetPublishedPrivacyPolicyAction::class)->execute() === null) {
+            $this->addError('data.privacyAccepted', __('fixcity::ticket.privacy.not_configured'));
+
+            return;
+        }
+
         /** @var array<string, mixed> $data */
-        $data = $this->form->getState();
+        // Resolve and validate form state without saving relationships yet:
+        // the Media Library field needs the persisted Ticket as its owner.
+        $data = $this->form->getState(shouldCallHooksBefore: false);
 
         $data['owner_id'] = Auth::id();
 
-        Ticket::create($data);
+        $ticket = app(CreateTicketAction::class)->execute($data, $this->confirmationLocale);
+
+        $this->form->model($ticket);
+        $this->form->saveRelationships();
 
         $this->redirectAfterSuccess();
+    }
+
+    /**
+     * Stable submit entrypoint for Livewire forms and theme templates.
+     */
+    public function submit(): void
+    {
+        $this->save();
     }
 
     protected function redirectAfterSuccess(): void
@@ -73,10 +96,12 @@ class CreateTicketWizardWidget extends XotBaseWizardWidget
             $this->blockData['confirmation_path'] ?? '/tickets/confirmation'
         );
 
-        $localizedUrl = LaravelLocalization::getLocalizedURL(
-            LaravelLocalization::getCurrentLocale(),
-            $path
-        );
+        $supportedLocales = LaravelLocalization::getSupportedLocales();
+        $locale = array_key_exists($this->confirmationLocale, $supportedLocales)
+            ? $this->confirmationLocale
+            : app()->getLocale();
+
+        $localizedUrl = LaravelLocalization::getLocalizedURL($locale, $path);
 
         $this->redirect($localizedUrl !== false ? $localizedUrl : $path);
     }

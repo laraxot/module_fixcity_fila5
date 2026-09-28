@@ -1,4 +1,7 @@
 ---
+qmd: "wizard fix summary"
+issues: []
+discussions: []
 title: "Wizard Fix Summary - May 2026"
 type: troubleshooting
 sources:

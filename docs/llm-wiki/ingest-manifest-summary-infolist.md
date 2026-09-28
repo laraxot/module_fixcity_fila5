@@ -1,3 +1,14 @@
+---
+title: "ingest manifest summary infolist"
+type: note
+tags: [documentation]
+created: 2026-09-26
+updated: 2026-09-26
+qmd: "ingest manifest summary infolist"
+issues: []
+discussions: []
+---
+
 # Ingest manifest: summary-infolist-migration
 
 Files updated and to ingest:

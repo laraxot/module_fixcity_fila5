@@ -1,3 +1,14 @@
+---
+title: "lessons learned wizard summary button"
+type: note
+tags: [documentation]
+created: 2026-09-26
+updated: 2026-09-26
+qmd: "lessons learned wizard summary button"
+issues: []
+discussions: []
+---
+
 # Lessons Learned – Wizard Summary / Submit Button
 
 ## Best Practices

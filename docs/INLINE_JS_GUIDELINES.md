@@ -1,3 +1,14 @@
+---
+title: "INLINE JS GUIDELINES"
+type: note
+tags: [documentation]
+created: 2026-09-26
+updated: 2026-09-26
+qmd: "INLINE JS GUIDELINES"
+issues: []
+discussions: []
+---
+
 # Linee guida: evitare JS inline nelle Blade
 
 Obiettivo

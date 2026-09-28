@@ -1,4 +1,8 @@
 ---
+updated: 2026-09-26
+qmd: "filament first ui boundary"
+issues: []
+discussions: []
 title: "Fixcity — boundary UI Filament-first"
 type: concept
 status: active

@@ -1,3 +1,14 @@
+---
+title: "filament summary infolist guidance"
+type: note
+tags: [documentation]
+created: 2026-09-26
+updated: 2026-09-26
+qmd: "filament summary infolist guidance"
+issues: []
+discussions: []
+---
+
 # Filament Infolist — step riepilogo wizard (Fixcity)
 
 ## Decisione architetturale

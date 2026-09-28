@@ -25,7 +25,9 @@ class ProfileFactory extends Factory
             'timezone' => 'Europe/Rome',
             'is_active' => true,
             'status' => 'active',
-            'type' => 'citizen',
+            // The Parental discriminator must be a mapped model class, never a
+            // business label such as "citizen".
+            'type' => Profile::class,
         ];
     }
 }

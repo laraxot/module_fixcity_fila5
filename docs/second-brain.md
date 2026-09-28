@@ -1,9 +1,13 @@
 ---
+tags: [documentation]
+qmd: "second brain"
+issues: []
+discussions: []
 title: "Second Brain — indice architetturale Fixcity"
 type: index
 module: Fixcity
 created: 2026-09-26
-updated: 2026-09-26
+updated: 2026-09-27
 ---
 
 # Second Brain Fixcity
@@ -14,20 +18,32 @@ Aggiorna quella fonte quando cambia una regola; non duplicare qui il contenuto.
 
 Per il contesto di processo e il recupero on-demand consulta
 [`second-brain-local-discipline`](wiki/concepts/second-brain-local-discipline.md).
-Le decisioni di prodotto e i criteri di accettazione vivono invece nei documenti
+Le decisioni di prodotto, i flussi attore e i criteri di accettazione vivono invece nei documenti
 [`docs/bmad/`](bmad/README.md).
+
+I workflow eseguibili sono indicizzati in [`docs/bmad/workflows/`](bmad/workflows/README.md)
+(process 00–10 + attori) e nel [`workflow-catalog`](bmad/workflow-catalog.md).
+Non creare una seconda sequenza equivalente in questo indice.
+
+### Demo FO (seed + guest)
+
+- Seed: [`demo-tickets-presentation-seed`](wiki/concepts/demo-tickets-presentation-seed.md) via `FixcityDatabaseSeeder`
+- Story demo guest: [`STORY-513`](bmad/stories/STORY-513-public-guest-visual-demo.md)
+- Log: [`wiki/log.md`](wiki/log.md)
+
 
 ## Documentazione Architetturale
 
-### 5. PHPStan generics: falsi positivi noti
-I generics `HasMany<TicketComment, $this>` e `BelongsTo<User, $this>` generano falsi positivi `missingType.generics` quando il trait viene usato in contesti diversi. 
+### 5. PHPStan generics
+Le relazioni Eloquent devono dichiarare entrambi i tipi del generic (`RelatedModel` e
+`DeclaringModel`). I docblock vanno verificati dopo aver pulito la result cache; non si
+accettano falsi positivi documentati né `@phpstan-ignore` come sostituto del fix.
 
-**Fix**: Usare `static` invece di `$this` quando possibile, accettare i falsi positivi documentati.
+**Fonte**: `app/Models/Concerns/HasTicketRelations.php`
 
-**Fonte**: `Modules/Fixcity/app/Models/Concerns/HasTicketRelations.php`
-
-### 6. PHPStan constantTypeCoverage: falsi positivi noti
-`PA_ROLES` (3 elementi) e `ProfileSeeder::DEMO_PROFILES` (2 elementi) generano `typeCoverage.constantTypeCoverage` perché PHPStan calcola la copertura su 180 possibili tipi costanti e richiede \u003e99%.\n\n**Realt\u00e0**: 3/180 = 1.7% \u00e8 perfettamente normale per array piccoli e semantici. Non \u00e8 un bug \u2014 \u00e8 una soglia irragionevole per costanti di dominio.\n\n**Fonte**: `Modules/Fixcity/app/Policies/BasePolicy.php:38`, `Modules/Fixcity/database/seeders/ProfileSeeder.php:22`\n\n**Documentazione aggiuntiva**:\n- `PA_ROLES` copre ruoli operativi critici (operator, supervisor, admin) per l'autorizzazione PA\n- La copertura teorica \u00e8 98.8% ma in pratica \u00e8 sufficiente per l'uso operativo\n- Documentata in `docs/second-brain.md` come eccezione architetturale legittima
+### 6. Costanti tipizzate
+Le costanti array di dominio devono dichiarare `array` quando il gate `typeCoverage`
+richiede la copertura della dichiarazione. Il gate si corregge nel codice, mai nel neon.
 
 ### 7. UserContract pattern (non User model direct usage)
 Sempre usare `UserContract` per l'autorizzazione, mai `Modules\User\Models\User` direttamente. Questo garantisce l'astrazione del modello utente e permette implementazioni diverse.

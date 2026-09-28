@@ -1,4 +1,11 @@
 ---
+title: "merge conflict file list"
+type: note
+tags: [documentation]
+created: 2026-09-26
+qmd: "merge conflict file list"
+issues: []
+discussions: []
 name: Merge Conflict File List
 updated: 2026-04-21
 ---

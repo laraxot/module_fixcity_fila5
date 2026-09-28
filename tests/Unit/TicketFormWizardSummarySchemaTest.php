@@ -4,12 +4,13 @@ declare(strict_types=1);
 
 use Filament\Forms\Components\Hidden;
 use Filament\Forms\Components\Select;
-use Filament\Forms\Components\TextInput;
 use Filament\Infolists\Components\TextEntry;
 use Modules\Fixcity\Filament\Resources\TicketResource\Schemas\TicketForm;
 use Modules\Fixcity\Filament\Resources\TicketResource\Schemas\TicketFormReviewInfolist;
+use Modules\Fixcity\Tests\TestCase;
 use PHPUnit\Framework\Assert;
-use ReflectionMethod;
+
+uses(TestCase::class);
 
 describe('ticket wizard summary step schema', function (): void {
     it('uses filament infolist text entries for the data recap block', function (): void {
@@ -30,19 +31,37 @@ describe('ticket wizard summary step schema', function (): void {
         }
     });
 
-    it('uses form text inputs for author and contacts on the same step', function (): void {
-        $authMethod = new ReflectionMethod(TicketForm::class, 'getAuthorSectionSchema');
-        /** @var array<string, mixed> $author */
-        $author = $authMethod->invoke(null);
+    it('does not collect personal details that the ticket does not persist', function (): void {
+        $defaults = TicketForm::getDefaultFormState();
+        foreach (['author_name', 'author_fiscal_code', 'author_phone', 'author_email'] as $field) {
+            Assert::assertArrayNotHasKey($field, $defaults);
+        }
+    });
 
-        $contactsMethod = new ReflectionMethod(TicketForm::class, 'getContactsSectionSchema');
-        /** @var array<string, mixed> $contacts */
-        $contacts = $contactsMethod->invoke(null);
+    it('provides localized labels for the summary entries in Italian and English', function (): void {
+        foreach ([
+            'it' => ['Posizione', 'Categoria', 'Priorità', 'Titolo', 'Descrizione', 'Allegati'],
+            'en' => ['Location', 'Category', 'Priority', 'Title', 'Description', 'Attachments'],
+        ] as $locale => $labels) {
+            app('translator')->setLocale($locale);
 
-        Assert::assertInstanceOf(TextInput::class, $author['authorFiscalCode'] ?? null);
-        Assert::assertInstanceOf(TextInput::class, $author['authorName'] ?? null);
-        Assert::assertInstanceOf(TextInput::class, $contacts['authorPhone'] ?? null);
-        Assert::assertInstanceOf(TextInput::class, $contacts['authorEmail'] ?? null);
+            foreach ([
+                'review_location',
+                'review_type',
+                'review_priority',
+                'review_name',
+                'review_content',
+                'review_images',
+            ] as $index => $field) {
+                Assert::assertSame(
+                    $labels[$index],
+                    __("fixcity::ticket_form_review_infolist.fields.{$field}.label"),
+                );
+            }
+        }
+
+        app('translator')->setLocale('it');
+        Assert::assertSame('', __('fixcity::ticket_form.sections.empty.heading'));
     });
 
     it('keeps priority as an internal default instead of a visible data-step select', function (): void {

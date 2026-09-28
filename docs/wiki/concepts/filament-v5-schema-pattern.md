@@ -1,4 +1,7 @@
 ---
+qmd: "filament v5 schema pattern"
+issues: []
+discussions: []
 title: "Filament v5 Schema Pattern - XotBase Abstraction"
 type: concept
 sources: ["../../../../docs/wiki/concepts/filament-v5-architecture.md", "https://filamentphp.com/docs/5.x/schemas"]

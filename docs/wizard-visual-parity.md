@@ -1,3 +1,14 @@
+---
+title: "wizard visual parity"
+type: note
+tags: [documentation]
+created: 2026-09-26
+updated: 2026-09-26
+qmd: "wizard visual parity"
+issues: []
+discussions: []
+---
+
 # Filament Wizard → Bootstrap Italia Visual Parity
 
 ## Filosofia
@@ -52,4 +63,12 @@ Quando Filament cambia le classi runtime:
 4. `npm run build`
 
 ---
+title: "wizard visual parity"
+type: note
+tags: [documentation]
+created: 2026-09-26
+updated: 2026-09-26
+qmd: "wizard visual parity"
+issues: []
+discussions: []
 *Ultimo aggiornamento: 2026-04-14*

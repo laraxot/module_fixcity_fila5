@@ -1,4 +1,8 @@
 ---
+updated: 2026-09-26
+qmd: "folio api no controllers"
+issues: []
+discussions: []
 title: API pubbliche Fixcity — Folio, non Controller
 type: concept
 confidence: high

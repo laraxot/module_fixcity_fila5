@@ -1,3 +1,14 @@
+---
+title: "user research"
+type: note
+tags: [documentation]
+created: 2026-09-26
+updated: 2026-09-26
+qmd: "user research"
+issues: []
+discussions: []
+---
+
 # 👥 Fixcity User Research
 
 > **Document ID**: FC-RESEARCH-001  
@@ -7,6 +18,14 @@
 
 ---
 
+title: "user research"
+type: note
+tags: [documentation]
+created: 2026-09-26
+updated: 2026-09-26
+qmd: "user research"
+issues: []
+discussions: []
 ## 📋 Table of Contents
 
 1. [Research Overview](#research-overview)

@@ -20,8 +20,7 @@ final class BuildTicketsGeoJsonAction
     public function __construct(
         private readonly ResolveTicketTypeMarkerPropertiesAction $resolveTypeMarker,
         private readonly ResolveTicketStatusMarkerPropertiesAction $resolveStatusMarker,
-    ) {
-    }
+    ) {}
 
     /**
      * @param  Builder<Ticket>  $query
@@ -97,8 +96,7 @@ final class BuildTicketsGeoJsonAction
                 'address' => $location['address'] ?? $location['display_name'] ?? '',
                 'city' => $location['city'] ?? '',
                 'status' => $statusProps,
-                'url' => '/it/tickets/'.$ticket->id,
-                'detail_url' => '/it/tickets/'.$ticket->id,
+                'detail_url' => '/'.app()->getLocale().'/tickets/'.rawurlencode((string) $ticket->id),
             ],
         ];
     }

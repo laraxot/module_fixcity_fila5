@@ -1,3 +1,14 @@
+---
+title: "product roadmap"
+type: note
+tags: [documentation]
+created: 2026-09-26
+updated: 2026-09-26
+qmd: "product roadmap"
+issues: []
+discussions: []
+---
+
 # 🗺️ Fixcity Product Roadmap
 
 > **Owner**: FixCity Product Team  
@@ -6,6 +17,14 @@
 
 ---
 
+title: "product roadmap"
+type: note
+tags: [documentation]
+created: 2026-09-26
+updated: 2026-09-26
+qmd: "product roadmap"
+issues: []
+discussions: []
 ## 📋 Table of Contents
 
 1. [Executive Summary](#executive-summary)

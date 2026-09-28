@@ -6,6 +6,7 @@ namespace Modules\Fixcity\Actions;
 
 use Modules\Fixcity\Models\Ticket;
 use Spatie\QueueableAction\QueueableAction;
+
 use function Safe\json_decode;
 
 final class NormalizeTicketLocationDataAction
@@ -78,6 +79,7 @@ final class NormalizeTicketLocationDataAction
             'postcode' => $this->normalizeText($location['postcode'] ?? $details['postcode'] ?? null),
             'city' => $this->normalizeText($location['city'] ?? $details['city'] ?? $details['town'] ?? $details['village'] ?? $details['municipality'] ?? null),
             'province' => $this->normalizeText($location['province'] ?? $details['county'] ?? $details['state_district'] ?? null),
+            'region' => $this->normalizeText($location['region'] ?? $details['state'] ?? $details['region'] ?? null),
             'state' => $this->normalizeText($location['state'] ?? $details['state'] ?? $details['region'] ?? null),
             'country' => $this->normalizeText($location['country'] ?? $details['country'] ?? null),
             'country_code' => $this->normalizeText($location['country_code'] ?? $details['country_code'] ?? null),
@@ -96,5 +98,4 @@ final class NormalizeTicketLocationDataAction
 
         return $normalized !== '' ? $normalized : null;
     }
-
 }

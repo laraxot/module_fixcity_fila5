@@ -1,3 +1,14 @@
+---
+title: "wizard step index and map integration rule"
+type: note
+tags: [documentation]
+created: 2026-09-26
+updated: 2026-09-26
+qmd: "wizard step index and map integration rule"
+issues: []
+discussions: []
+---
+
 # Wizard Step Index e Integrazione Mappa
 
 ## Regola

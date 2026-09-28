@@ -12,6 +12,7 @@ use Modules\Fixcity\Actions\LoadCityDesignFilterCatalogAction;
 use Modules\Fixcity\Models\Ticket;
 use Modules\Fixcity\ViewModels\Concerns\BuildsTicketLayoutFilters;
 use Modules\Fixcity\ViewModels\Concerns\PresentsTicketLayoutChrome;
+use Modules\Xot\Actions\Cast\SafeIntCastAction;
 use Modules\Xot\Actions\Cast\SafeStringCastAction;
 
 final class TicketLayoutViewModel
@@ -37,6 +38,10 @@ final class TicketLayoutViewModel
     /** @var Collection<int, Ticket|object> */
     private Collection $liveTickets;
 
+    private int $listPage = 1;
+
+    private bool $hasNextListPage = false;
+
     /** @var list<string> */
     private array $selectedTypes;
 
@@ -56,6 +61,7 @@ final class TicketLayoutViewModel
         $this->filterViewModel = new TicketFilterViewModel;
         $this->baseQuery = app(BuildPublicTicketsQueryAction::class)->execute();
         $this->filteredQuery = $this->buildFilteredQuery();
+        $this->listPage = max(1, SafeIntCastAction::cast(request()->query('page', 1)));
         $this->liveTickets = $this->buildLiveTickets();
     }
 
@@ -101,6 +107,9 @@ final class TicketLayoutViewModel
         if ($this->selectedTypes !== []) {
             $query->whereIn('type', $this->selectedTypes);
         }
+        if ($this->selectedStatuses !== []) {
+            $query->whereIn('status', $this->selectedStatuses);
+        }
 
         return $query;
     }
@@ -111,30 +120,49 @@ final class TicketLayoutViewModel
         if ($this->useCityDesignListDemo()) {
             /** @var Collection<int, object> $demoTickets */
             $demoTickets = Collection::make(app(LoadCityDesignDemoCardsAction::class)->execute());
+            $this->listPage = 1;
+            $this->hasNextListPage = false;
 
             return $demoTickets;
         }
 
+        $perPage = 20;
+        $offset = ($this->listPage - 1) * $perPage;
+        $this->hasNextListPage = $this->resultsCount() > $offset + $perPage;
+
         $tickets = (clone $this->filteredQuery)
             ->latest()
-            ->take(20)
+            ->skip($offset)
+            ->take($perPage)
             ->get();
-
-        $minListCards = 3;
-        if ($tickets->count() < $minListCards) {
-            /** @var array<int, int|string> $excludeIds */
-            $excludeIds = $tickets->pluck('id')->all();
-            $supplements = $this->filterViewModel->getSupplementListItems(
-                $minListCards - $tickets->count(),
-                $excludeIds,
-            );
-            $tickets = $tickets->concat($supplements);
-        }
 
         /** @var Collection<int, Ticket|object> $live */
         $live = Collection::make($tickets->all());
 
         return $live;
+    }
+
+    public function listPage(): int
+    {
+        return $this->listPage;
+    }
+
+    public function hasPreviousListPage(): bool
+    {
+        return $this->listPage > 1;
+    }
+
+    public function hasNextListPage(): bool
+    {
+        return $this->hasNextListPage;
+    }
+
+    public function listPageUrl(int $page): string
+    {
+        $query = request()->query();
+        $query['page'] = max(1, $page);
+
+        return url()->current().'?'.http_build_query($query).'#data-ex-disservizio2';
     }
 
     public function useCityDesignListDemo(): bool

@@ -1,4 +1,8 @@
 ---
+tags: [documentation]
+updated: 2026-09-26
+qmd: "duplicated comments relation manager"
+discussions: []
 title: "CommentsRelationManager duplicato in Fixcity"
 type: redundancy
 owner: Modules/Fixcity

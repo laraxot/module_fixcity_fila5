@@ -1,3 +1,14 @@
+---
+title: "ticket location json architecture"
+type: note
+tags: [documentation]
+created: 2026-09-26
+updated: 2026-09-26
+qmd: "ticket location json architecture"
+issues: []
+discussions: []
+---
+
 # Ticket Location JSON Architecture
 
 ## Rule

@@ -1,6 +1,6 @@
-LOCKED at 2026-09-26T15:34:13+00:00
-Task: fixcity-architecture-discoverability
-Agent: codex-root
+LOCKED at 2026-09-27T11:15:46+00:00
+Task: Assign demo tickets to the declared citizen account
+Agent: unknown
 Session: unknown
-PID: 1124922
+PID: 1494461
 PID note: subshell di lock.sh, gia' terminato — NON usarlo per giudicare il lock stale, guarda 'LOCKED at'

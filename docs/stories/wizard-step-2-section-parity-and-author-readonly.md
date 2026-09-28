@@ -1,3 +1,14 @@
+---
+title: "wizard step 2 section parity and author readonly"
+type: note
+tags: [documentation]
+created: 2026-09-26
+updated: 2026-09-26
+qmd: "wizard step 2 section parity and author readonly"
+issues: []
+discussions: []
+---
+
 # wizard step 2 section parity and author readonly
 
 ## obiettivo

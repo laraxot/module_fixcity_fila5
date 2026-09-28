@@ -1,3 +1,14 @@
+---
+title: "context compression plugin runtime"
+type: note
+tags: [documentation]
+created: 2026-09-26
+updated: 2026-09-26
+qmd: "context compression plugin runtime"
+issues: []
+discussions: []
+---
+
 # context compression plugin runtime
 
 ## diagnosi

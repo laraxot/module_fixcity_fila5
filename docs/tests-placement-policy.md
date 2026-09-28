@@ -1,3 +1,14 @@
+---
+title: "tests placement policy"
+type: note
+tags: [documentation]
+created: 2026-09-26
+updated: 2026-09-26
+qmd: "tests placement policy"
+issues: []
+discussions: []
+---
+
 # Test Placement Policy — Fixcity Module
 
 ## Rule: Playwright Tests Live Inside Modules/Themes

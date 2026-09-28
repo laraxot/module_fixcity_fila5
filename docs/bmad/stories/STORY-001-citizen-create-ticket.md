@@ -4,6 +4,19 @@ id: STORY-001
 author: BMAD
 status: done
 priority: high
+type: story
+module: Fixcity
+tags:
+- bmad
+- fixcity
+created: legacy
+updated: 2026-09-26
+qmd: story 001 citizen create ticket FixCity BMAD story
+issues:
+- https://github.com/laraxot/base_fixcity_fila5/issues/383
+discussions:
+- https://github.com/laraxot/base_fixcity_fila5/discussions/392
+---
 
 ## Descrizione
 Il cittadino può creare un ticket segnalazione attraverso il wizard "Create Ticket". Il flusso include:

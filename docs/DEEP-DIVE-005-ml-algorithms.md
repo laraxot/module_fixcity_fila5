@@ -1,4 +1,8 @@
 ---
+updated: 2026-09-26
+qmd: "DEEP DIVE 005 ml algorithms"
+issues: []
+discussions: []
 title: "Deep Dive: ML Algorithms - Duplicate Detection & Priority Scoring"
 type: technical-spec
 tags: [fixcity, ml, ai, duplicate-detection, computer-vision, nlp, algorithms]

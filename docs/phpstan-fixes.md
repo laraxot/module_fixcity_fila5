@@ -1,3 +1,14 @@
+---
+title: "phpstan fixes"
+type: note
+tags: [documentation]
+created: 2026-09-26
+updated: 2026-09-26
+qmd: "phpstan fixes"
+issues: []
+discussions: []
+---
+
 ## PHPStan Fixes - Modulo Fixcity
 
 Questo documento raccoglie le segnalazioni PHPStan attuali sul modulo `Fixcity` e il piano di correzione, **prima** di toccare il codice.

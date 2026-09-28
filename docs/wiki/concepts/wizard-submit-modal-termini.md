@@ -1,4 +1,11 @@
 ---
+title: "wizard submit modal termini"
+tags: [documentation]
+created: 2026-09-26
+updated: 2026-09-26
+qmd: "wizard submit modal termini"
+issues: []
+discussions: []
 name: wizard-submit-modal-termini
 description: Modal "Termini e condizioni" prima del submit wizard — parity segnalazione-03-riepilogo.html
 type: concept

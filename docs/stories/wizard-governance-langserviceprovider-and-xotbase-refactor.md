@@ -1,3 +1,14 @@
+---
+title: "wizard governance langserviceprovider and xotbase refactor"
+type: note
+tags: [documentation]
+created: 2026-09-26
+updated: 2026-09-26
+qmd: "wizard governance langserviceprovider and xotbase refactor"
+issues: []
+discussions: []
+---
+
 # story: wizard governance langserviceprovider and xotbase refactor
 
 ## contesto

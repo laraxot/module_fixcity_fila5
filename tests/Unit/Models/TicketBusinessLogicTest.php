@@ -2,22 +2,19 @@
 
 declare(strict_types=1);
 
-
-use Modules\Fixcity\Tests\TestCase;
-
-use PHPUnit\Framework\Assert;
-use Modules\Fixcity\Database\Factories\TicketHourFactory;
-use Modules\Fixcity\Database\Factories\TicketFactory;
-use Modules\User\Database\Factories\UserFactory;
 use Illuminate\Database\Eloquent\Relations\HasMany;
-use Illuminate\Support\Collection;
+use Illuminate\Database\Eloquent\Relations\MorphMany;
+use Modules\Fixcity\Database\Factories\TicketFactory;
+use Modules\Fixcity\Database\Factories\TicketHourFactory;
 use Modules\Fixcity\Enums\TicketStatusEnum;
 use Modules\Fixcity\Enums\TicketTypeEnum;
 use Modules\Fixcity\Models\Ticket;
-use Modules\Fixcity\Models\TicketHour;
+use Modules\Fixcity\Tests\TestCase;
+use Modules\User\Database\Factories\UserFactory;
 use Modules\User\Models\User;
+use Modules\Xot\Actions\Cast\SafeStringCastAction;
+use PHPUnit\Framework\Assert;
 
-uses(TestCase::class);
 beforeEach(function () {
     /** @var TestCase $this */
     $this->user = UserFactory::new()->createOne();
@@ -27,12 +24,14 @@ beforeEach(function () {
     ]);
 });
 
+uses(TestCase::class);
+
 describe('Ticket Business Logic Methods', function () {
     describe('Time Tracking Methods', function () {
         it('calculates total logged hours correctly', function () {
             /** @var TestCase $this */
-        Assert::assertNotNull($this->ticket);
-        Assert::assertNotNull($this->user);
+            Assert::assertNotNull($this->ticket);
+            Assert::assertNotNull($this->user);
             // Create some logged hours
             TicketHourFactory::new()->createOne([
                 'ticket_id' => $this->ticket()->id,
@@ -51,14 +50,14 @@ describe('Ticket Business Logic Methods', function () {
 
         it('returns 0 when no hours are logged', function () {
             /** @var TestCase $this */
-        Assert::assertNotNull($this->ticket);
+            Assert::assertNotNull($this->ticket);
             Assert::assertSame(0.0, $this->ticket->total_logged_in_hours);
         });
 
         it('handles decimal hour values correctly', function () {
             /** @var TestCase $this */
-        Assert::assertNotNull($this->ticket);
-        Assert::assertNotNull($this->user);
+            Assert::assertNotNull($this->ticket);
+            Assert::assertNotNull($this->user);
             TicketHourFactory::new()->createOne([
                 'ticket_id' => $this->ticket()->id,
                 'user_id' => $this->authUser()->id,
@@ -72,7 +71,7 @@ describe('Ticket Business Logic Methods', function () {
     describe('Estimation Methods', function () {
         it('converts estimation to human readable format', function () {
             /** @var TestCase $this */
-        Assert::assertNotNull($this->ticket);
+            Assert::assertNotNull($this->ticket);
             // This test assumes estimation_in_seconds is calculated correctly
             // For now, we test that the method exists and returns a string
             $result = $this->ticket->estimation_for_humans;
@@ -82,7 +81,7 @@ describe('Ticket Business Logic Methods', function () {
 
         it('handles null estimation gracefully', function () {
             /** @var TestCase $this */
-        Assert::assertNotNull($this->user);
+            Assert::assertNotNull($this->user);
             $ticket = TicketFactory::new()->createOne([
                 'owner_id' => $this->authUser()->id,
                 'estimation' => null,
@@ -97,7 +96,7 @@ describe('Ticket Business Logic Methods', function () {
     describe('Media Collection Methods', function () {
         it('registers media collections with correct configuration', function () {
             /** @var TestCase $this */
-        Assert::assertNotNull($this->ticket);
+            Assert::assertNotNull($this->ticket);
             $this->ticket->registerMediaCollections();
 
             $collection = $this->ticket->getMediaCollection('attachments');
@@ -113,7 +112,7 @@ describe('Ticket Business Logic Methods', function () {
 
         it('has proper media collection name', function () {
             /** @var TestCase $this */
-        Assert::assertNotNull($this->ticket);
+            Assert::assertNotNull($this->ticket);
             $this->ticket->registerMediaCollections();
 
             Assert::assertNotNull($this->ticket->getMediaCollection('attachments'));
@@ -123,14 +122,17 @@ describe('Ticket Business Logic Methods', function () {
     describe('Comment System Integration', function () {
         it('provides correct commentable name', function () {
             /** @var TestCase $this */
-        Assert::assertNotNull($this->ticket);
+            Assert::assertNotNull($this->ticket);
             Assert::assertSame('Segnalazione', $this->ticket->commentableName());
         });
 
         it('provides comment URL', function () {
             /** @var TestCase $this */
-        Assert::assertNotNull($this->ticket);
-            Assert::assertSame('#', $this->ticket->commentUrl());
+            Assert::assertNotNull($this->ticket);
+            Assert::assertStringEndsWith(
+                '/tickets/'.SafeStringCastAction::cast($this->ticket->getKey()),
+                $this->ticket->commentUrl()
+            );
         });
     });
 
@@ -143,7 +145,7 @@ describe('Ticket Business Logic Methods', function () {
 
         it('can store and retrieve geolocation data', function () {
             /** @var TestCase $this */
-        Assert::assertNotNull($this->user);
+            Assert::assertNotNull($this->user);
             $ticket = TicketFactory::new()->createOne([
                 'owner_id' => $this->authUser()->id,
                 'latitude' => '45.4642',
@@ -159,7 +161,7 @@ describe('Ticket Business Logic Methods', function () {
     describe('Slug Generation', function () {
         it('generates slug automatically from name', function () {
             /** @var TestCase $this */
-        Assert::assertNotNull($this->user);
+            Assert::assertNotNull($this->user);
             $ticket = TicketFactory::new()->createOne([
                 'name' => 'Test Ticket Name With Spaces',
                 'owner_id' => $this->authUser()->id,
@@ -176,7 +178,7 @@ describe('Ticket Business Logic Methods', function () {
 
         it('uses existing slug if provided', function () {
             /** @var TestCase $this */
-        Assert::assertNotNull($this->user);
+            Assert::assertNotNull($this->user);
             $ticket = TicketFactory::new()->createOne([
                 'name' => 'Test Ticket',
                 'slug' => 'custom-slug-123',
@@ -190,7 +192,7 @@ describe('Ticket Business Logic Methods', function () {
     describe('Default Values', function () {
         it('sets default status to PENDING when creating', function () {
             /** @var TestCase $this */
-        Assert::assertNotNull($this->user);
+            Assert::assertNotNull($this->user);
             $ticket = TicketFactory::new()->createOne([
                 'name' => 'Test Default Status',
                 'owner_id' => $this->authUser()->id,
@@ -203,7 +205,7 @@ describe('Ticket Business Logic Methods', function () {
 
         it('respects provided status instead of default', function () {
             /** @var TestCase $this */
-        Assert::assertNotNull($this->user);
+            Assert::assertNotNull($this->user);
             $ticket = TicketFactory::new()->createOne([
                 'name' => 'Test Custom Status',
                 'owner_id' => $this->authUser()->id,
@@ -218,7 +220,7 @@ describe('Ticket Business Logic Methods', function () {
     describe('Icon Data Generation', function () {
         it('generates icon data for valid ticket types', function () {
             /** @var TestCase $this */
-        Assert::assertNotNull($this->user);
+            Assert::assertNotNull($this->user);
             $ticket = TicketFactory::new()->createOne([
                 'owner_id' => $this->authUser()->id,
                 'type' => TicketTypeEnum::COMPLAINT,
@@ -235,7 +237,7 @@ describe('Ticket Business Logic Methods', function () {
 
         it('returns empty array for null type', function () {
             /** @var TestCase $this */
-        Assert::assertNotNull($this->user);
+            Assert::assertNotNull($this->user);
             $ticket = TicketFactory::new()->createOne([
                 'owner_id' => $this->authUser()->id,
                 'type' => null,
@@ -289,19 +291,18 @@ describe('Ticket Relationships Business Logic', function () {
         $subscriber = UserFactory::new()->createOne();
         $this->ticket->ticketSubscribers()->attach($subscriber->id);
 
-        /** @var Collection<int, User> $subscribers */
         $subscribers = $this->ticket->ticketSubscribers()->get();
         Assert::assertCount(1, $subscribers);
 
         $firstSubscriber = $subscribers->first();
         Assert::assertNotNull($firstSubscriber);
-        Assert::assertSame($subscriber->id, $firstSubscriber->id);
+        Assert::assertSame($subscriber->getKey(), $firstSubscriber->getKey());
     });
 
     it('can have spatie comments', function () {
         /** @var TestCase $this */
         Assert::assertNotNull($this->ticket);
-        Assert::assertInstanceOf(\Illuminate\Database\Eloquent\Relations\MorphMany::class, $this->ticket->comments());
+        Assert::assertInstanceOf(MorphMany::class, $this->ticket->comments());
     });
 
     it('can have legacy ticket comments', function () {

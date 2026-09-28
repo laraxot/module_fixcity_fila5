@@ -4,9 +4,6 @@ declare(strict_types=1);
 
 namespace Modules\Fixcity\ViewModels\Concerns;
 
-use Modules\Fixcity\Actions\LoadCityDesignFilterCatalogAction;
-use Modules\Fixcity\Actions\LoadPublicTicketsGeoJsonAction;
-use Modules\Fixcity\Models\Ticket;
 use Modules\Xot\Actions\Cast\SafeIntCastAction;
 use Modules\Xot\Actions\Cast\SafeStringCastAction;
 

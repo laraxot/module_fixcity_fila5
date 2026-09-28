@@ -1,3 +1,14 @@
+---
+title: "phpstan level 10 fixes"
+type: note
+tags: [documentation]
+created: 2026-09-26
+updated: 2026-09-26
+qmd: "phpstan level 10 fixes"
+issues: []
+discussions: []
+---
+
 > **Storico — fotografia del 2026-03-02, non guida operativa corrente.** Error count e soluzioni proposte possono essere superati. Prima di riusare un esempio, confrontarlo con il contratto architetturale Fixcity e il risultato di PHPStan corrente.
 
 # PHPStan Level 10 Fixes - Modulo Fixcity

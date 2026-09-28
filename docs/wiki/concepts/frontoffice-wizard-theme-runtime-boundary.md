@@ -1,4 +1,7 @@
 ---
+qmd: "frontoffice wizard theme runtime boundary"
+issues: []
+discussions: []
 title: "Frontoffice Wizard Theme Runtime Boundary"
 type: concept
 confidence: high

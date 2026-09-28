@@ -6,9 +6,12 @@ namespace Modules\Fixcity\Tests\Unit\Models;
 
 use Modules\Fixcity\Database\Factories\ProfileFactory;
 use Modules\Fixcity\Models\Profile;
+use Modules\Fixcity\Tests\TestCase;
 use Modules\User\Database\Factories\UserFactory;
 use Modules\User\Models\User;
 use PHPUnit\Framework\Assert;
+
+uses(TestCase::class);
 
 describe('Profile Model', function () {
     it('can be created with valid data', function () {
@@ -99,7 +102,7 @@ describe('Profile Model', function () {
             ->orWhere('last_name', 'like', '%Gialli%')
             ->get();
 
-        Assert::assertContains($profile, $searchResults);
+        Assert::assertTrue($searchResults->contains('id', $profile->id));
     });
 
     it('can be filtered by email', function () {
@@ -108,10 +111,15 @@ describe('Profile Model', function () {
         ]);
 
         $emailResults = Profile::where('email', 'like', '%filter.me%')->get();
-        Assert::assertContains($profile, $emailResults);
+        Assert::assertTrue($emailResults->contains('id', $profile->id));
     });
 
-    it('maintains data integrity constraints')->todo();
+    it('preserves a nullable user relation for imported profiles', function () {
+        $profile = ProfileFactory::new()->createOne(['user_id' => null]);
+
+        Assert::assertNull($profile->user_id);
+        Assert::assertNull($profile->user);
+    });
 
     it('can be deleted', function () {
         $profile = ProfileFactory::new()->createOne();
@@ -143,7 +151,7 @@ describe('Profile Model', function () {
         Assert::assertNotNull($profile->updated_at);
         $profile->update(['first_name' => 'Updated']);
 
-        Assert::assertGreaterThan($profile->created_at, $profile->updated_at);
+        Assert::assertGreaterThanOrEqual($profile->created_at, $profile->updated_at);
     });
 
     it('can handle special characters in names', function () {

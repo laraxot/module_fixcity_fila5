@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Modules\Fixcity\Actions;
 
 use Spatie\QueueableAction\QueueableAction;
+
 /**
  * Card elenco statiche del reference Design Comuni (tab Elenco).
  *

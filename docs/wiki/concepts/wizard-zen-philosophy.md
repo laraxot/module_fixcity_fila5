@@ -1,3 +1,14 @@
+---
+title: "wizard zen philosophy"
+type: note
+tags: [documentation]
+created: 2026-09-26
+updated: 2026-09-26
+qmd: "wizard zen philosophy"
+issues: []
+discussions: []
+---
+
 # Wizard Zen Philosophy - "Same Wizard, Different Dresses"
 
 **Date:** 2026-05-05

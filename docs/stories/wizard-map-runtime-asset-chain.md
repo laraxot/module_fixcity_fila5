@@ -1,3 +1,14 @@
+---
+title: "wizard map runtime asset chain"
+type: note
+tags: [documentation]
+created: 2026-09-26
+updated: 2026-09-26
+qmd: "wizard map runtime asset chain"
+issues: []
+discussions: []
+---
+
 # wizard map runtime asset chain
 
 ## contesto

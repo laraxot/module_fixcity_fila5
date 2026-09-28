@@ -1,4 +1,9 @@
 ---
+created: 2026-09-26
+updated: 2026-09-26
+qmd: "STORY 502 architectural invariants"
+issues: []
+discussions: []
 title: "STORY-502 — Invarianti architetturali: l'elenco corto che mancava"
 type: story
 status: in_progress

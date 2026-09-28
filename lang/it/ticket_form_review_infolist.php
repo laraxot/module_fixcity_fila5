@@ -9,22 +9,22 @@ declare(strict_types=1);
 return [
     'fields' => [
         'review_location' => [
-            'label' => 'review_location',
+            'label' => 'Posizione',
         ],
         'review_type' => [
-            'label' => 'review_type',
+            'label' => 'Categoria',
         ],
         'review_priority' => [
-            'label' => 'review_priority',
+            'label' => 'Priorità',
         ],
         'review_name' => [
-            'label' => 'review_name',
+            'label' => 'Titolo',
         ],
         'review_content' => [
-            'label' => 'review_content',
+            'label' => 'Descrizione',
         ],
         'review_images' => [
-            'label' => 'review_images',
+            'label' => 'Allegati',
         ],
         'review_author_name' => [
             'label' => 'review_author_name',

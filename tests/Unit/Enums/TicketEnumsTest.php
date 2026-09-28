@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-use PHPUnit\Framework\Assert;
 use Modules\Fixcity\Enums\TicketPriorityEnum;
 use Modules\Fixcity\Enums\TicketStatusEnum;
 use Modules\Fixcity\Enums\TicketTypeEnum;
+use PHPUnit\Framework\Assert;
 
 describe('TicketStatusEnum', function () {
     it('has all required status values', function () {
@@ -14,11 +14,11 @@ describe('TicketStatusEnum', function () {
             'in_progress',
             'resolved',
             'closed',
-            'cancelled',
+            'reopened',
         ];
 
         $actualStatuses = array_map(fn ($case) => $case->value, TicketStatusEnum::cases());
-// Laraxot module file — see docs/wiki for domain contract.
+        // Laraxot module file — see docs/wiki for domain contract.
 
         foreach ($expectedStatuses as $status) {
             Assert::assertContains($status, $actualStatuses);
@@ -67,6 +67,7 @@ describe('TicketPriorityEnum', function () {
             'low',
             'medium',
             'high',
+            'critical',
             'urgent',
         ];
 
@@ -113,7 +114,7 @@ describe('TicketPriorityEnum', function () {
     it('can get priority level for sorting', function () {
         // Assuming priorities have numeric values for sorting
         $priorities = TicketPriorityEnum::cases();
-        Assert::assertSame(4, count($priorities));
+        Assert::assertSame(5, count($priorities));
     });
 });
 

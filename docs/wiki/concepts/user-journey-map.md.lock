@@ -1,0 +1,6 @@
+LOCKED at 2026-09-26T23:59:56+00:00
+Task: user-guest-browser-audit
+Agent: unknown
+Session: unknown
+PID: 3444857
+PID note: subshell di lock.sh, gia' terminato — NON usarlo per giudicare il lock stale, guarda 'LOCKED at'

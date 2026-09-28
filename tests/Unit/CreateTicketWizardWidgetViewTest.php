@@ -2,22 +2,23 @@
 
 declare(strict_types=1);
 
-
-use function Safe\file_get_contents;
-use Modules\Fixcity\Tests\TestCase;
-
-use PHPUnit\Framework\Assert;
 use Modules\Fixcity\Filament\Resources\TicketResource;
 use Modules\Fixcity\Filament\Widgets\CreateTicketWizardWidget;
 use Modules\Xot\Filament\Widgets\XotBaseWidget;
+use Modules\Xot\Filament\Widgets\XotBaseWizardWidget;
+use Modules\Xot\Tests\XotBaseTestCase;
+use PHPUnit\Framework\Assert;
 
-uses(TestCase::class);
+use function Safe\file_get_contents;
+
+uses(XotBaseTestCase::class);
 test('create ticket wizard leaves view resolution to xot base widget', function (): void {
     $prop = new ReflectionProperty(CreateTicketWizardWidget::class, 'view');
+    $widget = new CreateTicketWizardWidget;
 
     Assert::assertSame(XotBaseWidget::class, $prop->getDeclaringClass()->getName());
 
-    Assert::assertSame('xot::filament.widgets.base', $prop->getDefaultValue());
+    Assert::assertSame('pub_theme::filament.widgets.create-ticket-wizard', $prop->getValue($widget));
 });
 
 test('create ticket wizard binds ticket resource for filament wizard', function (): void {
@@ -61,7 +62,7 @@ test('fixcity module wizard view avoids nested form around filament wizard', fun
 });
 
 test('xot base wizard widget exposes submit action hook from has xot form trait', function (): void {
-    $method = new ReflectionMethod(\Modules\Xot\Filament\Widgets\XotBaseWizardWidget::class, 'getSubmitFormAction');
+    $method = new ReflectionMethod(XotBaseWizardWidget::class, 'getSubmitFormAction');
 
     Assert::assertTrue($method->isProtected());
 });

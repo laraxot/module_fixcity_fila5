@@ -1,3 +1,14 @@
+---
+title: "sprint planning"
+type: note
+tags: [documentation]
+created: 2026-09-26
+updated: 2026-09-26
+qmd: "sprint planning"
+issues: []
+discussions: []
+---
+
 # 🏃 Fixcity Sprint Planning
 
 > **Document ID**: FC-SPRINT-001  
@@ -7,6 +18,14 @@
 
 ---
 
+title: "sprint planning"
+type: note
+tags: [documentation]
+created: 2026-09-26
+updated: 2026-09-26
+qmd: "sprint planning"
+issues: []
+discussions: []
 ## 📋 Table of Contents
 
 1. [Sprint Overview](#sprint-overview)

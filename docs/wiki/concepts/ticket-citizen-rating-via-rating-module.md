@@ -1,4 +1,8 @@
 ---
+updated: 2026-09-26
+qmd: "ticket citizen rating via rating module"
+issues: []
+discussions: []
 title: Valutazione cittadino ticket — modulo Rating
 type: concept
 created: 2026-05-29

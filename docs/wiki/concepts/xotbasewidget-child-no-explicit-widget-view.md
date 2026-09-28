@@ -1,4 +1,7 @@
 ---
+qmd: "xotbasewidget child no explicit widget view"
+issues: []
+discussions: []
 title: xotbasewidget — niente $view esplicito sul widget figlio
 type: concept
 confidence: high

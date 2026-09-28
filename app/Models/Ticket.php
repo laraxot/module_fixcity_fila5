@@ -7,32 +7,25 @@ namespace Modules\Fixcity\Models;
 use Carbon\CarbonInterval;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Collection;
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\BelongsToMany;
-use Illuminate\Database\Eloquent\Relations\HasMany;
-use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 use Illuminate\Support\Carbon;
-use Illuminate\Support\Str;
+use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
+use Modules\Comment\Models\Comment;
+use Modules\Comment\Models\CommentNotificationSubscription;
+use Modules\Comment\Models\Concerns\HasComments;
+use Modules\Comment\Models\Contracts\Commentable;
+use Modules\Fixcity\Actions\NormalizeTicketLocationDataAction;
 use Modules\Fixcity\Actions\ResolveTicketTypeMarkerPropertiesAction;
 use Modules\Fixcity\Database\Factories\TicketFactory;
 use Modules\Fixcity\Enums\TicketPriorityEnum;
 use Modules\Fixcity\Enums\TicketStatusEnum;
 use Modules\Fixcity\Enums\TicketTypeEnum;
-use Modules\Media\Models\Media;
-use Modules\User\Models\User;
-use Modules\Xot\Actions\Cast\SafeStringCastAction;
-use Modules\Xot\Actions\File\AssetAction;
-use Modules\Xot\Contracts\ProfileContract;
-use Modules\Xot\Contracts\UserContract;
-use Modules\Xot\Datas\XotData;
 use Modules\Fixcity\Models\Concerns\HasTicketRelations;
 use Modules\Fixcity\Models\Concerns\InteractsWithTicketCitizenRating;
 use Modules\Fixcity\Models\Concerns\NormalizesTicketLocation;
-use Modules\Comment\Models\Concerns\HasComments;
-use Modules\Comment\Models\CommentNotificationSubscription;
-use Modules\Comment\Models\Reaction;
-use Modules\Comment\Models\Contracts\Commentable;
+use Modules\Media\Models\Media;
+use Modules\User\Models\User;
+use Modules\Xot\Actions\Cast\SafeStringCastAction;
+use Modules\Xot\Contracts\ProfileContract;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 use Spatie\MediaLibrary\MediaCollections\Models\Collections\MediaCollection;
@@ -49,8 +42,8 @@ use Webmozart\Assert\Assert;
  * @property string $slug
  * @property int $id
  * @property string $content
- * @property int $owner_id
- * @property int|null $responsible_id
+ * @property string $owner_id
+ * @property string|null $responsible_id
  * @property int $status_id
  * @property string|null $code
  * @property string|null $ticket_prefix
@@ -73,7 +66,7 @@ use Webmozart\Assert\Assert;
  * @property string|null $deleted_by
  * @property Collection<int, TicketActivity> $activities
  * @property int|null $activities_count
- * @property Collection<int, \Modules\Comment\Models\Comment> $comments
+ * @property Collection<int, Comment> $comments
  * @property int|null $comments_count
  * @property Collection<int, TicketComment> $ticketComments Legacy relation, do not use in new FO flows.
  * @property int|null $ticket_comments_count
@@ -153,11 +146,35 @@ class Ticket extends BaseModel implements Commentable, HasMedia
 {
     use HasComments;
     use HasSlug;
-    use HasStatuses;
-    use InteractsWithMedia;
+
+    // The domain stores the current workflow state in the `status` column and
+    // casts it to TicketStatusEnum. Alias the package's legacy status accessor
+    // so it cannot shadow that Eloquent attribute; the statuses() history
+    // relation and latestStatus() helpers remain available to the audit flow.
+    use HasStatuses {
+        status as statusHistory;
+    }
+
+    /** @use HasTicketRelations<Ticket> */
     use HasTicketRelations;
+
+    use InteractsWithMedia;
     use InteractsWithTicketCitizenRating;
     use NormalizesTicketLocation;
+
+    /**
+     * Spatie ModelStatus intercepts `status` in __get(); FixCity's canonical
+     * workflow state is the enum-backed `status` column, so let Eloquent cast
+     * that attribute before delegating all other keys to the framework.
+     */
+    public function __get($key): mixed
+    {
+        if ($key === 'status' && array_key_exists('status', $this->getAttributes())) {
+            return $this->getAttributeValue('status');
+        }
+
+        return parent::__get($key);
+    }
 
     protected $fillable = [
         'name',
@@ -246,11 +263,7 @@ class Ticket extends BaseModel implements Commentable, HasMedia
             return false;
         }
 
-        if ($this->owner_id !== null && (string) $this->owner_id === (string) $uid) {
-            return true;
-        }
-
-        return in_array((string) $uid, [(string) $this->created_by, (string) $this->updated_by], true);
+        return $this->owner_id !== null && (string) $this->owner_id === (string) $uid;
     }
 
     public function isVisibleOnPublicFrontoffice(): bool
@@ -320,6 +333,19 @@ class Ticket extends BaseModel implements Commentable, HasMedia
         static::creating(static function (Ticket $ticket): void {
             if (! $ticket->status) {
                 $ticket->status = TicketStatusEnum::PENDING;
+            }
+        });
+
+        static::saving(static function (Ticket $ticket): void {
+            if (! is_array($ticket->getAttribute('location'))) {
+                return;
+            }
+
+            $normalized = app(NormalizeTicketLocationDataAction::class)->execute($ticket->getAttributes());
+            foreach (['location', 'latitude', 'longitude'] as $key) {
+                if (array_key_exists($key, $normalized)) {
+                    $ticket->setAttribute($key, $normalized[$key]);
+                }
             }
         });
     }

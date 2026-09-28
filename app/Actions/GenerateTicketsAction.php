@@ -7,8 +7,8 @@ namespace Modules\Fixcity\Actions;
 use Faker\Factory;
 use Faker\Generator;
 use Illuminate\Support\Facades\Bus;
-use Modules\Fixcity\Database\Factories\TicketFactory;
-use Modules\Fixcity\Models\Ticket;
+use Modules\Fixcity\Jobs\GenerateTicketJob;
+use Modules\Xot\Actions\Cast\SafeStringCastAction;
 use Spatie\QueueableAction\QueueableAction;
 
 class GenerateTicketsAction
@@ -24,18 +24,18 @@ class GenerateTicketsAction
 
     public function execute(int $count): void
     {
+        if ($count <= 0) {
+            return;
+        }
+
         $states = ['open', 'urgent', 'resolved'];
 
-        $closures = collect(range(1, $count))
-            ->map(fn (int $i): callable => function () use ($states): void {
-                $state = $this->faker->randomElement($states);
-
-                /** @var TicketFactory $factory */
-                $factory = Ticket::factory();
-                $factory->state(['status' => $state])->create();
-            })
+        $jobs = collect(range(1, $count))
+            ->map(fn (int $i): GenerateTicketJob => new GenerateTicketJob(
+                SafeStringCastAction::cast($this->faker->randomElement($states)),
+            ))
             ->all();
 
-        Bus::batch($closures)->dispatch();
+        Bus::batch($jobs)->dispatch();
     }
 }

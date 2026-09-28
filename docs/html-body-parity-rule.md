@@ -1,3 +1,14 @@
+---
+title: "html body parity rule"
+type: note
+tags: [documentation]
+created: 2026-09-26
+updated: 2026-09-26
+qmd: "html body parity rule"
+issues: []
+discussions: []
+---
+
 # HTML Body Parity Rule
 
 Related:

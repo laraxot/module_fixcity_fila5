@@ -6,20 +6,16 @@ declare(strict_types=1);
 // claude-audit static: split from ticket.php for maintainability (<500 LOC).
 // Canon: Modules/Fixcity/docs/wiki/concepts/claude-audit-static.md
 // File: lang/en/ticket_tabs.php
-return array (
-  'tabs' => 
-  array (
-    'aria' => 
-    array (
-      'label' => 'Map and list view of reports',
-    ),
-    'map' => 
-    array (
-      'label' => 'Map',
-    ),
-    'list' => 
-    array (
-      'label' => 'List',
-    ),
-  ),
-);
+return [
+    'tabs' => [
+        'aria' => [
+            'label' => 'Map and list view of reports',
+        ],
+        'map' => [
+            'label' => 'Map',
+        ],
+        'list' => [
+            'label' => 'List',
+        ],
+    ],
+];

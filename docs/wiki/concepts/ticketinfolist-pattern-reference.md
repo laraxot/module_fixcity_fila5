@@ -1,3 +1,14 @@
+---
+title: "ticketinfolist pattern reference"
+type: note
+tags: [documentation]
+created: 2026-09-26
+updated: 2026-09-26
+qmd: "ticketinfolist pattern reference"
+issues: []
+discussions: []
+---
+
 # TicketInfolist Pattern Reference
 
 **Date:** 2026-05-05  

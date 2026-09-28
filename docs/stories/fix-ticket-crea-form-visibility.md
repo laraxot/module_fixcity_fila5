@@ -1,3 +1,14 @@
+---
+title: "fix ticket crea form visibility"
+type: note
+tags: [documentation]
+created: 2026-09-26
+updated: 2026-09-26
+qmd: "fix ticket crea form visibility"
+issues: []
+discussions: []
+---
+
 # Story: Fix segnalazione-crea form visibility and footer component error
 
 > Superseded 2026-05-22: do **not** uncomment or reintroduce `protected string $view` in `CreateTicketWizardWidget`. The current rule is automatic view resolution through `XotBaseWidget::resolveView()` / `GetViewByClassAction`: `pub_theme::filament.widgets.create-ticket-wizard`, then `fixcity::filament.widgets.create-ticket-wizard`. This story is kept as historical context for the stale-cache/form-visibility incident only.

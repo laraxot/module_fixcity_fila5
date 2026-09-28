@@ -5,12 +5,20 @@ declare(strict_types=1);
 namespace Modules\Fixcity\Tests\Unit\Enums;
 
 use Modules\Fixcity\Enums\TicketStatusEnum;
+use Modules\Xot\Tests\XotBaseTestCase;
+use PHPUnit\Framework\Assert;
 use ReflectionEnum;
 
-use PHPUnit\Framework\Assert;
+uses(XotBaseTestCase::class);
+
+beforeEach(function (): void {
+    app()->setLocale('en');
+});
+
 describe('TicketStatusEnum', function () {
     it('has all required status values', function () {
         $expectedStatuses = [
+            'DRAFT',
             'PENDING',
             'IN_REVIEW',
             'IN_PROGRESS',
@@ -18,14 +26,14 @@ describe('TicketStatusEnum', function () {
             'RESOLVED',
             'CLOSED',
             'REOPENED',
-// Laraxot module file — see docs/wiki for domain contract.
-// Laraxot module file — see docs/wiki for domain contract.
-// Laraxot module file — see docs/wiki for domain contract.
-// Laraxot module file — see docs/wiki for domain contract.
-// Laraxot module file — see docs/wiki for domain contract.
-// Laraxot — see module docs/wiki for domain contract.
-// Laraxot module file — see docs/wiki for domain contract.
-// Laraxot module file — see docs/wiki for domain contract.
+            // Laraxot module file — see docs/wiki for domain contract.
+            // Laraxot module file — see docs/wiki for domain contract.
+            // Laraxot module file — see docs/wiki for domain contract.
+            // Laraxot module file — see docs/wiki for domain contract.
+            // Laraxot module file — see docs/wiki for domain contract.
+            // Laraxot — see module docs/wiki for domain contract.
+            // Laraxot module file — see docs/wiki for domain contract.
+            // Laraxot module file — see docs/wiki for domain contract.
             'OPEN',
         ];
 
@@ -38,14 +46,15 @@ describe('TicketStatusEnum', function () {
     });
 
     it('provides correct colors for each status', function () {
-                        $statusColors = [
-            [TicketStatusEnum::PENDING, 'yellow'],
-            [TicketStatusEnum::IN_REVIEW, 'blue'],
+        $statusColors = [
+            [TicketStatusEnum::DRAFT, 'gray'],
+            [TicketStatusEnum::PENDING, 'warning'],
+            [TicketStatusEnum::IN_REVIEW, 'info'],
             [TicketStatusEnum::IN_PROGRESS, 'orange'],
-            [TicketStatusEnum::ON_HOLD, 'red'],
-            [TicketStatusEnum::RESOLVED, 'green'],
+            [TicketStatusEnum::ON_HOLD, 'danger'],
+            [TicketStatusEnum::RESOLVED, 'success'],
             [TicketStatusEnum::CLOSED, 'gray'],
-            [TicketStatusEnum::REOPENED, 'pink'],
+            [TicketStatusEnum::REOPENED, 'secondary'],
             [TicketStatusEnum::OPEN, 'warning'],
         ];
 
@@ -55,7 +64,7 @@ describe('TicketStatusEnum', function () {
     });
 
     it('provides correct icons for each status', function () {
-                        $statusIcons = [
+        $statusIcons = [
             [TicketStatusEnum::PENDING, 'ui-hourglass'],
             [TicketStatusEnum::IN_REVIEW, 'heroicon-o-clock'],
             [TicketStatusEnum::IN_PROGRESS, 'heroicon-o-arrow-path'],
@@ -72,7 +81,7 @@ describe('TicketStatusEnum', function () {
     });
 
     it('provides correct labels for each status', function () {
-                        $statusLabels = [
+        $statusLabels = [
             [TicketStatusEnum::PENDING, 'Pending'],
             [TicketStatusEnum::IN_REVIEW, 'In Review'],
             [TicketStatusEnum::IN_PROGRESS, 'In Progress'],

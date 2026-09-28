@@ -1,3 +1,14 @@
+---
+title: "filament5 schema namespaces and wizard summary"
+type: note
+tags: [documentation]
+created: 2026-09-26
+updated: 2026-09-26
+qmd: "filament5 schema namespaces and wizard summary"
+issues: []
+discussions: []
+---
+
 # Filament 5.x — Namespace Schema e Pattern Wizard Summary
 
 ## Namespace corretti (fonte: vendor/filament/schemas/src/)

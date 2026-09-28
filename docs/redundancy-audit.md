@@ -1,3 +1,14 @@
+---
+title: "redundancy audit"
+type: note
+tags: [documentation]
+created: 2026-09-26
+updated: 2026-09-26
+qmd: "redundancy audit"
+issues: []
+discussions: []
+---
+
 # Indice degli audit di ridondanza Fixcity
 
 Il report canonico sull'inventario Markdown, sui duplicati esatti e sulle proposte di

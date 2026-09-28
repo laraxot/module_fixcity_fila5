@@ -1,4 +1,8 @@
 ---
+updated: 2026-09-26
+qmd: "DEEP DIVE 002 architecture patterns"
+issues: []
+discussions: []
 title: "Deep Dive: Architecture Patterns & Technical Decisions"
 type: analysis
 tags: [fixcity, architecture, patterns, technical-decisions, scalability]

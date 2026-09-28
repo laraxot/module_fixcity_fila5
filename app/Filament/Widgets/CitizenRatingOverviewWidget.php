@@ -4,14 +4,14 @@ declare(strict_types=1);
 
 namespace Modules\Fixcity\Filament\Widgets;
 
-use Filament\Widgets\StatsOverviewWidget as BaseWidget;
 use Filament\Widgets\StatsOverviewWidget\Stat;
 use Modules\Fixcity\Actions\GetCitizenRatingAggregateAction;
+use Modules\Xot\Filament\Widgets\XotBaseStatsOverviewWidget;
 
 /**
  * Aggregato valutazioni cittadino in backoffice (STORY-044).
  */
-class CitizenRatingOverviewWidget extends BaseWidget
+class CitizenRatingOverviewWidget extends XotBaseStatsOverviewWidget
 {
     protected function getStats(): array
     {

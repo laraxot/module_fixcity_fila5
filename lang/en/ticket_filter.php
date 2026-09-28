@@ -6,16 +6,17 @@ declare(strict_types=1);
 // claude-audit static: split from ticket.php for maintainability (<500 LOC).
 // Canon: Modules/Fixcity/docs/wiki/concepts/claude-audit-static.md
 // File: lang/en/ticket_filter.php
-return array (
-  'filter' => 
-  array (
-    'button' => 
-    array (
-      'label' => 'Filter',
-    ),
-    'remove' => 
-    array (
-      'label' => 'Clear filters',
-    ),
-  ),
-);
+return [
+    'assignment_status' => [
+        'assigned' => 'Assigned',
+        'unassigned' => 'Unassigned',
+    ],
+    'filter' => [
+        'button' => [
+            'label' => 'Filter',
+        ],
+        'remove' => [
+            'label' => 'Clear filters',
+        ],
+    ],
+];

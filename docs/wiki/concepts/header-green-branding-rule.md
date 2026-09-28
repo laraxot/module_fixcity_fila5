@@ -1,3 +1,14 @@
+---
+title: "header green branding rule"
+type: note
+tags: [documentation]
+created: 2026-09-26
+updated: 2026-09-26
+qmd: "header green branding rule"
+issues: []
+discussions: []
+---
+
 # header green branding rule
 
 ## Ambito (KISS)

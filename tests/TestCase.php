@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Modules\Fixcity\Tests;
 
 use Illuminate\Foundation\Testing\DatabaseTransactions;
-use Illuminate\Support\Facades\DB;
 use Modules\Fixcity\Models\Ticket;
 use Modules\User\Models\User;
 use Modules\Xot\Tests\XotBaseTestCase;
@@ -14,26 +13,36 @@ use PHPUnit\Framework\Assert;
 /**
  * Base test case Fixcity — DatabaseTransactions, no RefreshDatabase (dati sacri).
  *
- * @property \Modules\User\Models\User|null $user
- * @property \Modules\User\Models\User|null $admin
- * @property \Modules\Fixcity\Models\Ticket|null $ticket
+ * @property User|null $user
+ * @property User|null $admin
+ * @property Ticket|null $ticket
  * @property \Closure|null $callStatic
  */
 abstract class TestCase extends XotBaseTestCase
 {
     use DatabaseTransactions;
 
-    public ?\Modules\User\Models\User $user = null;
+    public ?User $user = null;
 
-    public ?\Modules\User\Models\User $admin = null;
+    public ?User $admin = null;
 
-    public ?\Modules\Fixcity\Models\Ticket $ticket = null;
+    public ?Ticket $ticket = null;
 
-    /** @var \Closure|null */
     public ?\Closure $callStatic = null;
 
     /** @var list<string> */
     protected $connectionsToTransact = ['fixcity', 'user', 'comment', 'media'];
+
+    /**
+     * Fixcity models run on the dedicated connection; keep assertions inside
+     * the same transaction/PDO instead of the application's generic default.
+     *
+     * @param  array<string, mixed>  $data
+     */
+    public function assertDatabaseHasRow(string $table, array $data, ?string $connection = 'fixcity'): void
+    {
+        parent::assertDatabaseHasRow($table, $data, $connection);
+    }
 
     public function authUser(): User
     {
@@ -58,21 +67,13 @@ abstract class TestCase extends XotBaseTestCase
 
     protected function setUp(): void
     {
+        // Prepare the shared SQLite PDO before Laravel's DatabaseTransactions trait
+        // opens its transactions; purging named connections afterwards would detach
+        // them from the transaction manager and cause leaks or SQLite locks.
+        $this->refreshApplication();
+        $this->prepareSharedSqliteForTesting();
+
         parent::setUp();
-
-        $database = database_path('fixcity_data.sqlite');
-
-        /** @var array<string, array<string, mixed>> $connections */
-        $connections = config('database.connections', []);
-
-        foreach (array_keys($connections) as $connection) {
-            if (config("database.connections.{$connection}.driver") !== 'sqlite') {
-                continue;
-            }
-
-            $this->app['config']->set("database.connections.{$connection}.database", $database);
-            DB::purge($connection);
-        }
 
         config(['auth.providers.users.model' => User::class]);
     }

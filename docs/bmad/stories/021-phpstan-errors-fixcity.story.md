@@ -1,22 +1,25 @@
 ---
-title: STORY-021 — Fixcity PHPStan errors resolution (deprecated class + generic types)
-status: in-progress
+title: Legacy record — Initial Fixcity PHPStan remediation proposal
+status: superseded
 module: Fixcity
 github_issue: https://github.com/laraxot/fixcity_fila5/issues/21
 discussion: https://github.com/laraxot/fixcity_fila5/discussions/21
+type: historical-story
+created: legacy
+updated: '2026-09-26'
+tags:
+- bmad
+- fixcity
+qmd: 021 phpstan errors fixcity.story FixCity BMAD story
+issues:
+- https://github.com/laraxot/base_fixcity_fila5/issues/383
+discussions:
+- https://github.com/laraxot/base_fixcity_fila5/discussions/392
 ---
+## Correzione del resoconto storico
 
-## Issues
-- `TicketComment` deprecated; tests reference `ticket_id`, `user_id`, `content` instead of `commentable_id`, `commentator_id`, `original_text`
-- `UserTest.php` uses legacy `ticketComments()` method
-- PHPStan generic type errors in `HasTicketRelations.php`
+La diagnosi iniziale trattava `TicketComment` come sostituibile con `Modules\Comment\Models\Comment` e proponeva di convertire factory e test. Un audit successivo dello schema ha dimostrato che i due modelli rappresentano tabelle e contratti differenti. Inoltre la classe `TicketComment` non ha un tag PHPDoc `@deprecated`: è un modello legacy mantenuto per compatibilità, mentre `Comment` è il modello per le nuove discussioni.
 
-## Actions Taken
-- Updated `TicketCommentTest.php` to use `Comment` model properties (`commentable_id`, `original_text` etc.)
-- Updated `UserTest.php` to reference `Comment` correctly (pending full fix for `$user->id` errors)
-- Added `tests/AuditCoverage/` to `.gitignore` in all modules
-- Removed `tests/AuditCoverage/` directories where present
+La proposta di migrazione contenuta nel resoconto originale è quindi **superata e non va applicata**. La relazione `ticketComments()` e la factory legacy restano sul modello `TicketComment`; i test del modulo Comment devono testare il contratto polimorfico separatamente.
 
-## Next Steps
-- Fix remaining `property.notFound` errors in `UserTest.php` (line 116, 137)
-- Verify `PHPStan` passes completely on `Modules`
+Riferimento: [handoff TicketComment legacy](../../../../../../docs/chat/ticketcomment-legacy-2026-09-26.md). La story resta per tracciare l'analisi PHPStan storica, non come istruzione di refactoring corrente.

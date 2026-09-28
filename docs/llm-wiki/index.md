@@ -1,9 +1,28 @@
+---
+title: "index"
+type: note
+tags: [documentation]
+created: 2026-09-26
+updated: 2026-09-26
+qmd: "index"
+issues: []
+discussions: []
+---
+
 # Fixcity Module — Indice Documentazione
 
 Modulo Laravel responsabile della gestione delle segnalazioni cittadine (Ticket).
 
 ---
 
+title: "index"
+type: note
+tags: [documentation]
+created: 2026-09-26
+updated: 2026-09-26
+qmd: "index"
+issues: []
+discussions: []
 ## 🏛 Architettura e Governance
 
 | Documento | Descrizione |

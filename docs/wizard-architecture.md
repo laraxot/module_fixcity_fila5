@@ -1,3 +1,14 @@
+---
+title: "wizard architecture"
+type: note
+tags: [documentation]
+created: 2026-09-26
+updated: 2026-09-26
+qmd: "wizard architecture"
+issues: []
+discussions: []
+---
+
 > **Esempio legacy non conforme — non copiare.** Il routing applicativo segue Folio e Actions; non introdurre `TestController` o route Controller. Per il contratto corrente consultare `wiki/concepts/no-controllers-folio-volt-filament.md`.
 
 # Wizard Architecture Documentation
@@ -163,6 +174,14 @@ Route::get('/it/tests/{slug}', [TestController::class, 'show'])
 
 ---
 
+title: "wizard architecture"
+type: note
+tags: [documentation]
+created: 2026-09-26
+updated: 2026-09-26
+qmd: "wizard architecture"
+issues: []
+discussions: []
 *Critical Architecture Pattern - Must be implemented in all wizard widgets*  
 *Last Updated: May 2026*  
 *Version: 1.0.0*

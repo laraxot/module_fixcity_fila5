@@ -1,4 +1,7 @@
 ---
+qmd: "ticket location not saved mass assignment"
+issues: []
+discussions: []
 title: "Ticket location not saved — mutator Eloquent mancante"
 type: troubleshooting
 confidence: high

@@ -1,3 +1,14 @@
+---
+title: "ticket model form reference"
+type: note
+tags: [documentation]
+created: 2026-09-26
+updated: 2026-09-26
+qmd: "ticket model form reference"
+issues: []
+discussions: []
+---
+
 # Ticket Model & TicketForm — Reference
 
 ## Modello: `Modules\Fixcity\Models\Ticket`
@@ -25,6 +36,14 @@
 
 ---
 
+title: "ticket model form reference"
+type: note
+tags: [documentation]
+created: 2026-09-26
+updated: 2026-09-26
+qmd: "ticket model form reference"
+issues: []
+discussions: []
 ## TicketForm: `Modules\Fixcity\Filament\Resources\TicketResource\Schemas\TicketForm`
 
 ### API pubblica

@@ -1,4 +1,8 @@
 ---
+updated: 2026-09-26
+qmd: "DEEP DIVE 007 devops summary"
+issues: []
+discussions: []
 title: "Deep Dive: DevOps & Infrastructure Summary"
 type: technical-spec
 tags: [fixcity, devops, kubernetes, terraform, ci-cd]

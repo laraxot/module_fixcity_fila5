@@ -1,4 +1,7 @@
 ---
+qmd: "header green branding rule"
+issues: []
+discussions: []
 title: "Header Green Branding Rule"
 type: concept
 confidence: high

@@ -1,4 +1,11 @@
 ---
+title: "wizard visual parity"
+tags: [documentation]
+created: 2026-09-26
+updated: 2026-09-26
+qmd: "wizard visual parity"
+issues: []
+discussions: []
 name: wizard-visual-parity
 description: Regola di parità visuale per il wizard Segnalazione in Fixcity
 type: concept

@@ -1,3 +1,14 @@
+---
+title: "fix complete only after target route recheck"
+type: note
+tags: [documentation]
+created: 2026-09-26
+updated: 2026-09-26
+qmd: "fix complete only after target route recheck"
+issues: []
+discussions: []
+---
+
 # Fix Complete Only After Target Route Recheck
 
 ## Regola

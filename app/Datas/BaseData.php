@@ -57,7 +57,7 @@ abstract class BaseData implements DataContract
      *
      * Override in subclasses for custom instantiation logic.
      *
-     * @param array<string, mixed> $data
+     * @param  array<string, mixed>  $data
      */
     public static function from(array $data): static
     {

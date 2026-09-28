@@ -27,7 +27,10 @@ final class GetTicketKpiAggregateAction
      */
     public function execute(): array
     {
-        $rows = DB::table((new Ticket)->getTable())
+        $ticket = new Ticket;
+        $connection = $ticket->getConnection();
+
+        $rows = $connection->table($ticket->getTable())
             ->select('status', DB::raw('count(*) as aggregate'))
             ->groupBy('status')
             ->get();

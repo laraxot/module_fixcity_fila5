@@ -1,3 +1,14 @@
+---
+title: "tickets view cms folio page"
+type: note
+tags: [documentation]
+created: 2026-09-26
+updated: 2026-09-26
+qmd: "tickets view cms folio page"
+issues: []
+discussions: []
+---
+
 # Tickets View CMS Folio Page Concept
 
 Documentation for the CMS-driven ticket detail page implementation using Folio routing system.

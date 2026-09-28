@@ -1,4 +1,11 @@
 ---
+title: "xotbasefield view rule"
+tags: [documentation]
+created: 2026-09-26
+updated: 2026-09-26
+qmd: "xotbasefield view rule"
+issues: []
+discussions: []
 name: XotBaseField view rule
 description: Components extending XotBaseField must not define a protected string $view; view is resolved dynamically via Spatie Queryable actions (getViewBy...).
 type: concept

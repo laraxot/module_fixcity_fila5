@@ -1,3 +1,14 @@
+---
+title: "filament components guidelines"
+type: note
+tags: [documentation]
+created: 2026-09-26
+updated: 2026-09-26
+qmd: "filament components guidelines"
+issues: []
+discussions: []
+---
+
 # Filament Components — Guida Corretta
 
 ## Verifica Fatto (2026-04-14)
@@ -62,5 +73,13 @@ use Filament\Schemas\Components\Utilities\Get;
 - ❌ `Placeholder` per dati del form — usa `TextEntry`
 
 ---
+title: "filament components guidelines"
+type: note
+tags: [documentation]
+created: 2026-09-26
+updated: 2026-09-26
+qmd: "filament components guidelines"
+issues: []
+discussions: []
 *Ultimo aggiornamento: 2026-04-14*
 *Verificato: Text::make → Class not found error*

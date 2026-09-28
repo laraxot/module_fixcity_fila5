@@ -1,3 +1,14 @@
+---
+title: "REFACTORING CREATE TICKET WIZARD"
+type: note
+tags: [documentation]
+created: 2026-09-26
+updated: 2026-09-26
+qmd: "REFACTORING CREATE TICKET WIZARD"
+issues: []
+discussions: []
+---
+
 # Refactoring CreateTicketWizardWidget
 
 Documentazione del processo di rifattorizzazione del widget di creazione ticket nel modulo Fixcity, seguendo i principi di Martin Fowler e gli standard Laraxot.
@@ -48,6 +59,14 @@ Di seguito i 10 punti (ispirati ai "Code Smells" di Fowler e ai benefici di Next
 
 ---
 
+title: "REFACTORING CREATE TICKET WIZARD"
+type: note
+tags: [documentation]
+created: 2026-09-26
+updated: 2026-09-26
+qmd: "REFACTORING CREATE TICKET WIZARD"
+issues: []
+discussions: []
 ## Stato Pre-Refactoring
 - `CreateTicketWizardWidget.php`: ~400 righe. Contiene schema completo, logica di submission, logica di formattazione riepilogo.
 - `TicketForm.php`: Contiene schema duplicato ma non completamente allineato.

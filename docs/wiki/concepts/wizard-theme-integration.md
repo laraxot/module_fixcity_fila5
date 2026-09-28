@@ -1,4 +1,7 @@
 ---
+qmd: "wizard theme integration"
+issues: []
+discussions: []
 title: "Wizard Theme Integration Contract"
 type: concept
 sources: []

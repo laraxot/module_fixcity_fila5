@@ -1,3 +1,14 @@
+---
+title: "git conflicts report"
+type: note
+tags: [documentation]
+created: 2026-09-26
+updated: 2026-09-26
+qmd: "git conflicts report"
+issues: []
+discussions: []
+---
+
 # Global Git Conflict Report
 
 Generated on: Wed Apr 22 14:04:36 CEST 2026

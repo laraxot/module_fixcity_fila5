@@ -1,0 +1,156 @@
+{
+  "title": "FixCity — La piattaforma civic tech per la manutenzione urbana",
+  "subtitle": "Segnala, monitora, risolvi: la città che si ripara in tempo reale",
+  "hero": {
+    "heading": "La tua cita, le tue segnalazioni, il tuo impatto",
+    "description": "FixCity permette ai cittadini di segnalare problemi urbani — buche, illuminazione guasta, rifiuti abbandonati — e di seguirne lo stato in tempo reale. Le amministrazioni municipali possono gestire le segnalazioni in modo efficiente e trasparente.",
+    "cta_primary": {
+      "text": "Segnala un problema",
+      "url": "/tickets/create"
+    },
+    "cta_secondary": {
+      "text": "Visualizza la mappa",
+      "url": "/tickets"
+    }
+  },
+  "features": [
+    {
+      "icon": "map-pin",
+      "title": "Mappa interattiva",
+      "description": "Visualizza tutte le segnalazioni attive su una mappa interattiva. Filtra per categoria, stato e priorità per avere una visione chiara dei problemi della tua città."
+    },
+    {
+      "icon": "bell",
+      "title": "Notifiche in tempo reale",
+      "description": "Ricevi aggiornamenti immediati sullo stato delle tue segnalazioni. Non devi più chiedere: FixCity ti informa."
+    },
+    {
+      "icon": "chart-bar",
+      "title": "Dashboard analytics",
+      "description": "Per le amministrazioni: monitora tempi di risposta, ticket per categoria, soddisfazione dei cittadini e performance dei team di manutenzione."
+    },
+    {
+      "icon": "users",
+      "title": "Comunità attiva",
+      "description": "I cittadini possono votare le segnalazioni più urgenti, lasciare commenti e valutare il lavoro svolto. La partecipazione civica al centro."
+    },
+    {
+      "icon": "shield-check",
+      "title": "Trasparenza totale",
+      "description": "Ogni segnalazione ha uno storico pubblico delle attività. Chi ha fatto cosa, quando, e con quale esito. Nessun buco nero burocratico."
+    },
+    {
+      "icon": "device-phone-mobile",
+      "title": "Mobile first",
+      "description": "Segnala un problema in pochi secondi dal tuo smartphone. Scatta una foto, aggiungi la posizione, invia. Fatto."
+    }
+  ],
+  "stats": [
+    {
+      "value": "50+",
+      "label": "Segnalazioni attive",
+      "color": "text-blue-600"
+    },
+    {
+      "value": "8",
+      "label": "Città coperte",
+      "color": "text-green-600"
+    },
+    {
+      "value": "72h",
+      "label": "Tempo medio di risoluzione",
+      "color": "text-orange-500"
+    },
+    {
+      "value": "4.2/5",
+      "label": "Soddisfazione cittadini",
+      "color": "text-purple-600"
+    }
+  ],
+  "categories": [
+    {
+      "name": "Strade e Marciapiedi",
+      "icon": "road",
+      "count": 12,
+      "color": "bg-orange-100 text-orange-600"
+    },
+    {
+      "name": "Illuminazione Pubblica",
+      "icon": "lightbulb",
+      "count": 8,
+      "color": "bg-yellow-100 text-yellow-600"
+    },
+    {
+      "name": "Rifiuti e Pulizia",
+      "icon": "trash",
+      "count": 10,
+      "color": "bg-green-100 text-green-600"
+    },
+    {
+      "name": "Verde Pubblico",
+      "icon": "tree",
+      "count": 6,
+      "color": "bg-emerald-100 text-emerald-600"
+    },
+    {
+      "name": "Segnaletica",
+      "icon": "sign",
+      "count": 5,
+      "color": "bg-blue-100 text-blue-600"
+    },
+    {
+      "name": "Trasporti",
+      "icon": "bicycle",
+      "count": 4,
+      "color": "bg-purple-100 text-purple-600"
+    }
+  ],
+  "testimonials": [
+    {
+      "name": "Giulia Rossi",
+      "city": "Roma",
+      "text": "Ho segnalato una buca in Via del Corso e in 48 ore è stata riparata. Non ci credevo nemmeno io.",
+      "rating": 5
+    },
+    {
+      "name": "Marco Bianchi",
+      "city": "Milano",
+      "text": "Finalmente un sistema che funziona. Vedo lo stato di ogni segnalazione e so esattamente quando verrà risolta.",
+      "rating": 4
+    },
+    {
+      "name": "Sara Verdi",
+      "city": "Napoli",
+      "text": "L'illuminazione del nostro quartiere era spenta da mesi. Con FixCity il problema è stato risolto in una settimana.",
+      "rating": 5
+    }
+  ],
+  "cta_section": {
+    "heading": "Pronto a migliorare la tua città?",
+    "description": "Unisciti a migliaia di cittadini che stanno già facendo la differenza. Segnala il primo problema oggi.",
+    "button_text": "Inizia ora",
+    "button_url": "/tickets/create"
+  },
+  "footer": {
+    "tagline": "FixCity — La piattaforma civic tech per la manutenzione urbana",
+    "links": {
+      "privacy": "/privacy",
+      "terms": "/terms",
+      "contact": "/contact"
+    },
+    "social": [
+      {
+        "name": "Twitter",
+        "url": "https://twitter.com/fixcity"
+      },
+      {
+        "name": "Facebook",
+        "url": "https://facebook.com/fixcity"
+      },
+      {
+        "name": "LinkedIn",
+        "url": "https://linkedin.com/company/fixcity"
+      }
+    ]
+  }
+}

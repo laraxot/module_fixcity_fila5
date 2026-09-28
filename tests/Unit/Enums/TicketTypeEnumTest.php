@@ -5,7 +5,14 @@ declare(strict_types=1);
 namespace Modules\Fixcity\Tests\Unit\Enums;
 
 use Modules\Fixcity\Enums\TicketTypeEnum;
+use Modules\Xot\Tests\XotBaseTestCase;
 use PHPUnit\Framework\Assert;
+
+uses(XotBaseTestCase::class);
+
+beforeEach(function (): void {
+    app()->setLocale('en');
+});
 
 describe('TicketTypeEnum', function () {
     it('has all required type values', function () {
@@ -90,16 +97,16 @@ describe('TicketTypeEnum', function () {
 
     it('provides correct labels for each type', function () {
         $typeLabels = [
-            [TicketTypeEnum::ROAD_MAINTENANCE, 'Manutenzione Stradale'],
-            [TicketTypeEnum::PUBLIC_LIGHTING, 'Illuminazione Pubblica'],
-            [TicketTypeEnum::WASTE_COLLECTION, 'Raccolta Rifiuti'],
-            [TicketTypeEnum::PARKS_AND_GARDENS, 'Aree Verdi e Parchi'],
-            [TicketTypeEnum::SEWAGE_AND_DRAINAGE, 'Fognature e Drenaggi'],
-            [TicketTypeEnum::PUBLIC_BUILDINGS, 'Edifici Pubblici'],
-            [TicketTypeEnum::ENVIRONMENTAL_REPORTS, 'Segnalazioni Ambientali'],
-            [TicketTypeEnum::PUBLIC_TRANSPORT, 'Trasporti Pubblici'],
-            [TicketTypeEnum::URBAN_FURNITURE, 'Arredo Urbano'],
-            [TicketTypeEnum::PUBLIC_SAFETY, 'Sicurezza Pubblica'],
+            [TicketTypeEnum::ROAD_MAINTENANCE, 'Road Maintenance'],
+            [TicketTypeEnum::PUBLIC_LIGHTING, 'Public Lighting'],
+            [TicketTypeEnum::WASTE_COLLECTION, 'Waste Collection'],
+            [TicketTypeEnum::PARKS_AND_GARDENS, 'Parks and Gardens'],
+            [TicketTypeEnum::SEWAGE_AND_DRAINAGE, 'Sewage and Drainage'],
+            [TicketTypeEnum::PUBLIC_BUILDINGS, 'Public Buildings'],
+            [TicketTypeEnum::ENVIRONMENTAL_REPORTS, 'Environmental Reports'],
+            [TicketTypeEnum::PUBLIC_TRANSPORT, 'Public Transport'],
+            [TicketTypeEnum::URBAN_FURNITURE, 'Urban Furniture'],
+            [TicketTypeEnum::PUBLIC_SAFETY, 'Public Safety'],
             [TicketTypeEnum::COMPLAINT, 'Complaint'],
             [TicketTypeEnum::SUGGESTION, 'Suggestion'],
             [TicketTypeEnum::REPORT, 'Report'],

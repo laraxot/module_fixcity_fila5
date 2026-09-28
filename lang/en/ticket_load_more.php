@@ -6,12 +6,16 @@ declare(strict_types=1);
 // claude-audit static: split from ticket.php for maintainability (<500 LOC).
 // Canon: Modules/Fixcity/docs/wiki/concepts/claude-audit-static.md
 // File: lang/en/ticket_load_more.php
-return array (
-  'load-more' => 
-  array (
-    'button' => 
-    array (
-      'label' => 'Load more reports',
-    ),
-  ),
-);
+return [
+    'load-more' => [
+        'button' => [
+            'label' => 'Load more reports',
+        ],
+    ],
+    'pagination' => [
+        'aria' => 'Reports pagination',
+        'page' => 'Page :page',
+        'previous' => 'Previous page',
+        'next' => 'Next page',
+    ],
+];

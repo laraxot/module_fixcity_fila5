@@ -1,3 +1,14 @@
+---
+title: "schema clean code rule"
+type: note
+tags: [documentation]
+created: 2026-09-26
+updated: 2026-09-26
+qmd: "schema clean code rule"
+issues: []
+discussions: []
+---
+
 # Schema Clean Code Rule
 
 **Rule**: `->schema()` must always call a method that returns an array with string keys

@@ -1,3 +1,14 @@
+---
+title: "wizard summary step header and submit parity plan"
+type: note
+tags: [documentation]
+created: 2026-09-26
+updated: 2026-09-26
+qmd: "wizard summary step header and submit parity plan"
+issues: []
+discussions: []
+---
+
 # Story: Wizard summary step header and submit parity plan
 
 ## Context

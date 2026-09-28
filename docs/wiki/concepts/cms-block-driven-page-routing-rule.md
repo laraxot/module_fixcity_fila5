@@ -1,4 +1,11 @@
 ---
+title: "cms block driven page routing rule"
+tags: [documentation]
+created: 2026-09-26
+updated: 2026-09-26
+qmd: "cms block driven page routing rule"
+issues: []
+discussions: []
 name: cms-block-driven-page-routing-rule
 description: "REGOLA: quando un URL usa tests/[slug].blade.php, la pagina è CMS-driven (JSON blocks), NON hardcoded. Cercare PRIMA il JSON block, poi il Folio page."
 type: concept

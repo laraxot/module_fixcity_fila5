@@ -1,3 +1,14 @@
+---
+title: "ADDRESS INPUT PHILOSOPHY"
+type: note
+tags: [documentation]
+created: 2026-09-26
+updated: 2026-09-26
+qmd: "ADDRESS INPUT PHILOSOPHY"
+issues: []
+discussions: []
+---
+
 # AddressInput Component — Geo Module
 
 > **Date:** 2026-04-13

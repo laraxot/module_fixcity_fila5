@@ -1,3 +1,14 @@
+---
+title: "wizard submission states"
+type: note
+tags: [documentation]
+created: 2026-09-26
+updated: 2026-09-26
+qmd: "wizard submission states"
+issues: []
+discussions: []
+---
+
 # Decision: Wizard Submission States (Draft vs Pending)
 
 **Status**: accepted
@@ -7,6 +18,14 @@
 
 ---
 
+title: "wizard submission states"
+type: note
+tags: [documentation]
+created: 2026-09-26
+updated: 2026-09-26
+qmd: "wizard submission states"
+issues: []
+discussions: []
 ## Context
 
 Il wizard di segnalazione citizen-frontoffice richiede una distinzione chiara tra l'intento di "completare il lavoro" e l'intento di "notificare l'ente". 

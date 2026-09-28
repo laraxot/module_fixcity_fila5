@@ -5,9 +5,16 @@ declare(strict_types=1);
 namespace Modules\Fixcity\Tests\Unit\Enums;
 
 use Modules\Fixcity\Enums\TicketPriorityEnum;
+use Modules\Xot\Tests\XotBaseTestCase;
+use PHPUnit\Framework\Assert;
 use ReflectionEnum;
 
-use PHPUnit\Framework\Assert;
+uses(XotBaseTestCase::class);
+
+beforeEach(function (): void {
+    app()->setLocale('en');
+});
+
 describe('TicketPriorityEnum', function () {
     it('has all required priority values', function () {
         $expectedPriorities = [
@@ -18,9 +25,9 @@ describe('TicketPriorityEnum', function () {
             'CRITICAL',
         ];
 
-// Laraxot module file — see docs/wiki for domain contract.
-// Laraxot module file — see docs/wiki for domain contract.
-// Laraxot module file — see docs/wiki for domain contract.
+        // Laraxot module file — see docs/wiki for domain contract.
+        // Laraxot module file — see docs/wiki for domain contract.
+        // Laraxot module file — see docs/wiki for domain contract.
         $actualPriorities = array_column(TicketPriorityEnum::cases(), 'name');
 
         Assert::assertCount(count($expectedPriorities), $actualPriorities);
@@ -30,11 +37,11 @@ describe('TicketPriorityEnum', function () {
     });
 
     it('provides correct colors for each priority', function () {
-                        $priorityColors = [
-            [TicketPriorityEnum::LOW, 'gray'],
-            [TicketPriorityEnum::MEDIUM, 'blue'],
-            [TicketPriorityEnum::HIGH, 'orange'],
-            [TicketPriorityEnum::URGENT, 'red'],
+        $priorityColors = [
+            [TicketPriorityEnum::LOW, 'success'],
+            [TicketPriorityEnum::MEDIUM, 'warning'],
+            [TicketPriorityEnum::HIGH, 'danger'],
+            [TicketPriorityEnum::URGENT, 'danger'],
             [TicketPriorityEnum::CRITICAL, 'danger'],
         ];
 
@@ -44,11 +51,11 @@ describe('TicketPriorityEnum', function () {
     });
 
     it('provides correct icons for each priority', function () {
-                        $priorityIcons = [
+        $priorityIcons = [
             [TicketPriorityEnum::LOW, 'heroicon-o-arrow-down'],
-            [TicketPriorityEnum::MEDIUM, 'heroicon-o-minus'],
+            [TicketPriorityEnum::MEDIUM, 'heroicon-o-arrow-right'],
             [TicketPriorityEnum::HIGH, 'heroicon-o-arrow-up'],
-            [TicketPriorityEnum::URGENT, 'heroicon-o-exclamation-triangle'],
+            [TicketPriorityEnum::URGENT, 'heroicon-o-exclamation-circle'],
             [TicketPriorityEnum::CRITICAL, 'heroicon-o-exclamation-circle'],
         ];
 
@@ -58,7 +65,7 @@ describe('TicketPriorityEnum', function () {
     });
 
     it('provides correct labels for each priority', function () {
-                        $priorityLabels = [
+        $priorityLabels = [
             [TicketPriorityEnum::LOW, 'Low'],
             [TicketPriorityEnum::MEDIUM, 'Medium'],
             [TicketPriorityEnum::HIGH, 'High'],
@@ -95,7 +102,7 @@ describe('TicketPriorityEnum', function () {
             Assert::assertNotEmpty($priority->getIcon());
             Assert::assertNotEmpty($priority->getLabel());
             // Colors should be valid CSS color names or Tailwind classes
-            $validColors = ['gray', 'blue', 'orange', 'red', 'danger'];
+            $validColors = ['success', 'warning', 'danger'];
             Assert::assertContains($priority->getColor(), $validColors);
             // Icons should contain valid icon identifiers
             Assert::assertStringContainsString('heroicon-o-', (string) $priority->getIcon());

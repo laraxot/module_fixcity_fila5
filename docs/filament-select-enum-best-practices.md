@@ -1,3 +1,14 @@
+---
+title: "filament select enum best practices"
+type: note
+tags: [documentation]
+created: 2026-09-26
+updated: 2026-09-26
+qmd: "filament select enum best practices"
+issues: []
+discussions: []
+---
+
 # Select con Enum in Filament - Best Practices
 
 ## Problema

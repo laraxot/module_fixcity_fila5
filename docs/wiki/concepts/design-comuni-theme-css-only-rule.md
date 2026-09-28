@@ -1,3 +1,14 @@
+---
+title: "design comuni theme css only rule"
+type: note
+tags: [documentation]
+created: 2026-09-26
+updated: 2026-09-26
+qmd: "design comuni theme css only rule"
+issues: []
+discussions: []
+---
+
 # Design Comuni Theme CSS Only Rule
 
 ## Regola per Fixcity

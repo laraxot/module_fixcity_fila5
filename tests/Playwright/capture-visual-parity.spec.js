@@ -1,5 +1,4 @@
-const { test } = require('@playwright/test');
-const path = require('path');
+import { test } from '@playwright/test';
 
 const viewports = [
   { name: 'desktop', width: 1280, height: 900 },

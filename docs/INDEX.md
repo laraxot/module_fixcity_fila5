@@ -1,3 +1,14 @@
+---
+title: "INDEX"
+type: note
+tags: [documentation]
+created: 2026-09-26
+updated: 2026-09-26
+qmd: "INDEX"
+issues: []
+discussions: []
+---
+
 # Documentation Index
 
 Elenco dei file markdown in questa directory.
@@ -35,4 +46,12 @@ Elenco dei file markdown in questa directory.
 
 ---
 
+title: "INDEX"
+type: note
+tags: [documentation]
+created: 2026-09-26
+updated: 2026-09-26
+qmd: "INDEX"
+issues: []
+discussions: []
 **DRY Principle**: This index references other documentation. Always check linked files for complete information.

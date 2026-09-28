@@ -1,3 +1,14 @@
+---
+title: "ticketform schema guidelines"
+type: note
+tags: [documentation]
+created: 2026-09-26
+updated: 2026-09-26
+qmd: "ticketform schema guidelines"
+issues: []
+discussions: []
+---
+
 # TicketForm Schema Guidelines
 
 ## Overview

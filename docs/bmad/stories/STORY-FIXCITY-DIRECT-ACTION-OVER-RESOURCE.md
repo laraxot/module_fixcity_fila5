@@ -1,3 +1,21 @@
+---
+title: STORY-FIXCITY-DIRECT-ACTION-OVER-RESOURCE — Action diretta nel lifecycle di
+  creazione
+type: story
+module: Fixcity
+status: in_progress
+created: legacy
+updated: 2026-09-26
+tags:
+- bmad
+- fixcity
+qmd: STORY FIXCITY DIRECT ACTION OVER RESOURCE FixCity BMAD story
+issues:
+- https://github.com/laraxot/base_fixcity_fila5/issues/383
+discussions:
+- https://github.com/laraxot/base_fixcity_fila5/discussions/392
+---
+
 # STORY-FIXCITY-DIRECT-ACTION-OVER-RESOURCE — Action diretta nel lifecycle di creazione
 
 **Epic:** Architecture consistency  

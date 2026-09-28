@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Modules\Fixcity\ViewModels;
 
+use Modules\Fixcity\Actions\BuildSegnalazioniFilterAggregateAction;
 use Modules\Xot\Actions\Cast\SafeStringCastAction;
 
 /**
@@ -34,7 +35,7 @@ class SegnalazioniFilterViewModel
 
     public function __construct()
     {
-        $aggregate = app(\Modules\Fixcity\Actions\BuildSegnalazioniFilterAggregateAction::class)->execute();
+        $aggregate = app(BuildSegnalazioniFilterAggregateAction::class)->execute();
         $this->features = $aggregate['features'] ?? [];
         $this->countsPerType = $aggregate['countsPerType'] ?? [];
         $this->countsPerStatus = $aggregate['countsPerStatus'] ?? [];

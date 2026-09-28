@@ -42,11 +42,11 @@ class TicketResource extends XotBaseResource
                         ->columnSpanFull() // Occupa tutta la larghezza disponibile
                         ->required()
                         ->maxLength(255)
-                        ->afterStateUpdated(static function (Set $set, Get $get, string $state): void {
+                        ->afterStateUpdated(static function (Set $set, Get $get, ?string $state): void {
                             if ($get('slug')) {
                                 return;
                             }
-                            $set('slug', Str::slug($state));
+                            $set('slug', Str::slug($state ?? ''));
                         })
                         ->extraAttributes([
                             'style' => '',

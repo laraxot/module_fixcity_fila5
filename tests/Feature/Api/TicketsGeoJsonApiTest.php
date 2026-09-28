@@ -8,9 +8,10 @@ use Modules\Fixcity\Database\Factories\TicketFactory;
 use Modules\Fixcity\Enums\TicketStatusEnum;
 use Modules\Fixcity\Enums\TicketTypeEnum;
 use Modules\Fixcity\Tests\TestCase;
+use Modules\User\Database\Factories\UserFactory;
 use Modules\Xot\Actions\Cast\SafeStringCastAction;
 
-uses(\Modules\Fixcity\Tests\TestCase::class);
+uses(TestCase::class);
 
 it('returns geojson feature collection from live api', function (): void {
     /** @var TestCase $this */
@@ -56,5 +57,42 @@ it('returns details for a public ticket marker id', function (): void {
 
     $response->assertOk()
         ->assertJsonPath('id', $ticket->getKey())
-        ->assertJsonPath('title', 'Ramo pericoloso su via Piovan');
+        ->assertJsonPath('title', 'Ramo pericoloso su via Piovan')
+        ->assertJsonPath('code', '');
+});
+
+it('does not expose the capability code to an authenticated non-owner', function (): void {
+    /** @var TestCase $this */
+    $owner = UserFactory::new()->createOne();
+    $viewer = UserFactory::new()->createOne();
+    $ticket = TicketFactory::new()->createOne([
+        'status' => TicketStatusEnum::RESOLVED,
+        'code' => 'TCK-PRIVATECODE01',
+        'owner_id' => $owner->getKey(),
+        'responsible_id' => $owner->getKey(),
+        'location' => ['lat' => 45.557, 'lng' => 12.236],
+    ]);
+
+    $this->actingAs($viewer)
+        ->getJson('/api/ticket-details/'.SafeStringCastAction::cast($ticket->getKey()))
+        ->assertOk()
+        ->assertJsonPath('code', '');
+});
+
+it('exposes the capability code to the ticket owner only', function (): void {
+    /** @var TestCase $this */
+    $owner = UserFactory::new()->createOne();
+    $ticket = TicketFactory::new()->createOne([
+        'name' => 'Lampione guasto',
+        'status' => TicketStatusEnum::PENDING,
+        'code' => 'TCK-OWNERSECRET01',
+        'owner_id' => $owner->getKey(),
+        'responsible_id' => $owner->getKey(),
+        'location' => ['lat' => 45.557, 'lng' => 12.236],
+    ]);
+
+    $this->actingAs($owner)
+        ->getJson('/api/ticket-details/'.SafeStringCastAction::cast($ticket->getKey()))
+        ->assertOk()
+        ->assertJsonPath('code', 'TCK-OWNERSECRET01');
 });

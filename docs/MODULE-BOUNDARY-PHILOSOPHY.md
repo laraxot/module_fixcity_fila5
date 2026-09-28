@@ -1,3 +1,14 @@
+---
+title: "MODULE BOUNDARY PHILOSOPHY"
+type: note
+tags: [documentation]
+created: 2026-09-26
+updated: 2026-09-26
+qmd: "MODULE BOUNDARY PHILOSOPHY"
+issues: []
+discussions: []
+---
+
 # Module Boundary Philosophy — AddressInput belongs to Geo
 
 **Status**: Active

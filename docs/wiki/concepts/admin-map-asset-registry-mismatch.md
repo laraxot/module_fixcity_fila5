@@ -1,3 +1,14 @@
+---
+title: "admin map asset registry mismatch"
+type: note
+tags: [documentation]
+created: 2026-09-26
+updated: 2026-09-26
+qmd: "admin map asset registry mismatch"
+issues: []
+discussions: []
+---
+
 # Admin map asset registry mismatch
 
 ## Problema

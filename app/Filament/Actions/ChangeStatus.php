@@ -19,12 +19,16 @@ class ChangeStatus extends Action
         parent::setUp();
 
         $this->translateLabel()
+            ->authorize('changeStatus')
             ->action(
                 static function (Ticket $record, array $data): void {
-                    Assert::string($data['status']);
+                    $status = $data['status'] instanceof TicketStatusEnum
+                        ? $data['status']->value
+                        : $data['status'];
+                    Assert::string($status);
                     Assert::string($data['reason']);
 
-                    app(ActionChangeStatus::class)->execute($record, $data['status'], $data['reason']);
+                    app(ActionChangeStatus::class)->execute($record, $status, $data['reason']);
                 }
             )
             ->schema([

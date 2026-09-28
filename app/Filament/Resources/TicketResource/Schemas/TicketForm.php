@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Modules\Fixcity\Filament\Resources\TicketResource\Schemas;
 
 use Filament\Forms\Components\Checkbox;
+use Filament\Forms\Components\Hidden;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\SpatieMediaLibraryFileUpload;
 use Filament\Forms\Components\Textarea;
@@ -14,6 +15,10 @@ use Filament\Schemas\Components\Html;
 use Filament\Schemas\Components\Section;
 use Filament\Schemas\Components\Wizard\Step;
 use Illuminate\Support\HtmlString;
+use Illuminate\Support\MessageBag;
+use Illuminate\Support\Str;
+use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
+use Modules\Fixcity\Actions\GetPublishedPrivacyPolicyAction;
 use Modules\Fixcity\Enums\TicketTypeEnum;
 use Modules\Geo\Filament\Forms\Components\CoordinatePicker;
 use Modules\Xot\Filament\Resources\Schemas\XotBaseResourceForm;
@@ -48,14 +53,6 @@ class TicketForm extends XotBaseResourceForm
                 ->heading((string) __('fixcity::ticket.sections.summary.label'))
                 ->schema(static::getSummarySectionSchema())
                 ->columnSpanFull(),
-            'authorSection' => Section::make()
-                ->heading((string) __('fixcity::ticket.sections.author.label'))
-                ->schema(static::getAuthorSectionSchema())
-                ->columnSpanFull(),
-            'contactsSection' => Section::make()
-                ->heading((string) __('fixcity::ticket.sections.contacts.label'))
-                ->schema(static::getContactsSectionSchema())
-                ->columnSpanFull(),
         ];
     }
 
@@ -86,31 +83,6 @@ class TicketForm extends XotBaseResourceForm
     }
 
     /**
-     * Dati autore: input (non Infolist) — si compilano nello stesso step del riepilogo.
-     *
-     * @return array<string, SchemaComponent>
-     */
-    protected static function getAuthorSectionSchema(): array
-    {
-        return [
-            'authorName' => TextInput::make('author_name'),
-            'authorFiscalCode' => TextInput::make('author_fiscal_code'),
-        ];
-    }
-
-    /**
-     * @return array<string, SchemaComponent>
-     */
-    protected static function getContactsSectionSchema(): array
-    {
-        return [
-            'authorPhone' => TextInput::make('author_phone'),
-            'authorEmail' => TextInput::make('author_email')
-                ->email(),
-        ];
-    }
-
-    /**
      * Wrapper per compatibilità con XotBaseResourceForm.
      *
      * @return array<string, SchemaComponent>
@@ -133,11 +105,8 @@ class TicketForm extends XotBaseResourceForm
             'privacyAccepted' => false,
             'name' => '',
             'type' => null,
+            'status' => 'pending',
             'content' => '',
-            'author_name' => '',
-            'author_fiscal_code' => '',
-            'author_phone' => '',
-            'author_email' => '',
             'location' => [
                 'latitude' => null,
                 'longitude' => null,
@@ -157,17 +126,35 @@ class TicketForm extends XotBaseResourceForm
             'privacyAccepted' => Checkbox::make('privacyAccepted')
                 ->accepted()
                 ->required()
+                ->disabled(app(GetPublishedPrivacyPolicyAction::class)->execute() === null)
+                ->extraInputAttributes(static function (Checkbox $component): array {
+                    $errorBag = $component->getLivewire()->getErrorBag();
+                    $hasPrivacyError = $errorBag instanceof MessageBag && $errorBag->has('data.privacyAccepted');
+
+                    return [
+                        'aria-invalid' => $hasPrivacyError ? 'true' : 'false',
+                        'aria-describedby' => 'ticket-privacy-error',
+                    ];
+                })
                 ->extraAttributes(['data-element' => 'privacy-consent']),
         ];
     }
 
     public static function getGdprHtml(): HtmlString
     {
+        $policy = app(GetPublishedPrivacyPolicyAction::class)->execute();
+        $privacyUrl = LaravelLocalization::getLocalizedURL(app()->getLocale(), '/privacy');
+        $reportUrl = LaravelLocalization::getLocalizedURL(app()->getLocale(), '/tickets/create');
+
         return new HtmlString(view('fixcity::components.gdpr-notice', [
-            'intro' => (string) __('fixcity::ticket.privacy.intro.text'),
-            'detailsPrefix' => (string) __('fixcity::ticket.privacy.detail_prefix.text'),
-            'privacyLabel' => (string) __('fixcity::ticket.privacy.link.label'),
-            'privacyUrl' => '/privacy',
+            'policyHtml' => $policy === null
+                ? null
+                : (string) Str::markdown($policy, [
+                    'html_input' => 'strip',
+                    'allow_unsafe_links' => false,
+                ]),
+            'privacyUrl' => is_string($privacyUrl) ? $privacyUrl : '/privacy',
+            'reportUrl' => is_string($reportUrl) ? $reportUrl : '/tickets/create',
         ])->render());
     }
 
@@ -177,6 +164,12 @@ class TicketForm extends XotBaseResourceForm
     public static function getDataSchema(): array
     {
         return [
+            'priority' => Hidden::make('priority')
+                ->default('low')
+                ->dehydrated(),
+            'status' => Hidden::make('status')
+                ->default('pending')
+                ->dehydrated(),
             'name' => TextInput::make('name')
                 ->columnSpanFull()
                 ->required()
@@ -199,7 +192,6 @@ class TicketForm extends XotBaseResourceForm
             'images' => SpatieMediaLibraryFileUpload::make('images')
                 ->columnSpanFull()
                 ->collection('attachments')
-                ->imageEditor()
                 ->maxFiles(5)
                 ->acceptedFileTypes(['image/*']),
         ];

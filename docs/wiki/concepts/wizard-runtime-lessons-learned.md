@@ -1,3 +1,14 @@
+---
+title: "wizard runtime lessons learned"
+type: note
+tags: [documentation]
+created: 2026-09-26
+updated: 2026-09-26
+qmd: "wizard runtime lessons learned"
+issues: []
+discussions: []
+---
+
 # Wizard Runtime Lessons Learned
 
 ## Data: 2026-04-23
@@ -6,6 +17,14 @@ Lezioni operative dal wizard CreateTicketWizardWidget e dai suoi componenti Geo.
 
 ---
 
+title: "wizard runtime lessons learned"
+type: note
+tags: [documentation]
+created: 2026-09-26
+updated: 2026-09-26
+qmd: "wizard runtime lessons learned"
+issues: []
+discussions: []
 ## 1. EnumSelect Signature Mismatch — FatalError
 
 ### Problema

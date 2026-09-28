@@ -1,4 +1,7 @@
 ---
+tags: [documentation]
+qmd: "fixcity cross module duplicate surfaces"
+discussions: []
 title: "Superfici Fixcity duplicate cross-modulo (non solo interne)"
 type: redundancy
 owner: Modules/Fixcity

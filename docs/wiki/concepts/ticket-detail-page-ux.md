@@ -1,4 +1,5 @@
 ---
+qmd: "ticket detail page ux"
 title: "Ticket Detail Page UX Design - Static Map + Comments"
 type: concept
 tags: [ux-design, ticket, map, comments, spatie-comments, folio]

@@ -25,7 +25,7 @@ test.describe('Header Logged Parity', () => {
             await page.waitForTimeout(3000);
 
             // Verify slim bar shows guest login CTA, NOT user dropdown
-            const guestCta = page.locator('[data-element="personal-area-login"]');
+            const guestCta = page.locator('.it-header-slim-wrapper [data-element="personal-area-login"]');
             await expect(guestCta).toBeVisible({ timeout: 5000 });
 
             // Verify no user dropdown exists
@@ -69,7 +69,7 @@ test.describe('Header Logged Parity', () => {
             await expect(userDropdown).toBeVisible({ timeout: 5000 });
 
             // Verify guest CTA is NOT present
-            const guestCta = page.locator('[data-element="personal-area-login"]');
+            const guestCta = page.locator('.it-header-slim-wrapper [data-element="personal-area-login"]');
             await expect(guestCta).toHaveCount(0);
 
             const nameSpan = userDropdown.locator('#header-user-toggle > span.d-none.d-lg-block');

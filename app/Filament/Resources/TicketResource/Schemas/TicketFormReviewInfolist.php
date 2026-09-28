@@ -7,6 +7,7 @@ namespace Modules\Fixcity\Filament\Resources\TicketResource\Schemas;
 use Filament\Infolists\Components\TextEntry;
 use Filament\Schemas\Components\Component as SchemaComponent;
 use Filament\Schemas\Components\Utilities\Get;
+use Modules\Fixcity\Enums\TicketPriorityEnum;
 use Modules\Fixcity\Enums\TicketTypeEnum;
 use Modules\Xot\Actions\Cast\SafeStringCastAction;
 
@@ -33,6 +34,9 @@ final class TicketFormReviewInfolist
             'review_type' => TextEntry::make('review_type')
                 ->badge()
                 ->state(static fn (Get $get): string => self::formatTicketTypeDisplay(self::coerceTicketTypeValue($get('type')))),
+            'review_priority' => TextEntry::make('review_priority')
+                ->badge()
+                ->state(static fn (Get $get): string => self::formatPriorityDisplay($get('priority'))),
             'review_name' => TextEntry::make('review_name')
                 ->columnSpanFull()
                 ->state(static fn (Get $get): string => SafeStringCastAction::cast($get('name') ?? '')),
@@ -83,6 +87,19 @@ final class TicketFormReviewInfolist
         $enum = TicketTypeEnum::tryFrom($raw);
 
         return $enum?->getLabel() ?? $raw;
+    }
+
+    private static function formatPriorityDisplay(mixed $raw): string
+    {
+        if ($raw instanceof TicketPriorityEnum) {
+            return $raw->getLabel();
+        }
+
+        if (! is_string($raw) || $raw === '') {
+            return '';
+        }
+
+        return TicketPriorityEnum::tryFrom($raw)?->getLabel() ?? $raw;
     }
 
     protected static function formatLocationReviewState(Get $get): string

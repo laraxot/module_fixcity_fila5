@@ -1,4 +1,11 @@
 ---
+title: "blade template location rule"
+tags: [documentation]
+created: 2026-09-26
+updated: 2026-09-26
+qmd: "blade template location rule"
+issues: []
+discussions: []
 name: blade-template-location-rule
 description: Prevent stray Blade files for dynamic wizard pages; enforce Livewire component + JSON config.
 type: concept

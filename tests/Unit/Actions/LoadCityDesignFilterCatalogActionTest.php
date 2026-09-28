@@ -4,16 +4,16 @@ declare(strict_types=1);
 
 namespace Modules\Fixcity\Tests\Unit\Actions;
 
-use PHPUnit\Framework\Assert;
 use Modules\Fixcity\Actions\LoadCityDesignFilterCatalogAction;
 use Modules\Fixcity\Tests\TestCase;
 use Modules\Xot\Actions\Cast\SafeStringCastAction;
+use PHPUnit\Framework\Assert;
 
-uses(\Modules\Fixcity\Tests\TestCase::class);
+uses(TestCase::class);
 
 describe('Load City Design Filter Catalog Action', function (): void {
     test('_it_loads_eleven_city_design_categories', function (): void {
-$catalog = app(LoadCityDesignFilterCatalogAction::class)->execute();
+        $catalog = app(LoadCityDesignFilterCatalogAction::class)->execute();
 
         Assert::assertSame('categoria', $catalog['legend']);
         Assert::assertCount(11, $catalog['items']);

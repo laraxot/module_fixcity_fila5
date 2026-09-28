@@ -1,3 +1,14 @@
+---
+title: "ticket visual parity"
+type: note
+tags: [documentation]
+created: 2026-09-26
+updated: 2026-09-26
+qmd: "ticket visual parity"
+issues: []
+discussions: []
+---
+
 # Segnalazione — Visual parity & rules (module-level)
 
 Purpose: document module-level responsibilities and rules for achieving visual parity with Design-Comuni for the Segnalazione create wizard.

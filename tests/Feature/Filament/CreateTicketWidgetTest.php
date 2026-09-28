@@ -2,25 +2,21 @@
 
 declare(strict_types=1);
 
-
-use Modules\Fixcity\Filament\Widgets\CreateTicketWidget;
-use Modules\Fixcity\Tests\TestCase;
-
-use PHPUnit\Framework\Assert;
-use Modules\User\Database\Factories\UserFactory;
 use Livewire\Livewire;
 use Modules\Fixcity\Enums\TicketPriorityEnum;
 use Modules\Fixcity\Enums\TicketStatusEnum;
 use Modules\Fixcity\Enums\TicketTypeEnum;
-use Modules\Fixcity\Filament\Widgets\CreateTicketWizardWidget;
+use Modules\Fixcity\Filament\Widgets\CreateTicketWidget;
 use Modules\Fixcity\Models\Ticket;
-use Modules\User\Models\User;
+use Modules\Fixcity\Tests\TestCase;
+use Modules\User\Database\Factories\UserFactory;
+use PHPUnit\Framework\Assert;
 
 uses(TestCase::class);
 beforeEach(function () {
     /** @var TestCase $this */
-        Assert::assertNotNull($this->user);
     $this->user = UserFactory::new()->createOne();
+    Assert::assertNotNull($this->user);
     $this->actingAs($this->user);
 });
 

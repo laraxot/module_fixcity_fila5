@@ -1,4 +1,7 @@
 ---
+qmd: "filament5 schema section namespace rule"
+issues: []
+discussions: []
 title: Filament 5 Schema Section Namespace Rule For Fixcity Wizard
 type: concept
 tags: [fixcity, filament, wizard, schemas, sections, livewire]

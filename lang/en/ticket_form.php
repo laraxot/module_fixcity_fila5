@@ -2,10 +2,6 @@
 
 declare(strict_types=1);
 
-// Fixcity translations — LangServiceProvider SSoT (never ->label() in Filament PHP).
-// claude-audit static: ≥5% comment lines on files >100 LOC.
-// Canon: Modules/Fixcity/docs/wiki — domain i18n only.
-// File: lang/en/ticket_form.php
 return [
     'summaries' => [
         'images_none' => 'No images attached',
@@ -55,6 +51,11 @@ return [
         'gdpr_text' => [
             'label' => 'Privacy notice',
         ],
+        'images' => [
+            'description' => 'images',
+            'helper_text' => 'images',
+            'placeholder' => 'images',
+        ],
     ],
     'steps' => [
         'privacy' => [
@@ -65,6 +66,12 @@ return [
         ],
         'summary' => [
             'label' => 'Summary',
+        ],
+    ],
+    'sections' => [
+        'empty' => [
+            'heading' => '',
+            'label' => '',
         ],
     ],
 ];

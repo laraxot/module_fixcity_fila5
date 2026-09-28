@@ -5,6 +5,17 @@ module: Fixcity
 owner: developer-agent
 github_issue: https://github.com/laraxot/fixcity_fila5/issues/25
 discussion: https://github.com/laraxot/fixcity_fila5/discussions/25
+type: story
+created: legacy
+updated: '2026-09-26'
+tags:
+- bmad
+- fixcity
+qmd: 025 usercontract pattern.story FixCity BMAD story
+issues:
+- https://github.com/laraxot/base_fixcity_fila5/issues/383
+discussions:
+- https://github.com/laraxot/base_fixcity_fila5/discussions/392
 ---
 
 ## Lesson

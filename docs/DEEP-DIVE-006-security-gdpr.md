@@ -1,4 +1,8 @@
 ---
+updated: 2026-09-26
+qmd: "DEEP DIVE 006 security gdpr"
+issues: []
+discussions: []
 title: "Deep Dive: Security Architecture & GDPR Compliance"
 type: technical-spec
 tags: [fixcity, security, gdpr, encryption, privacy, compliance, audit]

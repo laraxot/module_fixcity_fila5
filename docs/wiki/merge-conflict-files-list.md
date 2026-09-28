@@ -1,3 +1,14 @@
+---
+title: "merge conflict files list"
+type: note
+tags: [documentation]
+created: 2026-09-26
+updated: 2026-09-26
+qmd: "merge conflict files list"
+issues: []
+discussions: []
+---
+
 ### Files with Merge Conflict Markers
 
 The following files contain `<<<< HEAD` or `<<<< .merge_file` markers:

@@ -1,3 +1,14 @@
+---
+title: "wizard summary infolist alignment"
+type: note
+tags: [documentation]
+created: 2026-09-26
+updated: 2026-09-26
+qmd: "wizard summary infolist alignment"
+issues: []
+discussions: []
+---
+
 # wizard summary infolist alignment
 
 ## contesto

@@ -1,3 +1,14 @@
+---
+title: "pub theme wizard zen"
+type: note
+tags: [documentation]
+created: 2026-09-26
+updated: 2026-09-26
+qmd: "pub theme wizard zen"
+issues: []
+discussions: []
+---
+
 # PubThemeWizard — Filosofia e Implementazione
 
 ## Il Problema Iniziale

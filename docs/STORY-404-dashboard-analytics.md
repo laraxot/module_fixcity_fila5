@@ -1,4 +1,7 @@
 ---
+qmd: "STORY 404 dashboard analytics"
+issues: []
+discussions: []
 title: "STORY-404: Dashboard & Analytics Admin"
 type: story
 tags: [fixcity, dashboard, analytics, charts, reports, statistics, decoro-urbano, degradozero]

@@ -1,4 +1,9 @@
 ---
+created: 2026-09-26
+updated: 2026-09-26
+qmd: "STORY 495 citizen auth"
+issues: []
+discussions: []
 title: "STORY-495: Citizen Authentication"
 type: story
 status: open

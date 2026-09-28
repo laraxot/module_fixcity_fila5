@@ -1,3 +1,14 @@
+---
+title: "ProjectOrientedWorkflow"
+type: note
+tags: [documentation]
+created: 2026-09-26
+updated: 2026-09-26
+qmd: "ProjectOrientedWorkflow"
+issues: []
+discussions: []
+---
+
 # Project-Oriented Workflow Documentation
 
 ## Schema Requirements
