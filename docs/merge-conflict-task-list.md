@@ -1,4 +1,9 @@
 ---
+tags: [documentation]
+created: 2026-09-26
+qmd: "merge conflict task list"
+issues: []
+discussions: []
 title: Merge Conflict Task List
 type: taskboard
 updated: 2026-04-21

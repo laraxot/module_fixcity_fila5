@@ -1,4 +1,7 @@
 ---
+qmd: "node modules governance"
+issues: []
+discussions: []
 title: "Node Modules Governance — Project Root Only"
 type: concept
 sources:

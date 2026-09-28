@@ -1,4 +1,6 @@
 ---
+issues: []
+discussions: []
 title: "Fixcity User Model Architecture"
 type: concept
 tags: [architecture, user, comment, baseuser, cancomment, contract]

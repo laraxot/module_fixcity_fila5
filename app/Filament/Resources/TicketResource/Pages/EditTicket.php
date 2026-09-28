@@ -15,7 +15,7 @@ class EditTicket extends XotBaseEditRecord
     protected function getHeaderActions(): array
     {
         return [
-            'delete' => DeleteAction::make(),
+            'delete' => DeleteAction::make()->authorize('delete'),
         ];
     }
 }

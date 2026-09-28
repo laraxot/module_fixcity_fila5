@@ -4,6 +4,17 @@ status: in-progress
 module: Fixcity
 github_issue: https://github.com/laraxot/fixcity_fila5/issues/23
 discussion: https://github.com/laraxot/fixcity_fila5/discussions/23
+type: story
+created: legacy
+updated: '2026-09-26'
+tags:
+- bmad
+- fixcity
+qmd: 023 wizard responsive uiux.story FixCity BMAD story
+issues:
+- https://github.com/laraxot/base_fixcity_fila5/issues/383
+discussions:
+- https://github.com/laraxot/base_fixcity_fila5/discussions/392
 ---
 
 ## Objective

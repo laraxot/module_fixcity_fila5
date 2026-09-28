@@ -1,3 +1,14 @@
+---
+title: "TECH STACK NO BOOTSTRAP"
+type: note
+tags: [documentation]
+created: 2026-09-26
+updated: 2026-09-26
+qmd: "TECH STACK NO BOOTSTRAP"
+issues: []
+discussions: []
+---
+
 # Tech Stack Frontend - NO Bootstrap
 
 > **Regola permanente**: Non utilizzare Bootstrap. Usare esclusivamente TailwindCSS + Alpine.js + Lit + DaisyUI + Flowbite + Filament.

@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace Modules\Fixcity\Actions;
 
+use Spatie\QueueableAction\QueueableAction;
+
 use function Safe\file_put_contents;
 use function Safe\json_encode;
-
-use Spatie\QueueableAction\QueueableAction;
 
 /**
  * GeoJSON di test per clustering (Roma) — solo dev/QA.

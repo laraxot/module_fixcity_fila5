@@ -1,3 +1,14 @@
+---
+title: "profiles uuid contract"
+type: note
+tags: [documentation]
+created: 2026-09-26
+updated: 2026-09-26
+qmd: "profiles uuid contract"
+issues: []
+discussions: []
+---
+
 # Profiles UUID Contract
 
 > Mirror: [wiki/concepts/profiles-uuid-contract.md](../../wiki/concepts/profiles-uuid-contract.md)

@@ -1,3 +1,14 @@
+---
+title: "admin ticket create map visual contract"
+type: note
+tags: [documentation]
+created: 2026-09-26
+updated: 2026-09-26
+qmd: "admin ticket create map visual contract"
+issues: []
+discussions: []
+---
+
 # Admin ticket create map visual contract
 
 ## Contesto

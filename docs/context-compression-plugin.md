@@ -1,3 +1,14 @@
+---
+title: "context compression plugin"
+type: note
+tags: [documentation]
+created: 2026-09-26
+updated: 2026-09-26
+qmd: "context compression plugin"
+issues: []
+discussions: []
+---
+
 # Context compression (approccio interno)
 
 Scopo: ridurre la lunghezza del testo prima di inviare richieste a LLM per evitare errori di contesto (token limit).

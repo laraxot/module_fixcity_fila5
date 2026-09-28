@@ -1,4 +1,11 @@
 ---
+title: "test page routing"
+tags: [documentation]
+created: 2026-09-26
+updated: 2026-09-26
+qmd: "test page routing"
+issues: []
+discussions: []
 name: test-page-routing
 description: Maps URL slugs like `/it/tests/segnalazione-crea` to Blade views and JSON configuration files.
 type: concept

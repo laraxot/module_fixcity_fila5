@@ -1,12 +1,22 @@
 ---
-title: STORY-022 — AuditCoverage directory cleanup + .gitignore update
+title: Legacy record — AuditCoverage cleanup
 status: done
 module: ALL (16 modules)
 owner: developer-agent
 github_issue: https://github.com/laraxot/fixcity_fila5/issues/22
 discussion: https://github.com/laraxot/fixcity_fila5/discussions/22
+type: historical-story
+created: legacy
+updated: '2026-09-26'
+tags:
+- bmad
+- fixcity
+qmd: 022 auditcoverage gitignore.story FixCity BMAD story
+issues:
+- https://github.com/laraxot/base_fixcity_fila5/issues/383
+discussions:
+- https://github.com/laraxot/base_fixcity_fila5/discussions/392
 ---
-
 ## Problem
 All 16 modules had `tests/AuditCoverage/` directories which should be excluded from version control and removed.
 
@@ -23,5 +33,5 @@ All 16 modules had `tests/AuditCoverage/` directories which should be excluded f
 - ✅ `.gitignore` entries consistent
 
 ## Related Stories
-- STORY-020 — Merge conflict resolution in HasTicketRelations trait
-- STORY-021 — PHPStan errors in Fixcity module
+- legacy merge-resolution record
+- legacy PHPStan remediation record

@@ -1,4 +1,7 @@
 ---
+qmd: "ticket bootstrap tailwind conversion"
+issues: []
+discussions: []
 title: "Segnalazione Bootstrap → Tailwind Conversion"
 type: concept
 sources: 

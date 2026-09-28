@@ -3,7 +3,7 @@ title: "Modules Wiki Index"
 type: index
 tags: [modules, wiki, index, second-brain, bmad]
 created: 2026-04-15
-updated: 2026-06-05
+updated: 2026-09-27
 qmd: "modules wiki index second brain ai harness bmad architecture parity"
 issues:
   - "https://github.com/laraxot/base_fixcity_fila5/issues/272"
@@ -28,6 +28,8 @@ Wiki trasversale per tutti i moduli Laravel del progetto.
 - [bmad/architecture](../../../../docs/wiki/bmad/architecture.md) — 5 pilastri + harness
 - [ai-harness-module-discipline](./concepts/ai-harness-module-discipline.md) — contratto agenti
 - [second-brain-operating-model](./concepts/second-brain-operating-model.md) — PARA/CODE
+- [design-comuni-service-workflow-scope](./concepts/design-comuni-service-workflow-scope.md) — perimetro reale dei flussi Design Comuni e FixCity
+- [demo-operator-panel-access](./concepts/demo-operator-panel-access.md) — accesso pannello e capability operatore distinti
 - [Xot canon second-brain](../Xot/docs/wiki/concepts/second-brain-local-discipline.md)
 
 ## Documentazione (tutti i moduli)

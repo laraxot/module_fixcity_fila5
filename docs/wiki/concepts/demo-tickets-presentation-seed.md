@@ -1,3 +1,14 @@
+---
+title: "demo tickets presentation seed"
+type: note
+tags: [documentation]
+created: 2026-09-26
+updated: 2026-09-27
+qmd: "demo tickets presentation seed"
+issues: []
+discussions: []
+---
+
 # seed ticket demo — presentazione FO
 
 ## GitHub (tracciamento)
@@ -23,15 +34,25 @@ Il vecchio `TicketDatabaseSeeder` inseriva 4 righe senza coordinate e con `pendi
 
 ```bash
 cd laravel
+# demo completa (utenti STI validi → profili → categorie → ticket)
+php artisan db:seed --class=Modules\\Fixcity\\Database\\Seeders\\FixcityDatabaseSeeder
+# oppure solo ticket (serve almeno un utente)
 php artisan db:seed --class=Modules\\Fixcity\\Database\\Seeders\\TicketDatabaseSeeder
 ```
 
+Orchestrazione: `DemoUsersSeeder` (tipi STI `master_admin` / `customer_user`) → `CategorySeeder` → `ProfileSeeder` → `TicketDatabaseSeeder`.
+Non usa `UserDatabaseSeeder` completo (DeviceProfile/OAuth bloccano la demo).
+
 Idempotente: chiave `code` (`DEMO-001` …); slug `demo-*` impostato dopo `save()` (HasSlug altrimenti sovrascrive da `name`).
+
+Credenziali demo: `cittadino@fixcity.demo` / `password` (e `marco.sottana@gmail.com` / `password`).
 
 ## output
 
-- Tabella `tickets`: 15 record demo (area Mogliano Veneto)
-- `public_html/data/tickets.json` rigenerato da `GenerateTicketsJsonAction`
+- Tabella `tickets`: 27 record demo in 7 città italiane
+- Profili Fixcity allineati agli utenti demo
+- `public_html/data/tickets.json` rigenerato e validato da `GenerateTicketsJsonAction`
+  nell'ultimo passaggio `GeoJsonUpdateSeeder`, dopo commenti, attività e relazioni.
 
 ## story
 

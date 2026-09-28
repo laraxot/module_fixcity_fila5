@@ -1,4 +1,8 @@
 ---
+created: 2026-09-26
+qmd: "context compression and summary infolist rule"
+issues: []
+discussions: []
 title: Context compression and wizard summary Infolist rule
 type: concept
 updated: 2026-04-22

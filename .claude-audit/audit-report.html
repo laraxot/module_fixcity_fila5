@@ -96,27 +96,23 @@
 
   <div class="header">
     <div class="logo"><span>Claude</span> Audit</div>
-<<<<<<< HEAD
-    <div class="subtitle">AI-Powered Codebase Audit Report · 7/9/2026, 9:25:52 PM</div>
-=======
-    <div class="subtitle">AI-Powered Codebase Audit Report · 7/12/2026, 9:57:06 PM</div>
->>>>>>> 8220a4f (.)
+    <div class="subtitle">AI-Powered Codebase Audit Report · 9/27/2026, 10:30:24 PM</div>
   </div>
 
   <div class="overview">
     <div class="card big-score">
       <h2>Overall Score</h2>
-      <div class="score-ring" style="--score:80">
+      <div class="score-ring" style="--score:75">
         <svg viewBox="0 0 120 120">
           <circle class="bg" cx="60" cy="60" r="54"/>
-          <circle class="fg" cx="60" cy="60" r="54" style="stroke:#4ade80;stroke-dasharray:339;stroke-dashoffset:67.80000000000001"/>
+          <circle class="fg" cx="60" cy="60" r="54" style="stroke:#facc15;stroke-dasharray:339;stroke-dashoffset:84.75"/>
         </svg>
         <div class="score-number">
-          <span class="num" style="color:#4ade80">80</span>
+          <span class="num" style="color:#facc15">75</span>
           <span class="label">/ 100</span>
         </div>
       </div>
-      <div class="grade-badge" style="background:#4ade8022;color:#4ade80">B</div>
+      <div class="grade-badge" style="background:#facc1522;color:#facc15">B</div>
     </div>
 
     <div class="card">
@@ -127,19 +123,15 @@
           <div class="slabel">🔴 Critical</div>
         </div>
         <div class="stat-item">
-          <div class="count" style="color:#f97316">0</div>
+          <div class="count" style="color:#f97316">3</div>
           <div class="slabel">🟠 High</div>
         </div>
         <div class="stat-item">
-<<<<<<< HEAD
           <div class="count" style="color:#eab308">0</div>
-=======
-          <div class="count" style="color:#eab308">1</div>
->>>>>>> 8220a4f (.)
           <div class="slabel">🟡 Medium</div>
         </div>
         <div class="stat-item">
-          <div class="count" style="color:#60a5fa">0</div>
+          <div class="count" style="color:#60a5fa">2</div>
           <div class="slabel">🔵 Low</div>
         </div>
       </div>
@@ -150,17 +142,10 @@
     <h2>Project Info</h2>
     <table class="info-table">
       <tr><td>Project</td><td><strong>Fixcity</strong></td></tr>
-<<<<<<< HEAD
-      <tr><td>Languages</td><td>Markdown (306), JSON (103), XML (1), JavaScript (18), PHP (925), SQL (1), CSS (1), SCSS (5)</td></tr>
-      
-      <tr><td>Files Scanned</td><td>1,360</td></tr>
-      <tr><td>Lines of Code</td><td>126,220</td></tr>
-=======
-      <tr><td>Languages</td><td>Markdown (93), JSON (90), XML (1), JavaScript (11), PHP (299), SQL (1), CSS (1), SCSS (4)</td></tr>
+      <tr><td>Languages</td><td>Markdown (209), JSON (77), XML (1), JavaScript (2), PHP (210), SQL (1)</td></tr>
       
       <tr><td>Files Scanned</td><td>500</td></tr>
-      <tr><td>Lines of Code</td><td>66,256</td></tr>
->>>>>>> 8220a4f (.)
+      <tr><td>Lines of Code</td><td>66,408</td></tr>
       <tr><td>Tests</td><td>✅ Yes</td></tr>
       <tr><td>Package Manager</td><td>npm</td></tr>
       <tr><td>Analysis</td><td>⚡ Static Only</td></tr>
@@ -198,17 +183,37 @@
           <h3>Quality</h3>
         </div>
         <div class="cat-score">
-          <div class="score-circle" style="--score:80;--color:#4ade80">
-            <span>80</span>
+          <div class="score-circle" style="--score:60;--color:#facc15">
+            <span>60</span>
           </div>
-          <span class="grade" style="color:#4ade80">B</span>
+          <span class="grade" style="color:#facc15">C</span>
         </div>
       </div>
       <div class="score-bar-wrap">
-        <div class="score-bar-fill" style="width:80%;background:#4ade80"></div>
+        <div class="score-bar-fill" style="width:60%;background:#facc15"></div>
       </div>
       
-      <p class="clean">✅ No issues found</p>
+      <div class="findings-list">
+      <div class="finding">
+        <div class="finding-header">
+          <span class="sev-badge" style="background:#f97316">HIGH</span>
+          <strong>Large File — Consider Splitting</strong>
+        </div>
+        <p class="finding-desc">database/seeders/InvestoTicketSeeder.php has 1257 lines. Large files are hard to test, review, and maintain.</p>
+        <div class="finding-file">📄 <code>database/seeders/InvestoTicketSeeder.php</code></div>
+        
+        <div class="finding-fix">✅ <strong>Fix:</strong> Split into smaller, focused modules. Follow the Single Responsibility Principle.</div>
+      </div>
+      <div class="finding">
+        <div class="finding-header">
+          <span class="sev-badge" style="background:#f97316">HIGH</span>
+          <strong>Large File — Consider Splitting</strong>
+        </div>
+        <p class="finding-desc">database/seeders/InvestoUsersSeeder.php has 1101 lines. Large files are hard to test, review, and maintain.</p>
+        <div class="finding-file">📄 <code>database/seeders/InvestoUsersSeeder.php</code></div>
+        
+        <div class="finding-fix">✅ <strong>Fix:</strong> Split into smaller, focused modules. Follow the Single Responsibility Principle.</div>
+      </div></div>
     </div>
     <div class="cat-card">
       <div class="cat-header">
@@ -274,41 +279,27 @@
           <h3>Testing</h3>
         </div>
         <div class="cat-score">
-<<<<<<< HEAD
-          <div class="score-circle" style="--score:80;--color:#4ade80">
-            <span>80</span>
+          <div class="score-circle" style="--score:70;--color:#facc15">
+            <span>70</span>
           </div>
-          <span class="grade" style="color:#4ade80">B</span>
+          <span class="grade" style="color:#facc15">C</span>
         </div>
       </div>
       <div class="score-bar-wrap">
-        <div class="score-bar-fill" style="width:80%;background:#4ade80"></div>
-      </div>
-      
-      <p class="clean">✅ No issues found</p>
-=======
-          <div class="score-circle" style="--score:75;--color:#facc15">
-            <span>75</span>
-          </div>
-          <span class="grade" style="color:#facc15">B</span>
-        </div>
-      </div>
-      <div class="score-bar-wrap">
-        <div class="score-bar-fill" style="width:75%;background:#facc15"></div>
+        <div class="score-bar-fill" style="width:70%;background:#facc15"></div>
       </div>
       
       <div class="findings-list">
       <div class="finding">
         <div class="finding-header">
-          <span class="sev-badge" style="background:#eab308">MEDIUM</span>
-          <strong>Low Test Coverage</strong>
+          <span class="sev-badge" style="background:#f97316">HIGH</span>
+          <strong>No Tests Found</strong>
         </div>
-        <p class="finding-desc">Only 2% of source files have corresponding tests (5 test files for 309 source files).</p>
+        <p class="finding-desc">Only 0% of source files have corresponding tests (0 test files for 212 source files).</p>
         
         
         <div class="finding-fix">✅ <strong>Fix:</strong> Add unit tests for critical business logic. Aim for at least 70% code coverage.</div>
       </div></div>
->>>>>>> 8220a4f (.)
     </div>
     <div class="cat-card">
       <div class="cat-header">
@@ -317,17 +308,37 @@
           <h3>Documentation</h3>
         </div>
         <div class="cat-score">
-          <div class="score-circle" style="--score:80;--color:#4ade80">
-            <span>80</span>
+          <div class="score-circle" style="--score:76;--color:#facc15">
+            <span>76</span>
           </div>
-          <span class="grade" style="color:#4ade80">B</span>
+          <span class="grade" style="color:#facc15">B</span>
         </div>
       </div>
       <div class="score-bar-wrap">
-        <div class="score-bar-fill" style="width:80%;background:#4ade80"></div>
+        <div class="score-bar-fill" style="width:76%;background:#facc15"></div>
       </div>
       
-      <p class="clean">✅ No issues found</p>
+      <div class="findings-list">
+      <div class="finding">
+        <div class="finding-header">
+          <span class="sev-badge" style="background:#60a5fa">LOW</span>
+          <strong>Insufficient Documentation</strong>
+        </div>
+        <p class="finding-desc">database/seeders/InvestoTicketSeeder.php has &lt; 5% comment coverage across 1257 lines.</p>
+        <div class="finding-file">📄 <code>database/seeders/InvestoTicketSeeder.php</code></div>
+        
+        <div class="finding-fix">✅ <strong>Fix:</strong> Add JSDoc/docstrings to exported functions, classes, and complex logic.</div>
+      </div>
+      <div class="finding">
+        <div class="finding-header">
+          <span class="sev-badge" style="background:#60a5fa">LOW</span>
+          <strong>Insufficient Documentation</strong>
+        </div>
+        <p class="finding-desc">database/seeders/InvestoUsersSeeder.php has &lt; 5% comment coverage across 1101 lines.</p>
+        <div class="finding-file">📄 <code>database/seeders/InvestoUsersSeeder.php</code></div>
+        
+        <div class="finding-fix">✅ <strong>Fix:</strong> Add JSDoc/docstrings to exported functions, classes, and complex logic.</div>
+      </div></div>
     </div>
   </div>
 

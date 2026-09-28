@@ -1,4 +1,9 @@
 ---
+created: 2026-09-26
+updated: 2026-09-26
+qmd: "STORY 493 critical functional deficiency audit"
+issues: []
+discussions: []
 title: "STORY-493: Critical Functional Deficiency Audit"
 type: story
 status: open

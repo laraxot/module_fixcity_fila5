@@ -4,21 +4,20 @@ declare(strict_types=1);
 
 namespace Modules\Fixcity\Tests\Unit\Actions;
 
-use Modules\Fixcity\Database\Factories\TicketFactory;
-use PHPUnit\Framework\Assert;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
 use Modules\Fixcity\Actions\GetTicketSlaMetricsAction;
+use Modules\Fixcity\Database\Factories\TicketFactory;
 use Modules\Fixcity\Enums\TicketStatusEnum;
 use Modules\Fixcity\Enums\TicketTypeEnum;
-use Modules\Fixcity\Models\Ticket;
 use Modules\Fixcity\Tests\TestCase;
+use PHPUnit\Framework\Assert;
 
-uses(\Modules\Fixcity\Tests\TestCase::class);
+uses(TestCase::class);
 
 describe('Get Ticket Sla Metrics Action', function (): void {
     test('_it_returns_null_average_when_no_resolved_tickets', function (): void {
-        /** @var \Modules\Fixcity\Tests\TestCase $this */
+        /** @var TestCase $this */
         TicketFactory::new()->createOne(['status' => TicketStatusEnum::OPEN]);
 
         $sla = app(GetTicketSlaMetricsAction::class)->execute();
@@ -28,14 +27,14 @@ describe('Get Ticket Sla Metrics Action', function (): void {
     });
 
     test('_it_computes_average_resolution_hours', function (): void {
-Carbon::setTestNow('2026-05-29 12:00:00');
+        Carbon::setTestNow('2026-05-29 12:00:00');
 
         $ticket = TicketFactory::new()->createOne([
             'type' => TicketTypeEnum::COMPLAINT,
             'type_id' => null,
         ]);
 
-        DB::table($ticket->getTable())->where('id', $ticket->id)->update([
+        DB::connection($ticket->getConnectionName())->table($ticket->getTable())->where('id', $ticket->id)->update([
             'status' => TicketStatusEnum::RESOLVED->value,
             'created_at' => Carbon::parse('2026-05-28 12:00:00'),
             'updated_at' => Carbon::parse('2026-05-29 12:00:00'),

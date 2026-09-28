@@ -1,4 +1,4 @@
-const { test } = require('@playwright/test');
+import { test } from '@playwright/test';
 
 const REF_URL = 'https://italia.github.io/design-comuni-pagine-statiche/sito/ticket-list.html';
 

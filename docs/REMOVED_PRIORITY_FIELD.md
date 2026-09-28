@@ -1,3 +1,14 @@
+---
+title: "REMOVED PRIORITY FIELD"
+type: note
+tags: [documentation]
+created: 2026-09-26
+updated: 2026-09-26
+qmd: "REMOVED PRIORITY FIELD"
+issues: []
+discussions: []
+---
+
 # Rimosso campo 'priority' dal form wizard
 
 Descrizione

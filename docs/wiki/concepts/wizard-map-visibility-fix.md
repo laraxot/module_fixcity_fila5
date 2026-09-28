@@ -1,3 +1,14 @@
+---
+title: "wizard map visibility fix"
+type: note
+tags: [documentation]
+created: 2026-09-26
+updated: 2026-09-26
+qmd: "wizard map visibility fix"
+issues: []
+discussions: []
+---
+
 # Wizard Map Visibility Fix
 
 ## Problem

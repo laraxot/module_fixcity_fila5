@@ -1,4 +1,7 @@
 ---
+qmd: "ticket data step spacing rule"
+issues: []
+discussions: []
 title: Segnalazione Data Step Spacing Rule
 type: concept
 tags: [fixcity, segnalazione, wizard, design-comuni, css]

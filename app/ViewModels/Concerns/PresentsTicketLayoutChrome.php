@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace Modules\Fixcity\ViewModels\Concerns;
 
 use Illuminate\Support\Collection;
-use Modules\Fixcity\Actions\LoadPublicTicketsGeoJsonAction;
 use Modules\Fixcity\Models\Ticket;
+use Modules\Xot\Actions\Cast\SafeIntCastAction;
 use Modules\Xot\Actions\Cast\SafeStringCastAction;
 
 /**
@@ -94,6 +94,10 @@ trait PresentsTicketLayoutChrome
 
     public function defaultActiveTab(): string
     {
+        if (SafeIntCastAction::cast(request()->query('page', 1)) > 1) {
+            return $this->listTabId();
+        }
+
         foreach ($this->tabs() as $tab) {
             if ($tab['active']) {
                 return $tab['id'];
@@ -162,7 +166,7 @@ trait PresentsTicketLayoutChrome
 
     public function mapDataUrl(): string
     {
-        return LoadPublicTicketsGeoJsonAction::PUBLIC_URL;
+        return '/api/tickets/geojson';
     }
 
     /**
@@ -180,7 +184,7 @@ trait PresentsTicketLayoutChrome
             'title' => $this->t($rawCta['title'] ?? '', __($this->ns.'.map.cta.title.label')),
             'text' => $this->t($rawCta['text'] ?? '', __($this->ns.'.map.cta.text.label')),
             'button_text' => $this->t($rawCta['button_text'] ?? '', __($this->ns.'.map.cta.button.label')),
-            'button_url' => SafeStringCastAction::cast($rawCta['button_url'] ?? '/it/tests/ticket-crea'),
+            'button_url' => SafeStringCastAction::cast($rawCta['button_url'] ?? '/'.app()->getLocale().'/tickets/create'),
         ];
     }
 

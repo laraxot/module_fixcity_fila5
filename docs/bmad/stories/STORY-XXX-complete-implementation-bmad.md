@@ -1,52 +1,24 @@
 ---
-title: Complete Project Implementation - Fixcity Module
-story_id: XXX
-parent_story: STORY-495-platform-completion-evidence-and-closeout
-updated: 2026-06-27
+title: "STORY-XXX — Historical implementation summary"
+type: story
+module: Fixcity
+status: superseded
 created: 2026-06-27
-description: Complete implementation of Fixcity module with PHPStan fix, tests, and UI/UX verification
-priority: high
-bmad_links:
+updated: 2026-09-26
+tags: [bmad, fixcity, historical]
+qmd: "FixCity historical implementation summary current status superseded"
+issues:
   - "https://github.com/laraxot/base_fixcity_fila5/issues/302"
+  - "https://github.com/laraxot/base_fixcity_fila5/issues/383"
+discussions:
   - "https://github.com/laraxot/base_fixcity_fila5/discussions/40"
-  - "https://github.com/laraxot/module_xot_fila5/issues/39"
-  - "https://github.com/laraxot/module_xot_fila5/discussions/40"
-technical_details:
-  component: Fixcity Module
-  layer: Implementation + Verification
-  files_affected:
-    - laravel/Modules/Fixcity/app/Models/Concerns/HasTicketRelations.php
-    - laravel/Modules/Fixcity/app/Filament/Resources/TicketResource/Pages/CreateTicket.php
-    - laravel/Modules/Fixcity/app/Filament/Widgets/CreateTicketWizardWidget.php
-    - laravel/Modules/Fixcity/tests/Unit/CreateTicketWizardWidgetTest.php
-    - laravel/Modules/Fixcity/tests/Feature/Filament/CreateTicketWizardWidgetTest.php
-  related_docs:
-    - docs/wiki/rules/module-theme-root-cleanup.md
-    - docs/wiki/rules/no-controllers-rule.md
-    - docs/wiki/rules/module-contracts-naming-placement.md
-    - docs/wiki/rules/quality-gate-after-edit.md
-    - docs/wiki/rules/git-forward-only.md
-    - docs/wiki/PHPSTAN-INDEX.md
-    - docs/chat/INDEX.md
-    - docs/chat/platform-completion-closeout.md
-    - docs/standards/definition-of-done-fixcity.md
-  implementation_status: complete
-  documentation_status: complete
-  verification_status: in_progress
-  second_brain_integration: complete
-  quality_gate:
-    - phpstan_zero_errors: fixed
-    - test_coverage: improved
-    - code_quality: high
-    - ui_ux_parity: verified
-    - security_scan: passed
-    - performance: tested
-    - module_root_cleanup: complete
-  - test_coverage: improved
-  - code_quality: high
-  - ui_ux_parity: verified
-  - security_scan: passed
-  - performance: tested
+  - "https://github.com/laraxot/base_fixcity_fila5/discussions/392"
+related:
+  - ./STORY-500-vertical-slice-verification.md
+  - ./STORY-508-confirmation-tracking-fo.md
+---
+
+> Documento storico: le affermazioni di verifica riportate nel corpo non costituiscono evidenza corrente. Lo stato verificabile è registrato nelle story collegate e nella gap analysis.
 
 ## Story Summary
 

@@ -1,4 +1,7 @@
 ---
+qmd: "livewire removal"
+issues: []
+discussions: []
 title: "Technical Debt: Livewire Removal"
 type: technical-debt
 confidence: high

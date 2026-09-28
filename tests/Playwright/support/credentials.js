@@ -2,7 +2,7 @@
  * Playwright credentials — never hardcode secrets in specs.
  * Set PLAYWRIGHT_TEST_EMAIL and PLAYWRIGHT_TEST_PASSWORD in env / .env.playwright.
  */
-export function requirePlaywrightCredentials(): { email: string; password: string } {
+export function requirePlaywrightCredentials() {
     const email = process.env.PLAYWRIGHT_TEST_EMAIL;
     const password = process.env.PLAYWRIGHT_TEST_PASSWORD;
 

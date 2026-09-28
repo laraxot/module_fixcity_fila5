@@ -1,3 +1,14 @@
+---
+title: "wizard infolist replaces placeholders"
+type: note
+tags: [documentation]
+created: 2026-09-26
+updated: 2026-09-26
+qmd: "wizard infolist replaces placeholders"
+issues: []
+discussions: []
+---
+
 # wizard infolist replaces placeholders
 
 ## obiettivo

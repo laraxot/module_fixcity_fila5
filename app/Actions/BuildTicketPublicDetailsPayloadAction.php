@@ -10,7 +10,8 @@ use Modules\Xot\Actions\Cast\SafeStringCastAction;
 use Spatie\QueueableAction\QueueableAction;
 
 /**
- * Payload JSON popup mappa (GET /api/ticket-details/{ticket}) — logica in Action, non Controller.
+ * Payload JSON per il dettaglio frontoffice.
+ * Il codice di tracking è un capability secret ed è esposto solo al proprietario.
  */
 final class BuildTicketPublicDetailsPayloadAction
 {
@@ -22,7 +23,10 @@ final class BuildTicketPublicDetailsPayloadAction
      *     id: int,
      *     title: string,
      *     description: string,
-     *     images: list<string>
+     *     images: list<string>,
+     *     status: string,
+     *     code: string,
+     *     slug: string
      * }
      */
     public function execute(Ticket|array $ticket): array
@@ -46,6 +50,11 @@ final class BuildTicketPublicDetailsPayloadAction
             'title' => $ticket->name,
             'description' => SafeStringCastAction::cast($ticket->content),
             'images' => $imageUrls,
+            'status' => $ticket->resolveTicketStatusValue(),
+            'code' => $ticket->isOwnedByAuthenticatedUser()
+                ? SafeStringCastAction::cast($ticket->code)
+                : '',
+            'slug' => SafeStringCastAction::cast($ticket->slug),
         ];
     }
 
@@ -55,7 +64,10 @@ final class BuildTicketPublicDetailsPayloadAction
      *     id: int,
      *     title: string,
      *     description: string,
-     *     images: list<string>
+     *     images: list<string>,
+     *     status: string,
+     *     code: string,
+     *     slug: string
      * }
      */
     public function executeFromGeoJsonFeature(array $feature): array
@@ -69,7 +81,10 @@ final class BuildTicketPublicDetailsPayloadAction
      *     id: int,
      *     title: string,
      *     description: string,
-     *     images: list<string>
+     *     images: list<string>,
+     *     status: string,
+     *     code: string,
+     *     slug: string
      * }
      */
     private function payloadFromGeoJsonFeature(array $feature): array
@@ -88,6 +103,9 @@ final class BuildTicketPublicDetailsPayloadAction
             'title' => SafeStringCastAction::cast($properties['title'] ?? $properties['name'] ?? ''),
             'description' => SafeStringCastAction::cast($properties['description'] ?? $properties['content'] ?? ''),
             'images' => $imageUrls,
+            'status' => SafeStringCastAction::cast($properties['status'] ?? ''),
+            'code' => '',
+            'slug' => SafeStringCastAction::cast($properties['slug'] ?? ''),
         ];
     }
 }

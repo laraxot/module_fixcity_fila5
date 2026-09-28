@@ -1,4 +1,5 @@
 ---
+qmd: "cms block naming tailwind flowbite"
 title: "CMS Block naming — Tailwind UI / Flowbite"
 type: rule
 confidence: high

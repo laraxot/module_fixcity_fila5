@@ -1,4 +1,5 @@
 ---
+qmd: "definition of done"
 title: "Definition of Done — FixCity v1"
 type: standard
 status: proposed
@@ -109,6 +110,34 @@ Ogni criterio è **eseguibile**. Lo stato di ogni riga è misurato il 2026-09-26
 
 **6/25.** E dei 19 bloccanti, **7 dipendono da un umano** (C1, A1, A3, A4, A5, E2, E3) e
 non da codice.
+
+## Rivalutazione evidenze — 2026-09-27
+
+La tabella sopra fotografa il 2026-09-26 e resta come storico. Le verifiche successive
+correggono alcune misure, ma non dimostrano ancora il completamento del rilascio:
+
+| Criterio | Evidenza aggiornata | Stato attuale |
+|----------|---------------------|---------------|
+| A1 — rebase Cms | Nessun `rebase-merge`/`rebase-apply`; indice senza conflitti (`git ls-files -u` = 0). | ✅ |
+| A2 — marker | Quality gate wiki: nessun marker Markdown. | ✅ nel perimetro del gate |
+| A3 — nomi spazzatura | `audit-garbage-filenames.sh --fix-list`: nessun risultato dopo archiviazione forward-only. | ✅ |
+| A4 — albero Sixteen | `Themes/Sixteen/Sixteen` esiste ancora (circa 418 MB). | ❌ |
+| A7 — YAML sprint | `docs/sprint-status.yaml` è valido; il file è lockato e non è stato modificato in questa verifica. | ✅ validità / stato tracker non aggiornato |
+| B1 — PHPStan | `php -d memory_limit=2048M vendor/bin/phpstan analyse Modules --no-progress` → `[OK] No errors`. | ✅ |
+| B6/C2 — suite FixCity | SQLite isolato, costruito con il builder del progetto: 380 test / 1.634 asserzioni passano. | ✅ FixCity |
+| C1 — MySQL di test | Il precedente tentativo era `Access denied`; SQLite non prova grant o credenziali MySQL. | ❌ MySQL |
+| C3 — percorso browser | Chromium/Firefox e Playwright non sono disponibili nell'ambiente verificato. | ❌ non verificato ora |
+| C4 — `.env.testing` | `DB_CONNECTION`, `DB_DATABASE` e `DB_USERNAME` risultano uniche; nessun valore è stato letto o cambiato. | ✅ |
+
+La suite verde dimostra i test FixCity sul database SQLite temporaneo, non l'intera
+suite applicativa, l'accesso MySQL, l'accodamento in produzione o i flussi UI nel
+browser. Restano da chiudere la prova end-to-end browser, la configurazione MySQL, i
+dati legali ufficiali dell'ente e la tracciabilità verificata dei 44 AC. Nessun dato
+ufficiale o segreto d'ambiente è stato inventato o modificato.
+
+`docs/sprint-status.yaml`, `docs/chat/INDEX.md` e `docs/wiki/log.md` erano lockati:
+la rivalutazione è append-only e accompagnata da una nota chat dedicata. `qmd` non è
+installato, quindi la nota non può essere indicizzata in questa sessione.
 
 ## La sequenza che sblocca di più
 

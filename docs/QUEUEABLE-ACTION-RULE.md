@@ -1,3 +1,14 @@
+---
+title: "QUEUEABLE ACTION RULE"
+type: note
+tags: [documentation]
+created: 2026-09-26
+updated: 2026-09-26
+qmd: "QUEUEABLE ACTION RULE"
+issues: []
+discussions: []
+---
+
 # QueueableAction Architecture Rule
 
 > **Philosophy**: Single-responsibility actions that can be queued or run synchronously.  
@@ -326,4 +337,12 @@ $this->assertEquals($expected, $result);
 
 ---
 
+title: "QUEUEABLE ACTION RULE"
+type: note
+tags: [documentation]
+created: 2026-09-26
+updated: 2026-09-26
+qmd: "QUEUEABLE ACTION RULE"
+issues: []
+discussions: []
 **Remember**: When in doubt, create a QueueableAction. Never create a Service.

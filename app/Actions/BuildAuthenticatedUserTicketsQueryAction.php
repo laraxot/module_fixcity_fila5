@@ -23,7 +23,7 @@ final class BuildAuthenticatedUserTicketsQueryAction
         $currentUserId = auth()->id();
 
         return Ticket::query()
-            ->where('created_by', $currentUserId)
+            ->where('owner_id', $currentUserId)
             ->orderByDesc('created_at');
     }
 }

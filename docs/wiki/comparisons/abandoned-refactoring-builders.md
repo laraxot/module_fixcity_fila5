@@ -1,4 +1,7 @@
 ---
+qmd: "abandoned refactoring builders"
+issues: []
+discussions: []
 title: "Cross-Module Redundancy: Analysis Files and Abandoned Refactoring"
 type: comparison
 tags: [redundancy, refactoring, documentation, dry, xot]

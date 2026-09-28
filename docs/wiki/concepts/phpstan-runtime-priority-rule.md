@@ -1,3 +1,14 @@
+---
+title: "phpstan runtime priority rule"
+type: note
+tags: [documentation]
+created: 2026-09-26
+updated: 2026-09-26
+qmd: "phpstan runtime priority rule"
+issues: []
+discussions: []
+---
+
 # PHPStan Runtime Priority Rule
 
 ## Context

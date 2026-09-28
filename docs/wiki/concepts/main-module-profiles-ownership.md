@@ -1,4 +1,6 @@
 ---
+created: 2026-09-26
+updated: 2026-09-26
 title: main module e ownership tabella profiles
 type: concept
 tags:

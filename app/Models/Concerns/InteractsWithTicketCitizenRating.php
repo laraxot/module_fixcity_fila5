@@ -8,7 +8,6 @@ use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Support\Carbon;
 use Modules\Fixcity\Actions\TicketCitizenRating\GetTicketCitizenRatingMorphAction;
 use Modules\Fixcity\Enums\TicketStatusEnum;
-use Modules\Rating\Models\Contracts\HasRatingContract;
 use Modules\Rating\Models\Traits\HasRating;
 
 /**

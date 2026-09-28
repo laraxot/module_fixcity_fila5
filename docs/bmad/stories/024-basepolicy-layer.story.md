@@ -4,6 +4,17 @@ status: done
 module: Fixcity
 github_issue: https://github.com/laraxot/fixcity_fila5/issues/24
 discussion: https://github.com/laraxot/fixcity_fila5/discussions/24
+type: story
+created: legacy
+updated: '2026-09-26'
+tags:
+- bmad
+- fixcity
+qmd: 024 basepolicy layer.story FixCity BMAD story
+issues:
+- https://github.com/laraxot/base_fixcity_fila5/issues/383
+discussions:
+- https://github.com/laraxot/base_fixcity_fila5/discussions/392
 ---
 
 ## Requirement
@@ -18,7 +29,7 @@ discussion: https://github.com/laraxot/fixcity_fila5/discussions/24
 - Follows Second Brain pattern: learn from error, document, propagate
 
 ## Related BMAD
-- STORY-020 — Merge conflict resolution
-- STORY-021 — PHPStan errors
-- STORY-022 — AuditCoverage cleanup
+- Legacy merge resolution: `020-merge-conflict-resolution.story.md`
+- Legacy PHPStan proposal: `021-phpstan-errors-fixcity.story.md`
+- Legacy AuditCoverage record: `022-auditcoverage-gitignore.story.md`
 - STORY-023 — Wizard UI/UX responsive parity

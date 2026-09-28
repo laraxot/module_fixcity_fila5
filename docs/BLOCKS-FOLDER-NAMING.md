@@ -1,3 +1,14 @@
+---
+title: "BLOCKS FOLDER NAMING"
+type: note
+tags: [documentation]
+created: 2026-09-26
+updated: 2026-09-26
+qmd: "BLOCKS FOLDER NAMING"
+issues: []
+discussions: []
+---
+
 # Naming Convention Cartelle Blocks
 
 > **Fonte**: https://flowbite.com/blocks/ e https://tailwindcss.com/plus/ui-blocks

@@ -1,3 +1,14 @@
+---
+title: "filament wizard rules"
+type: note
+tags: [documentation]
+created: 2026-09-26
+updated: 2026-09-26
+qmd: "filament wizard rules"
+issues: []
+discussions: []
+---
+
 # Filament Wizard Rules
 
 ## Rule: docs-first before runtime edits

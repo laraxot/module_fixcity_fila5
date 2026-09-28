@@ -1,3 +1,14 @@
+---
+title: "filament wizard pattern"
+type: note
+tags: [documentation]
+created: 2026-09-26
+updated: 2026-09-26
+qmd: "filament wizard pattern"
+issues: []
+discussions: []
+---
+
 # Filament Schema Wizard Pattern
 
 ## Overview
@@ -6,6 +17,14 @@ Laraxot usa **Filament Schema Wizard** (v5) per tutti i wizard multi-step. Il pa
 
 ---
 
+title: "filament wizard pattern"
+type: note
+tags: [documentation]
+created: 2026-09-26
+updated: 2026-09-26
+qmd: "filament wizard pattern"
+issues: []
+discussions: []
 ## 🏛 Filosofia e Governance
 
 Per comprendere il "Perché", la "Religione" e lo "Zen" dietro questa scelta, consulta i documenti canonici:

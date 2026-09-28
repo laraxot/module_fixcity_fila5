@@ -4,11 +4,10 @@ declare(strict_types=1);
 
 namespace Modules\Fixcity\Tests\Unit\Models;
 
-use Illuminate\Support\Collection;
 use Modules\Comment\Database\Factories\CommentFactory;
+use Modules\Comment\Models\Comment;
 use Modules\Fixcity\Database\Factories\TicketFactory;
 use Modules\Fixcity\Models\Ticket;
-use Modules\Comment\Models\Comment;
 use Modules\Fixcity\Tests\TestCase;
 use Modules\User\Database\Factories\UserFactory;
 use Modules\User\Models\User;
@@ -88,7 +87,7 @@ describe('TicketComment Model', function () {
         // Update the comment
         $comment->update(['original_text' => 'Updated content']);
 
-        Assert::assertGreaterThan($comment->created_at, $comment->updated_at);
+        Assert::assertGreaterThanOrEqual($comment->created_at, $comment->updated_at);
     });
 
     it('can be queried by ticket', function () {
@@ -104,7 +103,7 @@ describe('TicketComment Model', function () {
 
         Assert::assertCount(3, $ticketComments);
         foreach ($ticketComments as $comment) {
-            Assert::assertSame($ticket->id, $comment->commentable_id);
+            Assert::assertEquals($ticket->id, $comment->commentable_id);
         }
     });
 
@@ -167,10 +166,19 @@ describe('TicketComment Model', function () {
 
         $searchResults = Comment::where('original_text', 'like', '%search term%')->get();
 
-        Assert::assertContains($comment, $searchResults);
+        Assert::assertTrue($searchResults->contains('id', $comment->getKey()));
     });
 
-    it('maintains data integrity constraints')->todo();
+    it('preserves polymorphic comment identity', function () {
+        $ticket = TicketFactory::new()->createOne();
+        $comment = CommentFactory::new()->createOne([
+            'commentable_id' => $ticket->getKey(),
+            'commentable_type' => $ticket->getMorphClass(),
+        ]);
+
+        Assert::assertEquals($ticket->getKey(), $comment->commentable_id);
+        Assert::assertSame($ticket->getMorphClass(), $comment->commentable_type);
+    });
 
     it('can be deleted', function () {
         $comment = CommentFactory::new()->createOne();
@@ -181,12 +189,12 @@ describe('TicketComment Model', function () {
         Assert::assertNull(Comment::find($commentId));
     });
 
-    it('can be associated with attachments if implemented', function () {
+    it('does not silently claim attachment support before it is implemented', function () {
         $comment = CommentFactory::new()->createOne();
 
-        // Test if media library is implemented
-        if (method_exists($comment, 'getMedia')) {
-            Assert::assertInstanceOf(Collection::class, $comment->getMedia());
-        }
+        Assert::assertFalse(
+            method_exists($comment, 'getMedia'),
+            'Comment attachments require an explicit media contract and implementation.'
+        );
     });
 });

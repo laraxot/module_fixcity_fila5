@@ -1,4 +1,11 @@
 ---
+type: note
+tags: [documentation]
+created: 2026-09-26
+updated: 2026-09-26
+qmd: "farmshops clustering integration"
+issues: []
+discussions: []
 title: Farmshops.eu Clustering Pattern Integration
 description: Implementation of farmshops.eu marker clustering behavior in Fixcity GeoMapLit
 category: geo-patterns

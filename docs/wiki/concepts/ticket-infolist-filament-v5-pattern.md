@@ -1,3 +1,14 @@
+---
+title: "ticket infolist filament v5 pattern"
+type: note
+tags: [documentation]
+created: 2026-09-26
+updated: 2026-09-26
+qmd: "ticket infolist filament v5 pattern"
+issues: []
+discussions: []
+---
+
 # TicketInfolist - Filament v5 Hybrid Pattern
 
 **Status**: ✅ Implemented  

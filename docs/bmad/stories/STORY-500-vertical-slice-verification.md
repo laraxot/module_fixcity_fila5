@@ -1,3 +1,17 @@
+---
+title: "STORY-500 — Verifica vertical slice FixCity"
+type: story
+module: Fixcity
+status: blocked
+created: "legacy"
+updated: 2026-09-26
+tags: [bmad, fixcity]
+qmd: "STORY 500 vertical slice verification FixCity BMAD story"
+issues:
+  - "https://github.com/laraxot/base_fixcity_fila5/issues/383"
+discussions:
+  - "https://github.com/laraxot/base_fixcity_fila5/discussions/392"
+---
 # STORY-500 — Verifica vertical slice FixCity
 
 **Epic:** Release pilota  

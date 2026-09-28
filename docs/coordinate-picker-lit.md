@@ -1,9 +1,28 @@
+---
+title: "coordinate picker lit"
+type: note
+tags: [documentation]
+created: 2026-09-26
+updated: 2026-09-26
+qmd: "coordinate picker lit"
+issues: []
+discussions: []
+---
+
 # Coordinate Picker Lit Component
 
 > Componente mappa per il wizard ticket basato su Lit.dev + Leaflet
 
 ---
 
+title: "coordinate picker lit"
+type: note
+tags: [documentation]
+created: 2026-09-26
+updated: 2026-09-26
+qmd: "coordinate picker lit"
+issues: []
+discussions: []
 ## Architettura
 
 ### Stack Tecnologico

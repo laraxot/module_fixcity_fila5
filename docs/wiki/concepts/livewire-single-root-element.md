@@ -1,3 +1,14 @@
+---
+title: "livewire single root element"
+type: note
+tags: [documentation]
+created: 2026-09-26
+updated: 2026-09-26
+qmd: "livewire single root element"
+issues: []
+discussions: []
+---
+
 # Livewire Single Root Element Rule
 
 ## Problem

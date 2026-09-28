@@ -1,3 +1,14 @@
+---
+title: "SECOND BRAIN JS ASSETS"
+type: note
+tags: [documentation]
+created: 2026-09-26
+updated: 2026-09-26
+qmd: "SECOND BRAIN JS ASSETS"
+issues: []
+discussions: []
+---
+
 # Second Brain: policy JS assets e build pipeline
 
 Scopo

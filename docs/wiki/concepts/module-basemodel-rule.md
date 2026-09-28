@@ -1,4 +1,8 @@
 ---
+updated: 2026-09-26
+qmd: "module basemodel rule"
+issues: []
+discussions: []
 title: Modelli Fixcity — estendere BaseModel del modulo
 type: concept
 created: 2026-05-29

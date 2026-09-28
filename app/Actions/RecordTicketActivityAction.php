@@ -15,6 +15,9 @@ final class RecordTicketActivityAction
 {
     use QueueableAction;
 
+    /**
+     * @param  array<string, mixed>  $payload
+     */
     public function execute(
         Ticket $ticket,
         TicketActivityEventTypeEnum $eventType,
@@ -23,6 +26,7 @@ final class RecordTicketActivityAction
         ?string $reason,
         TicketActivityVisibilityEnum $visibility,
         ?int $userId,
+        array $payload = [],
     ): TicketActivity {
         return TicketActivity::query()->create([
             'ticket_id' => $ticket->getKey(),
@@ -30,7 +34,7 @@ final class RecordTicketActivityAction
             'new_status_id' => null,
             'user_id' => $userId,
             'event_type' => $eventType->value,
-            'payload' => [
+            'payload' => $payload + [
                 'v' => 1,
                 'from' => $from?->value,
                 'to' => $to->value,

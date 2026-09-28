@@ -1,3 +1,14 @@
+---
+title: "README"
+type: note
+tags: [documentation]
+created: 2026-09-26
+updated: 2026-09-26
+qmd: "README"
+issues: []
+discussions: []
+---
+
 # 🏛️ Fixcity
 
 [![Domain-Ticket](https://img.shields.io/badge/Domain-Civic%20Tickets-008758.svg)](#)
@@ -14,6 +25,14 @@
 
 ---
 
+title: "README"
+type: note
+tags: [documentation]
+created: 2026-09-26
+updated: 2026-09-26
+qmd: "README"
+issues: []
+discussions: []
 ## Perché esiste
 
 È il modulo **dominio** di FixCity: trasforma la segnalazione del cittadino in ticket tracciabili, misurabili e gestibili dagli operatori.

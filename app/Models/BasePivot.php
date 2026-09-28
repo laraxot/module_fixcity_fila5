@@ -4,8 +4,9 @@ declare(strict_types=1);
 
 namespace Modules\Fixcity\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Factories\Factory;
 // //use Laravel\Scout\Searchable;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\Pivot;
 use Modules\Xot\Traits\Updater;
 
@@ -14,8 +15,9 @@ use Modules\Xot\Traits\Updater;
  */
 abstract class BasePivot extends Pivot
 {
-    /** @use HasFactory<\Illuminate\Database\Eloquent\Factories\Factory> */
+    /** @use HasFactory<Factory> */
     use HasFactory;
+
     use Updater;
 
     /**

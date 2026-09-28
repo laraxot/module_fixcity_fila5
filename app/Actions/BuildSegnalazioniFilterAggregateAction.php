@@ -10,7 +10,7 @@ use Modules\Xot\Actions\Cast\SafeStringCastAction;
 use Spatie\QueueableAction\QueueableAction;
 
 /**
- * Aggregati filtri elenco segnalazioni da tickets.json — SSoT unico per mappa + filtri.
+ * Aggregati live per i filtri pubblici; stessa query e stessi marker della mappa.
  */
 class BuildSegnalazioniFilterAggregateAction
 {
@@ -28,7 +28,9 @@ class BuildSegnalazioniFilterAggregateAction
      */
     public function execute(): array
     {
-        $geoJson = app(LoadPublicTicketsGeoJsonAction::class)->execute();
+        $geoJson = app(BuildTicketsGeoJsonAction::class)->execute(
+            app(BuildPublicTicketsQueryAction::class)->execute(),
+        );
         $features = $geoJson['features'] ?? [];
 
         /** @var array<string, int> $counts */
@@ -106,8 +108,7 @@ class BuildSegnalazioniFilterAggregateAction
      * Contratto GeoJSON properties.type (oggetto annidato o flat legacy).
      *
      * @param  array<string, mixed>  $properties
-     * Solo tipologia (TicketTypeEnum): icona per legenda filtri — niente colore (riservato allo status).
-     *
+     *                                            Solo tipologia (TicketTypeEnum): icona per legenda filtri — niente colore (riservato allo status).
      * @return array{value: string, label: string, iconUrl: string}|null
      */
     private function resolveTypeMeta(array $properties): ?array

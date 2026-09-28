@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-use Modules\Fixcity\Database\Factories\TicketFactory;
-use Modules\User\Database\Factories\UserFactory;
 use Modules\Comment\Models\Comment;
+use Modules\Fixcity\Database\Factories\TicketFactory;
 use Modules\Fixcity\Enums\TicketStatusEnum;
 use Modules\Fixcity\Enums\TicketTypeEnum;
 use Modules\Fixcity\Tests\TestCase;
+use Modules\User\Database\Factories\UserFactory;
 use Modules\Xot\Actions\Cast\SafeStringCastAction;
 use PHPUnit\Framework\Assert;
 

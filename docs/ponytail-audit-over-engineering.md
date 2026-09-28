@@ -1,3 +1,14 @@
+---
+title: "ponytail audit over engineering"
+type: note
+tags: [documentation]
+created: 2026-09-26
+updated: 2026-09-26
+qmd: "ponytail audit over engineering"
+issues: []
+discussions: []
+---
+
 # Ponytail audit — Fixcity (over-engineering)
 
 **Ultimo run storico:** 2026-07-09  

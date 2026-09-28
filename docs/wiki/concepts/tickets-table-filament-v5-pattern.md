@@ -1,3 +1,14 @@
+---
+title: "tickets table filament v5 pattern"
+type: note
+tags: [documentation]
+created: 2026-09-26
+updated: 2026-09-26
+qmd: "tickets table filament v5 pattern"
+issues: []
+discussions: []
+---
+
 # TicketsTable - Filament v5 Hybrid Pattern
 
 **Status**: ✅ Implemented  
@@ -175,4 +186,12 @@ Modules/Fixcity/app/Filament/Resources/TicketResource/
 
 ---
 
+title: "tickets table filament v5 pattern"
+type: note
+tags: [documentation]
+created: 2026-09-26
+updated: 2026-09-26
+qmd: "tickets table filament v5 pattern"
+issues: []
+discussions: []
 *Part of Filament v5 Hybrid Pattern implementation. See Story 8-91 for multi-agent rollout plan.*

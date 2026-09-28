@@ -1,3 +1,17 @@
+---
+title: "STORY-501 — Foreign key Ticket con `foreignIdFor`"
+type: story
+module: Fixcity
+status: in_progress
+created: "legacy"
+updated: 2026-09-26
+tags: [bmad, fixcity]
+qmd: "STORY 501 foreign id for migrations FixCity BMAD story"
+issues:
+  - "https://github.com/laraxot/base_fixcity_fila5/issues/383"
+discussions:
+  - "https://github.com/laraxot/base_fixcity_fila5/discussions/392"
+---
 # STORY-501 — Foreign key Ticket con `foreignIdFor`
 
 **Epic:** Data architecture  

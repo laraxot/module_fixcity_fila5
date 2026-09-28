@@ -1,3 +1,14 @@
+---
+title: "launch plan"
+type: note
+tags: [documentation]
+created: 2026-09-26
+updated: 2026-09-26
+qmd: "launch plan"
+issues: []
+discussions: []
+---
+
 # 🚀 Fixcity Product Launch Plan
 
 > **Document ID**: FC-LAUNCH-001  
@@ -7,6 +18,14 @@
 
 ---
 
+title: "launch plan"
+type: note
+tags: [documentation]
+created: 2026-09-26
+updated: 2026-09-26
+qmd: "launch plan"
+issues: []
+discussions: []
 ## 📋 Table of Contents
 
 1. [Launch Overview](#launch-overview)

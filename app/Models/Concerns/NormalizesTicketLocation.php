@@ -19,11 +19,11 @@ trait NormalizesTicketLocation
 
         /** @var array<string, mixed> $filtered */
         $filtered = array_filter([
-            'street' => self::normalizeNullableText($value['street'] ?? $details['street'] ?? null),
+            'street' => self::normalizeNullableText($value['street'] ?? $details['street'] ?? $details['road'] ?? null),
             'street_number' => self::normalizeNullableText($value['street_number'] ?? $details['house_number'] ?? null),
             'zip' => self::normalizeNullableText($value['zip'] ?? $value['postcode'] ?? $details['postcode'] ?? null),
             'postcode' => self::normalizeNullableText($value['postcode'] ?? $details['postcode'] ?? null),
-            'city' => self::normalizeNullableText($value['city'] ?? $details['city'] ?? $details['village'] ?? $details['municipality'] ?? null),
+            'city' => self::normalizeNullableText($value['city'] ?? $details['city'] ?? $details['town'] ?? $details['village'] ?? $details['municipality'] ?? null),
             'province' => self::normalizeNullableText($value['province'] ?? $details['county'] ?? $details['state_district'] ?? null),
             'state' => self::normalizeNullableText($value['state'] ?? $details['state'] ?? $details['region'] ?? null),
             'country' => self::normalizeNullableText($value['country'] ?? $details['country'] ?? null),

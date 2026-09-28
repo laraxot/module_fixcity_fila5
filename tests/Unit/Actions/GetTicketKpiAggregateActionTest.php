@@ -4,27 +4,25 @@ declare(strict_types=1);
 
 namespace Modules\Fixcity\Tests\Unit\Actions;
 
-use PHPUnit\Framework\Assert;
-use Modules\User\Database\Factories\UserFactory;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 use Modules\Fixcity\Actions\GetTicketKpiAggregateAction;
 use Modules\Fixcity\Enums\TicketStatusEnum;
 use Modules\Fixcity\Models\Ticket;
-use Modules\User\Models\User;
 use Modules\Fixcity\Tests\TestCase;
+use Modules\User\Database\Factories\UserFactory;
+use PHPUnit\Framework\Assert;
 
-uses(\Modules\Fixcity\Tests\TestCase::class);
+uses(TestCase::class);
 
 describe('Get Ticket Kpi Aggregate Action', function (): void {
     test('_it_aggregates_ticket_counts_by_status', function (): void {
-$owner = UserFactory::new()->createOne();
+        $owner = UserFactory::new()->createOne();
         $table = (new Ticket)->getTable();
         $now = now()->toDateTimeString();
 
         foreach ([TicketStatusEnum::OPEN, TicketStatusEnum::IN_PROGRESS, TicketStatusEnum::RESOLVED] as $status) {
-            DB::table($table)->insert([
+            DB::connection((new Ticket)->getConnectionName())->table($table)->insert([
                 'name' => 'Segnalazione test',
                 'slug' => Str::uuid()->toString(),
                 'content' => 'contenuto',

@@ -1,3 +1,14 @@
+---
+title: "theme owned wizard css parity rule"
+type: note
+tags: [documentation]
+created: 2026-09-26
+updated: 2026-09-26
+qmd: "theme owned wizard css parity rule"
+issues: []
+discussions: []
+---
+
 # Theme-Owned Wizard CSS Parity Rule
 
 ## Regola Fixcity

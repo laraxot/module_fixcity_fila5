@@ -1,3 +1,14 @@
+---
+title: "livewire cache table rate limiter"
+type: note
+tags: [documentation]
+created: 2026-09-26
+updated: 2026-09-26
+qmd: "livewire cache table rate limiter"
+issues: []
+discussions: []
+---
+
 # livewire cache table rate limiter
 
 ## Problema Riscontrato

@@ -23,7 +23,7 @@ return new class extends XotBaseMigration
                 $table->string('id')->primary();
                 $table->string('name');
                 $table->text('description');
-// Laraxot — see module docs/wiki for domain contract.
+                // Laraxot — see module docs/wiki for domain contract.
                 $table->string('icon');
                 $table->index('name', 'categories_name_idx');
             }
@@ -35,19 +35,28 @@ return new class extends XotBaseMigration
                 if (! $this->hasColumn('name')) {
                     $table->string('name')->nullable();
                 }
+                if (! $this->hasIndex('name')) {
+                    $table->index('name', 'categories_name_idx');
+                }
 
                 if (! $this->hasColumn('parent_id')) {
                     $table->string('parent_id')->nullable();
+                }
+                if (! $this->hasIndex('parent_id')) {
                     $table->index('parent_id', 'categories_parent_id_idx');
                 }
 
                 if (! $this->hasColumn('is_active')) {
                     $table->boolean('is_active')->default(true);
+                }
+                if (! $this->hasIndex('is_active')) {
                     $table->index('is_active', 'categories_is_active_idx');
                 }
 
                 if (! $this->hasColumn('sort_order')) {
                     $table->integer('sort_order')->default(0);
+                }
+                if (! $this->hasIndex('sort_order')) {
                     $table->index('sort_order', 'categories_sort_order_idx');
                 }
 
@@ -98,16 +107,22 @@ return new class extends XotBaseMigration
             function (Blueprint $table): void {
                 if (! $this->hasColumn('parent_id')) {
                     $table->string('parent_id')->nullable();
+                }
+                if (! $this->hasIndex('parent_id')) {
                     $table->index('parent_id', 'categories_parent_id_idx');
                 }
 
                 if (! $this->hasColumn('is_active')) {
                     $table->boolean('is_active')->default(true);
+                }
+                if (! $this->hasIndex('is_active')) {
                     $table->index('is_active', 'categories_is_active_idx');
                 }
 
                 if (! $this->hasColumn('sort_order')) {
                     $table->integer('sort_order')->default(0);
+                }
+                if (! $this->hasIndex('sort_order')) {
                     $table->index('sort_order', 'categories_sort_order_idx');
                 }
 

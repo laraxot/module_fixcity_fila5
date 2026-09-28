@@ -1,3 +1,14 @@
+---
+title: "merge conflict marker task list"
+type: note
+tags: [documentation]
+created: 2026-09-26
+updated: 2026-09-26
+qmd: "merge conflict marker task list"
+issues: []
+discussions: []
+---
+
 # Merge conflict marker task list (modules)
 
 Regola operativa multi-agent: ogni file con marker `<<<<<<<` va preso in carico manualmente, risolto, testato e poi spuntato in questa lista.

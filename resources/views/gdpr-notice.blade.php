@@ -1,8 +1,8 @@
 <!DOCTYPE html>
-<html lang="it">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
     <meta charset="utf-8">
-    <title>Informativa Privacy</title>
+    <title>{{ __('fixcity::privacy.page_title') }}</title>
     @push("css")
         <link rel="stylesheet" href="/storage/framework/scss/compilati/app.css">
     @endPush
@@ -18,7 +18,7 @@
             <p>{{ __('fixcity::segnalazione.privacy.text') }}</p>
         </div>
         <div class="mt-5 text-right">
-            <a href="/segnalazioni" class="btn btn-primary btn-sm"> {{ __('fixcity::segnalazione.privacy.choose_link') }}</a>
+            <a href="{{ $reportUrl ?? LaravelLocalization::localizeURL('/tickets/create') }}" class="btn btn-primary btn-sm"> {{ __('fixcity::segnalazione.privacy.choose_link') }}</a>
         </div>
     </div>
 </body>

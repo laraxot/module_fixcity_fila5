@@ -33,9 +33,9 @@ abstract class BasePolicy extends UserBasePolicy
      * Il PRD definisce tre personas: cittadino, operatore/ente, supervisore/admin.
      * Solo le ultime due toccano i dati di una segnalazione.
      *
-     * @var list<string>
+     * @var list<'operator'|'supervisor'|'admin'>
      */
-    protected const PA_ROLES = ['operator', 'supervisor', 'admin'];
+    protected const array PA_ROLES = ['operator', 'supervisor', 'admin'];
 
     /**
      * L'utente agisce come PA (non come cittadino proprietario)?

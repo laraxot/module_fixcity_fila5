@@ -5,16 +5,16 @@ declare(strict_types=1);
 namespace Modules\Fixcity\Tests\Unit\ViewModels;
 
 use Modules\Fixcity\Actions\BuildSegnalazioniFilterAggregateAction;
-use PHPUnit\Framework\Assert;
-use Modules\Fixcity\ViewModels\SegnalazioniFilterViewModel;
 use Modules\Fixcity\Tests\TestCase;
+use Modules\Fixcity\ViewModels\SegnalazioniFilterViewModel;
+use PHPUnit\Framework\Assert;
 
-uses(\Modules\Fixcity\Tests\TestCase::class);
+uses(TestCase::class);
 
 describe('Segnalazioni Filter View Model', function (): void {
     test('_it_exposes_filter_items_from_aggregate_action', function (): void {
-        /** @var \Modules\Fixcity\Tests\TestCase $this */
-$this->bindInstance(BuildSegnalazioniFilterAggregateAction::class, new class extends BuildSegnalazioniFilterAggregateAction
+        /** @var TestCase $this */
+        $this->bindInstance(BuildSegnalazioniFilterAggregateAction::class, new class extends BuildSegnalazioniFilterAggregateAction
         {
             public function execute(): array
             {
@@ -44,7 +44,7 @@ $this->bindInstance(BuildSegnalazioniFilterAggregateAction::class, new class ext
             }
         });
 
-        $viewModel = new SegnalazioniFilterViewModel();
+        $viewModel = new SegnalazioniFilterViewModel;
 
         Assert::assertSame(3, $viewModel->getTotalCount());
         Assert::assertSame(['waste' => 2, 'other' => 1], $viewModel->getCountsPerType());
@@ -58,7 +58,7 @@ $this->bindInstance(BuildSegnalazioniFilterAggregateAction::class, new class ext
     });
 
     test('_it_supplements_list_items_from_aggregate_features', function (): void {
-$this->bindInstance(BuildSegnalazioniFilterAggregateAction::class, new class extends BuildSegnalazioniFilterAggregateAction
+        $this->bindInstance(BuildSegnalazioniFilterAggregateAction::class, new class extends BuildSegnalazioniFilterAggregateAction
         {
             public function execute(): array
             {
@@ -82,7 +82,7 @@ $this->bindInstance(BuildSegnalazioniFilterAggregateAction::class, new class ext
             }
         });
 
-        $viewModel = new SegnalazioniFilterViewModel();
+        $viewModel = new SegnalazioniFilterViewModel;
         $items = $viewModel->getSupplementListItems(2, [1]);
 
         Assert::assertCount(1, $items);

@@ -1,4 +1,8 @@
 ---
+updated: 2026-09-26
+qmd: "DEEP DIVE 003 business strategy"
+issues: []
+discussions: []
 title: "Deep Dive: Business Model & Go-to-Market Strategy"
 type: analysis
 tags: [fixcity, business-model, pricing, gtm, strategy, revenue]

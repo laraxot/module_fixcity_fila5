@@ -1,3 +1,14 @@
+---
+title: "README"
+type: note
+tags: [documentation]
+created: 2026-09-26
+updated: 2026-09-26
+qmd: "README"
+issues: []
+discussions: []
+---
+
 # Laravel Modules Documentation
 
 This directory routes to the active documentation roots for the Laravel modules in this repository.

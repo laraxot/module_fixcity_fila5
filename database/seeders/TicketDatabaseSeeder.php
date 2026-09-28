@@ -4,15 +4,17 @@ declare(strict_types=1);
 
 namespace Modules\Fixcity\Database\Seeders;
 
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\File;
 use Modules\Fixcity\Actions\GenerateTicketsJsonAction;
 use Modules\Fixcity\Enums\TicketPriorityEnum;
 use Modules\Fixcity\Enums\TicketStatusEnum;
 use Modules\Fixcity\Enums\TicketTypeEnum;
 use Modules\Fixcity\Models\Ticket;
-use Modules\User\Models\User;
-use Illuminate\Support\Facades\File;
 use Modules\Xot\Actions\Cast\SafeStringCastAction;
+use Modules\Xot\Contracts\UserContract;
+use Modules\Xot\Datas\XotData;
 
 /**
  * Ticket dimostrativi per presentazione FO: mappa, elenco, dettaglio /it/tickets/{id}.
@@ -26,7 +28,7 @@ class TicketDatabaseSeeder extends Seeder
         $ownerId = $this->resolveOwnerId();
         if ($ownerId === null) {
             if ($this->command !== null) {
-                $this->command->warn('TicketDatabaseSeeder: nessun utente nel DB — seed ticket saltato.');
+                $this->command->warn('TicketDatabaseSeeder: cittadino demo assente — seed ticket saltato. Eseguire DemoUsersSeeder prima.');
             }
 
             return;
@@ -44,9 +46,11 @@ class TicketDatabaseSeeder extends Seeder
 
     private function resolveOwnerId(): int|string|null
     {
-        /** @var class-string<User> $userModel */
-        $userModel = config('auth.providers.users.model', User::class);
-        $id = $userModel::query()->orderBy('id')->value('id');
+        /** @var class-string<Model&UserContract> $userModel */
+        $userModel = XotData::make()->getUserClass();
+        $id = $userModel::query()
+            ->where('email', DemoUsersSeeder::CITIZEN_EMAIL)
+            ->value('id');
 
         if (is_int($id) || (is_string($id) && $id !== '')) {
             return $id;
@@ -56,7 +60,7 @@ class TicketDatabaseSeeder extends Seeder
     }
 
     /**
-     * @param array<string, mixed> $record
+     * @param  array<string, mixed>  $record
      */
     private function upsertPresentationTicket(array $record, int|string $ownerId): void
     {
@@ -111,11 +115,24 @@ class TicketDatabaseSeeder extends Seeder
 
         // Aggiunta immagine placeholder se non ne ha già
         if ($ticket->getMedia('attachments')->isEmpty()) {
-            $placeholder = base_path('Themes/Sixteen/Main_files/five/assets/images/image-disservizio.png');
-            if (File::exists($placeholder)) {
+            $placeholder = null;
+            foreach ([
+                base_path('Themes/Sixteen/docs/visual-comparison/screenshots/segnalazione-disservizio/reference-mobile.png'),
+                base_path('Themes/Sixteen/Main_files/five/assets/images/image-disservizio.png'),
+            ] as $candidate) {
+                $candidateMime = File::exists($candidate) ? File::mimeType($candidate) : null;
+                if (in_array($candidateMime, ['image/jpeg', 'image/png', 'application/pdf'], true)) {
+                    $placeholder = $candidate;
+                    break;
+                }
+            }
+
+            if ($placeholder !== null) {
                 $ticket->addMedia($placeholder)
                     ->preservingOriginal()
                     ->toMediaCollection('attachments');
+            } elseif ($this->command !== null) {
+                $this->command->warn('TicketDatabaseSeeder: nessun placeholder allegato valido, seed media saltato.');
             }
         }
 
@@ -133,11 +150,11 @@ class TicketDatabaseSeeder extends Seeder
     private function presentationRecords(): array
     {
         return [
-// Laraxot — see module docs/wiki for domain contract.
-// Laraxot — see module docs/wiki for domain contract.
-// Laraxot — see module docs/wiki for domain contract.
-// Laraxot — see module docs/wiki for domain contract.
-// Laraxot — see module docs/wiki for domain contract.
+            // Laraxot — see module docs/wiki for domain contract.
+            // Laraxot — see module docs/wiki for domain contract.
+            // Laraxot — see module docs/wiki for domain contract.
+            // Laraxot — see module docs/wiki for domain contract.
+            // Laraxot — see module docs/wiki for domain contract.
             [
                 'code' => 'DEMO-001',
                 'slug' => 'demo-buca-via-morandi',

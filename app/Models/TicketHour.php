@@ -12,6 +12,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Support\Carbon;
 use Modules\Fixcity\Database\Factories\TicketHourFactory;
 use Modules\User\Models\User;
+use Modules\Xot\Contracts\UserContract;
 use Modules\Xot\Datas\XotData;
 
 /**
@@ -64,7 +65,7 @@ class TicketHour extends BaseModel
         'user_id', 'ticket_id', 'value', 'comment', 'activity_id',
     ];
 
-    /** @return BelongsTo<Model&\Modules\Xot\Contracts\UserContract, $this> */
+    /** @return BelongsTo<Model&UserContract, $this> */
     public function user(): BelongsTo
     {
         $user_class = XotData::make()->getUserClass();

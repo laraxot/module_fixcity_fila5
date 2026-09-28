@@ -1,3 +1,14 @@
+---
+title: "readme en"
+type: note
+tags: [documentation]
+created: 2026-09-26
+updated: 2026-09-26
+qmd: "readme en"
+issues: []
+discussions: []
+---
+
 # 🏛️ Fixcity — English presentation
 
 [![Domain-Ticket](https://img.shields.io/badge/Domain-Civic%20Tickets-008758.svg)](#)
@@ -14,6 +25,14 @@
 
 ---
 
+title: "readme en"
+type: note
+tags: [documentation]
+created: 2026-09-26
+updated: 2026-09-26
+qmd: "readme en"
+issues: []
+discussions: []
 ## Why it exists
 
 FixCity **domain core**: citizen reports become traceable, measurable tickets for operators.

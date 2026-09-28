@@ -1,3 +1,14 @@
+---
+title: "wizard payload mapping contract refactor"
+type: note
+tags: [documentation]
+created: 2026-09-26
+updated: 2026-09-26
+qmd: "wizard payload mapping contract refactor"
+issues: []
+discussions: []
+---
+
 # wizard submit filament first refactor
 
 ## contesto

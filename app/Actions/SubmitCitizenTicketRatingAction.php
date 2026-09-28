@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Modules\Fixcity\Actions;
 
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Validation\ValidationException;
 use Modules\Fixcity\Actions\TicketCitizenRating\EnsureTicketCitizenRatingDefinitionAction;
 use Modules\Fixcity\Actions\TicketCitizenRating\GetTicketCitizenRatingMorphAction;
@@ -50,35 +51,42 @@ final class SubmitCitizenTicketRatingAction
 
         $userIdString = SafeStringCastAction::cast($userId);
 
-        if (app(GetTicketCitizenRatingMorphAction::class)->execute($ticket, $userIdString) !== null) {
-            throw ValidationException::withMessages([
-                'rating' => [__('fixcity::ticket_citizen_rating.validation.already_rated.label')],
+        return DB::connection($ticket->getConnectionName())->transaction(function () use ($ticket, $rating, $userIdString, $user): Ticket {
+            $lockedTicket = $ticket->newQuery()
+                ->whereKey($ticket->getKey())
+                ->lockForUpdate()
+                ->firstOrFail();
+
+            if (app(GetTicketCitizenRatingMorphAction::class)->execute($lockedTicket, $userIdString) !== null) {
+                throw ValidationException::withMessages([
+                    'rating' => [__('fixcity::ticket_citizen_rating.validation.already_rated.label')],
+                ]);
+            }
+
+            if (! $this->ticketAllowsCitizenRating($lockedTicket)) {
+                throw ValidationException::withMessages([
+                    'status' => [__('fixcity::ticket_citizen_rating.validation.status_not_resolved.label')],
+                ]);
+            }
+
+            if (! $this->userOwnsTicket($lockedTicket, $user)) {
+                throw ValidationException::withMessages([
+                    'owner' => [__('fixcity::ticket_citizen_rating.validation.not_owner.label')],
+                ]);
+            }
+
+            $definition = app(EnsureTicketCitizenRatingDefinitionAction::class)->execute();
+
+            RatingMorph::query()->create([
+                'rating_id' => $definition->id,
+                'model_type' => $lockedTicket->getMorphClass(),
+                'model_id' => $lockedTicket->getKey(),
+                'user_id' => $userIdString,
+                'value' => $rating,
             ]);
-        }
 
-        if (! $this->ticketAllowsCitizenRating($ticket)) {
-            throw ValidationException::withMessages([
-                'status' => [__('fixcity::ticket_citizen_rating.validation.status_not_resolved.label')],
-            ]);
-        }
-
-        if (! $this->userOwnsTicket($ticket, $user)) {
-            throw ValidationException::withMessages([
-                'owner' => [__('fixcity::ticket_citizen_rating.validation.not_owner.label')],
-            ]);
-        }
-
-        $definition = app(EnsureTicketCitizenRatingDefinitionAction::class)->execute();
-
-        RatingMorph::query()->create([
-            'rating_id' => $definition->id,
-            'model_type' => $ticket->getMorphClass(),
-            'model_id' => $ticket->getKey(),
-            'user_id' => $userIdString,
-            'value' => $rating,
-        ]);
-
-        return $ticket->refresh();
+            return $lockedTicket->refresh();
+        });
     }
 
     private function ticketAllowsCitizenRating(Ticket $ticket): bool
@@ -112,13 +120,7 @@ final class SubmitCitizenTicketRatingAction
             return false;
         }
 
-        if ($ticket->owner_id !== null && SafeStringCastAction::cast($ticket->owner_id) === SafeStringCastAction::cast($userId)) {
-            return true;
-        }
-
-        return in_array(SafeStringCastAction::cast($userId), [
-            SafeStringCastAction::cast($ticket->created_by),
-            SafeStringCastAction::cast($ticket->updated_by),
-        ], true);
+        return $ticket->owner_id !== null
+            && SafeStringCastAction::cast($ticket->owner_id) === SafeStringCastAction::cast($userId);
     }
 }

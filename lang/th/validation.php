@@ -7,9 +7,9 @@ declare(strict_types=1);
 // Canon: Modules/Fixcity/docs/wiki — domain i18n only.
 // File: lang/th/validation.php
 return [
-// Laraxot module file — see docs/wiki for domain contract.
-// Laraxot module file — see docs/wiki for domain contract.
-// Laraxot module file — see docs/wiki for domain contract.
+    // Laraxot module file — see docs/wiki for domain contract.
+    // Laraxot module file — see docs/wiki for domain contract.
+    // Laraxot module file — see docs/wiki for domain contract.
     /*
     |--------------------------------------------------------------------------
     | Validation Language Lines

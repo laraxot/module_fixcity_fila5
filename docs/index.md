@@ -1,3 +1,14 @@
+---
+title: "index"
+type: note
+tags: [documentation]
+created: 2026-09-26
+updated: 2026-09-26
+qmd: "index"
+issues: []
+discussions: []
+---
+
 # Fixcity Module
 
 Sistema completo per la gestione di ticket, segnalazioni e supporto tecnico con interfaccia Filament avanzata e wizard unificato cittadino.
@@ -212,6 +223,14 @@ Vedi anche:
 
 ---
 
+title: "index"
+type: note
+tags: [documentation]
+created: 2026-09-26
+updated: 2026-09-26
+qmd: "index"
+issues: []
+discussions: []
 **Status**: Active Development  
 **PHPStan Level**: Level 10 ✅  
 **Translation**: IT/EN ✅  

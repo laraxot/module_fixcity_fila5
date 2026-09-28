@@ -1,3 +1,14 @@
+---
+title: "wizard geolocation loading feedback"
+type: note
+tags: [documentation]
+created: 2026-09-26
+updated: 2026-09-26
+qmd: "wizard geolocation loading feedback"
+issues: []
+discussions: []
+---
+
 # wizard geolocation loading feedback
 
 ## contesto

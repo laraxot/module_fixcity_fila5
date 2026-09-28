@@ -6,27 +6,29 @@ namespace Modules\Fixcity\Tests\Unit\Models;
 
 use Modules\Fixcity\Database\Factories\TicketActivityFactory;
 use Modules\Fixcity\Database\Factories\TicketFactory;
-use Modules\User\Database\Factories\UserFactory;
 use Modules\Fixcity\Models\Ticket;
 use Modules\Fixcity\Models\TicketActivity;
+use Modules\Fixcity\Tests\TestCase;
+use Modules\User\Database\Factories\UserFactory;
 use Modules\User\Models\User;
-
 use PHPUnit\Framework\Assert;
+
+uses(TestCase::class);
 
 describe('TicketActivity Model', function () {
     it('can be created with valid data', function () {
         $user = UserFactory::new()->createOne();
         $ticket = TicketFactory::new()->createOne();
 
-// Laraxot module file — see docs/wiki for domain contract.
-// Laraxot module file — see docs/wiki for domain contract.
-// Laraxot module file — see docs/wiki for domain contract.
-// Laraxot module file — see docs/wiki for domain contract.
-// Laraxot module file — see docs/wiki for domain contract.
-// Laraxot — see module docs/wiki for domain contract.
-// Laraxot module file — see docs/wiki for domain contract.
-// Laraxot module file — see docs/wiki for domain contract.
-// Laraxot module file — see docs/wiki for domain contract.
+        // Laraxot module file — see docs/wiki for domain contract.
+        // Laraxot module file — see docs/wiki for domain contract.
+        // Laraxot module file — see docs/wiki for domain contract.
+        // Laraxot module file — see docs/wiki for domain contract.
+        // Laraxot module file — see docs/wiki for domain contract.
+        // Laraxot — see module docs/wiki for domain contract.
+        // Laraxot module file — see docs/wiki for domain contract.
+        // Laraxot module file — see docs/wiki for domain contract.
+        // Laraxot module file — see docs/wiki for domain contract.
         $activity = TicketActivity::create([
             'ticket_id' => $ticket->id,
             'old_status_id' => 1,
@@ -135,7 +137,7 @@ describe('TicketActivity Model', function () {
 
         $recentActivities = TicketActivity::where('created_at', '>=', now()->subDays(7))->get();
 
-        Assert::assertContains($activity, $recentActivities);
+        Assert::assertTrue($recentActivities->contains('id', $activity->id));
     });
 
     it('can be deleted', function () {

@@ -1,4 +1,9 @@
 ---
+created: 2026-09-26
+updated: 2026-09-26
+qmd: "STORY 497 pa improvements"
+issues: []
+discussions: []
 title: "STORY-497: PA/Backoffice Improvements"
 type: story
 status: open

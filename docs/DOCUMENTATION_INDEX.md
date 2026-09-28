@@ -1,3 +1,14 @@
+---
+title: "DOCUMENTATION INDEX"
+type: note
+tags: [documentation]
+created: 2026-09-26
+updated: 2026-09-26
+qmd: "DOCUMENTATION INDEX"
+issues: []
+discussions: []
+---
+
 # Module Documentation Index
 
 **Generated:** 2026-03-30  
@@ -7,6 +18,14 @@
 
 ---
 
+title: "DOCUMENTATION INDEX"
+type: note
+tags: [documentation]
+created: 2026-09-26
+updated: 2026-09-26
+qmd: "DOCUMENTATION INDEX"
+issues: []
+discussions: []
 ## Quick Navigation
 
 ### By Module

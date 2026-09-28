@@ -1,4 +1,9 @@
 ---
+tags: [documentation]
+updated: 2026-09-26
+qmd: "post sprint docs sync"
+issues: []
+discussions: []
 title: Post-sprint — sincronizzazione docs modulo e tema
 type: overview
 created: 2026-05-29

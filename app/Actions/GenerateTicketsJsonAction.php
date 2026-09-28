@@ -25,6 +25,7 @@ class GenerateTicketsJsonAction
         $geojson = app(BuildTicketsGeoJsonAction::class)->execute(
             app(BuildPublicTicketsQueryAction::class)->execute(),
         );
+        app(ValidateTicketsGeoJsonAction::class)->execute($geojson);
 
         $dir = \dirname($outputPath);
         if (! File::isDirectory($dir)) {

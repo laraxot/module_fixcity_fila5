@@ -1,4 +1,7 @@
 ---
+qmd: "redundancy overview"
+issues: []
+discussions: []
 title: "Redundancy and Documentation Sprawl — Final Overview"
 type: comparison
 tags: [redundancy, documentation, sprawl, dry, overview]

@@ -5,9 +5,9 @@ declare(strict_types=1);
 namespace Modules\Fixcity\Database\Seeders;
 
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 use Modules\Fixcity\Models\Profile;
-use Modules\User\Models\User;
 use Modules\Xot\Actions\Cast\SafeStringCastAction;
 use Modules\Xot\Datas\XotData;
 
@@ -17,45 +17,51 @@ use Modules\Xot\Datas\XotData;
 class ProfileSeeder extends Seeder
 {
     /**
-     * @var list<array{email: string, first_name: string, last_name: string, type: string}>
+     * @var list<array{email: non-empty-string, first_name: non-empty-string, last_name: non-empty-string}>
      */
-    private const DEMO_PROFILES = [
+    private const array DEMO_PROFILES = [
         [
             'email' => 'marco.sottana@gmail.com',
             'first_name' => 'Marco',
             'last_name' => 'Sottana',
-            'type' => 'admin',
         ],
         [
             'email' => 'cittadino@fixcity.demo',
             'first_name' => 'Cittadino',
             'last_name' => 'Demo',
-            'type' => 'citizen',
         ],
     ];
 
     public function run(): void
     {
         $userClass = XotData::make()->getUserClass();
-        \assert(is_subclass_of($userClass, User::class));
+        $profile = new Profile;
+
+        // Parental hydrates the concrete class from the type column; repair
+        // legacy aliases before reading rows so the demo seeder is rerunnable.
+        DB::connection($profile->getConnectionName())
+            ->table($profile->getTable())
+            ->whereIn('type', ['admin', 'citizen'])
+            ->update(['type' => Profile::class]);
 
         foreach (self::DEMO_PROFILES as $demo) {
-            /** @var User|null $user */
             $user = $userClass::query()->where('email', $demo['email'])->first();
             if ($user === null) {
                 continue;
             }
 
             $slug = Str::slug($demo['first_name'].'-'.$demo['last_name']);
+            $userId = SafeStringCastAction::cast($user->getKey());
 
             /** @var Profile $profile */
-            $profile = Profile::query()->firstOrCreate(
-                ['user_id' => SafeStringCastAction::cast($user->getKey())],
-                ['uuid' => SafeStringCastAction::cast(Str::uuid())],
-            );
+            $profile = Profile::query()->firstOrNew(['user_id' => $userId]);
+            if ($profile->uuid === null || $profile->uuid === '') {
+                $profile->uuid = SafeStringCastAction::cast((string) Str::uuid());
+            }
 
-            $profile->fill([
-                'type' => $demo['type'],
+            $profile->forceFill([
+                'user_id' => $userId,
+                'type' => Profile::class,
                 'first_name' => $demo['first_name'],
                 'last_name' => $demo['last_name'],
                 'email' => $demo['email'],

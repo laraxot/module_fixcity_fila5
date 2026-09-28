@@ -1,4 +1,7 @@
 ---
+qmd: "frontend stack canonical"
+issues: []
+discussions: []
 title: "Frontend Stack Canonico — Tailwind + Alpine + Lit + DaisyUI + Flowbite + Filament"
 type: rule
 confidence: high

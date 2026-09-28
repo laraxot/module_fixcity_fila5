@@ -1,4 +1,11 @@
 ---
+title: "ticket crea map fullscreen contract"
+tags: [documentation]
+created: 2026-09-26
+updated: 2026-09-26
+qmd: "ticket crea map fullscreen contract"
+issues: []
+discussions: []
 name: segnalazione-crea-map-fullscreen-contract
 description: Fixcity expectation for fullscreen map behavior in the public ticket wizard
 type: concept

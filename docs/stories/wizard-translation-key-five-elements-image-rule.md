@@ -1,3 +1,14 @@
+---
+title: "wizard translation key five elements image rule"
+type: note
+tags: [documentation]
+created: 2026-09-26
+updated: 2026-09-26
+qmd: "wizard translation key five elements image rule"
+issues: []
+discussions: []
+---
+
 # wizard translation key five elements image rule
 
 ## contesto

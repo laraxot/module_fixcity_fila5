@@ -4,22 +4,20 @@ declare(strict_types=1);
 
 namespace Modules\Fixcity\Tests\Feature;
 
-use PHPUnit\Framework\Assert;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Schema;
 use Modules\Fixcity\Models\Category;
 use Modules\Fixcity\Tests\TestCase;
-use function Pest\Laravel\get;
+use PHPUnit\Framework\Assert;
 
-uses(\Modules\Fixcity\Tests\TestCase::class);
+uses(TestCase::class);
 
 describe('Category Migration', function (): void {
     test('_categories_table_exists', function (): void {
-Assert::assertTrue(Schema::hasTable('categories'));
+        Assert::assertTrue(Schema::connection('fixcity')->hasTable('categories'));
     });
 
     test('_categories_table_has_required_columns', function (): void {
-$requiredColumns = [
+        $requiredColumns = [
             'id',
             'name',
             'description',
@@ -34,14 +32,15 @@ $requiredColumns = [
 
         foreach ($requiredColumns as $column) {
             Assert::assertTrue(
-                Schema::hasColumn('categories', $column),
+                Schema::connection('fixcity')->hasColumn('categories', $column),
                 "Column '{$column}' is missing from categories table"
             );
         }
     });
 
     test('_categories_table_has_required_indexes', function (): void {
-$indexes = Schema::getIndexes('categories');
+        $indexes = Schema::connection('fixcity')->getIndexes('categories');
+        $indexNames = array_column($indexes, 'name');
 
         $requiredIndexes = [
             'categories_name_idx',
@@ -52,17 +51,17 @@ $indexes = Schema::getIndexes('categories');
 
         foreach ($requiredIndexes as $index) {
             Assert::assertTrue(
-                in_array($index, $indexes, true),
+                in_array($index, $indexNames, true),
                 "Index '{$index}' is missing from categories table"
             );
         }
     });
 
     test('_category_model_can_be_created', function (): void {
-$category = Category::create([
+        $category = Category::create([
             'id' => 'test-category',
             'name' => 'Test Category',
-            'content' => 'Test description',
+            'description' => 'Test description',
             'icon' => 'test-icon',
             'is_active' => true,
             'sort_order' => 1,
@@ -75,11 +74,11 @@ $category = Category::create([
     });
 
     test('_category_model_supports_hierarchical_relationships', function (): void {
-// Crea categoria padre
+        // Crea categoria padre
         $parent = Category::create([
             'id' => 'parent-category',
             'name' => 'Parent Category',
-            'content' => 'Parent description',
+            'description' => 'Parent description',
             'icon' => 'parent-icon',
             'is_active' => true,
             'sort_order' => 1,
@@ -89,7 +88,7 @@ $category = Category::create([
         $child = Category::create([
             'id' => 'child-category',
             'name' => 'Child Category',
-            'content' => 'Child description',
+            'description' => 'Child description',
             'icon' => 'child-icon',
             'parent_id' => 'parent-category',
             'is_active' => true,
@@ -107,11 +106,11 @@ $category = Category::create([
     });
 
     test('_category_model_supports_scopes', function (): void {
-// Crea categorie attive e inattive
+        // Crea categorie attive e inattive
         Category::create([
             'id' => 'active-category',
             'name' => 'Active Category',
-            'content' => 'Active description',
+            'description' => 'Active description',
             'icon' => 'active-icon',
             'is_active' => true,
             'sort_order' => 1,
@@ -120,30 +119,36 @@ $category = Category::create([
         Category::create([
             'id' => 'inactive-category',
             'name' => 'Inactive Category',
-            'content' => 'Inactive description',
+            'description' => 'Inactive description',
             'icon' => 'inactive-icon',
             'is_active' => false,
             'sort_order' => 2,
         ]);
 
         // Test scope active
-        $activeCategories = Category::active()->get();
+        $activeCategories = Category::query()
+            ->whereIn('id', ['active-category', 'inactive-category'])
+            ->active()
+            ->get();
         Assert::assertEquals(1, $activeCategories->count());
         $firstActive = $activeCategories->first();
         Assert::assertNotNull($firstActive);
         Assert::assertEquals('active-category', $firstActive->id);
 
         // Test scope root
-        $rootCategories = Category::root()->get();
+        $rootCategories = Category::query()
+            ->whereIn('id', ['active-category', 'inactive-category'])
+            ->root()
+            ->get();
         Assert::assertEquals(2, $rootCategories->count());
     });
 
     test('_category_model_calculates_full_name_correctly', function (): void {
-// Crea categoria padre
+        // Crea categoria padre
         $parent = Category::create([
             'id' => 'parent',
             'name' => 'Parent',
-            'content' => 'Parent description',
+            'description' => 'Parent description',
             'icon' => 'parent-icon',
             'is_active' => true,
             'sort_order' => 1,
@@ -153,7 +158,7 @@ $category = Category::create([
         $child = Category::create([
             'id' => 'child',
             'name' => 'Child',
-            'content' => 'Child description',
+            'description' => 'Child description',
             'icon' => 'child-icon',
             'parent_id' => 'parent',
             'is_active' => true,
@@ -166,11 +171,11 @@ $category = Category::create([
     });
 
     test('_category_model_checks_children_correctly', function (): void {
-// Crea categoria senza figli
+        // Crea categoria senza figli
         $parent = Category::create([
             'id' => 'parent',
             'name' => 'Parent',
-            'content' => 'Parent description',
+            'description' => 'Parent description',
             'icon' => 'parent-icon',
             'is_active' => true,
             'sort_order' => 1,
@@ -182,7 +187,7 @@ $category = Category::create([
         Category::create([
             'id' => 'child',
             'name' => 'Child',
-            'content' => 'Child description',
+            'description' => 'Child description',
             'icon' => 'child-icon',
             'parent_id' => 'parent',
             'is_active' => true,

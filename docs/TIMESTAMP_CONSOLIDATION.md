@@ -1,4 +1,6 @@
 ---
+issues: []
+discussions: []
 title: "Timestamps Consolidation - Single Source of Truth"
 type: documentation
 tags: [timestamps, dry-kiss, migration, idempotent, xotbasemigration]

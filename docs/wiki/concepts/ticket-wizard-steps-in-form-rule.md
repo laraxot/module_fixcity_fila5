@@ -1,4 +1,7 @@
 ---
+qmd: "ticket wizard steps in form rule"
+issues: []
+discussions: []
 title: "Ticket Wizard Steps in TicketForm Rule"
 type: concept
 confidence: high

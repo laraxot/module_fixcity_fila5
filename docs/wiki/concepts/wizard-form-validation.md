@@ -1,3 +1,14 @@
+---
+title: "wizard form validation"
+type: note
+tags: [documentation]
+created: 2026-09-26
+updated: 2026-09-26
+qmd: "wizard form validation"
+issues: []
+discussions: []
+---
+
 # Wizard Form Validation Rule
 
 ## Overview

@@ -32,8 +32,7 @@ final class BuildPublicTicketsQueryAction
                     static fn (TicketStatusEnum $status): string => $status->value,
                     $visibleStatuses,
                 ))
-                    ->orWhere('created_by', $currentUserId)
-                    ->orWhere('updated_by', $currentUserId);
+                    ->orWhere('owner_id', $currentUserId);
             });
         } else {
             /** @var list<TicketStatusEnum> $visibleStatuses */

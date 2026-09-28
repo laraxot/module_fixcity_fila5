@@ -1,3 +1,14 @@
+---
+title: "wizard imageentry limitmessage badmethodcall fix"
+type: note
+tags: [documentation]
+created: 2026-09-26
+updated: 2026-09-26
+qmd: "wizard imageentry limitmessage badmethodcall fix"
+issues: []
+discussions: []
+---
+
 # wizard imageentry limitmessage badmethodcall fix
 
 ## contesto

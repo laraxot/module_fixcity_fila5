@@ -1,4 +1,7 @@
 ---
+qmd: "ticket type icon fixcity svg"
+issues: []
+discussions: []
 title: "Icona tipologia ticket — una sola SVG in Fixcity"
 type: concept
 confidence: high

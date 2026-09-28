@@ -1,4 +1,9 @@
 ---
+title: "one migration per model rule"
+tags: [documentation]
+created: 2026-09-26
+issues: []
+discussions: []
 type: concept
 module: Fixcity
 updated: 2026-06-05

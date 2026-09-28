@@ -1,4 +1,9 @@
 ---
+created: 2026-09-26
+updated: 2026-09-26
+qmd: "STORY 494 wizard critical path implementation"
+issues: []
+discussions: []
 title: "STORY-494: Wizard Implementation"
 created_at: "2026-09-26T10:00:00Z"
 type: story

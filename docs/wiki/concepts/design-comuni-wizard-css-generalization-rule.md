@@ -1,4 +1,7 @@
 ---
+qmd: "design comuni wizard css generalization rule"
+issues: []
+discussions: []
 title: Design Comuni Wizard CSS Generalization Rule
 type: concept
 tags: [fixcity, wizard, design-comuni, css, theme]

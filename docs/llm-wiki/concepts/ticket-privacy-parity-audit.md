@@ -1,3 +1,14 @@
+---
+title: "ticket privacy parity audit"
+type: note
+tags: [documentation]
+created: 2026-09-26
+updated: 2026-09-26
+qmd: "ticket privacy parity audit"
+issues: []
+discussions: []
+---
+
 # segnalazione privacy parity audit
 
 ## Perché (business)

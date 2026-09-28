@@ -1,4 +1,6 @@
 ---
+issues: []
+discussions: []
 title: PHPStan Standards & Model Documentation
 type: technical
 tags: [phpstan, models, ticket, type-safety]

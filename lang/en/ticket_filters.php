@@ -6,13 +6,16 @@ declare(strict_types=1);
 // claude-audit static: split from ticket.php for maintainability (<500 LOC).
 // Canon: Modules/Fixcity/docs/wiki/concepts/claude-audit-static.md
 // File: lang/en/ticket_filters.php
-return array (
-  'filters' => 
-  array (
-    'legend' => 
-    array (
-      'label' => 'Filter by category',
-    ),
-    'empty' => 'No categories available at the moment.',
-  ),
-);
+return [
+    'filters' => [
+        'legend' => [
+            'label' => 'Filter by category',
+        ],
+        'status' => [
+            'legend' => [
+                'label' => 'Filter by status',
+            ],
+        ],
+        'empty' => 'No categories available at the moment.',
+    ],
+];

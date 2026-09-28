@@ -2,29 +2,31 @@
 
 declare(strict_types=1);
 
-use PHPUnit\Framework\Assert;
-use Modules\Fixcity\Database\Factories\TicketFactory;
-use Modules\User\Database\Factories\UserFactory;
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use Modules\Fixcity\Tests\TestCase;
-
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\MorphMany;
+use Modules\Fixcity\Database\Factories\TicketFactory;
 use Modules\Fixcity\Enums\TicketPriorityEnum;
 use Modules\Fixcity\Enums\TicketStatusEnum;
 use Modules\Fixcity\Enums\TicketTypeEnum;
 use Modules\Fixcity\Models\Ticket;
+use Modules\Fixcity\Models\TicketSubscriber;
+use Modules\Fixcity\Tests\TestCase;
+use Modules\User\Database\Factories\UserFactory;
 use Modules\User\Models\User;
+use Modules\Xot\Actions\Cast\SafeStringCastAction;
+use PHPUnit\Framework\Assert;
 use Spatie\MediaLibrary\HasMedia;
 
-uses(TestCase::class, RefreshDatabase::class);
+uses(TestCase::class);
 
 beforeEach(function () {
     /** @var TestCase $this */
-        Assert::assertNotNull($this->user);
-        Assert::assertNotNull($this->admin);
     $this->user = UserFactory::new()->createOne();
     $this->admin = UserFactory::new()->createOne();
+    Assert::assertNotNull($this->user);
+    Assert::assertNotNull($this->admin);
 });
 
 describe('Ticket Model', function () {
@@ -245,7 +247,7 @@ describe('Ticket Relationships', function () {
             'owner_id' => $this->user->id,
         ]);
 
-        Assert::assertInstanceOf(\Illuminate\Database\Eloquent\Relations\MorphMany::class, $ticket->comments());
+        Assert::assertInstanceOf(MorphMany::class, $ticket->comments());
     });
 
     it('can have subscribers', function () {
@@ -256,6 +258,12 @@ describe('Ticket Relationships', function () {
         ]);
 
         Assert::assertInstanceOf(BelongsToMany::class, $ticket->ticketSubscribers());
+    });
+
+    it('resolves a ticket subscriber through ticket_id', function () {
+        $subscriber = new TicketSubscriber;
+
+        Assert::assertSame('ticket_id', $subscriber->ticket()->getForeignKeyName());
     });
 });
 
@@ -323,6 +331,26 @@ describe('Ticket Enums', function () {
 });
 
 describe('Ticket Methods', function () {
+    it('grants private frontoffice visibility only to the ticket owner', function () {
+        /** @var TestCase $this */
+        Assert::assertNotNull($this->user);
+        Assert::assertNotNull($this->admin);
+        auth()->login($this->user);
+
+        $ticket = new Ticket;
+        $ticket->owner_id = SafeStringCastAction::cast($this->admin->getAuthIdentifier());
+        $ticket->created_by = SafeStringCastAction::cast($this->user->getAuthIdentifier());
+        $ticket->updated_by = SafeStringCastAction::cast($this->user->getAuthIdentifier());
+
+        Assert::assertFalse($ticket->isOwnedByAuthenticatedUser());
+        Assert::assertFalse($ticket->isVisibleOnPublicFrontoffice());
+
+        $ticket->owner_id = SafeStringCastAction::cast($this->user->getAuthIdentifier());
+
+        Assert::assertTrue($ticket->isOwnedByAuthenticatedUser());
+        Assert::assertTrue($ticket->isVisibleOnPublicFrontoffice());
+    });
+
     it('can get icon data for type', function () {
         /** @var TestCase $this */
         Assert::assertNotNull($this->user);
@@ -370,7 +398,7 @@ describe('Ticket Methods', function () {
             'owner_id' => $this->user->id,
         ]);
 
-        Assert::assertSame('#', $ticket->commentUrl());
+        Assert::assertStringEndsWith('/tickets/'.$ticket->id, $ticket->commentUrl());
     });
 });
 
@@ -415,7 +443,7 @@ describe('Ticket Factory', function () {
 
     it('can create multiple tickets', function () {
         /** @var TestCase $this */
-        /** @var \Illuminate\Database\Eloquent\Collection<int, \Modules\Fixcity\Models\Ticket> $tickets */
+        /** @var Collection<int, Ticket> $tickets */
         $tickets = TicketFactory::new()->count(5)->create();
 
         Assert::assertCount(5, $tickets);

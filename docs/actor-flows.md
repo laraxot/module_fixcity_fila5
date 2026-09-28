@@ -1,10 +1,15 @@
 ---
+title: "actor flows"
+tags: [documentation]
+qmd: "actor flows"
+issues: []
+discussions: []
 # Actor Flows — Fixcity Fila5 (BMAD + Second Brain)
 
 type: actor-flows
 module: Fixcity
 created: 2026-09-26
-updated: 2026-09-26
+updated: 2026-09-27
 ---
 
 ## Attori
@@ -31,6 +36,20 @@ updated: 2026-09-26
 - **Permessi**: `viewAny` (tutti), `update/delete` (tutti se admin/supervisor)
 - **Policy**: `BasePolicy::PA_ROLES = ['operator', 'supervisor', 'admin']`
 - **Files**: `TicketPolicy`, `UserBasePolicy`, `XotBasePolicy` (before super-admin)
+
+### 4. Moderatore di quartiere
+- **Flusso atteso**: login → coda del quartiere → approva/respinge con motivazione →
+  deduplica/inoltro → timeline pubblica.
+- **Stato verificato**: non esiste ancora una capability canonica distinta nei
+  `PA_ROLES`; non viene dichiarato pronto solo perché è richiesto dalla demo.
+- **Decisione necessaria**: definire perimetro, permessi, audit e ruolo persistente.
+
+### 5. Mobile NativePHP
+- Guest: dashboard/map/detail read-only dal GeoJSON condiviso.
+- Cittadino autenticato: create/track/follow tramite Actions e policy condivise.
+- PA: viste native solo dopo adapter e capability verificati; il backoffice web resta
+  la superficie canonica fino alla prova APK.
+- Evidence: `Modules/Fixcity/docs/bmad/fixcity-nativephp-mobile.md`.
 
 ### 4. Sistema / Automatismi
 - **Eventi**: `TicketCreatedEvent`
@@ -69,6 +88,13 @@ Supervisore/Admin → Dashboard (XotBaseDashboard) → Analytics
 - System: `Modules/Fixcity/docs/second-brain.md` (sezione 5-7)
 
 ---
+
+## Criteri di completamento per ogni attore
+
+Ogni journey deve avere quattro prove: entry route, autorizzazione, persistenza/evento
+e feedback accessibile. Un mock, un seeder o una Blade presente non valgono come prova
+runtime. La checklist demo copre guest, citizen, operator, moderator (se abilitato),
+supervisor, admin e failure path (401/403/404/422/429/500).
 
 ## Aggiornamenti richiesti nei moduli e temi
 

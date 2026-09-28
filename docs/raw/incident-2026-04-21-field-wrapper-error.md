@@ -1,3 +1,14 @@
+---
+title: "incident 2026 04 21 field wrapper error"
+type: note
+tags: [documentation]
+created: 2026-09-26
+updated: 2026-09-26
+qmd: "incident 2026 04 21 field wrapper error"
+issues: []
+discussions: []
+---
+
 # Raw: Incident log - filament field-wrapper error (2026-04-21)
 
 Timestamp: 2026-04-21

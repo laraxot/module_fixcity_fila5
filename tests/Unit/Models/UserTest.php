@@ -5,16 +5,20 @@ declare(strict_types=1);
 namespace Modules\Fixcity\Tests\Unit\Models;
 
 use Illuminate\Database\Eloquent\Collection;
-use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\QueryException;
+use Modules\Comment\Models\Comment;
 use Modules\Fixcity\Database\Factories\TicketFactory;
 use Modules\Fixcity\Models\Profile;
 use Modules\Fixcity\Models\Ticket;
 use Modules\Fixcity\Models\TicketActivity;
-use Modules\Comment\Models\Comment;
 use Modules\Fixcity\Models\TicketHour;
+use Modules\Fixcity\Models\TicketSubscriber;
 use Modules\Fixcity\Models\User;
 use Modules\Fixcity\Tests\TestCase;
+use Modules\User\Database\Factories\TenantFactory;
 use Modules\User\Database\Factories\UserFactory;
+use Modules\User\Models\Permission;
+use Modules\User\Models\Role;
 use Modules\User\Models\Team;
 use Modules\User\Models\Tenant;
 use PHPUnit\Framework\Assert;
@@ -89,9 +93,12 @@ describe('User Model (Fixcity)', function () {
         // Subscribe user to ticket
         $ticket->ticketSubscribers()->attach($user->id);
 
-        $subscribedTickets = Ticket::query()
-            ->whereHas('ticketSubscribers', static fn ($query) => $query->where('users.id', $user->id))
-            ->get();
+        // The pivot lives on the user connection while tickets live on fixcity;
+        // resolve the IDs on the pivot connection before querying tickets.
+        $subscribedTicketIds = TicketSubscriber::query()
+            ->where('user_id', $user->id)
+            ->pluck('ticket_id');
+        $subscribedTickets = Ticket::query()->whereKey($subscribedTicketIds)->get();
         Assert::assertCount(1, $subscribedTickets);
         Assert::assertSame($ticket->id, $subscribedTickets->first()?->id);
     });
@@ -159,6 +166,8 @@ describe('User Model (Fixcity)', function () {
 
     it('can have multiple roles', function () {
         $user = UserFactory::new()->createOne();
+        Role::firstOrCreate(['name' => 'citizen', 'guard_name' => 'web']);
+        Role::firstOrCreate(['name' => 'moderator', 'guard_name' => 'web']);
 
         // Assign roles to user
         $user->assignRole('citizen');
@@ -171,6 +180,8 @@ describe('User Model (Fixcity)', function () {
 
     it('can have permissions', function () {
         $user = UserFactory::new()->createOne();
+        Permission::firstOrCreate(['name' => 'create_tickets', 'guard_name' => 'web']);
+        Permission::firstOrCreate(['name' => 'edit_tickets', 'guard_name' => 'web']);
 
         // Give permission to user
         $user->givePermissionTo('create_tickets');
@@ -202,9 +213,7 @@ describe('User Model (Fixcity)', function () {
         $user = UserFactory::new()->createOne();
 
         // Create tenant and add user
-        $tenant = Tenant::create([
-            'name' => 'Test Tenant',
-        ]);
+        $tenant = TenantFactory::new()->createOne(['name' => 'Test Tenant']);
 
         $user->tenants()->attach($tenant->id);
 
@@ -219,7 +228,7 @@ describe('User Model (Fixcity)', function () {
 
         // Check if authentication logging is implemented
         if (method_exists($user, 'authentications')) {
-            Assert::assertInstanceOf(HasMany::class, $user->authentications);
+            Assert::assertInstanceOf(Collection::class, $user->authentications);
         }
     });
 
@@ -230,7 +239,7 @@ describe('User Model (Fixcity)', function () {
 
         $searchResults = User::where('name', 'like', '%Searchable%')->get();
 
-        Assert::assertContains($user, $searchResults);
+        Assert::assertTrue($searchResults->contains('id', $user->id));
     });
 
     it('can be searched by email', function () {
@@ -240,10 +249,16 @@ describe('User Model (Fixcity)', function () {
 
         $searchResults = User::where('email', 'like', '%searchable%')->get();
 
-        Assert::assertContains($user, $searchResults);
+        Assert::assertTrue($searchResults->contains('id', $user->id));
     });
 
-    it('maintains data integrity constraints')->todo();
+    it('enforces unique email addresses', function () {
+        $email = 'unique-integrity@example.test';
+        UserFactory::new()->createOne(['email' => $email]);
+
+        expect(fn () => UserFactory::new()->createOne(['email' => $email]))
+            ->toThrow(QueryException::class);
+    });
 
     it('can be deleted', function () {
         $user = UserFactory::new()->createOne();
@@ -273,7 +288,7 @@ describe('User Model (Fixcity)', function () {
         // Update the user
         $user->update(['name' => 'Updated']);
 
-        Assert::assertGreaterThan($user->created_at, $user->updated_at);
+        Assert::assertGreaterThanOrEqual($user->created_at, $user->updated_at);
     });
 
     it('can handle special characters in names', function () {

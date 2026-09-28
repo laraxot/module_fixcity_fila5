@@ -1,4 +1,7 @@
 ---
+qmd: "STORY 402 rich questionnaire system"
+issues: []
+discussions: []
 title: "STORY-402: Rich Questionnaire System per Tipologie"
 type: story
 tags: [fixcity, questionnaire, dynamic-forms, ticket-types, validation, seeclickfix]

@@ -1,3 +1,14 @@
+---
+title: "DAISYUI"
+type: note
+tags: [documentation]
+created: 2026-09-26
+updated: 2026-09-26
+qmd: "DAISYUI"
+issues: []
+discussions: []
+---
+
 # Fixcity Module — daisyUI Reference
 
 ## Panoramica
@@ -15,6 +26,14 @@ Il modulo **Fixcity** **non istalla daisyUI direttamente**, ma la consuma indire
 
 ---
 
+title: "DAISYUI"
+type: note
+tags: [documentation]
+created: 2026-09-26
+updated: 2026-09-26
+qmd: "DAISYUI"
+issues: []
+discussions: []
 ## Dove Fixcity vede daisyUI
 
 Il modulo Fixcity **non ha un asset pipeline autonomo**. Tutti gli asset CSS/JS sono serviti dal tema Sixteen.

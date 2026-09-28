@@ -4,17 +4,17 @@ declare(strict_types=1);
 
 namespace Modules\Fixcity\Tests\Unit\ViewModels;
 
-use Modules\Fixcity\Actions\BuildTicketFilterAggregateAction;
-use PHPUnit\Framework\Assert;
-use Modules\Fixcity\ViewModels\TicketFilterViewModel;
+use Modules\Fixcity\Actions\BuildSegnalazioniFilterAggregateAction;
 use Modules\Fixcity\Tests\TestCase;
+use Modules\Fixcity\ViewModels\TicketFilterViewModel;
+use PHPUnit\Framework\Assert;
 
-uses(\Modules\Fixcity\Tests\TestCase::class);
+uses(TestCase::class);
 
 describe('Ticket Filter View Model', function (): void {
     test('_it_exposes_filter_items_from_aggregate_action', function (): void {
-        /** @var \Modules\Fixcity\Tests\TestCase $this */
-$this->bindInstance(BuildTicketFilterAggregateAction::class, new class extends BuildTicketFilterAggregateAction
+        /** @var TestCase $this */
+        $this->bindInstance(BuildSegnalazioniFilterAggregateAction::class, new class extends BuildSegnalazioniFilterAggregateAction
         {
             public function execute(): array
             {
@@ -44,7 +44,7 @@ $this->bindInstance(BuildTicketFilterAggregateAction::class, new class extends B
             }
         });
 
-        $viewModel = new TicketFilterViewModel();
+        $viewModel = new TicketFilterViewModel;
 
         Assert::assertSame(3, $viewModel->getTotalCount());
         Assert::assertSame(['waste' => 2, 'other' => 1], $viewModel->getCountsPerType());
@@ -58,7 +58,7 @@ $this->bindInstance(BuildTicketFilterAggregateAction::class, new class extends B
     });
 
     test('_it_supplements_list_items_from_aggregate_features', function (): void {
-$this->bindInstance(BuildTicketFilterAggregateAction::class, new class extends BuildTicketFilterAggregateAction
+        $this->bindInstance(BuildSegnalazioniFilterAggregateAction::class, new class extends BuildSegnalazioniFilterAggregateAction
         {
             public function execute(): array
             {
@@ -82,7 +82,7 @@ $this->bindInstance(BuildTicketFilterAggregateAction::class, new class extends B
             }
         });
 
-        $viewModel = new TicketFilterViewModel();
+        $viewModel = new TicketFilterViewModel;
         $items = $viewModel->getSupplementListItems(2, [1]);
 
         Assert::assertCount(1, $items);

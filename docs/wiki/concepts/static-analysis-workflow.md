@@ -1,4 +1,11 @@
 ---
+title: "static analysis workflow"
+tags: [documentation]
+created: 2026-09-26
+updated: 2026-09-26
+qmd: "static analysis workflow"
+issues: []
+discussions: []
 name: static-analysis-workflow
 description: Mandatory static analysis steps after every file edit.
 type: concept

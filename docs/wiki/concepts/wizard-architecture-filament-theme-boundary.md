@@ -1,3 +1,14 @@
+---
+title: "wizard architecture filament theme boundary"
+type: note
+tags: [documentation]
+created: 2026-09-26
+updated: 2026-09-26
+qmd: "wizard architecture filament theme boundary"
+issues: []
+discussions: []
+---
+
 # Filament Wizard Architecture & Theme Boundary
 
 ## Philosophy: Separation of Concerns (Filament v5)

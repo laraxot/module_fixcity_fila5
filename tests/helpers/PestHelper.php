@@ -3,7 +3,7 @@
 /**
  * Pest DSL helper for type narrowing in Laravel tests.
  *
- * @param  class-string $class
+ * @param  class-string  $class
  * @return class-string
  */
 function safe_instance(string $class): string
@@ -12,8 +12,7 @@ function safe_instance(string $class): string
 }
 
 /**
- * @param  mixed $value
- * @param  class-string $class
+ * @param  class-string  $class
  */
 function is_null_safe(mixed $value, string $class): bool
 {
@@ -21,8 +20,7 @@ function is_null_safe(mixed $value, string $class): bool
 }
 
 /**
- * @param  mixed $value
- * @param  class-string $class
+ * @param  class-string  $class
  */
 function assert_non_null(mixed $value, string $class): void
 {

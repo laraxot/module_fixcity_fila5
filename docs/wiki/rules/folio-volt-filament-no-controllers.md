@@ -1,61 +1,46 @@
 ---
-name: folio-volt-filament-no-controllers
-description: FixCity usa Folio + Volt + Filament, mai controller MVC per pagine pubbliche
-metadata:
-  type: reference
-  canonical: true
+title: "folio volt filament no controllers"
+type: rule
+status: canonical
+created: 2026-09-26
+updated: 2026-09-27
+qmd: "folio volt filament no controllers front office back office"
+issues:
+  - "https://github.com/laraxot/base_fixcity_fila5/issues/572"
+discussions:
+  - "https://github.com/laraxot/base_fixcity_fila5/discussions/573"
+tags: [fixcity, folio, volt, filament, architecture]
+related:
+  - ../concepts/no-controllers-folio-volt-filament.md
+  - ../concepts/folio-api-no-controllers.md
+  - ../../bmad/README.md
 ---
 
 # Folio + Volt + Filament — NO Controllers
 
-## Regola
+## Split FO / BO (KISS)
 
-**Mai usare controller MVC per pagine pubbliche.** FixCity utilizza una stack moderna:
+| Dove | Stack | Vietato |
+|------|-------|---------|
+| Front office | Folio + Volt + Filament-in-page + Actions | `Http\Controllers`, view da `Route::` |
+| Back office | Filament `XotBase*` | Controller MVC paralleli al pannello |
+| API pubbliche | Folio `pages/api/` + Actions | Controller API “di comodo” |
 
-- **Folio** — Routing e pagina basato su file (pagina = file)
-- **Volt** — Componenti Blade interattivi con stato reattivo (Alpine.js)
-- **Filament** — Widget e pannelli admin
+Canone esteso: [no-controllers-folio-volt-filament](../concepts/no-controllers-folio-volt-filament.md).
 
-## Struttura corretta
+## Struttura
 
 ```
-laravel/Modules/Fixcity/
-├── routes/                 # Solo route file per API (se necessario)
-│   └── api.php            # API endpoints solo, mai web.php
-├── resources/views/pages/  # Folio: pagina = blade
-│   └── ticket-list.blade.php
-├── resources/views/components/blocks/  # Blade components riusabili
-└── app/Filament/           # Widget admin Filament
+Modules/Fixcity/
+├── routes/web.php          # vuoto (solo commento ownership)
+├── resources/views/pages/  # Folio FO (+ api/)
+├── app/Actions/            # business logic
+└── app/Filament/           # BO
+Themes/Sixteen/resources/views/pages/  # Folio chrome / home / segnalazioni
 ```
 
-## Per le API
+## Nomi route FO
 
-Se servono endpoint API, vanno in `app/Http/Controllers/Api/` SOLO per:
-- GeoJSON
-- JSON response per mappe
-- Integrare con sistemi esterni
-
-**Mai** per:
-- Rendering view
-- Logic di business frontoffice
-- Gestione form pubblici (usare Volt)
-
-## Per le pagine
-
-Usare **Folio**:
-- Route automatiche da `resources/views/pages/**`
-- Nessun `web.php` necessario
-- Blade + Volt per interattività
-
-## Per l'admin
-
-Usare **Filament**:
-- Widget in `app/Filament/Widgets/`
-- Resource in `app/Filament/Resources/`
-- Nessun controller necessario
-
-## Vedi anche
-
-- [[folio-routing-pattern]]
-- [[volt-component-pattern]]
-- [[filament-widget-pattern]]
+Preferire path localizzati (`localizeURL`). Se serve un nome stabile
+(`tickets.list`), dichiararlo nel blade Folio (`name('…')`) e mantenere
+`bootstrap/cache/folio-routes.php` dopo `optimize:clear` (hit `/it` o persist Folio).

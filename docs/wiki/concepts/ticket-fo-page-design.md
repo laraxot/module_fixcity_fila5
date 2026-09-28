@@ -1,4 +1,5 @@
 ---
+discussions: []
 title: "Ticket FO page design — mappa statica + comments"
 type: concept
 tags: [ticket, folio, leaflet, comments, frontoffice]

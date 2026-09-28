@@ -1,3 +1,14 @@
+---
+title: "wizard system"
+type: note
+tags: [documentation]
+created: 2026-09-26
+updated: 2026-09-26
+qmd: "wizard system"
+issues: []
+discussions: []
+---
+
 > **Esempio legacy non conforme — non copiare.** Il routing applicativo segue Folio e Actions; non introdurre `TestController` o route Controller. Per il contratto corrente consultare `wiki/concepts/no-controllers-folio-volt-filament.md`.
 
 # Wizard System Documentation
@@ -294,5 +305,13 @@ public function test_form_submission()
 
 ---
 
+title: "wizard system"
+type: note
+tags: [documentation]
+created: 2026-09-26
+updated: 2026-09-26
+qmd: "wizard system"
+issues: []
+discussions: []
 *Last Updated: May 2026*  
 *Version: 1.0.0*

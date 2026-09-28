@@ -1,4 +1,8 @@
 ---
+created: 2026-09-26
+updated: 2026-09-26
+issues: []
+discussions: []
 title: "Fixcity Module - Status & TODO"
 type: "status"
 tags: ["fixcity", "status", "todo", "core-business"]

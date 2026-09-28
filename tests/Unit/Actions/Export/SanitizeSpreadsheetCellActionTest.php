@@ -3,9 +3,10 @@
 declare(strict_types=1);
 
 use Modules\Fixcity\Actions\Export\SanitizeSpreadsheetCellAction;
+use Modules\Fixcity\Tests\TestCase;
 use PHPUnit\Framework\Assert;
 
-uses(Modules\Fixcity\Tests\TestCase::class);
+uses(TestCase::class);
 
 it('sanitizes spreadsheet cells against formula injection', function (): void {
     $action = app(SanitizeSpreadsheetCellAction::class);

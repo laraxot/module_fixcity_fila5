@@ -1,3 +1,14 @@
+---
+title: "naming convention ticket vs segnalazioni"
+type: note
+tags: [documentation]
+created: 2026-09-26
+updated: 2026-09-26
+qmd: "naming convention ticket vs segnalazioni"
+issues: []
+discussions: []
+---
+
 # Naming Convention: ticket vs segnalazioni
 
 ## Rule

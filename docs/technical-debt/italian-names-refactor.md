@@ -1,4 +1,7 @@
 ---
+qmd: "italian names refactor"
+issues: []
+discussions: []
 title: "Technical Debt: Italian Names in Code"
 type: decision
 confidence: high

@@ -1,3 +1,17 @@
+---
+title: "STORY-499 — Assegnazione ticket dalla PA"
+type: story
+module: Fixcity
+status: in_progress
+created: "legacy"
+updated: 2026-09-26
+tags: [bmad, fixcity]
+qmd: "STORY 499 pa ticket assignment FixCity BMAD story"
+issues:
+  - "https://github.com/laraxot/base_fixcity_fila5/issues/383"
+discussions:
+  - "https://github.com/laraxot/base_fixcity_fila5/discussions/392"
+---
 # STORY-499 — Assegnazione ticket dalla PA
 
 **Epic:** Vertical slice  

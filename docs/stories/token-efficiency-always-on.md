@@ -1,3 +1,14 @@
+---
+title: "token efficiency always on"
+type: note
+tags: [documentation]
+created: 2026-09-26
+updated: 2026-09-26
+qmd: "token efficiency always on"
+issues: []
+discussions: []
+---
+
 # token efficiency always on
 
 ## contesto

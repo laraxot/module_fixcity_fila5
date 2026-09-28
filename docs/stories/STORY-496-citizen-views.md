@@ -1,4 +1,9 @@
 ---
+created: 2026-09-26
+updated: 2026-09-26
+qmd: "STORY 496 citizen views"
+issues: []
+discussions: []
 title: "STORY-496: Citizen Views Implementation"
 type: story
 status: open

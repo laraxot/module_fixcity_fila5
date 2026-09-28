@@ -1,4 +1,7 @@
 ---
+qmd: "fixcity best practices"
+issues: []
+discussions: []
 title: "Fixcity Module Best Practices"
 type: concept
 sources: ["../../Modules/Fixcity/app/Filament/Resources/TicketResource/"]
