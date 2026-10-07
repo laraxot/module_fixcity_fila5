@@ -13,6 +13,13 @@ discussions: []
 
 Questa è la sede BMAD del dominio FixCity. Il prodotto è un servizio civico per la raccolta e gestione di segnalazioni urbane: cittadino, operatore PA, supervisor e admin devono completare un unico flusso verificabile.
 
+## Homepage e flussi end-to-end
+
+- [Audit homepage 2026-10-07](homepage-audit-2026-10-07.md)
+- [Audit flusso cittadino 2026-10-07](citizen-journey-audit-2026-10-07.md)
+- [Flussi attore](actor-flows.md)
+- [Percorsi attore](actor-journeys.md)
+
 ## Religione stack (FO / BO)
 
 | Canale | Stack | Mai |
