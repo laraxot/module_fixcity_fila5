@@ -236,7 +236,7 @@
     "Jira projects": "Progetti Jira",
     "Jira tickets": "Biglietti Jira",
     "Username": "Nome utente",
-    "Password": "Parola d'ordine",
+    "Password": "Password",
     "Your jira account username": "Il nome utente del tuo account jira",
     "Your jira account password": "La password del tuo account jira",
     "Important: Your jira credentials are only used to communicate with jira REST API, and will not be stored in this application": "Importante: le tue credenziali jira vengono utilizzate solo per comunicare con l'API REST di jira e non verranno archiviate in questa applicazione",
