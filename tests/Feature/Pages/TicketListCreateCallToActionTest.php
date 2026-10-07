@@ -14,10 +14,7 @@ it('links the public reports page to canonical ticket creation', function (): vo
     $response->assertOk()
         ->assertSee('<title>Elenco segnalazioni</title>', false)
         ->assertSee('/it/tickets/create', false)
-<<<<<<< HEAD
         ->assertDontSee('/it/tests/ticket-crea', false)
-=======
->>>>>>> laraxot/dev
         ->assertDontSee('href="/it/segnalazione-crea"', false);
 
     $content = $response->getContent();

@@ -1,7 +1,7 @@
 ---
 title: "FixCity — audit dei flussi cittadino"
 type: bmad-journey-audit
-status: static-audit-complete-runtime-pending
+status: static-audit-with-navigation-fix-runtime-pending
 module: Fixcity
 created: 2026-10-07
 updated: 2026-10-07
@@ -72,6 +72,10 @@ Homepage guest
 - I test esistenti coprono redirect guest, privacy capability code, ticket list/API,
   pratiche personali, seguite e header auth. Sono evidenze di contratto, non collaudo
   completo di browser e database.
+- La CTA della mappa/elenco usava lo slug demo `/it/tests/ticket-crea`, mentre la route
+  reale è `/{locale}/tickets/create`; ora usa `LaravelLocalization::localizeURL('/tickets/create')`.
+- Le card dell’elenco mostravano i dettagli inline ma non collegavano il cittadino alla
+  pagina `/{locale}/tickets/{id}`; ora espongono il link localizzato al dettaglio canonico.
 
 ## Gap che impediscono di dire “il cittadino riesce”
 
@@ -87,6 +91,9 @@ Homepage guest
    staging; non vanno dichiarati completati dal solo codice presente.
 6. Le lingue supportate devono essere percorse almeno in `it`, `en`, `de`, `es`; ogni
    CTA e messaggio di errore deve restare tradotto.
+
+La correzione della navigazione elenco è verificata dal test
+`TicketListCreateCallToActionTest`; non sostituisce la prova verticale autenticata.
 
 ## Acceptance criteria BMAD
 
