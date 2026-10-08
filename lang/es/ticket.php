@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 return [
+<<<<<<< HEAD
     'heading' => [
         'title' => [
             'label' => 'Incidencias',
@@ -66,6 +67,8 @@ return [
             ],
         ],
     ],
+=======
+>>>>>>> laraxot/dev
     'pagination' => ['aria' => 'Paginación de incidencias', 'page' => 'Página :page', 'previous' => 'Página anterior', 'next' => 'Página siguiente'],
     'page' => ['title' => ['label' => 'Comunicar una incidencia']],
     'track' => ['title' => 'Seguir una incidencia', 'account_subtitle' => 'Estás consultando una incidencia vinculada a tu cuenta.', 'subtitle' => 'Introduce el código de confirmación para consultar el estado.', 'submit' => 'Buscar', 'help' => 'Introduce el código completo: TCK- seguido de 16 caracteres.', 'not_found' => 'No se ha encontrado ninguna incidencia con este código.', 'timeline_title' => 'Actualizaciones', 'timeline_empty' => 'Todavía no hay actualizaciones públicas.'],
