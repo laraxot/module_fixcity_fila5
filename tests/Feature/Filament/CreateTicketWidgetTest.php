@@ -79,8 +79,7 @@ describe('CreateTicketWidget', function () {
 
     it('can handle form submission', function () {
         /** @var TestCase $this */
-        $initialCount = Ticket::count();
-
+        Ticket::count();
         $ticketData = [
             'name' => 'Widget Test Ticket',
             'content' => 'Test content for widget submission',
@@ -90,8 +89,7 @@ describe('CreateTicketWidget', function () {
             'longitude' => '9.1900',
         ];
 
-        $component = Livewire::test(CreateTicketWidget::class)
-            ->set('data', $ticketData)
+        Livewire::test(CreateTicketWidget::class)            ->set('data', $ticketData)
             ->call('submit');
 
         // Check if ticket was actually created (depends on implementation)
@@ -146,8 +144,7 @@ describe('CreateTicketWidget User Association', function () {
     it('automatically sets current user as owner', function () {
         /** @var TestCase $this */
         Assert::assertNotNull($this->user);
-        $component = Livewire::test(CreateTicketWidget::class)
-            ->set('data.name', 'User Association Test')
+        Livewire::test(CreateTicketWidget::class)            ->set('data.name', 'User Association Test')
             ->set('data.content', 'Test content')
             ->call('submit');
 

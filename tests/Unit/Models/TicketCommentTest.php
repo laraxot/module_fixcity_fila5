@@ -92,8 +92,7 @@ describe('TicketComment Model', function () {
 
     it('can be queried by ticket', function () {
         $ticket = TicketFactory::new()->createOne();
-        $comments = CommentFactory::new()->count(3)->create([
-            'commentable_id' => $ticket->id,
+        CommentFactory::new()->count(3)->create([            'commentable_id' => $ticket->id,
             'commentable_type' => $ticket->getMorphClass(),
         ]);
 
@@ -109,8 +108,7 @@ describe('TicketComment Model', function () {
 
     it('can be queried by user', function () {
         $user = UserFactory::new()->createOne();
-        $comments = CommentFactory::new()->count(3)->create([
-            'commentator_id' => $user->id,
+        CommentFactory::new()->count(3)->create([            'commentator_id' => $user->id,
             'commentator_type' => $user->getMorphClass(),
         ]);
 

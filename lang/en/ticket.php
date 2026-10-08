@@ -33,10 +33,6 @@ return merge_translation_files(
     __DIR__.'/ticket_create_options.php',
     __DIR__.'/ticket_navigation.php',
     __DIR__.'/ticket_subscription.php',
-<<<<<<< HEAD
     __DIR__.'/ticket_pratiche.php',
     __DIR__.'/ticket_fo.php'
-=======
-    __DIR__.'/ticket_pratiche.php'
->>>>>>> laraxot/dev
 );

@@ -7,6 +7,8 @@ namespace Modules\Fixcity\Tests\Unit\Actions;
 use Illuminate\Bus\PendingBatch;
 use Illuminate\Support\Facades\Bus;
 use Modules\Fixcity\Actions\GenerateTicketsAction;
+use Modules\Fixcity\Enums\TicketPriorityEnum;
+use Modules\Fixcity\Enums\TicketStatusEnum;
 use Modules\Fixcity\Models\Ticket;
 use Modules\Fixcity\Tests\TestCase;
 use PHPUnit\Framework\Assert;
@@ -45,20 +47,21 @@ describe('Generate Tickets Action', function (): void {
 
     test('_creates_tickets_with_valid_states', function (): void {
         // Arrange
-        $validStates = ['open', 'urgent', 'resolved'];
         $count = 10;
 
         // Act
         (new GenerateTicketsAction)->execute($count);
 
         // Assert
-        // Verify that all created tickets have valid states
         $tickets = Ticket::all();
         Assert::assertCount($count, $tickets);
-
-        foreach ($tickets as $ticket) {
-
-        }
+        Assert::assertTrue($tickets->every(
+            static fn (Ticket $ticket): bool => match ($ticket->status) {
+                TicketStatusEnum::OPEN, TicketStatusEnum::RESOLVED => true,
+                TicketStatusEnum::PENDING => $ticket->priority === TicketPriorityEnum::URGENT,
+                default => false,
+            },
+        ));
     });
 
     test('_handles_zero_count_gracefully', function (): void {
@@ -146,10 +149,9 @@ describe('Generate Tickets Action', function (): void {
         $tickets = Ticket::all();
         Assert::assertCount($count, $tickets);
 
-        // Verify that all tickets have descriptions
-        foreach ($tickets as $ticket) {
-
-        }
+        Assert::assertTrue($tickets->every(
+            static fn (Ticket $ticket): bool => trim($ticket->content) !== '',
+        ));
     });
 
     test('_creates_tickets_with_titles', function (): void {
@@ -163,10 +165,9 @@ describe('Generate Tickets Action', function (): void {
         $tickets = Ticket::all();
         Assert::assertCount($count, $tickets);
 
-        // Verify that all tickets have titles
-        foreach ($tickets as $ticket) {
-
-        }
+        Assert::assertTrue($tickets->every(
+            static fn (Ticket $ticket): bool => trim($ticket->name) !== '',
+        ));
     });
 
     test('_creates_tickets_with_creation_timestamps', function (): void {

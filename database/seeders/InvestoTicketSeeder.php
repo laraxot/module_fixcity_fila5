@@ -43,7 +43,7 @@ class InvestoTicketSeeder extends Seeder
 
         $records = $this->ticketRecords();
 
-        foreach ($records as $index => $record) {
+        foreach ($records as $record) {
             $code = SafeStringCastAction::cast($record['code']);
             $name = SafeStringCastAction::cast($record['name']);
             $content = SafeStringCastAction::cast($record['content']);
@@ -101,8 +101,6 @@ class InvestoTicketSeeder extends Seeder
                     'citizen_rated_at' => $createdAt->copy()->addDays(random_int(3, 10)),
                 ])->save();
             }
-
-            ++$index;
         }
 
         if ($this->command !== null) {

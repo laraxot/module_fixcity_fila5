@@ -70,8 +70,7 @@ describe('public ticket listing page', function (): void {
 
     test('renders live map and list without serializing capability codes', function (): void {
         /** @var TestCase $this */
-        $ticket = TicketFactory::new()->createOne([
-            'name' => 'Lampione da riparare',
+        TicketFactory::new()->createOne([            'name' => 'Lampione da riparare',
             'status' => TicketStatusEnum::IN_PROGRESS,
             'code' => 'TCK-PRIVATE-CAPABILITY-9981',
             'location' => ['lat' => 45.4642, 'lng' => 9.1900],

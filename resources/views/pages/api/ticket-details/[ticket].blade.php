@@ -25,12 +25,9 @@ render(function (int|string $ticket): JsonResponse {
         );
     }
 
-<<<<<<< HEAD
     // Un ticket reale non visibile (es. in attesa di moderazione) non deve ricadere sul GeoJSON demo con lo stesso id.
     abort_if(Ticket::query()->whereKey($ticket)->exists(), 404);
 
-=======
->>>>>>> laraxot/dev
     $ticketId = (int) $ticket;
     $geoJson = app(LoadPublicTicketsGeoJsonAction::class)->execute();
     foreach ($geoJson['features'] as $feature) {

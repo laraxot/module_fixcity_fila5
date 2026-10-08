@@ -138,9 +138,10 @@ describe('Ticket Business Logic Methods', function () {
 
     describe('Geolocation Methods', function () {
         it('provides correct latitude/longitude attribute mapping', function () {
-            /** @var TestCase $this */
-            $attributes = Ticket::getLatLngAttributes();
-
+            Assert::assertSame([
+                'lat' => 'latitude',
+                'lng' => 'longitude',
+            ], Ticket::getLatLngAttributes());
         });
 
         it('can store and retrieve geolocation data', function () {

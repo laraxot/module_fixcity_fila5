@@ -485,7 +485,6 @@ describe('Ticket Resource', function (): void {
         actingAs($this->authUser());
 
         $ticketData = [
-            'privacyAccepted' => true,
             'name' => 'User Ticket',
             'content' => 'User Description',
             'priority' => TicketPriorityEnum::MEDIUM->value,

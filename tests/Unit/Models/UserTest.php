@@ -44,8 +44,7 @@ describe('User Model (Fixcity)', function () {
 
     it('can own tickets', function () {
         $user = UserFactory::new()->createOne();
-        /** @var Collection<int, Ticket> $tickets */
-        $tickets = TicketFactory::new()->count(3)->create([
+        TicketFactory::new()->count(3)->create([
             'owner_id' => $user->id,
         ]);
 
@@ -58,8 +57,7 @@ describe('User Model (Fixcity)', function () {
 
     it('can be responsible for tickets', function () {
         $user = UserFactory::new()->createOne();
-        /** @var Collection<int, Ticket> $tickets */
-        $tickets = TicketFactory::new()->count(2)->create([
+        TicketFactory::new()->count(2)->create([
             'responsible_id' => $user->id,
         ]);
 
@@ -74,7 +72,7 @@ describe('User Model (Fixcity)', function () {
         $user = UserFactory::new()->createOne();
 
         // Create profile for user
-        $profile = $user->profile()->create([
+        $user->profile()->create([
             'first_name' => 'Mario',
             'last_name' => 'Rossi',
         ]);
