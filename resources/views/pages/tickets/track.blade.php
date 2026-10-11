@@ -56,7 +56,7 @@ render(function (View $view): View {
 ?>
 
 <x-layouts.app :title="__('fixcity::ticket.track.title')">
-    <main id="main-container" class="bg-slate-50 px-4 py-10 sm:px-6 lg:px-8">
+            <div class="bg-slate-50 px-4 py-10 sm:px-6 lg:px-8">
         <div class="mx-auto max-w-3xl">
             <header class="mb-8">
                 <h1 class="text-3xl font-bold tracking-tight text-slate-950 sm:text-4xl">{{ __('fixcity::ticket.track.title') }}</h1>
@@ -149,5 +149,5 @@ render(function (View $view): View {
                     </section>
                 @endif
         </div>
-    </main>
+            </div>
 </x-layouts.app>

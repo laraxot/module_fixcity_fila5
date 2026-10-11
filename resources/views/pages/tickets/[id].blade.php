@@ -26,7 +26,7 @@ render(function (View $view, int|string $id): View {
 ?>
 
 <x-pub_theme::layouts.app :title="$ticket->name">
-    <main class="bg-slate-50 px-4 py-10 sm:px-6 lg:px-8" id="ticket-detail" aria-labelledby="ticket-detail-title">
+    <div class="bg-slate-50 px-4 py-10 sm:px-6 lg:px-8" id="ticket-detail" aria-labelledby="ticket-detail-title">
         <nav class="mx-auto mb-8 max-w-3xl" aria-label="{{ __('pub_theme::home.list.breadcrumb_aria') }}">
             <ol class="flex flex-wrap gap-2 text-sm text-slate-700">
                 <li><a class="underline decoration-slate-400 underline-offset-4 hover:text-sky-800" href="{{ url('/'.app()->getLocale()) }}">{{ __('pub_theme::footer.home') }}</a></li>
@@ -50,5 +50,5 @@ render(function (View $view, int|string $id): View {
                 </dl>
                 <a class="mt-6 inline-flex min-h-12 items-center rounded-lg border-2 border-sky-800 px-5 py-3 font-semibold text-sky-900 transition hover:bg-sky-50 focus:outline-none focus:ring-4 focus:ring-sky-800/30" href="{{ url('/'.app()->getLocale().'/tickets') }}">{{ __('pub_theme::home.map.back_to_map') }}</a>
         </article>
-    </main>
+    </div>
 </x-pub_theme::layouts.app>
