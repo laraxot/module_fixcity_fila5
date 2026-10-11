@@ -1,0 +1,21 @@
+{
+    "id": "tests.segnalazioni-elenco",
+    "slug": "tests.segnalazioni-elenco",
+    "parent_slug": "tests",
+    "title": {"it": "Elenco segnalazioni - Segnalazione disservizio", "en": "List of reports"},
+    "layout": "test",
+    "description": "Pagina elenco segnalazioni con mappa e lista, filtri per categoria e ricerca.",
+    "content_blocks": {
+        "it": [
+            {
+                "type": "segnalazioni-elenco",
+                "data": {
+                    "view": "pub_theme::components.blocks.segnalazioni-elenco.default"
+                }
+            }
+        ],
+        "en": []
+    },
+    "sidebar_blocks": {"it": [], "en": []},
+    "footer_blocks": null
+}

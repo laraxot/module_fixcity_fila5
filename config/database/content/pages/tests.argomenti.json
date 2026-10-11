@@ -1,0 +1,137 @@
+{
+    "id": "tests.argomenti",
+    "title": {"it": "Argomenti Design Comuni", "en": "Design Comuni topics"},
+    "slug": "tests.argomenti",
+    "parent_slug": "tests",
+    "layout": "test",
+    "description": "Pagina argomenti con topic evidenziati e griglia, replicando il template Design Comuni.",
+    "content_blocks": {
+        "it": [
+            {
+                "type": "breadcrumb",
+                "data": {
+                    "view": "pub_theme::components.blocks.breadcrumb.default",
+                    "items": [
+                        {"label": "Home", "url": "{{ route('home') }}"},
+                        {"label": "Design Comuni", "url": "{{ route('tests.view', ['slug' => 'index']) }}"},
+                        {"label": "Argomenti", "is_current": true}
+                    ]
+                }
+            },
+            {
+                "type": "hero",
+                "data": {
+                    "view": "pub_theme::components.blocks.hero.default",
+                    "eyebrow": "Argomenti",
+                    "heading": "Tutti gli argomenti del sito",
+                    "intro": "La pagina con la lista di tutti gli argomenti a cui sono associati i contenuti del sito. Ogni argomento è rappresentato da una card con titolo, descrizione e immagine."
+                }
+            },
+            {
+                "type": "topics-highlight",
+                "data": {
+                    "view": "pub_theme::components.blocks.topics.highlight-default",
+                    "title": "Argomenti principali",
+                    "description": "I temi trattati più frequentemente nel sito del comune.",
+                    "items": [
+                        {"label": "Servizi", "icon": "it-services", "url": "#"},
+                        {"label": "Eventi", "icon": "it-calendar", "url": "#"},
+                        {"label": "Notizie", "icon": "it-files", "url": "#"},
+                        {"label": "Bandi", "icon": "it-funnel", "url": "#"},
+                        {"label": "Appalti", "icon": "it-folder", "url": "#"},
+                        {"label": "Abitativa", "icon": "it-house", "url": "#"}
+                    ]
+                }
+            },
+            {
+                "type": "topics-grid",
+                "data": {
+                    "view": "pub_theme::components.blocks.topics.grid-default",
+                    "title": "Tutti gli argomenti",
+                    "description": "L'elenco completo di tutti gli argomenti presenti nel sito web del comune.",
+                    "items": [
+                        {"title": "Ambito di spesa", "description": "Informazioni sui piani di spesa e per il finanziamento del comune.", "icon": "it-folder", "url": "#", "color": "red"},
+                        {"title": "Anziani e disabilità", "description": "Servizi e iniziative dedicate alle persone anziane e con disabilità.", "icon": "it-user", "url": "#", "color": "blue"},
+                        {"title": "Asilo nido e scuola", "description": "Polizze educative, asili nidi e servizi per la scuola.", "icon": "it-book", "url": "#", "color": "green"},
+                        {"title": "Abbonamento musei", "description": "Biglietti e abbonamenti per i musei comunali.", "icon": "it-museum", "url": "#", "color": "purple"},
+                        {"title": "Agricoltura", "description": "Iniziative e politiche per il settore agricolo.", "icon": "it-agriculture", "url": "#", "color": "amber"},
+                        {"title": "Alcoholi e legalità", "description": "Campagna contro l'abuso di alcol e per la legalità.", "icon": "it-legal", "url": "#", "color": "teal"},
+                        {"title": "Ambiente", "description": "Polizze ambientali, raccolta e sostenibilità.", "icon": "it-environment", "url": "#", "color": "emerald"},
+                        {"title": "Animali", "description": "Servizi per la cura e il controllo degli animali.", "icon": "it-animal", "url": "#", "color": "orange"},
+                        {"title": "Assistenza infermieristica", "description": "Prestazioni di assistenza infermieristica domiciliare.", "icon": "it-medical", "url": "#", "color": "rose"},
+                        {"title": "Autobus", "description": "Orari e biglietti del trasporto pubblico urbano.", "icon": "it-bus", "url": "#", "color": "indigo"},
+                        {"title": "Bagni pubblici", "description": "Servizi igienici e bagni pubblici in città.", "icon": "it-restroom", "url": "#", "color": "sky"},
+                        {"title": "Biblioteca", "description": "Ore, catalogo e servizi della biblioteca comunale.", "icon": "it-library", "url": "#", "color": "cyan"},
+                        {"title": "Bollette", "description": "Servizi per la gestione delle bollette utilities.", "icon": "it-invoice", "url": "#", "color": "fuchsia"},
+                        {"title": "Bonus e sussidi", "description": "Agevolazioni e sussidi erogati dal comune.", "icon": "it-bonus", "url": "#", "color": "lime"},
+                        {"title": "Cimitero", "description": "Gestione dei cimiteri e servizi funebri.", "icon": "it-cemetery", "url": "#", "color": "brown"},
+                        {"title": "Cinema", "description": "Calendario film e programmazione del cinema.", "icon": "it-cinema", "url": "#", "color": "violet"},
+                        {"title": "Cultura", "description": "Eventi e iniziative per la cultura e gli usi letterari.", "icon": "it-culture", "url": "#", "color": "pink"},
+                        {"title": "Disoccupazione", "description": "Servizi e consulenze per disoccupati.", "icon": "it-job", "url": "#", "color": "blue"},
+                        {"title": "Energia", "description": "Polizze energetiche e risparmi sull'energia.", "icon": "it-energy", "url": "#", "color": "yellow"},
+                        {"title": "EUROPA", "description": "Iniziative e bandi dell'Unione Europea.", "icon": "it-eu", "url": "#", "color": "blue"},
+                        {"title": "Fast fashion", "description": "Campagna contro la produzione di moda a basso costo.", "icon": "it-fashion", "url": "#", "color": "red"},
+                        {"title": "Ferrovie", "description": "Orari e informazioni sui treni regionali.", "icon": "it-train", "url": "#", "color": "gray"},
+                        {"title": "Festività", "description": "Calendario festività comunali e celebrazioni.", "icon": "it-party", "url": "#", "color": "orange"},
+                        {"title": "Fotografia", "description": "Concorsi e mostre fotografiche.", "icon": "it-photo", "url": "#", "color": "indigo"},
+                        {"title": "Gare d'appalto", "description": "Bandi e gare d'appalto pubbliche.", "icon": "it-tender", "url": "#", "color": "navy"},
+                        {"title": "Genitorialità", "description": "Servizi e consigli per genitori e famiglie.", "icon": "it-parent", "url": "#", "color": "pink"},
+                        {"title": "Istruzione", "description": "Scuola, formazione e corsi per adulti.", "icon": "it-school", "url": "#", "color": "blue"},
+                        {"title": "Lavoro", "description": "Offerte di lavoro e servizi per disoccupati.", "icon": "it-work", "url": "#", "color": "green"},
+                        {"title": "Mappa dei servizi", "description": "Indicatore geografico dei servizi comunali.", "icon": "it-map-pin", "url": "#", "color": "red"},
+                        {"title": "Medicazioni", "description": "Servizi per le medicazioni domiciliari.", "icon": "it-medical", "url": "#", "color": "rose"},
+                        {"title": "Musei", "description": "Musei, mostre e servizi culturali.", "icon": "it-museum", "url": "#", "color": "purple"},
+                        {"title": "Notizie", "description": "Notizie, comunicati e comunicazioni.", "icon": "it-files", "url": "#", "color": "blue"},
+                        {"title": "Nucleo di polizia", "description": "Contatti e servizi della polizia municipale.", "icon": "it-police", "url": "#", "color": "navy"},
+                        {"title": "Orari sportelli", "description": "Orari e contatti degli sportelli comunali.", "icon": "it-clock", "url": "#", "color": "indigo"},
+                        {"title": "Parchi e giochi", "description": "Parchi, aree giochi e verde pubblico.", "icon": "it-park", "url": "#", "color": "green"},
+                        {"title": "Patrimoni", "description": "Luoghi e beni culturali del patrimonio comunale.", "icon": "it-monument", "url": "#", "color": "amber"},
+                        {"title": "Pensioni", "description": "Servizi e informazioni sulle pensioni.", "icon": "it-pension", "url": "#", "color": "yellow"},
+                        {"title": "Prenotazione appuntamento", "description": "Prenota un appuntamento online con gli uffici.", "icon": "it-calendar", "url": "#", "color": "blue"},
+                        {"title": "Previdenza", "description": "Servizi e consigli su previdenza e sicurezza.", "icon": "it-pension", "url": "#", "color": "orange"},
+                        {"title": "Pronto intervento", "description": "Servizio di pronto intervento per emergenze.", "icon": "it-emergency", "url": "#", "color": "red"},
+                        {"title": "Rifiuti", "description": "Calendario raccolta rifiuti e servizi di smaltimento.", "icon": "it-trash", "url": "#", "color": "emerald"},
+                        {"title": "Registrazione anagrafica", "description": "Servizi per la registrazione al registro anagrafico.", "icon": "it-register", "url": "#", "color": "cyan"},
+                        {"title": "Segnalazioni", "description": "Segnala un disservizio o un problema in città.", "icon": "it-warning", "url": "#", "color": "amber"},
+                        {"title": "Seniors", "description": "Servizi dedicati alle persone anziane.", "icon": "it-senior", "url": "#", "color": "blue"},
+                        {"title": "Servizi", "description": "Tutti i servizi offerti dal comune.", "icon": "it-services", "url": "#", "color": "blue"},
+                        {"title": "Sport", "description": "Palestre, campi e attività sportiva.", "icon": "it-sports", "url": "#", "color": "green"},
+                        {"title": "Tasse", "description": "Servizi per il pagamento delle tasse.", "icon": "it-tax", "url": "#", "color": "indigo"},
+                        {"title": "Trasporti", "description": "Orari e biglietti dei mezzi pubblici.", "icon": "it-bus", "url": "#", "color": "sky"},
+                        {"title": "Umanitaria", "description": "Servizi di assistenza sociale.", "icon": "it-social", "url": "#", "color": "rose"},
+                        {"title": "Viaggiare", "description": "Consigli e servizi per viaggiare in città.", "icon": "it-travel", "url": "#", "color": "teal"},
+                        {"title": "Vivi la città", "description": "Eventi e iniziative per vivere la città.", "icon": "it-party", "url": "#", "color": "purple"},
+                        {"title": "Volontariato", "description": "Opportunità di volontariato e iniziative", "icon": "it-volunteer", "url": "#", "color": "lime"}
+                    ]
+                }
+            },
+            {
+                "type": "feedback",
+                "data": {
+                    "view": "pub_theme::components.blocks.feedback.default",
+                    "title": "Hai domande o suggerimenti?",
+                    "description": "Se non trovi quello che cerchi o hai bisogno di chiarimenti, contattaci. Ti risponderemo al più presto.",
+                    "button_label": "Contattaci",
+                    "button_url": "#"
+                }
+            },
+            {
+                "type": "contacts",
+                "data": {
+                    "view": "pub_theme::components.sections.contacts.default",
+                    "title": "Contatti",
+                    "phone_label": "Telefono",
+                    "phone_value": "0123456789",
+                    "email_label": "Email",
+                    "email_value": "info@comune.example.it",
+                    "address_label": "Indirizzo",
+                    "address_value": "Piazza della Libertà, 1",
+                    "opening_hours": []
+                }
+            }
+        ],
+        "en": []
+    },
+    "sidebar_blocks": {"it": [], "en": []},
+    "footer_blocks": null
+}

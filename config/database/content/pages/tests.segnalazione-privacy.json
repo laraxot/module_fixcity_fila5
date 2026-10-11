@@ -1,0 +1,25 @@
+{
+    "id": "tests.segnalazione-privacy",
+    "slug": "tests.segnalazione-privacy",
+    "parent_slug": "tests",
+    "title": {"it": "Privacy - Segnalazione disservizio", "en": "Privacy - Report a problem"},
+    "layout": "test",
+    "description": "Step 1 della segnalazione disservizio: informativa sulla privacy e consenso al trattamento dei dati.",
+    "content_blocks": {
+        "it": [
+            {
+                "type": "segnalazione-01-privacy",
+                "data": {
+                    "view": "pub_theme::components.blocks.flow.segnalazione.01-privacy",
+                    "title": "Autorizzazioni e condizioni",
+                    "description": "Il Comune di Firenze gestisce i dati personali forniti e liberamente comunicati sulla base dell'articolo 13 del Regolamento (UE) 2016/679 General data protection regulation (Gdpr) e degli articoli 13 e successive modifiche e integrazione del decreto legislativo (di seguito d.lgs) 267/2000 (Testo unico enti locali).",
+                    "next_label": "Avanti",
+                    "next_url": "/it/tests/segnalazione-dati"
+                }
+            }
+        ],
+        "en": []
+    },
+    "sidebar_blocks": {"it": [], "en": []},
+    "footer_blocks": null
+}

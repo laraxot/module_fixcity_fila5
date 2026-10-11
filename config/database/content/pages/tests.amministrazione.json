@@ -1,0 +1,47 @@
+{
+  "id": "tests.amministrazione",
+  "slug": "amministrazione",
+  "title": {"it": "Amministrazione", "en": "Administration"},
+  "description": "Pagina lista di primo livello per la sezione Amministrazione (Design Comuni v2.4.0).",
+  "layout": "test",
+  "content_blocks": {
+    "it": [
+      {
+        "type": "breadcrumb",
+        "data": {
+          "view": "pub_theme::components.blocks.breadcrumb.default",
+          "items": [
+            {"label": "Home", "url": "{{ route('home') }}"},
+            {"label": "Amministrazione", "is_current": true}
+          ]
+        }
+      },
+      {
+        "type": "hero",
+        "data": {
+          "view": "pub_theme::components.blocks.hero.default",
+          "eyebrow": "AMMINISTRAZIONE",
+          "heading": "Amministrazione",
+          "intro": "Organi e uffici del Comune, atti amministrativi e trasparenza.",
+          "cta_primary": {"label": "Organi di governo", "url": "#organi"},
+          "cta_secondary": {"label": "Albo pretorio", "url": "#albo"}
+        }
+      },
+      {
+        "type": "card-grid",
+        "data": {
+          "view": "pub_theme::components.blocks.card-grid.default",
+          "heading": "Organi di governo",
+          "items": [
+            {"title": "Il Sindaco", "description": "Rappresenta l'ente, convoca e presiede la Giunta.", "url": "#sindaco", "icon": "it-user"},
+            {"title": "La Giunta Comunale", "description": "Collabora con il Sindaco nell'amministrazione.", "url": "#giunta", "icon": "it-users"},
+            {"title": "Il Consiglio Comunale", "description": "Organo di indirizzo e controllo politico-amministrativo.", "url": "#consiglio", "icon": "it-building"}
+          ]
+        }
+      }
+    ],
+    "en": []
+  },
+  "sidebar_blocks": {"it": [], "en": []},
+  "footer_blocks": null
+}

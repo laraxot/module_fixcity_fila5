@@ -93,6 +93,27 @@ public function tableCreate(Blueprint $table): void
 
 Per ogni relazione Eloquent usare `foreignIdFor(Model::class, 'column')`; per User usare `XotData::make()->getUserClass()`. Aggiungere `constrained()` solo quando i modelli condividono la stessa connessione/database; sui riferimenti cross-connection definire invece type/index senza vincolo fisico. Non usare `foreignId()` nudo.
 
+## TicketSubscriber: consolidamento migration (2026-10-11)
+
+Prima del consolidamento, `ticket_subscribers` aveva 3 migration:
+
+```
+2023_01_01_000000_create_ticket_subscribers_table.php   ← owner
+2026_09_26_200000_update_ticket_subscribers_user_id_to_uuid.php  ⚠️ update_* (viola R3)
+2026_09_27_230000_align_ticket_subscribers_and_coordinates.php  ⚠️ align_* (viola R3)
+```
+
+Problemi:
+- `user_id` definito come `foreignId('user_id')` (bigint) in `create_`, ma il modello `TicketSubscriber`
+  si aspetta `string('user_id', 36)` (UUID) -> cast mismatch su MySQL.
+- Migration `update_*` e `align_*` sono separate e violano "1 modello = 1 migration".
+
+Soluzione applicata (forward-only):
+- `create_ticket_subscribers_table.php` aggiornato con `string('user_id', 36)->index()` (UUID-compatible).
+- `tableUpdate()` consolidato con controlli di idempotenza (`hasColumn`, `getColumnType`).
+- `tableCreate()` usa `foreignIdFor(Ticket::class, 'ticket_id')->nullable()` (stessa connessione, physical FK valido).
+- Le migration `2026_09_26_*` e `2026_09_27_*` marcate come superseded (non cancellate per forward-only policy).
+
 ## Pattern corretto (R3 religion)
 
 ```php

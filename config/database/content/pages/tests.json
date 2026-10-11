@@ -2,6 +2,7 @@
     "id": "tests",
     "title": {"it": "Design Comuni — Indice template", "en": "Design Comuni — Template index"},
     "slug": "tests",
+    "layout": "test",
     "description": "Pagina indice dei template Design Comuni replicati nel tema Sixteen.",
     "content_blocks": {
         "it": [
@@ -29,9 +30,16 @@
                 }
             },
             {
-                "type": "tabs",
+                "type": "indice",
                 "data": {
-                    "view": "pub_theme::components.blocks.tabs.design-comuni",
+                    "view": "pub_theme::components.blocks.template-index",
+                    "title": "I templates HTML del modello per i comuni",
+                    "version_label": "v2.4.0",
+                    "version_url": "https://github.com/italia/design-comuni-pagine-statiche/releases/latest",
+                    "navigation": [
+                        {"label": "Sito", "url": "#", "active": true},
+                        {"label": "Flussi di servizio", "url": "{{ route('tests.view', ['slug' => 'servizi']) }}"}
+                    ],
                     "tabs": [
                         {
                             "id": "generali",

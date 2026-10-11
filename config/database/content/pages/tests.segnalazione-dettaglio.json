@@ -1,0 +1,52 @@
+{
+    "id": "tests.segnalazione-dettaglio",
+    "title": {"it": "Segnalazione disservizio", "en": "Report a problem"},
+    "slug": "tests.segnalazione-dettaglio",
+    "layout": "test",
+    "description": "Template dinamico Design Comuni per la scheda del servizio di segnalazione.",
+    "content_blocks": {
+        "it": [
+            {
+                "type": "service-detail",
+                "data": {
+                    "view": "pub_theme::components.blocks.service.detail",
+                    "breadcrumb": [
+                        {"label": "Home", "url": "{{ route('home') }}"},
+                        {"label": "Servizi", "url": "{{ route('tests.view', ['slug' => 'servizi']) }}"},
+                        {"label": "Segnalazione disservizio"}
+                    ],
+                    "title": "Segnalazione disservizio",
+                    "status": "Servizio attivo",
+                    "summary": "Un servizio aperto a tutti i cittadini per segnalare disservizi, guasti e criticità rilevati sul territorio comunale.",
+                    "actions": [
+                        {"label": "Segnala disservizio", "url": "{{ route('container0.view', ['container0' => 'tickets', 'slug0' => 'create']) }}", "style": "primary"},
+                        {"label": "Tutte le segnalazioni", "url": "{{ route('container0.index', ['container0' => 'tickets']) }}", "style": "secondary"}
+                    ],
+                    "sections": [
+                        {"id": "who-needs", "title": "A chi è rivolto", "paragraphs": ["Possono segnalare un disservizio tutte le persone residenti e non residenti nel comune."]},
+                        {"id": "description", "title": "Descrizione", "paragraphs": ["Il servizio permette di segnalare in modo dettagliato un problema all’amministrazione comunale. È possibile indicare il luogo del disservizio su mappa o tramite indirizzo e allegare foto. Le segnalazioni sono gestite dall’Ufficio Relazioni con il Pubblico (URP)."]},
+                        {"id": "how-to", "title": "Come fare", "paragraphs": ["Si può inviare una segnalazione online da smartphone o computer, oppure a sportello presso l’URP.", "Alcune tipologie di segnalazioni online richiedono l'accesso con identità digitale SPID o CIE. Non ci sono limitazioni per le segnalazioni generiche.", "Le segnalazioni per disservizi e guasti possono riguardare solo il territorio comunale."]},
+                        {"id": "needed", "title": "Cosa serve", "highlight": true, "paragraphs": ["Per accedere al servizio, assicurati di avere:"], "items": ["informazioni sul tipo di disservizio e sul luogo all'interno del territorio comunale;", "foto, se disponibili."]},
+                        {"id": "obtain", "title": "Cosa si ottiene", "paragraphs": ["Chi segnala un disservizio online identificandosi con identità digitale riceverà, tramite posta elettronica, gli aggiornamenti sullo stato di avanzamento della segnalazione."]},
+                        {"id": "costs", "title": "Costi", "paragraphs": ["Il servizio è gratuito"], "links": [{"label": "Allegato se necessario", "url": "#"}]},
+                        {"id": "service-access", "title": "Fai una segnalazione", "highlight": true, "paragraphs": ["Invia una segnalazione online dal tuo smartphone o computer", "Oppure, prenota un appuntamento all’Ufficio Relazioni con il Pubblico (URP)"], "actions": [{"label": "Segnala disservizio", "url": "{{ route('container0.view', ['container0' => 'tickets', 'slug0' => 'create']) }}", "style": "primary"}, {"label": "Prenota appuntamento", "url": "{{ route('tests.view', ['slug' => 'appuntamento-01-ufficio']) }}", "style": "secondary"}]},
+                        {"id": "conditions", "title": "Condizioni di servizio", "paragraphs": ["Per conoscere i dettagli di scadenze, requisiti e altre informazioni importanti, leggi i termini e le condizioni di servizio."], "links": [{"label": "Termini e condizioni di servizio (PDF 1MB)", "url": "#"}]}
+                    ],
+                    "contacts": {"title": "Contatti", "office": "Ufficio Servizio pubblico", "address": "Via Dei Transiti 21, 50302\n05 0505", "phone": "05 0505", "email": "ufficioserviziopubblico@email.it"},
+                    "topics": [{"label": "Gestione rifiuti"}, {"label": "Igiene pubblica"}, {"label": "Spazi verdi"}, {"label": "Inquinamento"}],
+                    "updated_at": "Pagina aggiornata il 14/04/2022"
+                    ,"rating_success": "Grazie, il tuo parere ci aiuterà a migliorare il servizio!"
+                    ,"related_title": "Contenuti correlati"
+                    ,"related_content": [
+                        {"title": "Servizi", "description": "Scopri tutti i servizi digitali del Comune.", "url": "{{ route('tests.view', ['slug' => 'servizi']) }}"},
+                        {"title": "Eventi", "description": "Consulta gli eventi e le iniziative in città.", "url": "{{ route('tests.view', ['slug' => 'eventi']) }}"},
+                        {"title": "Domande frequenti", "description": "Trova rapidamente le risposte alle domande più comuni.", "url": "{{ route('tests.view', ['slug' => 'domande-frequenti']) }}"}
+                    ]
+                }
+            }
+        ],
+        "en": []
+    },
+    "sidebar_blocks": {"it": [], "en": []},
+    "footer_blocks": null
+}

@@ -1,0 +1,38 @@
+{
+    "id": "tests.domande-frequenti",
+    "slug": "tests.domande-frequenti",
+    "parent_slug": "tests",
+    "title": {"it": "Domande frequenti (FAQ)", "en": "Frequently Asked Questions"},
+    "description": "Template della pagina FAQ del sito comunale, con struttura a domande e risposte. Usa layout 'test' e componenti Lit/DaisyUI.",
+    "layout": "test",
+    "content_blocks": {
+        "it": [
+            {
+                "type": "faq",
+                "data": {
+                    "view": "pub_theme::components.blocks.faq.default",
+                    "questions": [
+                        {
+                            "question": "Come invio una segnalazione?",
+                            "answer": "Descrivi il problema, scegli la categoria, indica il luogo e segui gli aggiornamenti.",
+                            "icon": "it-exclamation-triangle"
+                        },
+                        {
+                            "question": "Posso segnalare anonimamente?",
+                            "answer": "Sì, ma le segnalazioni anonime hanno priorità ridotta.",
+                            "icon": "it-anonym"
+                        },
+                        {
+                            "question": "Quanto tempo ci vuole per risolvere una segnalazione?",
+                            "answer": "Dipende dalla complessità e dalla priorità. In media 48-72 ore.",
+                            "icon": "it-clock"
+                        }
+                    ]
+                }
+            }
+        ],
+        "en": []
+    },
+    "sidebar_blocks": {"it": [], "en": []},
+    "footer_blocks": null
+}

@@ -1,0 +1,21 @@
+{
+    "id": "tests.segnalazione-area-personale",
+    "slug": "tests.segnalazione-area-personale",
+    "parent_slug": "tests",
+    "title": {"it": "Area personale - Segnalazione disservizio", "en": "Personal area"},
+    "layout": "test",
+    "description": "Pagina area personale con le segnalazioni inviate, i dati salvati e le impostazioni dell'account.",
+    "content_blocks": {
+        "it": [
+            {
+                "type": "segnalazione-area-personale",
+                "data": {
+                    "view": "pub_theme::components.blocks.segnalazione-area-personale.default"
+                }
+            }
+        ],
+        "en": []
+    },
+    "sidebar_blocks": {"it": [], "en": []},
+    "footer_blocks": null
+}

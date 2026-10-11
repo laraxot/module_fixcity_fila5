@@ -1,0 +1,75 @@
+{
+  "id": "tests.index",
+  "slug": "tests.index",
+  "title": {"it": "I templates HTML del modello per i comuni", "en": "HTML templates for municipalities"},
+  "layout": "test",
+  "content_blocks": {
+    "it": [{
+      "type": "template-index",
+      "data": {
+        "view": "pub_theme::components.blocks.template-index",
+        "navigation": [
+          {"label": "Sito", "url": "{{ route('tests.index') }}", "active": true},
+          {"label": "Flussi di servizio", "url": "{{ route('tests.view', ['slug' => 'servizi']) }}", "active": false}
+        ],
+        "heading": "INDICE",
+        "sections": [
+          {"id": "generali", "label": "Generali", "pages": [
+            {"name": "Homepage", "description": "La homepage del sito comunale", "file": "homepage.html", "url": "{{ route('tests.view', ['slug' => 'homepage']) }}"},
+            {"name": "Domande frequenti (FAQ)", "file": "domande-frequenti.html", "url": "{{ route('tests.view', ['slug' => 'domande-frequenti']) }}"},
+            {"name": "Risultati di ricerca", "file": "risultati-ricerca.html", "url": "{{ route('tests.view', ['slug' => 'risultati-ricerca']) }}"},
+            {"name": "Argomenti", "file": "argomenti.html", "url": "{{ route('tests.view', ['slug' => 'argomenti']) }}"},
+            {"name": "Argomento", "file": "argomento.html", "url": "{{ route('tests.view', ['slug' => 'argomento']) }}"},
+            {"name": "Lista contenuti/risorse", "file": "lista-risorse.html", "url": "{{ route('tests.view', ['slug' => 'lista-risorse']) }}"},
+            {"name": "Lista categorie", "file": "lista-categorie.html", "url": "{{ route('tests.view', ['slug' => 'lista-categorie']) }}"},
+            {"name": "Lista risorse e categorie", "file": "lista-risorse-categorie.html", "url": "{{ route('tests.view', ['slug' => 'lista-risorse-categorie']) }}"},
+            {"name": "Mappa del sito", "file": "mappa-sito.html", "url": "{{ route('tests.view', ['slug' => 'mappa-sito']) }}"}
+          ]},
+          {"id": "amministrazione", "label": "Amministrazione", "pages": [
+            {"name": "Amministrazione", "file": "amministrazione.html", "url": "{{ route('tests.view', ['slug' => 'amministrazione']) }}"},
+            {"name": "Documenti e dati", "file": "documenti-dati.html", "url": "{{ route('tests.view', ['slug' => 'documenti-dati']) }}"}
+          ]},
+          {"id": "novita", "label": "Novità", "pages": [
+            {"name": "Novità", "file": "novita.html", "url": "{{ route('tests.view', ['slug' => 'novita']) }}"},
+            {"name": "Notizia, Comunicato, Avviso", "file": "novita-dettaglio.html", "url": "{{ route('tests.view', ['slug' => 'novita-dettaglio']) }}"}
+          ]},
+          {"id": "servizi", "label": "Servizi", "pages": [
+            {"name": "Servizi", "file": "servizi.html", "url": "{{ route('tests.view', ['slug' => 'servizi']) }}"},
+            {"name": "Categorie di servizio - pagina di secondo livello", "file": "servizi-categoria.html", "url": "{{ route('tests.view', ['slug' => 'servizi-categoria']) }}"},
+            {"name": "Scheda servizio", "file": "servizio-dettaglio.html", "url": "{{ route('tests.view', ['slug' => 'servizio-dettaglio']) }}"}
+          ]},
+          {"id": "eventi", "label": "Vivere il Comune", "pages": [
+            {"name": "Eventi", "file": "eventi.html", "url": "{{ route('tests.view', ['slug' => 'eventi']) }}"},
+            {"name": "Evento", "file": "evento-dettaglio.html", "url": "{{ route('tests.view', ['slug' => 'evento-dettaglio']) }}"}
+          ]},
+          {"id": "appuntamento", "label": "Prenotazione Appuntamento", "description": "Templates specifici per la funzionalità di prenotazione appuntamento", "pages": [
+            {"name": "Step 1 - Selezione ufficio (1 di 2)", "file": "appuntamento-01-ufficio.html", "url": "{{ route('tests.view', ['slug' => 'appuntamento-01-ufficio']) }}"},
+            {"name": "Step 1 - Selezione ufficio (2 di 2)", "file": "appuntamento-01-ufficio-luogo.html", "url": "{{ route('tests.view', ['slug' => 'appuntamento-01-ufficio-luogo']) }}"},
+            {"name": "Step 2 - Scelta appuntamento", "file": "appuntamento-02-data-orario.html", "url": "{{ route('tests.view', ['slug' => 'appuntamento-02-data-orario']) }}"},
+            {"name": "Step 3 - Selezione del motivo e aggiunta dei dettagli", "file": "appuntamento-03-dettagli.html", "url": "{{ route('tests.view', ['slug' => 'appuntamento-03-dettagli']) }}"},
+            {"name": "Step 4 - Aggiunta delle informazioni personali", "file": "appuntamento-04-richiedente.html", "url": "{{ route('tests.view', ['slug' => 'appuntamento-04-richiedente']) }}"},
+            {"name": "Step 4 - Aggiunta delle informazioni personali (utente autenticato)", "file": "appuntamento-04-richiedente-autenticato.html", "url": "{{ route('tests.view', ['slug' => 'appuntamento-04-richiedente-autenticato']) }}"},
+            {"name": "Step 5 - Riepilogo delle informazioni inserite", "file": "appuntamento-05-riepilogo.html", "url": "{{ route('tests.view', ['slug' => 'appuntamento-05-riepilogo']) }}"},
+            {"name": "Step 6 - Conferma dell'appuntamento", "file": "appuntamento-06-conferma.html", "url": "{{ route('tests.view', ['slug' => 'appuntamento-06-conferma']) }}"}
+          ]},
+          {"id": "assistenza", "label": "Richiesta Assistenza", "description": "Templates specifici per la funzionalità di richiesta assistenza", "pages": [
+            {"name": "Step 1 - Inserimento dei dati", "file": "assistenza-01-dati.html", "url": "{{ route('tests.view', ['slug' => 'assistenza-01-dati']) }}"},
+            {"name": "Step 2 - Conferma invio richiesta", "file": "assistenza-02-conferma.html", "url": "{{ route('tests.view', ['slug' => 'assistenza-02-conferma']) }}"}
+          ]},
+          {"id": "segnalazione", "label": "Segnalazione Disservizio", "description": "Templates specifici per la funzionalità di segnalazione disservizio", "pages": [
+            {"name": "Scheda del servizio di segnalazione", "file": "segnalazione-dettaglio.html", "url": "{{ route('tests.view', ['slug' => 'segnalazione-dettaglio']) }}"},
+            {"name": "Step 1 - Acconsentire al trattamento dei dati personali", "file": "segnalazione-01-privacy.html", "url": "{{ route('tests.view', ['slug' => 'segnalazione-01-privacy']) }}"},
+            {"name": "Step 2 - Inserimento dei dati di segnalazione", "file": "segnalazione-02-dati.html", "url": "{{ route('tests.view', ['slug' => 'segnalazione-02-dati']) }}"},
+            {"name": "Step 3 - Riepilogo delle informazioni inserite", "file": "segnalazione-03-riepilogo.html", "url": "{{ route('tests.view', ['slug' => 'segnalazione-03-riepilogo']) }}"},
+            {"name": "Step 4 - Conferma invio segnalazione", "file": "segnalazione-04-conferma.html", "url": "{{ route('tests.view', ['slug' => 'segnalazione-04-conferma']) }}"},
+            {"name": "Segnalazione disservizio - Area personale", "file": "segnalazione-area-personale.html", "url": "{{ route('tests.view', ['slug' => 'segnalazione-area-personale']) }}"},
+            {"name": "Elenco delle segnalazioni", "file": "segnalazioni-elenco.html", "url": "{{ route('tests.view', ['slug' => 'segnalazioni-elenco']) }}"}
+          ]}
+        ]
+      }
+    }],
+    "en": []
+  },
+  "sidebar_blocks": {"it": [], "en": []},
+  "footer_blocks": null
+}
