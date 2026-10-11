@@ -15,8 +15,12 @@ return new class extends XotBaseMigration
     {
         $userClass = XotData::make()->getUserClass();
 
-        $this->tableUpdate(static function (Blueprint $table) use ($userClass): void {
-            $table->foreignIdFor($userClass, 'user_id')->change();
+        $this->tableUpdate(function (Blueprint $table) use ($userClass): void {
+            if (! $this->hasColumn('user_id')) {
+                $table->foreignIdFor($userClass, 'user_id');
+            } elseif (! $this->isUuidColumnType($this->getColumnType('user_id'))) {
+                $table->foreignIdFor($userClass, 'user_id')->change();
+            }
         });
     }
 };

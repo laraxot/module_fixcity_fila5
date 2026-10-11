@@ -19,13 +19,9 @@ return new class extends XotBaseMigration
 
     public function up(): void
     {
-        $this->tableCreate(static function (Blueprint $table): void {
-            $table->id();
+        $this->tableCreate(static function (Blueprint $table): void {            $table->id();
             $table->string('uuid', 36)->nullable()->index();
             $table->string('user_id', 36)->index()->nullable();
-            // Laraxot — see module docs/wiki for domain contract.
-            // Laraxot — see module docs/wiki for domain contract.
-            // Laraxot — see module docs/wiki for domain contract.
             $table->string('type')->index()->nullable();
             $table->string('first_name')->nullable();
             $table->string('last_name')->nullable();

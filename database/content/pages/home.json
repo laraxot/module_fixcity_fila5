@@ -6,12 +6,12 @@
     "description": "FixCity permette ai cittadini di segnalare problemi urbani — buche, illuminazione guasta, rifiuti abbandonati — e di seguirne lo stato in tempo reale. Le amministrazioni municipali possono gestire le segnalazioni in modo efficiente e trasparente.",
     "cta_primary": {
       "text": "Segnala un problema",
-      "url": "/tickets/create"
+      "url": "{{ route('container0.view', ['container0' => 'tickets', 'slug0' => 'create']) }}"
     },
     "cta_secondary": {
       "text": "Visualizza la mappa",
-      "url": "/tickets"
-    }
+      "url": "{{ route('container0.index', ['container0' => 'tickets']) }}"
+    },
   },
   "features": [
     {
@@ -129,7 +129,10 @@
     "heading": "Pronto a migliorare la tua città?",
     "description": "Unisciti a migliaia di cittadini che stanno già facendo la differenza. Segnala il primo problema oggi.",
     "button_text": "Inizia ora",
-    "button_url": "/tickets/create"
+    "button_url": "{{ route('container0.view', ['container0' => 'tickets', 'slug0' => 'create']) }}"
+  },
+  "list_url": "{{ route('container0.index', ['container0' => 'tickets']) }}",
+  "report_url": "{{ route('container0.view', ['container0' => 'tickets', 'slug0' => 'create']) }}",
   },
   "footer": {
     "tagline": "FixCity — La piattaforma civic tech per la manutenzione urbana",

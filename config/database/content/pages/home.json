@@ -1,0 +1,164 @@
+{
+    "id": "home",
+    "title": {"it": "FixCity — La piattaforma civic tech per la manutenzione urbana", "en": "FixCity — Civic tech for better urban maintenance"},
+    "slug": "home",
+    "content": null,
+    "content_blocks": {
+        "it": [
+            {
+                "type": "home.hero",
+                "data": {
+                    "view": "pub_theme::components.blocks.home.hero",
+                    "eyebrow": "SERVIZI DIGITALI DEL COMUNE",
+                    "heading": "Segnalazioni e servizi per la tua comunità",
+                    "intro": "Racconta cosa non funziona, indica dove e segui gli aggiornamenti in modo semplice e trasparente.",
+                    "primary_label": "Invia una segnalazione",
+                    "primary_url": "{{ route('container0.view',['container0' => 'tickets','slug0' => 'create' ]) }}",
+                    "secondary_label": "Vedi le segnalazioni",
+                    "secondary_url": "{{ route('container0.index',['container0' => 'tickets']) }}",
+                    "meta_label": "IMPEGNO CIVICO",
+                    "meta_value": "La tua voce conta",
+                    "meta_body": "Ogni segnalazione aiuta il Comune a capire le priorità e a rendere visibili gli interventi."
+                }
+            },
+            {
+                "type": "ticket.map-preview",
+                "data": {
+                    "view": "pub_theme::components.blocks.ticket.map-preview",
+                    "data_url": "/api/tickets/geojson",
+                    "report_url": "{{ route('container0.view',['container0' => 'tickets','slug0' => 'create' ]) }}",
+                    "list_url": "{{ route('container0.index',['container0' => 'tickets']) }}",
+                    "height": "420px",
+                    "aria_label": "pub_theme::home.list.map_aria",
+                    "icon_sprite": "/themes/Sixteen/design-comuni/assets/bootstrap-italia/dist/svg/sprites.svg#it-arrow-right",
+                    "heading": "Segnalazioni pubbliche sul territorio",
+                    "intro": "Consulta la mappa per conoscere i problemi già segnalati e gli interventi in corso.",
+                    "eyebrow": "MAPPA DELLA COMUNITÀ",
+                    "legend": "Segnalazioni pubbliche"
+                }
+            },
+            {
+                "type": "how-it-works",
+                "data": {
+                    "view": "pub_theme::components.blocks.how-it-works",
+                    "heading": "Come funziona",
+                    "intro": "Descrivi il problema, indica dove si trova e segui gli aggiornamenti dall’area personale.",
+                    "steps_label": "Passaggi per inviare una segnalazione",
+                    "steps": [
+                        {"number": 1, "title": "Descrivi il problema", "body": "Spiega cosa è successo e scegli la categoria più adatta.", "icon": "it-exclamation-triangle"},
+                        {"number": 2, "title": "Indica il luogo", "body": "Aggiungi la posizione e le informazioni utili per intervenire.", "icon": "it-map-pin"},
+                        {"number": 3, "title": "Segui gli aggiornamenti", "body": "Consulta lo stato della tua segnalazione dopo l’invio.", "icon": "it-check-circle"}
+                    ]
+                }
+            },
+            {
+                "type": "quick-actions",
+                "data": {
+                    "view": "pub_theme::components.blocks.quick-actions",
+                    "eyebrow": "HAI GIÀ SEGNALATO UN PROBLEMA?",
+                    "heading": "Segui la tua segnalazione",
+                    "body": "Inserisci il codice ricevuto per controllare lo stato della pratica.",
+                    "button": {
+                        "label": "Traccia una segnalazione",
+                        "url": "{{ route('tickets.track') }}",
+                        "icon": "it-search"
+                    },
+                    "secondary_button": {
+                        "label": "Invia una segnalazione",
+                        "url": "{{ route('container0.view',['container0' => 'tickets','slug0' => 'create' ]) }}",
+                        "icon": "it-plus"
+                    }
+                }
+            }
+        ],
+        "en": [
+            {
+                "type": "home.hero",
+                "data": {
+                    "view": "pub_theme::components.blocks.home.hero",
+                    "eyebrow": "MUNICIPAL DIGITAL SERVICES",
+                    "heading": "Reports and services for your community",
+                    "intro": "Tell us what is not working, show us where and follow updates simply and transparently.",
+                    "primary_label": "Submit a report",
+                    "primary_url": "{{ route('container0.view',['container0' => 'tickets','slug0' => 'create' ]) }}",
+                    "secondary_label": "View reports",
+                    "secondary_url": "{{ route('container0.index',['container0' => 'tickets']) }}",
+                    "meta_label": "CIVIC COMMITMENT",
+                    "meta_value": "Your voice matters",
+                    "meta_body": "Every report helps the municipality understand priorities and make improvements visible."
+                }
+            },
+            {
+                "type": "ticket.map-preview",
+                "data": {
+                    "view": "pub_theme::components.blocks.ticket.map-preview",
+                    "data_url": "/api/tickets/geojson",
+                    "report_url": "{{ route('container0.view',['container0' => 'tickets','slug0' => 'create' ]) }}",
+                    "list_url": "{{ route('container0.index',['container0' => 'tickets']) }}",
+                    "height": "420px",
+                    "aria_label": "pub_theme::home.list.map_aria",
+                    "icon_sprite": "/themes/Sixteen/design-comuni/assets/bootstrap-italia/dist/svg/sprites.svg#it-arrow-right",
+                    "heading": "Public reports in your area",
+                    "intro": "Use the map to explore reported problems and ongoing interventions.",
+                    "eyebrow": "COMMUNITY MAP",
+                    "legend": "Public reports"
+                }
+            },
+            {
+                "type": "how-it-works",
+                "data": {
+                    "view": "pub_theme::components.blocks.how-it-works",
+                    "heading": "How it works",
+                    "intro": "Describe the problem, show where it is and follow updates from your personal area.",
+                    "steps_label": "Steps to submit a report",
+                    "steps": [
+                        {
+                            "number": 1,
+                            "title": "Describe the problem",
+                            "body": "Explain what happened and choose the most suitable category.",
+                            "icon": "it-exclamation-triangle"
+                        },
+                        {
+                            "number": 2,
+                            "title": "Show the location",
+                            "body": "Add the position and useful information for the intervention.",
+                            "icon": "it-map-pin"
+                        },
+                        {
+                            "number": 3,
+                            "title": "Follow updates",
+                            "body": "Check the status of your report after submitting it.",
+                            "icon": "it-check-circle"
+                        }
+                    ],
+                    "step_numbers": {
+                        "aria_hidden": true,
+                        "style": "width:2.25rem;height:2.25rem",
+                        "class": "fc-how-card__number"
+                    }
+                }
+            },
+            {
+                "type": "quick-actions",
+                "data": {
+                    "view": "pub_theme::components.blocks.quick-actions",
+                    "eyebrow": "ALREADY REPORTED A PROBLEM?",
+                    "heading": "Follow your report",
+                    "body": "Enter the code you received to check the status of your request.",
+                    "button": {
+                        "label": "Track a report",
+                        "url": "{{ route('tickets.track') }}",
+                        "icon": "it-search"
+                    },
+                    "secondary_button": {
+                        "label": "Submit a report",
+                        "url": "{{ route('container0.view',['container0' => 'tickets','slug0' => 'create' ]) }}",
+                        "icon": "it-plus"
+                    }
+                }
+            }
+        ]
+    },
+    "sidebar_blocks": {"it": [], "en": []},
+    "footer_blocks": null
+}
