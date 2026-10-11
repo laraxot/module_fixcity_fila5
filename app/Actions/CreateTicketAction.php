@@ -21,7 +21,13 @@ class CreateTicketAction
     public function execute(array $data, ?string $locale = null): Ticket
     {
         if (! isset($data['owner_id'])) {
-            $data['owner_id'] = auth()->id();
+            $user = auth()->user();
+            if (! $user) {
+                throw new \Illuminate\Validation\ValidationException(
+                    validator([], ['owner_id' => 'required'])
+                )->withMessages(['owner_id' => __('fixcity::ticket.owner.auth_required')]);
+            }
+            $data['owner_id'] = $user->id;
         }
 
         $existingCode = SafeStringCastAction::cast($data['code'] ?? null);

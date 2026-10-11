@@ -29,6 +29,8 @@ Wiki trasversale per tutti i moduli Laravel del progetto.
 - [ai-harness-module-discipline](./concepts/ai-harness-module-discipline.md) — contratto agenti
 - [second-brain-operating-model](./concepts/second-brain-operating-model.md) — PARA/CODE
 - [design-comuni-service-workflow-scope](./concepts/design-comuni-service-workflow-scope.md) — perimetro reale dei flussi Design Comuni e FixCity
+- [freellmapi-boundary](./concepts/freellmapi-boundary.md) — router AI locale fuori dal runtime cittadino
+- [design-comuni-ods-information-architecture](./concepts/design-comuni-ods-information-architecture.md) — mapping ODS v2.0 di servizi, pratiche e contatti
 - [demo-operator-panel-access](./concepts/demo-operator-panel-access.md) — accesso pannello e capability operatore distinti
 - [Xot canon second-brain](../Xot/docs/wiki/concepts/second-brain-local-discipline.md)
 

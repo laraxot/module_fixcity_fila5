@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Modules\Fixcity\Filament\Concerns;
 
+use Filament\Facades\Filament;
 use Modules\Xot\Actions\Cast\SafeStringCastAction;
 
 /**
@@ -16,7 +17,7 @@ trait HasTicketAuthorData
 {
     protected static function getAuthUserName(): string
     {
-        $user = auth()->user();
+        $user = Filament::auth()->user();
         if ($user === null) {
             return '';
         }
@@ -27,7 +28,7 @@ trait HasTicketAuthorData
 
     protected static function getAuthUserFiscalCode(): string
     {
-        $user = auth()->user();
+        $user = Filament::auth()->user();
         if ($user === null) {
             return '';
         }
@@ -39,7 +40,7 @@ trait HasTicketAuthorData
 
     protected static function getAuthUserPhone(): string
     {
-        $user = auth()->user();
+        $user = Filament::auth()->user();
         if ($user === null) {
             return '';
         }
@@ -52,7 +53,7 @@ trait HasTicketAuthorData
 
     protected static function getAuthUserEmail(): string
     {
-        $user = auth()->user();
+        $user = Filament::auth()->user();
         if ($user === null) {
             return '';
         }

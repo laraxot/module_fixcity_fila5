@@ -1,0 +1,12 @@
+{
+    "id": "tickets-create",
+    "title": {"it": "Segnala disservizio", "en": "Report an issue"},
+    "slug": "tickets.create",
+    "content": null,
+    "content_blocks": {
+        "it": [{"type": "ticket_create", "data": {"view": "pub_theme::components.blocks.tests.ticket-crea"}}],
+        "en": [{"type": "ticket_create", "data": {"view": "pub_theme::components.blocks.tests.ticket-crea"}}]
+    },
+    "sidebar_blocks": {"it": [], "en": []},
+    "footer_blocks": null
+}

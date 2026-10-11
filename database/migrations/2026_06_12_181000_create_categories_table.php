@@ -25,7 +25,6 @@ return new class extends XotBaseMigration
                 $table->text('description');
                 // Laraxot — see module docs/wiki for domain contract.
                 $table->string('icon');
-                $table->index('name', 'categories_name_idx');
             }
         );
 
@@ -35,28 +34,28 @@ return new class extends XotBaseMigration
                 if (! $this->hasColumn('name')) {
                     $table->string('name')->nullable();
                 }
-                if (! $this->hasIndex('name')) {
+                if (! $this->hasIndex('categories_name_idx')) {
                     $table->index('name', 'categories_name_idx');
                 }
 
                 if (! $this->hasColumn('parent_id')) {
                     $table->string('parent_id')->nullable();
                 }
-                if (! $this->hasIndex('parent_id')) {
+                if (! $this->hasIndex('categories_parent_id_idx')) {
                     $table->index('parent_id', 'categories_parent_id_idx');
                 }
 
                 if (! $this->hasColumn('is_active')) {
                     $table->boolean('is_active')->default(true);
                 }
-                if (! $this->hasIndex('is_active')) {
+                if (! $this->hasIndex('categories_is_active_idx')) {
                     $table->index('is_active', 'categories_is_active_idx');
                 }
 
                 if (! $this->hasColumn('sort_order')) {
                     $table->integer('sort_order')->default(0);
                 }
-                if (! $this->hasIndex('sort_order')) {
+                if (! $this->hasIndex('categories_sort_order_idx')) {
                     $table->index('sort_order', 'categories_sort_order_idx');
                 }
 
@@ -99,7 +98,6 @@ return new class extends XotBaseMigration
                 $table->string('name');
                 $table->text('description');
                 $table->string('icon');
-                $table->index('name', 'categories_name_idx');
             }
         );
 

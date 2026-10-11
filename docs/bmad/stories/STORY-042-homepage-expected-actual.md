@@ -50,7 +50,7 @@ Document what the homepage (`/it`) SHOULD look like vs what it shows NOW, then f
 | Element | Expected | Actual | Status |
 |---------|----------|--------|--------|
 | Hero | Title + subtitle + CTA | Partial — broken by undefined var | 🐛 |
-| CTA Create | Link to wizard | ✅ `route('tickets.create')` | ✅ |
+| CTA Create | Link to wizard | ✅ `route('container0.view',['container0' => 'tickets','slug0' => 'create' ])` | ✅ |
 | CTA Track | Link to tracking | ❌ Missing | 🔴 |
 | How It Works | 3-step | ✅ Present | ✅ |
 | Stats | KPI cards | ❌ Not in theme view | 🔴 |

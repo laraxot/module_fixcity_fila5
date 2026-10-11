@@ -1,0 +1,12 @@
+{
+    "id": "tickets-confirmation",
+    "title": {"it": "Segnalazione inviata", "en": "Report submitted"},
+    "slug": "tickets.confirmation",
+    "content": null,
+    "content_blocks": {
+        "it": [{"type": "ticket_confirmation", "data": {"view": "pub_theme::components.blocks.flow.ticket.segnalazione.04-conferma"}}],
+        "en": [{"type": "ticket_confirmation", "data": {"view": "pub_theme::components.blocks.flow.ticket.segnalazione.04-conferma"}}]
+    },
+    "sidebar_blocks": {"it": [], "en": []},
+    "footer_blocks": null
+}

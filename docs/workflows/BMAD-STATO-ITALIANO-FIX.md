@@ -8,6 +8,20 @@ tags: [italian-site, ui, testing, playwright, bmad, second-brain]
 
 # STATO SITO ITALIANO — Correzione Completa BMAD
 
+## Nota di riallineamento — homepage JSON Sixteen
+
+Le sezioni storiche sotto descrivono il routing precedente e non sono il
+contratto corrente del payload CMS della homepage. In home.json:
+
+- la lista usa route('container0.index',['container0' => 'tickets']);
+- la CTA di creazione usa
+  route('container0.view',['container0' => 'tickets','slug0' => 'create' ]);
+- il mount [container0]/[slug0]/index con PageSlugMiddleware risolve la
+  pagina CMS tickets.create tramite ResolvePageAction.
+
+Non sostituire questa route con container0.create, container0.store,
+tickets.create o un URL hardcoded quando si modifica il contenuto JSON.
+
 ## 1. RICERCA (BMAD + Second Brain — Prima Di Modificare)
 
 ### 1.1 Documentazione Esistente

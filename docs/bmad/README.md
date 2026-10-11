@@ -88,3 +88,10 @@ Documenti:
 ## Fonte architetturale canonica
 
 Per namespace, policy, contratti utente, Filament, FK e ownership Frontoffice/tema, consulta il [contratto architetturale canonico](../wiki/concepts/fixcity-architecture-contract-2026-09-26.md). Le story registrano criteri e cambiamenti specifici; non duplicare in ogni story la regola completa.
+## FreeLLMAPI
+
+- [Integration architecture](./freellmapi-integration-architecture.md) — boundary, NFR e ownership
+
+## Information architecture
+
+- [DesignComuni ODS](./design-comuni-information-architecture.md) — mapping di servizi, pratiche, luoghi e contatti

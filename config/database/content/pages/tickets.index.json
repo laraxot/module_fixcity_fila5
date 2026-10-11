@@ -1,0 +1,12 @@
+{
+    "id": "tickets-index",
+    "title": {"it": "Elenco segnalazioni", "en": "Reported issues"},
+    "slug": "tickets.index",
+    "content": null,
+    "content_blocks": {
+        "it": [{"type": "ticket_list", "data": {"view": "pub_theme::components.blocks.ticket-layout.layout", "main_content": {"cta": {"title": "fixcity::ticket.map.cta.title.label", "text": "fixcity::ticket.map.cta.text.label", "button_text": "fixcity::ticket.map.cta.button.label"}}}}],
+        "en": [{"type": "ticket_list", "data": {"view": "pub_theme::components.blocks.ticket-layout.layout", "main_content": {"cta": {"title": "fixcity::ticket.map.cta.title.label", "text": "fixcity::ticket.map.cta.text.label", "button_text": "fixcity::ticket.map.cta.button.label"}}}}]
+    },
+    "sidebar_blocks": {"it": [], "en": []},
+    "footer_blocks": null
+}

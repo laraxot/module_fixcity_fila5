@@ -14,13 +14,16 @@ Template(s) reference `route('tickets.list')` but no such route exists in Folio 
 
 ## Files Affected
 - `Modules/Fixcity/resources/views/pages/home.blade.php` (if using this route)
-- `Themes/Sixteen/resources/views/pages/home.blade.php` - uses `route('tickets.create')` (exists)
+- `Themes/Sixteen/config/local/fixcity/database/content/pages/home.json` - uses
+  `route('container0.view',['container0' => 'tickets','slug0' => 'create' ])`
+  for the CMS/Folio create mount.
 - May be other templates referencing non-existent routes
 
 ## Solution
 1. Identify all `route('tickets.*')` references in templates
 2. Map to actual existing routes:
-   - `tickets.create` → `/tickets/create` (Folio: `tickets.create`)
+   - `container0.view` + `container0=tickets` + `slug0=create` →
+     `/tickets/create` (Folio mount: `[container0]/[slug0]/index`)
    - `tickets.track` → `/tickets/track` (Folio: `tickets.track`)
    - Need to create `tickets.list` → `/segnalazioni` (public list) OR replace with direct URL
 

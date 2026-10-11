@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Modules\Fixcity\Filament\Widgets;
 
+use Filament\Facades\Filament;
 use Filament\Schemas\Components\Wizard\Step;
-use Illuminate\Support\Facades\Auth;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 use Modules\Fixcity\Actions\CreateTicketAction;
 use Modules\Fixcity\Actions\GetPublishedPrivacyPolicyAction;
@@ -72,7 +72,12 @@ class CreateTicketWizardWidget extends XotBaseWizardWidget
         // the Media Library field needs the persisted Ticket as its owner.
         $data = $this->form->getState(shouldCallHooksBefore: false);
 
-        $data['owner_id'] = Auth::id();
+        $userId = Filament::auth()->id();
+        if (! $userId) {
+            $this->addError('global', __('fixcity::ticket.auth.required'));
+            return;
+        }
+        $data['owner_id'] = $userId;
 
         $ticket = app(CreateTicketAction::class)->execute($data, $this->confirmationLocale);
 

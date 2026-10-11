@@ -72,8 +72,9 @@ Homepage guest
 - I test esistenti coprono redirect guest, privacy capability code, ticket list/API,
   pratiche personali, seguite e header auth. Sono evidenze di contratto, non collaudo
   completo di browser e database.
-- La CTA della mappa/elenco usava lo slug demo `/it/tests/ticket-crea`, mentre la route
-  reale è `/{locale}/tickets/create`; ora usa `LaravelLocalization::localizeURL('/tickets/create')`.
+- La CTA della mappa/elenco deve usare il mount CMS/Folio
+  `route('container0.view',['container0' => 'tickets','slug0' => 'create' ])`;
+  il mount `[container0]/[slug0]/index` risolve la pagina CMS `tickets.create`.
 - Le card dell’elenco mostravano i dettagli inline ma non collegavano il cittadino alla
   pagina `/{locale}/tickets/{id}`; ora espongono il link localizzato al dettaglio canonico.
 

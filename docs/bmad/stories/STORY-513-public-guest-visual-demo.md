@@ -1,7 +1,7 @@
 ---
 title: "STORY-513 — Demo visuale guest riproducibile"
 type: story
-status: done
+status: in_progress
 created: 2026-09-27
 updated: 2026-09-27
 tags: [bmad, fixcity, demo, guest, ui, ux, puppeteer, playwright, i18n, seeder]
@@ -24,7 +24,7 @@ l'architettura interna.
 - [x] `/it/segnalazioni` e `/en/segnalazioni` 200 (lista FO, non CMS `[container0]`)
 - [x] `/it/tickets/create` redirect login (middleware CMS `auth`) — flusso guest → login
 - [x] `php artisan serve` + `npm run dev` (vite watch senza ELOOP symlink `.claude`)
-- [x] Smoke HTTP: `bash scripts/guest-fo-http-smoke.sh` → 8/8 PASS
+- [x] Smoke HTTP: `bash bashscripts/tools/visual/guest-fo-http-smoke.sh` → 8/8 PASS
 - [x] Screenshot Puppeteer: `/tmp/fixcity-visual/it-home-desktop-v3.png` (+ mobile); CTA contrast OK; eyebrow FixCity
 - [x] Home Design Comuni (no hero Tailwind custom); bug box bianco CTA risolto
 - [x] Seed ripetibile verificato su database demo: 3 utenti, 13 categorie, 20 ticket
@@ -38,7 +38,15 @@ l'architettura interna.
 
 - Playwright MCP e Puppeteer MCP sono configurati in [`.mcp.json`](../../../../../../.mcp.json).
 - Chromium host: libs via `apt-get download` + `LD_LIBRARY_PATH=/tmp/chromium-libs/root/usr/lib/x86_64-linux-gnu` (workaround senza sudo).
-- Script: `laravel/scripts/guest-fo-http-smoke.sh`, `laravel/scripts/guest-fo-smoke.mjs`.
+- Script: `bashscripts/tools/visual/guest-fo-http-smoke.sh`, `bashscripts/tools/visual/guest-fo-smoke.mjs`.
+
+## Verification update — 2026-10-11
+
+The scripts now live in the repository tooling tree and correctly fail on
+missing public routes. The current local runtime returns `404` for
+`/it|en/segnalazioni` and `/it/services`; the previous `8/8 PASS` claim is
+therefore stale and remains blocked until the canonical route matrix is repaired
+or the intentionally unsupported paths are removed from this story.
 - Fix visuale: [homepage-guest-visual-fix](../../../../Themes/Sixteen/docs/wiki/concepts/homepage-guest-visual-fix.md).
 - Audit finale: [design-comuni-guest-crawl-2026-09-27](../design-comuni-guest-crawl-2026-09-27.md).
 

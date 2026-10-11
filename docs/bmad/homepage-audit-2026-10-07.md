@@ -51,7 +51,7 @@ e portare il cittadino a creare o tracciare una segnalazione senza controller HT
 | No `HomeController` nel flusso auditato | PASS | L'home studiata è Folio; `/home` del tema e del modulo redirectano alla root locale. |
 | Laravel 13 / progetto corrente | PASS | `laravel/composer.json` richiede `laravel/framework:^13.0`. |
 | Layout Design Comuni | PASS | `x-pub_theme::layouts.app`, header/footer e `body-page="homepage"`. |
-| CTA localizzate | PASS | `LaravelLocalization::localizeURL('/tickets/create')`, `/tickets`, `/auth/login`, `/auth/register`. |
+| CTA localizzate | PASS | Homepage JSON: `container0.view` con `container0=tickets`, `slug0=create`; lista: `container0.index`. |
 | Mappa live | PASS | `map-lit` usa `/api/tickets/geojson`; API Folio chiama `BuildTicketsGeoJsonAction`. |
 | Privacy capability code | PASS correlato | Test mappa/lista e dettaglio API verificano che il code non venga serializzato al pubblico/non-owner. |
 | I18n hero/list/how | PASS | Copy da `pub_theme::home.*` in `it` e `en`. |
