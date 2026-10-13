@@ -1,0 +1,448 @@
+{
+    "id": "tests.homepage",
+    "slug": "tests.homepage",
+    "title": {
+        "it": "Homepage - Modello Comuni",
+        "en": "Homepage -- Comuni Template"
+    },
+    "description": "Homepage Design Comuni: contenuto da JSON, resa dal blocco homepage del tema Sixteen.",
+    "layout": "test",
+    "content_blocks": {
+        "it": [
+            {
+                "type": "homepage",
+                "data": {
+                    "view": "pub_theme::components.blocks.homepage",
+                    "hero": {
+                        "title": "Nome del comune",
+                        "eyebrow": "Contenuti in evidenza",
+                        "category": "Notizie",
+                        "date": "18 mag 2022",
+                        "url": "#",
+                        "heading": "Parte l'estate con oltre 300 eventi in centro e nei quartieri, tutti gli eventi previsti",
+                        "lead": "Inaugurazione lunedì 2 luglio",
+                        "intro": "con il concerto gratuito in piazza XX Settembre degli Sweet Soul Music Revue. Sul palco 20 musicisti dal tutto il mondo",
+                        "badge": {
+                            "label": "Estate in città",
+                            "url": "#"
+                        },
+                        "cta": {
+                            "label": "Tutte le novità",
+                            "url": "#"
+                        },
+                        "image": {
+                            "src": "https://picsum.photos/800/600",
+                            "title": "titolo immagine",
+                            "alt": "descrizione immagine"
+                        }
+                    },
+                    "government": {
+                        "items": [
+                            {
+                                "eyebrow": "Organi di governo",
+                                "title": "Mario Rossi",
+                                "description": "Il Sindaco della città",
+                                "cta": "Vai alla pagina",
+                                "url": "#",
+                                "image": {
+                                    "src": "https://picsum.photos/150/200",
+                                    "alt": "Immagine di esempio"
+                                }
+                            },
+                            {
+                                "eyebrow": "Organi di governo",
+                                "title": "La giunta comunale",
+                                "description": "La giunta, nominata dal sindaco, esercita collegialmente le funzioni ad essa attribuite dalla legge.",
+                                "cta": "Vai alla pagina",
+                                "url": "#"
+                            },
+                            {
+                                "eyebrow": "Organi di governo",
+                                "title": "Il consiglio comunale",
+                                "description": "Il Consiglio è un organo collegiale ed elettivo che rimane in carica per 5 anni.",
+                                "cta": "Vai alla pagina",
+                                "url": "#"
+                            }
+                        ]
+                    },
+                    "events": {
+                        "title": "Eventi",
+                        "month": "Settembre 2022",
+                        "days": [
+                            {
+                                "number": "15",
+                                "weekday": "lun",
+                                "items": [
+                                    {
+                                        "title": "Saldo TASI"
+                                    },
+                                    {
+                                        "title": "Concerto gratuito piazza XXIV maggio",
+                                        "image": {
+                                            "src": "https://picsum.photos/200",
+                                            "alt": "random image"
+                                        }
+                                    },
+                                    {
+                                        "title": "Convocazione Consiglio Comunale - Prima seduta"
+                                    },
+                                    {
+                                        "title": "Seconda rata TARI"
+                                    }
+                                ]
+                            },
+                            {
+                                "number": "16",
+                                "weekday": "mar",
+                                "items": [
+                                    {
+                                        "title": "Presentazione mostra “Mediterraneo”"
+                                    },
+                                    {
+                                        "title": "Convocazione Consiglio Comunale - Seconda seduta",
+                                        "image": {
+                                            "src": "https://picsum.photos/200",
+                                            "alt": "random image"
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                "number": "17",
+                                "weekday": "mar",
+                                "items": [
+                                    {
+                                        "title": "Presentazione piano lavori pubblici 2018"
+                                    }
+                                ]
+                            },
+                            {
+                                "number": "18",
+                                "weekday": "mar",
+                                "items": [
+                                    {
+                                        "title": "Evento ”La notte bianca dei bambini”"
+                                    },
+                                    {
+                                        "title": "Concerto della Banda Civica in piazza San Vittore"
+                                    }
+                                ]
+                            },
+                            {
+                                "number": "19",
+                                "weekday": "mar",
+                                "items": [
+                                    {
+                                        "title": "Saldo TASI"
+                                    },
+                                    {
+                                        "title": "Concerto gratuito piazza XXIV maggio",
+                                        "image": {
+                                            "src": "https://picsum.photos/200",
+                                            "alt": "random image"
+                                        }
+                                    },
+                                    {
+                                        "title": "Convocazione Consiglio Comunale - Prima seduta"
+                                    },
+                                    {
+                                        "title": "Seconda rata TARI"
+                                    }
+                                ]
+                            },
+                            {
+                                "number": "20",
+                                "weekday": "mar",
+                                "items": [
+                                    {
+                                        "title": "Saldo TASI"
+                                    },
+                                    {
+                                        "title": "Concerto gratuito piazza XXIV maggio",
+                                        "image": {
+                                            "src": "https://picsum.photos/200",
+                                            "alt": "random image"
+                                        }
+                                    },
+                                    {
+                                        "title": "Convocazione Consiglio Comunale - Prima seduta"
+                                    },
+                                    {
+                                        "title": "Seconda rata TARI"
+                                    }
+                                ]
+                            },
+                            {
+                                "number": "21",
+                                "weekday": "mar",
+                                "items": [
+                                    {
+                                        "title": "Saldo TASI"
+                                    },
+                                    {
+                                        "title": "Concerto gratuito piazza XXIV maggio",
+                                        "image": {
+                                            "src": "https://picsum.photos/200",
+                                            "alt": "random image"
+                                        }
+                                    },
+                                    {
+                                        "title": "Convocazione Consiglio Comunale - Prima seduta"
+                                    },
+                                    {
+                                        "title": "Seconda rata TARI"
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    "topics": {
+                        "title": "Argomenti in evidenza",
+                        "cta": "Esplora argomento",
+                        "items": [
+                            {
+                                "title": "Trasporto pubblico",
+                                "description": "Informazioni sui servizi di trasporto pubblico e servizi taxi",
+                                "url": "#",
+                                "site_intro": "Visita il sito:",
+                                "site": {
+                                    "label": "Mobilità in Comune",
+                                    "description": "Il sito del turismo del Comune e della Città Metropolitana.",
+                                    "image": "https://picsum.photos/200/200",
+                                    "alt": "Immagine",
+                                    "url": "#"
+                                }
+                            },
+                            {
+                                "title": "Animale domestico",
+                                "description": "Informazioni sui servizi e le norme previste dal comune per gli animali domestici.",
+                                "url": "#",
+                                "links": [
+                                    {
+                                        "label": "Come adottare un cane al Canile Municipale",
+                                        "url": "#",
+                                        "style": "success"
+                                    },
+                                    {
+                                        "label": "Elenco delle aree per cani",
+                                        "url": "#",
+                                        "style": "success"
+                                    },
+                                    {
+                                        "label": "Come segnalare una colonia felina e ricevere il tesserino di riconoscimento come referente",
+                                        "url": "#",
+                                        "style": "success"
+                                    },
+                                    {
+                                        "label": "Come segnalare lo smarrimento del proprio animale",
+                                        "url": "#",
+                                        "style": "success"
+                                    }
+                                ]
+                            },
+                            {
+                                "title": "Sport",
+                                "description": "Tutto quello che c’è da sapere sulle strutture sportive comunali a disposizione del pubblico e delle Associazioni, le iniziative a sostegno dello sport e gli eventi che coinvolgono la città.",
+                                "url": "#",
+                                "links": [
+                                    {
+                                        "label": "Tutte le strutture sportive della città",
+                                        "url": "#",
+                                        "style": "underline"
+                                    },
+                                    {
+                                        "label": "Da lunedì 3 settembre chiudono le vasche della piscina comunale",
+                                        "url": "#",
+                                        "style": "underline"
+                                    },
+                                    {
+                                        "label": "Concessione di contributi ad enti, associazioni, società sportive",
+                                        "url": "#",
+                                        "style": "underline"
+                                    }
+                                ]
+                            }
+                        ],
+                        "other": {
+                            "title": "Altri argomenti",
+                            "items": [
+                                {
+                                    "label": "Associazioni",
+                                    "url": "#"
+                                },
+                                {
+                                    "label": "Concorsi",
+                                    "url": "#"
+                                },
+                                {
+                                    "label": "Energie rinnovabili",
+                                    "url": "#"
+                                },
+                                {
+                                    "label": "Gestione rifiuti",
+                                    "url": "#"
+                                },
+                                {
+                                    "label": "Imposte",
+                                    "url": "#"
+                                },
+                                {
+                                    "label": "Istruzione",
+                                    "url": "#"
+                                },
+                                {
+                                    "label": "Pista ciclabile",
+                                    "url": "#"
+                                }
+                            ],
+                            "all": {
+                                "label": "Mostra tutti",
+                                "url": "#"
+                            }
+                        }
+                    },
+                    "theme_sites": {
+                        "title": "Siti tematici",
+                        "items": [
+                            {
+                                "label": "Mobilità in Comune",
+                                "description": "Il sito del turismo del Comune e della Città Metropolitana",
+                                "image": "https://picsum.photos/200/200",
+                                "alt": "Immagine",
+                                "url": "#",
+                                "tone": "blue"
+                            },
+                            {
+                                "label": "Turismo",
+                                "description": "Il sito che offre informazioni sulle attività turistiche attive in città",
+                                "image": "https://picsum.photos/200/200",
+                                "alt": "Immagine",
+                                "url": "#",
+                                "tone": "warning"
+                            },
+                            {
+                                "label": "Musei Civici",
+                                "description": "Tutte le informazioni sui musei e gli eventi culturali della città",
+                                "image": "https://picsum.photos/200/200",
+                                "alt": "Immagine",
+                                "url": "#",
+                                "tone": "dark"
+                            }
+                        ]
+                    },
+                    "search": {
+                        "label": "Cerca una parola chiave",
+                        "button": "Invio"
+                    },
+                    "links": {
+                        "title": "Link utili",
+                        "items": [
+                            {
+                                "label": "Rilascio Carta Identità Elettronica (CIE)",
+                                "url": "#"
+                            },
+                            {
+                                "label": "Cambio di residenza",
+                                "url": "#"
+                            },
+                            {
+                                "label": "Tributi online",
+                                "url": "#"
+                            },
+                            {
+                                "label": "Prenotazione appuntamenti",
+                                "url": "#"
+                            },
+                            {
+                                "label": "Rilascio tessera elettorale",
+                                "url": "#"
+                            },
+                            {
+                                "label": "Voucher connettività",
+                                "url": "#"
+                            }
+                        ]
+                    },
+                    "feedback": {
+                        "title": "Quanto sono chiare le informazioni su questa pagina?",
+                        "legend": "Valuta da 1 a 5 stelle la pagina",
+                        "star_label": "Valuta %d stelle su 5",
+                        "thanks": "Grazie, il tuo parere ci aiuterà a migliorare il servizio!",
+                        "positive": {
+                            "question": "Quali sono stati gli aspetti che hai preferito?",
+                            "answers": [
+                                "Le indicazioni erano chiare",
+                                "Le indicazioni erano complete",
+                                "Capivo sempre che stavo procedendo correttamente",
+                                "Non ho avuto problemi tecnici",
+                                "Altro"
+                            ]
+                        },
+                        "negative": {
+                            "question": "Dove hai incontrato le maggiori difficoltà?",
+                            "answers": [
+                                "A volte le indicazioni non erano chiare",
+                                "A volte le indicazioni non erano complete",
+                                "A volte non capivo se stavo procedendo correttamente",
+                                "Ho avuto problemi tecnici",
+                                "Altro"
+                            ]
+                        },
+                        "detail": {
+                            "question": "Vuoi aggiungere altri dettagli?",
+                            "label": "Dettaglio",
+                            "help": "Inserire massimo 200 caratteri"
+                        },
+                        "back": "Indietro",
+                        "next": "Avanti"
+                    },
+                    "contacts": {
+                        "main": {
+                            "title": "Contatta il comune",
+                            "items": [
+                                {
+                                    "icon": "it-help-circle",
+                                    "label": "Leggi le domande frequenti",
+                                    "url": "#"
+                                },
+                                {
+                                    "icon": "it-mail",
+                                    "label": "Richiedi assistenza",
+                                    "url": "#",
+                                    "element": "contacts"
+                                },
+                                {
+                                    "icon": "it-hearing",
+                                    "label": "Chiama il numero verde 05 0505",
+                                    "url": "#"
+                                },
+                                {
+                                    "icon": "it-calendar",
+                                    "label": "Prenota appuntamento",
+                                    "url": "#",
+                                    "element": "appointment-booking"
+                                }
+                            ]
+                        },
+                        "problems": {
+                            "title": "Problemi in città",
+                            "items": [
+                                {
+                                    "icon": "it-map-marker-circle",
+                                    "label": "Segnala disservizio",
+                                    "url": "#"
+                                }
+                            ]
+                        }
+                    }
+                }
+            }
+        ],
+        "en": []
+    },
+    "sidebar_blocks": {
+        "it": [],
+        "en": []
+    },
+    "footer_blocks": null
+}

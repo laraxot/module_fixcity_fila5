@@ -74,3 +74,4 @@ The governing rule for all module docs is in
 - [QMD Setup](./QMD-SETUP.md) — Configurazione ricerca locale
 - [Performance](./PERFORMANCE-OPTIMIZATION.md) — Metriche e best practice
 - [Project Structure](./PROJECT-STRUCTURE.md) — Directory layout
+- [File di contenuto delle pagine /it/tests](./tests-pages-content-files.md) — `tests.<slug>.json`, stato e regole (2026-10-13)

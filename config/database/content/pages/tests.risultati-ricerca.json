@@ -2,7 +2,10 @@
     "id": "tests.risultati-ricerca",
     "slug": "tests.risultati-ricerca",
     "parent_slug": "tests",
-    "title": {"it": "Risultati di ricerca", "en": "Search results"},
+    "title": {
+        "it": "Risultati di ricerca",
+        "en": "Search results"
+    },
     "description": "Pagina dei risultati di ricerca sul sito, con risultati filtrati per tipo, data e popolarità.",
     "layout": "test",
     "content_blocks": {
@@ -10,27 +13,534 @@
             {
                 "type": "search-results",
                 "data": {
-                    "view": "pub_theme::components.blocks.search-results.default",
-                    "query": "cimitero",
-                    "results": [
-                        {
-                            "title": "Risultati per cimitero",
-                            "description": "Elenco di servizi e informazioni sui cimiteri",
-                            "url": "#risultato1",
-                            "type": "service"
+                    "view": "pub_theme::components.blocks.search-results.design-comuni",
+                    "title": "Ricerca",
+                    "breadcrumb": {
+                        "items": [
+                            {
+                                "label": "Home",
+                                "url": "#"
+                            }
+                        ],
+                        "current": "Ricerca"
+                    },
+                    "search": {
+                        "label": "Con Etichetta",
+                        "placeholder": "Pagamento TARI",
+                        "button": "Cerca",
+                        "query": ""
+                    },
+                    "filters": {
+                        "hidden_title": "filtri da applicare",
+                        "groups": [
+                            {
+                                "title": "Tipologie",
+                                "items": [
+                                    {
+                                        "id": "unit",
+                                        "value": "unità organizzativa",
+                                        "label": "Unità organizzativa (21)"
+                                    },
+                                    {
+                                        "id": "public-person",
+                                        "value": "persona pubblica",
+                                        "label": "Persona pubblica (14)"
+                                    },
+                                    {
+                                        "id": "documents",
+                                        "value": "documenti",
+                                        "label": "Documenti (7)"
+                                    },
+                                    {
+                                        "id": "services",
+                                        "value": "servizi",
+                                        "label": "Servizi (208)"
+                                    },
+                                    {
+                                        "id": "news",
+                                        "value": "novita",
+                                        "label": "Novità (321)"
+                                    },
+                                    {
+                                        "id": "places",
+                                        "value": "luoghi",
+                                        "label": "Luoghi (42)"
+                                    },
+                                    {
+                                        "id": "events",
+                                        "value": "eventi",
+                                        "label": "Eventi (302)"
+                                    }
+                                ]
+                            },
+                            {
+                                "title": "Argomenti",
+                                "items": [
+                                    {
+                                        "id": "access",
+                                        "value": "accesso all'informazione",
+                                        "label": "Accesso all'informazione (8)"
+                                    },
+                                    {
+                                        "id": "water",
+                                        "value": "acqua",
+                                        "label": "Acqua (15)"
+                                    },
+                                    {
+                                        "id": "agriculture",
+                                        "value": "agricoltura",
+                                        "label": "Agricoltura (3)"
+                                    },
+                                    {
+                                        "id": "pet",
+                                        "value": "notianimale domestico",
+                                        "label": "Animale domestico (3)"
+                                    },
+                                    {
+                                        "id": "air",
+                                        "value": "aria",
+                                        "label": "Aria (2)"
+                                    },
+                                    {
+                                        "id": "assistance-disabled",
+                                        "value": "assistenza agli invalidi",
+                                        "label": "Assistenza agli invalidi (2)"
+                                    },
+                                    {
+                                        "id": "social-care",
+                                        "value": "assistenza sociale",
+                                        "label": "Assistenza sociale (2)"
+                                    },
+                                    {
+                                        "id": "associations",
+                                        "value": "associazioni",
+                                        "label": "Associazioni (13)"
+                                    },
+                                    {
+                                        "id": "balance",
+                                        "value": "bilancio",
+                                        "label": "Bilancio (2)"
+                                    },
+                                    {
+                                        "id": "wholesale",
+                                        "value": "commercio all'ingrosso",
+                                        "label": "Commercio all'ingrosso (10)"
+                                    },
+                                    {
+                                        "id": "retail-trade",
+                                        "value": "commercio al minuto",
+                                        "label": "Commercio al minuto (6)"
+                                    },
+                                    {
+                                        "id": "itinerant-trade",
+                                        "value": "commercio ambulante",
+                                        "label": "Commercio ambulante (8)"
+                                    },
+                                    {
+                                        "id": "institutional-communication",
+                                        "value": "comunicazione istituzionale",
+                                        "label": "Comunicazione istituzionale (6)"
+                                    },
+                                    {
+                                        "id": "political-communication",
+                                        "value": "comunicazione politica",
+                                        "label": "Comunicazione politica (3)"
+                                    },
+                                    {
+                                        "id": "competitions",
+                                        "value": "concorsi",
+                                        "label": "Concorsi (21)"
+                                    },
+                                    {
+                                        "id": "covid-19",
+                                        "value": "covid-19",
+                                        "label": "Covid-19 (9)"
+                                    },
+                                    {
+                                        "id": "elections",
+                                        "value": "elezioni",
+                                        "label": "Elezioni (7)"
+                                    },
+                                    {
+                                        "id": "abroad",
+                                        "value": "estero",
+                                        "label": "Estero (6)"
+                                    },
+                                    {
+                                        "id": "renewable-energies",
+                                        "value": "Energie rinnovabili",
+                                        "label": "Energie rinnovabili (13)"
+                                    },
+                                    {
+                                        "id": "forests",
+                                        "value": "foreste",
+                                        "label": "Foreste (2)"
+                                    },
+                                    {
+                                        "id": "professional-training",
+                                        "value": "formazione professionale",
+                                        "label": "Formazione professionale (27)"
+                                    },
+                                    {
+                                        "id": "twinning",
+                                        "value": "gemellaggi",
+                                        "label": "Gemellaggi (6)"
+                                    },
+                                    {
+                                        "id": "waste-management",
+                                        "value": "gestione-rigiuti",
+                                        "label": "Gestione rifiuti (10)"
+                                    },
+                                    {
+                                        "id": "justice",
+                                        "value": "giustizia",
+                                        "label": "Giustizia (3)"
+                                    },
+                                    {
+                                        "id": "public-hygiene",
+                                        "value": "igiene pubblica",
+                                        "label": "Igiene pubblica (7)"
+                                    },
+                                    {
+                                        "id": "immigration",
+                                        "value": "immigrazione",
+                                        "label": "Immigrazione (34)"
+                                    },
+                                    {
+                                        "id": "taxes",
+                                        "value": "imposte",
+                                        "label": "Imposte (3)"
+                                    },
+                                    {
+                                        "id": "businesses",
+                                        "value": "imprese",
+                                        "label": "Imprese (14)"
+                                    },
+                                    {
+                                        "id": "pollution",
+                                        "value": "inquinamento",
+                                        "label": "Inquinamento (36)"
+                                    },
+                                    {
+                                        "id": "social-integration",
+                                        "value": "integrazione sociale",
+                                        "label": "Integrazione sociale (18)"
+                                    },
+                                    {
+                                        "id": "thermal-insulation",
+                                        "value": "isolamento termico",
+                                        "label": "Isolamento termico (21)"
+                                    },
+                                    {
+                                        "id": "instruction",
+                                        "value": "istruzione",
+                                        "label": "Istruzione (13)"
+                                    },
+                                    {
+                                        "id": "work",
+                                        "value": "lavoro",
+                                        "label": "Lavoro (24)"
+                                    },
+                                    {
+                                        "id": "marriage",
+                                        "value": "matrimonio",
+                                        "label": "Matrimonio (16)"
+                                    },
+                                    {
+                                        "id": "market",
+                                        "value": "mercato",
+                                        "label": "Mercato (11)"
+                                    },
+                                    {
+                                        "id": "sustainable-mobility",
+                                        "value": "mobilità sostenibile",
+                                        "label": "Mobilità sostenibile (32)"
+                                    },
+                                    {
+                                        "id": "death",
+                                        "value": "Morte",
+                                        "label": "Morte (6)"
+                                    },
+                                    {
+                                        "id": "birth",
+                                        "value": "nascita",
+                                        "label": "Nascita (13)"
+                                    },
+                                    {
+                                        "id": "parking",
+                                        "value": "parcheggi",
+                                        "label": "Parcheggi (2)"
+                                    },
+                                    {
+                                        "id": "cultural-heritage",
+                                        "value": "patrimonio culturale",
+                                        "label": "Patrimonio culturale (27)"
+                                    },
+                                    {
+                                        "id": "fishing",
+                                        "value": "pesca",
+                                        "label": "Pesca (6)"
+                                    },
+                                    {
+                                        "id": "development-plan",
+                                        "value": "piano di sviluppo",
+                                        "label": "Piano di sviluppo (10)"
+                                    },
+                                    {
+                                        "id": "bicycle-lane",
+                                        "value": "pista ciclabile",
+                                        "label": "Pista ciclabile (3)"
+                                    },
+                                    {
+                                        "id": "commercial-policy",
+                                        "value": "politica commerciale",
+                                        "label": "Politica commerciale (7)"
+                                    },
+                                    {
+                                        "id": "police",
+                                        "value": "polizia",
+                                        "label": "Polizia (34)"
+                                    },
+                                    {
+                                        "id": "foodstuffs",
+                                        "value": "prodotti alimentari",
+                                        "label": "Prodotti alimentari (3)"
+                                    },
+                                    {
+                                        "id": "civil-protection",
+                                        "value": "protezione civile",
+                                        "label": "Protezione civile (14)"
+                                    },
+                                    {
+                                        "id": "residence",
+                                        "value": "residenza",
+                                        "label": "Residenza (36)"
+                                    },
+                                    {
+                                        "id": "emergency-response",
+                                        "value": "risposta alle emergenze",
+                                        "label": "Risposta alle emergenze (18)"
+                                    },
+                                    {
+                                        "id": "legal-system",
+                                        "value": "Sistema giuridico",
+                                        "label": "Sistema giuridico (21)"
+                                    },
+                                    {
+                                        "id": "green-space",
+                                        "value": "Spazio verde",
+                                        "label": "Spazio verde (13)"
+                                    },
+                                    {
+                                        "id": "sport",
+                                        "value": "sport",
+                                        "label": "Sport (24)"
+                                    },
+                                    {
+                                        "id": "sustainable-development",
+                                        "value": "Sviluppo sostenibile",
+                                        "label": "Sviluppo sostenibile (16)"
+                                    },
+                                    {
+                                        "id": "service-charge",
+                                        "value": "Tassa sui servizi",
+                                        "label": "Tassa sui servizi (11)"
+                                    },
+                                    {
+                                        "id": "free-time",
+                                        "value": "Tempo libero",
+                                        "label": "Tempo libero (32)"
+                                    },
+                                    {
+                                        "id": "administrative-transparency",
+                                        "value": "Trasparenza amministrativa",
+                                        "label": "Trasparenza amministrativa (13)"
+                                    },
+                                    {
+                                        "id": "public-transport",
+                                        "value": "Trasporto pubblico",
+                                        "label": "Trasporto pubblico (24)"
+                                    },
+                                    {
+                                        "id": "tourism",
+                                        "value": "Turismo",
+                                        "label": "Turismo (16)"
+                                    },
+                                    {
+                                        "id": "urbanization",
+                                        "value": "Urbanizzazione",
+                                        "label": "Urbanizzazione (11)"
+                                    },
+                                    {
+                                        "id": "travel",
+                                        "value": "Viaggi",
+                                        "label": "Viaggi (32)"
+                                    },
+                                    {
+                                        "id": "areas",
+                                        "value": "Zone pedonali",
+                                        "label": "Zone pedonali (6)"
+                                    },
+                                    {
+                                        "id": "ztl",
+                                        "value": "ztl",
+                                        "label": "ZTL (13)"
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    "results": {
+                        "hidden_title": "Risultati di ricerca",
+                        "count": 645,
+                        "count_label": "Risultati",
+                        "filter_button": "Filtra",
+                        "clear": "Rimuovi tutti i filtri",
+                        "category_label": "Categoria:",
+                        "items": [
+                            {
+                                "category": "Servizi",
+                                "title": "Consegna contenitori rifiuti",
+                                "description": "Consegna dei contenitori per il corretto conferimento dei rifiuti nel sistema di raccolta porta a porta.",
+                                "url": "#"
+                            },
+                            {
+                                "category": "Servizi",
+                                "title": "Consegna contenitori rifiuti",
+                                "description": "Consegna dei contenitori per il corretto conferimento dei rifiuti nel sistema di raccolta porta a porta.",
+                                "url": "#"
+                            },
+                            {
+                                "category": "Servizi",
+                                "title": "Conferimento rifiuti presso isole ecologiche mobili",
+                                "description": "Le isole ecologiche mobili sono dei piccoli eco-centri nei quali è possibile conferire rifiuti di piccole dimensioni",
+                                "url": "#"
+                            },
+                            {
+                                "category": "Servizi",
+                                "title": "Chiedere un rimborso Tari (Tassa sui rifiuti)",
+                                "description": "Come chiedere un rimborso per la Tassa sui rifiuti (Tari).",
+                                "url": "#"
+                            },
+                            {
+                                "category": "NOVITÀ",
+                                "title": "Agevolazioni tariffarie a favore delle categorie svantaggiate",
+                                "description": "Da lunedì 16 dicembre sarà possibile richiedere o rinnovare gli abbonamenti",
+                                "url": "#"
+                            },
+                            {
+                                "category": "NOVITÀ",
+                                "title": "Accertamenti TaRi: il sindaco e l’assessore fanno il punto",
+                                "description": "Circa 17mila le utenze che hanno presentato spontaneamente autodenuncia al Comune e che ora fanno la raccolta differenziata.",
+                                "url": "#"
+                            },
+                            {
+                                "category": "NOVITÀ",
+                                "title": "Accordo tra Cin-Tirrenia e continuità territoriale",
+                                "description": "A partire dal 25 febbraio 2019 sarà possibile acquistare l’abbonamento mensile CTM di marzo con le nuove tariffe agevolate.",
+                                "url": "#"
+                            },
+                            {
+                                "category": "NOVITÀ",
+                                "title": "Accertamento TARI",
+                                "description": "Risultati degli accertamenti TARI",
+                                "url": "#"
+                            },
+                            {
+                                "category": "NOVITÀ",
+                                "title": "Agevolazioni tariffarie a carattere sociale delle utenze del Servizio Idrico Integrato",
+                                "description": "Pubblicato bando, allegati e modulistica",
+                                "url": "#"
+                            },
+                            {
+                                "category": "NOVITÀ",
+                                "title": "La TARI scende del 17,7%",
+                                "description": "I dati diffusi dall’Osservatorio prezzi e tariffe di Cittadinanzattiva",
+                                "url": "#"
+                            }
+                        ],
+                        "load_more": "Carica altri risultati"
+                    },
+                    "feedback": {
+                        "title": "Quanto sono chiare le informazioni su questa pagina?",
+                        "legend": "Valuta da 1 a 5 stelle la pagina",
+                        "star_label": "Valuta %d stelle su 5",
+                        "thanks": "Grazie, il tuo parere ci aiuterà a migliorare il servizio!",
+                        "positive": {
+                            "question": "Quali sono stati gli aspetti che hai preferito?",
+                            "answers": [
+                                "Le indicazioni erano chiare",
+                                "Le indicazioni erano complete",
+                                "Capivo sempre che stavo procedendo correttamente",
+                                "Non ho avuto problemi tecnici",
+                                "Altro"
+                            ]
                         },
-                        {
-                            "title": "Mappe dei cimiteri comunali",
-                            "description": "Cartografia dei cimiteri del territorio",
-                            "url": "#risultato2",
-                            "type": "map"
+                        "negative": {
+                            "question": "Dove hai incontrato le maggiori difficoltà?",
+                            "answers": [
+                                "A volte le indicazioni non erano chiare",
+                                "A volte le indicazioni non erano complete",
+                                "A volte non capivo se stavo procedendo correttamente",
+                                "Ho avuto problemi tecnici",
+                                "Altro"
+                            ]
+                        },
+                        "detail": {
+                            "question": "Vuoi aggiungere altri dettagli?",
+                            "label": "Dettaglio",
+                            "help": "Inserire massimo 200 caratteri"
+                        },
+                        "back": "Indietro",
+                        "next": "Avanti"
+                    },
+                    "contacts": {
+                        "main": {
+                            "title": "Contatta il comune",
+                            "items": [
+                                {
+                                    "icon": "it-help-circle",
+                                    "label": "Leggi le domande frequenti",
+                                    "url": "#"
+                                },
+                                {
+                                    "icon": "it-mail",
+                                    "label": "Richiedi assistenza",
+                                    "url": "#",
+                                    "element": "contacts"
+                                },
+                                {
+                                    "icon": "it-hearing",
+                                    "label": "Chiama il numero verde 05 0505",
+                                    "url": "#"
+                                },
+                                {
+                                    "icon": "it-calendar",
+                                    "label": "Prenota appuntamento",
+                                    "url": "#",
+                                    "element": "appointment-booking"
+                                }
+                            ]
+                        },
+                        "problems": {
+                            "title": "Problemi in città",
+                            "items": [
+                                {
+                                    "icon": "it-map-marker-circle",
+                                    "label": "Segnala disservizio",
+                                    "url": "#"
+                                }
+                            ]
                         }
-                    ]
+                    }
                 }
             }
         ],
         "en": []
     },
-    "sidebar_blocks": {"it": [], "en": []},
+    "sidebar_blocks": {
+        "it": [],
+        "en": []
+    },
     "footer_blocks": null
 }
