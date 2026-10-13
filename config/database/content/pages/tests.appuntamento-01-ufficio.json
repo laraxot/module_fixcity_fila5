@@ -1,0 +1,133 @@
+{
+    "id": "tests.appuntamento-01-ufficio",
+    "slug": "tests.appuntamento-01-ufficio",
+    "parent_slug": "tests",
+    "title": {
+        "it": "Prenotazione appuntamento",
+        "en": "Appointment booking"
+    },
+    "description": "Passo 1 della prenotazione di un appuntamento: scelta del tipo di ufficio. Contenuto da JSON, reso dal blocco appointment-step del tema Sixteen.",
+    "layout": "test",
+    "content_blocks": {
+        "it": [
+            {
+                "type": "appointment-step",
+                "data": {
+                    "view": "pub_theme::components.blocks.appointment-step.design-comuni",
+                    "title": "Prenotazione appuntamento",
+                    "breadcrumb": {
+                        "items": [
+                            {
+                                "label": "Home",
+                                "url": "/it/tests/homepage"
+                            }
+                        ],
+                        "current": "Prenotazione appuntamento"
+                    },
+                    "steps": {
+                        "items": [
+                            {
+                                "label": "Luogo",
+                                "state": "active"
+                            },
+                            {
+                                "label": "Data e orario",
+                                "state": ""
+                            },
+                            {
+                                "label": "Dettagli appuntamento",
+                                "state": ""
+                            },
+                            {
+                                "label": "Richiedente",
+                                "state": ""
+                            },
+                            {
+                                "label": "Riepilogo",
+                                "state": ""
+                            }
+                        ],
+                        "index": "1/5",
+                        "confirmed_label": "Confermato",
+                        "active_label": "Attivo",
+                        "required_notice": "I campi contraddistinti dal simbolo asterisco sono obbligatori"
+                    },
+                    "side_nav": {
+                        "aria_label": "INFORMAZIONI RICHIESTE",
+                        "title": "INFORMAZIONI RICHIESTE",
+                        "items": [
+                            {
+                                "label": "Ufficio",
+                                "anchor": "office"
+                            }
+                        ]
+                    },
+                    "sections": [
+                        {
+                            "type": "select",
+                            "id": "office",
+                            "title": "Ufficio",
+                            "subtitle": "Scegli l’ufficio a cui vuoi richiedere l’appuntamento",
+                            "select_id": "office-option",
+                            "select_label": "Tipo di ufficio",
+                            "placeholder": "Seleziona opzione",
+                            "options": [
+                                "Affari generali",
+                                "Affari generali, amministrativi e contabili",
+                                "Albo pretorio",
+                                "Amministrativo",
+                                "Amministrativo lavori pubblici",
+                                "Amministrativo patrimonio",
+                                "Amministrativo sport",
+                                "Anagrafe",
+                                "Anticorruzione, trasparenza, controlli interni, antiriciclaggio, antifrode",
+                                "Asili nido",
+                                "Assistenza tecnica",
+                                "Autoparco",
+                                "Bilancio",
+                                "Cantieri",
+                                "Cimiteri",
+                                "Commercio e somministrazione",
+                                "Concessione occasionale suolo pubblico (Cosp)"
+                            ]
+                        }
+                    ],
+                    "nav": {
+                        "aria_label": "Step",
+                        "back": "Indietro",
+                        "next": "Avanti",
+                        "saved_message": "Richiesta salvata con successo"
+                    },
+                    "contacts": {
+                        "main": {
+                            "title": "Contatta il comune",
+                            "items": [
+                                {
+                                    "icon": "it-help-circle",
+                                    "label": "Leggi le domande frequenti",
+                                    "url": "#"
+                                },
+                                {
+                                    "icon": "it-mail",
+                                    "label": "Richiedi assistenza",
+                                    "url": "#"
+                                },
+                                {
+                                    "icon": "it-hearing",
+                                    "label": "Chiama il numero verde 05 0505",
+                                    "url": "#"
+                                }
+                            ]
+                        }
+                    }
+                }
+            }
+        ],
+        "en": []
+    },
+    "sidebar_blocks": {
+        "it": [],
+        "en": []
+    },
+    "footer_blocks": null
+}

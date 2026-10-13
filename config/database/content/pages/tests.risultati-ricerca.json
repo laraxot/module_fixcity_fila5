@@ -6,7 +6,9 @@
         "it": "Risultati di ricerca",
         "en": "Search results"
     },
-    "description": "Pagina dei risultati di ricerca sul sito, con risultati filtrati per tipo, data e popolarità.",
+    "description": {
+        "it": "Cerca informazioni, servizi e documenti del Comune."
+    },
     "layout": "test",
     "content_blocks": {
         "it": [
@@ -532,11 +534,39 @@
                                 }
                             ]
                         }
+                    },
+                    "report_modal": {
+                        "id": "modal-disservizio",
+                        "title": "Buca in via Solferino",
+                        "close_label": "Chiudi finestra modale",
+                        "close": "Chiudi",
+                        "images_label": "Immagini",
+                        "image": {
+                            "file": "modal-disservizio-placeholder.png",
+                            "alt": "immagine della mappa di dove si trova il disservizio"
+                        },
+                        "fields": [
+                            {
+                                "label": "Titolo",
+                                "value": "Buca in via Solferino"
+                            },
+                            {
+                                "label": "Tipologia di segnalazione",
+                                "value": "Verde pubblico e arredo urbano"
+                            },
+                            {
+                                "label": "Indirizzo",
+                                "value": "Via Solferino - 50100 Firenze"
+                            },
+                            {
+                                "label": "Dettaglio",
+                                "value": "Sulla strada c’è una buca piuttosto profonda che andrebbe sistemata con urgenza"
+                            }
+                        ]
                     }
                 }
             }
-        ],
-        "en": []
+        ]
     },
     "sidebar_blocks": {
         "it": [],

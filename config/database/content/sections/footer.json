@@ -1,7 +1,10 @@
 {
   "id": "footer",
   "slug": "footer",
-  "name": {"it": "Footer Design Comuni", "en": "Design Comuni footer"},
+  "name": {
+    "it": "Footer Design Comuni",
+    "en": "Design Comuni footer"
+  },
   "blocks": {
     "it": [
       {
@@ -18,63 +21,330 @@
             {
               "title": "Amministrazione",
               "links": [
-                {"label": "Organi di governo", "url": "/amministrazione"},
-                {"label": "Aree amministrative", "url": "/aree-amministrative"},
-                {"label": "Uffici", "url": "/uffici"},
-                {"label": "Enti e fondazioni", "url": "/enti-e-fondazioni"},
-                {"label": "Politici", "url": "/politici"},
-                {"label": "Personale amministrativo", "url": "/personale"}
+                {
+                  "label": "Organi di governo",
+                  "url": "/amministrazione"
+                },
+                {
+                  "label": "Aree amministrative",
+                  "url": "/aree-amministrative"
+                },
+                {
+                  "label": "Uffici",
+                  "url": "/uffici"
+                },
+                {
+                  "label": "Enti e fondazioni",
+                  "url": "/enti-e-fondazioni"
+                },
+                {
+                  "label": "Politici",
+                  "url": "/politici"
+                },
+                {
+                  "label": "Personale amministrativo",
+                  "url": "/personale"
+                }
               ]
             },
             {
               "title": "Categorie di servizio",
               "links": [
-                {"label": "Anagrafe e stato civile", "url": "/anagrafe"},
-                {"label": "Cultura e tempo libero", "url": "/cultura"},
-                {"label": "Vita lavorativa", "url": "/lavoro"},
-                {"label": "Imprese e commercio", "url": "/imprese"},
-                {"label": "Appalti pubblici", "url": "/appalti"},
-                {"label": "Catasto e urbanistica", "url": "/catasto"},
-                {"label": "Turismo", "url": "/turismo"},
-                {"label": "Mobilità e trasporti", "url": "/mobilita"}
+                {
+                  "label": "Anagrafe e stato civile",
+                  "url": "/anagrafe"
+                },
+                {
+                  "label": "Cultura e tempo libero",
+                  "url": "/cultura"
+                },
+                {
+                  "label": "Vita lavorativa",
+                  "url": "/lavoro"
+                },
+                {
+                  "label": "Imprese e commercio",
+                  "url": "/imprese"
+                },
+                {
+                  "label": "Appalti pubblici",
+                  "url": "/appalti"
+                },
+                {
+                  "label": "Catasto e urbanistica",
+                  "url": "/catasto"
+                },
+                {
+                  "label": "Turismo",
+                  "url": "/turismo"
+                },
+                {
+                  "label": "Mobilità e trasporti",
+                  "url": "/mobilita"
+                }
+              ]
+            },
+            {
+              "title": "Vivere il comune",
+              "links": [
+                {
+                  "label": "Luoghi",
+                  "url": "/luoghi"
+                },
+                {
+                  "label": "Eventi",
+                  "url": "/eventi"
+                }
               ]
             },
             {
               "title": "Novità",
               "links": [
-                {"label": "Notizie", "url": "/notizie"},
-                {"label": "Comunicati", "url": "/comunicati"},
-                {"label": "Avvisi", "url": "/avvisi"}
-              ]
-            },
-            {
-              "title": "Contatti",
-              "links": [
-                {"label": "Comune di Nome Comune", "url": "/contatti"},
-                {"label": "Via Roma 123 - 00100 Comune", "url": "/contatti"},
-                {"label": "Codice fiscale / P. IVA: 00123456789", "url": "/contatti"},
-                {"label": "Ufficio Relazioni con il Pubblico", "url": "/contatti"},
-                {"label": "Numero verde: 800 016 123", "url": "/contatti"},
-                {"label": "SMS e WhatsApp: +39 320 1234567", "url": "/contatti"},
-                {"label": "Posta Elettronica Certificata", "url": "/contatti"}
+                {
+                  "label": "Notizie",
+                  "url": "/notizie"
+                },
+                {
+                  "label": "Comunicati",
+                  "url": "/comunicati"
+                },
+                {
+                  "label": "Avvisi",
+                  "url": "/avvisi"
+                }
               ]
             }
           ],
+          "contact": {
+            "title": "Contatti",
+            "address": "Comune di Nome Comune\nVia Roma 123 - 00100 Comune\nCodice fiscale / P. IVA: 00123456789",
+            "office": "Ufficio Relazioni con il Pubblico",
+            "phone": "800 016 123",
+            "email": "serviziopubblico@comune.it",
+            "links": [
+              {
+                "label": "Leggi le FAQ",
+                "url": "/domande-frequenti",
+                "data_element": "faq"
+              },
+              {
+                "label": "Prenotazione appuntamento",
+                "url": "/prenota-appuntamento"
+              },
+              {
+                "label": "Segnalazione disservizio",
+                "url": "/tickets/create",
+                "data_element": "report-inefficiency"
+              },
+              {
+                "label": "Richiesta d'assistenza",
+                "url": "/assistenza"
+              }
+            ],
+            "details": [
+              "Numero verde: 800 016 123",
+              "SMS e WhatsApp: +39 320 1234567",
+              "Posta Elettronica Certificata",
+              "Centralino unico: 012 3456"
+            ],
+            "office_url": "#"
+          },
           "legal_links": [
-            {"label": "Amministrazione trasparente", "url": "/amministrazione-trasparente"},
-            {"label": "Informativa privacy", "url": "/privacy"},
-            {"label": "Note legali", "url": "/note-legali"},
-            {"label": "Dichiarazione di accessibilità", "url": "/accessibilita"}
+            {
+              "label": "Amministrazione trasparente",
+              "url": "/amministrazione-trasparente"
+            },
+            {
+              "label": "Informativa privacy",
+              "url": "/privacy"
+            },
+            {
+              "label": "Note legali",
+              "url": "/note-legali"
+            },
+            {
+              "label": "Dichiarazione di accessibilità",
+              "url": "/accessibilita"
+            }
+          ],
+          "footer_bottom_links": [
+            {
+              "label": "Media policy",
+              "url": "/media-policy"
+            },
+            {
+              "label": "Mappa del sito",
+              "url": "/mappa-del-sito"
+            }
           ],
           "social": [
-            {"label": "Twitter", "url": "https://twitter.com"},
-            {"label": "Facebook", "url": "https://facebook.com"},
-            {"label": "YouTube", "url": "https://youtube.com"},
-            {"label": "Telegram", "url": "https://telegram.org"},
-            {"label": "WhatsApp", "url": "https://wa.me"},
-            {"label": "RSS", "url": "/rss.xml"}
+            {
+              "label": "Twitter",
+              "url": "https://twitter.com",
+              "icon": "it-twitter"
+            },
+            {
+              "label": "Facebook",
+              "url": "https://facebook.com",
+              "icon": "it-facebook"
+            },
+            {
+              "label": "YouTube",
+              "url": "https://youtube.com",
+              "icon": "it-youtube"
+            },
+            {
+              "label": "Telegram",
+              "url": "https://telegram.org",
+              "icon": "it-telegram"
+            },
+            {
+              "label": "WhatsApp",
+              "url": "https://wa.me",
+              "icon": "it-whatsapp"
+            },
+            {
+              "label": "RSS",
+              "url": "/rss.xml",
+              "icon": "it-rss"
+            }
           ],
-          "copyright": "© 2026 Nome del Comune. Tutti i diritti riservati."
+          "copyright": "© 2026 Nome del Comune. Tutti i diritti riservati.",
+          "eu_logo": {
+            "src": "themes/Sixteen/design-comuni/assets/images/logo-eu-inverted.svg",
+            "alt": "logo Unione Europea"
+          },
+          "groups": {
+            "administration": {
+              "title": "Amministrazione",
+              "links": [
+                {
+                  "label": "Organi di governo",
+                  "url": "#"
+                },
+                {
+                  "label": "Aree amministrative",
+                  "url": "#"
+                },
+                {
+                  "label": "Uffici",
+                  "url": "#"
+                },
+                {
+                  "label": "Enti e fondazioni",
+                  "url": "#"
+                },
+                {
+                  "label": "Politici",
+                  "url": "#"
+                },
+                {
+                  "label": "Personale amministrativo",
+                  "url": "#"
+                },
+                {
+                  "label": "Documenti e dati",
+                  "url": "#"
+                }
+              ]
+            },
+            "services": {
+              "title": "Categorie di servizio",
+              "links": [
+                {
+                  "label": "Anagrafe e stato civile",
+                  "url": "#"
+                },
+                {
+                  "label": "Cultura e tempo libero",
+                  "url": "#"
+                },
+                {
+                  "label": "Vita lavorativa",
+                  "url": "#"
+                },
+                {
+                  "label": "Imprese e commercio",
+                  "url": "#"
+                },
+                {
+                  "label": "Appalti pubblici",
+                  "url": "#"
+                },
+                {
+                  "label": "Catasto e urbanistica",
+                  "url": "#"
+                },
+                {
+                  "label": "Turismo",
+                  "url": "#"
+                },
+                {
+                  "label": "Mobilità e trasporti",
+                  "url": "#"
+                },
+                {
+                  "label": "Educazione e formazione",
+                  "url": "#"
+                },
+                {
+                  "label": "Giustizia e sicurezza pubblica",
+                  "url": "#"
+                },
+                {
+                  "label": "Tributi, finanze e contravvenzioni",
+                  "url": "#"
+                },
+                {
+                  "label": "Ambiente",
+                  "url": "#"
+                },
+                {
+                  "label": "Salute, benessere e assistenza",
+                  "url": "#"
+                },
+                {
+                  "label": "Autorizzazioni",
+                  "url": "#"
+                },
+                {
+                  "label": "Agricoltura e pesca",
+                  "url": "#"
+                }
+              ]
+            },
+            "news": {
+              "title": "Novità",
+              "links": [
+                {
+                  "label": "Notizie",
+                  "url": "#"
+                },
+                {
+                  "label": "Comunicati",
+                  "url": "#"
+                },
+                {
+                  "label": "Avvisi",
+                  "url": "#"
+                }
+              ]
+            },
+            "living": {
+              "title": "Vivere il comune",
+              "links": [
+                {
+                  "label": "Luoghi",
+                  "url": "#"
+                },
+                {
+                  "label": "Eventi",
+                  "url": "#"
+                }
+              ]
+            }
+          },
+          "social_title": "Seguici su"
         }
       }
     ],
@@ -93,58 +363,330 @@
             {
               "title": "Administration",
               "links": [
-                {"label": "Government bodies", "url": "/administration"},
-                {"label": "Administrative areas", "url": "/administrative-areas"},
-                {"label": "Offices", "url": "/offices"},
-                {"label": "Entities and foundations", "url": "/entities"},
-                {"label": "Politicians", "url": "/politicians"},
-                {"label": "Administrative staff", "url": "/staff"}
+                {
+                  "label": "Government bodies",
+                  "url": "/administration"
+                },
+                {
+                  "label": "Administrative areas",
+                  "url": "/administrative-areas"
+                },
+                {
+                  "label": "Offices",
+                  "url": "/offices"
+                },
+                {
+                  "label": "Entities and foundations",
+                  "url": "/entities"
+                },
+                {
+                  "label": "Politicians",
+                  "url": "/politicians"
+                },
+                {
+                  "label": "Administrative staff",
+                  "url": "/staff"
+                }
               ]
             },
             {
               "title": "Service categories",
               "links": [
-                {"label": "Registry and civil status", "url": "/registry"},
-                {"label": "Culture and leisure", "url": "/culture"},
-                {"label": "Working life", "url": "/work"},
-                {"label": "Business and commerce", "url": "/business"},
-                {"label": "Public procurement", "url": "/procurement"},
-                {"label": "Cadastral and urban planning", "url": "/cadastral"},
-                {"label": "Tourism", "url": "/tourism"},
-                {"label": "Mobility and transport", "url": "/mobility"}
+                {
+                  "label": "Registry and civil status",
+                  "url": "/registry"
+                },
+                {
+                  "label": "Culture and leisure",
+                  "url": "/culture"
+                },
+                {
+                  "label": "Working life",
+                  "url": "/work"
+                },
+                {
+                  "label": "Business and commerce",
+                  "url": "/business"
+                },
+                {
+                  "label": "Public procurement",
+                  "url": "/procurement"
+                },
+                {
+                  "label": "Cadastral and urban planning",
+                  "url": "/cadastral"
+                },
+                {
+                  "label": "Tourism",
+                  "url": "/tourism"
+                },
+                {
+                  "label": "Mobility and transport",
+                  "url": "/mobility"
+                }
               ]
             },
             {
               "title": "News",
               "links": [
-                {"label": "News", "url": "/news"},
-                {"label": "Press releases", "url": "/press-releases"},
-                {"label": "Notices", "url": "/notices"}
+                {
+                  "label": "News",
+                  "url": "/news"
+                },
+                {
+                  "label": "Press releases",
+                  "url": "/press-releases"
+                },
+                {
+                  "label": "Notices",
+                  "url": "/notices"
+                }
               ]
             },
             {
-              "title": "Contacts",
+              "title": "Living in the city",
               "links": [
-                {"label": "Municipality of Name", "url": "/contacts"},
-                {"label": "Via Roma 123 - 00100 City", "url": "/contacts"}
+                {
+                  "label": "Places",
+                  "url": "/places"
+                },
+                {
+                  "label": "Events",
+                  "url": "/events"
+                }
               ]
             }
           ],
+          "contact": {
+            "title": "Contacts",
+            "address": "Municipality of Name\nVia Roma 123 - 00100 City\nTax code / VAT: 00123456789",
+            "office": "Public Relations Office",
+            "phone": "800 016 123",
+            "email": "public.service@municipality.it",
+            "links": [
+              {
+                "label": "Read FAQs",
+                "url": "/faqs",
+                "data_element": "faq"
+              },
+              {
+                "label": "Book an appointment",
+                "url": "/book-appointment"
+              },
+              {
+                "label": "Report a problem",
+                "url": "/tickets/create",
+                "data_element": "report-inefficiency"
+              },
+              {
+                "label": "Request assistance",
+                "url": "/assistance"
+              }
+            ],
+            "details": [
+              "Toll-free number: 800 016 123",
+              "SMS and WhatsApp: +39 320 1234567",
+              "Certified e-mail (PEC)",
+              "Switchboard: 012 3456"
+            ],
+            "office_url": "#"
+          },
           "legal_links": [
-            {"label": "Transparent administration", "url": "/transparent-administration"},
-            {"label": "Privacy policy", "url": "/privacy"},
-            {"label": "Legal notes", "url": "/legal-notes"},
-            {"label": "Accessibility statement", "url": "/accessibility"}
+            {
+              "label": "Transparent administration",
+              "url": "/transparent-administration"
+            },
+            {
+              "label": "Privacy policy",
+              "url": "/privacy"
+            },
+            {
+              "label": "Legal notes",
+              "url": "/legal-notes"
+            },
+            {
+              "label": "Accessibility statement",
+              "url": "/accessibility"
+            }
+          ],
+          "footer_bottom_links": [
+            {
+              "label": "Media policy",
+              "url": "/media-policy"
+            },
+            {
+              "label": "Sitemap",
+              "url": "/sitemap"
+            }
           ],
           "social": [
-            {"label": "Twitter", "url": "https://twitter.com"},
-            {"label": "Facebook", "url": "https://facebook.com"},
-            {"label": "YouTube", "url": "https://youtube.com"},
-            {"label": "Telegram", "url": "https://telegram.org"},
-            {"label": "WhatsApp", "url": "https://wa.me"},
-            {"label": "RSS", "url": "/rss.xml"}
+            {
+              "label": "Twitter",
+              "url": "https://twitter.com",
+              "icon": "it-twitter"
+            },
+            {
+              "label": "Facebook",
+              "url": "https://facebook.com",
+              "icon": "it-facebook"
+            },
+            {
+              "label": "YouTube",
+              "url": "https://youtube.com",
+              "icon": "it-youtube"
+            },
+            {
+              "label": "Telegram",
+              "url": "https://telegram.org",
+              "icon": "it-telegram"
+            },
+            {
+              "label": "WhatsApp",
+              "url": "https://wa.me",
+              "icon": "it-whatsapp"
+            },
+            {
+              "label": "RSS",
+              "url": "/rss.xml",
+              "icon": "it-rss"
+            }
           ],
-          "copyright": "© 2026 Municipality Name. All rights reserved."
+          "copyright": "© 2026 Municipality Name. All rights reserved.",
+          "eu_logo": {
+            "src": "themes/Sixteen/design-comuni/assets/images/logo-eu-inverted.svg",
+            "alt": "European Union logo"
+          },
+          "groups": {
+            "administration": {
+              "title": "Administration",
+              "links": [
+                {
+                  "label": "Government bodies",
+                  "url": "#"
+                },
+                {
+                  "label": "Administrative areas",
+                  "url": "#"
+                },
+                {
+                  "label": "Offices",
+                  "url": "#"
+                },
+                {
+                  "label": "Bodies and foundations",
+                  "url": "#"
+                },
+                {
+                  "label": "Politicians",
+                  "url": "#"
+                },
+                {
+                  "label": "Administrative staff",
+                  "url": "#"
+                },
+                {
+                  "label": "Documents and data",
+                  "url": "#"
+                }
+              ]
+            },
+            "services": {
+              "title": "Service categories",
+              "links": [
+                {
+                  "label": "Registry and civil status",
+                  "url": "#"
+                },
+                {
+                  "label": "Culture and leisure",
+                  "url": "#"
+                },
+                {
+                  "label": "Working life",
+                  "url": "#"
+                },
+                {
+                  "label": "Business and trade",
+                  "url": "#"
+                },
+                {
+                  "label": "Public procurement",
+                  "url": "#"
+                },
+                {
+                  "label": "Land registry and urban planning",
+                  "url": "#"
+                },
+                {
+                  "label": "Tourism",
+                  "url": "#"
+                },
+                {
+                  "label": "Mobility and transport",
+                  "url": "#"
+                },
+                {
+                  "label": "Education and training",
+                  "url": "#"
+                },
+                {
+                  "label": "Justice and public safety",
+                  "url": "#"
+                },
+                {
+                  "label": "Taxes, finance and fines",
+                  "url": "#"
+                },
+                {
+                  "label": "Environment",
+                  "url": "#"
+                },
+                {
+                  "label": "Health, wellness and assistance",
+                  "url": "#"
+                },
+                {
+                  "label": "Permits",
+                  "url": "#"
+                },
+                {
+                  "label": "Agriculture and fishing",
+                  "url": "#"
+                }
+              ]
+            },
+            "news": {
+              "title": "News",
+              "links": [
+                {
+                  "label": "News",
+                  "url": "#"
+                },
+                {
+                  "label": "Press releases",
+                  "url": "#"
+                },
+                {
+                  "label": "Notices",
+                  "url": "#"
+                }
+              ]
+            },
+            "living": {
+              "title": "Living in the municipality",
+              "links": [
+                {
+                  "label": "Places",
+                  "url": "#"
+                },
+                {
+                  "label": "Events",
+                  "url": "#"
+                }
+              ]
+            }
+          },
+          "social_title": "Follow us on"
         }
       }
     ]

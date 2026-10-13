@@ -1,0 +1,468 @@
+{
+    "id": "tests.pagamenti-imu-preferenze",
+    "slug": "tests.pagamenti-imu-preferenze",
+    "parent_slug": "tests",
+    "title": {
+        "it": "Calcolo IMU",
+        "en": "Calcolo IMU"
+    },
+    "layout": "test",
+    "sidebar_blocks": {
+        "it": [],
+        "en": []
+    },
+    "footer_blocks": null,
+    "description": "Pagina di prova pagamenti-imu-preferenze (flusso pagamento IMU) da JSON, resa dal blocco service-flow del tema Sixteen.",
+    "content_blocks": {
+        "it": [
+            {
+                "type": "service-flow",
+                "data": {
+                    "view": "pub_theme::components.blocks.service-flow.imu-design-comuni",
+                    "kind": "wizard-step",
+                    "breadcrumb": {
+                        "items": [
+                            {
+                                "label": "Home",
+                                "url": "/it/tests/homepage"
+                            },
+                            {
+                                "label": "Servizi",
+                                "url": "#"
+                            },
+                            {
+                                "label": "Tributi, finanze e contravvenzioni",
+                                "url": "#"
+                            }
+                        ],
+                        "current": "Pagamento IMU"
+                    },
+                    "heading": {
+                        "title": "Calcolo IMU"
+                    },
+                    "stepper": {
+                        "items": [
+                            {
+                                "label": "Informativa sulla privacy",
+                                "state": "confirmed"
+                            },
+                            {
+                                "label": "Dati generali",
+                                "state": "confirmed"
+                            },
+                            {
+                                "label": "Riepilogo",
+                                "state": "confirmed"
+                            },
+                            {
+                                "label": "Preferenze",
+                                "state": "active"
+                            },
+                            {
+                                "label": "Anteprima",
+                                "state": ""
+                            }
+                        ],
+                        "confirmed_label": "Confermato",
+                        "active_label": "Attivo",
+                        "index": "4/5"
+                    },
+                    "stepper_note": {
+                        "class": "title-xsmall d-lg-none my-5",
+                        "text": "I campi contraddistinti dal simbolo asterisco sono obbligatori"
+                    },
+                    "nav": {
+                        "aria_label": "Step",
+                        "back": "Indietro",
+                        "save": {
+                            "long": "Salva Richiesta",
+                            "short": "Salva"
+                        },
+                        "next": {
+                            "label": "Avanti",
+                            "icon": "it-chevron-right",
+                            "class": "",
+                            "modal": "#modal-terms"
+                        },
+                        "saved_message": "Richiesta salvata con successo"
+                    },
+                    "body": {
+                        "layout": "centered",
+                        "steps_content": "none",
+                        "sections_container": false,
+                        "col": "col-12 col-lg-8"
+                    },
+                    "sections": [
+                        {
+                            "type": "imu-card",
+                            "wrap": "none",
+                            "wrapper_class": "mb-40 mb-lg-4",
+                            "card_class": "card has-bkg-grey shadow-sm mb-0 p-lg-5 p-4",
+                            "header_class": "card-header border-0 p-0 mb-lg-20 m-0",
+                            "title": "H501 - Roma",
+                            "title_tag": "h3",
+                            "title_class": "subtitle-large mb-4",
+                            "content": {
+                                "kind": "imu-stack",
+                                "blocks": [
+                                    {
+                                        "kind": "imu-input",
+                                        "outer_class": "text-area-wrapper pt-25 pb-25 pl-25 pr-25 pt-lg-40 pb-lg-40 pl-lg-40 pr-lg-40 bg-white",
+                                        "group_class": "form-group cmp-input mb-0 border-bold",
+                                        "id": "amount-1",
+                                        "name": "amount-1",
+                                        "type": "text",
+                                        "label": "Importo versato*",
+                                        "hint": "Inserisci la somma già versata"
+                                    },
+                                    {
+                                        "kind": "imu-check-cards",
+                                        "cards": [
+                                            {
+                                                "class": "cmp-info-checkbox mt-4",
+                                                "card_class": "card pt-25 pb-25 pl-25 pr-25 pt-lg-40 pb-lg-40 pl-lg-40 pr-lg-40",
+                                                "id": "1",
+                                                "title": "Acconto",
+                                                "lines": [
+                                                    {
+                                                        "tag": "p",
+                                                        "class": "subtitle-smallmb-0",
+                                                        "text": "Data di scadenza:"
+                                                    },
+                                                    {
+                                                        "tag": "span",
+                                                        "class": "subtitle-small fw-semibold d-block mb-3",
+                                                        "text": "16/06/2021"
+                                                    }
+                                                ],
+                                                "toggle": {
+                                                    "class": "pb-2 border-bottom border-light",
+                                                    "id": "toggle-1",
+                                                    "label": "Ravvedimento",
+                                                    "lever_class": ""
+                                                },
+                                                "payment_rows": [
+                                                    {
+                                                        "label": "Giorni dalla scadenza",
+                                                        "value": "224 giorni"
+                                                    },
+                                                    {
+                                                        "label": "Sanzione",
+                                                        "value": "234,00 €"
+                                                    }
+                                                ]
+                                            },
+                                            {
+                                                "class": "cmp-info-checkbox mt-4",
+                                                "card_class": "card pt-25 pb-25 pl-25 pr-25 pt-lg-40 pb-lg-40 pl-lg-40 pr-lg-40",
+                                                "id": "2",
+                                                "title": "Saldo",
+                                                "lines": [
+                                                    {
+                                                        "tag": "p",
+                                                        "class": "subtitle-smallmb-3",
+                                                        "text": "Data di scadenza:",
+                                                        "child": {
+                                                            "class": "fw-semibold",
+                                                            "text": "16/06/2021"
+                                                        }
+                                                    }
+                                                ],
+                                                "toggle": {
+                                                    "class": "",
+                                                    "id": "toggle-2",
+                                                    "label": "Ravvedimento",
+                                                    "lever_class": ""
+                                                }
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "kind": "imu-total",
+                                        "class": "mt-4 pt-25 pb-25 pl-25 pr-25 pt-lg-40 pb-lg-40 pl-lg-40 pr-lg-40",
+                                        "label": "Totale da versare",
+                                        "value": "734,00 €",
+                                        "input": {
+                                            "kind": "imu-input",
+                                            "group_class": "form-group cmp-input mb-3",
+                                            "id": "tot-payed",
+                                            "name": "tot-payed",
+                                            "type": "text",
+                                            "label": "Inserisci importo*",
+                                            "hint": "Inserisci l’importo che desideri versare adesso",
+                                            "value": "734,00 €"
+                                        },
+                                        "remaining": {
+                                            "label": "Rimanente da versare",
+                                            "value": "34,00 €"
+                                        }
+                                    }
+                                ]
+                            }
+                        },
+                        {
+                            "type": "imu-card",
+                            "wrap": "none",
+                            "wrapper_class": "mb-40 mb-lg-4",
+                            "card_class": "card has-bkg-grey shadow-sm mb-0 p-lg-5 p-4",
+                            "header_class": "card-header border-0 p-0 mb-lg-20 m-0",
+                            "title": "L736 - Venezia",
+                            "title_tag": "h3",
+                            "title_class": "subtitle-large mb-4",
+                            "content": {
+                                "kind": "imu-stack",
+                                "blocks": [
+                                    {
+                                        "kind": "imu-input",
+                                        "outer_class": "text-area-wrapper pt-25 pb-25 pl-25 pr-25 pt-lg-40 pb-lg-40 pl-lg-40 pr-lg-40 bg-white",
+                                        "group_class": "form-group cmp-input mb-0 border-bold",
+                                        "id": "amount-5",
+                                        "name": "amount-5",
+                                        "type": "text",
+                                        "label": "Importo versato*",
+                                        "hint": "Inserisci la somma già versata"
+                                    },
+                                    {
+                                        "kind": "imu-check-cards",
+                                        "cards": [
+                                            {
+                                                "class": "cmp-info-checkbox mt-4",
+                                                "card_class": "card pt-25 pb-25 pl-25 pr-25 pt-lg-40 pb-lg-40 pl-lg-40 pr-lg-40",
+                                                "id": "3",
+                                                "title": "Acconto",
+                                                "lines": [
+                                                    {
+                                                        "tag": "p",
+                                                        "class": "subtitle-smallmb-3",
+                                                        "text": "Data di scadenza",
+                                                        "child": {
+                                                            "class": "fw-semibold",
+                                                            "text": "16/06/2021"
+                                                        }
+                                                    }
+                                                ]
+                                            },
+                                            {
+                                                "class": "cmp-info-checkbox mt-4",
+                                                "card_class": "card pt-25 pb-25 pl-25 pr-25 pt-lg-40 pb-lg-40 pl-lg-40 pr-lg-40",
+                                                "id": "4",
+                                                "title": "Saldo",
+                                                "lines": [
+                                                    {
+                                                        "tag": "p",
+                                                        "class": "subtitle-smallmb-3",
+                                                        "text": "Data di scadenza:",
+                                                        "child": {
+                                                            "class": "fw-semibold",
+                                                            "text": "16/06/2021"
+                                                        }
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "kind": "imu-total",
+                                        "class": "mt-4 pt-25 pb-25 pl-25 pr-25 pt-lg-40 pb-lg-40 pl-lg-40 pr-lg-40",
+                                        "label": "Totale da versare",
+                                        "value": "600,00 €",
+                                        "input": {
+                                            "kind": "imu-input",
+                                            "group_class": "form-group cmp-input mb-3",
+                                            "id": "tot-payed-1",
+                                            "name": "tot-payed-1",
+                                            "type": "text",
+                                            "label": "Inserisci importo*",
+                                            "hint": "Inserisci l’importo che desideri versare adesso",
+                                            "value": "600,00 €"
+                                        },
+                                        "remaining": {
+                                            "label": "Rimanente da versare",
+                                            "value": "400,00 €"
+                                        }
+                                    }
+                                ]
+                            }
+                        },
+                        {
+                            "type": "imu-card",
+                            "wrap": "none",
+                            "wrapper_class": "",
+                            "card_class": "card has-bkg-grey shadow-sm mb-0 p-lg-5 p-4",
+                            "header_class": "card-header border-0 p-0 mb-lg-20 m-0",
+                            "title": "L065 - Tavagnacco",
+                            "title_tag": "h3",
+                            "title_class": "subtitle-large mb-4",
+                            "content": {
+                                "kind": "imu-stack",
+                                "blocks": [
+                                    {
+                                        "kind": "imu-input",
+                                        "outer_class": "text-area-wrapper pt-25 pb-25 pl-25 pr-25 pt-lg-40 pb-lg-40 pl-lg-40 pr-lg-40 bg-white",
+                                        "group_class": "form-group cmp-input mb-0 border-bold",
+                                        "id": "amount-2",
+                                        "name": "amount-2",
+                                        "type": "text",
+                                        "label": "Importo versato*",
+                                        "hint": "Inserisci la somma già versata"
+                                    },
+                                    {
+                                        "kind": "imu-check-cards",
+                                        "cards": [
+                                            {
+                                                "class": "cmp-info-checkbox mt-4",
+                                                "card_class": "card pt-25 pb-25 pl-25 pr-25 pt-lg-40 pb-lg-40 pl-lg-40 pr-lg-40",
+                                                "id": "5",
+                                                "title": "Acconto",
+                                                "lines": [
+                                                    {
+                                                        "tag": "p",
+                                                        "class": "subtitle-smallmb-0",
+                                                        "text": "Data di scadenza:"
+                                                    },
+                                                    {
+                                                        "tag": "span",
+                                                        "class": "subtitle-small fw-semibold d-block mb-3",
+                                                        "text": "16/06/2021"
+                                                    }
+                                                ],
+                                                "toggle": {
+                                                    "class": "pb-2 border-bottom border-light",
+                                                    "id": "toggle-5",
+                                                    "label": "Ravvedimento",
+                                                    "lever_class": ""
+                                                },
+                                                "payment_rows": [
+                                                    {
+                                                        "label": "Giorni dalla scadenza",
+                                                        "value": "224 giorni"
+                                                    },
+                                                    {
+                                                        "label": "Sanzione",
+                                                        "value": "148,67 €"
+                                                    }
+                                                ]
+                                            },
+                                            {
+                                                "class": "cmp-info-checkbox mt-4",
+                                                "card_class": "card pt-25 pb-25 pl-25 pr-25 pt-lg-40 pb-lg-40 pl-lg-40 pr-lg-40",
+                                                "id": "6",
+                                                "title": "Saldo",
+                                                "lines": [
+                                                    {
+                                                        "tag": "p",
+                                                        "class": "subtitle-smallmb-3",
+                                                        "text": "Data di scadenza:",
+                                                        "child": {
+                                                            "class": "fw-semibold",
+                                                            "text": "16/06/2021"
+                                                        }
+                                                    }
+                                                ],
+                                                "toggle": {
+                                                    "class": "pb-2 border-bottom border-light",
+                                                    "id": "toggle-6",
+                                                    "label": "Ravvedimento",
+                                                    "lever_class": ""
+                                                },
+                                                "payment_rows": [
+                                                    {
+                                                        "label": "Giorni dalla scadenza",
+                                                        "value": "224 giorni"
+                                                    },
+                                                    {
+                                                        "label": "Sanzione",
+                                                        "value": "148,67 €"
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "kind": "imu-total",
+                                        "class": "mt-4 pt-25 pb-25 pl-25 pr-25 pt-lg-40 pb-lg-40 pl-lg-40 pr-lg-40",
+                                        "label": "Totale da versare",
+                                        "value": "900,00 €",
+                                        "input": {
+                                            "kind": "imu-input",
+                                            "group_class": "form-group cmp-input mb-3",
+                                            "id": "tot-payed-2",
+                                            "name": "tot-payed-2",
+                                            "type": "text",
+                                            "label": "Inserisci importo*",
+                                            "hint": "Inserisci l’importo che desideri versare adesso",
+                                            "value": "900,00 €"
+                                        },
+                                        "remaining": {
+                                            "label": "Rimanente da versare",
+                                            "value": "00,00 €"
+                                        }
+                                    }
+                                ]
+                            }
+                        }
+                    ],
+                    "contacts": {
+                        "layout": "offset",
+                        "col": "col-12 col-lg-6",
+                        "main": {
+                            "title": "Contatta il comune",
+                            "items": [
+                                {
+                                    "icon": "it-help-circle",
+                                    "label": "Leggi le domande frequenti",
+                                    "url": "#"
+                                },
+                                {
+                                    "icon": "it-mail",
+                                    "label": "Richiedi assistenza",
+                                    "url": "#",
+                                    "element": "contacts"
+                                },
+                                {
+                                    "icon": "it-hearing",
+                                    "label": "Chiama il numero verde 05 0505",
+                                    "url": "#"
+                                },
+                                {
+                                    "icon": "it-calendar",
+                                    "label": "Prenota appuntamento",
+                                    "url": "#",
+                                    "element": "appointment-booking"
+                                }
+                            ]
+                        }
+                    },
+                    "modals": [
+                        {
+                            "type": "dialog",
+                            "id": "modal-terms",
+                            "close_label": "Chiudi finestra modale",
+                            "header": {
+                                "title": "Termini e condizioni",
+                                "info": "Cliccando su Conferma e invia confermi di aver preso visione dei termini e delle condizioni di servizio.",
+                                "link": {
+                                    "label": "Leggi termini e condizioni",
+                                    "url": "#"
+                                }
+                            },
+                            "footer": {
+                                "buttons": [
+                                    {
+                                        "label": "Conferma e invia",
+                                        "variant": "primary"
+                                    },
+                                    {
+                                        "label": "Annulla",
+                                        "variant": "outline"
+                                    }
+                                ]
+                            }
+                        }
+                    ]
+                }
+            }
+        ],
+        "en": []
+    }
+}

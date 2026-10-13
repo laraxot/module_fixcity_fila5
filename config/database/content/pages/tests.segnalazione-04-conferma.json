@@ -1,0 +1,172 @@
+{
+    "id": "tests.segnalazione-04-conferma",
+    "slug": "tests.segnalazione-04-conferma",
+    "parent_slug": "tests",
+    "title": {
+        "it": "Segnalazione inviata",
+        "en": "Report sent"
+    },
+    "layout": "test",
+    "description": "Step 4 della segnalazione disservizio: conferma invio e ricevuta. Contenuto da JSON, reso dal blocco report-step del tema Sixteen.",
+    "sidebar_blocks": {
+        "it": [],
+        "en": []
+    },
+    "footer_blocks": null,
+    "content_blocks": {
+        "it": [
+            {
+                "type": "report-step",
+                "data": {
+                    "view": "pub_theme::components.blocks.report-step.design-comuni",
+                    "layout": "done",
+                    "title": "Segnalazione inviata",
+                    "breadcrumb": {
+                        "items": [
+                            {
+                                "label": "Home",
+                                "url": "/it/tests/homepage"
+                            },
+                            {
+                                "label": "Servizi",
+                                "url": "#"
+                            }
+                        ],
+                        "current": "Segnalazione disservizio"
+                    },
+                    "heading": {
+                        "icon": "it-check-circle",
+                        "lines": [
+                            {
+                                "class": "subtitle-small",
+                                "parts": [
+                                    {
+                                        "text": "Grazie, abbiamo ricevuto la tua"
+                                    },
+                                    {
+                                        "strong": "segnalazione AN4059281."
+                                    }
+                                ]
+                            },
+                            {
+                                "class": "subtitle-small",
+                                "parts": [
+                                    {
+                                        "text": "Sarà visibile sulla"
+                                    },
+                                    {
+                                        "link": {
+                                            "label": "lista di tutte segnalazioni",
+                                            "url": "#"
+                                        }
+                                    },
+                                    {
+                                        "text": "una volta presa in carico dall’amministrazione."
+                                    }
+                                ]
+                            },
+                            {
+                                "class": "subtitle-small pt-3 pt-lg-4",
+                                "parts": [
+                                    {
+                                        "text": "Abbiamo inviato il riepilogo all’email:"
+                                    },
+                                    {
+                                        "br": true
+                                    },
+                                    {
+                                        "strong": "giulia.bianchi@gmail.com"
+                                    }
+                                ]
+                            }
+                        ],
+                        "button": {
+                            "icon": "it-download",
+                            "label": "Scarica la ricevuta (PDF 100KB)"
+                        },
+                        "followup": {
+                            "label": "Consulta la richiesta",
+                            "url": "#",
+                            "text": "nella tua area riservata"
+                        }
+                    },
+                    "related": {
+                        "title": "Servizi correlati",
+                        "items": [
+                            {
+                                "label": "Richiesta appuntamento",
+                                "url": "#",
+                                "icon": "it-settings"
+                            }
+                        ]
+                    },
+                    "feedback": {
+                        "title": "Quanto è stato facile usare questo servizio?",
+                        "col_class": "col-12 col-lg-6 p-lg-0 px-4",
+                        "legend": "Valuta da 1 a 5 stelle la pagina",
+                        "star_label": "Valuta %d stelle su 5",
+                        "thanks": "Grazie, il tuo parere ci aiuterà a migliorare il servizio!",
+                        "positive": {
+                            "question": "Quali sono stati gli aspetti che hai preferito?",
+                            "answers": [
+                                "Le indicazioni erano chiare",
+                                "Le indicazioni erano complete",
+                                "Capivo sempre che stavo procedendo correttamente",
+                                "Non ho avuto problemi tecnici",
+                                "Altro"
+                            ]
+                        },
+                        "negative": {
+                            "question": "Dove hai incontrato le maggiori difficoltà?",
+                            "answers": [
+                                "A volte le indicazioni non erano chiare",
+                                "A volte le indicazioni non erano complete",
+                                "A volte non capivo se stavo procedendo correttamente",
+                                "Ho avuto problemi tecnici",
+                                "Altro"
+                            ]
+                        },
+                        "detail": {
+                            "question": "Vuoi aggiungere altri dettagli?",
+                            "label": "Dettaglio",
+                            "help": "Inserire massimo 200 caratteri"
+                        },
+                        "back": "Indietro",
+                        "next": "Avanti"
+                    },
+                    "contacts": {
+                        "layout": "offset",
+                        "main": {
+                            "title": "Contatta il comune",
+                            "items": [
+                                {
+                                    "icon": "it-help-circle",
+                                    "label": "Leggi le domande frequenti",
+                                    "url": "#"
+                                },
+                                {
+                                    "icon": "it-mail",
+                                    "label": "Richiedi assistenza",
+                                    "url": "#",
+                                    "element": "contacts"
+                                },
+                                {
+                                    "icon": "it-hearing",
+                                    "label": "Chiama il numero verde 05 0505",
+                                    "url": "#"
+                                },
+                                {
+                                    "icon": "it-calendar",
+                                    "label": "Prenota appuntamento",
+                                    "url": "#",
+                                    "element": "appointment-booking"
+                                }
+                            ]
+                        }
+                    }
+                }
+            }
+        ],
+        "en": []
+    }
+}

@@ -1,0 +1,615 @@
+{
+    "id": "tests.servizio-dettaglio",
+    "slug": "tests.servizio-dettaglio",
+    "parent_slug": "tests",
+    "title": {
+        "it": "Iscrizione alla Scuola dell’infanzia",
+        "en": "Nursery school enrolment"
+    },
+    "layout": "test",
+    "sidebar_blocks": {
+        "it": [],
+        "en": []
+    },
+    "footer_blocks": null,
+    "description": "Dettaglio di un servizio con indice, sezioni, contatti e contenuti correlati (riferimento sito/servizio-dettaglio). Contenuto da JSON, reso dal blocco service-page-detail del tema Sixteen.",
+    "content_blocks": {
+        "it": [
+            {
+                "type": "service-page-detail",
+                "data": {
+                    "view": "pub_theme::components.blocks.service-page-detail.design-comuni",
+                    "breadcrumb": {
+                        "items": [
+                            {
+                                "label": "Home",
+                                "url": "/it/tests/homepage"
+                            },
+                            {
+                                "label": "Servizi",
+                                "url": "#"
+                            },
+                            {
+                                "label": "Educazione e formazione",
+                                "url": "#"
+                            }
+                        ],
+                        "current": "Iscrizione alla scuola dell’infanzia"
+                    },
+                    "title": "Iscrizione alla Scuola dell’infanzia",
+                    "status": {
+                        "label": "Servizio attivo",
+                        "element": "service-status"
+                    },
+                    "subtitle": "Come iscrivere i propri figli alle Scuole dell'infanzia comunali o nelle strutture accreditate.",
+                    "primary_action": {
+                        "label": "Richiesta di iscrizione online",
+                        "element": "service-description"
+                    },
+                    "actions": [
+                        {
+                            "id": "shareActions",
+                            "aria_label": "condividi sui social",
+                            "icon": "it-share",
+                            "label": "Condividi",
+                            "items": [
+                                {
+                                    "icon": "it-facebook",
+                                    "label": "Facebook",
+                                    "url": "#"
+                                },
+                                {
+                                    "icon": "it-twitter",
+                                    "label": "Twitter",
+                                    "url": "#"
+                                },
+                                {
+                                    "icon": "it-linkedin",
+                                    "label": "Linkedin",
+                                    "url": "#"
+                                },
+                                {
+                                    "icon": "it-whatsapp",
+                                    "label": "Whatsapp",
+                                    "url": "#"
+                                }
+                            ]
+                        },
+                        {
+                            "id": "viewActions",
+                            "aria_label": "vedi azioni da compiere sulla pagina",
+                            "icon": "it-more-items",
+                            "label": "Vedi azioni",
+                            "items": [
+                                {
+                                    "icon": "it-print",
+                                    "label": "Stampa",
+                                    "url": "#"
+                                },
+                                {
+                                    "icon": "it-hearing",
+                                    "label": "Ascolta",
+                                    "url": "#"
+                                },
+                                {
+                                    "icon": "it-mail",
+                                    "label": "Invia",
+                                    "url": "#"
+                                }
+                            ]
+                        }
+                    ],
+                    "side_nav": {
+                        "aria_label": "INDICE DELLA PAGINA",
+                        "title": "INDICE DELLA PAGINA",
+                        "items": [
+                            {
+                                "anchor": "who-needs",
+                                "label": "A chi è rivolto"
+                            },
+                            {
+                                "anchor": "description",
+                                "label": "Descrizione"
+                            },
+                            {
+                                "anchor": "how-to",
+                                "label": "Come fare"
+                            },
+                            {
+                                "anchor": "needed",
+                                "label": "Cosa serve"
+                            },
+                            {
+                                "anchor": "obtain",
+                                "label": "Cosa si ottiene"
+                            },
+                            {
+                                "anchor": "deadlines",
+                                "label": "Tempi e scadenze"
+                            },
+                            {
+                                "anchor": "costs",
+                                "label": "Quanto costa"
+                            },
+                            {
+                                "anchor": "submit-request",
+                                "label": "Accedi al servizio"
+                            },
+                            {
+                                "anchor": "more-info",
+                                "label": "Ulteriori informazioni"
+                            },
+                            {
+                                "anchor": "conditions",
+                                "label": "Condizioni di servizio"
+                            },
+                            {
+                                "anchor": "contacts",
+                                "label": "Contatti"
+                            }
+                        ]
+                    },
+                    "sections": [
+                        {
+                            "id": "who-needs",
+                            "title": "A chi è rivolto",
+                            "type": "content",
+                            "blocks": [
+                                {
+                                    "type": "richtext",
+                                    "element": "service-addressed",
+                                    "nodes": [
+                                        {
+                                            "type": "list",
+                                            "items": [
+                                                "Bambini di età compresa tra i 3 e i 5 anni compiuti o da compiere entro il 31 dicembre di ogni anno.",
+                                                "Bambini che compiranno i 3 anni dopo il 31 dicembre e, comunque, entro e non oltre il 30 aprile dell’anno successivo (ammissione anticipata)."
+                                            ]
+                                        }
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "id": "description",
+                            "title": "Descrizione",
+                            "type": "content",
+                            "blocks": [
+                                {
+                                    "type": "richtext",
+                                    "element": "",
+                                    "nodes": [
+                                        {
+                                            "type": "p",
+                                            "segments": [
+                                                "Le domande di iscrizione devono essere presentate alle scuole nei mesi di gennaio/febbraio. L'Amministrazione pubblica un avviso con le modalità di accesso e i termini di presentazione della domanda.",
+                                                "",
+                                                "Le graduatorie ai fini dell'inserimento dei bambini sono curate dal Servizio Istruzione del Comune che le approva con determinazione dirigenziale."
+                                            ]
+                                        }
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "id": "how-to",
+                            "title": "Come fare",
+                            "type": "content",
+                            "blocks": [
+                                {
+                                    "type": "richtext",
+                                    "element": "service-how-to",
+                                    "nodes": [
+                                        {
+                                            "type": "p",
+                                            "segments": [
+                                                "Puoi presentare la richiesta di iscrizione esclusivamente online dalle ore 10:00 del 4 gennaio 2022 alle 20:00 del 4 febbraio 2022. I posti assegnati vanno accettati entro 15 giorni dalla pubblicazione della graduatoria."
+                                            ]
+                                        }
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "id": "needed",
+                            "title": "Cosa serve",
+                            "type": "content",
+                            "blocks": [
+                                {
+                                    "type": "richtext",
+                                    "element": "service-needed",
+                                    "nodes": [
+                                        {
+                                            "type": "p",
+                                            "segments": [
+                                                "Per accedere al servizio, assicurati di avere:"
+                                            ]
+                                        },
+                                        {
+                                            "type": "list",
+                                            "items": [
+                                                "SPID (Sistema Pubblico per la gestione dell'Identità Digitale), Carta identità elettronica (CIE) o Carta Nazionale dei Servizi (CNS);",
+                                                "la documentazione attestante eventuali disabilità",
+                                                "il permesso di soggiorno del genitore che presenta la richiesta",
+                                                "l’ISEE in corso di validità"
+                                            ]
+                                        }
+                                    ]
+                                }
+                            ],
+                            "box": {
+                                "padding": 3
+                            }
+                        },
+                        {
+                            "id": "obtain",
+                            "title": "Cosa si ottiene",
+                            "type": "content",
+                            "blocks": [
+                                {
+                                    "type": "richtext",
+                                    "element": "service-achieved",
+                                    "nodes": [
+                                        {
+                                            "type": "p",
+                                            "segments": [
+                                                "Se - in base ai requisiti e alla graduatoria - la richiesta verrà accettata, sarà possibile perfezionare l’iscrizione all’asilo."
+                                            ]
+                                        }
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "id": "deadlines",
+                            "type": "timeline",
+                            "title": "Tempi e scadenze",
+                            "text": {
+                                "element": "service-calendar-text",
+                                "nodes": [
+                                    {
+                                        "type": "p",
+                                        "segments": [
+                                            "Le graduatorie verranno aggiornate ogni mese con nuove assegnazioni e trasferimenti in base ai posti disponibili."
+                                        ]
+                                    }
+                                ]
+                            },
+                            "calendar_element": "service-calendar-list",
+                            "dates": [
+                                {
+                                    "year": "2022",
+                                    "day": "04",
+                                    "month": "gen",
+                                    "label": "Apertura iscrizioni"
+                                },
+                                {
+                                    "year": "2022",
+                                    "day": "04",
+                                    "month": "feb",
+                                    "label": "Termine presentazione domande"
+                                },
+                                {
+                                    "year": "2022",
+                                    "day": "02",
+                                    "month": "mar",
+                                    "label": "Pubblicazione graduatorie"
+                                },
+                                {
+                                    "year": "2022",
+                                    "day": "02",
+                                    "month": "apr",
+                                    "label": "Perfezionamento domande"
+                                }
+                            ]
+                        },
+                        {
+                            "id": "costs",
+                            "title": "Quanto costa",
+                            "type": "content",
+                            "blocks": [
+                                {
+                                    "type": "richtext",
+                                    "element": "",
+                                    "nodes": [
+                                        {
+                                            "type": "p",
+                                            "segments": [
+                                                "L’importo della retta si basa sul reddito del nucleo famigliare in base al certificato ISEE. Per maggiori informazioni, consulta la tabella allegata al bando."
+                                            ]
+                                        }
+                                    ]
+                                },
+                                {
+                                    "type": "file",
+                                    "label": "Tabella rette in base al reddito",
+                                    "aria": "Scarica Tabella rette in base al reddito ",
+                                    "title": "Scarica Tabella rette in base al reddito ",
+                                    "element": "service-file",
+                                    "url": "#",
+                                    "icon": "it-clip"
+                                }
+                            ]
+                        },
+                        {
+                            "id": "submit-request",
+                            "title": "Accedi al servizio",
+                            "type": "content",
+                            "blocks": [
+                                {
+                                    "type": "paragraph",
+                                    "text": "Puoi richiedere l’iscrizione alla Scuola dell’infanzia direttamente online tramite identità digitale.",
+                                    "element": "service-generic-access",
+                                    "spacing": "mb-4"
+                                },
+                                {
+                                    "type": "button",
+                                    "style": "primary",
+                                    "label": "Richiedi iscrizione online",
+                                    "element": "service-online-access"
+                                },
+                                {
+                                    "type": "paragraph",
+                                    "text": "Oppure, puoi prenotare un appuntamento e presentarti presso gli uffici.",
+                                    "element": "service-generic-access",
+                                    "spacing": "mt-4"
+                                },
+                                {
+                                    "type": "button",
+                                    "style": "outline",
+                                    "label": "Prenota appuntamento",
+                                    "element": "service-booking-access"
+                                }
+                            ],
+                            "box": {
+                                "padding": 4
+                            }
+                        },
+                        {
+                            "id": "more-info",
+                            "title": "Ulteriori informazioni",
+                            "type": "content",
+                            "blocks": [
+                                {
+                                    "type": "subtitle",
+                                    "text": "Graduatorie di accesso"
+                                },
+                                {
+                                    "type": "richtext",
+                                    "element": "",
+                                    "nodes": [
+                                        {
+                                            "type": "p",
+                                            "segments": [
+                                                "I bambini già ammessi alla frequenza nell’anno scolastico in corso sono riammessi di diritto nell’anno scolastico successivo previa richiesta, su appositi moduli trasmessi alle strutture di riferimento.",
+                                                "Alle domande viene attribuito un punteggio secondo i criteri stabiliti dall'Amministrazione Comunale. La famiglia può in qualsiasi momento rinunciare al posto, presentando al responsabile del servizio specifica dichiarazione scritta di rinuncia.",
+                                                "",
+                                                "Se hai già inviato la richiesta di iscrizione puoi vedere le graduatorie d’accesso nella sezione documenti.\""
+                                            ]
+                                        }
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "id": "conditions",
+                            "title": "Condizioni di servizio",
+                            "type": "content",
+                            "blocks": [
+                                {
+                                    "type": "paragraph",
+                                    "text": "Per conoscere i dettagli di scadenze, requisiti e altre informazioni importanti, leggi i termini e le condizioni di servizio.",
+                                    "element": "",
+                                    "spacing": ""
+                                },
+                                {
+                                    "type": "file",
+                                    "label": "Termini e condizioni di servizio (PDF 1MB)",
+                                    "aria": "Scarica Termini e condizioni di servizio (PDF 1MB)",
+                                    "title": "Scarica Termini e condizioni di servizio (PDF 1MB)",
+                                    "element": "",
+                                    "url": "#",
+                                    "icon": "it-clip"
+                                }
+                            ]
+                        },
+                        {
+                            "id": "contacts",
+                            "type": "contacts",
+                            "title": "Contatti",
+                            "card": {
+                                "title": "Ufficio Scuola",
+                                "url": "#",
+                                "element": "service-area",
+                                "lines": [
+                                    {
+                                        "label": "Via Dei Transiti 21, 50302"
+                                    },
+                                    {
+                                        "label": "(+39) 05 505 2334",
+                                        "url": "tel:+39055052334"
+                                    },
+                                    {
+                                        "label": "ufficioscuola@email.it",
+                                        "url": "mailto:ufficioscuola@email.it"
+                                    }
+                                ],
+                                "avatar": {
+                                    "src": "https://picsum.photos/200/200",
+                                    "alt": "Immagine"
+                                }
+                            },
+                            "topics": {
+                                "title": "Argomenti:",
+                                "element": "service-topic",
+                                "items": [
+                                    "Educazione",
+                                    "Famiglia",
+                                    "Scuola materna",
+                                    "Bambini 3 - 5 anni"
+                                ]
+                            },
+                            "updated": "Pagina aggiornata il 14/04/2022"
+                        }
+                    ],
+                    "related": {
+                        "title": "Contenuti correlati",
+                        "items": [
+                            {
+                                "icon": "it-pa",
+                                "aria_hidden": false,
+                                "title": "Amministrazione",
+                                "links": [
+                                    {
+                                        "label": "Area Servizi Civici",
+                                        "url": "#"
+                                    }
+                                ]
+                            },
+                            {
+                                "icon": "it-settings",
+                                "aria_hidden": true,
+                                "title": "Servizi",
+                                "links": [
+                                    {
+                                        "label": "Pagamento retta scolastica",
+                                        "url": "#"
+                                    },
+                                    {
+                                        "label": "Servizio di trasporto scolastico",
+                                        "url": "#"
+                                    }
+                                ]
+                            },
+                            {
+                                "icon": "it-file",
+                                "aria_hidden": true,
+                                "title": "Documenti",
+                                "links": [
+                                    {
+                                        "label": "Attestazione ISEE",
+                                        "url": "#"
+                                    },
+                                    {
+                                        "label": "Carta dei servizi educativi all'infanzia",
+                                        "url": "#"
+                                    }
+                                ]
+                            },
+                            {
+                                "icon": "it-calendar",
+                                "aria_hidden": true,
+                                "title": "Notizie",
+                                "links": [
+                                    {
+                                        "label": "Justo eget magna fermentum",
+                                        "url": "#"
+                                    },
+                                    {
+                                        "label": "Dolor magna eget est lorem",
+                                        "url": "#"
+                                    },
+                                    {
+                                        "label": "Justo eget magna fermentum",
+                                        "url": "#"
+                                    },
+                                    {
+                                        "label": "Dolor magna eget est lorem",
+                                        "url": "#"
+                                    }
+                                ],
+                                "more": {
+                                    "label": "Vedi altri 2",
+                                    "id": "collapseExample",
+                                    "links": [
+                                        {
+                                            "label": "Servizio di trasporto scolastico",
+                                            "url": "#"
+                                        },
+                                        {
+                                            "label": "Servizio di trasporto scolastico",
+                                            "url": "#"
+                                        }
+                                    ]
+                                }
+                            }
+                        ]
+                    },
+                    "feedback": {
+                        "title": "Quanto sono chiare le informazioni su questa pagina?",
+                        "legend": "Valuta da 1 a 5 stelle la pagina",
+                        "star_label": "Valuta %d stelle su 5",
+                        "thanks": "Grazie, il tuo parere ci aiuterà a migliorare il servizio!",
+                        "positive": {
+                            "question": "Quali sono stati gli aspetti che hai preferito?",
+                            "answers": [
+                                "Le indicazioni erano chiare",
+                                "Le indicazioni erano complete",
+                                "Capivo sempre che stavo procedendo correttamente",
+                                "Non ho avuto problemi tecnici",
+                                "Altro"
+                            ]
+                        },
+                        "negative": {
+                            "question": "Dove hai incontrato le maggiori difficoltà?",
+                            "answers": [
+                                "A volte le indicazioni non erano chiare",
+                                "A volte le indicazioni non erano complete",
+                                "A volte non capivo se stavo procedendo correttamente",
+                                "Ho avuto problemi tecnici",
+                                "Altro"
+                            ]
+                        },
+                        "detail": {
+                            "question": "Vuoi aggiungere altri dettagli?",
+                            "label": "Dettaglio",
+                            "help": "Inserire massimo 200 caratteri"
+                        },
+                        "back": "Indietro",
+                        "next": "Avanti"
+                    },
+                    "contacts": {
+                        "main": {
+                            "title": "Contatta il comune",
+                            "items": [
+                                {
+                                    "icon": "it-help-circle",
+                                    "label": "Leggi le domande frequenti",
+                                    "url": "#"
+                                },
+                                {
+                                    "icon": "it-mail",
+                                    "label": "Richiedi assistenza",
+                                    "url": "#",
+                                    "element": "contacts"
+                                },
+                                {
+                                    "icon": "it-hearing",
+                                    "label": "Chiama il numero verde 05 0505",
+                                    "url": "#"
+                                },
+                                {
+                                    "icon": "it-calendar",
+                                    "label": "Prenota appuntamento",
+                                    "url": "#",
+                                    "element": "appointment-booking"
+                                }
+                            ]
+                        },
+                        "problems": {
+                            "title": "Problemi in città",
+                            "items": [
+                                {
+                                    "icon": "it-map-marker-circle",
+                                    "label": "Segnala disservizio",
+                                    "url": "#"
+                                }
+                            ]
+                        }
+                    }
+                }
+            }
+        ],
+        "en": []
+    }
+}

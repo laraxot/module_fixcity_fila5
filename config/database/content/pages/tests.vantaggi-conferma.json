@@ -1,0 +1,190 @@
+{
+    "id": "tests.vantaggi-conferma",
+    "slug": "tests.vantaggi-conferma",
+    "parent_slug": "tests",
+    "title": {
+        "it": "Richiesta inviata",
+        "en": "Richiesta inviata"
+    },
+    "layout": "test",
+    "sidebar_blocks": {
+        "it": [],
+        "en": []
+    },
+    "footer_blocks": null,
+    "description": "Pagina di prova vantaggi-conferma (flusso vantaggi economici) da JSON, resa dal blocco service-flow del tema Sixteen.",
+    "content_blocks": {
+        "it": [
+            {
+                "type": "service-flow",
+                "data": {
+                    "view": "pub_theme::components.blocks.service-flow.vantaggi-design-comuni",
+                    "kind": "confirmation",
+                    "breadcrumb": {
+                        "items": [
+                            {
+                                "label": "Home",
+                                "url": "/it/tests/homepage"
+                            },
+                            {
+                                "label": "Servizi",
+                                "url": "#"
+                            }
+                        ],
+                        "current": "Assegno di maternità"
+                    },
+                    "heading": {
+                        "title": "Richiesta inviata",
+                        "icon": {
+                            "name": "it-check-circle",
+                            "class": "icon-success mr-10 big-lg-icon mb-1"
+                        },
+                        "subtitles": [
+                            {
+                                "text": "Grazie, abbiamo ricevuto la tua richiesta per la pratica **AN4059281 assegno di maternità.**",
+                                "class": "subtitle-small"
+                            },
+                            {
+                                "text": "Abbiamo inviato il riepilogo all’email:\n**jcs@gmail.com**",
+                                "class": "subtitle-small pt-3 pt-lg-4 mb-0"
+                            }
+                        ],
+                        "buttons": [
+                            {
+                                "label": "Scarica la ricevuta (PDF 100KB)",
+                                "icon": "it-download",
+                                "class": "btn btn-outline-primary fw-bold"
+                            }
+                        ],
+                        "rule": "d-none d-lg-block mt-3 mb-40"
+                    },
+                    "side_nav": {
+                        "class": "d-none d-sm-none d-lg-block col-lg-3",
+                        "aria_label": "INDICE DELLA PAGINA",
+                        "title": "INDICE DELLA PAGINA",
+                        "items": [
+                            {
+                                "label": "Prossimi passi",
+                                "anchor": "next-step"
+                            },
+                            {
+                                "label": "Servizi correlati",
+                                "anchor": "related-service"
+                            }
+                        ]
+                    },
+                    "sections": [
+                        {
+                            "type": "vantaggi-timeline",
+                            "id": "next-step",
+                            "class": "",
+                            "title": "Prossimi passi",
+                            "entries": [
+                                {
+                                    "year": "2022",
+                                    "day": "20",
+                                    "month": "apr",
+                                    "label": "Esito richiesta"
+                                }
+                            ],
+                            "footer": {
+                                "class": "mt-4 mt-lg-30 mb-10",
+                                "link": {
+                                    "label": "Consulta la richiesta",
+                                    "url": "#"
+                                },
+                                "text": "nella tua area riservata."
+                            }
+                        },
+                        {
+                            "type": "icon-list",
+                            "id": "related-service",
+                            "title": "Servizi correlati",
+                            "title_class": "title-xxlarge mt-40 mb-2 mb-lg-4 mb-lg-4",
+                            "items": [
+                                {
+                                    "label": "Iscrizione asilo nido",
+                                    "icon": "it-settings",
+                                    "url": "#",
+                                    "class": "shadow"
+                                },
+                                {
+                                    "label": "Richiesta assegno nucleo familiare",
+                                    "icon": "it-settings",
+                                    "url": "#",
+                                    "class": "shadow mb-50 mb-lg-80"
+                                }
+                            ]
+                        }
+                    ],
+                    "feedback": {
+                        "col_class": "col-12 col-lg-6 p-lg-0 px-4",
+                        "title": "Quanto è stato facile usare questo servizio?",
+                        "legend": "Valuta da 1 a 5 stelle la pagina",
+                        "star_label": "Valuta %d stelle su 5",
+                        "thanks": "Grazie, il tuo parere ci aiuterà a migliorare il servizio!",
+                        "positive": {
+                            "question": "Quali sono stati gli aspetti che hai preferito?",
+                            "answers": [
+                                "Le indicazioni erano chiare",
+                                "Le indicazioni erano complete",
+                                "Capivo sempre che stavo procedendo correttamente",
+                                "Non ho avuto problemi tecnici",
+                                "Altro"
+                            ]
+                        },
+                        "negative": {
+                            "question": "Dove hai incontrato le maggiori difficoltà?",
+                            "answers": [
+                                "A volte le indicazioni non erano chiare",
+                                "A volte le indicazioni non erano complete",
+                                "A volte non capivo se stavo procedendo correttamente",
+                                "Ho avuto problemi tecnici",
+                                "Altro"
+                            ]
+                        },
+                        "detail": {
+                            "question": "Vuoi aggiungere altri dettagli?",
+                            "label": "Dettaglio",
+                            "help": "Inserire massimo 200 caratteri"
+                        },
+                        "back": "Indietro",
+                        "next": "Avanti"
+                    },
+                    "contacts": {
+                        "layout": "offset",
+                        "col": "col-12 col-lg-6",
+                        "main": {
+                            "title": "Contatta il comune",
+                            "items": [
+                                {
+                                    "icon": "it-help-circle",
+                                    "label": "Leggi le domande frequenti",
+                                    "url": "#"
+                                },
+                                {
+                                    "icon": "it-mail",
+                                    "label": "Richiedi assistenza",
+                                    "url": "#",
+                                    "element": "contacts"
+                                },
+                                {
+                                    "icon": "it-hearing",
+                                    "label": "Chiama il numero verde 05 0505",
+                                    "url": "#"
+                                },
+                                {
+                                    "icon": "it-calendar",
+                                    "label": "Prenota appuntamento",
+                                    "url": "#",
+                                    "element": "appointment-booking"
+                                }
+                            ]
+                        }
+                    }
+                }
+            }
+        ],
+        "en": []
+    }
+}

@@ -1,0 +1,184 @@
+{
+    "id": "tests.graduatoria-perfezionamento",
+    "slug": "tests.graduatoria-perfezionamento",
+    "parent_slug": "tests",
+    "title": {
+        "it": "Iscrizione alla scuola dell'infanzia",
+        "en": "Iscrizione alla scuola dell'infanzia"
+    },
+    "layout": "test",
+    "sidebar_blocks": {
+        "it": [],
+        "en": []
+    },
+    "footer_blocks": null,
+    "description": "Pagina di prova graduatoria-perfezionamento (flusso graduatoria) da JSON, resa dal blocco service-flow del tema Sixteen.",
+    "content_blocks": {
+        "it": [
+            {
+                "type": "service-flow",
+                "data": {
+                    "view": "pub_theme::components.blocks.service-flow.graduatoria-design-comuni",
+                    "kind": "graduatoria-wizard",
+                    "breadcrumb": {
+                        "items": [
+                            {
+                                "label": "Home",
+                                "url": "/it/tests/homepage"
+                            },
+                            {
+                                "label": "Servizi",
+                                "url": "#"
+                            },
+                            {
+                                "label": "Educazione e Formazione",
+                                "url": "#"
+                            }
+                        ],
+                        "current": "Iscrizione alla scuola dell'infanzia"
+                    },
+                    "heading": {
+                        "title": "Iscrizione alla scuola dell'infanzia",
+                        "subtitles": [
+                            {
+                                "text": "Hai bisogno di assistenza?",
+                                "class": "subtitle-small",
+                                "link": {
+                                    "label": "Contattaci",
+                                    "url": "#",
+                                    "class": "title-small-semi-bold t-primary"
+                                }
+                            }
+                        ],
+                        "row": "row",
+                        "rule": "d-none d-lg-block mb-0 mt-0"
+                    },
+                    "nav": {
+                        "aria_label": "Step",
+                        "back": "Indietro",
+                        "save": {
+                            "long": "Salva Richiesta",
+                            "short": "Salva"
+                        },
+                        "next": {
+                            "label": "Avanti",
+                            "icon": "it-chevron-right",
+                            "class": "",
+                            "modal": "#"
+                        },
+                        "saved_message": "Richiesta salvata con successo"
+                    },
+                    "side_nav": {
+                        "class": "col-12 col-lg-3 d-lg-block mb-4 d-none",
+                        "aria_label": "INFORMAZIONI RICHIESTE",
+                        "title": "INFORMAZIONI RICHIESTE",
+                        "items": [
+                            {
+                                "label": "Doposcuola",
+                                "anchor": "after-school-activity"
+                            },
+                            {
+                                "label": "Sezione",
+                                "anchor": "school-section"
+                            }
+                        ]
+                    },
+                    "body": {
+                        "row": "row mt-lg-40",
+                        "col": "col-12 col-lg-8 offset-lg-1",
+                        "steps_class": "mt-3"
+                    },
+                    "sections": [
+                        {
+                            "type": "graduatoria-card",
+                            "id": "after-school-activity",
+                            "class": "",
+                            "wrapper_class": "mb-40",
+                            "card_class": "card has-bkg-grey shadow-sm p-20 p-lg-30",
+                            "header_class": "card-header border-0 p-0 mb-lg-20",
+                            "title": "Doposcuola",
+                            "title_class": "title-xxlarge mb-1 icon-required",
+                            "subtitle": "Hai bisogno del servizio di doposcuola?",
+                            "subtitle_class": "subtitle-small mb-0",
+                            "content": {
+                                "kind": "graduatoria-radios",
+                                "legend": "Hai bisogno del servizio di doposcuola?",
+                                "name": "doposcuola",
+                                "options": [
+                                    "Sì",
+                                    "No"
+                                ]
+                            }
+                        },
+                        {
+                            "type": "graduatoria-card",
+                            "id": "school-section",
+                            "class": "",
+                            "wrapper_class": "",
+                            "card_class": "card has-bkg-grey shadow-sm p-20 p-lg-30",
+                            "header_class": "card-header border-0 p-0 mb-lg-20",
+                            "title": "Sezione",
+                            "title_class": "title-xxlarge icon-required",
+                            "subtitle": "Esprimi una preferenza per la sezione da frequentare",
+                            "subtitle_class": "subtitle-small mb-0",
+                            "content": {
+                                "kind": "graduatoria-checks",
+                                "class": "form-check d-flex flex-column bg-white p-3 p-lg-4 mt-0",
+                                "items": [
+                                    {
+                                        "id": "green-section",
+                                        "label": "Classe verde"
+                                    },
+                                    {
+                                        "id": "blue-section",
+                                        "label": "Classe blu"
+                                    },
+                                    {
+                                        "id": "yellow-section",
+                                        "label": "Classe gialla"
+                                    },
+                                    {
+                                        "id": "no-section",
+                                        "label": "Nessuna preferenza"
+                                    }
+                                ]
+                            }
+                        }
+                    ],
+                    "contacts": {
+                        "layout": "center",
+                        "col": "col-12 col-lg-5",
+                        "main": {
+                            "title": "Contatta il comune",
+                            "items": [
+                                {
+                                    "icon": "it-help-circle",
+                                    "label": "Leggi le domande frequenti",
+                                    "url": "#"
+                                },
+                                {
+                                    "icon": "it-mail",
+                                    "label": "Richiedi assistenza",
+                                    "url": "#",
+                                    "element": "contacts"
+                                },
+                                {
+                                    "icon": "it-hearing",
+                                    "label": "Chiama il numero verde 05 0505",
+                                    "url": "#"
+                                },
+                                {
+                                    "icon": "it-calendar",
+                                    "label": "Prenota appuntamento",
+                                    "url": "#",
+                                    "element": "appointment-booking"
+                                }
+                            ]
+                        }
+                    }
+                }
+            }
+        ],
+        "en": []
+    }
+}

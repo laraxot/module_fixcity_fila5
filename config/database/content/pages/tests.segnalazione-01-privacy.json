@@ -1,0 +1,119 @@
+{
+    "id": "tests.segnalazione-01-privacy",
+    "slug": "tests.segnalazione-01-privacy",
+    "parent_slug": "tests",
+    "title": {
+        "it": "Autorizzazioni e condizioni",
+        "en": "Authorizations and conditions"
+    },
+    "layout": "test",
+    "description": "Step 1 della segnalazione disservizio: informativa sulla privacy e consenso al trattamento dei dati. Contenuto da JSON, reso dal blocco report-step del tema Sixteen.",
+    "sidebar_blocks": {
+        "it": [],
+        "en": []
+    },
+    "footer_blocks": null,
+    "content_blocks": {
+        "it": [
+            {
+                "type": "report-step",
+                "data": {
+                    "view": "pub_theme::components.blocks.report-step.design-comuni",
+                    "layout": "narrow",
+                    "title": "Segnalazione disservizio",
+                    "breadcrumb": {
+                        "items": [
+                            {
+                                "label": "Home",
+                                "url": "/it/tests/homepage"
+                            },
+                            {
+                                "label": "Servizi",
+                                "url": "#"
+                            }
+                        ],
+                        "current": "Segnalazione disservizio"
+                    },
+                    "steps": {
+                        "items": [
+                            {
+                                "label": "Autorizzazioni e condizioni",
+                                "state": "active"
+                            },
+                            {
+                                "label": "Dati di segnalazione",
+                                "state": ""
+                            },
+                            {
+                                "label": "Riepilogo",
+                                "state": ""
+                            }
+                        ],
+                        "index": "1/3",
+                        "confirmed_label": "Confermato",
+                        "active_label": "Attivo",
+                        "required_notice": "I campi contraddistinti dal simbolo asterisco sono obbligatori"
+                    },
+                    "sections": [
+                        {
+                            "type": "paragraph",
+                            "class": "mb-lg-4",
+                            "text": "Il Comune di Firenze gestisce i dati personali forniti e liberamente comunicati sulla base dell’articolo 13 del Regolamento (UE) 2016/679 General data protection regulation (Gdpr) e degli articoli 13 e successive modifiche e integrazione del decreto legislativo (di seguito d.lgs) 267/2000 (Testo unico enti locali)."
+                        },
+                        {
+                            "type": "paragraph",
+                            "class": "mb-0",
+                            "text": "Per i dettagli sul trattamento dei dati personali consulta l’",
+                            "link": {
+                                "label": "informativa sulla privacy.",
+                                "url": "#"
+                            }
+                        },
+                        {
+                            "type": "checkbox",
+                            "id": "privacy",
+                            "name": "privacy-field",
+                            "value": "privacy-field",
+                            "label": "Ho letto e compreso l’informativa sulla privacy"
+                        },
+                        {
+                            "type": "button",
+                            "label": "Avanti"
+                        }
+                    ],
+                    "contacts": {
+                        "layout": "offset",
+                        "main": {
+                            "title": "Contatta il comune",
+                            "items": [
+                                {
+                                    "icon": "it-help-circle",
+                                    "label": "Leggi le domande frequenti",
+                                    "url": "#"
+                                },
+                                {
+                                    "icon": "it-mail",
+                                    "label": "Richiedi assistenza",
+                                    "url": "#",
+                                    "element": "contacts"
+                                },
+                                {
+                                    "icon": "it-hearing",
+                                    "label": "Chiama il numero verde 05 0505",
+                                    "url": "#"
+                                },
+                                {
+                                    "icon": "it-calendar",
+                                    "label": "Prenota appuntamento",
+                                    "url": "#",
+                                    "element": "appointment-booking"
+                                }
+                            ]
+                        }
+                    }
+                }
+            }
+        ],
+        "en": []
+    }
+}

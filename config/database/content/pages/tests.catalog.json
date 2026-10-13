@@ -1,40 +1,33 @@
 {
   "id": "tests.catalog",
   "slug": "tests.catalog",
-  "description": "Catalogo dinamico delle pagine statiche DesignComuni usate per le preview Sixteen.",
-  "pages": {
-    "domande-frequenti": {"title": "Domande frequenti", "intro": "Trova le risposte alle domande più frequenti sui servizi del Comune."},
-    "risultati-ricerca": {"title": "Ricerca", "intro": "Cerca informazioni, servizi, persone e documenti del Comune."},
-    "argomenti": {"title": "Argomenti", "intro": "Esplora i contenuti del Comune per argomento."},
-    "argomento": {"title": "Sport", "intro": "Informazioni, strutture e iniziative sportive del Comune."},
-    "lista-risorse": {"title": "Titolo della pagina lista con risorse in evidenza e lista risorse", "intro": "Consulta le risorse disponibili organizzate per contenuto."},
-    "lista-categorie": {"title": "Titolo della pagina lista con risorse in evidenza e categorie", "intro": "Consulta le risorse disponibili organizzate per categoria."},
-    "lista-risorse-categorie": {"title": "Titolo della pagina lista con risorse in evidenza, lista risorse e categorie", "intro": "Consulta risorse e categorie in un'unica pagina."},
-    "mappa-sito": {"title": "Mappa del sito", "intro": "Consulta la struttura completa del sito del Comune."},
-    "amministrazione": {"title": "Amministrazione", "intro": "Conosci gli organi, gli uffici e le persone che amministrano il Comune."},
-    "documenti-dati": {"title": "Documenti e Dati", "intro": "Accedi a documenti, dati e pubblicazioni dell'amministrazione."},
-    "novita": {"title": "Novità", "intro": "Tutte le notizie, gli avvisi e le comunicazioni del Comune."},
-    "novita-dettaglio": {"title": "Stralcio automatico dei debiti fino a mille euro", "intro": "Informazioni e aggiornamenti dal Comune."},
-    "servizi": {"title": "Servizi", "intro": "Trova il servizio del Comune che ti serve."},
-    "servizi-categoria": {"title": "Anagrafe e stato civile", "intro": "Servizi e informazioni per anagrafe e stato civile."},
-    "servizio-dettaglio": {"title": "Iscrizione alla Scuola dell’infanzia", "intro": "Informazioni, requisiti e modalità per accedere al servizio."},
-    "eventi": {"title": "Vivere il comune", "intro": "Eventi, luoghi e iniziative per vivere la città."},
-    "evento-dettaglio": {"title": "363^ Festa di Sant'Efisio", "intro": "Scopri programma, informazioni e contatti dell'evento."},
-    "appuntamento-01-ufficio": {"title": "Prenotazione appuntamento", "intro": "Scegli l'ufficio con cui vuoi prendere appuntamento."},
-    "appuntamento-01-ufficio-luogo": {"title": "Prenotazione appuntamento", "intro": "Scegli la sede più comoda per il tuo appuntamento."},
-    "appuntamento-02-data-orario": {"title": "Prenotazione appuntamento", "intro": "Scegli data e orario disponibili."},
-    "appuntamento-03-dettagli": {"title": "Prenotazione appuntamento", "intro": "Inserisci i dettagli della richiesta."},
-    "appuntamento-04-richiedente": {"title": "Prenotazione appuntamento", "intro": "Inserisci i dati del richiedente."},
-    "appuntamento-04-richiedente-autenticato": {"title": "Prenotazione appuntamento", "intro": "Verifica i dati del richiedente autenticato."},
-    "appuntamento-05-riepilogo": {"title": "Prenotazione appuntamento", "intro": "Controlla i dati prima di confermare."},
-    "appuntamento-06-conferma": {"title": "Appuntamento confermato", "intro": "La prenotazione è stata registrata correttamente."},
-    "assistenza-01-dati": {"title": "Richiesta assistenza", "intro": "Inserisci i dati necessari per ricevere assistenza."},
-    "assistenza-02-conferma": {"title": "Richiesta inviata", "intro": "La richiesta di assistenza è stata inviata."},
-    "segnalazione-01-privacy": {"title": "Segnalazione disservizio", "intro": "Leggi l'informativa e scegli come proseguire."},
-    "segnalazione-02-dati": {"title": "Segnalazione disservizio", "intro": "Descrivi il problema e indica dove si trova."},
-    "segnalazione-03-riepilogo": {"title": "Segnalazione disservizio", "intro": "Controlla i dati della segnalazione prima dell'invio."},
-    "segnalazione-04-conferma": {"title": "Segnalazione inviata", "intro": "La segnalazione è stata inviata al Comune."},
-    "segnalazione-area-personale": {"title": "Giulia Rossi", "intro": "Consulta le tue segnalazioni e lo stato delle pratiche."},
-    "segnalazioni-elenco": {"title": "Elenco segnalazioni", "intro": "Consulta le segnalazioni pubbliche del Comune."}
-  }
+  "layout": "test",
+  "title": "Catalogo",
+  "subtitle": "Pagine statiche Design Comuni",
+  "breadcrumb": [
+    {"label":"Home","url":"/tests/homepage"},
+    {"label":"Catalogo","url":"/tests/catalog","active":true}
+  ],
+  "hero": {
+    "title":"Catalogo Design Comuni",
+    "intro":"Anteprima delle pagine statiche di riferimento per la parità visiva Sixteen.",
+    "cta":"Scopri le pagine"
+  },
+  "blocks": [
+    {"name":"breadcrumb","component":"breadcrumb"},
+    {"name":"hero","component":"hero"},
+    {"name":"card-grid","component":"card-grid","cards":[
+      {"title":"Homepage","slug":"tests.homepage","label":"Base","token":"#007A52"},
+      {"title":"Domande frequenti","slug":"tests.domande-frequenti","label":"FAQ","token":"#007A52"},
+      {"title":"Ricerca","slug":"tests.risultati-ricerca","label":"Search","token":"#007A52"},
+      {"title":"Amministrazione","slug":"tests.amministrazione","label":"Admin","token":"#007A52"}
+    ]},
+    {"name":"link-list","component":"link-list","links":[
+      {"label":"Servizi","url":"tests.servizi-index"},
+      {"label":"Documenti e dati","url":"tests.documenti-dati"},
+      {"label":"Novità","url":"tests.eventi"},
+      {"label":"Segnalazioni","url":"tests.segnalazioni-elenco"}
+    ]},
+    {"name":"search-form","component":"search-form","placeholder":"Cerca pagine...","token":"#007A52"}
+  ]
 }

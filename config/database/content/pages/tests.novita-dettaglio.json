@@ -1,0 +1,242 @@
+{
+  "id": "tests.novita-dettaglio",
+  "slug": "tests.novita-dettaglio",
+  "parent_slug": "tests",
+  "title": {
+    "it": "Novità - dettaglio",
+    "en": "News detail"
+  },
+  "layout": "test",
+  "description": "Dettaglio di una notizia, comunicato o avviso. Contenuto da JSON, reso dal blocco news-detail del tema Sixteen.",
+  "content_blocks": {
+    "it": [
+      {
+        "type": "news-detail",
+        "data": {
+          "view": "pub_theme::components.blocks.news-detail.design-comuni",
+          "title": "Stralcio automatico dei debiti fino a mille euro",
+          "breadcrumb": {
+            "items": [
+              {
+                "label": "Home",
+                "url": "/it/tests/homepage"
+              },
+              {
+                "label": "Novità",
+                "url": "#"
+              },
+              {
+                "label": "Notizie",
+                "url": "#"
+              }
+            ],
+            "current": "Stralcio automatico dei debiti fino a mille euro"
+          },
+          "details_label": "Dettagli della notizia",
+          "lead": "Delibera del Consiglio comunale in merito ai carichi di importo residuo fino a 1.000,00 €",
+          "meta": [
+            {
+              "label": "Data:",
+              "value": "31 gennaio 2023",
+              "format": "date"
+            },
+            {
+              "label": "Tempo di lettura:",
+              "value": "1 min",
+              "format": "text"
+            }
+          ],
+          "actions": [
+            {
+              "id": "shareActions",
+              "aria_label": "condividi sui social",
+              "icon": "it-share",
+              "label": "Condividi",
+              "items": [
+                {
+                  "icon": "it-facebook",
+                  "label": "Facebook",
+                  "url": "#"
+                },
+                {
+                  "icon": "it-twitter",
+                  "label": "Twitter",
+                  "url": "#"
+                },
+                {
+                  "icon": "it-linkedin",
+                  "label": "Linkedin",
+                  "url": "#"
+                },
+                {
+                  "icon": "it-whatsapp",
+                  "label": "Whatsapp",
+                  "url": "#"
+                }
+              ]
+            },
+            {
+              "id": "viewActions",
+              "aria_label": "vedi azioni da compiere sulla pagina",
+              "icon": "it-more-items",
+              "label": "Vedi azioni",
+              "items": [
+                {
+                  "icon": "it-print",
+                  "label": "Stampa",
+                  "url": "#"
+                },
+                {
+                  "icon": "it-hearing",
+                  "label": "Ascolta"
+                },
+                {
+                  "icon": "it-mail",
+                  "label": "Invia",
+                  "url": "#"
+                }
+              ]
+            }
+          ],
+          "topics": {
+            "title": "Argomenti",
+            "items": [
+              "Cultura",
+              "Muoversi"
+            ]
+          },
+          "hero": {
+            "src": "https://images.unsplash.com/photo-1635859890085-ec8cb5466806?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1740&q=80",
+            "alt": "Un'immagine generica segnaposto con angoli arrotondati in una figura.",
+            "caption": "Una didascalia per l'immagine sopra."
+          },
+          "side_nav": {
+            "aria_label": "INDICE DELLA PAGINA",
+            "title": "INDICE DELLA PAGINA",
+            "items": [
+              {
+                "anchor": "descrizione",
+                "label": "Descrizione"
+              },
+              {
+                "anchor": "a-cura-di",
+                "label": "A cura di"
+              }
+            ]
+          },
+          "description": {
+            "paragraphs": [
+              "Il Consiglio Comunale con provvedimento n. 15/2023 adottato nella seduta del 30 gennaio 2023 ha deliberato di non applicare lo stralcio automatico previsto dai commi 227 e 228 dell’art. 1 della L. 197/2022 (Legge di Bilancio 2023) per carichi di importo residuo fino a 1.000,00 euro e affidati all’Agente della Riscossione dal 1° gennaio 2000 al 31 dicembre 2015.",
+              "Tale provvedimento non produce invece effetti sulla definizione agevolata disciplinata dai commi 231 e seguenti del medesimo art. 1 della Legge di Bilancio che rimane quindi utilizzabile dai contribuenti per tutti i carichi affidati all’Agente della Riscossione dal 1° gennaio 2000 al 30 giugno 2022.",
+              "I contribuenti potranno pertanto accedere ai benefici della sopracitata definizione agevolata presentando, entro il 30 aprile 2023, all’Agenzia delle Entrate - Riscossione (AdER) una dichiarazione di adesione e impegnandosi a pagare, entro le scadenze previste dalla normativa, la quota capitale, le spese di notifica e le spese per le procedure esecutive.",
+              "Per l’accesso a tali modalità di adesione si invita a consultare il sito dell’Agenzia delle Entrate - Riscossione al seguente link: https://www.agenziaentrateriscossione.gov.it/it/"
+            ]
+          },
+          "curator": {
+            "title": "A cura di",
+            "office": {
+              "name": "Ufficio Imposte",
+              "lines": [
+                "Via dei Transiti 9",
+                "00100 Roma"
+              ],
+              "avatar": {
+                "src": "https://picsum.photos/200/200",
+                "alt": "Immagine"
+              }
+            },
+            "people": {
+              "title": "Persone",
+              "items": [
+                "Mario Rossi",
+                "Alessandro Bianchi"
+              ]
+            }
+          },
+          "updated": {
+            "label": "Ultimo aggiornamento:",
+            "value": "10/06/2019, 16:00"
+          },
+          "feedback": {
+            "title": "Quanto sono chiare le informazioni su questa pagina?",
+            "legend": "Valuta da 1 a 5 stelle la pagina",
+            "star_label": "Valuta %d stelle su 5",
+            "thanks": "Grazie, il tuo parere ci aiuterà a migliorare il servizio!",
+            "positive": {
+              "question": "Quali sono stati gli aspetti che hai preferito?",
+              "answers": [
+                "Le indicazioni erano chiare",
+                "Le indicazioni erano complete",
+                "Capivo sempre che stavo procedendo correttamente",
+                "Non ho avuto problemi tecnici",
+                "Altro"
+              ]
+            },
+            "negative": {
+              "question": "Dove hai incontrato le maggiori difficoltà?",
+              "answers": [
+                "A volte le indicazioni non erano chiare",
+                "A volte le indicazioni non erano complete",
+                "A volte non capivo se stavo procedendo correttamente",
+                "Ho avuto problemi tecnici",
+                "Altro"
+              ]
+            },
+            "detail": {
+              "question": "Vuoi aggiungere altri dettagli?",
+              "label": "Dettaglio",
+              "help": "Inserire massimo 200 caratteri"
+            },
+            "back": "Indietro",
+            "next": "Avanti"
+          },
+          "contacts": {
+            "main": {
+              "title": "Contatta il comune",
+              "items": [
+                {
+                  "icon": "it-help-circle",
+                  "label": "Leggi le domande frequenti",
+                  "url": "#"
+                },
+                {
+                  "icon": "it-mail",
+                  "label": "Richiedi assistenza",
+                  "url": "#",
+                  "element": "contacts"
+                },
+                {
+                  "icon": "it-hearing",
+                  "label": "Chiama il numero verde 05 0505",
+                  "url": "#"
+                },
+                {
+                  "icon": "it-calendar",
+                  "label": "Prenota appuntamento",
+                  "url": "#",
+                  "element": "appointment-booking"
+                }
+              ]
+            },
+            "problems": {
+              "title": "Problemi in città",
+              "items": [
+                {
+                  "icon": "it-map-marker-circle",
+                  "label": "Segnala disservizio",
+                  "url": "#"
+                }
+              ]
+            }
+          }
+        }
+      }
+    ],
+    "en": []
+  },
+  "sidebar_blocks": {
+    "it": [],
+    "en": []
+  },
+  "footer_blocks": null
+}

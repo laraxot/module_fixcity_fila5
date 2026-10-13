@@ -1,0 +1,336 @@
+{
+    "id": "tests.pagamenti-multa-dati-specifci-fase2",
+    "slug": "tests.pagamenti-multa-dati-specifci-fase2",
+    "parent_slug": "tests",
+    "title": {
+        "it": "Pagamento multa - dati specifici, fase 2",
+        "en": "Pagamento multa - dati specifici, fase 2"
+    },
+    "layout": "test",
+    "sidebar_blocks": {
+        "it": [],
+        "en": []
+    },
+    "footer_blocks": null,
+    "description": "Pagina di prova pagamenti-multa-dati-specifci-fase2 (flusso pagamento multa) da JSON, resa dal blocco service-flow del tema Sixteen.",
+    "content_blocks": {
+        "it": [
+            {
+                "type": "service-flow",
+                "data": {
+                    "view": "pub_theme::components.blocks.service-flow.multa-design-comuni",
+                    "kind": "multa-wizard",
+                    "breadcrumb": {
+                        "items": [
+                            {
+                                "label": "Home",
+                                "url": "/it/tests/homepage"
+                            },
+                            {
+                                "label": "Servizi",
+                                "url": "#"
+                            },
+                            {
+                                "label": "Tributi, finanze e contravvenzioni",
+                                "url": "#"
+                            }
+                        ],
+                        "current": "Pagamento Multa"
+                    },
+                    "heading": {
+                        "title": "Pagamento multa",
+                        "subtitles": [
+                            {
+                                "class": "subtitle-small",
+                                "segments": [
+                                    "Inserisci le informazioni necessarie per il pagamento della multa.",
+                                    {
+                                        "span": "d-lg-block mb-lg-2",
+                                        "text": "Potrai ricontrollare tutti i dati nel riepilogo, prima di effettuare il pagamento."
+                                    }
+                                ]
+                            },
+                            {
+                                "class": "subtitle-small mb-8",
+                                "text": "Hai bisogno di assistenza?",
+                                "link": {
+                                    "label": "Contattaci",
+                                    "url": "",
+                                    "class": "title-small-semi-bold t-primary"
+                                }
+                            }
+                        ]
+                    },
+                    "stepper": {
+                        "items": [
+                            {
+                                "label": "Informativa sulla privacy",
+                                "state": "confirmed"
+                            },
+                            {
+                                "label": "Dati generali",
+                                "state": "confirmed"
+                            },
+                            {
+                                "label": "Dati specifici del servizio",
+                                "state": "active"
+                            },
+                            {
+                                "label": "Riepilogo",
+                                "state": ""
+                            }
+                        ],
+                        "confirmed_label": "Confermato",
+                        "active_label": "Attivo",
+                        "index": "3/4"
+                    },
+                    "body": {
+                        "wrap": "container",
+                        "col": "col-12 col-lg-8",
+                        "form": "justValidateMulta"
+                    },
+                    "sections": [
+                        {
+                            "type": "note",
+                            "class": "text-paragraph-small mt-3 mb-40 mb-lg-25",
+                            "text": "I campi contraddistinti dal simbolo asterisco sono obbligatori"
+                        },
+                        {
+                            "type": "multa-card",
+                            "wrapper_class": "mb-0",
+                            "card_class": "card has-bkg-grey shadow-sm p-4 pt-lg-30 pb-lg-30 pl-lg-30 pr-lg-30",
+                            "header_class": "card-header border-0 p-0 mb-lg-20 m-0",
+                            "title": "Avvisi di pagamento",
+                            "title_class": "title-xxlarge mb-0 icon-required",
+                            "content": {
+                                "kind": "multa-fields",
+                                "fields": [
+                                    {
+                                        "type": "text",
+                                        "class": "subtitle-small pb-3 mb-4",
+                                        "value": "Seleziona un codice avviso tra quelli già disponibili oppure inseriscilo manualmente.",
+                                        "link": {
+                                            "label": "Dove trovare il codice",
+                                            "url": "#",
+                                            "class": "t-primary d-block d-lg-inline mt-1"
+                                        }
+                                    },
+                                    {
+                                        "type": "title",
+                                        "tag": "h3",
+                                        "class": "h4 mb-3",
+                                        "text": "Avvisi disponibili"
+                                    },
+                                    {
+                                        "type": "radios",
+                                        "wrapper_class": "cmp-card-radio mb-4",
+                                        "name": "rate",
+                                        "required": true,
+                                        "options": [
+                                            {
+                                                "label": "Targa: CK 345 HB\nAvviso: 3456 5678 1234 9012 53",
+                                                "body_class": "radio-body border-bottom border-light pb-2"
+                                            },
+                                            {
+                                                "label": "Targa: CK 345 HB\nAvviso: 5678 9012 3456 1234 323",
+                                                "body_class": "radio-body",
+                                                "label_class": "active"
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "type": "title",
+                                        "tag": "h3",
+                                        "class": "h4 mb-3",
+                                        "text": "Inserisci un codice avviso"
+                                    },
+                                    {
+                                        "type": "input",
+                                        "group_class": "form-group cmp-input mb-4 mb-lg-30 mt-0",
+                                        "label": "Codice avviso*",
+                                        "label_class": "cmp-input__label",
+                                        "input_type": "text",
+                                        "class": "form-control just-validate-success-field",
+                                        "id": "code",
+                                        "name": "code",
+                                        "required": true,
+                                        "value": "1234 5678 9012 3456 78 "
+                                    },
+                                    {
+                                        "type": "summary",
+                                        "group": {
+                                            "class": "bg-white p-3 p-lg-4 mb-4 mb-lg-30",
+                                            "rows": [
+                                                {
+                                                    "label": "Codice avviso",
+                                                    "value": "1234 5678 9012 3456 78"
+                                                },
+                                                {
+                                                    "label": "Ente creditore",
+                                                    "value": "Comune di Reggio Emilia"
+                                                },
+                                                {
+                                                    "label": "Codice fiscale ente creditore",
+                                                    "value": "00154902351"
+                                                },
+                                                {
+                                                    "label": "Targa veicolo",
+                                                    "value": "CK 345 HB"
+                                                },
+                                                {
+                                                    "label": "Data rilevazione",
+                                                    "value": "16/08/2022"
+                                                },
+                                                {
+                                                    "label": "Importo entro 60 gg",
+                                                    "value": "41,00 €"
+                                                },
+                                                {
+                                                    "label": "Spese notfica",
+                                                    "value": "13,88 €"
+                                                },
+                                                {
+                                                    "label": "Spese procedura",
+                                                    "value": "0,00 €"
+                                                },
+                                                {
+                                                    "label": "Importo totale entro 60 gg",
+                                                    "value": "54,88 €"
+                                                }
+                                            ],
+                                            "footer_class": "card-footer p-0"
+                                        }
+                                    },
+                                    {
+                                        "type": "box",
+                                        "class": "bg-white p-3 p-lg-4",
+                                        "fields": [
+                                            {
+                                                "type": "title",
+                                                "tag": "h2",
+                                                "class": "title-xxlarge",
+                                                "text": "Calcolo importo"
+                                            },
+                                            {
+                                                "type": "text",
+                                                "class": "text-paragraph mb-4",
+                                                "value": "Per il calcolo del corretto importo da pagare, inserisci la data in cui hai ricevuto l'avviso. Il conteggio dei giorni parte dalla data successiva alla ricezione dell'avviso."
+                                            },
+                                            {
+                                                "type": "date",
+                                                "wrapper_class": "calendar-partials card px-0",
+                                                "group_class": "form-group mb-4",
+                                                "label": "Inserisci la data di ricevuta avviso*",
+                                                "label_class": "active",
+                                                "class": "it-date-datepicker icon-primary form-control",
+                                                "id": "date-1",
+                                                "name": "dateStandard",
+                                                "required": true
+                                            },
+                                            {
+                                                "type": "text",
+                                                "class": "title-large-semi-bold mb-0",
+                                                "value": [
+                                                    "Importo dovuto",
+                                                    {
+                                                        "span": "d-block d-lg-inline",
+                                                        "text": "--,-- €"
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        }
+                    ],
+                    "nav": {
+                        "aria_label": "Step",
+                        "back": "Indietro",
+                        "save": {
+                            "long": "Salva Richiesta",
+                            "short": "Salva"
+                        },
+                        "next": {
+                            "label": "Avanti",
+                            "icon": "it-chevron-right",
+                            "class": "",
+                            "modal": "#",
+                            "submit": true
+                        },
+                        "saved_message": "Richiesta salvata con successo"
+                    },
+                    "contacts": {
+                        "layout": "offset",
+                        "col": "col-12 col-lg-6",
+                        "main": {
+                            "title": "Contatta il comune",
+                            "items": [
+                                {
+                                    "icon": "it-help-circle",
+                                    "label": "Leggi le domande frequenti",
+                                    "url": "#"
+                                },
+                                {
+                                    "icon": "it-mail",
+                                    "label": "Richiedi assistenza",
+                                    "url": "#",
+                                    "element": "contacts"
+                                },
+                                {
+                                    "icon": "it-hearing",
+                                    "label": "Chiama il numero verde 05 0505",
+                                    "url": "#"
+                                },
+                                {
+                                    "icon": "it-calendar",
+                                    "label": "Prenota appuntamento",
+                                    "url": "#",
+                                    "element": "appointment-booking"
+                                }
+                            ]
+                        }
+                    },
+                    "modals": [
+                        {
+                            "type": "dialog",
+                            "id": "modal-save-1",
+                            "close_label": "Chiudi finestra modale",
+                            "header": {
+                                "title": "Salva i dati in area personale",
+                                "info": "Vuoi salvare le informazioni anche nella tua area personale? Potrai usarle anche in altre occasioni."
+                            },
+                            "footer": {
+                                "buttons": [
+                                    {
+                                        "label": "Salva nella mia area personale",
+                                        "variant": "primary",
+                                        "target": "#modal-save-2"
+                                    },
+                                    {
+                                        "label": "Salva solo per questa pratica",
+                                        "variant": "outline"
+                                    }
+                                ]
+                            }
+                        },
+                        {
+                            "type": "dialog",
+                            "id": "modal-save-2",
+                            "close_label": "Chiudi finestra modale",
+                            "header": {
+                                "title": "Salva i dati in area personale",
+                                "info": "Vuoi salvare le informazioni anche nella tua area personale? Potrai riutilizzarle in futuro per altre pratiche."
+                            },
+                            "success": {
+                                "icon": "it-check-circle",
+                                "message": "Salvataggio effettuato"
+                            }
+                        }
+                    ]
+                }
+            }
+        ],
+        "en": []
+    }
+}

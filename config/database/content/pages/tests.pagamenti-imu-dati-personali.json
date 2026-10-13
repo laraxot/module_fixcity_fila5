@@ -1,0 +1,980 @@
+{
+    "id": "tests.pagamenti-imu-dati-personali",
+    "slug": "tests.pagamenti-imu-dati-personali",
+    "parent_slug": "tests",
+    "title": {
+        "it": "Pagamento IMU",
+        "en": "Pagamento IMU"
+    },
+    "layout": "test",
+    "sidebar_blocks": {
+        "it": [],
+        "en": []
+    },
+    "footer_blocks": null,
+    "description": "Pagina di prova pagamenti-imu-dati-personali (flusso pagamento IMU) da JSON, resa dal blocco service-flow del tema Sixteen.",
+    "content_blocks": {
+        "it": [
+            {
+                "type": "service-flow",
+                "data": {
+                    "view": "pub_theme::components.blocks.service-flow.imu-design-comuni",
+                    "kind": "wizard-step",
+                    "breadcrumb": {
+                        "items": [
+                            {
+                                "label": "Home",
+                                "url": "/it/tests/homepage"
+                            },
+                            {
+                                "label": "Servizi",
+                                "url": "#"
+                            },
+                            {
+                                "label": "Tributi, finanze e contravvenzioni",
+                                "url": "#"
+                            }
+                        ],
+                        "current": "Pagamento IMU"
+                    },
+                    "heading": {
+                        "title": "Pagamento IMU",
+                        "subtitles": [
+                            {
+                                "text": "Inserisci le informazioni necessarie per pagare l’IMU.\nPotrai ricontrollare tutti i dati nel riepilogo, prima di inviare la richiesta.",
+                                "class": "subtitle-small"
+                            },
+                            {
+                                "text": "Hai bisogno di assistenza?",
+                                "class": "subtitle-small mt-lg-2",
+                                "link": {
+                                    "label": "Contattaci",
+                                    "url": "#",
+                                    "class": "title-small-semi-bold t-primary"
+                                }
+                            }
+                        ]
+                    },
+                    "stepper": {
+                        "items": [
+                            {
+                                "label": "Informativa sulla privacy",
+                                "state": "confirmed"
+                            },
+                            {
+                                "label": "Dati generali",
+                                "state": "active"
+                            },
+                            {
+                                "label": "Riepilogo",
+                                "state": ""
+                            },
+                            {
+                                "label": "Preferenze",
+                                "state": ""
+                            },
+                            {
+                                "label": "Anteprima",
+                                "state": ""
+                            }
+                        ],
+                        "confirmed_label": "Confermato",
+                        "active_label": "Attivo",
+                        "index": "2/5"
+                    },
+                    "stepper_note": {
+                        "class": "title-xsmall d-lg-none my-5",
+                        "text": "I campi contraddistinti dal simbolo asterisco sono obbligatori"
+                    },
+                    "side_nav": {
+                        "class": "col-12 col-lg-3 mb-4 d-none d-lg-block",
+                        "aria_label": "INFORMAZIONI RICHIESTE",
+                        "title": "INFORMAZIONI RICHIESTE",
+                        "items": [
+                            {
+                                "label": "Contribuente",
+                                "anchor": "taxpayer"
+                            },
+                            {
+                                "label": "Coobbligato",
+                                "anchor": "co-obliged"
+                            },
+                            {
+                                "label": "Immobili",
+                                "anchor": "properties"
+                            }
+                        ]
+                    },
+                    "body": {
+                        "layout": "sidebar",
+                        "steps_content": "outer",
+                        "sections_container": true
+                    },
+                    "sections": [
+                        {
+                            "type": "imu-card",
+                            "wrap": "section",
+                            "id": "taxpayer",
+                            "class": "",
+                            "wrapper_class": "mb-40",
+                            "card_class": "card has-bkg-grey shadow-sm p-big",
+                            "header_class": "card-header border-0 p-0 mb-lg-20 m-0",
+                            "title": "Contribuente",
+                            "title_tag": "h2",
+                            "title_class": "title-xxlarge mb-1",
+                            "subtitle": "Seleziona o aggiungi il contribuente che pagherà l’imposta",
+                            "subtitle_class": "subtitle-small mb-0",
+                            "header_content": {
+                                "kind": "imu-select",
+                                "wrapper_class": "select-wrapper mt-40 mb-3 mb-lg-30 bg-transparent p-0",
+                                "id": "taxpayer-type",
+                                "label": "Tipologia*",
+                                "select_class": "bg-transparent",
+                                "placeholder": "Seleziona opzione",
+                                "options": [
+                                    "Persona fisica",
+                                    "Persona fisica",
+                                    "Persona fisica",
+                                    "Persona fisica"
+                                ]
+                            },
+                            "content": {
+                                "kind": "info-cards",
+                                "radio_name": "beneficiaries",
+                                "cards": [
+                                    {
+                                        "id": "first",
+                                        "title": "Giulia Rossi",
+                                        "info": {
+                                            "label": "Codice Fiscale",
+                                            "value": "GLABNC72H25H501Y"
+                                        },
+                                        "toggle_label": "Mostra tutto",
+                                        "collapse_id": "collapse-benef-1",
+                                        "collapse_class": "accordion-collapse collapse",
+                                        "header_id": "heading-collapse-benef-1",
+                                        "button_class": "collapsed accordion-button",
+                                        "groups": [
+                                            {
+                                                "class": "bg-white has-border",
+                                                "header_class": "d-flex justify-content-between d-flex justify-content-end",
+                                                "title": "Anagrafica",
+                                                "edit": {
+                                                    "label": "Modifica",
+                                                    "url": "#"
+                                                },
+                                                "rows": [
+                                                    {
+                                                        "label": "Codice Fiscale",
+                                                        "value": "GLABNC72H25H501Y"
+                                                    },
+                                                    {
+                                                        "label": "Data di nascita",
+                                                        "value": "02/03/1975"
+                                                    },
+                                                    {
+                                                        "label": "Luogo di nascita",
+                                                        "value": "Roma"
+                                                    },
+                                                    {
+                                                        "label": "Sesso",
+                                                        "value": "Femmina"
+                                                    },
+                                                    {
+                                                        "label": "Nazionalità",
+                                                        "value": "Italiana"
+                                                    },
+                                                    {
+                                                        "label": "Professione",
+                                                        "value": "Impiegata"
+                                                    },
+                                                    {
+                                                        "label": "Scolarità",
+                                                        "value": "Laurea Magistrale"
+                                                    }
+                                                ]
+                                            },
+                                            {
+                                                "class": "bg-white has-border",
+                                                "header_class": "d-flex justify-content-between d-flex justify-content-end",
+                                                "title": "Indirizzi",
+                                                "edit": {
+                                                    "label": "Modifica",
+                                                    "url": "#"
+                                                },
+                                                "rows": [
+                                                    {
+                                                        "label": "Residenza",
+                                                        "value": "Via Roma 16, 00100 Roma, IT"
+                                                    },
+                                                    {
+                                                        "label": "Domicilio",
+                                                        "value": "Piazza Risorgimento 16, 00100 Roma, It"
+                                                    }
+                                                ]
+                                            },
+                                            {
+                                                "class": "bg-white has-border",
+                                                "header_class": "d-flex justify-content-between d-flex justify-content-end",
+                                                "title": "Contatti",
+                                                "edit": {
+                                                    "label": "Modifica",
+                                                    "url": "#"
+                                                },
+                                                "rows": [
+                                                    {
+                                                        "label": "Telefono",
+                                                        "value": "+39 331 1234567"
+                                                    },
+                                                    {
+                                                        "label": "Email",
+                                                        "value": "giulia.bianchi@gmail.com"
+                                                    },
+                                                    {
+                                                        "label": "Recapito postale",
+                                                        "value": "P.zza Risorgimento 16, 00100 Roma"
+                                                    }
+                                                ]
+                                            },
+                                            {
+                                                "class": "bg-white has-border",
+                                                "header_class": "d-flex justify-content-between d-flex justify-content-end",
+                                                "title": "Documenti",
+                                                "edit": {
+                                                    "label": "Modifica",
+                                                    "url": "#"
+                                                },
+                                                "rows": [
+                                                    {
+                                                        "label": "Carta d'identità",
+                                                        "value": "giulia_bianchi_carta_di_identità_fronte_retro.pdf",
+                                                        "status": {
+                                                            "tone": "success",
+                                                            "text": "Documento inserito con successo",
+                                                            "icon": "it-check-circle"
+                                                        }
+                                                    },
+                                                    {
+                                                        "label": "Modulo condizione lavorativa",
+                                                        "value": "giulia_bianchi_modulo.pdf",
+                                                        "status": {
+                                                            "tone": "success",
+                                                            "text": "Documento inserito con successo",
+                                                            "icon": "it-check-circle"
+                                                        }
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "id": "second",
+                                        "title": "Sara Bianchi",
+                                        "info": {
+                                            "label": "Codice Fiscale",
+                                            "value": "SRABNC72H25H501Y"
+                                        },
+                                        "toggle_label": "Mostra tutto",
+                                        "collapse_id": "collapse-benef-2",
+                                        "collapse_class": "accordion-collapse collapse",
+                                        "header_id": "heading-collapse-benef-2",
+                                        "button_class": "collapsed accordion-button",
+                                        "groups": [
+                                            {
+                                                "class": "bg-white has-border",
+                                                "header_class": "d-flex justify-content-between d-flex justify-content-end",
+                                                "title": "Anagrafica",
+                                                "edit": {
+                                                    "label": "Modifica",
+                                                    "url": "#"
+                                                },
+                                                "rows": [
+                                                    {
+                                                        "label": "Codice Fiscale",
+                                                        "value": "GLABNC72H25H501Y"
+                                                    },
+                                                    {
+                                                        "label": "Data di nascita",
+                                                        "value": "02/03/1975"
+                                                    },
+                                                    {
+                                                        "label": "Luogo di nascita",
+                                                        "value": "Roma"
+                                                    },
+                                                    {
+                                                        "label": "Sesso",
+                                                        "value": "Femmina"
+                                                    },
+                                                    {
+                                                        "label": "Nazionalità",
+                                                        "value": "Italiana"
+                                                    },
+                                                    {
+                                                        "label": "Professione",
+                                                        "value": "Impiegata"
+                                                    },
+                                                    {
+                                                        "label": "Scolarità",
+                                                        "value": "Laurea Magistrale"
+                                                    }
+                                                ]
+                                            },
+                                            {
+                                                "class": "bg-white has-border",
+                                                "header_class": "d-flex justify-content-between d-flex justify-content-end",
+                                                "title": "Indirizzi",
+                                                "edit": {
+                                                    "label": "Modifica",
+                                                    "url": "#"
+                                                },
+                                                "rows": [
+                                                    {
+                                                        "label": "Residenza",
+                                                        "value": "Via Roma 16, 00100 Roma, IT"
+                                                    },
+                                                    {
+                                                        "label": "Domicilio",
+                                                        "value": "Piazza Risorgimento 16, 00100 Roma, It"
+                                                    }
+                                                ]
+                                            },
+                                            {
+                                                "class": "bg-white has-border",
+                                                "header_class": "d-flex justify-content-between d-flex justify-content-end",
+                                                "title": "Contatti",
+                                                "edit": {
+                                                    "label": "Modifica",
+                                                    "url": "#"
+                                                },
+                                                "rows": [
+                                                    {
+                                                        "label": "Telefono",
+                                                        "value": "+39 331 1234567"
+                                                    },
+                                                    {
+                                                        "label": "Email",
+                                                        "value": "giulia.bianchi@gmail.com"
+                                                    },
+                                                    {
+                                                        "label": "Recapito postale",
+                                                        "value": "P.zza Risorgimento 16, 00100 Roma"
+                                                    }
+                                                ]
+                                            },
+                                            {
+                                                "class": "bg-white has-border",
+                                                "header_class": "d-flex justify-content-between d-flex justify-content-end",
+                                                "title": "Documenti",
+                                                "edit": {
+                                                    "label": "Modifica",
+                                                    "url": "#"
+                                                },
+                                                "rows": [
+                                                    {
+                                                        "label": "Carta d'identità",
+                                                        "value": "giulia_bianchi_carta_di_identità_fronte_retro.pdf",
+                                                        "status": {
+                                                            "tone": "success",
+                                                            "text": "Documento inserito con successo",
+                                                            "icon": "it-check-circle"
+                                                        }
+                                                    },
+                                                    {
+                                                        "label": "Modulo condizione lavorativa",
+                                                        "value": "giulia_bianchi_modulo.pdf",
+                                                        "status": {
+                                                            "tone": "success",
+                                                            "text": "Documento inserito con successo",
+                                                            "icon": "it-check-circle"
+                                                        }
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    }
+                                ],
+                                "add": {
+                                    "label": "Aggiungi contribuente",
+                                    "icon": "it-plus-circle"
+                                }
+                            }
+                        },
+                        {
+                            "type": "imu-card",
+                            "wrap": "section",
+                            "id": "co-obliged",
+                            "class": "",
+                            "wrapper_class": "mb-40",
+                            "card_class": "card has-bkg-grey shadow-sm",
+                            "header_class": "card-header border-0 p-0 mb-lg-20",
+                            "title": "Coobbligato",
+                            "title_tag": "h2",
+                            "title_class": "title-xxlarge mb-1",
+                            "subtitle": "Seleziona o aggiungi il coobbligato per il quale pagherai l’imposta",
+                            "subtitle_class": "subtitle-small mb-0",
+                            "content": {
+                                "kind": "imu-stack",
+                                "blocks": [
+                                    {
+                                        "kind": "imu-toggle",
+                                        "class": "",
+                                        "id": "toggle-toggle",
+                                        "label": "C’è un coobbligato",
+                                        "lever_class": "bg-white"
+                                    },
+                                    {
+                                        "kind": "imu-stack",
+                                        "wrapper_class": "infoWrapper d-none",
+                                        "blocks": [
+                                            {
+                                                "kind": "imu-select",
+                                                "wrapper_class": "select-wrapper mt-4 mb-3 mb-lg-30 mt-lg-40 bg-transparent p-0",
+                                                "id": "toggle",
+                                                "label": "Tipologia*",
+                                                "select_class": "bg-transparent",
+                                                "placeholder": "Seleziona opzione",
+                                                "options": [
+                                                    "Persona fisica",
+                                                    "Persona fisica",
+                                                    "Persona fisica",
+                                                    "Persona fisica"
+                                                ]
+                                            },
+                                            {
+                                                "kind": "info-cards",
+                                                "radio_name": "beneficiaries",
+                                                "cards": [
+                                                    {
+                                                        "id": "third",
+                                                        "title": "Giovanni Rossi",
+                                                        "info": {
+                                                            "label": "Codice Fiscale",
+                                                            "value": "GVNRSS72H25H501Y"
+                                                        },
+                                                        "toggle_label": "Mostra tutto",
+                                                        "collapse_id": "collapse-benef-3",
+                                                        "collapse_class": "accordion-collapse collapse",
+                                                        "header_id": "heading-collapse-benef-3",
+                                                        "button_class": "collapsed accordion-button",
+                                                        "groups": [
+                                                            {
+                                                                "class": "bg-white has-border",
+                                                                "header_class": "d-flex justify-content-between d-flex justify-content-end",
+                                                                "title": "Anagrafica",
+                                                                "edit": {
+                                                                    "label": "Modifica",
+                                                                    "url": "#"
+                                                                },
+                                                                "rows": [
+                                                                    {
+                                                                        "label": "Codice Fiscale",
+                                                                        "value": "GLABNC72H25H501Y"
+                                                                    },
+                                                                    {
+                                                                        "label": "Data di nascita",
+                                                                        "value": "02/03/1975"
+                                                                    },
+                                                                    {
+                                                                        "label": "Luogo di nascita",
+                                                                        "value": "Roma"
+                                                                    },
+                                                                    {
+                                                                        "label": "Sesso",
+                                                                        "value": "Femmina"
+                                                                    },
+                                                                    {
+                                                                        "label": "Nazionalità",
+                                                                        "value": "Italiana"
+                                                                    },
+                                                                    {
+                                                                        "label": "Professione",
+                                                                        "value": "Impiegata"
+                                                                    },
+                                                                    {
+                                                                        "label": "Scolarità",
+                                                                        "value": "Laurea Magistrale"
+                                                                    }
+                                                                ]
+                                                            },
+                                                            {
+                                                                "class": "bg-white has-border",
+                                                                "header_class": "d-flex justify-content-between d-flex justify-content-end",
+                                                                "title": "Indirizzi",
+                                                                "edit": {
+                                                                    "label": "Modifica",
+                                                                    "url": "#"
+                                                                },
+                                                                "rows": [
+                                                                    {
+                                                                        "label": "Residenza",
+                                                                        "value": "Via Roma 16, 00100 Roma, IT"
+                                                                    },
+                                                                    {
+                                                                        "label": "Domicilio",
+                                                                        "value": "Piazza Risorgimento 16, 00100 Roma, It"
+                                                                    }
+                                                                ]
+                                                            },
+                                                            {
+                                                                "class": "bg-white has-border",
+                                                                "header_class": "d-flex justify-content-between d-flex justify-content-end",
+                                                                "title": "Contatti",
+                                                                "edit": {
+                                                                    "label": "Modifica",
+                                                                    "url": "#"
+                                                                },
+                                                                "rows": [
+                                                                    {
+                                                                        "label": "Telefono",
+                                                                        "value": "+39 331 1234567"
+                                                                    },
+                                                                    {
+                                                                        "label": "Email",
+                                                                        "value": "giulia.bianchi@gmail.com"
+                                                                    },
+                                                                    {
+                                                                        "label": "Recapito postale",
+                                                                        "value": "P.zza Risorgimento 16, 00100 Roma"
+                                                                    }
+                                                                ]
+                                                            },
+                                                            {
+                                                                "class": "bg-white has-border",
+                                                                "header_class": "d-flex justify-content-between d-flex justify-content-end",
+                                                                "title": "Documenti",
+                                                                "edit": {
+                                                                    "label": "Modifica",
+                                                                    "url": "#"
+                                                                },
+                                                                "rows": [
+                                                                    {
+                                                                        "label": "Carta d'identità",
+                                                                        "value": "giulia_bianchi_carta_di_identità_fronte_retro.pdf",
+                                                                        "status": {
+                                                                            "tone": "success",
+                                                                            "text": "Documento inserito con successo",
+                                                                            "icon": "it-check-circle"
+                                                                        }
+                                                                    },
+                                                                    {
+                                                                        "label": "Modulo condizione lavorativa",
+                                                                        "value": "giulia_bianchi_modulo.pdf",
+                                                                        "status": {
+                                                                            "tone": "success",
+                                                                            "text": "Documento inserito con successo",
+                                                                            "icon": "it-check-circle"
+                                                                        }
+                                                                    }
+                                                                ]
+                                                            }
+                                                        ]
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        },
+                        {
+                            "type": "imu-card",
+                            "wrap": "section",
+                            "id": "properties",
+                            "class": "",
+                            "wrapper_class": "",
+                            "card_class": "card has-bkg-grey shadow-sm",
+                            "header_class": "card-header border-0 p-0 mb-lg-20",
+                            "title": "Immobili",
+                            "title_tag": "h2",
+                            "title_class": "title-xxlarge mb-1",
+                            "subtitle": "Seleziona o aggiungi uno o più immobili per i quali pagherai l’imposta",
+                            "subtitle_class": "subtitle-small mb-0",
+                            "content": {
+                                "kind": "imu-check-cards",
+                                "add": {
+                                    "label": "Aggiungi immobile",
+                                    "icon": "it-plus-circle",
+                                    "modal": "#modal-tributes"
+                                },
+                                "cards": [
+                                    {
+                                        "class": "cmp-info-checkbox",
+                                        "card_class": "card",
+                                        "id": "1",
+                                        "title": "H501 - Roma",
+                                        "title_class": "title-xlarge u-main-black",
+                                        "info": {
+                                            "label": "Tipologia",
+                                            "value": "Abitazione principale"
+                                        },
+                                        "accordion": {
+                                            "id": "collapse-benef-4",
+                                            "label": "Mostra tutto",
+                                            "groups": [
+                                                {
+                                                    "class": "bg-white border border-light",
+                                                    "header_class": "d-flex justify-content-between d-flex justify-content-end",
+                                                    "title": "Anagrafica",
+                                                    "edit": {
+                                                        "label": "Modifica",
+                                                        "url": "#"
+                                                    },
+                                                    "rows": [
+                                                        {
+                                                            "label": "Nome",
+                                                            "value": "Mario"
+                                                        },
+                                                        {
+                                                            "label": "Cognome",
+                                                            "value": "Rossi"
+                                                        },
+                                                        {
+                                                            "label": "Codice fiscale",
+                                                            "value": "MRARSS72H25H501Y"
+                                                        },
+                                                        {
+                                                            "label": "Data di Nascita",
+                                                            "value": "03/07/1975"
+                                                        },
+                                                        {
+                                                            "label": "Luogo di Nascita",
+                                                            "value": "Roma"
+                                                        },
+                                                        {
+                                                            "label": "Sesso",
+                                                            "value": "Maschio"
+                                                        },
+                                                        {
+                                                            "label": "Nazionalità",
+                                                            "value": "Italiana"
+                                                        },
+                                                        {
+                                                            "label": "Professione",
+                                                            "value": "Insegnante"
+                                                        },
+                                                        {
+                                                            "label": "Scolarità",
+                                                            "value": "Laurea Magistrale"
+                                                        }
+                                                    ]
+                                                }
+                                            ]
+                                        }
+                                    },
+                                    {
+                                        "class": "cmp-info-checkbox",
+                                        "card_class": "card",
+                                        "id": "2",
+                                        "title": "L736 - Venezia",
+                                        "title_class": "title-xlarge u-main-black",
+                                        "info": {
+                                            "label": "Tipologia",
+                                            "value": "Altro immobile"
+                                        },
+                                        "accordion": {
+                                            "id": "collapse-benef-5",
+                                            "label": "Mostra tutto",
+                                            "groups": [
+                                                {
+                                                    "class": "bg-white border border-light",
+                                                    "header_class": "d-flex justify-content-between d-flex justify-content-end",
+                                                    "title": "Anagrafica",
+                                                    "edit": {
+                                                        "label": "Modifica",
+                                                        "url": "#"
+                                                    },
+                                                    "rows": [
+                                                        {
+                                                            "label": "Nome",
+                                                            "value": "Mario"
+                                                        },
+                                                        {
+                                                            "label": "Cognome",
+                                                            "value": "Rossi"
+                                                        },
+                                                        {
+                                                            "label": "Codice fiscale",
+                                                            "value": "MRARSS72H25H501Y"
+                                                        },
+                                                        {
+                                                            "label": "Data di Nascita",
+                                                            "value": "03/07/1975"
+                                                        },
+                                                        {
+                                                            "label": "Luogo di Nascita",
+                                                            "value": "Roma"
+                                                        },
+                                                        {
+                                                            "label": "Sesso",
+                                                            "value": "Maschio"
+                                                        },
+                                                        {
+                                                            "label": "Nazionalità",
+                                                            "value": "Italiana"
+                                                        },
+                                                        {
+                                                            "label": "Professione",
+                                                            "value": "Insegnante"
+                                                        },
+                                                        {
+                                                            "label": "Scolarità",
+                                                            "value": "Laurea Magistrale"
+                                                        }
+                                                    ]
+                                                }
+                                            ]
+                                        }
+                                    }
+                                ]
+                            }
+                        }
+                    ],
+                    "nav": {
+                        "aria_label": "Step",
+                        "back": "Indietro",
+                        "save": {
+                            "long": "Salva Richiesta",
+                            "short": "Salva"
+                        },
+                        "next": {
+                            "label": "Avanti",
+                            "icon": "it-chevron-right",
+                            "class": "",
+                            "modal": "#modal-save-1"
+                        },
+                        "saved_message": "Richiesta salvata con successo"
+                    },
+                    "contacts": {
+                        "layout": "offset",
+                        "col": "col-12 col-lg-6",
+                        "main": {
+                            "title": "Contatta il comune",
+                            "items": [
+                                {
+                                    "icon": "it-help-circle",
+                                    "label": "Leggi le domande frequenti",
+                                    "url": "#"
+                                },
+                                {
+                                    "icon": "it-mail",
+                                    "label": "Richiedi assistenza",
+                                    "url": "#",
+                                    "element": "contacts"
+                                },
+                                {
+                                    "icon": "it-hearing",
+                                    "label": "Chiama il numero verde 05 0505",
+                                    "url": "#"
+                                },
+                                {
+                                    "icon": "it-calendar",
+                                    "label": "Prenota appuntamento",
+                                    "url": "#",
+                                    "element": "appointment-booking"
+                                }
+                            ]
+                        }
+                    },
+                    "modals": [
+                        {
+                            "type": "imu-fields",
+                            "id": "modal-tributes",
+                            "close_label": "Chiudi finestra modale",
+                            "title": "Immobile",
+                            "info": "I campi contraddistinti dal simbolo asterisco sono obbligatori",
+                            "form_id": "tributes-form",
+                            "form_class": "text-black",
+                            "fields": [
+                                {
+                                    "kind": "imu-select",
+                                    "wrapper_class": "select-wrapper mt-30 mb-40 bg-transparent p-0",
+                                    "id": "property-location",
+                                    "label": "Ubicazione immobile*",
+                                    "select_class": "bg-transparent",
+                                    "placeholder": "Seleziona opzione",
+                                    "options": [
+                                        "H501 - Roma",
+                                        "L736 - Venezia",
+                                        "L065 - Tavagnacco"
+                                    ],
+                                    "label_flag": "mb-3",
+                                    "hint": {
+                                        "class": "d-flex mb-30",
+                                        "text": "Inserire l’informazione per proseguire con la richiesta"
+                                    }
+                                },
+                                {
+                                    "kind": "imu-select",
+                                    "wrapper_class": "select-wrapper mt-30 bg-transparent p-0",
+                                    "id": "property-type",
+                                    "label": "Tipologia dell’immobile*",
+                                    "select_class": "bg-transparent",
+                                    "placeholder": "Seleziona opzione",
+                                    "options": [
+                                        "Abitazione principale",
+                                        "Altro immobile"
+                                    ],
+                                    "label_flag": "mb-3",
+                                    "hint": {
+                                        "class": "d-flex",
+                                        "text": "Inserire l’informazione per proseguire con la richiesta"
+                                    }
+                                },
+                                {
+                                    "kind": "imu-input",
+                                    "group_class": "form-group cmp-input",
+                                    "id": "accountholder",
+                                    "name": "accountholder",
+                                    "type": "number",
+                                    "label": "Rendita catastale*",
+                                    "hint": "Inserire l’informazione per proseguire con la richiesta"
+                                },
+                                {
+                                    "kind": "imu-input",
+                                    "group_class": "form-group cmp-input",
+                                    "id": "vehicle-type",
+                                    "name": "vehicle-type",
+                                    "type": "number",
+                                    "label": "Aliquota IMU*",
+                                    "hint": "Inserire l’informazione per proseguire con la richiesta"
+                                },
+                                {
+                                    "kind": "imu-input",
+                                    "group_class": "form-group cmp-input",
+                                    "id": "vehicle-model",
+                                    "name": "vehicle-model",
+                                    "type": "text",
+                                    "label": "Aliquota acconto / base IMU*",
+                                    "hint": "Inserire l’informazione per proseguire con la richiesta"
+                                },
+                                {
+                                    "kind": "imu-input",
+                                    "group_class": "form-group cmp-input",
+                                    "id": "vehicle-plate",
+                                    "name": "vehicle-plate",
+                                    "type": "number",
+                                    "label": "Quota di possesso*",
+                                    "hint": "Inserire l’informazione per proseguire con la richiesta"
+                                },
+                                {
+                                    "kind": "imu-input",
+                                    "group_class": "form-group cmp-input",
+                                    "id": "vehicle-use",
+                                    "name": "vehicle-use",
+                                    "type": "number",
+                                    "label": "Mesi di possesso*",
+                                    "hint": "Inserire l’informazione per proseguire con la richiesta"
+                                },
+                                {
+                                    "kind": "imu-input",
+                                    "group_class": "form-group cmp-input",
+                                    "id": "concession",
+                                    "name": "concession",
+                                    "type": "text",
+                                    "label": "Immobile storico / inagibile*",
+                                    "hint": "Inserire l’informazione per proseguire con la richiesta"
+                                },
+                                {
+                                    "kind": "imu-input",
+                                    "group_class": "form-group cmp-input",
+                                    "id": "vehicle-registration",
+                                    "name": "vehicle-registration",
+                                    "type": "text",
+                                    "label": "Ulteriori contitolari*",
+                                    "hint": "Inserire l’informazione per proseguire con la richiesta"
+                                },
+                                {
+                                    "kind": "imu-input",
+                                    "group_class": "form-group cmp-input",
+                                    "id": "appliances",
+                                    "name": "appliances",
+                                    "type": "text",
+                                    "label": "Pertinenze*",
+                                    "hint": "Inserire l’informazione per proseguire con la richiesta"
+                                }
+                            ],
+                            "cancel": "Annulla",
+                            "save": "Salva"
+                        },
+                        {
+                            "type": "upload",
+                            "id": "modal-documents",
+                            "close_label": "Chiudi finestra modale",
+                            "title": "Documenti",
+                            "info": "I campi contraddistinti dal simbolo asterisco sono obbligatori",
+                            "form_id": "documents-form",
+                            "uploads": [
+                                {
+                                    "label": "Documento d'identità*",
+                                    "files": [
+                                        {
+                                            "state": "success",
+                                            "name": "giulia_bianchi_carta_di_identit...",
+                                            "visually_hidden": "File caricato:",
+                                            "remove_label": "Elimina il documento"
+                                        }
+                                    ],
+                                    "input_id": "upload-doc-id",
+                                    "link_label": "Carica documento",
+                                    "info": "Caricare uno o più file in formato pdf, jpg, png"
+                                },
+                                {
+                                    "label": "Modulo condizione lavorativa*",
+                                    "files": [
+                                        {
+                                            "state": "success",
+                                            "name": "giulia_bianchi_modulo.pdf",
+                                            "visually_hidden": "File caricato:",
+                                            "remove_label": "Elimina il documento"
+                                        }
+                                    ],
+                                    "input_id": "upload-doc-lav",
+                                    "link_label": "Carica documento",
+                                    "info": "Caricare uno o più file in formato pdf, jpg, png"
+                                }
+                            ],
+                            "cancel": "Annulla",
+                            "save": "Salva"
+                        },
+                        {
+                            "type": "dialog",
+                            "id": "modal-save-1",
+                            "close_label": "Chiudi finestra modale",
+                            "header": {
+                                "title": "Salva i dati in area personale",
+                                "info": "Vuoi salvare le informazioni anche nella tua area personale? Potrai usarle anche in altre occasioni."
+                            },
+                            "footer": {
+                                "buttons": [
+                                    {
+                                        "label": "Salva nella mia area personale",
+                                        "variant": "primary",
+                                        "target": "#modal-save-2"
+                                    },
+                                    {
+                                        "label": "Salva solo per questa pratica",
+                                        "variant": "outline"
+                                    }
+                                ]
+                            }
+                        },
+                        {
+                            "type": "dialog",
+                            "id": "modal-save-2",
+                            "close_label": "Chiudi finestra modale",
+                            "header": {
+                                "title": "Salva i dati in area personale",
+                                "info": "Vuoi salvare le informazioni anche nella tua area personale? Potrai riutilizzarle in futuro per altre pratiche."
+                            },
+                            "success": {
+                                "icon": "it-check-circle",
+                                "message": "Salvataggio effettuato"
+                            }
+                        }
+                    ]
+                }
+            }
+        ],
+        "en": []
+    }
+}

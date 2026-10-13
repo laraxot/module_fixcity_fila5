@@ -238,7 +238,8 @@
                                         "url": "#",
                                         "style": "success"
                                     }
-                                ]
+                                ],
+                                "cta_wrapped": true
                             },
                             {
                                 "title": "Sport",

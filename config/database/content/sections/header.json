@@ -1,55 +1,290 @@
 {
   "id": "sixteen-header",
   "slug": "header",
-  "name": {"it": "Intestazione Design Comuni", "en": "Design Comuni header"},
+  "name": {
+    "it": "Intestazione Design Comuni",
+    "en": "Design Comuni header"
+  },
   "blocks": {
-    "it": [{
-      "type": "header",
-      "slug": "design-comuni-header",
-      "data": {
-        "view": "pub_theme::components.sections.header.v1",
-        "brand": {"name": "Nome del Comune", "tagline": "Un comune da vivere", "logo": "themes/Sixteen/design-comuni/assets/images/logo-comune.svg"},
-        "region": {"name": "Nome della Regione", "url": "/regione"},
-        "utility_links": [{"label": "Amministrazione trasparente", "url": "/amministrazione-trasparente"}],
-        "account": {"label": "Accedi all’area personale", "url": "/login"},
-        "social": {"twitter": "https://twitter.com", "facebook": "https://facebook.com", "youtube": "https://youtube.com", "telegram": "https://telegram.org", "whatsapp": "https://wa.me"},
-        "navigation": [
-          {"label": "Amministrazione", "url": "/amministrazione"},
-          {"label": "Novità", "url": "/novita"},
-          {"label": "Servizi", "url": "/servizi"},
-          {"label": "Vivere il Comune", "url": "/eventi"}
-        ],
-        "secondary_navigation": [
-          {"label": "Iscrizioni", "url": "/argomenti/iscrizioni"},
-          {"label": "Estate in città", "url": "/argomenti/estate-in-citta"},
-          {"label": "Polizia locale", "url": "/argomenti/polizia-locale"},
-          {"label": "Tutti gli argomenti", "url": "/argomenti"}
-        ]
+    "it": [
+      {
+        "type": "header",
+        "slug": "design-comuni-header",
+        "data": {
+          "view": "pub_theme::components.sections.header.v1",
+          "brand": {
+            "name": "Nome del Comune",
+            "tagline": "Un comune da vivere",
+            "logo": "themes/Sixteen/design-comuni/assets/images/logo-comune.svg",
+            "header_title": "Il mio Comune",
+            "menu_title": "Nome del Comune"
+          },
+          "region": {
+            "name": "Nome della Regione",
+            "url": "/regione",
+            "title": "Vai al portale {Nome della Regione}",
+            "aria_label": "Vai al portale {Nome della Regione} - link esterno - apertura nuova scheda"
+          },
+          "utility_links": [
+            {
+              "label": "Amministrazione trasparente",
+              "url": "/amministrazione-trasparente"
+            }
+          ],
+          "account": {
+            "label": "Accedi all’area personale",
+            "url": "/login",
+            "element": "personal-area-login",
+            "login_label": "Accedi all'area personale"
+          },
+          "social": {
+            "twitter": "https://twitter.com",
+            "facebook": "https://facebook.com",
+            "youtube": "https://youtube.com",
+            "telegram": "https://telegram.org",
+            "whatsapp": "https://wa.me"
+          },
+          "navigation": [
+            {
+              "label": "Amministrazione",
+              "url": "/amministrazione",
+              "element": "management"
+            },
+            {
+              "label": "Novità",
+              "url": "/novita",
+              "element": "news"
+            },
+            {
+              "label": "Servizi",
+              "url": "/servizi",
+              "element": "all-services"
+            },
+            {
+              "label": "Vivere il Comune",
+              "url": "/eventi",
+              "element": "live"
+            }
+          ],
+          "secondary_navigation": [
+            {
+              "label": "Iscrizioni",
+              "url": "/argomenti/iscrizioni"
+            },
+            {
+              "label": "Estate in città",
+              "url": "/argomenti/estate-in-citta"
+            },
+            {
+              "label": "Polizia locale",
+              "url": "/argomenti/polizia-locale"
+            },
+            {
+              "label": "Tutti gli argomenti",
+              "url": "/argomenti",
+              "element": "all-topics",
+              "chevron": true
+            }
+          ],
+          "languages": {
+            "active_label": "Lingua attiva:",
+            "selected_label": "selezionata",
+            "items": [
+              {
+                "locale": "it",
+                "label": "ITA"
+              },
+              {
+                "locale": "en",
+                "label": "ENG"
+              }
+            ]
+          },
+          "follow_us": "Seguici su",
+          "social_links": [
+            {
+              "icon": "it-twitter",
+              "label": "Twitter",
+              "url": "#"
+            },
+            {
+              "icon": "it-facebook",
+              "label": "Facebook",
+              "url": "#"
+            },
+            {
+              "icon": "it-youtube",
+              "label": "YouTube",
+              "url": "#"
+            },
+            {
+              "icon": "it-telegram",
+              "label": "Telegram",
+              "url": "#"
+            },
+            {
+              "icon": "it-whatsapp",
+              "label": "Whatsapp",
+              "url": "#"
+            },
+            {
+              "icon": "it-rss",
+              "label": "RSS",
+              "url": "#"
+            }
+          ],
+          "search": {
+            "label": "Cerca",
+            "aria_label": "Cerca nel sito"
+          },
+          "menu": {
+            "toggle_label": "Mostra/Nascondi la navigazione",
+            "close_label": "Nascondi la navigazione",
+            "main_label": "Principale",
+            "secondary_label": "Secondaria"
+          }
+        }
       }
-    }],
-    "en": [{
-      "type": "header",
-      "slug": "design-comuni-header",
-      "data": {
-        "view": "pub_theme::components.sections.header.v1",
-        "brand": {"name": "Name of the Municipality", "tagline": "A municipality to live", "logo": "themes/Sixteen/design-comuni/assets/images/logo-comune.svg"},
-        "region": {"name": "Name of the Region", "url": "/region"},
-        "utility_links": [{"label": "Transparent administration", "url": "/transparent-administration"}],
-        "account": {"label": "Access personal area", "url": "/login"},
-        "social": {"twitter": "https://twitter.com", "facebook": "https://facebook.com", "youtube": "https://youtube.com", "telegram": "https://telegram.org", "whatsapp": "https://wa.me"},
-        "navigation": [
-          {"label": "Administration", "url": "/administration"},
-          {"label": "News", "url": "/news"},
-          {"label": "Services", "url": "/services"},
-          {"label": "Living the municipality", "url": "/events"}
-        ],
-        "secondary_navigation": [
-          {"label": "Registrations", "url": "/topics/registrations"},
-          {"label": "Summer in the city", "url": "/topics/summer-in-the-city"},
-          {"label": "Local police", "url": "/topics/local-police"},
-          {"label": "All topics", "url": "/topics"}
-        ]
+    ],
+    "en": [
+      {
+        "type": "header",
+        "slug": "design-comuni-header",
+        "data": {
+          "view": "pub_theme::components.sections.header.v1",
+          "brand": {
+            "name": "Name of the Municipality",
+            "tagline": "A municipality to live",
+            "logo": "themes/Sixteen/design-comuni/assets/images/logo-comune.svg",
+            "header_title": "My Municipality",
+            "menu_title": "Municipality name"
+          },
+          "region": {
+            "name": "Name of the Region",
+            "url": "/region",
+            "title": "Go to the {Region name} portal",
+            "aria_label": "Go to the {Region name} portal - external link - opens in a new tab"
+          },
+          "utility_links": [
+            {
+              "label": "Transparent administration",
+              "url": "/transparent-administration"
+            }
+          ],
+          "account": {
+            "label": "Access personal area",
+            "url": "/login",
+            "element": "personal-area-login",
+            "login_label": "Access personal area"
+          },
+          "social": {
+            "twitter": "https://twitter.com",
+            "facebook": "https://facebook.com",
+            "youtube": "https://youtube.com",
+            "telegram": "https://telegram.org",
+            "whatsapp": "https://wa.me"
+          },
+          "navigation": [
+            {
+              "label": "Administration",
+              "url": "/administration",
+              "element": "management"
+            },
+            {
+              "label": "News",
+              "url": "/news",
+              "element": "news"
+            },
+            {
+              "label": "Services",
+              "url": "/services",
+              "element": "all-services"
+            },
+            {
+              "label": "Living the municipality",
+              "url": "/events",
+              "element": "live"
+            }
+          ],
+          "secondary_navigation": [
+            {
+              "label": "Registrations",
+              "url": "/topics/registrations"
+            },
+            {
+              "label": "Summer in the city",
+              "url": "/topics/summer-in-the-city"
+            },
+            {
+              "label": "Local police",
+              "url": "/topics/local-police"
+            },
+            {
+              "label": "All topics",
+              "url": "/topics",
+              "element": "all-topics",
+              "chevron": true
+            }
+          ],
+          "languages": {
+            "active_label": "Active language:",
+            "selected_label": "selected",
+            "items": [
+              {
+                "locale": "it",
+                "label": "ITA"
+              },
+              {
+                "locale": "en",
+                "label": "ENG"
+              }
+            ]
+          },
+          "follow_us": "Follow us on",
+          "social_links": [
+            {
+              "icon": "it-twitter",
+              "label": "Twitter",
+              "url": "#"
+            },
+            {
+              "icon": "it-facebook",
+              "label": "Facebook",
+              "url": "#"
+            },
+            {
+              "icon": "it-youtube",
+              "label": "YouTube",
+              "url": "#"
+            },
+            {
+              "icon": "it-telegram",
+              "label": "Telegram",
+              "url": "#"
+            },
+            {
+              "icon": "it-whatsapp",
+              "label": "Whatsapp",
+              "url": "#"
+            },
+            {
+              "icon": "it-rss",
+              "label": "RSS",
+              "url": "#"
+            }
+          ],
+          "search": {
+            "label": "Search",
+            "aria_label": "Search the site"
+          },
+          "menu": {
+            "toggle_label": "Show/Hide navigation",
+            "close_label": "Hide navigation",
+            "main_label": "Main",
+            "secondary_label": "Secondary"
+          }
+        }
       }
-    }]
+    ]
   }
 }

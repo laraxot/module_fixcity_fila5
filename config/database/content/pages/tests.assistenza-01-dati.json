@@ -1,0 +1,189 @@
+{
+  "id": "tests.assistenza-01-dati",
+  "slug": "tests.assistenza-01-dati",
+  "parent_slug": "tests",
+  "title": {
+    "it": "Richiesta assistenza - dati",
+    "en": "Assistance request - data"
+  },
+  "layout": "test",
+  "description": "Richiesta di assistenza, passo dati: modulo con richiedente, richiesta e privacy. Contenuto da JSON, reso dal blocco assistance-form del tema Sixteen.",
+  "content_blocks": {
+    "it": [
+      {
+        "type": "assistance-form",
+        "data": {
+          "view": "pub_theme::components.blocks.assistance-form.design-comuni",
+          "title": "Richiesta assistenza",
+          "breadcrumb": {
+            "items": [
+              {
+                "label": "Home",
+                "url": "/it/tests/homepage"
+              }
+            ],
+            "current": "Richiesta assistenza"
+          },
+          "hero": {
+            "intro": "I campi contraddistinti dal simbolo asterisco sono obbligatori.",
+            "login": {
+              "question": "Hai un’identità digitale SPID o CIE?",
+              "label": "Accedi",
+              "url": "/it/tests/accesso-servizio"
+            }
+          },
+          "side_nav": {
+            "aria_label": "INFORMAZIONI RICHIESTE",
+            "title": "INFORMAZIONI RICHIESTE",
+            "items": [
+              {
+                "anchor": "applicant",
+                "label": "Richiedente"
+              },
+              {
+                "anchor": "request",
+                "label": "Richiesta"
+              }
+            ]
+          },
+          "form_id": "justValidateForm",
+          "sections": [
+            {
+              "id": "applicant",
+              "title": "Richiedente",
+              "fields": [
+                {
+                  "kind": "input",
+                  "id": "name",
+                  "name": "name",
+                  "type": "text",
+                  "label": "Nome*",
+                  "required": true,
+                  "hint": "Inserisci il tuo nome"
+                },
+                {
+                  "kind": "input",
+                  "id": "surname",
+                  "name": "surname",
+                  "type": "text",
+                  "label": "Cognome*",
+                  "required": true,
+                  "hint": "Inserisci il tuo cognome"
+                },
+                {
+                  "kind": "input",
+                  "id": "email",
+                  "name": "email",
+                  "type": "email",
+                  "label": "Email*",
+                  "required": true,
+                  "hint": "Inserisci la tua email"
+                }
+              ]
+            },
+            {
+              "id": "request",
+              "title": "Richiesta",
+              "fields": [
+                {
+                  "kind": "select",
+                  "id": "category",
+                  "label": "Categoria di servizio*",
+                  "required": true,
+                  "placeholder": "Seleziona categoria",
+                  "options": [
+                    "Agricoltura e pesca",
+                    "Ambiente",
+                    "Anagrafe e stato civile",
+                    "Appalti pubblici",
+                    "Autorizzazioni",
+                    "Catasto e urbanistica",
+                    "Cultura e tempo libero",
+                    "Educazione e formazione",
+                    "Giustizia e sicurezza pubblica",
+                    "Imprese e commercio",
+                    "Mobilità e trasporti",
+                    "Relazioni con il pubblico",
+                    "Salute, benessere e assistenza",
+                    "Tributi, finanze e contravvenzioni",
+                    "Turismo",
+                    "Vita lavorativa"
+                  ],
+                  "hint": "Seleziona la categoria del servizio per cui vuoi richiedere assistenza"
+                },
+                {
+                  "kind": "select",
+                  "id": "service",
+                  "label": "Servizio*",
+                  "required": true,
+                  "placeholder": "Scegli il servizio",
+                  "options": [
+                    "Iscrizione alla Scuola dell’infanzia",
+                    "Permessi ZTL",
+                    "Assegno di maternità"
+                  ],
+                  "hint": "Seleziona il servizio per cui vuoi richiedere assistenza"
+                },
+                {
+                  "kind": "textarea",
+                  "id": "description",
+                  "label": "Dettagli*",
+                  "rows": 2,
+                  "required": true,
+                  "hint": "Inserire massimo 600 caratteri"
+                }
+              ]
+            }
+          ],
+          "privacy": {
+            "text": "Per i dettagli sul trattamento dei dati personali consulta l’",
+            "link": {
+              "label": "informativa sulla privacy.",
+              "url": "#"
+            },
+            "checkbox": {
+              "id": "privacy",
+              "name": "privacy-field",
+              "value": "privacy-field",
+              "label": "Ho letto e compreso l’informativa sulla privacy"
+            }
+          },
+          "nav": {
+            "aria_label": "Step",
+            "back": "Indietro",
+            "submit": "Invia",
+            "saved_message": "Richiesta salvata con successo"
+          },
+          "contacts": {
+            "main": {
+              "title": "Contatta il comune",
+              "items": [
+                {
+                  "icon": "it-help-circle",
+                  "label": "Leggi le domande frequenti",
+                  "url": "#"
+                },
+                {
+                  "icon": "it-hearing",
+                  "label": "Chiama il numero verde 05 0505",
+                  "url": "#"
+                },
+                {
+                  "icon": "it-calendar",
+                  "label": "Prenota appuntamento",
+                  "url": "#"
+                }
+              ]
+            }
+          }
+        }
+      }
+    ],
+    "en": []
+  },
+  "sidebar_blocks": {
+    "it": [],
+    "en": []
+  },
+  "footer_blocks": null
+}

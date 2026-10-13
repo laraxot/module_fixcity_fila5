@@ -1,0 +1,92 @@
+{
+  "id": "sixteen-search-modal",
+  "slug": "search-modal",
+  "name": {
+    "it": "Modale di ricerca Design Comuni",
+    "en": "Design Comuni search modal"
+  },
+  "blocks": {
+    "it": [
+      {
+        "type": "search-modal",
+        "slug": "design-comuni-search-modal",
+        "data": {
+          "view": "pub_theme::components.sections.search-modal.design-comuni",
+          "title": "Cerca",
+          "back_label": "Chiudi e torna alla pagina precedente",
+          "label": "Cerca nel sito",
+          "placeholder": "Cerca nel sito",
+          "button": "Cerca",
+          "suggestions_title": "FORSE STAVI CERCANDO",
+          "suggestions": [
+            {
+              "label": "Rilascio Carta Identità Elettronica (CIE)",
+              "url": "#"
+            },
+            {
+              "label": "Cambio di residenza",
+              "url": "#"
+            },
+            {
+              "label": "Tributi online",
+              "url": "#"
+            },
+            {
+              "label": "Prenotazione appuntamenti",
+              "url": "#"
+            },
+            {
+              "label": "Rilascio tessera elettorale",
+              "url": "#"
+            },
+            {
+              "label": "Voucher connettività",
+              "url": "#"
+            }
+          ]
+        }
+      }
+    ],
+    "en": [
+      {
+        "type": "search-modal",
+        "slug": "design-comuni-search-modal",
+        "data": {
+          "view": "pub_theme::components.sections.search-modal.design-comuni",
+          "title": "Search",
+          "back_label": "Close and go back to the previous page",
+          "label": "Search the site",
+          "placeholder": "Search the site",
+          "button": "Search",
+          "suggestions_title": "YOU MIGHT BE LOOKING FOR",
+          "suggestions": [
+            {
+              "label": "Electronic Identity Card (CIE) issue",
+              "url": "#"
+            },
+            {
+              "label": "Change of residence",
+              "url": "#"
+            },
+            {
+              "label": "Online taxes",
+              "url": "#"
+            },
+            {
+              "label": "Appointment booking",
+              "url": "#"
+            },
+            {
+              "label": "Electoral card issue",
+              "url": "#"
+            },
+            {
+              "label": "Connectivity voucher",
+              "url": "#"
+            }
+          ]
+        }
+      }
+    ]
+  }
+}

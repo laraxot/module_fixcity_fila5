@@ -1,0 +1,96 @@
+{
+    "id": "tests.servizi-categoria-14",
+    "slug": "tests.servizi-categoria-14",
+    "parent_slug": "tests",
+    "title": {"it": "Servizi Categoria 14", "en": "Category 14 Services"},
+    "description": "Pagina che mostra i servizi della categoria 14 del Comune, con risultati filtrati e dettagli.",
+    "layout": "test",
+    "content_blocks": {
+        "it": [
+            {
+                "type": "search-results",
+                "data": {
+                    "view": "pub_theme::components.blocks.search-results.default",
+                    "query": "",
+                    "results": [
+                        {
+                            "title": "Servizio A",
+                            "description": "Servizio A dettagliato con icona e descrizione.",
+                            "url": "/it/servizi/servizio/a",
+                            "type": "service",
+                            "badge": "Nuovo"
+                        },
+                        {
+                            "title": "Servizio B",
+                            "description": "Servizio B con immagine e link esterno.",
+                            "url": "https://esempio.com/servizio-b",
+                            "type": "external",
+                            "badge": ""
+                        },
+                        {
+                            "title": "Servizio C",
+                            "description": "Servizio C con calendario e prezzo.",
+                            "url": "/it/servizi/servizio/c",
+                            "type": "service",
+                            "badge": "Popolare"
+                        }
+                    ],
+                    "filters": {
+                        "type": "filter-group",
+                        "fields": [
+                            {
+                                "name": "tipo",
+                                "label": "Tipo",
+                                "options": [
+                                    "service",
+                                    "external",
+                                    "map",
+                                    "normative"
+                                ],
+                                "default": "all"
+                            },
+                            {
+                                "name": "data",
+                                "label": "Data",
+                                "options": [
+                                    "ultimi_7_giorni",
+                                    "ultimo_mese",
+                                    "ultimo_anno",
+                                    "tutto"
+                                ],
+                                "default": "tutto"
+                            },
+                            {
+                                "name": "popolarita",
+                                "label": "Popolarità",
+                                "options": [
+                                    "piu_popolare",
+                                    "meno_popolare",
+                                    "data"
+                                ],
+                                "default": "data"
+                            }
+                        ]
+                    },
+                    "pagination": {
+                        "current_page": 1,
+                        "per_page": 10,
+                        "total_pages": 2,
+                        "has_prev": false,
+                        "has_next": true,
+                        "prev_url": "/it/tests/servizi-categoria-14?page=1",
+                        "next_url": "/it/tests/servizi-categoria-14?page=2",
+                        "show_first_last": true
+                    },
+                    "sorting": {
+                        "field": "data",
+                        "direction": "desc"
+                    }
+                }
+            }
+        ],
+        "en": []
+    },
+    "sidebar_blocks": {"it": [], "en": []},
+    "footer_blocks": null
+}

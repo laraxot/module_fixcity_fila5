@@ -2,20 +2,356 @@
     "id": "tests.segnalazioni-elenco",
     "slug": "tests.segnalazioni-elenco",
     "parent_slug": "tests",
-    "title": {"it": "Elenco segnalazioni - Segnalazione disservizio", "en": "List of reports"},
+    "title": {
+        "it": "Elenco segnalazioni - Segnalazione disservizio",
+        "en": "List of reports"
+    },
     "layout": "test",
-    "description": "Pagina elenco segnalazioni con mappa e lista, filtri per categoria e ricerca.",
+    "description": "Elenco delle segnalazioni con filtro per categoria, mappa e lista. Contenuto da JSON, reso dal blocco report-list del tema Sixteen.",
+    "sidebar_blocks": {
+        "it": [],
+        "en": []
+    },
+    "footer_blocks": null,
     "content_blocks": {
         "it": [
             {
-                "type": "segnalazioni-elenco",
+                "type": "report-list",
                 "data": {
-                    "view": "pub_theme::components.blocks.segnalazioni-elenco.default"
+                    "view": "pub_theme::components.blocks.report-list.design-comuni",
+                    "title": "Elenco segnalazioni",
+                    "subtitle": "Negli ultimi 12 mesi sono state risolte 73 segnalazioni.",
+                    "breadcrumb": {
+                        "items": [
+                            {
+                                "label": "Home",
+                                "url": "/it/tests/homepage"
+                            }
+                        ],
+                        "current": "Elenco segnalazioni"
+                    },
+                    "filters": {
+                        "title": "categoria",
+                        "open_label": "Filtra",
+                        "reset_label": "Rimuovi tutti i filtri",
+                        "items": [
+                            {
+                                "id": "water",
+                                "value": "acqua,allagamenti,fogne",
+                                "label": "Acqua, allagamenti, problemi fognari (21)"
+                            },
+                            {
+                                "id": "enviroment",
+                                "value": "inquinamneto",
+                                "label": "Ambiente, inquinamento, protezione ambientale (14)"
+                            },
+                            {
+                                "id": "street-furniture",
+                                "value": "arredo-urbano",
+                                "label": "Arredo urbano (7)"
+                            },
+                            {
+                                "id": "rodent-control",
+                                "value": "derattizazione",
+                                "label": "Disinfestazione, derattizazione, animali randagi (208)"
+                            },
+                            {
+                                "id": "waste",
+                                "value": "igiene",
+                                "label": "Igiene urbana, rifiuti, pulizia e decoro (321)"
+                            },
+                            {
+                                "id": "maintenance",
+                                "value": "manutenzione",
+                                "label": "Manutenzione immobili, edifici pubblici, scuole, barriere architettoniche, cimiteri (302)"
+                            },
+                            {
+                                "id": "public-order",
+                                "value": "ordine-pubblico",
+                                "label": "Ordine pubblico, disturbo della quiete (302)"
+                            },
+                            {
+                                "id": "green",
+                                "value": "parchi",
+                                "label": "Parchi e verde pubblico (302)"
+                            },
+                            {
+                                "id": "service",
+                                "value": "servizi",
+                                "label": "Servizi del comune (302)"
+                            },
+                            {
+                                "id": "security",
+                                "value": "sicurezza",
+                                "label": "Sicurezza, degrado urbano e sociale (302)"
+                            },
+                            {
+                                "id": "road",
+                                "value": "strade",
+                                "label": "Strade, marciapiedi, segnaletica e viabilità (302)"
+                            }
+                        ]
+                    },
+                    "results": "645 Risultati",
+                    "tabs": [
+                        "Mappa",
+                        "Elenco"
+                    ],
+                    "map": {
+                        "image": "map-placeholder.svg",
+                        "alt": "Mappa",
+                        "pin": {
+                            "image": "map-pin.svg",
+                            "alt": "Pin di geolocalizzazione"
+                        }
+                    },
+                    "invite": {
+                        "title": "Fai una segnalazione",
+                        "text": "Se vuoi aggiungere una segnalazione, puoi farlo dopo esserti autenticato con le tue credenziali SPID o CIE.",
+                        "button": "Segnala disservizio"
+                    },
+                    "items": [
+                        {
+                            "title_class": "medium-title",
+                            "title": "Buca in via Solferino",
+                            "info": {
+                                "label": "Tipologia di segnalazione",
+                                "value": "Verde pubblico e arredo urbano"
+                            },
+                            "toggle_id": "collapse1",
+                            "toggle_label": "Mostra tutto",
+                            "collapse_class": "pb-0",
+                            "summary": {
+                                "class": "border-0",
+                                "compact": true,
+                                "edit": {
+                                    "label": "Modifica",
+                                    "url": "#",
+                                    "hidden": true
+                                },
+                                "footer_hidden": true,
+                                "rows": [
+                                    {
+                                        "label": "Indirizzo",
+                                        "value": "Via Solferino - 50100 Firenze"
+                                    },
+                                    {
+                                        "label": "Dettaglio",
+                                        "value": "Sulla strada c’è una buca piuttosto profonda che andrebbe sistemata con urgenza"
+                                    },
+                                    {
+                                        "label": "Immagini",
+                                        "images": [
+                                            {
+                                                "file": "image-disservizio.png",
+                                                "alt": "Immagine della mappa di dove si trova il disservizio"
+                                            },
+                                            {
+                                                "file": "image-disservizio.png",
+                                                "alt": "Immagine della mappa di dove si trova il disservizio"
+                                            },
+                                            {
+                                                "file": "image-disservizio.png",
+                                                "alt": "Immagine della mappa di dove si trova il disservizio"
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        },
+                        {
+                            "title_class": "medium-title",
+                            "title": "Titolo segnalazione 2",
+                            "info": {
+                                "label": "Tipologia segnalazione"
+                            },
+                            "toggle_id": "collapse2",
+                            "toggle_label": "Mostra tutto",
+                            "collapse_class": "",
+                            "summary": {
+                                "class": "border-0",
+                                "compact": true,
+                                "edit": {
+                                    "label": "Modifica",
+                                    "url": "#",
+                                    "hidden": true
+                                },
+                                "footer_hidden": true,
+                                "rows": [
+                                    {
+                                        "label": "Indirizzo",
+                                        "value": "Via Solferino - 50100 Firenze"
+                                    },
+                                    {
+                                        "label": "Dettaglio",
+                                        "value": "Sulla strada c’è una buca piuttosto profonda che andrebbe sistemata con urgenza"
+                                    },
+                                    {
+                                        "label": "Immagini",
+                                        "images": [
+                                            {
+                                                "file": "image-disservizio.png",
+                                                "alt": "Immagine della mappa di dove si trova il disservizio"
+                                            },
+                                            {
+                                                "file": "image-disservizio.png",
+                                                "alt": "Immagine della mappa di dove si trova il disservizio"
+                                            },
+                                            {
+                                                "file": "image-disservizio.png",
+                                                "alt": "Immagine della mappa di dove si trova il disservizio"
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        },
+                        {
+                            "title_class": "medium-title",
+                            "title": "Titolo segnalazione 3",
+                            "info": {
+                                "label": "Tipologia segnalazione"
+                            },
+                            "toggle_id": "collapse3",
+                            "toggle_label": "Mostra tutto",
+                            "collapse_class": "",
+                            "summary": {
+                                "class": "border-0",
+                                "compact": true,
+                                "edit": {
+                                    "label": "Modifica",
+                                    "url": "#",
+                                    "hidden": true
+                                },
+                                "footer_hidden": true,
+                                "rows": [
+                                    {
+                                        "label": "Indirizzo",
+                                        "value": "Via Solferino - 50100 Firenze"
+                                    },
+                                    {
+                                        "label": "Dettaglio",
+                                        "value": "Sulla strada c’è una buca piuttosto profonda che andrebbe sistemata con urgenza"
+                                    },
+                                    {
+                                        "label": "Immagini",
+                                        "images": [
+                                            {
+                                                "file": "image-disservizio.png",
+                                                "alt": "Immagine della mappa di dove si trova il disservizio"
+                                            },
+                                            {
+                                                "file": "image-disservizio.png",
+                                                "alt": "Immagine della mappa di dove si trova il disservizio"
+                                            },
+                                            {
+                                                "file": "image-disservizio.png",
+                                                "alt": "Immagine della mappa di dove si trova il disservizio"
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        }
+                    ],
+                    "load_more": "Carica altre segnalazioni",
+                    "feedback": {
+                        "title": "Quanto sono chiare le informazioni su questa pagina?",
+                        "col_class": "col-12 col-lg-6 p-lg-0 px-3",
+                        "legend": "Valuta da 1 a 5 stelle la pagina",
+                        "star_label": "Valuta %d stelle su 5",
+                        "thanks": "Grazie, il tuo parere ci aiuterà a migliorare il servizio!",
+                        "positive": {
+                            "question": "Quali sono stati gli aspetti che hai preferito?",
+                            "answers": [
+                                "Le indicazioni erano chiare",
+                                "Le indicazioni erano complete",
+                                "Capivo sempre che stavo procedendo correttamente",
+                                "Non ho avuto problemi tecnici",
+                                "Altro"
+                            ]
+                        },
+                        "negative": {
+                            "question": "Dove hai incontrato le maggiori difficoltà?",
+                            "answers": [
+                                "A volte le indicazioni non erano chiare",
+                                "A volte le indicazioni non erano complete",
+                                "A volte non capivo se stavo procedendo correttamente",
+                                "Ho avuto problemi tecnici",
+                                "Altro"
+                            ]
+                        },
+                        "detail": {
+                            "question": "Vuoi aggiungere altri dettagli?",
+                            "label": "Dettaglio",
+                            "help": "Inserire massimo 200 caratteri"
+                        },
+                        "back": "Indietro",
+                        "next": "Avanti"
+                    },
+                    "contacts": {
+                        "layout": "narrow",
+                        "main": {
+                            "title": "Contatta il comune",
+                            "items": [
+                                {
+                                    "icon": "it-help-circle",
+                                    "label": "Leggi le domande frequenti",
+                                    "url": "#"
+                                },
+                                {
+                                    "icon": "it-mail",
+                                    "label": "Richiedi assistenza",
+                                    "url": "#",
+                                    "element": "contacts"
+                                },
+                                {
+                                    "icon": "it-hearing",
+                                    "label": "Chiama il numero verde 05 0505",
+                                    "url": "#"
+                                },
+                                {
+                                    "icon": "it-calendar",
+                                    "label": "Prenota appuntamento",
+                                    "url": "#",
+                                    "element": "appointment-booking"
+                                }
+                            ]
+                        }
+                    },
+                    "modal": {
+                        "id": "modal-disservizio",
+                        "title_id": "modal2Title",
+                        "title": "Buca in via Solferino",
+                        "close_label": "Chiudi finestra modale",
+                        "close_button": "Chiudi",
+                        "fields": [
+                            {
+                                "label": "Titolo",
+                                "value": "Buca in via Solferino"
+                            },
+                            {
+                                "label": "Tipologia di segnalazione",
+                                "value": "Verde pubblico e arredo urbano"
+                            },
+                            {
+                                "label": "Indirizzo",
+                                "value": "Via Solferino - 50100 Firenze"
+                            },
+                            {
+                                "label": "Dettaglio",
+                                "value": "Sulla strada c’è una buca piuttosto profonda che andrebbe sistemata con urgenza"
+                            }
+                        ],
+                        "images": {
+                            "label": "Immagini",
+                            "file": "modal-disservizio-placeholder.png",
+                            "alt": "immagine della mappa di dove si trova il disservizio"
+                        }
+                    }
                 }
             }
         ],
         "en": []
-    },
-    "sidebar_blocks": {"it": [], "en": []},
-    "footer_blocks": null
+    }
 }

@@ -1,75 +1,360 @@
 {
   "id": "tests.index",
   "slug": "tests.index",
-  "title": {"it": "I templates HTML del modello per i comuni", "en": "HTML templates for municipalities"},
+  "parent_slug": "tests",
+  "title": {
+    "it": "I templates HTML del modello per i comuni",
+    "en": "HTML templates for municipalities"
+  },
   "layout": "test",
+  "description": "Catalogo dei template HTML del modello per i comuni. Contenuto da JSON, reso dal blocco tests-index del tema Sixteen.",
   "content_blocks": {
-    "it": [{
-      "type": "template-index",
-      "data": {
-        "view": "pub_theme::components.blocks.template-index",
-        "navigation": [
-          {"label": "Sito", "url": "{{ route('tests.index') }}", "active": true},
-          {"label": "Flussi di servizio", "url": "{{ route('tests.view', ['slug' => 'servizi']) }}", "active": false}
-        ],
-        "heading": "INDICE",
-        "sections": [
-          {"id": "generali", "label": "Generali", "pages": [
-            {"name": "Homepage", "description": "La homepage del sito comunale", "file": "homepage.html", "url": "{{ route('tests.view', ['slug' => 'homepage']) }}"},
-            {"name": "Domande frequenti (FAQ)", "file": "domande-frequenti.html", "url": "{{ route('tests.view', ['slug' => 'domande-frequenti']) }}"},
-            {"name": "Risultati di ricerca", "file": "risultati-ricerca.html", "url": "{{ route('tests.view', ['slug' => 'risultati-ricerca']) }}"},
-            {"name": "Argomenti", "file": "argomenti.html", "url": "{{ route('tests.view', ['slug' => 'argomenti']) }}"},
-            {"name": "Argomento", "file": "argomento.html", "url": "{{ route('tests.view', ['slug' => 'argomento']) }}"},
-            {"name": "Lista contenuti/risorse", "file": "lista-risorse.html", "url": "{{ route('tests.view', ['slug' => 'lista-risorse']) }}"},
-            {"name": "Lista categorie", "file": "lista-categorie.html", "url": "{{ route('tests.view', ['slug' => 'lista-categorie']) }}"},
-            {"name": "Lista risorse e categorie", "file": "lista-risorse-categorie.html", "url": "{{ route('tests.view', ['slug' => 'lista-risorse-categorie']) }}"},
-            {"name": "Mappa del sito", "file": "mappa-sito.html", "url": "{{ route('tests.view', ['slug' => 'mappa-sito']) }}"}
-          ]},
-          {"id": "amministrazione", "label": "Amministrazione", "pages": [
-            {"name": "Amministrazione", "file": "amministrazione.html", "url": "{{ route('tests.view', ['slug' => 'amministrazione']) }}"},
-            {"name": "Documenti e dati", "file": "documenti-dati.html", "url": "{{ route('tests.view', ['slug' => 'documenti-dati']) }}"}
-          ]},
-          {"id": "novita", "label": "Novità", "pages": [
-            {"name": "Novità", "file": "novita.html", "url": "{{ route('tests.view', ['slug' => 'novita']) }}"},
-            {"name": "Notizia, Comunicato, Avviso", "file": "novita-dettaglio.html", "url": "{{ route('tests.view', ['slug' => 'novita-dettaglio']) }}"}
-          ]},
-          {"id": "servizi", "label": "Servizi", "pages": [
-            {"name": "Servizi", "file": "servizi.html", "url": "{{ route('tests.view', ['slug' => 'servizi']) }}"},
-            {"name": "Categorie di servizio - pagina di secondo livello", "file": "servizi-categoria.html", "url": "{{ route('tests.view', ['slug' => 'servizi-categoria']) }}"},
-            {"name": "Scheda servizio", "file": "servizio-dettaglio.html", "url": "{{ route('tests.view', ['slug' => 'servizio-dettaglio']) }}"}
-          ]},
-          {"id": "eventi", "label": "Vivere il Comune", "pages": [
-            {"name": "Eventi", "file": "eventi.html", "url": "{{ route('tests.view', ['slug' => 'eventi']) }}"},
-            {"name": "Evento", "file": "evento-dettaglio.html", "url": "{{ route('tests.view', ['slug' => 'evento-dettaglio']) }}"}
-          ]},
-          {"id": "appuntamento", "label": "Prenotazione Appuntamento", "description": "Templates specifici per la funzionalità di prenotazione appuntamento", "pages": [
-            {"name": "Step 1 - Selezione ufficio (1 di 2)", "file": "appuntamento-01-ufficio.html", "url": "{{ route('tests.view', ['slug' => 'appuntamento-01-ufficio']) }}"},
-            {"name": "Step 1 - Selezione ufficio (2 di 2)", "file": "appuntamento-01-ufficio-luogo.html", "url": "{{ route('tests.view', ['slug' => 'appuntamento-01-ufficio-luogo']) }}"},
-            {"name": "Step 2 - Scelta appuntamento", "file": "appuntamento-02-data-orario.html", "url": "{{ route('tests.view', ['slug' => 'appuntamento-02-data-orario']) }}"},
-            {"name": "Step 3 - Selezione del motivo e aggiunta dei dettagli", "file": "appuntamento-03-dettagli.html", "url": "{{ route('tests.view', ['slug' => 'appuntamento-03-dettagli']) }}"},
-            {"name": "Step 4 - Aggiunta delle informazioni personali", "file": "appuntamento-04-richiedente.html", "url": "{{ route('tests.view', ['slug' => 'appuntamento-04-richiedente']) }}"},
-            {"name": "Step 4 - Aggiunta delle informazioni personali (utente autenticato)", "file": "appuntamento-04-richiedente-autenticato.html", "url": "{{ route('tests.view', ['slug' => 'appuntamento-04-richiedente-autenticato']) }}"},
-            {"name": "Step 5 - Riepilogo delle informazioni inserite", "file": "appuntamento-05-riepilogo.html", "url": "{{ route('tests.view', ['slug' => 'appuntamento-05-riepilogo']) }}"},
-            {"name": "Step 6 - Conferma dell'appuntamento", "file": "appuntamento-06-conferma.html", "url": "{{ route('tests.view', ['slug' => 'appuntamento-06-conferma']) }}"}
-          ]},
-          {"id": "assistenza", "label": "Richiesta Assistenza", "description": "Templates specifici per la funzionalità di richiesta assistenza", "pages": [
-            {"name": "Step 1 - Inserimento dei dati", "file": "assistenza-01-dati.html", "url": "{{ route('tests.view', ['slug' => 'assistenza-01-dati']) }}"},
-            {"name": "Step 2 - Conferma invio richiesta", "file": "assistenza-02-conferma.html", "url": "{{ route('tests.view', ['slug' => 'assistenza-02-conferma']) }}"}
-          ]},
-          {"id": "segnalazione", "label": "Segnalazione Disservizio", "description": "Templates specifici per la funzionalità di segnalazione disservizio", "pages": [
-            {"name": "Scheda del servizio di segnalazione", "file": "segnalazione-dettaglio.html", "url": "{{ route('tests.view', ['slug' => 'segnalazione-dettaglio']) }}"},
-            {"name": "Step 1 - Acconsentire al trattamento dei dati personali", "file": "segnalazione-01-privacy.html", "url": "{{ route('tests.view', ['slug' => 'segnalazione-01-privacy']) }}"},
-            {"name": "Step 2 - Inserimento dei dati di segnalazione", "file": "segnalazione-02-dati.html", "url": "{{ route('tests.view', ['slug' => 'segnalazione-02-dati']) }}"},
-            {"name": "Step 3 - Riepilogo delle informazioni inserite", "file": "segnalazione-03-riepilogo.html", "url": "{{ route('tests.view', ['slug' => 'segnalazione-03-riepilogo']) }}"},
-            {"name": "Step 4 - Conferma invio segnalazione", "file": "segnalazione-04-conferma.html", "url": "{{ route('tests.view', ['slug' => 'segnalazione-04-conferma']) }}"},
-            {"name": "Segnalazione disservizio - Area personale", "file": "segnalazione-area-personale.html", "url": "{{ route('tests.view', ['slug' => 'segnalazione-area-personale']) }}"},
-            {"name": "Elenco delle segnalazioni", "file": "segnalazioni-elenco.html", "url": "{{ route('tests.view', ['slug' => 'segnalazioni-elenco']) }}"}
-          ]}
-        ]
+    "it": [
+      {
+        "type": "tests-index",
+        "data": {
+          "view": "pub_theme::components.blocks.tests-index.design-comuni",
+          "title": "I templates HTML del modello per i comuni",
+          "release": {
+            "label": "v2.4.0",
+            "url": "https://github.com/italia/design-comuni-pagine-statiche/releases/latest",
+            "title": "Vai alla release",
+            "alt": "Link alla release su Github"
+          },
+          "tabs": [
+            {
+              "label": "Sito",
+              "url": "/it/tests",
+              "active": true
+            },
+            {
+              "label": "Flussi di servizio",
+              "url": "/it/tests/servizi-index",
+              "active": false
+            }
+          ],
+          "nav": {
+            "toggle_aria_label": "Toggle navigation",
+            "toggle_label": "Indice templates",
+            "close_label": "close",
+            "back_label": "Back",
+            "heading": "INDICE",
+            "items": [
+              {
+                "anchor": "generali",
+                "label": "Generali",
+                "active": true
+              },
+              {
+                "anchor": "amministrazione",
+                "label": "Amministrazione",
+                "active": false
+              },
+              {
+                "anchor": "novita",
+                "label": "Novità",
+                "active": false
+              },
+              {
+                "anchor": "servizi",
+                "label": "Servizi",
+                "active": false
+              },
+              {
+                "anchor": "eventi",
+                "label": "Vivere il Comune",
+                "active": false
+              },
+              {
+                "anchor": "appuntamento",
+                "label": "Prenotazione Appuntamento",
+                "active": false
+              },
+              {
+                "anchor": "assistenza",
+                "label": "Richiesta Assistenza",
+                "active": false
+              },
+              {
+                "anchor": "segnalazione",
+                "label": "Segnalazione Disservizio",
+                "active": false
+              }
+            ]
+          },
+          "sections": [
+            {
+              "id": "generali",
+              "title": "Generali",
+              "pages": [
+                {
+                  "name": "Homepage",
+                  "description": "La homepage del sito comunale",
+                  "file": "homepage.html",
+                  "url": "/it/tests/homepage"
+                },
+                {
+                  "name": "Domande frequenti (FAQ)",
+                  "description": "La pagina per la presentazione delle domande frequenti (FAQ)",
+                  "file": "domande-frequenti.html",
+                  "url": "/it/tests/domande-frequenti"
+                },
+                {
+                  "name": "Risultati di ricerca",
+                  "description": "La pagina per la presentazione dei risultati di ricerca",
+                  "file": "risultati-ricerca.html",
+                  "url": "/it/tests/risultati-ricerca"
+                },
+                {
+                  "name": "Argomenti",
+                  "description": "La pagina con la lista di tutti gli argomenti a cui sono associati i contenuti del sito",
+                  "file": "argomenti.html",
+                  "url": "/it/tests/argomenti"
+                },
+                {
+                  "name": "Argomento",
+                  "description": "La pagina di presentazione dei contenuti di uno specifico argomento",
+                  "file": "argomento.html",
+                  "url": "/it/tests/argomento"
+                },
+                {
+                  "name": "Lista contenuti/risorse",
+                  "description": "Il template di una pagina lista di secondo o terzo livello",
+                  "file": "lista-risorse.html",
+                  "url": "/it/tests/lista-risorse"
+                },
+                {
+                  "name": "Lista categorie",
+                  "description": "Il template di una pagina lista categorie di secondo o terzo livello",
+                  "file": "lista-categorie.html",
+                  "url": "/it/tests/lista-categorie"
+                },
+                {
+                  "name": "Lista risorse e categorie",
+                  "description": "Il template di una pagina lista di secondo o terzo livello che riunisce sia risorse che categorie",
+                  "file": "lista-risorse-categorie.html",
+                  "url": "/it/tests/lista-risorse-categorie"
+                },
+                {
+                  "name": "Mappa del sito",
+                  "description": "Il template della pagina mappa del sito",
+                  "file": "mappa-sito.html",
+                  "url": "/it/tests/mappa-sito"
+                }
+              ],
+              "heading_id": true
+            },
+            {
+              "id": "amministrazione",
+              "title": "Amministrazione",
+              "pages": [
+                {
+                  "name": "Amministrazione",
+                  "description": "La pagina lista di primo livello per la sezione Amministrazione",
+                  "file": "amministrazione.html",
+                  "url": "/it/tests/amministrazione"
+                },
+                {
+                  "name": "Documenti e dati",
+                  "description": "La pagina principale della sottosezione Documenti e dati",
+                  "file": "documenti-dati.html",
+                  "url": "/it/tests/documenti-dati"
+                }
+              ]
+            },
+            {
+              "id": "novita",
+              "title": "Novità",
+              "pages": [
+                {
+                  "name": "Novità",
+                  "description": "La pagina lista di primo livello per la sezione Novità",
+                  "file": "novita.html",
+                  "url": "/it/tests/novita"
+                },
+                {
+                  "name": "Notizia, Comunicato, Avviso",
+                  "description": "La pagina di dettaglio per le notizie, i comunicati e gli avvisi",
+                  "file": "novita-dettaglio.html",
+                  "url": "/it/tests/novita-dettaglio"
+                }
+              ]
+            },
+            {
+              "id": "servizi",
+              "title": "Servizi",
+              "pages": [
+                {
+                  "name": "Servizi",
+                  "description": "La pagina lista di primo livello per la sezione Servizi",
+                  "file": "servizi.html",
+                  "url": "/it/tests/servizi"
+                },
+                {
+                  "name": "Categoria di servizio - pagina di secondo livello",
+                  "description": "La pagina dei servizi appartenenti a una specifica categoria",
+                  "file": "servizi-categoria.html",
+                  "url": "/it/tests/servizi-categoria"
+                },
+                {
+                  "name": "Scheda servizio",
+                  "description": "La pagina di dettaglio di un servizio specifico",
+                  "file": "servizio-dettaglio.html",
+                  "url": "/it/tests/servizio-dettaglio"
+                }
+              ]
+            },
+            {
+              "id": "eventi",
+              "title": "Vivere il Comune",
+              "pages": [
+                {
+                  "name": "Eventi",
+                  "description": "La pagina lista di primo livello per la sezione Vivere il Comune",
+                  "file": "eventi.html",
+                  "url": "/it/tests/eventi"
+                },
+                {
+                  "name": "Evento",
+                  "description": "La pagina di dettaglio di un evento",
+                  "file": "evento-dettaglio.html",
+                  "url": "/it/tests/evento-dettaglio"
+                }
+              ]
+            },
+            {
+              "id": "appuntamento",
+              "title": "Prenotazione Appuntamento",
+              "pages": [
+                {
+                  "name": "Step 1 - Selezione ufficio (1 di 2)",
+                  "description": "La schermata di selezione di un ufficio",
+                  "file": "appuntamento-01-ufficio.html",
+                  "url": "/it/tests/appuntamento-01-ufficio"
+                },
+                {
+                  "name": "Step 1 - Selezione ufficio (2 di 2)",
+                  "description": "La schermata di selezione tra più sedi dello stesso ufficio",
+                  "file": "appuntamento-01-ufficio-luogo.html",
+                  "url": "/it/tests/appuntamento-01-ufficio-luogo"
+                },
+                {
+                  "name": "Step 2 - Scelta appuntamento",
+                  "description": "La schermata di selezione della data e ora dell'appuntamento",
+                  "file": "appuntamento-02-data-orario.html",
+                  "url": "/it/tests/appuntamento-02-data-orario"
+                },
+                {
+                  "name": "Step 3 - Selezione del motivo e aggiunta dei dettagli",
+                  "description": "La schermata di selezione del motivo dell'appuntamento e integrazione della richiesta con maggiori dettagli",
+                  "file": "appuntamento-03-dettagli.html",
+                  "url": "/it/tests/appuntamento-03-dettagli"
+                },
+                {
+                  "name": "Step 4 - Aggiunta delle informazioni personali (utente non autenticato)",
+                  "description": "La schermata di inserimento delle informazioni personali senza essersi autenticato tramite identità digitale",
+                  "file": "appuntamento-04-richiedente.html",
+                  "url": "/it/tests/appuntamento-04-richiedente"
+                },
+                {
+                  "name": "Step 4 - Aggiunta delle informazioni personali (utente autenticato)",
+                  "description": "La schermata per verificare le informazioni personali provenienti da identità digitale",
+                  "file": "appuntamento-04-richiedente-autenticato.html",
+                  "url": "/it/tests/appuntamento-04-richiedente-autenticato"
+                },
+                {
+                  "name": "Step 5 - Riepilogo delle informazioni inserite",
+                  "description": "La schermata di riepilogo delle informazioni inserite, con la possibilità di confermarle o tornare indietro per effettuare una modifica",
+                  "file": "appuntamento-05-riepilogo.html",
+                  "url": "/it/tests/appuntamento-05-riepilogo"
+                },
+                {
+                  "name": "Step 6 - Conferma dell'appuntamento",
+                  "description": "La schermata con la conferma della prenotazione appuntamento e il riepilogo di data, ora, cosa serve e indirizzo dell'ufficio",
+                  "file": "appuntamento-06-conferma.html",
+                  "url": "/it/tests/appuntamento-06-conferma"
+                }
+              ],
+              "heading_id": true,
+              "intro": "Templates specifici per la funzionalità di prenotazione appuntamento"
+            },
+            {
+              "id": "assistenza",
+              "title": "Richiesta Assistenza",
+              "pages": [
+                {
+                  "name": "Step 1 - Inserimento dei dati",
+                  "description": "La schermata per inserire le informazioni personali del richiedente (nome, cognome, email) e i dettagli della richiesta (categoria di servizio, servizio specifico e ulteriori informazioni testuali)",
+                  "file": "assistenza-01-dati.html",
+                  "url": "/it/tests/assistenza-01-dati"
+                },
+                {
+                  "name": "Step 2 - Conferma invio richiesta",
+                  "description": "La schermata con la conferma dell'avvenuta richiesta di assistenza",
+                  "file": "assistenza-02-conferma.html",
+                  "url": "/it/tests/assistenza-02-conferma"
+                }
+              ],
+              "intro": "Templates specifici per la funzionalità di richiesta assistenza"
+            },
+            {
+              "id": "segnalazione",
+              "title": "Segnalazione Disservizio",
+              "pages": [
+                {
+                  "name": "Scheda del servizio di segnalazione",
+                  "description": "La scheda di presentazione del servizio di segnalazione con tutte le informazioni necessarie, l’accesso alla funzionalità e l’accesso alla lista di tutte le segnalazioni",
+                  "file": "segnalazione-dettaglio.html",
+                  "url": "/it/tests/segnalazione-dettaglio"
+                },
+                {
+                  "name": "Step 1 - Acconsentire al trattamento dei dati personali",
+                  "description": "La schermata con l’informativa privacy e la possibilità di acconsentire al trattamento dei dati",
+                  "file": "segnalazione-01-privacy.html",
+                  "url": "/it/tests/segnalazione-01-privacy"
+                },
+                {
+                  "name": "Step 2 - Inserimento dei dati di segnalazione",
+                  "description": "La schermata per l’inserimento di luogo, i dettagli del disservizio, gli allegati e i dati dell’autore della segnalazione",
+                  "file": "segnalazione-02-dati.html",
+                  "url": "/it/tests/segnalazione-02-dati"
+                },
+                {
+                  "name": "Step 3 - Riepilogo delle informazioni inserite",
+                  "description": "La schermata di riepilogo delle informazioni inserite con la possibilità di confermare o tornare indietro per modificarle",
+                  "file": "segnalazione-03-riepilogo.html",
+                  "url": "/it/tests/segnalazione-03-riepilogo"
+                },
+                {
+                  "name": "Step 4 - Conferma invio segnalazione",
+                  "description": "segnalazione-04-conferma.html",
+                  "file": "segnalazione-04-conferma.html",
+                  "url": "/it/tests/segnalazione-04-conferma"
+                },
+                {
+                  "name": "Segnalazione disservizio - Area personale",
+                  "description": "La schermata dell’area personale con la segnalazione disservizio appena effettuata tra le ultime attività",
+                  "file": "segnalazione-area-personale.html",
+                  "url": "/it/tests/segnalazione-area-personale"
+                },
+                {
+                  "name": "Elenco delle segnalazioni",
+                  "description": "La schermata con l’elenco e la mappa con tutte le segnalazioni ricevute dal comune, filtrabili per tipologia",
+                  "file": "segnalazioni-elenco.html",
+                  "url": "/it/tests/segnalazioni-elenco"
+                }
+              ],
+              "intro": "Templates specifici per la funzionalità di segnalazione disservizio"
+            }
+          ]
+        }
       }
-    }],
+    ],
     "en": []
   },
-  "sidebar_blocks": {"it": [], "en": []},
+  "sidebar_blocks": {
+    "it": [],
+    "en": []
+  },
   "footer_blocks": null
 }

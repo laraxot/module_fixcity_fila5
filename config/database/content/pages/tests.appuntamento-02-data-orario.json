@@ -1,0 +1,151 @@
+{
+    "id": "tests.appuntamento-02-data-orario",
+    "slug": "tests.appuntamento-02-data-orario",
+    "parent_slug": "tests",
+    "title": {
+        "it": "Prenotazione appuntamento",
+        "en": "Appointment booking"
+    },
+    "description": "Passo 2 della prenotazione di un appuntamento: data e orario. Contenuto da JSON, reso dal blocco appointment-step del tema Sixteen.",
+    "layout": "test",
+    "content_blocks": {
+        "it": [
+            {
+                "type": "appointment-step",
+                "data": {
+                    "view": "pub_theme::components.blocks.appointment-step.design-comuni",
+                    "title": "Prenotazione appuntamento",
+                    "breadcrumb": {
+                        "items": [
+                            {
+                                "label": "Home",
+                                "url": "/it/tests/homepage"
+                            }
+                        ],
+                        "current": "Prenotazione appuntamento"
+                    },
+                    "steps": {
+                        "items": [
+                            {
+                                "label": "Luogo",
+                                "state": "confirmed"
+                            },
+                            {
+                                "label": "Data e orario",
+                                "state": "active"
+                            },
+                            {
+                                "label": "Dettagli appuntamento",
+                                "state": ""
+                            },
+                            {
+                                "label": "Richiedente",
+                                "state": ""
+                            },
+                            {
+                                "label": "Riepilogo",
+                                "state": ""
+                            }
+                        ],
+                        "index": "2/5",
+                        "confirmed_label": "Confermato",
+                        "active_label": "Attivo",
+                        "required_notice": "I campi contraddistinti dal simbolo asterisco sono obbligatori"
+                    },
+                    "side_nav": {
+                        "aria_label": "INFORMAZIONI RICHIESTE",
+                        "title": "INFORMAZIONI RICHIESTE",
+                        "items": [
+                            {
+                                "label": "Appuntamenti disponibili",
+                                "anchor": "appointment-available"
+                            },
+                            {
+                                "label": "Ufficio",
+                                "anchor": "office"
+                            }
+                        ]
+                    },
+                    "sections": [
+                        {
+                            "type": "appointments",
+                            "id": "appointment-available",
+                            "title": "Appuntamenti disponibili*",
+                            "select_label": "Seleziona un mese",
+                            "months": [
+                                "Gennaio",
+                                "Febbraio",
+                                "Marzo",
+                                "Aprile",
+                                "Maggio",
+                                "Giugno",
+                                "Luglio",
+                                "Agosto",
+                                "Settembre",
+                                "Ottobre",
+                                "Novembre",
+                                "Dicembre"
+                            ],
+                            "legend": "Seleziona un giorno e orario",
+                            "slots": [
+                                "Giovedì 11 Marzo 2022 ore 10:00",
+                                "Venerdì 12 Marzo 2022 ore 11:15",
+                                "Lunedì 15 Marzo 2022 ore 09:00"
+                            ]
+                        },
+                        {
+                            "type": "office-summary",
+                            "id": "office",
+                            "title": "Ufficio",
+                            "name": "Municipalità 1 - Chiaia, Posillipo, S. Ferdinando",
+                            "rows": [
+                                {
+                                    "label": "Indirizzo",
+                                    "value": "via S. Caterina a Chiaia, 76"
+                                },
+                                {
+                                    "label": "Apertura",
+                                    "value": "lun, mar, mer ore 9:00 – 12:00"
+                                }
+                            ]
+                        }
+                    ],
+                    "nav": {
+                        "aria_label": "Step",
+                        "back": "Indietro",
+                        "next": "Avanti",
+                        "saved_message": "Richiesta salvata con successo"
+                    },
+                    "contacts": {
+                        "main": {
+                            "title": "Contatta il comune",
+                            "items": [
+                                {
+                                    "icon": "it-help-circle",
+                                    "label": "Leggi le domande frequenti",
+                                    "url": "#"
+                                },
+                                {
+                                    "icon": "it-mail",
+                                    "label": "Richiedi assistenza",
+                                    "url": "#"
+                                },
+                                {
+                                    "icon": "it-hearing",
+                                    "label": "Chiama il numero verde 05 0505",
+                                    "url": "#"
+                                }
+                            ]
+                        }
+                    }
+                }
+            }
+        ],
+        "en": []
+    },
+    "sidebar_blocks": {
+        "it": [],
+        "en": []
+    },
+    "footer_blocks": null
+}

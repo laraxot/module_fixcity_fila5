@@ -1,0 +1,213 @@
+{
+    "id": "tests.permessi-dati-specifici",
+    "slug": "tests.permessi-dati-specifici",
+    "parent_slug": "tests",
+    "title": {
+        "it": "Permesso ZTL",
+        "en": "Permesso ZTL"
+    },
+    "layout": "test",
+    "sidebar_blocks": {
+        "it": [],
+        "en": []
+    },
+    "footer_blocks": null,
+    "description": "Pagina di prova permessi-dati-specifici (flusso permessi) da JSON, resa dal blocco service-flow del tema Sixteen.",
+    "content_blocks": {
+        "it": [
+            {
+                "type": "service-flow",
+                "data": {
+                    "view": "pub_theme::components.blocks.service-flow.permessi-design-comuni",
+                    "kind": "permessi-wizard-step",
+                    "breadcrumb": {
+                        "items": [
+                            {
+                                "label": "Home",
+                                "url": "/it/tests/homepage"
+                            },
+                            {
+                                "label": "Servizi",
+                                "url": "#"
+                            },
+                            {
+                                "label": "Mobilità e trasporti",
+                                "url": "#"
+                            }
+                        ],
+                        "current": "Permesso ZTL"
+                    },
+                    "heading": {
+                        "title": "Permesso ZTL",
+                        "subtitles": [
+                            {
+                                "text": "Hai bisogno di assistenza?",
+                                "class": "subtitle-small",
+                                "link": {
+                                    "label": "Contattaci",
+                                    "url": "",
+                                    "class": "title-small-semi-bold t-primary"
+                                }
+                            }
+                        ]
+                    },
+                    "stepper": {
+                        "items": [
+                            {
+                                "label": "Informativa sulla privacy",
+                                "state": "confirmed"
+                            },
+                            {
+                                "label": "Dati Generali",
+                                "state": "confirmed"
+                            },
+                            {
+                                "label": "Preferenze di servizio",
+                                "state": "active"
+                            },
+                            {
+                                "label": "Riepilogo",
+                                "state": ""
+                            }
+                        ],
+                        "confirmed_label": "Confermato",
+                        "active_label": "Attivo",
+                        "index": "3/4"
+                    },
+                    "body": {
+                        "layout": "sidebar",
+                        "steps_content": "inner",
+                        "col": "col-12 col-lg-8 offset-lg-1",
+                        "sections_container": true,
+                        "before": []
+                    },
+                    "side_nav": {
+                        "class": "col-12 col-lg-3 d-lg-block mb-4 d-none",
+                        "aria_label": "INFORMAZIONI RICHIESTE",
+                        "title": "INFORMAZIONI RICHIESTE",
+                        "items": [
+                            {
+                                "label": "Tipo di permesso",
+                                "anchor": "permission-type"
+                            },
+                            {
+                                "label": "Periodo di validità",
+                                "anchor": "validity-period"
+                            }
+                        ]
+                    },
+                    "sections": [
+                        {
+                            "type": "card",
+                            "id": "permission-type",
+                            "class": "",
+                            "wrapper_class": "mb-40 mt-2",
+                            "card_class": "card has-bkg-grey shadow-sm p-big",
+                            "header_class": "card-header border-0 p-0 mb-lg-20",
+                            "title": "Tipo di permesso",
+                            "title_class": "title-xxlarge mb-1 icon-required",
+                            "subtitle": "Scegli il tipo di permesso ZTL",
+                            "subtitle_class": "subtitle-small mb-0",
+                            "content": {
+                                "kind": "permessi-checkboxes",
+                                "class": "form-check d-flex flex-column align-items-center bg-white w-100 p-3 p-lg-4 mt-0",
+                                "options": [
+                                    {
+                                        "id": "ztl-a",
+                                        "label": "Zona Traffico Limitato A"
+                                    },
+                                    {
+                                        "id": "ztl-b",
+                                        "label": "Zona Traffico Limitato B"
+                                    },
+                                    {
+                                        "id": "ztl-c",
+                                        "label": "Zona Traffico Limitato C"
+                                    }
+                                ]
+                            }
+                        },
+                        {
+                            "type": "card",
+                            "id": "validity-period",
+                            "class": "",
+                            "wrapper_class": "",
+                            "card_class": "card has-bkg-grey shadow-sm p-big",
+                            "header_class": "card-header border-0 p-0 mb-lg-20",
+                            "title": "Periodo di validità",
+                            "title_class": "title-xxlarge mb-1 icon-required",
+                            "subtitle": "Indica il periodo di validità del permesso ZTL",
+                            "subtitle_class": "subtitle-small mb-0",
+                            "content": {
+                                "kind": "permessi-dates",
+                                "class": "d-lg-flex justify-content-between flex-column flex-lg-row",
+                                "fields": [
+                                    {
+                                        "id": "date-1",
+                                        "name": "dateStandard",
+                                        "label": "Dal*",
+                                        "class": "form-group mb-0 me-lg-4 p-3 pt-lg-40 pb-lg-40 pl-lg-40"
+                                    },
+                                    {
+                                        "id": "date-2",
+                                        "name": "dateStandard",
+                                        "label": "Al*",
+                                        "class": "form-group mb-0 p-3 pt-lg-40 pb-lg-40 ps-lg-8 pr-lg-40"
+                                    }
+                                ]
+                            }
+                        }
+                    ],
+                    "nav": {
+                        "aria_label": "Step",
+                        "back": "Indietro",
+                        "save": {
+                            "long": "Salva Richiesta",
+                            "short": "Salva"
+                        },
+                        "next": {
+                            "label": "Avanti",
+                            "icon": "it-chevron-right",
+                            "class": "",
+                            "modal": "#"
+                        },
+                        "saved_message": "Richiesta salvata con successo"
+                    },
+                    "contacts": {
+                        "layout": "offset",
+                        "col": "col-12 col-lg-6",
+                        "row_class": "row",
+                        "main": {
+                            "title": "Contatta il comune",
+                            "items": [
+                                {
+                                    "icon": "it-help-circle",
+                                    "label": "Leggi le domande frequenti",
+                                    "url": "#"
+                                },
+                                {
+                                    "icon": "it-mail",
+                                    "label": "Richiedi assistenza",
+                                    "url": "#",
+                                    "element": "contacts"
+                                },
+                                {
+                                    "icon": "it-hearing",
+                                    "label": "Chiama il numero verde 05 0505",
+                                    "url": "#"
+                                },
+                                {
+                                    "icon": "it-calendar",
+                                    "label": "Prenota appuntamento",
+                                    "url": "#",
+                                    "element": "appointment-booking"
+                                }
+                            ]
+                        }
+                    }
+                }
+            }
+        ],
+        "en": []
+    }
+}

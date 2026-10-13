@@ -1,0 +1,560 @@
+{
+    "id": "tests.graduatoria-riepilogo",
+    "slug": "tests.graduatoria-riepilogo",
+    "parent_slug": "tests",
+    "title": {
+        "it": "Iscrizione alla scuola dell'infanzia",
+        "en": "Iscrizione alla scuola dell'infanzia"
+    },
+    "layout": "test",
+    "sidebar_blocks": {
+        "it": [],
+        "en": []
+    },
+    "footer_blocks": null,
+    "description": "Pagina di prova graduatoria-riepilogo (flusso graduatoria) da JSON, resa dal blocco service-flow del tema Sixteen.",
+    "content_blocks": {
+        "it": [
+            {
+                "type": "service-flow",
+                "data": {
+                    "view": "pub_theme::components.blocks.service-flow.design-comuni",
+                    "kind": "wizard-step",
+                    "breadcrumb": {
+                        "items": [
+                            {
+                                "label": "Home",
+                                "url": "/it/tests/homepage"
+                            },
+                            {
+                                "label": "Servizi",
+                                "url": "#"
+                            },
+                            {
+                                "label": "Educazione e Formazione",
+                                "url": "#"
+                            }
+                        ],
+                        "current": "Iscrizione alla Scuola dell'infanzia"
+                    },
+                    "heading": {
+                        "title": "Iscrizione alla scuola dell'infanzia",
+                        "subtitles": [
+                            {
+                                "text": "Hai bisogno di assistenza?",
+                                "class": "subtitle-small",
+                                "link": {
+                                    "label": "Contattaci",
+                                    "url": "#",
+                                    "class": "title-small-semi-bold t-primary"
+                                }
+                            }
+                        ]
+                    },
+                    "stepper": {
+                        "items": [
+                            {
+                                "label": "Informativa sulla privacy",
+                                "state": "confirmed"
+                            },
+                            {
+                                "label": "Dati Generali",
+                                "state": "confirmed"
+                            },
+                            {
+                                "label": "Preferenze di servizio",
+                                "state": "confirmed"
+                            },
+                            {
+                                "label": "Riepilogo",
+                                "state": "active"
+                            }
+                        ],
+                        "confirmed_label": "Confermato",
+                        "active_label": "Attivo",
+                        "index": "4/4"
+                    },
+                    "nav": {
+                        "aria_label": "Step",
+                        "back": "Indietro",
+                        "save": {
+                            "long": "Salva Richiesta",
+                            "short": "Salva"
+                        },
+                        "next": {
+                            "label": "Invia",
+                            "icon": "",
+                            "class": "send",
+                            "modal": "#modal-terms"
+                        },
+                        "saved_message": "Richiesta salvata con successo"
+                    },
+                    "body": {
+                        "layout": "centered",
+                        "steps_content": "none",
+                        "sections_container": false,
+                        "col": "col-12 col-lg-8"
+                    },
+                    "sections": [
+                        {
+                            "type": "graduatoria-callout",
+                            "class": "callout callout-highlight ps-3 warning",
+                            "icon": "it-horn",
+                            "title": "Attenzione",
+                            "text": "Le informazioni che hai fornito hanno valore di dichiarazione.",
+                            "text_block": "Verifica che siano corrette.",
+                            "text_class": "d-lg-block"
+                        },
+                        {
+                            "type": "graduatoria-heading",
+                            "text": "Dati Generali",
+                            "class": "title-xxlarge mb-4 mt-40"
+                        },
+                        {
+                            "type": "summary",
+                            "bare": true,
+                            "wrapper_class": "mb-40 mb-lg-4",
+                            "card_class": "card has-bkg-grey shadow-sm mb-0",
+                            "title": "Richiedente",
+                            "title_class": "subtitle-large mb-0",
+                            "header_class": "card-header border-0 p-0 mb-lg-20",
+                            "groups": [
+                                {
+                                    "class": "bg-white mb-4 mb-lg-30 p-4",
+                                    "header_class": "d-flex justify-content-between d-flex justify-content-end",
+                                    "title": "Giulia Bianchi",
+                                    "edit": {
+                                        "label": "Modifica",
+                                        "url": "#"
+                                    },
+                                    "rows": [
+                                        {
+                                            "label": "Codice Fiscale",
+                                            "value": "GLABNC72H25H501Y"
+                                        },
+                                        {
+                                            "label": "Data di nascita",
+                                            "value": "02/03/1975"
+                                        },
+                                        {
+                                            "label": "Luogo di nascita",
+                                            "value": "Roma"
+                                        },
+                                        {
+                                            "label": "Sesso",
+                                            "value": "Femmina"
+                                        },
+                                        {
+                                            "label": "Nazionalità",
+                                            "value": "Italiana"
+                                        },
+                                        {
+                                            "label": "Professione",
+                                            "value": "Impiegata"
+                                        },
+                                        {
+                                            "label": "Scolarità",
+                                            "value": "Laurea Magistrale"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "class": "bg-white mb-4 mb-lg-30 p-4",
+                                    "header_class": "d-flex justify-content-between d-flex justify-content-end",
+                                    "title": "Indirizzo",
+                                    "edit": {
+                                        "label": "Modifica",
+                                        "url": "#"
+                                    },
+                                    "rows": [
+                                        {
+                                            "label": "Residenza",
+                                            "value": "Via Roma 16, 00100 Roma, IT"
+                                        },
+                                        {
+                                            "label": "Domicilio",
+                                            "value": "Piazza Risorgimento 16, 00100 Roma, It"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "class": "bg-white mb-4 mb-lg-30 p-4",
+                                    "header_class": "d-flex justify-content-between d-flex justify-content-end",
+                                    "title": "Contatti",
+                                    "edit": {
+                                        "label": "Modifica",
+                                        "url": "#"
+                                    },
+                                    "rows": [
+                                        {
+                                            "label": "Telefono",
+                                            "value": "+39 331 1234567"
+                                        },
+                                        {
+                                            "label": "Email",
+                                            "value": "giulia.bianchi@gmail.com"
+                                        },
+                                        {
+                                            "label": "Recapito postale",
+                                            "value": "P.zza Risorgimento 16, 00100 Roma"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "class": "bg-white p-4 mb-0",
+                                    "header_class": "d-flex justify-content-between d-flex justify-content-end",
+                                    "title": "Documenti",
+                                    "edit": {
+                                        "label": "Modifica",
+                                        "url": "#"
+                                    },
+                                    "rows": [
+                                        {
+                                            "label": "Carta d'identità",
+                                            "value": "giulia_bianchi_carta_di_identità_fronte_retro.pdf"
+                                        },
+                                        {
+                                            "label": "Modulo condizione lavorativa",
+                                            "value": "giulia_bianchi_modulo.pdf"
+                                        }
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "type": "summary",
+                            "bare": true,
+                            "wrapper_class": "mb-40 mb-lg-4",
+                            "card_class": "card has-bkg-grey shadow-sm mb-0",
+                            "title": "Beneficiario",
+                            "title_class": "subtitle-large mb-0",
+                            "header_class": "card-header border-0 p-0 mb-lg-20",
+                            "groups": [
+                                {
+                                    "class": "bg-white mb-4 mb-lg-30 p-4",
+                                    "header_class": "d-flex justify-content-between d-flex justify-content-end",
+                                    "title": "Francesco Rossi",
+                                    "edit": {
+                                        "label": "Modifica",
+                                        "url": "#"
+                                    },
+                                    "rows": [
+                                        {
+                                            "label": "Codice Fiscale",
+                                            "value": "FRARSS72H25H501Y"
+                                        },
+                                        {
+                                            "label": "Data di nascita",
+                                            "value": "26/03/2018"
+                                        },
+                                        {
+                                            "label": "Luogo di nascita",
+                                            "value": "Roma"
+                                        },
+                                        {
+                                            "label": "Sesso",
+                                            "value": "Maschio"
+                                        },
+                                        {
+                                            "label": "Nazionalità",
+                                            "value": "Italiana"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "class": "bg-white mb-4 mb-lg-30 p-4",
+                                    "header_class": "d-flex justify-content-between d-flex justify-content-end",
+                                    "title": "Indirizzo",
+                                    "edit": {
+                                        "label": "Modifica",
+                                        "url": "#"
+                                    },
+                                    "rows": [
+                                        {
+                                            "label": "Residenza",
+                                            "value": "Via Roma 16, 00100 Roma, IT"
+                                        },
+                                        {
+                                            "label": "Domicilio",
+                                            "value": "Piazza Risorgimento 16, 00100 Roma, It"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "class": "bg-white p-4",
+                                    "header_class": "d-flex justify-content-between d-flex justify-content-end",
+                                    "title": "Documenti",
+                                    "edit": {
+                                        "label": "Modifica",
+                                        "url": "#"
+                                    },
+                                    "rows": [
+                                        {
+                                            "label": "Carta d'identità",
+                                            "value": "francesco_rossi_carta_di_identità_fronte_retro.pdf"
+                                        },
+                                        {
+                                            "label": "Certificato Vaccinale",
+                                            "value": "francesco_rossi.pdf"
+                                        }
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "type": "summary",
+                            "bare": true,
+                            "wrapper_class": "mb-40 mb-lg-4",
+                            "card_class": "card has-bkg-grey shadow-sm mb-0",
+                            "title": "Altro Genitore",
+                            "title_class": "subtitle-large mb-0",
+                            "header_class": "card-header border-0 p-0 mb-lg-20",
+                            "groups": [
+                                {
+                                    "class": "bg-white mb-4 mb-lg-30 p-4",
+                                    "header_class": "d-flex justify-content-between d-flex justify-content-end",
+                                    "title": "Mario Rossi",
+                                    "edit": {
+                                        "label": "Modifica",
+                                        "url": "#"
+                                    },
+                                    "rows": [
+                                        {
+                                            "label": "Codice Fiscale",
+                                            "value": "MRARSS72H25H501Y"
+                                        },
+                                        {
+                                            "label": "Data di nascita",
+                                            "value": "03/07/1975"
+                                        },
+                                        {
+                                            "label": "Luogo di nascita",
+                                            "value": "Roma"
+                                        },
+                                        {
+                                            "label": "Sesso",
+                                            "value": "Maschio"
+                                        },
+                                        {
+                                            "label": "Nazionalità",
+                                            "value": "Italiana"
+                                        },
+                                        {
+                                            "label": "Professione",
+                                            "value": "Impiegato"
+                                        },
+                                        {
+                                            "label": "Scolarità",
+                                            "value": "Laurea Magistrale"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "class": "bg-white mb-4 mb-lg-30 p-4",
+                                    "header_class": "d-flex justify-content-between d-flex justify-content-end",
+                                    "title": "Indirizzo",
+                                    "edit": {
+                                        "label": "Modifica",
+                                        "url": "#"
+                                    },
+                                    "rows": [
+                                        {
+                                            "label": "Residenza",
+                                            "value": "Via Roma 16, 00100 Roma, IT"
+                                        },
+                                        {
+                                            "label": "Domicilio",
+                                            "value": "Piazza Risorgimento 16, 00100 Roma, It"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "class": "bg-white mb-4 mb-lg-30 p-4",
+                                    "header_class": "d-flex justify-content-between d-flex justify-content-end",
+                                    "title": "Contatti",
+                                    "edit": {
+                                        "label": "Modifica",
+                                        "url": "#"
+                                    },
+                                    "rows": [
+                                        {
+                                            "label": "Telefono",
+                                            "value": "+39 331 1234567"
+                                        },
+                                        {
+                                            "label": "Email",
+                                            "value": "mario.rossi@gmail.com"
+                                        },
+                                        {
+                                            "label": "Recapito postale",
+                                            "value": "P.zza Risorgimento 16, 00100 Roma"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "class": "bg-white p-4",
+                                    "header_class": "d-flex justify-content-between d-flex justify-content-end",
+                                    "title": "Documenti",
+                                    "edit": {
+                                        "label": "Modifica",
+                                        "url": "#"
+                                    },
+                                    "rows": [
+                                        {
+                                            "label": "Carta d'identità",
+                                            "value": "mario_rossi_carta_di_identità.pdf"
+                                        },
+                                        {
+                                            "label": "Modulo condizione lavorativa",
+                                            "value": "mario_rossi_modulo.pdf"
+                                        }
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "type": "summary",
+                            "bare": true,
+                            "wrapper_class": "mb-40",
+                            "card_class": "card has-bkg-grey shadow-sm mb-0",
+                            "title": "ISEE",
+                            "title_class": "subtitle-large mb-0",
+                            "header_class": "card-header border-0 p-0 mb-lg-20",
+                            "groups": [
+                                {
+                                    "class": "bg-white p-4",
+                                    "header_class": "d-flex justify-content-between d-flex justify-content-end",
+                                    "title": "ISEE: 18.000,00€",
+                                    "edit": {
+                                        "label": "Modifica",
+                                        "url": "#"
+                                    },
+                                    "rows": [
+                                        {
+                                            "label": "Scadenza ISEE",
+                                            "value": "06/10/2023"
+                                        },
+                                        {
+                                            "label": "Anno protocollo",
+                                            "value": "2022"
+                                        },
+                                        {
+                                            "label": "Numero protocollo",
+                                            "value": "1234567"
+                                        },
+                                        {
+                                            "label": "Codice filiale protocollo",
+                                            "value": "1234567"
+                                        },
+                                        {
+                                            "label": "Certificato ISEE",
+                                            "value": "documento_ISEE-2022.pdf"
+                                        }
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "type": "graduatoria-heading",
+                            "text": "Preferenze di servizio",
+                            "class": "title-xxlarge mb-4"
+                        },
+                        {
+                            "type": "summary",
+                            "bare": true,
+                            "wrapper_class": "",
+                            "card_class": "card has-bkg-grey shadow-sm",
+                            "groups": [
+                                {
+                                    "class": "bg-white p-4",
+                                    "header_class": "pb-2 d-flex justify-content-end",
+                                    "edit": {
+                                        "label": "Modifica",
+                                        "url": "#"
+                                    },
+                                    "rows": [
+                                        {
+                                            "label": "Istituto",
+                                            "value": "Istituto Narcisi"
+                                        },
+                                        {
+                                            "label": "Religione cattolica",
+                                            "value": "No"
+                                        },
+                                        {
+                                            "label": "Uscite didattiche",
+                                            "value": "Sì"
+                                        },
+                                        {
+                                            "label": "Riprese Multimediali",
+                                            "value": "Sì"
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    ],
+                    "contacts": {
+                        "layout": "offset",
+                        "col": "col-12 col-lg-6",
+                        "main": {
+                            "title": "Contatta il comune",
+                            "items": [
+                                {
+                                    "icon": "it-help-circle",
+                                    "label": "Leggi le domande frequenti",
+                                    "url": "#"
+                                },
+                                {
+                                    "icon": "it-mail",
+                                    "label": "Richiedi assistenza",
+                                    "url": "#",
+                                    "element": "contacts"
+                                },
+                                {
+                                    "icon": "it-hearing",
+                                    "label": "Chiama il numero verde 05 0505",
+                                    "url": "#"
+                                },
+                                {
+                                    "icon": "it-calendar",
+                                    "label": "Prenota appuntamento",
+                                    "url": "#",
+                                    "element": "appointment-booking"
+                                }
+                            ]
+                        }
+                    },
+                    "modals": [
+                        {
+                            "type": "dialog",
+                            "id": "modal-terms",
+                            "close_label": "Chiudi finestra modale",
+                            "header": {
+                                "title": "Termini e condizioni",
+                                "info": "Cliccando su Conferma e invia confermi di aver preso visione dei termini e delle condizioni di servizio.",
+                                "link": {
+                                    "label": "Leggi termini e condizioni",
+                                    "url": "#"
+                                }
+                            },
+                            "footer": {
+                                "buttons": [
+                                    {
+                                        "label": "Conferma e invia",
+                                        "variant": "primary"
+                                    },
+                                    {
+                                        "label": "Annulla",
+                                        "variant": "outline"
+                                    }
+                                ]
+                            }
+                        }
+                    ]
+                }
+            }
+        ],
+        "en": []
+    }
+}
