@@ -5,6 +5,11 @@ authors: [developer-agent]
 priority: critical
 github_issue: https://github.com/laraxot/fixcity_fila5/issues/46
 discussion: https://github.com/laraxot/fixcity_fila5/discussions/46
+type: note
+status: draft
+updated: 2026-10-08
+tags: [docs, fixcity, bmad]
+qmd: "story 046 homepage design comuni alignment fixcity"
 ---
 
 ## Problem

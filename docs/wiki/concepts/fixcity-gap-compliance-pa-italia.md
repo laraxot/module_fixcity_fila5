@@ -18,6 +18,7 @@ related:
   - ../../roadmap/product-strategy.md
   - ../../../../../../docs/wiki/competitive-analysis-fixcity-2026.md
   - ../../../../../../docs/stories/STORY-397-competitor-gap-programme.md
+status: draft
 ---
 
 # FixCity — gap normativi/interoperabilità PA italiana (deep dive)

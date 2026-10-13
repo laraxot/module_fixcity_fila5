@@ -7,6 +7,7 @@ updated: 2026-09-26
 qmd: "product strategy"
 issues: []
 discussions: []
+status: draft
 ---
 
 # 🎯 Fixcity Product Strategy Document
@@ -17,15 +18,6 @@ discussions: []
 > **Timeframe**: 2026-2027 (3-Year Strategy)
 
 ---
-
-title: "product strategy"
-type: note
-tags: [documentation]
-created: 2026-09-26
-updated: 2026-09-26
-qmd: "product strategy"
-issues: []
-discussions: []
 ## 📋 Table of Contents
 
 1. [Executive Summary](#executive-summary)

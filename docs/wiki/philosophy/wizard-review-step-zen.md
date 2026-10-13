@@ -7,6 +7,7 @@ updated: 2026-09-26
 qmd: "wizard review step zen"
 issues: []
 discussions: []
+status: draft
 ---
 
 # Wizard Review Step Zen
@@ -32,12 +33,4 @@ Il riepilogo deve infondere fiducia. Spazi ampi, gerarchia chiara e la possibili
 - **Super Mucca**: Il componente di riepilogo deve estendere i principi di modularità di Laraxot, separando la logica di estrazione dati dalla loro presentazione visiva.
 
 ---
-title: "wizard review step zen"
-type: note
-tags: [documentation]
-created: 2026-09-26
-updated: 2026-09-26
-qmd: "wizard review step zen"
-issues: []
-discussions: []
 *Creato in risposta alla Story 8.51*

@@ -6,7 +6,7 @@
         "it": "Area personale - Segnalazione disservizio",
         "en": "Personal area"
     },
-    "layout": "test",
+    "layout": "design-comuni-authenticated",
     "description": "Pagina area personale con le segnalazioni inviate, i dati salvati e le impostazioni dell'account. Contenuto da JSON, reso dal blocco report-area del tema Sixteen.",
     "sidebar_blocks": {
         "it": [],

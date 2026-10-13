@@ -16,6 +16,10 @@ references:
   design_comuni_services: "https://italia.github.io/design-comuni-pagine-statiche/servizi/index.html"
   issue: "https://github.com/laraxot/base_fixcity_fila5/issues/522"
   discussion: "https://github.com/laraxot/base_fixcity_fila5/discussions/523"
+type: note
+updated: 2026-10-08
+tags: [docs, fixcity, bmad]
+qmd: "verifica bmad: percorso pubblico guest fixcity"
 ---
 
 # Verifica BMAD: percorso pubblico guest

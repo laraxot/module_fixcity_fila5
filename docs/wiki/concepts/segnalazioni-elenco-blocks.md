@@ -7,6 +7,7 @@ updated: 2026-09-26
 qmd: "segnalazioni elenco blocks"
 issues: []
 discussions: []
+status: draft
 ---
 
 # Segnalazioni elenco — composizione blocchi CMS

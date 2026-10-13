@@ -18,7 +18,7 @@
             {
                 "type": "service-flow",
                 "data": {
-                    "view": "pub_theme::components.blocks.service-flow.graduatoria-design-comuni",
+                    "view": "pub_theme::components.blocks.service-flow.design-comuni",
                     "kind": "graduatoria-consent",
                     "breadcrumb": {
                         "items": [
@@ -123,7 +123,8 @@
                                 }
                             ]
                         }
-                    }
+                    },
+                    "header_active": "all-services"
                 }
             }
         ],

@@ -117,7 +117,7 @@ DaisyUI e Filament possono convivere, ma servono regole di isolamento:
 | Usare classi daisyUI (`.btn`, `.input`, `.alert`) nei nuovi template Blade invece di scrivere utility Tailwind manuali | 🔴 Alta |
 | Rimuovere `bootstrap-italia/dist/css` dal bundle Sixteen | 🟡 Media (già pianificato in scheda consolidamento) |
 | Documentare ogni pagina che usa daisyUI | 🟢 Bassa |
-| Non installare daisyUI nel modulo Geo (vedi [Geo/DAISYUI.md](../Geo/docs/DAISYUI.md)) | 🔴 Alta |
+| Non installare daisyUI nel modulo Geo (vedi [Geo/DAISYUI.md](../../Geo/docs/DAISYUI.md)) | 🔴 Alta |
 
 ---
 

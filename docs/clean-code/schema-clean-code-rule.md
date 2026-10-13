@@ -7,6 +7,7 @@ updated: 2026-09-26
 qmd: "schema clean code rule"
 issues: []
 discussions: []
+status: draft
 ---
 
 # Schema Clean Code Rule

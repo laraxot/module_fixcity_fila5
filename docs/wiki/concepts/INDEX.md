@@ -7,6 +7,7 @@ type: index
 tags: [concepts, Fixcity]
 created: 2026-05-11
 updated: 2026-06-13
+status: draft
 ---
 
 # concepts Index — Fixcity
@@ -27,3 +28,4 @@ Concetti specifici del modulo Fixcity. Carica on-demand via `qmd search` o consu
 - [completion-roadmap](../overviews/completion-roadmap.md) — cosa resta per chiudere Fixcity
 - [user-journey-map](./user-journey-map.md) — percorsi guest→cittadino→PA→admin→sistema: dovrebbe/vede/può/fatto/manca
 - [actor-flow-map](./actor-flow-map.md) — actor → flow → story → Action → stato (tracing tecnico)
+- [Viaggio del cittadino: accesso e ritorno alla pagina richiesta](citizen-journey-login-register-return.md) — url.intended, redirectIntended, dashboard 404 (DCP-124)

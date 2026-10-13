@@ -3,7 +3,7 @@ title: "ticket create URL — routing chain CMS + PageSlugMiddleware"
 type: concept
 tags: [fixcity, tickets, create, folio, cms, pageslugmiddleware]
 created: 2026-05-04
-updated: 2026-07-13
+updated: 2026-10-13
 qmd: "tickets create URL routing PageSlugMiddleware auth JSON tickets.create wizard"
 issues:
   - "https://github.com/laraxot/base_fixcity_fila5/issues/362"
@@ -11,8 +11,8 @@ discussions:
   - "https://github.com/laraxot/base_fixcity_fila5/discussions/363"
 related:
   - tickets-view-cms-folio-page.md
-  - ../../../../Modules/Cms/docs/wiki/concepts/cms-page-middleware-json-ssot.md
-  - ../../../../Themes/Sixteen/docs/wiki/concepts/folio-no-semantic-pages-tickets.md
+  - ../../../../Cms/docs/wiki/concepts/cms-page-middleware-json-ssot.md
+  - ../../../../../Themes/Sixteen/docs/wiki/concepts/folio-no-semantic-pages-tickets.md
 ---
 
 # Ticket create — catena URL e auth
@@ -23,24 +23,24 @@ related:
 /it/tickets/create
 ```
 
+Verificato il 2026-10-13 dalla risposta reale (`data-slug="tickets.create"`, `wire:name` dello snapshot Livewire) e da `bashscripts/tools/cms/page-json-for-url.sh`.
+
 | Layer | Valore |
 |-------|--------|
-| Folio owner | `Modules/Fixcity/resources/views/pages/tickets/create.blade.php` |
-| `name()` | `tickets.create` |
-| Middleware Folio | `PageSlugMiddleware` (solo questo — **no** `middleware(['auth'])` hardcoded) |
-| CMS JSON | `config/local/fixcity/database/content/pages/tickets.create.json` |
-| Auth SSoT | `"middleware": ["auth"]` nel JSON (`web` già nello stack Folio) |
-| Widget | `CreateTicketWizardWidget` via blocco CMS `type: widget` |
+| Pagina che risponde | `Themes/Sixteen/resources/views/pages/[container0]/[slug0]/index.blade.php` (Folio `container0.view`, componente Volt) |
+| Folio del modulo | `Modules/Fixcity/resources/views/pages/tickets/create.blade.php` (`tickets.create`, `middleware('auth')`): registrata in `folio:list` ma NON e' quella che risponde con il tema Sixteen. Perche' vinca la generica non e' stato indagato |
+| Slug | `<container0>.<slug0>` dai segmenti dell'URL = `tickets.create` |
+| CMS JSON | `laravel/config/local/fixcity/database/content/pages/tickets.create.json` (identico in `Modules/Fixcity/config/...`; anche `config/eu/fixcity/...` (identiche alle 14:10 UTC)) |
+| Blocco | `type: ticket_create`, `data.view = pub_theme::components.blocks.tests.ticket-crea`. La cartella `tests` e' di view, NON di slug: non esiste e non deve esistere `tests.tickets-create.json` |
+| Widget | `CreateTicketWizardWidget` via `@livewire` in `Themes/Sixteen/resources/views/components/blocks/tests/ticket-crea.blade.php` |
+| Auth | `"middleware": ["auth"]` nel JSON (ripristinato il 2026-10-13, D17, DCP-42). Solo `auth`: `web` e' un gruppo gia' nello stack Folio (prima dava 500, `Target class [web] does not exist`; dalla DCP-50 e' ignorato ma non va scritto) e un nome non risolvibile lancia un errore chiaro. Ospite: 302 `/<lingua>/auth/login` con `url.intended` |
 | Post-submit | redirect `/it/tickets/confirmation` |
 
-Guest → `PageSlugMiddleware` legge JSON → redirect login localizzato (`/it/auth/login*`).
+## Catena render
 
-## Catena render (autenticato)
-
-1. Folio `tickets/create.blade.php` → `<x-page slug="tickets.create">`
-2. `Page::getBlocksBySlug('tickets.create')` da Sushi/JSON tenant `local/fixcity`
-3. Blocchi: breadcrumb + widget wizard
-4. `CreateTicketWizardWidget` → `TicketForm::getSteps()` (privacy → data → summary)
+1. Folio generica `[container0]/[slug0]` -> `ResolvePageAction` -> `@volt('container0.view')` con `div.page-content` come radice (vedi `Themes/Sixteen/docs/decision-log/D15-volt-fragment-explicit-root.md`)
+2. `<x-page slug="tickets.create">` -> `Page::getBlocksBySlug('tickets.create')`
+3. Blocco `ticket-crea` -> `CreateTicketWizardWidget` -> `TicketForm::getSteps()` (privacy -> data -> summary)
 
 ## Sandbox parity (non produzione)
 
@@ -48,7 +48,7 @@ Guest → `PageSlugMiddleware` legge JSON → redirect login localizzato (`/it/a
 /it/tests/segnalazione-crea
 ```
 
-Stesso widget, canale `tests/[slug].blade.php` + `tests.segnalazione-crea.json` — vedi sezione sotto.
+Stesso widget, ma canale `pages/tests/[slug].blade.php` (compone `tests.<slug>`) e `tests.segnalazione-crea.json`. Le sezioni sotto descrivono SOLO questa sandbox, non `/it/tickets/create`. Correzione verificata 2026-10-13: oggi `tests.segnalazione-crea.json` non esiste in nessun tenant (`page-json-for-url.sh` esce con 2) e la risposta di `/it/tests/segnalazione-crea` (200) non contiene il wizard (0 occorrenze di `fi-sc-wizard` e di `$wire.save()`, contro 5 e 3 su `/it/tickets/create`): le sezioni «Catena reale» e «Architettura» qui sotto sono storiche e non descrivono lo stato attuale.
 
 ## Prerequisito tenant
 

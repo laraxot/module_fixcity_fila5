@@ -5,6 +5,9 @@ module: Fixcity
 owner: Modules/Fixcity + Modules/Geo
 status: approved
 created: 2026-09-27
+updated: 2026-10-08
+tags: [docs, fixcity, bmad]
+qmd: "expected experience fixcity"
 ---
 
 # Expected experience

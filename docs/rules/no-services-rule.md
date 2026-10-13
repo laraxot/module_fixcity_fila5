@@ -7,6 +7,7 @@ updated: 2026-09-26
 qmd: "no services rule"
 issues: []
 discussions: []
+status: draft
 ---
 
 # Actions vs Services Philosophy

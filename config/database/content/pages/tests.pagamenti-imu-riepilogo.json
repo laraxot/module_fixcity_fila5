@@ -18,7 +18,7 @@
             {
                 "type": "service-flow",
                 "data": {
-                    "view": "pub_theme::components.blocks.service-flow.imu-design-comuni",
+                    "view": "pub_theme::components.blocks.service-flow.design-comuni",
                     "kind": "wizard-step",
                     "breadcrumb": {
                         "items": [
@@ -101,7 +101,7 @@
                     },
                     "sections": [
                         {
-                            "type": "imu-callout",
+                            "type": "callout",
                             "class": "callout callout-highlight ps-3 warning",
                             "icon": "it-horn",
                             "title": "Attenzione",
@@ -110,13 +110,13 @@
                             "text_block_class": "d-lg-block"
                         },
                         {
-                            "type": "imu-title",
+                            "type": "title",
                             "tag": "h2",
                             "class": "title-xxlarge mb-4 mt-40",
                             "text": "Dati Generali"
                         },
                         {
-                            "type": "imu-summary",
+                            "type": "summary",
                             "wrapper_class": "mb-40 mb-lg-4",
                             "card_class": "card has-bkg-grey shadow-sm mb-0",
                             "header_class": "card-header border-0 p-0 mb-lg-20",
@@ -166,10 +166,11 @@
                                         }
                                     ]
                                 }
-                            ]
+                            ],
+                            "bare": true
                         },
                         {
-                            "type": "imu-summary",
+                            "type": "summary",
                             "wrapper_class": "mb-40 mb-lg-4",
                             "card_class": "card has-bkg-grey shadow-sm mb-0",
                             "header_class": "card-header border-0 p-0 mb-lg-20",
@@ -204,10 +205,11 @@
                                         }
                                     ]
                                 }
-                            ]
+                            ],
+                            "bare": true
                         },
                         {
-                            "type": "imu-summary",
+                            "type": "summary",
                             "wrapper_class": "",
                             "card_class": "card has-bkg-grey shadow-sm mb-0",
                             "header_class": "card-header border-0 p-0 mb-lg-20",
@@ -356,7 +358,8 @@
                                         }
                                     ]
                                 }
-                            ]
+                            ],
+                            "bare": true
                         }
                     ],
                     "contacts": {
@@ -416,7 +419,8 @@
                                 ]
                             }
                         }
-                    ]
+                    ],
+                    "header_active": "all-services"
                 }
             }
         ],

@@ -7,6 +7,7 @@ updated: 2026-09-26
 qmd: "ticket model form reference"
 issues: []
 discussions: []
+status: draft
 ---
 
 # Ticket Model & TicketForm — Reference
@@ -35,15 +36,6 @@ discussions: []
 - **`slug`**: gestito da `HasSlug` automaticamente al `create()`. Non mettere nel form (nemmeno hidden/dehydrated).
 
 ---
-
-title: "ticket model form reference"
-type: note
-tags: [documentation]
-created: 2026-09-26
-updated: 2026-09-26
-qmd: "ticket model form reference"
-issues: []
-discussions: []
 ## TicketForm: `Modules\Fixcity\Filament\Resources\TicketResource\Schemas\TicketForm`
 
 ### API pubblica

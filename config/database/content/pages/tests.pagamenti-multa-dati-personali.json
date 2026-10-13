@@ -18,8 +18,8 @@
             {
                 "type": "service-flow",
                 "data": {
-                    "view": "pub_theme::components.blocks.service-flow.multa-design-comuni",
-                    "kind": "multa-wizard",
+                    "view": "pub_theme::components.blocks.service-flow.design-comuni",
+                    "kind": "wizard-step",
                     "breadcrumb": {
                         "items": [
                             {
@@ -83,19 +83,17 @@
                         ],
                         "confirmed_label": "Confermato",
                         "active_label": "Attivo",
-                        "index": "2/4",
-                        "note": {
-                            "class": "title-xsmall d-lg-none my-5",
-                            "text": "I campi contraddistinti dal simbolo asterisco sono obbligatori"
-                        }
+                        "index": "2/4"
                     },
                     "body": {
-                        "wrap": "steppers-content",
-                        "col": "col-12 col-lg-8"
+                        "col": "col-12 col-lg-8",
+                        "layout": "centered",
+                        "steps_content": "outer",
+                        "sections_container": false
                     },
                     "sections": [
                         {
-                            "type": "multa-card",
+                            "type": "card",
                             "wrapper_class": "mb-0",
                             "card_class": "card has-bkg-grey shadow-sm p-big",
                             "header_class": "card-header border-0 p-0 mb-lg-20",
@@ -104,7 +102,7 @@
                             "subtitle": "Informazioni sulla persona che effettua il pagamento, che può essere diversa da chi ha ricevuto la multa.",
                             "subtitle_class": "subtitle-small mb-0",
                             "content": {
-                                "kind": "multa-info-cards",
+                                "kind": "info-cards",
                                 "cards": [
                                     {
                                         "title": "Giulia Rossi",
@@ -118,13 +116,6 @@
                                         "groups": [
                                             {
                                                 "class": "bg-white has-border",
-                                                "header": {
-                                                    "title": "Anagrafica",
-                                                    "edit": {
-                                                        "label": "Modifica",
-                                                        "url": "#"
-                                                    }
-                                                },
                                                 "rows": [
                                                     {
                                                         "label": "Nome",
@@ -139,29 +130,37 @@
                                                         "value": "GLABNC72H25H501Y"
                                                     }
                                                 ],
-                                                "last_row_class": "border-light border-0"
+                                                "last_row_class": "border-light border-0",
+                                                "title": "Anagrafica",
+                                                "edit": {
+                                                    "label": "Modifica",
+                                                    "url": "#",
+                                                    "tight": true
+                                                },
+                                                "footer_class": "card-footer p-0 d-none"
                                             },
                                             {
                                                 "class": "bg-white has-border",
-                                                "header": {
-                                                    "title": "Indirizzo",
-                                                    "edit": {
-                                                        "label": "Modifica",
-                                                        "url": "#"
-                                                    }
-                                                },
                                                 "rows": [
                                                     {
                                                         "label": "Residenza",
                                                         "value": "Via Roma 16, 00100 Roma, It"
                                                     }
                                                 ],
-                                                "last_row_class": "border-light border-0"
+                                                "last_row_class": "border-light border-0",
+                                                "title": "Indirizzo",
+                                                "edit": {
+                                                    "label": "Modifica",
+                                                    "url": "#",
+                                                    "tight": true
+                                                },
+                                                "footer_class": "card-footer p-0 d-none"
                                             }
                                         ]
                                     }
                                 ]
-                            }
+                            },
+                            "tag": "none"
                         }
                     ],
                     "nav": {
@@ -246,7 +245,12 @@
                                 "message": "Salvataggio effettuato"
                             }
                         }
-                    ]
+                    ],
+                    "header_active": "all-services",
+                    "stepper_note": {
+                        "class": "title-xsmall d-lg-none my-5",
+                        "text": "I campi contraddistinti dal simbolo asterisco sono obbligatori"
+                    }
                 }
             }
         ],

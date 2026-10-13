@@ -16,7 +16,7 @@ discussions: []
 
 ## Master Documentation
 
-**See [Project MCP Servers](../../../docs/MCP_SERVERS.md)** for complete server list, configuration, and usage examples.
+**See [Project MCP Servers](../../../../docs/MCP_SERVERS.md)** for complete server list, configuration, and usage examples.
 
 This document provides Fixcity module-specific MCP usage guidelines only.
 
@@ -40,7 +40,7 @@ This document provides Fixcity module-specific MCP usage guidelines only.
 - **Key Paths**:
   - `app/Filament/Widgets/CreateTicketWizardWidget.php` - Ticket creation wizard
   - `app/Models/Ticket.php` - Core ticket model
-  - `resources/views/filament/widgets/ticket-create-wizard.blade.php` - Wizard view
+  - `resources/views/filament/widgets/create-ticket-wizard.blade.php` - Wizard view (fallback del modulo; `GetViewByClassAction` sceglie prima `Themes/Sixteen/resources/views/filament/widgets/create-ticket-wizard.blade.php`, verificato 2026-10-13)
   - `lang/it/segnalazione.php` - Italian translations
 
 ### memory
@@ -124,10 +124,10 @@ This document provides Fixcity module-specific MCP usage guidelines only.
 
 ## Cross-References
 
-- **Master MCP Docs**: [Project MCP Servers](../../../docs/MCP_SERVERS.md)
+- **Master MCP Docs**: [Project MCP Servers](../../../../docs/MCP_SERVERS.md)
 - **Xot Module MCP**: [Xot MCP Guide](../../Xot/docs/MCP_SERVERS.md)
-- **Theme MCP**: [Sixteen Theme MCP](../../Themes/Sixteen/docs/MCP_SERVERS.md)
-- **SuperMemory Quickstart**: [SuperMemory Guide](../../../docs/SUPERMEMORY_QUICKSTART.md)
+- **Theme MCP**: [Sixteen Theme MCP](../../../Themes/Sixteen/docs/MCP_SERVERS.md)
+- **SuperMemory Quickstart**: [SuperMemory Guide](../../../../docs/SUPERMEMORY_QUICKSTART.md)
 - **Fixcity Documentation**: [Fixcity Docs Index](README.md)
 
 ---

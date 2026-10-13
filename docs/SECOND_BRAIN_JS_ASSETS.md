@@ -7,6 +7,7 @@ updated: 2026-09-26
 qmd: "SECOND BRAIN JS ASSETS"
 issues: []
 discussions: []
+status: draft
 ---
 
 # Second Brain: policy JS assets e build pipeline

@@ -7,6 +7,7 @@ updated: 2026-09-26
 qmd: "phpstan immediate fixes"
 issues: []
 discussions: []
+status: draft
 ---
 
 > **Documento storico — 2026-03-02.** Il conteggio di errori e gli esempi seguenti
@@ -765,15 +766,6 @@ test('report factory creates valid report', function () {
 ✅ Documentation updated
 
 ---
-
-title: "phpstan immediate fixes"
-type: note
-tags: [documentation]
-created: 2026-09-26
-updated: 2026-09-26
-qmd: "phpstan immediate fixes"
-issues: []
-discussions: []
 **Status**: Ready for Implementation
 **Estimated Time**: 5 days
 **Priority**: HIGH

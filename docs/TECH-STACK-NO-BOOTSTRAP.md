@@ -7,6 +7,7 @@ updated: 2026-09-26
 qmd: "TECH STACK NO BOOTSTRAP"
 issues: []
 discussions: []
+status: draft
 ---
 
 # Tech Stack Frontend - NO Bootstrap

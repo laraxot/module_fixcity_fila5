@@ -7,6 +7,7 @@ updated: 2026-09-26
 qmd: "REFACTORING CREATE TICKET WIZARD"
 issues: []
 discussions: []
+status: draft
 ---
 
 # Refactoring CreateTicketWizardWidget
@@ -58,15 +59,6 @@ Di seguito i 10 punti (ispirati ai "Code Smells" di Fowler e ai benefici di Next
     - **Perché**: Assicura che il codice non solo funzioni, ma rispetti gli standard qualitativi più elevati definiti dal progetto.
 
 ---
-
-title: "REFACTORING CREATE TICKET WIZARD"
-type: note
-tags: [documentation]
-created: 2026-09-26
-updated: 2026-09-26
-qmd: "REFACTORING CREATE TICKET WIZARD"
-issues: []
-discussions: []
 ## Stato Pre-Refactoring
 - `CreateTicketWizardWidget.php`: ~400 righe. Contiene schema completo, logica di submission, logica di formattazione riepilogo.
 - `TicketForm.php`: Contiene schema duplicato ma non completamente allineato.

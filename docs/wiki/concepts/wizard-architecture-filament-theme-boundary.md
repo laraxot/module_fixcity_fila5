@@ -7,6 +7,7 @@ updated: 2026-09-26
 qmd: "wizard architecture filament theme boundary"
 issues: []
 discussions: []
+status: draft
 ---
 
 # Filament Wizard Architecture & Theme Boundary

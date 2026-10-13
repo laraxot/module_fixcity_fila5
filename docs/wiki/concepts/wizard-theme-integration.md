@@ -7,10 +7,10 @@ type: concept
 sources: []
 confidence: high
 created: 2026-05-04
-updated: 2026-05-04
+updated: 2026-10-13
 tags: [wizard, filament, theme-integration, contract, api, fixcity]
 related:
-  - ../../../../Themes/Sixteen/docs/wiki/concepts/filament-wizard-custom-component.md
+  - ../../../../../Themes/Sixteen/docs/wiki/concepts/filament-wizard-custom-component.md
   - ../../../../docs/wiki/concepts/laraxot-theme-module-separation.md
 ---
 
@@ -24,45 +24,40 @@ related:
 
 ### Module Responsibilities (Fixcity)
 
+Estratto fedele al codice (verificato 2026-10-13, DOCS-ARRETRATO DCP-44; il vecchio esempio con `getFrontofficePrivacySchema('#')`, `->key('wizard')` e `hasSkippableWizardSteps()` non corrispondeva a nessun metodo reale):
+
 ```php
-// CreateTicketWizardWidget.php
-class CreateTicketWizardWidget extends XotBaseWizardWidget
+// Modules/Fixcity/app/Filament/Widgets/CreateTicketWizardWidget.php
+public function getSteps(): array
 {
-    public function getFormSchema(): array
-    {
-        return [
-            Wizard::make($this->getSteps())
-                ->key('wizard')  // Key for theme to access
-                ->startOnStep(fn () => $this->wizardStartStep)
-                ->skippable($this->hasSkippableWizardSteps()),
-        ];
-    }
-    
-    public function getSteps(): array
-    {
-        return [
-            Step::make(__('fixcity::ticket_wizard.steps.privacy.label'))
-                ->description(__('fixcity::ticket_wizard.steps.privacy.description'))
-                ->schema(TicketForm::getFrontofficePrivacySchema('#')),
-            
-            Step::make(__('fixcity::ticket_wizard.steps.data.label'))
-                ->description(__('fixcity::ticket_wizard.steps.data.description'))
-                ->schema(TicketForm::getDataSchema()),
-            
-            Step::make(__('fixcity::ticket_wizard.steps.summary.label'))
-                ->description(__('fixcity::ticket_wizard.steps.summary.description'))
-                ->schema(TicketForm::getSummarySchema()),
-        ];
-    }
+    return app(TicketForm::class)->getSteps();
+}
+
+// Modules/Fixcity/app/Filament/Resources/TicketResource/Schemas/TicketForm.php
+public function getSteps(): array
+{
+    return [
+        'privacy' => static::getStepByName('privacy')   // -> getPrivacySchema()
+            ->label((string) __('fixcity::fixcity.ticket.steps.auth.label')),
+        'data' => static::getStepByName('data')         // -> getDataSchema()
+            ->label((string) __('fixcity::fixcity.ticket.steps.data.label')),
+        'summary' => Step::make('summary')
+            ->schema(array_values(static::getReviewStepSchema()))
+            ->label((string) __('fixcity::fixcity.ticket.steps.summary.label')),
+    ];
 }
 ```
 
+`getFormSchema()` e `getWizardComponent()` non sono nel widget Fixcity: sono `XotBaseWizardWidget::getFormSchema()` (restituisce `[$this->getWizardComponent()]`) e `XotBaseWizardWidget::getWizardComponent()`, che parte da `HasWizard::getWizardComponent()` di Filament (`Wizard::make($this->getSteps())->startOnStep(...)->skippable($this->hasSkippableSteps())`), aggiunge `persistStepInQueryString()` e, fuori dall'admin, la vista `pub_theme::components.wizard`. `getStepByName()` (`XotBaseResourceForm`, `protected static`) deriva `get{Name}Schema()` dal nome e ne usa l'array come schema dello step.
+
+> Nota 2026-10-13: le sezioni "Theme Responsibilities", "Data Flow" e "Theme Access Patterns" qui sotto non sono state riverificate. In `Themes/Sixteen/resources`, `Modules/Fixcity/app` e `Modules/Xot/app` non esistono ne' `->key('wizard')` ne' `getComponent('wizard')` (`grep -rn "getComponent('wizard')\|key('wizard')"`: nessun risultato); la vista del wizard e' agganciata con `$wizard->view('pub_theme::components.wizard')`.
+
 **Module provides:**
-1. `getFormSchema()` - Returns form with Wizard component
-2. `getSteps()` - Returns array of Step components
+1. `getFormSchema()` / `getWizardComponent()` (ereditati da `XotBaseWizardWidget`) - form con il componente Wizard
+2. `getSteps()` - array di Step, delegato a `TicketForm::getSteps()`
 3. `$this->form` - Livewire property available in Blade
 4. `wizardStartStep` - Current step index (1-based)
-5. Translations via `fixcity::ticket_wizard.steps.{name}.label`
+5. Etichette dei passi via `fixcity::fixcity.ticket.steps.{auth|data|summary}.label` (le chiavi `fixcity::ticket_wizard.steps.*` non sono lette da nessun codice)
 
 ### Theme Responsibilities (Sixteen)
 
@@ -260,7 +255,7 @@ $steps = ['Privacy', 'Data', 'Summary']; // ❌
 - [ ] `getFormSchema()` returns Wizard with key 'wizard'
 - [ ] `getSteps()` returns translated Step components
 - [ ] `wizardStartStep` tracks current step
-- [ ] Translations in `fixcity::ticket_wizard.steps.{name}.label`
+- [ ] Translations in `fixcity::fixcity.ticket.steps.{auth|data|summary}.label` (verificato 2026-10-13)
 
 ### Theme Side
 - [ ] `pub_theme::wizard` component exists

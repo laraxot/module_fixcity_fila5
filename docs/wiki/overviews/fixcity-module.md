@@ -9,10 +9,10 @@ type: overview
 module: Fixcity
 sources:
   - ../../../README.md
-  - ../../../ticket-wizard-frontoffice.md
-  - ../../../structure.md
-  - ../../../wizard-governance-philosophy.md
-  - ../../../filament-wizard-pattern.md
+  - ../../ticket-wizard-frontoffice.md
+  - ../../structure.md
+  - ../../wizard-governance-philosophy.md
+  - ../../filament-wizard-pattern.md
 confidence: high
 updated: 2026-09-26
 ---

@@ -9,4 +9,6 @@ return [
     'fields' => ['code' => ['label' => 'Código de incidencia'], 'status' => ['label' => 'Estado']],
     'actions' => ['create' => ['label' => 'Enviar una nueva incidencia']],
     'pratiche' => ['description' => 'Tus incidencias enviadas.', 'count' => '{0} Ninguna incidencia|{1} :count incidencia|[2,*] :count incidencias', 'empty' => 'Todavía no has enviado ninguna incidencia.'],
+    'privacy' => ['detail_prefix' => ['text' => 'Para más detalles sobre el tratamiento de los datos personales, consulta la '], 'link' => ['label' => 'política de privacidad.']],
+    'steps' => ['active' => ['label' => 'Activo'], 'confirmed' => ['label' => 'Confirmado']],
 ];

@@ -7,6 +7,7 @@ updated: 2026-09-26
 qmd: "wizard refactor explanation"
 issues: []
 discussions: []
+status: draft
 ---
 
 # Wizard Refactor Explanation

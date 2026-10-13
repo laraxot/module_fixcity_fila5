@@ -18,7 +18,7 @@
             {
                 "type": "service-flow",
                 "data": {
-                    "view": "pub_theme::components.blocks.service-flow.multa-design-comuni",
+                    "view": "pub_theme::components.blocks.service-flow.design-comuni",
                     "kind": "payment",
                     "breadcrumb": {
                         "items": [

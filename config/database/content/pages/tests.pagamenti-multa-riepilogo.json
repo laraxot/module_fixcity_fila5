@@ -18,8 +18,8 @@
             {
                 "type": "service-flow",
                 "data": {
-                    "view": "pub_theme::components.blocks.service-flow.multa-design-comuni",
-                    "kind": "multa-wizard",
+                    "view": "pub_theme::components.blocks.service-flow.design-comuni",
+                    "kind": "wizard-step",
                     "breadcrumb": {
                         "items": [
                             {
@@ -75,21 +75,23 @@
                         "index": "4/4"
                     },
                     "body": {
-                        "wrap": "none",
-                        "col": "col-12 col-lg-8"
+                        "col": "col-12 col-lg-8",
+                        "layout": "centered",
+                        "steps_content": "none",
+                        "sections_container": false
                     },
                     "sections": [
                         {
-                            "type": "multa-callout",
+                            "type": "callout",
                             "class": "callout callout-highlight ps-3 warning",
                             "icon": "it-horn",
                             "title": "Attenzione",
                             "text": "Le informazioni che hai fornito hanno valore di dichiarazione.",
                             "text_block": "Verifica che siano corrette.",
-                            "block_class": "d-lg-block"
+                            "text_block_class": "d-lg-block"
                         },
                         {
-                            "type": "multa-card",
+                            "type": "card",
                             "heading": {
                                 "tag": "h2",
                                 "class": "title-xxlarge mb-4 mt-40",
@@ -108,39 +110,38 @@
                                         "type": "summary",
                                         "group": {
                                             "class": "bg-white mb-4 mb-lg-30 p-3 p-lg-4",
-                                            "header": {
-                                                "title": "Giulia Bianchi"
-                                            },
                                             "rows": [
                                                 {
                                                     "label": "Codice Fiscale",
                                                     "value": "GLABNC72H25H501Y"
                                                 }
                                             ],
-                                            "last_row_class": "border-light border-0"
+                                            "last_row_class": "border-light border-0",
+                                            "title": "Giulia Bianchi",
+                                            "footer_class": "card-footer p-0 d-none"
                                         }
                                     },
                                     {
                                         "type": "summary",
                                         "group": {
                                             "class": "bg-white p-3 p-lg-4",
-                                            "header": {
-                                                "title": "Indirizzo"
-                                            },
                                             "rows": [
                                                 {
                                                     "label": "Residenza",
                                                     "value": "Via Roma 16, 00100 Roma, It"
                                                 }
                                             ],
-                                            "last_row_class": "border-light border-0"
+                                            "last_row_class": "border-light border-0",
+                                            "title": "Indirizzo",
+                                            "footer_class": "card-footer p-0 d-none"
                                         }
                                     }
                                 ]
-                            }
+                            },
+                            "tag": "none"
                         },
                         {
-                            "type": "multa-card",
+                            "type": "card",
                             "heading": {
                                 "tag": "h2",
                                 "class": "title-xxlarge mb-4 pt-3 pt-lg-0",
@@ -196,12 +197,15 @@
                                                     "label": "Importo dovuto",
                                                     "value": "38,42 €"
                                                 }
-                                            ]
+                                            ],
+                                            "no_header": true,
+                                            "footer_class": "card-footer p-0 d-none"
                                         }
                                     }
                                 ]
                             },
-                            "wrap": true
+                            "tag": "div",
+                            "plain": true
                         }
                     ],
                     "nav": {
@@ -277,7 +281,8 @@
                                 ]
                             }
                         }
-                    ]
+                    ],
+                    "header_active": "all-services"
                 }
             }
         ],

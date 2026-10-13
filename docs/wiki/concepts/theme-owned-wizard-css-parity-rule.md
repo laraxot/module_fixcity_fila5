@@ -7,13 +7,14 @@ updated: 2026-09-26
 qmd: "theme owned wizard css parity rule"
 issues: []
 discussions: []
+status: draft
 ---
 
 # Theme-Owned Wizard CSS Parity Rule
 
 ## Regola Fixcity
 
-`ticket-create-wizard.blade.php` nel modulo Fixcity deve restare un wrapper markup/Livewire del wizard.
+`create-ticket-wizard.blade.php` nel modulo Fixcity deve restare un wrapper markup/Livewire del wizard.
 
 Non aggiungere:
 
@@ -27,7 +28,7 @@ Non usare selettori CSS per slug pagina e non usare `.ticket-wizard-root` per re
 
 ## Owner
 
-- Markup e schema: `laravel/Modules/Fixcity/resources/views/filament/widgets/ticket-create-wizard.blade.php`
+- Markup e schema: `laravel/Modules/Fixcity/resources/views/filament/widgets/create-ticket-wizard.blade.php`
 - CSS parity: `laravel/Themes/Sixteen/resources/css/app.css` o CSS importati da quel file
 - Build asset: dalla cartella `laravel/Themes/Sixteen`, eseguire `npm run build` e `npm run copy`
 

@@ -4,6 +4,7 @@ id: STORY-018
 author: BMAD
 status: done
 priority: high
+---
 
 ## Attore: Rating System
 

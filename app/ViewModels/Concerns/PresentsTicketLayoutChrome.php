@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Modules\Fixcity\ViewModels\Concerns;
 
 use Illuminate\Support\Collection;
+use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 use Modules\Fixcity\Models\Ticket;
 use Modules\Xot\Actions\Cast\SafeIntCastAction;
 use Modules\Xot\Actions\Cast\SafeStringCastAction;
@@ -34,12 +35,21 @@ trait PresentsTicketLayoutChrome
             }
             $items[] = [
                 'label' => $this->t($item['label'] ?? ''),
-                'url' => isset($item['url']) ? SafeStringCastAction::cast($item['url']) : null,
+                'url' => isset($item['url']) ? $this->localizedUrl(SafeStringCastAction::cast($item['url'])) : null,
                 'active' => (bool) ($item['active'] ?? false),
             ];
         }
 
         return $items;
+    }
+
+    /**
+     * I link nel JSON sono senza lingua ("/tickets/track"): la pagina li serve in ogni lingua, quindi si prefissano qui.
+     * Schemi (tel:, mailto:, https:) e ancore restano intatti.
+     */
+    private function localizedUrl(string $url): string
+    {
+        return str_starts_with($url, '/') ? LaravelLocalization::localizeURL($url) : $url;
     }
 
     public function title(): string
@@ -184,7 +194,7 @@ trait PresentsTicketLayoutChrome
             'title' => $this->t($rawCta['title'] ?? '', __($this->ns.'.map.cta.title.label')),
             'text' => $this->t($rawCta['text'] ?? '', __($this->ns.'.map.cta.text.label')),
             'button_text' => $this->t($rawCta['button_text'] ?? '', __($this->ns.'.map.cta.button.label')),
-            'button_url' => SafeStringCastAction::cast($rawCta['button_url'] ?? '/'.app()->getLocale().'/tickets/create'),
+            'button_url' => $this->localizedUrl(SafeStringCastAction::cast($rawCta['button_url'] ?? '/tickets/create')),
         ];
     }
 
@@ -208,7 +218,7 @@ trait PresentsTicketLayoutChrome
             }
             $items[] = [
                 'label' => $this->t($contact['label'] ?? ''),
-                'url' => SafeStringCastAction::cast($contact['url'] ?? '#'),
+                'url' => $this->localizedUrl(SafeStringCastAction::cast($contact['url'] ?? '#')),
                 'icon' => SafeStringCastAction::cast($contact['icon'] ?? 'it-help-circle'),
             ];
         }

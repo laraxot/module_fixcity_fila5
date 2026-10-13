@@ -9,4 +9,6 @@ return [
     'fields' => ['code' => ['label' => 'Meldungscode'], 'status' => ['label' => 'Status']],
     'actions' => ['create' => ['label' => 'Neue Meldung senden']],
     'pratiche' => ['description' => 'Ihre eingereichten Meldungen.', 'count' => '{0} Keine Meldungen|{1} :count Meldung|[2,*] :count Meldungen', 'empty' => 'Sie haben noch keine Meldungen eingereicht.'],
+    'privacy' => ['detail_prefix' => ['text' => 'Einzelheiten zur Verarbeitung personenbezogener Daten finden Sie in der '], 'link' => ['label' => 'Datenschutzerklärung.']],
+    'steps' => ['active' => ['label' => 'Aktiv'], 'confirmed' => ['label' => 'Bestätigt']],
 ];

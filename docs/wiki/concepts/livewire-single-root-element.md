@@ -7,6 +7,7 @@ updated: 2026-09-26
 qmd: "livewire single root element"
 issues: []
 discussions: []
+status: draft
 ---
 
 # Livewire Single Root Element Rule
@@ -20,7 +21,7 @@ Livewire throws `MultipleRootElementsDetectedException` when a component's Blade
 
 ## Example Error
 ```blade
-<!-- ticket-create-wizard.blade.php -->
+<!-- create-ticket-wizard.blade.php -->
 <div>  <!-- Root wrapper start -->
     <!-- step content -->
 </div>  <!-- Line 174: wrapper closes -->
@@ -109,7 +110,7 @@ Livewire throws `MultipleRootElementsDetectedException` when a component's Blade
 
 ## Files Fixed (Example)
 
-- `laravel/Modules/Fixcity/resources/views/filament/widgets/ticket-create-wizard.blade.php`
+- `laravel/Modules/Fixcity/resources/views/filament/widgets/create-ticket-wizard.blade.php`
 
 ## Further Reading
 

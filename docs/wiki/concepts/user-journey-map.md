@@ -17,6 +17,7 @@ related:
   - ../../bmad/actor-flows.md
   - ../../bmad/workflows/README.md
   - ../../bmad/workflows/actor-citizen.md
+status: draft
 ---
 
 # Mappa percorsi utente — Fixcity

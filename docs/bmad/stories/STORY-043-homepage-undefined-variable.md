@@ -13,6 +13,7 @@ discussions:
 related:
   - ./STORY-513-public-guest-visual-demo.md
   - ../../wiki/concepts/no-controllers-folio-volt-filament.md
+qmd: "story-043   superseded fixcity"
 ---
 
 # STORY-043 — superseded

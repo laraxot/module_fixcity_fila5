@@ -7,6 +7,7 @@ updated: 2026-09-26
 qmd: "llm wiki usage"
 issues: []
 discussions: []
+status: draft
 ---
 
 # LLM Wiki - Usage Guide (Module: Fixcity)

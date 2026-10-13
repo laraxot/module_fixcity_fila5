@@ -371,7 +371,7 @@ Empower citizens and municipalities with tools to report, track, and resolve urb
 ## Appendix
 
 ### Related Documents
-- [PRD: Product Requirements](./PRD.md)
+- [PRD: Product Requirements](./prd.md)
 - [Product Strategy](./product-strategy.md)
 - [Product Launch Plan](./launch-plan.md)
 - [User Research](./user-research.md)

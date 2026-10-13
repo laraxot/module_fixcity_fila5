@@ -8,6 +8,7 @@ tags: [bmad, design-comuni, information-architecture, fixcity, services, practic
 sources:
   - "https://designers.italia.it/files/resources/modelli/comuni/adotta-il-modello-di-sito-comunale/definisci-architettura-e-contenuti/Architettura-informazione-sito-Comuni.ods"
   - "https://italia.github.io/design-comuni-pagine-statiche/"
+qmd: "architettura informativa fixcity"
 ---
 
 # Architettura informativa

@@ -328,28 +328,6 @@ return [
             'heading' => 'Contatti',
             'label' => 'Contatti',
         ],
-        'fixcity::segnalazione' => [
-            'sections' => [
-                'summary' => [
-                    'label' => [
-                        'heading' => 'fixcity::ticket.sections.summary.label',
-                        'label' => 'fixcity::ticket.sections.summary.label',
-                    ],
-                ],
-                'place' => [
-                    'label' => [
-                        'label' => 'fixcity::segnalazione.sections.place.label',
-                        'heading' => 'fixcity::segnalazione.sections.place.label',
-                    ],
-                ],
-                'inefficiency' => [
-                    'label' => [
-                        'label' => 'fixcity::segnalazione.sections.inefficiency.label',
-                        'heading' => 'fixcity::segnalazione.sections.inefficiency.label',
-                    ],
-                ],
-            ],
-        ],
         'Riepilogo' => [
             'heading' => 'Riepilogo',
             'label' => 'Riepilogo',

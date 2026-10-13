@@ -17,7 +17,7 @@ references:
 related:
   - ../design-comuni-service-workflow-audit-2026-09-27.md
   - ../design-comuni-workflow-expected-2026-09-27.md
-  - ../wiki/concepts/design-comuni-service-workflow-scope.md
+  - ../../wiki/concepts/design-comuni-service-workflow-scope.md
   - ../../../../Themes/Sixteen/docs/bmad/design-comuni-workflow-correction-plan-2026-09-27.md
 ---
 

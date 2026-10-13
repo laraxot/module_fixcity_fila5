@@ -182,16 +182,16 @@ Vedi dettagli: [Ticket Wizard Frontoffice](ticket-wizard-frontoffice.md)
 
 ## Related Modules
 
-- [User Module](../User/docs/) - Utenti e autenticazione
-- [Comment Module](../Comment/docs/) - Commenti su ticket
-- [Activity Module](../Activity/docs/) - Activity logging
-- [Notify Module](../Notify/docs/) - Notifiche
-- [Xot Module](../Xot/docs/) - Base classes e patterns
+- [User Module](../../User/docs) - Utenti e autenticazione
+- [Comment Module](../../Comment/docs) - Commenti su ticket
+- [Activity Module](../../Activity/docs) - Activity logging
+- [Notify Module](../../Notify/docs) - Notifiche
+- [Xot Module](../../Xot/docs) - Base classes e patterns
 
 ## Troubleshooting
 
 **Wizard steps non visibili su mobile**
-- Verificare media queries in [Stepper Component](../../Themes/Sixteen/docs/design-comuni/stepper-component.md)
+- Verificare media queries in [Stepper Component](../../../Themes/Sixteen/docs/design-comuni/stepper-component.md)
 - Check CSS scoping `.page-content[data-slug]`
 
 **Geolocalizzazione non funziona**

@@ -4,6 +4,10 @@ status: in-progress
 module: Fixcity
 github_issue: https://github.com/laraxot/fixcity_fila5/issues/41
 discussion: https://github.com/laraxot/fixcity_fila5/discussions/41
+type: note
+updated: 2026-10-11
+tags: [docs, fixcity, bmad]
+qmd: "story 041 fix route tickets list fixcity"
 ---
 
 ## Problem

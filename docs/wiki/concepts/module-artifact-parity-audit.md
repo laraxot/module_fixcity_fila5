@@ -17,6 +17,7 @@ related:
   - ../../../../../../docs/wiki/bmad/architecture-module-model-artifact-parity.md
   - ./one-migration-per-model-rule.md
   - ./data-sacred-migrations.md
+status: draft
 ---
 
 # Parità artefatti modulo (Fixcity)

@@ -41,7 +41,7 @@ render(function (View $view): View {
 @endphp
 
 <x-layouts.app :title="$pageTitle">
-    <div class="max-w-4xl mx-auto px-4 py-6">
+    <div class="mx-auto w-full px-4 py-6 sm:px-6 lg:max-w-[1166px] lg:px-8">
         <x-page side="content" slug="tickets.confirmation" :data="$data" />
     </div>
 </x-layouts.app>

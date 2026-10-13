@@ -14,6 +14,7 @@ related:
   - ./phpstan-compliance.md
   - ../overviews/completion-roadmap.md
   - ../../../Xot/docs/wiki/concepts/phpstan-pest-bridge-discipline.md
+status: draft
 ---
 
 # Fixcity — helper TestCase per PHPStan + Pest

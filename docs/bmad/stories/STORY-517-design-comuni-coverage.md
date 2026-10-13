@@ -30,7 +30,7 @@ related:
   - ./STORY-514-public-navigation-contract.md
   - ./STORY-515-public-navigation-measured-reality.md
   - ./STORY-516-design-comuni-parity-home.md
-  - ../../../../bashscripts/ai/wiki/concepts/user-journeys.md
+  - ../../../../../../bashscripts/ai/wiki/concepts/user-journeys.md
 ---
 
 # STORY-517 — Copertura del catalogo Design Comuni

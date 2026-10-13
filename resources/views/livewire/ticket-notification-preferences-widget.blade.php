@@ -1,5 +1,5 @@
 <form wire:submit="save" aria-labelledby="ticket-notification-preferences-title">
-    <h2 id="ticket-notification-preferences-title" class="h4 mb-3">
+    <h2 id="ticket-notification-preferences-title" class="title-xxlarge mb-3">
         {{ __('fixcity::ticket_notification_preferences.section_title') }}
     </h2>
 
@@ -22,7 +22,8 @@
         {{ __('fixcity::ticket_notification_preferences.save') }}
     </button>
 
-    @if (session()->has('status'))
-        <p class="text-success mt-3 mb-0" role="status" aria-live="polite">{{ session('status') }}</p>
-    @endif
+    {{-- L'area resta nel DOM anche vuota: un'area live inserita insieme al testo spesso non viene annunciata dai lettori di schermo. --}}
+    <p class="text-success mt-3 mb-0" role="status" aria-live="polite" aria-atomic="true">
+        @if ($saved){{ __('fixcity::ticket_notification_preferences.saved') }}@endif
+    </p>
 </form>

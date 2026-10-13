@@ -18,6 +18,7 @@ related:
   - stories/STORY-517-design-comuni-coverage.md
   - ../wiki/concepts/design-comuni-service-workflow-scope.md
   - ../../../Themes/Sixteen/docs/bmad/design-comuni-workflow-correction-plan-2026-09-27.md
+qmd: "audit method and reference findings fixcity"
 ---
 
 # Audit method and reference findings

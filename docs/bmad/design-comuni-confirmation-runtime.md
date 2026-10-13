@@ -15,6 +15,10 @@ references:
   design_comuni: "https://italia.github.io/design-comuni-pagine-statiche/sito/segnalazione-04-conferma.html"
   issue: "https://github.com/laraxot/base_fixcity_fila5/issues/517"
   discussion: "https://github.com/laraxot/base_fixcity_fila5/discussions/518"
+type: note
+updated: 2026-10-08
+tags: [docs, fixcity, bmad]
+qmd: "decisione bmad: conferma runtime fixcity"
 ---
 
 # Decisione BMAD: conferma runtime

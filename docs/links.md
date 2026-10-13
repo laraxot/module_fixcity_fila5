@@ -7,6 +7,7 @@ updated: 2026-09-26
 qmd: "links"
 issues: []
 discussions: []
+status: draft
 ---
 
 # Collegamenti Utili - Modulo Fixcity
@@ -26,4 +27,4 @@ https://italia.github.io/design-comuni-pagine-statiche/sito/
 - [Strategia Testing](./TESTING_STRATEGY.md)
 - [Analisi Modulo](./module-analysis.md)
 - [Struttura](./structure.md)
-- [XotBaseWizardWidget](../../Xot/docs/filament/widgets/xot-base-wizard-widget.md) — base class condivisa Xot
+- [XotBaseWizardWidget](../../Xot/docs/wiki/concepts/filament-wizard-architecture-right-way.md) — base class condivisa Xot

@@ -15,6 +15,9 @@ final class TicketNotificationPreferencesWidget extends Component
 {
     public bool $emailTicketUpdates = true;
 
+    /** Vero solo dopo un salvataggio riuscito e finche' la scelta non cambia: alimenta l'area `role="status"` (DCP-111). */
+    public bool $saved = false;
+
     public function mount(): void
     {
         $user = Auth::user();
@@ -22,6 +25,11 @@ final class TicketNotificationPreferencesWidget extends Component
 
         $this->emailTicketUpdates = app(GetFixcityEmailNotificationPreferenceAction::class)
             ->execute($user);
+    }
+
+    public function updatedEmailTicketUpdates(): void
+    {
+        $this->saved = false;
     }
 
     public function save(): void
@@ -32,7 +40,7 @@ final class TicketNotificationPreferencesWidget extends Component
         app(SetFixcityEmailNotificationPreferenceAction::class)
             ->execute($user, $this->emailTicketUpdates);
 
-        session()->flash('status', __('fixcity::ticket_notification_preferences.saved'));
+        $this->saved = true;
     }
 
     public function render(): View

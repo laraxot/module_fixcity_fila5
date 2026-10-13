@@ -18,7 +18,7 @@
             {
                 "type": "service-flow",
                 "data": {
-                    "view": "pub_theme::components.blocks.service-flow.multa-design-comuni",
+                    "view": "pub_theme::components.blocks.service-flow.design-comuni",
                     "kind": "service-sheet",
                     "breadcrumb": {
                         "items": [
@@ -159,7 +159,7 @@
                     },
                     "sections": [
                         {
-                            "type": "multa-flow",
+                            "type": "flow",
                             "id": "who-needs",
                             "class": "mb-30",
                             "title": "A chi è rivolto",
@@ -173,7 +173,7 @@
                             ]
                         },
                         {
-                            "type": "multa-flow",
+                            "type": "flow",
                             "id": "how-to",
                             "class": "mb-30",
                             "title": "Come fare",
@@ -187,7 +187,7 @@
                             ]
                         },
                         {
-                            "type": "multa-flow",
+                            "type": "flow",
                             "id": "needed",
                             "class": "mb-30 has-bg-grey p-3 p-lg-4",
                             "title": "Cosa serve",
@@ -210,7 +210,7 @@
                             ]
                         },
                         {
-                            "type": "multa-flow",
+                            "type": "flow",
                             "id": "deadlines",
                             "class": "mb-30",
                             "title": "Tempi e scadenze",
@@ -235,7 +235,7 @@
                             ]
                         },
                         {
-                            "type": "multa-flow",
+                            "type": "flow",
                             "id": "costs",
                             "class": "mb-30",
                             "title": "Costi",
@@ -249,7 +249,7 @@
                             ]
                         },
                         {
-                            "type": "multa-flow",
+                            "type": "flow",
                             "id": "service-access",
                             "class": "mb-30 has-bg-grey p-4",
                             "title": "Accedi al servizio",
@@ -280,7 +280,7 @@
                             ]
                         },
                         {
-                            "type": "multa-flow",
+                            "type": "flow",
                             "id": "conditions",
                             "class": "mb-30",
                             "title": "Condizioni di servizio",
@@ -437,7 +437,8 @@
                                 }
                             ]
                         }
-                    }
+                    },
+                    "header_active": "all-services"
                 }
             }
         ],

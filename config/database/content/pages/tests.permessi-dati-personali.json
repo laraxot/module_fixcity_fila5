@@ -18,8 +18,8 @@
             {
                 "type": "service-flow",
                 "data": {
-                    "view": "pub_theme::components.blocks.service-flow.permessi-design-comuni",
-                    "kind": "permessi-wizard-step",
+                    "view": "pub_theme::components.blocks.service-flow.design-comuni",
+                    "kind": "wizard-step",
                     "breadcrumb": {
                         "items": [
                             {
@@ -270,7 +270,7 @@
                             "subtitle": "Seleziona o aggiungi il veicolo per il quale vuoi richiedere il permesso",
                             "subtitle_class": "subtitle-small mb-0",
                             "content": {
-                                "kind": "permessi-fieldset-cards",
+                                "kind": "info-cards",
                                 "radio_name": "vehicles",
                                 "cards": [
                                     {
@@ -604,7 +604,8 @@
                                 "message": "Salvataggio effettuato"
                             }
                         }
-                    ]
+                    ],
+                    "header_active": "all-services"
                 }
             }
         ],

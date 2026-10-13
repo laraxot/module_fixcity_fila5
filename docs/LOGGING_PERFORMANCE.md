@@ -7,6 +7,7 @@ updated: 2026-09-26
 qmd: "LOGGING PERFORMANCE"
 issues: []
 discussions: []
+status: draft
 ---
 
 # Logging Performance Optimization

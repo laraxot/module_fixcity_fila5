@@ -16,6 +16,8 @@ related:
   - ../demo-operator-panel-access-correction-plan-2026-09-27.md
   - ../../../database/seeders/DemoUsersSeeder.php
   - ../../../database/seeders/FixcityDatabaseSeeder.php
+tags: [docs, fixcity, bmad]
+qmd: "user story fixcity"
 ---
 
 # User story

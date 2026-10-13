@@ -18,8 +18,8 @@
             {
                 "type": "service-flow",
                 "data": {
-                    "view": "pub_theme::components.blocks.service-flow.permessi-design-comuni",
-                    "kind": "permessi-wizard-step",
+                    "view": "pub_theme::components.blocks.service-flow.design-comuni",
+                    "kind": "wizard-step",
                     "breadcrumb": {
                         "items": [
                             {
@@ -83,7 +83,7 @@
                     },
                     "sections": [
                         {
-                            "type": "permessi-callout",
+                            "type": "callout",
                             "class": "callout callout-highlight ps-3 warning",
                             "icon": "it-horn",
                             "title": "Attenzione",
@@ -92,7 +92,7 @@
                             "text_block_class": "d-lg-block"
                         },
                         {
-                            "type": "permessi-summary",
+                            "type": "summary",
                             "bare": true,
                             "wrapper_class": "mb-4",
                             "card_class": "card has-bkg-grey shadow-sm mb-0",
@@ -194,7 +194,7 @@
                             }
                         },
                         {
-                            "type": "permessi-summary",
+                            "type": "summary",
                             "class": "pt-3 pt-lg-0",
                             "wrapper_class": "mb-4",
                             "card_class": "card has-bkg-grey shadow-sm mb-0",
@@ -246,7 +246,7 @@
                             ]
                         },
                         {
-                            "type": "permessi-summary",
+                            "type": "summary",
                             "bare": true,
                             "wrapper_class": "",
                             "card_class": "card has-bkg-grey shadow-sm",
@@ -351,7 +351,8 @@
                                 ]
                             }
                         }
-                    ]
+                    ],
+                    "header_active": "all-services"
                 }
             }
         ],

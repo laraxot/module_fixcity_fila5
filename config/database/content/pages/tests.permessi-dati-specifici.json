@@ -18,8 +18,8 @@
             {
                 "type": "service-flow",
                 "data": {
-                    "view": "pub_theme::components.blocks.service-flow.permessi-design-comuni",
-                    "kind": "permessi-wizard-step",
+                    "view": "pub_theme::components.blocks.service-flow.design-comuni",
+                    "kind": "wizard-step",
                     "breadcrumb": {
                         "items": [
                             {
@@ -109,7 +109,7 @@
                             "subtitle": "Scegli il tipo di permesso ZTL",
                             "subtitle_class": "subtitle-small mb-0",
                             "content": {
-                                "kind": "permessi-checkboxes",
+                                "kind": "checkboxes",
                                 "class": "form-check d-flex flex-column align-items-center bg-white w-100 p-3 p-lg-4 mt-0",
                                 "options": [
                                     {
@@ -204,7 +204,8 @@
                                 }
                             ]
                         }
-                    }
+                    },
+                    "header_active": "all-services"
                 }
             }
         ],

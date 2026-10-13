@@ -10,6 +10,7 @@ tags: [memories, index, on-demand]
 related:
   - ../rules/00-TRIGGER_MAP.md
   - ../rules/on-demand-pattern.md
+status: draft
 ---
 
 # Memories Index

@@ -7,6 +7,7 @@ qmd: "FixCity UI UX browser responsive test assets map ticket listing"
 issues: []
 discussions: []
 tags: [bmad, fixcity, ui, ux, browser, verification]
+status: draft
 ---
 
 # Audit UI/UX runtime — 26 settembre 2026

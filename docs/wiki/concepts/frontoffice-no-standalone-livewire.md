@@ -11,6 +11,7 @@ updated: 2026-05-29
 related:
   - ../../../../../../docs/wiki/concepts/no-pure-livewire-outside-filament-widgets.md
   - ../../../app/Filament/Docs/frontoffice-no-standalone-livewire.md
+status: draft
 ---
 
 # Frontoffice Fixcity — no Livewire standalone

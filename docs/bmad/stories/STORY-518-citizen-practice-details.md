@@ -16,7 +16,7 @@ related:
   - ./STORY-008-citizen-my-tickets.md
   - ../../wiki/concepts/user-journey-map.md
   - ../../../../Themes/Sixteen/resources/views/pages/area-personale/pratiche.blade.php
-  - ../../app/Actions/BuildAuthenticatedUserTicketsQueryAction.php
+  - ../../../app/Actions/BuildAuthenticatedUserTicketsQueryAction.php
 ---
 
 # STORY-518 — Dettaglio delle pratiche del cittadino

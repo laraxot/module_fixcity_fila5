@@ -7,6 +7,7 @@ updated: 2026-09-26
 qmd: "filament5 schema namespaces and wizard summary"
 issues: []
 discussions: []
+status: draft
 ---
 
 # Filament 5.x — Namespace Schema e Pattern Wizard Summary

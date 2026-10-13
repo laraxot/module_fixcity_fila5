@@ -266,7 +266,8 @@
                                 }
                             ]
                         }
-                    }
+                    },
+                    "header_active": "news"
                 }
             }
         ],

@@ -18,8 +18,8 @@
             {
                 "type": "service-flow",
                 "data": {
-                    "view": "pub_theme::components.blocks.service-flow.multa-design-comuni",
-                    "kind": "multa-confirmation",
+                    "view": "pub_theme::components.blocks.service-flow.design-comuni",
+                    "kind": "confirmation",
                     "breadcrumb": {
                         "items": [
                             {
@@ -143,7 +143,8 @@
                             ]
                         }
                     },
-                    "modals": []
+                    "modals": [],
+                    "header_active": "all-services"
                 }
             }
         ],

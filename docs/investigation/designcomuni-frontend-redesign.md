@@ -2,6 +2,10 @@
 type: investigation
 title: "Investigation DesignComuni Frontend Redesign - TailwindCSS + Alpine.js + Lit + DaisyUI"
 links: {github_issue: #55}
+status: draft
+updated: 2026-10-11
+tags: [docs, fixcity, investigation]
+qmd: "investigation: designcomuni frontend redesign fixcity"
 ---
 
 # Investigation: DesignComuni Frontend Redesign

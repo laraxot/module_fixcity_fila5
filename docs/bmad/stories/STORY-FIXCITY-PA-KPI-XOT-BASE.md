@@ -9,6 +9,7 @@ issues:
   - "https://github.com/laraxot/base_fixcity_fila5/issues/383"
 discussions:
   - "https://github.com/laraxot/base_fixcity_fila5/discussions/392"
+qmd: "story   widget fixcity sulle basi xot fixcity"
 ---
 
 # STORY — Widget FixCity sulle basi Xot

@@ -3,6 +3,7 @@ title: Design Comuni Complete Parity — BMAD Master Plan
 status: to_do
 priority: must
 date: 2026-09-27
+---
 
 ## References
 - https://italia.github.io/design-comuni-pagine-statiche/index.html — Homepage template index

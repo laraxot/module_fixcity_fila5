@@ -9,6 +9,7 @@ discussions: []
 name: ticket-location-column-mismatch
 description: Admin/frontoffice ticket creation can fail if the CoordinatePicker payload is persisted to a non-existent location column
 type: troubleshooting
+status: draft
 ---
 
 # Ticket Location Column Mismatch

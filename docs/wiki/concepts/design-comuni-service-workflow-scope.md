@@ -13,6 +13,7 @@ related:
   - ../../bmad/design-comuni-service-workflow-audit-2026-09-27.md
   - ../../bmad/design-comuni-workflow-expected-2026-09-27.md
   - ./ticket-design-comuni-comparison.md
+status: draft
 ---
 
 # Reusable decision

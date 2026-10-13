@@ -7,6 +7,7 @@ updated: 2026-09-26
 qmd: "wizard single next cta rule"
 issues: []
 discussions: []
+status: draft
 ---
 
 # wizard single next cta rule

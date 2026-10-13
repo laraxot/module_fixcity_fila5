@@ -13,6 +13,7 @@ tags: [node_modules, npm, governance, project-structure, dependencies]
 related:
   - ../../../laravel/Themes/Sixteen/docs/wiki/concepts/theme-owned-css-parity-rule.md
   - ../../../laravel/Modules/Fixcity/docs/wiki/concepts/segnalazione-design-comuni-comparison.md
+status: draft
 ---
 
 # Node Modules Governance — Project Root Only

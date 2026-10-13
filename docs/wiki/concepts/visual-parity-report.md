@@ -10,6 +10,7 @@ discussions: []
 module: theme
 topic: visual-parity-report
 canonical: ../../../../../Themes/docs/shared-components/visual-parity-report.md
+status: stub
 ---
 
 See canonical documentation: ../../../../../Themes/docs/shared-components/visual-parity-report.md

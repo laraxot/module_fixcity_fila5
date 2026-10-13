@@ -606,7 +606,8 @@
                                 }
                             ]
                         }
-                    }
+                    },
+                    "header_active": "all-services"
                 }
             }
         ],

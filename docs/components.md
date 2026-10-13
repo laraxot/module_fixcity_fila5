@@ -7,6 +7,7 @@ updated: 2026-09-26
 qmd: "components"
 issues: []
 discussions: []
+status: draft
 ---
 
 # Componenti View di Fixcity

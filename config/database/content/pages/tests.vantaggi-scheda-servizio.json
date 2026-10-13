@@ -18,7 +18,7 @@
             {
                 "type": "service-flow",
                 "data": {
-                    "view": "pub_theme::components.blocks.service-flow.vantaggi-design-comuni",
+                    "view": "pub_theme::components.blocks.service-flow.design-comuni",
                     "kind": "service-sheet",
                     "breadcrumb": {
                         "items": [
@@ -159,13 +159,13 @@
                     },
                     "sections": [
                         {
-                            "type": "vantaggi-flow",
+                            "type": "flow",
                             "id": "who-needs",
                             "class": "mb-30",
                             "title": "A chi è rivolto",
                             "items": [
                                 {
-                                    "type": "list",
+                                    "type": "nested-list",
                                     "items": [
                                         "Cittadine italiane",
                                         "Cittadine comunitarie",
@@ -187,7 +187,7 @@
                             ]
                         },
                         {
-                            "type": "vantaggi-flow",
+                            "type": "flow",
                             "id": "description",
                             "class": "mb-30",
                             "title": "Descrizione",
@@ -200,7 +200,7 @@
                             ]
                         },
                         {
-                            "type": "vantaggi-flow",
+                            "type": "flow",
                             "id": "how-to",
                             "class": "mb-30",
                             "title": "Come fare",
@@ -213,7 +213,7 @@
                             ]
                         },
                         {
-                            "type": "vantaggi-flow",
+                            "type": "flow",
                             "id": "needed",
                             "class": "mb-30 has-bg-grey p-3",
                             "title": "Cosa serve",
@@ -223,7 +223,7 @@
                                     "text": "Per accedere al servizio, assicurati di avere:"
                                 },
                                 {
-                                    "type": "list",
+                                    "type": "nested-list",
                                     "items": [
                                         "Attestazione ISEE e relativa Dichiarazione sostitutiva unica (Dsu), valida nell’anno che includa il bambino o la bambina;",
                                         "Copia del codice Iban intestato o cointestato alla richiedente dell’assegno di maternità;",
@@ -234,7 +234,7 @@
                             ]
                         },
                         {
-                            "type": "vantaggi-flow",
+                            "type": "flow",
                             "id": "obtain",
                             "class": "mb-30",
                             "title": "Cosa si ottiene",
@@ -247,7 +247,7 @@
                             ]
                         },
                         {
-                            "type": "vantaggi-timeline",
+                            "type": "timeline",
                             "id": "deadlines",
                             "class": "mb-30",
                             "title": "Tempi e scadenze",
@@ -257,7 +257,7 @@
                                     "day": "",
                                     "month": "",
                                     "label": "Esito richiesta",
-                                    "text": "Dopo 30 giorni dalla presentazione della richiesta"
+                                    "info": "Dopo 30 giorni dalla presentazione della richiesta"
                                 },
                                 {
                                     "year": "",
@@ -268,7 +268,7 @@
                             ]
                         },
                         {
-                            "type": "vantaggi-flow",
+                            "type": "flow",
                             "id": "service-access",
                             "class": "mb-30 has-bg-grey p-3 p-lg-4",
                             "title": "Accedi al servizio",
@@ -282,7 +282,8 @@
                                 {
                                     "type": "button",
                                     "label": "Richiedi online",
-                                    "class": "btn btn-primary mobile-full"
+                                    "class": "btn btn-primary mobile-full",
+                                    "bare": true
                                 },
                                 {
                                     "type": "paragraph",
@@ -292,12 +293,13 @@
                                 {
                                     "type": "button",
                                     "label": "Prenota appuntamento",
-                                    "class": "btn btn-outline-primary t-primary bg-white mobile-full"
+                                    "class": "btn btn-outline-primary t-primary bg-white mobile-full",
+                                    "bare": true
                                 }
                             ]
                         },
                         {
-                            "type": "vantaggi-flow",
+                            "type": "flow",
                             "id": "conditions",
                             "class": "mb-30",
                             "title": "Condizioni di servizio",
@@ -317,7 +319,7 @@
                             ]
                         },
                         {
-                            "type": "vantaggi-service-contacts",
+                            "type": "service-contacts",
                             "id": "contacts",
                             "title": "Contatti",
                             "office": {
@@ -332,7 +334,9 @@
                                 "image": {
                                     "src": "https://picsum.photos/200/200",
                                     "alt": "Immagine"
-                                }
+                                },
+                                "card_class": "card card-teaser card-teaser-info align-items-center rounded shadow-sm p-3",
+                                "title_class": "title-small mb-2"
                             },
                             "topics": {
                                 "label": "Argomenti:",
@@ -455,7 +459,8 @@
                                 }
                             ]
                         }
-                    }
+                    },
+                    "header_active": "all-services"
                 }
             }
         ],

@@ -7,6 +7,7 @@ updated: 2026-09-26
 qmd: "ingest manifest summary infolist"
 issues: []
 discussions: []
+status: draft
 ---
 
 # Ingest manifest: summary-infolist-migration

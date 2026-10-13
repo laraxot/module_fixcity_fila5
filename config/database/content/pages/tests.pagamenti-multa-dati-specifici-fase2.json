@@ -1,10 +1,10 @@
 {
-    "id": "tests.pagamenti-multa-dati-specifci-fase3",
-    "slug": "tests.pagamenti-multa-dati-specifci-fase3",
+    "id": "tests.pagamenti-multa-dati-specifici-fase2",
+    "slug": "tests.pagamenti-multa-dati-specifici-fase2",
     "parent_slug": "tests",
     "title": {
-        "it": "Pagamento multa - dati specifici, fase 3",
-        "en": "Pagamento multa - dati specifici, fase 3"
+        "it": "Pagamento multa - dati specifici, fase 2",
+        "en": "Pagamento multa - dati specifici, fase 2"
     },
     "layout": "test",
     "sidebar_blocks": {
@@ -12,14 +12,14 @@
         "en": []
     },
     "footer_blocks": null,
-    "description": "Pagina di prova pagamenti-multa-dati-specifci-fase3 (flusso pagamento multa) da JSON, resa dal blocco service-flow del tema Sixteen.",
+    "description": "Pagina di prova pagamenti-multa-dati-specifici-fase2 (flusso pagamento multa) da JSON, resa dal blocco service-flow del tema Sixteen.",
     "content_blocks": {
         "it": [
             {
                 "type": "service-flow",
                 "data": {
-                    "view": "pub_theme::components.blocks.service-flow.multa-design-comuni",
-                    "kind": "multa-wizard",
+                    "view": "pub_theme::components.blocks.service-flow.design-comuni",
+                    "kind": "wizard-step",
                     "breadcrumb": {
                         "items": [
                             {
@@ -85,8 +85,11 @@
                         "index": "3/4"
                     },
                     "body": {
-                        "wrap": "container",
-                        "col": "col-12 col-lg-8"
+                        "col": "col-12 col-lg-8",
+                        "form": "justValidateMulta",
+                        "layout": "centered",
+                        "steps_content": "split",
+                        "sections_container": false
                     },
                     "sections": [
                         {
@@ -95,7 +98,7 @@
                             "text": "I campi contraddistinti dal simbolo asterisco sono obbligatori"
                         },
                         {
-                            "type": "multa-card",
+                            "type": "card",
                             "wrapper_class": "mb-0",
                             "card_class": "card has-bkg-grey shadow-sm p-4 pt-lg-30 pb-lg-30 pl-lg-30 pr-lg-30",
                             "header_class": "card-header border-0 p-0 mb-lg-20 m-0",
@@ -107,7 +110,7 @@
                                     {
                                         "type": "text",
                                         "class": "subtitle-small pb-3 mb-4",
-                                        "value": "Inserisci il codice di 18 cifre presente nell’avviso della multa.",
+                                        "value": "Seleziona un codice avviso tra quelli già disponibili oppure inseriscilo manualmente.",
                                         "link": {
                                             "label": "Dove trovare il codice",
                                             "url": "#",
@@ -197,7 +200,8 @@
                                                     "value": "54,88 €"
                                                 }
                                             ],
-                                            "footer_class": "card-footer p-0"
+                                            "footer_class": "card-footer p-0",
+                                            "no_header": true
                                         }
                                     },
                                     {
@@ -228,24 +232,20 @@
                                             },
                                             {
                                                 "type": "text",
-                                                "class": "title-large-semi-bold mb-2 mb-lg-4",
+                                                "class": "title-large-semi-bold mb-0",
                                                 "value": [
                                                     "Importo dovuto",
                                                     {
                                                         "span": "d-block d-lg-inline",
-                                                        "text": "38,42 €"
+                                                        "text": "--,-- €"
                                                     }
                                                 ]
-                                            },
-                                            {
-                                                "type": "text",
-                                                "class": "mb-0",
-                                                "value": "Stai pagando **entro 5 giorni** dalla ricezione dell'avviso. L'importo da pagare è stato **ridotto del 30%**."
                                             }
                                         ]
                                     }
                                 ]
-                            }
+                            },
+                            "tag": "none"
                         }
                     ],
                     "nav": {
@@ -259,7 +259,8 @@
                             "label": "Avanti",
                             "icon": "it-chevron-right",
                             "class": "",
-                            "modal": "#"
+                            "modal": "#",
+                            "submit": true
                         },
                         "saved_message": "Richiesta salvata con successo"
                     },
@@ -330,7 +331,8 @@
                                 "message": "Salvataggio effettuato"
                             }
                         }
-                    ]
+                    ],
+                    "header_active": "all-services"
                 }
             }
         ],

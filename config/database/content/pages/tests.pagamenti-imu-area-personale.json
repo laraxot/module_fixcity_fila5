@@ -6,7 +6,7 @@
         "it": "Giulia Rossi",
         "en": "Giulia Rossi"
     },
-    "layout": "test",
+    "layout": "design-comuni-authenticated",
     "sidebar_blocks": {
         "it": [],
         "en": []
@@ -18,7 +18,7 @@
             {
                 "type": "service-flow",
                 "data": {
-                    "view": "pub_theme::components.blocks.service-flow.imu-design-comuni",
+                    "view": "pub_theme::components.blocks.service-flow.design-comuni",
                     "kind": "personal-area",
                     "breadcrumb": {
                         "items": [
@@ -135,7 +135,7 @@
                                     "title": "Ultime attività",
                                     "title_class": "title-xxlarge mb-3",
                                     "content": {
-                                        "kind": "imu-activities",
+                                        "kind": "activities",
                                         "icon": "it-files",
                                         "more": "Vedi altre attività",
                                         "title_class": "t-primary mb-2 underline title-small-semi-bold",

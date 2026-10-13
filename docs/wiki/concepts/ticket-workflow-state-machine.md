@@ -15,6 +15,7 @@ related:
   - ticket-citizen-timeline.md
   - ../../../../../../docs/stories/STORY-392-ticket-workflow-activity-events.dev.md
   - codebase-gap-matrix.md
+status: draft
 ---
 
 # Macchina a stati ticket — canon vs drift

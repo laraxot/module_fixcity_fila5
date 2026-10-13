@@ -1,33 +1,21 @@
 import { test, expect } from '@playwright/test';
 
-test.describe('Segnalazione crea wizard submit wiring', () => {
-    test('page exposes filament wizard alpine submit wired to Livewire save', async ({ page }) => {
-        const response = await page.goto('/it/tests/segnalazione-crea', {
+test.describe('Segnalazione crea access boundary', () => {
+    test('guest is sent to the localized login before the wizard renders', async ({ page }) => {
+        const response = await page.goto('/it/tickets/create', {
             waitUntil: 'networkidle',
         });
 
-        expect(response?.ok()).toBeTruthy();
-
-        const html = await page.content();
-
-        expect(html).toContain('$wire.save()');
-        expect(html).toContain('fi-sc-wizard');
+        await expect(page).toHaveURL(/\/it\/auth\/login/);
+        await expect(page.locator('.fi-sc-wizard')).toHaveCount(0);
     });
 
-    test('summary step uses Filament Infolist markup (TextEntry rows) via canonical Filament step id', async ({ page }) => {
-        const canonicalStepId = encodeURIComponent('form.summary::data::wizard-step');
-
-        await page.goto(`/it/tests/segnalazione-crea?step=${canonicalStepId}`, {
+    test('guest cannot reach the summary step through a crafted query string', async ({ page }) => {
+        await page.goto('/it/tickets/create?step=form.summary%3A%3Adata%3A%3Awizard-step', {
             waitUntil: 'networkidle',
         });
 
-        await expect(page.locator('.fi-sc-wizard')).toBeAttached();
-
-        await expect.poll(async () => await page.locator('.fi-in-entry').count()).toBeGreaterThan(3);
-
-        // Footer Filament wizard: pulsante conferma usa label dalla Resource / Lang auto-label (locale it).
-        await expect(
-            page.getByRole('button', { name: /Conferma e invia|Salva|Save/i }).first(),
-        ).toBeVisible({ timeout: 25000 });
+        await expect(page).toHaveURL(/\/it\/auth\/login/);
+        await expect(page.locator('.fi-sc-wizard')).toHaveCount(0);
     });
 });

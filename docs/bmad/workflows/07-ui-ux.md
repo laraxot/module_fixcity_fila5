@@ -13,7 +13,7 @@ discussions:
   - "https://github.com/laraxot/base_fixcity_fila5/discussions"
 related:
   - actor-citizen.md
-  - ../../../../Themes/Sixteen/docs/bmad/README.md
+  - ../../../../../Themes/Sixteen/docs/bmad/README.md
   - 08-security.md
 ---
 
@@ -40,7 +40,7 @@ sono parte del prodotto, non un optional post-release.
 
 La route `/segnalazioni` attiva è la pagina CMS `segnalazioni.index`: usa la query live del modulo, `/api/tickets/geojson`, filtri tipo/stato applicati alle card e paginazione server-side da 20 elementi. Il browser verifica layout e interazione Mappa/Elenco a 320/768/1440 px, titolo, CTA, assenza di overflow ed errori JS; Pest copre filtri, paginazione e assenza del capability code. Tile reali sono caricati, ma marker/popup richiedono ticket geolocalizzati non presenti nell'ambiente corrente.
 
-Il tracking pubblico valido e il lookup owner sono stati verificati su database SQLite temporaneo: il guest vede stato/timeline pubblici senza capability code; l'owner autenticato vede il proprio codice via ID; il guest via ID riceve 403. La pagina di errore IT/EN è stata controllata in browser. Report con misure e limiti: [audit runtime FixCity](../ui-ux-runtime-audit-2026-09-26.md) e [report owner Sixteen](../../../../Themes/Sixteen/docs/bmad/fixcity-ui-ux-runtime-audit.md).
+Il tracking pubblico valido e il lookup owner sono stati verificati su database SQLite temporaneo: il guest vede stato/timeline pubblici senza capability code; l'owner autenticato vede il proprio codice via ID; il guest via ID riceve 403. La pagina di errore IT/EN è stata controllata in browser. Report con misure e limiti: [audit runtime FixCity](../ui-ux-runtime-audit-2026-09-26.md) e [report owner Sixteen](../../../../../Themes/Sixteen/docs/bmad/fixcity-ui-ux-runtime-audit.md).
 
 Wizard autenticato provato a 320/768/1440 px e IT/EN: title CMS e step localizzati, nessun overflow o chiave grezza; la privacy è obbligatoria e Space avanza allo step dati. Se il consenso manca, `aria-invalid` e `aria-describedby` collegano il messaggio al checkbox e il focus torna al controllo.
 

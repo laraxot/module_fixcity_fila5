@@ -7,6 +7,7 @@ updated: 2026-09-26
 qmd: "redundancy audit"
 issues: []
 discussions: []
+status: draft
 ---
 
 # Indice degli audit di ridondanza Fixcity

@@ -12,6 +12,7 @@ related:
   - ../../../Sixteen/docs/wiki/concepts/header-color-parity.md
   - ../../../Sixteen/docs/wiki/concepts/header-slim-dropdown-behavior.md
   - ../../../Sixteen/docs/wiki/concepts/design-comuni-header-green-navbar-rule.md
+status: draft
 ---
 
 # header green branding rule

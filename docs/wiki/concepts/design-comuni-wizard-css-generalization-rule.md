@@ -8,7 +8,7 @@ tags: [fixcity, wizard, design-comuni, css, theme]
 created: 2026-04-22
 updated: 2026-04-22
 sources:
-  - ../../../../Themes/Sixteen/docs/wiki/concepts/design-comuni-site-wide-component-css-rule.md
+  - ../../../../../Themes/Sixteen/docs/wiki/concepts/design-comuni-site-wide-component-css-rule.md
 ---
 
 # Design Comuni Wizard CSS Generalization Rule

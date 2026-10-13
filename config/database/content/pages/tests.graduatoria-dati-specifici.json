@@ -119,7 +119,7 @@
                     },
                     "sections": [
                         {
-                            "type": "graduatoria-card",
+                            "type": "card",
                             "id": "school-choice",
                             "class": "",
                             "wrapper_class": "mb-40",
@@ -143,7 +143,7 @@
                             }
                         },
                         {
-                            "type": "graduatoria-card",
+                            "type": "card",
                             "id": "religion-choice",
                             "class": "",
                             "wrapper_class": "mb-40",
@@ -154,7 +154,7 @@
                             "subtitle": "Vuoi avvalerti dell'insegnamento della religione cattolica?",
                             "subtitle_class": "subtitle-small mb-0",
                             "content": {
-                                "kind": "graduatoria-radios",
+                                "kind": "radios",
                                 "legend": "Vuoi avvalerti dell'insegnamento della religione cattolica?",
                                 "name": "religione",
                                 "required": true,
@@ -165,7 +165,7 @@
                             }
                         },
                         {
-                            "type": "graduatoria-card",
+                            "type": "card",
                             "id": "outings-choice",
                             "class": "",
                             "wrapper_class": "mb-40",
@@ -176,7 +176,7 @@
                             "subtitle": "Autorizzi le uscite didattiche?",
                             "subtitle_class": "subtitle-small mb-0",
                             "content": {
-                                "kind": "graduatoria-radios",
+                                "kind": "radios",
                                 "legend": "Autorizzi le uscite didattiche?",
                                 "name": "uscite",
                                 "required": true,
@@ -187,7 +187,7 @@
                             }
                         },
                         {
-                            "type": "graduatoria-card",
+                            "type": "card",
                             "id": "media-choice",
                             "class": "",
                             "wrapper_class": "mb-40",
@@ -199,7 +199,7 @@
                             "subtitle": "Autorizzi la scuola a produrre e utilizzare foto e video in cui compare tua figlia o tuo figlio?",
                             "subtitle_class": "subtitle-small mb-0",
                             "content": {
-                                "kind": "graduatoria-radios",
+                                "kind": "radios",
                                 "legend": "Autorizzi la scuola a produrre e utilizzare foto e video in cui compare tua figlia o tuo figlio?",
                                 "name": "multimedia",
                                 "required": true,
@@ -241,7 +241,8 @@
                             ]
                         }
                     },
-                    "modals": []
+                    "modals": [],
+                    "header_active": "all-services"
                 }
             }
         ],

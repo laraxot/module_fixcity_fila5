@@ -4,6 +4,7 @@ id: STORY-020
 author: BMAD
 status: to_do
 priority: must
+---
 
 ## Analisi Problema
 

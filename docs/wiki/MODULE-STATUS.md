@@ -132,6 +132,6 @@ resources/views/pages/api/segnalazioni/
 
 ## Collegamenti
 
-- [Project Roadmap](../../Activity/docs/wiki/PROJECT-ROADMAP.md)
+- [Project Roadmap](../../../Activity/docs/wiki/PROJECT-ROADMAP.md)
 - [Xot PHPStan Best Practices](../../Xot/docs/wiki/PHPSTAN-BEST-PRACTICES.md)
-- [No Controllers Rule](../../../docs/wiki/rules/no-controllers-rule.md)
+- [No Controllers Rule](../../../../../docs/wiki/rules/no-controllers-rule.md)

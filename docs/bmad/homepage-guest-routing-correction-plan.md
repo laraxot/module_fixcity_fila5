@@ -15,7 +15,7 @@ related:
   - ./homepage-guest-routing-expected.md
   - ./homepage-guest-routing-comparison.md
   - ../wiki/concepts/no-controllers-folio-volt-filament.md
-  - ../../../../docs/second-brain/process/folio-volt-app-pages.md
+  - ../../../../../docs/second-brain/process/folio-volt-app-pages.md
 ---
 
 # Homepage guest — piano correttivo routing

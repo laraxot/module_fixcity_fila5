@@ -15,6 +15,7 @@ discussions:
 related:
   - ../../../../../../docs/wiki/rules/data-sacred-no-destructive-db.md
   - ../../../../../../docs/wiki/memories/data-sacred-no-destructive-db.md
+status: draft
 ---
 
 # Dati sacri — migrazioni Fixcity

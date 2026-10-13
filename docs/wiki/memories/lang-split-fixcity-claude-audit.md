@@ -13,6 +13,7 @@ discussions:
 related:
   - ./claude-audit-static.md
   - ../../Xot/docs/wiki/concepts/claude-audit-static-all-modules.md
+status: draft
 ---
 
 # Split lang Fixcity (claude-audit)

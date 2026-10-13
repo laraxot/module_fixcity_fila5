@@ -7,6 +7,7 @@ updated: 2026-09-26
 qmd: "QUEUEABLE ACTION RULE"
 issues: []
 discussions: []
+status: draft
 ---
 
 # QueueableAction Architecture Rule
@@ -336,13 +337,4 @@ $this->assertEquals($expected, $result);
 - [Single Responsibility Principle](https://en.wikipedia.org/wiki/Single-responsibility_principle)
 
 ---
-
-title: "QUEUEABLE ACTION RULE"
-type: note
-tags: [documentation]
-created: 2026-09-26
-updated: 2026-09-26
-qmd: "QUEUEABLE ACTION RULE"
-issues: []
-discussions: []
 **Remember**: When in doubt, create a QueueableAction. Never create a Service.

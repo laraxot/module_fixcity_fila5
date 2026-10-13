@@ -7,6 +7,7 @@ updated: 2026-09-26
 qmd: "wizard step index and map integration rule"
 issues: []
 discussions: []
+status: draft
 ---
 
 # Wizard Step Index e Integrazione Mappa

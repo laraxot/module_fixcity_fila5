@@ -7,6 +7,7 @@ updated: 2026-09-26
 qmd: "BLOCKS FOLDER NAMING"
 issues: []
 discussions: []
+status: draft
 ---
 
 # Naming Convention Cartelle Blocks

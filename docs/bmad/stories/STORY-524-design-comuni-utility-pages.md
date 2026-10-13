@@ -24,6 +24,10 @@ references:
   service_flows: "https://italia.github.io/design-comuni-pagine-statiche/servizi/index.html"
 related:
   - ./STORY-517-design-comuni-coverage.md
+type: note
+updated: 2026-10-08
+tags: [docs, fixcity, bmad]
+qmd: "story-524   utility pubbliche fixcity"
 ---
 
 # STORY-524 — Utility pubbliche

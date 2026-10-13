@@ -7,6 +7,7 @@ updated: 2026-09-26
 qmd: "CENTRAL REDUNDANCY REPORT 2026 05 25"
 issues: []
 discussions: []
+status: draft
 ---
 
 Central Redundancy Report — 2026-05-25

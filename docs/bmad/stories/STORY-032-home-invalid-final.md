@@ -3,6 +3,7 @@ title: /it Homepage Improvement — BMAD Complete
 status: done
 priority: must
 date: 2026-09-27
+---
 
 ## BMAD + Second Brain Process Completed
 

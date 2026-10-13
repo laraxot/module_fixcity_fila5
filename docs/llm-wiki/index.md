@@ -48,16 +48,16 @@ discussions: []
 | [Livewire Cache Table Rule](./wiki/concepts/livewire-cache-table-rate-limiter.md) | Gestione backend cache per Rate Limiter e Checksum. |
 | [Segnalazione Runtime Asset Integrity](./wiki/concepts/segnalazione-runtime-asset-integrity.md) | Catena fix su 404 asset + bootstrap Livewire/Alpine coerente. |
 | **[Select Enum Best Practices](./filament-select-enum-best-practices.md)** | Come usare correttamente Select con enum in Filament: evita codice complesso! |
-| [AddressInput (Geo)](../../Geo/docs/address-input-component.md) | Componente Filament per input indirizzi con mappa. |
+| [AddressInput (Geo)](../../../Geo/docs/address-input-component.md) | Componente Filament per input indirizzi con mappa. |
 
 ---
 
 ## 📚 Altri Riferimenti
 
-- [Traduzioni IT](../lang/it/create_ticket_wizard.php) / [Traduzioni EN](../lang/en/create_ticket_wizard.php)
+- [Traduzioni IT](../../lang/it/create_ticket_wizard.php) / [Traduzioni EN](../../lang/en/create_ticket_wizard.php)
 - [Storie di Sviluppo](./stories/index.md)
 - [PHPStan Fixes](./phpstan/index.md)
-- [Sixteen Theme Documentation](../../Themes/Sixteen/docs/00-index.md)
+- [Sixteen Theme Documentation](../../../../Themes/Sixteen/docs/00-INDEX.md)
 
 ---
 
@@ -65,5 +65,5 @@ discussions: []
 
 - [XotBaseWizardWidget Philosophy](../../Xot/docs/filament/widgets/xot-base-wizard-widget-philosophy.md)
 - [Infolists for Summary](../../Xot/docs/filament/widgets/infolists-for-summary.md)
-- [Schemas Unified Religion](../../../../docs/schemas-unified-religion.md)
+- [Schemas Unified Religion](../../../../../docs/schemas-unified-religion.md)
 - [AutoLabel Guidelines](../../UI/docs/autolabel-guidelines.md)

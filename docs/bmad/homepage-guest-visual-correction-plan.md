@@ -15,8 +15,8 @@ related:
   - ./homepage-guest-expected-visual.md
   - ./homepage-guest-visual-comparison.md
   - ./stories/STORY-513-public-guest-visual-demo.md
-  - ../../../Themes/Sixteen/docs/bmad/homepage-guest-visual-contract.md
-  - ../../../Themes/Sixteen/docs/wiki/concepts/homepage-guest-visual-fix.md
+  - ../../../../Themes/Sixteen/docs/bmad/homepage-guest-visual-contract.md
+  - ../../../../Themes/Sixteen/docs/wiki/concepts/homepage-guest-visual-fix.md
 ---
 
 # Homepage guest — piano correttivo

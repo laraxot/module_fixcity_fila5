@@ -11,6 +11,7 @@ updated: 2026-04-22
 related:
   - theme-css-build-workflow.md
   - design-comuni-compliance.md
+status: draft
 ---
 
 # Global CSS Rule - Avoid Page-Specific Selectors

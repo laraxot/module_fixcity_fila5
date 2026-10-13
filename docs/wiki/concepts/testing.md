@@ -13,6 +13,7 @@ related:
   - ./phpstan-pest-testcase-helpers.md
   - ../overviews/completion-roadmap.md
   - ../../../Xot/docs/wiki/rules/module-testcase-xotbase-hierarchy.md
+status: draft
 ---
 
 # Testing in Fixcity

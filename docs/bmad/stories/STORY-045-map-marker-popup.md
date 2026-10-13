@@ -2,6 +2,11 @@
 title: STORY-045 — Map Marker Popup UI/UX Enhancement
 github_issue: https://github.com/laraxot/fixcity_fila5/issues/45
 discussion: https://github.com/laraxot/fixcity_fila5/discussions/45
+type: note
+status: draft
+updated: 2026-10-08
+tags: [docs, fixcity, bmad]
+qmd: "story 045 map marker popup fixcity"
 ---
 
 ## Goal

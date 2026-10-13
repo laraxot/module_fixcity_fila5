@@ -258,7 +258,8 @@
                 }
               ]
             }
-          }
+          },
+          "header_active": "management"
         }
       }
     ]

@@ -227,6 +227,8 @@ After implementation, update:
 ## Related Documentation
 
 - [XotBaseWizardWidget Architecture](xotbase-wizard-architecture.md)
-- [TicketForm Pattern Reference](../Fixcity/docs/wiki/concepts/ticketform-pattern-reference.md)
+- [TicketForm Pattern Reference](ticketform-pattern-reference.md)
 - [Theme Dress Pattern](../../Themes/Sixteen/docs/wiki/concepts/theme-dress-pattern.md)
 - [Safe Functions Importance](../../Xot/docs/wiki/concepts/safe-functions-mandatory.md)
+
+Correzione verificata 2026-10-13 (DCP-35 S4): `tests.segnalazione-crea.json` è stato eliminato (commit 260f3bcc5, `git log --diff-filter=D`) e oggi non esiste in nessun tenant; la risposta di `/it/tests/segnalazione-crea` (200) non contiene il wizard (0 occorrenze di `fi-sc-wizard` e `$wire.save()`). Il flusso vive su `/it/tickets/create` (`tickets.create.json`, blocco `components/blocks/tests/ticket-crea.blade.php`). Questo documento descrive lo stato precedente; stato attuale in `Modules/Fixcity/docs/wiki/concepts/ticket-crea-url-routing-chain.md`.

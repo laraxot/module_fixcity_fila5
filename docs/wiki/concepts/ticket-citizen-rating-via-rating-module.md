@@ -9,6 +9,7 @@ created: 2026-05-29
 tags: [rating, ticket, fixcity, architecture]
 related:
   - ../../../../../../docs/wiki/concepts/module-boundaries-rating.md
+status: draft
 ---
 
 # Valutazione cittadino — solo modulo Rating

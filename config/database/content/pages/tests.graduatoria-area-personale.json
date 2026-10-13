@@ -6,7 +6,7 @@
         "it": "Giulia Bianchi",
         "en": "Giulia Bianchi"
     },
-    "layout": "test",
+    "layout": "design-comuni-authenticated",
     "sidebar_blocks": {
         "it": [],
         "en": []
@@ -179,7 +179,7 @@
                             "col_class": "col-12 col-lg-8 offset-lg-1 px-0 px-sm-3",
                             "sections": [
                                 {
-                                    "type": "graduatoria-filtered-accordion",
+                                    "type": "filtered-accordion",
                                     "accordion_id": "accordion-1",
                                     "id": "practices",
                                     "class": "mb-40 mb-lg-60",
@@ -398,7 +398,7 @@
                                     ]
                                 },
                                 {
-                                    "type": "graduatoria-filtered-accordion",
+                                    "type": "filtered-accordion",
                                     "accordion_id": "accordion-2",
                                     "id": "payments",
                                     "class": "mb-50 mb-lg-90",

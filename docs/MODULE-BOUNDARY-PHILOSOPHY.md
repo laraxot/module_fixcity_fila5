@@ -7,6 +7,7 @@ updated: 2026-09-26
 qmd: "MODULE BOUNDARY PHILOSOPHY"
 issues: []
 discussions: []
+status: draft
 ---
 
 # Module Boundary Philosophy — AddressInput belongs to Geo

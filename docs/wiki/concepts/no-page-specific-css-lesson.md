@@ -7,6 +7,7 @@ updated: 2026-09-26
 qmd: "no page specific css lesson"
 issues: []
 discussions: []
+status: draft
 ---
 
 # No Page-Specific CSS - Lesson Learned

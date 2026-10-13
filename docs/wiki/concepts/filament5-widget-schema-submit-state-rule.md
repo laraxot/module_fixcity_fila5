@@ -7,6 +7,7 @@ updated: 2026-09-26
 qmd: "filament5 widget schema submit state rule"
 issues: []
 discussions: []
+status: draft
 ---
 
 # Filament 5 Widget Schema Submit State Rule

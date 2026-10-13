@@ -4,6 +4,7 @@ id: STORY-021
 author: BMAD
 status: done
 priority: must
+---
 
 ## Implementazione
 

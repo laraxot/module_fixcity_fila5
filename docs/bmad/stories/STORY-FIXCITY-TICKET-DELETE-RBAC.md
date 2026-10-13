@@ -12,6 +12,7 @@ discussions:
 related:
   - STORY-009-pa-operator-flow.md
   - STORY-010-admin-config-flow.md
+qmd: "story   eliminazione ticket secondo il ruolo fixcity"
 ---
 
 # STORY — Eliminazione ticket secondo il ruolo

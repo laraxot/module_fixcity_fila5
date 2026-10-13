@@ -2,6 +2,10 @@
 type: investigation
 title: "Investigation Rich Questionnaire & Analytics"
 links: {github_issue: #XXX}
+status: draft
+updated: 2026-10-08
+tags: [docs, fixcity, investigation]
+qmd: "investigation: rich questionnaire & analytics fixcity"
 ---
 # Investigation: Rich Questionnaire & Analytics
 

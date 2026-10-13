@@ -7,6 +7,7 @@ updated: 2026-09-26
 qmd: "SET BODY TAG SIMPLE"
 issues: []
 discussions: []
+status: draft
 ---
 
 Motivazione

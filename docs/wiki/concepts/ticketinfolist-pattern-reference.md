@@ -7,6 +7,7 @@ updated: 2026-09-26
 qmd: "ticketinfolist pattern reference"
 issues: []
 discussions: []
+status: draft
 ---
 
 # TicketInfolist Pattern Reference

@@ -7,6 +7,7 @@ updated: 2026-09-26
 qmd: "wizard system"
 issues: []
 discussions: []
+status: draft
 ---
 
 > **Esempio legacy non conforme — non copiare.** Il routing applicativo segue Folio e Actions; non introdurre `TestController` o route Controller. Per il contratto corrente consultare `wiki/concepts/no-controllers-folio-volt-filament.md`.
@@ -304,14 +305,7 @@ public function test_form_submission()
 4. **Accessibility**: Enhanced accessibility features
 
 ---
-
-title: "wizard system"
-type: note
-tags: [documentation]
-created: 2026-09-26
-updated: 2026-09-26
-qmd: "wizard system"
-issues: []
-discussions: []
 *Last Updated: May 2026*  
 *Version: 1.0.0*
+
+Correzione verificata 2026-10-13 (DCP-35 S4): lo snippet `CreateTicketWizardWidget` di questo documento non corrisponde al codice. La classe reale estende `Modules\Xot\Filament\Widgets\XotBaseWizardWidget` (non `FilamentWidget`), non ha `$currentStep` (0 occorrenze in `CreateTicketWizardWidget.php`) e non dichiara `protected string $view`: la vista è risolta da `XotBaseWidget` con `GetViewByClassAction` in `pub_theme::filament.widgets.create-ticket-wizard` (`Themes/Sixteen/resources/views/filament/widgets/create-ticket-wizard.blade.php`), fallback `fixcity::filament.widgets.create-ticket-wizard`. Gli step reali sono `privacy`, `data`, `summary` (`TicketForm::getSteps()`).

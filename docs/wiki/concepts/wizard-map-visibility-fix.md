@@ -7,6 +7,7 @@ updated: 2026-09-26
 qmd: "wizard map visibility fix"
 issues: []
 discussions: []
+status: draft
 ---
 
 # Wizard Map Visibility Fix

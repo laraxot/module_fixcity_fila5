@@ -8,6 +8,7 @@ title: Merge Conflict Task List
 type: taskboard
 updated: 2026-04-21
 rule: merge-conflict-marker-resolution
+status: draft
 ---
 
 # Merge Conflict Task List

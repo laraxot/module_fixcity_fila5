@@ -13,6 +13,7 @@ discussions:
 related:
   - design-comuni-service-workflow-audit-2026-09-27.md
   - ../../../Themes/Sixteen/docs/bmad/design-comuni-workflow-correction-plan-2026-09-27.md
+qmd: "expected citizen journey fixcity"
 ---
 
 # Expected citizen journey

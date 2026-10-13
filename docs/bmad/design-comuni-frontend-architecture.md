@@ -4,6 +4,8 @@ type: architecture
 created: 2026-10-11
 updated: 2026-10-11
 qmd: "design-comuni-frontend-architecture"
+status: draft
+tags: [docs, fixcity, bmad]
 ---
 
 # DesignComuni Frontend Architecture

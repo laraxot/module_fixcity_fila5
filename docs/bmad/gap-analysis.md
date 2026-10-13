@@ -7,6 +7,7 @@ updated: 2026-09-27
 qmd: "gap analysis"
 issues: []
 discussions: []
+status: draft
 ---
 
 # FixCity — Gap analysis BMAD

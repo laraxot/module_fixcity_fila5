@@ -7,6 +7,7 @@ updated: 2026-09-26
 qmd: "fixcity ticket vs ticket lang"
 issues: []
 discussions: []
+status: draft
 ---
 
 # Fixcity — `ticket` vs `segnalazione`: quale lingua per lo schema Filament

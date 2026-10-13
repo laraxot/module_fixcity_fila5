@@ -4,6 +4,10 @@ title: "Public marker popup exposes visible report details"
 status: done
 module: Fixcity
 created: 2026-09-27
+type: note
+updated: 2026-10-08
+tags: [docs, fixcity, bmad]
+qmd: "story fixcity"
 ---
 
 # Story

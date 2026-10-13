@@ -26,4 +26,4 @@ find laravel/Modules -type d \( -path '*/lang/lang' -o -name '_docs' \) | sort
 
 Il comando deve produrre output vuoto.
 
-Regola canonica: [docs/wiki/concepts/no-lang-lang-and-no-underscore-docs-rule.md](../../../docs/wiki/concepts/no-lang-lang-and-no-underscore-docs-rule.md).
+Regola canonica: [docs/wiki/concepts/no-lang-lang-and-no-underscore-docs-rule.md](../../../../docs/wiki/concepts/no-lang-lang-and-no-underscore-docs-rule.md).

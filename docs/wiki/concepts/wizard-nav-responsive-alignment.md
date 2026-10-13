@@ -10,6 +10,7 @@ discussions: []
 module: theme
 topic: wizard-nav-responsive-alignment
 canonical: ../../../../../Themes/docs/shared-components/wizard-nav-responsive-alignment.md
+status: stub
 ---
 
 See canonical documentation: ../../../../../Themes/docs/shared-components/wizard-nav-responsive-alignment.md

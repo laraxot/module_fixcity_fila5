@@ -11,6 +11,7 @@ related:
   - XOTBASEMIGRATION_TIMESTAMPS_RULE.md
   - ../wiki/rules/module-congruence-rule.md
   - ../wiki/patterns/daa-efficient-data-structures.md
+status: draft
 ---
 
 # Timestamps Consolidation

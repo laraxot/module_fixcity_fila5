@@ -13,10 +13,10 @@ discussions:
   - "https://github.com/laraxot/base_fixcity_fila5/discussions/265"
 related:
   - ../../../docs/architecture-ai-assisted-coding-2026-06-05.md
-  - ../../../docs/chat/register-flow-religions-r1-r6.md
-  - ../../../docs/wiki/memories/migration-one-per-model.md
-  - ../../../docs/wiki/memories/one-migration-per-model-bump-timestamp.md
-  - ../../../docs/wiki/rules/migration-update-timestamps-only.md
+  - ../../../../docs/chat/register-flow-religions-r1-r6.md
+  - ../../../../docs/wiki/memories/migration-one-per-model.md
+  - ../../../../docs/wiki/memories/one-migration-per-model-bump-timestamp.md
+  - ../../../../docs/wiki/rules/migration-update-timestamps-only.md
   - ../../Xot/docs/xotbase-schemawidget-pattern.md
 ---
 

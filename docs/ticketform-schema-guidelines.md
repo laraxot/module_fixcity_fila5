@@ -155,4 +155,4 @@ Key structure: `fixcity::segnalazione.gdpr_notice.*`
 ## Related Documentation
 - [Filament Forms Documentation](https://filamentphp.com/docs/forms)
 - [Wizard Architecture](wizard-architecture.md)
-- [Translation Guidelines](../lang/README.md)
+- [Translation Guidelines](../../Lang/README.md)

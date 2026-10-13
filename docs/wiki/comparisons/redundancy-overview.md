@@ -36,7 +36,7 @@ A deep scan of the codebase has revealed significant redundancies in both code a
 ## Documentation Index for this Task
 
 Detailed reports created/updated during this analysis:
-- [`Geo Module: Documentation Sprawl Analysis`](../../Geo/docs/wiki/comparisons/documentation-sprawl.md)
+- [`Geo Module: Documentation Sprawl Analysis`](../../../../Geo/docs/wiki/comparisons/documentation-sprawl.md)
 - [`Cross-Module: Analysis Files and Abandoned Refactoring`](./abandoned-refactoring-builders.md)
 - [`Themes: Ridondanze documentazione temi (hub)`](../../../../Themes/docs/ridondanze-documentazione-temi.md) (previously existing)
 - [`Modules: Redundancy Report — Laraxot Modules`](../../redundancy-report.md) (previously existing)

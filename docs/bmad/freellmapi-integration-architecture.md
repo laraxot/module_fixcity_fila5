@@ -44,6 +44,6 @@ browser cittadino ---------------------> Laravel/Fixcity + Sixteen
 
 ## Riferimenti
 
-- [tooling locale](../../../../bashscripts/docs/bmad/freellmapi-local-tooling.md)
+- [tooling locale](../../../../../bashscripts/docs/bmad/freellmapi-local-tooling.md)
 - [frontend DesignComuni](./design-comuni-frontend-architecture.md)
-- [BMAD master plan](../../../../bmad-output/front-office-design-comuni/README.md)
+- [BMAD master plan](../../../../../bmad-output/front-office-design-comuni/README.md)

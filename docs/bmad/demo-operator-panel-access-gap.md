@@ -13,6 +13,7 @@ discussions:
 related:
   - demo-operator-panel-access-expected-2026-09-27.md
   - ../wiki/concepts/demo-operator-panel-access.md
+qmd: "observed behavior fixcity"
 ---
 
 # Observed behavior

@@ -12,7 +12,7 @@ related:
   - ../../../../../../docs/wiki/rules/filament-first-rule.md
   - ./frontoffice-no-standalone-livewire.md
   - ./ticket-list-map-architecture.md
-  - ../../../../Themes/Sixteen/docs/wiki/concepts/filament-first-frontoffice.md
+  - ../../../../../Themes/Sixteen/docs/wiki/concepts/filament-first-frontoffice.md
 ---
 
 # Fixcity — boundary UI Filament-first

@@ -4,6 +4,8 @@ type: workflow
 status: in_progress
 priority: Must
 tags: [italian-site, ui, testing, playwright, bmad, second-brain]
+updated: 2026-10-11
+qmd: "stato sito italiano   correzione completa bmad fixcity"
 ---
 
 # STATO SITO ITALIANO — Correzione Completa BMAD

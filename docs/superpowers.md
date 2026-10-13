@@ -7,6 +7,7 @@ updated: 2026-09-26
 qmd: "superpowers"
 issues: []
 discussions: []
+status: draft
 ---
 
 # 🦸 Superpowers for Laravel Modules
@@ -16,15 +17,6 @@ discussions: []
 > **Version**: v5.0.6
 
 ---
-
-title: "superpowers"
-type: note
-tags: [documentation]
-created: 2026-09-26
-updated: 2026-09-26
-qmd: "superpowers"
-issues: []
-discussions: []
 ## 📋 Overview
 
 This guide explains how to use Superpowers skills specifically for Laravel module development in the FixCity platform.

@@ -38,5 +38,5 @@ Quando aggiungi o modifichi colonne:
 ## Collegamenti
 
 - [profiles-uuid-contract](./profiles-uuid-contract.md)
-- [architecture-one-migration-per-model](../../../../../docs/wiki/bmad/architecture-one-migration-per-model.md)
-- [profiles-ownership-boundary-rule](../../../User/docs/wiki/concepts/profiles-ownership-boundary-rule.md)
+- [architecture-one-migration-per-model](../../../../../../docs/wiki/bmad/architecture-one-migration-per-model.md)
+- [profiles-ownership-boundary-rule](../../../../User/docs/wiki/concepts/profiles-ownership-boundary-rule.md)

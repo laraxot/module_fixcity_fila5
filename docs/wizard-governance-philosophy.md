@@ -83,5 +83,5 @@ Per evitare file doppi:
 - [Filament wizard rules](./rules/filament-wizard-rules.md)
 - [Governance story](./stories/wizard-governance-langserviceprovider-and-xotbase-refactor.md)
 - [Infolist summary story](./stories/wizard-summary-infolist-alignment.md)
-- [Theme bridge](../../Themes/Sixteen/docs/design-comuni/wizard-governance-bridge.md)
-- [Xot base wizard](../../Xot/docs/filament/widgets/xot-base-wizard-widget.md)
+- [Theme bridge](../../../Themes/Sixteen/docs/design-comuni/wizard-governance-bridge.md)
+- [Xot base wizard](../../Xot/docs/wiki/concepts/filament-wizard-architecture-right-way.md)

@@ -6,6 +6,7 @@ namespace Modules\Fixcity\Actions;
 
 use Illuminate\Database\Eloquent\Builder;
 use Modules\Fixcity\Models\Ticket;
+use Modules\Xot\Contracts\UserContract;
 use Spatie\QueueableAction\QueueableAction;
 
 /**
@@ -16,14 +17,22 @@ final class BuildAuthenticatedUserTicketsQueryAction
     use QueueableAction;
 
     /**
+     * Senza utente esplicito vale quello autenticato; senza nessuno dei due la query e' VUOTA
+     * (`where owner_id = null` diventerebbe `IS NULL` e mostrerebbe i ticket senza proprietario).
+     *
      * @return Builder<Ticket>
      */
-    public function execute(): Builder
+    public function execute(?UserContract $user = null): Builder
     {
-        $currentUserId = auth()->id();
+        $ownerId = $user?->getAuthIdentifier() ?? auth()->id();
+
+        if ($ownerId === null) {
+            return Ticket::query()->whereKey([]);
+        }
 
         return Ticket::query()
-            ->where('owner_id', $currentUserId)
-            ->orderByDesc('created_at');
+            ->where('owner_id', $ownerId)
+            ->orderByDesc('created_at')
+            ->orderByDesc('id');
     }
 }

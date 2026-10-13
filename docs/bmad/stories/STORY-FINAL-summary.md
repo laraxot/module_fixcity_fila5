@@ -4,6 +4,7 @@ id: STORY-FINAL
 author: BMAD
 status: done
 priority: must
+---
 
 ## Overview
 This document summarizes the completion of the Fixcity civic reporting platform using BMAD methodology and Second Brain approach.

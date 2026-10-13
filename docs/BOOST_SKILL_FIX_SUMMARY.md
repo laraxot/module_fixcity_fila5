@@ -7,6 +7,7 @@ updated: 2026-09-26
 qmd: "BOOST SKILL FIX SUMMARY"
 issues: []
 discussions: []
+status: draft
 ---
 
 # Boost Skill Fix Summary - Fixcity Module

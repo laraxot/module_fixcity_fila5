@@ -7,6 +7,7 @@ updated: 2026-09-26
 qmd: "module artifact parity audit"
 issues: []
 discussions: []
+status: draft
 ---
 
 # Module artifact parity (Fixcity)

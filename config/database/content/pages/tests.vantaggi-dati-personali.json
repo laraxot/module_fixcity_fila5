@@ -18,7 +18,7 @@
             {
                 "type": "service-flow",
                 "data": {
-                    "view": "pub_theme::components.blocks.service-flow.vantaggi-design-comuni",
+                    "view": "pub_theme::components.blocks.service-flow.design-comuni",
                     "kind": "wizard-step",
                     "breadcrumb": {
                         "items": [
@@ -151,7 +151,7 @@
                             "subtitle": "Informazione su di te",
                             "subtitle_class": "subtitle-small mb-0",
                             "content": {
-                                "kind": "vantaggi-cards",
+                                "kind": "info-cards",
                                 "cards": [
                                     {
                                         "title": "Julie Crampton Smith",
@@ -303,7 +303,7 @@
                             "subtitle": "Informazioni sul minore per cui chiedi l’assegno di maternità",
                             "subtitle_class": "subtitle-small mb-0",
                             "content": {
-                                "kind": "vantaggi-cards",
+                                "kind": "info-cards",
                                 "cards": [],
                                 "empty": {
                                     "id": "minor-warning",
@@ -329,7 +329,7 @@
                             "subtitle": "Informazioni sul valore dell’ISEE del tuo nucleo familiare basato sulla tua ultima dichiarazione",
                             "subtitle_class": "subtitle-small mb-0",
                             "content": {
-                                "kind": "vantaggi-cards",
+                                "kind": "info-cards",
                                 "cards": [
                                     {
                                         "title": "ISEE: 18.000,00€",
@@ -399,7 +399,7 @@
                             "subtitle": "Seleziona o aggiungi il conto su cui vuoi ricevere l'assegno",
                             "subtitle_class": "subtitle-small mb-0",
                             "content": {
-                                "kind": "vantaggi-cards",
+                                "kind": "info-cards",
                                 "radio_name": "bank-accounts",
                                 "cards": [
                                     {
@@ -758,7 +758,8 @@
                                 "message": "Salvataggio effettuato"
                             }
                         }
-                    ]
+                    ],
+                    "header_active": "all-services"
                 }
             }
         ],

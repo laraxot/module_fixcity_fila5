@@ -2,6 +2,7 @@
 title: BMAD Complete - Map Marker Fix
 date: 2026-09-26
 status: done
+---
 
 ## BMAD Workflow Completed (As Required)
 1. ✅ Created BMAD docs describing expected behavior (STORY-023)

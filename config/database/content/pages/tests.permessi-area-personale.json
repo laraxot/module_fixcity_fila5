@@ -6,7 +6,7 @@
         "it": "Mario Rossi",
         "en": "Mario Rossi"
     },
-    "layout": "test",
+    "layout": "design-comuni-authenticated",
     "sidebar_blocks": {
         "it": [],
         "en": []
@@ -18,7 +18,7 @@
             {
                 "type": "service-flow",
                 "data": {
-                    "view": "pub_theme::components.blocks.service-flow.permessi-design-comuni",
+                    "view": "pub_theme::components.blocks.service-flow.design-comuni",
                     "kind": "personal-area",
                     "breadcrumb": {
                         "items": [

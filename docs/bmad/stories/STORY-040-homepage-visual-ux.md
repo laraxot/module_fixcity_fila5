@@ -4,6 +4,10 @@ status: in-progress
 module: Fixcity
 github_issue: https://github.com/laraxot/fixcity_fila5/issues/40
 discussion: https://github.com/laraxot/fixcity_fila5/discussions/40
+type: note
+updated: 2026-10-08
+tags: [docs, fixcity, bmad]
+qmd: "story 040 homepage visual ux fixcity"
 ---
 
 ## Problem

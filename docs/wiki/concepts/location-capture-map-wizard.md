@@ -7,6 +7,7 @@ updated: 2026-09-26
 qmd: "location capture map wizard"
 issues: []
 discussions: []
+status: draft
 ---
 
 # Ticket location capture map workflow

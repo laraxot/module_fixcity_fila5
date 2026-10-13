@@ -16,6 +16,7 @@ qmd:
   - Fixcity profiles table
 issues: []
 discussions: []
+status: draft
 ---
 
 # Main module e ownership `profiles`

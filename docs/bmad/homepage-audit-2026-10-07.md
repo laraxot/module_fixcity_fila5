@@ -17,7 +17,7 @@ related:
   - ./homepage-guest-routing-comparison.md
   - ./stories/homepage-audit-followup-2026-10-07.story.md
   - ../wiki/concepts/homepage-audit-2026-10-07.md
-  - ../../../Themes/Sixteen/docs/bmad/homepage-guest-visual-contract.md
+  - ../../../../Themes/Sixteen/docs/bmad/homepage-guest-visual-contract.md
 ---
 
 # Homepage audit — 2026-10-07

@@ -15,9 +15,9 @@ discussions:
 related:
   - ../README.md
   - ../gap-analysis.md
-  - ../../../../database/seeders/DemoUsersSeeder.php
-  - ../../../../database/seeders/TicketDatabaseSeeder.php
-  - ../../../../tests/Feature/Database/FixcityDatabaseSeederTest.php
+  - ../../../database/seeders/DemoUsersSeeder.php
+  - ../../../database/seeders/TicketDatabaseSeeder.php
+  - ../../../tests/Feature/Database/FixcityDatabaseSeederTest.php
 ---
 
 # Ticket demo — ownership coerente con l’attore cittadino

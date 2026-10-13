@@ -9,6 +9,7 @@ discussions: []
 name: map-fullscreen-issues
 description: Problemi di visualizzazione della mappa in fullscreen nel wizard Segnalazione
 type: concept
+status: draft
 ---
 
 # Problemi di Mappa in Fullscreen – Wizard Segnalazione

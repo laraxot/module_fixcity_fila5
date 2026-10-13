@@ -7,6 +7,7 @@ updated: 2026-09-26
 qmd: "create record guidelines"
 issues: []
 discussions: []
+status: draft
 ---
 
 # XotBase `CreateRecord` – Guideline & Architecture Overview
@@ -69,14 +70,6 @@ protected function mutateFormDataBeforeCreate(array $data): array
 La Page adatta il lifecycle XotBase, l’Action possiede la trasformazione e il Resource configura schema e route. Il frontoffice non dipende dal Resource Filament.
 
 ---
-title: "create record guidelines"
-type: note
-tags: [documentation]
-created: 2026-09-26
-updated: 2026-09-26
-qmd: "create record guidelines"
-issues: []
-discussions: []
 **Where this lives**
 - Core class: `Modules/Xot/app/Filament/Resources/Pages/XotBaseCreateRecord.php`
 - Extension example: `Modules/Fixcity/app/Filament/Widgets/CreateTicketWizardWidget.php`

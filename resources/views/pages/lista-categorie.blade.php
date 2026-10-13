@@ -10,5 +10,5 @@ name('services.categories');
 
 {{-- Canonical public category directory owned by the active Sixteen theme. --}}
 <x-layouts.app :title="__('pub_theme::services.categories.title')">
-    @include('pub_theme::pages.services.categories-content')
+    @include('pub_theme::components.pages.categories')
 </x-layouts.app>

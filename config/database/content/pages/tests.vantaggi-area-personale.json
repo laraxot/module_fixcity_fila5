@@ -6,7 +6,7 @@
         "it": "Julie Crampton Smith",
         "en": "Julie Crampton Smith"
     },
-    "layout": "test",
+    "layout": "design-comuni-authenticated",
     "sidebar_blocks": {
         "it": [],
         "en": []
@@ -18,7 +18,7 @@
             {
                 "type": "service-flow",
                 "data": {
-                    "view": "pub_theme::components.blocks.service-flow.vantaggi-design-comuni",
+                    "view": "pub_theme::components.blocks.service-flow.design-comuni",
                     "kind": "personal-area",
                     "breadcrumb": {
                         "items": [
@@ -134,7 +134,7 @@
                                     "title": "Ultime attività",
                                     "title_class": "title-xxlarge mb-3",
                                     "content": {
-                                        "kind": "vantaggi-activities",
+                                        "kind": "activities",
                                         "icon": "it-files",
                                         "more": "Vedi altre attività",
                                         "items": [
@@ -150,7 +150,8 @@
                                                 "date": "12/11/2021",
                                                 "title": "Pagamento permesso ZTL"
                                             }
-                                        ]
+                                        ],
+                                        "title_class": "t-primary mb-2 underline title-small-semi-bold"
                                     }
                                 }
                             ]

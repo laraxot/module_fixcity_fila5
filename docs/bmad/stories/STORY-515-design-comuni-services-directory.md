@@ -7,6 +7,9 @@ created: 2026-09-27
 updated: 2026-09-27
 issue: "https://github.com/laraxot/base_fixcity_fila5/issues/383"
 discussion: "https://github.com/laraxot/base_fixcity_fila5/discussions/392"
+type: note
+tags: [docs, fixcity, bmad]
+qmd: "context fixcity"
 ---
 
 # Context

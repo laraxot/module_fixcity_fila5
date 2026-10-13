@@ -8,6 +8,46 @@ return [
         'images_choice' => '{1} Una immagine allegata|[2,*] :count immagini allegate',
     ],
     'fields' => [
+        'location' => [
+            'label' => 'Luogo',
+            'invalid' => 'Indica un punto valido sulla mappa: latitudine tra -90 e 90, longitudine tra -180 e 180.',
+            'placeholder' => 'Cerca un luogo',
+            'helper_text' => 'Indica il luogo del disservizio',
+            'address' => [
+                'label' => 'Indirizzo del disservizio',
+                'placeholder' => 'Cerca un indirizzo',
+                'helper_text' => 'Cerca l’indirizzo o seleziona il punto sulla mappa',
+                'description' => 'Indirizzo del disservizio',
+            ],
+            'description' => 'location',
+        ],
+        'type' => [
+            'label' => 'Tipo di disservizio',
+            'placeholder' => 'Seleziona il tipo di disservizio',
+            'helper_text' => 'Seleziona la categoria del disservizio',
+            'description' => 'Categoria del disservizio',
+        ],
+        'content' => [
+            'label' => 'Dettagli',
+            'placeholder' => 'Descrivi il problema',
+            'helper_text' => 'Inserire al massimo 200 caratteri',
+            'description' => 'Descrivi il disservizio in modo chiaro',
+        ],
+        'images' => [
+            'label' => 'Immagini',
+            'helper_text' => 'Seleziona una o più immagini da allegare alla segnalazione',
+            'placeholder' => 'Aggiungi immagini (facoltativo)',
+            'description' => 'Immagini a supporto della segnalazione',
+        ],
+        'author' => [
+            'show_more' => 'Mostra tutto',
+        ],
+        'author_fiscal_code' => [
+            'label' => 'Codice fiscale',
+            'description' => 'Codice fiscale dell’autore',
+            'helper_text' => 'Dato associato al tuo profilo',
+            'placeholder' => 'Codice fiscale',
+        ],
         'name' => [
             'label' => 'Nome',
             'placeholder' => 'Inserisci il nome',
@@ -81,41 +121,11 @@ return [
             'helper_text' => 'author_phone',
             'placeholder' => 'author_phone',
         ],
-        'author_fiscal_code' => [
-            'label' => 'author_fiscal_code',
-            'description' => 'author_fiscal_code',
-            'helper_text' => 'author_fiscal_code',
-            'placeholder' => 'author_fiscal_code',
-        ],
         'author_name' => [
             'label' => 'author_name',
             'description' => 'author_name',
             'helper_text' => 'author_name',
             'placeholder' => 'author_name',
-        ],
-        'location' => [
-            'label' => 'location',
-            'placeholder' => 'location',
-            'helper_text' => 'location',
-            'description' => 'location',
-            'address' => [
-                'label' => 'location.address',
-                'description' => 'location.address',
-                'helper_text' => 'location.address',
-                'placeholder' => 'location.address',
-            ],
-        ],
-        'content' => [
-            'label' => 'content',
-            'placeholder' => 'content',
-            'helper_text' => '',
-            'description' => 'content',
-        ],
-        'images' => [
-            'label' => 'images',
-            'placeholder' => 'images',
-            'helper_text' => 'images',
-            'description' => 'images',
         ],
         'author_email' => [
             'label' => 'author_email',
@@ -135,7 +145,7 @@ return [
             'helper_text' => '',
             'description' => 'slug',
         ],
-        'type' => [
+        'type_legacy' => [
             'label' => 'type',
             'placeholder' => 'type',
             'helper_text' => '',
@@ -174,20 +184,24 @@ return [
             'label' => 'Disservizio',
             'heading' => 'Disservizio',
         ],
-        'fixcity::segnalazione' => [
-            'summary' => [
-                'title' => [
-                    'label' => 'fixcity::segnalazione.summary.title',
-                    'heading' => 'fixcity::segnalazione.summary.title',
-                ],
-            ],
-        ],
         'empty' => [
             'heading' => '',
             'label' => '',
         ],
         'Contatti' => [
             'heading' => 'Contatti',
+        ],
+        'location' => [
+            'heading' => 'Luogo',
+            'description' => 'Indica il luogo del disservizio',
+        ],
+        'issue' => [
+            'heading' => 'Disservizio',
+            'description' => 'Descrivi il problema segnalato',
+        ],
+        'author' => [
+            'heading' => 'Autore della segnalazione',
+            'description' => 'Informazioni su di te',
         ],
     ],
     'steps' => [
@@ -234,25 +248,6 @@ return [
         ],
         'Autorizzazioni e condizioni' => [
             'label' => 'Autorizzazioni e condizioni',
-        ],
-        'fixcity::ticket_form' => [
-            'steps' => [
-                'summary' => [
-                    'label' => [
-                        'label' => 'fixcity::ticket_form.steps.summary.label',
-                    ],
-                ],
-                'privacy' => [
-                    'label' => [
-                        'label' => 'fixcity::ticket_form.steps.privacy.label',
-                    ],
-                ],
-                'data' => [
-                    'label' => [
-                        'label' => 'fixcity::ticket_form.steps.data.label',
-                    ],
-                ],
-            ],
         ],
     ],
 ];

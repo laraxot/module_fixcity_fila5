@@ -14,7 +14,7 @@ discussions:
 related:
   - competitor-benchmark.md
   - ../../../../Modules/Mobile/docs/stories/1.8.nativephp-integration.story.md
-  - ../../../../docs/chat/competitor-benchmark-gap-analysis.md
+  - ../../../../../docs/chat/competitor-benchmark-gap-analysis.md
 ---
 
 # FixCity Mobile — contratto NativePHP iOS/Android

@@ -7,6 +7,7 @@ updated: 2026-09-26
 qmd: "sprint"
 issues: []
 discussions: []
+status: draft
 ---
 
 # Sprint Planning Meeting - Fixcity Module

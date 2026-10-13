@@ -7,6 +7,7 @@ updated: 2026-09-26
 qmd: "naming convention ticket vs segnalazioni"
 issues: []
 discussions: []
+status: draft
 ---
 
 # Naming Convention: ticket vs segnalazioni

@@ -13,6 +13,7 @@ related:
   - concepts/admin-ticket-create-map-visual-contract.md
   - concepts/location-capture-map-wizard.md
   - concepts/wizard-summary-infolist-rule.md
+status: draft
 ---
 
 # Fixcity Module Best Practices

@@ -13,7 +13,7 @@ related:
   - ../concepts/phpstan-pest-testcase-helpers.md
   - ../concepts/fixcity-best-practices.md
   - ../../roadmap/README.md
-  - ../../../../Themes/Sixteen/docs/wiki/overviews/completion-roadmap.md
+  - ../../../../../Themes/Sixteen/docs/wiki/overviews/completion-roadmap.md
 ---
 
 # Fixcity — roadmap completamento progetto
@@ -66,7 +66,7 @@ related:
 
 - Pest coverage tutti i moduli (`phpunit.xml` centrale)
 - Themes in scope PHPStan quando `paths` includerà `./Themes/` in neon
-- Playwright/visual — [TwentyOne visual-testing](../../../../Themes/TwentyOne/docs/wiki/concepts/visual-testing-playwright-puppeteer.md); FO owner [Sixteen completion](../../../../Themes/Sixteen/docs/wiki/overviews/completion-roadmap.md)
+- Playwright/visual — [TwentyOne visual-testing](../../../../../Themes/TwentyOne/docs/wiki/concepts/visual-testing-playwright-puppeteer.md); FO owner [Sixteen completion](../../../../../Themes/Sixteen/docs/wiki/overviews/completion-roadmap.md)
 
 ## Moduli satellite (dipendenze Fixcity)
 
@@ -74,10 +74,10 @@ related:
 |--------|-------------------|--------------|
 | Geo | Mappe, coordinate ticket | — |
 | User | Auth FO, `getUserClass()` | — |
-| Cms | `<x-page>` blocchi segnalazioni | [testing](../../../Cms/docs/wiki/concepts/testing.md) |
+| Cms | `<x-page>` blocchi segnalazioni | [testing](../../../../Cms/docs/wiki/concepts/testing.md) |
 | Rating | Rating cittadino ticket | — |
 | Comment | Commenti ticket | — |
-| Notify | Notifiche workflow | [test doubles](../../../Notify/docs/wiki/concepts/phpstan-pest-test-doubles.md) |
+| Notify | Notifiche workflow | [test doubles](../../../../Notify/docs/wiki/concepts/phpstan-pest-test-doubles.md) |
 | UI | Componenti Filament condivisi | [testing](../../../UI/docs/wiki/concepts/testing.md) |
 | Xot | TestCase base, bridge Pest | [phpstan-pest-bridge](../../../Xot/docs/wiki/concepts/phpstan-pest-bridge-discipline.md) |
 

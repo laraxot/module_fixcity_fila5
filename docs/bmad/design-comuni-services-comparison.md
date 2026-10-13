@@ -9,6 +9,9 @@ sources:
   - https://italia.github.io/design-comuni-pagine-statiche/sito/servizi.html
   - https://italia.github.io/design-comuni-pagine-statiche/sito/servizi-categoria.html
   - https://italia.github.io/design-comuni-pagine-statiche/sito/servizio-dettaglio.html
+status: draft
+tags: [docs, fixcity, bmad]
+qmd: "expected experience fixcity"
 ---
 
 # Expected experience

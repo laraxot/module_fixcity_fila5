@@ -7,6 +7,7 @@ updated: 2026-09-26
 qmd: "tests placement policy"
 issues: []
 discussions: []
+status: draft
 ---
 
 # Test Placement Policy — Fixcity Module

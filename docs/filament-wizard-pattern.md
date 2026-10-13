@@ -3,7 +3,7 @@ title: "filament wizard pattern"
 type: note
 tags: [documentation]
 created: 2026-09-26
-updated: 2026-09-26
+updated: 2026-10-13
 qmd: "filament wizard pattern"
 issues: []
 discussions: []
@@ -16,15 +16,6 @@ discussions: []
 Laraxot usa **Filament Schema Wizard** (v5) per tutti i wizard multi-step. Il pattern segue il principio **Single Responsibility**: widget wizard estendono `XotBaseWizardWidget`, non `XotBaseWidget`.
 
 ---
-
-title: "filament wizard pattern"
-type: note
-tags: [documentation]
-created: 2026-09-26
-updated: 2026-09-26
-qmd: "filament wizard pattern"
-issues: []
-discussions: []
 ## 🏛 Filosofia e Governance
 
 Per comprendere il "Perché", la "Religione" e lo "Zen" dietro questa scelta, consulta i documenti canonici:
@@ -49,22 +40,31 @@ Per comprendere il "Perché", la "Religione" e lo "Zen" dietro questa scelta, co
 Il widget principale di questo modulo è:
 **[CreateTicketWizardWidget Documentation](./CreateTicketWizardWidget.md)**
 
-### Esempio Step Riepilogo (Zen)
+### Esempio Step Riepilogo (estratto reale, verificato 2026-10-13)
+
+Il vecchio esempio con `makeStepSummary()` non corrispondeva a nessun metodo (nessuna `function makeStepSummary` in `Modules/Fixcity/app` e `Modules/Xot/app`). Il passo reale e' in `TicketForm` (`Modules/Fixcity/app/Filament/Resources/TicketResource/Schemas/TicketForm.php`):
 
 ```php
-private function makeStepSummary(): Step
-{
-    return Step::make('3')
-        ->schema([
-            Section::make('Riepilogo')
-                ->schema([
-                    TextEntry::make('review_title')
-                        ->state(fn (Get $get) => $get('title')),
-                    // ...
-                ]),
-        ]);
-}
+// TicketForm::getSteps(): la riga del riepilogo
+'summary' => Step::make('summary')
+    ->schema(array_values(static::getReviewStepSchema()))
+    ->label((string) __('fixcity::fixcity.ticket.steps.summary.label')),
+
+// TicketForm::getReviewStepSchema() (DCP-33): un solo componente View alimentato dallo stato del form
+return [
+    'reviewSummary' => View::make('pub_theme::components.wizard.summary-step')
+        ->viewData(static fn (object $livewire): array => [
+            'review' => app(BuildTicketReviewSummaryAction::class)->execute(
+                (array) data_get($livewire, 'data', []),
+                Filament::auth()->user(),
+            ),
+            // + 'data' (blockData), 'withContainer', 'withShell', 'wired'
+        ])
+        ->columnSpanFull(),
+];
 ```
+
+Lo schema piatto con `Section` e `TextEntry` (`TicketForm::getSummarySchema()`, via `TicketFormReviewInfolist::summarySectionEntries()`) resta per il back office (`getFormSchema()`).
 
 ---
 
@@ -72,4 +72,4 @@ private function makeStepSummary(): Step
 
 - [Fixcity Documentation Index](./INDEX.md)
 - [Geolocation AddressInput Component](../../Geo/docs/address-input-component.md)
-- [Design Comuni - Ticket Creation Wizard](../../Themes/Sixteen/docs/design-comuni/TICKET-CREATION-WIZARD.md)
+- [Design Comuni - Ticket Creation Wizard](../../../Themes/Sixteen/docs/design-comuni/TICKET-CREATION-WIZARD.md)

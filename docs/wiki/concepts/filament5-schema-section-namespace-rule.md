@@ -11,6 +11,7 @@ sources:
   - ../../../../../../docs/wiki/concepts/filament5-schema-section-namespace-rule.md
   - https://filamentphp.com/docs/5.x/schemas/overview
   - https://filamentphp.com/docs/5.x/schemas/sections
+status: draft
 ---
 
 # Filament 5 Schema Section Namespace Rule For Fixcity Wizard

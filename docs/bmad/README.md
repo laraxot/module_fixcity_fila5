@@ -7,6 +7,7 @@ updated: 2026-09-27
 qmd: "README"
 issues: []
 discussions: []
+status: draft
 ---
 
 # FixCity BMAD — piano canonico del modulo

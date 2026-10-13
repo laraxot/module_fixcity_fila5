@@ -7,6 +7,7 @@ updated: 2026-09-26
 qmd: "launch plan"
 issues: []
 discussions: []
+status: draft
 ---
 
 # 🚀 Fixcity Product Launch Plan
@@ -17,15 +18,6 @@ discussions: []
 > **Launch Date**: 2026-03-31 (v1.5.0 - Geographic Enhancement)
 
 ---
-
-title: "launch plan"
-type: note
-tags: [documentation]
-created: 2026-09-26
-updated: 2026-09-26
-qmd: "launch plan"
-issues: []
-discussions: []
 ## 📋 Table of Contents
 
 1. [Launch Overview](#launch-overview)

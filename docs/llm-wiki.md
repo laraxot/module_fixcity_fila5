@@ -34,6 +34,6 @@ A separate `laravel/Modules/<Module>/docs/wiki/` convention would create competi
 
 ## Entry Points
 
-- Canonical workflow: [../../../docs/wiki/README.md](../../../docs/wiki/README.md)
-- Canonical index: [../../../docs/wiki/index.md](../../../docs/wiki/index.md)
-- Adoption notes: [../../../docs/project/karpathy-llm-wiki-adoption.md](../../../docs/project/karpathy-llm-wiki-adoption.md)
+- Canonical workflow: [../../../docs/wiki/README.md](../../../../docs/wiki/README.md)
+- Canonical index: [../../../docs/wiki/index.md](../../../../docs/wiki/index.md)
+- Adoption notes: [../../../docs/project/karpathy-llm-wiki-adoption.md](../../../../docs/project/karpathy-llm-wiki-adoption.md)

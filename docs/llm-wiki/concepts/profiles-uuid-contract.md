@@ -7,6 +7,7 @@ updated: 2026-09-26
 qmd: "profiles uuid contract"
 issues: []
 discussions: []
+status: draft
 ---
 
 # Profiles UUID Contract

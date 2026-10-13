@@ -14,6 +14,7 @@ related:
   - ../../bmad/demo-operator-panel-access-gap-2026-09-27.md
   - ../../bmad/demo-operator-panel-access-correction-plan-2026-09-27.md
   - ../../bmad/stories/STORY-526-demo-operator-panel-access.md
+status: draft
 ---
 
 # Reusable authorization decision

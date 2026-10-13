@@ -2,6 +2,7 @@
 title: Design Comuni Parity - Segnalazioni Flow
 status: to_do
 priority: must
+---
 
 ## Reference: Design Comuni Italia
 - https://italia.github.io/design-comuni-pagine-statiche/sito/segnalazioni-elenco.html

@@ -16,7 +16,7 @@ related:
   - ./actor-flows.md
   - ./stories/STORY-507-actor-flows-and-user-journeys.md
   - ../../../User/docs/bmad/citizen-auth-flow-contract-2026-10-07.md
-  - ../../../Themes/Sixteen/docs/bmad/citizen-journey-presentation-contract-2026-10-07.md
+  - ../../../../Themes/Sixteen/docs/bmad/citizen-journey-presentation-contract-2026-10-07.md
 ---
 
 # Audit dei flussi cittadino

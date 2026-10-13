@@ -7,13 +7,14 @@ updated: 2026-09-26
 qmd: "filament summary infolist guidance"
 issues: []
 discussions: []
+status: draft
 ---
 
 # Filament Infolist — step riepilogo wizard (Fixcity)
 
 ## Decisione architetturale
 
-- Lo step **`form.summary::data::wizard-step`** (deeplink anche come `?step=form.summary%3A%3Adata%3A%3Awizard-step`) deve mostrare **dati già compilati**, non input.
+- Lo step **`form.summary::data::wizard-step`** in `en` (in `it` la chiave è `form.riepilogo::data::wizard-step`, verificato 2026-10-13 sull'HTML di `/it/tickets/create`; deeplink anche come `?step=form.summary%3A%3Adata%3A%3Awizard-step`) deve mostrare **dati già compilati**, non input.
 - In **Filament v5** questo pattern è **`Filament\Infolists\Components\TextEntry`** (ed entry affini) **dentro il flusso schema** del Wizard, NON `TextInput::disabled()`, NON `Placeholder`, NON [`SchemaView`](https://filamentphp.com/docs/5.x/schemas/overview).
 - Doc ufficiale Infolists: https://filamentphp.com/docs/5.x/infolists/overview · schema unificato: https://filamentphp.com/docs/5.x/schemas/overview
 

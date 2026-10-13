@@ -290,8 +290,8 @@ Tre cluster da non confondere con duplicazioni di **codice**:
 
 1. **`Modules/docs/redundancy-report.md` (questo file)** — inventario **cross modulo** tecnico aggiornato.
 2. **Report “locali”** — ogni modulo con `docs/redundancy-report.md` approfondisce **solo quel modulo**: Blog, Cms, Fixcity, Gdpr, Geo, Job, Lang, Notify, Rating, UI, User, Xot.
-3. **Documentazione tema Sixteen**: molte pagine **`segnalazione-*`** in `Themes/Sixteen/docs/wiki/concepts/` si sovrappongono perché suddividono parity per step/asset; roadmap in [`../../Themes/Sixteen/docs/wiki/concepts/wizard-parity-documentation-map.md`](../../Themes/Sixteen/docs/wiki/concepts/wizard-parity-documentation-map.md).
-4. **Modulo User `docs/legacy/`** — migliaia di note storiche ripetute (stesso tema con `-1`, `_` vs `-`, varianti duplicate); uso operativo solo via ricerca mirata — vedi [legacy-docs-duplication-pattern](../User/docs/wiki/concepts/legacy-docs-duplication-pattern.md).
+3. **Documentazione tema Sixteen**: molte pagine **`segnalazione-*`** in `Themes/Sixteen/docs/wiki/concepts/` si sovrappongono perché suddividono parity per step/asset; roadmap in [`../../Themes/Sixteen/docs/wiki/concepts/wizard-parity-documentation-map.md`](../../../Themes/Sixteen/docs/wiki/concepts/wizard-parity-documentation-map.md).
+4. **Modulo User `docs/legacy/`** — migliaia di note storiche ripetute (stesso tema con `-1`, `_` vs `-`, varianti duplicate); uso operativo solo via ricerca mirata — vedi [legacy-docs-duplication-pattern](../../User/docs/wiki/concepts/legacy-docs-duplication-pattern.md).
 
 **Collegamento filosofia anti-ridondanza Filament (trait già sulla base)** — [`../Xot/docs/filament/redundancy-rules.md`](../Xot/docs/filament/redundancy-rules.md).
 

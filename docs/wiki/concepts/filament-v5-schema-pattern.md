@@ -13,6 +13,7 @@ related:
   - concepts/xotbase-resource-form-pattern.md
   - concepts/filament-v5-architecture.md
   - entities/xotbaseresource.md
+status: draft
 ---
 
 # Filament v5 Schema Pattern - XotBase Abstraction

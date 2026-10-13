@@ -15,6 +15,7 @@ related:
   - ../../../../../../bashscripts/tools/split-module-lang-monolith-for-audit.php
   - ../../Xot/docs/wiki/concepts/claude-audit-static-all-modules.md
   - ../memories/lang-split-fixcity-claude-audit.md
+status: draft
 ---
 
 # claude-audit static (Fixcity)

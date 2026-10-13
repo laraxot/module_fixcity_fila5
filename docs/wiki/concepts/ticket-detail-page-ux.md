@@ -10,7 +10,7 @@ issues:
 discussions:
   - "https://github.com/laraxot/base_fixcity_fila5/discussions/287"
 related:
-  - ../../../../Themes/Sixteen/docs/wiki/concepts/fo-folio-links-multilingua.md
+  - ../../../../../Themes/Sixteen/docs/wiki/concepts/fo-folio-links-multilingua.md
   - ../../../../../../Modules/Comment/docs/wiki/concepts/spatie-comments-integration.md
 ---
 

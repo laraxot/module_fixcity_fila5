@@ -10,6 +10,7 @@ discussions: []
 module: theme
 topic: README
 canonical: ../../../../Themes/docs/shared-components/README-Modules.md
+status: stub
 ---
 
 See canonical documentation: ../../../../Themes/docs/shared-components/README-Modules.md

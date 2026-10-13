@@ -188,7 +188,8 @@
                         "confirm": "Conferma e invia",
                         "cancel": "Annulla",
                         "close_label": "Chiudi finestra modale"
-                    }
+                    },
+                    "header_active": "all-services"
                 }
             }
         ],

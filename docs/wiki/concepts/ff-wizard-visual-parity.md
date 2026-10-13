@@ -7,6 +7,7 @@ updated: 2026-09-26
 qmd: "ff wizard visual parity"
 issues: []
 discussions: []
+status: draft
 ---
 
 # Wizard Visual Parity – Segnalazione Wizard

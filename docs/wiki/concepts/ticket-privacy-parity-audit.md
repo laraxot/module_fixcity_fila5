@@ -10,6 +10,7 @@ discussions: []
 module: theme
 topic: segnalazione-privacy-parity-audit
 canonical: ../../../../../Themes/docs/shared-components/segnalazione-privacy-parity-audit.md
+status: stub
 ---
 
 See canonical documentation: ../../../../../Themes/docs/shared-components/segnalazione-privacy-parity-audit.md

@@ -7,6 +7,7 @@ updated: 2026-09-26
 qmd: "REMOVED PRIORITY FIELD"
 issues: []
 discussions: []
+status: draft
 ---
 
 # Rimosso campo 'priority' dal form wizard

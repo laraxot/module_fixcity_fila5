@@ -7,6 +7,7 @@ type: comparison
 tags: [redundancy, refactoring, documentation, dry, xot]
 created: "2026-05-25"
 updated: "2026-05-25"
+status: draft
 ---
 
 # Cross-Module Redundancy: Analysis Files and Abandoned Refactoring

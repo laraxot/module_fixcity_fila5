@@ -9,6 +9,7 @@ discussions: []
 name: wizard-visual-parity
 description: Regola di parità visuale per il wizard Segnalazione in Fixcity
 type: concept
+status: draft
 ---
 
 # Wizard Visual Parity – Segnalazione

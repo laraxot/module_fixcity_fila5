@@ -4,6 +4,8 @@ type: concept
 created: 2026-10-11
 updated: 2026-10-11
 tags: [second-brain, freellmapi, boundary, security]
+status: draft
+qmd: "confine freellmapi fixcity"
 ---
 
 # Confine FreeLLMAPI

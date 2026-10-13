@@ -56,7 +56,7 @@ Credenziali demo: `cittadino@fixcity.demo` / `password` (e `marco.sottana@gmail.
 
 ## story
 
-[STORY-135](../../../../../docs/stories/STORY-135-ticket-presentation-seeders.md) — GitHub [#239](https://github.com/laraxot/base_fixcity_fila5/issues/239) · [D#242](https://github.com/laraxot/base_fixcity_fila5/discussions/242)
+[STORY-135](../../../../../../docs/stories/STORY-135-ticket-presentation-seeders.md) — GitHub [#239](https://github.com/laraxot/base_fixcity_fila5/issues/239) · [D#242](https://github.com/laraxot/base_fixcity_fila5/discussions/242)
 
 ## collegamenti
 

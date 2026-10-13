@@ -10,6 +10,7 @@ confidence: high
 tags: [queueable-action, spatie, architecture, laraxot, fixcity]
 related:
   - Modules/Xot/docs/queueable-actions.md
+status: draft
 ---
 
 # Queueable Actions — Fixcity Module Doctrine

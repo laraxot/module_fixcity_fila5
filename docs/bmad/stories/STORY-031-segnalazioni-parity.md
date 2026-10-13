@@ -2,6 +2,7 @@
 title: Design Comuni Parity - Segnalazioni Elenco Page
 status: to_do
 priority: must
+---
 
 ## Expected (Design Comuni Italia)
 

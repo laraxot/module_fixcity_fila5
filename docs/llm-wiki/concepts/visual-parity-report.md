@@ -7,6 +7,7 @@ updated: 2026-09-26
 qmd: "visual parity report"
 issues: []
 discussions: []
+status: draft
 ---
 
 # visual parity report - segnalazione crea

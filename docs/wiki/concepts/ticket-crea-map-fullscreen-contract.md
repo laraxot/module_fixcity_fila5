@@ -9,6 +9,7 @@ discussions: []
 name: segnalazione-crea-map-fullscreen-contract
 description: Fixcity expectation for fullscreen map behavior in the public ticket wizard
 type: concept
+status: draft
 ---
 
 # Segnalazione Crea Map Fullscreen Contract

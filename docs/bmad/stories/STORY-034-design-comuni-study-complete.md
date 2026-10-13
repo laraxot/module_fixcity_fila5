@@ -4,6 +4,7 @@ status: done
 priority: must
 date: 2026-09-27
 author: BMAD + Second Brain
+---
 
 ## Study Completed
 

@@ -16,7 +16,7 @@ related:
   - ./stories/STORY-514-public-navigation-contract.md
   - ./homepage-guest-visual-comparison.md
   - ./homepage-guest-visual-correction-plan.md
-  - ../../../Themes/Sixteen/docs/bmad/homepage-guest-visual-contract.md
+  - ../../../../Themes/Sixteen/docs/bmad/homepage-guest-visual-contract.md
   - ../wiki/concepts/user-journey-map.md
 ---
 

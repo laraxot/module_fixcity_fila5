@@ -12,8 +12,8 @@ tags: [filament, blade-components, filament-first, fixcity, frontoffice]
 related:
   - concepts/filament-wizard-architecture.md
   - concepts/filament-first-rule.md
-  - ../../Themes/Sixteen/docs/wiki/concepts/filament-5x-blade-components-reference.md
-  - ../../../docs/wiki/rules/filament-first-rule.md
+  - ../../../../../Themes/Sixteen/docs/wiki/concepts/filament-5x-blade-components-reference.md
+  - ../../../../../../docs/wiki/rules/filament-first-rule.md
 ---
 
 # Filament 5.x Blade Components in Fixcity — Regola Filament-First

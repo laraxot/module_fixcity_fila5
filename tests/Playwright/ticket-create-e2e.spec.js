@@ -1,8 +1,17 @@
 import { test, expect } from '@playwright/test';
+import { requirePlaywrightCredentials } from './support/credentials.js';
 
 test.describe('Segnalazione crea wizard e2e', () => {
+    test.skip(!process.env.PLAYWRIGHT_TEST_EMAIL || !process.env.PLAYWRIGHT_TEST_PASSWORD, 'authenticated browser credentials are required');
+
     test.beforeEach(async ({ page }) => {
-        await page.goto('/it/tests/segnalazione-crea', { waitUntil: 'networkidle' });
+        const credentials = requirePlaywrightCredentials();
+        await page.goto('/it/auth/login', { waitUntil: 'networkidle' });
+        await page.locator('input[wire\\:model="data.email"]').first().fill(credentials.email);
+        await page.locator('input[wire\\:model="data.password"]').first().fill(credentials.password);
+        await page.locator('button[type="submit"]').first().click();
+        await page.waitForTimeout(1500);
+        await page.goto('/it/tickets/create', { waitUntil: 'networkidle' });
         await expect(page.locator('.fi-sc-wizard')).toBeAttached({ timeout: 15000 });
     });
 

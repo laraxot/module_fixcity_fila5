@@ -7,6 +7,7 @@ updated: 2026-09-26
 qmd: "wizard nav responsive alignment"
 issues: []
 discussions: []
+status: draft
 ---
 
 # wizard nav responsive alignment
@@ -24,7 +25,7 @@ Per massimizzare l'usabilità su dispositivi mobili e tablet, e garantire che l'
 
 ## Stato Implementazione
 
-In `ticket-create-wizard.blade.php`, il container `.steppers-nav` avvolge le azioni in un `d-flex flex-column w-100`.
+In `Themes/Sixteen/resources/views/components/wizard/cmp-nav-steps.blade.php` (non più in `create-ticket-wizard.blade.php`, verificato 2026-10-13), il container `.steppers-nav` avvolge le azioni in un `d-flex flex-column w-100`.
 
 - Se è presente solo "Avanti" (Step 1): Occupa la riga sotto il checkbox.
 - Se sono presenti "Indietro" e "Avanti": "Indietro" è in alto (start) e "Avanti" è in basso (stretch).

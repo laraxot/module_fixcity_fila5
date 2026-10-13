@@ -24,6 +24,10 @@ reference:
   services: "https://italia.github.io/design-comuni-pagine-statiche/sito/servizi.html"
 related:
   - ./STORY-517-design-comuni-coverage.md
+type: note
+updated: 2026-10-08
+tags: [docs, fixcity, bmad]
+qmd: "scheda servizio: segnalare un disservizio fixcity"
 ---
 
 # Scheda servizio: segnalare un disservizio

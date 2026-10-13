@@ -9,6 +9,7 @@ discussions: []
 title: Farmshops.eu Clustering Pattern Integration
 description: Implementation of farmshops.eu marker clustering behavior in Fixcity GeoMapLit
 category: geo-patterns
+status: draft
 ---
 
 # Farmshops.eu Clustering Pattern Integration

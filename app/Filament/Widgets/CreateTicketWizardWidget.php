@@ -6,9 +6,12 @@ namespace Modules\Fixcity\Filament\Widgets;
 
 use Filament\Facades\Filament;
 use Filament\Schemas\Components\Wizard\Step;
+use Livewire\Attributes\Locked;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 use Modules\Fixcity\Actions\CreateTicketAction;
 use Modules\Fixcity\Actions\GetPublishedPrivacyPolicyAction;
+use Modules\Fixcity\Enums\TicketPriorityEnum;
+use Modules\Fixcity\Enums\TicketStatusEnum;
 use Modules\Fixcity\Filament\Concerns\HasTicketAuthorData;
 use Modules\Fixcity\Filament\Resources\TicketResource;
 use Modules\Fixcity\Filament\Resources\TicketResource\Schemas\TicketForm;
@@ -30,8 +33,10 @@ class CreateTicketWizardWidget extends XotBaseWizardWidget
      */
 
     /** @var array<string, mixed> */
+    #[Locked]
     public array $blockData = [];
 
+    #[Locked]
     public string $confirmationLocale = 'it';
 
     public static string $resource = TicketResource::class;
@@ -78,13 +83,17 @@ class CreateTicketWizardWidget extends XotBaseWizardWidget
             return;
         }
         $data['owner_id'] = $userId;
+        // Stato e priorita' iniziali li decide il server: `status` e `priority` sono campi Hidden e il client puo' riscriverli
+        // (`$wire.set('data.status', 'closed')`): senza questo un cittadino creerebbe ticket gia' aperti o chiusi (SEC-01, DCP-49).
+        $data['status'] = TicketStatusEnum::PENDING->value;
+        $data['priority'] = TicketPriorityEnum::LOW->value;
 
         $ticket = app(CreateTicketAction::class)->execute($data, $this->confirmationLocale);
 
         $this->form->model($ticket);
         $this->form->saveRelationships();
 
-        $this->redirectAfterSuccess();
+        $this->redirectAfterSuccess($ticket);
     }
 
     /**
@@ -95,7 +104,7 @@ class CreateTicketWizardWidget extends XotBaseWizardWidget
         $this->save();
     }
 
-    protected function redirectAfterSuccess(): void
+    protected function redirectAfterSuccess(\Modules\Fixcity\Models\Ticket $ticket): void
     {
         $path = SafeStringCastAction::cast(
             $this->blockData['confirmation_path'] ?? '/tickets/confirmation'
@@ -108,7 +117,13 @@ class CreateTicketWizardWidget extends XotBaseWizardWidget
 
         $localizedUrl = LaravelLocalization::getLocalizedURL($locale, $path);
 
-        $this->redirect($localizedUrl !== false ? $localizedUrl : $path);
+        $redirectUrl = $localizedUrl !== false ? $localizedUrl : $path;
+        $code = SafeStringCastAction::cast($ticket->code);
+        if ($code !== '') {
+            $redirectUrl .= (str_contains($redirectUrl, '?') ? '&' : '?').'code='.rawurlencode($code);
+        }
+
+        $this->redirect($redirectUrl);
     }
 
     /**

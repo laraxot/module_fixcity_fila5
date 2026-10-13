@@ -14,6 +14,7 @@ discussions:
 related:
   - ./redundancy-overview.md
   - ../concepts/fixcity-architecture-contract-2026-09-26.md
+status: draft
 ---
 
 # Audit ridondanza documentale

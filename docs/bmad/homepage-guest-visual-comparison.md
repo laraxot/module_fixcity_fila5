@@ -15,7 +15,7 @@ related:
   - ./homepage-guest-expected-visual.md
   - ./homepage-guest-visual-correction-plan.md
   - ./stories/STORY-513-public-guest-visual-demo.md
-  - ../../../Themes/Sixteen/docs/bmad/homepage-guest-visual-contract.md
+  - ../../../../Themes/Sixteen/docs/bmad/homepage-guest-visual-contract.md
 ---
 
 # Homepage guest — confronto atteso vs attuale

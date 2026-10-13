@@ -7,6 +7,7 @@ updated: 2026-09-26
 qmd: "ticket infolist filament v5 pattern"
 issues: []
 discussions: []
+status: draft
 ---
 
 # TicketInfolist - Filament v5 Hybrid Pattern

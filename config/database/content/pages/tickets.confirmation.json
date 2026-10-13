@@ -1,12 +1,389 @@
 {
     "id": "tickets-confirmation",
-    "title": {"it": "Segnalazione inviata", "en": "Report submitted"},
-    "slug": "tickets.confirmation",
-    "content": null,
-    "content_blocks": {
-        "it": [{"type": "ticket_confirmation", "data": {"view": "pub_theme::components.blocks.flow.ticket.segnalazione.04-conferma"}}],
-        "en": [{"type": "ticket_confirmation", "data": {"view": "pub_theme::components.blocks.flow.ticket.segnalazione.04-conferma"}}]
+    "title": {
+        "it": "Segnalazione inviata",
+        "en": "Report submitted"
     },
-    "sidebar_blocks": {"it": [], "en": []},
-    "footer_blocks": null
+    "slug": "tickets.confirmation",
+    "layout": "design-comuni",
+    "description": {
+        "it": "Conferma di invio della segnalazione: codice di tracciamento e prossimi passi.",
+        "en": "Report submission confirmation: tracking code and next steps."
+    },
+    "content": null,
+    "sidebar_blocks": {
+        "it": [],
+        "en": []
+    },
+    "footer_blocks": null,
+    "content_blocks": {
+        "it": [
+            {
+                "type": "ticket_confirmation",
+                "data": {
+                    "view": "pub_theme::components.blocks.ticket-confirmation.design-comuni",
+                    "layout": "done",
+                    "title": "Segnalazione inviata",
+                    "breadcrumb": {
+                        "items": [
+                            {
+                                "label": "Home",
+                                "url": "/it"
+                            },
+                            {
+                                "label": "Servizi",
+                                "url": "/it/tickets"
+                            }
+                        ],
+                        "current": "Segnalazione disservizio"
+                    },
+                    "heading": {
+                        "icon": "it-check-circle",
+                        "lines": [
+                            {
+                                "class": "subtitle-small",
+                                "parts": [
+                                    {
+                                        "text": "Grazie, abbiamo ricevuto la tua"
+                                    },
+                                    {
+                                        "strong": "segnalazione :code."
+                                    }
+                                ]
+                            },
+                            {
+                                "class": "subtitle-small",
+                                "parts": [
+                                    {
+                                        "text": "Sarà visibile sulla"
+                                    },
+                                    {
+                                        "link": {
+                                            "label": "lista di tutte segnalazioni",
+                                            "url": "/it/tickets"
+                                        }
+                                    },
+                                    {
+                                        "text": "una volta presa in carico dall’amministrazione."
+                                    }
+                                ]
+                            },
+                            {
+                                "class": "subtitle-small pt-3 pt-lg-4",
+                                "parts": [
+                                    {
+                                        "text": "Abbiamo inviato il riepilogo all’email:"
+                                    },
+                                    {
+                                        "br": true
+                                    },
+                                    {
+                                        "strong": ":email"
+                                    }
+                                ]
+                            }
+                        ],
+                        "button": {
+                            "icon": "it-search",
+                            "label": "Traccia la segnalazione",
+                            "url": ":receipt_url"
+                        },
+                        "followup": {
+                            "label": "Consulta la richiesta",
+                            "url": ":area_url",
+                            "text": "nella tua area riservata"
+                        }
+                    },
+                    "related": {
+                        "title": "Servizi correlati",
+                        "items": [
+                            {
+                                "label": "Richiesta appuntamento",
+                                "url": "#",
+                                "icon": "it-settings"
+                            }
+                        ]
+                    },
+                    "feedback": {
+                        "title": "Quanto è stato facile usare questo servizio?",
+                        "col_class": "col-12 col-lg-6 p-lg-0 px-4",
+                        "legend": "Valuta da 1 a 5 stelle la pagina",
+                        "star_label": "Valuta %d stelle su 5",
+                        "thanks": "Grazie, il tuo parere ci aiuterà a migliorare il servizio!",
+                        "positive": {
+                            "question": "Quali sono stati gli aspetti che hai preferito?",
+                            "answers": [
+                                "Le indicazioni erano chiare",
+                                "Le indicazioni erano complete",
+                                "Capivo sempre che stavo procedendo correttamente",
+                                "Non ho avuto problemi tecnici",
+                                "Altro"
+                            ]
+                        },
+                        "negative": {
+                            "question": "Dove hai incontrato le maggiori difficoltà?",
+                            "answers": [
+                                "A volte le indicazioni non erano chiare",
+                                "A volte le indicazioni non erano complete",
+                                "A volte non capivo se stavo procedendo correttamente",
+                                "Ho avuto problemi tecnici",
+                                "Altro"
+                            ]
+                        },
+                        "detail": {
+                            "question": "Vuoi aggiungere altri dettagli?",
+                            "label": "Dettaglio",
+                            "help": "Inserire massimo 200 caratteri"
+                        },
+                        "back": "Indietro",
+                        "next": "Avanti"
+                    },
+                    "contacts": {
+                        "layout": "offset",
+                        "main": {
+                            "title": "Contatta il comune",
+                            "items": [
+                                {
+                                    "icon": "it-help-circle",
+                                    "label": "Leggi le domande frequenti",
+                                    "url": "#"
+                                },
+                                {
+                                    "icon": "it-mail",
+                                    "label": "Richiedi assistenza",
+                                    "url": "#",
+                                    "element": "contacts"
+                                },
+                                {
+                                    "icon": "it-hearing",
+                                    "label": "Chiama il numero verde 05 0505",
+                                    "url": "#"
+                                },
+                                {
+                                    "icon": "it-calendar",
+                                    "label": "Prenota appuntamento",
+                                    "url": "#",
+                                    "element": "appointment-booking"
+                                }
+                            ]
+                        }
+                    },
+                    "without_code": {
+                        "heading": {
+                            "icon": "it-check-circle",
+                            "lines": [
+                                {
+                                    "class": "subtitle-small",
+                                    "parts": [
+                                        {
+                                            "text": "Non troviamo i dati dell’ultima segnalazione inviata."
+                                        }
+                                    ]
+                                },
+                                {
+                                    "class": "subtitle-small",
+                                    "parts": [
+                                        {
+                                            "text": "Puoi seguire le tue segnalazioni dalla"
+                                        },
+                                        {
+                                            "link": {
+                                                "label": "lista delle segnalazioni",
+                                                "url": "/it/tickets"
+                                            }
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    },
+                    "header_active": "all-services"
+                }
+            }
+        ],
+        "en": [
+            {
+                "type": "ticket_confirmation",
+                "data": {
+                    "view": "pub_theme::components.blocks.ticket-confirmation.design-comuni",
+                    "layout": "done",
+                    "title": "Report submitted",
+                    "breadcrumb": {
+                        "items": [
+                            {
+                                "label": "Home",
+                                "url": "/en"
+                            },
+                            {
+                                "label": "Services",
+                                "url": "/en/tickets"
+                            }
+                        ],
+                        "current": "Service issue report"
+                    },
+                    "heading": {
+                        "icon": "it-check-circle",
+                        "lines": [
+                            {
+                                "class": "subtitle-small",
+                                "parts": [
+                                    {
+                                        "text": "Thank you, we have received your"
+                                    },
+                                    {
+                                        "strong": "report :code."
+                                    }
+                                ]
+                            },
+                            {
+                                "class": "subtitle-small",
+                                "parts": [
+                                    {
+                                        "text": "It will be visible on the"
+                                    },
+                                    {
+                                        "link": {
+                                            "label": "list of all reports",
+                                            "url": "/en/tickets"
+                                        }
+                                    },
+                                    {
+                                        "text": "once the administration has taken charge of it."
+                                    }
+                                ]
+                            },
+                            {
+                                "class": "subtitle-small pt-3 pt-lg-4",
+                                "parts": [
+                                    {
+                                        "text": "We have sent the summary to the email:"
+                                    },
+                                    {
+                                        "br": true
+                                    },
+                                    {
+                                        "strong": ":email"
+                                    }
+                                ]
+                            }
+                        ],
+                        "button": {
+                            "icon": "it-search",
+                            "label": "Track the report",
+                            "url": ":receipt_url"
+                        },
+                        "followup": {
+                            "label": "View the request",
+                            "url": ":area_url",
+                            "text": "in your private area"
+                        }
+                    },
+                    "related": {
+                        "title": "Related services",
+                        "items": [
+                            {
+                                "label": "Appointment request",
+                                "url": "#",
+                                "icon": "it-settings"
+                            }
+                        ]
+                    },
+                    "feedback": {
+                        "title": "How easy was it to use this service?",
+                        "col_class": "col-12 col-lg-6 p-lg-0 px-4",
+                        "legend": "Rate the page from 1 to 5 stars",
+                        "star_label": "Rate %d stars out of 5",
+                        "thanks": "Thank you, your feedback will help us improve the service!",
+                        "positive": {
+                            "question": "Which aspects did you prefer?",
+                            "answers": [
+                                "The instructions were clear",
+                                "The instructions were complete",
+                                "I always understood I was proceeding correctly",
+                                "I had no technical problems",
+                                "Other"
+                            ]
+                        },
+                        "negative": {
+                            "question": "Where did you find the greatest difficulties?",
+                            "answers": [
+                                "Sometimes the instructions were not clear",
+                                "Sometimes the instructions were not complete",
+                                "Sometimes I did not understand whether I was proceeding correctly",
+                                "I had technical problems",
+                                "Other"
+                            ]
+                        },
+                        "detail": {
+                            "question": "Would you like to add more details?",
+                            "label": "Details",
+                            "help": "Enter 200 characters at most"
+                        },
+                        "back": "Back",
+                        "next": "Next"
+                    },
+                    "contacts": {
+                        "layout": "offset",
+                        "main": {
+                            "title": "Contact the municipality",
+                            "items": [
+                                {
+                                    "icon": "it-help-circle",
+                                    "label": "Read the frequently asked questions",
+                                    "url": "#"
+                                },
+                                {
+                                    "icon": "it-mail",
+                                    "label": "Request assistance",
+                                    "url": "#",
+                                    "element": "contacts"
+                                },
+                                {
+                                    "icon": "it-hearing",
+                                    "label": "Call the toll-free number 05 0505",
+                                    "url": "#"
+                                },
+                                {
+                                    "icon": "it-calendar",
+                                    "label": "Book an appointment",
+                                    "url": "#",
+                                    "element": "appointment-booking"
+                                }
+                            ]
+                        }
+                    },
+                    "without_code": {
+                        "heading": {
+                            "icon": "it-check-circle",
+                            "lines": [
+                                {
+                                    "class": "subtitle-small",
+                                    "parts": [
+                                        {
+                                            "text": "We cannot find the details of the last report sent."
+                                        }
+                                    ]
+                                },
+                                {
+                                    "class": "subtitle-small",
+                                    "parts": [
+                                        {
+                                            "text": "You can follow your reports from the"
+                                        },
+                                        {
+                                            "link": {
+                                                "label": "list of reports",
+                                                "url": "/en/tickets"
+                                            }
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    },
+                    "header_active": "all-services"
+                }
+            }
+        ]
+    }
 }

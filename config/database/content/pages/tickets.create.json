@@ -1,12 +1,310 @@
 {
     "id": "tickets-create",
-    "title": {"it": "Segnala disservizio", "en": "Report an issue"},
+    "title": {
+        "it": "Segnala disservizio",
+        "en": "Report an issue",
+        "de": "Störung melden",
+        "es": "Comunicar una incidencia"
+    },
     "slug": "tickets.create",
     "content": null,
     "content_blocks": {
-        "it": [{"type": "ticket_create", "data": {"view": "pub_theme::components.blocks.tests.ticket-crea"}}],
-        "en": [{"type": "ticket_create", "data": {"view": "pub_theme::components.blocks.tests.ticket-crea"}}]
+        "it": [
+            {
+                "type": "ticket_create",
+                "data": {
+                    "view": "pub_theme::components.blocks.tests.ticket-crea",
+                    "title": "Segnalazione disservizio",
+                    "breadcrumb": {
+                        "items": [
+                            {
+                                "label": "Home",
+                                "url": "/it"
+                            },
+                            {
+                                "label": "Servizi",
+                                "url": "/it/tickets"
+                            }
+                        ],
+                        "current": "Segnalazione disservizio"
+                    },
+                    "callout": {
+                        "variant": "warning",
+                        "icon": "it-horn",
+                        "title": "Attenzione",
+                        "text": "Le informazioni che hai fornito hanno valore di dichiarazione.",
+                        "emphasis": "Verifica che siano corrette."
+                    },
+                    "nav": {
+                        "aria_label": "Step",
+                        "back": "Indietro",
+                        "next": "Invia",
+                        "next_class": "send",
+                        "next_icon": false,
+                        "next_click": "$wire.submit()",
+                        "next_step": "Avanti"
+                    },
+                    "contacts": {
+                        "layout": "offset",
+                        "main": {
+                            "title": "Contatta il comune",
+                            "items": [
+                                {
+                                    "icon": "it-help-circle",
+                                    "label": "Leggi le domande frequenti",
+                                    "url": "/it/domande-frequenti"
+                                },
+                                {
+                                    "icon": "it-mail",
+                                    "label": "Richiedi assistenza",
+                                    "url": "#",
+                                    "element": "contacts"
+                                },
+                                {
+                                    "icon": "it-hearing",
+                                    "label": "Chiama il numero verde 05 0505",
+                                    "url": "#"
+                                },
+                                {
+                                    "icon": "it-calendar",
+                                    "label": "Prenota appuntamento",
+                                    "url": "#",
+                                    "element": "appointment-booking"
+                                }
+                            ]
+                        }
+                    },
+                    "header_active": "all-services"
+                }
+            }
+        ],
+        "en": [
+            {
+                "type": "ticket_create",
+                "data": {
+                    "view": "pub_theme::components.blocks.tests.ticket-crea",
+                    "title": "Report an issue",
+                    "breadcrumb": {
+                        "items": [
+                            {
+                                "label": "Home",
+                                "url": "/en"
+                            },
+                            {
+                                "label": "Services",
+                                "url": "/en/tickets"
+                            }
+                        ],
+                        "current": "Report an issue"
+                    },
+                    "callout": {
+                        "variant": "warning",
+                        "icon": "it-horn",
+                        "title": "Warning",
+                        "text": "The information you provided has the value of a declaration.",
+                        "emphasis": "Check that it is correct."
+                    },
+                    "nav": {
+                        "aria_label": "Step",
+                        "back": "Back",
+                        "next": "Submit",
+                        "next_class": "send",
+                        "next_icon": false,
+                        "next_click": "$wire.submit()",
+                        "next_step": "Next"
+                    },
+                    "contacts": {
+                        "layout": "offset",
+                        "main": {
+                            "title": "Contact the municipality",
+                            "items": [
+                                {
+                                    "icon": "it-help-circle",
+                                    "label": "Read the frequently asked questions",
+                                    "url": "/en/domande-frequenti"
+                                },
+                                {
+                                    "icon": "it-mail",
+                                    "label": "Request assistance",
+                                    "url": "#",
+                                    "element": "contacts"
+                                },
+                                {
+                                    "icon": "it-hearing",
+                                    "label": "Call the toll-free number 05 0505",
+                                    "url": "#"
+                                },
+                                {
+                                    "icon": "it-calendar",
+                                    "label": "Book an appointment",
+                                    "url": "#",
+                                    "element": "appointment-booking"
+                                }
+                            ]
+                        }
+                    },
+                    "header_active": "all-services"
+                }
+            }
+        ],
+        "de": [
+            {
+                "type": "ticket_create",
+                "data": {
+                    "view": "pub_theme::components.blocks.tests.ticket-crea",
+                    "title": "Störung melden",
+                    "breadcrumb": {
+                        "items": [
+                            {
+                                "label": "Startseite",
+                                "url": "/de"
+                            },
+                            {
+                                "label": "Dienste",
+                                "url": "/de/tickets"
+                            }
+                        ],
+                        "current": "Störung melden"
+                    },
+                    "callout": {
+                        "variant": "warning",
+                        "icon": "it-horn",
+                        "title": "Achtung",
+                        "text": "Die von Ihnen gemachten Angaben gelten als Erklärung.",
+                        "emphasis": "Prüfen Sie, ob sie korrekt sind."
+                    },
+                    "nav": {
+                        "aria_label": "Schritt",
+                        "back": "Zurück",
+                        "next": "Senden",
+                        "next_class": "send",
+                        "next_icon": false,
+                        "next_click": "$wire.submit()",
+                        "next_step": "Weiter"
+                    },
+                    "contacts": {
+                        "layout": "offset",
+                        "main": {
+                            "title": "Gemeinde kontaktieren",
+                            "items": [
+                                {
+                                    "icon": "it-help-circle",
+                                    "label": "Häufige Fragen lesen",
+                                    "url": "/de/domande-frequenti"
+                                },
+                                {
+                                    "icon": "it-mail",
+                                    "label": "Hilfe anfordern",
+                                    "url": "#",
+                                    "element": "contacts"
+                                },
+                                {
+                                    "icon": "it-hearing",
+                                    "label": "Gebührenfreie Nummer 05 0505 anrufen",
+                                    "url": "#"
+                                },
+                                {
+                                    "icon": "it-calendar",
+                                    "label": "Termin vereinbaren",
+                                    "url": "#",
+                                    "element": "appointment-booking"
+                                }
+                            ]
+                        }
+                    },
+                    "header_active": "all-services"
+                }
+            }
+        ],
+        "es": [
+            {
+                "type": "ticket_create",
+                "data": {
+                    "view": "pub_theme::components.blocks.tests.ticket-crea",
+                    "title": "Comunicar una incidencia",
+                    "breadcrumb": {
+                        "items": [
+                            {
+                                "label": "Inicio",
+                                "url": "/es"
+                            },
+                            {
+                                "label": "Servicios",
+                                "url": "/es/tickets"
+                            }
+                        ],
+                        "current": "Comunicar una incidencia"
+                    },
+                    "callout": {
+                        "variant": "warning",
+                        "icon": "it-horn",
+                        "title": "Atención",
+                        "text": "La información que has facilitado tiene valor de declaración.",
+                        "emphasis": "Comprueba que sea correcta."
+                    },
+                    "nav": {
+                        "aria_label": "Paso",
+                        "back": "Anterior",
+                        "next": "Enviar",
+                        "next_class": "send",
+                        "next_icon": false,
+                        "next_click": "$wire.submit()",
+                        "next_step": "Siguiente"
+                    },
+                    "contacts": {
+                        "layout": "offset",
+                        "main": {
+                            "title": "Contacta con el ayuntamiento",
+                            "items": [
+                                {
+                                    "icon": "it-help-circle",
+                                    "label": "Lee las preguntas frecuentes",
+                                    "url": "/es/domande-frequenti"
+                                },
+                                {
+                                    "icon": "it-mail",
+                                    "label": "Solicita asistencia",
+                                    "url": "#",
+                                    "element": "contacts"
+                                },
+                                {
+                                    "icon": "it-hearing",
+                                    "label": "Llama al número gratuito 05 0505",
+                                    "url": "#"
+                                },
+                                {
+                                    "icon": "it-calendar",
+                                    "label": "Reserva una cita",
+                                    "url": "#",
+                                    "element": "appointment-booking"
+                                }
+                            ]
+                        }
+                    },
+                    "header_active": "all-services"
+                }
+            }
+        ]
     },
-    "sidebar_blocks": {"it": [], "en": []},
-    "footer_blocks": null
+    "sidebar_blocks": {
+        "it": [],
+        "en": [],
+        "de": [],
+        "es": []
+    },
+    "footer_blocks": null,
+    "layout": "design-comuni",
+    "middleware": [
+        "auth"
+    ],
+    "access_policy": {
+        "description": "La creazione di una segnalazione richiede un utente autenticato: il ticket ha un proprietario (owner_id) e la conferma arriva alla sua email. Lettura pubblica e tracking con codice restano aperti.",
+        "guest_access": false,
+        "guest_redirect": "login",
+        "public_reading": [
+            "tickets"
+        ],
+        "tracking_by_code": true,
+        "source": "STORY-357, DCP-42"
+    }
 }

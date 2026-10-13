@@ -4,6 +4,8 @@ type: implementation-plan
 created: 2026-10-11
 updated: 2026-10-11
 qmd: "design-comuni-frontend-plan"
+status: draft
+tags: [docs, fixcity, bmad]
 ---
 
 # DesignComuni Frontend Implementation Plan

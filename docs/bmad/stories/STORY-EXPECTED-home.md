@@ -2,6 +2,7 @@
 title: BMAD Analysis - Homepage /it Expected State
 status: to_do
 priority: must
+---
 
 ## Expected (BMAD Spec)
 - URL: http://localhost:8001/it

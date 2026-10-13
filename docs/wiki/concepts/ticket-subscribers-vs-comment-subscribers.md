@@ -14,6 +14,7 @@ related:
   - ./ticket-view-fo-enrichment-map-media-comments.md
   - ../../../../Comment/docs/wiki/concepts/native-comments-architecture.md
   - ../../../../../../docs/chat/st351-phpstan-ticket-subscribers.md
+status: draft
 ---
 
 # Ticket subscribers vs comment notification subscribers

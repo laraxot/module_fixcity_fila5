@@ -4,6 +4,10 @@ status: in-progress
 module: Fixcity
 github_issue: https://github.com/laraxot/fixcity_fila5/issues/39
 discussion: https://github.com/laraxot/fixcity_fila5/discussions/39
+type: note
+updated: 2026-10-08
+tags: [docs, fixcity, bmad]
+qmd: "story 039 puppeteer testing fixcity"
 ---
 
 ## Objective

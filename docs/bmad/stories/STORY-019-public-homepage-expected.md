@@ -4,6 +4,7 @@ id: STORY-019
 author: BMAD
 status: to_do
 priority: must
+---
 
 ## Descrizione
 Questo documento definisce cosa dovrebbe apparire sulla homepage pubblica di Fixcity (http://localhost:8001/it).

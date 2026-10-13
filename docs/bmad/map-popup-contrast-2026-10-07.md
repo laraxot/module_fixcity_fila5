@@ -9,6 +9,7 @@ issues:
   - "https://github.com/laraxot/base_fixcity_fila5/issues/514"
 discussions:
   - "https://github.com/laraxot/base_fixcity_fila5/discussions/573"
+status: draft
 ---
 
 # Contrasto popup marker mappa

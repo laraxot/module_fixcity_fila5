@@ -3,6 +3,7 @@ title: Map Marker Card - UI/UX Complete Fix
 author: BMAD
 status: done
 priority: must
+---
 
 ## Fix Summary
 

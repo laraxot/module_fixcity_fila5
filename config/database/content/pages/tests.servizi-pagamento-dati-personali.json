@@ -746,7 +746,8 @@
                                 "message": "Salvataggio effettuato"
                             }
                         }
-                    ]
+                    ],
+                    "header_active": "all-services"
                 }
             }
         ],

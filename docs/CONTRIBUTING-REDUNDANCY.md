@@ -7,6 +7,7 @@ updated: 2026-09-26
 qmd: "CONTRIBUTING REDUNDANCY"
 issues: []
 discussions: []
+status: draft
 ---
 
 CONTRIBUTING: Redundancy reduction checklist
@@ -27,14 +28,6 @@ Maintenance
 
 Example stub content
 ---
-title: "CONTRIBUTING REDUNDANCY"
-type: note
-tags: [documentation]
-created: 2026-09-26
-updated: 2026-09-26
-qmd: "CONTRIBUTING REDUNDANCY"
-issues: []
-discussions: []
 module: ModuleName
 topic: Forms
 canonical: ../../docs/shared/forms.md

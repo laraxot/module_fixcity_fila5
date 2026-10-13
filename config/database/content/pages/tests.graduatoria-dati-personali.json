@@ -142,7 +142,7 @@
                     },
                     "sections": [
                         {
-                            "type": "graduatoria-card",
+                            "type": "card",
                             "id": "applicant-info",
                             "class": "",
                             "wrapper_class": "mb-40",
@@ -153,7 +153,7 @@
                             "subtitle": "Informazione su di te",
                             "subtitle_class": "subtitle-small mb-0",
                             "content": {
-                                "kind": "graduatoria-info-cards",
+                                "kind": "info-cards",
                                 "cards": [
                                     {
                                         "title": "Giulia Bianchi",
@@ -277,7 +277,7 @@
                             }
                         },
                         {
-                            "type": "graduatoria-card",
+                            "type": "card",
                             "id": "beneficiary-info",
                             "class": "",
                             "wrapper_class": "mb-40",
@@ -288,7 +288,7 @@
                             "subtitle": "Seleziona o aggiungi il minore per cui vuoi richiedere l’iscrizione",
                             "subtitle_class": "subtitle-small mb-0",
                             "content": {
-                                "kind": "graduatoria-info-cards",
+                                "kind": "info-cards",
                                 "legend": "Seleziona o aggiungi il minore per cui vuoi richiedere l’iscrizione",
                                 "radio_name": "beneficiaries",
                                 "cards": [
@@ -538,7 +538,7 @@
                             }
                         },
                         {
-                            "type": "graduatoria-card",
+                            "type": "card",
                             "id": "other-parent-info",
                             "class": "",
                             "wrapper_class": "mb-40",
@@ -549,7 +549,7 @@
                             "subtitle": "Informazioni sull’altro genitore",
                             "subtitle_class": "subtitle-small mb-0",
                             "content": {
-                                "kind": "graduatoria-info-cards",
+                                "kind": "info-cards",
                                 "cards": [
                                     {
                                         "title": "Mario Rossi",
@@ -674,13 +674,14 @@
                                                     "modal": "#modal-documents"
                                                 }
                                             }
-                                        ]
+                                        ],
+                                        "expanded": true
                                     }
                                 ]
                             }
                         },
                         {
-                            "type": "graduatoria-card",
+                            "type": "card",
                             "id": "isee-info",
                             "class": "",
                             "wrapper_class": "",
@@ -691,7 +692,7 @@
                             "subtitle": "Informazioni sul valore dell’ISEE del tuo nucleo familiare basato sulla tua ultima dichiarazione",
                             "subtitle_class": "subtitle-small mb-0",
                             "content": {
-                                "kind": "graduatoria-info-cards",
+                                "kind": "info-cards",
                                 "cards": [
                                     {
                                         "title": "ISEE: 18.000,00€",
@@ -751,7 +752,8 @@
                                                     "modal": "#modal-isee"
                                                 }
                                             }
-                                        ]
+                                        ],
+                                        "expanded": true
                                     }
                                 ]
                             }
@@ -920,7 +922,8 @@
                                 "message": "Salvataggio effettuato"
                             }
                         }
-                    ]
+                    ],
+                    "header_active": "all-services"
                 }
             }
         ],

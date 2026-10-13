@@ -18,5 +18,5 @@ discussions: []
 
 ## Cross-Reference
 
-- Project-wide: [docs/wiki/rules/](../../../docs/wiki/rules/)
-- No Controllers: [../../../docs/wiki/rules/no-controllers-rule.md](../../../docs/wiki/rules/no-controllers-rule.md)
+- Project-wide: [docs/wiki/rules/](../wiki/rules)
+- No Controllers: [../../../docs/wiki/rules/no-controllers-rule.md](../../../../../docs/wiki/rules/no-controllers-rule.md)

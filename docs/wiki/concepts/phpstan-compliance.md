@@ -12,7 +12,7 @@ discussions:
 related:
   - ./phpstan-pest-testcase-helpers.md
   - ../overviews/completion-roadmap.md
-  - ../../../../Themes/Sixteen/docs/wiki/concepts/phpstan-compliance.md
+  - ../../../../../Themes/Sixteen/docs/wiki/concepts/phpstan-compliance.md
   - ../../../../../../docs/wiki/concepts/phpstan-level-max-compliance.md
 ---
 

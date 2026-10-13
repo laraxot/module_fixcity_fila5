@@ -2,6 +2,10 @@
 type: decision-log
 title: "Decision Log — Fixcity"
 links: {github_issue: #XXX, discussion: #XXX}
+status: draft
+updated: 2026-10-11
+tags: [docs, fixcity]
+qmd: "decision log   fixcity fixcity"
 ---
 # Decision Log — Fixcity
 

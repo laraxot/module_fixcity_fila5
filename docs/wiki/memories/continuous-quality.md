@@ -5,6 +5,7 @@ tags: [fixcity, quality, migrations, owner, design-comuni]
 created: 2026-10-09
 updated: 2026-10-09
 qmd: "FixCity owner ticket authenticated creation migration single owner Design Comuni contrast"
+status: draft
 ---
 
 # Durable decisions

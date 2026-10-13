@@ -17,6 +17,7 @@ related:
   - ../workflows/08-security.md
   - ../../../../../Themes/Sixteen/docs/architecture/privacy-policy-folio-route.md
   - STORY-FIXCITY-PRIVACY-ACKNOWLEDGEMENT-AUDIT.md
+qmd: "problema fixcity"
 ---
 
 # Problema

@@ -27,7 +27,7 @@ Pagina `/it/tickets/{id}` con:
 
 ## File owner (vietato `pages/tickets/`)
 
-**Non creare** `Themes/Sixteen/resources/views/pages/tickets/` — directory semantica vietata ([page-directory-structure.md](../../../../Themes/Sixteen/docs/page-directory-structure.md)).
+**Non creare** `Themes/Sixteen/resources/views/pages/tickets/` — directory semantica vietata ([page-directory-structure.md](../../../../../Themes/Sixteen/docs/page-directory-structure.md)).
 
 | Layer | File SSoT |
 |-------|-----------|

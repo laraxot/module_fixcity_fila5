@@ -15,6 +15,7 @@ related:
   - ../workflows/actor-visitor.md
   - ../gap-analysis.md
   - STORY-037-public-ticket-tracking-page.md
+qmd: "problema fixcity"
 ---
 
 # Problema

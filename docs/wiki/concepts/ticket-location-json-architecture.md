@@ -7,6 +7,7 @@ updated: 2026-09-26
 qmd: "ticket location json architecture"
 issues: []
 discussions: []
+status: draft
 ---
 
 # Ticket Location JSON Architecture

@@ -11,6 +11,8 @@ issues:
   - "https://github.com/laraxot/base_fixcity_fila5/issues/54"
 discussions:
   - "https://github.com/laraxot/base_fixcity_fila5/discussions/54"
+tags: [docs, fixcity, bmad]
+qmd: "story fixcity"
 ---
 
 # Story

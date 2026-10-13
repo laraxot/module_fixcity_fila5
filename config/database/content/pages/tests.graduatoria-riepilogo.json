@@ -97,16 +97,16 @@
                     },
                     "sections": [
                         {
-                            "type": "graduatoria-callout",
+                            "type": "callout",
                             "class": "callout callout-highlight ps-3 warning",
                             "icon": "it-horn",
                             "title": "Attenzione",
                             "text": "Le informazioni che hai fornito hanno valore di dichiarazione.",
                             "text_block": "Verifica che siano corrette.",
-                            "text_class": "d-lg-block"
+                            "text_block_class": "d-lg-block"
                         },
                         {
-                            "type": "graduatoria-heading",
+                            "type": "title",
                             "text": "Dati Generali",
                             "class": "title-xxlarge mb-4 mt-40"
                         },
@@ -455,7 +455,7 @@
                             ]
                         },
                         {
-                            "type": "graduatoria-heading",
+                            "type": "title",
                             "text": "Preferenze di servizio",
                             "class": "title-xxlarge mb-4"
                         },
@@ -551,7 +551,8 @@
                                 ]
                             }
                         }
-                    ]
+                    ],
+                    "header_active": "all-services"
                 }
             }
         ],

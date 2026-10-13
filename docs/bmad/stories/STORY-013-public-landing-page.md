@@ -4,6 +4,7 @@ id: STORY-013
 author: BMAD
 status: done
 priority: must
+---
 
 ## Attore: Utente non loggato (Guest)
 

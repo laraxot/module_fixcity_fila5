@@ -35,8 +35,8 @@ reference:
 related:
   - ./STORY-514-public-navigation-contract.md
   - ./STORY-515-public-navigation-measured-reality.md
-  - ../../../../bashscripts/ai/wiki/concepts/user-journeys.md
-  - ../../../../Themes/Sixteen/resources/views/components/blocks
+  - ../../../../../../bashscripts/ai/wiki/concepts/user-journeys.md
+  - ../../../../../Themes/Sixteen/resources/views/components/blocks
 ---
 
 # STORY-516 — Parità con Design Comuni

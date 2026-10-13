@@ -2,6 +2,7 @@
 title: Map Marker Improvements
 status: to_do
 priority: must
+---
 
 ## Current State
 - Map: Placeholder div in tickets-map-widget.blade.php

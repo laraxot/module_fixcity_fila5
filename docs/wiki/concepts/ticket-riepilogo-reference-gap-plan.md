@@ -7,6 +7,7 @@ updated: 2026-09-26
 qmd: "ticket riepilogo reference gap plan"
 issues: []
 discussions: []
+status: draft
 ---
 
 # Segnalazione Riepilogo Reference Gap Plan

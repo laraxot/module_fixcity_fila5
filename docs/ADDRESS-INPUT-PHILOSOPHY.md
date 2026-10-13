@@ -7,6 +7,7 @@ updated: 2026-09-26
 qmd: "ADDRESS INPUT PHILOSOPHY"
 issues: []
 discussions: []
+status: draft
 ---
 
 # AddressInput Component — Geo Module

@@ -7,6 +7,7 @@ updated: 2026-09-26
 qmd: "filament select enum best practices"
 issues: []
 discussions: []
+status: draft
 ---
 
 # Select con Enum in Filament - Best Practices

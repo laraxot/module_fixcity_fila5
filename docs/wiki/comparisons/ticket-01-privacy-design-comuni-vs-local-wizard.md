@@ -15,6 +15,7 @@ related:
   - "../../ticket-wizard-frontoffice.md"
   - "../../../../../Themes/Sixteen/docs/wiki/comparisons/segnalazione-01-privacy-design-comuni-vs-local-wizard.md"
   - "../../../../../_bmad-output/implementation-artifacts/7-103-segnalazione-01-privacy-tailwind-lit-html-audit-correction-plan.md"
+status: draft
 ---
 
 # Delta privacy step 1 — Fixcity
@@ -25,9 +26,9 @@ Documentare il confronto tra il **modello statico** Design Comuni ([segnalazione
 
 ## Dove sta la logica
 
-- Schema privacy: `TicketForm::getFrontofficePrivacySchema(string $privacyLink)`
+- Schema privacy: `TicketForm::getPrivacySchema()` (il vecchio `getFrontofficePrivacySchema()` non esiste più, verificato 2026-10-13)
 - Widget: `CreateTicketWizardWidget` (estende `XotBaseWizardWidget`)
-- Vista wrapper (markup stepper + CTA): `resources/views/filament/widgets/ticket-create-wizard.blade.php` nel modulo Fixcity — **presentazione** da spostare gradualmente verso pattern tema (vedi wiki Sixteen).
+- Vista wrapper (markup stepper + CTA): `resources/views/filament/widgets/create-ticket-wizard.blade.php` nel modulo Fixcity — **presentazione** da spostare gradualmente verso pattern tema (vedi wiki Sixteen).
 
 ## Documentazione dettagliata
 

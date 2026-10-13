@@ -4,6 +4,10 @@ status: in-progress
 module: Fixcity + Theme Sixteen
 github_issue: https://github.com/laraxot/fixcity_fila5/issues/44
 discussion: https://github.com/laraxot/fixcity_fila5/discussions/44
+type: note
+updated: 2026-10-08
+tags: [docs, fixcity, bmad]
+qmd: "story 044 map marker details fixcity"
 ---
 
 ## Problem

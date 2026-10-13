@@ -1,6 +1,6 @@
 {
-    "id": "tests.pagamenti-multa-dati-specifci-fase1",
-    "slug": "tests.pagamenti-multa-dati-specifci-fase1",
+    "id": "tests.pagamenti-multa-dati-specifici-fase1",
+    "slug": "tests.pagamenti-multa-dati-specifici-fase1",
     "parent_slug": "tests",
     "title": {
         "it": "Pagamento multa - dati specifici, fase 1",
@@ -12,14 +12,14 @@
         "en": []
     },
     "footer_blocks": null,
-    "description": "Pagina di prova pagamenti-multa-dati-specifci-fase1 (flusso pagamento multa) da JSON, resa dal blocco service-flow del tema Sixteen.",
+    "description": "Pagina di prova pagamenti-multa-dati-specifici-fase1 (flusso pagamento multa) da JSON, resa dal blocco service-flow del tema Sixteen.",
     "content_blocks": {
         "it": [
             {
                 "type": "service-flow",
                 "data": {
-                    "view": "pub_theme::components.blocks.service-flow.multa-design-comuni",
-                    "kind": "multa-wizard",
+                    "view": "pub_theme::components.blocks.service-flow.design-comuni",
+                    "kind": "wizard-step",
                     "breadcrumb": {
                         "items": [
                             {
@@ -85,8 +85,10 @@
                         "index": "3/4"
                     },
                     "body": {
-                        "wrap": "steppers-content",
-                        "col": "col-12 col-lg-8"
+                        "col": "col-12 col-lg-8",
+                        "layout": "centered",
+                        "steps_content": "outer",
+                        "sections_container": false
                     },
                     "sections": [
                         {
@@ -95,7 +97,7 @@
                             "text": "I campi contraddistinti dal simbolo asterisco sono obbligatori"
                         },
                         {
-                            "type": "multa-card",
+                            "type": "card",
                             "wrapper_class": "mb-0",
                             "card_class": "card has-bkg-grey shadow-sm p-4 pt-lg-30 pb-lg-30 pl-lg-30 pr-lg-30",
                             "header_class": "card-header border-0 p-0 mb-lg-20 m-0",
@@ -156,7 +158,8 @@
                                         "wrapper_class": "bg-white"
                                     }
                                 ]
-                            }
+                            },
+                            "tag": "none"
                         }
                     ],
                     "nav": {
@@ -242,7 +245,8 @@
                                 "message": "Salvataggio effettuato"
                             }
                         }
-                    ]
+                    ],
+                    "header_active": "all-services"
                 }
             }
         ],

@@ -25,10 +25,10 @@ discussions:
 
 related:
   - ./STORY-514-public-navigation-contract.md
-  - ../../../../bashscripts/ai/wiki/concepts/user-journeys.md
-  - ../../../../bashscripts/quality-gates/audit-public-navigation.sh
-  - ../../routes/web.php
-  - ../../../../public_html/themes/Sixteen/manifest.json
+  - ../../../../../../bashscripts/ai/wiki/concepts/user-journeys.md
+  - ../../../../../../bashscripts/quality-gates/audit-public-navigation.sh
+  - ../../../routes/web.php
+  - ../../../../../../public_html/themes/Sixteen/manifest.json
 ---
 
 # STORY-515 — Confronto e correzione

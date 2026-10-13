@@ -4,6 +4,10 @@ status: in-progress
 module: Fixcity + Theme Sixteen
 github_issue: https://github.com/laraxot/fixcity_fila5/issues/42
 discussion: https://github.com/laraxot/fixcity_fila5/discussions/42
+type: note
+updated: 2026-10-11
+tags: [docs, fixcity, bmad]
+qmd: "story 042 homepage expected actual fixcity"
 ---
 
 ## Objective

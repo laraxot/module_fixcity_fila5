@@ -17,6 +17,7 @@ related:
   - ../../bmad/workflows/actor-citizen.md
   - ../../bmad/actor-flows.md
   - ticket-workflow-state-machine.md
+status: draft
 ---
 
 # Mappa flussi per attore — Fixcity

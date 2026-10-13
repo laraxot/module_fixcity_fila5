@@ -276,7 +276,8 @@
                             ]
                         }
                     },
-                    "modals": []
+                    "modals": [],
+                    "header_active": "all-services"
                 }
             }
         ],

@@ -7,6 +7,7 @@ updated: 2026-09-26
 qmd: "INLINE JS GUIDELINES"
 issues: []
 discussions: []
+status: draft
 ---
 
 # Linee guida: evitare JS inline nelle Blade

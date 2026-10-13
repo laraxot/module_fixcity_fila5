@@ -7,6 +7,7 @@ updated: 2026-09-26
 qmd: "migration foreign key string to bigint"
 issues: []
 discussions: []
+status: draft
 ---
 
 # Migration Foreign Key Errors

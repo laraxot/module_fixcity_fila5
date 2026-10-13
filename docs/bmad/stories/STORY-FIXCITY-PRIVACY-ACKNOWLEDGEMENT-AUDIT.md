@@ -16,6 +16,7 @@ related:
   - ../gap-analysis.md
   - ../workflows/actor-citizen.md
   - ../../../../Gdpr/docs/user-registration-integration.md
+qmd: "problema fixcity"
 ---
 
 # Problema

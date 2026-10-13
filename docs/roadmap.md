@@ -7,6 +7,7 @@ updated: 2026-09-26
 qmd: "roadmap"
 issues: []
 discussions: []
+status: draft
 ---
 
 # Product Roadmap - Fixcity Module

@@ -7,6 +7,7 @@ updated: 2026-09-26
 qmd: "design comuni theme css only rule"
 issues: []
 discussions: []
+status: draft
 ---
 
 # Design Comuni Theme CSS Only Rule
@@ -22,7 +23,7 @@ Le view Fixcity del wizard segnalazione non devono contenere CSS inline per inse
 
 ## Impatto sul wizard
 
-`resources/views/filament/widgets/ticket-create-wizard.blade.php` deve esporre classi stabili come `ticket-wizard-root` e `segnalazione-wizard-root`; le regole su footer wizard, CTA, layout grid e nav sidebar si applicano dal CSS del tema.
+`resources/views/filament/widgets/create-ticket-wizard.blade.php` deve esporre classi stabili come `ticket-wizard-root` e `segnalazione-wizard-root`; le regole su footer wizard, CTA, layout grid e nav sidebar si applicano dal CSS del tema.
 
 ## Build
 

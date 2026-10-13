@@ -2,6 +2,7 @@
 title: Fixcity Homepage Final Check (BMAD + Second Brain)
 status: done
 priority: must
+---
 
 ## Documentazione BMAD completata
 1. STORY-019: Expected behavior

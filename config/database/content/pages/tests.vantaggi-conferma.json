@@ -18,7 +18,7 @@
             {
                 "type": "service-flow",
                 "data": {
-                    "view": "pub_theme::components.blocks.service-flow.vantaggi-design-comuni",
+                    "view": "pub_theme::components.blocks.service-flow.design-comuni",
                     "kind": "confirmation",
                     "breadcrumb": {
                         "items": [
@@ -75,7 +75,7 @@
                     },
                     "sections": [
                         {
-                            "type": "vantaggi-timeline",
+                            "type": "timeline",
                             "id": "next-step",
                             "class": "",
                             "title": "Prossimi passi",
@@ -181,7 +181,8 @@
                                 }
                             ]
                         }
-                    }
+                    },
+                    "header_active": "all-services"
                 }
             }
         ],

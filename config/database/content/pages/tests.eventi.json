@@ -21,13 +21,13 @@
                         "items": [
                             {
                                 "label": "Home",
-                                "url": "\/it\/tests\/homepage"
+                                "url": "/it/tests/homepage"
                             }
                         ],
                         "current": "Vivere il comune"
                     },
                     "hero": {
-                        "text": "Tutti gli eventi, le iniziative e i luoghi d\u2019interesse per scoprire e vivere il territorio comunale.",
+                        "text": "Tutti gli eventi, le iniziative e i luoghi d’interesse per scoprire e vivere il territorio comunale.",
                         "image": {
                             "file": "roma-colosseo.png",
                             "title": "titolo immagine",
@@ -36,9 +36,9 @@
                         "caption": "Colosseo, Roma. Foto di Griffin Wooldridge."
                     },
                     "card": {
-                        "read_more": "Leggi di pi\u00f9",
-                        "read_more_aria": "Leggi di pi\u00f9 sulla pagina di %s",
-                        "read_more_hidden": "su Lorem ipsum dolor sit amet, consectetur adipiscing elit\u2026"
+                        "read_more": "Leggi di più",
+                        "read_more_aria": "Leggi di più sulla pagina di %s",
+                        "read_more_hidden": "su Lorem ipsum dolor sit amet, consectetur adipiscing elit…"
                     },
                     "sections": [
                         {
@@ -57,7 +57,7 @@
                                     },
                                     "title": "Un'estate indimenticabile",
                                     "url": "",
-                                    "text": "Una iniziativa di invito alla lettura nel parco della Vittoria, dove verr\u00e0 presentato il concorso \u201cvivere il comune\u201d",
+                                    "text": "Una iniziativa di invito alla lettura nel parco della Vittoria, dove verrà presentato il concorso “vivere il comune”",
                                     "read_more_url": "#",
                                     "calendar": {
                                         "date": "26",
@@ -76,7 +76,7 @@
                                     },
                                     "title": "La biblioteca nel parco",
                                     "url": "",
-                                    "text": "Una iniziativa di invito alla lettura nel parco della Vittoria, dove verr\u00e0 presentato il concorso \u201cvivere il comune\u201d.",
+                                    "text": "Una iniziativa di invito alla lettura nel parco della Vittoria, dove verrà presentato il concorso “vivere il comune”.",
                                     "read_more_url": "#",
                                     "calendar": {
                                         "date": "03",
@@ -95,7 +95,7 @@
                                     },
                                     "title": "Festa delle associazioni della sesta circoscrizione",
                                     "url": "",
-                                    "text": "Le associazioni della sesta circoscrizione si troveranno nell\u2019auditorium della musica per presentare le attivit\u00e0 dell\u2019anno in corso e per fare festa.",
+                                    "text": "Le associazioni della sesta circoscrizione si troveranno nell’auditorium della musica per presentare le attività dell’anno in corso e per fare festa.",
                                     "read_more_url": "#",
                                     "calendar": {
                                         "date": "10",
@@ -114,7 +114,7 @@
                                     },
                                     "title": "Celluloide film festival",
                                     "url": "",
-                                    "text": "Sono pi\u00f9 di 120 i film in programma: 27 anteprime mondiali, 13 internazionali e 37 italiane, ben oltre met\u00e0 del programma sar\u00e0 composta da film mai visti prima in Italia",
+                                    "text": "Sono più di 120 i film in programma: 27 anteprime mondiali, 13 internazionali e 37 italiane, ben oltre metà del programma sarà composta da film mai visti prima in Italia",
                                     "read_more_url": "#",
                                     "calendar": {
                                         "date": "30",
@@ -132,7 +132,7 @@
                                         "label": "Categoria",
                                         "url": "#"
                                     },
-                                    "title": "Street art e murales in citt\u00e0",
+                                    "title": "Street art e murales in città",
                                     "url": "",
                                     "text": "Lo sapevi che il nostro Territorio, se imbocchi il vicolo giusto, nasconde opere di street art e bellissimi murales? Scopri con noi dove poterli ammirare.",
                                     "read_more_url": "#",
@@ -183,7 +183,7 @@
                                     },
                                     "title": "Il castello normanno",
                                     "url": "",
-                                    "text": "Sorta a met\u00e0 Seicento come residenza di caccia di Carlo Emanuele II, che fece del centrale Salone di Diana uno snodo ideale fra palazzo e giardini.",
+                                    "text": "Sorta a metà Seicento come residenza di caccia di Carlo Emanuele II, che fece del centrale Salone di Diana uno snodo ideale fra palazzo e giardini.",
                                     "read_more_url": "#"
                                 },
                                 {
@@ -198,7 +198,7 @@
                                     },
                                     "title": "Il castello normanno",
                                     "url": "",
-                                    "text": "Scopri il programma degli eventi dell\u2019estate, fra feste, cultura, attivit\u00e0 all\u2019aperto e momenti di socializzazione.",
+                                    "text": "Scopri il programma degli eventi dell’estate, fra feste, cultura, attività all’aperto e momenti di socializzazione.",
                                     "read_more_url": "#"
                                 },
                                 {
@@ -213,7 +213,7 @@
                                     },
                                     "title": "Il castello normanno",
                                     "url": "",
-                                    "text": "Scopri il programma degli eventi dell\u2019estate, fra feste, cultura, attivit\u00e0 all\u2019aperto e momenti di socializzazione.",
+                                    "text": "Scopri il programma degli eventi dell’estate, fra feste, cultura, attività all’aperto e momenti di socializzazione.",
                                     "read_more_url": "#"
                                 },
                                 {
@@ -228,7 +228,7 @@
                                     },
                                     "title": "La Gipsoteca canoviana",
                                     "url": "",
-                                    "text": "Il complesso \u00e8 situato a Possagno e contiene i modelli in gesso e i bozzetti in argilla dello scultore neoclassico Antonio Canova.",
+                                    "text": "Il complesso è situato a Possagno e contiene i modelli in gesso e i bozzetti in argilla dello scultore neoclassico Antonio Canova.",
                                     "read_more_url": "#",
                                     "date": "18 MAG 2018"
                                 },
@@ -244,7 +244,7 @@
                                     },
                                     "title": "Tomba Brion",
                                     "url": "",
-                                    "text": "La Tomba Brion si trova in via Brioni a San Vito di Altivole. Luogo estremamente affascinante e carico di simbologia, si pu\u00f2 raggiungere solamente in auto.",
+                                    "text": "La Tomba Brion si trova in via Brioni a San Vito di Altivole. Luogo estremamente affascinante e carico di simbologia, si può raggiungere solamente in auto.",
                                     "read_more_url": "#"
                                 },
                                 {
@@ -259,7 +259,7 @@
                                     },
                                     "title": "Il castello normanno",
                                     "url": "",
-                                    "text": "Scopri il programma degli eventi dell\u2019estate, fra feste, cultura, attivit\u00e0 all\u2019aperto e momenti di socializzazione.",
+                                    "text": "Scopri il programma degli eventi dell’estate, fra feste, cultura, attività all’aperto e momenti di socializzazione.",
                                     "read_more_url": "#"
                                 }
                             ],
@@ -274,7 +274,7 @@
                         "title": "Quanto sono chiare le informazioni su questa pagina?",
                         "legend": "Valuta da 1 a 5 stelle la pagina",
                         "star_label": "Valuta %d stelle su 5",
-                        "thanks": "Grazie, il tuo parere ci aiuter\u00e0 a migliorare il servizio!",
+                        "thanks": "Grazie, il tuo parere ci aiuterà a migliorare il servizio!",
                         "positive": {
                             "question": "Quali sono stati gli aspetti che hai preferito?",
                             "answers": [
@@ -286,7 +286,7 @@
                             ]
                         },
                         "negative": {
-                            "question": "Dove hai incontrato le maggiori difficolt\u00e0?",
+                            "question": "Dove hai incontrato le maggiori difficoltà?",
                             "answers": [
                                 "A volte le indicazioni non erano chiare",
                                 "A volte le indicazioni non erano complete",
@@ -332,7 +332,7 @@
                             ]
                         },
                         "problems": {
-                            "title": "Problemi in citt\u00e0",
+                            "title": "Problemi in città",
                             "items": [
                                 {
                                     "icon": "it-map-marker-circle",
@@ -341,7 +341,8 @@
                                 }
                             ]
                         }
-                    }
+                    },
+                    "header_active": "live"
                 }
             }
         ],

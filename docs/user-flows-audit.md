@@ -2,6 +2,10 @@
 type: actor-flows-audit
 title: "Audit Flussi Utente: Registrazione → Login → Segnalazioni"
 links: {github_issue: #402, discussion: #403}
+status: draft
+updated: 2026-10-08
+tags: [docs, fixcity]
+qmd: "audit flusso completo utente (fixcity + user) fixcity"
 ---
 # Audit Flusso Completo Utente (Fixcity + User)
 

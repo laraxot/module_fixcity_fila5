@@ -4,6 +4,7 @@ id: STORY-016
 author: BMAD
 status: done
 priority: high
+---
 
 ## Attore: Sistema di Notifica
 

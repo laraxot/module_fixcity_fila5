@@ -7,6 +7,7 @@ updated: 2026-09-26
 qmd: "log"
 issues: []
 discussions: []
+status: draft
 ---
 
 # Fixcity Activity Log
@@ -16,15 +17,6 @@ discussions: []
 > **Created**: 2026-04-15
 
 ---
-
-title: "log"
-type: note
-tags: [documentation]
-created: 2026-09-26
-updated: 2026-09-26
-qmd: "log"
-issues: []
-discussions: []
 ## [2026-04-15] maintenance | Initial wiki setup
 - Created: llm-wiki/ directory structure
 - Created: AGENTS.md (agent instructions)

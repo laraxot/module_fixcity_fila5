@@ -7,6 +7,7 @@ updated: 2026-09-26
 qmd: "git merge conflict inventory 2026 04 28"
 issues: []
 discussions: []
+status: draft
 ---
 
 # Git Conflict Inventory

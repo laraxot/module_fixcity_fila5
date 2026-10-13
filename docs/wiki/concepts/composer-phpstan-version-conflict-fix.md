@@ -7,6 +7,7 @@ updated: 2026-09-26
 qmd: "composer phpstan version conflict fix"
 issues: []
 discussions: []
+status: draft
 ---
 
 # Composer PHPStan Version Conflict Fix

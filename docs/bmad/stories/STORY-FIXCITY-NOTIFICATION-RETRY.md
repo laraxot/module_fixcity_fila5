@@ -12,6 +12,7 @@ discussions:
 related:
   - ../workflows/actor-system.md
   - STORY-003-system-notification.md
+qmd: "story   retry consegna notifiche fixcity fixcity"
 ---
 
 # STORY — Retry consegna notifiche FixCity

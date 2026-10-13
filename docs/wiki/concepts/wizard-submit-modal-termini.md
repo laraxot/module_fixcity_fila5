@@ -9,6 +9,7 @@ discussions: []
 name: wizard-submit-modal-termini
 description: Modal "Termini e condizioni" prima del submit wizard — parity segnalazione-03-riepilogo.html
 type: concept
+status: draft
 ---
 
 # Wizard Submit — Modal Termini e Condizioni
@@ -51,5 +52,5 @@ Apre prima un modal Bootstrap Italia con i termini e condizioni; la conferma chi
 
 ## File
 
-- Blade: `Modules/Fixcity/resources/views/filament/widgets/ticket-create-wizard.blade.php`
+- Blade: `Modules/Fixcity/resources/views/filament/widgets/create-ticket-wizard.blade.php`
 - Lang: `Modules/Fixcity/lang/it/segnalazione.php`

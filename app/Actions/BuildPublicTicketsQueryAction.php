@@ -11,6 +11,9 @@ use Spatie\QueueableAction\QueueableAction;
 
 /**
  * Query ticket visibili in frontoffice (lista, mappa, filtri) — STORY-029.
+ *
+ * Per un utente autenticato la mappa include anche le sue segnalazioni non ancora pubbliche; l'elenco pubblico (DCP-104)
+ * passa `includeOwnTickets: false` cosi' mostra a tutti lo stesso insieme e gli URL filtrati sono condivisibili.
  */
 final class BuildPublicTicketsQueryAction
 {
@@ -19,12 +22,12 @@ final class BuildPublicTicketsQueryAction
     /**
      * @return Builder<Ticket>
      */
-    public function execute(): Builder
+    public function execute(bool $includeOwnTickets = true): Builder
     {
         $query = Ticket::query()->whereNotNull('location');
 
         $currentUserId = auth()->id();
-        if ($currentUserId !== null) {
+        if ($includeOwnTickets && $currentUserId !== null) {
             $query->where(function (Builder $q) use ($currentUserId): void {
                 /** @var list<TicketStatusEnum> $visibleStatuses */
                 $visibleStatuses = TicketStatusEnum::canViewByAll();

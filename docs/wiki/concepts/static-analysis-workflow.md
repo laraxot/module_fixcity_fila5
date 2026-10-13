@@ -9,6 +9,7 @@ discussions: []
 name: static-analysis-workflow
 description: Mandatory static analysis steps after every file edit.
 type: concept
+status: draft
 ---
 
 # Static Analysis Workflow

@@ -9,6 +9,7 @@ discussions: []
 name: wizard-riepilogo-parity-audit
 description: Audit visual parity step riepilogo (step 3) vs Design Comuni segnalazione-03-riepilogo.html
 type: concept
+status: draft
 ---
 
 # Wizard Riepilogo — Visual Parity Audit

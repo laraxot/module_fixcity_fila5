@@ -2,6 +2,7 @@
 title: Map Marker Card - Expected Behavior
 status: to_do
 priority: must
+---
 
 ## Expected (BMAD Spec)
 When user clicks on a marker on the map, a **scheda completa** (complete card) should appear with:

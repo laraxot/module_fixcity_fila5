@@ -5,6 +5,8 @@ type: guide
 status: active
 created: 2026-10-13
 qmd: "fixcity tests pages json content files design comuni homepage risultati ricerca tenant"
+updated: 2026-10-13
+tags: [docs, fixcity]
 ---
 
 # File di contenuto delle pagine `/it/tests`

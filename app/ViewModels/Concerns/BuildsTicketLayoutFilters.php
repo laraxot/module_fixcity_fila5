@@ -6,6 +6,8 @@ namespace Modules\Fixcity\ViewModels\Concerns;
 
 use Modules\Xot\Actions\Cast\SafeIntCastAction;
 use Modules\Xot\Actions\Cast\SafeStringCastAction;
+use Modules\Fixcity\Actions\ResolveTicketTypeMarkerPropertiesAction;
+use Modules\Fixcity\Enums\TicketTypeEnum;
 
 trait BuildsTicketLayoutFilters
 {
@@ -32,7 +34,23 @@ trait BuildsTicketLayoutFilters
             return $this->cityDesignFilterCatalog()['items'];
         }
 
-        return $this->filterViewModel->getFilterItems();
+        $items = $this->filterViewModel->getFilterItems();
+        if ($items !== []) {
+            return $items;
+        }
+
+        // Preserve the usable filter affordance when the public dataset is empty.
+        $resolver = app(ResolveTicketTypeMarkerPropertiesAction::class);
+
+        return array_map(static function (TicketTypeEnum $type) use ($resolver): array {
+            $meta = $resolver->execute($type);
+
+            return [
+                'id' => $meta['value'], 'value' => $meta['value'],
+                'label' => $meta['label'], 'display_label' => $meta['label'],
+                'count' => 0, 'iconUrl' => $meta['iconUrl'],
+            ];
+        }, TicketTypeEnum::cases());
     }
 
     public function resultsCount(): int

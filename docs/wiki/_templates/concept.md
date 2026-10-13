@@ -10,6 +10,7 @@ discussions: []
 module: theme
 topic: concept
 canonical: ../../../../../Themes/docs/shared-components/concept.md
+status: stub
 ---
 
 See canonical documentation: ../../../../../Themes/docs/shared-components/concept.md

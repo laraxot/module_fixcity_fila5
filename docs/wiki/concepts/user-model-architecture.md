@@ -10,6 +10,7 @@ qmd: "fixcity user model architecture baseuser cancomment contract extends imple
 related:
   - laravel/Modules/User/docs/wiki/concepts/baseuser-hierarchy.md
   - laravel/Modules/Comment/docs/wiki/concepts/can-comment-contract-owner.md
+status: draft
 ---
 
 # Fixcity User Model Architecture

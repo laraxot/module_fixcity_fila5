@@ -94,4 +94,4 @@ Per route admin Filament, la catena asset deve essere coerente end-to-end:
 ## Riferimenti
 
 - [admin ticket create map visual contract](./admin-ticket-create-map-visual-contract.md)
-- [filament admin panel map visibility contract](../../../Geo/docs/wiki/concepts/filament-admin-panel-map-visibility-contract.md)
+- [filament admin panel map visibility contract](../../../../Geo/docs/wiki/concepts/filament-admin-panel-map-visibility-contract.md)

@@ -14,6 +14,7 @@ related:
   - demo-operator-panel-access-expected-2026-09-27.md
   - demo-operator-panel-access-gap-2026-09-27.md
   - stories/STORY-526-demo-operator-panel-access.md
+qmd: "implementation plan and completion fixcity"
 ---
 
 # Implementation plan and completion

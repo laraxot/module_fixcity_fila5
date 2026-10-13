@@ -4,6 +4,9 @@ type: bmad-ui-gap
 module: Fixcity
 status: closed
 created: 2026-09-27
+updated: 2026-10-08
+tags: [docs, fixcity, bmad]
+qmd: "observed gap and verified correction fixcity"
 ---
 
 # Observed gap and verified correction

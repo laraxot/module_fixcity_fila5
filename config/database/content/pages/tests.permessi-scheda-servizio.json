@@ -18,7 +18,7 @@
             {
                 "type": "service-flow",
                 "data": {
-                    "view": "pub_theme::components.blocks.service-flow.permessi-design-comuni",
+                    "view": "pub_theme::components.blocks.service-flow.design-comuni",
                     "kind": "service-sheet",
                     "breadcrumb": {
                         "items": [
@@ -256,7 +256,7 @@
                             ]
                         },
                         {
-                            "type": "permessi-timeline",
+                            "type": "timeline",
                             "id": "deadlines",
                             "class": "mb-30",
                             "title": "Tempi e scadenze",
@@ -355,7 +355,7 @@
                             ]
                         },
                         {
-                            "type": "permessi-service-contacts",
+                            "type": "service-contacts",
                             "id": "contacts",
                             "title": "Contatti",
                             "office": {
@@ -494,7 +494,8 @@
                                 }
                             ]
                         }
-                    }
+                    },
+                    "header_active": "all-services"
                 }
             }
         ],

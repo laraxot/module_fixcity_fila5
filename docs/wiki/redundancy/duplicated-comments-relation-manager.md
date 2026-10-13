@@ -13,6 +13,7 @@ issues:
 related:
   - ../../../Comment/docs/redundancy-report.md
   - ./fixcity-cross-module-duplicate-surfaces.md
+status: draft
 ---
 
 # CommentsRelationManager — due path nello stesso modulo

@@ -6,7 +6,7 @@
         "it": "Graduatoria scuola dell'infanzia per l'anno educativo 2022/23",
         "en": "Graduatoria scuola dell'infanzia per l'anno educativo 2022/23"
     },
-    "layout": "test",
+    "layout": "design-comuni-authenticated",
     "sidebar_blocks": {
         "it": [],
         "en": []
@@ -18,8 +18,8 @@
             {
                 "type": "service-flow",
                 "data": {
-                    "view": "pub_theme::components.blocks.service-flow.graduatoria-design-comuni",
-                    "kind": "graduatoria-document",
+                    "view": "pub_theme::components.blocks.service-flow.design-comuni",
+                    "kind": "wizard-step",
                     "breadcrumb": {
                         "items": [
                             {
@@ -35,6 +35,8 @@
                         "rule": "d-none d-lg-block mb-2"
                     },
                     "body": {
+                        "layout": "centered",
+                        "sections_container": false,
                         "row": "row mt-3 mt-lg-40 justify-content-center",
                         "col": "col-12 col-lg-8"
                     },
@@ -96,7 +98,7 @@
                             ]
                         },
                         {
-                            "type": "graduatoria-timeline",
+                            "type": "timeline",
                             "bare": true,
                             "title": "Tempi e scadenze",
                             "entries": [

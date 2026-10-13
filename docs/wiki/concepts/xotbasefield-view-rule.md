@@ -9,6 +9,7 @@ discussions: []
 name: XotBaseField view rule
 description: Components extending XotBaseField must not define a protected string $view; view is resolved dynamically via Spatie Queryable actions (getViewBy...).
 type: concept
+status: draft
 ---
 
 # XotBaseField View Calculation Rule

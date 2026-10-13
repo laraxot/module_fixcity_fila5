@@ -18,7 +18,7 @@
             {
                 "type": "service-flow",
                 "data": {
-                    "view": "pub_theme::components.blocks.service-flow.imu-design-comuni",
+                    "view": "pub_theme::components.blocks.service-flow.design-comuni",
                     "kind": "confirmation",
                     "breadcrumb": {
                         "items": [
@@ -61,14 +61,15 @@
                             }
                         ]
                     },
-                    "after": {
+                    "after_heading": {
                         "class": "mt-4 mt-lg-3 mb-40 mb-lg-100",
                         "link": {
                             "label": "Consulta la richiesta",
                             "url": "#",
                             "class": "t-primary"
                         },
-                        "text": "nella tua area riservata."
+                        "text": "nella tua area riservata.",
+                        "link_first": true
                     },
                     "feedback": {
                         "col_class": "col-12 col-lg-6 p-lg-0 px-4",
@@ -134,7 +135,8 @@
                                 }
                             ]
                         }
-                    }
+                    },
+                    "header_active": "all-services"
                 }
             }
         ],

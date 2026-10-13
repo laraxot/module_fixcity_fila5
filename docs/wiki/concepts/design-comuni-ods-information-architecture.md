@@ -5,6 +5,8 @@ created: 2026-10-11
 updated: 2026-10-11
 tags: [second-brain, design-comuni, ods, information-architecture, fixcity]
 source: "https://designers.italia.it/files/resources/modelli/comuni/adotta-il-modello-di-sito-comunale/definisci-architettura-e-contenuti/Architettura-informazione-sito-Comuni.ods"
+status: draft
+qmd: "regola ods fixcity"
 ---
 
 # Regola ODS

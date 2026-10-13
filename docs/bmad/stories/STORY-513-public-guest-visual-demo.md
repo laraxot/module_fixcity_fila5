@@ -47,7 +47,7 @@ missing public routes. The current local runtime returns `404` for
 `/it|en/segnalazioni` and `/it/services`; the previous `8/8 PASS` claim is
 therefore stale and remains blocked until the canonical route matrix is repaired
 or the intentionally unsupported paths are removed from this story.
-- Fix visuale: [homepage-guest-visual-fix](../../../../Themes/Sixteen/docs/wiki/concepts/homepage-guest-visual-fix.md).
+- Fix visuale: [homepage-guest-visual-fix](../../../../../Themes/Sixteen/docs/wiki/concepts/homepage-guest-visual-fix.md).
 - Audit finale: [design-comuni-guest-crawl-2026-09-27](../design-comuni-guest-crawl-2026-09-27.md).
 
 ## Collegamenti

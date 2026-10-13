@@ -11,6 +11,7 @@ sources:
   - ../../../../../../docs/wiki/concepts/openrouter-context-compression-plugin.md
   - ../../filament-summary-infolist-guidance.md
   - https://filamentphp.com/docs/5.x/infolists/overview
+status: draft
 ---
 
 # Context compression and wizard summary Infolist rule

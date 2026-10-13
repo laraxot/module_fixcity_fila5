@@ -25,6 +25,13 @@ test('create ticket wizard binds ticket resource for filament wizard', function 
     Assert::assertSame(TicketResource::class, CreateTicketWizardWidget::$resource);
 });
 
+test('create ticket wizard exposes filament schema calls to livewire', function (): void {
+    $method = new ReflectionMethod(CreateTicketWizardWidget::class, 'callSchemaComponentMethod');
+
+    Assert::assertTrue($method->isPublic());
+    Assert::assertSame(XotBaseWizardWidget::class, $method->getDeclaringClass()->getName());
+});
+
 test('sixteen theme wizard wrapper avoids nested form around filament wizard', function (): void {
     $path = dirname(__DIR__, 4).'/Themes/Sixteen/resources/views/filament/widgets/create-ticket-wizard.blade.php';
 

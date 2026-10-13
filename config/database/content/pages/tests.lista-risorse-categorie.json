@@ -375,7 +375,8 @@
                                 }
                             ]
                         }
-                    }
+                    },
+                    "header_active": "news"
                 }
             }
         ],

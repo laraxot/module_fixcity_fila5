@@ -16,6 +16,7 @@ related:
   - ./no-controllers-folio-volt-filament.md
   - ../../bmad/README.md
   - ../../bmad/gap-analysis.md
+status: draft
 ---
 
 # Contratto architetturale canonico FixCity

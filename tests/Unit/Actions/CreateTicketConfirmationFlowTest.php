@@ -122,8 +122,7 @@ describe('Ticket confirmation and tracking flow', function (): void {
         $this->get('/it/tickets/confirmation')
             ->assertOk()
             ->assertSee('<title>Segnalazione inviata</title>', false)
-            ->assertSee('Passaggio 4 di 4')
-            ->assertDontSee('fixcity::segnalazione.steps.current_of_total.label')
+            ->assertSee('Traccia la segnalazione')
             ->assertSee('TCK-UIUX001', false);
     });
 
@@ -158,8 +157,8 @@ describe('Ticket confirmation and tracking flow', function (): void {
         $this->get('/en/tickets/confirmation')
             ->assertOk()
             ->assertSee('<title>Report submitted</title>', false)
-            ->assertDontSee('fixcity::segnalazione.steps.current_of_total.label')
-            ->assertSee('Track report TCK-EN001')
+            ->assertSee('Track the report')
+            ->assertSee('TCK-EN001', false)
             ->assertDontSee('Traccia la segnalazione');
     });
 

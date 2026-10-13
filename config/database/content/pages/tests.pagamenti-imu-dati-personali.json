@@ -18,7 +18,7 @@
             {
                 "type": "service-flow",
                 "data": {
-                    "view": "pub_theme::components.blocks.service-flow.imu-design-comuni",
+                    "view": "pub_theme::components.blocks.service-flow.design-comuni",
                     "kind": "wizard-step",
                     "breadcrumb": {
                         "items": [
@@ -112,8 +112,7 @@
                     },
                     "sections": [
                         {
-                            "type": "imu-card",
-                            "wrap": "section",
+                            "type": "card",
                             "id": "taxpayer",
                             "class": "",
                             "wrapper_class": "mb-40",
@@ -400,8 +399,7 @@
                             }
                         },
                         {
-                            "type": "imu-card",
-                            "wrap": "section",
+                            "type": "card",
                             "id": "co-obliged",
                             "class": "",
                             "wrapper_class": "mb-40",
@@ -577,8 +575,7 @@
                             }
                         },
                         {
-                            "type": "imu-card",
-                            "wrap": "section",
+                            "type": "card",
                             "id": "properties",
                             "class": "",
                             "wrapper_class": "",
@@ -971,7 +968,8 @@
                                 "message": "Salvataggio effettuato"
                             }
                         }
-                    ]
+                    ],
+                    "header_active": "all-services"
                 }
             }
         ],

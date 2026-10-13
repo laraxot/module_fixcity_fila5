@@ -15,6 +15,7 @@ discussions:
 related:
   - ../../../../../../docs/wiki/rules/migration-update-timestamps-only.md
   - ./profiles-uuid-contract.md
+status: draft
 ---
 
 # Fixcity — audit columns in migrazione

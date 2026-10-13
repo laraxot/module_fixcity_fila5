@@ -11,6 +11,7 @@ tags: [fixcity, ticket, wizard, priority, frontoffice, filament]
 related:
   - ./ticket-wizard-steps-in-form-rule.md
   - ../../../../../Themes/Sixteen/docs/wiki/concepts/frontoffice-ticket-priority-theme-boundary.md
+status: draft
 ---
 
 # Frontoffice Ticket Priority Default Rule

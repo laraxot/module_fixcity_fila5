@@ -15,7 +15,7 @@ related:
   - gap-analysis.md
   - release-plan.md
   - workflows/01-discovery.md
-  - ../../wiki/concepts/fixcity-gap-compliance-pa-italia.md
+  - ../wiki/concepts/fixcity-gap-compliance-pa-italia.md
 ---
 
 # FixCity — benchmark competitivo e gap di prodotto

@@ -7,6 +7,7 @@ updated: 2026-09-26
 qmd: "ticketform pattern reference"
 issues: []
 discussions: []
+status: draft
 ---
 
 # TicketForm Pattern Reference

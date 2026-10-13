@@ -7,6 +7,7 @@ updated: 2026-09-26
 qmd: "phpstan runtime priority rule"
 issues: []
 discussions: []
+status: draft
 ---
 
 # PHPStan Runtime Priority Rule

@@ -7,6 +7,7 @@ updated: 2026-09-26
 qmd: "ticket header navbar green rule"
 issues: []
 discussions: []
+status: draft
 ---
 
 # Segnalazione Header Navbar Green Rule

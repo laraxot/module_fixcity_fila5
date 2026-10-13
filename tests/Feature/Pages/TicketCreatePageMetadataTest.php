@@ -14,7 +14,7 @@ it('renders the Italian CMS title in the browser title for the authenticated wiz
         ->assertOk()
         ->assertSee('<title>Segnala disservizio</title>', false)
         ->assertSee('Autorizzazioni e condizioni')
-        ->assertSee('(Attivo)')
+        ->assertSee('Ho letto e compreso l\'informativa sulla privacy')
         ->assertSee('aria-invalid="false"', false)
         ->assertSee('aria-describedby="ticket-privacy-error"', false)
         ->assertDontSee('fixcity::');
@@ -27,7 +27,7 @@ it('renders the English CMS title in the browser title for the authenticated wiz
         ->assertOk()
         ->assertSee('<title>Report an issue</title>', false)
         ->assertSee('Privacy and terms')
-        ->assertSee('(Active)')
+        ->assertSee('I have read and understood the privacy policy')
         ->assertSee('aria-invalid="false"', false)
         ->assertSee('aria-describedby="ticket-privacy-error"', false)
         ->assertDontSee('fixcity::');

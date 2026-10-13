@@ -14,6 +14,7 @@ related:
   - ../concepts/location-capture-map-wizard.md
   - ../concepts/segnalazione-crea-geolocate-when-empty.md
   - ../concepts/ticket-list-map-architecture.md
+status: draft
 ---
 
 # Segnalazione Crea Map UX Fixes (2026-05-13)

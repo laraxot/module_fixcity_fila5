@@ -12,6 +12,7 @@ related:
     - ../../../docs/ticket-wizard-frontoffice.md
     - ../../../../../Modules/Xot/app/Filament/Widgets/XotBaseWidget.php
     - ../../../../../Modules/Xot/app/Actions/View/GetViewByClassAction.php
+status: draft
 ---
 
 # perché

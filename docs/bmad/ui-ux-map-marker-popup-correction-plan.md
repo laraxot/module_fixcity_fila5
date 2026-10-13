@@ -4,6 +4,9 @@ type: bmad-ui-correction-plan
 module: Fixcity
 status: implemented
 created: 2026-09-27
+updated: 2026-10-08
+tags: [docs, fixcity, bmad]
+qmd: "correction plan fixcity"
 ---
 
 # Correction plan

@@ -3,7 +3,9 @@
   "slug": "header",
   "name": {
     "it": "Intestazione Design Comuni",
-    "en": "Design Comuni header"
+    "en": "Design Comuni header",
+    "de": "Design-Comuni-Kopfbereich",
+    "es": "Cabecera Design Comuni"
   },
   "blocks": {
     "it": [
@@ -17,7 +19,8 @@
             "tagline": "Un comune da vivere",
             "logo": "themes/Sixteen/design-comuni/assets/images/logo-comune.svg",
             "header_title": "Il mio Comune",
-            "menu_title": "Nome del Comune"
+            "menu_title": "Nome del Comune",
+            "link_title": "Vai alla homepage"
           },
           "region": {
             "name": "Nome della Regione",
@@ -35,7 +38,36 @@
             "label": "Accedi all’area personale",
             "url": "/login",
             "element": "personal-area-login",
-            "login_label": "Accedi all'area personale"
+            "login_label": "Accedi all'area personale",
+            "signed_in": {
+              "name": "Area personale",
+              "menu": [
+                {
+                  "label": "I miei servizi",
+                  "url": "#"
+                },
+                {
+                  "label": "Le mie pratiche",
+                  "url": "#"
+                },
+                {
+                  "label": "Notifiche",
+                  "url": "#"
+                },
+                {
+                  "divider": true
+                },
+                {
+                  "label": "Impostazioni",
+                  "url": "#"
+                },
+                {
+                  "label": "Esci",
+                  "url": "#",
+                  "icon": "it-external-link"
+                }
+              ]
+            }
           },
           "social": {
             "twitter": "https://twitter.com",
@@ -97,6 +129,14 @@
               {
                 "locale": "en",
                 "label": "ENG"
+              },
+              {
+                "locale": "de",
+                "label": "DEU"
+              },
+              {
+                "locale": "es",
+                "label": "SPA"
               }
             ]
           },
@@ -157,25 +197,55 @@
             "tagline": "A municipality to live",
             "logo": "themes/Sixteen/design-comuni/assets/images/logo-comune.svg",
             "header_title": "My Municipality",
-            "menu_title": "Municipality name"
+            "menu_title": "Municipality name",
+            "link_title": "Go to the homepage"
           },
           "region": {
             "name": "Name of the Region",
-            "url": "/region",
+            "url": "/regione",
             "title": "Go to the {Region name} portal",
             "aria_label": "Go to the {Region name} portal - external link - opens in a new tab"
           },
           "utility_links": [
             {
               "label": "Transparent administration",
-              "url": "/transparent-administration"
+              "url": "/amministrazione-trasparente"
             }
           ],
           "account": {
             "label": "Access personal area",
             "url": "/login",
             "element": "personal-area-login",
-            "login_label": "Access personal area"
+            "login_label": "Access personal area",
+            "signed_in": {
+              "name": "Personal area",
+              "menu": [
+                {
+                  "label": "My services",
+                  "url": "#"
+                },
+                {
+                  "label": "My requests",
+                  "url": "#"
+                },
+                {
+                  "label": "Notifications",
+                  "url": "#"
+                },
+                {
+                  "divider": true
+                },
+                {
+                  "label": "Settings",
+                  "url": "#"
+                },
+                {
+                  "label": "Log out",
+                  "url": "#",
+                  "icon": "it-external-link"
+                }
+              ]
+            }
           },
           "social": {
             "twitter": "https://twitter.com",
@@ -187,41 +257,41 @@
           "navigation": [
             {
               "label": "Administration",
-              "url": "/administration",
+              "url": "/amministrazione",
               "element": "management"
             },
             {
               "label": "News",
-              "url": "/news",
+              "url": "/novita",
               "element": "news"
             },
             {
               "label": "Services",
-              "url": "/services",
+              "url": "/servizi",
               "element": "all-services"
             },
             {
               "label": "Living the municipality",
-              "url": "/events",
+              "url": "/eventi",
               "element": "live"
             }
           ],
           "secondary_navigation": [
             {
               "label": "Registrations",
-              "url": "/topics/registrations"
+              "url": "/argomenti/iscrizioni"
             },
             {
               "label": "Summer in the city",
-              "url": "/topics/summer-in-the-city"
+              "url": "/argomenti/estate-in-citta"
             },
             {
               "label": "Local police",
-              "url": "/topics/local-police"
+              "url": "/argomenti/polizia-locale"
             },
             {
               "label": "All topics",
-              "url": "/topics",
+              "url": "/argomenti",
               "element": "all-topics",
               "chevron": true
             }
@@ -237,6 +307,14 @@
               {
                 "locale": "en",
                 "label": "ENG"
+              },
+              {
+                "locale": "de",
+                "label": "DEU"
+              },
+              {
+                "locale": "es",
+                "label": "SPA"
               }
             ]
           },
@@ -282,6 +360,362 @@
             "close_label": "Hide navigation",
             "main_label": "Main",
             "secondary_label": "Secondary"
+          }
+        }
+      }
+    ],
+    "de": [
+      {
+        "type": "header",
+        "slug": "design-comuni-header",
+        "data": {
+          "view": "pub_theme::components.sections.header.v1",
+          "brand": {
+            "name": "Name der Gemeinde",
+            "tagline": "Eine Gemeinde zum Leben",
+            "logo": "themes/Sixteen/design-comuni/assets/images/logo-comune.svg",
+            "header_title": "Meine Gemeinde",
+            "menu_title": "Name der Gemeinde",
+            "link_title": "Zur Startseite"
+          },
+          "region": {
+            "name": "Name der Region",
+            "url": "/regione",
+            "title": "Zum Portal {Name der Region}",
+            "aria_label": "Zum Portal {Name der Region} - externer Link - öffnet in einem neuen Tab"
+          },
+          "utility_links": [
+            {
+              "label": "Transparente Verwaltung",
+              "url": "/amministrazione-trasparente"
+            }
+          ],
+          "account": {
+            "label": "Im persönlichen Bereich anmelden",
+            "url": "/login",
+            "element": "personal-area-login",
+            "login_label": "Im persönlichen Bereich anmelden",
+            "signed_in": {
+              "name": "Persönlicher Bereich",
+              "menu": [
+                {
+                  "label": "Meine Dienste",
+                  "url": "#"
+                },
+                {
+                  "label": "Meine Vorgänge",
+                  "url": "#"
+                },
+                {
+                  "label": "Benachrichtigungen",
+                  "url": "#"
+                },
+                {
+                  "divider": true
+                },
+                {
+                  "label": "Einstellungen",
+                  "url": "#"
+                },
+                {
+                  "label": "Abmelden",
+                  "url": "#",
+                  "icon": "it-external-link"
+                }
+              ]
+            }
+          },
+          "social": {
+            "twitter": "https://twitter.com",
+            "facebook": "https://facebook.com",
+            "youtube": "https://youtube.com",
+            "telegram": "https://telegram.org",
+            "whatsapp": "https://wa.me"
+          },
+          "navigation": [
+            {
+              "label": "Verwaltung",
+              "url": "/amministrazione",
+              "element": "management"
+            },
+            {
+              "label": "Neuigkeiten",
+              "url": "/novita",
+              "element": "news"
+            },
+            {
+              "label": "Dienste",
+              "url": "/servizi",
+              "element": "all-services"
+            },
+            {
+              "label": "Das Gemeindeleben",
+              "url": "/eventi",
+              "element": "live"
+            }
+          ],
+          "secondary_navigation": [
+            {
+              "label": "Anmeldungen",
+              "url": "/argomenti/iscrizioni"
+            },
+            {
+              "label": "Sommer in der Stadt",
+              "url": "/argomenti/estate-in-citta"
+            },
+            {
+              "label": "Ortspolizei",
+              "url": "/argomenti/polizia-locale"
+            },
+            {
+              "label": "Alle Themen",
+              "url": "/argomenti",
+              "element": "all-topics",
+              "chevron": true
+            }
+          ],
+          "languages": {
+            "active_label": "Aktuelle Sprache:",
+            "selected_label": "ausgewählt",
+            "items": [
+              {
+                "locale": "it",
+                "label": "ITA"
+              },
+              {
+                "locale": "en",
+                "label": "ENG"
+              },
+              {
+                "locale": "de",
+                "label": "DEU"
+              },
+              {
+                "locale": "es",
+                "label": "SPA"
+              }
+            ]
+          },
+          "follow_us": "Folgen Sie uns auf",
+          "social_links": [
+            {
+              "icon": "it-twitter",
+              "label": "Twitter",
+              "url": "#"
+            },
+            {
+              "icon": "it-facebook",
+              "label": "Facebook",
+              "url": "#"
+            },
+            {
+              "icon": "it-youtube",
+              "label": "YouTube",
+              "url": "#"
+            },
+            {
+              "icon": "it-telegram",
+              "label": "Telegram",
+              "url": "#"
+            },
+            {
+              "icon": "it-whatsapp",
+              "label": "Whatsapp",
+              "url": "#"
+            },
+            {
+              "icon": "it-rss",
+              "label": "RSS",
+              "url": "#"
+            }
+          ],
+          "search": {
+            "label": "Suchen",
+            "aria_label": "Website durchsuchen"
+          },
+          "menu": {
+            "toggle_label": "Navigation anzeigen/ausblenden",
+            "close_label": "Navigation ausblenden",
+            "main_label": "Hauptnavigation",
+            "secondary_label": "Sekundärnavigation"
+          }
+        }
+      }
+    ],
+    "es": [
+      {
+        "type": "header",
+        "slug": "design-comuni-header",
+        "data": {
+          "view": "pub_theme::components.sections.header.v1",
+          "brand": {
+            "name": "Nombre del Ayuntamiento",
+            "tagline": "Una ciudad para vivir",
+            "logo": "themes/Sixteen/design-comuni/assets/images/logo-comune.svg",
+            "header_title": "Mi Ayuntamiento",
+            "menu_title": "Nombre del Ayuntamiento",
+            "link_title": "Ir a la página de inicio"
+          },
+          "region": {
+            "name": "Nombre de la Región",
+            "url": "/regione",
+            "title": "Ir al portal de {Nombre de la Región}",
+            "aria_label": "Ir al portal de {Nombre de la Región} - enlace externo - se abre en una pestaña nueva"
+          },
+          "utility_links": [
+            {
+              "label": "Administración transparente",
+              "url": "/amministrazione-trasparente"
+            }
+          ],
+          "account": {
+            "label": "Acceder al área personal",
+            "url": "/login",
+            "element": "personal-area-login",
+            "login_label": "Acceder al área personal",
+            "signed_in": {
+              "name": "Área personal",
+              "menu": [
+                {
+                  "label": "Mis servicios",
+                  "url": "#"
+                },
+                {
+                  "label": "Mis trámites",
+                  "url": "#"
+                },
+                {
+                  "label": "Notificaciones",
+                  "url": "#"
+                },
+                {
+                  "divider": true
+                },
+                {
+                  "label": "Ajustes",
+                  "url": "#"
+                },
+                {
+                  "label": "Cerrar sesión",
+                  "url": "#",
+                  "icon": "it-external-link"
+                }
+              ]
+            }
+          },
+          "social": {
+            "twitter": "https://twitter.com",
+            "facebook": "https://facebook.com",
+            "youtube": "https://youtube.com",
+            "telegram": "https://telegram.org",
+            "whatsapp": "https://wa.me"
+          },
+          "navigation": [
+            {
+              "label": "Administración",
+              "url": "/amministrazione",
+              "element": "management"
+            },
+            {
+              "label": "Novedades",
+              "url": "/novita",
+              "element": "news"
+            },
+            {
+              "label": "Servicios",
+              "url": "/servizi",
+              "element": "all-services"
+            },
+            {
+              "label": "Vivir el municipio",
+              "url": "/eventi",
+              "element": "live"
+            }
+          ],
+          "secondary_navigation": [
+            {
+              "label": "Inscripciones",
+              "url": "/argomenti/iscrizioni"
+            },
+            {
+              "label": "Verano en la ciudad",
+              "url": "/argomenti/estate-in-citta"
+            },
+            {
+              "label": "Policía local",
+              "url": "/argomenti/polizia-locale"
+            },
+            {
+              "label": "Todos los temas",
+              "url": "/argomenti",
+              "element": "all-topics",
+              "chevron": true
+            }
+          ],
+          "languages": {
+            "active_label": "Idioma actual:",
+            "selected_label": "seleccionado",
+            "items": [
+              {
+                "locale": "it",
+                "label": "ITA"
+              },
+              {
+                "locale": "en",
+                "label": "ENG"
+              },
+              {
+                "locale": "de",
+                "label": "DEU"
+              },
+              {
+                "locale": "es",
+                "label": "SPA"
+              }
+            ]
+          },
+          "follow_us": "Síguenos en",
+          "social_links": [
+            {
+              "icon": "it-twitter",
+              "label": "Twitter",
+              "url": "#"
+            },
+            {
+              "icon": "it-facebook",
+              "label": "Facebook",
+              "url": "#"
+            },
+            {
+              "icon": "it-youtube",
+              "label": "YouTube",
+              "url": "#"
+            },
+            {
+              "icon": "it-telegram",
+              "label": "Telegram",
+              "url": "#"
+            },
+            {
+              "icon": "it-whatsapp",
+              "label": "Whatsapp",
+              "url": "#"
+            },
+            {
+              "icon": "it-rss",
+              "label": "RSS",
+              "url": "#"
+            }
+          ],
+          "search": {
+            "label": "Buscar",
+            "aria_label": "Buscar en el sitio"
+          },
+          "menu": {
+            "toggle_label": "Mostrar/ocultar la navegación",
+            "close_label": "Ocultar la navegación",
+            "main_label": "Navegación principal",
+            "secondary_label": "Navegación secundaria"
           }
         }
       }

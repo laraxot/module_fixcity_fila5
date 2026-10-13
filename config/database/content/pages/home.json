@@ -1,7 +1,13 @@
 {
     "id": "home",
-    "title": {"it": "FixCity — La piattaforma civic tech per la manutenzione urbana", "en": "FixCity — Civic tech for better urban maintenance"},
+    "title": {"it": "FixCity — La piattaforma civic tech per la manutenzione urbana", "en": "FixCity — Civic tech for better urban maintenance", "de": "FixCity — Civic-Tech-Plattform für die Instandhaltung der Stadt", "es": "FixCity — Civic tech para un mejor mantenimiento urbano"},
     "slug": "home",
+  "description": {
+    "it": "Segnala disservizi e problemi di manutenzione urbana, consulta la mappa delle segnalazioni pubbliche e segui lo stato della tua pratica.",
+    "en": "Report service issues and urban maintenance problems, browse the map of public reports and follow the status of your request.",
+    "de": "Melden Sie Störungen und Probleme bei der Instandhaltung der Stadt, sehen Sie die Karte der öffentlichen Meldungen und verfolgen Sie den Status Ihres Vorgangs.",
+    "es": "Comunica incidencias y problemas de mantenimiento urbano, consulta el mapa de incidencias públicas y sigue el estado de tu trámite."
+  },
     "content": null,
     "content_blocks": {
         "it": [
@@ -13,9 +19,9 @@
                     "heading": "Segnalazioni e servizi per la tua comunità",
                     "intro": "Racconta cosa non funziona, indica dove e segui gli aggiornamenti in modo semplice e trasparente.",
                     "primary_label": "Invia una segnalazione",
-                    "primary_url": "{{ route('container0.view',['container0' => 'tickets','slug0' => 'create' ]) }}",
+                    "primary_url": "{{ LaravelLocalization::localizeURL('/tickets/create') }}",
                     "secondary_label": "Vedi le segnalazioni",
-                    "secondary_url": "{{ route('container0.index',['container0' => 'tickets']) }}",
+                    "secondary_url": "{{ LaravelLocalization::localizeURL('/tickets') }}",
                     "meta_label": "IMPEGNO CIVICO",
                     "meta_value": "La tua voce conta",
                     "meta_body": "Ogni segnalazione aiuta il Comune a capire le priorità e a rendere visibili gli interventi."
@@ -26,8 +32,8 @@
                 "data": {
                     "view": "pub_theme::components.blocks.ticket.map-preview",
                     "data_url": "/api/tickets/geojson",
-                    "report_url": "{{ route('container0.view',['container0' => 'tickets','slug0' => 'create' ]) }}",
-                    "list_url": "{{ route('container0.index',['container0' => 'tickets']) }}",
+                    "report_url": "{{ LaravelLocalization::localizeURL('/tickets/create') }}",
+                    "list_url": "{{ LaravelLocalization::localizeURL('/tickets') }}",
                     "height": "420px",
                     "aria_label": "pub_theme::home.list.map_aria",
                      "icon": "it-arrow-right",
@@ -60,12 +66,12 @@
                     "body": "Inserisci il codice ricevuto per controllare lo stato della pratica.",
                     "button": {
                         "label": "Traccia una segnalazione",
-                        "url": "{{ route('tickets.track') }}",
+                        "url": "{{ LaravelLocalization::localizeURL('/tickets/track') }}",
                         "icon": "it-search"
                     },
                     "secondary_button": {
                         "label": "Invia una segnalazione",
-                        "url": "{{ route('container0.view',['container0' => 'tickets','slug0' => 'create' ]) }}",
+                        "url": "{{ LaravelLocalization::localizeURL('/tickets/create') }}",
                         "icon": "it-plus"
                     }
                 }
@@ -80,9 +86,9 @@
                     "heading": "Reports and services for your community",
                     "intro": "Tell us what is not working, show us where and follow updates simply and transparently.",
                     "primary_label": "Submit a report",
-                    "primary_url": "{{ route('container0.view',['container0' => 'tickets','slug0' => 'create' ]) }}",
+                    "primary_url": "{{ LaravelLocalization::localizeURL('/tickets/create') }}",
                     "secondary_label": "View reports",
-                    "secondary_url": "{{ route('container0.index',['container0' => 'tickets']) }}",
+                    "secondary_url": "{{ LaravelLocalization::localizeURL('/tickets') }}",
                     "meta_label": "CIVIC COMMITMENT",
                     "meta_value": "Your voice matters",
                     "meta_body": "Every report helps the municipality understand priorities and make improvements visible."
@@ -93,8 +99,8 @@
                 "data": {
                     "view": "pub_theme::components.blocks.ticket.map-preview",
                     "data_url": "/api/tickets/geojson",
-                    "report_url": "{{ route('container0.view',['container0' => 'tickets','slug0' => 'create' ]) }}",
-                    "list_url": "{{ route('container0.index',['container0' => 'tickets']) }}",
+                    "report_url": "{{ LaravelLocalization::localizeURL('/tickets/create') }}",
+                    "list_url": "{{ LaravelLocalization::localizeURL('/tickets') }}",
                     "height": "420px",
                     "aria_label": "pub_theme::home.list.map_aria",
                      "icon": "it-arrow-right",
@@ -147,18 +153,182 @@
                     "body": "Enter the code you received to check the status of your request.",
                     "button": {
                         "label": "Track a report",
-                        "url": "{{ route('tickets.track') }}",
+                        "url": "{{ LaravelLocalization::localizeURL('/tickets/track') }}",
                         "icon": "it-search"
                     },
                     "secondary_button": {
                         "label": "Submit a report",
-                        "url": "{{ route('container0.view',['container0' => 'tickets','slug0' => 'create' ]) }}",
+                        "url": "{{ LaravelLocalization::localizeURL('/tickets/create') }}",
+                        "icon": "it-plus"
+                    }
+                }
+            }
+        ],
+        "de": [
+            {
+                "type": "home.hero",
+                "data": {
+                    "view": "pub_theme::components.blocks.home.hero",
+                    "eyebrow": "DIGITALE DIENSTE DER GEMEINDE",
+                    "heading": "Meldungen und Dienste für Ihre Gemeinschaft",
+                    "intro": "Sagen Sie uns, was nicht funktioniert, geben Sie den Ort an und verfolgen Sie die Aktualisierungen einfach und transparent.",
+                    "primary_label": "Meldung senden",
+                    "primary_url": "{{ LaravelLocalization::localizeURL('/tickets/create') }}",
+                    "secondary_label": "Meldungen ansehen",
+                    "secondary_url": "{{ LaravelLocalization::localizeURL('/tickets') }}",
+                    "meta_label": "BÜRGERENGAGEMENT",
+                    "meta_value": "Ihre Stimme zählt",
+                    "meta_body": "Jede Meldung hilft der Gemeinde, Prioritäten zu erkennen und Maßnahmen sichtbar zu machen."
+                }
+            },
+            {
+                "type": "ticket.map-preview",
+                "data": {
+                    "view": "pub_theme::components.blocks.ticket.map-preview",
+                    "data_url": "/api/tickets/geojson",
+                    "report_url": "{{ LaravelLocalization::localizeURL('/tickets/create') }}",
+                    "list_url": "{{ LaravelLocalization::localizeURL('/tickets') }}",
+                    "height": "420px",
+                    "aria_label": "pub_theme::home.list.map_aria",
+                    "icon": "it-arrow-right",
+                    "heading": "Öffentliche Meldungen im Gemeindegebiet",
+                    "intro": "Auf der Karte sehen Sie die bereits gemeldeten Probleme und die laufenden Maßnahmen.",
+                    "eyebrow": "KARTE DER GEMEINSCHAFT",
+                    "legend": "Öffentliche Meldungen"
+                }
+            },
+            {
+                "type": "how-it-works",
+                "data": {
+                    "view": "pub_theme::components.blocks.how-it-works",
+                    "heading": "So funktioniert es",
+                    "intro": "Beschreiben Sie das Problem, geben Sie an, wo es sich befindet, und verfolgen Sie die Aktualisierungen im persönlichen Bereich.",
+                    "steps_label": "Schritte zum Senden einer Meldung",
+                    "steps": [
+                        {
+                            "number": 1,
+                            "title": "Problem beschreiben",
+                            "body": "Erklären Sie, was passiert ist, und wählen Sie die passendste Kategorie.",
+                            "icon": "it-exclamation-triangle"
+                        },
+                        {
+                            "number": 2,
+                            "title": "Ort angeben",
+                            "body": "Fügen Sie den Standort und die für den Einsatz nützlichen Informationen hinzu.",
+                            "icon": "it-map-pin"
+                        },
+                        {
+                            "number": 3,
+                            "title": "Aktualisierungen verfolgen",
+                            "body": "Prüfen Sie nach dem Senden den Status Ihrer Meldung.",
+                            "icon": "it-check-circle"
+                        }
+                    ]
+                }
+            },
+            {
+                "type": "quick-actions",
+                "data": {
+                    "view": "pub_theme::components.blocks.quick-actions",
+                    "eyebrow": "HABEN SIE BEREITS EIN PROBLEM GEMELDET?",
+                    "heading": "Verfolgen Sie Ihre Meldung",
+                    "body": "Geben Sie den erhaltenen Code ein, um den Status des Vorgangs zu prüfen.",
+                    "button": {
+                        "label": "Meldung verfolgen",
+                        "url": "{{ LaravelLocalization::localizeURL('/tickets/track') }}",
+                        "icon": "it-search"
+                    },
+                    "secondary_button": {
+                        "label": "Meldung senden",
+                        "url": "{{ LaravelLocalization::localizeURL('/tickets/create') }}",
+                        "icon": "it-plus"
+                    }
+                }
+            }
+        ],
+        "es": [
+            {
+                "type": "home.hero",
+                "data": {
+                    "view": "pub_theme::components.blocks.home.hero",
+                    "eyebrow": "SERVICIOS DIGITALES DEL AYUNTAMIENTO",
+                    "heading": "Incidencias y servicios para tu comunidad",
+                    "intro": "Cuéntanos qué no funciona, indica dónde y sigue las actualizaciones de forma sencilla y transparente.",
+                    "primary_label": "Enviar una incidencia",
+                    "primary_url": "{{ LaravelLocalization::localizeURL('/tickets/create') }}",
+                    "secondary_label": "Ver las incidencias",
+                    "secondary_url": "{{ LaravelLocalization::localizeURL('/tickets') }}",
+                    "meta_label": "COMPROMISO CÍVICO",
+                    "meta_value": "Tu voz cuenta",
+                    "meta_body": "Cada incidencia ayuda al Ayuntamiento a entender las prioridades y a hacer visibles las intervenciones."
+                }
+            },
+            {
+                "type": "ticket.map-preview",
+                "data": {
+                    "view": "pub_theme::components.blocks.ticket.map-preview",
+                    "data_url": "/api/tickets/geojson",
+                    "report_url": "{{ LaravelLocalization::localizeURL('/tickets/create') }}",
+                    "list_url": "{{ LaravelLocalization::localizeURL('/tickets') }}",
+                    "height": "420px",
+                    "aria_label": "pub_theme::home.list.map_aria",
+                    "icon": "it-arrow-right",
+                    "heading": "Incidencias públicas en el territorio",
+                    "intro": "Consulta el mapa para conocer los problemas ya comunicados y las intervenciones en curso.",
+                    "eyebrow": "MAPA DE LA COMUNIDAD",
+                    "legend": "Incidencias públicas"
+                }
+            },
+            {
+                "type": "how-it-works",
+                "data": {
+                    "view": "pub_theme::components.blocks.how-it-works",
+                    "heading": "Cómo funciona",
+                    "intro": "Describe el problema, indica dónde está y sigue las actualizaciones desde tu área personal.",
+                    "steps_label": "Pasos para enviar una incidencia",
+                    "steps": [
+                        {
+                            "number": 1,
+                            "title": "Describe el problema",
+                            "body": "Explica lo ocurrido y elige la categoría más adecuada.",
+                            "icon": "it-exclamation-triangle"
+                        },
+                        {
+                            "number": 2,
+                            "title": "Indica el lugar",
+                            "body": "Añade la ubicación y la información útil para intervenir.",
+                            "icon": "it-map-pin"
+                        },
+                        {
+                            "number": 3,
+                            "title": "Sigue las actualizaciones",
+                            "body": "Consulta el estado de tu incidencia después de enviarla.",
+                            "icon": "it-check-circle"
+                        }
+                    ]
+                }
+            },
+            {
+                "type": "quick-actions",
+                "data": {
+                    "view": "pub_theme::components.blocks.quick-actions",
+                    "eyebrow": "¿YA HAS COMUNICADO UN PROBLEMA?",
+                    "heading": "Sigue tu incidencia",
+                    "body": "Introduce el código recibido para consultar el estado del trámite.",
+                    "button": {
+                        "label": "Seguir una incidencia",
+                        "url": "{{ LaravelLocalization::localizeURL('/tickets/track') }}",
+                        "icon": "it-search"
+                    },
+                    "secondary_button": {
+                        "label": "Enviar una incidencia",
+                        "url": "{{ LaravelLocalization::localizeURL('/tickets/create') }}",
                         "icon": "it-plus"
                     }
                 }
             }
         ]
     },
-    "sidebar_blocks": {"it": [], "en": []},
+    "sidebar_blocks": {"it": [], "en": [], "de": [], "es": []},
     "footer_blocks": null
 }

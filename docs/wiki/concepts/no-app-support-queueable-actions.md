@@ -10,7 +10,7 @@ issues:
 discussions:
   - "https://github.com/laraxot/base_fixcity_fila5/discussions/273"
 related:
-  - ../../../../docs/wiki/concepts/no-app-support-monorepo-migration.md
+  - ../../../../../../docs/wiki/concepts/no-app-support-monorepo-migration.md
   - ticket-export-security.md
 ---
 
@@ -28,4 +28,4 @@ Consumer: `TicketExporter` (formatStateUsing).
 
 ## Collegamenti
 
-- [no-app-support-monorepo-migration](../../../../docs/wiki/concepts/no-app-support-monorepo-migration.md)
+- [no-app-support-monorepo-migration](../../../../../../docs/wiki/concepts/no-app-support-monorepo-migration.md)

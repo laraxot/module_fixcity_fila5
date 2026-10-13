@@ -7,6 +7,7 @@ updated: 2026-09-26
 qmd: "wizard form validation"
 issues: []
 discussions: []
+status: draft
 ---
 
 # Wizard Form Validation Rule

@@ -7,6 +7,7 @@ updated: 2026-09-26
 qmd: "ticket wizard runtime regression 2026 04 23"
 issues: []
 discussions: []
+status: draft
 ---
 
 # Segnalazione Wizard Runtime Regression — 2026-04-23
@@ -42,3 +43,5 @@ discussions: []
 2. Verificare con browser il flusso privacy -> avanti e lo step diretto con query.
 3. Applicare fix riusabili in Xot/Geo/Sixteen, evitando eccezioni per pagina.
 4. Eseguire `php -l`, `node --check`, build/copy tema, clear cache, curl/browser check.
+
+Correzione verificata 2026-10-13 (DCP-35 S4): `tests.segnalazione-crea.json` è stato eliminato (commit 260f3bcc5, `git log --diff-filter=D`) e oggi non esiste in nessun tenant; la risposta di `/it/tests/segnalazione-crea` (200) non contiene il wizard (0 occorrenze di `fi-sc-wizard` e `$wire.save()`). Il flusso vive su `/it/tickets/create` (`tickets.create.json`, blocco `components/blocks/tests/ticket-crea.blade.php`). Questo documento descrive lo stato precedente; stato attuale in `Modules/Fixcity/docs/wiki/concepts/ticket-crea-url-routing-chain.md`.

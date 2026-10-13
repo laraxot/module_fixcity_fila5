@@ -23,7 +23,7 @@ issues:
 
 ## Perché questa pagina
 
-Il modulo [**Fixcity**](../../overviews/fixcity-module.md) concentra segnalazioni/ticket. Parte delle view Filament/widget è **delegata correttamente** a Xot (pattern `TicketForm`) e ai temi (boundary parity). Qui si elencano **superfici con hash o struttura condivisi con altri moduli** perché sono candidati alla deriva quando si corregge “solo Rating” o “solo Job” ma non Fixcity — o viceversa.
+Il modulo [**Fixcity**](../overviews/fixcity-module.md) concentra segnalazioni/ticket. Parte delle view Filament/widget è **delegata correttamente** a Xot (pattern `TicketForm`) e ai temi (boundary parity). Qui si elencano **superfici con hash o struttura condivisi con altri moduli** perché sono candidati alla deriva quando si corregge “solo Rating” o “solo Job” ma non Fixcity — o viceversa.
 
 ## Evidenza statica SHA256 cross-owner
 

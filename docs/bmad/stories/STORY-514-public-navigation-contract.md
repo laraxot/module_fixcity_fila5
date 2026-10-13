@@ -24,11 +24,11 @@ discussions:
   - "https://github.com/laraxot/base_fixcity_fila5/discussions/515"
 
 related:
-  - ../../../../bashscripts/ai/wiki/concepts/user-journeys.md
-  - ../../../../bashscripts/ai/wiki/concepts/architectural-invariants.md
-  - ../../../../bashscripts/quality-gates/audit-public-navigation.sh
-  - ../../app/Policies/TicketPolicy.php
-  - ../../routes/web.php
+  - ../../../../../../bashscripts/ai/wiki/concepts/user-journeys.md
+  - ../../../../../../bashscripts/ai/wiki/concepts/architectural-invariants.md
+  - ../../../../../../bashscripts/quality-gates/audit-public-navigation.sh
+  - ../../../app/Policies/TicketPolicy.php
+  - ../../../routes/web.php
 ---
 
 # STORY-514 — Il contratto della navigazione pubblica

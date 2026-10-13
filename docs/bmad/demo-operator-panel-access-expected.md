@@ -13,6 +13,7 @@ discussions:
 related:
   - demo-operator-panel-access-gap-2026-09-27.md
   - stories/STORY-526-demo-operator-panel-access.md
+qmd: "expected access contract fixcity"
 ---
 
 # Expected access contract

@@ -2,6 +2,7 @@
 title: BMAD Fix - Map Marker Popup Card Complete
 status: done
 priority: must
+---
 
 ## BMAD Documentation Complete
 1. ✅ STORY-025: Map Marker Card - Expected Behavior

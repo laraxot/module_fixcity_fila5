@@ -18,8 +18,8 @@
             {
                 "type": "service-flow",
                 "data": {
-                    "view": "pub_theme::components.blocks.service-flow.permessi-design-comuni",
-                    "kind": "permessi-payment",
+                    "view": "pub_theme::components.blocks.service-flow.design-comuni",
+                    "kind": "payment",
                     "breadcrumb": {
                         "items": [
                             {
@@ -45,7 +45,7 @@
                     },
                     "sections": [
                         {
-                            "type": "permessi-summary",
+                            "type": "summary",
                             "bare": true,
                             "wrapper_class": "mb-30 mb-lg-40",
                             "card_class": "card has-bkg-grey shadow-sm mb-0 card-summary-grey",

@@ -9,6 +9,7 @@ issues: []
 discussions: []
 name: segnalazione-map-runtime-boundary-rule
 description: Responsibility split for the segnalazione wizard map between Fixcity, Geo, and Sixteen
+status: draft
 ---
 
 # Segnalazione Map Runtime Boundary Rule
