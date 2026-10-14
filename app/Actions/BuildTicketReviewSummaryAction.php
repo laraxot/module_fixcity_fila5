@@ -7,10 +7,12 @@ namespace Modules\Fixcity\Actions;
 use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Str;
+use Livewire\Features\SupportFileUploads\TemporaryUploadedFile;
 use Modules\Fixcity\Enums\TicketTypeEnum;
 use Modules\Xot\Actions\Cast\SafeStringCastAction;
 use Modules\Xot\Contracts\UserContract;
 use Spatie\QueueableAction\QueueableAction;
+use Throwable;
 
 /**
  * Dati del passo "riepilogo" del wizard `/tickets/create` (DCP-33), nella forma che la vista del tema
@@ -24,6 +26,9 @@ final class BuildTicketReviewSummaryAction
 {
     use QueueableAction;
 
+    /** Tipi con anteprima: i soli che il campo `images` ammette come immagini (`image/jpeg`, `image/png`). */
+    private const array PREVIEW_EXTENSIONS = ['jpg', 'jpeg', 'png'];
+
     /**
      * @param  array<string, mixed>  $state  Stato del form (`TicketForm::getDefaultFormState()`: name, type, content, location, images).
      * @param  Authenticatable|null  $user  Utente autenticato (`Filament::auth()->user()`); solo un {@see UserContract} conta.
@@ -35,12 +40,15 @@ final class BuildTicketReviewSummaryAction
      *         edit_step: string,
      *         rows: list<array{label: string, value: string}>,
      *         images: list<string>,
+     *         image_previews: list<string>,
+     *         image_alts: list<string>,
+     *         images_label: string,
      *         location: array{latitude: float, longitude: float, address: string}|null,
      *         map_label: string
      *     },
      *     author: array{group_title: string, card_title: string, name: string, rows: list<array{label: string, value: string}>}|null,
      *     contacts: array{title: string, rows: list<array{label: string, value: string}>}|null
-     * }
+     *     }
      */
     public function execute(array $state, ?Authenticatable $user = null): array
     {
@@ -62,14 +70,18 @@ final class BuildTicketReviewSummaryAction
      *     edit_step: string,
      *     rows: list<array{label: string, value: string}>,
      *     images: list<string>,
+     *     image_previews: list<string>,
+     *     image_alts: list<string>,
+     *     images_label: string,
      *     location: array{latitude: float, longitude: float, address: string}|null,
      *     map_label: string
-     * }
+     *     }
      */
     private function report(array $state): array
     {
         $location = $this->location($state['location'] ?? null);
         $images = $this->imageNames($state['images'] ?? null);
+        $previews = $this->imagePreviewItems($state['images'] ?? null);
         $address = trim(SafeStringCastAction::cast(data_get($state, 'location.address')));
 
         return [
@@ -85,6 +97,9 @@ final class BuildTicketReviewSummaryAction
                 'images' => implode(', ', $images),
             ]),
             'images' => $images,
+            'image_previews' => array_column($previews, 'url'),
+            'image_alts' => array_map(static fn (array $p): string => (string) __('fixcity::ticket_review.report.image_alt', ['name' => $p['name']]), $previews),
+            'images_label' => (string) __('fixcity::ticket_review.report.images_label'),
             'location' => $location,
             'map_label' => (string) __('fixcity::ticket_review.report.map_label'),
         ];
@@ -212,6 +227,47 @@ final class BuildTicketReviewSummaryAction
         }
 
         return $names;
+    }
+
+    /**
+     * Anteprime delle foto caricate nel passo dei dati (DCP-182), nello stesso ordine di {@see imageNames()}.
+     *
+     * Regola unica: ha l'anteprima solo un `TemporaryUploadedFile` di Livewire il cui tipo REALE (`guessExtension()`, dal contenuto) e' jpg, jpeg o
+     * png. PDF, SVG (che Livewire saprebbe mostrare) e ogni altro file restano solo nei nomi. L'URL e' `temporaryUrl()`: firmato, valido 30 minuti.
+     * Le stringhe dello stato sono identificativi di media gia' salvati, non URL: non si copiano mai. Un file temporaneo sparito non rompe il passo.
+     *
+     * @return list<array{url: string, name: string}>
+     */
+    private function imagePreviewItems(mixed $raw): array
+    {
+        if (! is_array($raw)) {
+            return [];
+        }
+
+        $items = [];
+        foreach ($raw as $file) {
+            $url = $file instanceof TemporaryUploadedFile ? $this->temporaryPreviewUrl($file) : '';
+            if ($url !== '' && $file instanceof TemporaryUploadedFile) {
+                $items[] = ['url' => $url, 'name' => trim($file->getClientOriginalName())];
+            }
+        }
+
+        return $items;
+    }
+
+    private function temporaryPreviewUrl(TemporaryUploadedFile $file): string
+    {
+        try {
+            if (! in_array($file->guessExtension(), self::PREVIEW_EXTENSIONS, true) || ! $file->isPreviewable()) {
+                return '';
+            }
+
+            $url = $file->temporaryUrl();
+
+            return is_string($url) ? $url : '';
+        } catch (Throwable) {
+            return '';
+        }
     }
 
     /**

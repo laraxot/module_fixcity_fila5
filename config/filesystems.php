@@ -81,19 +81,6 @@ return [
             'throw' => true,
         ],
         */
-        'photos' => [
-            'driver' => 'ftp',
-            'host' => 'ftpupload.net',
-            'username' => 'epiz_29396204',
-            'password' => 'tMY84nuxwMUD8',
-            'url' => 'http://xotimagetest.infinityfreeapp.com',
-            // Optional FTP Settings...
-            // 'port' => 21,
-            'root' => '/htdocs/photos/geek_local',
-            // 'passive' => true,
-            // 'ssl' => true,
-            // 'timeout' => 30,
-        ],
 
         'cache' => [
             'driver' => 'local',

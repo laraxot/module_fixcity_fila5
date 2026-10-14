@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 use Illuminate\Http\UploadedFile;
 use Livewire\Features\SupportFileUploads\TemporaryUploadedFile;
+use Mockery\MockInterface;
 use Modules\Fixcity\Actions\BuildTicketReviewSummaryAction;
 use Modules\Fixcity\Database\Factories\ProfileFactory;
 use Modules\Fixcity\Enums\TicketTypeEnum;
@@ -309,4 +310,136 @@ describe('BuildTicketReviewSummaryAction', function (): void {
         'italian' => ['it', 'Posizione del disservizio sulla mappa'],
         'english' => ['en', 'Location of the issue on the map'],
     ]);
+});
+
+/**
+ * DCP-182: anteprima delle foto nel riepilogo. Contratto: `report.image_previews` = lista di URL (stringhe) nello stesso ordine di `report.images`,
+ * uno per ogni `TemporaryUploadedFile` il cui TIPO REALE (`guessExtension()`) e' jpg/jpeg/png. Mai un URL per PDF o SVG, mai le stringhe dello
+ * stato (identificativi di media gia' salvati), mai un'eccezione se il file temporaneo e' sparito. L'URL e' `temporaryUrl()` di Livewire 4:
+ * un URL firmato (`livewire.preview-file`, 30 minuti). Piano: `docs/blueprints/riepilogo-anteprima-foto.md`.
+ */
+function temporaryUpload(string $name, string $extension, ?string $url = null, bool $previewable = true): MockInterface
+{
+    $upload = Mockery::mock(TemporaryUploadedFile::class);
+    $upload->shouldReceive('getClientOriginalName')->andReturn($name);
+    $upload->shouldReceive('guessExtension')->andReturn($extension);
+    $upload->shouldReceive('isPreviewable')->andReturn($previewable);
+    if ($url === null) {
+        $upload->shouldNotReceive('temporaryUrl');
+    } else {
+        $upload->shouldReceive('temporaryUrl')->andReturn($url);
+    }
+
+    return $upload;
+}
+
+describe('BuildTicketReviewSummaryAction image previews (DCP-182)', function (): void {
+    test('gives a signed preview url to jpg and png uploads, in the same order as the names', function (): void {
+        $state = reviewState(['images' => [
+            'k1' => temporaryUpload('panchina.jpg', 'jpg', 'http://dev.test/livewire/preview-file/aaa.jpg?signature=1'),
+            'k2' => temporaryUpload('buca.png', 'png', 'http://dev.test/livewire/preview-file/bbb.png?signature=2'),
+        ]]);
+
+        $report = app(BuildTicketReviewSummaryAction::class)->execute($state)['report'];
+
+        Assert::assertSame(['panchina.jpg', 'buca.png'], $report['images']);
+        Assert::assertSame([
+            'http://dev.test/livewire/preview-file/aaa.jpg?signature=1',
+            'http://dev.test/livewire/preview-file/bbb.png?signature=2',
+        ], $report['image_previews']);
+    });
+
+    test('keeps a pdf in the names but gives it no preview and never asks for a url', function (): void {
+        $state = reviewState(['images' => [
+            'k1' => temporaryUpload('modulo.pdf', 'pdf', null, false),
+            'k2' => temporaryUpload('buca.png', 'png', 'http://dev.test/p/b.png?signature=2'),
+        ]]);
+
+        $report = app(BuildTicketReviewSummaryAction::class)->execute($state)['report'];
+
+        Assert::assertSame(['modulo.pdf', 'buca.png'], $report['images']);
+        Assert::assertSame(['http://dev.test/p/b.png?signature=2'], $report['image_previews']);
+    });
+
+    test('never previews an svg even when livewire could', function (): void {
+        $state = reviewState(['images' => ['k' => temporaryUpload('disegno.svg', 'svg', null, true)]]);
+
+        $report = app(BuildTicketReviewSummaryAction::class)->execute($state)['report'];
+
+        Assert::assertSame(['disegno.svg'], $report['images']);
+        Assert::assertSame([], $report['image_previews']);
+    });
+
+    test('keeps the step working when the temporary file is gone', function (): void {
+        $upload = Mockery::mock(TemporaryUploadedFile::class);
+        $upload->shouldReceive('getClientOriginalName')->andReturn('scaduta.jpg');
+        $upload->shouldReceive('guessExtension')->andReturn('jpg');
+        $upload->shouldReceive('isPreviewable')->andReturn(true);
+        $upload->shouldReceive('temporaryUrl')->andThrow(new RuntimeException('file temporaneo non piu\' presente'));
+
+        $report = app(BuildTicketReviewSummaryAction::class)->execute(reviewState(['images' => ['k' => $upload]]))['report'];
+
+        Assert::assertSame(['scaduta.jpg'], $report['images']);
+        Assert::assertSame([], $report['image_previews']);
+    });
+
+    test('never turns the strings of the state into preview urls', function (): void {
+        $state = reviewState(['images' => [
+            'k1' => '0d1d3e5c-aaaa-bbbb-cccc-111122223333',
+            'k2' => 'javascript:alert(1)',
+            'k3' => UploadedFile::fake()->image('locale.jpg'),
+        ]]);
+
+        $report = app(BuildTicketReviewSummaryAction::class)->execute($state)['report'];
+
+        Assert::assertSame([], $report['image_previews']);
+        Assert::assertStringNotContainsString('javascript', json_encode($report['image_previews'], JSON_THROW_ON_ERROR));
+    });
+
+    test('has no previews when nothing is uploaded', function (mixed $images): void {
+        $report = app(BuildTicketReviewSummaryAction::class)->execute(reviewState(['images' => $images]))['report'];
+
+        Assert::assertSame([], $report['image_previews']);
+    })->with(['empty' => [[]], 'null' => [null], 'not an array' => ['file.jpg']]);
+
+    test('keeps a hostile file name verbatim in the data and in the alternative text: escaping is the view\'s job', function (): void {
+        $state = reviewState(['images' => ['k' => temporaryUpload('<script>x</script>.png', 'png', 'http://dev.test/p/x.png?signature=1')]]);
+
+        $report = app(BuildTicketReviewSummaryAction::class)->execute($state)['report'];
+
+        Assert::assertSame(['<script>x</script>.png'], $report['images']);
+        Assert::assertStringContainsString('<script>x</script>.png', $report['image_alts'][0]);
+    });
+
+    test('pairs every alternative text with its own url when previewable and other files are mixed', function (): void {
+        app()->setLocale('it');
+        $state = reviewState(['images' => [
+            'k1' => temporaryUpload('modulo.pdf', 'pdf', null, false),
+            'k2' => temporaryUpload('buca.png', 'png', 'http://dev.test/p/buca.png?signature=1'),
+            'k3' => temporaryUpload('disegno.svg', 'svg', null, true),
+            'k4' => temporaryUpload('panchina.jpg', 'jpg', 'http://dev.test/p/panchina.jpg?signature=2'),
+        ]]);
+
+        $report = app(BuildTicketReviewSummaryAction::class)->execute($state)['report'];
+
+        Assert::assertSame(['http://dev.test/p/buca.png?signature=1', 'http://dev.test/p/panchina.jpg?signature=2'], $report['image_previews']);
+        Assert::assertSame(['Anteprima della foto buca.png', 'Anteprima della foto panchina.jpg'], $report['image_alts']);
+    });
+
+    test('gives every preview a translated alternative text, in every language', function (string $locale, string $alt, string $label): void {
+        app()->setLocale($locale);
+        $state = reviewState(['images' => ['k' => temporaryUpload('a.jpg', 'jpg', 'http://dev.test/p/a.jpg?signature=1')]]);
+
+        $report = app(BuildTicketReviewSummaryAction::class)->execute($state)['report'];
+
+        Assert::assertSame([$alt], $report['image_alts']);
+        Assert::assertSame($label, $report['images_label']);
+        Assert::assertCount(count($report['image_previews']), $report['image_alts']);
+    })->with([
+        'it' => ['it', 'Anteprima della foto a.jpg', 'Foto allegate'],
+        'en' => ['en', 'Preview of photo a.jpg', 'Attached photos'],
+        'de' => ['de', 'Vorschau des Fotos a.jpg', 'Angehängte Fotos'],
+        'es' => ['es', 'Vista previa de la foto a.jpg', 'Fotos adjuntas'],
+    ]);
+
 });

@@ -11,6 +11,8 @@ return [
         'title' => 'Report',
         'card_title' => 'Issue',
         'edit_label' => 'Edit',
+        'images_label' => 'Attached photos',
+        'image_alt' => 'Preview of photo :name',
         'map_label' => 'Location of the issue on the map',
         'fields' => [
             'address' => 'Address',

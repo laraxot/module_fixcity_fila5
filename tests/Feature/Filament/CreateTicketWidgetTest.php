@@ -2,7 +2,10 @@
 
 declare(strict_types=1);
 
+use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Facades\Storage;
 use Livewire\Livewire;
+use Modules\Fixcity\Actions\GetPublishedPrivacyPolicyAction;
 use Modules\Fixcity\Enums\TicketPriorityEnum;
 use Modules\Fixcity\Enums\TicketStatusEnum;
 use Modules\Fixcity\Enums\TicketTypeEnum;
@@ -89,7 +92,7 @@ describe('CreateTicketWidget', function () {
             'longitude' => '9.1900',
         ];
 
-        Livewire::test(CreateTicketWidget::class)            ->set('data', $ticketData)
+        Livewire::test(CreateTicketWidget::class)->set('data', $ticketData)
             ->call('submit');
 
         // Check if ticket was actually created (depends on implementation)
@@ -144,7 +147,7 @@ describe('CreateTicketWidget User Association', function () {
     it('automatically sets current user as owner', function () {
         /** @var TestCase $this */
         Assert::assertNotNull($this->user);
-        Livewire::test(CreateTicketWidget::class)            ->set('data.name', 'User Association Test')
+        Livewire::test(CreateTicketWidget::class)->set('data.name', 'User Association Test')
             ->set('data.content', 'Test content')
             ->call('submit');
 
@@ -190,4 +193,42 @@ describe('CreateTicketWidget File Upload', function () {
         // Should enforce file size limits
         Assert::assertNotNull($component);
     });
+});
+
+describe('CreateTicketWidget Server Authority', function () {
+    /*
+     * `status` e' un campo Hidden dello schema (`TicketForm::getDataSchema()`): il client puo' riscriverlo con `$wire.set('data.status', 'closed')`.
+     * Come nel wizard (DCP-49 SEC-01) lo stato iniziale lo decide il server; qui il widget e' stato riportato sullo schema vivo da DCP-184.
+     */
+    it('ignores a status tampered by the client', function (string $status) {
+        /** @var TestCase $this */
+        Storage::fake('public');
+        $this->instance(GetPublishedPrivacyPolicyAction::class, new class extends GetPublishedPrivacyPolicyAction
+        {
+            public function execute(): string
+            {
+                return '# Informativa di test';
+            }
+        });
+
+        $component = Livewire::test(CreateTicketWidget::class)
+            ->set('data.accept_terms', true)
+            ->set('data.name', 'Lampione spento in via Verdi')
+            ->set('data.type', TicketTypeEnum::PUBLIC_LIGHTING->value)
+            ->set('data.content', 'Il lampione e spento da una settimana.')
+            ->set('data.location', ['latitude' => '45.4642', 'longitude' => '9.1900', 'address' => 'Via Verdi, Milano'])
+            ->set('data.images', [UploadedFile::fake()->image('lampione.jpg')])
+            ->set('data.status', $status)
+            ->call('submit');
+        $component->assertHasNoErrors();
+
+        Assert::assertNotNull($this->user);
+        $ticket = Ticket::query()->where('owner_id', $this->user->getAuthIdentifier())->latest('id')->first();
+        Assert::assertInstanceOf(Ticket::class, $ticket, 'Il ticket non e stato creato: la prova passerebbe a vuoto.');
+        Assert::assertSame(TicketStatusEnum::PENDING, $ticket->status);
+    })->with([
+        'closed' => ['closed'],
+        'resolved' => ['resolved'],
+        'in_progress' => ['in_progress'],
+    ]);
 });

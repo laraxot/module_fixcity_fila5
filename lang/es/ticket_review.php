@@ -25,6 +25,8 @@ return [
             'content' => 'Detalles',
             'images' => 'Imágenes',
         ],
+        'images_label' => 'Fotos adjuntas',
+        'image_alt' => 'Vista previa de la foto :name',
         'map_label' => 'Ubicación de la incidencia en el mapa',
         'title' => 'Incidencia',
     ],

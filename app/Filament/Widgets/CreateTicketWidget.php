@@ -28,7 +28,7 @@ use Modules\Fixcity\Enums\TicketPriorityEnum;
 use Modules\Fixcity\Enums\TicketStatusEnum;
 use Modules\Fixcity\Enums\TicketTypeEnum;
 use Modules\Fixcity\Events\TicketCreatedEvent;
-use Modules\Fixcity\Filament\Resources\TicketResource;
+use Modules\Fixcity\Filament\Resources\TicketResource\Schemas\TicketForm;
 use Modules\Fixcity\Models\Ticket;
 use Modules\Xot\Filament\Widgets\XotBaseWidget;
 
@@ -109,7 +109,7 @@ class CreateTicketWidget extends XotBaseWidget
                                 .'</h1>'
                             )
                         )->columnSpanFull(),
-                        ...app(TicketResource::class)->getFormSchema(),
+                        ...TicketForm::getDataSchema(),
                     ]),
             ])
                 ->nextAction(
@@ -164,6 +164,24 @@ class CreateTicketWidget extends XotBaseWidget
         ];
     }
 
+    /**
+     * Applica `rules()` ai dati del form e ne riporta gli errori sul componente.
+     *
+     * @return bool true se nessuna regola e' violata
+     */
+    private function passesDeclaredRules(): bool
+    {
+        $validator = Validator::make(['data' => $this->data ?? []], $this->rules());
+
+        foreach ($validator->errors()->messages() as $key => $messages) {
+            foreach ($messages as $message) {
+                $this->addError($key, $message);
+            }
+        }
+
+        return ! $validator->fails();
+    }
+
     public function submit(): void
     {
         if (! auth()->check()) {
@@ -173,14 +191,7 @@ class CreateTicketWidget extends XotBaseWidget
         }
 
         if (app(GetPublishedPrivacyPolicyAction::class)->execute() === null) {
-            $validator = Validator::make(['data' => $this->data ?? []], $this->rules());
-
-            foreach ($validator->errors()->messages() as $key => $messages) {
-                foreach ($messages as $message) {
-                    $this->addError($key, $message);
-                }
-            }
-
+            $this->passesDeclaredRules();
             $this->addError('data.accept_terms', __('fixcity::ticket.privacy.not_configured'));
 
             return;
@@ -192,10 +203,18 @@ class CreateTicketWidget extends XotBaseWidget
             return;
         }
 
+        // `rules()` non e' applicato da `validate()` (la validazione e' quella dei campi dello schema): `priority` e' un Hidden e senza questo
+        // accettava qualunque valore. Si applica a mano, come nel ramo dell'informativa mancante.
+        if (! $this->passesDeclaredRules()) {
+            return;
+        }
+
         $this->validate();
 
         /** @var array<string, mixed> $data */
         $data = $this->data ?? [];
+        // Stato iniziale deciso dal server: `status` e' un Hidden che il client puo' riscrivere (DCP-49 SEC-01, stesso criterio del wizard).
+        $data['status'] = TicketStatusEnum::PENDING->value;
         $data['owner_id'] = auth()->id();
         app(CreateTicketAction::class)->execute($data);
 

@@ -76,6 +76,7 @@ DCP-33, DCP-34 e DCP-35 qui sono le story del modulo Fixcity; lo stesso numero e
 - [2026-10-14-dcp-149-ricerca-per-codice-senza-limite-di-tentativi](./2026-10-14-dcp-149-ricerca-per-codice-senza-limite-di-tentativi.story.md) - DCP-149: la ricerca per codice di tracciamento non aveva piu' limite di tentativi
 - [2026-10-14-dcp-150-ricerca-elenco-per-indirizzo-sensibile-alle-maiuscole](./2026-10-14-dcp-150-ricerca-elenco-per-indirizzo-sensibile-alle-maiuscole.story.md) - DCP-150: la ricerca dell'elenco pubblico per indirizzo distingueva le maiuscole
 - [2026-10-14-dcp-151-pagina-404-del-front-office-con-il-layout-del-tema](./2026-10-14-dcp-151-pagina-404-del-front-office-con-il-layout-del-tema.story.md) - DCP-151: pagina 404 del front office con il layout del tema, in quattro lingue
+- [2026-10-14-dcp-180-audit-sicurezza-filament-blueprint](./2026-10-14-dcp-180-audit-sicurezza-filament-blueprint.story.md) - DCP-180: audit di sicurezza del pannello Filament con Blueprint (F-01 corretto, F-02 e F-03 aperti)
 - [STORY-493-critical-functional-deficiency-audit](./STORY-493-critical-functional-deficiency-audit.md) - STORY-493: Critical Functional Deficiency Audit
 - [STORY-494-wizard-critical-path-implementation](./STORY-494-wizard-critical-path-implementation.md) - STORY-494: Wizard Implementation
 - [STORY-495-citizen-auth](./STORY-495-citizen-auth.md) - STORY-495: Citizen Authentication
@@ -109,6 +110,8 @@ DCP-33, DCP-34 e DCP-35 qui sono le story del modulo Fixcity; lo stesso numero e
 - [DCP-177](./dcp-177-marker-di-merge-non-risolti-nei-prompt-e-nelle-docs.story.md) - DCP-177: marker di merge non risolti nei prompt e nelle docs
 - [DCP-178 (owner Modules/Gdpr)](../../../Gdpr/docs/stories/dcp-178-registrazione-e-disiscrizione-a-norma.story.md) - DCP-178: registrazione del cittadino e disiscrizione a norma
 - [DCP-179](./dcp-179-phpstan-zero-su-modules-e-default-di-config-env.story.md) - DCP-179: PHPStan a zero su Modules e il default perso di config('env.K', default)
+- [DCP-181](./dcp-181-filament-blueprint-audit-degli-altri-pannelli-e-piano-richieste-interessato.story.md) - DCP-181: Filament Blueprint, audit degli altri pannelli e piano del registro delle richieste dell'interessato (complementare a DCP-180)
+- [DCP-182](./dcp-182-riepilogo-wizard-anteprima-delle-foto.story.md) - DCP-182: nel riepilogo del wizard le foto caricate si vedono come anteprima
 
 ## collegamenti bidirezionali
 

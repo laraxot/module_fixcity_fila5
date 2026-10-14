@@ -11,6 +11,8 @@ return [
         'title' => 'Segnalazione',
         'card_title' => 'Disservizio',
         'edit_label' => 'Modifica',
+        'images_label' => 'Foto allegate',
+        'image_alt' => 'Anteprima della foto :name',
         'map_label' => 'Posizione del disservizio sulla mappa',
         'fields' => [
             'address' => 'Indirizzo',

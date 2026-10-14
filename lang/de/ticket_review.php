@@ -25,6 +25,8 @@ return [
             'content' => 'Details',
             'images' => 'Bilder',
         ],
+        'images_label' => 'Angehängte Fotos',
+        'image_alt' => 'Vorschau des Fotos :name',
         'map_label' => 'Standort der Störung auf der Karte',
         'title' => 'Meldung',
     ],

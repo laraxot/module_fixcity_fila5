@@ -576,3 +576,9 @@ Fase BMAD documentazione/qualita'. Solo `laravel/Modules/Fixcity/docs/`, nessun 
 - `phpstan analyse Modules`: da 144 errori (segnalazione incollata dall'utente) a exit 0 senza ignore ne' baseline. Il grosso lo aveva gia' corretto un'altra sessione (costanti tipizzate, `env()` verso `config('env.K')`, morph_map, comments, orbit, lang di User).
 - Trovata e corretta la regressione: `config("env.K", default)` perde il default perche' le chiavi di `config/env.php` esistono con `null`. 71 chiamate in 13 file di `Modules/Fixcity/config` riscritte in `(config('env.K') ?? default)`; aggiunte a `config/env.php` le due chiavi `FILAMENT_GOOGLE_MAPS_SERVER_API_KEY` e `FILAMENT_GOOGLE_MAPS_WEB_API_KEY`.
 - DCP-161 parziale: tolto il `<link>` duplicato di `cookie-consent.css` dal layout del tema (da 2 a 1 per pagina). DCP-177: causa dei marker di merge trovata (`merge_remote_repo_2.sh`), prompt 55 risolto.
+
+## [2026-10-14] dcp-181/dcp-182 | audit Filament con Blueprint e anteprima delle foto nel riepilogo
+- Audit `filament-security-audit` sugli 11 pannelli diversi da fixcity (4 agenti + verifica mia): 12 finding, 6 corretti con prova (super-admin, preserveFilenames, popup mappa, bulk delete, tickets.json, `$hidden`); rapporto in `docs/security/filament-security-audit-altri-pannelli.md`.
+- Anteprima delle foto nel riepilogo del wizard: piano `docs/blueprints/riepilogo-anteprima-foto.md`, Action/vista/lang/test, verifica nel browser reale (2 miniature decodificate, roundtrip con rimozione). Presa in carico della bozza lasciata a meta' da un'altra sessione.
+- Gate `go-live-gate.py`: `REPO-01` (marker di merge nel codice sorgente); ripristinati 3 file `Modules/User/lang/*/validation.php` con marker che davano errore di sintassi.
+- Fonts in Vite: gia' analizzato da DCP-183 (tema Sixteen); aggiunta una risposta con la cache HTTP di produzione e la misura di preload non attendibile in locale.

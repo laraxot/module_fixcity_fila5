@@ -56,3 +56,14 @@ Il gate controlla configurazione e contenuti. Mancano, e non sono automatizzabil
 - [ ] Monitoraggio dei primi 15 minuti (errori 5xx, log) e soglie di rollback decise prima: 5xx oltre una soglia, wizard che non arriva al riepilogo, posta non recapitata.
 - [ ] Note di rilascio e avviso al titolare del trattamento.
 
+## Cosa serve per pubblicare, per responsabile (2026-10-14, sera)
+Misura: `python3 -I bashscripts/tools/release/go-live-gate.py --skip-pest` su `http://127.0.0.1:8081`: **11 bloccanti, 3 requisiti LG, 15 controlli superati su 32**. Il lavoro che spettava allo sviluppo e si poteva fare senza dati dell'ente e' stato fatto (sitemap, canonical e hreflang, traduzioni dei titoli, registrazione a norma con prova dei consensi, cookiebar, audit di sicurezza dei pannelli e correzioni, assenza di marker di merge: `REPO-01` verde). Quello che resta non e' codice:
+| Responsabile | Cosa | Controlli |
+|---|---|---|
+| **Ente (titolare)** | Denominazione, regione, recapiti, sede, codice fiscale al posto dei segnaposto («Il mio Comune», «Nome della Regione», «1234567»...) nelle home in 4 lingue | LEG-02 |
+| **Ente (titolare)** | Testi di informativa privacy, condizioni d'uso, note legali, dichiarazione di accessibilita' (le guardie `PUBLICATION_GATE=1` sono rosse per costruzione finche' mancano) | LEG-04, LEG-01 |
+| **Ente (DPO)** | Contatto del DPO raggiungibile dalla home e dalle pagine legali (`DCP-164`); decisioni D1-D7 su registro delle richieste, cancellazione, verifica dell'email, minori (`DCP-140`, `DCP-165`, `DCP-178`) | LG-02 |
+| **Titolare e fornitore** | Nome a dominio definitivo (`DCP-155`), indirizzo `APP_URL` con `https`, mittente della posta sul dominio del servizio | ENV-04, ENV-05 |
+| **Fornitore** | `.env` di produzione: `APP_ENV=production`, `APP_DEBUG=false`, `DEBUGBAR_ENABLED=false`, `SESSION_SECURE_COOKIE=true`; HTTPS valido e controlli `production-checklist.sh`; posta che arriva davvero (SMTP, non `sendmail`); backup con ripristino provato, worker delle code e scheduler, intestazioni di cache lunghe per `/themes/Sixteen/` (vedi DCP-183); **cambiare la password FTP del disco `photos` di prova, che resta nella storia di git** | ENV-01/02/03/06, NET-01, ENV-08 |
+Non bloccanti ma richiesti dalle Linee guida: data di ultimo aggiornamento su ogni pagina (`DCP-167`, serve la regola su quale data), valutazione della pagina (`DCP-169`, serve dove memorizzare), licenza dei contenuti (`DCP-170`, decisione dell'ente), `security.txt` (serve un contatto per le segnalazioni di sicurezza), ricerca interna (campo che non risponde: collegarla o toglierla).
+

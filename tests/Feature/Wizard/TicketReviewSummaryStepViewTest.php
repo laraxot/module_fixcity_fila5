@@ -8,6 +8,7 @@ use Modules\Fixcity\Tests\TestCase;
 use PHPUnit\Framework\Assert;
 
 use function Safe\preg_match_all;
+use function Safe\preg_replace;
 
 uses(TestCase::class);
 
@@ -285,4 +286,83 @@ describe('wizard summary-step view', function (): void {
         File::put($out, $main);
         Assert::assertStringContainsString('</main>', $main);
     })->skip(fn (): bool => ! is_string(getenv('DCP33_RENDER_OUT')) || getenv('DCP33_RENDER_OUT') === '', 'solo con DCP33_RENDER_OUT=<file>');
+});
+
+describe('wizard summary-step view: photo previews (DCP-182)', function (): void {
+    /** @return array<mixed> */
+    function previewsReview(): array
+    {
+        return summaryStepReview(['report' => [
+            'images' => ['panchina.jpg', 'buca.png'],
+            'image_previews' => ['http://dev.test/livewire/preview-file/aaa.jpg?signature=1', 'http://dev.test/livewire/preview-file/bbb.png?signature=2'],
+            'image_alts' => ['Anteprima della foto panchina.jpg', 'Anteprima della foto buca.png'],
+            'images_label' => 'Foto allegate',
+        ]]);
+    }
+
+    test('shows one thumbnail per preview with its alternative text, inside the report card', function (): void {
+        $html = renderSummaryStep(previewsReview(), summaryStepShell());
+
+        Assert::assertSame(1, substr_count($html, 'data-element="review-attachments"'));
+        Assert::assertSame(2, substr_count($html, '<img class="img-fluid rounded border"'));
+        Assert::assertStringContainsString('src="http://dev.test/livewire/preview-file/aaa.jpg?signature=1" alt="Anteprima della foto panchina.jpg"', $html);
+        Assert::assertStringContainsString('src="http://dev.test/livewire/preview-file/bbb.png?signature=2" alt="Anteprima della foto buca.png"', $html);
+        Assert::assertStringContainsString('aria-label="Foto allegate"', $html);
+        $firstThumb = strpos($html, 'data-element="review-attachments"');
+        $map = strpos($html, 'data-dc-map');
+        $author = strpos($html, 'Dati Generali');
+        Assert::assertIsInt($firstThumb);
+        Assert::assertIsInt($map);
+        Assert::assertIsInt($author);
+        Assert::assertLessThan($map, $firstThumb);
+        Assert::assertLessThan($author, $firstThumb);
+    });
+
+    test('adds no markup at all when there is no preview, so the reference parity does not change', function (): void {
+        $without = renderSummaryStep(summaryStepReview(), summaryStepShell());
+        $empty = renderSummaryStep(summaryStepReview(['report' => ['image_previews' => [], 'image_alts' => []]]), summaryStepShell());
+
+        // l'id della mappa e' casuale a ogni resa: si normalizza, il resto dell'HTML deve essere identico
+        $normalize = static fn (string $html): string => preg_replace('/geo-point-map-[a-z0-9]{8}/', 'geo-point-map-X', $html);
+
+        Assert::assertStringNotContainsString('review-attachments', $without);
+        Assert::assertSame($normalize($without), $normalize($empty));
+    });
+
+    test('escapes hostile text in the alternative text and the url', function (): void {
+        $review = summaryStepReview(['report' => [
+            'image_previews' => ['http://dev.test/p/x.png?a=1&b="><script>alert(1)</script>'],
+            'image_alts' => ['Anteprima della foto <script>alert(2)</script>.png'],
+            'images_label' => 'Foto "allegate"',
+        ]]);
+
+        $html = renderSummaryStep($review, summaryStepShell());
+
+        Assert::assertStringNotContainsString('<script>alert', $html);
+        Assert::assertStringContainsString('&lt;script&gt;alert(2)&lt;/script&gt;', $html);
+        Assert::assertStringContainsString('aria-label="Foto &quot;allegate&quot;"', $html);
+    });
+
+    test('has no text of its own: the label and the alternative text come from the review data, in every language', function (string $label, string $alt): void {
+        $review = summaryStepReview(['report' => [
+            'image_previews' => ['http://dev.test/p/aaa.jpg?signature=1'],
+            'image_alts' => [$alt],
+            'images_label' => $label,
+        ]]);
+
+        $html = renderSummaryStep($review, summaryStepShell());
+
+        Assert::assertStringContainsString('aria-label="'.$label.'"', $html);
+        Assert::assertStringContainsString('alt="'.$alt.'"', $html);
+        foreach (['Foto allegate', 'Anteprima della foto'] as $italian) {
+            if (! str_contains($label.$alt, $italian)) {
+                Assert::assertStringNotContainsString($italian, $html);
+            }
+        }
+    })->with([
+        'it' => ['Foto allegate', 'Anteprima della foto a.jpg'],
+        'en' => ['Attached photos', 'Preview of photo a.jpg'],
+        'de' => ['Angehängte Fotos', 'Vorschau des Fotos a.jpg'],
+        'es' => ['Fotos adjuntas', 'Vista previa de la foto a.jpg'],
+    ]);
 });
