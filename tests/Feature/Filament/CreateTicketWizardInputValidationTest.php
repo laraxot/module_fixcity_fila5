@@ -24,6 +24,7 @@ uses(TestCase::class);
  * `decimal(20,18)` dava QueryException). Ogni input fuori contratto deve fermarsi in validazione, prima di scrivere il ticket.
  *
  * @param  array<string, mixed>  $override
+ * @return Testable<CreateTicketWizardWidget>
  */
 function ticketWizardSubmitWith(array $override): Testable
 {

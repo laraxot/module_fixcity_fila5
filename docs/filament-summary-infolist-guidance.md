@@ -29,7 +29,7 @@ status: draft
 ## Namespace traduzioni (heading sezione)
 
 - **Titoli `Section`** dello schema (`TicketForm::getSummarySchema()`) → **`fixcity::ticket.sections.*`** (`lang/*/ticket.php`). Il contesto è il **bounded context Filament + modello `Ticket`**: stesse chiavi usate dalla resource (create/edit) e dal wizard che riusa `TicketForm`.
-- **`fixcity::segnalazione.*`** serve al **canale pubblico** (copy Design Comuni, pagine `segnalazione-*`, testi nei blocchi CMS). Non è la SSoT per gli heading tecnici delle `Section` ticket: usando `ticket` si evita drift e si rispetta la “religione” namespace-per-dominio (vedi [`translation-namespace-religion.md`](../../../../docs/translation-namespace-religion.md) e [Fixcity: `ticket` vs `segnalazione`](./wiki/concepts/fixcity-ticket-vs-segnalazione-lang.md)).
+- **`fixcity::segnalazione.*`** serve al **canale pubblico** (copy Design Comuni, pagine `segnalazione-*`, testi nei blocchi CMS). Non è la SSoT per gli heading tecnici delle `Section` ticket: usando `ticket` si evita drift e si rispetta la “religione” namespace-per-dominio (vedi [`translation-namespace-religion.md`](../../../../docs/translation-namespace-religion.md) e [Fixcity: `ticket` vs `segnalazione`](./wiki/concepts/fixcity-ticket-vs-ticket-lang.md)).
 
 **Esempi**
 

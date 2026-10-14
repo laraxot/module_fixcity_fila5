@@ -9,7 +9,7 @@ updated: 2026-05-11
 tags: [rules, index, on-demand]
 related:
   - ../rules/00-TRIGGER_MAP.md
-  - ../rules/on-demand-pattern.md
+  - ../../ON-DEMAND-PATTERN.md
 status: draft
 ---
 

@@ -11,7 +11,7 @@ issues:
 discussions:
   - "https://github.com/laraxot/base_fixcity_fila5/discussions/304"
 related:
-  - ./claude-audit-static.md
+  - ../concepts/claude-audit-static.md
   - ../../Xot/docs/wiki/concepts/claude-audit-static-all-modules.md
 status: draft
 ---

@@ -7,7 +7,7 @@ title: "Second Brain — indice architetturale Fixcity"
 type: index
 module: Fixcity
 created: 2026-09-26
-updated: 2026-09-27
+updated: 2026-10-14
 status: draft
 ---
 
@@ -48,3 +48,15 @@ richiede la copertura della dichiarazione. Il gate si corregge nel codice, mai n
 
 ### 7. UserContract pattern (non User model direct usage)
 Sempre usare `UserContract` per l'autorizzazione, mai `Modules\User\Models\User` direttamente. Questo garantisce l'astrazione del modello utente e permette implementazioni diverse.
+
+---
+
+### 8. Aggiornamento parallelo — marcatori mappa + wizard (2026-10-14)
+
+- **STORY-054**: marker non visibile (`nero piccolo con ?`) → SVG Design Comuni `#007A52`, `36×48`, `aria-label`, `role="img"`, nessun `?` overlay.
+- **STORY-XXX**: pulsanti `ctrl-btn` mappa (`bg-transparent` invisibile) → `#007a52` background, hover `#005c3d`, shadow, `rounded-lg`, transizione.
+- **STORY-530**: geolocalizzazione non funzionante (`isSecureContext` false su HTTP, `navigator.geolocation` disattivato su HTTP) → `fallBackToApproximate` attivato, documentato requisito HTTPS (`FORCE_HTTPS=true`) per produzione.
+
+**Cross-riferimenti BMAD** (`docs/bmad/stories/`): `STORY-054-ticket-marker-visibility.md`, `STORY-XXX-wizard-map-buttons.md`, `STORY-530-geolocation-not-working.md`.
+**Cross-riferimenti design**: `design-comuni-pagine-statiche` v2.4.0 marker (green `#007A52`), `button` componente con `bg-primary-500`.
+**Second brain**: questi tre problemi sono collegati alla stessa area (`map` + `geolocation` dentro il wizard ticket); non duplicare le storie ma collegare tramite `related:` nel frontmatter.

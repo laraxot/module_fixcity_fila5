@@ -60,10 +60,12 @@ describe('ResolveTicketConfirmationDataAction', function (): void {
         $action = app(ResolveTicketConfirmationDataAction::class);
 
         $this->actingAs($other);
-        Assert::assertSame('', $action->execute('TCK-OWNER001')['email'] ?? null);
+        $asOther = $action->execute('TCK-OWNER001');
+        Assert::assertSame('', $asOther['email'] ?? null);
 
         $this->actingAs($owner);
-        Assert::assertSame('proprietario.codice@example.test', $action->execute('TCK-OWNER001')['email'] ?? null);
+        $asOwner = $action->execute('TCK-OWNER001');
+        Assert::assertSame('proprietario.codice@example.test', $asOwner['email'] ?? null);
     });
 
     test('returns an empty array without flash and without a usable code', function (?string $code): void {

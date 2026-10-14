@@ -120,3 +120,33 @@ La policy applicativa corretta è invece `app/Policies/TicketPolicy.php` con nam
 ## Migrazioni
 
 Le migration nuove usano `foreignIdFor(Model::class, 'column')`; per User usano `XotData::make()->getUserClass()`. Le migration storiche con `foreignId('ticket_id')` non vengono riscritte: la regola forward-only richiede una migration evolutiva separata, se l'audit dello schema pilota la renderà necessaria.
+
+## G-33: Mappa/Download dei ticket - testimoniare nuove storie per fix al momento della scrittura
+- **Description**: Three Map/Wizard tickets stories added in parallel:
+  - STORY-054-ticket-marker-visibility.md (marker visibility fix)
+  - STORY-XXX-wizard-map-buttons.md (map button background/transparent fix)
+  - STORY-530-geolocation-not-working.md (geolocation non funzionante fix)
+- **Related files**:
+  - Tickets/index.blade.php (marker fix)
+  - Modules/Geo/resources/js/components/map/controls/geolocation.js (button + geolocation fix)
+  - Second-brain/fixes/parallel-map-wizard-2026-10-14.md (second-brain summary)
+- **Closure requested**: update documentation, cross-link, verify visual parity & WCAG, run smoke stage tests for Map/Wizard.
+- **Status**: Story/BMAD created, second-brain updated, code fixes applied
+
+## G-34: Quality gate documentation - cross-link to new Fixcity stories
+- **Description**: Ensure all BMAD stories are cross-linked in Module and Theme second-brain docs.
+- **Related files**:
+  - Modules/Fixcity/docs/second-brain.md (updated)
+  - Themes/Sixteen/docs/second-brain/geo-map-tickets-2026-10-14.md (new)
+  - Themes/Sixteen/docs/bmad/decision-log.md (appended D13-D17)
+- **Closure requested**: Verify cross-references appear correctly.
+- **Status**: Done
+
+## G-35: Documentation standards - no conflict between new and existing stories
+- **Description**: Prevent conflict between new parallel fixes and any existing stories.
+- **Related files**:
+  - Themes/Sixteen/docs/bmad/decision-log.md (appended D16, D17)
+  - Modules/Fixcity/docs/second-brain.md (appended §8)
+  - Ensure all frontmatter includes `github_issue` etc.
+- **Closure requested**: Ensure no duplicate or conflicting story IDs.
+- **Status**: Done
