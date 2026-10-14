@@ -4,23 +4,13 @@
     Resta un campo Filament: stato Livewire sul suo state path (`data.location.address`, una chiave dello stato del CoordinatePicker),
     `required`, aria-* ed errori di validazione. Da usare con `->hiddenLabel()->view('fixcity::filament.forms.components.dc-place-autocomplete')`.
 
-    "Usa la tua posizione" (solo Alpine, solo contesto sicuro): `navigator.geolocation` e poi l'evento `coords-changed` sul
-    `coordinate-picker-lit` piu' vicino (stesso contratto della mappa: `detail.latitude|longitude`, bubbles, composed). Il wrapper del
-    CoordinatePicker aggiorna lo stato `data.location` e fa `reverseGeocode` lato server, che riempie `address` (questo input). Senza HTTPS
-    il link dichiara il motivo (messaggio sotto il link) invece di non fare nulla. Nessuna dipendenza da Bootstrap JS.
+    "Usa la tua posizione" (solo Alpine): delega a `coordinate-picker-lit` piu' vicino (`_requestGeolocation()`), la stessa catena del
+    pulsante della mappa: GPS se il browser lo permette, altrimenti posizione approssimativa da IP (solo centro, nessun punto) e, se il
+    GPS e' negato o fallisce, silenzio. Il picker scrive lo stato `data.location` e, con l'indirizzo da Nominatim lato client, anche
+    `address` (questo input). Nessun messaggio su HTTPS o permessi: l'utente non puo' risolverli. Nessuna dipendenza da Bootstrap JS.
     Suggerimenti mentre si digita: non implementati (`.autocomplete-list` ha `display:none` nello scope e `autocomplete-list-show` non ha regole).
 --}}
 @php
-    // ponytail: __() su una chiave mancante crea la riga DB e fa scrivere il file lingua dall'auto-writer. Finche' la chiave nuova non
-    // esiste in lang/*/ticket_form.php si legge dal loader con testo di ripiego; poi sostituire con __().
-    $line = static function (string $key, string $fallback): string {
-        [$namespace, $path] = explode('::', $key, 2);
-        [$group, $item] = explode('.', $path, 2);
-        $value = \Illuminate\Support\Arr::get(app('translator')->getLoader()->load(app()->getLocale(), $group, $namespace), $item);
-
-        return \is_string($value) ? $value : $fallback;
-    };
-
     $id = $getId();
     $statePath = $getStatePath();
     $hasError = $errors->has($statePath);
@@ -29,11 +19,6 @@
     $placeholder = ((string) ($getPlaceholder() ?? __('fixcity::ticket_form.fields.location.placeholder'))) . ($isFieldRequired ? '*' : '');
     $texts = [
         'locating' => __('geo::address.geolocation.locating'),
-        'denied' => __('geo::address.geolocation.permission_denied'),
-        'timeout' => __('geo::address.geolocation.timeout'),
-        'unsupported' => __('geo::address.geolocation.not_supported'),
-        'unavailable' => __('geo::address.geolocation.unavailable'),
-        'insecure' => $line('fixcity::ticket_form.fields.location.geolocation_insecure', 'La posizione automatica richiede una connessione sicura (HTTPS). Seleziona il punto sulla mappa.'),
     ];
 @endphp
 <div
@@ -49,30 +34,18 @@
             }
             return null
         },
-        locate() {
+        async locate() {
             if (this.locating) return
-            if (! window.isSecureContext) return void (this.message = this.texts.insecure)
-            if (! navigator.geolocation) return void (this.message = this.texts.unsupported)
             const picker = this.picker()
-            if (! picker) return void (this.message = this.texts.unavailable)
+            if (! picker || typeof picker._requestGeolocation !== 'function') return
             this.locating = true
             this.message = this.texts.locating
-            navigator.geolocation.getCurrentPosition(
-                ({ coords: { latitude, longitude } }) => {
-                    this.locating = false
-                    this.message = ''
-                    picker.dispatchEvent(new CustomEvent('coords-changed', {
-                        bubbles: true,
-                        composed: true,
-                        detail: { latitude, longitude, lat: latitude, lng: longitude, address: null, display_name: null, source: 'geolocation' },
-                    }))
-                },
-                (error) => {
-                    this.locating = false
-                    this.message = this.texts[{ 1: 'denied', 3: 'timeout' }[error.code] ?? 'unavailable']
-                },
-                { enableHighAccuracy: true, timeout: 10000, maximumAge: 0 },
-            )
+            try {
+                await picker._requestGeolocation()
+            } finally {
+                this.locating = false
+                this.message = ''
+            }
         },
     }"
 >

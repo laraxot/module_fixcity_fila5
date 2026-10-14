@@ -762,6 +762,7 @@ return [
         'save' => [
             'tooltip' => 'save',
             'icon' => 'save',
+            'label' => 'save',
         ],
         'next' => [
             'icon' => 'next',

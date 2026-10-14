@@ -29,3 +29,4 @@ Concetti specifici del modulo Fixcity. Carica on-demand via `qmd search` o consu
 - [user-journey-map](./user-journey-map.md) — percorsi guest→cittadino→PA→admin→sistema: dovrebbe/vede/può/fatto/manca
 - [actor-flow-map](./actor-flow-map.md) — actor → flow → story → Action → stato (tracing tecnico)
 - [Viaggio del cittadino: accesso e ritorno alla pagina richiesta](citizen-journey-login-register-return.md) — url.intended, redirectIntended, dashboard 404 (DCP-124)
+- [Intestazioni di sicurezza e CSP (DCP-139)](security-headers-and-csp-dcp-139.md) — middleware, config, host misurati, Report-Only, config in cache, lista di controllo

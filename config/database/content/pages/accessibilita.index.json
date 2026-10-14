@@ -1,0 +1,16 @@
+{
+    "id": "accessibilita-index",
+    "title": {"it": "Dichiarazione di accessibilità", "en": "Accessibility statement", "de": "Erklärung zur Barrierefreiheit", "es": "Declaración de accesibilidad"},
+    "slug": "accessibilita.index",
+    "layout": "design-comuni",
+    "description": {"it": "Dichiarazione di accessibilità del servizio di segnalazioni, con il meccanismo di feedback e la procedura di attuazione (legge 4/2004, art. 3-quater).", "en": "Accessibility statement of the reporting service, with the feedback mechanism and the enforcement procedure (Law 4/2004, art. 3-quater).", "de": "Erklärung zur Barrierefreiheit des Meldedienstes mit Feedback-Mechanismus und Durchsetzungsverfahren (Gesetz 4/2004, Art. 3-quater).", "es": "Declaración de accesibilidad del servicio de incidencias, con el mecanismo de comentarios y el procedimiento de aplicación (ley 4/2004, art. 3-quater)."},
+    "content": null,
+    "content_blocks": {
+        "it": [{"type": "accessibility_statement", "data": {"view": "pub_theme::components.blocks.accessibility-statement.design-comuni", "header_active": "", "declaration": {"status": null, "evaluation": {"method": null, "date": null}, "published_at": null, "updated_at": null, "feedback_email": null, "agid_declaration_url": null, "procedure_url": "https://www.agid.gov.it/it/design-servizi/accessibilita/procedura-attuazione", "non_accessible": [], "disproportionate_burden": [], "out_of_scope": []}}}],
+        "en": [{"type": "accessibility_statement", "data": {"view": "pub_theme::components.blocks.accessibility-statement.design-comuni", "header_active": "", "declaration": {"status": null, "evaluation": {"method": null, "date": null}, "published_at": null, "updated_at": null, "feedback_email": null, "agid_declaration_url": null, "procedure_url": "https://www.agid.gov.it/it/design-servizi/accessibilita/procedura-attuazione", "non_accessible": [], "disproportionate_burden": [], "out_of_scope": []}}}],
+        "de": [{"type": "accessibility_statement", "data": {"view": "pub_theme::components.blocks.accessibility-statement.design-comuni", "header_active": "", "declaration": {"status": null, "evaluation": {"method": null, "date": null}, "published_at": null, "updated_at": null, "feedback_email": null, "agid_declaration_url": null, "procedure_url": "https://www.agid.gov.it/it/design-servizi/accessibilita/procedura-attuazione", "non_accessible": [], "disproportionate_burden": [], "out_of_scope": []}}}],
+        "es": [{"type": "accessibility_statement", "data": {"view": "pub_theme::components.blocks.accessibility-statement.design-comuni", "header_active": "", "declaration": {"status": null, "evaluation": {"method": null, "date": null}, "published_at": null, "updated_at": null, "feedback_email": null, "agid_declaration_url": null, "procedure_url": "https://www.agid.gov.it/it/design-servizi/accessibilita/procedura-attuazione", "non_accessible": [], "disproportionate_burden": [], "out_of_scope": []}}}]
+    },
+    "sidebar_blocks": {"it": [], "en": [], "de": [], "es": []},
+    "footer_blocks": null
+}

@@ -27,10 +27,17 @@ final class ApplyPublicTicketFiltersAction
         if ($filters->query !== '') {
             // i caratteri jolly di LIKE sono gia' tolti da PublicTicketListFilters: si cerca la sottostringa, senza distinzione di maiuscole
             $like = '%'.$filters->query.'%';
-            $query->where(static function (Builder $match) use ($like): void {
+            // `location->address` e' un campo JSON: su MariaDB `json_unquote(...)` ha collation binaria e LIKE distingue le maiuscole ("piazza" non
+            // trovava "Piazza": DCP-150). Con LOWER() su entrambi i lati il confronto e' uguale a quello di titolo e descrizione. Due espressioni
+            // letterali, una per driver (SQLite non ha json_unquote): niente SQL costruito a pezzi.
+            $addressLower = match ($query->getModel()->getConnection()->getDriverName()) {
+                'sqlite' => "LOWER(json_extract(location, '$.address')) like ?",
+                default => "LOWER(json_unquote(json_extract(location, '$.address'))) like ?",
+            };
+            $query->where(static function (Builder $match) use ($like, $addressLower): void {
                 $match->where('name', 'like', $like)
                     ->orWhere('content', 'like', $like)
-                    ->orWhere('location->address', 'like', $like);
+                    ->orWhereRaw($addressLower, [mb_strtolower($like)]);
             });
         }
 

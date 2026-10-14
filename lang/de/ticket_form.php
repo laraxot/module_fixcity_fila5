@@ -34,6 +34,14 @@ return [
             'description' => 'Beschreiben Sie die Störung klar und verständlich',
         ],
         'images' => [
+            'upload_button' => 'Datei hochladen',
+            'upload_aria' => 'Dateien für die Störung hochladen',
+            'remove' => ':name entfernen',
+            'uploading' => 'Wird hochgeladen',
+            'error_type' => 'Dateityp nicht erlaubt: JPG, PNG oder PDF verwenden',
+            'error_size' => 'Die Datei ist größer als :max MB',
+            'error_count' => 'Es können höchstens :max Dateien angehängt werden',
+            'error_upload' => 'Hochladen fehlgeschlagen, bitte erneut versuchen',
             'label' => 'Bilder',
             'helper_text' => 'Wählen Sie ein oder mehrere Bilder aus, die der Meldung beigefügt werden sollen',
             'placeholder' => 'Bilder hinzufügen (optional)',
@@ -47,6 +55,9 @@ return [
             'description' => 'Steuernummer der meldenden Person',
             'helper_text' => 'Mit Ihrem Profil verknüpfte Angabe',
             'placeholder' => 'Steuernummer',
+        ],
+        'title' => [
+            'label' => 'Titel',
         ],
         'name' => [
             'label' => 'Name',
@@ -166,6 +177,23 @@ return [
             'helper_text' => 'status',
             'description' => 'status',
         ],
+    ],
+    'required_notice' => 'Mit einem Sternchen gekennzeichnete Felder sind Pflichtfelder',
+    'navscroll' => [
+        'title' => 'ERFORDERLICHE ANGABEN',
+    ],
+    'nav' => [
+        'aria_label' => 'Schritt',
+        'back' => 'Zurück',
+        'next' => 'Weiter',
+    ],
+    'hints' => [
+        'max_length' => 'Maximal :max Zeichen eingeben',
+    ],
+    'validation' => [
+        'required' => 'Das Feld :attribute ist erforderlich.',
+        'min' => 'Das Feld :attribute muss mindestens :min Zeichen enthalten.',
+        'max' => 'Das Feld :attribute darf höchstens :max Zeichen enthalten.',
     ],
     'sections' => [
         'Riepilogo' => [

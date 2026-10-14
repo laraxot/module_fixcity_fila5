@@ -131,7 +131,7 @@
               },
               {
                 "label": "Prenotazione appuntamento",
-                "url": "/prenota-appuntamento"
+                "url": ""
               },
               {
                 "label": "Segnalazione disservizio",
@@ -140,7 +140,7 @@
               },
               {
                 "label": "Richiesta d'assistenza",
-                "url": "/assistenza"
+                "url": ""
               }
             ],
             "details": [
@@ -149,12 +149,12 @@
               "Posta Elettronica Certificata",
               "Centralino unico: 012 3456"
             ],
-            "office_url": "#"
+            "office_url": ""
           },
           "legal_links": [
             {
               "label": "Amministrazione trasparente",
-              "url": "/amministrazione-trasparente"
+              "url": ""
             },
             {
               "label": "Informativa privacy",
@@ -176,7 +176,7 @@
             },
             {
               "label": "Mappa del sito",
-              "url": "/mappa-del-sito"
+              "url": "/mappa-sito"
             }
           ],
           "social": [
@@ -207,7 +207,7 @@
             },
             {
               "label": "RSS",
-              "url": "/rss.xml",
+              "url": "",
               "icon": "it-rss"
             }
           ],
@@ -222,31 +222,31 @@
               "links": [
                 {
                   "label": "Organi di governo",
-                  "url": "#"
+                  "url": ""
                 },
                 {
                   "label": "Aree amministrative",
-                  "url": "#"
+                  "url": ""
                 },
                 {
                   "label": "Uffici",
-                  "url": "#"
+                  "url": ""
                 },
                 {
                   "label": "Enti e fondazioni",
-                  "url": "#"
+                  "url": ""
                 },
                 {
                   "label": "Politici",
-                  "url": "#"
+                  "url": ""
                 },
                 {
                   "label": "Personale amministrativo",
-                  "url": "#"
+                  "url": ""
                 },
                 {
                   "label": "Documenti e dati",
-                  "url": "#"
+                  "url": ""
                 }
               ]
             },
@@ -255,63 +255,63 @@
               "links": [
                 {
                   "label": "Anagrafe e stato civile",
-                  "url": "#"
+                  "url": ""
                 },
                 {
                   "label": "Cultura e tempo libero",
-                  "url": "#"
+                  "url": ""
                 },
                 {
                   "label": "Vita lavorativa",
-                  "url": "#"
+                  "url": ""
                 },
                 {
                   "label": "Imprese e commercio",
-                  "url": "#"
+                  "url": ""
                 },
                 {
                   "label": "Appalti pubblici",
-                  "url": "#"
+                  "url": ""
                 },
                 {
                   "label": "Catasto e urbanistica",
-                  "url": "#"
+                  "url": ""
                 },
                 {
                   "label": "Turismo",
-                  "url": "#"
+                  "url": ""
                 },
                 {
                   "label": "Mobilità e trasporti",
-                  "url": "#"
+                  "url": ""
                 },
                 {
                   "label": "Educazione e formazione",
-                  "url": "#"
+                  "url": ""
                 },
                 {
                   "label": "Giustizia e sicurezza pubblica",
-                  "url": "#"
+                  "url": ""
                 },
                 {
                   "label": "Tributi, finanze e contravvenzioni",
-                  "url": "#"
+                  "url": ""
                 },
                 {
                   "label": "Ambiente",
-                  "url": "#"
+                  "url": ""
                 },
                 {
                   "label": "Salute, benessere e assistenza",
-                  "url": "#"
+                  "url": ""
                 },
                 {
                   "label": "Autorizzazioni",
-                  "url": "#"
+                  "url": ""
                 },
                 {
                   "label": "Agricoltura e pesca",
-                  "url": "#"
+                  "url": ""
                 }
               ]
             },
@@ -320,15 +320,15 @@
               "links": [
                 {
                   "label": "Notizie",
-                  "url": "#"
+                  "url": ""
                 },
                 {
                   "label": "Comunicati",
-                  "url": "#"
+                  "url": ""
                 },
                 {
                   "label": "Avvisi",
-                  "url": "#"
+                  "url": ""
                 }
               ]
             },
@@ -337,11 +337,11 @@
               "links": [
                 {
                   "label": "Luoghi",
-                  "url": "#"
+                  "url": ""
                 },
                 {
                   "label": "Eventi",
-                  "url": "#"
+                  "url": ""
                 }
               ]
             }
@@ -473,7 +473,7 @@
               },
               {
                 "label": "Book an appointment",
-                "url": "/prenota-appuntamento"
+                "url": ""
               },
               {
                 "label": "Report a problem",
@@ -482,7 +482,7 @@
               },
               {
                 "label": "Request assistance",
-                "url": "/assistenza"
+                "url": ""
               }
             ],
             "details": [
@@ -491,12 +491,12 @@
               "Certified e-mail (PEC)",
               "Switchboard: 012 3456"
             ],
-            "office_url": "#"
+            "office_url": ""
           },
           "legal_links": [
             {
               "label": "Transparent administration",
-              "url": "/amministrazione-trasparente"
+              "url": ""
             },
             {
               "label": "Privacy policy",
@@ -518,7 +518,7 @@
             },
             {
               "label": "Sitemap",
-              "url": "/mappa-del-sito"
+              "url": "/mappa-sito"
             }
           ],
           "social": [
@@ -549,7 +549,7 @@
             },
             {
               "label": "RSS",
-              "url": "/rss.xml",
+              "url": "",
               "icon": "it-rss"
             }
           ],
@@ -564,31 +564,31 @@
               "links": [
                 {
                   "label": "Government bodies",
-                  "url": "#"
+                  "url": ""
                 },
                 {
                   "label": "Administrative areas",
-                  "url": "#"
+                  "url": ""
                 },
                 {
                   "label": "Offices",
-                  "url": "#"
+                  "url": ""
                 },
                 {
                   "label": "Bodies and foundations",
-                  "url": "#"
+                  "url": ""
                 },
                 {
                   "label": "Politicians",
-                  "url": "#"
+                  "url": ""
                 },
                 {
                   "label": "Administrative staff",
-                  "url": "#"
+                  "url": ""
                 },
                 {
                   "label": "Documents and data",
-                  "url": "#"
+                  "url": ""
                 }
               ]
             },
@@ -597,63 +597,63 @@
               "links": [
                 {
                   "label": "Registry and civil status",
-                  "url": "#"
+                  "url": ""
                 },
                 {
                   "label": "Culture and leisure",
-                  "url": "#"
+                  "url": ""
                 },
                 {
                   "label": "Working life",
-                  "url": "#"
+                  "url": ""
                 },
                 {
                   "label": "Business and trade",
-                  "url": "#"
+                  "url": ""
                 },
                 {
                   "label": "Public procurement",
-                  "url": "#"
+                  "url": ""
                 },
                 {
                   "label": "Land registry and urban planning",
-                  "url": "#"
+                  "url": ""
                 },
                 {
                   "label": "Tourism",
-                  "url": "#"
+                  "url": ""
                 },
                 {
                   "label": "Mobility and transport",
-                  "url": "#"
+                  "url": ""
                 },
                 {
                   "label": "Education and training",
-                  "url": "#"
+                  "url": ""
                 },
                 {
                   "label": "Justice and public safety",
-                  "url": "#"
+                  "url": ""
                 },
                 {
                   "label": "Taxes, finance and fines",
-                  "url": "#"
+                  "url": ""
                 },
                 {
                   "label": "Environment",
-                  "url": "#"
+                  "url": ""
                 },
                 {
                   "label": "Health, wellness and assistance",
-                  "url": "#"
+                  "url": ""
                 },
                 {
                   "label": "Permits",
-                  "url": "#"
+                  "url": ""
                 },
                 {
                   "label": "Agriculture and fishing",
-                  "url": "#"
+                  "url": ""
                 }
               ]
             },
@@ -662,15 +662,15 @@
               "links": [
                 {
                   "label": "News",
-                  "url": "#"
+                  "url": ""
                 },
                 {
                   "label": "Press releases",
-                  "url": "#"
+                  "url": ""
                 },
                 {
                   "label": "Notices",
-                  "url": "#"
+                  "url": ""
                 }
               ]
             },
@@ -679,11 +679,11 @@
               "links": [
                 {
                   "label": "Places",
-                  "url": "#"
+                  "url": ""
                 },
                 {
                   "label": "Events",
-                  "url": "#"
+                  "url": ""
                 }
               ]
             }
@@ -815,7 +815,7 @@
               },
               {
                 "label": "Terminvereinbarung",
-                "url": "/prenota-appuntamento"
+                "url": ""
               },
               {
                 "label": "Störungsmeldung",
@@ -824,7 +824,7 @@
               },
               {
                 "label": "Hilfeanfrage",
-                "url": "/assistenza"
+                "url": ""
               }
             ],
             "details": [
@@ -833,12 +833,12 @@
               "Zertifizierte E-Mail (PEC)",
               "Zentrale: 012 3456"
             ],
-            "office_url": "#"
+            "office_url": ""
           },
           "legal_links": [
             {
               "label": "Transparente Verwaltung",
-              "url": "/amministrazione-trasparente"
+              "url": ""
             },
             {
               "label": "Datenschutzerklärung",
@@ -860,7 +860,7 @@
             },
             {
               "label": "Sitemap",
-              "url": "/mappa-del-sito"
+              "url": "/mappa-sito"
             }
           ],
           "social": [
@@ -891,7 +891,7 @@
             },
             {
               "label": "RSS",
-              "url": "/rss.xml",
+              "url": "",
               "icon": "it-rss"
             }
           ],
@@ -906,31 +906,31 @@
               "links": [
                 {
                   "label": "Gemeindeorgane",
-                  "url": "#"
+                  "url": ""
                 },
                 {
                   "label": "Verwaltungsbereiche",
-                  "url": "#"
+                  "url": ""
                 },
                 {
                   "label": "Ämter",
-                  "url": "#"
+                  "url": ""
                 },
                 {
                   "label": "Körperschaften und Stiftungen",
-                  "url": "#"
+                  "url": ""
                 },
                 {
                   "label": "Politikerinnen und Politiker",
-                  "url": "#"
+                  "url": ""
                 },
                 {
                   "label": "Verwaltungspersonal",
-                  "url": "#"
+                  "url": ""
                 },
                 {
                   "label": "Dokumente und Daten",
-                  "url": "#"
+                  "url": ""
                 }
               ]
             },
@@ -939,63 +939,63 @@
               "links": [
                 {
                   "label": "Einwohnermeldeamt und Standesamt",
-                  "url": "#"
+                  "url": ""
                 },
                 {
                   "label": "Kultur und Freizeit",
-                  "url": "#"
+                  "url": ""
                 },
                 {
                   "label": "Arbeitsleben",
-                  "url": "#"
+                  "url": ""
                 },
                 {
                   "label": "Unternehmen und Handel",
-                  "url": "#"
+                  "url": ""
                 },
                 {
                   "label": "Öffentliche Vergaben",
-                  "url": "#"
+                  "url": ""
                 },
                 {
                   "label": "Kataster und Raumplanung",
-                  "url": "#"
+                  "url": ""
                 },
                 {
                   "label": "Tourismus",
-                  "url": "#"
+                  "url": ""
                 },
                 {
                   "label": "Mobilität und Verkehr",
-                  "url": "#"
+                  "url": ""
                 },
                 {
                   "label": "Bildung und Ausbildung",
-                  "url": "#"
+                  "url": ""
                 },
                 {
                   "label": "Justiz und öffentliche Sicherheit",
-                  "url": "#"
+                  "url": ""
                 },
                 {
                   "label": "Abgaben, Finanzen und Bußgelder",
-                  "url": "#"
+                  "url": ""
                 },
                 {
                   "label": "Umwelt",
-                  "url": "#"
+                  "url": ""
                 },
                 {
                   "label": "Gesundheit, Wohlbefinden und Betreuung",
-                  "url": "#"
+                  "url": ""
                 },
                 {
                   "label": "Genehmigungen",
-                  "url": "#"
+                  "url": ""
                 },
                 {
                   "label": "Landwirtschaft und Fischerei",
-                  "url": "#"
+                  "url": ""
                 }
               ]
             },
@@ -1004,15 +1004,15 @@
               "links": [
                 {
                   "label": "Nachrichten",
-                  "url": "#"
+                  "url": ""
                 },
                 {
                   "label": "Pressemitteilungen",
-                  "url": "#"
+                  "url": ""
                 },
                 {
                   "label": "Bekanntmachungen",
-                  "url": "#"
+                  "url": ""
                 }
               ]
             },
@@ -1021,11 +1021,11 @@
               "links": [
                 {
                   "label": "Orte",
-                  "url": "#"
+                  "url": ""
                 },
                 {
                   "label": "Veranstaltungen",
-                  "url": "#"
+                  "url": ""
                 }
               ]
             }
@@ -1157,7 +1157,7 @@
               },
               {
                 "label": "Reserva de cita",
-                "url": "/prenota-appuntamento"
+                "url": ""
               },
               {
                 "label": "Comunicar una incidencia",
@@ -1166,7 +1166,7 @@
               },
               {
                 "label": "Solicitud de asistencia",
-                "url": "/assistenza"
+                "url": ""
               }
             ],
             "details": [
@@ -1175,12 +1175,12 @@
               "Correo electrónico certificado (PEC)",
               "Centralita única: 012 3456"
             ],
-            "office_url": "#"
+            "office_url": ""
           },
           "legal_links": [
             {
               "label": "Administración transparente",
-              "url": "/amministrazione-trasparente"
+              "url": ""
             },
             {
               "label": "Política de privacidad",
@@ -1202,7 +1202,7 @@
             },
             {
               "label": "Mapa del sitio",
-              "url": "/mappa-del-sito"
+              "url": "/mappa-sito"
             }
           ],
           "social": [
@@ -1233,7 +1233,7 @@
             },
             {
               "label": "RSS",
-              "url": "/rss.xml",
+              "url": "",
               "icon": "it-rss"
             }
           ],
@@ -1248,31 +1248,31 @@
               "links": [
                 {
                   "label": "Órganos de gobierno",
-                  "url": "#"
+                  "url": ""
                 },
                 {
                   "label": "Áreas administrativas",
-                  "url": "#"
+                  "url": ""
                 },
                 {
                   "label": "Oficinas",
-                  "url": "#"
+                  "url": ""
                 },
                 {
                   "label": "Entes y fundaciones",
-                  "url": "#"
+                  "url": ""
                 },
                 {
                   "label": "Cargos electos",
-                  "url": "#"
+                  "url": ""
                 },
                 {
                   "label": "Personal administrativo",
-                  "url": "#"
+                  "url": ""
                 },
                 {
                   "label": "Documentos y datos",
-                  "url": "#"
+                  "url": ""
                 }
               ]
             },
@@ -1281,63 +1281,63 @@
               "links": [
                 {
                   "label": "Padrón y registro civil",
-                  "url": "#"
+                  "url": ""
                 },
                 {
                   "label": "Cultura y ocio",
-                  "url": "#"
+                  "url": ""
                 },
                 {
                   "label": "Vida laboral",
-                  "url": "#"
+                  "url": ""
                 },
                 {
                   "label": "Empresas y comercio",
-                  "url": "#"
+                  "url": ""
                 },
                 {
                   "label": "Contratación pública",
-                  "url": "#"
+                  "url": ""
                 },
                 {
                   "label": "Catastro y urbanismo",
-                  "url": "#"
+                  "url": ""
                 },
                 {
                   "label": "Turismo",
-                  "url": "#"
+                  "url": ""
                 },
                 {
                   "label": "Movilidad y transporte",
-                  "url": "#"
+                  "url": ""
                 },
                 {
                   "label": "Educación y formación",
-                  "url": "#"
+                  "url": ""
                 },
                 {
                   "label": "Justicia y seguridad pública",
-                  "url": "#"
+                  "url": ""
                 },
                 {
                   "label": "Tributos, finanzas y multas",
-                  "url": "#"
+                  "url": ""
                 },
                 {
                   "label": "Medio ambiente",
-                  "url": "#"
+                  "url": ""
                 },
                 {
                   "label": "Salud, bienestar y asistencia",
-                  "url": "#"
+                  "url": ""
                 },
                 {
                   "label": "Autorizaciones",
-                  "url": "#"
+                  "url": ""
                 },
                 {
                   "label": "Agricultura y pesca",
-                  "url": "#"
+                  "url": ""
                 }
               ]
             },
@@ -1346,15 +1346,15 @@
               "links": [
                 {
                   "label": "Noticias",
-                  "url": "#"
+                  "url": ""
                 },
                 {
                   "label": "Comunicados",
-                  "url": "#"
+                  "url": ""
                 },
                 {
                   "label": "Avisos",
-                  "url": "#"
+                  "url": ""
                 }
               ]
             },
@@ -1363,11 +1363,11 @@
               "links": [
                 {
                   "label": "Lugares",
-                  "url": "#"
+                  "url": ""
                 },
                 {
                   "label": "Eventos",
-                  "url": "#"
+                  "url": ""
                 }
               ]
             }

@@ -36,7 +36,8 @@ Le misure sono su blocchi sostituiti dentro il riferimento, non sulla pagina int
 
 ## Fatti emersi
 - "Avanti" = `requestNextStep()` Alpine -> `$wire.callSchemaComponentMethod(key, 'nextStep', ...)` -> `Wizard::nextStep()`; con campo obbligatorio vuoto errore senza evento, con dati validi evento verso `form.riepilogo::data::wizard-step` (provato con `Livewire::test`).
-- Geolocalizzazione: attiva solo in contesto sicuro; sul dev server HTTP il link mostra un messaggio dichiarato. Coordinate al picker con l'evento `coords-changed` (picker non `readonly`); modulo Geo non toccato.
+- Geolocalizzazione: superseded la vecchia formulazione "attiva solo in contesto sicuro" come requisito di flusso. La posizione automatica e' progressiva: se il browser la espone, invia coordinate al picker con l'evento `coords-changed` (picker non `readonly`); se non la espone o il permesso e' negato, mostra `geolocation_unavailable` e l'utente seleziona manualmente il punto. Il ticket e la mappa non devono richiedere HTTPS; modulo Geo non toccato.
+- Centro mappa: prima coordinate gia' presenti nel record/stato (`location.latitude` + `location.longitude`), poi posizione browser/utente quando disponibile, infine fallback Comune/default Geo. Il cittadino segnala il danno dove si trova, quindi la posizione corrente e' il default funzionale.
 - Suggerimenti d'indirizzo mentre si digita: NON implementati. Per P2-B `autocomplete-list-show` non ha regole nello scope e `.autocomplete-list` e' `display:none`; DCP-35 (Specifica passo 2, riga 8) prevede Alpine + `searchAddress` (>= 3 caratteri, Nominatim 1 richiesta/s senza debounce lato server): resta da fare, non e' un limite tecnico.
 - Upload immagini: nessuna vista; proposta `fieldWrapperView()` + `placeholder()` HTML; il CSS FilePond e' escluso sotto `data-dc` (blocco 173,7 px contro 217).
 - Il solo `data-dc` sul markup Filament attuale portava la pagina da 4060 a 5477 px a 1440 (S2, Playwright, ospite, prima del cablaggio di shell/stepper: altro metodo e altra ora dei 4028 del gate). Il layout `design-comuni` e' stato poi attivato da un altro agente: rimisurare.
@@ -44,7 +45,7 @@ Le misure sono su blocchi sostituiti dentro il riferimento, non sulla pagina int
 ## Richieste aperte (tabella in DCP-35)
 1. `overrides.css` (sessione shell): `body:has(.page-content[data-dc]) .fi-sc { font-size: var(--bs-body-font-size); line-height: var(--bs-body-line-height); }`.
 2. Cablaggio in `TicketForm` (orchestratore): `native()` sulla select, `required()` su `location.address`, `data-element="location-map"`, viste P2.
-3. Lingue: chiavi proposte nelle sezioni "Chiavi lingua proposte (P2-A/B/C)" di DCP-35: `required_notice`, `navscroll.title`, `nav.aria_label`, `nav.back`, `nav.next`, `fields.location.geolocation_insecure`, `hints.max_length`, `fields.name.label` = Titolo.
+3. Lingue: chiavi proposte nelle sezioni "Chiavi lingua proposte (P2-A/B/C)" di DCP-35: `required_notice`, `navscroll.title`, `nav.aria_label`, `nav.back`, `nav.next`, `fields.location.geolocation_unavailable`, `hints.max_length`, `fields.name.label` = Titolo. `fields.location.geolocation_insecure` e' superseded: non dire che HTTPS e' richiesto per completare la segnalazione.
 
 ## Criteri di accettazione
 Quelli numerici della sezione 7 di DCP-35 (pixel >= 97% a 1440/768/375, altezze entro 1% con mappa nascosta, 0 chiavi grezze in it/en/de/es, PHPStan a zero, admin invariato).
@@ -85,3 +86,6 @@ Difetti trovati (non corretti, nessuna vista toccata):
 - Osservazione, non difetto: Filament ripulisce `->id()` (`getId()` toglie `"<>`), quindi l'id ostile non apre attributi; il test lo fissa (nessun `"<>` nell'id, ancora dell'indice = id della scheda).
 
 Non coperto: Alpine reale e `requestNextStep()` eseguito nel browser, `dcNavscroll` dopo un morph di Livewire, geometria e CSS (restano al gate pixel), testi delle 5 chiavi nelle lingue vere (le chiavi non esistono ancora in `lang/*/ticket_form.php`: il test usa un namespace temporaneo), round-trip server di `nextStep` (provato da P2-A con `roundtrip.php`, non portato nel test). I test fissano le classi Bootstrap Italia del riferimento: se l'orchestratore decide per il contratto DCP-33 (nessuna classe BI, registro DCP-97) vanno rivisti insieme alle viste.
+
+## Esito cablaggio (DCP-128, 2026-10-13 22:05 UTC)
+Le viste del passo 2 sono cablate in `TicketForm` (front office `getDataSchema(designComuni: true)`, back office invariato): pixel 99,37-99,67% a 5 larghezze con mappa nascosta e altezze uguali, E2E fino alla conferma, axe 0, PHPStan 0. Dettagli, filtri, cause dell'HTML a 63,5% e punti aperti: `2026-10-13-dcp-128-wizard-passo2-cablaggio-design-comuni.story.md`.

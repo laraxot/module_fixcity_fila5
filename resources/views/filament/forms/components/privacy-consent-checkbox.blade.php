@@ -7,7 +7,13 @@
     $statePath = $getStatePath();
     $hasError = $errors->has($statePath);
 @endphp
-<div class="form-check mt-4 mb-3 mt-md-40 mb-lg-40">
+{{--
+    `data-field-wrapper` e `data-validation-error` sono i contrassegni che il gestore `form-validation-error` di Filament cerca per portare
+    l'utente al campo in errore: espande i contenitori (il passo del wizard si attiva) e scorre fino al campo. Questa vista sostituisce il
+    wrapper standard del campo, quindi li ripete: senza, un "Invia" con il consenso mancante (es. aprendo `?step=` direttamente) falliva
+    in silenzio perche' l'errore stava nel passo 1, nascosto (DCP-146).
+--}}
+<div class="form-check mt-4 mb-3 mt-md-40 mb-lg-40" data-field-wrapper @if ($hasError) data-validation-error @endif>
     <div class="checkbox-body d-flex align-items-center">
         <input
             type="checkbox"

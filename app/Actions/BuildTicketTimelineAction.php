@@ -16,7 +16,9 @@ final class BuildTicketTimelineAction
     use QueueableAction;
 
     /**
-     * @return list<array{occurred_at: string, from_label: string|null, to_label: string, reason: string|null}>
+     * `occurred_date` e' il solo giorno (mai l'ora): e' quello che le pagine pubbliche mostrano.
+     *
+     * @return list<array{occurred_at: string, occurred_date: string, from_label: string|null, to_label: string, reason: string|null}>
      */
     public function execute(Ticket $ticket): array
     {
@@ -50,6 +52,7 @@ final class BuildTicketTimelineAction
 
             $timeline[] = [
                 'occurred_at' => $activity->created_at?->translatedFormat('d F Y H:i') ?? '',
+                'occurred_date' => $activity->created_at?->translatedFormat('j F Y') ?? '',
                 'from_label' => $from?->getLabel(),
                 'to_label' => $to->getLabel(),
                 'reason' => $activity->reason,

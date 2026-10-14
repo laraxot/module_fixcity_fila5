@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 use Livewire\Livewire;
+use Modules\Fixcity\Actions\GetPublishedLegalDocumentAction;
 use Modules\Fixcity\Actions\GetPublishedPrivacyPolicyAction;
 use Modules\Fixcity\Filament\Widgets\CreateTicketWidget;
 use Modules\Fixcity\Filament\Widgets\CreateTicketWizardWidget;
@@ -12,29 +13,33 @@ use Modules\User\Database\Factories\UserFactory;
 
 uses(TestCase::class);
 
-it('returns a localized unavailable response while the tenant policy is a template', function (): void {
+/*
+ * DCP-130: `/{lingua}/privacy` non e' piu' una pagina Folio che risponde 503 senza testo (cancellata dal commit 30d521c): e' la pagina CMS
+ * `privacy.index` e risponde sempre 200, con un avviso che elenca che cosa deve fornire il titolare. Test dettagliati:
+ * PrivacyPolicyPageTest. Il testo dell'ente arriva da GetPublishedLegalDocumentAction (GetPublishedPrivacyPolicyAction la usa per il wizard).
+ */
+it('returns a 200 page with a warning while the tenant policy is a template', function (): void {
     /** @var TestCase $this */
-    $this->instance(GetPublishedPrivacyPolicyAction::class, new class extends GetPublishedPrivacyPolicyAction
+    $this->instance(GetPublishedLegalDocumentAction::class, new class extends GetPublishedLegalDocumentAction
     {
-        public function execute(): ?string
+        public function execute(string $file): ?string
         {
             return null;
         }
     });
 
-    $response = $this->get('/it/privacy');
-    $response
-        ->assertStatus(503)
+    $this->get('/it/privacy')
+        ->assertOk()
         ->assertSee('Informativa privacy')
-        ->assertSee('L’informativa privacy non è ancora disponibile.')
+        ->assertSee('data-element="legal-incomplete"', false)
         ->assertDontSee('Firenze');
 });
 
 it('renders the tenant policy as sanitized markdown when it is published', function (): void {
     /** @var TestCase $this */
-    $this->instance(GetPublishedPrivacyPolicyAction::class, new class extends GetPublishedPrivacyPolicyAction
+    $this->instance(GetPublishedLegalDocumentAction::class, new class extends GetPublishedLegalDocumentAction
     {
-        public function execute(): string
+        public function execute(string $file): string
         {
             return "# Informativa pubblicata\n\nContenuto fornito dall'ente.\n\n<script>alert('unsafe')</script>";
         }

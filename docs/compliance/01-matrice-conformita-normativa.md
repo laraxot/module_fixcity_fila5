@@ -190,3 +190,16 @@ Verificate il 2026-10-13 (curl, grep, git). Non sono state corrette: i file appa
 | 15 | `Modules/Gdpr/app/Filament/Widgets/Auth/RegisterWidget.php` | (codice) docblock con `<<<<<<< HEAD`, `=======`, `>>>>>>> 12e4ae8` | `grep -n '<<<<<<<' ...` | Ripulire (DCP-135) |
 | 16 | `Modules/Fixcity/docs/wiki/concepts/fixcity-gap-compliance-pa-italia.md` (riga 108) | La dichiarazione di accessibilita' si compila su «form.agid.it» | Le Linee guida AgID (cap. 4.1) e la pagina AgID indicano la piattaforma `https://form.agid.gov.it` (registro 03, sez. 6). Le scadenze citate dal documento (23 settembre, 31 marzo) coincidono con le fonti: la prima e' nelle Linee guida AgID, la seconda nel D.L. 179/2012 art. 9 c. 7, non nella L. 4/2004 | Correggere il dominio e citare le fonti |
 
+## Aggiornamento 2026-10-13 (sera): DCP-130, DCP-131, DCP-132
+
+Le righe sotto cambiano di stato; le prove sono nelle story (comandi e output). Il testo delle righe originali resta com'e' (cronologia).
+
+| Riga | Prima | Ora |
+|---|---|---|
+| N-03 | parziale | struttura completa: modello con le 10 sezioni dell'art. 13 (`Modules/Fixcity/resources/templates/privacy-policy.<lingua>.md`) e verifica automatica (`AssessPrivacyPolicyAction`, test `PrivacyPolicyPublicationGateTest`, rosso finche' il Comune non fornisce i valori). I valori (titolare, DPO, base giuridica, termini) restano da fornire |
+| N-04 | assente | `/{it,en,de,es}/privacy` risponde 200 con `<h1>` (pagina JSON `privacy.index`); senza testo completo mostra un avviso con i campi mancanti. Wizard e footer puntano alla stessa pagina |
+| N-27 | link morto | il link «Amministrazione trasparente» e' ora testo non attivo finche' il Comune non fornisce l'URL del sito istituzionale |
+| I-01 (matrice interfaccia) | assente | `/{lingua}/accessibilita` 200 con modulo di feedback e link alla procedura; lo stato di conformita' resta da fornire dopo l'audit DCP-143 |
+
+Story: DCP-130 (`../stories/2026-10-13-dcp-130-informativa-privacy-art13-e-pagina-servita.story.md`), DCP-131 e DCP-132 (`Themes/Sixteen/docs/bmad/stories/`).
+

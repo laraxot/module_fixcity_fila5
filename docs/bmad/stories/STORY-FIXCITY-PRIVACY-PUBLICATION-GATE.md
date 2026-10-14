@@ -48,3 +48,13 @@ questo tenant. La checkbox consentiva l'invio anche senza un'informativa leggibi
 Nessun titolare, finalità, base giuridica, retention, contatto DPO o testo legale
 viene inventato dal codice. Senza il Markdown ufficiale del tenant il servizio
 segnalazioni rimane intenzionalmente non disponibile: è un blocco di go-live.
+
+# Correzione 2026-10-13 (DCP-130)
+
+I criteri spuntati sulla pagina Folio `/{locale}/privacy` (503 senza testo) descrivono uno stato superato: la pagina Folio e' stata
+cancellata dal commit `30d521c` (2026-10-11) e `/it/privacy` rispondeva 404. Ora la pagina e' il JSON CMS `privacy.index` con il blocco
+`legal-document` e risponde sempre 200: senza testo completo mostra un avviso con i campi che il titolare deve fornire. Il gate del
+wizard (`GetPublishedPrivacyPolicyAction`, consenso rifiutato senza policy) e' invariato. La guardia di pubblicazione e' il test
+`Feature/Pages/PrivacyPolicyPublicationGateTest.php` (rosso finche' il testo del tenant non ha le sezioni dell'art. 13 e nessun segnaposto).
+Vedi `../stories/2026-10-13-dcp-130-informativa-privacy-art13-e-pagina-servita.story.md`.
+

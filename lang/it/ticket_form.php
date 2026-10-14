@@ -34,6 +34,14 @@ return [
             'description' => 'Descrivi il disservizio in modo chiaro',
         ],
         'images' => [
+            'upload_button' => 'Carica file',
+            'upload_aria' => 'Carica file per il disservizio',
+            'remove' => 'Elimina :name',
+            'uploading' => 'Caricamento in corso',
+            'error_type' => 'Formato non consentito: usa JPG, PNG o PDF',
+            'error_size' => 'Il file supera :max MB',
+            'error_count' => 'Puoi allegare al massimo :max file',
+            'error_upload' => 'Caricamento non riuscito, riprova',
             'label' => 'Immagini',
             'helper_text' => 'Seleziona una o più immagini da allegare alla segnalazione',
             'placeholder' => 'Aggiungi immagini (facoltativo)',
@@ -47,6 +55,9 @@ return [
             'description' => 'Codice fiscale dell’autore',
             'helper_text' => 'Dato associato al tuo profilo',
             'placeholder' => 'Codice fiscale',
+        ],
+        'title' => [
+            'label' => 'Titolo',
         ],
         'name' => [
             'label' => 'Nome',
@@ -166,6 +177,23 @@ return [
             'helper_text' => 'status',
             'description' => 'status',
         ],
+    ],
+    'required_notice' => 'I campi contraddistinti dal simbolo asterisco sono obbligatori',
+    'navscroll' => [
+        'title' => 'INFORMAZIONI RICHIESTE',
+    ],
+    'nav' => [
+        'aria_label' => 'Step',
+        'back' => 'Indietro',
+        'next' => 'Avanti',
+    ],
+    'hints' => [
+        'max_length' => 'Inserire al massimo :max caratteri',
+    ],
+    'validation' => [
+        'required' => 'Il campo :attribute è obbligatorio.',
+        'min' => 'Il campo :attribute deve contenere almeno :min caratteri.',
+        'max' => 'Il campo :attribute non può superare :max caratteri.',
     ],
     'sections' => [
         'Riepilogo' => [

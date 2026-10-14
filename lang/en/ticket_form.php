@@ -34,6 +34,14 @@ return [
             'description' => 'Describe the issue clearly',
         ],
         'images' => [
+            'upload_button' => 'Upload file',
+            'upload_aria' => 'Upload files for the issue',
+            'remove' => 'Remove :name',
+            'uploading' => 'Uploading',
+            'error_type' => 'File type not allowed: use JPG, PNG or PDF',
+            'error_size' => 'The file is larger than :max MB',
+            'error_count' => 'You can attach at most :max files',
+            'error_upload' => 'Upload failed, please try again',
             'label' => 'Images',
             'helper_text' => 'Select one or more images to attach to the report',
             'placeholder' => 'Add images (optional)',
@@ -47,6 +55,9 @@ return [
             'description' => 'Tax code of the author',
             'helper_text' => 'Information linked to your profile',
             'placeholder' => 'Tax code',
+        ],
+        'title' => [
+            'label' => 'Title',
         ],
         'name' => [
             'label' => 'Name',
@@ -166,6 +177,23 @@ return [
             'helper_text' => 'status',
             'description' => 'status',
         ],
+    ],
+    'required_notice' => 'Fields marked with an asterisk are required',
+    'navscroll' => [
+        'title' => 'REQUIRED INFORMATION',
+    ],
+    'nav' => [
+        'aria_label' => 'Step navigation',
+        'back' => 'Back',
+        'next' => 'Next',
+    ],
+    'hints' => [
+        'max_length' => 'Enter at most :max characters',
+    ],
+    'validation' => [
+        'required' => 'The :attribute field is required.',
+        'min' => 'The :attribute field must be at least :min characters.',
+        'max' => 'The :attribute field must not be greater than :max characters.',
     ],
     'sections' => [
         'Riepilogo' => [

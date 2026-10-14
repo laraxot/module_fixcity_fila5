@@ -34,6 +34,14 @@ return [
             'description' => 'Describe la incidencia con claridad',
         ],
         'images' => [
+            'upload_button' => 'Subir archivo',
+            'upload_aria' => 'Subir archivos para la incidencia',
+            'remove' => 'Eliminar :name',
+            'uploading' => 'Subiendo',
+            'error_type' => 'Formato no permitido: usa JPG, PNG o PDF',
+            'error_size' => 'El archivo supera :max MB',
+            'error_count' => 'Puedes adjuntar como máximo :max archivos',
+            'error_upload' => 'No se pudo subir, inténtalo de nuevo',
             'label' => 'Imágenes',
             'helper_text' => 'Selecciona una o más imágenes para adjuntar a la incidencia',
             'placeholder' => 'Añadir imágenes (opcional)',
@@ -47,6 +55,9 @@ return [
             'description' => 'Código fiscal de la persona autora',
             'helper_text' => 'Dato asociado a tu perfil',
             'placeholder' => 'Código fiscal',
+        ],
+        'title' => [
+            'label' => 'Título',
         ],
         'name' => [
             'label' => 'Nombre',
@@ -166,6 +177,23 @@ return [
             'helper_text' => 'status',
             'description' => 'status',
         ],
+    ],
+    'required_notice' => 'Los campos marcados con un asterisco son obligatorios',
+    'navscroll' => [
+        'title' => 'INFORMACIÓN REQUERIDA',
+    ],
+    'nav' => [
+        'aria_label' => 'Paso',
+        'back' => 'Atrás',
+        'next' => 'Siguiente',
+    ],
+    'hints' => [
+        'max_length' => 'Introduce como máximo :max caracteres',
+    ],
+    'validation' => [
+        'required' => 'El campo :attribute es obligatorio.',
+        'min' => 'El campo :attribute debe tener al menos :min caracteres.',
+        'max' => 'El campo :attribute no puede superar los :max caracteres.',
     ],
     'sections' => [
         'Riepilogo' => [

@@ -286,15 +286,22 @@ it('renders dc-place-autocomplete with the search input, the geolocation link an
     Assert::assertSame('message', $status->getAttribute('x-text'));
 });
 
-it('wires the geolocation of dc-place-autocomplete to the map picker contract', function (): void {
-    $script = dcFieldOne(dcFieldsDoc(), '.cmp-input-autocomplete')->getAttribute('x-data') ?? '';
+it('wires the geolocation of dc-place-autocomplete to the map picker chain, with no HTTPS or permission message', function (): void {
+    $root = dcFieldOne(dcFieldsDoc(), '.cmp-input-autocomplete');
+    $script = $root->getAttribute('x-data') ?? '';
 
-    // Solo contesto sicuro (senza HTTPS il link dichiara il motivo) e solo il picker modificabile, via evento `coords-changed`.
-    Assert::assertStringContainsString('window.isSecureContext', $script);
+    // Il link non decide nulla: delega al picker modificabile (DCP-127). GPS, posizione approssimativa da IP o silenzio si
+    // decidono li', in un posto solo, con le stesse regole del pulsante della mappa.
     Assert::assertStringContainsString("coordinate-picker-lit:not([readonly])", $script);
-    Assert::assertStringContainsString("new CustomEvent('coords-changed'", $script);
-    Assert::assertStringContainsString('bubbles: true', $script);
-    Assert::assertStringContainsString('composed: true', $script);
+    Assert::assertStringContainsString('_requestGeolocation()', $script);
+
+    // Niente contesto sicuro obbligatorio e niente messaggi di errore di posizione: l'utente non puo' risolverli.
+    Assert::assertStringNotContainsString('isSecureContext', $script);
+    Assert::assertStringNotContainsString('getCurrentPosition', $script);
+    foreach (['insecure', 'denied', 'timeout', 'unsupported', 'unavailable'] as $errorKey) {
+        Assert::assertStringNotContainsString($errorKey, $script, "Messaggio di errore di posizione reintrodotto: {$errorKey}");
+    }
+    Assert::assertDoesNotMatchRegularExpression('/https/i', $root->textContent ?? '', 'Nessun testo visibile deve nominare HTTPS.');
 });
 
 it('hides the geolocation link and the required mark when dc-place-autocomplete is disabled', function (): void {
@@ -361,7 +368,11 @@ it('emits no error state before validation', function (string $id): void {
     Assert::assertFalse($input->hasAttribute('aria-invalid'));
     Assert::assertFalse($input->classList->contains('is-invalid'));
     Assert::assertSame(0, dcFieldCount($document, '[data-validation-error]'));
-    Assert::assertSame(0, dcFieldCount($document, '[data-field-wrapper]'));
+    // Solo il consenso privacy porta sempre `data-field-wrapper` (DCP-146: il gestore `form-validation-error` di Filament lo cerca per aprire il passo 1
+    // quando l'errore e' nascosto); gli altri campi lo emettono soltanto con un errore.
+    $wrappers = $document->querySelectorAll('[data-field-wrapper]');
+    Assert::assertSame(1, $wrappers->length);
+    Assert::assertNotNull($wrappers->item(0)?->querySelector('[id="form.privacyAccepted"]'));
     Assert::assertStringNotContainsString($id.'-error', $input->getAttribute('aria-describedby') ?? '');
 })->with(['form.type', 'form.name', 'form.content', 'form.location.address', 'form.privacyAccepted']);
 
