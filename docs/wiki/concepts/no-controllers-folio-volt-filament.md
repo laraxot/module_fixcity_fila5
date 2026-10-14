@@ -19,6 +19,7 @@ related:
   - ../../../../../Themes/Sixteen/docs/wiki/concepts/no-controllers-folio-volt-filament.md
   - ../../../../../../docs/wiki/rules/no-controllers-rule.md
   - ../../../../../../docs/second-brain/process/folio-volt-app-pages.md
+status: draft
 ---
 
 # No Controllers — Solo Folio + Volt + Filament

@@ -37,6 +37,10 @@ related:
   - ./STORY-515-public-navigation-measured-reality.md
   - ../../../../../../bashscripts/ai/wiki/concepts/user-journeys.md
   - ../../../../../Themes/Sixteen/resources/views/components/blocks
+type: note
+updated: 2026-10-13
+tags: [docs, fixcity, bmad]
+qmd: "story-516   parità con design comuni fixcity"
 ---
 
 # STORY-516 — Parità con Design Comuni

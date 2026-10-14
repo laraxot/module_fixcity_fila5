@@ -5,7 +5,7 @@ return [
      | Your Google Maps API key, usually set in .env (but see 'keys' section below).
      */
 
-    'key' => env('GOOGLE_MAPS_API_KEY'),
+    'key' => config('env.GOOGLE_MAPS_API_KEY'),
 
     /*
      | If you need to use both a browser key (restricted by HTTP Referrer) for use in the Javascript API on the
@@ -15,9 +15,9 @@ return [
      */
 
     'keys' => [
-        'web_key' => env('FILAMENT_GOOGLE_MAPS_WEB_API_KEY', env('GOOGLE_MAPS_API_KEY')),
-        'server_key' => env('FILAMENT_GOOGLE_MAPS_SERVER_API_KEY', env('GOOGLE_MAPS_API_KEY')),
-        'signing_key' => env('FILAMENT_GOOGLE_MAPS_SIGNING_KEY', null),
+        'web_key' => (config('env.FILAMENT_GOOGLE_MAPS_WEB_API_KEY') ?? config('env.GOOGLE_MAPS_API_KEY')),
+        'server_key' => (config('env.FILAMENT_GOOGLE_MAPS_SERVER_API_KEY') ?? config('env.GOOGLE_MAPS_API_KEY')),
+        'signing_key' => config('env.FILAMENT_GOOGLE_MAPS_SIGNING_KEY'),
     ],
 
     /*
@@ -26,7 +26,7 @@ return [
      | appropriate env key)
      */
 
-    'libraries' => env('FILAMENT_GOOGLE_MAPS_ADDITIONAL_LIBRARIES', ''),
+    'libraries' => (config('env.FILAMENT_GOOGLE_MAPS_ADDITIONAL_LIBRARIES') ?? ''),
 
     /*
      | Region and country codes.
@@ -44,23 +44,23 @@ return [
      | https://developers.google.com/maps/faq#languagesupport
      */
     'locale' => [
-        'region' => env('FILAMENT_GOOGLE_MAPS_REGION_CODE', null),
-        'language' => env('FILAMENT_GOOGLE_MAPS_LANGUAGE_CODE', null),
-        'api' => env('FILAMENT_GOOGLE_MAPS_API_LANGUAGE_CODE', null),
+        'region' => config('env.FILAMENT_GOOGLE_MAPS_REGION_CODE'),
+        'language' => config('env.FILAMENT_GOOGLE_MAPS_LANGUAGE_CODE'),
+        'api' => config('env.FILAMENT_GOOGLE_MAPS_API_LANGUAGE_CODE'),
     ],
 
     /*
      | Rate limit for API calls, although you REALLY should also set usage quota limits in your Google Console
      */
 
-    'rate-limit' => env('FILAMENT_GOOGLE_MAPS_RATE_LIMIT', 150),
+    'rate-limit' => (config('env.FILAMENT_GOOGLE_MAPS_RATE_LIMIT') ?? 150),
 
     /*
      | Log channel to use, default is 'null' (no logging), set to your desired channel from logging.php if you want
      | logs.  Typically only useful for debugging, or if youw ant to keep track of a scheduled geocoding task.
      */
     'log' => [
-        'channel' => env('FILAMENT_GOOGLE_MAPS_LOG_CHANNEL', 'null'),
+        'channel' => (config('env.FILAMENT_GOOGLE_MAPS_LOG_CHANNEL') ?? 'null'),
     ],
 
     /*
@@ -71,8 +71,8 @@ return [
      */
 
     'cache' => [
-        'duration' => env('FILAMENT_GOOGLE_MAPS_CACHE_DURATION_SECONDS', 60 * 60 * 24 * 30),
-        'store' => env('FILAMENT_GOOGLE_MAPS_CACHE_STORE', null),
+        'duration' => (config('env.FILAMENT_GOOGLE_MAPS_CACHE_DURATION_SECONDS') ?? 60 * 60 * 24 * 30),
+        'store' => config('env.FILAMENT_GOOGLE_MAPS_CACHE_STORE'),
     ],
 
     /*
@@ -80,5 +80,5 @@ return [
     | may be needed if your app is behind a reverse proxy.
     */
 
-    'force-https' => env('FILAMENT_GOOGLE_MAPS_FORCE_HTTPS', false),
+    'force-https' => (config('env.FILAMENT_GOOGLE_MAPS_FORCE_HTTPS') ?? false),
 ];

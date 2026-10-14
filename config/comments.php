@@ -2,18 +2,19 @@
 
 declare(strict_types=1);
 
-use Modules\Comment\Models\CommentNotificationSubscription;
-use Modules\Comment\Models\Reaction;
 use Modules\Comment\Actions\Comment\ApproveCommentAction;
 use Modules\Comment\Actions\Comment\ProcessCommentAction;
 use Modules\Comment\Actions\Comment\RejectCommentAction;
-use Modules\Comment\Models\Comment;
 use Modules\Comment\Actions\Content\SanitizeCommentHtmlAction;
-use Modules\Comment\Transformers\MarkdownToHtmlTransformer;
-use Modules\Comment\Actions\Notification\SendNotificationsForApprovedCommentAction;
 use Modules\Comment\Actions\Notification\SendNotificationsForPendingCommentAction;
+use Modules\Comment\Actions\QueueNotifyApprovedCommentAction;
+use Modules\Comment\Models\Comment;
+use Modules\Comment\Models\CommentNotificationSubscription;
+use Modules\Comment\Models\Reaction;
 use Modules\Comment\Notifications\ApprovedCommentNotification;
 use Modules\Comment\Notifications\PendingCommentNotification;
+use Modules\Comment\Transformers\MarkdownToHtmlTransformer;
+use Modules\Fixcity\Models\User;
 
 return [
     /*
@@ -64,7 +65,7 @@ return [
          * The class that will comment on other things. Typically, this
          * would be a user model.
          */
-        'commentator' => Modules\Fixcity\Models\User::class,
+        'commentator' => User::class,
 
         /*
          * The field to use to display the name from the commentator model.
@@ -75,7 +76,7 @@ return [
          * The model you want to use as a Comment model. It needs to be or
          * extend the `Spatie\Comments\Models\Comment::class` model.
          */
-        'comment' => Modules\Comment\Models\Comment::class,
+        'comment' => Comment::class,
 
         /*
          * The model you want to use as a React model. It needs to be or
@@ -107,8 +108,8 @@ return [
          */
         'mail' => [
             'from' => [
-                'address' => env('MAIL_FROM_ADDRESS', 'hello@example.com'),
-                'name' => env('MAIL_FROM_NAME', 'Example'),
+                'address' => (config('env.MAIL_FROM_ADDRESS') ?? 'hello@example.com'),
+                'name' => (config('env.MAIL_FROM_NAME') ?? 'Example'),
             ],
         ],
     ],
@@ -145,7 +146,7 @@ return [
         'send_notifications_for_pending_comment' => SendNotificationsForPendingCommentAction::class,
         'approve_comment' => ApproveCommentAction::class,
         'reject_comment' => RejectCommentAction::class,
-        'send_notifications_for_approved_comment' => SendNotificationsForApprovedCommentAction::class,
+        'send_notifications_for_approved_comment' => QueueNotifyApprovedCommentAction::class,
     ],
 
     'gravatar' => [

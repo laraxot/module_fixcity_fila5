@@ -1,23 +1,18 @@
 <?php
 
-use Orbit\Drivers\Json;
-use Orbit\Drivers\Markdown;
-use Orbit\Drivers\Yaml;
+use Modules\Tenant\Actions\Config\GetTenantFilePathAction;
 
 return [
 
-    'default' => env('ORBIT_DEFAULT_DRIVER', 'md'),
+    'default' => (config('env.ORBIT_DEFAULT_DRIVER') ?? 'md'),
 
-    'drivers' => [
-        'md' => Markdown::class,
-        'json' => Json::class,
-        'yaml' => Yaml::class,
-    ],
+    // Orbit is not installed in this application; the configuration is kept for compatibility.
+    'drivers' => [],
 
     'paths' => [
         'content' => base_path('database/content'),
         // 'cache' => storage_path('framework/cache/orbit'),
-        'cache' => app(\Modules\Tenant\Actions\Config\GetTenantFilePathAction::class)->execute(''),
+        'cache' => app(GetTenantFilePathAction::class)->execute(''),
     ],
 
 ];

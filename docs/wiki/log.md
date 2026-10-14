@@ -9,9 +9,14 @@ issues:
   - "https://github.com/laraxot/base_fixcity_fila5/issues/572"
 discussions:
   - "https://github.com/laraxot/base_fixcity_fila5/discussions/573"
+status: draft
 ---
 
 # Modules Wiki Log
+
+## [2026-10-14] docs | studio degli ingressi di Fixcity confrontati con il codice
+
+Gli ingressi (`README.md`, `00-INDEX.md`, `index.md`, `INDEX.md`, `wiki/index.md`) descrivevano nomi che nel codice non esistono (modelli `TicketStatus`/`TicketPriority`/`TicketType` al posto degli enum, `UpdateTicketAction`, `DashboardWidget`, `FixcitySeeder`, tipi `bugReport`, URL `/it/tests/segnalazione-crea`). Corretti con evidenza; `wiki/MODULE-STATUS.md` segnato `stale`. Fatti durevoli: il `routes/` del modulo e' vuoto (POST in `laravel/routes/web.php`), il pannello admin e' su `/fixcity/admin/tickets`, il wizard ha i passi `privacy`, `data`, `summary`, gli endpoint `pages/api/*` li monta `Cms/FolioVoltServiceProvider` (il `registerFolioApiRoutes()` di Fixcity punta a una cartella inesistente), PHPStan: 0 errori in `app/`, 122 in `config/`. Story: [studio-docs-fixcity-ingressi-verificati](../stories/2026-10-14-studio-docs-fixcity-ingressi-verificati.story.md). Memoria: `bashscripts/ai/wiki/memories/2026-10-14-docs-fixcity-geo-studio.md`.
 
 ## [2026-09-27] Design Comuni — utility pubbliche e flusso CMS/Folio
 
@@ -164,7 +169,7 @@ content instead of 503; Playwright verified all four locales at mobile width.
 
 - Corretto il percorso notification che conteneva `ticket_id` sequenziale: notifiche database owner/follower ora portano `ticket_code` e `/tickets/track?code=...`; se un record storico non ha codice non si invia una notifica con link non sicuro.
 - Anche “Segnalazioni seguite” punta al codice capability; per un ticket legacy senza codice mostra un messaggio esplicito senza URL vuoto. Tracking guest è testato al limite 10 richieste/minuto.
-- Pest mirato: 6 test / 24 asserzioni. Suite Fixcity completa con `FIXCITY_TEST_SQLITE=1`, database condiviso e transazioni: 345 test / 1.416 asserzioni in 97,52 secondi; PHPStan Modules zero errori e Pint/view-cache passano. Report [tracking-links-capability](../bmad/tracking-links-capability-2026-09-27.md).
+- Pest mirato: 6 test / 24 asserzioni. Suite Fixcity completa con `FIXCITY_TEST_SQLITE=1`, database condiviso e transazioni: 345 test / 1.416 asserzioni in 97,52 secondi; PHPStan Modules zero errori e Pint/view-cache passano. Report tracking-links-capability _(target mancante, verificato 2026-10-14: `bmad/tracking-links-capability-2026-09-27.md` non esiste; esiste `bmad/tracking-links-capability.md`, stesso argomento, non verificato che sia lo stesso report)_.
 - Nessun grant MariaDB o database di produzione è stato modificato. Restano separati verifica schema MariaDB/staging e test visuale browser, non installato nel runtime corrente.
 
 ## [2026-09-26] impl | STORY-511 follow segnalazione FO
@@ -254,7 +259,7 @@ content instead of 503; Playwright verified all four locales at mobile width.
 
 ## [2026-06-13] docs | Gate chef — hub completamento + Activity/Xot test docs
 
-- Hub: [platform-completion-roadmap](../Xot/docs/wiki/overviews/platform-completion-roadmap.md)
+- Hub: platform-completion-roadmap _(target mancante, verificato 2026-10-14: nessun file con quel nome nel repo)_
 - Activity: 7 file test Assert; [completion-status](../../../Activity/docs/wiki/overviews/completion-status.md)
 - Temi: Barthelemy, TwentyOne, Meetup completion roadmaps
 - GitHub: [#372](https://github.com/laraxot/base_fixcity_fila5/issues/372)
@@ -263,14 +268,14 @@ content instead of 503; Playwright verified all four locales at mobile width.
 
 - Fixcity: [phpstan-pest-testcase-helpers](concepts/phpstan-pest-testcase-helpers.md), [completion-roadmap](overviews/completion-roadmap.md)
 - Notify: [phpstan-pest-test-doubles](../../../Notify/docs/wiki/concepts/phpstan-pest-test-doubles.md)
-- Xot: aggiornato [phpstan-pest-bridge-discipline](../Xot/docs/wiki/concepts/phpstan-pest-bridge-discipline.md)
+- Xot: aggiornato phpstan-pest-bridge-discipline _(target mancante, verificato 2026-10-14: nessun file con quel nome nel repo)_
 - UI, Tenant, Cms: `testing.md` aggiornati
 - Sixteen: [theme-component-test-contract](../../../../Themes/Sixteen/docs/wiki/concepts/theme-component-test-contract.md), [completion-roadmap](../../../../Themes/Sixteen/docs/wiki/overviews/completion-roadmap.md)
 - GitHub: [Fixcity#52](https://github.com/laraxot/module_fixcity_fila5/issues/52) / [D#53](https://github.com/laraxot/module_fixcity_fila5/discussions/53)
 
 ## [2026-06-05] docs | HackerNoon harness — tips 001-022 in wiki locale
 
-- Stub/checklist: second-brain → canon Xot, ai-harness, [hackernoon map](../../../../../docs/wiki/concepts/hackernoon-ai-coding-tips-fixcity-map.md), [llm-wiki.txt](../../../../bashscripts/tools/prompts/llm-wiki.txt)
+- Stub/checklist: second-brain → canon Xot, ai-harness, [hackernoon map](../../../../../docs/wiki/concepts/hackernoon-ai-coding-tips-fixcity-map.md), llm-wiki.txt _(target mancante, verificato 2026-10-14: `bashscripts/tools/prompts/llm-wiki.txt` non esiste)_
 - GitHub: [#272](https://github.com/laraxot/base_fixcity_fila5/issues/272) / [D#273](https://github.com/laraxot/base_fixcity_fila5/discussions/273)
 
 # Modules Wiki Log
@@ -546,3 +551,28 @@ Fase BMAD documentazione/qualita'. Solo `laravel/Modules/Fixcity/docs/`, nessun 
 - Link relativi: 202 coppie (file, bersaglio) rotte prima, 191 dopo, 0 nuove. Con `bashscripts/tools/docs/docs-organizer.py links --by-name` erano risolvibili 17; applicate 13 (8 in `llm-wiki/index.md`, 1 in `wiki/memories/lang-split-fixcity-claude-audit.md`, 4 `related` verso `ON-DEMAND-PATTERN.md`). Non applicate 4 verso `Xot/docs/wiki/concepts/second-brain-local-discipline.md`: quel file non esiste in Xot e il bersaglio non e' certo. Il resto dei rotti punta a file fuori dalla cartella o inesistenti: non toccato.
 - Registro numerazione DCP: vive in `Themes/Sixteen/docs/bmad/stories/2026-10-13-dcp-97-registro-flusso-tickets-numerazione-e-coordinamento.story.md`, fuori da questa cartella, e non elenca DCP-146 e DCP-148..152 (nessuna occorrenza). Non modificato: da aggiungere dal proprietario del tema.
 - Non eseguiti test ne' PHPStan: le modifiche sono solo documentazione.
+
+## [2026-10-14] dcp-176 | plugin Cowork e gate di messa online
+- Installati i plugin `legal`, `design`, `engineering` (scope utente); non `product-management` (BMAD). La guida `pasqualepillitteri.it` non e' leggibile da qui: usata la fonte primaria `anthropics/knowledge-work-plugins`.
+- `bashscripts/tools/release/go-live-gate.py`: corretti percorso Pest e `LG-01`, aggiunto `ENV-09` (canale di log definito). `laravel/.env.production.example`: `MAIL_DRIVER` -> `MAIL_MAILER`, aggiunti `MAIL_FROM_*`, commentato `LOG_CHANNEL=sentry` (pacchetto e canale assenti).
+- DCP-154 aggiornata (stato e checklist operativa); DCP-140 (Gdpr) con nota datata; nuova story DCP-176.
+- Misure a 320 px su 8 pagine: nessuno scroll orizzontale; un bersaglio da 21 px (link «Vai al portale»). Non misurati lettore schermo e Firefox/Safari.
+
+## [2026-10-14] dcp-177 | marker di merge nei prompt e nelle docs
+- Eseguito il prompt `55-md-conventions.md`: 85 `.md` con marker di merge reali (committati nel `HEAD` di `bashscripts`), 33 sono prompt. Il gate `audit-prompts.sh` non li vedeva: aggiunta la classe `CONFLICT-MARKER`.
+- Risolti 19 file meccanici senza perdita di contenuto; 66 restano da decidere (elenco nella story DCP-177). Prompt 55 corretto in 5 punti (pattern, posizione delle story, repo separati, indice QMD, `role`).
+- Decisione aperta: date nei nomi file (prompt 55) contro la policy delle story `YYYY-MM-DD-<slug>`.
+
+## [2026-10-14] dcp-166 | canonical, hreflang, sitemap e docs correlate
+- `seo-links.blade.php` (canonical e hreflang da `request()->path()`, mai la query), rotta `/sitemap.xml` con `BuildSitemapAction` (40 URL, 4 lingue), titolo e description di accesso e registrazione tradotti. Test `SeoLinksTest`. Scan: canonical, hreflang e meta description a 0/48; sitemap 200.
+- Docs aggiornate: `Themes/Sixteen/docs/SEO_FRONTEND_OPTIMIZATION_GUIDE.md` (sezione sullo stato reale), indici `Fixcity/docs/llm-wiki/index.md` e `Sixteen/docs/design-comuni/00-INDEX.md` (collegamenti rotti riparati o dichiarati assenti), `Modules/Gdpr/docs` (register-widget, terms-conditions, INDEX).
+- Non fatto: riga `Sitemap:` in robots.txt (dominio, DCP-155), ricerca interna (scelta tra collegarla o toglierla).
+## [2026-10-14] docs | confine dominio ticket e flusso pubblico
+
+- Aggiunta `concepts/ticket-domain-and-public-flow-boundary.md`.
+- Collegati Cms, Geo e Sixteen con ordine di verifica dati → routing → GeoJSON → UI.
+
+## [2026-10-14] dcp-179 | PHPStan a zero su Modules e default di config/env
+- `phpstan analyse Modules`: da 144 errori (segnalazione incollata dall'utente) a exit 0 senza ignore ne' baseline. Il grosso lo aveva gia' corretto un'altra sessione (costanti tipizzate, `env()` verso `config('env.K')`, morph_map, comments, orbit, lang di User).
+- Trovata e corretta la regressione: `config("env.K", default)` perde il default perche' le chiavi di `config/env.php` esistono con `null`. 71 chiamate in 13 file di `Modules/Fixcity/config` riscritte in `(config('env.K') ?? default)`; aggiunte a `config/env.php` le due chiavi `FILAMENT_GOOGLE_MAPS_SERVER_API_KEY` e `FILAMENT_GOOGLE_MAPS_WEB_API_KEY`.
+- DCP-161 parziale: tolto il `<link>` duplicato di `cookie-consent.css` dal layout del tema (da 2 a 1 per pagina). DCP-177: causa dei marker di merge trovata (`merge_remote_repo_2.sh`), prompt 55 risolto.

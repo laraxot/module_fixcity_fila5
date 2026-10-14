@@ -4,6 +4,10 @@ id: STORY-020
 author: BMAD
 status: to_do
 priority: must
+type: note
+updated: 2026-10-13
+tags: [docs, fixcity, bmad]
+qmd: "story 020 public homepage fix fixcity"
 ---
 
 ## Analisi Problema

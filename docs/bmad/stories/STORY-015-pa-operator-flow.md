@@ -4,6 +4,10 @@ id: STORY-015
 author: BMAD
 status: done
 priority: must
+type: note
+updated: 2026-10-13
+tags: [docs, fixcity, bmad]
+qmd: "story 015 pa operator flow fixcity"
 ---
 
 ## Attore: Operatore PA

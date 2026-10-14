@@ -14,6 +14,7 @@ related:
   - ../concepts/fixcity-best-practices.md
   - ../../roadmap/README.md
   - ../../../../../Themes/Sixteen/docs/wiki/overviews/completion-roadmap.md
+status: draft
 ---
 
 # Fixcity — roadmap completamento progetto

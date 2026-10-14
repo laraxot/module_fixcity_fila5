@@ -50,14 +50,14 @@ return [
      * A queue is used to guarantee that all events get passed to the projectors in
      * the right order. Here you can set of the name of the queue.
      */
-    'queue' => env('EVENT_PROJECTOR_QUEUE_NAME', null),
+    'queue' => config('env.EVENT_PROJECTOR_QUEUE_NAME'),
 
     /*
      * When a Projector or Reactor throws an exception the event Projectionist can catch it
      * so all other projectors and reactors can still do their work. The exception will
      * be passed to the `handleException` method on that Projector or Reactor.
      */
-    'catch_exceptions' => env('EVENT_PROJECTOR_CATCH_EXCEPTIONS', false),
+    'catch_exceptions' => (config('env.EVENT_PROJECTOR_CATCH_EXCEPTIONS') ?? false),
 
     /*
      * This class is responsible for storing events in the EloquentStoredEventRepository.

@@ -13,6 +13,7 @@ related:
   - tickets-view-cms-folio-page.md
   - ../../../../Cms/docs/wiki/concepts/cms-page-middleware-json-ssot.md
   - ../../../../../Themes/Sixteen/docs/wiki/concepts/folio-no-semantic-pages-tickets.md
+status: draft
 ---
 
 # Ticket create — catena URL e auth

@@ -2,6 +2,10 @@
 title: BMAD Analysis - Homepage /it Expected State
 status: to_do
 priority: must
+type: note
+updated: 2026-10-13
+tags: [docs, fixcity, bmad]
+qmd: "story expected home fixcity"
 ---
 
 ## Expected (BMAD Spec)

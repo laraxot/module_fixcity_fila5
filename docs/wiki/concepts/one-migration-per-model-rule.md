@@ -8,6 +8,7 @@ type: concept
 module: Fixcity
 updated: 2026-06-05
 qmd: "fixcity one migration per model profiles owner bump timestamp"
+status: draft
 ---
 
 # One migration per model (Fixcity)

@@ -3,6 +3,10 @@ title: /it Homepage Improvement — BMAD Complete
 status: done
 priority: must
 date: 2026-09-27
+type: note
+updated: 2026-10-13
+tags: [docs, fixcity, bmad]
+qmd: "story 032 home invalid final fixcity"
 ---
 
 ## BMAD + Second Brain Process Completed

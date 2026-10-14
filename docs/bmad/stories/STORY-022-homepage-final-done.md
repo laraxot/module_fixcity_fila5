@@ -2,6 +2,10 @@
 title: Fixcity Homepage Final Check (BMAD + Second Brain)
 status: done
 priority: must
+type: note
+updated: 2026-10-13
+tags: [docs, fixcity, bmad]
+qmd: "story 022 homepage final done fixcity"
 ---
 
 ## Documentazione BMAD completata

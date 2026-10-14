@@ -2,6 +2,10 @@
 title: Map Marker Card - Fix Plan
 status: to_do
 priority: must
+type: note
+updated: 2026-10-13
+tags: [docs, fixcity, bmad]
+qmd: "story 026 map card fix fixcity"
 ---
 
 ## Fix Plan

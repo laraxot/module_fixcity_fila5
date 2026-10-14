@@ -15,6 +15,7 @@ sources:
   - ../../filament-wizard-pattern.md
 confidence: high
 updated: 2026-09-26
+status: draft
 ---
 
 # Fixcity Module — Overview

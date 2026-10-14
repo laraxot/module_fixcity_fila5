@@ -7,6 +7,7 @@ updated: 2026-10-13
 qmd: "00 INDEX"
 issues: []
 discussions: []
+status: draft
 ---
 
 # Fixcity Module Documentation Index
@@ -72,3 +73,14 @@ Nuovi Markdown: nome lowercase, senza date/timestamp e mai con suffisso `-1`, `-
 - [DCP-48 codice fiscale dell'autore (decisione richiesta)](stories/2026-10-13-dcp-48-codice-fiscale-autore-decisione.story.md)
 - [DCP-49 audit di sicurezza e accessibilita' delle viste](stories/2026-10-13-dcp-49-audit-sicurezza-viste-wizard.story.md)
 - [Norme e conformita' FixCity (matrice DCP-54): CAD, GDPR, cookie, accessibilita', SPID/CIE, lacune per gravita'](wiki/concepts/norme-e-conformita-fixcity.md)
+
+## Classificazione delle directory (verificata il 2026-10-14)
+
+Mappa completa con lo scopo di ogni cartella: [INDEX.md](./INDEX.md). Stato verificato del codice (azioni, rotte, test, PHPStan): [README.md](./README.md), sezione Fixcity. Nessun file e' stato spostato o rinominato.
+
+| Classe | Cartelle e file | Come usarli |
+|---|---|---|
+| Canonica | `stories/` (65 file, compresa [la story di questo studio](stories/2026-10-14-studio-docs-fixcity-ingressi-verificati.story.md)), `compliance/` (4), `wiki/` (regole e concetti, log in [wiki/log.md](./wiki/log.md)), `rules/` (3), [decision-log.md](./decision-log.md) | Fonte di intento, criteri e decisioni. Le story non si cancellano ne' si rinumerano |
+| Evidence | `raw/` (immutabile), `assets/` (screenshot di verifica), `bmad/` (198 file, artefatti BMAD storici), `investigation/` | Cronologia e prove di un momento passato, non stato corrente: prima di citarli confrontare con il codice |
+| Legacy | file `.md` della radice non elencati sopra (rapporti di ridondanza, PHPStan, conflitti di merge, `STORY-40x`, `DEEP-DIVE-*`), `phpstan/` (10 rinvii senza risultati), `technical-debt/`, `wizard/`, `clean-code/` | Ricercabili ma non attendibili finche' una story non li richiama. Molti usano nomi superati (`Segnalazione`, `/it/tests/segnalazione-crea`, `FixcitySeeder`) |
+| Non verificate in questa passata | `workflows/`, `roadmap/`, `llm-wiki/` | Descrivono intenti o strumenti, non e' stato confrontato il contenuto con il codice |

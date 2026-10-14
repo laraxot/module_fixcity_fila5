@@ -9,6 +9,7 @@ created: 2026-05-29
 tags: [basemodel, fixcity, xot, architecture]
 related:
   - ../../../../../../docs/wiki/guidelines/module-basemodel-pattern.md
+status: draft
 ---
 
 # Modelli Fixcity — `BaseModel` del modulo

@@ -12,6 +12,7 @@ related:
   - ../concepts/admin-ticket-create-map-visual-contract.md
   - ../concepts/location-capture-map-wizard.md
   - ../../../../Geo/docs/wiki/concepts/coordinate-picker-filament5-save-pattern.md
+status: draft
 ---
 
 ## Scopo business

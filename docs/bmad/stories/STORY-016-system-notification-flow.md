@@ -4,6 +4,10 @@ id: STORY-016
 author: BMAD
 status: done
 priority: high
+type: note
+updated: 2026-10-13
+tags: [docs, fixcity, bmad]
+qmd: "story 016 system notification flow fixcity"
 ---
 
 ## Attore: Sistema di Notifica

@@ -15,6 +15,7 @@ related:
   - ./tickets-view-cms-folio-page.md
   - ../../../../../../docs/stories/STORY-157-ux-design-ticket-detail-no-tabs-map-comments.md
   - ../../../../../../docs/wiki/decisions/ticket-fo-detail-filament-widget-infolist.md
+status: draft
 ---
 
 # FO dettaglio ticket: mappa, foto, commenti

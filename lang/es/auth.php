@@ -12,4 +12,9 @@ return [
     'remember' => 'Recordarme',
     'email' => 'Correo electrónico',
     'password' => 'Contraseña',
+    'intro' => 'Accede para enviar y seguir tus incidencias.',
+    'meta_description' => 'Accede a FixCity para enviar y seguir tus incidencias sobre problemas de tu municipio.',
+    'register_title' => 'Crea tu cuenta',
+    'register_intro' => 'Crea una cuenta para enviar y seguir tus incidencias.',
+    'register_meta_description' => 'Crea una cuenta de FixCity para enviar y seguir tus incidencias sobre problemas de tu municipio.',
 ];

@@ -10,7 +10,10 @@ date: "2026-06-13"
 qmd: "fixcity-status"
 github_issue: ""
 github_discussion: ""
+status: stale
 ---
+
+> Nota 2026-10-14 (docs-audit): Descrive un modello Segnalazione e un 60% di completamento al 2026-06-13: il codice reale ha Ticket, TicketActivity, TicketComment, TicketHour, TicketRelation, TicketSubscriber e Category (verificato 2026-10-14); stato attuale in docs/README.md, sezione Fixcity. Contenuto non riscritto, verificare prima di usarlo.
 
 # Fixcity Module - Status & TODO
 
@@ -133,5 +136,5 @@ resources/views/pages/api/segnalazioni/
 ## Collegamenti
 
 - [Project Roadmap](../../../Activity/docs/wiki/PROJECT-ROADMAP.md)
-- [Xot PHPStan Best Practices](../../Xot/docs/wiki/PHPSTAN-BEST-PRACTICES.md)
+- Xot PHPStan Best Practices _(target mancante, verificato 2026-10-14: `Modules/Xot/docs/wiki/PHPSTAN-BEST-PRACTICES.md` non esiste)_
 - [No Controllers Rule](../../../../../docs/wiki/rules/no-controllers-rule.md)

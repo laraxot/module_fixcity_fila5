@@ -2,6 +2,10 @@
 title: Map Marker Improvements
 status: to_do
 priority: must
+type: note
+updated: 2026-10-13
+tags: [docs, fixcity, bmad]
+qmd: "story 023 map marker improvement fixcity"
 ---
 
 ## Current State

@@ -4,6 +4,10 @@ id: STORY-018
 author: BMAD
 status: done
 priority: high
+type: note
+updated: 2026-10-13
+tags: [docs, fixcity, bmad]
+qmd: "story 018 rating system flow fixcity"
 ---
 
 ## Attore: Rating System

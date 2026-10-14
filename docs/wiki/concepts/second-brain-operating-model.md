@@ -12,7 +12,7 @@ discussions:
 related:
   - ./ai-harness-module-discipline.md
   - ../../../../../../docs/wiki/concepts/hackernoon-ai-coding-tips-fixcity-map.md
-  - ../../Xot/docs/wiki/concepts/second-brain-local-discipline.md
+  - second-brain-local-discipline.md
 ---
 
 # Second Brain Operating Model (Modules)

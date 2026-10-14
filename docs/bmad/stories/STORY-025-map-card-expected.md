@@ -2,6 +2,10 @@
 title: Map Marker Card - Expected Behavior
 status: to_do
 priority: must
+type: note
+updated: 2026-10-13
+tags: [docs, fixcity, bmad]
+qmd: "story 025 map card expected fixcity"
 ---
 
 ## Expected (BMAD Spec)

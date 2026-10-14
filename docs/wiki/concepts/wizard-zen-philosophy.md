@@ -7,6 +7,7 @@ updated: 2026-09-26
 qmd: "wizard zen philosophy"
 issues: []
 discussions: []
+status: draft
 ---
 
 # Wizard Zen Philosophy - "Same Wizard, Different Dresses"

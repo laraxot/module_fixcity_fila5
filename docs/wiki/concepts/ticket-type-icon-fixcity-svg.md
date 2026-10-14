@@ -13,6 +13,7 @@ related:
   - ../../../../Geo/docs/wiki/concepts/map-legend-status-semantics.md
   - ../../../../../../docs/wiki/architecture/frontoffice-map-filters-ssot-architecture.md
   - ../../../../../docs/wiki/agents/agents-project-rules.md
+status: draft
 ---
 
 # Icona tipologia ticket — una sola SVG in Fixcity

@@ -96,6 +96,19 @@ DCP-33, DCP-34 e DCP-35 qui sono le story del modulo Fixcity; lo stesso numero e
 - [wizard-summary-step-header-and-submit-parity-plan](./wizard-summary-step-header-and-submit-parity-plan.md) - wizard summary step header and submit parity plan
 - [DCP-148 (owner Themes/Sixteen)](../../../../Themes/Sixteen/docs/bmad/stories/2026-10-13-dcp-148-dettaglio-pubblico-segnalazione-e-segui.story.md) - DCP-148: dettaglio pubblico /{lang}/tickets/{id} e funzione Segui
 - [DCP-152 (owner Modules/Geo)](../../../Geo/docs/stories/2026-10-14-dcp-152-marker-dettaglio-ticket-e-pulsanti-mappa-su-pagine-dc.story.md) - DCP-152: marker del dettaglio ticket con tipo e stato, pulsanti della mappa opachi nelle pagine DC
+- [DCP-153 (owner Modules/Gdpr)](../../../Gdpr/docs/stories/2026-10-14-dcp-153-cookiebar-integrata-nel-modulo-gdpr.story.md) - DCP-153: cookiebar integrata nel modulo Gdpr, multilingua, non bloccante e a norma
+- [DCP-154](./2026-10-14-dcp-154-gate-di-messa-in-produzione.story.md) - DCP-154: gate di messa in produzione, un solo comando che dice se si puo' pubblicare
+- [DCP-155](./2026-10-14-dcp-155-dominio-e-identita-di-rete.story.md) - DCP-155: dominio, DNS, posta e identita' di rete del servizio
+- [DCP-156](./2026-10-14-dcp-156-responsabile-del-procedimento-e-termini.story.md) - DCP-156: responsabile del procedimento, termine di risposta (L. 241/1990)
+- [DCP-157](./2026-10-14-dcp-157-soddisfazione-dell-utente-e-dati-pubblicati.story.md) - DCP-157: soddisfazione dell'utente e pubblicazione dei risultati (CAD art. 7)
+- [DCP-158 (owner Themes/Sixteen)](../../../../Themes/Sixteen/docs/bmad/stories/2026-10-14-dcp-158-accessibilita-obiettivi-contratti-e-linee-guida-design.story.md) - DCP-158: accessibilita': obiettivi annuali, clausole contrattuali, linee guida di design
+- [DCP-159](./2026-10-14-dcp-159-sicurezza-organizzativa-della-pa-nis2-agid-rtd.story.md) - DCP-159: sicurezza organizzativa della PA (NIS2, notifica incidenti, misure minime, RTD)
+- [DCP-160](./2026-10-14-dcp-160-lingue-minoritarie-e-lingue-del-servizio.story.md) - DCP-160: lingue minoritarie e copertura delle quattro lingue
+- [DCP-161 (owner Themes/Sixteen)](../../../../Themes/Sixteen/docs/bmad/stories/2026-10-14-dcp-161-rimozione-delle-implementazioni-cookie-duplicate.story.md) - DCP-161: una sola cookiebar, rimozione delle implementazioni duplicate del tema
+- [DCP-176](./2026-10-14-dcp-176-plugin-cowork-studio-e-adozione.story.md) - DCP-176: plugin Claude Cowork, studio, installazione e cosa adottare
+- [DCP-177](./dcp-177-marker-di-merge-non-risolti-nei-prompt-e-nelle-docs.story.md) - DCP-177: marker di merge non risolti nei prompt e nelle docs
+- [DCP-178 (owner Modules/Gdpr)](../../../Gdpr/docs/stories/dcp-178-registrazione-e-disiscrizione-a-norma.story.md) - DCP-178: registrazione del cittadino e disiscrizione a norma
+- [DCP-179](./dcp-179-phpstan-zero-su-modules-e-default-di-config-env.story.md) - DCP-179: PHPStan a zero su Modules e il default perso di config('env.K', default)
 
 ## collegamenti bidirezionali
 

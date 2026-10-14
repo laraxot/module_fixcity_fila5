@@ -7,6 +7,7 @@ updated: 2026-09-26
 qmd: "admin ticket create map visual contract"
 issues: []
 discussions: []
+status: draft
 ---
 
 # Admin ticket create map visual contract

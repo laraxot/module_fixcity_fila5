@@ -7,6 +7,7 @@ updated: 2026-06-10
 qmd: profiles uuid migration owner Fixcity main_module bump timestamp
 issues: []
 discussions: []
+status: draft
 ---
 
 # Profiles UUID Contract

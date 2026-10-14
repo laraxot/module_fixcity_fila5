@@ -3,6 +3,10 @@ title: Map Marker Card - UI/UX Complete Fix
 author: BMAD
 status: done
 priority: must
+type: note
+updated: 2026-10-13
+tags: [docs, fixcity, bmad]
+qmd: "story 028 map marker card final fixcity"
 ---
 
 ## Fix Summary

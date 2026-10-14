@@ -217,21 +217,21 @@ return [
         ],
     ],
     'web' => [
-        'middleware' => env('TOTEM_WEB_MIDDLEWARE', 'web'),
-        'route_prefix' => env('TOTEM_WEB_ROUTE_PREFIX', 'totem'),
+        'middleware' => (config('env.TOTEM_WEB_MIDDLEWARE') ?? 'web'),
+        'route_prefix' => (config('env.TOTEM_WEB_ROUTE_PREFIX') ?? 'totem'),
     ],
     'api' => [
-        'middleware' => env('TOTEM_API_MIDDLEWARE', 'api'),
+        'middleware' => (config('env.TOTEM_API_MIDDLEWARE') ?? 'api'),
     ],
-    'table_prefix' => env('TOTEM_TABLE_PREFIX', ''),
+    'table_prefix' => (config('env.TOTEM_TABLE_PREFIX') ?? ''),
     'artisan' => [
         'command_filter' => [],
         'whitelist' => true,
     ],
-    'database_connection' => env('TOTEM_DATABASE_CONNECTION'),
+    'database_connection' => config('env.TOTEM_DATABASE_CONNECTION'),
 
     'broadcasting' => [
-        'enabled' => env('TOTEM_BROADCASTING_ENABLED', true),
-        'channel' => env('TOTEM_BROADCASTING_CHANNEL', 'task.events'),
+        'enabled' => (config('env.TOTEM_BROADCASTING_ENABLED') ?? true),
+        'channel' => (config('env.TOTEM_BROADCASTING_CHANNEL') ?? 'task.events'),
     ],
 ];

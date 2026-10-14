@@ -19,6 +19,8 @@ related:
   - ../design-comuni-workflow-expected-2026-09-27.md
   - ../../wiki/concepts/design-comuni-service-workflow-scope.md
   - ../../../../Themes/Sixteen/docs/bmad/design-comuni-workflow-correction-plan-2026-09-27.md
+tags: [docs, fixcity, bmad]
+qmd: "user story fixcity"
 ---
 
 # User story

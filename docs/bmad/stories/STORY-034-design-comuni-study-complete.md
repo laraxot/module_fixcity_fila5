@@ -4,6 +4,10 @@ status: done
 priority: must
 date: 2026-09-27
 author: BMAD + Second Brain
+type: note
+updated: 2026-10-13
+tags: [docs, fixcity, bmad]
+qmd: "story 034 design comuni study complete fixcity"
 ---
 
 ## Study Completed

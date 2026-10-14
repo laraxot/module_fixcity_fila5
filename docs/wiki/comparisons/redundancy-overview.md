@@ -7,6 +7,7 @@ type: comparison
 tags: [redundancy, documentation, sprawl, dry, overview]
 created: "2026-05-25"
 updated: "2026-09-26"
+status: draft
 ---
 
 # Redundancy and Documentation Sprawl — Final Overview

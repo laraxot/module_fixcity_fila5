@@ -7,10 +7,12 @@ updated: 2026-09-26
 qmd: "README"
 issues: []
 discussions: []
-module: theme
+module: Fixcity
 topic: README
-canonical: ../../../../Themes/docs/shared-components/README-Modules.md
+canonical: ./index.md
 status: stub
 ---
 
-See canonical documentation: ../../../../Themes/docs/shared-components/README-Modules.md
+Wiki del modulo Fixcity: l'indice e' [index.md](./index.md), la cronologia [log.md](./log.md).
+
+Nota 2026-10-14: questo stub rimandava a `Themes/docs/shared-components/README-Modules.md`, file che non esiste (`laravel/Themes/docs` non esiste); `module: theme` era un residuo della generazione dello stub.

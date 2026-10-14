@@ -9,6 +9,8 @@ related:
   - Modules/Fixcity/docs/stories/2026-10-13-dcp-146-wizard-passo-dati-mappa-sempre-funzionante.story.md
   - Modules/Fixcity/docs/stories/2026-10-13-dcp-128-wizard-passo2-cablaggio-design-comuni.story.md
 tags: [wizard, passo-2, i18n, validazione, http, filepond]
+status: draft
+qmd: "w3-form: cosa e' stato provato e cosa non funzionava fixcity"
 ---
 
 # W3-FORM: cosa e' stato provato e cosa non funzionava

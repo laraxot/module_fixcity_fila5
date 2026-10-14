@@ -7,6 +7,7 @@ updated: 2026-09-26
 qmd: "segnalazioni elenco map architecture"
 issues: []
 discussions: []
+status: draft
 ---
 
 # Segnalazioni Elenco — Architettura Mappa e Lista

@@ -4,6 +4,10 @@ id: STORY-017
 author: BMAD
 status: done
 priority: high
+type: note
+updated: 2026-10-13
+tags: [docs, fixcity, bmad]
+qmd: "story 017 admin config flow fixcity"
 ---
 
 ## Attore: Admin (Super Admin)

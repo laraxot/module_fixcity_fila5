@@ -12,6 +12,7 @@ discussions:
 related:
   - ../../../../../../docs/wiki/concepts/no-app-support-monorepo-migration.md
   - ticket-export-security.md
+status: draft
 ---
 
 # Fixcity — `app/Support/` eliminato

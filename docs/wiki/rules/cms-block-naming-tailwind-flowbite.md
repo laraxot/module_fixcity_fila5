@@ -14,6 +14,7 @@ related:
   - ../../../../../Themes/Sixteen/docs/blocks/folder-vocabulary.md
   - no-italian-component-names.md
   - frontend-stack-canonical.md
+status: draft
 ---
 
 # CMS Block naming — Tailwind UI / Flowbite

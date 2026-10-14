@@ -2,6 +2,9 @@
 
 declare(strict_types=1);
 
+$app_url = config('env.APP_URL');
+$app_url = is_string($app_url) ? $app_url : '';
+
 return [
     /*
     |--------------------------------------------------------------------------
@@ -14,7 +17,7 @@ return [
     |
     */
 
-    'default' => env('FILESYSTEM_DRIVER', 'local'),
+    'default' => (config('env.FILESYSTEM_DRIVER') ?? 'local'),
 
     /*
     |--------------------------------------------------------------------------
@@ -27,7 +30,7 @@ return [
     |
     */
 
-    'cloud' => env('FILESYSTEM_CLOUD', 's3'),
+    'cloud' => (config('env.FILESYSTEM_CLOUD') ?? 's3'),
 
     /*
     |--------------------------------------------------------------------------
@@ -51,7 +54,7 @@ return [
         'public' => [
             'driver' => 'local',
             'root' => storage_path('app/public'),
-            'url' => env('APP_URL').'/storage',
+            'url' => $app_url.'/storage',
             'visibility' => 'public',
             'throw' => true,
         ],
@@ -96,18 +99,18 @@ return [
             'driver' => 'local',
             // 'root' => storage_path('app/public'),
             'root' => base_path('../cache'),
-            // 'url' => env('APP_URL').'/storage',
+            // 'url' => config("env.APP_URL").'/storage',
             'visibility' => 'public',
             'throw' => true,
         ],
 
         's3' => [
             'driver' => 's3',
-            'key' => env('AWS_ACCESS_KEY_ID'),
-            'secret' => env('AWS_SECRET_ACCESS_KEY'),
-            'region' => env('AWS_DEFAULT_REGION'),
-            'bucket' => env('AWS_BUCKET'),
-            'url' => env('AWS_URL'),
+            'key' => config('env.AWS_ACCESS_KEY_ID'),
+            'secret' => config('env.AWS_SECRET_ACCESS_KEY'),
+            'region' => config('env.AWS_DEFAULT_REGION'),
+            'bucket' => config('env.AWS_BUCKET'),
+            'url' => config('env.AWS_URL'),
         ],
 
         'dropbox' => [

@@ -18,6 +18,7 @@ related:
   - ../../../../docs/wiki/memories/one-migration-per-model-bump-timestamp.md
   - ../../../../docs/wiki/rules/migration-update-timestamps-only.md
   - ../../Xot/docs/xotbase-schemawidget-pattern.md
+status: draft
 ---
 
 # R3 religion applied — one migration per model (Fixcity module)

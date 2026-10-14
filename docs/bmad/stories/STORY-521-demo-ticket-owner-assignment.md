@@ -18,6 +18,7 @@ related:
   - ../../../database/seeders/DemoUsersSeeder.php
   - ../../../database/seeders/TicketDatabaseSeeder.php
   - ../../../tests/Feature/Database/FixcityDatabaseSeederTest.php
+qmd: "ticket demo   ownership coerente con l’attore cittadino fixcity"
 ---
 
 # Ticket demo — ownership coerente con l’attore cittadino

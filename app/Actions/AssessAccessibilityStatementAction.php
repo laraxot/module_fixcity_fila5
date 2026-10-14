@@ -23,17 +23,17 @@ final class AssessAccessibilityStatementAction
 {
     use QueueableAction;
 
-    public const MISSING = 'missing';
+    public const string MISSING = 'missing';
 
-    public const INVALID = 'invalid';
+    public const string INVALID = 'invalid';
 
-    public const PLACEHOLDER = 'placeholder';
+    public const string PLACEHOLDER = 'placeholder';
 
-    public const STATUSES = ['compliant', 'partially_compliant', 'non_compliant'];
+    public const array STATUSES = ['compliant', 'partially_compliant', 'non_compliant'];
 
-    public const METHODS = ['self', 'third_party'];
+    public const array METHODS = ['self', 'third_party'];
 
-    private const PLACEHOLDER_PATTERN = '/\[\[|Edit this file|lorem ipsum|\b(?:TODO|TBD|FIXME)\b|example\.(?:com|org|it)|x{4,}/iu';
+    private const string PLACEHOLDER_PATTERN = '/\[\[|Edit this file|lorem ipsum|\b(?:TODO|TBD|FIXME)\b|example\.(?:com|org|it)|x{4,}/iu';
 
     /**
      * @param  array<string, mixed>  $declaration

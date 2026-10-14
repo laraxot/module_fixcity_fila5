@@ -7,6 +7,7 @@ updated: 2026-09-26
 qmd: "redundancy report"
 issues: []
 discussions: []
+status: draft
 ---
 
 # Redundancy Report — Laraxot Modules
@@ -26,15 +27,6 @@ L'analisi ha identificato **7 categorie principali di ridondanza** che attravers
 7. **ProfileResource** — 4 copie in Blog, Gdpr (x2), User
 
 ---
-
-title: "redundancy report"
-type: note
-tags: [documentation]
-created: 2026-09-26
-updated: 2026-09-26
-qmd: "redundancy report"
-issues: []
-discussions: []
 ## 1. BaseModel — varianti modulo (attualmente tutti conformi ✓ Laraxot 2026-05-21)
 
 Ogni modulo ha un `BaseModel.php` in `app/Models/`. La regola Laraxot è: **estendere `Modules\Xot\Models\XotBaseModel`**.

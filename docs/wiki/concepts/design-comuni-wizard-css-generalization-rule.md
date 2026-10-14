@@ -9,6 +9,7 @@ created: 2026-04-22
 updated: 2026-04-22
 sources:
   - ../../../../../Themes/Sixteen/docs/wiki/concepts/design-comuni-site-wide-component-css-rule.md
+status: draft
 ---
 
 # Design Comuni Wizard CSS Generalization Rule

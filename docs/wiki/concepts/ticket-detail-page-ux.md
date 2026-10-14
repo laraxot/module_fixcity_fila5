@@ -12,6 +12,7 @@ discussions:
 related:
   - ../../../../../Themes/Sixteen/docs/wiki/concepts/fo-folio-links-multilingua.md
   - ../../../../../../Modules/Comment/docs/wiki/concepts/spatie-comments-integration.md
+status: draft
 ---
 
 # Ticket Detail Page UX Design

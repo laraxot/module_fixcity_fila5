@@ -11,6 +11,7 @@ related:
   - ../../stories/2026-10-13-dcp-124-viaggio-cittadino-login-registrazione-ritorno.story.md
   - ../../../../../Themes/Sixteen/docs/decision-log/D18-login-e-registrazione-tornano-alla-pagina-richiesta.md
   - ticket-crea-url-routing-chain.md
+status: draft
 ---
 
 # Viaggio del cittadino: accesso e ritorno alla pagina richiesta

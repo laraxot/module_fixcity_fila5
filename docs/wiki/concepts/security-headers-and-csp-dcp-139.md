@@ -10,6 +10,7 @@ related:
   - ../../../../../../bashscripts/docs/visual-comparison/net-hosts-probe.md
   - ../../../../../../bashscripts/docs/tools/production-checklist.md
 qmd: "security headers csp content security policy report-only enforce hsts permissions-policy geolocation self x-powered-by securityheaders middleware net-hosts-probe unsafe-eval alpine livewire dcp-139"
+status: draft
 ---
 
 # Intestazioni di sicurezza HTTP e CSP

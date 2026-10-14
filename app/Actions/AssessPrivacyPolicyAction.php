@@ -24,27 +24,39 @@ final class AssessPrivacyPolicyAction
 {
     use QueueableAction;
 
-    public const MISSING = 'missing';
+    public const string MISSING = 'missing';
 
-    public const PLACEHOLDER = 'placeholder';
+    public const string PLACEHOLDER = 'placeholder';
 
     /** Sezioni obbligatorie, nell'ordine di art. 13 par. 1 e 2. */
-    public const SECTIONS = ['controller', 'dpo', 'purposes', 'recipients', 'transfers', 'retention', 'rights', 'complaint', 'mandatory', 'automated'];
+    public const array SECTIONS = ['controller', 'dpo', 'purposes', 'recipients', 'transfers', 'retention', 'rights', 'complaint', 'mandatory', 'automated'];
 
-    private const PLACEHOLDER_PATTERN = '/\[\[.*?\]\]|Edit this file|lorem ipsum|\b(?:TODO|TBD|FIXME)\b|example\.(?:com|org|it)|x{4,}/iu';
+    /**
+     * Sezioni del modello delle note legali (disclaimer e condizioni di utilizzo, DCP-162). Non sono un elenco di obblighi di legge: sono
+     * il modello proposto, da far rivedere al legale dell'ente; l'ente puo' toglierne una solo cambiando questo elenco con una decisione scritta.
+     */
+    public const array NOTES_SECTIONS = ['owner', 'purpose', 'use', 'contributions', 'liability', 'links', 'ip', 'privacy', 'changes', 'law', 'contacts'];
+
+    /** Documento verificato: `privacy` (art. 13 GDPR) oppure `legal_notes`. */
+    public const string DOCUMENT_PRIVACY = 'privacy';
+
+    public const string DOCUMENT_LEGAL_NOTES = 'legal_notes';
+
+    private const string PLACEHOLDER_PATTERN = '/\[\[.*?\]\]|Edit this file|lorem ipsum|\b(?:TODO|TBD|FIXME)\b|example\.(?:com|org|it)|x{4,}/iu';
 
     /**
      * @return array<string, string>
      */
-    public function execute(?string $markdown): array
+    public function execute(?string $markdown, string $document = self::DOCUMENT_PRIVACY): array
     {
+        $sections = self::sectionsOf($document);
         if ($markdown === null) {
-            return array_fill_keys(self::SECTIONS, self::MISSING);
+            return array_fill_keys($sections, self::MISSING);
         }
 
-        $bodies = $this->bodiesBySection($markdown);
+        $bodies = $this->bodiesBySection($markdown, $sections, $document);
         $issues = [];
-        foreach (self::SECTIONS as $key) {
+        foreach ($sections as $key) {
             $body = $bodies[$key] ?? '';
             if (trim($body) === '') {
                 $issues[$key] = self::MISSING;
@@ -61,16 +73,25 @@ final class AssessPrivacyPolicyAction
     }
 
     /**
+     * @return list<string>
+     */
+    public static function sectionsOf(string $document): array
+    {
+        return $document === self::DOCUMENT_LEGAL_NOTES ? self::NOTES_SECTIONS : self::SECTIONS;
+    }
+
+    /**
      * Corpo di ogni sezione obbligatoria presente: dalla sua intestazione fino alla successiva di livello pari o superiore
      * (le sotto-intestazioni fanno parte del corpo).
      *
+     * @param  list<string>  $sections
      * @return array<string, string>
      */
-    private function bodiesBySection(string $markdown): array
+    private function bodiesBySection(string $markdown, array $sections, string $document): array
     {
         $keyByTitle = [];
-        foreach (self::SECTIONS as $key) {
-            $keyByTitle[$this->normalize((string) __('fixcity::privacy.sections.'.$key.'.title'))] = $key;
+        foreach ($sections as $key) {
+            $keyByTitle[$this->normalize((string) __('fixcity::'.$document.'.sections.'.$key.'.title'))] = $key;
         }
 
         /** @var array<string, list<string>> $lines */

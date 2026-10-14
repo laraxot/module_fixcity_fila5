@@ -10,6 +10,7 @@ qmd: wizard-map-buttons
 links: {github_issue: "#14", discussion: "design-comuni-button-spec"}
 type: story
 tags: [design-comuni, accessibility, wizard, map, button]
+updated: 2026-10-14
 ---
 
 ## Bug

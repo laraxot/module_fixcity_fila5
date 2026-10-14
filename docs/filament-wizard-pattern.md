@@ -7,6 +7,7 @@ updated: 2026-10-13
 qmd: "filament wizard pattern"
 issues: []
 discussions: []
+status: draft
 ---
 
 # Filament Schema Wizard Pattern

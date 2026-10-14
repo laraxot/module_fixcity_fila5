@@ -4,6 +4,10 @@ id: STORY-021
 author: BMAD
 status: done
 priority: must
+type: note
+updated: 2026-10-13
+tags: [docs, fixcity, bmad]
+qmd: "story 021 homepage fix done fixcity"
 ---
 
 ## Implementazione

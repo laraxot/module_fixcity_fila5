@@ -7,6 +7,7 @@ updated: 2026-09-26
 qmd: "product roadmap"
 issues: []
 discussions: []
+status: draft
 ---
 
 # 🗺️ Fixcity Product Roadmap
@@ -16,15 +17,6 @@ discussions: []
 > **Timeframe**: Q1 2026 - Q4 2027
 
 ---
-
-title: "product roadmap"
-type: note
-tags: [documentation]
-created: 2026-09-26
-updated: 2026-09-26
-qmd: "product roadmap"
-issues: []
-discussions: []
 ## 📋 Table of Contents
 
 1. [Executive Summary](#executive-summary)

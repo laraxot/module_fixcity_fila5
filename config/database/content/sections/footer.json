@@ -177,6 +177,15 @@
             {
               "label": "Mappa del sito",
               "url": "/mappa-sito"
+            },
+            {
+              "label": "Cookie policy",
+              "url": "/cookie-policy"
+            },
+            {
+              "label": "Gestisci cookie",
+              "url": "/cookie-policy",
+              "preferences": true
             }
           ],
           "social": [
@@ -519,6 +528,15 @@
             {
               "label": "Sitemap",
               "url": "/mappa-sito"
+            },
+            {
+              "label": "Cookie policy",
+              "url": "/cookie-policy"
+            },
+            {
+              "label": "Manage cookies",
+              "url": "/cookie-policy",
+              "preferences": true
             }
           ],
           "social": [
@@ -861,6 +879,15 @@
             {
               "label": "Sitemap",
               "url": "/mappa-sito"
+            },
+            {
+              "label": "Cookie-Richtlinie",
+              "url": "/cookie-policy"
+            },
+            {
+              "label": "Cookies verwalten",
+              "url": "/cookie-policy",
+              "preferences": true
             }
           ],
           "social": [
@@ -1203,6 +1230,15 @@
             {
               "label": "Mapa del sitio",
               "url": "/mappa-sito"
+            },
+            {
+              "label": "Política de cookies",
+              "url": "/cookie-policy"
+            },
+            {
+              "label": "Gestionar cookies",
+              "url": "/cookie-policy",
+              "preferences": true
             }
           ],
           "social": [

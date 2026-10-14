@@ -5,6 +5,7 @@ status: active
 created: 2026-10-11
 updated: 2026-10-11
 tags: [bmad, fixcity, freellmapi, ai, security]
+qmd: "architettura d’integrazione fixcity"
 ---
 
 # Architettura d’integrazione

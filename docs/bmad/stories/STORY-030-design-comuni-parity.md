@@ -2,6 +2,10 @@
 title: Design Comuni Parity - Segnalazioni Flow
 status: to_do
 priority: must
+type: note
+updated: 2026-10-13
+tags: [docs, fixcity, bmad]
+qmd: "story 030 design comuni parity fixcity"
 ---
 
 ## Reference: Design Comuni Italia

@@ -7,6 +7,7 @@ updated: 2026-09-27
 qmd: "demo tickets presentation seed"
 issues: []
 discussions: []
+status: draft
 ---
 
 # seed ticket demo — presentazione FO

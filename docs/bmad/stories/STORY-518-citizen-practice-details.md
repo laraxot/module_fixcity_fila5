@@ -17,6 +17,7 @@ related:
   - ../../wiki/concepts/user-journey-map.md
   - ../../../../Themes/Sixteen/resources/views/pages/area-personale/pratiche.blade.php
   - ../../../app/Actions/BuildAuthenticatedUserTicketsQueryAction.php
+qmd: "story-518   dettaglio delle pratiche del cittadino fixcity"
 ---
 
 # STORY-518 — Dettaglio delle pratiche del cittadino

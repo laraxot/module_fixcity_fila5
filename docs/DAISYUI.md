@@ -7,6 +7,7 @@ updated: 2026-09-26
 qmd: "DAISYUI"
 issues: []
 discussions: []
+status: draft
 ---
 
 # Fixcity Module — daisyUI Reference
@@ -25,15 +26,6 @@ Il modulo **Fixcity** **non istalla daisyUI direttamente**, ma la consuma indire
 | Tailwind CSS in Fixcity | ❌ Nessun `tailwind.config.js` locale — usa quello del tema |
 
 ---
-
-title: "DAISYUI"
-type: note
-tags: [documentation]
-created: 2026-09-26
-updated: 2026-09-26
-qmd: "DAISYUI"
-issues: []
-discussions: []
 ## Dove Fixcity vede daisyUI
 
 Il modulo Fixcity **non ha un asset pipeline autonomo**. Tutti gli asset CSS/JS sono serviti dal tema Sixteen.

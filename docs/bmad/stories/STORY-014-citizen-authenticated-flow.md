@@ -4,6 +4,10 @@ id: STORY-014
 author: BMAD
 status: done
 priority: must
+type: note
+updated: 2026-10-13
+tags: [docs, fixcity, bmad]
+qmd: "story 014 citizen authenticated flow fixcity"
 ---
 
 ## Attore: Cittadino autenticato

@@ -7,6 +7,7 @@ updated: 2026-09-26
 qmd: "ticketform schema guidelines"
 issues: []
 discussions: []
+status: draft
 ---
 
 # TicketForm Schema Guidelines

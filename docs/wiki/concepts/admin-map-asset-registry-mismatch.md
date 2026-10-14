@@ -7,6 +7,7 @@ updated: 2026-09-26
 qmd: "admin map asset registry mismatch"
 issues: []
 discussions: []
+status: draft
 ---
 
 # Admin map asset registry mismatch

@@ -31,6 +31,10 @@ related:
   - ./STORY-515-public-navigation-measured-reality.md
   - ./STORY-516-design-comuni-parity-home.md
   - ../../../../../../bashscripts/ai/wiki/concepts/user-journeys.md
+type: note
+updated: 2026-10-13
+tags: [docs, fixcity, bmad]
+qmd: "story-517   copertura del catalogo design comuni fixcity"
 ---
 
 # STORY-517 — Copertura del catalogo Design Comuni

@@ -16,7 +16,7 @@ class GetAccessibilityDeclarationAction
 {
     use QueueableAction;
 
-    public const PAGE_SLUG = 'accessibilita.index';
+    public const string PAGE_SLUG = 'accessibilita.index';
 
     /**
      * @return array<string, mixed>

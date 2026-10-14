@@ -29,6 +29,10 @@ related:
   - ../../../../../../bashscripts/quality-gates/audit-public-navigation.sh
   - ../../../routes/web.php
   - ../../../../../../public_html/themes/Sixteen/manifest.json
+type: note
+updated: 2026-10-13
+tags: [docs, fixcity, bmad]
+qmd: "non create: `gh` non e' installato. le url sotto seguono la convenzione del fixcity"
 ---
 
 # STORY-515 — Confronto e correzione

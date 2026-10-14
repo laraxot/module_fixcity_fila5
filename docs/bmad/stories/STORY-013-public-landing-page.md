@@ -4,6 +4,10 @@ id: STORY-013
 author: BMAD
 status: done
 priority: must
+type: note
+updated: 2026-10-13
+tags: [docs, fixcity, bmad]
+qmd: "story 013 public landing page fixcity"
 ---
 
 ## Attore: Utente non loggato (Guest)

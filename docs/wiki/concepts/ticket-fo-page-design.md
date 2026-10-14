@@ -8,6 +8,7 @@ updated: 2026-06-09
 qmd: "ticket frontoffice folio mappa statica comments"
 issues:
   - "https://github.com/laraxot/base_fixcity_fila5/issues/284"
+status: draft
 ---
 
 # Ticket FO page design

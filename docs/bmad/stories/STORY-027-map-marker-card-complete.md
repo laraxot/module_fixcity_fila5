@@ -2,6 +2,10 @@
 title: BMAD Fix - Map Marker Popup Card Complete
 status: done
 priority: must
+type: note
+updated: 2026-10-13
+tags: [docs, fixcity, bmad]
+qmd: "story 027 map marker card complete fixcity"
 ---
 
 ## BMAD Documentation Complete

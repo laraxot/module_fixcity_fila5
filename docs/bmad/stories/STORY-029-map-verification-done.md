@@ -3,6 +3,10 @@ title: Map Marker UI/UX Final Verification
 date: 2026-09-26
 status: done
 priority: must
+type: note
+updated: 2026-10-13
+tags: [docs, fixcity, bmad]
+qmd: "story 029 map verification done fixcity"
 ---
 
 ## BMAD + Second Brain — Complete Workflow

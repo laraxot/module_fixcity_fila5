@@ -12,6 +12,7 @@ tags: [wizard, filament, theme-integration, contract, api, fixcity]
 related:
   - ../../../../../Themes/Sixteen/docs/wiki/concepts/filament-wizard-custom-component.md
   - ../../../../docs/wiki/concepts/laraxot-theme-module-separation.md
+status: draft
 ---
 
 # Wizard Theme Integration Contract

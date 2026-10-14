@@ -15,6 +15,7 @@ related:
   - concepts/segnalazione-design-comuni-comparison.md
   - ../../../../../Themes/Sixteen/docs/wiki/concepts/bootstrap-tailwind-mapping.md
   - concepts/segnalazione-visual-parity.md
+status: draft
 ---
 
 # Segnalazione Bootstrap → Tailwind Conversion

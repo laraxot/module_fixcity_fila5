@@ -23,10 +23,10 @@ final class GetPublicTicketByCodeAction
     use QueueableAction;
 
     /** Codici sbagliati ammessi per indirizzo nella finestra, poi 429. */
-    public const MAX_MISSES = 10;
+    public const int MAX_MISSES = 10;
 
     /** Durata della finestra e del blocco, in secondi. */
-    public const DECAY_SECONDS = 60;
+    public const int DECAY_SECONDS = 60;
 
     public static function throttleKey(string $ip): string
     {

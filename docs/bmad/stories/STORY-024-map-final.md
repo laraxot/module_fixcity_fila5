@@ -2,6 +2,10 @@
 title: BMAD Complete - Map Marker Fix
 date: 2026-09-26
 status: done
+type: note
+updated: 2026-10-13
+tags: [docs, fixcity, bmad]
+qmd: "story 024 map final fixcity"
 ---
 
 ## BMAD Workflow Completed (As Required)

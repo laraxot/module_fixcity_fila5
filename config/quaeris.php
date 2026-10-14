@@ -5,9 +5,9 @@ declare(strict_types=1);
 return [
     'limesurvey' => [
         'api' => [
-            'url' => env('LIMESURVEY_URL', ''),
-            'username' => env('LIMESURVEY_USERNAME', ''),
-            'password' => env('LIMESURVEY_PASSWORD', ''),
+            'url' => (config('env.LIMESURVEY_URL') ?? ''),
+            'username' => (config('env.LIMESURVEY_USERNAME') ?? ''),
+            'password' => (config('env.LIMESURVEY_PASSWORD') ?? ''),
         ],
     ],
 ];

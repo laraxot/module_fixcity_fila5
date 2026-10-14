@@ -7,6 +7,7 @@ updated: 2026-09-26
 qmd: "DOCUMENTATION INDEX"
 issues: []
 discussions: []
+status: draft
 ---
 
 # Module Documentation Index
@@ -17,15 +18,6 @@ discussions: []
 **After Deduplication Target:** ~6,500
 
 ---
-
-title: "DOCUMENTATION INDEX"
-type: note
-tags: [documentation]
-created: 2026-09-26
-updated: 2026-09-26
-qmd: "DOCUMENTATION INDEX"
-issues: []
-discussions: []
 ## Quick Navigation
 
 ### By Module

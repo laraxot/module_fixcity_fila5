@@ -2,6 +2,10 @@
 title: Design Comuni Parity - Segnalazioni Elenco Page
 status: to_do
 priority: must
+type: note
+updated: 2026-10-13
+tags: [docs, fixcity, bmad]
+qmd: "story 031 segnalazioni parity fixcity"
 ---
 
 ## Expected (Design Comuni Italia)

@@ -31,7 +31,7 @@ return [
      * The disk on which to store added files and derived images by default. Choose
      * one or more of the disks you've configured in config/filesystems.php.
      */
-    'disk_name' => env('MEDIA_DISK', 'public'),
+    'disk_name' => (config('env.MEDIA_DISK') ?? 'public'),
 
     /*
      * The maximum file size of an item in bytes.
@@ -43,7 +43,7 @@ return [
      * This queue connection will be used to generate derived and responsive images.
      * Leave empty to use the default queue connection.
      */
-    'queue_connection_name' => env('QUEUE_CONNECTION', 'sync'),
+    'queue_connection_name' => (config('env.QUEUE_CONNECTION') ?? 'sync'),
 
     /*
      * This queue will be used to generate derived and responsive images.
@@ -54,7 +54,7 @@ return [
     /*
      * By default all conversions will be performed on a queue.
      */
-    'queue_conversions_by_default' => env('QUEUE_CONVERSIONS_BY_DEFAULT', true),
+    'queue_conversions_by_default' => (config('env.QUEUE_CONVERSIONS_BY_DEFAULT') ?? true),
 
     /*
      * The fully qualified class name of the media model.
@@ -197,15 +197,15 @@ return [
      * The engine that should perform the image conversions.
      * Should be either `gd` or `imagick`.
      */
-    'image_driver' => env('IMAGE_DRIVER', 'gd'),
+    'image_driver' => (config('env.IMAGE_DRIVER') ?? 'gd'),
 
     /*
      * FFMPEG & FFProbe binaries paths, only used if you try to generate video
      * thumbnails and have installed the php-ffmpeg/php-ffmpeg composer
      * dependency.
      */
-    'ffmpeg_path' => env('FFMPEG_PATH', '/usr/bin/ffmpeg'),
-    'ffprobe_path' => env('FFPROBE_PATH', '/usr/bin/ffprobe'),
+    'ffmpeg_path' => (config('env.FFMPEG_PATH') ?? '/usr/bin/ffmpeg'),
+    'ffprobe_path' => (config('env.FFPROBE_PATH') ?? '/usr/bin/ffprobe'),
 
     /*
      * Here you can override the class names of the jobs used by this package. Make sure
@@ -266,7 +266,7 @@ return [
      * the Media Library Pro Vue and React components to move uploaded files
      * in a S3 bucket to their right place.
      */
-    'enable_vapor_uploads' => env('ENABLE_MEDIA_LIBRARY_VAPOR_UPLOADS', false),
+    'enable_vapor_uploads' => (config('env.ENABLE_MEDIA_LIBRARY_VAPOR_UPLOADS') ?? false),
 
     /*
      * When converting Media instances to response the media library will add
@@ -283,5 +283,5 @@ return [
      * You can specify a prefix for that is used for storing all media.
      * If you set this to `/my-subdir`, all your media will be stored in a `/my-subdir` directory.
      */
-    'prefix' => env('MEDIA_PREFIX', ''),
+    'prefix' => (config('env.MEDIA_PREFIX') ?? ''),
 ];

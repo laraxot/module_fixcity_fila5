@@ -7,6 +7,7 @@ updated: 2026-09-26
 qmd: "tickets view cms folio page"
 issues: []
 discussions: []
+status: draft
 ---
 
 # Tickets View CMS Folio Page Concept

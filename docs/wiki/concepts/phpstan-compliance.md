@@ -14,6 +14,7 @@ related:
   - ../overviews/completion-roadmap.md
   - ../../../../../Themes/Sixteen/docs/wiki/concepts/phpstan-compliance.md
   - ../../../../../../docs/wiki/concepts/phpstan-level-max-compliance.md
+status: draft
 ---
 
 # Fixcity Module — PHPStan Type Compliance

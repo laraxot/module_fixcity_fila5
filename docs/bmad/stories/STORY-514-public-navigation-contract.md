@@ -29,6 +29,10 @@ related:
   - ../../../../../../bashscripts/quality-gates/audit-public-navigation.sh
   - ../../../app/Policies/TicketPolicy.php
   - ../../../routes/web.php
+type: note
+updated: 2026-10-13
+tags: [docs, fixcity, bmad]
+qmd: "non create: `gh` non e' installato. le url sotto seguono la convenzione del fixcity"
 ---
 
 # STORY-514 — Il contratto della navigazione pubblica

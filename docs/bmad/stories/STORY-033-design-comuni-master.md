@@ -3,6 +3,10 @@ title: Design Comuni Complete Parity — BMAD Master Plan
 status: to_do
 priority: must
 date: 2026-09-27
+type: note
+updated: 2026-10-13
+tags: [docs, fixcity, bmad]
+qmd: "story 033 design comuni master fixcity"
 ---
 
 ## References

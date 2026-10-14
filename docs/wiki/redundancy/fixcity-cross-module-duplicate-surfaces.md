@@ -17,6 +17,7 @@ related:
   - ../../../../Xot/docs/wiki/redundancy/audit-profondo-ridondanze-holistic.md
 issues:
   - "https://github.com/laraxot/base_fixcity_fila5/issues/90"
+status: draft
 ---
 
 # Fixcity — dove il dominio pubblico incontra artefatti “copiati” altrove

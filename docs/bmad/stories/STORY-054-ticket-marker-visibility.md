@@ -7,6 +7,7 @@ discussion: "#54"
 type: story
 tags: ["map-marker", "design-comuni", "wcag", "visibility", "ticket-marker-visible"]
 qmd: "map-marker visibility design-comuni #007A52"
+updated: 2026-10-14
 ---
 
 ## Bug Description

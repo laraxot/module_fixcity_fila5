@@ -7,6 +7,7 @@ updated: 2026-09-26
 qmd: "pub theme wizard zen"
 issues: []
 discussions: []
+status: draft
 ---
 
 # PubThemeWizard — Filosofia e Implementazione

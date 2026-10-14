@@ -7,6 +7,7 @@ discussions: []
 title: Post-sprint — sincronizzazione docs modulo e tema
 type: overview
 created: 2026-05-29
+status: draft
 ---
 
 # Post-sprint — sync documentazione

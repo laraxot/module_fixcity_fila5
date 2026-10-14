@@ -7,6 +7,7 @@ updated: 2026-09-26
 qmd: "directory structure rules"
 issues: []
 discussions: []
+status: draft
 ---
 
 # Directory Structure Rules

@@ -14,7 +14,7 @@ return [
     | https://manual.limesurvey.org/RemoteControl_2_API to enable
     |
     */
-    'url' => env('LIMESURVEY_URL', 'https://localhost/limesurvey/'),
+    'url' => (config('env.LIMESURVEY_URL') ?? 'https://localhost/limesurvey/'),
 
     /*
     |--------------------------------------------------------------------------
@@ -25,12 +25,12 @@ return [
     | only used for this purpose
     |
     */
-    'username' => env('LIMESURVEY_USERNAME', ''),
+    'username' => (config('env.LIMESURVEY_USERNAME') ?? ''),
 
     /*
     |--------------------------------------------------------------------------
     | Password of the account being used
     |--------------------------------------------------------------------------
     */
-    'password' => env('LIMESURVEY_PASSWORD', ''),
+    'password' => (config('env.LIMESURVEY_PASSWORD') ?? ''),
 ];

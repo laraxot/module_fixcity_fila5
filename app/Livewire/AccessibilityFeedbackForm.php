@@ -19,7 +19,7 @@ use Modules\Fixcity\Actions\SendAccessibilityFeedbackAction;
  */
 final class AccessibilityFeedbackForm extends Component
 {
-    public const MAX_PER_HOUR = 5;
+    public const int MAX_PER_HOUR = 5;
 
     public string $problem = '';
 
