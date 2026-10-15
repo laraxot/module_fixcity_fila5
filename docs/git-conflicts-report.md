@@ -83,7 +83,7 @@ Esito:
 * ./Modules/Cms/docs/roadmap/legacy/legacy-roadmap-content-management.md
 * ./Modules/Cms/docs/quality-status.md
 * ./Modules/Cms/docs/errors/git-conflicts-themes-resolution.md
-* ./Modules/Cms/docs/quality-status-2025-11.md
+* ./Modules/Cms/docs/quality-status-activity-module-november.md
 * ./Modules/Cms/docs/merge-conflicts-list.md
 * ./Modules/Cms/app/Models/Attachment.php
 * ./Modules/Cms/database/seeders/CmsMassSeeder.php

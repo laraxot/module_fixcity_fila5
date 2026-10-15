@@ -284,7 +284,7 @@ docs/master/
 - `kebab-case.md` (e.g., `phpstan-fixes.md`)
 - `PascalCase.md` (e.g., `PHPStanFixes.md`)
 - `UPPERCASE.md` (e.g., `README.md`)
-- Mixed with suffixes: `phpstan-fixes-.md`, `phpstan-fixes-1.md`
+- Mixed with suffixes: `phpstan-fixes-.md`, `phpstan-fixes-documentation-themes.md`
 
 **Recommended Standard:**
 - Lowercase kebab-case: `topic-subtopic.md`

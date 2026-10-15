@@ -27,7 +27,7 @@ Analyze e Plan. **Nessuna modifica allo schema finche' non c'e' la decisione DEC
 - `fixcity_user.users.id` e' `varchar(36)` (UUID). Un `user_id` intero non puo' contenere un id utente: l'inserimento fallisce con `Data truncated for column 'user_id'`, `Incorrect integer value` o `Out of range value`.
 - La tabella ha **0 righe**: nessun dato da migrare.
 - Il docblock di `TicketHour` dice `@property int $user_id`, coerente con lo schema sbagliato e non con gli utenti.
-- Effetto sui test: nella suite intera di Fixcity (990 s, DB di prova) **20 dei 27 rossi** vengono da questa sola causa (`TicketHourTest`, i test di tempo di `Ticket`, la relazione `Profile`/`User` sulle ore, il test sui messaggi e ore dei ticket DMO). Dettaglio in [DCP-103](./2026-10-13-dcp-103-test-rossi-residui-modulo-fixcity.story.md).
+- Effetto sui test: nella suite intera di Fixcity (990 s, DB di prova) **20 dei 27 rossi** vengono da questa sola causa (`TicketHourTest`, i test di tempo di `Ticket`, la relazione `Profile`/`User` sulle ore, il test sui messaggi e ore dei ticket DMO). Dettaglio in [DCP-103](./dcp-103-test-rossi-residui-modulo-fixcity.story.md).
 
 ## Decisione da prendere (DEC-35)
 | Opzione | Cosa comporta | Quando ha senso |

@@ -104,4 +104,4 @@ Regola operativa multi-agent: ogni file con marker `<<<<<<<` va preso in carico 
 - [ ] `laravel/Modules/Cms/docs/code-quality-analysis.md`
 - [ ] `laravel/Modules/Cms/docs/roadmap/legacy/legacy-roadmap-content-management.md`
 - [ ] `laravel/Modules/Cms/docs/roadmap/legacy/legacy-roadmap-x.md`
-- [ ] `laravel/Modules/Cms/docs/quality-status-2025-11.md`
+- [ ] `laravel/Modules/Cms/docs/quality-status-activity-module-november.md`
