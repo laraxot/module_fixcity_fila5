@@ -238,8 +238,11 @@ Vedi anche:
 **Last Updated**: 2026-05-13
 
 > Verifica 2026-10-14 di questo blocco: `./vendor/bin/phpstan analyse Modules/Fixcity` (config unica `laravel/phpstan.neon`, livello `max`) dà 122 errori, tutti in `config/*.php`, e 0 in `app/`, `tests/` e `database/`; quindi "Level 10 ✅" vale per il codice ma non per il modulo intero. "Production Ready" non e' verificato: la [matrice di conformita'](compliance/01-matrice-conformita-normativa.md) (stato `draft-for-dpo-legal-review`, 2026-10-13) elenca lacune di gravita' alta ancora aperte (per esempio N-02 consenso privacy non persistito, N-24 SPID/CIE assenti). "IT/EN" e' riduttivo: `lang/` ha PHP per piu' lingue (80 file in `en`, 75 in `it`, 35 in `es`, 32 in `de`). Stato aggiornato: [README.md](README.md), sezione Fixcity.
+<<<<<<< .merge_file_yT4qCI
 
 --- BMAD + Second Brain ---
 - Scopo: documentazione tecnica del modulo.
 - Utilità: riferimento sviluppatori/audit.
 - Funzionalità: struttura, dipendenze, convenzioni (no date .md, git avanti).
+=======
+>>>>>>> .merge_file_gTG5aB

@@ -38,8 +38,11 @@ A separate `laravel/Modules/<Module>/docs/wiki/` convention would create competi
 - Canonical workflow: [../../../docs/wiki/README.md](../../../../docs/wiki/README.md)
 - Canonical index: [../../../docs/wiki/index.md](../../../../docs/wiki/index.md)
 - Adoption notes: [../../../docs/project/karpathy-llm-wiki-adoption.md](../../../../docs/project/karpathy-llm-wiki-adoption.md)
+<<<<<<< .merge_file_k8erZg
 
 --- BMAD + Second Brain ---
 - Scopo: documentazione tecnica del modulo.
 - Utilità: riferimento sviluppatori/audit.
 - Funzionalità: struttura, dipendenze, convenzioni (no date .md, git avanti).
+=======
+>>>>>>> .merge_file_UJArBV

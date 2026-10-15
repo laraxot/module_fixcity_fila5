@@ -91,8 +91,11 @@ The governing rule for all module docs is in
 - [File di contenuto delle pagine /it/tests](./tests-pages-content-files.md) — `tests.<slug>.json`, stato e regole (2026-10-13)
 - [Indice canonico del modulo](./00-INDEX.md), [mappa delle sottocartelle](./INDEX.md), [panoramica](./index.md)
 - [Scopo e conformita' normativa](./compliance/00-scopo-del-progetto.md), [decision log](./decision-log.md), [wiki](./wiki/index.md), [story](./stories/index.md)
+<<<<<<< .merge_file_I27SSY
 
 --- BMAD + Second Brain ---
 - Scopo: documentazione tecnica del modulo.
 - Utilità: riferimento sviluppatori/audit.
 - Funzionalità: struttura, dipendenze, convenzioni (no date .md, git avanti).
+=======
+>>>>>>> .merge_file_K7mdNd

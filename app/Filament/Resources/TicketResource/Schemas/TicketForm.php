@@ -35,6 +35,7 @@ class TicketForm extends XotBaseResourceForm
      * @return array<string, Step>
      */
     public function getSteps(): array
+<<<<<<< .merge_file_P1KBj0
     {
         return [
             'privacy' => static::getStepByName('privacy')
@@ -63,6 +64,36 @@ class TicketForm extends XotBaseResourceForm
                 ->viewData(static fn (object $livewire): array => [
                     'review' => app(BuildTicketReviewSummaryAction::class)->execute(
                         static::reviewFormState($livewire),
+=======
+    {
+        return [
+            'privacy' => static::getStepByName('privacy')
+                ->label((string) __('fixcity::fixcity.ticket.steps.auth.label')),
+            // Front office: passo con markup di sito/segnalazione-02-dati (DCP-128). L'etichetta NON si cambia: da essa dipende la chiave `?step=`.
+            'data' => Step::make('data')
+                ->schema(array_values(static::getDataSchema(designComuni: true)))
+                ->label((string) __('fixcity::fixcity.ticket.steps.data.label')),
+            'summary' => Step::make('summary')
+                ->schema(array_values(static::getReviewStepSchema()))
+                ->label((string) __('fixcity::fixcity.ticket.steps.summary.label')),
+        ];
+    }
+
+    /**
+     * Passo "riepilogo" del wizard front office (DCP-33): un solo componente con il markup di sito/segnalazione-03-riepilogo, alimentato dallo
+     * stato del form (`$livewire->data`). Il guscio (breadcrumb, h1, barra dei passi, container) e' del widget; qui restano avviso, schede,
+     * mappa e navigazione. `getSummarySchema()` (schema piatto) resta per il back office.
+     *
+     * @return array<string, SchemaComponent>
+     */
+    public static function getReviewStepSchema(): array
+    {
+        return [
+            'reviewSummary' => View::make('pub_theme::components.wizard.summary-step')
+                ->viewData(static fn (object $livewire): array => [
+                    'review' => app(BuildTicketReviewSummaryAction::class)->execute(
+                        array_filter((array) data_get($livewire, 'data', []), is_string(...), ARRAY_FILTER_USE_KEY),
+>>>>>>> .merge_file_H9gEsN
                         Filament::auth()->user(),
                     ),
                     'data' => (array) data_get($livewire, 'blockData', []),

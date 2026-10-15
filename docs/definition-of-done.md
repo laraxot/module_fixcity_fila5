@@ -172,8 +172,11 @@ dell'intero progetto, e costa una riga.
 
 - **2026-09-26** — creazione. 25 criteri, 6 passati, 19 bloccanti. Collo di bottiglia:
   credenziali MySQL.
+<<<<<<< .merge_file_8CxBqU
 
 --- BMAD + Second Brain ---
 - Scopo: documentazione tecnica del modulo.
 - Utilità: riferimento sviluppatori/audit.
 - Funzionalità: struttura, dipendenze, convenzioni (no date .md, git avanti).
+=======
+>>>>>>> .merge_file_TJS1YM

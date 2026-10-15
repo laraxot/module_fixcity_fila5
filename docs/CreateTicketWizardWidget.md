@@ -132,8 +132,11 @@ php artisan test Modules/Fixcity/tests/Unit/CreateTicketWizardWidgetViewTest.php
 
 The browser check must also open `/it/tickets/create`, activate the privacy
 checkbox, and advance to step two without a Livewire `MethodNotFoundException`.
+<<<<<<< .merge_file_bMQXGZ
 
 --- BMAD + Second Brain ---
 - Scopo: documentazione tecnica del modulo.
 - Utilità: riferimento sviluppatori/audit.
 - Funzionalità: struttura, dipendenze, convenzioni (no date .md, git avanti).
+=======
+>>>>>>> .merge_file_FYZKgg
