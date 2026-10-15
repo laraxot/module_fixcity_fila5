@@ -7,7 +7,6 @@ namespace Modules\Fixcity\Enums;
 use Filament\Support\Contracts\HasColor;
 use Filament\Support\Contracts\HasIcon;
 use Filament\Support\Contracts\HasLabel;
-
 use Modules\Xot\Traits\EnumTrait;
 
 enum TicketPriorityEnum: string implements HasColor, HasIcon, HasLabel

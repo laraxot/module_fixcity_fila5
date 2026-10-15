@@ -1,3 +1,15 @@
+---
+title: "QUEUEABLE ACTION RULE"
+type: note
+tags: [documentation]
+created: 2026-09-26
+updated: 2026-09-26
+qmd: "QUEUEABLE ACTION RULE"
+issues: []
+discussions: []
+status: draft
+---
+
 # QueueableAction Architecture Rule
 
 > **Philosophy**: Single-responsibility actions that can be queued or run synchronously.  
@@ -325,5 +337,9 @@ $this->assertEquals($expected, $result);
 - [Single Responsibility Principle](https://en.wikipedia.org/wiki/Single-responsibility_principle)
 
 ---
-
 **Remember**: When in doubt, create a QueueableAction. Never create a Service.
+
+--- BMAD + Second Brain ---
+- Scopo: documentazione tecnica del modulo.
+- Utilità: riferimento sviluppatori/audit.
+- Funzionalità: struttura, dipendenze, convenzioni (no date .md, git avanti).

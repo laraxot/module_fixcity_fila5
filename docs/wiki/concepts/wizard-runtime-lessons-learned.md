@@ -1,3 +1,15 @@
+---
+title: "wizard runtime lessons learned"
+type: note
+tags: [documentation]
+created: 2026-09-26
+updated: 2026-10-13
+qmd: "wizard runtime lessons learned"
+issues: []
+discussions: []
+status: draft
+---
+
 # Wizard Runtime Lessons Learned
 
 ## Data: 2026-04-23
@@ -5,7 +17,6 @@
 Lezioni operative dal wizard CreateTicketWizardWidget e dai suoi componenti Geo.
 
 ---
-
 ## 1. EnumSelect Signature Mismatch — FatalError
 
 ### Problema
@@ -99,7 +110,7 @@ Nei merge conflict di import, SEMPRE controllare se il branch alternativo aggiun
 
 ## Best Practices per il Wizard
 
-1. **defaultFormData()** — Tutti i campi devono essere inizializzati, anche se null. Livewire/Alpine errorano su proprietà Entangle mancanti.
+1. **`TicketForm::getDefaultFormState()`** — Tutti i campi devono essere inizializzati, anche se null. Livewire/Alpine errorano su proprietà Entangle mancanti. Il metodo reale (`public static`, in `TicketForm.php`) restituisce lo stato iniziale ed e' usato da `CreateTicketWizardWidget::mount()` con `$this->form->fill(TicketForm::getDefaultFormState())`; `defaultFormData()` non esiste (verificato 2026-10-13, DOCS-ARRETRATO DCP-44).
 2. **Wizard step schema** — I componenti mappa devono essere nel place section con `CoordinatePicker`, non `GeopointPicker` (quest'ultimo è per deidratazione database).
 3. **EnumSelect per backed enum** — Usare `EnumSelect::make('type_id')->enum(TicketTypeEnum::class)` per select con icone e label HTML.
 4. **Location structured data** — Il campo `location` nel form state deve contenere `latitude`, `longitude`, `address`, e tutti gli address details per reverse geocoding.

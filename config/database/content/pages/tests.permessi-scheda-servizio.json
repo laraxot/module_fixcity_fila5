@@ -1,0 +1,504 @@
+{
+    "id": "tests.permessi-scheda-servizio",
+    "slug": "tests.permessi-scheda-servizio",
+    "parent_slug": "tests",
+    "title": {
+        "it": "Permesso ZTL",
+        "en": "Permesso ZTL"
+    },
+    "layout": "test",
+    "sidebar_blocks": {
+        "it": [],
+        "en": []
+    },
+    "footer_blocks": null,
+    "description": "Pagina di prova permessi-scheda-servizio (flusso permessi) da JSON, resa dal blocco service-flow del tema Sixteen.",
+    "content_blocks": {
+        "it": [
+            {
+                "type": "service-flow",
+                "data": {
+                    "view": "pub_theme::components.blocks.service-flow.design-comuni",
+                    "kind": "service-sheet",
+                    "breadcrumb": {
+                        "items": [
+                            {
+                                "label": "Home",
+                                "url": "/it/tests/homepage"
+                            },
+                            {
+                                "label": "Servizi",
+                                "url": "#"
+                            },
+                            {
+                                "label": "Mobilità e trasporti",
+                                "url": "#"
+                            }
+                        ],
+                        "current": "Permesso ZTL"
+                    },
+                    "heading": {
+                        "title": "Permesso ZTL",
+                        "title_element": "service-title",
+                        "chips": [
+                            {
+                                "label": "Servizio attivo",
+                                "element": "service-status"
+                            }
+                        ],
+                        "subtitles": [
+                            {
+                                "text": "Rilascio del permesso zone a traffico limitato (ZTL) del centro storico.",
+                                "class": "subtitle-small mb-3"
+                            }
+                        ],
+                        "buttons": [
+                            {
+                                "label": "Richiedi online",
+                                "class": "btn btn-primary fw-bold"
+                            }
+                        ],
+                        "actions": [
+                            {
+                                "id": "shareActions",
+                                "aria_label": "condividi sui social",
+                                "icon": "it-share",
+                                "label": "Condividi",
+                                "items": [
+                                    {
+                                        "label": "Facebook",
+                                        "icon": "it-facebook",
+                                        "url": "#"
+                                    },
+                                    {
+                                        "label": "Twitter",
+                                        "icon": "it-twitter",
+                                        "url": "#"
+                                    },
+                                    {
+                                        "label": "Linkedin",
+                                        "icon": "it-linkedin",
+                                        "url": "#"
+                                    },
+                                    {
+                                        "label": "Whatsapp",
+                                        "icon": "it-whatsapp",
+                                        "url": "#"
+                                    }
+                                ]
+                            },
+                            {
+                                "id": "viewActions",
+                                "aria_label": "vedi azioni da compiere sulla pagina",
+                                "icon": "it-more-items",
+                                "label": "Vedi azioni",
+                                "items": [
+                                    {
+                                        "label": "Stampa",
+                                        "icon": "it-print",
+                                        "url": "#"
+                                    },
+                                    {
+                                        "label": "Ascolta",
+                                        "icon": "it-hearing",
+                                        "url": "#"
+                                    },
+                                    {
+                                        "label": "Invia",
+                                        "icon": "it-mail",
+                                        "url": "#"
+                                    }
+                                ]
+                            }
+                        ],
+                        "rule": "d-none d-lg-block mb-0",
+                        "row": "row justify-content-center mb-40 mb-lg-80",
+                        "col": "col-12 col-lg-10 pb-2"
+                    },
+                    "side_nav": {
+                        "class": "col-12 col-lg-3 mb-4 border-col",
+                        "aria_label": "INDICE DELLA PAGINA",
+                        "title": "INDICE DELLA PAGINA",
+                        "items": [
+                            {
+                                "label": "A chi è rivolto",
+                                "anchor": "who-needs"
+                            },
+                            {
+                                "label": "Descrizione",
+                                "anchor": "description"
+                            },
+                            {
+                                "label": "Come fare",
+                                "anchor": "how-to"
+                            },
+                            {
+                                "label": "Cosa serve",
+                                "anchor": "needed"
+                            },
+                            {
+                                "label": "Cosa si ottiene",
+                                "anchor": "obtain"
+                            },
+                            {
+                                "label": "Tempi e scadenze",
+                                "anchor": "deadlines"
+                            },
+                            {
+                                "label": "Costi",
+                                "anchor": "costs"
+                            },
+                            {
+                                "label": "Accedi al servizio",
+                                "anchor": "service-access"
+                            },
+                            {
+                                "label": "Condizioni di servizio",
+                                "anchor": "conditions"
+                            },
+                            {
+                                "label": "Contatti",
+                                "anchor": "contacts"
+                            }
+                        ]
+                    },
+                    "body": {
+                        "row": "row row-column-menu-left pb-4 pb-lg-80"
+                    },
+                    "sections": [
+                        {
+                            "type": "flow",
+                            "id": "who-needs",
+                            "class": "mb-30",
+                            "title": "A chi è rivolto",
+                            "title_class": "title-xxlarge mb-3",
+                            "items": [
+                                {
+                                    "type": "paragraph",
+                                    "text": "Persone fisiche con residenza anagrafica in zone a traffico limitato:",
+                                    "class": "text-paragraph lora mb-0"
+                                },
+                                {
+                                    "type": "list",
+                                    "items": [
+                                        "proprietarie di veicolo;",
+                                        "con veicolo in leasing;",
+                                        "con veicolo acquistato con patto di riservato dominio;",
+                                        "con veicolo in locazione con facoltà di acquisto o in usufrutto (regolarmente trascritti sui documenti del veicolo);",
+                                        "con veicolo a noleggio intestato ad azienda della quale il residente è titolare;",
+                                        "con veicolo concesso in fringe benefit."
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "type": "flow",
+                            "id": "description",
+                            "class": "mb-30",
+                            "title": "Descrizione",
+                            "title_class": "title-xxlarge mb-3",
+                            "items": [
+                                {
+                                    "type": "paragraph",
+                                    "text": "L'autorizzazione consente il transito e la sosta h 24 dei veicoli nelle zone a traffico limitato.\n\nIl permesso ZTL è valido per 5 anni dalla data del rilascio e si può rinnovare da due mesi prima della data di scadenza.",
+                                    "class": "text-paragraph lora"
+                                }
+                            ]
+                        },
+                        {
+                            "type": "flow",
+                            "id": "how-to",
+                            "class": "mb-30",
+                            "title": "Come fare",
+                            "title_class": "title-xxlarge mb-3",
+                            "items": [
+                                {
+                                    "type": "paragraph",
+                                    "text": "La richiesta può essere inviata online o consegnata di persona all’Ufficio Protocollo Generale, in via dei Transiti 21.\n\nIn caso di esito positivo dell'istruttoria il permesso viene inviato nella casella di posta elettronica indicata nella richiesta.",
+                                    "class": "text-paragraph lora"
+                                }
+                            ]
+                        },
+                        {
+                            "type": "flow",
+                            "id": "needed",
+                            "class": "mb-30 has-bg-grey p-3",
+                            "title": "Cosa serve",
+                            "title_class": "title-xxlarge mb-3",
+                            "items": [
+                                {
+                                    "type": "paragraph",
+                                    "text": "Per accedere al servizio, assicurati di avere:",
+                                    "class": "text-paragraph lora mb-0"
+                                },
+                                {
+                                    "type": "list",
+                                    "items": [
+                                        "SPID (Sistema Pubblico per la gestione dell'Identità Digitale), Carta identità elettronica (CIE) o Carta Nazionale dei Servizi (CNS);",
+                                        "Numero di targa del veicolo;",
+                                        "Patente di guida del richiedente."
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "type": "flow",
+                            "id": "obtain",
+                            "class": "mb-30",
+                            "title": "Cosa si ottiene",
+                            "title_class": "title-xxlarge mb-3",
+                            "items": [
+                                {
+                                    "type": "paragraph",
+                                    "text": "Si ottiene un permesso da esporre sul parabrezza del veicolo durante tutto il tempo di durata del transito e della sosta in ZTL o da esibire, a richiesta degli agenti addetti al controllo, quando è associato a veicoli che non consentono la chiusura a chiave dell’abitacolo.",
+                                    "class": "text-paragraph lora"
+                                }
+                            ]
+                        },
+                        {
+                            "type": "timeline",
+                            "id": "deadlines",
+                            "class": "mb-30",
+                            "title": "Tempi e scadenze",
+                            "entries": [
+                                {
+                                    "year": "",
+                                    "day": "",
+                                    "month": "",
+                                    "label": "Esito richiesta",
+                                    "info": "Si riceve all’indirizzo email indicato nella richiesta",
+                                    "info_class": "info-text mt-1 mb-0"
+                                },
+                                {
+                                    "year": "",
+                                    "day": "10",
+                                    "month": "giorni",
+                                    "label": "Pagamento"
+                                },
+                                {
+                                    "year": "",
+                                    "day": "02",
+                                    "month": "giorni",
+                                    "label": "Rilascio permesso ZTL"
+                                }
+                            ]
+                        },
+                        {
+                            "type": "flow",
+                            "id": "costs",
+                            "class": "mb-30",
+                            "title": "Costi",
+                            "title_class": "title-xxlarge mb-3",
+                            "items": [
+                                {
+                                    "type": "paragraph",
+                                    "text": "L’importo del permesso ZTL per il centro storico è di € 5,00. La tariffa non è dovuta alla scadenza del permesso in caso di rinnovo, quando sia effettuato in continuità di validità del precedente pass in scadenza. Non è considerato rinnovo quello del permesso scaduto da oltre un anno.",
+                                    "class": "text-paragraph lora"
+                                },
+                                {
+                                    "type": "attachment",
+                                    "label": "Allegato se necessario (PDF 1MB)",
+                                    "aria": "Scarica Allegato se necessario (PDF 1MB)",
+                                    "title": "Scarica Allegato se necessario (PDF 1MB)",
+                                    "url": "#"
+                                }
+                            ]
+                        },
+                        {
+                            "type": "flow",
+                            "id": "service-access",
+                            "class": "mb-30 has-bg-grey p-3 p-lg-4",
+                            "title": "Accedi al servizio",
+                            "title_class": "mb-3",
+                            "items": [
+                                {
+                                    "type": "paragraph",
+                                    "text": "Puoi richiedere il permesso ZTL direttamente online tramite identità digitale.",
+                                    "class": "text-paragraph lora mb-4"
+                                },
+                                {
+                                    "type": "button",
+                                    "label": "Richiedi online",
+                                    "class": "btn btn-primary mobile-full"
+                                },
+                                {
+                                    "type": "paragraph",
+                                    "text": "Oppure, puoi prenotare un appuntamento e presentarti presso gli uffici.",
+                                    "class": "text-paragraph lora mt-4"
+                                },
+                                {
+                                    "type": "button",
+                                    "label": "Prenota appuntamento",
+                                    "class": "btn btn-outline-primary t-primary bg-white mobile-full"
+                                }
+                            ]
+                        },
+                        {
+                            "type": "flow",
+                            "id": "conditions",
+                            "class": "mb-30",
+                            "title": "Condizioni di servizio",
+                            "title_class": "title-xxlarge mb-3",
+                            "items": [
+                                {
+                                    "type": "paragraph",
+                                    "text": "Per conoscere i dettagli di scadenze, requisiti e altre informazioni importanti, leggi i termini e le condizioni di servizio.",
+                                    "class": "text-paragraph lora"
+                                },
+                                {
+                                    "type": "attachment",
+                                    "label": "Termini e condizioni di servizio (PDF 1MB)",
+                                    "aria": "Scarica Termini e condizioni di servizio (PDF 1MB)",
+                                    "title": "Scarica Termini e condizioni di servizio (PDF 1MB)",
+                                    "url": "#"
+                                }
+                            ]
+                        },
+                        {
+                            "type": "service-contacts",
+                            "id": "contacts",
+                            "title": "Contatti",
+                            "office": {
+                                "name": "Ufficio mobilità",
+                                "url": "#",
+                                "card_class": "card card-teaser card-teaser-info align-items-center rounded shadow-sm p-3",
+                                "title_class": "title-small mb-2",
+                                "lines": [
+                                    "Via Dei Transiti 21, 50302",
+                                    "05 0505"
+                                ],
+                                "email": "ufficiomobilita@email.it",
+                                "email_aria": "Invia una email a ufficiomobilita@email.it",
+                                "image": {
+                                    "src": "https://picsum.photos/200/200",
+                                    "alt": "Immagine"
+                                }
+                            },
+                            "topics": {
+                                "label": "Argomenti:",
+                                "items": [
+                                    "Autovettura",
+                                    "Permesso"
+                                ]
+                            },
+                            "updated": "Pagina aggiornata il 14/04/2022"
+                        }
+                    ],
+                    "feedback": {
+                        "col_class": "col-12 col-lg-6 p-lg-0 px-4",
+                        "title": "Quanto è stato facile usare questo servizio?",
+                        "legend": "Valuta da 1 a 5 stelle la pagina",
+                        "star_label": "Valuta %d stelle su 5",
+                        "thanks": "Grazie, il tuo parere ci aiuterà a migliorare il servizio!",
+                        "positive": {
+                            "question": "Quali sono stati gli aspetti che hai preferito?",
+                            "answers": [
+                                "Le indicazioni erano chiare",
+                                "Le indicazioni erano complete",
+                                "Capivo sempre che stavo procedendo correttamente",
+                                "Non ho avuto problemi tecnici",
+                                "Altro"
+                            ]
+                        },
+                        "negative": {
+                            "question": "Dove hai incontrato le maggiori difficoltà?",
+                            "answers": [
+                                "A volte le indicazioni non erano chiare",
+                                "A volte le indicazioni non erano complete",
+                                "A volte non capivo se stavo procedendo correttamente",
+                                "Ho avuto problemi tecnici",
+                                "Altro"
+                            ]
+                        },
+                        "detail": {
+                            "question": "Vuoi aggiungere altri dettagli?",
+                            "label": "Dettaglio",
+                            "help": "Inserire massimo 200 caratteri"
+                        },
+                        "back": "Indietro",
+                        "next": "Avanti"
+                    },
+                    "related": {
+                        "title": "Contenuti correlati",
+                        "cards": [
+                            {
+                                "icon": "it-pa",
+                                "title": "Amministrazione",
+                                "links": [
+                                    "Area Servizi Civici"
+                                ]
+                            },
+                            {
+                                "icon": "it-settings",
+                                "title": "Servizi",
+                                "links": [
+                                    "Pagamento retta scolastica",
+                                    "Servizio di trasporto scolastico"
+                                ]
+                            },
+                            {
+                                "icon": "it-file",
+                                "title": "Documenti",
+                                "links": [
+                                    "Attestazione ISEE",
+                                    "Carta dei servizi educativi all'infanzia"
+                                ]
+                            },
+                            {
+                                "icon": "it-calendar",
+                                "title": "Notizie",
+                                "links": [
+                                    "Justo eget magna fermentum",
+                                    "Dolor magna eget est lorem",
+                                    "Justo eget magna fermentum",
+                                    "Dolor magna eget est lorem"
+                                ],
+                                "more": {
+                                    "label": "Vedi altri 2",
+                                    "items": [
+                                        "Servizio di trasporto scolastico",
+                                        "Servizio di trasporto scolastico"
+                                    ]
+                                }
+                            }
+                        ]
+                    },
+                    "contacts": {
+                        "layout": "offset",
+                        "col": "col-12 col-lg-6",
+                        "row_class": "row",
+                        "main": {
+                            "title": "Contatta il comune",
+                            "items": [
+                                {
+                                    "icon": "it-help-circle",
+                                    "label": "Leggi le domande frequenti",
+                                    "url": "#"
+                                },
+                                {
+                                    "icon": "it-mail",
+                                    "label": "Richiedi assistenza",
+                                    "url": "#",
+                                    "element": "contacts"
+                                },
+                                {
+                                    "icon": "it-hearing",
+                                    "label": "Chiama il numero verde 05 0505",
+                                    "url": "#"
+                                },
+                                {
+                                    "icon": "it-calendar",
+                                    "label": "Prenota appuntamento",
+                                    "url": "#",
+                                    "element": "appointment-booking"
+                                }
+                            ]
+                        }
+                    },
+                    "header_active": "all-services"
+                }
+            }
+        ],
+        "en": []
+    }
+}

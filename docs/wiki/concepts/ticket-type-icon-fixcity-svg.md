@@ -1,4 +1,7 @@
 ---
+qmd: "ticket type icon fixcity svg"
+issues: []
+discussions: []
 title: "Icona tipologia ticket — una sola SVG in Fixcity"
 type: concept
 confidence: high
@@ -8,8 +11,9 @@ tags: [fixcity, ticket-type, svg, map, architecture]
 related:
   - ./ticket-list-map-architecture.md
   - ../../../../Geo/docs/wiki/concepts/map-legend-status-semantics.md
-  - ../../../../../docs/wiki/architecture/frontoffice-map-filters-ssot-architecture.md
+  - ../../../../../../docs/wiki/architecture/frontoffice-map-filters-ssot-architecture.md
   - ../../../../../docs/wiki/agents/agents-project-rules.md
+status: draft
 ---
 
 # Icona tipologia ticket — una sola SVG in Fixcity

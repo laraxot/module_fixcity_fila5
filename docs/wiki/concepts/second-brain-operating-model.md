@@ -11,8 +11,8 @@ discussions:
   - "https://github.com/laraxot/base_fixcity_fila5/discussions/273"
 related:
   - ./ai-harness-module-discipline.md
-  - ../../../../../docs/wiki/concepts/hackernoon-ai-coding-tips-fixcity-map.md
-  - ../../Xot/docs/wiki/concepts/second-brain-local-discipline.md
+  - ../../../../../../docs/wiki/concepts/hackernoon-ai-coding-tips-fixcity-map.md
+  - second-brain-local-discipline.md
 ---
 
 # Second Brain Operating Model (Modules)
@@ -38,7 +38,7 @@ Il second brain dei moduli trasforma documentazione in **memoria operativa**: me
 | Chiusura | 016 | Issue owner modulo in frontmatter |
 | Qualità | 006/021 | PHPStan, no workslop |
 
-Dettaglio: [ai-harness-module-discipline.md](./ai-harness-module-discipline.md) · [mappa HackerNoon](../../../../../docs/wiki/concepts/hackernoon-ai-coding-tips-fixcity-map.md)
+Dettaglio: [ai-harness-module-discipline.md](./ai-harness-module-discipline.md) · [mappa HackerNoon](../../../../../../docs/wiki/concepts/hackernoon-ai-coding-tips-fixcity-map.md)
 
 ## Struttura PARA
 
@@ -62,9 +62,9 @@ Dettaglio: [ai-harness-module-discipline.md](./ai-harness-module-discipline.md) 
 
 ## Stack ricerca
 
-QMD primario; Redis (cache/lock) ed Elasticsearch solo se pain misurato — [second-brain-search-stack.md](../../../../../docs/wiki/concepts/second-brain-search-stack.md).
+QMD primario; Redis (cache/lock) ed Elasticsearch solo se pain misurato — [second-brain-search-stack.md](../../../../../../docs/wiki/concepts/second-brain-search-stack.md).
 
 ## Collegamenti
 
 - [ai-harness-module-discipline.md](./ai-harness-module-discipline.md)
-- [bmad architecture](../../../../../docs/wiki/bmad/architecture.md)
+- [bmad architecture](../../../../../../docs/wiki/bmad/architecture.md)

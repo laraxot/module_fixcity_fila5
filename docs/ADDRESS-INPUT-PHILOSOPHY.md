@@ -1,3 +1,15 @@
+---
+title: "ADDRESS INPUT PHILOSOPHY"
+type: note
+tags: [documentation]
+created: 2026-09-26
+updated: 2026-09-26
+qmd: "ADDRESS INPUT PHILOSOPHY"
+issues: []
+discussions: []
+status: draft
+---
+
 # AddressInput Component — Geo Module
 
 > **Date:** 2026-04-13
@@ -161,3 +173,8 @@ This component provides:
 - [Module Boundary Philosophy](./MODULE-BOUNDARY-PHILOSOPHY.md)
 - [XotBaseWizard Philosophy](./XOTBASE-WIZARD-PHILOSOPHY.md)
 - [CMS-Driven Blocks](../../../Themes/Sixteen/docs/architecture/CMS-DRIVEN-BLOCKS.md)
+
+--- BMAD + Second Brain ---
+- Scopo: documentazione tecnica del modulo.
+- Utilità: riferimento sviluppatori/audit.
+- Funzionalità: struttura, dipendenze, convenzioni (no date .md, git avanti).

@@ -1,4 +1,7 @@
 ---
+qmd: "ticket crea map ux fixes"
+issues: []
+discussions: []
 title: "Segnalazione Crea Map UX Fixes"
 description: "Map centering, search UX, and geolocation fixes for segnalazione-crea page"
 type: concept
@@ -11,6 +14,7 @@ related:
   - ../concepts/location-capture-map-wizard.md
   - ../concepts/segnalazione-crea-geolocate-when-empty.md
   - ../concepts/ticket-list-map-architecture.md
+status: draft
 ---
 
 # Segnalazione Crea Map UX Fixes (2026-05-13)

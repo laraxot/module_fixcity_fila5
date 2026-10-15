@@ -1,3 +1,15 @@
+---
+title: "form tag fix"
+type: note
+tags: [documentation]
+created: 2026-09-26
+updated: 2026-09-26
+qmd: "form tag fix"
+issues: []
+discussions: []
+status: draft
+---
+
 # Form Tag Fix for Create Ticket Wizard
 
 **Issue**: Missing `<form wire:submit="submit">` wrapper in wizard view

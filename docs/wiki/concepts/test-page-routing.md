@@ -1,7 +1,15 @@
 ---
+title: "test page routing"
+tags: [documentation]
+created: 2026-09-26
+updated: 2026-09-26
+qmd: "test page routing"
+issues: []
+discussions: []
 name: test-page-routing
 description: Maps URL slugs like `/it/tests/segnalazione-crea` to Blade views and JSON configuration files.
 type: concept
+status: draft
 ---
 
 # Test Page Routing Overview
@@ -73,3 +81,5 @@ Sources:
 - `Modules/Fixcity/config/test_pages.php` (slug‑to‑path config)  
 - Blade view template `pages/tests/{slug}.blade.php`  
 - QMD indexing workflow  
+
+Correzione verificata 2026-10-13 (DCP-35 S4): `tests.segnalazione-crea.json` è stato eliminato (commit 260f3bcc5, `git log --diff-filter=D`) e oggi non esiste in nessun tenant; la risposta di `/it/tests/segnalazione-crea` (200) non contiene il wizard (0 occorrenze di `fi-sc-wizard` e `$wire.save()`). Il flusso vive su `/it/tickets/create` (`tickets.create.json`, blocco `components/blocks/tests/ticket-crea.blade.php`). L'esempio `segnalazione-crea` di questo documento descrive lo stato precedente (il meccanismo generale `/it/tests/<slug>` -> `tests.<slug>.json` resta valido per le altre pagine); stato attuale in `Modules/Fixcity/docs/wiki/concepts/ticket-crea-url-routing-chain.md`.

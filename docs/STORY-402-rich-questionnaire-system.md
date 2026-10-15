@@ -1,4 +1,7 @@
 ---
+qmd: "STORY 402 rich questionnaire system"
+issues: []
+discussions: []
 title: "STORY-402: Rich Questionnaire System per Tipologie"
 type: story
 tags: [fixcity, questionnaire, dynamic-forms, ticket-types, validation, seeclickfix]
@@ -8,6 +11,8 @@ assignee: TBD
 created: 2026-06-17
 updated: 2026-06-17
 ---
+
+> Migration snippets are design sketches only: implementation must follow the current `XotBaseMigration` contract and use `foreignIdFor()` for model relations. The current rules are in `docs/wiki/concepts/fixcity-architecture-contract-2026-09-26.md`.
 
 # STORY-402: Rich Questionnaire System per Tipologie
 
@@ -137,7 +142,7 @@ Schema::create('ticket_questionnaires', function (Blueprint $table) {
 // Migration: ticket_questionnaire_fields
 Schema::create('ticket_questionnaire_fields', function (Blueprint $table) {
     $table->id();
-    $table->foreignId('questionnaire_id')->constrained('ticket_questionnaires')->cascadeOnDelete();
+    $table->foreignIdFor(TicketQuestionnaire::class, 'questionnaire_id')->constrained()->cascadeOnDelete();
     $table->string('key', 100); // snake_case identifier
     $table->string('label');
     $table->string('type', 50); // text, textarea, select, number, boolean, datetime, rating, note, media
@@ -155,8 +160,8 @@ Schema::create('ticket_questionnaire_fields', function (Blueprint $table) {
 // Migration: ticket_answers (store user responses)
 Schema::create('ticket_answers', function (Blueprint $table) {
     $table->id();
-    $table->foreignId('ticket_id')->constrained()->cascadeOnDelete();
-    $table->foreignId('questionnaire_field_id')->constrained('ticket_questionnaire_fields');
+    $table->foreignIdFor(Ticket::class, 'ticket_id')->constrained()->cascadeOnDelete();
+    $table->foreignIdFor(TicketQuestionnaireField::class, 'questionnaire_field_id')->constrained();
     $table->json('value'); // stored as JSON to handle different types
     $table->timestamps();
     $table->unique(['ticket_id', 'questionnaire_field_id']);
@@ -619,3 +624,8 @@ class TicketQuestionnaireForm extends Component
 
 - SeeClickFix API: https://dev.seeclickfix.com/v2/issues/reporting/
 - Open311 GeoReport v2: http://wiki.open311.org/GeoReport_v2/
+
+--- BMAD + Second Brain ---
+- Scopo: documentazione tecnica del modulo.
+- Utilità: riferimento sviluppatori/audit.
+- Funzionalità: struttura, dipendenze, convenzioni (no date .md, git avanti).

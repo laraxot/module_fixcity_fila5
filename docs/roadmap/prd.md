@@ -1,3 +1,15 @@
+---
+title: "prd"
+type: note
+tags: [documentation]
+created: 2026-09-26
+updated: 2026-09-26
+qmd: "prd"
+issues: []
+discussions: []
+status: draft
+---
+
 # 📝 PRD: Fixcity Product Requirements Document
 
 > **Document ID**: FC-PRD-001  
@@ -6,7 +18,6 @@
 > **Status**: 🟢 Approved
 
 ---
-
 ## 📋 Table of Contents
 
 1. [Document Information](#document-information)

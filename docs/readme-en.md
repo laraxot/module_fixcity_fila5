@@ -1,3 +1,15 @@
+---
+title: "readme en"
+type: note
+tags: [documentation]
+created: 2026-09-26
+updated: 2026-09-26
+qmd: "readme en"
+issues: []
+discussions: []
+status: draft
+---
+
 # 🏛️ Fixcity — English presentation
 
 [![Domain-Ticket](https://img.shields.io/badge/Domain-Civic%20Tickets-008758.svg)](#)
@@ -13,7 +25,6 @@
 > **Reports that actually work.** Tickets, multi-step wizards, and workflows built for municipalities — not generic SaaS.
 
 ---
-
 ## Why it exists
 
 FixCity **domain core**: citizen reports become traceable, measurable tickets for operators.
@@ -39,7 +50,7 @@ FixCity **domain core**: citizen reports become traceable, measurable tickets fo
 
 If you care about **civic domain logic** and strict typing, this is where the game is won.
 
-Frontoffice stack: **Tailwind · Alpine · Lit · DaisyUI · Flowbite · Filament v5** — see [STORY-133](../../../docs/stories/STORY-133-frontend-stack-religion-tailwind-alpine-lit.md).
+Frontoffice stack: **Tailwind · Alpine · Lit · DaisyUI · Flowbite · Filament v5** — see [STORY-133](../../../../docs/stories/STORY-133-frontend-stack-religion-tailwind-alpine-lit.md).
 
 ---
 
@@ -54,3 +65,8 @@ Frontoffice stack: **Tailwind · Alpine · Lit · DaisyUI · Flowbite · Filamen
 ---
 
 **Module** `fixcity` · **Laraxot** · **FixCity Platform** · PHPStan 10 · Filament 5
+
+--- BMAD + Second Brain ---
+- Scopo: documentazione tecnica del modulo.
+- Utilità: riferimento sviluppatori/audit.
+- Funzionalità: struttura, dipendenze, convenzioni (no date .md, git avanti).

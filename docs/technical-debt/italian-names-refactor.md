@@ -1,4 +1,7 @@
 ---
+qmd: "italian names refactor"
+issues: []
+discussions: []
 title: "Technical Debt: Italian Names in Code"
 type: decision
 confidence: high
@@ -7,6 +10,7 @@ updated: 2026-05-29
 tags: [technical-debt, refactoring, naming, i18n]
 related:
   - ../../../../../docs/wiki/rules/no-italian-folder-names-in-code.md
+status: draft
 ---
 
 # Debito Tecnico: Nomi Italiani nel Codice

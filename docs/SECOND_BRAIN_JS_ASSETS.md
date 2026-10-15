@@ -1,3 +1,15 @@
+---
+title: "SECOND BRAIN JS ASSETS"
+type: note
+tags: [documentation]
+created: 2026-09-26
+updated: 2026-09-26
+qmd: "SECOND BRAIN JS ASSETS"
+issues: []
+discussions: []
+status: draft
+---
+
 # Second Brain: policy JS assets e build pipeline
 
 Scopo
@@ -16,3 +28,8 @@ Checklist per sviluppatori
 Esempi
 - In Themes/Sixteen/resources/js/app.js: `import './theme/header-mobile-nav-boot.js';`
 - Build: `cd Themes/Sixteen && npm run build:with-webroot && npm run copy`.
+
+--- BMAD + Second Brain ---
+- Scopo: documentazione tecnica del modulo.
+- Utilità: riferimento sviluppatori/audit.
+- Funzionalità: struttura, dipendenze, convenzioni (no date .md, git avanti).

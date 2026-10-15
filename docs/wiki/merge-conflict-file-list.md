@@ -1,6 +1,14 @@
 ---
+title: "merge conflict file list"
+type: note
+tags: [documentation]
+created: 2026-09-26
+qmd: "merge conflict file list"
+issues: []
+discussions: []
 name: Merge Conflict File List
 updated: 2026-04-21
+status: draft
 ---
 
 ### Pending Files with Merge Conflicts
@@ -14,7 +22,7 @@ updated: 2026-04-21
 7. laravel/Modules/Geo/docs/wiki/log.md
 8. laravel/Modules/Cms/database/seeders/CmsMassSeeder.php
 9. laravel/Modules/Cms/app/Models/Page.php
-10. docs/project_docs/riepilogo-risoluzione-conflitti-2025-09-30.md
+10. docs/project_docs/riepilogo-risoluzione-conflitti-obiettivo.md
 11. laravel/Modules/Fixcity/docs/wiki/logo.md
 12. ... [65 total files]
 

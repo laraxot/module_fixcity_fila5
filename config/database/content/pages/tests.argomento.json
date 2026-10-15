@@ -1,0 +1,331 @@
+{
+  "id": "tests.argomento",
+  "slug": "tests.argomento",
+  "parent_slug": "tests",
+  "title": {
+    "it": "Argomento",
+    "en": "Topic"
+  },
+  "layout": "test",
+  "description": "Dettaglio di un argomento: chi lo gestisce, novita, amministrazione, servizi e documenti. Contenuto da JSON, reso dal blocco content-topic del tema Sixteen.",
+  "content_blocks": {
+    "it": [
+      {
+        "type": "content-topic",
+        "data": {
+          "view": "pub_theme::components.blocks.content-topic.design-comuni",
+          "title": "Sport",
+          "breadcrumb": {
+            "items": [
+              {
+                "label": "Home",
+                "url": "/it/tests/homepage"
+              },
+              {
+                "label": "Argomenti",
+                "url": "#"
+              }
+            ],
+            "current": "Sport",
+            "class": "mt-0"
+          },
+          "hero": {
+            "image": {
+              "src": "https://picsum.photos/800/400",
+              "alt": "descrizione immagine",
+              "title": "titolo immagine"
+            },
+            "text": "Informazioni su eventi sportivi, impianti comunali, servizi dedicati allo sport",
+            "details_id": "news-details",
+            "details": "Dettagli della notizia",
+            "managers_title": "Questo argomento è gestito da:",
+            "managers": [
+              {
+                "title": "Sport, cultura, spettacolo",
+                "url": "#",
+                "text": "Via Dei Transiti 21, 50302",
+                "image": {
+                  "src": "https://picsum.photos/200/200",
+                  "alt": "Immagine",
+                  "title": ""
+                }
+              },
+              {
+                "title": "Gestione impianti sportivi",
+                "url": "#",
+                "text": "Via Dei Transiti 21, 50302",
+                "image": {
+                  "src": "https://picsum.photos/200/200",
+                  "alt": "Immagine",
+                  "title": ""
+                }
+              }
+            ]
+          },
+          "sections": [
+            {
+              "id": "novita",
+              "wrapper_class": "bg-grey-card py-5",
+              "title": "Novità",
+              "button": {
+                "label": "Tutte le novità",
+                "url": "#",
+                "title": "Vai a tutte le novità"
+              },
+              "type": "news",
+              "items": [
+                {
+                  "category": {
+                    "label": "Notizie",
+                    "url": "#"
+                  },
+                  "date": "18 MAG 2022",
+                  "title": "Sport nel verde: le iniziative della prossima edizione",
+                  "url": "#",
+                  "text": "Le informazioni per partecipare all’iniziativa rivolta a tutte le fasce d’età per promuovere l’attività motoria nelle aree verdi della città.",
+                  "image": {
+                    "src": "https://picsum.photos/400/200",
+                    "alt": "descrizione immagine",
+                    "title": "titolo immagine"
+                  }
+                },
+                {
+                  "category": {
+                    "label": "Eventi",
+                    "url": "#"
+                  },
+                  "date": "DAL 2 AL 3 GIU 2022",
+                  "title": "Torneo di beneficienza “Tutti in pista”",
+                  "url": "#",
+                  "text": "Dal 2 al 3 giugno torna il torneo di beneficienza “Tutti in pista”. La raccolta fondi finanzierà progetti sportivi per ragazzi e ragazze.",
+                  "image": {
+                    "src": "https://picsum.photos/400/200",
+                    "alt": "descrizione immagine",
+                    "title": "titolo immagine"
+                  },
+                  "calendar": {
+                    "date": "2-3",
+                    "day": "giu"
+                  }
+                },
+                {
+                  "category": {
+                    "label": "Avviso",
+                    "url": "#"
+                  },
+                  "date": "18 MAG 2022",
+                  "title": "Chiusa per ristrutturazione la piscina Minghetti",
+                  "url": "#",
+                  "text": "Partiti i lavori per l’adeguamento dell’impianto. La riapertura è prevista per giugno 2023."
+                }
+              ]
+            },
+            {
+              "id": "amministrazione",
+              "wrapper_class": "py-5",
+              "title": "Amministrazione",
+              "button": {
+                "label": "Tutta l’amministrazione",
+                "url": "#",
+                "title": "Vai a Amministrazione"
+              },
+              "type": "teaser",
+              "items": [
+                {
+                  "category": {
+                    "label": "Giunta e consiglio",
+                    "url": "#"
+                  },
+                  "title": "Gabriele Bianchi",
+                  "url": "#",
+                  "text": "Assessore allo sport",
+                  "image": {
+                    "src": "https://picsum.photos/200/200",
+                    "alt": "Immagine di esempio",
+                    "title": ""
+                  }
+                },
+                {
+                  "category": {
+                    "label": "Aree di competenza",
+                    "url": "#"
+                  },
+                  "title": "Area impiantistica sportiva e manifestazioni sportive",
+                  "url": "#",
+                  "text": "Dirigente Arch. M. Alessandra Verdi"
+                },
+                {
+                  "category": {
+                    "label": "Aree di competenza",
+                    "url": "#"
+                  },
+                  "title": "Area pratiche ed erogazione dei contributi",
+                  "url": "#",
+                  "text": "Dirigente Ing. Mauro Brambilla"
+                }
+              ]
+            },
+            {
+              "id": "servizi",
+              "wrapper_class": "pb-5",
+              "title": "Servizi",
+              "button": {
+                "label": "Tutti i servizi",
+                "url": "#",
+                "title": "Vai a tutti i servizi"
+              },
+              "type": "teaser",
+              "items": [
+                {
+                  "category": {
+                    "label": "Autorizzazioni",
+                    "url": "#"
+                  },
+                  "title": "Rimborsi alle società sportive",
+                  "url": "#",
+                  "text": "Nuovo bando per l’Anno sportivo 2022-2023"
+                },
+                {
+                  "category": {
+                    "label": "Appalti pubblici",
+                    "url": "#"
+                  },
+                  "title": "Concessione degli impianti sportivi",
+                  "url": "#",
+                  "text": "Domanda per la concessione degli impianti sportivi"
+                },
+                {
+                  "category": {
+                    "label": "Giustizia e sicurezza pubblica",
+                    "url": "#"
+                  },
+                  "title": "Manifestazioni sportive",
+                  "url": "#",
+                  "text": "Richiesta autorizzativa per eventi sportivi"
+                }
+              ]
+            },
+            {
+              "id": "documenti",
+              "wrapper_class": "pb-5",
+              "title": "Documenti",
+              "button": {
+                "label": "Tutti i documenti",
+                "url": "#",
+                "aria_label": "vai a tutti i documenti"
+              },
+              "type": "teaser",
+              "items": [
+                {
+                  "category": {
+                    "label": "Documento albo pretorio",
+                    "url": "#"
+                  },
+                  "title": "Bandi per impianti e manifestazioni",
+                  "url": "#",
+                  "text": "Elenco dei bandi attivi"
+                },
+                {
+                  "category": {
+                    "label": "Modulistica",
+                    "url": "#"
+                  },
+                  "title": "Concessione per la piscina Verdicchio",
+                  "url": "#",
+                  "text": "Bando per la concessione dell’impianto"
+                },
+                {
+                  "category": {
+                    "label": "Documento albo pretorio",
+                    "url": "#"
+                  },
+                  "title": "Piano lavori 2023",
+                  "url": "#",
+                  "text": "Deliberazione del Consiglio comunale per piano lavori previsto per il 2023"
+                }
+              ],
+              "grid_gap": true
+            }
+          ],
+          "feedback": {
+            "title": "Quanto sono chiare le informazioni su questa pagina?",
+            "legend": "Valuta da 1 a 5 stelle la pagina",
+            "star_label": "Valuta %d stelle su 5",
+            "thanks": "Grazie, il tuo parere ci aiuterà a migliorare il servizio!",
+            "positive": {
+              "question": "Quali sono stati gli aspetti che hai preferito?",
+              "answers": [
+                "Le indicazioni erano chiare",
+                "Le indicazioni erano complete",
+                "Capivo sempre che stavo procedendo correttamente",
+                "Non ho avuto problemi tecnici",
+                "Altro"
+              ]
+            },
+            "negative": {
+              "question": "Dove hai incontrato le maggiori difficoltà?",
+              "answers": [
+                "A volte le indicazioni non erano chiare",
+                "A volte le indicazioni non erano complete",
+                "A volte non capivo se stavo procedendo correttamente",
+                "Ho avuto problemi tecnici",
+                "Altro"
+              ]
+            },
+            "detail": {
+              "question": "Vuoi aggiungere altri dettagli?",
+              "label": "Dettaglio",
+              "help": "Inserire massimo 200 caratteri"
+            },
+            "back": "Indietro",
+            "next": "Avanti"
+          },
+          "contacts": {
+            "main": {
+              "title": "Contatta il comune",
+              "items": [
+                {
+                  "icon": "it-help-circle",
+                  "label": "Leggi le domande frequenti",
+                  "url": "#"
+                },
+                {
+                  "icon": "it-mail",
+                  "label": "Richiedi assistenza",
+                  "url": "#",
+                  "element": "contacts"
+                },
+                {
+                  "icon": "it-hearing",
+                  "label": "Chiama il numero verde 05 0505",
+                  "url": "#"
+                },
+                {
+                  "icon": "it-calendar",
+                  "label": "Prenota appuntamento",
+                  "url": "#",
+                  "element": "appointment-booking"
+                }
+              ]
+            },
+            "problems": {
+              "title": "Problemi in città",
+              "items": [
+                {
+                  "icon": "it-map-marker-circle",
+                  "label": "Segnala disservizio",
+                  "url": "#"
+                }
+              ]
+            }
+          }
+        }
+      }
+    ]
+  },
+  "sidebar_blocks": {
+    "it": [],
+    "en": []
+  },
+  "footer_blocks": null
+}

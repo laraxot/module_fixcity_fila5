@@ -13,6 +13,7 @@ discussions:
 related:
   - ./module-artifact-parity-audit.md
   - ../../../../../../docs/wiki/rules/wiki-markdown-frontmatter-mandatory.md
+status: draft
 ---
 
 # Obsidian skills and ingest checklist

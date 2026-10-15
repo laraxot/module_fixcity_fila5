@@ -1,3 +1,15 @@
+---
+title: "vhost configuration"
+type: note
+tags: [documentation]
+created: 2026-09-26
+updated: 2026-09-26
+qmd: "vhost configuration"
+issues: []
+discussions: []
+status: draft
+---
+
 # 🌐 VHost Configuration Guide
 
 > **Last Updated**: 2026-03-31  
@@ -5,7 +17,6 @@
 > **Environment**: Local Development
 
 ---
-
 ## 📋 Overview
 
 This guide covers the Apache VirtualHost configuration for FixCity local development environments.
@@ -292,3 +303,8 @@ curl -I http://fixcity.local
 **Last Review**: 2026-03-31  
 **Next Review**: 2026-06-30  
 **Status**: ✅ Active
+
+--- BMAD + Second Brain ---
+- Scopo: documentazione tecnica del modulo.
+- Utilità: riferimento sviluppatori/audit.
+- Funzionalità: struttura, dipendenze, convenzioni (no date .md, git avanti).

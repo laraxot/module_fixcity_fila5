@@ -1,3 +1,15 @@
+---
+title: "MODULE BOUNDARY PHILOSOPHY"
+type: note
+tags: [documentation]
+created: 2026-09-26
+updated: 2026-09-26
+qmd: "MODULE BOUNDARY PHILOSOPHY"
+issues: []
+discussions: []
+status: draft
+---
+
 # Module Boundary Philosophy — AddressInput belongs to Geo
 
 **Status**: Active
@@ -288,3 +300,8 @@ Before writing code, ask:
   - `../../../.planning/stories/1-10-extract-address-input-to-geo-module.md`
   - `../../../.planning/stories/2-1-geo-module-address-input.md`
   - `../../../_bmad-output/implementation-artifacts/7-30-refactor-ticket-wizard-to-filament-pure.md`
+
+--- BMAD + Second Brain ---
+- Scopo: documentazione tecnica del modulo.
+- Utilità: riferimento sviluppatori/audit.
+- Funzionalità: struttura, dipendenze, convenzioni (no date .md, git avanti).

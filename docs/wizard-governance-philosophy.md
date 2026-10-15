@@ -1,3 +1,15 @@
+---
+title: "wizard governance philosophy"
+type: note
+tags: [documentation]
+created: 2026-09-26
+updated: 2026-09-26
+qmd: "wizard governance philosophy"
+issues: []
+discussions: []
+status: draft
+---
+
 # wizard governance philosophy
 
 ## perche'
@@ -72,5 +84,10 @@ Per evitare file doppi:
 - [Filament wizard rules](./rules/filament-wizard-rules.md)
 - [Governance story](./stories/wizard-governance-langserviceprovider-and-xotbase-refactor.md)
 - [Infolist summary story](./stories/wizard-summary-infolist-alignment.md)
-- [Theme bridge](../../Themes/Sixteen/docs/design-comuni/wizard-governance-bridge.md)
-- [Xot base wizard](../../Xot/docs/filament/widgets/xot-base-wizard-widget.md)
+- [Theme bridge](../../../Themes/Sixteen/docs/design-comuni/wizard-governance-bridge.md)
+- [Xot base wizard](../../Xot/docs/wiki/concepts/filament-wizard-architecture-right-way.md)
+
+--- BMAD + Second Brain ---
+- Scopo: documentazione tecnica del modulo.
+- Utilità: riferimento sviluppatori/audit.
+- Funzionalità: struttura, dipendenze, convenzioni (no date .md, git avanti).

@@ -1,0 +1,179 @@
+{
+    "id": "tests.appuntamento-05-riepilogo",
+    "slug": "tests.appuntamento-05-riepilogo",
+    "parent_slug": "tests",
+    "title": {
+        "it": "Prenotazione appuntamento",
+        "en": "Appointment booking"
+    },
+    "description": "Passo 5 della prenotazione di un appuntamento: riepilogo e invio. Contenuto da JSON, reso dal blocco appointment-step del tema Sixteen.",
+    "layout": "test",
+    "content_blocks": {
+        "it": [
+            {
+                "type": "appointment-step",
+                "data": {
+                    "view": "pub_theme::components.blocks.appointment-step.design-comuni",
+                    "title": "Prenotazione appuntamento",
+                    "layout": "centered",
+                    "breadcrumb": {
+                        "items": [
+                            {
+                                "label": "Home",
+                                "url": "/it/tests/homepage"
+                            }
+                        ],
+                        "current": "Prenotazione appuntamento"
+                    },
+                    "steps": {
+                        "items": [
+                            {
+                                "label": "Luogo",
+                                "state": "confirmed"
+                            },
+                            {
+                                "label": "Data e orario",
+                                "state": "confirmed"
+                            },
+                            {
+                                "label": "Dettagli appuntamento",
+                                "state": "confirmed"
+                            },
+                            {
+                                "label": "Richiedente",
+                                "state": "confirmed"
+                            },
+                            {
+                                "label": "Riepilogo",
+                                "state": "active"
+                            }
+                        ],
+                        "index": "5/5",
+                        "confirmed_label": "Confermato",
+                        "active_label": "Attivo",
+                        "required_notice": ""
+                    },
+                    "side_nav": {
+                        "aria_label": "INFORMAZIONI RICHIESTE",
+                        "title": "INFORMAZIONI RICHIESTE",
+                        "items": []
+                    },
+                    "sections": [],
+                    "summary": {
+                        "hidden_title": "Dettagli dell'appuntamento",
+                        "title": "Riepilogo",
+                        "edit": "Modifica",
+                        "groups": [
+                            {
+                                "title": "Ufficio",
+                                "rows": [
+                                    {
+                                        "label": "Tipologia ufficio",
+                                        "value": "Ufficio anagrafe"
+                                    },
+                                    {
+                                        "label": "Municipalità",
+                                        "value": "Municipalità 1 - Chiaia, Posillipo, S. Ferdinando"
+                                    }
+                                ]
+                            },
+                            {
+                                "title": "Data e orario",
+                                "rows": [
+                                    {
+                                        "label": "Data",
+                                        "value": "Giovedì 11 Marzo 2022"
+                                    },
+                                    {
+                                        "label": "Ora",
+                                        "value": "10:00 - 10:30"
+                                    }
+                                ]
+                            },
+                            {
+                                "title": "Dettagli appuntamento",
+                                "rows": [
+                                    {
+                                        "label": "Motivo",
+                                        "value": "Cambio residenza"
+                                    },
+                                    {
+                                        "label": "Dettagli",
+                                        "value": "Avrei bisogno di capire come spostare la mia residenza da un altro comune."
+                                    }
+                                ]
+                            },
+                            {
+                                "title": "Richiedente",
+                                "rows": [
+                                    {
+                                        "label": "Nome",
+                                        "value": "Giulia"
+                                    },
+                                    {
+                                        "label": "Cognome",
+                                        "value": "Bianchi"
+                                    },
+                                    {
+                                        "label": "Email",
+                                        "value": "giulia-bianchi@gmail.com"
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    "nav": {
+                        "aria_label": "Step",
+                        "back": "Indietro",
+                        "next": "Invia",
+                        "saved_message": "Richiesta salvata con successo",
+                        "save": "Salva Richiesta",
+                        "save_short": "Salva",
+                        "next_class": "send",
+                        "next_target": "#modal-terms",
+                        "next_icon": false
+                    },
+                    "modal": {
+                        "id": "modal-terms",
+                        "title": "Termini e condizioni",
+                        "info": "Cliccando su Conferma e invia confermi di aver preso visione dei termini e delle condizioni di servizio.",
+                        "link": "Leggi termini e condizioni",
+                        "confirm": "Conferma e invia",
+                        "cancel": "Annulla",
+                        "close_label": "Chiudi finestra modale"
+                    },
+                    "contacts": {
+                        "layout": "col",
+                        "main": {
+                            "title": "Contatta il comune",
+                            "items": [
+                                {
+                                    "icon": "it-help-circle",
+                                    "label": "Leggi le domande frequenti",
+                                    "url": "#"
+                                },
+                                {
+                                    "icon": "it-mail",
+                                    "label": "Richiedi assistenza",
+                                    "url": "#"
+                                },
+                                {
+                                    "icon": "it-hearing",
+                                    "label": "Chiama il numero verde 05 0505",
+                                    "url": "#"
+                                }
+                            ]
+                        }
+                    },
+                    "header_active": "all-services"
+                }
+            }
+        ],
+        "en": []
+    },
+    "sidebar_blocks": {
+        "it": [],
+        "en": []
+    },
+    "footer_blocks": null
+}

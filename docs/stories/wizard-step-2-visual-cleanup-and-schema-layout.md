@@ -1,3 +1,14 @@
+---
+title: "wizard step 2 visual cleanup and schema layout"
+type: note
+tags: [documentation]
+created: 2026-09-26
+updated: 2026-09-26
+qmd: "wizard step 2 visual cleanup and schema layout"
+issues: []
+discussions: []
+---
+
 # wizard step 2 visual cleanup and schema layout
 
 ## contesto

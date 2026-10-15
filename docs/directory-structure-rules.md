@@ -1,3 +1,15 @@
+---
+title: "directory structure rules"
+type: note
+tags: [documentation]
+created: 2026-09-26
+updated: 2026-09-26
+qmd: "directory structure rules"
+issues: []
+discussions: []
+status: draft
+---
+
 # Directory Structure Rules
 
 Regola globale per tutti i moduli Laraxot di questo repository:
@@ -15,4 +27,9 @@ find laravel/Modules -type d \( -path '*/lang/lang' -o -name '_docs' \) | sort
 
 Il comando deve produrre output vuoto.
 
-Regola canonica: [docs/wiki/concepts/no-lang-lang-and-no-underscore-docs-rule.md](../../../docs/wiki/concepts/no-lang-lang-and-no-underscore-docs-rule.md).
+Regola canonica: [docs/wiki/concepts/no-lang-lang-and-no-underscore-docs-rule.md](../../../../docs/wiki/concepts/no-lang-lang-and-no-underscore-docs-rule.md).
+
+--- BMAD + Second Brain ---
+- Scopo: documentazione tecnica del modulo.
+- Utilità: riferimento sviluppatori/audit.
+- Funzionalità: struttura, dipendenze, convenzioni (no date .md, git avanti).

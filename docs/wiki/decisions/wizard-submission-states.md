@@ -1,3 +1,15 @@
+---
+title: "wizard submission states"
+type: note
+tags: [documentation]
+created: 2026-09-26
+updated: 2026-09-26
+qmd: "wizard submission states"
+issues: []
+discussions: []
+status: draft
+---
+
 # Decision: Wizard Submission States (Draft vs Pending)
 
 **Status**: accepted
@@ -6,7 +18,6 @@
 **Tags**: UX, Workflow, Ticket
 
 ---
-
 ## Context
 
 Il wizard di segnalazione citizen-frontoffice richiede una distinzione chiara tra l'intento di "completare il lavoro" e l'intento di "notificare l'ente". 
@@ -43,11 +54,11 @@ Abbiamo deciso di implementare due canali di persistenza finale nello step di Ri
 ## Impatto Tecnico
 
 - Il metodo `submit()` in `CreateTicketWizardWidget` deve essere affiancato da un metodo `draft()`.
-- Il wrapper Blade `ticket-create-wizard.blade.php` deve renderizzare condizionalmente questi bottoni basandosi sull'indice dello step.
+- Il wrapper Blade `create-ticket-wizard.blade.php` deve renderizzare condizionalmente questi bottoni basandosi sull'indice dello step.
 - Il CSS deve garantire `display: none !important` su ogni elemento nativo di Filament che possa rompere la parity visuale del tema.
 
 ## Riferimenti
 
-- [CreateTicketWizardWidget.md](../CreateTicketWizardWidget.md)
-- [Wizard Governance Philosophy](../wizard-governance-philosophy.md)
+- [CreateTicketWizardWidget.md](../../CreateTicketWizardWidget.md)
+- [Wizard Governance Philosophy](../../wizard-governance-philosophy.md)
 - [Design Comuni - Flusso Segnalazione](https://designers.italia.it/modelli/comuni/segnalazione-disservizio/)

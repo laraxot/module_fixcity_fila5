@@ -1,3 +1,14 @@
+---
+title: "wizard autolabel regression guard"
+type: note
+tags: [documentation]
+created: 2026-09-26
+updated: 2026-09-26
+qmd: "wizard autolabel regression guard"
+issues: []
+discussions: []
+---
+
 # wizard autolabel regression guard
 
 ## contesto
@@ -29,3 +40,5 @@ Questo contraddice la policy del modulo (LangServiceProvider + AutoLabel).
 - [CreateTicketWizardWidget docs](../CreateTicketWizardWidget.md)
 - [Filament wizard rules](../rules/filament-wizard-rules.md)
 - [Wizard summary infolist alignment](./wizard-summary-infolist-alignment.md)
+
+Correzione verificata 2026-10-13 (DOCS-ARRETRATO, DCP-44): `makeStepSummary()` non esiste (nessuna `function makeStepSummary` in `Modules/Fixcity/app` e `Modules/Xot/app`; `git log -S"makeStepSummary" -- app` nel repo Fixcity: nessun commit). Il riepilogo front office e' `TicketForm::getReviewStepSchema()` (View `pub_theme::components.wizard.summary-step`); gli entry Infolist del riepilogo back office sono in `TicketFormReviewInfolist::summarySectionEntries()` richiamato da `TicketForm::getSummarySectionSchema()`. Il testo sopra e' storico e non e' stato riscritto.

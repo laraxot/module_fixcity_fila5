@@ -1,3 +1,15 @@
+---
+title: "llm wiki"
+type: note
+tags: [documentation]
+created: 2026-09-26
+updated: 2026-09-26
+qmd: "llm wiki"
+issues: []
+discussions: []
+status: draft
+---
+
 # LLM Wiki For Modules
 
 This note explains how modules participate in the repository-wide Karpathy-style LLM wiki.
@@ -23,6 +35,11 @@ A separate `laravel/Modules/<Module>/docs/wiki/` convention would create competi
 
 ## Entry Points
 
-- Canonical workflow: [../../../docs/wiki/README.md](../../../docs/wiki/README.md)
-- Canonical index: [../../../docs/wiki/index.md](../../../docs/wiki/index.md)
-- Adoption notes: [../../../docs/project/karpathy-llm-wiki-adoption.md](../../../docs/project/karpathy-llm-wiki-adoption.md)
+- Canonical workflow: [../../../docs/wiki/README.md](../../../../docs/wiki/README.md)
+- Canonical index: [../../../docs/wiki/index.md](../../../../docs/wiki/index.md)
+- Adoption notes: [../../../docs/project/karpathy-llm-wiki-adoption.md](../../../../docs/project/karpathy-llm-wiki-adoption.md)
+
+--- BMAD + Second Brain ---
+- Scopo: documentazione tecnica del modulo.
+- Utilità: riferimento sviluppatori/audit.
+- Funzionalità: struttura, dipendenze, convenzioni (no date .md, git avanti).

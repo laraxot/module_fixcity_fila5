@@ -1,3 +1,15 @@
+---
+title: "segnalazioni elenco blocks"
+type: note
+tags: [documentation]
+created: 2026-09-26
+updated: 2026-09-26
+qmd: "segnalazioni elenco blocks"
+issues: []
+discussions: []
+status: draft
+---
+
 # Segnalazioni elenco — composizione blocchi CMS
 
 ## Scopo

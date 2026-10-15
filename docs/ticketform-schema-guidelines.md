@@ -1,3 +1,15 @@
+---
+title: "ticketform schema guidelines"
+type: note
+tags: [documentation]
+created: 2026-09-26
+updated: 2026-09-26
+qmd: "ticketform schema guidelines"
+issues: []
+discussions: []
+status: draft
+---
+
 # TicketForm Schema Guidelines
 
 ## Overview
@@ -144,4 +156,8 @@ Key structure: `fixcity::segnalazione.gdpr_notice.*`
 ## Related Documentation
 - [Filament Forms Documentation](https://filamentphp.com/docs/forms)
 - [Wizard Architecture](wizard-architecture.md)
-- [Translation Guidelines](../lang/README.md)
+- [Translation Guidelines](../../Lang/README.md)
+--- BMAD + Second Brain ---
+- Scopo: documentazione tecnica del modulo.
+- Utilità: riferimento sviluppatori/audit.
+- Funzionalità: struttura, dipendenze, convenzioni (no date .md, git avanti).

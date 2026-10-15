@@ -1,4 +1,8 @@
 ---
+created: 2026-09-26
+qmd: "context compression and summary infolist rule"
+issues: []
+discussions: []
 title: Context compression and wizard summary Infolist rule
 type: concept
 updated: 2026-04-22
@@ -7,6 +11,7 @@ sources:
   - ../../../../../../docs/wiki/concepts/openrouter-context-compression-plugin.md
   - ../../filament-summary-infolist-guidance.md
   - https://filamentphp.com/docs/5.x/infolists/overview
+status: draft
 ---
 
 # Context compression and wizard summary Infolist rule

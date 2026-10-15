@@ -1,8 +1,14 @@
 ---
+title: "one migration per model rule"
+tags: [documentation]
+created: 2026-09-26
+issues: []
+discussions: []
 type: concept
 module: Fixcity
 updated: 2026-06-05
 qmd: "fixcity one migration per model profiles owner bump timestamp"
+status: draft
 ---
 
 # One migration per model (Fixcity)
@@ -33,5 +39,5 @@ Quando aggiungi o modifichi colonne:
 ## Collegamenti
 
 - [profiles-uuid-contract](./profiles-uuid-contract.md)
-- [architecture-one-migration-per-model](../../../../../docs/wiki/bmad/architecture-one-migration-per-model.md)
-- [profiles-ownership-boundary-rule](../../../User/docs/wiki/concepts/profiles-ownership-boundary-rule.md)
+- [architecture-one-migration-per-model](../../../../../../docs/wiki/bmad/architecture-one-migration-per-model.md)
+- [profiles-ownership-boundary-rule](../../../../User/docs/wiki/concepts/profiles-ownership-boundary-rule.md)

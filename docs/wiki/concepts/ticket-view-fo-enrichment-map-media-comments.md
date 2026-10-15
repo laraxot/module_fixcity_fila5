@@ -15,6 +15,7 @@ related:
   - ./tickets-view-cms-folio-page.md
   - ../../../../../../docs/stories/STORY-157-ux-design-ticket-detail-no-tabs-map-comments.md
   - ../../../../../../docs/wiki/decisions/ticket-fo-detail-filament-widget-infolist.md
+status: draft
 ---
 
 # FO dettaglio ticket: mappa, foto, commenti
@@ -38,7 +39,7 @@ Completare `/it/tickets/{id}` (widget `Ticket\ViewWidget` + `TicketInfolist`) co
 | Foto | `attachments` + fallback `ticket` | Seed media su ticket demo |
 | Commenti | `Modules\\Comment` Livewire nativo (auth scrive, guest legge) | Skin DC / policy ruoli cittadino |
 
-UX canon: [STORY-157](../../../../../docs/stories/STORY-157-ux-design-ticket-detail-no-tabs-map-comments.md) · `_bmad-output/ux-design-ticket-detail-fo.md`
+UX canon: [STORY-157](../../../../../../docs/stories/STORY-157-ux-design-ticket-detail-no-tabs-map-comments.md) · `_bmad-output/ux-design-ticket-detail-fo.md`
 
 ## UX target (STORY-157)
 
@@ -107,4 +108,4 @@ Per vedere foto su `/it/tickets/{id}`: allegati reali o seed con media su collec
 
 ## Commenti — CanComment (2026-06-10)
 
-Post-submit: policy `see()` richiede `User\Contracts\CanComment` in Blade, non `auth()->user()` grezzo. Vedi [comment-policy-blade-commentator.md](../../../../Comment/docs/concepts/comment-policy-blade-commentator.md). STORY: [STORY-295](../../../docs/stories/STORY-295-comment-policy-can-comment-blade.md).
+Post-submit: policy `see()` richiede `User\Contracts\CanComment` in Blade, non `auth()->user()` grezzo. Vedi [comment-policy-blade-commentator.md](../../../../Comment/docs/concepts/comment-policy-blade-commentator.md). STORY: [STORY-295](../../../../../../docs/stories/STORY-295-comment-policy-can-comment-blade.md).

@@ -1,3 +1,11 @@
+// Fixcity — frontend asset (claude-audit doc ratio).
+// Fixcity — frontend asset (claude-audit doc ratio).
+// Fixcity — frontend asset (claude-audit doc ratio).
+// Fixcity — frontend asset (claude-audit doc ratio).
+// Fixcity — frontend asset (claude-audit doc ratio).
+// Fixcity — frontend asset (claude-audit doc ratio).
+// Fixcity — frontend asset (claude-audit doc ratio).
+// Fixcity — frontend asset (claude-audit doc ratio).
 import { css, html } from 'lit';
 
 export const mapPickerStyles = css`

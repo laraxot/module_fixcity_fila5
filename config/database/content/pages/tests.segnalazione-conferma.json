@@ -1,0 +1,43 @@
+{
+    "id": "tests.segnalazione-conferma",
+    "slug": "tests.segnalazione-conferma",
+    "parent_slug": "tests",
+    "title": {"it": "Conferma invio - Segnalazione disservizio", "en": "Confirmation - Report a problem"},
+    "layout": "test",
+    "description": "Step 4 della segnalazione disservizio: conferma di invio con numero di protocollo, ricevuta e servizi correlati.",
+    "content_blocks": {
+        "it": [
+            {
+                "type": "segnalazione-04-conferma",
+                "data": {
+                    "view": "pub_theme::components.blocks.flow.segnalazione.04-conferma",
+                    "title": "Segnalazione inviata",
+                    "summary_html": "Grazie, abbiamo ricevuto la tua segnalazione AN4059281. Sarà visibile sulla lista di tutte segnalazioni una volta presa in carico dall'amministrazione.",
+                    "visibility_html": "Abbiamo inviato il riepilogo all'email:",
+                    "email": "giulia.bianchi@gmail.com",
+                    "receipt": {"label": "Scarica la ricevuta (PDF 100KB)", "url": "#", "icon": "it-download"},
+                    "reserved_area": {"url": "#", "link_label": "Consulta la richiesta nella tua area riservata", "text": ""},
+                    "related_services": {
+                        "title": "Servizi correlati",
+                        "items": [
+                            {"label": "Richiesta appuntamento", "url": "#", "icon": "it-calendar"}
+                        ]
+                    },
+                    "contacts": {
+                        "title": "Contatta il comune",
+                        "links": [
+                            {"label": "Leggi le domande frequenti", "url": "#", "icon": "it-question-circle"},
+                            {"label": "Richiedi assistenza", "url": "#", "icon": "it-help"},
+                            {"label": "Chiama il numero verde 05 0505", "url": "tel:050505", "icon": "it-phone"},
+                            {"label": "Prenota appuntamento", "url": "#", "icon": "it-calendar"}
+                        ]
+                    },
+                    "show_rating": true
+                }
+            }
+        ],
+        "en": []
+    },
+    "sidebar_blocks": {"it": [], "en": []},
+    "footer_blocks": null
+}

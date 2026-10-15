@@ -1,3 +1,15 @@
+---
+title: "phpstan fixes"
+type: note
+tags: [documentation]
+created: 2026-09-26
+updated: 2026-09-26
+qmd: "phpstan fixes"
+issues: []
+discussions: []
+status: draft
+---
+
 ## PHPStan Fixes - Modulo Fixcity
 
 Questo documento raccoglie le segnalazioni PHPStan attuali sul modulo `Fixcity` e il piano di correzione, **prima** di toccare il codice.
@@ -96,3 +108,8 @@ Questo documento raccoglie le segnalazioni PHPStan attuali sul modulo `Fixcity` 
 1. Prioritizzare le correzioni legate ai **modelli** e alle **Actions di dominio** (ChangeStatus, GenerateTicketsAction), perché hanno impatto diretto sulla business logic.
 2. Allineare i componenti Livewire/Filament agli stack già consolidati in `Cms`, `User`, `Activity`.
 3. Rieseguire `./vendor/bin/phpstan analyse Modules/Fixcity` e aggiornare questa pagina con l'elenco degli errori risolti e quelli ancora aperti.
+
+--- BMAD + Second Brain ---
+- Scopo: documentazione tecnica del modulo.
+- Utilità: riferimento sviluppatori/audit.
+- Funzionalità: struttura, dipendenze, convenzioni (no date .md, git avanti).

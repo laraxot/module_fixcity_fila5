@@ -6,18 +6,12 @@ namespace Modules\Fixcity\Filament\Resources\TicketResource\Pages;
 
 use Filament\Actions\Action;
 use Filament\Actions\ActionGroup;
-use Filament\Actions\BulkAction;
 use Filament\Actions\CreateAction;
-use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\ExportAction;
-use Filament\Actions\ExportBulkAction;
 use Filament\Notifications\Notification;
-use Filament\Tables\Columns\Column;
-use Filament\Tables\Filters\BaseFilter;
 use Modules\Fixcity\Actions\GenerateTicketsJsonAction;
 use Modules\Fixcity\Filament\Exports\TicketExporter;
 use Modules\Fixcity\Filament\Resources\TicketResource;
-use Modules\Fixcity\Filament\Resources\TicketResource\Tables\TicketsTable;
 use Modules\Fixcity\Filament\Widgets\CitizenRatingOverviewWidget;
 use Modules\Fixcity\Filament\Widgets\TicketOverview;
 use Modules\Fixcity\Filament\Widgets\TicketSlaOverviewWidget;
@@ -64,41 +58,6 @@ class ListTickets extends XotBaseListRecords
                         ->body('File scritto in '.basename(dirname($path)).'/'.basename($path))
                         ->send();
                 }),
-        ];
-    }
-
-    /**
-     * @return array<string, Column>
-     */
-    #[\Override]
-    public function getTableColumns(): array
-    {
-        return (new TicketsTable)->getTableColumns();
-    }
-
-    /**
-     * @return array<string, BaseFilter>
-     */
-    #[\Override]
-    public function getTableFilters(): array
-    {
-        return (new TicketsTable)->getTableFilters();
-    }
-
-    /**
-     * @return array<string, BulkAction>
-     */
-    #[\Override]
-    public function getTableBulkActions(): array
-    {
-        return [
-            'delete' => DeleteBulkAction::make()
-                ->label('')
-                ->icon('heroicon-o-trash')
-                ->color('danger')
-                ->requiresConfirmation(),
-            'export' => ExportBulkAction::make()
-                ->exporter(TicketExporter::class),
         ];
     }
 }

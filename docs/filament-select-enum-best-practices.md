@@ -1,3 +1,15 @@
+---
+title: "filament select enum best practices"
+type: note
+tags: [documentation]
+created: 2026-09-26
+updated: 2026-09-26
+qmd: "filament select enum best practices"
+issues: []
+discussions: []
+status: draft
+---
+
 # Select con Enum in Filament - Best Practices
 
 ## Problema
@@ -63,3 +75,7 @@ Select::make('type')
 
 ## Regola Aurea
 **MAI** usare `Enum::cases()` come opzioni in un Select di Filament. Usa sempre `Enum::class`.
+--- BMAD + Second Brain ---
+- Scopo: documentazione tecnica del modulo.
+- Utilità: riferimento sviluppatori/audit.
+- Funzionalità: struttura, dipendenze, convenzioni (no date .md, git avanti).

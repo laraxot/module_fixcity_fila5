@@ -1,10 +1,15 @@
 ---
+updated: 2026-09-26
+qmd: "module basemodel rule"
+issues: []
+discussions: []
 title: Modelli Fixcity — estendere BaseModel del modulo
 type: concept
 created: 2026-05-29
 tags: [basemodel, fixcity, xot, architecture]
 related:
-  - ../../../../docs/wiki/guidelines/module-basemodel-pattern.md
+  - ../../../../../../docs/wiki/guidelines/module-basemodel-pattern.md
+status: draft
 ---
 
 # Modelli Fixcity — `BaseModel` del modulo
@@ -22,7 +27,7 @@ related:
 
 - Connection `fixcity`, `SoftDeletes`, cast Updater centralizzati in un solo punto
 - Confine modulo: customizzazioni Fixcity non contaminano Xot
-- Allineamento [module-basemodel-pattern.md](../../../../docs/wiki/guidelines/module-basemodel-pattern.md)
+- Allineamento [module-basemodel-pattern.md](../../../../../../docs/wiki/guidelines/module-basemodel-pattern.md)
 
 ## Checklist agente
 

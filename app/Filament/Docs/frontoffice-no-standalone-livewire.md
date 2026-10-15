@@ -1,4 +1,9 @@
 ---
+tags: [documentation]
+created: 2026-09-26
+qmd: "frontoffice no standalone livewire"
+issues: []
+discussions: []
 title: frontoffice — no livewire standalone
 type: concept
 module: fixcity

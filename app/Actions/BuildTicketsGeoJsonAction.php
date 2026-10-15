@@ -8,17 +8,19 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Collection;
 use Modules\Fixcity\Models\Ticket;
 use Modules\Xot\Actions\Cast\SafeFloatCastAction;
+use Spatie\QueueableAction\QueueableAction;
 
 /**
  * GeoJSON FeatureCollection da ticket geolocalizzati (mappa pubblica).
  */
 final class BuildTicketsGeoJsonAction
 {
+    use QueueableAction;
+
     public function __construct(
         private readonly ResolveTicketTypeMarkerPropertiesAction $resolveTypeMarker,
         private readonly ResolveTicketStatusMarkerPropertiesAction $resolveStatusMarker,
-    ) {
-    }
+    ) {}
 
     /**
      * @param  Builder<Ticket>  $query
@@ -76,10 +78,10 @@ final class BuildTicketsGeoJsonAction
             ? (string) $rawType->value
             : (is_string($rawType) ? $rawType : 'other');
 
-        $typeProps = $this->resolveTypeMarker->executeFromValue($typeValue);
+        $typeProps = $this->resolveTypeMarker->execute($typeValue);
 
         $statusValue = $ticket->resolveTicketStatusValue();
-        $statusProps = $this->resolveStatusMarker->executeFromValue($statusValue);
+        $statusProps = $this->resolveStatusMarker->execute($statusValue);
 
         return [
             'type' => 'Feature',
@@ -94,8 +96,7 @@ final class BuildTicketsGeoJsonAction
                 'address' => $location['address'] ?? $location['display_name'] ?? '',
                 'city' => $location['city'] ?? '',
                 'status' => $statusProps,
-                'url' => '/it/tickets/'.$ticket->id,
-                'detail_url' => '/it/tickets/'.$ticket->id,
+                'detail_url' => '/'.app()->getLocale().'/tickets/'.rawurlencode((string) $ticket->id),
             ],
         ];
     }

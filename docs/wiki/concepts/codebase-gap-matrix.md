@@ -14,6 +14,7 @@ related:
   - ../../../../../../docs/stories/STORY-397-competitor-gaps-catalog.dev.md
   - ../../../../../../docs/wiki/concepts/fixcity-competitor-profiles.md
   - ticket-citizen-timeline.md
+status: draft
 ---
 
 # Matrice gap codebase — story → file vs mancanti

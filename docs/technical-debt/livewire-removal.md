@@ -1,4 +1,7 @@
 ---
+qmd: "livewire removal"
+issues: []
+discussions: []
 title: "Technical Debt: Livewire Removal"
 type: technical-debt
 confidence: high
@@ -8,6 +11,7 @@ tags: [technical-debt, livewire, filament, refactoring]
 related:
   - ../../../../../docs/wiki/rules/no-pure-livewire-outside-filament-widgets.md
   - ../../../../../docs/wiki/concepts/filament-widget-vs-livewire-philosophy.md
+status: draft
 ---
 
 # Debito Tecnico: Rimozione Livewire

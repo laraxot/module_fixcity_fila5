@@ -21,7 +21,7 @@ return new class extends XotBaseMigration
             $table->string('name');
             $table->text('description')->nullable();
             $table->boolean('is_active')->default(true);
-            
+
         });
 
         $this->tableUpdate(function (Blueprint $table): void {

@@ -1,4 +1,7 @@
 ---
+qmd: "STORY 404 dashboard analytics"
+issues: []
+discussions: []
 title: "STORY-404: Dashboard & Analytics Admin"
 type: story
 tags: [fixcity, dashboard, analytics, charts, reports, statistics, decoro-urbano, degradozero]
@@ -8,6 +11,8 @@ assignee: TBD
 created: 2026-06-17
 updated: 2026-06-17
 ---
+
+> Migration snippets are design sketches only: implementation must follow the current `XotBaseMigration` contract and use `foreignIdFor()` for model relations. The current rules are in `docs/wiki/concepts/fixcity-architecture-contract-2026-09-26.md`.
 
 # STORY-404: Dashboard & Analytics Admin
 
@@ -161,7 +166,7 @@ Schema::create('ticket_statistics_hourly', function (Blueprint $table) {
 Schema::create('operator_performance_daily', function (Blueprint $table) {
     $table->id();
     $table->date('date');
-    $table->foreignId('user_id')->constrained();
+    $table->foreignIdFor(XotData::make()->getUserClass(), 'user_id');
     $table->integer('tickets_assigned')->default(0);
     $table->integer('tickets_completed')->default(0);
     $table->integer('avg_resolution_minutes')->nullable();
@@ -592,3 +597,8 @@ class PredictionService
 
 - Degradozero Dashboard: https://github.com/gbvitrano/Segnalazioni
 - SeeClickFix Open Data: https://www.civicplus.help/seeclickfix/docs/available-seeclickfix-api
+
+--- BMAD + Second Brain ---
+- Scopo: documentazione tecnica del modulo.
+- Utilità: riferimento sviluppatori/audit.
+- Funzionalità: struttura, dipendenze, convenzioni (no date .md, git avanti).

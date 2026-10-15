@@ -1,4 +1,7 @@
 ---
+qmd: "STORY 403 notification system"
+issues: []
+discussions: []
 title: "STORY-403: Notification System (Email, Push, SMS)"
 type: story
 tags: [fixcity, notifications, email, push, sms, real-time, decoro-urbano]
@@ -8,6 +11,8 @@ assignee: TBD
 created: 2026-06-17
 updated: 2026-06-17
 ---
+
+> Migration snippets are design sketches only: implementation must follow the current `XotBaseMigration` contract and use `foreignIdFor()` for model relations. The current rules are in `docs/wiki/concepts/fixcity-architecture-contract-2026-09-26.md`.
 
 # STORY-403: Notification System (Email, Push, SMS)
 
@@ -160,7 +165,7 @@ Schema::create('notification_templates', function (Blueprint $table) {
 // Migration: user_notification_preferences
 Schema::create('user_notification_preferences', function (Blueprint $table) {
     $table->id();
-    $table->foreignId('user_id')->constrained()->cascadeOnDelete();
+    $table->foreignIdFor(XotData::make()->getUserClass(), 'user_id')->index();
     $table->string('event_type', 100);
     $table->string('channel', 50);
     $table->boolean('is_enabled')->default(true);
@@ -465,3 +470,8 @@ class NotificationDropdown extends Component
 
 - GitHub Issue: `https://github.com/laraxot/fixcity/issues/403`
 - GitHub Discussion: `https://github.com/laraxot/fixcity/discussions/403`
+
+--- BMAD + Second Brain ---
+- Scopo: documentazione tecnica del modulo.
+- Utilità: riferimento sviluppatori/audit.
+- Funzionalità: struttura, dipendenze, convenzioni (no date .md, git avanti).

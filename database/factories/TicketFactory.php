@@ -25,7 +25,6 @@ class TicketFactory extends Factory
     {
         return [
             'name' => fake()->sentence(),
-            'slug' => fake()->slug(),
             'content' => fake()->paragraph(),
             'owner_id' => User::factory(),
             'responsible_id' => User::factory(),
@@ -39,8 +38,10 @@ class TicketFactory extends Factory
             'epic_id' => null,
             'sprint_id' => null,
             'type' => TicketTypeEnum::REPORT,
-            'latitude' => fake()->optional()->latitude,
-            'longitude' => fake()->optional()->longitude,
+            // MySQL decimal(20,18) accepts latitude [-90,90]; longitude needs
+            // decimal(21,18) so the full geographic range [-180,180] remains valid.
+            'latitude' => fake()->optional()->randomFloat(6, -90, 90),
+            'longitude' => fake()->optional()->randomFloat(6, -180, 180),
             'created_by' => fake()->optional()->userName(),
             'updated_by' => fake()->optional()->userName(),
         ];

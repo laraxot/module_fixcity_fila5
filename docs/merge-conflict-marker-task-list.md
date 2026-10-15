@@ -1,3 +1,15 @@
+---
+title: "merge conflict marker task list"
+type: note
+tags: [documentation]
+created: 2026-09-26
+updated: 2026-09-26
+qmd: "merge conflict marker task list"
+issues: []
+discussions: []
+status: draft
+---
+
 # Merge conflict marker task list (modules)
 
 Regola operativa multi-agent: ogni file con marker `<<<<<<<` va preso in carico manualmente, risolto, testato e poi spuntato in questa lista.
@@ -79,17 +91,21 @@ Regola operativa multi-agent: ogni file con marker `<<<<<<<` va preso in carico 
 - [ ] `docs/wiki/log.md`
 - [ ] `docs/raw/README.md`
 - [ ] `docs/wiki/concepts/no-docs-archive-rule.md`
-- [ ] `docs/correzioni-phpstan-completate_3.md`
+- [ ] `docs/correzioni-phpstan-completate-modulo-notify.md`
 - [ ] `memory/MEMORY.md`
-- [ ] `laravel/Modules/Notify/docs/correzioni-phpstan-completate_3.md`
+- [ ] `laravel/Modules/Notify/docs/correzioni-phpstan-completate-modulo-notify.md`
 - [ ] `_bmad/bmm/4-implementation/bmad-create-story/stories/1-1-segnalazione-ui-ux-improvement.md`
 
 ## Docs modulo
 
-- [ ] `laravel/Modules/Cms/docs/quality-status-11.md`
+- [ ] `laravel/Modules/Cms/docs/quality-status.md`
 - [ ] `laravel/Modules/Cms/docs/roadmap.md`
 - [ ] `laravel/Modules/Cms/docs/phpstan-scripts-roadmap.md`
 - [ ] `laravel/Modules/Cms/docs/code-quality-analysis.md`
-- [ ] `laravel/Modules/Cms/docs/roadmap/legacy/legacy-roadmap-3.md`
+- [ ] `laravel/Modules/Cms/docs/roadmap/legacy/legacy-roadmap-content-management.md`
 - [ ] `laravel/Modules/Cms/docs/roadmap/legacy/legacy-roadmap-x.md`
-- [ ] `laravel/Modules/Cms/docs/quality-status-2025-11.md`
+- [ ] `laravel/Modules/Cms/docs/quality-status-activity-module-november.md`
+--- BMAD + Second Brain ---
+- Scopo: documentazione tecnica del modulo.
+- Utilità: riferimento sviluppatori/audit.
+- Funzionalità: struttura, dipendenze, convenzioni (no date .md, git avanti).

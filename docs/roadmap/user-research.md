@@ -1,3 +1,15 @@
+---
+title: "user research"
+type: note
+tags: [documentation]
+created: 2026-09-26
+updated: 2026-09-26
+qmd: "user research"
+issues: []
+discussions: []
+status: draft
+---
+
 # 👥 Fixcity User Research
 
 > **Document ID**: FC-RESEARCH-001  
@@ -6,7 +18,6 @@
 > **Research Period**: Q4 2025 - Q1 2026
 
 ---
-
 ## 📋 Table of Contents
 
 1. [Research Overview](#research-overview)

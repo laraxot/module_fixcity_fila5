@@ -1,3 +1,15 @@
+---
+title: "filament5 schema namespaces and wizard summary"
+type: note
+tags: [documentation]
+created: 2026-09-26
+updated: 2026-09-26
+qmd: "filament5 schema namespaces and wizard summary"
+issues: []
+discussions: []
+status: draft
+---
+
 # Filament 5.x — Namespace Schema e Pattern Wizard Summary
 
 ## Namespace corretti (fonte: vendor/filament/schemas/src/)
@@ -78,7 +90,7 @@ di Filament 5.x — NON richiede un record Eloquent.
 - Pattern ViewRecord corretto: `laravel/Modules/Xot/app/Filament/Resources/LogResource/Pages/ViewLog.php`
 - Base wizard: `laravel/Modules/Xot/app/Filament/Widgets/XotBaseWizardWidget.php`
 - Widget segnalazione: `laravel/Modules/Fixcity/app/Filament/Widgets/CreateTicketWizardWidget.php`
-- i18n heading `Section`: [fixcity-ticket-vs-segnalazione-lang](./fixcity-ticket-vs-segnalazione-lang.md) — usare `fixcity::ticket.sections.*` nello schema `TicketForm`
+- i18n heading `Section`: [fixcity-ticket-vs-ticket-lang](./fixcity-ticket-vs-ticket-lang.md) — usare `fixcity::ticket.sections.*` nello schema `TicketForm`
 
 ## Anti-pattern linter (Pint/PHP-CS-Fixer)
 

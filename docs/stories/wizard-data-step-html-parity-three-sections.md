@@ -1,3 +1,14 @@
+---
+title: "wizard data step html parity three sections"
+type: note
+tags: [documentation]
+created: 2026-09-26
+updated: 2026-09-26
+qmd: "wizard data step html parity three sections"
+issues: []
+discussions: []
+---
+
 # wizard data step html parity three sections
 
 ## contesto

@@ -1,0 +1,499 @@
+{
+    "id": "tests.pagamenti-imu-scheda-servizio",
+    "slug": "tests.pagamenti-imu-scheda-servizio",
+    "parent_slug": "tests",
+    "title": {
+        "it": "Pagamento IMU",
+        "en": "Pagamento IMU"
+    },
+    "layout": "test",
+    "sidebar_blocks": {
+        "it": [],
+        "en": []
+    },
+    "footer_blocks": null,
+    "description": "Pagina di prova pagamenti-imu-scheda-servizio (flusso pagamento IMU) da JSON, resa dal blocco service-flow del tema Sixteen.",
+    "content_blocks": {
+        "it": [
+            {
+                "type": "service-flow",
+                "data": {
+                    "view": "pub_theme::components.blocks.service-flow.design-comuni",
+                    "kind": "service-sheet",
+                    "breadcrumb": {
+                        "items": [
+                            {
+                                "label": "Home",
+                                "url": "/it/tests/homepage"
+                            },
+                            {
+                                "label": "Servizi",
+                                "url": "#"
+                            },
+                            {
+                                "label": "Tributi, finanze e contravvenzioni",
+                                "url": "#"
+                            }
+                        ],
+                        "current": "Pagamento IMU"
+                    },
+                    "heading": {
+                        "title": "Pagamento IMU",
+                        "title_element": "service-title",
+                        "chips": [
+                            {
+                                "label": "Servizio attivo",
+                                "element": "service-status"
+                            }
+                        ],
+                        "subtitles": [
+                            {
+                                "text": "L'IMU è l'Imposta municipale unica istituita in via sperimentale nel 2012 e ridisciplinata dalla legge di bilancio 2020.",
+                                "class": "subtitle-small mb-3"
+                            }
+                        ],
+                        "buttons": [
+                            {
+                                "label": "Avvia richiesta online",
+                                "class": "btn btn-primary fw-bold"
+                            }
+                        ],
+                        "actions": [
+                            {
+                                "id": "shareActions",
+                                "aria_label": "condividi sui social",
+                                "icon": "it-share",
+                                "label": "Condividi",
+                                "items": [
+                                    {
+                                        "label": "Facebook",
+                                        "icon": "it-facebook",
+                                        "url": "#"
+                                    },
+                                    {
+                                        "label": "Twitter",
+                                        "icon": "it-twitter",
+                                        "url": "#"
+                                    },
+                                    {
+                                        "label": "Linkedin",
+                                        "icon": "it-linkedin",
+                                        "url": "#"
+                                    },
+                                    {
+                                        "label": "Whatsapp",
+                                        "icon": "it-whatsapp",
+                                        "url": "#"
+                                    }
+                                ]
+                            },
+                            {
+                                "id": "viewActions",
+                                "aria_label": "vedi azioni da compiere sulla pagina",
+                                "icon": "it-more-items",
+                                "label": "Vedi azioni",
+                                "items": [
+                                    {
+                                        "label": "Stampa",
+                                        "icon": "it-print",
+                                        "url": "#"
+                                    },
+                                    {
+                                        "label": "Ascolta",
+                                        "icon": "it-hearing",
+                                        "url": "#"
+                                    },
+                                    {
+                                        "label": "Invia",
+                                        "icon": "it-mail",
+                                        "url": "#"
+                                    }
+                                ]
+                            }
+                        ],
+                        "row": "row justify-content-center",
+                        "col": "col-12 col-lg-10",
+                        "rule": "d-none d-lg-block mb-0 mt-2"
+                    },
+                    "side_nav": {
+                        "class": "col-12 col-lg-3 mb-4 border-col",
+                        "aria_label": "INDICE DELLA PAGINA",
+                        "title": "INDICE DELLA PAGINA",
+                        "items": [
+                            {
+                                "label": "A chi è rivolto",
+                                "anchor": "who-needs"
+                            },
+                            {
+                                "label": "Descrizione",
+                                "anchor": "description"
+                            },
+                            {
+                                "label": "Come fare",
+                                "anchor": "how-to"
+                            },
+                            {
+                                "label": "Cosa serve",
+                                "anchor": "needed"
+                            },
+                            {
+                                "label": "Tempi e scadenze",
+                                "anchor": "deadlines"
+                            },
+                            {
+                                "label": "Costi",
+                                "anchor": "costs"
+                            },
+                            {
+                                "label": "Accedi al servizio",
+                                "anchor": "service-access"
+                            },
+                            {
+                                "label": "Condizioni di servizio",
+                                "anchor": "conditions"
+                            },
+                            {
+                                "label": "Contatti",
+                                "anchor": "contacts"
+                            }
+                        ]
+                    },
+                    "body": {
+                        "row": "row row-column-menu-left mt-lg-80 mt-4"
+                    },
+                    "sections": [
+                        {
+                            "type": "flow",
+                            "id": "who-needs",
+                            "class": "mb-30",
+                            "title": "A chi è rivolto",
+                            "title_class": "mb-3",
+                            "items": [
+                                {
+                                    "type": "paragraph",
+                                    "text": "Proprietario di immobili, ovvero:",
+                                    "class": "description lora mb-0"
+                                },
+                                {
+                                    "type": "list",
+                                    "items": [
+                                        "dal titolare del diritto reale di usufrutto, uso, abitazione, enfiteusi, superficie;",
+                                        "dal concessionario di aree demaniali",
+                                        "dal locatario per gli immobili concessi in locazione finanziaria."
+                                    ]
+                                },
+                                {
+                                    "type": "paragraph",
+                                    "text": "In caso di decesso del possessore gli eredi, divenuti titolari dei diritti sull'immobile, dovranno versare l'imposta fino alla data del decesso provvedendo al pagamento dell'IMU:",
+                                    "class": "description lora mb-0 mt-3"
+                                },
+                                {
+                                    "type": "list",
+                                    "items": [
+                                        "dal titolare del diritto reale di usufrutto, uso, abitazione, enfiteusi, superficie;",
+                                        "dal concessionario di aree demaniali",
+                                        "dal locatario per gli immobili concessi in locazione finanziaria."
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "type": "flow",
+                            "id": "description",
+                            "class": "mb-30",
+                            "title": "Descrizione",
+                            "title_class": "mb-3",
+                            "items": [
+                                {
+                                    "type": "paragraph",
+                                    "text": "L'IMU è l'Imposta Municipale Unica che viene applicata sugli immobili di proprietà e su cui sono istituiti diritti reali di godimento.\nIl presupposto dell'imposta è dato dal possesso di immobili, ovvero fabbricati, aree edificabili e terreni agricoli:",
+                                    "class": "description lora mb-0"
+                                },
+                                {
+                                    "type": "list",
+                                    "items": [
+                                        "per fabbricato si intende l'unità immobiliare iscritta, o che deve essere iscritta, nel catasto edilizio urbano e nel quale viene ricompresa anche la pertinenza.",
+                                        "per area edificabile si intende quella utilizzabile a scopo edificatorio in base agli strumenti urbanistici (PRG-piano regolatore generale) ovvero in base alle possibilità effettive di edificazione",
+                                        "per terreno agricolo si intende un terreno adibito ad attività agricola (coltivazione, silvicoltura, allevamento di animali, etc.)"
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "type": "flow",
+                            "id": "how-to",
+                            "class": "mb-30",
+                            "title": "Come fare",
+                            "title_class": "mb-3",
+                            "items": [
+                                {
+                                    "type": "paragraph",
+                                    "text": "Il pagamento si esegue con l’apposito bollettino postale, con il modello F24 oppure online.\n\nIl Comune mette a disposizione un sistema per calcolare online l’importo dell’acconto, del saldo e di eventuali ravvedimenti, con stampa di modello F24 per il versamento.",
+                                    "class": "text-paragraph lora"
+                                }
+                            ]
+                        },
+                        {
+                            "type": "flow",
+                            "id": "needed",
+                            "class": "mb-30 has-bg-grey p-3 p-lg-4",
+                            "title": "Cosa serve",
+                            "title_class": "mb-3",
+                            "items": [
+                                {
+                                    "type": "paragraph",
+                                    "text": "Per accedere al servizio, assicurati di avere:",
+                                    "class": "text-paragraph lora fw-semibold mb-0"
+                                },
+                                {
+                                    "type": "list",
+                                    "items": [
+                                        "le informazioni sugli immobili di proprietà (rendita catastale, quota di possesso, etc.)",
+                                        "le informazioni sul contribuente ed eventuali coobbligati"
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "type": "flow",
+                            "id": "deadlines",
+                            "class": "mb-30",
+                            "title": "Tempi e scadenze",
+                            "title_class": "mb-3",
+                            "items": [
+                                {
+                                    "type": "paragraph",
+                                    "text": "Le scadenze fondamentali sono:",
+                                    "class": "description lora mb-0"
+                                },
+                                {
+                                    "type": "list",
+                                    "items": [
+                                        "il 16 giugno e il 16 dicembre per il pagamento",
+                                        "il 30 giugno dell'anno successivo al pagamento per la presentazione della dichiarazione nei casi obbligatori previsti dalla legge e per le agevolazioni e le aliquote stabilite dal Comuneil 30 giugno dell'anno successivo al pagamento per la presentazione della dichiarazione nei casi obbligatori previsti dalla legge e per le agevolazioni e le aliquote stabilite dal Comune"
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "type": "flow",
+                            "id": "costs",
+                            "class": "mb-30",
+                            "title": "Costi",
+                            "title_class": "mb-3",
+                            "items": [
+                                {
+                                    "type": "paragraph",
+                                    "text": "Il versamento della prima rata è pari all'imposta dovuta per il primo semestre applicando l'aliquota e la detrazione dei dodici mesi dell'anno precedente.\n\nIl versamento della rata a saldo dell'imposta dovuta per l'intero anno è eseguita, a conguaglio, sulla base delle aliquote risultanti dal prospetto delle aliquote pubblicato nel sito Internet del Dipartimento delle finanze del Ministero dell'Economia e delle Finanze (Mef), alla data del 28 ottobre di ciascun anno.",
+                                    "class": "text-paragraph lora"
+                                },
+                                {
+                                    "type": "attachment",
+                                    "label": "Aliquote e detrazioni IMU 2022 (PDF 80KB)",
+                                    "aria": "Scarica Aliquote e detrazioni IMU 2022 (PDF 80KB)",
+                                    "title": "Scarica Aliquote e detrazioni IMU 2022 (PDF 80KB)",
+                                    "url": "#"
+                                }
+                            ]
+                        },
+                        {
+                            "type": "flow",
+                            "id": "service-access",
+                            "class": "mb-30 has-bg-grey p-4",
+                            "title": "Accedi al servizio",
+                            "title_class": "mb-3",
+                            "items": [
+                                {
+                                    "type": "paragraph",
+                                    "text": "Puoi pagare l’IMU direttamente online tramite identità digitale.",
+                                    "class": "text-paragraph lora mb-4"
+                                },
+                                {
+                                    "type": "button",
+                                    "label": "Paga online",
+                                    "class": "btn btn-primary mobile-full mb-4",
+                                    "bare": true
+                                },
+                                {
+                                    "type": "paragraph",
+                                    "text": "Oppure puoi prenotare un appuntamento e presentarti presso gli uffici.",
+                                    "class": "text-paragraph lora mb-4"
+                                },
+                                {
+                                    "type": "button",
+                                    "label": "Prenota appuntamento",
+                                    "class": "btn mobile-full btn-outline-primary t-primary bg-white",
+                                    "bare": true
+                                }
+                            ]
+                        },
+                        {
+                            "type": "flow",
+                            "id": "conditions",
+                            "class": "mb-30",
+                            "title": "Condizioni di servizio",
+                            "title_class": "mb-3",
+                            "items": [
+                                {
+                                    "type": "paragraph",
+                                    "text": "Per conoscere i dettagli di scadenze, requisiti e altre informazioni importanti, leggi i termini e le condizioni di servizio.",
+                                    "class": "text-paragraph lora"
+                                },
+                                {
+                                    "type": "attachment",
+                                    "label": "Termini e condizioni di servizio (PDF 1MB)",
+                                    "aria": "Scarica Termini e condizioni di servizio (PDF 1MB)",
+                                    "title": "Scarica Termini e condizioni di servizio (PDF 1MB)",
+                                    "url": "#"
+                                }
+                            ]
+                        },
+                        {
+                            "type": "service-contacts",
+                            "id": "contacts",
+                            "title": "Contatti",
+                            "office": {
+                                "name": "Ufficio tributi",
+                                "url": "#",
+                                "lines": [
+                                    "Via Dei Transiti 21, 50302",
+                                    "05 0505"
+                                ],
+                                "email": "ufficiotributi@email.it",
+                                "email_href": "ufficiotributia@email.it",
+                                "email_aria": "Invia una email a ufficiotributi@email.it",
+                                "image": {
+                                    "src": "https://picsum.photos/200/200",
+                                    "alt": "Immagine"
+                                },
+                                "name_class": "",
+                                "name_element": "",
+                                "text_wrap": true
+                            },
+                            "topics": {
+                                "label": "Argomenti:",
+                                "items": [
+                                    "Abitazione",
+                                    "Pagamenti"
+                                ]
+                            },
+                            "updated": "Pagina aggiornata il 14/04/2022"
+                        }
+                    ],
+                    "feedback": {
+                        "col_class": "col-12 col-lg-6 p-lg-0 px-4",
+                        "title": "Quanto è stato facile usare questo servizio?",
+                        "legend": "Valuta da 1 a 5 stelle la pagina",
+                        "star_label": "Valuta %d stelle su 5",
+                        "thanks": "Grazie, il tuo parere ci aiuterà a migliorare il servizio!",
+                        "positive": {
+                            "question": "Quali sono stati gli aspetti che hai preferito?",
+                            "answers": [
+                                "Le indicazioni erano chiare",
+                                "Le indicazioni erano complete",
+                                "Capivo sempre che stavo procedendo correttamente",
+                                "Non ho avuto problemi tecnici",
+                                "Altro"
+                            ]
+                        },
+                        "negative": {
+                            "question": "Dove hai incontrato le maggiori difficoltà?",
+                            "answers": [
+                                "A volte le indicazioni non erano chiare",
+                                "A volte le indicazioni non erano complete",
+                                "A volte non capivo se stavo procedendo correttamente",
+                                "Ho avuto problemi tecnici",
+                                "Altro"
+                            ]
+                        },
+                        "detail": {
+                            "question": "Vuoi aggiungere altri dettagli?",
+                            "label": "Dettaglio",
+                            "help": "Inserire massimo 200 caratteri"
+                        },
+                        "back": "Indietro",
+                        "next": "Avanti"
+                    },
+                    "related": {
+                        "title": "Contenuti correlati",
+                        "cards": [
+                            {
+                                "icon": "it-pa",
+                                "title": "Amministrazione",
+                                "links": [
+                                    "Area Servizi Civici"
+                                ]
+                            },
+                            {
+                                "icon": "it-settings",
+                                "title": "Servizi",
+                                "links": [
+                                    "Pagamento retta scolastica",
+                                    "Servizio di trasporto scolastico"
+                                ]
+                            },
+                            {
+                                "icon": "it-file",
+                                "title": "Documenti",
+                                "links": [
+                                    "Attestazione ISEE",
+                                    "Carta dei servizi educativi all'infanzia"
+                                ]
+                            },
+                            {
+                                "icon": "it-calendar",
+                                "title": "Notizie",
+                                "links": [
+                                    "Justo eget magna fermentum",
+                                    "Dolor magna eget est lorem",
+                                    "Justo eget magna fermentum",
+                                    "Dolor magna eget est lorem"
+                                ],
+                                "more": {
+                                    "label": "Vedi altri 2",
+                                    "items": [
+                                        "Servizio di trasporto scolastico",
+                                        "Servizio di trasporto scolastico"
+                                    ]
+                                }
+                            }
+                        ]
+                    },
+                    "contacts": {
+                        "layout": "offset",
+                        "col": "col-12 col-lg-6",
+                        "main": {
+                            "title": "Contatta il comune",
+                            "items": [
+                                {
+                                    "icon": "it-help-circle",
+                                    "label": "Leggi le domande frequenti",
+                                    "url": "#"
+                                },
+                                {
+                                    "icon": "it-mail",
+                                    "label": "Richiedi assistenza",
+                                    "url": "#",
+                                    "element": "contacts"
+                                },
+                                {
+                                    "icon": "it-hearing",
+                                    "label": "Chiama il numero verde 05 0505",
+                                    "url": "#"
+                                },
+                                {
+                                    "icon": "it-calendar",
+                                    "label": "Prenota appuntamento",
+                                    "url": "#",
+                                    "element": "appointment-booking"
+                                }
+                            ]
+                        }
+                    },
+                    "header_active": "all-services"
+                }
+            }
+        ],
+        "en": []
+    }
+}

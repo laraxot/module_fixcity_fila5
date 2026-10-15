@@ -1,3 +1,15 @@
+---
+title: "tests placement policy"
+type: note
+tags: [documentation]
+created: 2026-09-26
+updated: 2026-09-26
+qmd: "tests placement policy"
+issues: []
+discussions: []
+status: draft
+---
+
 # Test Placement Policy — Fixcity Module
 
 ## Rule: Playwright Tests Live Inside Modules/Themes
@@ -59,3 +71,8 @@ laravel/Modules/Fixcity/tests/Playwright/ticket-list.spec.js
 - Story 8-74: Agent directory audit and reduction
 - Modules/Geo/docs/agents-consolidation.md — agent cleanup rationale
 - bashscripts/ai/.claude/rules/second-brain-always-first.md — context ownership
+
+--- BMAD + Second Brain ---
+- Scopo: documentazione tecnica del modulo.
+- Utilità: riferimento sviluppatori/audit.
+- Funzionalità: struttura, dipendenze, convenzioni (no date .md, git avanti).

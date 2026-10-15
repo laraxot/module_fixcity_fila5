@@ -1,0 +1,286 @@
+{
+    "id": "tests.servizi-pagamento-dati-specifici",
+    "slug": "tests.servizi-pagamento-dati-specifici",
+    "parent_slug": "tests",
+    "title": {
+        "it": "Richiesta mensa scolastica",
+        "en": "Richiesta mensa scolastica"
+    },
+    "layout": "test",
+    "sidebar_blocks": {
+        "it": [],
+        "en": []
+    },
+    "footer_blocks": null,
+    "description": "Pagina di prova servizi-pagamento-dati-specifici (flusso pagamento servizio) da JSON, resa dal blocco service-flow del tema Sixteen.",
+    "content_blocks": {
+        "it": [
+            {
+                "type": "service-flow",
+                "data": {
+                    "view": "pub_theme::components.blocks.service-flow.design-comuni",
+                    "kind": "wizard-step",
+                    "breadcrumb": {
+                        "items": [
+                            {
+                                "label": "Home",
+                                "url": "/it/tests/homepage"
+                            },
+                            {
+                                "label": "Servizi",
+                                "url": "#"
+                            },
+                            {
+                                "label": "Educazione e formazione",
+                                "url": "#"
+                            }
+                        ],
+                        "current": "Richiesta mensa scolastica"
+                    },
+                    "heading": {
+                        "title": "Richiesta mensa scolastica",
+                        "subtitles": [
+                            {
+                                "text": "Hai bisogno di assistenza?",
+                                "class": "subtitle-small",
+                                "link": {
+                                    "label": "Contattaci",
+                                    "url": "",
+                                    "class": "title-small-semi-bold t-primary"
+                                }
+                            }
+                        ]
+                    },
+                    "stepper": {
+                        "items": [
+                            {
+                                "label": "Informativa sulla privacy",
+                                "state": "confirmed"
+                            },
+                            {
+                                "label": "Dati Generali",
+                                "state": "confirmed"
+                            },
+                            {
+                                "label": "Preferenze di servizio",
+                                "state": "active"
+                            },
+                            {
+                                "label": "Riepilogo",
+                                "state": ""
+                            }
+                        ],
+                        "confirmed_label": "Confermato",
+                        "active_label": "Attivo",
+                        "index": "3/4"
+                    },
+                    "nav": {
+                        "aria_label": "Step",
+                        "back": "Indietro",
+                        "save": {
+                            "long": "Salva Richiesta",
+                            "short": "Salva"
+                        },
+                        "next": {
+                            "label": "Avanti",
+                            "icon": "it-chevron-right",
+                            "class": "",
+                            "modal": "#"
+                        },
+                        "saved_message": "Richiesta salvata con successo"
+                    },
+                    "side_nav": {
+                        "class": "col-12 col-lg-3 d-lg-block mb-4 d-none",
+                        "aria_label": "INFORMAZIONI RICHIESTE",
+                        "title": "INFORMAZIONI RICHIESTE",
+                        "items": [
+                            {
+                                "label": "Scegli la scuola",
+                                "anchor": "school-choice"
+                            },
+                            {
+                                "label": "Tariffa esonero",
+                                "anchor": "rate-choice"
+                            },
+                            {
+                                "label": "Tariffa riduzione",
+                                "anchor": "outings-choice"
+                            },
+                            {
+                                "label": "Frequenza",
+                                "anchor": "attendance"
+                            },
+                            {
+                                "label": "Dieta diversificata",
+                                "anchor": "different-diet"
+                            }
+                        ]
+                    },
+                    "body": {
+                        "layout": "sidebar",
+                        "steps_content": "inner",
+                        "col": "col-12 col-lg-8 offset-lg-1"
+                    },
+                    "sections": [
+                        {
+                            "type": "note",
+                            "class": "text-paragraph-small mb-40",
+                            "text": "I campi contraddistinti dal simbolo asterisco sono obbligatori"
+                        },
+                        {
+                            "type": "card",
+                            "id": "school-choice",
+                            "class": "",
+                            "wrapper_class": "mb-40",
+                            "card_class": "card has-bkg-grey shadow-sm p-big p-4",
+                            "header_class": "card-header border-0 p-0 mb-lg-20",
+                            "title": "Scegli la scuola",
+                            "title_class": "title-xxlarge mb-0 icon-required",
+                            "subtitle": "Scegli l’istituto a cui vuoi iscrivere il minore",
+                            "subtitle_class": "subtitle-small mb-0",
+                            "content": {
+                                "kind": "select",
+                                "class": "select-wrapper p-big p-4 select-partials",
+                                "id": "select-school",
+                                "label": "Scegli la scuola*",
+                                "placeholder": "Seleziona un'opzione",
+                                "required": true,
+                                "options": [
+                                    "Istituto Narcisi",
+                                    "Istituto Narcisi",
+                                    "Istituto Narcisi",
+                                    "Istituto Narcisi"
+                                ]
+                            }
+                        },
+                        {
+                            "type": "card",
+                            "id": "rate-choice",
+                            "class": "",
+                            "wrapper_class": "mb-40",
+                            "card_class": "card has-bkg-grey shadow-sm p-big",
+                            "header_class": "card-header border-0 p-0 mb-lg-20 m-0",
+                            "title": "Tariffa esonero",
+                            "title_class": "title-xxlarge mb-1 icon-required",
+                            "subtitle": "Indica la tariffa di esonero a cui ha diritto il beneficiario",
+                            "subtitle_class": "subtitle-small mb-0 mb-4",
+                            "content": {
+                                "kind": "radios",
+                                "name": "rate",
+                                "required": true,
+                                "options": [
+                                    "Nessuna",
+                                    "25%",
+                                    "50%",
+                                    "75%",
+                                    "100%"
+                                ]
+                            }
+                        },
+                        {
+                            "type": "card",
+                            "id": "outings-choice",
+                            "class": "",
+                            "wrapper_class": "mb-40",
+                            "card_class": "card has-bkg-grey shadow-sm p-big",
+                            "header_class": "card-header border-0 p-0 mb-lg-20 m-0",
+                            "title": "Tariffa riduzione",
+                            "title_class": "title-xxlarge mb-1 icon-required",
+                            "subtitle": "Indica la tariffa di riduzione a cui ha diritto il beneficiario",
+                            "subtitle_class": "subtitle-small mb-0 mb-4",
+                            "content": {
+                                "kind": "radios",
+                                "name": "reduction",
+                                "required": true,
+                                "options": [
+                                    "Nessuna",
+                                    "10%",
+                                    "20%",
+                                    "30%",
+                                    "40%"
+                                ]
+                            }
+                        },
+                        {
+                            "type": "card",
+                            "id": "attendance",
+                            "class": "",
+                            "wrapper_class": "mb-40",
+                            "card_class": "card has-bkg-grey shadow-sm p-big",
+                            "header_class": "card-header border-0 p-0 mb-lg-20 m-0",
+                            "title": "Frequenza",
+                            "title_class": "title-xxlarge mb-1 icon-required",
+                            "subtitle": "Indica i giorni di frequenza del servizio",
+                            "subtitle_class": "subtitle-small mb-0 mb-4",
+                            "content": {
+                                "kind": "radios",
+                                "name": "frequency",
+                                "options": [
+                                    "1 giorno",
+                                    "3 giorni",
+                                    "5 giorni"
+                                ]
+                            }
+                        },
+                        {
+                            "type": "card",
+                            "id": "different-diet",
+                            "class": "",
+                            "wrapper_class": "",
+                            "card_class": "card has-bkg-grey shadow-sm p-big",
+                            "header_class": "card-header border-0 p-0 mb-lg-20 m-0",
+                            "title": "Dieta diversificata",
+                            "title_class": "title-xxlarge mb-1 icon-required",
+                            "subtitle": "Indica la dieta per il beneficiario",
+                            "subtitle_class": "subtitle-small mb-0 mb-4",
+                            "content": {
+                                "kind": "radios",
+                                "name": "diet",
+                                "required": true,
+                                "options": [
+                                    "Nessuna dieta",
+                                    "Dieta per patologia",
+                                    "Dieta etico religiosa"
+                                ]
+                            }
+                        }
+                    ],
+                    "contacts": {
+                        "layout": "center",
+                        "col": "col-12 col-lg-5",
+                        "main": {
+                            "title": "Contatta il comune",
+                            "items": [
+                                {
+                                    "icon": "it-help-circle",
+                                    "label": "Leggi le domande frequenti",
+                                    "url": "#"
+                                },
+                                {
+                                    "icon": "it-mail",
+                                    "label": "Richiedi assistenza",
+                                    "url": "#",
+                                    "element": "contacts"
+                                },
+                                {
+                                    "icon": "it-hearing",
+                                    "label": "Chiama il numero verde 05 0505",
+                                    "url": "#"
+                                },
+                                {
+                                    "icon": "it-calendar",
+                                    "label": "Prenota appuntamento",
+                                    "url": "#",
+                                    "element": "appointment-booking"
+                                }
+                            ]
+                        }
+                    },
+                    "modals": [],
+                    "header_active": "all-services"
+                }
+            }
+        ],
+        "en": []
+    }
+}

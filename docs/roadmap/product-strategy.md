@@ -1,3 +1,15 @@
+---
+title: "product strategy"
+type: note
+tags: [documentation]
+created: 2026-09-26
+updated: 2026-09-26
+qmd: "product strategy"
+issues: []
+discussions: []
+status: draft
+---
+
 # 🎯 Fixcity Product Strategy Document
 
 > **Document ID**: FC-STRATEGY-001  
@@ -6,7 +18,6 @@
 > **Timeframe**: 2026-2027 (3-Year Strategy)
 
 ---
-
 ## 📋 Table of Contents
 
 1. [Executive Summary](#executive-summary)

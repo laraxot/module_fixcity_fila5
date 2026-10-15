@@ -1,10 +1,22 @@
+---
+title: "header green branding rule"
+type: note
+tags: [documentation]
+created: 2026-09-26
+updated: 2026-09-26
+qmd: "header green branding rule"
+issues: []
+discussions: []
+status: draft
+---
+
 # header green branding rule
 
 ## Ambito (KISS)
 
 Questa nota descrive **token verdi** usati nel perimetro Fixcity / test quando serve continuità con il **modello segnalazioni** del kit. **Non** sostituisce il riferimento visivo ufficiale del flusso HTML statico.
 
-**Parità con [Design Comuni — segnalazione-02-dati](https://italia.github.io/design-comuni-pagine-statiche/sito/segnalazione-02-dati.html):** la fascia menu (`.it-header-navbar-wrapper`) nel wizard test è **chiara** (link scuri, hover/active verde), non una barra intera verde con testo bianco. Fonte di implementazione nel tema: [header color parity](../../../../../../Themes/Sixteen/docs/wiki/concepts/header-color-parity.md).
+**Parità con [Design Comuni — segnalazione-02-dati](https://italia.github.io/design-comuni-pagine-statiche/sito/segnalazione-02-dati.html):** la fascia menu (`.it-header-navbar-wrapper`) nel wizard test è **chiara** (link scuri, hover/active verde), non una barra intera verde con testo bianco. Fonte di implementazione nel tema: [header color parity](../../../../../Themes/Sixteen/docs/wiki/concepts/header-color-parity.md).
 
 ## Token (riferimento)
 

@@ -3,18 +3,18 @@
 declare(strict_types=1);
 
 return [
-    /*
-    |--------------------------------------------------------------------------
-    | Authentication Language Lines
-    |--------------------------------------------------------------------------
-    |
-    | The following language lines are used during authentication for various
-    | messages that we need to display to the user. You are free to modify
-    | these language lines according to your application's requirements.
-    |
-    */
-
-    'failed' => 'Estas credenciales no coinciden con nuestros registros.',
-    'password' => 'La contraseña ingresada no es correcta.',
-    'throttle' => 'Demasiados intentos de acceso. Por favor intente nuevamente en :seconds segundos.',
+    'title' => 'Accede a FixCity',
+    'submit' => 'Acceder',
+    'loading' => 'Accediendo...',
+    'forgot_password' => '¿Has olvidado la contraseña?',
+    'no_account' => '¿No tienes una cuenta?',
+    'register' => 'Crear una cuenta',
+    'remember' => 'Recordarme',
+    'email' => 'Correo electrónico',
+    'password' => 'Contraseña',
+    'intro' => 'Accede para enviar y seguir tus incidencias.',
+    'meta_description' => 'Accede a FixCity para enviar y seguir tus incidencias sobre problemas de tu municipio.',
+    'register_title' => 'Crea tu cuenta',
+    'register_intro' => 'Crea una cuenta para enviar y seguir tus incidencias.',
+    'register_meta_description' => 'Crea una cuenta de FixCity para enviar y seguir tus incidencias sobre problemas de tu municipio.',
 ];

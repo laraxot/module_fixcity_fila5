@@ -1,7 +1,15 @@
 ---
+title: "cms block driven page routing rule"
+tags: [documentation]
+created: 2026-09-26
+updated: 2026-09-26
+qmd: "cms block driven page routing rule"
+issues: []
+discussions: []
 name: cms-block-driven-page-routing-rule
 description: "REGOLA: quando un URL usa tests/[slug].blade.php, la pagina è CMS-driven (JSON blocks), NON hardcoded. Cercare PRIMA il JSON block, poi il Folio page."
 type: concept
+status: draft
 ---
 
 # CMS Block-Driven Page Routing Rule
@@ -49,3 +57,5 @@ Se esiste un file Folio hardcoded (`segnalazione-crea.blade.php` con route `segn
 
 - `docs/wiki/concepts/segnalazione-crea-url-routing-chain.md` — Fixcity wiki
 - `laravel/Themes/Sixteen/docs/wiki/concepts/theme-cms-block-architecture-segnalazione-crea.md` — Theme wiki
+
+Correzione verificata 2026-10-13 (DCP-35 S4): `tests.segnalazione-crea.json` è stato eliminato (commit 260f3bcc5, `git log --diff-filter=D`) e oggi non esiste in nessun tenant; la risposta di `/it/tests/segnalazione-crea` (200) non contiene il wizard (0 occorrenze di `fi-sc-wizard` e `$wire.save()`). Il flusso vive su `/it/tickets/create` (`tickets.create.json`, blocco `components/blocks/tests/ticket-crea.blade.php`). Questo documento descrive lo stato precedente; stato attuale in `Modules/Fixcity/docs/wiki/concepts/ticket-crea-url-routing-chain.md`.

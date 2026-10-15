@@ -1,4 +1,8 @@
 ---
+updated: 2026-09-26
+qmd: "filament first ui boundary"
+issues: []
+discussions: []
 title: "Fixcity — boundary UI Filament-first"
 type: concept
 status: active
@@ -8,7 +12,7 @@ related:
   - ../../../../../../docs/wiki/rules/filament-first-rule.md
   - ./frontoffice-no-standalone-livewire.md
   - ./ticket-list-map-architecture.md
-  - ../../../../Themes/Sixteen/docs/wiki/concepts/filament-first-frontoffice.md
+  - ../../../../../Themes/Sixteen/docs/wiki/concepts/filament-first-frontoffice.md
 ---
 
 # Fixcity — boundary UI Filament-first

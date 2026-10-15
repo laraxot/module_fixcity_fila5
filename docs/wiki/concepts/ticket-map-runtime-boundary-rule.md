@@ -1,6 +1,15 @@
 ---
+title: "ticket map runtime boundary rule"
+type: note
+tags: [documentation]
+created: 2026-09-26
+updated: 2026-09-26
+qmd: "ticket map runtime boundary rule"
+issues: []
+discussions: []
 name: segnalazione-map-runtime-boundary-rule
 description: Responsibility split for the segnalazione wizard map between Fixcity, Geo, and Sixteen
+status: draft
 ---
 
 # Segnalazione Map Runtime Boundary Rule

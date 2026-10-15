@@ -1,0 +1,464 @@
+{
+    "id": "tests.servizi-pagamento-scheda-servizio",
+    "slug": "tests.servizi-pagamento-scheda-servizio",
+    "parent_slug": "tests",
+    "title": {
+        "it": "Richiesta servizio mensa scolastica",
+        "en": "Richiesta servizio mensa scolastica"
+    },
+    "layout": "test",
+    "sidebar_blocks": {
+        "it": [],
+        "en": []
+    },
+    "footer_blocks": null,
+    "description": "Pagina di prova servizi-pagamento-scheda-servizio (flusso pagamento servizio) da JSON, resa dal blocco service-flow del tema Sixteen.",
+    "content_blocks": {
+        "it": [
+            {
+                "type": "service-flow",
+                "data": {
+                    "view": "pub_theme::components.blocks.service-flow.design-comuni",
+                    "kind": "service-sheet",
+                    "breadcrumb": {
+                        "items": [
+                            {
+                                "label": "Home",
+                                "url": "/it/tests/homepage"
+                            },
+                            {
+                                "label": "Servizi",
+                                "url": "#"
+                            },
+                            {
+                                "label": "Educazione e formazione",
+                                "url": "#"
+                            }
+                        ],
+                        "current": "Richiesta mensa scolastica"
+                    },
+                    "heading": {
+                        "title": "Richiesta servizio mensa scolastica",
+                        "title_element": "service-title",
+                        "chips": [
+                            {
+                                "label": "Servizio attivo",
+                                "element": "service-status"
+                            }
+                        ],
+                        "subtitles": [
+                            {
+                                "text": "Il servizio di mensa scolastica per le scuole dell’infanzia e primarie statali.",
+                                "class": "subtitle-small mb-3"
+                            }
+                        ],
+                        "buttons": [
+                            {
+                                "label": "Richiedi online",
+                                "class": "btn btn-primary fw-bold"
+                            }
+                        ],
+                        "actions": [
+                            {
+                                "id": "shareActions",
+                                "aria_label": "condividi sui social",
+                                "icon": "it-share",
+                                "label": "Condividi",
+                                "items": [
+                                    {
+                                        "label": "Facebook",
+                                        "icon": "it-facebook",
+                                        "url": "#"
+                                    },
+                                    {
+                                        "label": "Twitter",
+                                        "icon": "it-twitter",
+                                        "url": "#"
+                                    },
+                                    {
+                                        "label": "Linkedin",
+                                        "icon": "it-linkedin",
+                                        "url": "#"
+                                    },
+                                    {
+                                        "label": "Whatsapp",
+                                        "icon": "it-whatsapp",
+                                        "url": "#"
+                                    }
+                                ]
+                            },
+                            {
+                                "id": "viewActions",
+                                "aria_label": "vedi azioni da compiere sulla pagina",
+                                "icon": "it-more-items",
+                                "label": "Vedi azioni",
+                                "items": [
+                                    {
+                                        "label": "Stampa",
+                                        "icon": "it-print",
+                                        "url": "#"
+                                    },
+                                    {
+                                        "label": "Ascolta",
+                                        "icon": "it-hearing",
+                                        "url": "#"
+                                    },
+                                    {
+                                        "label": "Invia",
+                                        "icon": "it-mail",
+                                        "url": "#"
+                                    }
+                                ]
+                            }
+                        ],
+                        "row": "row justify-content-center",
+                        "col": "col-12 col-lg-10",
+                        "rule": "d-none d-lg-block mb-0 mt-2"
+                    },
+                    "side_nav": {
+                        "class": "col-12 col-lg-3 mb-4 border-col",
+                        "aria_label": "INDICE DELLA PAGINA",
+                        "title": "INDICE DELLA PAGINA",
+                        "items": [
+                            {
+                                "label": "A chi è rivolto",
+                                "anchor": "who-needs"
+                            },
+                            {
+                                "label": "Descrizione",
+                                "anchor": "description"
+                            },
+                            {
+                                "label": "Come fare",
+                                "anchor": "how-to"
+                            },
+                            {
+                                "label": "Cosa serve",
+                                "anchor": "needed"
+                            },
+                            {
+                                "label": "Tempi e scadenze",
+                                "anchor": "deadlines"
+                            },
+                            {
+                                "label": "Costi",
+                                "anchor": "costs"
+                            },
+                            {
+                                "label": "Accedi al servizio",
+                                "anchor": "service-access"
+                            },
+                            {
+                                "label": "Condizioni di servizio",
+                                "anchor": "conditions"
+                            },
+                            {
+                                "label": "Contatti",
+                                "anchor": "contacts"
+                            }
+                        ]
+                    },
+                    "body": {
+                        "row": "row row-column-menu-left mt-4 mt-lg-80"
+                    },
+                    "sections": [
+                        {
+                            "type": "flow",
+                            "id": "who-needs",
+                            "class": "mb-30",
+                            "title": "A chi è rivolto",
+                            "items": [
+                                {
+                                    "type": "list",
+                                    "items": [
+                                        "Alunni iscritti alla Scuola dell'infanzia",
+                                        "Alunni iscritti alla Scuola primaria"
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "type": "flow",
+                            "id": "description",
+                            "class": "mb-30",
+                            "title": "Descrizione",
+                            "items": [
+                                {
+                                    "type": "paragraph",
+                                    "text": "Per la **Scuola dell’infanzia** il servizio è attivo tutti i giorni. La richiesta dovrà essere ripresentata ogni anno contestualmente alla riconferma alla scuola.\n\nPer la **Scuola primaria**, la richiesta di iscrizione alla classe prima comporta l'iscrizione automatica al servizio mensa e si intende valida per l'intero ciclo scolastico.\n\nI menù sono articolati su otto settimane per il menù invernale e su quattro settimane per il menù estivo e diversificati per tipo d’utenza. Sono predisposti osservando le Linee Guida Regionali sulla ristorazione scolastica."
+                                }
+                            ]
+                        },
+                        {
+                            "type": "flow",
+                            "id": "how-to",
+                            "class": "mb-30",
+                            "title": "Come fare",
+                            "items": [
+                                {
+                                    "type": "paragraph",
+                                    "text": "L’iscrizione e l’eventuale richiesta di dieta speciale devono essere effettuate obbligatoriamente ogni anno per tutti gli iscritti che consumeranno il pasto a scuola."
+                                }
+                            ]
+                        },
+                        {
+                            "type": "flow",
+                            "id": "needed",
+                            "class": "mb-30 has-bg-grey p-3",
+                            "title": "Cosa serve",
+                            "items": [
+                                {
+                                    "type": "paragraph",
+                                    "text": "Per accedere al servizio, assicurati di avere:"
+                                },
+                                {
+                                    "type": "list",
+                                    "items": [
+                                        "SPID (Sistema Pubblico per la gestione dell'Identità Digitale), Carta identità elettronica (CIE) o Carta Nazionale dei Servizi (CNS);",
+                                        "attestazione ISEE in corso di validità",
+                                        "certificazioni per diete speciali",
+                                        "certificazione per disabilità"
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "type": "timeline",
+                            "id": "deadlines",
+                            "class": "mb-30",
+                            "title": "Tempi e scadenze",
+                            "entries": [
+                                {
+                                    "year": "2022",
+                                    "day": "01",
+                                    "month": "feb",
+                                    "label": "Apertura domande"
+                                },
+                                {
+                                    "year": "2022",
+                                    "day": "02",
+                                    "month": "mar",
+                                    "label": "Termine presentazione domande"
+                                },
+                                {
+                                    "year": "2022",
+                                    "day": "28",
+                                    "month": "apr",
+                                    "label": "Pagamento servizio mensa"
+                                }
+                            ]
+                        },
+                        {
+                            "type": "flow",
+                            "id": "costs",
+                            "class": "mb-30",
+                            "title": "Costi",
+                            "items": [
+                                {
+                                    "type": "paragraph",
+                                    "text": "L'utente del servizio mensa è tenuto a versare, per ciascun pasto, la quota stabilita in base alle fasce Isee approvate con delibera di Giunta comunale n. 3/2019.\n\nÈ riconosciuta l’esenzione per ISEE compreso tra € 0,00 ed € 10.000,00.\"",
+                                    "class": "text-paragraph lora"
+                                },
+                                {
+                                    "type": "attachment",
+                                    "label": "Tariffe per la mensa scolastica (PDF1MB)",
+                                    "aria": "Scarica Tariffe per la mensa scolastica (PDF1MB)",
+                                    "title": "Scarica Tariffe per la mensa scolastica (PDF1MB)",
+                                    "url": "#"
+                                }
+                            ]
+                        },
+                        {
+                            "type": "flow",
+                            "id": "service-access",
+                            "class": "mb-30 has-bg-grey p-3",
+                            "title": "Accedi al servizio",
+                            "items": [
+                                {
+                                    "type": "paragraph",
+                                    "text": "Puoi richiedere il servizio mensa direttamente online tramite identità digitale.",
+                                    "class": "text-paragraph lora"
+                                },
+                                {
+                                    "type": "button",
+                                    "label": "Richiedi online",
+                                    "class": "btn btn-primary mobile-full"
+                                },
+                                {
+                                    "type": "paragraph",
+                                    "text": "Oppure, puoi prenotare un appuntamento e presentarti presso gli uffici.",
+                                    "class": "text-paragraph mt-4 lora"
+                                },
+                                {
+                                    "type": "button",
+                                    "label": "Prenota appuntamento",
+                                    "class": "btn mobile-full btn-outline-primary bg-white t-primary"
+                                }
+                            ]
+                        },
+                        {
+                            "type": "flow",
+                            "id": "conditions",
+                            "class": "mb-30",
+                            "title": "Condizioni di servizio",
+                            "items": [
+                                {
+                                    "type": "paragraph",
+                                    "text": "Per conoscere i dettagli di scadenze, requisiti e altre informazioni importanti, leggi i termini e le condizioni di servizio.\"",
+                                    "class": "text-paragraph lora"
+                                },
+                                {
+                                    "type": "attachment",
+                                    "label": "Termini e condizioni di servizio (PDF 1MB)",
+                                    "aria": "Scarica Termini e condizioni di servizio (PDF 1MB)",
+                                    "title": "Scarica Termini e condizioni di servizio (PDF 1MB)",
+                                    "url": "#"
+                                }
+                            ]
+                        },
+                        {
+                            "type": "service-contacts",
+                            "id": "contacts",
+                            "title": "Contatti",
+                            "office": {
+                                "name": "Ufficio scuola",
+                                "url": "#",
+                                "lines": [
+                                    "Via Dei Transiti 21, 50302",
+                                    "05 0505"
+                                ],
+                                "email": "ufficioscuola@email.it",
+                                "email_aria": "Invia una email a ufficioscuola@email.it",
+                                "image": {
+                                    "src": "https://picsum.photos/200/200",
+                                    "alt": "Immagine"
+                                }
+                            },
+                            "topics": {
+                                "label": "Argomenti:",
+                                "items": [
+                                    "Educazione",
+                                    "Famiglia",
+                                    "Scuola"
+                                ]
+                            },
+                            "updated": "Pagina aggiornata il 14/04/2022"
+                        }
+                    ],
+                    "feedback": {
+                        "col_class": "col-12 col-lg-6 p-lg-0 px-4",
+                        "title": "Quanto è stato facile usare questo servizio?",
+                        "legend": "Valuta da 1 a 5 stelle la pagina",
+                        "star_label": "Valuta %d stelle su 5",
+                        "thanks": "Grazie, il tuo parere ci aiuterà a migliorare il servizio!",
+                        "positive": {
+                            "question": "Quali sono stati gli aspetti che hai preferito?",
+                            "answers": [
+                                "Le indicazioni erano chiare",
+                                "Le indicazioni erano complete",
+                                "Capivo sempre che stavo procedendo correttamente",
+                                "Non ho avuto problemi tecnici",
+                                "Altro"
+                            ]
+                        },
+                        "negative": {
+                            "question": "Dove hai incontrato le maggiori difficoltà?",
+                            "answers": [
+                                "A volte le indicazioni non erano chiare",
+                                "A volte le indicazioni non erano complete",
+                                "A volte non capivo se stavo procedendo correttamente",
+                                "Ho avuto problemi tecnici",
+                                "Altro"
+                            ]
+                        },
+                        "detail": {
+                            "question": "Vuoi aggiungere altri dettagli?",
+                            "label": "Dettaglio",
+                            "help": "Inserire massimo 200 caratteri"
+                        },
+                        "back": "Indietro",
+                        "next": "Avanti"
+                    },
+                    "related": {
+                        "title": "Contenuti correlati",
+                        "cards": [
+                            {
+                                "icon": "it-pa",
+                                "title": "Amministrazione",
+                                "links": [
+                                    "Area Servizi Civici"
+                                ]
+                            },
+                            {
+                                "icon": "it-settings",
+                                "title": "Servizi",
+                                "links": [
+                                    "Pagamento retta scolastica",
+                                    "Servizio di trasporto scolastico"
+                                ]
+                            },
+                            {
+                                "icon": "it-file",
+                                "title": "Documenti",
+                                "links": [
+                                    "Attestazione ISEE",
+                                    "Carta dei servizi educativi all'infanzia"
+                                ]
+                            },
+                            {
+                                "icon": "it-calendar",
+                                "title": "Notizie",
+                                "links": [
+                                    "Justo eget magna fermentum",
+                                    "Dolor magna eget est lorem",
+                                    "Justo eget magna fermentum",
+                                    "Dolor magna eget est lorem"
+                                ],
+                                "more": {
+                                    "label": "Vedi altri 2",
+                                    "items": [
+                                        "Servizio di trasporto scolastico",
+                                        "Servizio di trasporto scolastico"
+                                    ]
+                                }
+                            }
+                        ]
+                    },
+                    "contacts": {
+                        "layout": "offset",
+                        "col": "col-12 col-lg-6",
+                        "main": {
+                            "title": "Contatta il comune",
+                            "items": [
+                                {
+                                    "icon": "it-help-circle",
+                                    "label": "Leggi le domande frequenti",
+                                    "url": "#"
+                                },
+                                {
+                                    "icon": "it-mail",
+                                    "label": "Richiedi assistenza",
+                                    "url": "#",
+                                    "element": "contacts"
+                                },
+                                {
+                                    "icon": "it-hearing",
+                                    "label": "Chiama il numero verde 05 0505",
+                                    "url": "#"
+                                },
+                                {
+                                    "icon": "it-calendar",
+                                    "label": "Prenota appuntamento",
+                                    "url": "#",
+                                    "element": "appointment-booking"
+                                }
+                            ]
+                        }
+                    },
+                    "header_active": "all-services"
+                }
+            }
+        ],
+        "en": []
+    }
+}

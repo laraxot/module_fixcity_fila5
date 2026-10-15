@@ -4,7 +4,7 @@ type: concept
 module: Fixcity
 tags: [second-brain, stub, hackernoon, harness, fixcity]
 created: 2026-06-05
-updated: 2026-06-05
+updated: 2026-09-26
 qmd: "fixcity second brain stub canonical xot harness hackernoon ticket migration"
 issues:
   - "https://github.com/laraxot/module_fixcity_fila5/issues/29"
@@ -14,10 +14,11 @@ discussions:
   - "https://github.com/laraxot/base_fixcity_fila5/discussions/273"
 related:
   - ../../../../Xot/docs/wiki/concepts/second-brain-local-discipline.md
-  - ../../../../docs/wiki/concepts/ai-harness-module-discipline.md
+  - ai-harness-module-discipline.md
   - ./ai-harness-fixcity-discipline.md
   - ../../../../../../docs/wiki/concepts/hackernoon-ai-coding-tips-fixcity-map.md
   - ../../../../../../bashscripts/tools/prompts/llm-wiki.txt
+status: draft
 ---
 
 # Contratto wiki locale — stub Fixcity
@@ -26,8 +27,10 @@ related:
 |---------|------|
 | **Canon** | [Xot second-brain-local-discipline.md](../../../../Xot/docs/wiki/concepts/second-brain-local-discipline.md) |
 | **Harness Fixcity** | [ai-harness-fixcity-discipline.md](./ai-harness-fixcity-discipline.md) |
-| **Harness moduli** | [ai-harness-module-discipline.md](../../../../docs/wiki/concepts/ai-harness-module-discipline.md) |
+| **Harness moduli** | [ai-harness-module-discipline.md](ai-harness-module-discipline.md) |
 | **Tips 001–022** | [hackernoon map](../../../../../../docs/wiki/concepts/hackernoon-ai-coding-tips-fixcity-map.md) |
 | **Prompt router** | [llm-wiki.txt](../../../../../../bashscripts/tools/prompts/llm-wiki.txt) |
 
 Ticket, migrazioni owner, Actions Queueable — solo qui; pilastri DB in [bmad/architecture](../../../../../../docs/wiki/bmad/architecture.md).
+
+Per le decisioni attuali del dominio consultare prima [il contratto architetturale canonico Fixcity](./fixcity-architecture-contract-2026-09-26.md); questo file resta il router operativo locale.

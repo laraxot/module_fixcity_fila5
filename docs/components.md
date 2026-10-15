@@ -1,3 +1,15 @@
+---
+title: "components"
+type: note
+tags: [documentation]
+created: 2026-09-26
+updated: 2026-09-26
+qmd: "components"
+issues: []
+discussions: []
+status: draft
+---
+
 # Componenti View di Fixcity
 
 ## TicketList
@@ -41,3 +53,7 @@ Recupera la lista delle categorie dal database con:
 #### Correzioni Recenti
 - Risolto un problema di riferimento circolare nella definizione della classe
 - Rimossa l'estensione errata `BaseAgid` in favore di `Component` 
+--- BMAD + Second Brain ---
+- Scopo: documentazione tecnica del modulo.
+- Utilità: riferimento sviluppatori/audit.
+- Funzionalità: struttura, dipendenze, convenzioni (no date .md, git avanti).

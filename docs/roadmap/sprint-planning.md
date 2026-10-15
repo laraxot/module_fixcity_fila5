@@ -1,3 +1,15 @@
+---
+title: "sprint planning"
+type: note
+tags: [documentation]
+created: 2026-09-26
+updated: 2026-09-26
+qmd: "sprint planning"
+issues: []
+discussions: []
+status: draft
+---
+
 # 🏃 Fixcity Sprint Planning
 
 > **Document ID**: FC-SPRINT-001  
@@ -6,7 +18,6 @@
 > **Current Sprint**: S-26-10 (Mar 2-15, 2026)
 
 ---
-
 ## 📋 Table of Contents
 
 1. [Sprint Overview](#sprint-overview)

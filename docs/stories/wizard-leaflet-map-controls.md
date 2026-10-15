@@ -1,3 +1,14 @@
+---
+title: "wizard leaflet map controls"
+type: note
+tags: [documentation]
+created: 2026-09-26
+updated: 2026-09-26
+qmd: "wizard leaflet map controls"
+issues: []
+discussions: []
+---
+
 # Story: controlli mappa wizard segnalazione
 
 ## Contesto

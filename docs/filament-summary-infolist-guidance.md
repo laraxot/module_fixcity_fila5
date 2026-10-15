@@ -1,8 +1,20 @@
+---
+title: "filament summary infolist guidance"
+type: note
+tags: [documentation]
+created: 2026-09-26
+updated: 2026-09-26
+qmd: "filament summary infolist guidance"
+issues: []
+discussions: []
+status: draft
+---
+
 # Filament Infolist — step riepilogo wizard (Fixcity)
 
 ## Decisione architetturale
 
-- Lo step **`form.summary::data::wizard-step`** (deeplink anche come `?step=form.summary%3A%3Adata%3A%3Awizard-step`) deve mostrare **dati già compilati**, non input.
+- Lo step **`form.summary::data::wizard-step`** in `en` (in `it` la chiave è `form.riepilogo::data::wizard-step`, verificato 2026-10-13 sull'HTML di `/it/tickets/create`; deeplink anche come `?step=form.summary%3A%3Adata%3A%3Awizard-step`) deve mostrare **dati già compilati**, non input.
 - In **Filament v5** questo pattern è **`Filament\Infolists\Components\TextEntry`** (ed entry affini) **dentro il flusso schema** del Wizard, NON `TextInput::disabled()`, NON `Placeholder`, NON [`SchemaView`](https://filamentphp.com/docs/5.x/schemas/overview).
 - Doc ufficiale Infolists: https://filamentphp.com/docs/5.x/infolists/overview · schema unificato: https://filamentphp.com/docs/5.x/schemas/overview
 
@@ -17,7 +29,7 @@
 ## Namespace traduzioni (heading sezione)
 
 - **Titoli `Section`** dello schema (`TicketForm::getSummarySchema()`) → **`fixcity::ticket.sections.*`** (`lang/*/ticket.php`). Il contesto è il **bounded context Filament + modello `Ticket`**: stesse chiavi usate dalla resource (create/edit) e dal wizard che riusa `TicketForm`.
-- **`fixcity::segnalazione.*`** serve al **canale pubblico** (copy Design Comuni, pagine `segnalazione-*`, testi nei blocchi CMS). Non è la SSoT per gli heading tecnici delle `Section` ticket: usando `ticket` si evita drift e si rispetta la “religione” namespace-per-dominio (vedi [`translation-namespace-religion.md`](../../../../docs/translation-namespace-religion.md) e [Fixcity: `ticket` vs `segnalazione`](./wiki/concepts/fixcity-ticket-vs-segnalazione-lang.md)).
+- **`fixcity::segnalazione.*`** serve al **canale pubblico** (copy Design Comuni, pagine `segnalazione-*`, testi nei blocchi CMS). Non è la SSoT per gli heading tecnici delle `Section` ticket: usando `ticket` si evita drift e si rispetta la “religione” namespace-per-dominio (vedi [`translation-namespace-religion.md`](../../../../docs/translation-namespace-religion.md) e [Fixcity: `ticket` vs `segnalazione`](./wiki/concepts/fixcity-ticket-vs-ticket-lang.md)).
 
 **Esempi**
 
@@ -39,3 +51,8 @@
 - Pattern generico modulo Xot: [infolists-for-summary.md](../../Xot/docs/filament/widgets/infolists-for-summary.md).
 - Smoke E2E: `Modules/Fixcity/tests/Playwright/segnalazione-crea-wizard.spec.js` — URL canonico summary + assert `.fi-in-entry`.
 - Tema Sixteen parity visiva riepilogo: [wizard-review-parity.md](../../../Themes/Sixteen/docs/wiki/design/wizard-review-parity.md).
+
+--- BMAD + Second Brain ---
+- Scopo: documentazione tecnica del modulo.
+- Utilità: riferimento sviluppatori/audit.
+- Funzionalità: struttura, dipendenze, convenzioni (no date .md, git avanti).

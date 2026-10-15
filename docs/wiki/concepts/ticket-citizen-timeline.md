@@ -14,6 +14,7 @@ related:
   - ticket-detail-page-ux.md
   - ticket-view-fo-enrichment-map-media-comments.md
   - ../../../../../../docs/wiki/concepts/fixcity-scopo-e-target.md
+status: draft
 ---
 
 # Timeline cittadino — avanzamento segnalazione

@@ -1,3 +1,15 @@
+---
+title: "superpowers"
+type: note
+tags: [documentation]
+created: 2026-09-26
+updated: 2026-09-26
+qmd: "superpowers"
+issues: []
+discussions: []
+status: draft
+---
+
 # 🦸 Superpowers for Laravel Modules
 
 > **Last Updated**: 2026-03-31  
@@ -5,7 +17,6 @@
 > **Version**: v5.0.6
 
 ---
-
 ## 📋 Overview
 
 This guide explains how to use Superpowers skills specifically for Laravel module development in the FixCity platform.
@@ -549,3 +560,8 @@ php artisan test --filter Ticket
 **Last Review**: 2026-03-31  
 **Next Review**: 2026-06-30  
 **Status**: ✅ Active
+
+--- BMAD + Second Brain ---
+- Scopo: documentazione tecnica del modulo.
+- Utilità: riferimento sviluppatori/audit.
+- Funzionalità: struttura, dipendenze, convenzioni (no date .md, git avanti).

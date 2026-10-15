@@ -1,4 +1,8 @@
 ---
+updated: 2026-09-26
+qmd: "DEEP DIVE 005 ml algorithms"
+issues: []
+discussions: []
 title: "Deep Dive: ML Algorithms - Duplicate Detection & Priority Scoring"
 type: technical-spec
 tags: [fixcity, ml, ai, duplicate-detection, computer-vision, nlp, algorithms]
@@ -795,3 +799,8 @@ def evaluate(predictions, ground_truth, threshold=0.85):
 ---
 
 *Algorithm design based on: computer vision best practices, information retrieval theory, geospatial analysis, and civic tech domain expertise.*
+
+--- BMAD + Second Brain ---
+- Scopo: documentazione tecnica del modulo.
+- Utilità: riferimento sviluppatori/audit.
+- Funzionalità: struttura, dipendenze, convenzioni (no date .md, git avanti).

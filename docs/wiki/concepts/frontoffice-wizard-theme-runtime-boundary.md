@@ -1,4 +1,7 @@
 ---
+qmd: "frontoffice wizard theme runtime boundary"
+issues: []
+discussions: []
 title: "Frontoffice Wizard Theme Runtime Boundary"
 type: concept
 confidence: high
@@ -9,6 +12,7 @@ related:
   - ../../../../../Themes/Sixteen/docs/wiki/concepts/no-bootstrap-runtime-assets-rule.md
   - ./frontoffice-ticket-priority-default-rule.md
   - ../../../../../../docs/ux-design-fixcity.md
+status: draft
 ---
 
 # Frontoffice Wizard Theme Runtime Boundary

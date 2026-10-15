@@ -1,3 +1,15 @@
+---
+title: "pub theme wizard zen"
+type: note
+tags: [documentation]
+created: 2026-09-26
+updated: 2026-09-26
+qmd: "pub theme wizard zen"
+issues: []
+discussions: []
+status: draft
+---
+
 # PubThemeWizard — Filosofia e Implementazione
 
 ## Il Problema Iniziale
@@ -57,7 +69,7 @@ public static function getFormSchema(): array
 }
 ```
 
-Non si tratta di «logica di presentazione sparsa»: è il **confine** tra due superfici UX (Filament standard vs tema pubblico), documentato in [filament-admin-pub-theme-wizard-boundary](../../../../docs/wiki/concepts/filament-admin-pub-theme-wizard-boundary.md).
+Non si tratta di «logica di presentazione sparsa»: è il **confine** tra due superfici UX (Filament standard vs tema pubblico), documentato in [filament-admin-pub-theme-wizard-boundary](../../../../../../docs/wiki/concepts/filament-admin-pub-theme-wizard-boundary.md).
 
 ### Vista tema `pub_theme::components.wizard`
 
@@ -80,7 +92,7 @@ Markup e classi Design Comuni vivono nel tema (es. Sixteen), non in `<style>` in
 
 ## Riferimenti
 
-- [filament-admin-pub-theme-wizard-boundary](../../../../docs/wiki/concepts/filament-admin-pub-theme-wizard-boundary.md)
+- [filament-admin-pub-theme-wizard-boundary](../../../../../../docs/wiki/concepts/filament-admin-pub-theme-wizard-boundary.md)
 - [theme-owned-wizard-css-parity-rule](./theme-owned-wizard-css-parity-rule.md)
 - Filament Wizard: pacchetto `schemas` Filament 5.x
 - Design Comuni Stepper: https://designers.italia.it/pattern/stepper/

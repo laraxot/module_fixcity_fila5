@@ -25,13 +25,16 @@ render(function (int|string $ticket): JsonResponse {
         );
     }
 
+    // Un ticket reale non visibile (es. in attesa di moderazione) non deve ricadere sul GeoJSON demo con lo stesso id.
+    abort_if(Ticket::query()->whereKey($ticket)->exists(), 404);
+
     $ticketId = (int) $ticket;
     $geoJson = app(LoadPublicTicketsGeoJsonAction::class)->execute();
     foreach ($geoJson['features'] as $feature) {
         $properties = is_array($feature['properties'] ?? null) ? $feature['properties'] : [];
         if ((int) ($properties['id'] ?? 0) === $ticketId) {
             return response()->json(
-                $payloadAction->executeFromGeoJsonFeature($feature),
+                $payloadAction->execute($feature),
             );
         }
     }

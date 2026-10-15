@@ -1,3 +1,14 @@
+---
+title: "ticket crea map fullscreen refinement"
+type: note
+tags: [documentation]
+created: 2026-09-26
+updated: 2026-09-26
+qmd: "ticket crea map fullscreen refinement"
+issues: []
+discussions: []
+---
+
 # Story: segnalazione-crea map fullscreen refinement
 
 ## Contesto

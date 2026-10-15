@@ -1,0 +1,16 @@
+{
+    "id": "terms-index",
+    "title": {"it": "Termini e disclaimer", "en": "Terms and disclaimer", "de": "Nutzungsbedingungen und Haftungshinweis", "es": "Términos y aviso legal"},
+    "slug": "terms.index",
+    "layout": "design-comuni",
+    "description": {"it": "Termini di utilizzo e disclaimer del servizio, a cura del Comune.", "en": "Terms of use and disclaimer for the service, provided by the municipality.", "de": "Nutzungsbedingungen und Haftungshinweis für den Dienst, bereitgestellt von der Gemeinde.", "es": "Términos de uso y aviso legal del servicio, a cargo del Ayuntamiento."},
+    "content": null,
+    "content_blocks": {
+        "it": [{"type": "legal_document", "data": {"view": "pub_theme::components.blocks.legal-document.design-comuni", "document": "terms_disclaimer", "markdown": "terms.md", "header_active": ""}}],
+        "en": [{"type": "legal_document", "data": {"view": "pub_theme::components.blocks.legal-document.design-comuni", "document": "terms_disclaimer", "markdown": "terms.md", "header_active": ""}}],
+        "de": [{"type": "legal_document", "data": {"view": "pub_theme::components.blocks.legal-document.design-comuni", "document": "terms_disclaimer", "markdown": "terms.md", "header_active": ""}}],
+        "es": [{"type": "legal_document", "data": {"view": "pub_theme::components.blocks.legal-document.design-comuni", "document": "terms_disclaimer", "markdown": "terms.md", "header_active": ""}}]
+    },
+    "sidebar_blocks": {"it": [], "en": [], "de": [], "es": []},
+    "footer_blocks": null
+}

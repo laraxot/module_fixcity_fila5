@@ -1,9 +1,13 @@
 ---
+qmd: "PROJECT STRUCTURE"
+issues: []
+discussions: []
 title: "Project Structure — Root root"
 type: documentation
 created: 2026-05-11
 updated: 2026-05-11
 tags: [structure, architecture, module]
+status: draft
 ---
 
 # Project Structure — Root **root**
@@ -95,10 +99,10 @@ graph TD
 ## Riferimenti Globali
 
 - [Project Wiki Root](../../docs/wiki/)
-- [Global Rules](../../docs/wiki/rules/)
-- [Global Skills](../../docs/wiki/skills/)
-- [Global Commands](../../docs/wiki/commands/)
-- [Global Memories](../../docs/wiki/memories/)
+- [Global Rules](wiki/rules)
+- [Global Skills](wiki/skills)
+- [Global Commands](wiki/commands)
+- [Global Memories](wiki/memories)
 
 ## Setup Iniziale (per nuovi moduli)
 
@@ -120,3 +124,8 @@ git commit -m "docs: add wiki structure for root"
 
 ---
 *Pattern: On-Demand | Source: docs/wiki/*
+
+--- BMAD + Second Brain ---
+- Scopo: documentazione tecnica del modulo.
+- Utilità: riferimento sviluppatori/audit.
+- Funzionalità: struttura, dipendenze, convenzioni (no date .md, git avanti).

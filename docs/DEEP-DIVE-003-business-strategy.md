@@ -1,4 +1,8 @@
 ---
+updated: 2026-09-26
+qmd: "DEEP DIVE 003 business strategy"
+issues: []
+discussions: []
 title: "Deep Dive: Business Model & Go-to-Market Strategy"
 type: analysis
 tags: [fixcity, business-model, pricing, gtm, strategy, revenue]
@@ -521,3 +525,8 @@ created: 2026-06-17
 ---
 
 *Strategy based on: competitor analysis, civic tech market research, Italian municipal structure, startup best practices.*
+
+--- BMAD + Second Brain ---
+- Scopo: documentazione tecnica del modulo.
+- Utilità: riferimento sviluppatori/audit.
+- Funzionalità: struttura, dipendenze, convenzioni (no date .md, git avanti).

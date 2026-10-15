@@ -1,0 +1,198 @@
+{
+    "id": "tests.segnalazione-03-riepilogo",
+    "slug": "tests.segnalazione-03-riepilogo",
+    "parent_slug": "tests",
+    "title": {
+        "it": "Riepilogo",
+        "en": "Summary"
+    },
+    "layout": "test",
+    "description": "Step 3 della segnalazione disservizio: riepilogo delle informazioni inserite. Contenuto da JSON, reso dal blocco report-step del tema Sixteen.",
+    "sidebar_blocks": {
+        "it": [],
+        "en": []
+    },
+    "footer_blocks": null,
+    "content_blocks": {
+        "it": [
+            {
+                "type": "report-step",
+                "data": {
+                    "view": "pub_theme::components.blocks.report-step.design-comuni",
+                    "layout": "summary",
+                    "title": "Segnalazione disservizio",
+                    "breadcrumb": {
+                        "items": [
+                            {
+                                "label": "Home",
+                                "url": "/it/tests/homepage"
+                            },
+                            {
+                                "label": "Servizi",
+                                "url": "#"
+                            }
+                        ],
+                        "current": "Segnalazione disservizio"
+                    },
+                    "steps": {
+                        "items": [
+                            {
+                                "label": "Autorizzazioni e condizioni",
+                                "state": "confirmed"
+                            },
+                            {
+                                "label": "Dati di segnalazione",
+                                "state": "confirmed"
+                            },
+                            {
+                                "label": "Riepilogo",
+                                "state": "active"
+                            }
+                        ],
+                        "index": "3/3",
+                        "confirmed_label": "Confermato",
+                        "active_label": "Attivo",
+                        "required_notice": "I campi contraddistinti dal simbolo asterisco sono obbligatori"
+                    },
+                    "callout": {
+                        "variant": "warning",
+                        "icon": "it-horn",
+                        "title": "Attenzione",
+                        "text": "Le informazioni che hai fornito hanno valore di dichiarazione.",
+                        "emphasis": "Verifica che siano corrette."
+                    },
+                    "groups": [
+                        {
+                            "title": "Segnalazione",
+                            "cards": [
+                                {
+                                    "title": "Disservizio",
+                                    "summaries": [
+                                        {
+                                            "class": "p-3 p-lg-4",
+                                            "edit": {
+                                                "label": "Modifica",
+                                                "url": "#",
+                                                "hidden": false
+                                            },
+                                            "footer_hidden": false,
+                                            "rows": [
+                                                {
+                                                    "label": "Indirizzo",
+                                                    "value": "Via Solferino - 50100 Firenze (FI)"
+                                                },
+                                                {
+                                                    "label": "Tipo di disservizio",
+                                                    "value": "Danneggiamento proprietà pubblica"
+                                                },
+                                                {
+                                                    "label": "Titolo",
+                                                    "value": "Panchina danneggiata"
+                                                },
+                                                {
+                                                    "label": "Dettagli",
+                                                    "value": "La seduta della panchina risulta inutilizzabile e pericolosa dato che ci sono molte schegge e parti appuntite"
+                                                },
+                                                {
+                                                    "label": "Immagini",
+                                                    "value": "6yhakandsahm413d8da.jpg"
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "title": "Dati Generali",
+                            "cards": [
+                                {
+                                    "title": "Autore della segnalazione",
+                                    "summaries": [
+                                        {
+                                            "class": "mb-4 mb-lg-30 p-3 p-lg-4",
+                                            "title": "Giulia Bianchi",
+                                            "rows": [
+                                                {
+                                                    "label": "Codice Fiscale",
+                                                    "value": "GLABNC72H25H501Y"
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "class": "p-3 p-lg-4",
+                                            "title": "Contatti",
+                                            "rows": [
+                                                {
+                                                    "label": "Telefono",
+                                                    "value": "+39 331 1234567"
+                                                },
+                                                {
+                                                    "label": "Email",
+                                                    "value": "giulia.bianchi@gmail.com"
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    ],
+                    "nav": {
+                        "aria_label": "Step",
+                        "back": "Indietro",
+                        "save": "Salva Richiesta",
+                        "save_short": "Salva",
+                        "next": "Invia",
+                        "saved_message": "Richiesta salvata con successo",
+                        "next_class": "send",
+                        "next_target": "#modal-terms",
+                        "next_icon": false
+                    },
+                    "contacts": {
+                        "layout": "offset",
+                        "main": {
+                            "title": "Contatta il comune",
+                            "items": [
+                                {
+                                    "icon": "it-help-circle",
+                                    "label": "Leggi le domande frequenti",
+                                    "url": "#"
+                                },
+                                {
+                                    "icon": "it-mail",
+                                    "label": "Richiedi assistenza",
+                                    "url": "#",
+                                    "element": "contacts"
+                                },
+                                {
+                                    "icon": "it-hearing",
+                                    "label": "Chiama il numero verde 05 0505",
+                                    "url": "#"
+                                },
+                                {
+                                    "icon": "it-calendar",
+                                    "label": "Prenota appuntamento",
+                                    "url": "#",
+                                    "element": "appointment-booking"
+                                }
+                            ]
+                        }
+                    },
+                    "modal": {
+                        "id": "modal-terms",
+                        "title": "Termini e condizioni",
+                        "info": "Cliccando su Conferma e invia confermi di aver preso visione dei termini e delle condizioni di servizio.",
+                        "link": "Leggi termini e condizioni",
+                        "link_url": "#",
+                        "confirm": "Conferma e invia",
+                        "cancel": "Annulla",
+                        "close_label": "Chiudi finestra modale"
+                    },
+                    "header_active": "all-services"
+                }
+            }
+        ],
+        "en": []
+    }
+}

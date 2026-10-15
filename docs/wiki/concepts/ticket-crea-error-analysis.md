@@ -1,7 +1,15 @@
 ---
+title: "ticket crea error analysis"
+tags: [documentation]
+created: 2026-09-26
+updated: 2026-09-26
+qmd: "ticket crea error analysis"
+issues: []
+discussions: []
 name: segnalazione-crea-error-analysis
 description: "Analisi dell'errore di routing fatto dall'AI: ha confuso il Folio page hardcoded con il percorso CMS JSON-driven"
 type: feedback
+status: draft
 ---
 
 # Error Analysis: Segnalazione-Crea Routing Confusion

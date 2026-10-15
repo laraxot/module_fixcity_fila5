@@ -8,7 +8,6 @@ use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Support\Carbon;
 use Modules\Fixcity\Actions\TicketCitizenRating\GetTicketCitizenRatingMorphAction;
 use Modules\Fixcity\Enums\TicketStatusEnum;
-use Modules\Rating\Models\Contracts\HasRatingContract;
 use Modules\Rating\Models\Traits\HasRating;
 
 /**
@@ -25,7 +24,7 @@ trait InteractsWithTicketCitizenRating
     {
         return Attribute::make(
             get: function (): ?int {
-                $morph = app(GetTicketCitizenRatingMorphAction::class)->executeForTicket($this);
+                $morph = app(GetTicketCitizenRatingMorphAction::class)->execute($this);
                 if ($morph === null || $morph->value === null) {
                     return null;
                 }
@@ -42,7 +41,7 @@ trait InteractsWithTicketCitizenRating
     {
         return Attribute::make(
             get: function (): ?Carbon {
-                $morph = app(GetTicketCitizenRatingMorphAction::class)->executeForTicket($this);
+                $morph = app(GetTicketCitizenRatingMorphAction::class)->execute($this);
 
                 return $morph?->created_at;
             },

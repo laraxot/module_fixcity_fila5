@@ -1,7 +1,15 @@
 ---
+title: "ticket crea geolocate when empty"
+tags: [documentation]
+created: 2026-09-26
+updated: 2026-09-26
+qmd: "ticket crea geolocate when empty"
+issues: []
+discussions: []
 name: segnalazione-crea-geolocate-when-empty
 description: CoordinatePicker in segnalazione-crea must geolocate when coordinates are missing
 type: concept
+status: draft
 ---
 
 # Segnalazione Crea Geolocate When Empty

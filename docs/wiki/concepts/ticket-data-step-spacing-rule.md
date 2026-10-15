@@ -1,11 +1,15 @@
 ---
+qmd: "ticket data step spacing rule"
+issues: []
+discussions: []
 title: Segnalazione Data Step Spacing Rule
 type: concept
 tags: [fixcity, segnalazione, wizard, design-comuni, css]
 created: 2026-04-22
 updated: 2026-04-22
 sources:
-  - ../../../../Themes/Sixteen/docs/wiki/concepts/coordinate-picker-design-comuni-parity-rule.md
+  - ../../../../../Themes/Sixteen/docs/wiki/concepts/coordinate-picker-design-comuni-parity-rule.md
+status: draft
 ---
 
 # Segnalazione Data Step Spacing Rule

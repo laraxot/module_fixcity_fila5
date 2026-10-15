@@ -1,8 +1,14 @@
 ---
+tags: [documentation]
+created: 2026-09-26
+qmd: "merge conflict task list"
+issues: []
+discussions: []
 title: Merge Conflict Task List
 type: taskboard
 updated: 2026-04-21
 rule: merge-conflict-marker-resolution
+status: draft
 ---
 
 # Merge Conflict Task List
@@ -33,7 +39,7 @@ Ogni agente prende un file, lo risolve semanticamente (non meccanicamente), e sp
 ### Modules/Cms
 - [ ] `laravel/Modules/Cms/docs/errors/git-conflicts-themes-resolution.md`
 - [ ] `laravel/Modules/Cms/docs/roadmap.md`
-- [ ] `laravel/Modules/Cms/docs/roadmap/legacy/legacy-roadmap-3.md`
+- [ ] `laravel/Modules/Cms/docs/roadmap/legacy/legacy-roadmap-content-management.md`
 - [ ] `laravel/Modules/Cms/docs/roadmap/legacy/legacy-roadmap-x.md`
 - [ ] `laravel/Modules/Cms/docs/wiki/README.md`
 - [ ] `laravel/Modules/Cms/docs/wiki/_archive/filament-4x-compatibility.md`
@@ -106,3 +112,7 @@ Ogni agente prende un file, lo risolve semanticamente (non meccanicamente), e sp
 ## Riferimento regola
 
 `bashscripts/ai/.claude/rules/merge-conflict-marker-resolution.md`
+--- BMAD + Second Brain ---
+- Scopo: documentazione tecnica del modulo.
+- Utilità: riferimento sviluppatori/audit.
+- Funzionalità: struttura, dipendenze, convenzioni (no date .md, git avanti).

@@ -1,0 +1,176 @@
+{
+  "id": "sixteen-search-modal",
+  "slug": "search-modal",
+  "name": {
+    "it": "Modale di ricerca Design Comuni",
+    "en": "Design Comuni search modal",
+    "de": "Design-Comuni-Suchfenster",
+    "es": "Ventana de búsqueda Design Comuni"
+  },
+  "blocks": {
+    "it": [
+      {
+        "type": "search-modal",
+        "slug": "design-comuni-search-modal",
+        "data": {
+          "view": "pub_theme::components.sections.search-modal.design-comuni",
+          "title": "Cerca",
+          "back_label": "Chiudi e torna alla pagina precedente",
+          "label": "Cerca nel sito",
+          "placeholder": "Cerca nel sito",
+          "button": "Cerca",
+          "suggestions_title": "FORSE STAVI CERCANDO",
+          "suggestions": [
+            {
+              "label": "Rilascio Carta Identità Elettronica (CIE)",
+              "url": "#"
+            },
+            {
+              "label": "Cambio di residenza",
+              "url": "#"
+            },
+            {
+              "label": "Tributi online",
+              "url": "#"
+            },
+            {
+              "label": "Prenotazione appuntamenti",
+              "url": "#"
+            },
+            {
+              "label": "Rilascio tessera elettorale",
+              "url": "#"
+            },
+            {
+              "label": "Voucher connettività",
+              "url": "#"
+            }
+          ]
+        }
+      }
+    ],
+    "en": [
+      {
+        "type": "search-modal",
+        "slug": "design-comuni-search-modal",
+        "data": {
+          "view": "pub_theme::components.sections.search-modal.design-comuni",
+          "title": "Search",
+          "back_label": "Close and go back to the previous page",
+          "label": "Search the site",
+          "placeholder": "Search the site",
+          "button": "Search",
+          "suggestions_title": "YOU MIGHT BE LOOKING FOR",
+          "suggestions": [
+            {
+              "label": "Electronic Identity Card (CIE) issue",
+              "url": "#"
+            },
+            {
+              "label": "Change of residence",
+              "url": "#"
+            },
+            {
+              "label": "Online taxes",
+              "url": "#"
+            },
+            {
+              "label": "Appointment booking",
+              "url": "#"
+            },
+            {
+              "label": "Electoral card issue",
+              "url": "#"
+            },
+            {
+              "label": "Connectivity voucher",
+              "url": "#"
+            }
+          ]
+        }
+      }
+    ],
+    "de": [
+      {
+        "type": "search-modal",
+        "slug": "design-comuni-search-modal",
+        "data": {
+          "view": "pub_theme::components.sections.search-modal.design-comuni",
+          "title": "Suchen",
+          "back_label": "Schließen und zur vorherigen Seite zurückkehren",
+          "label": "Website durchsuchen",
+          "placeholder": "Website durchsuchen",
+          "button": "Suchen",
+          "suggestions_title": "VIELLEICHT SUCHEN SIE",
+          "suggestions": [
+            {
+              "label": "Ausstellung des elektronischen Personalausweises (CIE)",
+              "url": "#"
+            },
+            {
+              "label": "Wohnsitzwechsel",
+              "url": "#"
+            },
+            {
+              "label": "Online-Abgaben",
+              "url": "#"
+            },
+            {
+              "label": "Terminbuchung",
+              "url": "#"
+            },
+            {
+              "label": "Ausstellung der Wahlkarte",
+              "url": "#"
+            },
+            {
+              "label": "Konnektivitätsgutschein",
+              "url": "#"
+            }
+          ]
+        }
+      }
+    ],
+    "es": [
+      {
+        "type": "search-modal",
+        "slug": "design-comuni-search-modal",
+        "data": {
+          "view": "pub_theme::components.sections.search-modal.design-comuni",
+          "title": "Buscar",
+          "back_label": "Cerrar y volver a la página anterior",
+          "label": "Buscar en el sitio",
+          "placeholder": "Buscar en el sitio",
+          "button": "Buscar",
+          "suggestions_title": "QUIZÁ ESTABAS BUSCANDO",
+          "suggestions": [
+            {
+              "label": "Emisión del Documento de Identidad Electrónico (CIE)",
+              "url": "#"
+            },
+            {
+              "label": "Cambio de residencia",
+              "url": "#"
+            },
+            {
+              "label": "Tributos en línea",
+              "url": "#"
+            },
+            {
+              "label": "Reserva de citas",
+              "url": "#"
+            },
+            {
+              "label": "Emisión de la tarjeta electoral",
+              "url": "#"
+            },
+            {
+              "label": "Bono de conectividad",
+              "url": "#"
+            }
+          ]
+        }
+      }
+    ]
+  }
+}

@@ -1,9 +1,20 @@
+---
+title: "coordinate picker lit"
+type: note
+tags: [documentation]
+created: 2026-09-26
+updated: 2026-09-26
+qmd: "coordinate picker lit"
+issues: []
+discussions: []
+status: draft
+---
+
 # Coordinate Picker Lit Component
 
 > Componente mappa per il wizard ticket basato su Lit.dev + Leaflet
 
 ---
-
 ## Architettura
 
 ### Stack Tecnologico
@@ -163,3 +174,8 @@ public static function getDataSchema(): array
 **Data**: 2026-04-27
 **Stato**: In Progress
 **Issues**: #8-41
+
+--- BMAD + Second Brain ---
+- Scopo: documentazione tecnica del modulo.
+- Utilità: riferimento sviluppatori/audit.
+- Funzionalità: struttura, dipendenze, convenzioni (no date .md, git avanti).

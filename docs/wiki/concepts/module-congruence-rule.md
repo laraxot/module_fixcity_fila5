@@ -16,6 +16,7 @@ discussions:
 related:
   - ./module-artifact-parity-audit.md
   - ../../../../../../docs/wiki/memories/module-symmetry-law.md
+status: draft
 ---
 
 # Regola di Congruenza Modulo-Modello

@@ -17,6 +17,7 @@ related:
   - ./migration-update-timestamps-only.md
   - ../../../../../../docs/wiki/concepts/hackernoon-ai-coding-tips-fixcity-map.md
   - ../../../../../../docs/wiki/bmad/architecture.md
+status: draft
 ---
 
 # AI harness — Fixcity

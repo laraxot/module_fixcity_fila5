@@ -7,12 +7,15 @@ namespace Modules\Fixcity\Actions;
 use Modules\Fixcity\Enums\TicketStatusEnum;
 use Modules\Xot\Actions\Cast\SafeIntCastAction;
 use Modules\Xot\Actions\Cast\SafeStringCastAction;
+use Spatie\QueueableAction\QueueableAction;
 
 /**
- * Aggregati filtri elenco segnalazioni da tickets.json — SSoT unico per mappa + filtri.
+ * Aggregati live per i filtri pubblici; stessa query e stessi marker della mappa.
  */
 class BuildSegnalazioniFilterAggregateAction
 {
+    use QueueableAction;
+
     /**
      * @return array{
      *     features: array<int, array<string, mixed>>,
@@ -25,7 +28,9 @@ class BuildSegnalazioniFilterAggregateAction
      */
     public function execute(): array
     {
-        $geoJson = app(LoadPublicTicketsGeoJsonAction::class)->execute();
+        $geoJson = app(BuildTicketsGeoJsonAction::class)->execute(
+            app(BuildPublicTicketsQueryAction::class)->execute(),
+        );
         $features = $geoJson['features'] ?? [];
 
         /** @var array<string, int> $counts */
@@ -63,16 +68,7 @@ class BuildSegnalazioniFilterAggregateAction
                 $typesMap[$typeValue] = $typeMeta;
             }
 
-            $statusMeta = $this->resolveStatusMeta($props);
-            if ($statusMeta !== null) {
-                $statusValue = SafeStringCastAction::cast($statusMeta['value'] ?? '');
-                if ($statusValue !== '') {
-                    $statusCounts[$statusValue] = ($statusCounts[$statusValue] ?? 0) + 1;
-                    if (! isset($statusesMap[$statusValue])) {
-                        $statusesMap[$statusValue] = $statusMeta;
-                    }
-                }
-            }
+            $this->accumulateStatusMeta($props, $statusCounts, $statusesMap);
         }
 
         return [
@@ -86,11 +82,33 @@ class BuildSegnalazioniFilterAggregateAction
     }
 
     /**
+     * @param  array<string, mixed>  $props
+     * @param  array<string, int>  $statusCounts
+     * @param  array<string, array<string, mixed>>  $statusesMap
+     */
+    private function accumulateStatusMeta(array $props, array &$statusCounts, array &$statusesMap): void
+    {
+        $statusMeta = $this->resolveStatusMeta($props);
+        if ($statusMeta === null) {
+            return;
+        }
+
+        $statusValue = SafeStringCastAction::cast($statusMeta['value'] ?? '');
+        if ($statusValue === '') {
+            return;
+        }
+
+        $statusCounts[$statusValue] = ($statusCounts[$statusValue] ?? 0) + 1;
+        if (! isset($statusesMap[$statusValue])) {
+            $statusesMap[$statusValue] = $statusMeta;
+        }
+    }
+
+    /**
      * Contratto GeoJSON properties.type (oggetto annidato o flat legacy).
      *
      * @param  array<string, mixed>  $properties
-     * Solo tipologia (TicketTypeEnum): icona per legenda filtri — niente colore (riservato allo status).
-     *
+     *                                            Solo tipologia (TicketTypeEnum): icona per legenda filtri — niente colore (riservato allo status).
      * @return array{value: string, label: string, iconUrl: string}|null
      */
     private function resolveTypeMeta(array $properties): ?array
@@ -116,7 +134,7 @@ class BuildSegnalazioniFilterAggregateAction
         }
 
         if (is_string($typeRaw) && $typeRaw !== '') {
-            return app(ResolveTicketTypeMarkerPropertiesAction::class)->executeFromValue($typeRaw);
+            return app(ResolveTicketTypeMarkerPropertiesAction::class)->execute($typeRaw);
         }
 
         return null;
@@ -142,12 +160,12 @@ class BuildSegnalazioniFilterAggregateAction
                 'value' => $value,
                 'label' => SafeStringCastAction::cast($statusRaw['label'] ?? $value),
                 'color' => $color !== '' ? $color : app(ResolveTicketStatusMarkerPropertiesAction::class)
-                    ->executeFromValue($value)['color'],
+                    ->execute($value)['color'],
             ];
         }
 
         if (is_string($statusRaw) && $statusRaw !== '') {
-            return app(ResolveTicketStatusMarkerPropertiesAction::class)->executeFromValue($statusRaw);
+            return app(ResolveTicketStatusMarkerPropertiesAction::class)->execute($statusRaw);
         }
 
         return null;

@@ -1,3 +1,15 @@
+---
+title: "tickets view cms folio page"
+type: note
+tags: [documentation]
+created: 2026-09-26
+updated: 2026-09-26
+qmd: "tickets view cms folio page"
+issues: []
+discussions: []
+status: draft
+---
+
 # Tickets View CMS Folio Page Concept
 
 Documentation for the CMS-driven ticket detail page implementation using Folio routing system.
@@ -93,7 +105,7 @@ sequenceDiagram
 Non creare `Themes/Sixteen/resources/views/pages/tickets/`.  
 URL `/it/tickets/{id}` è già servito da `[container0]/[slug0]/index.blade.php` + CMS `tickets.view` + `Ticket\ViewWidget`.
 
-Canon: [page-directory-structure.md](../../../../Themes/Sixteen/docs/page-directory-structure.md) · [container0-pattern-philosophy.md](../../../../../../docs/wiki/memories/container0-pattern-philosophy.md).
+Canon: [page-directory-structure.md](../../../../../Themes/Sixteen/docs/page-directory-structure.md) · [container0-pattern-philosophy.md](../../../../../../docs/wiki/memories/container0-pattern-philosophy.md).
 
 ## Tasks / Subtasks (aggiornato)
 
@@ -112,7 +124,7 @@ Canon: [page-directory-structure.md](../../../../Themes/Sixteen/docs/page-direct
 
 ## dati demo
 
-[STORY-135](../../../../../docs/stories/STORY-135-ticket-presentation-seeder.md) — `php artisan db:seed --class="Modules\Fixcity\Database\Seeders\TicketDatabaseSeeder"` poi rigenerare GeoJSON (`GenerateTicketsJsonAction`).
+[STORY-135](../../../../../../docs/stories/STORY-135-ticket-presentation-seeder.md) — `php artisan db:seed --class="Modules\Fixcity\Database\Seeders\TicketDatabaseSeeder"` poi rigenerare GeoJSON (`GenerateTicketsJsonAction`).
 
 ## References
 

@@ -1,3 +1,15 @@
+---
+title: "DAISYUI"
+type: note
+tags: [documentation]
+created: 2026-09-26
+updated: 2026-09-26
+qmd: "DAISYUI"
+issues: []
+discussions: []
+status: draft
+---
+
 # Fixcity Module — daisyUI Reference
 
 ## Panoramica
@@ -14,7 +26,6 @@ Il modulo **Fixcity** **non istalla daisyUI direttamente**, ma la consuma indire
 | Tailwind CSS in Fixcity | ❌ Nessun `tailwind.config.js` locale — usa quello del tema |
 
 ---
-
 ## Dove Fixcity vede daisyUI
 
 Il modulo Fixcity **non ha un asset pipeline autonomo**. Tutti gli asset CSS/JS sono serviti dal tema Sixteen.
@@ -98,7 +109,7 @@ DaisyUI e Filament possono convivere, ma servono regole di isolamento:
 | Usare classi daisyUI (`.btn`, `.input`, `.alert`) nei nuovi template Blade invece di scrivere utility Tailwind manuali | 🔴 Alta |
 | Rimuovere `bootstrap-italia/dist/css` dal bundle Sixteen | 🟡 Media (già pianificato in scheda consolidamento) |
 | Documentare ogni pagina che usa daisyUI | 🟢 Bassa |
-| Non installare daisyUI nel modulo Geo (vedi [Geo/DAISYUI.md](../Geo/docs/DAISYUI.md)) | 🔴 Alta |
+| Non installare daisyUI nel modulo Geo (vedi [Geo/DAISYUI.md](../../Geo/docs/DAISYUI.md)) | 🔴 Alta |
 
 ---
 
@@ -133,3 +144,8 @@ border al `<input>` interno. **Regola operativa: un solo elemento porta il
 bordo per ciascun controllo.** Nel wizard il bordo vive sul wrapper, l'input è
 trasparente. Vedi `laravel/Themes/Sixteen/resources/css/components/filament-wizard-parity.css`
 e il doc canonico `laravel/Themes/Sixteen/docs/DAISYUI.md` § "Decisione architetturale".
+
+--- BMAD + Second Brain ---
+- Scopo: documentazione tecnica del modulo.
+- Utilità: riferimento sviluppatori/audit.
+- Funzionalità: struttura, dipendenze, convenzioni (no date .md, git avanti).

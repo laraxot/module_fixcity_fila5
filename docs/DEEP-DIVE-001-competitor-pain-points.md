@@ -1,4 +1,8 @@
 ---
+updated: 2026-09-26
+qmd: "DEEP DIVE 001 competitor pain points"
+issues: []
+discussions: []
 title: "Deep Dive: Competitor Pain Points & Real Failures"
 type: analysis
 tags: [fixcity, competitor-analysis, pain-points, failures, real-world]
@@ -336,3 +340,8 @@ Per evitare failure patterns:
 ---
 
 *Analysis based on: Capterra reviews, CivicPlus docs, mySociety case studies, AidData research, IRI white paper, academic journals.*
+
+--- BMAD + Second Brain ---
+- Scopo: documentazione tecnica del modulo.
+- Utilità: riferimento sviluppatori/audit.
+- Funzionalità: struttura, dipendenze, convenzioni (no date .md, git avanti).

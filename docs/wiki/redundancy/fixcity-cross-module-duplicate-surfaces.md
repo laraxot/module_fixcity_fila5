@@ -1,4 +1,7 @@
 ---
+tags: [documentation]
+qmd: "fixcity cross module duplicate surfaces"
+discussions: []
 title: "Superfici Fixcity duplicate cross-modulo (non solo interne)"
 type: redundancy
 owner: Modules/Fixcity
@@ -14,13 +17,14 @@ related:
   - ../../../../Xot/docs/wiki/redundancy/audit-profondo-ridondanze-holistic.md
 issues:
   - "https://github.com/laraxot/base_fixcity_fila5/issues/90"
+status: draft
 ---
 
 # Fixcity — dove il dominio pubblico incontra artefatti “copiati” altrove
 
 ## Perché questa pagina
 
-Il modulo [**Fixcity**](../../overviews/fixcity-module.md) concentra segnalazioni/ticket. Parte delle view Filament/widget è **delegata correttamente** a Xot (pattern `TicketForm`) e ai temi (boundary parity). Qui si elencano **superfici con hash o struttura condivisi con altri moduli** perché sono candidati alla deriva quando si corregge “solo Rating” o “solo Job” ma non Fixcity — o viceversa.
+Il modulo [**Fixcity**](../overviews/fixcity-module.md) concentra segnalazioni/ticket. Parte delle view Filament/widget è **delegata correttamente** a Xot (pattern `TicketForm`) e ai temi (boundary parity). Qui si elencano **superfici con hash o struttura condivisi con altri moduli** perché sono candidati alla deriva quando si corregge “solo Rating” o “solo Job” ma non Fixcity — o viceversa.
 
 ## Evidenza statica SHA256 cross-owner
 

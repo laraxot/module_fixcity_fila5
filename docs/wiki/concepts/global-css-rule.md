@@ -1,4 +1,7 @@
 ---
+qmd: "global css rule"
+issues: []
+discussions: []
 title: Global CSS Rule - Avoid Page-Specific Selectors
 type: concept
 tags: [css, design-comuni, dry-kiss, architecture]
@@ -8,6 +11,7 @@ updated: 2026-04-22
 related:
   - theme-css-build-workflow.md
   - design-comuni-compliance.md
+status: draft
 ---
 
 # Global CSS Rule - Avoid Page-Specific Selectors

@@ -1,4 +1,9 @@
 ---
+tags: [documentation]
+created: 2026-09-26
+qmd: "livewire removal debt"
+issues: []
+discussions: []
 title: debito tecnico — rimozione livewire ticketlist
 type: debt
 module: fixcity

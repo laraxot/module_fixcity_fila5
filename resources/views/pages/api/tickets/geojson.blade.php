@@ -3,24 +3,21 @@
 declare(strict_types=1);
 
 use Illuminate\Http\JsonResponse;
+use Modules\Fixcity\Actions\ApplyPublicTicketFiltersAction;
 use Modules\Fixcity\Actions\BuildPublicTicketsQueryAction;
 use Modules\Fixcity\Actions\BuildTicketsGeoJsonAction;
+use Modules\Fixcity\Datas\PublicTicketListFilters;
 use function Laravel\Folio\name;
 use function Laravel\Folio\render;
 
 name('api.tickets.geojson');
 
+// Stessi filtri dell'elenco pubblico (q, types[], statuses[], period): la mappa e l'elenco di /{lang}/tickets mostrano le stesse segnalazioni.
 render(function (): JsonResponse {
-    /** @var array<int, string> $types */
-    $types = request()->collect('types')
-        ->filter(static fn ($type): bool => is_string($type) && $type !== '')
-        ->values()
-        ->all();
-
-    $payload = app(BuildTicketsGeoJsonAction::class)->execute(
+    $query = app(ApplyPublicTicketFiltersAction::class)->execute(
         app(BuildPublicTicketsQueryAction::class)->execute(),
-        $types,
+        PublicTicketListFilters::fromRequest(request()),
     );
 
-    return response()->json($payload);
+    return response()->json(app(BuildTicketsGeoJsonAction::class)->execute($query));
 });

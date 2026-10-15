@@ -1,3 +1,14 @@
+---
+title: "wizard schemas overview alignment"
+type: note
+tags: [documentation]
+created: 2026-09-26
+updated: 2026-09-26
+qmd: "wizard schemas overview alignment"
+issues: []
+discussions: []
+---
+
 # wizard schemas overview alignment
 
 ## obiettivo

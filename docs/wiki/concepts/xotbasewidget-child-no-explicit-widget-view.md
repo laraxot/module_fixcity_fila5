@@ -1,4 +1,7 @@
 ---
+qmd: "xotbasewidget child no explicit widget view"
+issues: []
+discussions: []
 title: xotbasewidget — niente $view esplicito sul widget figlio
 type: concept
 confidence: high
@@ -9,6 +12,7 @@ related:
     - ../../../docs/ticket-wizard-frontoffice.md
     - ../../../../../Modules/Xot/app/Filament/Widgets/XotBaseWidget.php
     - ../../../../../Modules/Xot/app/Actions/View/GetViewByClassAction.php
+status: draft
 ---
 
 # perché

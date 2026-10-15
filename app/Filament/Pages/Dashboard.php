@@ -4,10 +4,9 @@ declare(strict_types=1);
 
 namespace Modules\Fixcity\Filament\Pages;
 
-// use Filament\Pages\Dashboard as BaseDashboard;
-use Filament\Pages\Page;
+use Modules\Xot\Filament\Pages\XotBaseDashboard;
 
-class Dashboard extends Page
+class Dashboard extends XotBaseDashboard
 {
     protected static string|\BackedEnum|null $navigationIcon = 'heroicon-o-home';
 

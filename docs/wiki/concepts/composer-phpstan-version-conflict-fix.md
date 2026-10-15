@@ -1,3 +1,15 @@
+---
+title: "composer phpstan version conflict fix"
+type: note
+tags: [documentation]
+created: 2026-09-26
+updated: 2026-09-26
+qmd: "composer phpstan version conflict fix"
+issues: []
+discussions: []
+status: draft
+---
+
 # Composer PHPStan Version Conflict Fix
 
 ## Problem

@@ -1,4 +1,5 @@
 ---
+qmd: "cms block naming tailwind flowbite"
 title: "CMS Block naming — Tailwind UI / Flowbite"
 type: rule
 confidence: high
@@ -10,9 +11,10 @@ issues:
 discussions:
   - https://github.com/laraxot/base_fixcity_fila5/discussions/195
 related:
-  - ../../../../Themes/Sixteen/docs/blocks/folder-vocabulary.md
+  - ../../../../../Themes/Sixteen/docs/blocks/folder-vocabulary.md
   - no-italian-component-names.md
   - frontend-stack-canonical.md
+status: draft
 ---
 
 # CMS Block naming — Tailwind UI / Flowbite
@@ -25,7 +27,7 @@ Le **sottocartelle** di `resources/views/components/blocks/` devono usare nomi p
 - [Tailwind CSS UI Blocks](https://tailwindcss.com/plus/ui-blocks)
 
 **Inglese**, **kebab-case**, **no dominio** (`ticket`, `segnalazione`).  
-Vocabolario completo + contenuto ammesso: [folder-vocabulary.md](../../../../Themes/Sixteen/docs/blocks/folder-vocabulary.md).
+Vocabolario completo + contenuto ammesso: [folder-vocabulary.md](../../../../../Themes/Sixteen/docs/blocks/folder-vocabulary.md).
 
 ## Shape
 

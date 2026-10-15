@@ -4,14 +4,14 @@ declare(strict_types=1);
 
 namespace Modules\Fixcity\Filament\Widgets;
 
-use Filament\Widgets\StatsOverviewWidget as BaseWidget;
 use Filament\Widgets\StatsOverviewWidget\Stat;
 use Modules\Fixcity\Actions\GetTicketSlaMetricsAction;
+use Modules\Xot\Filament\Widgets\XotBaseStatsOverviewWidget;
 
 /**
  * SLA / tempi medi risoluzione (STORY-041).
  */
-class TicketSlaOverviewWidget extends BaseWidget
+class TicketSlaOverviewWidget extends XotBaseStatsOverviewWidget
 {
     protected function getStats(): array
     {

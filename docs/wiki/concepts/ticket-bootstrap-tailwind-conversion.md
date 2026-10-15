@@ -1,4 +1,7 @@
 ---
+qmd: "ticket bootstrap tailwind conversion"
+issues: []
+discussions: []
 title: "Segnalazione Bootstrap → Tailwind Conversion"
 type: concept
 sources: 
@@ -10,8 +13,9 @@ updated: 2026-05-04
 tags: [segnalazione, bootstrap, tailwind, conversion, design-comuni, parity]
 related:
   - concepts/segnalazione-design-comuni-comparison.md
-  - ../../../laravel/Themes/Sixteen/docs/wiki/concepts/bootstrap-tailwind-mapping.md
+  - ../../../../../Themes/Sixteen/docs/wiki/concepts/bootstrap-tailwind-mapping.md
   - concepts/segnalazione-visual-parity.md
+status: draft
 ---
 
 # Segnalazione Bootstrap → Tailwind Conversion

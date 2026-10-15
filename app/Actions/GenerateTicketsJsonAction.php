@@ -23,8 +23,11 @@ class GenerateTicketsJsonAction
         $outputPath = base_path(LoadPublicTicketsGeoJsonAction::RELATIVE_PATH);
 
         $geojson = app(BuildTicketsGeoJsonAction::class)->execute(
-            app(BuildPublicTicketsQueryAction::class)->execute(),
+            // Il file e' pubblico (public_html/data/tickets.json): solo segnalazioni pubbliche, mai le non ancora pubbliche di chi preme «Esporta»
+            // (il valore predefinito `includeOwnTickets: true` serve alla mappa dell'utente loggato). Audit DCP-181, D-1.
+            app(BuildPublicTicketsQueryAction::class)->execute(includeOwnTickets: false),
         );
+        app(ValidateTicketsGeoJsonAction::class)->execute($geojson);
 
         $dir = \dirname($outputPath);
         if (! File::isDirectory($dir)) {

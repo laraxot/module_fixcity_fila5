@@ -1,3 +1,15 @@
+---
+title: "LOGGING PERFORMANCE"
+type: note
+tags: [documentation]
+created: 2026-09-26
+updated: 2026-09-26
+qmd: "LOGGING PERFORMANCE"
+issues: []
+discussions: []
+status: draft
+---
+
 # Logging Performance Optimization
 
 ## Rule: NEVER USE Log::info()
@@ -53,3 +65,7 @@ activity()->causedBy($user)->log('Ticket created');
 // Use metrics for tracking
 Metrics::increment('tickets.created');
 ```
+--- BMAD + Second Brain ---
+- Scopo: documentazione tecnica del modulo.
+- Utilità: riferimento sviluppatori/audit.
+- Funzionalità: struttura, dipendenze, convenzioni (no date .md, git avanti).

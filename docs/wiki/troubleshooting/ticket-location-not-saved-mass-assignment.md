@@ -1,4 +1,7 @@
 ---
+qmd: "ticket location not saved mass assignment"
+issues: []
+discussions: []
 title: "Ticket location not saved — mutator Eloquent mancante"
 type: troubleshooting
 confidence: high
@@ -8,7 +11,8 @@ tags: [ticket, location, geo, filament, admin, eloquent, mutator, coordinate-pic
 related:
   - ../concepts/admin-ticket-create-map-visual-contract.md
   - ../concepts/location-capture-map-wizard.md
-  - ../../../Geo/docs/wiki/concepts/coordinate-picker-filament5-save-pattern.md
+  - ../../../../Geo/docs/wiki/concepts/coordinate-picker-filament5-save-pattern.md
+status: draft
 ---
 
 ## Scopo business

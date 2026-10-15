@@ -1,0 +1,123 @@
+{
+    "id": "tests.accesso-servizio",
+    "slug": "tests.accesso-servizio",
+    "parent_slug": "tests",
+    "title": {
+        "it": "Accesso Servizio",
+        "en": "Service Access"
+    },
+    "layout": "test",
+    "description": "Accesso ai servizi con SPID, CIE e altre utenze. Contenuto da JSON, reso dal blocco access-page del tema Sixteen.",
+    "content_blocks": {
+        "it": [
+            {
+                "type": "access-page",
+                "data": {
+                    "view": "pub_theme::components.blocks.access-page.design-comuni",
+                    "title": "Accedi",
+                    "breadcrumb": {
+                        "items": [
+                            {
+                                "label": "Home",
+                                "url": "/it/tests/homepage"
+                            }
+                        ],
+                        "current": "Accedi"
+                    },
+                    "subtitle": "Per accedere al sito e ai suoi servizi, utilizza una delle seguenti modalità.",
+                    "methods": [
+                        {
+                            "title": "SPID",
+                            "text": "Accedi con SPID, il sistema Pubblico di Identità Digitale.",
+                            "layout": "single",
+                            "buttons": [
+                                {
+                                    "label": "Entra con SPID",
+                                    "variant": "icon",
+                                    "image": {
+                                        "file": "spid.svg",
+                                        "alt": "Entra con SPID"
+                                    }
+                                }
+                            ],
+                            "link": {
+                                "label": "Come attivare SPID",
+                                "url": "#"
+                            }
+                        },
+                        {
+                            "title": "CIE",
+                            "text": "Accedi con la tua Carta d’Identità Elettronica.",
+                            "layout": "single",
+                            "buttons": [
+                                {
+                                    "label": "Entra con CIE",
+                                    "variant": "icon",
+                                    "image": {
+                                        "file": "cie.svg",
+                                        "alt": "Entra con CIE"
+                                    }
+                                }
+                            ],
+                            "link": {
+                                "label": "Come richiedere CIE",
+                                "url": "#"
+                            }
+                        },
+                        {
+                            "title": "Altre utenze",
+                            "text": "In alternativa puoi utilizzare le seguenti modalità.",
+                            "layout": "row",
+                            "buttons": [
+                                {
+                                    "label": "Accedi con ID azienda",
+                                    "variant": "outline"
+                                },
+                                {
+                                    "label": "Accedi come dipendente",
+                                    "variant": "outline"
+                                }
+                            ]
+                        }
+                    ],
+                    "contacts": {
+                        "layout": "offset",
+                        "main": {
+                            "title": "Contatta il comune",
+                            "items": [
+                                {
+                                    "icon": "it-help-circle",
+                                    "label": "Leggi le domande frequenti",
+                                    "url": "#"
+                                },
+                                {
+                                    "icon": "it-mail",
+                                    "label": "Richiedi assistenza",
+                                    "url": "#",
+                                    "element": "contacts"
+                                },
+                                {
+                                    "icon": "it-hearing",
+                                    "label": "Chiama il numero verde 05 0505",
+                                    "url": "#"
+                                },
+                                {
+                                    "icon": "it-calendar",
+                                    "label": "Prenota appuntamento",
+                                    "url": "#",
+                                    "element": "appointment-booking"
+                                }
+                            ]
+                        }
+                    }
+                }
+            }
+        ],
+        "en": []
+    },
+    "sidebar_blocks": {
+        "it": [],
+        "en": []
+    },
+    "footer_blocks": null
+}

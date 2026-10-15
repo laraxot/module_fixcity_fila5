@@ -1,10 +1,13 @@
 ---
+issues: []
+discussions: []
 title: PHPStan Standards & Model Documentation
 type: technical
 tags: [phpstan, models, ticket, type-safety]
 created: 2026-06-10
 updated: 2026-06-10
 qmd: docs/wiki/phpstan-fixcity-module.md
+status: draft
 ---
 
 # PHPStan Level 10 Standards - Fixcity Module
@@ -89,3 +92,8 @@ class ChangeStatus
 
 Last PHPStan Check: 2026-06-10
 Status: ✅ All methods verified and documented
+
+--- BMAD + Second Brain ---
+- Scopo: documentazione tecnica del modulo.
+- Utilità: riferimento sviluppatori/audit.
+- Funzionalità: struttura, dipendenze, convenzioni (no date .md, git avanti).

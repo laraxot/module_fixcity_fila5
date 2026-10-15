@@ -1,3 +1,15 @@
+---
+title: "admin map asset registry mismatch"
+type: note
+tags: [documentation]
+created: 2026-09-26
+updated: 2026-09-26
+qmd: "admin map asset registry mismatch"
+issues: []
+discussions: []
+status: draft
+---
+
 # Admin map asset registry mismatch
 
 ## Problema
@@ -83,4 +95,4 @@ Per route admin Filament, la catena asset deve essere coerente end-to-end:
 ## Riferimenti
 
 - [admin ticket create map visual contract](./admin-ticket-create-map-visual-contract.md)
-- [filament admin panel map visibility contract](../../../Geo/docs/wiki/concepts/filament-admin-panel-map-visibility-contract.md)
+- [filament admin panel map visibility contract](../../../../Geo/docs/wiki/concepts/filament-admin-panel-map-visibility-contract.md)

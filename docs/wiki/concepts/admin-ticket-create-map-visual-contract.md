@@ -1,3 +1,15 @@
+---
+title: "admin ticket create map visual contract"
+type: note
+tags: [documentation]
+created: 2026-09-26
+updated: 2026-09-26
+qmd: "admin ticket create map visual contract"
+issues: []
+discussions: []
+status: draft
+---
+
 # Admin ticket create map visual contract
 
 ## Contesto
@@ -33,5 +45,5 @@ Un fix mappa su admin panel e' completo solo dopo verifica diretta della route a
 
 ## Riferimenti
 
-- [geo admin panel map visibility contract](../../../Geo/docs/wiki/concepts/filament-admin-panel-map-visibility-contract.md)
-- [theme not owner for admin panel styles](../../../../Themes/Sixteen/docs/wiki/concepts/filament-admin-style-ownership-boundary.md)
+- [geo admin panel map visibility contract](../../../../Geo/docs/wiki/concepts/filament-admin-panel-map-visibility-contract.md)
+- [theme not owner for admin panel styles](../../../../../Themes/Sixteen/docs/wiki/concepts/filament-admin-style-ownership-boundary.md)

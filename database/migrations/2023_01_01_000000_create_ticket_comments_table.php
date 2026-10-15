@@ -20,7 +20,7 @@ return new class extends XotBaseMigration
             static function (Blueprint $table): void {
                 $table->id();
                 $table->foreignId('ticket_id'); // ->constrained('tickets');
-                $table->foreignId('user_id'); // ->constrained('users');
+                $table->string('user_id', 36)->index()->nullable(); // ->constrained('users');
                 $table->longText('content');
             }
         );

@@ -1,3 +1,15 @@
+---
+title: "product roadmap"
+type: note
+tags: [documentation]
+created: 2026-09-26
+updated: 2026-09-26
+qmd: "product roadmap"
+issues: []
+discussions: []
+status: draft
+---
+
 # 🗺️ Fixcity Product Roadmap
 
 > **Owner**: FixCity Product Team  
@@ -5,7 +17,6 @@
 > **Timeframe**: Q1 2026 - Q4 2027
 
 ---
-
 ## 📋 Table of Contents
 
 1. [Executive Summary](#executive-summary)
@@ -352,7 +363,7 @@ Empower citizens and municipalities with tools to report, track, and resolve urb
 ## Appendix
 
 ### Related Documents
-- [PRD: Product Requirements](./PRD.md)
+- [PRD: Product Requirements](./prd.md)
 - [Product Strategy](./product-strategy.md)
 - [Product Launch Plan](./launch-plan.md)
 - [User Research](./user-research.md)

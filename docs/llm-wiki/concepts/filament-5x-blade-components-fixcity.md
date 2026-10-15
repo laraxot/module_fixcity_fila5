@@ -1,4 +1,7 @@
 ---
+qmd: "filament 5x blade components fixcity"
+issues: []
+discussions: []
 title: "Filament 5.x Blade Components in Fixcity — Regola Filament-First"
 type: concept
 sources: ["https://filamentphp.com/docs/5.x/components/overview"]
@@ -9,8 +12,9 @@ tags: [filament, blade-components, filament-first, fixcity, frontoffice]
 related:
   - concepts/filament-wizard-architecture.md
   - concepts/filament-first-rule.md
-  - ../../Themes/Sixteen/docs/wiki/concepts/filament-5x-blade-components-reference.md
-  - ../../../docs/wiki/rules/filament-first-rule.md
+  - ../../../../../Themes/Sixteen/docs/wiki/concepts/filament-5x-blade-components-reference.md
+  - ../../../../../../docs/wiki/rules/filament-first-rule.md
+status: draft
 ---
 
 # Filament 5.x Blade Components in Fixcity — Regola Filament-First

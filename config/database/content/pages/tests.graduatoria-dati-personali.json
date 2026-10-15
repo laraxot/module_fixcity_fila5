@@ -1,0 +1,932 @@
+{
+    "id": "tests.graduatoria-dati-personali",
+    "slug": "tests.graduatoria-dati-personali",
+    "parent_slug": "tests",
+    "title": {
+        "it": "Iscrizione alla scuola dell'infanzia",
+        "en": "Iscrizione alla scuola dell'infanzia"
+    },
+    "layout": "test",
+    "sidebar_blocks": {
+        "it": [],
+        "en": []
+    },
+    "footer_blocks": null,
+    "description": "Pagina di prova graduatoria-dati-personali (flusso graduatoria) da JSON, resa dal blocco service-flow del tema Sixteen.",
+    "content_blocks": {
+        "it": [
+            {
+                "type": "service-flow",
+                "data": {
+                    "view": "pub_theme::components.blocks.service-flow.design-comuni",
+                    "kind": "wizard-step",
+                    "breadcrumb": {
+                        "items": [
+                            {
+                                "label": "Home",
+                                "url": "/it/tests/homepage"
+                            },
+                            {
+                                "label": "Servizi",
+                                "url": "#"
+                            },
+                            {
+                                "label": "Educazione e Formazione",
+                                "url": "#"
+                            }
+                        ],
+                        "current": "Iscrizione alla Scuola dell'infanzia"
+                    },
+                    "heading": {
+                        "title": "Iscrizione alla scuola dell'infanzia",
+                        "subtitles": [
+                            {
+                                "text": "Inserisci le informazioni necessarie per richiedere l’iscrizione alla Scuola dell’infanzia.\nPotrai ricontrollare tutti i dati nel riepilogo, prima di inviare la richiesta.",
+                                "class": "subtitle-small"
+                            },
+                            {
+                                "text": "Hai bisogno di assistenza?",
+                                "class": "subtitle-small mt-lg-2 mb-4",
+                                "link": {
+                                    "label": "Contattaci",
+                                    "url": "#",
+                                    "class": "title-small-semi-bold t-primary"
+                                }
+                            }
+                        ]
+                    },
+                    "stepper": {
+                        "items": [
+                            {
+                                "label": "Informativa sulla privacy",
+                                "state": "confirmed"
+                            },
+                            {
+                                "label": "Dati Generali",
+                                "state": "active"
+                            },
+                            {
+                                "label": "Preferenze di servizio",
+                                "state": ""
+                            },
+                            {
+                                "label": "Riepilogo",
+                                "state": ""
+                            }
+                        ],
+                        "confirmed_label": "Confermato",
+                        "active_label": "Attivo",
+                        "index": "2/4"
+                    },
+                    "nav": {
+                        "aria_label": "Step",
+                        "back": "Indietro",
+                        "save": {
+                            "long": "Salva Richiesta",
+                            "short": "Salva"
+                        },
+                        "next": {
+                            "label": "Avanti",
+                            "icon": "it-chevron-right",
+                            "class": "",
+                            "modal": "#modal-save-1"
+                        },
+                        "saved_message": "Richiesta salvata con successo"
+                    },
+                    "side_nav": {
+                        "class": "col-12 col-lg-3 mb-4 d-none d-lg-block",
+                        "aria_label": "INFORMAZIONI RICHIESTE",
+                        "title": "INFORMAZIONI RICHIESTE",
+                        "items": [
+                            {
+                                "label": "Richiedente",
+                                "anchor": "applicant-info"
+                            },
+                            {
+                                "label": "Beneficiario",
+                                "anchor": "beneficiary-info"
+                            },
+                            {
+                                "label": "Altro Genitore",
+                                "anchor": "other-parent-info"
+                            },
+                            {
+                                "label": "ISEE",
+                                "anchor": "isee-info"
+                            }
+                        ]
+                    },
+                    "body": {
+                        "layout": "sidebar",
+                        "steps_content": "outer",
+                        "col": "col-12 col-lg-8 offset-lg-1 mt-0",
+                        "before": [
+                            {
+                                "type": "warning-box",
+                                "icon": "it-info-circle",
+                                "icon_xlink": "it-warning",
+                                "title": "ATTENZIONE",
+                                "text": "Ci sono alcune informazioni mancanti o errate",
+                                "links": [
+                                    {
+                                        "label": "Altro genitore",
+                                        "url": "#documenti-warning"
+                                    },
+                                    {
+                                        "label": "ISEE",
+                                        "url": "#isee-warning"
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    "sections": [
+                        {
+                            "type": "card",
+                            "id": "applicant-info",
+                            "class": "",
+                            "wrapper_class": "mb-40",
+                            "card_class": "card has-bkg-grey shadow-sm",
+                            "header_class": "card-header border-0 p-0 mb-lg-20",
+                            "title": "Richiedente",
+                            "title_class": "title-xxlarge mb-1",
+                            "subtitle": "Informazione su di te",
+                            "subtitle_class": "subtitle-small mb-0",
+                            "content": {
+                                "kind": "info-cards",
+                                "cards": [
+                                    {
+                                        "title": "Giulia Bianchi",
+                                        "info": {
+                                            "label": "Codice Fiscale",
+                                            "value": "GLABNC72H25H501Y"
+                                        },
+                                        "toggle_label": "Mostra tutto",
+                                        "collapse_id": "collapse-parents",
+                                        "collapse_class": "accordion-collapse collapse",
+                                        "button_class": "collapsed accordion-button",
+                                        "header_id": "heading-collapse-parents",
+                                        "groups": [
+                                            {
+                                                "class": "bg-white has-border",
+                                                "header_class": "d-flex justify-content-between d-flex justify-content-end",
+                                                "title": "Anagrafica",
+                                                "edit": {
+                                                    "label": "Modifica",
+                                                    "url": "#"
+                                                },
+                                                "rows": [
+                                                    {
+                                                        "label": "Nome",
+                                                        "value": "Giulia"
+                                                    },
+                                                    {
+                                                        "label": "Cognome",
+                                                        "value": "Bianchi"
+                                                    },
+                                                    {
+                                                        "label": "Codice Fiscale",
+                                                        "value": "GLABNC72H25H501Y"
+                                                    },
+                                                    {
+                                                        "label": "Data di nascita",
+                                                        "value": "03/07/1975"
+                                                    },
+                                                    {
+                                                        "label": "Luogo di nascita",
+                                                        "value": "Roma"
+                                                    },
+                                                    {
+                                                        "label": "Sesso",
+                                                        "value": "Femmina"
+                                                    },
+                                                    {
+                                                        "label": "Nazionalità",
+                                                        "value": "Italiana"
+                                                    },
+                                                    {
+                                                        "label": "Professione",
+                                                        "value": "Impiegato"
+                                                    },
+                                                    {
+                                                        "label": "Scolarità",
+                                                        "value": "Laurea Magistrale"
+                                                    }
+                                                ]
+                                            },
+                                            {
+                                                "class": "bg-white has-border",
+                                                "header_class": "d-flex justify-content-between d-flex justify-content-end",
+                                                "title": "Indirizzi",
+                                                "edit": {
+                                                    "label": "Modifica",
+                                                    "url": "#"
+                                                },
+                                                "rows": [
+                                                    {
+                                                        "label": "Residenza",
+                                                        "value": "Via Roma 16, 00100 Roma, IT"
+                                                    }
+                                                ]
+                                            },
+                                            {
+                                                "class": "bg-white has-border",
+                                                "header_class": "d-flex justify-content-between d-flex justify-content-end",
+                                                "title": "Contatti",
+                                                "edit": {
+                                                    "label": "Modifica",
+                                                    "url": "#"
+                                                },
+                                                "rows": [
+                                                    {
+                                                        "label": "Telefono",
+                                                        "value": "+39 331 1234567"
+                                                    },
+                                                    {
+                                                        "label": "Email",
+                                                        "value": "mario.rossi@gmail.com"
+                                                    }
+                                                ]
+                                            },
+                                            {
+                                                "class": "bg-white has-border",
+                                                "header_class": "d-flex justify-content-between d-flex justify-content-end",
+                                                "title": "Documenti",
+                                                "edit": {
+                                                    "label": "Modifica",
+                                                    "url": "#"
+                                                },
+                                                "rows": [
+                                                    {
+                                                        "label": "Carta d'identità",
+                                                        "value": "mario_rossi_carta_di_identità_fronte_retro.pdf"
+                                                    },
+                                                    {
+                                                        "label": "Modulo condizione lavorativa",
+                                                        "status": {
+                                                            "tone": "success",
+                                                            "text": "Documento inserito con successo",
+                                                            "icon": "it-check-circle"
+                                                        }
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        },
+                        {
+                            "type": "card",
+                            "id": "beneficiary-info",
+                            "class": "",
+                            "wrapper_class": "mb-40",
+                            "card_class": "card has-bkg-grey shadow-sm",
+                            "header_class": "card-header border-0 p-0 mb-lg-20",
+                            "title": "Beneficiario",
+                            "title_class": "title-xxlarge mb-1",
+                            "subtitle": "Seleziona o aggiungi il minore per cui vuoi richiedere l’iscrizione",
+                            "subtitle_class": "subtitle-small mb-0",
+                            "content": {
+                                "kind": "info-cards",
+                                "legend": "Seleziona o aggiungi il minore per cui vuoi richiedere l’iscrizione",
+                                "radio_name": "beneficiaries",
+                                "cards": [
+                                    {
+                                        "id": "son",
+                                        "title": "Francesco Rossi",
+                                        "info": {
+                                            "label": "Codice Fiscale",
+                                            "value": "FRARSS72H25H501Y"
+                                        },
+                                        "toggle_label": "Mostra tutto",
+                                        "collapse_id": "collapse-benef-1",
+                                        "collapse_class": "accordion-collapse collapse",
+                                        "button_class": "collapsed accordion-button",
+                                        "header_id": "heading-collapse-benef-1",
+                                        "groups": [
+                                            {
+                                                "class": "bg-white has-border",
+                                                "header_class": "d-flex justify-content-between d-flex justify-content-end",
+                                                "title": "Anagrafica",
+                                                "edit": {
+                                                    "label": "Modifica",
+                                                    "url": "#"
+                                                },
+                                                "rows": [
+                                                    {
+                                                        "label": "Nome",
+                                                        "value": "Giulia"
+                                                    },
+                                                    {
+                                                        "label": "Cognome",
+                                                        "value": "Bianchi"
+                                                    },
+                                                    {
+                                                        "label": "Codice Fiscale",
+                                                        "value": "GLABNC72H25H501Y"
+                                                    },
+                                                    {
+                                                        "label": "Data di nascita",
+                                                        "value": "03/07/1975"
+                                                    },
+                                                    {
+                                                        "label": "Luogo di nascita",
+                                                        "value": "Roma"
+                                                    },
+                                                    {
+                                                        "label": "Sesso",
+                                                        "value": "Femmina"
+                                                    },
+                                                    {
+                                                        "label": "Nazionalità",
+                                                        "value": "Italiana"
+                                                    },
+                                                    {
+                                                        "label": "Professione",
+                                                        "value": "Impiegato"
+                                                    },
+                                                    {
+                                                        "label": "Scolarità",
+                                                        "value": "Laurea Magistrale"
+                                                    }
+                                                ]
+                                            },
+                                            {
+                                                "class": "bg-white has-border",
+                                                "header_class": "d-flex justify-content-between d-flex justify-content-end",
+                                                "title": "Indirizzi",
+                                                "edit": {
+                                                    "label": "Modifica",
+                                                    "url": "#"
+                                                },
+                                                "rows": [
+                                                    {
+                                                        "label": "Residenza",
+                                                        "value": "Via Roma 16, 00100 Roma, IT"
+                                                    }
+                                                ]
+                                            },
+                                            {
+                                                "class": "bg-white has-border",
+                                                "header_class": "d-flex justify-content-between d-flex justify-content-end",
+                                                "title": "Contatti",
+                                                "edit": {
+                                                    "label": "Modifica",
+                                                    "url": "#"
+                                                },
+                                                "rows": [
+                                                    {
+                                                        "label": "Telefono",
+                                                        "value": "+39 331 1234567"
+                                                    },
+                                                    {
+                                                        "label": "Email",
+                                                        "value": "mario.rossi@gmail.com"
+                                                    }
+                                                ]
+                                            },
+                                            {
+                                                "class": "bg-white has-border",
+                                                "header_class": "d-flex justify-content-between d-flex justify-content-end",
+                                                "title": "Documenti",
+                                                "edit": {
+                                                    "label": "Modifica",
+                                                    "url": "#"
+                                                },
+                                                "rows": [
+                                                    {
+                                                        "label": "Carta d'identità",
+                                                        "value": "mario_rossi_carta_di_identità_fronte_retro.pdf"
+                                                    },
+                                                    {
+                                                        "label": "Modulo condizione lavorativa",
+                                                        "status": {
+                                                            "tone": "success",
+                                                            "text": "Documento inserito con successo",
+                                                            "icon": "it-check-circle"
+                                                        }
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "id": "daughter",
+                                        "title": "Lucia Rossi",
+                                        "info": {
+                                            "label": "Codice Fiscale",
+                                            "value": "LCARSS72H25H501Y"
+                                        },
+                                        "toggle_label": "Mostra tutto",
+                                        "collapse_id": "collapse-benef-2",
+                                        "collapse_class": "accordion-collapse collapse",
+                                        "button_class": "collapsed accordion-button",
+                                        "header_id": "heading-collapse-benef-2",
+                                        "groups": [
+                                            {
+                                                "class": "bg-white has-border",
+                                                "header_class": "d-flex justify-content-between d-flex justify-content-end",
+                                                "title": "Anagrafica",
+                                                "edit": {
+                                                    "label": "Modifica",
+                                                    "url": "#"
+                                                },
+                                                "rows": [
+                                                    {
+                                                        "label": "Nome",
+                                                        "value": "Giulia"
+                                                    },
+                                                    {
+                                                        "label": "Cognome",
+                                                        "value": "Bianchi"
+                                                    },
+                                                    {
+                                                        "label": "Codice Fiscale",
+                                                        "value": "GLABNC72H25H501Y"
+                                                    },
+                                                    {
+                                                        "label": "Data di nascita",
+                                                        "value": "03/07/1975"
+                                                    },
+                                                    {
+                                                        "label": "Luogo di nascita",
+                                                        "value": "Roma"
+                                                    },
+                                                    {
+                                                        "label": "Sesso",
+                                                        "value": "Femmina"
+                                                    },
+                                                    {
+                                                        "label": "Nazionalità",
+                                                        "value": "Italiana"
+                                                    },
+                                                    {
+                                                        "label": "Professione",
+                                                        "value": "Impiegato"
+                                                    },
+                                                    {
+                                                        "label": "Scolarità",
+                                                        "value": "Laurea Magistrale"
+                                                    }
+                                                ]
+                                            },
+                                            {
+                                                "class": "bg-white has-border",
+                                                "header_class": "d-flex justify-content-between d-flex justify-content-end",
+                                                "title": "Indirizzi",
+                                                "edit": {
+                                                    "label": "Modifica",
+                                                    "url": "#"
+                                                },
+                                                "rows": [
+                                                    {
+                                                        "label": "Residenza",
+                                                        "value": "Via Roma 16, 00100 Roma, IT"
+                                                    }
+                                                ]
+                                            },
+                                            {
+                                                "class": "bg-white has-border",
+                                                "header_class": "d-flex justify-content-between d-flex justify-content-end",
+                                                "title": "Contatti",
+                                                "edit": {
+                                                    "label": "Modifica",
+                                                    "url": "#"
+                                                },
+                                                "rows": [
+                                                    {
+                                                        "label": "Telefono",
+                                                        "value": "+39 331 1234567"
+                                                    },
+                                                    {
+                                                        "label": "Email",
+                                                        "value": "mario.rossi@gmail.com"
+                                                    }
+                                                ]
+                                            },
+                                            {
+                                                "class": "bg-white has-border",
+                                                "header_class": "d-flex justify-content-between d-flex justify-content-end",
+                                                "title": "Documenti",
+                                                "edit": {
+                                                    "label": "Modifica",
+                                                    "url": "#"
+                                                },
+                                                "rows": [
+                                                    {
+                                                        "label": "Carta d'identità",
+                                                        "value": "mario_rossi_carta_di_identità_fronte_retro.pdf"
+                                                    },
+                                                    {
+                                                        "label": "Modulo condizione lavorativa",
+                                                        "status": {
+                                                            "tone": "success",
+                                                            "text": "Documento inserito con successo",
+                                                            "icon": "it-check-circle"
+                                                        }
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    }
+                                ],
+                                "add": {
+                                    "label": "Aggiungi beneficiario",
+                                    "icon": "it-plus-circle"
+                                }
+                            }
+                        },
+                        {
+                            "type": "card",
+                            "id": "other-parent-info",
+                            "class": "",
+                            "wrapper_class": "mb-40",
+                            "card_class": "card has-bkg-grey shadow-sm",
+                            "header_class": "card-header border-0 p-0 mb-lg-20",
+                            "title": "Altro genitore",
+                            "title_class": "title-xxlarge mb-1",
+                            "subtitle": "Informazioni sull’altro genitore",
+                            "subtitle_class": "subtitle-small mb-0",
+                            "content": {
+                                "kind": "info-cards",
+                                "cards": [
+                                    {
+                                        "title": "Mario Rossi",
+                                        "info": {
+                                            "label": "Codice Fiscale",
+                                            "value": "MRARSS72H25H501Y"
+                                        },
+                                        "toggle_label": "Mostra tutto",
+                                        "collapse_id": "collapse1",
+                                        "collapse_class": "accordion-collapse collapse show",
+                                        "button_class": "accordion-button",
+                                        "header_id": "heading-collapse1",
+                                        "groups": [
+                                            {
+                                                "class": "bg-white has-border",
+                                                "header_class": "d-flex justify-content-between d-flex justify-content-end",
+                                                "title": "Anagrafica",
+                                                "edit": {
+                                                    "label": "Modifica",
+                                                    "url": "#"
+                                                },
+                                                "rows": [
+                                                    {
+                                                        "label": "Nome",
+                                                        "value": "Mario"
+                                                    },
+                                                    {
+                                                        "label": "Cognome",
+                                                        "value": "Rossi"
+                                                    },
+                                                    {
+                                                        "label": "Codice Fiscale",
+                                                        "value": "MRARSS72H25H501Y"
+                                                    },
+                                                    {
+                                                        "label": "Data di nascita",
+                                                        "value": "03/07/1975"
+                                                    },
+                                                    {
+                                                        "label": "Luogo di nascita",
+                                                        "value": "Roma"
+                                                    },
+                                                    {
+                                                        "label": "Sesso",
+                                                        "value": "Maschio"
+                                                    },
+                                                    {
+                                                        "label": "Nazionalità",
+                                                        "value": "Italiana"
+                                                    },
+                                                    {
+                                                        "label": "Professione",
+                                                        "value": "Impiegato"
+                                                    },
+                                                    {
+                                                        "label": "Scolarità",
+                                                        "value": "Laurea Magistrale"
+                                                    }
+                                                ]
+                                            },
+                                            {
+                                                "class": "bg-white has-border",
+                                                "header_class": "d-flex justify-content-between d-flex justify-content-end",
+                                                "title": "Indirizzi",
+                                                "edit": {
+                                                    "label": "Modifica",
+                                                    "url": "#"
+                                                },
+                                                "rows": [
+                                                    {
+                                                        "label": "Residenza",
+                                                        "value": "Via Roma 16, 00100 Roma, IT"
+                                                    }
+                                                ]
+                                            },
+                                            {
+                                                "class": "bg-white has-border",
+                                                "header_class": "d-flex justify-content-between d-flex justify-content-end",
+                                                "title": "Contatti",
+                                                "edit": {
+                                                    "label": "Modifica",
+                                                    "url": "#"
+                                                },
+                                                "rows": [
+                                                    {
+                                                        "label": "Telefono",
+                                                        "value": "+39 331 1234567"
+                                                    },
+                                                    {
+                                                        "label": "Email",
+                                                        "value": "mario.rossi@gmail.com"
+                                                    }
+                                                ]
+                                            },
+                                            {
+                                                "class": "bg-white has-border",
+                                                "header_class": "d-flex justify-content-between d-flex justify-content-end",
+                                                "title": "Documenti",
+                                                "edit": {
+                                                    "label": "Modifica",
+                                                    "url": "#",
+                                                    "hidden": true
+                                                },
+                                                "rows": [
+                                                    {
+                                                        "label": "Carta d'identità",
+                                                        "value": "mario_rossi_carta_di_identità_fronte_retro.pdf"
+                                                    },
+                                                    {
+                                                        "id": "documenti-warning",
+                                                        "label": "Modulo condizione lavorativa",
+                                                        "status": {
+                                                            "tone": "alert",
+                                                            "text": "Documento mancante",
+                                                            "icon": "it-error"
+                                                        }
+                                                    }
+                                                ],
+                                                "footer_button": {
+                                                    "label": "Aggiungi",
+                                                    "icon": "it-pencil",
+                                                    "modal": "#modal-documents"
+                                                }
+                                            }
+                                        ],
+                                        "expanded": true
+                                    }
+                                ]
+                            }
+                        },
+                        {
+                            "type": "card",
+                            "id": "isee-info",
+                            "class": "",
+                            "wrapper_class": "",
+                            "card_class": "card has-bkg-grey shadow-sm",
+                            "header_class": "card-header border-0 p-0 mb-lg-20",
+                            "title": "ISEE",
+                            "title_class": "title-xxlarge mb-1",
+                            "subtitle": "Informazioni sul valore dell’ISEE del tuo nucleo familiare basato sulla tua ultima dichiarazione",
+                            "subtitle_class": "subtitle-small mb-0",
+                            "content": {
+                                "kind": "info-cards",
+                                "cards": [
+                                    {
+                                        "title": "ISEE: 18.000,00€",
+                                        "info": {
+                                            "label": "Scadenza ISEE",
+                                            "value": "01/10/2019"
+                                        },
+                                        "toggle_label": "Mostra tutto",
+                                        "collapse_id": "collapse2",
+                                        "collapse_class": "accordion-collapse collapse rounded show",
+                                        "button_class": "accordion-button",
+                                        "groups": [
+                                            {
+                                                "class": "bg-white border border-light p-3 p-lg-4",
+                                                "header_class": "d-flex justify-content-between d-flex justify-content-end",
+                                                "title": "Dati ISEE",
+                                                "edit": {
+                                                    "label": "Modifica",
+                                                    "url": "#",
+                                                    "hidden": true
+                                                },
+                                                "rows": [
+                                                    {
+                                                        "label": "Valore ISEE",
+                                                        "value": "18.000,00€"
+                                                    },
+                                                    {
+                                                        "label": "Scadenza ISEE",
+                                                        "value": "06/10/2023"
+                                                    },
+                                                    {
+                                                        "label": "Anno protocollo",
+                                                        "value": "2022"
+                                                    },
+                                                    {
+                                                        "label": "Numero protocollo",
+                                                        "value": "12345678"
+                                                    },
+                                                    {
+                                                        "label": "Codice filiale protocollo",
+                                                        "value": "12345678"
+                                                    },
+                                                    {
+                                                        "id": "isee-warning",
+                                                        "label": "Certificato ISEE",
+                                                        "value": "documento_ISEE-2019.pdf",
+                                                        "status": {
+                                                            "tone": "alert",
+                                                            "text": "Documento scaduto",
+                                                            "icon": "it-error"
+                                                        }
+                                                    }
+                                                ],
+                                                "footer_button": {
+                                                    "label": "Correggi",
+                                                    "icon": "it-pencil",
+                                                    "modal": "#modal-isee"
+                                                }
+                                            }
+                                        ],
+                                        "expanded": true
+                                    }
+                                ]
+                            }
+                        }
+                    ],
+                    "contacts": {
+                        "layout": "offset",
+                        "col": "col-12 col-lg-6",
+                        "main": {
+                            "title": "Contatta il comune",
+                            "items": [
+                                {
+                                    "icon": "it-help-circle",
+                                    "label": "Leggi le domande frequenti",
+                                    "url": "#"
+                                },
+                                {
+                                    "icon": "it-mail",
+                                    "label": "Richiedi assistenza",
+                                    "url": "#",
+                                    "element": "contacts"
+                                },
+                                {
+                                    "icon": "it-hearing",
+                                    "label": "Chiama il numero verde 05 0505",
+                                    "url": "#"
+                                },
+                                {
+                                    "icon": "it-calendar",
+                                    "label": "Prenota appuntamento",
+                                    "url": "#",
+                                    "element": "appointment-booking"
+                                }
+                            ]
+                        }
+                    },
+                    "modals": [
+                        {
+                            "type": "upload",
+                            "id": "modal-documents",
+                            "close_label": "Chiudi finestra modale",
+                            "title": "Documenti",
+                            "info": "I campi contraddistinti dal simbolo asterisco sono obbligatori",
+                            "form_id": "documents-form",
+                            "uploads": [
+                                {
+                                    "label": "Documento d'identità*",
+                                    "label_class": "cmp-upload__label mb-3",
+                                    "files": [
+                                        {
+                                            "state": "success",
+                                            "visually_hidden": "File caricato:",
+                                            "name": "mario_rossi_carta_di_identit...",
+                                            "remove_label": "Elimina il documento"
+                                        }
+                                    ],
+                                    "input_id": "upload-doc-id",
+                                    "link_label": "Carica documento",
+                                    "info": "Caricare uno o più file in formato pdf, jpg, png"
+                                },
+                                {
+                                    "label": "Modulo condizione lavorativa*",
+                                    "label_class": "cmp-upload__label mb-3",
+                                    "files": [
+                                        {
+                                            "state": "success",
+                                            "visually_hidden": "File caricato:",
+                                            "name": "mario_rossi_modulo.pdf",
+                                            "remove_label": "Elimina il documento"
+                                        }
+                                    ],
+                                    "input_id": "upload-doc-lav",
+                                    "link_label": "Carica documento",
+                                    "info": "Caricare uno o più file in formato pdf, jpg, png"
+                                }
+                            ],
+                            "cancel": "Annulla",
+                            "save": "Salva"
+                        },
+                        {
+                            "type": "form",
+                            "id": "modal-isee",
+                            "close_label": "Chiudi finestra modale",
+                            "title": "ISEE",
+                            "info": "I campi contraddistinti dal simbolo asterisco sono obbligatori",
+                            "form_id": "isee-form",
+                            "fields": [
+                                {
+                                    "id": "isee",
+                                    "label": "Valore ISEE*",
+                                    "hint": "Inserisci valore ISEE"
+                                },
+                                {
+                                    "id": "scadenza",
+                                    "label": "Scadenza ISEE*",
+                                    "hint": "Inserisci data scadenza ISEE gg/mm/aaaa"
+                                },
+                                {
+                                    "id": "anno-protocollo",
+                                    "label": "Anno protocollo*",
+                                    "hint": "Inserisci numero anno protocollo"
+                                },
+                                {
+                                    "id": "numero-protocollo",
+                                    "label": "Numero protocollo*",
+                                    "hint": "Inserisci numero protocollo"
+                                },
+                                {
+                                    "id": "codice-filiale",
+                                    "label": "Codice filiale protocollo*",
+                                    "hint": "Inserisci numero codice filiale protocollo"
+                                }
+                            ],
+                            "uploads": [
+                                {
+                                    "label": "Modulo condizione lavorativa*",
+                                    "label_class": "cmp-upload__label",
+                                    "files": [
+                                        {
+                                            "state": "error",
+                                            "visually_hidden": "Errore caricamento file:",
+                                            "name": "documento_ISEE-2019.pdf",
+                                            "remove_label": "Elimina file caricato nome-file-04.jpg"
+                                        }
+                                    ],
+                                    "input_id": "upload-cond-lav-isee",
+                                    "link_label": "Carica documento",
+                                    "info": "Caricare uno o più file in formato pdf, jpg, png"
+                                }
+                            ],
+                            "cancel": "Annulla",
+                            "save": "Salva"
+                        },
+                        {
+                            "type": "dialog",
+                            "id": "modal-save-1",
+                            "close_label": "Chiudi finestra modale",
+                            "header": {
+                                "title": "Salva i dati in area personale",
+                                "info": "Vuoi salvare le informazioni anche nella tua area personale? Potrai usarle anche in altre occasioni."
+                            },
+                            "footer": {
+                                "buttons": [
+                                    {
+                                        "label": "Salva nella mia area personale",
+                                        "variant": "primary",
+                                        "target": "#modal-save-2"
+                                    },
+                                    {
+                                        "label": "Salva solo per questa pratica",
+                                        "variant": "outline"
+                                    }
+                                ]
+                            }
+                        },
+                        {
+                            "type": "dialog",
+                            "id": "modal-save-2",
+                            "close_label": "Chiudi finestra modale",
+                            "header": {
+                                "title": "Salva i dati in area personale",
+                                "info": "Vuoi salvare le informazioni anche nella tua area personale? Potrai riutilizzarle in futuro per altre pratiche."
+                            },
+                            "success": {
+                                "icon": "it-check-circle",
+                                "message": "Salvataggio effettuato"
+                            }
+                        }
+                    ],
+                    "header_active": "all-services"
+                }
+            }
+        ],
+        "en": []
+    }
+}

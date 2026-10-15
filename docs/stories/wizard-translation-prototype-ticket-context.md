@@ -1,3 +1,14 @@
+---
+title: "wizard translation prototype ticket context"
+type: note
+tags: [documentation]
+created: 2026-09-26
+updated: 2026-09-26
+qmd: "wizard translation prototype ticket context"
+issues: []
+discussions: []
+---
+
 # wizard translation prototype ticket context
 
 ## contesto

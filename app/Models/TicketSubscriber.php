@@ -9,12 +9,12 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Support\Carbon;
 use Modules\Fixcity\Database\Factories\TicketSubscriberFactory;
-use Modules\User\Models\User;
+use Modules\Xot\Contracts\UserContract;
 use Modules\Xot\Datas\XotData;
 
 /**
  * @property int $id
- * @property int $user_id
+ * @property string $user_id
  * @property int $ticket_id
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
@@ -41,7 +41,7 @@ use Modules\Xot\Datas\XotData;
  * @method static Builder|TicketSubscriber withTrashed()
  * @method static Builder|TicketSubscriber withoutTrashed()
  *
- * @property User|null $user
+ * @property UserContract|null $user
  * @property-read Profile|null $creator
  * @property-read Profile|null $updater
  * @property-read Profile|null $deleter
@@ -50,11 +50,13 @@ use Modules\Xot\Datas\XotData;
  */
 class TicketSubscriber extends BaseModel
 {
+    protected $connection = 'user';
+
     protected $fillable = [
         'user_id', 'ticket_id',
     ];
 
-    /** @return BelongsTo<Model&\Modules\Xot\Contracts\UserContract, $this> */
+    /** @return BelongsTo<Model&UserContract, $this> */
     public function user(): BelongsTo
     {
         $user_class = XotData::make()->getUserClass();
@@ -65,6 +67,6 @@ class TicketSubscriber extends BaseModel
     /** @return BelongsTo<Ticket, $this> */
     public function ticket(): BelongsTo
     {
-        return $this->belongsTo(Ticket::class, 'user_id', 'id');
+        return $this->belongsTo(Ticket::class, 'ticket_id', 'id');
     }
 }

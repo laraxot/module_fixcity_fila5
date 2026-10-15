@@ -4,10 +4,11 @@ declare(strict_types=1);
 
 namespace Modules\Fixcity\Filament\Resources\TicketResource\Pages;
 
-use Filament\Resources\Pages\CreateRecord;
+use Modules\Fixcity\Actions\GetTicketFormDataForPersistAction;
 use Modules\Fixcity\Filament\Resources\TicketResource;
+use Modules\Xot\Filament\Resources\Pages\XotBaseCreateRecord;
 
-class CreateTicket extends CreateRecord
+class CreateTicket extends XotBaseCreateRecord
 {
     protected static string $resource = TicketResource::class;
 
@@ -17,6 +18,6 @@ class CreateTicket extends CreateRecord
      */
     protected function mutateFormDataBeforeCreate(array $data): array
     {
-        return TicketResource::prepareFormDataBeforePersist($data);
+        return app(GetTicketFormDataForPersistAction::class)->execute($data);
     }
 }

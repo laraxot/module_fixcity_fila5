@@ -4,13 +4,14 @@ declare(strict_types=1);
 
 namespace Modules\Fixcity\ViewModels;
 
+use Modules\Fixcity\Actions\BuildSegnalazioniFilterAggregateAction;
 use Modules\Xot\Actions\Cast\SafeStringCastAction;
 
 /**
  * ViewModel per i filtri della pagina ticket elenco.
  *
- * Filtri sidebar: stesso file GeoJSON della mappa (/data/tickets.json).
- * NO dati statici: la sorgente unica e' public_html/data/tickets.json.
+ * Filtri sidebar calcolati dallo stesso GeoJSON live servito alla mappa.
+ * Il file statico resta per export/cache legacy, non per l'elenco interattivo.
  * NO pattern Services: usa solo Spatie Queueable Actions (spatie/laravel-queueable-action).
  */
 class TicketFilterViewModel
@@ -34,7 +35,7 @@ class TicketFilterViewModel
 
     public function __construct()
     {
-        $aggregate = app(\Modules\Fixcity\Actions\BuildTicketFilterAggregateAction::class)->execute();
+        $aggregate = app(BuildSegnalazioniFilterAggregateAction::class)->execute();
         $this->features = $aggregate['features'] ?? [];
         $this->countsPerType = $aggregate['countsPerType'] ?? [];
         $this->countsPerStatus = $aggregate['countsPerStatus'] ?? [];

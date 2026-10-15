@@ -1,4 +1,8 @@
 ---
+updated: 2026-09-26
+qmd: "DEEP DIVE 002 architecture patterns"
+issues: []
+discussions: []
 title: "Deep Dive: Architecture Patterns & Technical Decisions"
 type: analysis
 tags: [fixcity, architecture, patterns, technical-decisions, scalability]
@@ -816,3 +820,8 @@ after('deploy:symlink', 'deploy:migrate');
 ---
 
 *Architecture analysis based on: FixMyStreet GitHub, SeeClickFix API docs, Decoro Urbano reverse engineering, Degradozero open source code, Laravel best practices.*
+
+--- BMAD + Second Brain ---
+- Scopo: documentazione tecnica del modulo.
+- Utilità: riferimento sviluppatori/audit.
+- Funzionalità: struttura, dipendenze, convenzioni (no date .md, git avanti).

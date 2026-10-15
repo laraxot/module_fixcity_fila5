@@ -1,0 +1,138 @@
+{
+    "id": "tests.appuntamento-03-dettagli",
+    "slug": "tests.appuntamento-03-dettagli",
+    "parent_slug": "tests",
+    "title": {
+        "it": "Prenotazione appuntamento",
+        "en": "Appointment booking"
+    },
+    "description": "Passo 3 della prenotazione di un appuntamento: motivo e dettagli. Contenuto da JSON, reso dal blocco appointment-step del tema Sixteen.",
+    "layout": "test",
+    "content_blocks": {
+        "it": [
+            {
+                "type": "appointment-step",
+                "data": {
+                    "view": "pub_theme::components.blocks.appointment-step.design-comuni",
+                    "title": "Prenotazione appuntamento",
+                    "breadcrumb": {
+                        "items": [
+                            {
+                                "label": "Home",
+                                "url": "/it/tests/homepage"
+                            }
+                        ],
+                        "current": "Prenotazione appuntamento"
+                    },
+                    "steps": {
+                        "items": [
+                            {
+                                "label": "Luogo",
+                                "state": "confirmed"
+                            },
+                            {
+                                "label": "Data e orario",
+                                "state": "confirmed"
+                            },
+                            {
+                                "label": "Dettagli appuntamento",
+                                "state": "active"
+                            },
+                            {
+                                "label": "Richiedente",
+                                "state": ""
+                            },
+                            {
+                                "label": "Riepilogo",
+                                "state": ""
+                            }
+                        ],
+                        "index": "3/5",
+                        "confirmed_label": "Confermato",
+                        "active_label": "Attivo",
+                        "required_notice": "I campi contraddistinti dal simbolo asterisco sono obbligatori"
+                    },
+                    "side_nav": {
+                        "aria_label": "INFORMAZIONI RICHIESTE",
+                        "title": "INFORMAZIONI RICHIESTE",
+                        "items": [
+                            {
+                                "label": "Motivo",
+                                "anchor": "reason"
+                            },
+                            {
+                                "label": "Dettagli",
+                                "anchor": "details"
+                            }
+                        ]
+                    },
+                    "sections": [
+                        {
+                            "type": "select",
+                            "id": "reason",
+                            "title": "Motivo*",
+                            "title_class": "mb-0",
+                            "header_class": "mb-3",
+                            "subtitle": "Scegli il motivo dell’appuntamento",
+                            "select_id": "motivo-appuntamento",
+                            "select_label": "Motivo dell'appuntamento",
+                            "placeholder": "Seleziona opzione",
+                            "options": [
+                                "Cambio residenza",
+                                "Richiesta certificati",
+                                "Rilascio CIE"
+                            ]
+                        },
+                        {
+                            "type": "textarea",
+                            "id": "details",
+                            "title": "Dettagli*",
+                            "header_class": "m-0",
+                            "subtitle": "Aggiungi ulteriori dettagli",
+                            "subtitle_class": "mb-0 mb-3",
+                            "textarea_id": "form-details",
+                            "label": "Aggiungi ulteriori dettagli",
+                            "rows": 2,
+                            "hint": "Inserire massimo 200 caratteri"
+                        }
+                    ],
+                    "nav": {
+                        "aria_label": "Step",
+                        "back": "Indietro",
+                        "next": "Avanti",
+                        "saved_message": "Richiesta salvata con successo"
+                    },
+                    "contacts": {
+                        "main": {
+                            "title": "Contatta il comune",
+                            "items": [
+                                {
+                                    "icon": "it-help-circle",
+                                    "label": "Leggi le domande frequenti",
+                                    "url": "#"
+                                },
+                                {
+                                    "icon": "it-mail",
+                                    "label": "Richiedi assistenza",
+                                    "url": "#"
+                                },
+                                {
+                                    "icon": "it-hearing",
+                                    "label": "Chiama il numero verde 05 0505",
+                                    "url": "#"
+                                }
+                            ]
+                        }
+                    },
+                    "header_active": "all-services"
+                }
+            }
+        ],
+        "en": []
+    },
+    "sidebar_blocks": {
+        "it": [],
+        "en": []
+    },
+    "footer_blocks": null
+}

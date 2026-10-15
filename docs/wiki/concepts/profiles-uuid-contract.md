@@ -7,6 +7,7 @@ updated: 2026-06-10
 qmd: profiles uuid migration owner Fixcity main_module bump timestamp
 issues: []
 discussions: []
+status: draft
 ---
 
 # Profiles UUID Contract
@@ -39,8 +40,8 @@ Nel modulo Fixcity, `profiles` (connessione `fixcity`) deve avere:
 
 Runtime profilo può essere referenziato da User; **schema** resta in Fixcity.
 
-Vedi [profile-migration-uuid-contract](../../../User/docs/wiki/concepts/profile-migration-uuid-contract.md).
+Vedi [profile-migration-uuid-contract](../../../../User/docs/wiki/concepts/profile-migration-uuid-contract.md).
 
 ## Collegamenti
 
-- Memoria root: [main-module-profiles-migration-owner.md](../../../../docs/wiki/memories/main-module-profiles-migration-owner.md)
+- Memoria root: [main-module-profiles-migration-owner.md](../../../../../../docs/wiki/memories/main-module-profiles-migration-owner.md)

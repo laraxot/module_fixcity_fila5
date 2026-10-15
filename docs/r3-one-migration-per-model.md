@@ -13,11 +13,12 @@ discussions:
   - "https://github.com/laraxot/base_fixcity_fila5/discussions/265"
 related:
   - ../../../docs/architecture-ai-assisted-coding-2026-06-05.md
-  - ../../../docs/chat/register-flow-religions-r1-r6.md
-  - ../../../docs/wiki/memories/migration-one-per-model.md
-  - ../../../docs/wiki/memories/one-migration-per-model-bump-timestamp.md
-  - ../../../docs/wiki/rules/migration-update-timestamps-only.md
+  - ../../../../docs/chat/register-flow-religions-r1-r6.md
+  - ../../../../docs/wiki/memories/migration-one-per-model.md
+  - ../../../../docs/wiki/memories/one-migration-per-model-bump-timestamp.md
+  - ../../../../docs/wiki/rules/migration-update-timestamps-only.md
   - ../../Xot/docs/xotbase-schemawidget-pattern.md
+status: draft
 ---
 
 # R3 religion applied — one migration per model (Fixcity module)
@@ -89,34 +90,68 @@ public function tableCreate(Blueprint $table): void
 ❌ wrapper Action su `Model::create()` (es. `app(CreateTicketAction::class)->execute($data)`)
 ❌ `'type' => 'standard'` o magic values per `parental/HasChildren` (causa `Class "standard" not found`)
 
+## Foreign key su model Eloquent
+
+Per ogni relazione Eloquent usare `foreignIdFor(Model::class, 'column')`; per User usare `XotData::make()->getUserClass()`. Aggiungere `constrained()` solo quando i modelli condividono la stessa connessione/database; sui riferimenti cross-connection definire invece type/index senza vincolo fisico. Non usare `foreignId()` nudo.
+
+## TicketSubscriber: consolidamento migration (2026-10-11)
+
+Prima del consolidamento, `ticket_subscribers` aveva 3 migration:
+
+```
+2023_01_01_000000_create_ticket_subscribers_table.php   ← owner
+2026_09_26_200000_update_ticket_subscribers_user_id_to_uuid.php  ⚠️ update_* (viola R3)
+2026_09_27_230000_align_ticket_subscribers_and_coordinates.php  ⚠️ align_* (viola R3)
+```
+
+Problemi:
+- `user_id` definito come `foreignId('user_id')` (bigint) in `create_`, ma il modello `TicketSubscriber`
+  si aspetta `string('user_id', 36)` (UUID) -> cast mismatch su MySQL.
+- Migration `update_*` e `align_*` sono separate e violano "1 modello = 1 migration".
+
+Soluzione applicata (forward-only):
+- `create_ticket_subscribers_table.php` aggiornato con `string('user_id', 36)->index()` (UUID-compatible).
+- `tableUpdate()` consolidato con controlli di idempotenza (`hasColumn`, `getColumnType`).
+- `tableCreate()` usa `foreignIdFor(Ticket::class, 'ticket_id')->nullable()` (stessa connessione, physical FK valido).
+- Le migration `2026_09_26_*` e `2026_09_27_*` marcate come superseded (non cancellate per forward-only policy).
+
 ## Pattern corretto (R3 religion)
 
-```bash
-# 1. Crea modello + migration insieme
-php artisan make:model Ticket -mfs  # -m migration, -f factory, -s seeder
+```php
+use Illuminate\Database\Schema\Blueprint;
+use Modules\Fixcity\Models\Category;
+use Modules\Fixcity\Models\Ticket;
+use Modules\Xot\Datas\XotData;
+use Modules\Xot\Database\Migrations\XotBaseMigration;
 
-# 2. Migration UNICA con tableCreate + tableUpdate
-# 2026_06_05_100000_create_tickets_table.php
-public function up(): void
-{
-    $this->tableCreate('tickets', function (Blueprint $table): void {
-        $table->id();
-        $table->string('title');
-        $table->text('description');
-        $table->string('status', 32)->default('open');
-        $table->string('priority', 16)->default('normal');
-        $table->string('uuid', 36)->nullable()->index();
-        $table->foreignId('user_id')->constrained();
-        $table->foreignId('category_id')->nullable()->constrained();
-    });
-    $this->tableUpdate('tickets', function (Blueprint $table): void {
-        $this->updateTimestamps(table: $table, hasSoftDeletes: true);
-    });
-}
+return new class extends XotBaseMigration {
+    protected ?string $model_class = Ticket::class;
 
-# 3. Per evolvere lo schema: BUMP TIMESTAMP
-# 2026_06_15_100000_create_tickets_table.php  (più recente, sostituisce)
+    public function up(): void
+    {
+        $userClass = XotData::make()->getUserClass();
+
+        $this->tableCreate(static function (Blueprint $table) use ($userClass): void {
+            $table->id();
+            $table->string('title');
+            $table->text('description');
+            $table->string('status', 32)->default('open');
+            $table->string('priority', 16)->default('normal');
+            $table->string('uuid', 36)->nullable()->index();
+            // User may live on another connection: no physical FK constraint.
+            $table->foreignIdFor($userClass, 'user_id')->nullable()->index();
+            // Category shares the Fixcity connection: the physical constraint is valid.
+            $table->foreignIdFor(Category::class, 'category_id')->nullable()->constrained();
+        });
+
+        $this->tableUpdate(function (Blueprint $table): void {
+            $this->updateTimestamps($table, hasSoftDeletes: true);
+        });
+    }
+};
 ```
+
+Per nuove entità seguire il modello e la migration owner in `XotBaseMigration`; non usare `Schema::create()` o la base Laravel `Migration`. Per evoluzioni rispettare la regola forward-only e aggiornare solo la migration owner secondo la convenzione timestamp del progetto.
 
 ## R3 religion enforcement (R20 verifier)
 
@@ -145,3 +180,8 @@ public function up(): void
 
 ---
 *opencode (MiniMax-M3) · 2026-06-05*
+
+--- BMAD + Second Brain ---
+- Scopo: documentazione tecnica del modulo.
+- Utilità: riferimento sviluppatori/audit.
+- Funzionalità: struttura, dipendenze, convenzioni (no date .md, git avanti).

@@ -1,3 +1,15 @@
+---
+title: "DOCUMENTATION INDEX"
+type: note
+tags: [documentation]
+created: 2026-09-26
+updated: 2026-09-26
+qmd: "DOCUMENTATION INDEX"
+issues: []
+discussions: []
+status: draft
+---
+
 # Module Documentation Index
 
 **Generated:** 2026-03-30  
@@ -6,7 +18,6 @@
 **After Deduplication Target:** ~6,500
 
 ---
-
 ## Quick Navigation
 
 ### By Module
@@ -44,7 +55,7 @@
 ### AI Module
 **Location:** `laravel/Modules/AI/docs/`  
 **Files:** ~50  
-**Entry Point:** [`README.md`](../AI/docs/README.md)
+**Entry Point:** [`README.md`](../../AI/docs/README.md)
 
 **Key Topics:**
 - AI integration patterns
@@ -60,7 +71,7 @@
 ### Activity Module
 **Location:** `laravel/Modules/Activity/docs/`  
 **Files:** ~200  
-**Entry Point:** [`README.md`](../Activity/docs/README.md)
+**Entry Point:** [`README.md`](../../Activity/docs/README.md)
 
 **Key Topics:**
 - Activity tracking
@@ -78,7 +89,7 @@
 ### Blog Module
 **Location:** `laravel/Modules/Blog/docs/`  
 **Files:** 60  
-**Entry Point:** [`README.md`](../Blog/docs/README.md)
+**Entry Point:** [`README.md`](../../Blog/docs/README.md)
 
 **Key Topics:**
 - Blog post management
@@ -87,9 +98,9 @@
 - Comments integration
 
 **Key Documents:**
-- [`prd.md`](../Blog/docs/prd.md) - Product Requirements
-- [`structure.md`](../Blog/docs/structure.md) - Module architecture
-- [`blocks.md`](../Blog/docs/blocks.md) - Content blocks system
+- [`prd.md`](../../Blog/docs/prd.md) - Product Requirements
+- [`structure.md`](../../Blog/docs/structure.md) - Module architecture
+- [`blocks.md`](../../Blog/docs/blocks.md) - Content blocks system
 
 **Cross-References:**
 - Uses: [Cms Blocks](#cms-module)
@@ -100,7 +111,7 @@
 ### Cms Module
 **Location:** `laravel/Modules/Cms/docs/`  
 **Files:** 893  
-**Entry Point:** [`index.md`](../Cms/docs/index.md)
+**Entry Point:** [`index.md`](../../Cms/docs/index.md)
 
 **Key Topics:**
 - Content Management System
@@ -112,7 +123,7 @@
 **⚠️ Audit Note:** 793 files in `archive/` directory (89% duplication)
 
 **Key Documents:**
-- [`content-blocks-system.md`](../Cms/docs/content-blocks-system.md) - **SSOT** for blocks
+- [`content-blocks-system.md`](../../Cms/docs/content-blocks-system.md) - **SSOT** for blocks
 - [`pages-content-blocks.md`](../Cms/docs/pages-content-blocks.md) - Page composition
 - [`frontoffice/multi-block-page-builder-governance.md`](../Cms/docs/frontoffice/multi-block-page-builder-governance.md)
 
@@ -130,7 +141,7 @@
 ### Comment Module
 **Location:** `laravel/Modules/Comment/docs/`  
 **Files:** ~30  
-**Entry Point:** [`00-INDEX.md`](../Comment/docs/00-INDEX.md)
+**Entry Point:** [`00-INDEX.md`](../../Comment/docs/00-INDEX.md)
 
 **Key Topics:**
 - Comment system
@@ -146,7 +157,7 @@
 ### Fixcity Module
 **Location:** `laravel/Modules/Fixcity/docs/`  
 **Files:** ~100  
-**Entry Point:** [`README.md`](../Fixcity/docs/README.md)
+**Entry Point:** [`README.md`](README.md)
 
 **Key Topics:**
 - Core platform features
@@ -154,7 +165,7 @@
 - Roadmap
 
 **Key Documents:**
-- [`roadmap/user-research.md`](../Fixcity/docs/roadmap/user-research.md) - User insights
+- [`roadmap/user-research.md`](roadmap/user-research.md) - User insights
 
 **Cross-References:**
 - Depends on: [All modules](#)
@@ -164,7 +175,7 @@
 ### Gdpr Module
 **Location:** `laravel/Modules/Gdpr/docs/`  
 **Files:** ~40  
-**Entry Point:** [`README.md`](../Gdpr/docs/README.md)
+**Entry Point:** [`README.md`](../../Gdpr/docs/README.md)
 
 **Key Topics:**
 - GDPR compliance
@@ -180,7 +191,7 @@
 ### Geo Module
 **Location:** `laravel/Modules/Geo/docs/`  
 **Files:** ~150  
-**Entry Point:** [`README.md`](../Geo/docs/README.md)
+**Entry Point:** [`README.md`](../../Geo/docs/README.md)
 
 **Key Topics:**
 - Geographic data
@@ -197,7 +208,7 @@
 ### Job Module
 **Location:** `laravel/Modules/Job/docs/`  
 **Files:** ~50  
-**Entry Point:** [`README.md`](../Job/docs/README.md)
+**Entry Point:** [`README.md`](../../Job/docs/README.md)
 
 **Key Topics:**
 - Job postings
@@ -211,7 +222,7 @@
 ### Lang Module
 **Location:** `laravel/Modules/Lang/docs/`  
 **Files:** 879  
-**Entry Point:** [`index.md`](../Lang/docs/index.md)
+**Entry Point:** [`index.md`](../../Lang/docs/index.md)
 
 **Key Topics:**
 - **SSOT** for all translation/i18n content
@@ -222,10 +233,10 @@
 **⚠️ Audit Note:** 700+ files in `archive/` directory
 
 **Key Documents:**
-- [`translation_system.md`](../Lang/docs/translation_system.md) - **SSOT**
-- [`translation_keys_best_practices.md`](../Lang/docs/translation_keys_best_practices.md) - **SSOT**
-- [`translation_files_update.md`](../Lang/docs/translation_files_update.md)
-- [`working_with_locales.md`](../Lang/docs/working_with_locales.md)
+- [`translation_system.md`](../../Lang/docs/translation_system.md) - **SSOT**
+- [`translation_keys_best_practices.md`](../../Lang/docs/translation_keys_best_practices.md) - **SSOT**
+- [`translation_files_update.md`](../../Lang/docs/translation_files_update.md)
+- [`working_with_locales.md`](../../Lang/docs/working_with_locales.md)
 
 **Deprecated:**
 - `archive/` directory - scheduled for removal
@@ -240,7 +251,7 @@
 ### Media Module
 **Location:** `laravel/Modules/Media/docs/`  
 **Files:** ~80  
-**Entry Point:** [`README.md`](../Media/docs/README.md)
+**Entry Point:** [`README.md`](../../Media/docs/README.md)
 
 **Key Topics:**
 - Media library
@@ -256,7 +267,7 @@
 ### Notify Module
 **Location:** `laravel/Modules/Notify/docs/`  
 **Files:** ~200  
-**Entry Point:** [`README.md`](../Notify/docs/README.md)
+**Entry Point:** [`README.md`](../../Notify/docs/README.md)
 
 **Key Topics:**
 - Notification system
@@ -265,8 +276,8 @@
 - Seasonal campaigns
 
 **Key Documents:**
-- [`seasonal-email-templates.md`](../Notify/docs/seasonal-email-templates.md) - 1,731 lines
-- [`telegram-provider-architecture.md`](../Notify/docs/telegram-provider-architecture.md)
+- [`seasonal-email-templates.md`](../../Notify/docs/seasonal-email-templates.md) - 1,731 lines
+- [`telegram-provider-architecture.md`](../../Notify/docs/telegram-provider-architecture.md)
 
 **Cross-References:**
 - Related: [User Module](#user-module)
@@ -276,7 +287,7 @@
 ### Rating Module
 **Location:** `laravel/Modules/Rating/docs/`  
 **Files:** ~40  
-**Entry Point:** [`00-INDEX.md`](../Rating/docs/00-INDEX.md)
+**Entry Point:** [`00-INDEX.md`](../../Rating/docs/00-INDEX.md)
 
 **Key Topics:**
 - Rating system
@@ -291,7 +302,7 @@
 ### Seo Module
 **Location:** `laravel/Modules/Seo/docs/`  
 **Files:** ~100  
-**Entry Point:** [`00-INDEX.md`](../Seo/docs/00-INDEX.md)
+**Entry Point:** [`00-INDEX.md`](../../Seo/docs/00-INDEX.md)
 
 **Key Topics:**
 - SEO optimization
@@ -309,7 +320,7 @@
 ### Tenant Module
 **Location:** `laravel/Modules/Tenant/docs/`  
 **Files:** ~60  
-**Entry Point:** [`README.md`](../Tenant/docs/README.md)
+**Entry Point:** [`README.md`](../../Tenant/docs/README.md)
 
 **Key Topics:**
 - Multi-tenancy
@@ -354,7 +365,7 @@
 ### User Module
 **Location:** `laravel/Modules/User/docs/`  
 **Files:** ~1,500  
-**Entry Point:** [`README.md`](../User/docs/README.md)
+**Entry Point:** [`README.md`](../../User/docs/README.md)
 
 **Key Topics:**
 - User management
@@ -368,8 +379,8 @@
 - Contains `coverage-full.md` (11,055 lines) - **CRITICAL**: split immediately
 
 **Key Documents:**
-- [`gdpr-compliance.md`](../User/docs/gdpr-compliance.md) - **SSOT**
-- [`guida-migrazione-step-by-step.md`](../User/docs/guida-migrazione-step-by-step.md)
+- [`gdpr-compliance.md`](../../User/docs/gdpr-compliance.md) - **SSOT**
+- [`guida-migrazione-step-by-step.md`](../../User/docs/guida-migrazione-step-by-step.md)
 
 **Deprecated:**
 - `volt_errors.md` → use `volt-errors.md`
@@ -385,7 +396,7 @@
 ### Xot Module
 **Location:** `laravel/Modules/Xot/docs/`  
 **Files:** 4,993  
-**Entry Point:** [`00-INDEX.md`](../Xot/docs/00-INDEX.md)
+**Entry Point:** [`00-INDEX.md`](../../Xot/docs/00-INDEX.md)
 
 **Key Topics:**
 - **SSOT** for core architecture
@@ -454,8 +465,8 @@
 ---
 
 ### Translations
-1. [`Lang/docs/translation_system.md`](../Lang/docs/translation_system.md) - **MASTER GUIDE**
-2. [`Lang/docs/translation_keys_best_practices.md`](../Lang/docs/translation_keys_best_practices.md)
+1. [`Lang/docs/translation_system.md`](../../Lang/docs/translation_system.md) - **MASTER GUIDE**
+2. [`Lang/docs/translation_keys_best_practices.md`](../../Lang/docs/translation_keys_best_practices.md)
 
 **Related:**
 - `Xot/docs/translation-rules-1.md`
@@ -466,9 +477,9 @@
 ### BMAD & Context Engineering
 
 **Single Sources of Truth:**
-1. [`docs/wiki/concepts/bmad-method.md`](../../../docs/wiki/concepts/bmad-method.md) - **BMAD MASTER GUIDE**
-2. [`docs/wiki/concepts/context-engineering.md`](../../../docs/wiki/concepts/context-engineering.md) - **CONTEXT MASTER GUIDE**
-3. [`docs/wiki/concepts/context-memory-compaction-rule.md`](../../../docs/wiki/concepts/context-memory-compaction-rule.md) - **COMPACTION RULE**
+1. [`docs/wiki/concepts/bmad-method.md`](../../../../docs/wiki/concepts/bmad-method.md) - **BMAD MASTER GUIDE**
+2. [`docs/wiki/concepts/context-engineering.md`](../../../../docs/wiki/concepts/context-engineering.md) - **CONTEXT MASTER GUIDE**
+3. [`docs/wiki/concepts/context-memory-compaction-rule.md`](../../../../docs/wiki/concepts/context-memory-compaction-rule.md) - **COMPACTION RULE**
 
 **Module-Specific Adoption:**
 - [`laravel/Modules/docs/llm-wiki.md`](llm-wiki.md) - How modules participate in LLM Wiki
@@ -479,7 +490,7 @@
 
 **Single Sources of Truth:**
 1. [`UI/docs/filament-components-usage.md`](../UI/docs/filament-components-usage.md) - **MASTER GUIDE**
-2. [`Cms/docs/FILAMENT-RESOURCE-GUIDELINES.md`](../Cms/docs/FILAMENT-RESOURCE-GUIDELINES.md)
+2. [`Cms/docs/FILAMENT-RESOURCE-GUIDELINES.md`](../../Cms/docs/FILAMENT-RESOURCE-GUIDELINES.md)
 
 **Related:**
 - `Xot/docs/volt-folio-best-practices.md`
@@ -490,7 +501,7 @@
 ### Routing
 
 **Single Sources of Truth:**
-1. [`Cms/docs/folio-routing-locale.md`](../Cms/docs/folio-routing-locale.md) - **MASTER GUIDE**
+1. [`Cms/docs/folio-routing-locale.md`](../../Cms/docs/folio-routing-locale.md) - **MASTER GUIDE**
 
 **Related:**
 - `UI/docs/folio-volt-best-practices.md`

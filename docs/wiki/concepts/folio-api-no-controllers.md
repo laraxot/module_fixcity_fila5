@@ -1,4 +1,8 @@
 ---
+updated: 2026-09-26
+qmd: "folio api no controllers"
+issues: []
+discussions: []
 title: API pubbliche Fixcity — Folio, non Controller
 type: concept
 confidence: high
@@ -7,6 +11,7 @@ tags: [folio, api, fixcity, geojson]
 related:
   - ../../../../docs/wiki/concepts/folio-api-no-controllers.md
   - map-lit-ticket-api.md
+status: draft
 ---
 
 # API pubbliche Fixcity — Folio, non Controller

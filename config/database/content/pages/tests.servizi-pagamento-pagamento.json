@@ -1,0 +1,133 @@
+{
+    "id": "tests.servizi-pagamento-pagamento",
+    "slug": "tests.servizi-pagamento-pagamento",
+    "parent_slug": "tests",
+    "title": {
+        "it": "Pagamento",
+        "en": "Pagamento"
+    },
+    "layout": "test",
+    "sidebar_blocks": {
+        "it": [],
+        "en": []
+    },
+    "footer_blocks": null,
+    "description": "Pagina di prova servizi-pagamento-pagamento (flusso pagamento servizio) da JSON, resa dal blocco service-flow del tema Sixteen.",
+    "content_blocks": {
+        "it": [
+            {
+                "type": "service-flow",
+                "data": {
+                    "view": "pub_theme::components.blocks.service-flow.design-comuni",
+                    "kind": "payment",
+                    "breadcrumb": {
+                        "items": [
+                            {
+                                "label": "Home",
+                                "url": "/it/tests/homepage"
+                            },
+                            {
+                                "label": "Area personale",
+                                "url": "#"
+                            }
+                        ],
+                        "current": "Pagamento"
+                    },
+                    "heading": {
+                        "title": "Pagamento",
+                        "rule": "d-none d-lg-block mb-40 mt-0"
+                    },
+                    "sections": [
+                        {
+                            "type": "summary",
+                            "bare": true,
+                            "wrapper_class": "",
+                            "card_class": "card has-bkg-grey shadow-sm mb-0 card-summary-grey",
+                            "header_class": "card-header border-0 p-0 mb-lg-20 m-0",
+                            "title": "Richiesta servizio mensa scolastica",
+                            "title_tag": "h2",
+                            "title_class": "title-xxlarge",
+                            "groups": [
+                                {
+                                    "class": "bg-white card-summary-inline",
+                                    "header_class": "d-flex justify-content-between d-flex justify-content-end",
+                                    "title": "Dati",
+                                    "inline": true,
+                                    "rows": [
+                                        {
+                                            "label": "Pratica:",
+                                            "value": "AN4059281"
+                                        },
+                                        {
+                                            "label": "Data di pagamento:",
+                                            "value": "10/04/2022"
+                                        },
+                                        {
+                                            "label": "Importo totale dovuto:",
+                                            "value": "23,00 €"
+                                        },
+                                        {
+                                            "label": "Descrizione pagamento:",
+                                            "value": "Pagamento del servizio per la mensa scolastica"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "total": "Importo pagamento: 23,00 €"
+                        },
+                        {
+                            "type": "cta",
+                            "class": "mb-40 mb-lg-80 mt-lg-40",
+                            "buttons": [
+                                {
+                                    "label": "paga con pagoPA",
+                                    "class": "btn btn-icon btn-re square mb-2",
+                                    "image": {
+                                        "file": "pagopa.svg",
+                                        "alt": "paga con pagoPA"
+                                    }
+                                }
+                            ],
+                            "link": {
+                                "label": "Che cos’è pagoPA",
+                                "url": "#"
+                            }
+                        }
+                    ],
+                    "contacts": {
+                        "layout": "offset",
+                        "col": "col-12 col-lg-6",
+                        "main": {
+                            "title": "Contatta il comune",
+                            "items": [
+                                {
+                                    "icon": "it-help-circle",
+                                    "label": "Leggi le domande frequenti",
+                                    "url": "#"
+                                },
+                                {
+                                    "icon": "it-mail",
+                                    "label": "Richiedi assistenza",
+                                    "url": "#",
+                                    "element": "contacts"
+                                },
+                                {
+                                    "icon": "it-hearing",
+                                    "label": "Chiama il numero verde 05 0505",
+                                    "url": "#"
+                                },
+                                {
+                                    "icon": "it-calendar",
+                                    "label": "Prenota appuntamento",
+                                    "url": "#",
+                                    "element": "appointment-booking"
+                                }
+                            ]
+                        }
+                    }
+                }
+            }
+        ],
+        "en": []
+    }
+}

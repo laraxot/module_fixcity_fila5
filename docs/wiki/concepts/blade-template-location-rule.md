@@ -1,7 +1,15 @@
 ---
+title: "blade template location rule"
+tags: [documentation]
+created: 2026-09-26
+updated: 2026-09-26
+qmd: "blade template location rule"
+issues: []
+discussions: []
 name: blade-template-location-rule
 description: Prevent stray Blade files for dynamic wizard pages; enforce Livewire component + JSON config.
 type: concept
+status: draft
 ---
 
 # Blade Template Location Rule
@@ -36,3 +44,5 @@ type: concept
 - `no-page-specific-css` – avoid CSS scoped to a single Blade file.
 
 ---
+
+Correzione verificata 2026-10-13 (DCP-35 S4): `tests.segnalazione-crea.json` è stato eliminato (commit 260f3bcc5, `git log --diff-filter=D`) e oggi non esiste in nessun tenant; la risposta di `/it/tests/segnalazione-crea` (200) non contiene il wizard (0 occorrenze di `fi-sc-wizard` e `$wire.save()`). Il flusso vive su `/it/tickets/create` (`tickets.create.json`, blocco `components/blocks/tests/ticket-crea.blade.php`). Questo documento descrive lo stato precedente; stato attuale in `Modules/Fixcity/docs/wiki/concepts/ticket-crea-url-routing-chain.md`.

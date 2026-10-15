@@ -1,3 +1,15 @@
+---
+title: "prd"
+type: note
+tags: [documentation]
+created: 2026-09-26
+updated: 2026-09-26
+qmd: "prd"
+issues: []
+discussions: []
+status: draft
+---
+
 # PRD: Product Requirements Document - Fixcity Module
 
 > **Version**: 1.0.0
@@ -29,3 +41,8 @@ Il modulo **Fixcity** gestisce le funzionalità di fixcity in modo agnostico e m
 ## 6. References
 - [roadmap.md](roadmap.md)
 - [strategy.md](strategy.md)
+
+--- BMAD + Second Brain ---
+- Scopo: documentazione tecnica del modulo.
+- Utilità: riferimento sviluppatori/audit.
+- Funzionalità: struttura, dipendenze, convenzioni (no date .md, git avanti).

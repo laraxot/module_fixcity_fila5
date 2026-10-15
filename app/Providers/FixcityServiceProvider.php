@@ -5,7 +5,12 @@ declare(strict_types=1);
 namespace Modules\Fixcity\Providers;
 
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Gate;
 use Laravel\Folio\Folio;
+use Modules\Fixcity\Models\Ticket;
+use Modules\Fixcity\Models\TicketActivity;
+use Modules\Fixcity\Observers\TicketActivityObserver;
+use Modules\Fixcity\Policies\TicketPolicy;
 use Modules\Xot\Providers\XotBaseServiceProvider;
 
 class FixcityServiceProvider extends XotBaseServiceProvider
@@ -16,9 +21,18 @@ class FixcityServiceProvider extends XotBaseServiceProvider
 
     protected string $module_ns = __NAMESPACE__;
 
+    public function register(): void
+    {
+        parent::register();
+    }
+
     public function boot(): void
     {
         parent::boot();
+
+
+        Gate::policy(Ticket::class, TicketPolicy::class);
+        TicketActivity::observe(TicketActivityObserver::class);
 
         $this->registerFolioApiRoutes();
     }

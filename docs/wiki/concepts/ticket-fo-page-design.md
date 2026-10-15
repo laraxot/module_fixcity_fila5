@@ -1,4 +1,5 @@
 ---
+discussions: []
 title: "Ticket FO page design — mappa statica + comments"
 type: concept
 tags: [ticket, folio, leaflet, comments, frontoffice]
@@ -7,6 +8,7 @@ updated: 2026-06-09
 qmd: "ticket frontoffice folio mappa statica comments"
 issues:
   - "https://github.com/laraxot/base_fixcity_fila5/issues/284"
+status: draft
 ---
 
 # Ticket FO page design
@@ -26,7 +28,7 @@ Pagina `/it/tickets/{id}` con:
 
 ## File owner (vietato `pages/tickets/`)
 
-**Non creare** `Themes/Sixteen/resources/views/pages/tickets/` — directory semantica vietata ([page-directory-structure.md](../../../../Themes/Sixteen/docs/page-directory-structure.md)).
+**Non creare** `Themes/Sixteen/resources/views/pages/tickets/` — directory semantica vietata ([page-directory-structure.md](../../../../../Themes/Sixteen/docs/page-directory-structure.md)).
 
 | Layer | File SSoT |
 |-------|-----------|

@@ -1,3 +1,15 @@
+---
+title: "segnalazioni elenco map architecture"
+type: note
+tags: [documentation]
+created: 2026-09-26
+updated: 2026-09-26
+qmd: "segnalazioni elenco map architecture"
+issues: []
+discussions: []
+status: draft
+---
+
 # Segnalazioni Elenco — Architettura Mappa e Lista
 
 ## Overview
@@ -24,7 +36,7 @@ Il file è **statico** e **leggero** — anche con migliaia di punti resta < 1MB
 ## Componenti
 
 ### GenerateTicketsJsonAction
-- **Path**: `Modules/Fixcity/app/Actions/GenerateTicketsJsonAction.php` (nwidart: **solo** sotto `app/` — vedi [incident-nwidart-class-outside-app.md](../../../../../docs/wiki/memories/incident-nwidart-class-outside-app.md))
+- **Path**: `Modules/Fixcity/app/Actions/GenerateTicketsJsonAction.php` (nwidart: **solo** sotto `app/` — vedi [incident-nwidart-class-outside-app.md](../../../../../../docs/wiki/memories/incident-nwidart-class-outside-app.md))
 - **Trigger**: HeaderAction "Esporta JSON mappa" nel pannello admin Filament (ListTickets)
 - **Output**: `public_html/data/tickets.json` (GeoJSON FeatureCollection)
 - **Filtro**: solo ticket con `location` non null e coordinate valide
@@ -108,4 +120,4 @@ Se il codice JS/CSS/Blade va perso, ricostruire in ordine:
 - Design Comuni reference: https://italia.github.io/design-comuni-pagine-statiche/sito/ticket-list.html
 - farmshops.eu pattern: https://github.com/CodeforKarlsruhe/farmshops.eu
 - Regola leaflet: `Modules/Geo/docs/MAP-COMPONENTS-ARCHITECTURE.md`
-- Root SSOT filtri: [frontoffice-map-filters-ssot-architecture.md](../../../../../docs/wiki/architecture/frontoffice-map-filters-ssot-architecture.md)
+- Root SSOT filtri: [frontoffice-map-filters-ssot-architecture.md](../../../../../../docs/wiki/architecture/frontoffice-map-filters-ssot-architecture.md)

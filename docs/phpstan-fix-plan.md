@@ -1,3 +1,17 @@
+---
+title: "phpstan fix plan"
+type: note
+tags: [documentation]
+created: 2026-09-26
+updated: 2026-09-26
+qmd: "phpstan fix plan"
+issues: []
+discussions: []
+status: draft
+---
+
+> **Storico — fotografia del 2026-03-02, non guida operativa corrente.** Error count e soluzioni proposte possono essere superati. Prima di riusare un esempio, confrontarlo con il contratto architetturale Fixcity e il risultato di PHPStan corrente.
+
 # Fixcity Module - PHPStan Fix Plan
 
 ## Current Status
@@ -302,3 +316,7 @@ public function validate(string $attribute, mixed $value, Closure $fail): void
 - All relationships properly defined
 - PHPStan level 10 passes
 - All tests pass
+--- BMAD + Second Brain ---
+- Scopo: documentazione tecnica del modulo.
+- Utilità: riferimento sviluppatori/audit.
+- Funzionalità: struttura, dipendenze, convenzioni (no date .md, git avanti).

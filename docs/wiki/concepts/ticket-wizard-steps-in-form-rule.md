@@ -1,4 +1,7 @@
 ---
+qmd: "ticket wizard steps in form rule"
+issues: []
+discussions: []
 title: "Ticket Wizard Steps in TicketForm Rule"
 type: concept
 confidence: high
@@ -8,6 +11,7 @@ tags: [filament, wizard, ticket, ticketform, haswizard, step]
 related:
   - concepts/filament5-schema-form-access-rule.md
   - concepts/filament5-widget-schema-submit-state-rule.md
+status: draft
 ---
 
 # Regola: Gli step del wizard Ticket stanno in TicketForm

@@ -4,14 +4,14 @@ declare(strict_types=1);
 
 namespace Modules\Fixcity\Filament\Widgets;
 
-use Filament\Widgets\StatsOverviewWidget as BaseWidget;
 use Filament\Widgets\StatsOverviewWidget\Stat;
 use Modules\Fixcity\Actions\GetTicketKpiAggregateAction;
+use Modules\Xot\Filament\Widgets\XotBaseStatsOverviewWidget;
 
 /**
  * KPI volumi ticket — dashboard e analytics PA (STORY-025 / STORY-040).
  */
-class TicketOverview extends BaseWidget
+class TicketOverview extends XotBaseStatsOverviewWidget
 {
     protected function getStats(): array
     {

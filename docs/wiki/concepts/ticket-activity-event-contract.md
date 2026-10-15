@@ -15,6 +15,7 @@ related:
   - ticket-citizen-timeline.md
   - ../../../../../../docs/stories/STORY-392-ticket-workflow-activity-events.dev.md
   - ../../../../../../docs/stories/STORY-444-note-interne-operatori.dev.md
+status: draft
 ---
 
 # Contratto eventi TicketActivity

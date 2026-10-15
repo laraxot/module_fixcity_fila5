@@ -6,6 +6,8 @@ namespace Modules\Fixcity\Actions;
 
 use Illuminate\Support\Facades\File;
 use Modules\Xot\Actions\Cast\SafeStringCastAction;
+use Spatie\QueueableAction\QueueableAction;
+
 use function Safe\preg_match;
 use function Safe\preg_replace;
 
@@ -16,10 +18,12 @@ use function Safe\preg_replace;
  */
 final class LoadCityDesignFilterCatalogAction
 {
-    public const REFERENCE_RESULTS_TOTAL = 645;
+    use QueueableAction;
+
+    public const int REFERENCE_RESULTS_TOTAL = 645;
 
     /** Reference count for H1 subtitle (12 months resolved). */
-    public const REFERENCE_RESOLVED_LAST_12_MONTHS = 73;
+    public const int REFERENCE_RESOLVED_LAST_12_MONTHS = 73;
 
     /**
      * @return array{
@@ -43,7 +47,6 @@ final class LoadCityDesignFilterCatalogAction
         $legend = SafeStringCastAction::cast($firstCategory['title'] ?? 'categoria');
 
         $items = [];
-        $sumCounts = 0;
 
         foreach ($list as $entry) {
             $rawLabel = SafeStringCastAction::cast($entry['label'] ?? '');
@@ -54,8 +57,6 @@ final class LoadCityDesignFilterCatalogAction
                 $count = (int) $matches[1];
                 $label = trim((string) preg_replace('/\s*\(\d+\)\s*$/', '', $rawLabel));
             }
-
-            $sumCounts += $count;
 
             $items[] = [
                 'id' => SafeStringCastAction::cast($entry['id'] ?? 'filter'),

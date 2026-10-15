@@ -1,0 +1,49 @@
+{
+  "id": "segnalazione-dettaglio",
+  "slug": "segnalazione-dettaglio",
+  "title": {"it":"Segnalazione disservizio - Nome del Comune","en":"Segnalazione disservizio"},
+  "description": "Schema segnalazione disservizio replicato tramite TailwindCSS + Alpine.js + Lit (no Bootstrap Italia runtime).",
+  "content_blocks": {
+    "it": [
+      {
+        "type": "breadcrumb",
+        "data": {
+          "view": "pub_theme::components.blocks.breadcrumb.default",
+          "items": [
+            {"label":"Home","url":"{{ route('home') }}"},
+            {"label":"Servizi","url":"{{ route('tests.view',['slug'=>'servizi']) }}"},
+            {"label":"Segnalazione disservizio","is_current":true}
+          ]
+        }
+      },
+      {
+        "type": "hero",
+        "data": {
+          "view": "pub_theme::components.blocks.hero.default",
+          "eyebrow":"SEGNALAZIONE DISSERVIZIO",
+          "heading":"Segnalazione disservizio",
+          "intro":"Descrivi il problema, indica dove si trova e segui gli aggiornamenti. Il Comune interviene in base alla priorità.",
+          "cta_primary":{"label":"Invia una segnalazione","url":"{{ route('container0.view',['container0'=>'tickets','slug0'=>'create']) }}"}
+        }
+      },
+      {
+        "type": "form-steps",
+        "data": {
+          "view": "pub_theme::components.blocks.form-wizard.default",
+          "heading":"Invio segnalazione",
+          "steps_label":"Passaggi per inviare una segnalazione",
+          "steps":[
+            {"number":1,"title":"Privacy","body":"Accetti il trattamento dei dati personali.","icon":"it-lock"},
+            {"number":2,"title":"Dati","body":"Inserisci descrizione, categoria e posizione.","icon":"it-map-pin"},
+            {"number":3,"title":"Riepilogo","body":"Verifica le informazioni inserite.","icon":"it-check-circle"},
+            {"number":4,"title":"Conferma","body":"Ricevi il codice di riferimento.","icon":"it-paper-plane"}
+          ],
+          "form_view":"pub_theme::components.blocks.form-segnalazione.default"
+        }
+      }
+    ],
+    "en": []
+  },
+  "sidebar_blocks": {"it":[],"en":[]},
+  "footer_blocks": null
+}

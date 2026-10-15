@@ -1,14 +1,21 @@
 ---
+title: "fixcity module"
+tags: [documentation]
+created: 2026-09-26
+qmd: "fixcity module"
+issues: []
+discussions: []
 type: overview
 module: Fixcity
 sources:
   - ../../../README.md
-  - ../../../ticket-wizard-frontoffice.md
-  - ../../../structure.md
-  - ../../../wizard-governance-philosophy.md
-  - ../../../filament-wizard-pattern.md
+  - ../../ticket-wizard-frontoffice.md
+  - ../../structure.md
+  - ../../wizard-governance-philosophy.md
+  - ../../filament-wizard-pattern.md
 confidence: high
-updated: 2026-04-15
+updated: 2026-09-26
+status: draft
 ---
 
 # Fixcity Module — Overview
@@ -99,7 +106,7 @@ Wizard\Step::make('dati')
 
 **6. Multilingua obbligatoria** — tutto il testo usa chiavi `fixcity::...`; slug CMS via config (MAI hardcoded italiano nel PHP).
 
-**7. Submit wizard frontoffice** — `CreateTicketWizardWidget::submit()` passa a **`Ticket::create`** l’output di **`$this->form->getState()`** (più **`owner_id`** se sessione auth, senza sovrascrivere valori già nello stato), **senza** `TicketResource::prepareFormDataBeforePersist()` (riservata al backoffice).
+**7. Submit wizard frontoffice** — `CreateTicketWizardWidget::submit()` passa a **`Ticket::create`** l’output di **`$this->form->getState()`** (più **`owner_id`** se sessione auth, senza sovrascrivere valori già nello stato), senza usare la Resource come service locator.
 
 ### Composizione CMS Pagina
 

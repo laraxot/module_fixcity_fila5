@@ -1,3 +1,15 @@
+---
+title: "map controls visibility issue"
+type: note
+tags: [documentation]
+created: 2026-09-26
+updated: 2026-09-26
+qmd: "map controls visibility issue"
+issues: []
+discussions: []
+status: draft
+---
+
 # Map Controls Visibility Issue on Ticket Creation Page
 
 ## Story: BMAD-2026-04-28-001
@@ -81,7 +93,7 @@ $location = [
 **Browser Testing** (per `post-modifica-verifica-obbligatoria.md` and `visual-parity-verification.md`):
 
 1. Open `http://127.0.0.1:8001/fixcity/admin/tickets/create?step=form.data::data::wizard-step`
-2. Login: marco.sottana@gmail.com / prova123
+2. Login con un utente di test (credenziali fuori repo)
 3. Verify map controls visible:
    - Fullscreen button (top-right)
    - Zoom in (+) / zoom out (-) (bottom-right or top-right)

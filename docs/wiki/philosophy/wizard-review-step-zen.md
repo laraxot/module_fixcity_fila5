@@ -1,3 +1,15 @@
+---
+title: "wizard review step zen"
+type: note
+tags: [documentation]
+created: 2026-09-26
+updated: 2026-09-26
+qmd: "wizard review step zen"
+issues: []
+discussions: []
+status: draft
+---
+
 # Wizard Review Step Zen
 
 ## Il Riepilogo come Atto di Trasparenza

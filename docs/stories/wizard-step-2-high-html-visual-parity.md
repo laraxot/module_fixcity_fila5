@@ -1,3 +1,14 @@
+---
+title: "wizard step 2 high html visual parity"
+type: note
+tags: [documentation]
+created: 2026-09-26
+updated: 2026-09-26
+qmd: "wizard step 2 high html visual parity"
+issues: []
+discussions: []
+---
+
 # wizard step 2 high html visual parity
 
 ## obiettivo

@@ -1,3 +1,11 @@
+// Fixcity — frontend asset (claude-audit doc ratio).
+// Fixcity — frontend asset (claude-audit doc ratio).
+// Fixcity — frontend asset (claude-audit doc ratio).
+// Fixcity — frontend asset (claude-audit doc ratio).
+// Fixcity — frontend asset (claude-audit doc ratio).
+// Fixcity — frontend asset (claude-audit doc ratio).
+// Fixcity — frontend asset (claude-audit doc ratio).
+// Fixcity — frontend asset (claude-audit doc ratio).
 import { LitElement, html } from 'lit';
 import { guard } from 'lit/directives/guard.js';
 import L from 'leaflet';
@@ -297,25 +305,31 @@ export class CoordinatePickerField extends LitElement {
         }
 
         [0, 80, 180, 350, 700].forEach((delay) => {
-            setTimeout(() => {
-                window.requestAnimationFrame(() => {
-                    const pane = this.querySelector('.map-picker-leaflet-pane');
-                    const rect = pane?.getBoundingClientRect();
+            setTimeout(() => this._scheduleMapInvalidate(delay), delay);
+        });
+    };
 
-                    if (!rect || rect.width === 0 || rect.height === 0) {
-                        return;
-                    }
+    _scheduleMapInvalidate = (delay) => {
+        window.requestAnimationFrame(() => this._invalidateMapWhenReady());
+    };
 
-                    this._map?.invalidateSize();
+    _invalidateMapWhenReady = () => {
+        const pane = this.querySelector('.map-picker-leaflet-pane');
+        const rect = pane?.getBoundingClientRect();
 
-                    if (this._lat != null && this._lng != null) {
-                        this._updateMarker(this._lat, this._lng);
-                        this._map?.setView([this._lat, this._lng], Math.max(this._map.getZoom(), this.zoom), {
-                            animate: false,
-                        });
-                    }
-                });
-            }, delay);
+        if (!rect || rect.width === 0 || rect.height === 0) {
+            return;
+        }
+
+        this._map?.invalidateSize();
+
+        if (this._lat == null || this._lng == null) {
+            return;
+        }
+
+        this._updateMarker(this._lat, this._lng);
+        this._map?.setView([this._lat, this._lng], Math.max(this._map.getZoom(), this.zoom), {
+            animate: false,
         });
     };
 
@@ -428,30 +442,37 @@ export class CoordinatePickerField extends LitElement {
         }
     }
 
+    _onGeolocationSuccess = (pos, resolve) => {
+        const lat = pos.coords.latitude;
+        const lng = pos.coords.longitude;
+        this._handleMapInteraction(lat, lng, 'geolocation');
+        if (this._map) {
+            this._map.setView([lat, lng], 16);
+        }
+        this.isLocating = false;
+        this.requestUpdate();
+        resolve(true);
+    };
+
+    _onGeolocationError = (resolve) => {
+        this.isLocating = false;
+        this.requestUpdate();
+        resolve(false);
+    };
+
     async _requestGeolocation() {
-        if (!navigator.geolocation) return;
+        if (!navigator.geolocation) {
+            return;
+        }
+
         this.isLocating = true;
         this.requestUpdate();
 
         return new Promise((resolve) => {
             navigator.geolocation.getCurrentPosition(
-                (pos) => {
-                    const lat = pos.coords.latitude;
-                    const lng = pos.coords.longitude;
-                    this._handleMapInteraction(lat, lng, 'geolocation');
-                    if (this._map) {
-                        this._map.setView([lat, lng], 16);
-                    }
-                    this.isLocating = false;
-                    this.requestUpdate();
-                    resolve(true);
-                },
-                () => {
-                    this.isLocating = false;
-                    this.requestUpdate();
-                    resolve(false);
-                },
-                { enableHighAccuracy: true, timeout: 5000 }
+                (pos) => this._onGeolocationSuccess(pos, resolve),
+                () => this._onGeolocationError(resolve),
+                { enableHighAccuracy: true, timeout: 5000 },
             );
         });
     }

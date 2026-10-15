@@ -1,7 +1,13 @@
 ---
+title: "ticket design comuni comparison"
+updated: 2026-09-26
+qmd: "ticket design comuni comparison"
+issues: []
+discussions: []
 type: concept
 created: 2026-05-04
 tags: [design-comuni, visual-parity, comparison]
+status: draft
 ---
 
 # Design Comuni Comparison: Segnalazione

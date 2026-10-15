@@ -1,3 +1,17 @@
+---
+title: "wizard architecture"
+type: note
+tags: [documentation]
+created: 2026-09-26
+updated: 2026-09-26
+qmd: "wizard architecture"
+issues: []
+discussions: []
+status: draft
+---
+
+> **Esempio legacy non conforme — non copiare.** Il routing applicativo segue Folio e Actions; non introdurre `TestController` o route Controller. Per il contratto corrente consultare `wiki/concepts/no-controllers-folio-volt-filament.md`.
+
 # Wizard Architecture Documentation
 
 ## Critical Architecture Pattern: URL State Persistence
@@ -160,7 +174,13 @@ Route::get('/it/tests/{slug}', [TestController::class, 'show'])
 - **Network**: No additional network requests for state
 
 ---
-
 *Critical Architecture Pattern - Must be implemented in all wizard widgets*  
 *Last Updated: May 2026*  
 *Version: 1.0.0*
+
+Correzione verificata 2026-10-13 (DCP-35 S4): `tests.segnalazione-crea.json` è stato eliminato (commit 260f3bcc5, `git log --diff-filter=D`) e oggi non esiste in nessun tenant; la risposta di `/it/tests/segnalazione-crea` (200) non contiene il wizard (0 occorrenze di `fi-sc-wizard` e `$wire.save()`). Il flusso vive su `/it/tickets/create` (`tickets.create.json`, blocco `components/blocks/tests/ticket-crea.blade.php`). Questo documento descrive lo stato precedente; stato attuale in `Modules/Fixcity/docs/wiki/concepts/ticket-crea-url-routing-chain.md`.
+
+--- BMAD + Second Brain ---
+- Scopo: documentazione tecnica del modulo.
+- Utilità: riferimento sviluppatori/audit.
+- Funzionalità: struttura, dipendenze, convenzioni (no date .md, git avanti).

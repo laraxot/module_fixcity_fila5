@@ -1,3 +1,15 @@
+---
+title: "index"
+type: note
+tags: [documentation]
+created: 2026-09-26
+updated: 2026-09-26
+qmd: "index"
+issues: []
+discussions: []
+status: draft
+---
+
 # Fixcity Rules Index
 
 | Rule | Description | File |
@@ -7,5 +19,5 @@
 
 ## Cross-Reference
 
-- Project-wide: [docs/wiki/rules/](../../../docs/wiki/rules/)
-- No Controllers: [../../../docs/wiki/rules/no-controllers-rule.md](../../../docs/wiki/rules/no-controllers-rule.md)
+- Project-wide: [docs/wiki/rules/](../wiki/rules)
+- No Controllers: [../../../docs/wiki/rules/no-controllers-rule.md](../../../../../docs/wiki/rules/no-controllers-rule.md)

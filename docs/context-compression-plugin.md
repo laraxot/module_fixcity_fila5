@@ -1,3 +1,15 @@
+---
+title: "context compression plugin"
+type: note
+tags: [documentation]
+created: 2026-09-26
+updated: 2026-09-26
+qmd: "context compression plugin"
+issues: []
+discussions: []
+status: draft
+---
+
 # Context compression (approccio interno)
 
 Scopo: ridurre la lunghezza del testo prima di inviare richieste a LLM per evitare errori di contesto (token limit).
@@ -19,3 +31,7 @@ Passi successivi:
 
 Riferimenti:
 - Ricerca web: "contextual compression"; alcune pagine ufficiali OpenAI possono essere soggette a restrizioni di accesso.
+--- BMAD + Second Brain ---
+- Scopo: documentazione tecnica del modulo.
+- Utilità: riferimento sviluppatori/audit.
+- Funzionalità: struttura, dipendenze, convenzioni (no date .md, git avanti).

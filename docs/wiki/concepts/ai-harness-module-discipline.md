@@ -11,10 +11,10 @@ discussions:
   - "https://github.com/laraxot/base_fixcity_fila5/discussions/273"
 related:
   - ./second-brain-operating-model.md
-  - ../../../../../docs/wiki/concepts/hackernoon-ai-coding-tips-fixcity-map.md
-  - ../../../../../docs/wiki/bmad/architecture.md
-  - ../../../../../docs/wiki/rules/wiki-markdown-frontmatter-mandatory.md
-  - ../../Xot/docs/wiki/concepts/second-brain-local-discipline.md
+  - ../../../../../../docs/wiki/concepts/hackernoon-ai-coding-tips-fixcity-map.md
+  - ../../../../../../docs/wiki/bmad/architecture.md
+  - ../../../../../../docs/wiki/rules/wiki-markdown-frontmatter-mandatory.md
+  - second-brain-local-discipline.md
 ---
 
 # AI harness — moduli Laraxot
@@ -25,10 +25,10 @@ Contratto **trasversale** per ogni `laravel/Modules/<Nome>/docs/`.
 
 | Argomento | Fonte |
 |-----------|--------|
-| Tips 001–022 | [hackernoon-ai-coding-tips-fixcity-map.md](../../../../../docs/wiki/concepts/hackernoon-ai-coding-tips-fixcity-map.md) |
-| Second brain locale | [Xot second-brain-local-discipline.md](../../Xot/docs/wiki/concepts/second-brain-local-discipline.md) |
-| Schema DB / migrate | [bmad/architecture.md](../../../../../docs/wiki/bmad/architecture.md) |
-| Frontmatter + GitHub | [wiki-markdown-frontmatter-mandatory.md](../../../../../docs/wiki/rules/wiki-markdown-frontmatter-mandatory.md) |
+| Tips 001–022 | [hackernoon-ai-coding-tips-fixcity-map.md](../../../../../../docs/wiki/concepts/hackernoon-ai-coding-tips-fixcity-map.md) |
+| Second brain locale | [Xot second-brain-local-discipline.md](second-brain-local-discipline.md) |
+| Schema DB / migrate | [bmad/architecture.md](../../../../../../docs/wiki/bmad/architecture.md) |
+| Frontmatter + GitHub | [wiki-markdown-frontmatter-mandatory.md](../../../../../../docs/wiki/rules/wiki-markdown-frontmatter-mandatory.md) |
 
 ## Checklist agente (da `llm-wiki.txt`)
 

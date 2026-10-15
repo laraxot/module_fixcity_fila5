@@ -1,3 +1,14 @@
+---
+title: "wizard timeout recurrence import and infolist guard"
+type: note
+tags: [documentation]
+created: 2026-09-26
+updated: 2026-09-26
+qmd: "wizard timeout recurrence import and infolist guard"
+issues: []
+discussions: []
+---
+
 # wizard timeout recurrence import and infolist guard
 
 ## contesto

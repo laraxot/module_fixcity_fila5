@@ -1,0 +1,22 @@
+{
+    "id": "tests.segnalazione-dati",
+    "slug": "tests.segnalazione-dati",
+    "parent_slug": "tests",
+    "title": {"it": "Dati di segnalazione - Segnalazione disservizio", "en": "Report data - Report a problem"},
+    "layout": "test",
+    "description": "Step 2 della segnalazione disservizio: inserimento luogo, tipo di disservizio, titolo, dettagli e immagini.",
+    "content_blocks": {
+        "it": [
+            {
+                "type": "segnalazione-02-dati",
+                "data": {
+                    "view": "pub_theme::components.blocks.flow.segnalazione.02-dati",
+                    "title": "Dati di segnalazione"
+                }
+            }
+        ],
+        "en": []
+    },
+    "sidebar_blocks": {"it": [], "en": []},
+    "footer_blocks": null
+}
