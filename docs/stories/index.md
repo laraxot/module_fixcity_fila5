@@ -119,6 +119,11 @@ DCP-33, DCP-34 e DCP-35 qui sono le story del modulo Fixcity; lo stesso numero e
 - [dcp-231-guardie-di-pubblicazione-di-terms-e-media-policy-e-feedback-accessibilita](./dcp-231-guardie-di-pubblicazione-di-terms-e-media-policy-e-feedback-accessibilita.story.md) - DCP-231: guardie di pubblicazione per terms e media-policy, e feedback sull'accessibilita' spento; decisioni D231-1..4
 - [dcp-194-nomi-file-md-senza-date-e-suffissi-numerici](./dcp-194-nomi-file-md-senza-date-e-suffissi-numerici.story.md) - DCP-194: puntatore a DCP-201 (nomi dei file `.md` senza date ne' suffissi numerici)
 
+- [DCP-200](./dcp-200-registro-unico-delle-decisioni-aperte.story.md) - DCP-200: registro unico delle decisioni aperte (chi decide, opzioni, proposta, cosa sblocca)
+- [DCP-202](./dcp-202-sicurezza-filament-finding-aperti.story.md) - DCP-202: sicurezza del back office e delle API, finding aperti
+- [DCP-205](./dcp-205-test-rossi-e-debito-di-qualita.story.md) - DCP-205: test rossi, strumenti di prova e debito di qualita
+- [DCP-208](./dcp-208-messa-online-compiti-del-fornitore-e-dell-ente.story.md) - DCP-208: messa online, compiti del fornitore e dell'ente
+
 ## collegamenti bidirezionali
 
 - [Fixcity docs index](../INDEX.md)
