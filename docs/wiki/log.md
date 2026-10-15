@@ -582,3 +582,8 @@ Fase BMAD documentazione/qualita'. Solo `laravel/Modules/Fixcity/docs/`, nessun 
 - Anteprima delle foto nel riepilogo del wizard: piano `docs/blueprints/riepilogo-anteprima-foto.md`, Action/vista/lang/test, verifica nel browser reale (2 miniature decodificate, roundtrip con rimozione). Presa in carico della bozza lasciata a meta' da un'altra sessione.
 - Gate `go-live-gate.py`: `REPO-01` (marker di merge nel codice sorgente); ripristinati 3 file `Modules/User/lang/*/validation.php` con marker che davano errore di sintassi.
 - Fonts in Vite: gia' analizzato da DCP-183 (tema Sixteen); aggiunta una risposta con la cache HTTP di produzione e la misura di preload non attendibile in locale.
+
+## 2026-10-15: story di lavoro, decisioni aperte e nomi dei file
+- Creato il registro unico delle decisioni (DCP-200, DEC-01..45) e le story DCP-201 (nomi `.md`), 202 (sicurezza Filament), 203 (front office), 204 (Gdpr), 205 (test), 206 (strumenti e credenziali), 208 (messa online).
+- Regola dell'utente sui nomi dei `.md` (niente date, timestamp, `-1/-2/-3`): una regola canonica, hook su `Write`, gate `REPO-02`; 2190 file rinominati o ritirati, 0 rimasti fuori da `docs/raw/` (DCP-201).
+- Commit e push in 23 repo annidati e nella radice. PHPStan `Modules`: zero.
