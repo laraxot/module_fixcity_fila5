@@ -316,3 +316,7 @@ public function validate(string $attribute, mixed $value, Closure $fail): void
 - All relationships properly defined
 - PHPStan level 10 passes
 - All tests pass
+--- BMAD + Second Brain ---
+- Scopo: documentazione tecnica del modulo.
+- Utilità: riferimento sviluppatori/audit.
+- Funzionalità: struttura, dipendenze, convenzioni (no date .md, git avanti).

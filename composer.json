@@ -25,17 +25,8 @@
             "Modules\\Fixcity\\Database\\Seeders\\": "database/seeders/"
         }
     },
-    "autoload-dev": {
-        "psr-4": {
-            "Modules\\Fixcity\\Tests\\": "tests/"
-        }
-    },
-    "require": {
-       
-    },
-    "require-dev": {
-        
-    },
+    "require": {},
+    "require-dev": {},
     "repositories": [
         {
             "type": "path",
@@ -83,5 +74,4 @@
     },
     "minimum-stability": "dev",
     "prefer-stable": true
-    
 }

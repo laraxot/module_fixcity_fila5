@@ -45,3 +45,11 @@ Confidence
 - Medium: function-name duplication requires manual review — some duplicates are legitimate framework conventions.
 
 Author: Copilot CLI
+<<<<<<< .merge_file_5o6mOj
+
+--- BMAD + Second Brain ---
+- Scopo: documentazione tecnica del modulo.
+- Utilità: riferimento sviluppatori/audit.
+- Funzionalità: struttura, dipendenze, convenzioni (no date .md, git avanti).
+=======
+>>>>>>> .merge_file_8JQLBB

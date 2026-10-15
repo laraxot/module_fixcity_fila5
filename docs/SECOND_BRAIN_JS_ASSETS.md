@@ -28,3 +28,8 @@ Checklist per sviluppatori
 Esempi
 - In Themes/Sixteen/resources/js/app.js: `import './theme/header-mobile-nav-boot.js';`
 - Build: `cd Themes/Sixteen && npm run build:with-webroot && npm run copy`.
+
+--- BMAD + Second Brain ---
+- Scopo: documentazione tecnica del modulo.
+- Utilità: riferimento sviluppatori/audit.
+- Funzionalità: struttura, dipendenze, convenzioni (no date .md, git avanti).

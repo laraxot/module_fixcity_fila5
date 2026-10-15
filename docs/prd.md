@@ -41,3 +41,8 @@ Il modulo **Fixcity** gestisce le funzionalità di fixcity in modo agnostico e m
 ## 6. References
 - [roadmap.md](roadmap.md)
 - [strategy.md](strategy.md)
+
+--- BMAD + Second Brain ---
+- Scopo: documentazione tecnica del modulo.
+- Utilità: riferimento sviluppatori/audit.
+- Funzionalità: struttura, dipendenze, convenzioni (no date .md, git avanti).

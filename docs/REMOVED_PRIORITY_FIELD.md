@@ -26,3 +26,8 @@ Cosa è stato cambiato
 Follow-up
 - Se il campo priority è necessario lato back-office, considerare di mantenerlo solo in Filament admin resources.
 - Eseguire `./vendor/bin/phpstan analyse` e tests per verificare eventuali riferimenti residui a `priority`.
+
+--- BMAD + Second Brain ---
+- Scopo: documentazione tecnica del modulo.
+- Utilità: riferimento sviluppatori/audit.
+- Funzionalità: struttura, dipendenze, convenzioni (no date .md, git avanti).

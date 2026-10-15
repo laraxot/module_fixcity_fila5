@@ -309,3 +309,11 @@ public function test_form_submission()
 *Version: 1.0.0*
 
 Correzione verificata 2026-10-13 (DCP-35 S4): lo snippet `CreateTicketWizardWidget` di questo documento non corrisponde al codice. La classe reale estende `Modules\Xot\Filament\Widgets\XotBaseWizardWidget` (non `FilamentWidget`), non ha `$currentStep` (0 occorrenze in `CreateTicketWizardWidget.php`) e non dichiara `protected string $view`: la vista è risolta da `XotBaseWidget` con `GetViewByClassAction` in `pub_theme::filament.widgets.create-ticket-wizard` (`Themes/Sixteen/resources/views/filament/widgets/create-ticket-wizard.blade.php`), fallback `fixcity::filament.widgets.create-ticket-wizard`. Gli step reali sono `privacy`, `data`, `summary` (`TicketForm::getSteps()`).
+<<<<<<< .merge_file_UQwU3K
+
+--- BMAD + Second Brain ---
+- Scopo: documentazione tecnica del modulo.
+- Utilità: riferimento sviluppatori/audit.
+- Funzionalità: struttura, dipendenze, convenzioni (no date .md, git avanti).
+=======
+>>>>>>> .merge_file_2uTWwN

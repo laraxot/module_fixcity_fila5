@@ -75,3 +75,7 @@ Select::make('type')
 
 ## Regola Aurea
 **MAI** usare `Enum::cases()` come opzioni in un Select di Filament. Usa sempre `Enum::class`.
+--- BMAD + Second Brain ---
+- Scopo: documentazione tecnica del modulo.
+- Utilità: riferimento sviluppatori/audit.
+- Funzionalità: struttura, dipendenze, convenzioni (no date .md, git avanti).

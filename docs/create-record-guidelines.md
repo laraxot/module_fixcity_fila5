@@ -80,3 +80,8 @@ La Page adatta il lifecycle XotBase, l’Action possiede la trasformazione e il 
 - Add this file to the module’s `docs` index.
 - Create a memory entry (`memory/create-record-guidelines.md`) summarising the key rules for quick reference.
 - Optionally write a test case in `Modules/Fixcity/tests/Feature/CreateRecordTest.php`.
+
+--- BMAD + Second Brain ---
+- Scopo: documentazione tecnica del modulo.
+- Utilità: riferimento sviluppatori/audit.
+- Funzionalità: struttura, dipendenze, convenzioni (no date .md, git avanti).

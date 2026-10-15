@@ -133,3 +133,8 @@ This document provides Fixcity module-specific MCP usage guidelines only.
 
 ---
 *This document follows DRY+KISS principles. Server list and configuration are in the master doc.*
+
+--- BMAD + Second Brain ---
+- Scopo: documentazione tecnica del modulo.
+- Utilità: riferimento sviluppatori/audit.
+- Funzionalità: struttura, dipendenze, convenzioni (no date .md, git avanti).

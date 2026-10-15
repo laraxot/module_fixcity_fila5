@@ -66,3 +66,8 @@ Di seguito i 10 punti (ispirati ai "Code Smells" di Fowler e ai benefici di Next
 ## Stato Post-Refactoring (Obiettivo)
 - `CreateTicketWizardWidget.php`: Focalizzato su mount, submission e redirect. Schema delegato.
 - `TicketForm.php`: Unica fonte di verità per lo schema del ticket (Wizard & Form lineare).
+
+--- BMAD + Second Brain ---
+- Scopo: documentazione tecnica del modulo.
+- Utilità: riferimento sviluppatori/audit.
+- Funzionalità: struttura, dipendenze, convenzioni (no date .md, git avanti).

@@ -112,3 +112,7 @@ Ogni agente prende un file, lo risolve semanticamente (non meccanicamente), e sp
 ## Riferimento regola
 
 `bashscripts/ai/.claude/rules/merge-conflict-marker-resolution.md`
+--- BMAD + Second Brain ---
+- Scopo: documentazione tecnica del modulo.
+- Utilità: riferimento sviluppatori/audit.
+- Funzionalità: struttura, dipendenze, convenzioni (no date .md, git avanti).

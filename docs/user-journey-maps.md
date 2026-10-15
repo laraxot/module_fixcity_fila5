@@ -20,3 +20,11 @@ related:
 Canon aggiornato (verificato sul codice):
 
 [wiki/concepts/user-journey-map.md](wiki/concepts/user-journey-map.md)
+<<<<<<< .merge_file_iernyl
+
+--- BMAD + Second Brain ---
+- Scopo: documentazione tecnica del modulo.
+- Utilità: riferimento sviluppatori/audit.
+- Funzionalità: struttura, dipendenze, convenzioni (no date .md, git avanti).
+=======
+>>>>>>> .merge_file_2pgBHi

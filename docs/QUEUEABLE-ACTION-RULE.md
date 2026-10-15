@@ -338,3 +338,8 @@ $this->assertEquals($expected, $result);
 
 ---
 **Remember**: When in doubt, create a QueueableAction. Never create a Service.
+
+--- BMAD + Second Brain ---
+- Scopo: documentazione tecnica del modulo.
+- Utilità: riferimento sviluppatori/audit.
+- Funzionalità: struttura, dipendenze, convenzioni (no date .md, git avanti).

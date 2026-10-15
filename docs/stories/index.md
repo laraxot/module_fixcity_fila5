@@ -123,6 +123,10 @@ DCP-33, DCP-34 e DCP-35 qui sono le story del modulo Fixcity; lo stesso numero e
 - [DCP-202](./dcp-202-sicurezza-filament-finding-aperti.story.md) - DCP-202: sicurezza del back office e delle API, finding aperti
 - [DCP-205](./dcp-205-test-rossi-e-debito-di-qualita.story.md) - DCP-205: test rossi, strumenti di prova e debito di qualita
 - [DCP-208](./dcp-208-messa-online-compiti-del-fornitore-e-dell-ente.story.md) - DCP-208: messa online, compiti del fornitore e dell'ente
+<<<<<<< .merge_file_c2lxVx
+- [swarm-phpstan-ticketform-scope-fixcity](./swarm-phpstan-ticketform-scope-fixcity.story.md) - Swarm PHPStan (scope Fixcity): TicketForm, famiglie da ground truth stale e tipizzazione alla sorgente (verify-pending: gate strumentali bloccati, handoff al coordinatore)
+=======
+>>>>>>> .merge_file_22ys8M
 
 ## collegamenti bidirezionali
 

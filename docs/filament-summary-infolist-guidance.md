@@ -51,3 +51,8 @@ status: draft
 - Pattern generico modulo Xot: [infolists-for-summary.md](../../Xot/docs/filament/widgets/infolists-for-summary.md).
 - Smoke E2E: `Modules/Fixcity/tests/Playwright/segnalazione-crea-wizard.spec.js` — URL canonico summary + assert `.fi-in-entry`.
 - Tema Sixteen parity visiva riepilogo: [wizard-review-parity.md](../../../Themes/Sixteen/docs/wiki/design/wizard-review-parity.md).
+
+--- BMAD + Second Brain ---
+- Scopo: documentazione tecnica del modulo.
+- Utilità: riferimento sviluppatori/audit.
+- Funzionalità: struttura, dipendenze, convenzioni (no date .md, git avanti).

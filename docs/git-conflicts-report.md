@@ -145,3 +145,8 @@ Esito:
 * ./Themes/Sixteen/docs/merge-conflicts-list.md
 * ./Themes/Sixteen/docs/screenshots/homepage/reference-full-2026-04-07.png
 * ./Themes/Sixteen/docs/screenshots/homepage/reference-viewport-2026-04-07.png
+
+--- BMAD + Second Brain ---
+- Scopo: documentazione tecnica del modulo.
+- Utilità: riferimento sviluppatori/audit.
+- Funzionalità: struttura, dipendenze, convenzioni (no date .md, git avanti).

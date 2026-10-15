@@ -75,3 +75,8 @@ Critical dependencies for Fixcity module:
    - Check admin dashboard loads
    - Test API endpoints respond
 
+
+--- BMAD + Second Brain ---
+- Scopo: documentazione tecnica del modulo.
+- Utilità: riferimento sviluppatori/audit.
+- Funzionalità: struttura, dipendenze, convenzioni (no date .md, git avanti).

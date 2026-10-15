@@ -30,3 +30,11 @@ la variante `v1`/`full` del sito reale e la variante `design-comuni` delle pagin
 (header: `brand.header_title/menu_title`, `region.title/aria_label`, `languages`, `social_links`, `search`, `menu`, `account.element/login_label`, `navigation[].element`;
 footer: `eu_logo`, `groups`, `contact.details/office_url`, `social_title`, `social[].icon`; modale: tutto in `search-modal.json`), cosi' il sito reale non cambia.
 Il modulo ha una copia piu' vecchia del footer (senza `contact`): il tenant ha la precedenza.
+<<<<<<< .merge_file_wxA2e5
+
+--- BMAD + Second Brain ---
+- Scopo: documentazione tecnica del modulo.
+- Utilità: riferimento sviluppatori/audit.
+- Funzionalità: struttura, dipendenze, convenzioni (no date .md, git avanti).
+=======
+>>>>>>> .merge_file_Wdpmr7

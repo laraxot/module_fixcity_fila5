@@ -16,3 +16,8 @@ status: draft
 - **Modularità**: Indipendenza totale dalle logiche esterne.
 - **Affidabilità**: TDD come base dello sviluppo.
 - **Scalabilità**: Design atomico delle azioni.
+
+--- BMAD + Second Brain ---
+- Scopo: documentazione tecnica del modulo.
+- Utilità: riferimento sviluppatori/audit.
+- Funzionalità: struttura, dipendenze, convenzioni (no date .md, git avanti).

@@ -31,3 +31,7 @@ Passi successivi:
 
 Riferimenti:
 - Ricerca web: "contextual compression"; alcune pagine ufficiali OpenAI possono essere soggette a restrizioni di accesso.
+--- BMAD + Second Brain ---
+- Scopo: documentazione tecnica del modulo.
+- Utilità: riferimento sviluppatori/audit.
+- Funzionalità: struttura, dipendenze, convenzioni (no date .md, git avanti).

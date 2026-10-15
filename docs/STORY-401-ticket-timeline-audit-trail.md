@@ -331,3 +331,8 @@ class TicketTimelineController
 **Performance:** Aggiungere index su `ticket_id + changed_at` per query timeline veloci. Considerare pagination per history con > 50 record.
 
 **SLA:** Configurare target SLA in config/fixcity.php (es: acknowledge_within_hours = 24, resolve_within_hours = 168).
+
+--- BMAD + Second Brain ---
+- Scopo: documentazione tecnica del modulo.
+- Utilità: riferimento sviluppatori/audit.
+- Funzionalità: struttura, dipendenze, convenzioni (no date .md, git avanti).

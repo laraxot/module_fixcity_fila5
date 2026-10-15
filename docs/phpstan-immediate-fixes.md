@@ -769,3 +769,7 @@ test('report factory creates valid report', function () {
 **Status**: Ready for Implementation
 **Estimated Time**: 5 days
 **Priority**: HIGH
+--- BMAD + Second Brain ---
+- Scopo: documentazione tecnica del modulo.
+- Utilità: riferimento sviluppatori/audit.
+- Funzionalità: struttura, dipendenze, convenzioni (no date .md, git avanti).

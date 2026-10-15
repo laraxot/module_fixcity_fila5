@@ -156,4 +156,12 @@ Key structure: `fixcity::segnalazione.gdpr_notice.*`
 ## Related Documentation
 - [Filament Forms Documentation](https://filamentphp.com/docs/forms)
 - [Wizard Architecture](wizard-architecture.md)
+<<<<<<< .merge_file_qaJOoT
 - [Translation Guidelines](../../Lang/README.md)
+--- BMAD + Second Brain ---
+- Scopo: documentazione tecnica del modulo.
+- Utilità: riferimento sviluppatori/audit.
+- Funzionalità: struttura, dipendenze, convenzioni (no date .md, git avanti).
+=======
+- [Translation Guidelines](../../Lang/README.md)
+>>>>>>> .merge_file_tMSW45

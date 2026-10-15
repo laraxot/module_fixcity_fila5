@@ -76,3 +76,8 @@ use Filament\Schemas\Components\Utilities\Get;
 ---
 *Ultimo aggiornamento: 2026-04-14*
 *Verificato: Text::make → Class not found error*
+
+--- BMAD + Second Brain ---
+- Scopo: documentazione tecnica del modulo.
+- Utilità: riferimento sviluppatori/audit.
+- Funzionalità: struttura, dipendenze, convenzioni (no date .md, git avanti).

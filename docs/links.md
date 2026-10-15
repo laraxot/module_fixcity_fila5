@@ -28,3 +28,11 @@ https://italia.github.io/design-comuni-pagine-statiche/sito/
 - [Analisi Modulo](./module-analysis.md)
 - [Struttura](./structure.md)
 - [XotBaseWizardWidget](../../Xot/docs/wiki/concepts/filament-wizard-architecture-right-way.md) — base class condivisa Xot
+<<<<<<< .merge_file_eP2QKh
+
+--- BMAD + Second Brain ---
+- Scopo: documentazione tecnica del modulo.
+- Utilità: riferimento sviluppatori/audit.
+- Funzionalità: struttura, dipendenze, convenzioni (no date .md, git avanti).
+=======
+>>>>>>> .merge_file_0sEGfV

@@ -531,3 +531,8 @@ reason: Consolidated into master guide
 ---
 
 *This audit follows the ZEN_OF_DOCUMENTATION principles: DRY, KISS, and forward-only evolution.*
+
+--- BMAD + Second Brain ---
+- Scopo: documentazione tecnica del modulo.
+- Utilità: riferimento sviluppatori/audit.
+- Funzionalità: struttura, dipendenze, convenzioni (no date .md, git avanti).

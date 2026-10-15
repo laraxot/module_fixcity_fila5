@@ -144,3 +144,8 @@ border al `<input>` interno. **Regola operativa: un solo elemento porta il
 bordo per ciascun controllo.** Nel wizard il bordo vive sul wrapper, l'input è
 trasparente. Vedi `laravel/Themes/Sixteen/resources/css/components/filament-wizard-parity.css`
 e il doc canonico `laravel/Themes/Sixteen/docs/DAISYUI.md` § "Decisione architetturale".
+
+--- BMAD + Second Brain ---
+- Scopo: documentazione tecnica del modulo.
+- Utilità: riferimento sviluppatori/audit.
+- Funzionalità: struttura, dipendenze, convenzioni (no date .md, git avanti).

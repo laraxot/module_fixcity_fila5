@@ -74,3 +74,11 @@ Lo schema piatto con `Section` e `TextEntry` (`TicketForm::getSummarySchema()`, 
 - [Fixcity Documentation Index](./INDEX.md)
 - [Geolocation AddressInput Component](../../Geo/docs/address-input-component.md)
 - [Design Comuni - Ticket Creation Wizard](../../../Themes/Sixteen/docs/design-comuni/TICKET-CREATION-WIZARD.md)
+<<<<<<< .merge_file_s5jB2n
+
+--- BMAD + Second Brain ---
+- Scopo: documentazione tecnica del modulo.
+- Utilità: riferimento sviluppatori/audit.
+- Funzionalità: struttura, dipendenze, convenzioni (no date .md, git avanti).
+=======
+>>>>>>> .merge_file_aE6Nli

@@ -92,3 +92,8 @@ class ChangeStatus
 
 Last PHPStan Check: 2026-06-10
 Status: ✅ All methods verified and documented
+
+--- BMAD + Second Brain ---
+- Scopo: documentazione tecnica del modulo.
+- Utilità: riferimento sviluppatori/audit.
+- Funzionalità: struttura, dipendenze, convenzioni (no date .md, git avanti).

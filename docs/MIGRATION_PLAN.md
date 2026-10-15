@@ -387,3 +387,8 @@ A: Yes, but clearly mark them as examples: "e.g., 'fixcity' for a civic platform
 **Created**: 2026-03-30  
 **Status**: Phase 1 Complete, Ready for Phase 2  
 **Owner**: Development Team
+
+--- BMAD + Second Brain ---
+- Scopo: documentazione tecnica del modulo.
+- Utilità: riferimento sviluppatori/audit.
+- Funzionalità: struttura, dipendenze, convenzioni (no date .md, git avanti).

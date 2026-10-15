@@ -84,3 +84,7 @@ The widget now properly handles both contexts:
 ## Related Documentation
 - See `wizard-governance-philosophy.md` for broader wizard implementation guidelines
 - Check `filament-wizard-pattern.md` for Filament-specific wizard patterns
+--- BMAD + Second Brain ---
+- Scopo: documentazione tecnica del modulo.
+- Utilità: riferimento sviluppatori/audit.
+- Funzionalità: struttura, dipendenze, convenzioni (no date .md, git avanti).
