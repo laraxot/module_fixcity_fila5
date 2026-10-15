@@ -10,7 +10,7 @@ module: Fixcity
 created: 2026-10-13
 updated: 2026-10-13
 tags: [product, data, gdpr]
-related: [Modules/Fixcity/docs/stories/2026-10-13-dcp-33-tickets-create-riepilogo-design-comuni-mappa.story.md]
+related: [Modules/Fixcity/docs/stories/dcp-33-tickets-create-riepilogo-design-comuni-mappa.story.md]
 qmd: "Codice fiscale dell'autore: il riferimento lo mostra, il DB non lo ha"
 ---
 

@@ -11,8 +11,8 @@ created: 2026-10-13
 updated: 2026-10-13
 tags: [auth, journey, registrazione, login, intended, ux]
 related:
-  - Themes/Sixteen/docs/bmad/stories/2026-10-13-dcp-104-pagine-reali-elenco-e-dettaglio-segnalazioni.story.md
-  - Modules/Fixcity/docs/stories/2026-10-13-dcp-35-tickets-create-privacy-dati-coordinamento.story.md
+  - Themes/Sixteen/docs/bmad/stories/dcp-104-pagine-reali-elenco-e-dettaglio-segnalazioni.story.md
+  - Modules/Fixcity/docs/stories/dcp-35-tickets-create-privacy-dati-coordinamento.story.md
   - Themes/Sixteen/docs/decision-log/D18-login-e-registrazione-tornano-alla-pagina-richiesta.md
 qmd: "dcp-124 viaggio del cittadino registrazione login url.intended redirectIntended dashboard 404 segnala disservizio"
 ---

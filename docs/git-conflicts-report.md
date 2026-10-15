@@ -80,8 +80,8 @@ Esito:
 * ./Modules/Cms/docs/phpstan-scripts-roadmap.md
 * ./Modules/Cms/docs/roadmap.md
 * ./Modules/Cms/docs/roadmap/legacy/legacy-roadmap-x.md
-* ./Modules/Cms/docs/roadmap/legacy/legacy-roadmap-3.md
-* ./Modules/Cms/docs/quality-status-11.md
+* ./Modules/Cms/docs/roadmap/legacy/legacy-roadmap-content-management.md
+* ./Modules/Cms/docs/quality-status.md
 * ./Modules/Cms/docs/errors/git-conflicts-themes-resolution.md
 * ./Modules/Cms/docs/quality-status-2025-11.md
 * ./Modules/Cms/docs/merge-conflicts-list.md
@@ -98,8 +98,8 @@ Esito:
 * ./Modules/Notify/docs/ai-agents/git-error-path-does-not-have-our-version.md
 * ./Modules/Notify/docs/wiki/index.md
 * ./Modules/Notify/docs/merge-conflicts-list.md
-* ./Modules/Notify/docs/correzioni-phpstan-completate_3.md
-* ./Modules/Notify/docs/project_docs/riepilogo-risoluzione-conflitti-2025-09-30.md
+* ./Modules/Notify/docs/correzioni-phpstan-completate-modulo-notify.md
+* ./Modules/Notify/docs/project_docs/riepilogo-risoluzione-conflitti-obiettivo.md
 * ./Modules/Notify/.planning/debug/knowledge-base.md
 * ./Modules/Notify/.planning/debug/resolved/sqlite-model-contract-fix.md
 * ./Modules/Blog/docs/wiki/README.md
@@ -134,7 +134,7 @@ Esito:
 * ./Themes/TwentyOne/docs/merge-conflicts-list.md
 * ./Themes/Meetup/docs/merge-conflicts-list.md
 * ./Themes/Sixteen/docs/css-js-parity.md
-* ./Themes/Sixteen/docs/design-comuni/SEGNALAZIONE-FIX-SESSION-2026-04-07.md
+* ./Themes/Sixteen/docs/design-comuni/SEGNALAZIONE-FIX-SESSION.md
 * ./Themes/Sixteen/docs/design-comuni/HTML_PARITY_COMPLETE.md
 * ./Themes/Sixteen/docs/design-comuni/screenshots/comparison/POST-FIX-VERIFICATION.md
 * ./Themes/Sixteen/docs/design-comuni/screenshots/ref-homepage.png

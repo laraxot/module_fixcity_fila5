@@ -22,7 +22,7 @@ status: draft
 7. laravel/Modules/Geo/docs/wiki/log.md
 8. laravel/Modules/Cms/database/seeders/CmsMassSeeder.php
 9. laravel/Modules/Cms/app/Models/Page.php
-10. docs/project_docs/riepilogo-risoluzione-conflitti-2025-09-30.md
+10. docs/project_docs/riepilogo-risoluzione-conflitti-obiettivo.md
 11. laravel/Modules/Fixcity/docs/wiki/logo.md
 12. ... [65 total files]
 

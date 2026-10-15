@@ -206,7 +206,7 @@ Vedi dettagli: [Ticket Wizard Frontoffice](ticket-wizard-frontoffice.md)
 **Geolocalizzazione non funziona**
 - Verificare HTTPS (required per browser geolocation API)
 - Check browser permissions dialogo
-- Vedi story 7-33 (segnalazione-crea step 2, geolocalizzazione e `?step=`) _(target mancante, verificato 2026-10-14: `_bmad-output/` non esiste nel repo)_; sul comportamento attuale della mappa senza HTTPS vedi [DCP-146](stories/2026-10-13-dcp-146-wizard-passo-dati-mappa-sempre-funzionante.story.md) e [DCP-127 (Geo)](../../Geo/docs/stories/2026-10-13-dcp-127-mappa-centratura-senza-https.story.md)
+- Vedi story 7-33 (segnalazione-crea step 2, geolocalizzazione e `?step=`) _(target mancante, verificato 2026-10-14: `_bmad-output/` non esiste nel repo)_; sul comportamento attuale della mappa senza HTTPS vedi [DCP-146](stories/dcp-146-wizard-passo-dati-mappa-sempre-funzionante.story.md) e [DCP-127 (Geo)](../../Geo/docs/stories/dcp-127-mappa-centratura-senza-https.story.md)
 
 **Notifiche non inviate su status change**
 - Verificare event listeners sono registered

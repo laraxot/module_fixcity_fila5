@@ -11,8 +11,8 @@ created: 2026-10-13
 updated: 2026-10-13
 tags: [wizard, design-comuni, mappa, passo-2]
 qmd: "dcp-43 Passo 2 del wizard (dati + mappa): viste Design Comuni non cablate"
-depends_on: [Modules/Fixcity/docs/stories/2026-10-13-dcp-35-tickets-create-privacy-dati-coordinamento.story.md, Themes/Sixteen/docs/bmad/stories/2026-10-13-dcp-32-scope-data-dc-pagine-reali.story.md]
-related: [Modules/Fixcity/docs/stories/2026-10-13-dcp-33-tickets-create-riepilogo-design-comuni-mappa.story.md, Modules/Fixcity/docs/stories/2026-10-13-dcp-42-tickets-create-auth-regressione.story.md, Themes/Sixteen/docs/bmad/stories/2026-10-13-dcp-33-wizard-step2-dati.story.md, Themes/Sixteen/docs/bmad/stories/2026-10-13-dcp-97-registro-flusso-tickets-numerazione-e-coordinamento.story.md]
+depends_on: [Modules/Fixcity/docs/stories/dcp-35-tickets-create-privacy-dati-coordinamento.story.md, Themes/Sixteen/docs/bmad/stories/dcp-32-scope-data-dc-pagine-reali.story.md]
+related: [Modules/Fixcity/docs/stories/dcp-33-tickets-create-riepilogo-design-comuni-mappa.story.md, Modules/Fixcity/docs/stories/dcp-42-tickets-create-auth-regressione.story.md, Themes/Sixteen/docs/bmad/stories/dcp-33-wizard-step2-dati.story.md, Themes/Sixteen/docs/bmad/stories/dcp-97-registro-flusso-tickets-numerazione-e-coordinamento.story.md]
 reference: https://italia.github.io/design-comuni-pagine-statiche/sito/segnalazione-02-dati.html
 local: http://192.168.1.40:8000/it/tickets/create?step=form.dati-di-segnalazione%3A%3Adata%3A%3Awizard-step
 ---
@@ -54,7 +54,7 @@ Quelli numerici della sezione 7 di DCP-35 (pixel >= 97% a 1440/768/375, altezze 
 Tutto il cablaggio e la misura sulla pagina intera. `id` duplicato `form.location` con il riepilogo (DCP-33).
 
 ## Contratti in conflitto (segnalato dal lead, 2026-10-13 14:15 UTC)
-- `Themes/Sixteen/docs/bmad/stories/2026-10-13-dcp-33-wizard-step2-dati.story.md` (altro agente) vieta le classi Bootstrap Italia (righe 54-55, AC7) e possiede `components/wizard/**` (riga 312). Le viste P2-A (`data-step`, `dc-section-card`) stanno in quella cartella e usano le classi del markup di riferimento (`cmp-card`, `steppers-content`, ...), come prevede la decisione dell'orchestratore in DCP-33 (Fixcity): emettere lo stesso markup che il CSS generato gia' conosce. I due contratti non sono stati riconciliati: decide l'orchestratore o l'utente prima del cablaggio. Registro: DCP-97.
+- `Themes/Sixteen/docs/bmad/stories/dcp-33-wizard-step2-dati.story.md` (altro agente) vieta le classi Bootstrap Italia (righe 54-55, AC7) e possiede `components/wizard/**` (riga 312). Le viste P2-A (`data-step`, `dc-section-card`) stanno in quella cartella e usano le classi del markup di riferimento (`cmp-card`, `steppers-content`, ...), come prevede la decisione dell'orchestratore in DCP-33 (Fixcity): emettere lo stesso markup che il CSS generato gia' conosce. I due contratti non sono stati riconciliati: decide l'orchestratore o l'utente prima del cablaggio. Registro: DCP-97.
 - Il lavoro misurato e le misure sono precedenti al layout `design-comuni` e all'auth ripristinata: per rimisurare serve una sessione autenticata (D17; `parity-wizard-steps.sh` rifiuta la pagina di login).
 
 ## Test di regressione delle viste (VIEWTESTS-TEMA, 16:31 UTC)
@@ -88,4 +88,4 @@ Difetti trovati (non corretti, nessuna vista toccata):
 Non coperto: Alpine reale e `requestNextStep()` eseguito nel browser, `dcNavscroll` dopo un morph di Livewire, geometria e CSS (restano al gate pixel), testi delle 5 chiavi nelle lingue vere (le chiavi non esistono ancora in `lang/*/ticket_form.php`: il test usa un namespace temporaneo), round-trip server di `nextStep` (provato da P2-A con `roundtrip.php`, non portato nel test). I test fissano le classi Bootstrap Italia del riferimento: se l'orchestratore decide per il contratto DCP-33 (nessuna classe BI, registro DCP-97) vanno rivisti insieme alle viste.
 
 ## Esito cablaggio (DCP-128, 2026-10-13 22:05 UTC)
-Le viste del passo 2 sono cablate in `TicketForm` (front office `getDataSchema(designComuni: true)`, back office invariato): pixel 99,37-99,67% a 5 larghezze con mappa nascosta e altezze uguali, E2E fino alla conferma, axe 0, PHPStan 0. Dettagli, filtri, cause dell'HTML a 63,5% e punti aperti: `2026-10-13-dcp-128-wizard-passo2-cablaggio-design-comuni.story.md`.
+Le viste del passo 2 sono cablate in `TicketForm` (front office `getDataSchema(designComuni: true)`, back office invariato): pixel 99,37-99,67% a 5 larghezze con mappa nascosta e altezze uguali, E2E fino alla conferma, axe 0, PHPStan 0. Dettagli, filtri, cause dell'HTML a 63,5% e punti aperti: `dcp-128-wizard-passo2-cablaggio-design-comuni.story.md`.

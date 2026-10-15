@@ -43,7 +43,7 @@ I duplicati semantici sono più numerosi perché esistono coppie `ticket/segnala
 
 - report parity con e senza data;
 - `ticket-*` e `segnalazione-*` byte-identici;
-- `AGID_CHECKLIST_100.md` e `agid_checklist_100.md`;
+- `AGID_CHECKLIST_100.md` e `agid_checklist-compliance.md`;
 - `components-update` con varianti uppercase/underscore;
 - roadmap duplicate tra root, `roadmap/` e wiki.
 

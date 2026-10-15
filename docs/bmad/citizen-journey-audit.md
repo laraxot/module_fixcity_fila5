@@ -11,12 +11,12 @@ issues:
 discussions:
   - "https://github.com/laraxot/base_fixcity_fila5/discussions/573"
 related:
-  - ./homepage-audit-2026-10-07.md
+  - ./homepage-audit.md
   - ./actor-journeys.md
   - ./actor-flows.md
   - ./stories/STORY-507-actor-flows-and-user-journeys.md
-  - ../../../User/docs/bmad/citizen-auth-flow-contract-2026-10-07.md
-  - ../../../../Themes/Sixteen/docs/bmad/citizen-journey-presentation-contract-2026-10-07.md
+  - ../../../User/docs/bmad/citizen-auth-flow-contract.md
+  - ../../../../Themes/Sixteen/docs/bmad/citizen-journey-presentation-contract.md
 qmd: "audit dei flussi cittadino fixcity"
 ---
 

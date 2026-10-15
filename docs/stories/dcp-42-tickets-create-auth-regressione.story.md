@@ -116,7 +116,7 @@ né l'URL intended, e non compaiono eccezioni Livewire/Filament dopo il login.
 - laravel/Modules/Fixcity/config/database/content/pages/tickets.create.json
 - laravel/Modules/Fixcity/tests/Feature/Pages/TicketGuestLocaleRedirectTest.php
 - laravel/Modules/Fixcity/tests/Feature/Pages/TicketCreatePageMetadataTest.php
-- laravel/Modules/Fixcity/docs/stories/2026-10-13-dcp-42-tickets-create-auth-regressione.story.md
+- laravel/Modules/Fixcity/docs/stories/dcp-42-tickets-create-auth-regressione.story.md
 - laravel/Themes/Sixteen/docs/bmad/stories/fil-tickets-guest-access-why.story.md
 
 Shared/contended: i18n/Folio middleware registration; non modificare il wizard o

@@ -294,8 +294,8 @@ docs/master/
 ### 5.2 Date-Based Naming (Anti-Pattern)
 
 **Examples:**
-- `phpstan-analysis-2026-03-02.md`
-- `documentation-improvement-summary-2026-03-13.md`
+- `phpstan-analysis-level-report.md`
+- `documentation-improvement-summary-executive.md`
 - `bugfix-report-2025-01-14.md`
 
 **Problem:** Dates in filenames become stale immediately.

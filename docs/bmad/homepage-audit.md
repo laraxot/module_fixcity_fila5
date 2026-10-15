@@ -16,7 +16,7 @@ related:
   - ./homepage-guest-visual-comparison.md
   - ./homepage-guest-routing-comparison.md
   - ./stories/homepage-audit-followup-2026-10-07.story.md
-  - ../wiki/concepts/homepage-audit-2026-10-07.md
+  - ../wiki/concepts/homepage-audit.md
   - ../../../../Themes/Sixteen/docs/bmad/homepage-guest-visual-contract.md
 ---
 

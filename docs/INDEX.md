@@ -45,7 +45,7 @@ Nessun file e' stato spostato o rinominato: questa tabella descrive cio' che c'e
 | Cartella | Scopo |
 |---|---|
 | [`compliance/`](compliance/00-scopo-del-progetto.md) | Nuova. Scopo del progetto e ragioni delle scelte (`00-`), matrice di conformita' normativa con prove (`01-`), registri delle fonti normative verificate (`02-`, `03-`). Story DCP-112 e di chiusura DCP-130..145 |
-| `stories/` | Story numerate del modulo (DCP-xx e STORY-xx) e non numerate (`YYYY-MM-DD-<slug>.story.md`), 65 file al 2026-10-14 (compresa [la story dello studio degli ingressi](stories/2026-10-14-studio-docs-fixcity-ingressi-verificati.story.md)). Fonte di verita' di intento e criteri di accettazione. Canonica |
+| `stories/` | Story numerate del modulo (DCP-xx e STORY-xx) e non numerate (`YYYY-MM-DD-<slug>.story.md`), 65 file al 2026-10-14 (compresa [la story dello studio degli ingressi](stories/studio-docs-fixcity-ingressi-verificati.story.md)). Fonte di verita' di intento e criteri di accettazione. Canonica |
 | `bmad/` | Artefatti BMAD del dominio: flussi per attore, audit del percorso del cittadino, dossier, gap analysis, story BMAD storiche |
 | `wiki/` | Second brain del modulo: concepts, overviews, decisions, rules, memories, troubleshooting |
 | `llm-wiki/` | Wiki per agenti LLM (AGENTS.md, concepts, manifest di ingest) |

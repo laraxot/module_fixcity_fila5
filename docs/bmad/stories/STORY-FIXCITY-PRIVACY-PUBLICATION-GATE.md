@@ -56,5 +56,5 @@ cancellata dal commit `30d521c` (2026-10-11) e `/it/privacy` rispondeva 404. Ora
 `legal-document` e risponde sempre 200: senza testo completo mostra un avviso con i campi che il titolare deve fornire. Il gate del
 wizard (`GetPublishedPrivacyPolicyAction`, consenso rifiutato senza policy) e' invariato. La guardia di pubblicazione e' il test
 `Feature/Pages/PrivacyPolicyPublicationGateTest.php` (rosso finche' il testo del tenant non ha le sezioni dell'art. 13 e nessun segnaposto).
-Vedi `../stories/2026-10-13-dcp-130-informativa-privacy-art13-e-pagina-servita.story.md`.
+Vedi `../stories/dcp-130-informativa-privacy-art13-e-pagina-servita.story.md`.
 

@@ -16,8 +16,8 @@ Questa è la sede BMAD del dominio FixCity. Il prodotto è un servizio civico pe
 
 ## Homepage e flussi end-to-end
 
-- [Audit homepage 2026-10-07](homepage-audit-2026-10-07.md)
-- [Audit flusso cittadino 2026-10-07](citizen-journey-audit-2026-10-07.md)
+- [Audit homepage 2026-10-07](homepage-audit.md)
+- [Audit flusso cittadino 2026-10-07](citizen-journey-audit.md)
 - [Flussi attore](actor-flows.md)
 - [Percorsi attore](actor-journeys.md)
 

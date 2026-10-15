@@ -39,7 +39,7 @@ Ogni agente prende un file, lo risolve semanticamente (non meccanicamente), e sp
 ### Modules/Cms
 - [ ] `laravel/Modules/Cms/docs/errors/git-conflicts-themes-resolution.md`
 - [ ] `laravel/Modules/Cms/docs/roadmap.md`
-- [ ] `laravel/Modules/Cms/docs/roadmap/legacy/legacy-roadmap-3.md`
+- [ ] `laravel/Modules/Cms/docs/roadmap/legacy/legacy-roadmap-content-management.md`
 - [ ] `laravel/Modules/Cms/docs/roadmap/legacy/legacy-roadmap-x.md`
 - [ ] `laravel/Modules/Cms/docs/wiki/README.md`
 - [ ] `laravel/Modules/Cms/docs/wiki/_archive/filament-4x-compatibility.md`

@@ -11,7 +11,7 @@ created: 2026-10-14
 updated: 2026-10-14
 tags: [docs, mailmap, worklog, organizzazione, second-brain]
 related:
-  - 2026-10-13-dcp-56-organizzazione-docs-moduli-e-temi.story.md
+  - dcp-56-organizzazione-docs-moduli-e-temi.story.md
   - ../../../../../bmad-output/stories/docs-organization/README.md
   - ../../../../../bmad-output/docs-architecture/module-theme-docs-contract.md
 qmd: "mailmap identita git alias marco76tv worklog docs-organizer frontmatter link rotti moduli temi DOC-003 DOC-005"

@@ -7,8 +7,8 @@ updated: 2026-10-13
 status: draft-for-dpo-legal-review
 story: dcp-54
 related:
-  - ../../stories/2026-10-13-dcp-54-scopo-del-progetto-e-conformita-normativa.story.md
-  - ../../stories/2026-10-13-dcp-49-audit-sicurezza-viste-wizard.story.md
+  - ../../stories/dcp-54-scopo-del-progetto-e-conformita-normativa.story.md
+  - ../../stories/dcp-49-audit-sicurezza-viste-wizard.story.md
   - ../../../../../../bashscripts/ai/wiki/concepts/fixcity-scopo-e-target.md
   - ./design-comuni-service-workflow-scope.md
 qmd: "FixCity norme conformità matrice CAD GDPR WCAG AgID cookie SPID CIE informativa privacy dichiarazione accessibilità lacune DCP-54"
@@ -39,7 +39,7 @@ I confini sono dichiarati: non è un CMS generico, non è un ERP comunale, **non
 | Design Comuni / Bootstrap Italia come riferimento visivo | Il Comune deve offrire un servizio coerente con il modello AgID; parity HTML/CSS sulle pagine critiche (elenco, dettaglio, wizard) | `fixcity-scopo-e-target.md:31-33` |
 | Monolite modulare Laravel 13 / PHP 8.4 con moduli nwidart | Transazioni semplici su ticket, attività e notifiche; riuso tra Comuni; scartati microservizi e un secondo modello di ticket per il mobile | `bmad-output/architecture.md:18-31` |
 | Folio + Actions, niente controller HTTP né Services | Confine UI/dominio fisso; la logica di business sta nelle Actions del modulo proprietario | `architecture.md:47-50`; `fixcity-scopo-e-target.md:37-38` |
-| Wizard Filament a passi | Il riferimento è un flusso a 3 passi più conferma; lo schema `TicketForm::getSteps()` è fonte unica per front office e back office, con validazione per passo, upload e stato Livewire | `Modules/Fixcity/docs/stories/2026-10-13-dcp-35-tickets-create-privacy-dati-coordinamento.story.md:34` |
+| Wizard Filament a passi | Il riferimento è un flusso a 3 passi più conferma; lo schema `TicketForm::getSteps()` è fonte unica per front office e back office, con validazione per passo, upload e stato Livewire | `Modules/Fixcity/docs/stories/dcp-35-tickets-create-privacy-dati-coordinamento.story.md:34` |
 | Mappa e coordinate | Ogni segnalazione ha una posizione; elenco e mappa pubblici mostrano solo ciò che è pubblicabile | `prd.md:38-39` (FR-001); `product-brief.md:37` |
 | Tracciamento pubblico con codice | Il codice è una "capability" non enumerabile: chi lo possiede vede lo stato, gli altri no; il codice completo compare solo al proprietario | `prd.md:42-43` (FR-003); `architecture.md:60-64`; `Modules/Fixcity/app/Actions/BuildTicketPublicDetailsPayloadAction.php:48-58` |
 | Back office Filament per operatori | Triage, assegnazione, transizioni di stato con attore, motivo e orario, SLA | `prd.md:50-56` (FR-006..FR-010); `architecture.md:66-69` (ADR-004) |
@@ -385,9 +385,9 @@ Numerazione provvisoria `DCP-54.n` (sotto-story di DCP-54); il numero definitivo
 
 - `bashscripts/ai/wiki/concepts/fixcity-scopo-e-target.md` (scopo, target, confini)
 - `bmad-output/product-brief.md`, `bmad-output/prd.md`, `bmad-output/architecture.md`, `bmad-output/security-plan.md`, `bmad-output/devops-plan.md`
-- `laravel/Modules/Fixcity/docs/stories/2026-10-13-dcp-49-audit-sicurezza-viste-wizard.story.md` (SEC-01..SEC-14, ACC-01..ACC-05)
-- `laravel/Modules/Fixcity/docs/stories/2026-10-13-dcp-48-codice-fiscale-autore-decisione.story.md` (identità, SPID/CIE, dati dell'autore)
-- `laravel/Modules/Fixcity/docs/stories/2026-10-13-dcp-35-tickets-create-privacy-dati-coordinamento.story.md`
+- `laravel/Modules/Fixcity/docs/stories/dcp-49-audit-sicurezza-viste-wizard.story.md` (SEC-01..SEC-14, ACC-01..ACC-05)
+- `laravel/Modules/Fixcity/docs/stories/dcp-48-codice-fiscale-autore-decisione.story.md` (identità, SPID/CIE, dati dell'autore)
+- `laravel/Modules/Fixcity/docs/stories/dcp-35-tickets-create-privacy-dati-coordinamento.story.md`
 - `laravel/Modules/Fixcity/docs/wiki/concepts/design-comuni-service-workflow-scope.md`
 - `laravel/Modules/Fixcity/{app,lang,config,tests}` (wizard, privacy, notifiche, valutazione, SLA)
 - `laravel/Modules/Gdpr/{app,config,tests}`, `laravel/Modules/User/app/{Filament/Widgets,Actions}`

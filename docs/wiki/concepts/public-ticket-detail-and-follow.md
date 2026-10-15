@@ -7,8 +7,8 @@ updated: 2026-10-14
 qmd: "dettaglio pubblico segnalazione tickets id segui follow BuildPublicTicketDetailAction FollowTicketAction occurred_date marker-icon-url"
 related:
   - ticket-citizen-timeline.md
-  - ../../../../../Themes/Sixteen/docs/bmad/stories/2026-10-13-dcp-148-dettaglio-pubblico-segnalazione-e-segui.story.md
-  - ../../../../Geo/docs/stories/2026-10-14-dcp-152-marker-dettaglio-ticket-e-pulsanti-mappa-su-pagine-dc.story.md
+  - ../../../../../Themes/Sixteen/docs/bmad/stories/dcp-148-dettaglio-pubblico-segnalazione-e-segui.story.md
+  - ../../../../Geo/docs/stories/dcp-152-marker-dettaglio-ticket-e-pulsanti-mappa-su-pagine-dc.story.md
 status: active
 ---
 

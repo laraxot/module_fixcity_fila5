@@ -14,7 +14,7 @@ related: [dcp-180, dcp-140, dcp-178, dcp-176, dcp-154]
 ---
 # DCP-181: Filament Blueprint, audit di sicurezza degli altri pannelli e piano delle richieste dell'interessato
 
-**Coordinamento:** un'altra sessione ha aperto nello stesso momento [DCP-180](./2026-10-14-dcp-180-audit-sicurezza-filament-blueprint.story.md), che audita il pannello `fixcity/admin` e i punti trasversali (`BaseUser::canAccessPanel`, widget base di Xot). Questa story (numero preso dopo la collisione) copre gli altri 11 pannelli; i due rapporti non si sovrappongono e vanno letti insieme.
+**Coordinamento:** un'altra sessione ha aperto nello stesso momento [DCP-180](./dcp-180-audit-sicurezza-filament-blueprint.story.md), che audita il pannello `fixcity/admin` e i punti trasversali (`BaseUser::canAccessPanel`, widget base di Xot). Questa story (numero preso dopo la collisione) copre gli altri 11 pannelli; i due rapporti non si sovrappongono e vanno letti insieme.
 
 Fase BMAD: Analyze, Plan, Verify. Richiesta dell'utente: studiare https://filamentphp.com/plugins/filament-blueprint e usarlo per completare il progetto.
 

@@ -11,7 +11,7 @@ created: 2026-10-13
 updated: 2026-10-13
 tags: [wizard, privacy, design-comuni, passo-1]
 qmd: "dcp-46 Passo 1 del wizard (privacy): markup del riferimento e un solo h1"
-depends_on: [Modules/Fixcity/docs/stories/2026-10-13-dcp-35-tickets-create-privacy-dati-coordinamento.story.md, Themes/Sixteen/docs/bmad/stories/2026-10-13-dcp-32-wizard-step1-privacy.story.md]
+depends_on: [Modules/Fixcity/docs/stories/dcp-35-tickets-create-privacy-dati-coordinamento.story.md, Themes/Sixteen/docs/bmad/stories/dcp-32-wizard-step1-privacy.story.md]
 reference: https://italia.github.io/design-comuni-pagine-statiche/sito/segnalazione-01-privacy.html
 local: http://192.168.1.40:8000/it/tickets/create
 ---

@@ -191,6 +191,6 @@ public function getUsers(): Collection {
 ```
 
 ## Collegamenti
-- [Report Completo PHPStan 2026-03-02](../../../docs/phpstan-analysis-2026-03-02.md)
+- [Report Completo PHPStan 2026-03-02](../../../docs/phpstan-analysis-level-report.md)
 - [PHPStan Level 10 Guide](../../../docs/phpstan-level-10-guide.md)
 - [Ticket Model Documentation](./models/ticket.md)

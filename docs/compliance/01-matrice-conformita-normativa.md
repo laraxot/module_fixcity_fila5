@@ -12,7 +12,7 @@ related:
   - ./02-fonti-privacy-sicurezza-verificate.md
   - ./03-fonti-cad-accessibilita-verificate.md
   - ../../../../Themes/Sixteen/docs/compliance/01-matrice-conformita-interfaccia.md
-  - ../../../../Themes/Sixteen/docs/bmad/stories/2026-10-13-dcp-112-scopo-e-conformita-normativa.story.md
+  - ../../../../Themes/Sixteen/docs/bmad/stories/dcp-112-scopo-e-conformita-normativa.story.md
 qmd: "matrice conformita normativa gdpr cad spid cie cookie garante nis2 agid accessibilita l4 2004 prove curl informativa privacy 404 lacune story dcp-130"
 ---
 
@@ -175,7 +175,7 @@ Verificate il 2026-10-13 (curl, grep, git). Non sono state corrette: i file appa
 |---|---|---|---|---|
 | 1 | `Themes/Sixteen/docs/bmad/studies/header-auth-state-legal-study.md`, `.../decisions/decision-header-auth-state.md` | `graduatoria-area-personale`, `vantaggi-area-personale`, `pagamenti-imu/multa-area-personale`, `permessi-area-personale` rispondono 404 | `curl` su `/it/tests/<slug>`: tutte 200 (come `segnalazione-area-personale`) | Dichiarare 200; sono le repliche `tests.*-area-personale` |
 | 2 | `.../studies/header-auth-state-legal-study.md` | Componente modificato `pub_theme/components/sections/header.tailwind.blade.php`; guest `route('login')`, autenticato `url('/area-personale')` | Il file non esiste (esistono `sections/header.blade.php`, `header_bi5.blade.php`, `header/design-comuni.blade.php`); `/it/area-personale` risponde 404 | Citare il file reale e le voci di DCP-106 |
-| 3 | `.../bmad/scopi-e-norme.md` | Front matter `id: dcp-24` | Esistono gia' `2026-10-13-dcp-24-appuntamento.story.md` e `dcp-24-segnalazione-area-personale.story.md` | Assegnare un id libero |
+| 3 | `.../bmad/scopi-e-norme.md` | Front matter `id: dcp-24` | Esistono gia' `dcp-24-appuntamento.story.md` e `dcp-24-segnalazione-area-personale.story.md` | Assegnare un id libero |
 | 4 | `.../bmad/scopi-e-norme.md` (campo `dati_login`) e `.../bmad/header-auth-logic.md` (campo `scopo`) | Riportano un indirizzo email e una password di prova in chiaro | Lettura dei due file (la password non viene qui ripetuta) | Rimuovere la password dai file e dalla storia di git; ruotare la credenziale. Viola la regola «credenziali mai in un file» (DCP-106) |
 | 5 | `.../studies/header-auth-state-legal-study.md` | Due chiavi `type:` nel front matter (`bmad-study` e `study`) | `grep -c '^type:'` = 2 | YAML con chiave duplicata: tenerne una |
 | 6 | `.../decisions/decision-header-auth-state.md`, `.../studies/...` | Quadro normativo: GDPR art. 6 par. 1 lett. e) per l'ospite ma lett. b) (contratto) o lett. a) (consenso) per l'autenticato; Dir. (UE) 2019/882 (EAA) tra le norme di accessibilita'; eIDAS come meccanismo di login; «Italian PA Code (CAD)» senza articoli | Per un Comune la base e' una sola (art. 6 par. 1 lett. e) e art. 2-ter), il consenso e' problematico (Considerando 43); l'EAA non elenca i servizi comunali (N-33); il progetto non usa eIDAS; il CAD art. 64 impone SPID/CIE per il login (N-24) e nessun documento lo cita | Usare questa matrice |
@@ -185,7 +185,7 @@ Verificate il 2026-10-13 (curl, grep, git). Non sono state corrette: i file appa
 | 10 | `Modules/Fixcity/docs/ticket-wizard-frontoffice.md` (sezione «Parity step 1», riga 249) | Il testo «Il Comune di Firenze gestisce i dati personali...» deve essere visibile nello step privacy | La story gate dichiara rimossi i riferimenti runtime al Comune di Firenze; il testo reale non lo contiene | Aggiornare la riga |
 | 11 | `Modules/Fixcity/docs/ticket-wizard-frontoffice.md` (sezione «Decisione», righe 18-19 vs «Accesso», riga 15) | Il documento afferma che le tre copie del JSON non hanno `middleware` e che un ospite riceve 200, e anche che hanno `["auth"]` | Guest su `/it/tickets/create`: 302 a `/it/auth/login` | Togliere il capoverso stale |
 | 12 | `Modules/Fixcity/docs/wiki/overviews/fixcity-module.md` | URL del wizard `/it/tests/segnalazione-crea`; composizione con `breadcrumb` e `contacts-card`; «50+ lingue supportate» | `/it/tests/segnalazione-crea`: 0 occorrenze di `fi-sc-wizard`; il wizard e' `/it/tickets/create` (autenticato); le lingue servite sono 4 (`config/laravellocalization.php`: de, en, es, it) | Correggere con i dati di `ticket-wizard-frontoffice.md` |
-| 13 | `Modules/Fixcity/docs/stories/2026-10-13-dcp-54-scopo-del-progetto-e-conformita-normativa.story.md` | SSoT in `Modules/Fixcity/docs/wiki/concepts/fixcity-scopo-e-target.md` | Il file non esiste; sta in `bashscripts/ai/wiki/concepts/fixcity-scopo-e-target.md` (lo nota anche la matrice DCP-54) | Correggere il percorso |
+| 13 | `Modules/Fixcity/docs/stories/dcp-54-scopo-del-progetto-e-conformita-normativa.story.md` | SSoT in `Modules/Fixcity/docs/wiki/concepts/fixcity-scopo-e-target.md` | Il file non esiste; sta in `bashscripts/ai/wiki/concepts/fixcity-scopo-e-target.md` (lo nota anche la matrice DCP-54) | Correggere il percorso |
 | 14 | `Themes/Sixteen/docs/NO_BOOTSTRAP_ITALIA.md` | «NON stiamo usando Bootstrap Italia (CSS o JS)» | `resources/css/design-comuni/components.css` e' generato da `bootstrap-italia.min.css` 2.9.0 e porta la licenza BSD-3-Clause (righe 1-8): le regole sono derivate; il documento non cita gli obblighi di licenza | Riformulare: nessun pacchetto a runtime, regole derivate con obblighi BSD-3 (DCP-145) |
 | 15 | `Modules/Gdpr/app/Filament/Widgets/Auth/RegisterWidget.php` | (codice) docblock con `<<<<<<< HEAD`, `=======`, `>>>>>>> 12e4ae8` | `grep -n '<<<<<<<' ...` | Ripulire (DCP-135) |
 | 16 | `Modules/Fixcity/docs/wiki/concepts/fixcity-gap-compliance-pa-italia.md` (riga 108) | La dichiarazione di accessibilita' si compila su «form.agid.it» | Le Linee guida AgID (cap. 4.1) e la pagina AgID indicano la piattaforma `https://form.agid.gov.it` (registro 03, sez. 6). Le scadenze citate dal documento (23 settembre, 31 marzo) coincidono con le fonti: la prima e' nelle Linee guida AgID, la seconda nel D.L. 179/2012 art. 9 c. 7, non nella L. 4/2004 | Correggere il dominio e citare le fonti |
@@ -201,5 +201,5 @@ Le righe sotto cambiano di stato; le prove sono nelle story (comandi e output). 
 | N-27 | link morto | il link «Amministrazione trasparente» e' ora testo non attivo finche' il Comune non fornisce l'URL del sito istituzionale |
 | I-01 (matrice interfaccia) | assente | `/{lingua}/accessibilita` 200 con modulo di feedback e link alla procedura; lo stato di conformita' resta da fornire dopo l'audit DCP-143 |
 
-Story: DCP-130 (`../stories/2026-10-13-dcp-130-informativa-privacy-art13-e-pagina-servita.story.md`), DCP-131 e DCP-132 (`Themes/Sixteen/docs/bmad/stories/`).
+Story: DCP-130 (`../stories/dcp-130-informativa-privacy-art13-e-pagina-servita.story.md`), DCP-131 e DCP-132 (`Themes/Sixteen/docs/bmad/stories/`).
 

@@ -6,9 +6,9 @@ created: 2026-10-13
 updated: 2026-10-13
 qmd: "viaggio cittadino login registrazione url.intended redirectIntended Segnala disservizio dashboard 404 area personale"
 module: Fixcity
-story: Modules/Fixcity/docs/stories/2026-10-13-dcp-124-viaggio-cittadino-login-registrazione-ritorno.story.md
+story: Modules/Fixcity/docs/stories/dcp-124-viaggio-cittadino-login-registrazione-ritorno.story.md
 related:
-  - ../../stories/2026-10-13-dcp-124-viaggio-cittadino-login-registrazione-ritorno.story.md
+  - ../../stories/dcp-124-viaggio-cittadino-login-registrazione-ritorno.story.md
   - ../../../../../Themes/Sixteen/docs/decision-log/D18-login-e-registrazione-tornano-alla-pagina-richiesta.md
   - ticket-crea-url-routing-chain.md
 status: draft

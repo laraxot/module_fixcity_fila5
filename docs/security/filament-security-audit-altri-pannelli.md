@@ -11,7 +11,7 @@ issues: []
 discussions: []
 related:
   - ../stories/dcp-181-filament-blueprint-audit-degli-altri-pannelli-e-piano-richieste-interessato.story.md
-  - ../stories/2026-10-14-dcp-180-audit-sicurezza-filament-blueprint.story.md
+  - ../stories/dcp-180-audit-sicurezza-filament-blueprint.story.md
 ---
 
 # Audit di sicurezza Filament: gli 11 pannelli diversi da fixcity

@@ -11,9 +11,9 @@ created: 2026-10-13
 updated: 2026-10-13
 tags: [wizard, design-comuni, passo-2, cablaggio, upload, i18n]
 related:
-  - Modules/Fixcity/docs/stories/2026-10-13-dcp-35-tickets-create-privacy-dati-coordinamento.story.md
-  - Modules/Fixcity/docs/stories/2026-10-13-dcp-43-wizard-passo2-viste-design-comuni.story.md
-  - Modules/Fixcity/docs/stories/2026-10-13-dcp-146-wizard-passo-dati-mappa-sempre-funzionante.story.md
+  - Modules/Fixcity/docs/stories/dcp-35-tickets-create-privacy-dati-coordinamento.story.md
+  - Modules/Fixcity/docs/stories/dcp-43-wizard-passo2-viste-design-comuni.story.md
+  - Modules/Fixcity/docs/stories/dcp-146-wizard-passo-dati-mappa-sempre-funzionante.story.md
 qmd: "dcp-128 cablaggio passo 2 wizard dati di segnalazione design comuni data-step dc-section-card upload"
 reference: https://italia.github.io/design-comuni-pagine-statiche/sito/segnalazione-02-dati.html
 local: http://192.168.1.40:8000/it/tickets/create?step=form.dati-di-segnalazione%3A%3Adata%3A%3Awizard-step
@@ -44,7 +44,7 @@ Chrome DC ok, contenuto del passo ancora Filament nativo: etichette doppie, camp
 La story DCP-146 (lead, scritta alle 21:18 UTC) assegna a un proprio subagent W3-FORM gli stessi file (`TicketForm.php`, viste Fixcity, `lang/*/ticket_form.php`). Questa story e' stata aperta prima dal coordinatore DCP-129 con lo stesso perimetro: io tocco SOLO i metodi del passo dati e le viste elencate sopra; se W3-FORM ha gia' modificato un file lo rilego e rimergio, mai riscrivere.
 
 
-> **Nota del coordinatore DCP-129 (21:36 UTC):** la stessa richiesta e' stata presa anche dalla sessione DCP-146 (Modules/Fixcity/docs/stories/2026-10-13-dcp-146-wizard-passo-dati-mappa-sempre-funzionante.story.md: lead + W1-LAYOUT, W2-GEO, W3-FORM, W4-TESTS). Decisione presa li' (sezione "DECISIONE DEL COORDINATORE", leggila): **la posizione approssimata da IP tramite terzi e' ABBANDONATA** (GDPR art. 6 e 44, DCP-137); resta il fuso orario gia' fatto. Catena: punto salvato > centro esplicito > GPS > fuso orario > `geo.map.default_view` solo se configurata > mondo con guardia clic. Una sola mano per file: prima di scrivere `ls -l --time-style=full-iso` e `git diff`, rileggi e ancora le tue modifiche; non riscrivere cio' che un altro ha appena fatto.
+> **Nota del coordinatore DCP-129 (21:36 UTC):** la stessa richiesta e' stata presa anche dalla sessione DCP-146 (Modules/Fixcity/docs/stories/dcp-146-wizard-passo-dati-mappa-sempre-funzionante.story.md: lead + W1-LAYOUT, W2-GEO, W3-FORM, W4-TESTS). Decisione presa li' (sezione "DECISIONE DEL COORDINATORE", leggila): **la posizione approssimata da IP tramite terzi e' ABBANDONATA** (GDPR art. 6 e 44, DCP-137); resta il fuso orario gia' fatto. Catena: punto salvato > centro esplicito > GPS > fuso orario > `geo.map.default_view` solo se configurata > mondo con guardia clic. Una sola mano per file: prima di scrivere `ls -l --time-style=full-iso` e `git diff`, rileggi e ancora le tue modifiche; non riscrivere cio' che un altro ha appena fatto.
 
 ## Esito (2026-10-13 21:00-22:05 UTC, Dev + Verify; solo misure fatte da me)
 ### Cosa e' stato cablato

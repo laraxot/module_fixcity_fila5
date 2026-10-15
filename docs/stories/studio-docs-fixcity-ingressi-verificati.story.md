@@ -7,8 +7,8 @@ updated: 2026-10-14
 module: Fixcity
 epic: docs-organization
 related:
-  - 2026-10-13-dcp-56-organizzazione-docs-moduli-e-temi.story.md
-  - 2026-10-14-mailmap-e-passata-meccanica-docs-moduli-temi.story.md
+  - dcp-56-organizzazione-docs-moduli-e-temi.story.md
+  - mailmap-e-passata-meccanica-docs-moduli-temi.story.md
   - ../../../../../bmad-output/docs-architecture/module-theme-docs-contract.md
 tags: [docs, organizzazione, verifica-nel-codice, second-brain, doc-010, doc-002]
 qmd: "studio docs fixcity ingressi README 00-INDEX index verificati codice Actions Ticket enum wizard tickets create phpstan config 122 errori docs-organizer"
@@ -45,7 +45,7 @@ Utente, 2026-10-13 e 2026-10-14: studiare, aggiornare, migliorare e organizzare 
 Scoperte laterali (non corrette, fuori perimetro): `FixcityServiceProvider::registerFolioApiRoutes()` calcola `dirname($this->module_dir, 3).'/resources/views/pages/api'`, cioe' `laravel/Modules/resources/views/pages/api` (cartella inesistente, verificato con `ls`): e' un no-op, gli endpoint `pages/api/*` sono montati da `Modules/Cms/app/Providers/FolioVoltServiceProvider.php`. `config/morph_map.php` ha 12 chiavi duplicate.
 
 ## Modifiche (solo sostituzioni mirate)
-`docs/README.md`, `docs/00-INDEX.md`, `docs/index.md`, `docs/INDEX.md`, `docs/wiki/index.md`, `docs/wiki/README.md`, `docs/wiki/MODULE-STATUS.md`, `docs/wiki/log.md`, questa story, nota di memoria `bashscripts/ai/wiki/memories/2026-10-14-docs-fixcity-geo-studio.md`. Nessun file spostato, rinominato o cancellato; nessun commit; git usato solo in lettura.
+`docs/README.md`, `docs/00-INDEX.md`, `docs/index.md`, `docs/INDEX.md`, `docs/wiki/index.md`, `docs/wiki/README.md`, `docs/wiki/MODULE-STATUS.md`, `docs/wiki/log.md`, questa story, nota di memoria `bashscripts/ai/wiki/memories/docs-fixcity-geo-studio.md`. Nessun file spostato, rinominato o cancellato; nessun commit; git usato solo in lettura.
 
 ## Verifica (output reale, 2026-10-14)
 - Link non risolti (`docs-organizer.py --busy-minutes 0 links ... --by-name`, dry-run) sui file toccati: README 2 -> 0, index 1 -> 0, wiki/index 1 -> 0, wiki/README 1 -> 0, wiki/MODULE-STATUS 1 -> 0, wiki/log 4 -> 0, 00-INDEX 0 -> 0, INDEX 0 -> 0; somma 10 -> 0. Intera cartella: 264 -> 254 (il resto e' fuori dagli ingressi).

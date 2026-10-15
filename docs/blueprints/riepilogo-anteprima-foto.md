@@ -11,7 +11,7 @@ issues: []
 discussions: []
 related:
   - ../stories/dcp-182-riepilogo-wizard-anteprima-delle-foto.story.md
-  - ../stories/2026-10-13-dcp-128-wizard-passo2-cablaggio-design-comuni.story.md
+  - ../stories/dcp-128-wizard-passo2-cablaggio-design-comuni.story.md
 ---
 
 # Blueprint: anteprima delle foto nel passo riepilogo

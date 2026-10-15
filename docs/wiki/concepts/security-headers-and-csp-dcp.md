@@ -6,7 +6,7 @@ created: 2026-10-13
 updated: 2026-10-13
 story: dcp-139
 related:
-  - ../../stories/2026-10-13-dcp-139-intestazioni-di-sicurezza-http-e-hardening-per-la-produzione.story.md
+  - ../../stories/dcp-139-intestazioni-di-sicurezza-http-e-hardening-per-la-produzione.story.md
   - ../../../../../../bashscripts/docs/visual-comparison/net-hosts-probe.md
   - ../../../../../../bashscripts/docs/tools/production-checklist.md
 qmd: "security headers csp content security policy report-only enforce hsts permissions-policy geolocation self x-powered-by securityheaders middleware net-hosts-probe unsafe-eval alpine livewire dcp-139"

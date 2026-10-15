@@ -137,7 +137,7 @@ Le migration nuove usano `foreignIdFor(Model::class, 'column')`; per User usano 
 - **Description**: Ensure all BMAD stories are cross-linked in Module and Theme second-brain docs.
 - **Related files**:
   - Modules/Fixcity/docs/second-brain.md (updated)
-  - Themes/Sixteen/docs/second-brain/geo-map-tickets-2026-10-14.md (new)
+  - Themes/Sixteen/docs/second-brain/geo-map-tickets.md (new)
   - Themes/Sixteen/docs/bmad/decision-log.md (appended D13-D17)
 - **Closure requested**: Verify cross-references appear correctly.
 - **Status**: Done

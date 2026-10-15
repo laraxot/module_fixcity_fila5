@@ -33,7 +33,7 @@ Dopo DCP-42 `/it/tickets/create` richiede il login: i gate da ospite si fermavan
 Le altezze locali risultano +33 px nei miei script per l'ingombro della debug bar di sviluppo (il gate ufficiale la rimuove): non e' una differenza di pagina.
 
 ## Relazioni con le story dell'altra sessione (14:25)
-[DCP-47](2026-10-13-dcp-47-fixture-autenticata-misure-wizard.story.md) (fixture senza toccare il DB di sviluppo, in corso) e [DCP-48](2026-10-13-dcp-48-codice-fiscale-autore-decisione.story.md) (codice fiscale: decisione di prodotto): le due soluzioni coesistono; quando DCP-47 e' pronta questa puo' essere rimossa con il comando sopra.
+[DCP-47](dcp-47-fixture-autenticata-misure-wizard.story.md) (fixture senza toccare il DB di sviluppo, in corso) e [DCP-48](dcp-48-codice-fiscale-autore-decisione.story.md) (codice fiscale: decisione di prodotto): le due soluzioni coesistono; quando DCP-47 e' pronta questa puo' essere rimossa con il comando sopra.
 
 ## Prova end-to-end del salvataggio (2026-10-13 14:35, Playwright, account di prova)
 Percorso: login -> `/it/tickets/create?step=form.riepilogo...` (passo 3) -> stato impostato via `$wire.set` (privacy, titolo, tipo `public_lighting`, dettagli, indirizzo, coordinate; i passi 1-2 sono in rifacimento da DCP-43/46 e la checkbox privacy del passo 1 non era cliccabile: "outside of the viewport") -> clic su **Invia** (`$wire.submit()`) -> ticket creato -> redirect a `/it/tickets/confirmation?code=TCK-NFZWEACWYVVAHY6S`. La conferma mostra `h1` "Segnalazione inviata", il codice e l'email del proprietario; 0 errori di pagina. Non provati: allegato reale, il percorso con i passi 1-2 cliccati a mano, l'inglese.

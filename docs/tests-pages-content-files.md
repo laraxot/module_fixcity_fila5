@@ -22,7 +22,7 @@ Le pagine di prova del front office (`/it/tests/<slug>`) sono **dato**: `config/
 
 ## Regole
 Nessun file con slug duplicato nella stessa cartella; nessun testo nelle viste Blade; nomi `tests.<slug>.json`.
-Dettagli: `Modules/Cms/docs/json-content-slug-uniqueness.md` e `Themes/Sixteen/docs/bmad/stories/2026-10-13-dcp-00-epic-design-comuni-parity-v2.story.md`.
+Dettagli: `Modules/Cms/docs/json-content-slug-uniqueness.md` e `Themes/Sixteen/docs/bmad/stories/dcp-00-epic-design-comuni-parity-v2.story.md`.
 
 ## Sezioni condivise (aggiornamento 2026-10-13)
 `config/database/content/sections/header.json`, `footer.json` e `search-modal.json` (tenant: `laravel/config/local/fixcity/database/content/sections/`) servono due template:
