@@ -53,3 +53,8 @@ Chi sostituisce `env()` in un file di configurazione scrive `(config('env.K') ??
 - [x] Nessuna `ignoreErrors`, baseline o ignore inline aggiunti.
 - [x] Default di `env()` preservati nelle configurazioni modificate.
 - [ ] Un controllo automatico contro `config('env.K', default)` (oggi solo la ricerca a mano sopra).
+
+## Aggiornamento 2026-10-14, 20:40: PHPStan di nuovo a zero e lo strumento di test
+- Dopo il fatale di `getFormSchemaOld` (DCP-184) e gli import persi in `LocationResource` e `AddressResource` (Geo), l'app era a 500 e PHPStan non faceva bootstrap. Import ripristinati (`Pages` in `LocationResource`; `Select`, `Get`, `Set`, `Region`, `Province`, `Locality` in `AddressResource`), poi **`./vendor/bin/phpstan analyse Modules` = `[OK] No errors`** (exit 0, ore 20:09 e 20:33) e `/it` 200.
+- **`bashscripts/tools/pest-scratch-db.sh`**: clonava prima il database dati; 5 tabelle esistono in entrambi i database (`extras`, `migrations`, `notifications`, `notification_types`, `profiles`) e `notifications.notifiable_id` era `bigint` al posto di `uuid`. Un test del front office (`PersonalAreaSettingsPagesTest`, notifiche per cittadino) falliva a intermittenza perche' due utenti diversi finivano con `notifiable_id` 0. Ora si clona prima il database utenti. Prima: 6 run rossi su 8; dopo: 4 su 4 verdi. Effetto collaterale: la suite gira su uno schema piu' vicino al vero.
+- Lezione: un test rosso a intermittenza non si riesegue finche' passa; si cattura lo stato nel punto del fallimento (qui: righe `notifications` con `notifiable_id` = 0) con un test-sonda temporaneo fuori dal repo.

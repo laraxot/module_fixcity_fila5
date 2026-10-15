@@ -101,7 +101,7 @@ return [
             'table' => 'password_resets',
             'expire' => 60,
             'email' => 'lu::auth.emails.password',
-            'connection' => 'liveuser_general',
+            'connection' => 'user', // connessione degli utenti e di `password_resets`; `liveuser_general` era di un altro progetto e qui non esiste (DCP-186)
         ],
     ],
 ];

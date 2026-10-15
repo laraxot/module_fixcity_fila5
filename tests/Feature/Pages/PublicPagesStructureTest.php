@@ -17,7 +17,7 @@ uses(TestCase::class);
  * nessun test lo vedeva (il fallback e' la chiave stessa, non un errore).
  */
 it('serves every public page with a valid structure and no raw translation key', function (string $locale): void {
-    $pages = ['', '/tickets', '/tickets/track', '/auth/login', '/auth/register', '/privacy', '/domande-frequenti', '/mappa-sito', '/accessibilita', '/note-legali', '/media-policy', '/cookie-policy'];
+    $pages = ['', '/tickets', '/tickets/track', '/auth/login', '/auth/register', '/privacy', '/domande-frequenti', '/mappa-sito', '/accessibilita', '/note-legali', '/media-policy', '/cookie-policy', '/auth/password/reset', '/services'];
     $problems = [];
     $titles = [];
 

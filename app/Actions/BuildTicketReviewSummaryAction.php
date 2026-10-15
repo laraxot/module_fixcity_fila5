@@ -6,6 +6,7 @@ namespace Modules\Fixcity\Actions;
 
 use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
 use Livewire\Features\SupportFileUploads\TemporaryUploadedFile;
 use Modules\Fixcity\Enums\TicketTypeEnum;
@@ -265,7 +266,11 @@ final class BuildTicketReviewSummaryAction
             $url = $file->temporaryUrl();
 
             return is_string($url) ? $url : '';
-        } catch (Throwable) {
+        } catch (Throwable $exception) {
+            // Il passo resta utilizzabile (restano i nomi), ma un guasto del disco non deve togliere le anteprime senza traccia.
+            // Niente nome del file (dato personale) ne' URL firmato nel log.
+            Log::warning('Anteprima della foto non disponibile nel riepilogo del wizard.', ['exception' => $exception::class, 'message' => $exception->getMessage()]);
+
             return '';
         }
     }

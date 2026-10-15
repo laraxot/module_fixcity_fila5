@@ -3,7 +3,7 @@ id: dcp-180
 title: "DCP-180: audit di sicurezza del pannello Filament di Fixcity con Filament Blueprint"
 type: story
 epic: dc-parity-v2
-status: in-progress
+status: done
 priority: P1
 owner: module:Fixcity
 module: Fixcity
@@ -114,4 +114,12 @@ Verify: vedi sezione 4.
 
 ## Nota di coordinamento 2026-10-14 (altra sessione)
 Nello stesso momento e' stata aperta [DCP-181](./dcp-181-filament-blueprint-audit-degli-altri-pannelli-e-piano-richieste-interessato.story.md): audit con la stessa skill sugli altri 11 pannelli (user, notify, xot, cms, blog, job, rating, comment, lang, tenant, ui), piu' un piano `planning-filament` per il registro delle richieste dell'interessato (modulo Gdpr). Non sovrapposti a questo perimetro.
+
+## Chiusura (2026-10-14, 19:50): esito dei tre difetti, con correzioni al mio stesso audit
+- **F-01 (relation manager `Media`)**: corretto e provato (`TicketResourceRelationManagersTest`, rosso poi verde). Nota: l'auto-discovery di `XotBaseResource::getRelations()` e' la causa; `TicketResource::getRelations()` a runtime e' la prova, non il grep.
+- **F-02 (upload RPC su widget senza `RestrictsFileUploadsToSchemaComponents`)**: **gia' risolto alla radice** da un'altra sessione (DCP-181 A-2) con un `use` in `XotBaseWidget`, ereditato da `XotBaseSchemaWidget`, `XotBaseInfolistWidget` e `XotBaseWizardWidget`. Il mio audit aveva contato solo gli `use` diretti e lo dava per aperto: **errore mio**. Aggiunta la prova che mancava, `WizardUploadRestrictionTest` (6 test): 403 su `data.name`, `data`, `blockData`, proprieta' inesistente; `data.images.<k>` accettato; e un controllo di mutazione (stesso widget con la restrizione spenta lascia passare l'upload), cosi' il 403 e' provato dipendere dalla trait. Residuo non chiuso: componenti Livewire "nudi" con `InteractsWithForms` e senza la trait, `Modules/Blog/app/Http/Livewire/Profile/Setting.php` (referenziato dal blocco `profile.setting`), `Modules/User/app/Http/Livewire/Auth/{Login,Register}.php` (non referenziati: nessuna rotta, nessun template).
+- **F-03 (campo `images` senza whitelist)**: corretto sul campo del vecchio schema, poi **assorbito da DCP-184**: `getFormSchemaOld()` e' stato tolto da tutte le Resource e `CreateTicketWidget` usa ora `TicketForm::getDataSchema()`, che ha `acceptedFileTypes(['image/jpeg', 'image/png', 'application/pdf'])` come la collezione `attachments`. `TicketFormImagesUploadTypesTest` prova l'uguaglianza fra mime del campo e della collezione sullo schema vivo. Il mio commento "esposizione bassa" restava valido; il file e' sparito.
+- **Effetto collaterale trovato e chiuso**: portare il widget sullo schema vivo ha reso `status` e `priority` campi `Hidden` client-controllati, e `rules()` del widget non e' applicato da `validate()` (la validazione e' quella dei campi dello schema). 14 test su 15 del widget erano rossi (metodo rimosso) e poi `validates enum values` mostrava `priority` non validata. Corretto in `CreateTicketWidget::submit()`: le `rules()` dichiarate si applicano a mano (`passesDeclaredRules()`) e lo stato iniziale e' imposto dal server (`PENDING`), come nel wizard (DCP-49 SEC-01). Test: 3 casi in `CreateTicketWidgetTest` (`closed`, `resolved`, `in_progress` manomessi), rossi prima (il ticket nasceva con lo stato del client), verdi dopo.
+- **Verifica**: `phpstan analyse Modules` exit 0, 0 errori (19:35, JSON validato); suite Filament di Fixcity 101 test, 457 asserzioni, su DB scratch (DB di sviluppo intatto: 18 ticket, 11 utenti prima e dopo). Pint pulito.
+- **Non verificato**: il pannello `fixcity/admin` non e' stato aperto nel browser; gli altri moduli (User, Xot, Job, ...) sono nel rapporto di DCP-181.
 

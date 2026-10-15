@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Facades\Log;
 use Livewire\Features\SupportFileUploads\TemporaryUploadedFile;
 use Mockery\MockInterface;
 use Modules\Fixcity\Actions\BuildTicketReviewSummaryAction;
@@ -376,6 +377,12 @@ describe('BuildTicketReviewSummaryAction image previews (DCP-182)', function ():
         $upload->shouldReceive('guessExtension')->andReturn('jpg');
         $upload->shouldReceive('isPreviewable')->andReturn(true);
         $upload->shouldReceive('temporaryUrl')->andThrow(new RuntimeException('file temporaneo non piu\' presente'));
+        // Un guasto del disco non deve togliere tutte le anteprime senza lasciare traccia; il nome del file (dato personale) non va nel log.
+        Log::shouldReceive('warning')->once()->withArgs(function (string $message, array $context): bool {
+            $encoded = json_encode($context, JSON_THROW_ON_ERROR);
+
+            return str_contains($encoded, 'RuntimeException') && ! str_contains($encoded, 'scaduta.jpg');
+        });
 
         $report = app(BuildTicketReviewSummaryAction::class)->execute(reviewState(['images' => ['k' => $upload]]))['report'];
 

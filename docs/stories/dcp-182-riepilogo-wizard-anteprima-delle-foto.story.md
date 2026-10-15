@@ -75,3 +75,6 @@ Agente indipendente, sola lettura (rapporto nello scratchpad `review-dcp182.md`)
 **Residui dichiarati:** parity pixel a zero foto non rimisurata con il gate DCP-33; CLS con foto non 4:3 non misurato (`width=320 height=240` fissi con `img-fluid`); il `catch` non registra l'errore (un guasto del disco toglierebbe tutte le anteprime senza traccia); l'Action ricalcola gli URL a ogni resa del passo.
 **Misure finali:** Pest 71 passati e 1 saltato (Action, vista, roundtrip, autorizzazione super-admin); spec browser 1/1 (22 s); PHPStan su `Modules` vedi il rapporto finale.
 
+## Residuo chiuso (2026-10-14, 20:15)
+Il `catch (Throwable)` di `BuildTicketReviewSummaryAction::temporaryPreviewUrl()` non lasciava traccia. Ora registra un `Log::warning` con classe e messaggio dell'eccezione, **senza** nome del file ne' URL firmato. Test rosso prima (`Method warning(<Any Arguments>) ... should be called`), verde dopo; Pest 54 passati su Action, roundtrip Livewire e parita' lingue; PHPStan a zero sui file toccati. Restano: parity pixel a zero foto non rimisurata con il gate DCP-33, CLS con foto non 4:3, URL ricalcolato a ogni resa del passo.
+

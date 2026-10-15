@@ -34,3 +34,20 @@ DCP-90 ha corretto i due rossi del flusso (route cache con altro `APP_KEY` nei t
 ## Riconferma (16:25, sessione tema, dopo tutte le modifiche del pomeriggio)
 Sottoinsieme wizard + pagine + conferma (`CreateTicketWizardWidgetTest`, `TicketFormWizardSummarySchemaTest`, `CreateTicketWizardWidgetViewTest`, `Feature/Pages`, `Feature/Wizard`, `BuildTicketReviewSummaryActionTest`, `CreateTicketConfirmationFlowTest`): `18 failed, 1 skipped, 100 passed (522 assertions)`. I 18 rossi sono tutti nei gruppi gia' elencati sopra (area-personale, FollowedTickets, NotificationPreferences, TicketPages, TicketPrivacyPublication, TrackingTranslation, TicketListCreateCallToAction): nessun rosso nuovo dalle modifiche a shell, stepper, footer di ripiego, header attivo, asset relativi, `middleware: ["auth"]`.
 
+## Suite intera rilanciata il 2026-10-14 (20:05, sessione tracker/MCP)
+`bashscripts/tools/pest-scratch-db.sh Modules/Fixcity/tests` (DB di prova, `APP_CONFIG_CACHE` escluso), un processo, 990 s: **27 falliti, 1 todo, 13 saltati, 1131 passati (8526 asserzioni)**. L'elenco di sopra (19 rossi) e' superato: i test sono raddoppiati e la composizione dei rossi e' cambiata. Raggruppati per messaggio d'errore:
+
+| Gruppo | N | Causa provata | Stato |
+|---|---|---|---|
+| `ticket_hours.user_id` intero, utenti UUID | 20 | `fixcity_data.ticket_hours.user_id` e' `bigint unsigned`, `users.id` e' `varchar(36)`; `created_by`/`updated_by` della stessa tabella sono gia' `uuid`. Nessuna ora di lavoro puo' essere registrata per nessun utente. Tabella con 0 righe; nessuna migrazione attiva la crea (solo `database/migrations/_bak/*.merged`); nessuna UI scrive `TicketHour` (solo `Ticket::hours()` per la somma a `Ticket.php:360` e `Profile::hours()`). Il docblock del model dice `@property int $user_id`. | **Serve una decisione** (vedi sotto) |
+| Contratto di parita' lingue | 1 | «Cookie policy» e' il termine inglese stesso (de/es tradotte, `local` ed `eu` identici) | **Chiuso**: aggiunto alle eccezioni documentate `en` di `ContentLocaleParityTest` (accanto a «Media policy»); 5/5 verdi |
+| Factory dei ticket | 1 | `GenerateTicketsActionTest > _creates_tickets_with_valid_states`: la factory crea PENDING/MEDIUM, il test accetta altri stati (gia' in tabella sopra) | aperto |
+| `TicketFormRenderTest` | 2 | un `Failed asserting that false is true` e un errore `data.location` («Indica un punto valido sulla mappa»): non indagati | aperto |
+| `CategoryMigrationTest` | 1 | indice `categories_name_idx` assente nella tabella `categories` del DB di sviluppo (il DB di prova ne clona la struttura): migrazione non applicata o indice mai creato | aperto, tocca lo schema |
+| `FixcityDemoSeederTest` | 1 | asserisce `N > N` su dati: il DB di prova ha solo la struttura | da verificare se e' un limite dell'harness |
+| `PersonalAreaSettingsPagesTest` | 1 | due stringhe diverse, non indagato | aperto |
+
+**Decisione per il gruppo `ticket_hours`** (nessuna scelta presa): (a) tenere la funzione e correggere il tipo con una migrazione forward-only `user_id` -> `string(36)` (la tabella e' vuota: nessun dato a rischio; poi docblock `@property string`); oppure (b) togliere la funzione (`TicketHour`, factory, i 3 punti d'uso e i test), perche' nessuna UI la usa. Raccomandazione: (a) se le ore di lavoro servono ai ticket DMO, altrimenti (b); e' un cambio di schema del database dei dati, quindi aspetta il via libera esplicito.
+
+**Cosa dice di piu' il gruppo:** altre tabelle del DB dati hanno `user_id` intero con utenti UUID (`comments` int(11), `contacts` int(11), `posts`, `post_views`, `translations`, `upvote_downvotes`, `ai_messages`, `ai_tool_logs` bigint). Non provato se siano usate da FixCity: nessun test le ha colpite.
+

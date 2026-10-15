@@ -34,7 +34,8 @@ $contentParityTargets = [
  */
 $contentParityIdenticalAllowed = [
     '*' => ['Twitter', 'Facebook', 'YouTube', 'Telegram', 'Whatsapp', 'WhatsApp', 'RSS', 'ITA', 'ENG', 'DEU', 'SPA'],
-    'en' => ['Media policy'],
+    // "Cookie policy" e' il termine inglese stesso (in italiano e' un prestito): de ed es sono tradotte, verificato in local ed eu il 2026-10-14.
+    'en' => ['Media policy', 'Cookie policy'],
     'es' => ['Turismo'],
 ];
 
