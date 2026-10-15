@@ -48,5 +48,12 @@ Un testo legale incompleto non deve mai arrivare in produzione senza che nulla s
 - [ ] Nessuna promessa di un modulo che non c'e'; con la casella impostata, l'invio di prova arriva e il limite scatta alla sesta richiesta.
 - [ ] `go-live-gate.py` rimisurato (`LEG-01`, `LEG-04`, `LG-02`) e l'esito scritto in DCP-154.
 
+## Owned File/Module Scope
+- `laravel/Modules/Fixcity/app/Actions/Assess*Action.php` (nuove Action per terms e media-policy)
+- `laravel/Modules/Fixcity/resources/templates/**`
+- `laravel/Modules/Fixcity/tests/Feature/Pages/*PublicationGateTest.php`
+- `laravel/config/*/fixcity/database/content/pages/{terms,media-policy,accessibilita}.index.json`
+- `bashscripts/tools/release/go-live-gate.py` (voce `LEG-01`)
+
 ## Non verificato
 Parere del DPO e di un legale (non e' dello sviluppo); consegna reale dell'email; store di cache e limite in produzione; lettore di schermo sulla pagina di accessibilita'.

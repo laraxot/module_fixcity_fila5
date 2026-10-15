@@ -51,5 +51,11 @@ Chi guarda le segnalazioni pubbliche (ospite o cittadino) deve vedere dati veri,
 - [ ] `FollowedTicketsPageTest`, `TicketPublicDetailPageTest`, `PublicPagesStructureTest` e la suite Filament di Fixcity restano verdi; PHPStan su `Modules` a zero.
 - [ ] Nessun ticket non pubblico visibile a un ospite o a un altro utente (test con tre utenti).
 
+## Owned File/Module Scope
+- `laravel/Modules/Fixcity/app/Actions/**` (`BuildPublicTicketDetailAction`, `ApplyPublicTicketFiltersAction`, `GetPublicTicketByCodeAction`)
+- `laravel/Modules/Fixcity/resources/views/**` e `laravel/Themes/Sixteen/resources/views/components/blocks/**` (elenco, dettaglio, tracciamento, conferma)
+- `laravel/Modules/Fixcity/tests/**`
+Non toccare: il passo wizard `data` e il riepilogo (DCP-182/211).
+
 ## Non verificato
 Foto ed EXIF reali; la pagina 429 con corpo; la timeline con voci e `reason` (nessun ticket di prova ha attivita'); il flusso dopo l'invio con la sessione reale.

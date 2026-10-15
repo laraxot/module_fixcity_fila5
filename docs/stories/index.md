@@ -113,6 +113,12 @@ DCP-33, DCP-34 e DCP-35 qui sono le story del modulo Fixcity; lo stesso numero e
 - [DCP-181](./dcp-181-filament-blueprint-audit-degli-altri-pannelli-e-piano-richieste-interessato.story.md) - DCP-181: Filament Blueprint, audit degli altri pannelli e piano del registro delle richieste dell'interessato (complementare a DCP-180)
 - [DCP-182](./dcp-182-riepilogo-wizard-anteprima-delle-foto.story.md) - DCP-182: nel riepilogo del wizard le foto caricate si vedono come anteprima
 
+### Story aggiunte all'indice (2026-10-15)
+
+- [dcp-230-ticket-pubblici-residui-dell-audit-del-front-office](./dcp-230-ticket-pubblici-residui-dell-audit-del-front-office.story.md) - DCP-230: geocoding, foto ed EXIF, conteggi, date, noindex, codice nell'URL e viste morte dei ticket pubblici; decisioni D230-1..5
+- [dcp-231-guardie-di-pubblicazione-di-terms-e-media-policy-e-feedback-accessibilita](./dcp-231-guardie-di-pubblicazione-di-terms-e-media-policy-e-feedback-accessibilita.story.md) - DCP-231: guardie di pubblicazione per terms e media-policy, e feedback sull'accessibilita' spento; decisioni D231-1..4
+- [dcp-194-nomi-file-md-senza-date-e-suffissi-numerici](./dcp-194-nomi-file-md-senza-date-e-suffissi-numerici.story.md) - DCP-194: puntatore a DCP-201 (nomi dei file `.md` senza date ne' suffissi numerici)
+
 ## collegamenti bidirezionali
 
 - [Fixcity docs index](../INDEX.md)
