@@ -22,12 +22,87 @@
           "view": "pub_theme::components.blocks.blog.index",
           "title": "Novità",
           "intro": "Le notizie, i comunicati e gli avvisi per restare aggiornati sulle ultime novità, opportunità e cosa succede nel territorio.",
-          "featured_title": "In evidenza",
+          "featured_title": "Notizie in evidenza",
           "explore_title": "Esplora tutte le novità",
           "home_label": "Home",
           "read_more": "Leggi tutto",
           "empty": "Non ci sono ancora novità pubblicate.",
-          "pagination_label": "Paginazione delle novità"
+          "pagination_label": "Paginazione delle novità",
+          "parity_page": "lista-risorse",
+          "feedback": {
+            "title": "Quanto sono chiare le informazioni su questa pagina?",
+            "legend": "Valuta da 1 a 5 stelle la pagina",
+            "star_label": "Valuta %d stelle su 5",
+            "thanks": "Grazie, il tuo parere ci aiuterà a migliorare il servizio!",
+            "positive": {
+              "question": "Quali sono stati gli aspetti che hai preferito?",
+              "answers": [
+                "Le indicazioni erano chiare",
+                "Le indicazioni erano complete",
+                "Capivo sempre che stavo procedendo correttamente",
+                "Non ho avuto problemi tecnici",
+                "Altro"
+              ]
+            },
+            "negative": {
+              "question": "Dove hai incontrato le maggiori difficoltà?",
+              "answers": [
+                "A volte le indicazioni non erano chiare",
+                "A volte le indicazioni non erano complete",
+                "A volte non capivo se stavo procedendo correttamente",
+                "Ho avuto problemi tecnici",
+                "Altro"
+              ]
+            },
+            "detail": {
+              "question": "Vuoi aggiungere altri dettagli?",
+              "label": "Dettaglio",
+              "help": "Inserire massimo 200 caratteri"
+            },
+            "back": "Indietro",
+            "next": "Avanti"
+          },
+          "contacts": {
+            "main": {
+              "title": "Contatta il comune",
+              "items": [
+                {
+                  "icon": "it-help-circle",
+                  "label": "Leggi le domande frequenti",
+                  "url": "/domande-frequenti"
+                },
+                {
+                  "icon": "it-mail",
+                  "label": "Richiedi assistenza",
+                  "url": "#",
+                  "element": "contacts"
+                },
+                {
+                  "icon": "it-hearing",
+                  "label": "Chiama il numero verde 05 0505",
+                  "url": "#"
+                },
+                {
+                  "icon": "it-calendar",
+                  "label": "Prenota appuntamento",
+                  "url": "#",
+                  "element": "appointment-booking"
+                }
+              ]
+            },
+            "problems": {
+              "title": "Problemi in città",
+              "items": [
+                {
+                  "icon": "it-map-marker-circle",
+                  "label": "Segnala disservizio",
+                  "url": "/tickets/create"
+                }
+              ]
+            }
+          },
+          "search_placeholder": "Cerca per parola chiave",
+          "search_submit": "Invio"
         }
       }
     ],
@@ -43,7 +118,8 @@
           "home_label": "Home",
           "read_more": "Read more",
           "empty": "There are no published posts yet.",
-          "pagination_label": "News pagination"
+          "pagination_label": "News pagination",
+          "parity_page": "lista-risorse"
         }
       }
     ],
@@ -59,7 +135,8 @@
           "home_label": "Startseite",
           "read_more": "Weiterlesen",
           "empty": "Noch keine Beiträge veröffentlicht.",
-          "pagination_label": "Seitennavigation der Neuigkeiten"
+          "pagination_label": "Seitennavigation der Neuigkeiten",
+          "parity_page": "lista-risorse"
         }
       }
     ],
@@ -75,7 +152,8 @@
           "home_label": "Inicio",
           "read_more": "Leer más",
           "empty": "Todavía no hay publicaciones.",
-          "pagination_label": "Paginación de novedades"
+          "pagination_label": "Paginación de novedades",
+          "parity_page": "lista-risorse"
         }
       }
     ]

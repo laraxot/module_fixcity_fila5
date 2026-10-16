@@ -2,7 +2,7 @@
   "id": "events.index",
   "slug": "events.index",
   "title": {
-    "it": "Eventi",
+    "it": "Vivere il comune",
     "en": "Events",
     "de": "Veranstaltungen",
     "es": "Eventos"
@@ -20,7 +20,8 @@
         "type": "events.index",
         "data": {
           "view": "pub_theme::components.blocks.events.index",
-          "title": "Eventi",
+          "parity_page": "eventi",
+          "title": "Vivere il comune",
           "intro": "Passeggiate, laboratori e incontri pubblici per conoscere i servizi e partecipare alla cura del territorio.",
           "explore_title": "Tutti gli eventi",
           "home_label": "Home",
