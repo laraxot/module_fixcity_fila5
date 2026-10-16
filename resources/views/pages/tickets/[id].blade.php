@@ -49,6 +49,37 @@ render(function (View $view, int|string $id): View {
                             <dd class="leading-7 text-slate-800">{{ $ticket->content ?: __('pub_theme::home.map.not_available') }}</dd>
                 </dl>
                 <a class="mt-6 inline-flex min-h-12 items-center rounded-lg border-2 border-sky-800 px-5 py-3 font-semibold text-sky-900 transition hover:bg-sky-50 focus:outline-none focus:ring-4 focus:ring-sky-800/30" href="{{ url('/'.app()->getLocale().'/tickets') }}">{{ __('pub_theme::home.map.back_to_map') }}</a>
+
+        @if ($ticket instanceof \Modules\Fixcity\Models\Ticket)
+            @php
+                $timeline = app(\Modules\Fixcity\Actions\BuildTicketTimelineAction::class)->execute($ticket);
+            @endphp
+            @if ($timeline !== [])
+                <section class="mt-8" aria-labelledby="ticket-passaggi-heading">
+                    <h2 id="ticket-passaggi-heading" class="text-xl font-bold text-slate-950">Passaggi</h2>
+                    <ol class="mt-4 space-y-3" aria-label="Passaggi del ticket">
+                        @foreach ($timeline as $entry)
+                            <li class="rounded-xl border border-slate-200 bg-white p-4 shadow-sm">
+                                <div class="flex flex-col justify-between gap-1 sm:flex-row">
+                    <strong class="text-slate-950">{{ $entry['to_label'] ?? $entry['reason'] ?? 'Passaggio' }}</strong>
+                    @if (filled($entry['from_label'] ?? null))
+                        <span class="text-sm text-slate-600">({{ $entry['from_label'] }} → {{ $entry['to_label'] }})</span>
+                    @endif
+                                    @if ($entry['occurred_date'] !== '')
+                                        <time class="text-sm text-slate-600" datetime="{{ $entry['occurred_on'] }}">{{ $entry['occurred_date'] }}</time>
+                                    @endif
+                                </div>
+                                @if ($entry['reason'] !== null && $entry['reason'] !== '')
+                                    <p class="mt-2 leading-7 text-slate-700">{{ $entry['reason'] }}</p>
+                                @endif
+                            </li>
+                        @endforeach
+                    </ol>
+                </section>
+            @endif
+
+            <x-ticket-comments :ticket="$ticket" />
+        @endif
         </article>
     </div>
 </x-pub_theme::layouts.app>

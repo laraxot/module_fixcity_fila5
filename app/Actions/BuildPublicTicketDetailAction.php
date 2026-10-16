@@ -40,7 +40,7 @@ final class BuildPublicTicketDetailAction
      *     longitude: float|null,
      *     description: string,
      *     meta_description: string,
-     *     timeline: list<array{occurred_at: string, occurred_date: string, from_label: string|null, to_label: string, reason: string|null}>,
+     *     timeline: list<array{occurred_at: string, occurred_date: string, occurred_on: string, from_label: string|null, to_label: string, reason: string|null}>,
      *     is_following: bool
      * }|null null se la segnalazione non esiste o non e' visibile al pubblico
      */
@@ -77,7 +77,7 @@ final class BuildPublicTicketDetailAction
             'longitude' => $hasPoint ? $lng : null,
             'description' => $description,
             'meta_description' => Str::of($description)->squish()->limit(self::META_DESCRIPTION_LENGTH - 3)->toString(),
-            'timeline' => app(BuildTicketTimelineAction::class)->execute($ticket),
+            'timeline' => app(BuildTicketTimelineAction::class)->execute($ticket, $viewer),
             'is_following' => $this->isFollowing($ticket, $viewer),
         ];
     }

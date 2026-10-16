@@ -174,8 +174,3 @@ public static function getDataSchema(): array
 **Data**: 2026-04-27
 **Stato**: In Progress
 **Issues**: #8-41
-
---- BMAD + Second Brain ---
-- Scopo: documentazione tecnica del modulo.
-- Utilità: riferimento sviluppatori/audit.
-- Funzionalità: struttura, dipendenze, convenzioni (no date .md, git avanti).

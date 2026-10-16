@@ -194,8 +194,3 @@ public function getUsers(): Collection {
 - [Report Completo PHPStan 2026-03-02](../../../docs/phpstan-analysis-level-report.md)
 - [PHPStan Level 10 Guide](../../../docs/phpstan-level-10-guide.md)
 - [Ticket Model Documentation](./models/ticket.md)
-
---- BMAD + Second Brain ---
-- Scopo: documentazione tecnica del modulo.
-- Utilità: riferimento sviluppatori/audit.
-- Funzionalità: struttura, dipendenze, convenzioni (no date .md, git avanti).

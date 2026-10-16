@@ -624,8 +624,3 @@ class TicketQuestionnaireForm extends Component
 
 - SeeClickFix API: https://dev.seeclickfix.com/v2/issues/reporting/
 - Open311 GeoReport v2: http://wiki.open311.org/GeoReport_v2/
-
---- BMAD + Second Brain ---
-- Scopo: documentazione tecnica del modulo.
-- Utilità: riferimento sviluppatori/audit.
-- Funzionalità: struttura, dipendenze, convenzioni (no date .md, git avanti).

@@ -12,7 +12,27 @@ status: draft
 
 # FixCity BMAD — piano canonico del modulo
 
+## Kit BMAD owner (canonico)
+
+- [BMAD Planning](../bmad-planning.md)
+- [BMAD Brainstorming](../bmad-brainstorming.md)
+- [Filament blueprint](./filament-blueprint.md)
+- [Project context](./project-context.md)
+- [Decision log](./decision-log.md)
+
 Questa è la sede BMAD del dominio FixCity. Il prodotto è un servizio civico per la raccolta e gestione di segnalazioni urbane: cittadino, operatore PA, supervisor e admin devono completare un unico flusso verificabile.
+
+**`bmad-output/` è vietato** — tutti i dossier vivono qui (o nel tema/modulo owner).
+Mappa migrazione: [project/migration-from-bmad-output.md](project/migration-from-bmad-output.md).
+
+| Dossier | Path |
+|---|---|
+| Inbound marketing | [inbound-marketing/](inbound-marketing/README.md) |
+| Contratto Blog/Eventi | [content-type-contract.md](inbound-marketing/content-type-contract.md) |
+| Footer / partner | [footer-sponsorship/](footer-sponsorship/README.md) |
+| Sostenibilità | [project-sustainability/](project-sustainability/README.md) |
+| Project BMAD (ex root) | [project/](project/) |
+| Stories migrate | [stories/_from-bmad-output/](stories/_from-bmad-output/) |
 
 ## Homepage e flussi end-to-end
 
@@ -70,6 +90,8 @@ Documenti:
 - [STORY-521 — ownership ticket demo e privacy tracking](stories/STORY-521-demo-ticket-owner-assignment.md)
 - [release plan](release-plan.md)
 - [stories](stories/)
+- [Inbound marketing — blog ed eventi](inbound-marketing/README.md)
+- [Indice stories inbound per owner](inbound-marketing/stories-index.md)
 - [STORY-013 — preferenze email cittadino](stories/STORY-013-ticket-notification-preferences.md)
 - [Gate pubblicazione informativa privacy](stories/STORY-FIXCITY-PRIVACY-PUBLICATION-GATE.md)
 - [Semantica e audit della presa visione privacy](stories/STORY-FIXCITY-PRIVACY-ACKNOWLEDGEMENT-AUDIT.md)

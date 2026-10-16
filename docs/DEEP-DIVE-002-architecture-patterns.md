@@ -820,8 +820,3 @@ after('deploy:symlink', 'deploy:migrate');
 ---
 
 *Architecture analysis based on: FixMyStreet GitHub, SeeClickFix API docs, Decoro Urbano reverse engineering, Degradozero open source code, Laravel best practices.*
-
---- BMAD + Second Brain ---
-- Scopo: documentazione tecnica del modulo.
-- Utilità: riferimento sviluppatori/audit.
-- Funzionalità: struttura, dipendenze, convenzioni (no date .md, git avanti).

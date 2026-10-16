@@ -807,8 +807,3 @@ class IncidentResponseService
 ---
 
 *Security architecture based on: OWASP guidelines, GDPR Article 32 (security of processing), ISO 27001, NIST Cybersecurity Framework.*
-
---- BMAD + Second Brain ---
-- Scopo: documentazione tecnica del modulo.
-- Utilità: riferimento sviluppatori/audit.
-- Funzionalità: struttura, dipendenze, convenzioni (no date .md, git avanti).

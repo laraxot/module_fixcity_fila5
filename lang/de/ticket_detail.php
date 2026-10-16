@@ -22,6 +22,21 @@ return [
         'previous' => 'Zuvor: :status',
         'empty' => 'Es gibt noch keine Aktualisierungen: Die Meldung hat den Status „:status“.',
     ],
+    'next_steps' => [
+        'title' => 'Nächste Schritte',
+        'deadline_not_configured' => 'Die Dauer hängt von der zuständigen Stelle ab und wird ergänzt, sobald sie verfügbar ist.',
+        'moderation' => ['title' => 'Prüfung der Meldung', 'description' => 'Eine Moderation prüft die Meldung, bevor sie bearbeitet wird.'],
+        'review' => ['title' => 'Übernahme', 'description' => 'Ein Bearbeiter prüft die Angaben und bestimmt die zuständige Stelle.'],
+        'processing' => ['title' => 'In Bearbeitung', 'description' => 'Die Meldung wird bearbeitet. Aktualisierungen erscheinen hier.'],
+        'waiting' => ['title' => 'Warten', 'description' => 'Die Bearbeitung wartet auf Informationen oder eine externe Antwort.'],
+        'confirmation' => ['title' => 'Prüfung der Lösung', 'description' => 'Die Lösung wurde erfasst; das Ticket wird erst nach der vorgesehenen Prüfung geschlossen.'],
+        'closed' => ['title' => 'Vorgang abgeschlossen', 'description' => 'Die Meldung wurde gelöst und geschlossen.'],
+    ],
+    'timeline' => [
+        'update' => 'Aktualisierung', 'assignment' => 'Meldung zugewiesen', 'approved' => 'Meldung genehmigt',
+        'rejected' => 'Meldung abgelehnt', 'mail_sent' => 'Nachricht gesendet', 'mail_failed' => 'Nachricht konnte nicht gesendet werden', 'mail_received' => 'Antwort erhalten',
+        'followup' => 'Erinnerung gesendet', 'media_added' => 'Anhang hinzugefügt', 'recipient' => 'Empfänger: :recipient', 'attachment' => 'Datei: :file', 'closed' => 'Meldung geschlossen',
+    ],
     'where' => [
         'title' => 'Wo',
         'address' => 'Adresse',

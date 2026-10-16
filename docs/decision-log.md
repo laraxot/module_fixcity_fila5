@@ -66,11 +66,3 @@ qmd: "decision log   fixcity fixcity"
 - [ ] Define success metrics and measurement methodology
 - [ ] Establish feedback collection process for iteration
 
-<<<<<<< .merge_file_DIoIQs
-
---- BMAD + Second Brain ---
-- Scopo: documentazione tecnica del modulo.
-- Utilità: riferimento sviluppatori/audit.
-- Funzionalità: struttura, dipendenze, convenzioni (no date .md, git avanti).
-=======
->>>>>>> .merge_file_Ecrq7o

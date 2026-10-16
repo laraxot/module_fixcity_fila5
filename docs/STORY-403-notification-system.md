@@ -470,8 +470,3 @@ class NotificationDropdown extends Component
 
 - GitHub Issue: `https://github.com/laraxot/fixcity/issues/403`
 - GitHub Discussion: `https://github.com/laraxot/fixcity/discussions/403`
-
---- BMAD + Second Brain ---
-- Scopo: documentazione tecnica del modulo.
-- Utilità: riferimento sviluppatori/audit.
-- Funzionalità: struttura, dipendenze, convenzioni (no date .md, git avanti).

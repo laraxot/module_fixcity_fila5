@@ -14,6 +14,7 @@ status: draft
 
 Concetti specifici del modulo Fixcity. Carica on-demand via `qmd search` o consulta il [trigger map root](../../../../../../docs/wiki/rules/00-TRIGGER_MAP.md).
 
+- [Sostenibilità impatto](../../project-sustainability-impact-and-mission.md) — missione + KPI ticket aggregati (no PII); dossier BMAD project-sustainability
 - [profiles-uuid-contract](./profiles-uuid-contract.md) — owner `profiles`: 1 migrazione, `uuid` + `credits` nullable, bump timestamp
 - [xotbasewidget-child-no-explicit-widget-view](./xotbasewidget-child-no-explicit-widget-view.md) — widget che estende `XotBaseWidget`: niente `$view` sul figlio; docblock pigro ok
 - [fixcity-ticket-vs-ticket-lang](./fixcity-ticket-vs-ticket-lang.md) — `fixcity::ticket.*` per schema Filament Ticket vs `segnalazione` pubblico

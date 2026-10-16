@@ -1,0 +1,83 @@
+{
+  "id": "blog.index",
+  "slug": "blog.index",
+  "title": {
+    "it": "Novità",
+    "en": "News",
+    "de": "Neuigkeiten",
+    "es": "Novedades"
+  },
+  "layout": "design-comuni",
+  "description": {
+    "it": "Notizie, comunicati e avvisi per restare aggiornati sul territorio e sui servizi civici.",
+    "en": "News, notices and updates about the municipality and civic services.",
+    "de": "Nachrichten, Mitteilungen und Hinweise zu Gebiet und kommunalen Diensten.",
+    "es": "Noticias, comunicados y avisos sobre el territorio y los servicios cívicos."
+  },
+  "content_blocks": {
+    "it": [
+      {
+        "type": "blog.index",
+        "data": {
+          "view": "pub_theme::components.blocks.blog.index",
+          "title": "Novità",
+          "intro": "Le notizie, i comunicati e gli avvisi per restare aggiornati sulle ultime novità, opportunità e cosa succede nel territorio.",
+          "featured_title": "In evidenza",
+          "explore_title": "Esplora tutte le novità",
+          "home_label": "Home",
+          "read_more": "Leggi tutto",
+          "empty": "Non ci sono ancora novità pubblicate.",
+          "pagination_label": "Paginazione delle novità"
+        }
+      }
+    ],
+    "en": [
+      {
+        "type": "blog.index",
+        "data": {
+          "view": "pub_theme::components.blocks.blog.index",
+          "title": "News",
+          "intro": "News, notices and updates to stay informed about the municipality and civic services.",
+          "featured_title": "Featured",
+          "explore_title": "Explore all news",
+          "home_label": "Home",
+          "read_more": "Read more",
+          "empty": "There are no published posts yet.",
+          "pagination_label": "News pagination"
+        }
+      }
+    ],
+    "de": [
+      {
+        "type": "blog.index",
+        "data": {
+          "view": "pub_theme::components.blocks.blog.index",
+          "title": "Neuigkeiten",
+          "intro": "Nachrichten und Mitteilungen zu Gebiet und kommunalen Diensten.",
+          "featured_title": "Im Fokus",
+          "explore_title": "Alle Neuigkeiten entdecken",
+          "home_label": "Startseite",
+          "read_more": "Weiterlesen",
+          "empty": "Noch keine Beiträge veröffentlicht.",
+          "pagination_label": "Seitennavigation der Neuigkeiten"
+        }
+      }
+    ],
+    "es": [
+      {
+        "type": "blog.index",
+        "data": {
+          "view": "pub_theme::components.blocks.blog.index",
+          "title": "Novedades",
+          "intro": "Noticias, comunicados y avisos para seguir el territorio y los servicios cívicos.",
+          "featured_title": "Destacados",
+          "explore_title": "Explorar todas las novedades",
+          "home_label": "Inicio",
+          "read_more": "Leer más",
+          "empty": "Todavía no hay publicaciones.",
+          "pagination_label": "Paginación de novedades"
+        }
+      }
+    ]
+  }
+}

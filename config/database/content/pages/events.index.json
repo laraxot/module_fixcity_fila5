@@ -1,0 +1,87 @@
+{
+  "id": "events.index",
+  "slug": "events.index",
+  "title": {
+    "it": "Eventi",
+    "en": "Events",
+    "de": "Veranstaltungen",
+    "es": "Eventos"
+  },
+  "layout": "design-comuni",
+  "description": {
+    "it": "Appuntamenti pubblici, laboratori e incontri per vivere e curare il territorio.",
+    "en": "Public appointments, workshops and meetings to live and care for the community.",
+    "de": "Öffentliche Termine, Workshops und Treffen für die Gemeinschaft.",
+    "es": "Citas públicas, talleres y encuentros para vivir y cuidar el territorio."
+  },
+  "content_blocks": {
+    "it": [
+      {
+        "type": "events.index",
+        "data": {
+          "view": "pub_theme::components.blocks.events.index",
+          "title": "Eventi",
+          "intro": "Passeggiate, laboratori e incontri pubblici per conoscere i servizi e partecipare alla cura del territorio.",
+          "explore_title": "Tutti gli eventi",
+          "home_label": "Home",
+          "read_more": "Leggi tutto",
+          "empty": "Non ci sono ancora eventi pubblicati.",
+          "pagination_label": "Paginazione degli eventi",
+          "featured_title": "Eventi in evidenza",
+          "header_active": "live"
+        }
+      }
+    ],
+    "en": [
+      {
+        "type": "events.index",
+        "data": {
+          "view": "pub_theme::components.blocks.events.index",
+          "title": "Events",
+          "intro": "Walks, workshops and public meetings to learn about services and care for the community.",
+          "explore_title": "All events",
+          "home_label": "Home",
+          "read_more": "Read more",
+          "empty": "There are no published events yet.",
+          "pagination_label": "Events pagination",
+          "featured_title": "Featured events",
+          "header_active": "live"
+        }
+      }
+    ],
+    "de": [
+      {
+        "type": "events.index",
+        "data": {
+          "view": "pub_theme::components.blocks.events.index",
+          "title": "Veranstaltungen",
+          "intro": "Spaziergänge, Workshops und öffentliche Treffen rund um kommunale Dienste.",
+          "explore_title": "Alle Veranstaltungen",
+          "home_label": "Startseite",
+          "read_more": "Weiterlesen",
+          "empty": "Noch keine Veranstaltungen veröffentlicht.",
+          "pagination_label": "Seitennavigation der Veranstaltungen",
+          "featured_title": "Veranstaltungen im Fokus",
+          "header_active": "live"
+        }
+      }
+    ],
+    "es": [
+      {
+        "type": "events.index",
+        "data": {
+          "view": "pub_theme::components.blocks.events.index",
+          "title": "Eventos",
+          "intro": "Paseos, talleres y encuentros públicos para conocer los servicios y cuidar el territorio.",
+          "explore_title": "Todos los eventos",
+          "home_label": "Inicio",
+          "read_more": "Leer más",
+          "empty": "Todavía no hay eventos publicados.",
+          "pagination_label": "Paginación de eventos",
+          "featured_title": "Eventos destacados",
+          "header_active": "live"
+        }
+      }
+    ]
+  }
+}

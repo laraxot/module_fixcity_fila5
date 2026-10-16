@@ -32,7 +32,7 @@ Il percorso e' `Themes/Sixteen/resources/views/pages/[container0]/[slug0]/index.
 Visibilita' = `BuildPublicTicketsQueryAction::execute()`: richiede `location` non nulla; l'ospite vede gli stati di `TicketStatusEnum::canViewByAll()`, chi e' loggato vede quelli piu' le proprie segnalazioni (`owner_id`). Conseguenza: una segnalazione senza `location` risponde 404 anche in uno stato pubblico. Il proprietario apre la propria segnalazione non ancora pubblica (test unitario «lets the owner open the own report even when it is not public yet»; `CitizenMyTicketsDetailLinkTest.php` esiste, il suo contenuto non e' stato riletto).
 
 ## Cronologia
-`BuildTicketTimelineAction` restituisce per ogni voce `occurred_at` (`d F Y H:i`, con ora), `occurred_date` (`j F Y`, solo giorno), `from_label`, `to_label`, `reason` (ordine fissato dal test). Le pagine pubbliche mostrano solo il giorno.
+`BuildTicketTimelineAction` restituisce per ogni voce `occurred_at` (`d F Y H:i`, con ora), `occurred_date` (`j F Y`, solo giorno), `occurred_on` (`Y-m-d`, per `<time datetime>` nel markup), `from_label`, `to_label`, `reason` (ordine fissato dal test). Le pagine pubbliche mostrano solo il giorno, in un elemento `<time>`.
 
 ## Segui
 `POST /{lang}/tickets/{ticket}/follow` e' registrata in `laravel/routes/web.php` (le route dei moduli non sono caricate): `lang` `[a-z]{2}`, `ticket` numerico, middleware `auth` e `throttle:30,1`, nome `tickets.follow`. Il form del blocco ha `@csrf`; che il gruppo `web` applichi il controllo CSRF (non verificato).

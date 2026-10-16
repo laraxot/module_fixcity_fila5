@@ -15,109 +15,98 @@
         "data": {
           "view": "pub_theme::components.sections.header.v1",
           "brand": {
-            "name": "Nome del Comune",
-            "tagline": "Un comune da vivere",
+            "name": "FixCity",
+            "tagline": "Segnala e segui i problemi della tua città",
             "logo": "themes/Sixteen/design-comuni/assets/images/logo-comune.svg",
-            "header_title": "Il mio Comune",
-            "menu_title": "Nome del Comune",
-            "link_title": "Vai alla homepage"
+            "header_title": "FixCity",
+            "menu_title": "FixCity",
+            "link_title": "Vai alla homepage di FixCity"
           },
           "region": {
             "name": "Nome della Regione",
-            "url": "/regione",
+            "url": "",
             "title": "Vai al portale {Nome della Regione}",
             "aria_label": "Vai al portale {Nome della Regione} - link esterno - apertura nuova scheda"
           },
           "utility_links": [
             {
-              "label": "Amministrazione trasparente",
-              "url": "/amministrazione-trasparente"
+              "label": "Privacy",
+              "url": "/privacy"
+            },
+            {
+              "label": "Accessibilità",
+              "url": "/accessibilita"
             }
           ],
           "account": {
-            "label": "Accedi all’area personale",
-            "url": "/login",
+            "label": "Accedi all'area personale",
+            "url": "/auth/login",
             "element": "personal-area-login",
             "login_label": "Accedi all'area personale",
             "signed_in": {
               "name": "Area personale",
               "menu": [
                 {
-                  "label": "I miei servizi",
-                  "url": "#"
+                  "label": "Le mie pratiche",
+                  "url": "/area-personale/pratiche"
                 },
                 {
-                  "label": "Le mie pratiche",
-                  "url": "#"
+                  "label": "Segnalazioni seguite",
+                  "url": "/area-personale/seguite"
                 },
                 {
                   "label": "Notifiche",
-                  "url": "#"
+                  "url": "/area-personale/notifiche"
                 },
                 {
                   "divider": true
                 },
                 {
                   "label": "Impostazioni",
-                  "url": "#"
+                  "url": "/area-personale/impostazioni"
                 },
                 {
                   "label": "Esci",
-                  "url": "#",
+                  "url": "/auth/logout",
                   "icon": "it-external-link"
                 }
               ]
             }
           },
-          "social": {
-            "twitter": "https://twitter.com",
-            "facebook": "https://facebook.com",
-            "youtube": "https://youtube.com",
-            "telegram": "https://telegram.org",
-            "whatsapp": "https://wa.me"
-          },
+          "social": {},
           "navigation": [
             {
-              "label": "Amministrazione",
-              "url": "/amministrazione",
-              "element": "management"
-            },
-            {
-              "label": "Novità",
-              "url": "/novita",
-              "element": "news"
-            },
-            {
-              "label": "Servizi",
-              "url": "/servizi",
+              "label": "Segnalazioni",
+              "url": "/tickets",
               "element": "all-services"
             },
             {
-              "label": "Vivere il Comune",
-              "url": "/eventi",
+              "label": "Segnala",
+              "url": "/tickets/create",
+              "element": "report"
+            },
+            {
+              "label": "Traccia",
+              "url": "/tickets/track",
+              "element": "track"
+            },
+            {
+              "label": "Novità",
+              "url": "/blog",
+              "element": "news"
+            },
+            {
+              "label": "Eventi",
+              "url": "/events",
               "element": "live"
+            },
+            {
+              "label": "Domande frequenti",
+              "url": "/domande-frequenti",
+              "element": "faq"
             }
           ],
-          "secondary_navigation": [
-            {
-              "label": "Iscrizioni",
-              "url": "/argomenti/iscrizioni"
-            },
-            {
-              "label": "Estate in città",
-              "url": "/argomenti/estate-in-citta"
-            },
-            {
-              "label": "Polizia locale",
-              "url": "/argomenti/polizia-locale"
-            },
-            {
-              "label": "Tutti gli argomenti",
-              "url": "/argomenti",
-              "element": "all-topics",
-              "chevron": true
-            }
-          ],
+          "secondary_navigation": [],
           "languages": {
             "active_label": "Lingua attiva:",
             "selected_label": "selezionata",
@@ -141,38 +130,7 @@
             ]
           },
           "follow_us": "Seguici su",
-          "social_links": [
-            {
-              "icon": "it-twitter",
-              "label": "Twitter",
-              "url": "#"
-            },
-            {
-              "icon": "it-facebook",
-              "label": "Facebook",
-              "url": "#"
-            },
-            {
-              "icon": "it-youtube",
-              "label": "YouTube",
-              "url": "#"
-            },
-            {
-              "icon": "it-telegram",
-              "label": "Telegram",
-              "url": "#"
-            },
-            {
-              "icon": "it-whatsapp",
-              "label": "Whatsapp",
-              "url": "#"
-            },
-            {
-              "icon": "it-rss",
-              "label": "RSS",
-              "url": "#"
-            }
-          ],
+          "social_links": [],
           "search": {
             "label": "Cerca",
             "aria_label": "Cerca nel sito"
@@ -193,109 +151,98 @@
         "data": {
           "view": "pub_theme::components.sections.header.v1",
           "brand": {
-            "name": "Name of the Municipality",
-            "tagline": "A municipality to live",
+            "name": "FixCity",
+            "tagline": "Report and track issues in your city",
             "logo": "themes/Sixteen/design-comuni/assets/images/logo-comune.svg",
-            "header_title": "My Municipality",
-            "menu_title": "Municipality name",
-            "link_title": "Go to the homepage"
+            "header_title": "FixCity",
+            "menu_title": "FixCity",
+            "link_title": "Go to the FixCity homepage"
           },
           "region": {
             "name": "Name of the Region",
-            "url": "/regione",
+            "url": "",
             "title": "Go to the {Region name} portal",
             "aria_label": "Go to the {Region name} portal - external link - opens in a new tab"
           },
           "utility_links": [
             {
-              "label": "Transparent administration",
-              "url": "/amministrazione-trasparente"
+              "label": "Privacy",
+              "url": "/privacy"
+            },
+            {
+              "label": "Accessibility",
+              "url": "/accessibilita"
             }
           ],
           "account": {
             "label": "Access personal area",
-            "url": "/login",
+            "url": "/auth/login",
             "element": "personal-area-login",
             "login_label": "Access personal area",
             "signed_in": {
               "name": "Personal area",
               "menu": [
                 {
-                  "label": "My services",
-                  "url": "#"
+                  "label": "My cases",
+                  "url": "/area-personale/pratiche"
                 },
                 {
-                  "label": "My requests",
-                  "url": "#"
+                  "label": "Followed reports",
+                  "url": "/area-personale/seguite"
                 },
                 {
                   "label": "Notifications",
-                  "url": "#"
+                  "url": "/area-personale/notifiche"
                 },
                 {
                   "divider": true
                 },
                 {
                   "label": "Settings",
-                  "url": "#"
+                  "url": "/area-personale/impostazioni"
                 },
                 {
-                  "label": "Log out",
-                  "url": "#",
+                  "label": "Sign out",
+                  "url": "/auth/logout",
                   "icon": "it-external-link"
                 }
               ]
             }
           },
-          "social": {
-            "twitter": "https://twitter.com",
-            "facebook": "https://facebook.com",
-            "youtube": "https://youtube.com",
-            "telegram": "https://telegram.org",
-            "whatsapp": "https://wa.me"
-          },
+          "social": {},
           "navigation": [
             {
-              "label": "Administration",
-              "url": "/amministrazione",
-              "element": "management"
-            },
-            {
-              "label": "News",
-              "url": "/novita",
-              "element": "news"
-            },
-            {
-              "label": "Services",
-              "url": "/servizi",
+              "label": "Reports",
+              "url": "/tickets",
               "element": "all-services"
             },
             {
-              "label": "Living the municipality",
-              "url": "/eventi",
+              "label": "Report an issue",
+              "url": "/tickets/create",
+              "element": "report"
+            },
+            {
+              "label": "Track",
+              "url": "/tickets/track",
+              "element": "track"
+            },
+            {
+              "label": "News",
+              "url": "/blog",
+              "element": "news"
+            },
+            {
+              "label": "Events",
+              "url": "/events",
               "element": "live"
+            },
+            {
+              "label": "FAQ",
+              "url": "/domande-frequenti",
+              "element": "faq"
             }
           ],
-          "secondary_navigation": [
-            {
-              "label": "Registrations",
-              "url": "/argomenti/iscrizioni"
-            },
-            {
-              "label": "Summer in the city",
-              "url": "/argomenti/estate-in-citta"
-            },
-            {
-              "label": "Local police",
-              "url": "/argomenti/polizia-locale"
-            },
-            {
-              "label": "All topics",
-              "url": "/argomenti",
-              "element": "all-topics",
-              "chevron": true
-            }
-          ],
+          "secondary_navigation": [],
           "languages": {
             "active_label": "Active language:",
             "selected_label": "selected",
@@ -319,38 +266,7 @@
             ]
           },
           "follow_us": "Follow us on",
-          "social_links": [
-            {
-              "icon": "it-twitter",
-              "label": "Twitter",
-              "url": "#"
-            },
-            {
-              "icon": "it-facebook",
-              "label": "Facebook",
-              "url": "#"
-            },
-            {
-              "icon": "it-youtube",
-              "label": "YouTube",
-              "url": "#"
-            },
-            {
-              "icon": "it-telegram",
-              "label": "Telegram",
-              "url": "#"
-            },
-            {
-              "icon": "it-whatsapp",
-              "label": "Whatsapp",
-              "url": "#"
-            },
-            {
-              "icon": "it-rss",
-              "label": "RSS",
-              "url": "#"
-            }
-          ],
+          "social_links": [],
           "search": {
             "label": "Search",
             "aria_label": "Search the site"
@@ -371,109 +287,98 @@
         "data": {
           "view": "pub_theme::components.sections.header.v1",
           "brand": {
-            "name": "Name der Gemeinde",
-            "tagline": "Eine Gemeinde zum Leben",
+            "name": "FixCity",
+            "tagline": "Melden und verfolgen Sie Probleme in Ihrer Stadt",
             "logo": "themes/Sixteen/design-comuni/assets/images/logo-comune.svg",
-            "header_title": "Meine Gemeinde",
-            "menu_title": "Name der Gemeinde",
-            "link_title": "Zur Startseite"
+            "header_title": "FixCity",
+            "menu_title": "FixCity",
+            "link_title": "Zur FixCity-Startseite"
           },
           "region": {
             "name": "Name der Region",
-            "url": "/regione",
+            "url": "",
             "title": "Zum Portal {Name der Region}",
             "aria_label": "Zum Portal {Name der Region} - externer Link - öffnet in einem neuen Tab"
           },
           "utility_links": [
             {
-              "label": "Transparente Verwaltung",
-              "url": "/amministrazione-trasparente"
+              "label": "Datenschutz",
+              "url": "/privacy"
+            },
+            {
+              "label": "Barrierefreiheit",
+              "url": "/accessibilita"
             }
           ],
           "account": {
-            "label": "Im persönlichen Bereich anmelden",
-            "url": "/login",
+            "label": "Persönlichen Bereich öffnen",
+            "url": "/auth/login",
             "element": "personal-area-login",
-            "login_label": "Im persönlichen Bereich anmelden",
+            "login_label": "Persönlichen Bereich öffnen",
             "signed_in": {
               "name": "Persönlicher Bereich",
               "menu": [
                 {
-                  "label": "Meine Dienste",
-                  "url": "#"
+                  "label": "Meine Vorgänge",
+                  "url": "/area-personale/pratiche"
                 },
                 {
-                  "label": "Meine Vorgänge",
-                  "url": "#"
+                  "label": "Verfolgte Meldungen",
+                  "url": "/area-personale/seguite"
                 },
                 {
                   "label": "Benachrichtigungen",
-                  "url": "#"
+                  "url": "/area-personale/notifiche"
                 },
                 {
                   "divider": true
                 },
                 {
                   "label": "Einstellungen",
-                  "url": "#"
+                  "url": "/area-personale/impostazioni"
                 },
                 {
                   "label": "Abmelden",
-                  "url": "#",
+                  "url": "/auth/logout",
                   "icon": "it-external-link"
                 }
               ]
             }
           },
-          "social": {
-            "twitter": "https://twitter.com",
-            "facebook": "https://facebook.com",
-            "youtube": "https://youtube.com",
-            "telegram": "https://telegram.org",
-            "whatsapp": "https://wa.me"
-          },
+          "social": {},
           "navigation": [
             {
-              "label": "Verwaltung",
-              "url": "/amministrazione",
-              "element": "management"
-            },
-            {
-              "label": "Neuigkeiten",
-              "url": "/novita",
-              "element": "news"
-            },
-            {
-              "label": "Dienste",
-              "url": "/servizi",
+              "label": "Meldungen",
+              "url": "/tickets",
               "element": "all-services"
             },
             {
-              "label": "Das Gemeindeleben",
-              "url": "/eventi",
+              "label": "Meldung erstatten",
+              "url": "/tickets/create",
+              "element": "report"
+            },
+            {
+              "label": "Verfolgen",
+              "url": "/tickets/track",
+              "element": "track"
+            },
+            {
+              "label": "Neuigkeiten",
+              "url": "/blog",
+              "element": "news"
+            },
+            {
+              "label": "Veranstaltungen",
+              "url": "/events",
               "element": "live"
+            },
+            {
+              "label": "Häufige Fragen",
+              "url": "/domande-frequenti",
+              "element": "faq"
             }
           ],
-          "secondary_navigation": [
-            {
-              "label": "Anmeldungen",
-              "url": "/argomenti/iscrizioni"
-            },
-            {
-              "label": "Sommer in der Stadt",
-              "url": "/argomenti/estate-in-citta"
-            },
-            {
-              "label": "Ortspolizei",
-              "url": "/argomenti/polizia-locale"
-            },
-            {
-              "label": "Alle Themen",
-              "url": "/argomenti",
-              "element": "all-topics",
-              "chevron": true
-            }
-          ],
+          "secondary_navigation": [],
           "languages": {
             "active_label": "Aktuelle Sprache:",
             "selected_label": "ausgewählt",
@@ -497,38 +402,7 @@
             ]
           },
           "follow_us": "Folgen Sie uns auf",
-          "social_links": [
-            {
-              "icon": "it-twitter",
-              "label": "Twitter",
-              "url": "#"
-            },
-            {
-              "icon": "it-facebook",
-              "label": "Facebook",
-              "url": "#"
-            },
-            {
-              "icon": "it-youtube",
-              "label": "YouTube",
-              "url": "#"
-            },
-            {
-              "icon": "it-telegram",
-              "label": "Telegram",
-              "url": "#"
-            },
-            {
-              "icon": "it-whatsapp",
-              "label": "Whatsapp",
-              "url": "#"
-            },
-            {
-              "icon": "it-rss",
-              "label": "RSS",
-              "url": "#"
-            }
-          ],
+          "social_links": [],
           "search": {
             "label": "Suchen",
             "aria_label": "Website durchsuchen"
@@ -549,109 +423,98 @@
         "data": {
           "view": "pub_theme::components.sections.header.v1",
           "brand": {
-            "name": "Nombre del Ayuntamiento",
-            "tagline": "Una ciudad para vivir",
+            "name": "FixCity",
+            "tagline": "Avisa y sigue los problemas de tu ciudad",
             "logo": "themes/Sixteen/design-comuni/assets/images/logo-comune.svg",
-            "header_title": "Mi Ayuntamiento",
-            "menu_title": "Nombre del Ayuntamiento",
-            "link_title": "Ir a la página de inicio"
+            "header_title": "FixCity",
+            "menu_title": "FixCity",
+            "link_title": "Ir a la página de inicio de FixCity"
           },
           "region": {
             "name": "Nombre de la Región",
-            "url": "/regione",
+            "url": "",
             "title": "Ir al portal de {Nombre de la Región}",
             "aria_label": "Ir al portal de {Nombre de la Región} - enlace externo - se abre en una pestaña nueva"
           },
           "utility_links": [
             {
-              "label": "Administración transparente",
-              "url": "/amministrazione-trasparente"
+              "label": "Privacidad",
+              "url": "/privacy"
+            },
+            {
+              "label": "Accesibilidad",
+              "url": "/accessibilita"
             }
           ],
           "account": {
             "label": "Acceder al área personal",
-            "url": "/login",
+            "url": "/auth/login",
             "element": "personal-area-login",
             "login_label": "Acceder al área personal",
             "signed_in": {
               "name": "Área personal",
               "menu": [
                 {
-                  "label": "Mis servicios",
-                  "url": "#"
+                  "label": "Mis trámites",
+                  "url": "/area-personale/pratiche"
                 },
                 {
-                  "label": "Mis trámites",
-                  "url": "#"
+                  "label": "Avisos seguidos",
+                  "url": "/area-personale/seguite"
                 },
                 {
                   "label": "Notificaciones",
-                  "url": "#"
+                  "url": "/area-personale/notifiche"
                 },
                 {
                   "divider": true
                 },
                 {
                   "label": "Ajustes",
-                  "url": "#"
+                  "url": "/area-personale/impostazioni"
                 },
                 {
-                  "label": "Cerrar sesión",
-                  "url": "#",
+                  "label": "Salir",
+                  "url": "/auth/logout",
                   "icon": "it-external-link"
                 }
               ]
             }
           },
-          "social": {
-            "twitter": "https://twitter.com",
-            "facebook": "https://facebook.com",
-            "youtube": "https://youtube.com",
-            "telegram": "https://telegram.org",
-            "whatsapp": "https://wa.me"
-          },
+          "social": {},
           "navigation": [
             {
-              "label": "Administración",
-              "url": "/amministrazione",
-              "element": "management"
-            },
-            {
-              "label": "Novedades",
-              "url": "/novita",
-              "element": "news"
-            },
-            {
-              "label": "Servicios",
-              "url": "/servizi",
+              "label": "Reportes",
+              "url": "/tickets",
               "element": "all-services"
             },
             {
-              "label": "Vivir el municipio",
-              "url": "/eventi",
+              "label": "Reportar",
+              "url": "/tickets/create",
+              "element": "report"
+            },
+            {
+              "label": "Seguir",
+              "url": "/tickets/track",
+              "element": "track"
+            },
+            {
+              "label": "Novedades",
+              "url": "/blog",
+              "element": "news"
+            },
+            {
+              "label": "Eventos",
+              "url": "/events",
               "element": "live"
+            },
+            {
+              "label": "Preguntas frecuentes",
+              "url": "/domande-frequenti",
+              "element": "faq"
             }
           ],
-          "secondary_navigation": [
-            {
-              "label": "Inscripciones",
-              "url": "/argomenti/iscrizioni"
-            },
-            {
-              "label": "Verano en la ciudad",
-              "url": "/argomenti/estate-in-citta"
-            },
-            {
-              "label": "Policía local",
-              "url": "/argomenti/polizia-locale"
-            },
-            {
-              "label": "Todos los temas",
-              "url": "/argomenti",
-              "element": "all-topics",
-              "chevron": true
-            }
-          ],
+          "secondary_navigation": [],
           "languages": {
             "active_label": "Idioma actual:",
             "selected_label": "seleccionado",
@@ -675,38 +538,7 @@
             ]
           },
           "follow_us": "Síguenos en",
-          "social_links": [
-            {
-              "icon": "it-twitter",
-              "label": "Twitter",
-              "url": "#"
-            },
-            {
-              "icon": "it-facebook",
-              "label": "Facebook",
-              "url": "#"
-            },
-            {
-              "icon": "it-youtube",
-              "label": "YouTube",
-              "url": "#"
-            },
-            {
-              "icon": "it-telegram",
-              "label": "Telegram",
-              "url": "#"
-            },
-            {
-              "icon": "it-whatsapp",
-              "label": "Whatsapp",
-              "url": "#"
-            },
-            {
-              "icon": "it-rss",
-              "label": "RSS",
-              "url": "#"
-            }
-          ],
+          "social_links": [],
           "search": {
             "label": "Buscar",
             "aria_label": "Buscar en el sitio"

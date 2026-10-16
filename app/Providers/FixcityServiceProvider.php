@@ -10,7 +10,9 @@ use Laravel\Folio\Folio;
 use Modules\Fixcity\Models\Ticket;
 use Modules\Fixcity\Models\TicketActivity;
 use Modules\Fixcity\Observers\TicketActivityObserver;
+use Modules\Fixcity\Observers\TicketMediaObserver;
 use Modules\Fixcity\Policies\TicketPolicy;
+use Modules\Media\Models\Media;
 use Modules\Xot\Providers\XotBaseServiceProvider;
 
 class FixcityServiceProvider extends XotBaseServiceProvider
@@ -30,9 +32,9 @@ class FixcityServiceProvider extends XotBaseServiceProvider
     {
         parent::boot();
 
-
         Gate::policy(Ticket::class, TicketPolicy::class);
         TicketActivity::observe(TicketActivityObserver::class);
+        Media::observe(TicketMediaObserver::class);
 
         $this->registerFolioApiRoutes();
     }

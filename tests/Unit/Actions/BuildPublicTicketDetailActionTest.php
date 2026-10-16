@@ -139,7 +139,8 @@ test('adds the day-only date to the timeline without changing the existing keys'
     $timeline = app(BuildTicketTimelineAction::class)->execute($ticket);
 
     Assert::assertCount(1, $timeline);
-    Assert::assertSame(['occurred_at', 'occurred_date', 'from_label', 'to_label', 'reason'], array_keys($timeline[0]));
+    Assert::assertSame(['occurred_at', 'occurred_date', 'occurred_on', 'from_label', 'to_label', 'reason'], array_keys($timeline[0]));
+    Assert::assertSame('2026-03-15', $timeline[0]['occurred_on']);
     Assert::assertStringContainsString('09:30', $timeline[0]['occurred_at']);
     Assert::assertStringNotContainsString('09:30', $timeline[0]['occurred_date']);
     Assert::assertStringContainsString('15', $timeline[0]['occurred_date']);

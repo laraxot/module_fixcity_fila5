@@ -15,147 +15,74 @@
         "data": {
           "view": "pub_theme::components.sections.footer.v1",
           "brand": {
-            "name": "Nome del Comune",
-            "description": "Servizi e informazioni del Comune.",
+            "name": "FixCity",
+            "description": "Segnala e segui i problemi della tua città",
             "logo": "themes/Sixteen/design-comuni/assets/images/logo-comune.svg"
           },
           "columns": [
             {
-              "title": "Amministrazione",
+              "title": "Segnalazioni",
               "links": [
                 {
-                  "label": "Organi di governo",
-                  "url": "/amministrazione"
+                  "label": "Elenco segnalazioni",
+                  "url": "/tickets"
                 },
                 {
-                  "label": "Aree amministrative",
-                  "url": "/aree-amministrative"
+                  "label": "Invia segnalazione",
+                  "url": "/tickets/create",
+                  "data_element": "report-inefficiency"
                 },
                 {
-                  "label": "Uffici",
-                  "url": "/uffici"
-                },
-                {
-                  "label": "Enti e fondazioni",
-                  "url": "/enti-e-fondazioni"
-                },
-                {
-                  "label": "Politici",
-                  "url": "/politici"
-                },
-                {
-                  "label": "Personale amministrativo",
-                  "url": "/personale"
+                  "label": "Traccia segnalazione",
+                  "url": "/tickets/track"
                 }
               ]
             },
             {
-              "title": "Categorie di servizio",
+              "title": "Informazioni",
               "links": [
                 {
-                  "label": "Anagrafe e stato civile",
-                  "url": "/anagrafe"
+                  "label": "Domande frequenti",
+                  "url": "/domande-frequenti",
+                  "data_element": "faq"
                 },
                 {
-                  "label": "Cultura e tempo libero",
-                  "url": "/cultura"
-                },
-                {
-                  "label": "Vita lavorativa",
-                  "url": "/lavoro"
-                },
-                {
-                  "label": "Imprese e commercio",
-                  "url": "/imprese"
-                },
-                {
-                  "label": "Appalti pubblici",
-                  "url": "/appalti"
-                },
-                {
-                  "label": "Catasto e urbanistica",
-                  "url": "/catasto"
-                },
-                {
-                  "label": "Turismo",
-                  "url": "/turismo"
-                },
-                {
-                  "label": "Mobilità e trasporti",
-                  "url": "/mobilita"
-                }
-              ]
-            },
-            {
-              "title": "Vivere il comune",
-              "links": [
-                {
-                  "label": "Luoghi",
-                  "url": "/luoghi"
+                  "label": "Novità",
+                  "url": "/blog"
                 },
                 {
                   "label": "Eventi",
-                  "url": "/eventi"
-                }
-              ]
-            },
-            {
-              "title": "Novità",
-              "links": [
-                {
-                  "label": "Notizie",
-                  "url": "/notizie"
+                  "url": "/events"
                 },
                 {
-                  "label": "Comunicati",
-                  "url": "/comunicati"
-                },
-                {
-                  "label": "Avvisi",
-                  "url": "/avvisi"
+                  "label": "Mappa del sito",
+                  "url": "/mappa-sito"
                 }
               ]
             }
           ],
           "contact": {
             "title": "Contatti",
-            "address": "Comune di Nome Comune\nVia Roma 123 - 00100 Comune\nCodice fiscale / P. IVA: 00123456789",
-            "office": "Ufficio Relazioni con il Pubblico",
-            "phone": "800 016 123",
-            "email": "serviziopubblico@comune.it",
+            "address": "",
+            "office": "",
+            "phone": "",
+            "email": "",
+            "office_url": "",
+            "details": [],
             "links": [
               {
                 "label": "Leggi le FAQ",
-                "url": "{{ LaravelLocalization::localizeURL('/domande-frequenti') }}",
+                "url": "/domande-frequenti",
                 "data_element": "faq"
               },
               {
-                "label": "Prenotazione appuntamento",
-                "url": ""
-              },
-              {
                 "label": "Segnalazione disservizio",
-                "url": "{{ LaravelLocalization::localizeURL('/tickets/create') }}",
+                "url": "/tickets/create",
                 "data_element": "report-inefficiency"
-              },
-              {
-                "label": "Richiesta d'assistenza",
-                "url": ""
               }
-            ],
-            "details": [
-              "Numero verde: 800 016 123",
-              "SMS e WhatsApp: +39 320 1234567",
-              "Posta Elettronica Certificata",
-              "Centralino unico: 012 3456"
-            ],
-            "office_url": ""
+            ]
           },
           "legal_links": [
-            {
-              "label": "Amministrazione trasparente",
-              "url": ""
-            },
             {
               "label": "Informativa privacy",
               "url": "/privacy"
@@ -188,139 +115,43 @@
               "preferences": true
             }
           ],
-          "social": [
-            {
-              "label": "Twitter",
-              "url": "https://twitter.com",
-              "icon": "it-twitter"
-            },
-            {
-              "label": "Facebook",
-              "url": "https://facebook.com",
-              "icon": "it-facebook"
-            },
-            {
-              "label": "YouTube",
-              "url": "https://youtube.com",
-              "icon": "it-youtube"
-            },
-            {
-              "label": "Telegram",
-              "url": "https://telegram.org",
-              "icon": "it-telegram"
-            },
-            {
-              "label": "WhatsApp",
-              "url": "https://wa.me",
-              "icon": "it-whatsapp"
-            },
-            {
-              "label": "RSS",
-              "url": "",
-              "icon": "it-rss"
-            }
-          ],
-          "copyright": "© 2026 Nome del Comune. Tutti i diritti riservati.",
+          "social": [],
+          "social_title": "Seguici su",
+          "copyright": "© 2026 FixCity. Tutti i diritti riservati.",
           "eu_logo": {
-            "src": "themes/Sixteen/design-comuni/assets/images/logo-eu-inverted.svg",
-            "alt": "logo Unione Europea"
+            "src": "",
+            "alt": ""
           },
           "groups": {
             "administration": {
-              "title": "Amministrazione",
+              "title": "Segnalazioni",
               "links": [
                 {
-                  "label": "Organi di governo",
-                  "url": ""
+                  "label": "Elenco segnalazioni",
+                  "url": "/tickets"
                 },
                 {
-                  "label": "Aree amministrative",
-                  "url": ""
+                  "label": "Invia segnalazione",
+                  "url": "/tickets/create",
+                  "data_element": "report-inefficiency"
                 },
                 {
-                  "label": "Uffici",
-                  "url": ""
-                },
-                {
-                  "label": "Enti e fondazioni",
-                  "url": ""
-                },
-                {
-                  "label": "Politici",
-                  "url": ""
-                },
-                {
-                  "label": "Personale amministrativo",
-                  "url": ""
-                },
-                {
-                  "label": "Documenti e dati",
-                  "url": ""
+                  "label": "Traccia segnalazione",
+                  "url": "/tickets/track"
                 }
               ]
             },
             "services": {
-              "title": "Categorie di servizio",
+              "title": "Informazioni",
               "links": [
                 {
-                  "label": "Anagrafe e stato civile",
-                  "url": ""
+                  "label": "Domande frequenti",
+                  "url": "/domande-frequenti",
+                  "data_element": "faq"
                 },
                 {
-                  "label": "Cultura e tempo libero",
-                  "url": ""
-                },
-                {
-                  "label": "Vita lavorativa",
-                  "url": ""
-                },
-                {
-                  "label": "Imprese e commercio",
-                  "url": ""
-                },
-                {
-                  "label": "Appalti pubblici",
-                  "url": ""
-                },
-                {
-                  "label": "Catasto e urbanistica",
-                  "url": ""
-                },
-                {
-                  "label": "Turismo",
-                  "url": ""
-                },
-                {
-                  "label": "Mobilità e trasporti",
-                  "url": ""
-                },
-                {
-                  "label": "Educazione e formazione",
-                  "url": ""
-                },
-                {
-                  "label": "Giustizia e sicurezza pubblica",
-                  "url": ""
-                },
-                {
-                  "label": "Tributi, finanze e contravvenzioni",
-                  "url": ""
-                },
-                {
-                  "label": "Ambiente",
-                  "url": ""
-                },
-                {
-                  "label": "Salute, benessere e assistenza",
-                  "url": ""
-                },
-                {
-                  "label": "Autorizzazioni",
-                  "url": ""
-                },
-                {
-                  "label": "Agricoltura e pesca",
-                  "url": ""
+                  "label": "Mappa del sito",
+                  "url": "/mappa-sito"
                 }
               ]
             },
@@ -328,16 +159,8 @@
               "title": "Novità",
               "links": [
                 {
-                  "label": "Notizie",
-                  "url": ""
-                },
-                {
-                  "label": "Comunicati",
-                  "url": ""
-                },
-                {
-                  "label": "Avvisi",
-                  "url": ""
+                  "label": "Tutte le novità",
+                  "url": "/blog"
                 }
               ]
             },
@@ -345,17 +168,12 @@
               "title": "Vivere il comune",
               "links": [
                 {
-                  "label": "Luoghi",
-                  "url": ""
-                },
-                {
                   "label": "Eventi",
-                  "url": ""
+                  "url": "/events"
                 }
               ]
             }
-          },
-          "social_title": "Seguici su"
+          }
         }
       }
     ],
@@ -366,147 +184,74 @@
         "data": {
           "view": "pub_theme::components.sections.footer.v1",
           "brand": {
-            "name": "Municipality Name",
-            "description": "Services and information of the Municipality.",
+            "name": "FixCity",
+            "description": "Report and track issues in your city",
             "logo": "themes/Sixteen/design-comuni/assets/images/logo-comune.svg"
           },
           "columns": [
             {
-              "title": "Administration",
+              "title": "Reports",
               "links": [
                 {
-                  "label": "Government bodies",
-                  "url": "/amministrazione"
+                  "label": "Browse reports",
+                  "url": "/tickets"
                 },
                 {
-                  "label": "Administrative areas",
-                  "url": "/aree-amministrative"
+                  "label": "Submit a report",
+                  "url": "/tickets/create",
+                  "data_element": "report-inefficiency"
                 },
                 {
-                  "label": "Offices",
-                  "url": "/uffici"
-                },
-                {
-                  "label": "Entities and foundations",
-                  "url": "/enti-e-fondazioni"
-                },
-                {
-                  "label": "Politicians",
-                  "url": "/politici"
-                },
-                {
-                  "label": "Administrative staff",
-                  "url": "/personale"
+                  "label": "Track a report",
+                  "url": "/tickets/track"
                 }
               ]
             },
             {
-              "title": "Service categories",
+              "title": "Information",
               "links": [
                 {
-                  "label": "Registry and civil status",
-                  "url": "/anagrafe"
+                  "label": "Frequently asked questions",
+                  "url": "/domande-frequenti",
+                  "data_element": "faq"
                 },
                 {
-                  "label": "Culture and leisure",
-                  "url": "/cultura"
-                },
-                {
-                  "label": "Working life",
-                  "url": "/lavoro"
-                },
-                {
-                  "label": "Business and commerce",
-                  "url": "/imprese"
-                },
-                {
-                  "label": "Public procurement",
-                  "url": "/appalti"
-                },
-                {
-                  "label": "Cadastral and urban planning",
-                  "url": "/catasto"
-                },
-                {
-                  "label": "Tourism",
-                  "url": "/turismo"
-                },
-                {
-                  "label": "Mobility and transport",
-                  "url": "/mobilita"
-                }
-              ]
-            },
-            {
-              "title": "Living in the city",
-              "links": [
-                {
-                  "label": "Places",
-                  "url": "/luoghi"
+                  "label": "News",
+                  "url": "/blog"
                 },
                 {
                   "label": "Events",
-                  "url": "/eventi"
-                }
-              ]
-            },
-            {
-              "title": "News",
-              "links": [
-                {
-                  "label": "News",
-                  "url": "/notizie"
+                  "url": "/events"
                 },
                 {
-                  "label": "Press releases",
-                  "url": "/comunicati"
-                },
-                {
-                  "label": "Notices",
-                  "url": "/avvisi"
+                  "label": "Sitemap",
+                  "url": "/mappa-sito"
                 }
               ]
             }
           ],
           "contact": {
             "title": "Contacts",
-            "address": "Municipality of Name\nVia Roma 123 - 00100 City\nTax code / VAT: 00123456789",
-            "office": "Public Relations Office",
-            "phone": "800 016 123",
-            "email": "serviziopubblico@comune.it",
+            "address": "",
+            "office": "",
+            "phone": "",
+            "email": "",
+            "office_url": "",
+            "details": [],
             "links": [
               {
                 "label": "Read FAQs",
-                "url": "{{ LaravelLocalization::localizeURL('/domande-frequenti') }}",
+                "url": "/domande-frequenti",
                 "data_element": "faq"
               },
               {
-                "label": "Book an appointment",
-                "url": ""
-              },
-              {
                 "label": "Report a problem",
-                "url": "{{ LaravelLocalization::localizeURL('/tickets/create') }}",
+                "url": "/tickets/create",
                 "data_element": "report-inefficiency"
-              },
-              {
-                "label": "Request assistance",
-                "url": ""
               }
-            ],
-            "details": [
-              "Toll-free number: 800 016 123",
-              "SMS and WhatsApp: +39 320 1234567",
-              "Certified e-mail (PEC)",
-              "Switchboard: 012 3456"
-            ],
-            "office_url": ""
+            ]
           },
           "legal_links": [
-            {
-              "label": "Transparent administration",
-              "url": ""
-            },
             {
               "label": "Privacy policy",
               "url": "/privacy"
@@ -539,139 +284,43 @@
               "preferences": true
             }
           ],
-          "social": [
-            {
-              "label": "Twitter",
-              "url": "https://twitter.com",
-              "icon": "it-twitter"
-            },
-            {
-              "label": "Facebook",
-              "url": "https://facebook.com",
-              "icon": "it-facebook"
-            },
-            {
-              "label": "YouTube",
-              "url": "https://youtube.com",
-              "icon": "it-youtube"
-            },
-            {
-              "label": "Telegram",
-              "url": "https://telegram.org",
-              "icon": "it-telegram"
-            },
-            {
-              "label": "WhatsApp",
-              "url": "https://wa.me",
-              "icon": "it-whatsapp"
-            },
-            {
-              "label": "RSS",
-              "url": "",
-              "icon": "it-rss"
-            }
-          ],
-          "copyright": "© 2026 Municipality Name. All rights reserved.",
+          "social": [],
+          "social_title": "Follow us on",
+          "copyright": "© 2026 FixCity. All rights reserved.",
           "eu_logo": {
-            "src": "themes/Sixteen/design-comuni/assets/images/logo-eu-inverted.svg",
-            "alt": "European Union logo"
+            "src": "",
+            "alt": ""
           },
           "groups": {
             "administration": {
-              "title": "Administration",
+              "title": "Reports",
               "links": [
                 {
-                  "label": "Government bodies",
-                  "url": ""
+                  "label": "Browse reports",
+                  "url": "/tickets"
                 },
                 {
-                  "label": "Administrative areas",
-                  "url": ""
+                  "label": "Submit a report",
+                  "url": "/tickets/create",
+                  "data_element": "report-inefficiency"
                 },
                 {
-                  "label": "Offices",
-                  "url": ""
-                },
-                {
-                  "label": "Bodies and foundations",
-                  "url": ""
-                },
-                {
-                  "label": "Politicians",
-                  "url": ""
-                },
-                {
-                  "label": "Administrative staff",
-                  "url": ""
-                },
-                {
-                  "label": "Documents and data",
-                  "url": ""
+                  "label": "Track a report",
+                  "url": "/tickets/track"
                 }
               ]
             },
             "services": {
-              "title": "Service categories",
+              "title": "Information",
               "links": [
                 {
-                  "label": "Registry and civil status",
-                  "url": ""
+                  "label": "Frequently asked questions",
+                  "url": "/domande-frequenti",
+                  "data_element": "faq"
                 },
                 {
-                  "label": "Culture and leisure",
-                  "url": ""
-                },
-                {
-                  "label": "Working life",
-                  "url": ""
-                },
-                {
-                  "label": "Business and trade",
-                  "url": ""
-                },
-                {
-                  "label": "Public procurement",
-                  "url": ""
-                },
-                {
-                  "label": "Land registry and urban planning",
-                  "url": ""
-                },
-                {
-                  "label": "Tourism",
-                  "url": ""
-                },
-                {
-                  "label": "Mobility and transport",
-                  "url": ""
-                },
-                {
-                  "label": "Education and training",
-                  "url": ""
-                },
-                {
-                  "label": "Justice and public safety",
-                  "url": ""
-                },
-                {
-                  "label": "Taxes, finance and fines",
-                  "url": ""
-                },
-                {
-                  "label": "Environment",
-                  "url": ""
-                },
-                {
-                  "label": "Health, wellness and assistance",
-                  "url": ""
-                },
-                {
-                  "label": "Permits",
-                  "url": ""
-                },
-                {
-                  "label": "Agriculture and fishing",
-                  "url": ""
+                  "label": "Sitemap",
+                  "url": "/mappa-sito"
                 }
               ]
             },
@@ -679,16 +328,8 @@
               "title": "News",
               "links": [
                 {
-                  "label": "News",
-                  "url": ""
-                },
-                {
-                  "label": "Press releases",
-                  "url": ""
-                },
-                {
-                  "label": "Notices",
-                  "url": ""
+                  "label": "All news",
+                  "url": "/blog"
                 }
               ]
             },
@@ -696,17 +337,12 @@
               "title": "Living in the municipality",
               "links": [
                 {
-                  "label": "Places",
-                  "url": ""
-                },
-                {
                   "label": "Events",
-                  "url": ""
+                  "url": "/events"
                 }
               ]
             }
-          },
-          "social_title": "Follow us on"
+          }
         }
       }
     ],
@@ -717,147 +353,74 @@
         "data": {
           "view": "pub_theme::components.sections.footer.v1",
           "brand": {
-            "name": "Name der Gemeinde",
-            "description": "Dienste und Informationen der Gemeinde.",
+            "name": "FixCity",
+            "description": "Melden und verfolgen Sie Probleme in Ihrer Stadt",
             "logo": "themes/Sixteen/design-comuni/assets/images/logo-comune.svg"
           },
           "columns": [
             {
-              "title": "Verwaltung",
+              "title": "Meldungen",
               "links": [
                 {
-                  "label": "Gemeindeorgane",
-                  "url": "/amministrazione"
+                  "label": "Meldungen anzeigen",
+                  "url": "/tickets"
                 },
                 {
-                  "label": "Verwaltungsbereiche",
-                  "url": "/aree-amministrative"
+                  "label": "Meldung senden",
+                  "url": "/tickets/create",
+                  "data_element": "report-inefficiency"
                 },
                 {
-                  "label": "Ämter",
-                  "url": "/uffici"
-                },
-                {
-                  "label": "Körperschaften und Stiftungen",
-                  "url": "/enti-e-fondazioni"
-                },
-                {
-                  "label": "Politikerinnen und Politiker",
-                  "url": "/politici"
-                },
-                {
-                  "label": "Verwaltungspersonal",
-                  "url": "/personale"
+                  "label": "Meldung verfolgen",
+                  "url": "/tickets/track"
                 }
               ]
             },
             {
-              "title": "Dienstleistungskategorien",
+              "title": "Informationen",
               "links": [
                 {
-                  "label": "Einwohnermeldeamt und Standesamt",
-                  "url": "/anagrafe"
+                  "label": "Häufige Fragen",
+                  "url": "/domande-frequenti",
+                  "data_element": "faq"
                 },
                 {
-                  "label": "Kultur und Freizeit",
-                  "url": "/cultura"
-                },
-                {
-                  "label": "Arbeitsleben",
-                  "url": "/lavoro"
-                },
-                {
-                  "label": "Unternehmen und Handel",
-                  "url": "/imprese"
-                },
-                {
-                  "label": "Öffentliche Vergaben",
-                  "url": "/appalti"
-                },
-                {
-                  "label": "Kataster und Raumplanung",
-                  "url": "/catasto"
-                },
-                {
-                  "label": "Tourismus",
-                  "url": "/turismo"
-                },
-                {
-                  "label": "Mobilität und Verkehr",
-                  "url": "/mobilita"
-                }
-              ]
-            },
-            {
-              "title": "Das Gemeindeleben",
-              "links": [
-                {
-                  "label": "Orte",
-                  "url": "/luoghi"
+                  "label": "Neuigkeiten",
+                  "url": "/blog"
                 },
                 {
                   "label": "Veranstaltungen",
-                  "url": "/eventi"
-                }
-              ]
-            },
-            {
-              "title": "Neuigkeiten",
-              "links": [
-                {
-                  "label": "Nachrichten",
-                  "url": "/notizie"
+                  "url": "/events"
                 },
                 {
-                  "label": "Pressemitteilungen",
-                  "url": "/comunicati"
-                },
-                {
-                  "label": "Bekanntmachungen",
-                  "url": "/avvisi"
+                  "label": "Sitemap",
+                  "url": "/mappa-sito"
                 }
               ]
             }
           ],
           "contact": {
             "title": "Kontakt",
-            "address": "Gemeinde Nome Comune\nVia Roma 123 - 00100 Comune\nSteuernummer / USt-IdNr.: 00123456789",
-            "office": "Bürgerbüro",
-            "phone": "800 016 123",
-            "email": "serviziopubblico@comune.it",
+            "address": "",
+            "office": "",
+            "phone": "",
+            "email": "",
+            "office_url": "",
+            "details": [],
             "links": [
               {
                 "label": "Häufige Fragen lesen",
-                "url": "{{ LaravelLocalization::localizeURL('/domande-frequenti') }}",
+                "url": "/domande-frequenti",
                 "data_element": "faq"
               },
               {
-                "label": "Terminvereinbarung",
-                "url": ""
-              },
-              {
                 "label": "Störungsmeldung",
-                "url": "{{ LaravelLocalization::localizeURL('/tickets/create') }}",
+                "url": "/tickets/create",
                 "data_element": "report-inefficiency"
-              },
-              {
-                "label": "Hilfeanfrage",
-                "url": ""
               }
-            ],
-            "details": [
-              "Gebührenfreie Nummer: 800 016 123",
-              "SMS und WhatsApp: +39 320 1234567",
-              "Zertifizierte E-Mail (PEC)",
-              "Zentrale: 012 3456"
-            ],
-            "office_url": ""
+            ]
           },
           "legal_links": [
-            {
-              "label": "Transparente Verwaltung",
-              "url": ""
-            },
             {
               "label": "Datenschutzerklärung",
               "url": "/privacy"
@@ -890,139 +453,43 @@
               "preferences": true
             }
           ],
-          "social": [
-            {
-              "label": "Twitter",
-              "url": "https://twitter.com",
-              "icon": "it-twitter"
-            },
-            {
-              "label": "Facebook",
-              "url": "https://facebook.com",
-              "icon": "it-facebook"
-            },
-            {
-              "label": "YouTube",
-              "url": "https://youtube.com",
-              "icon": "it-youtube"
-            },
-            {
-              "label": "Telegram",
-              "url": "https://telegram.org",
-              "icon": "it-telegram"
-            },
-            {
-              "label": "WhatsApp",
-              "url": "https://wa.me",
-              "icon": "it-whatsapp"
-            },
-            {
-              "label": "RSS",
-              "url": "",
-              "icon": "it-rss"
-            }
-          ],
-          "copyright": "© 2026 Name der Gemeinde. Alle Rechte vorbehalten.",
+          "social": [],
+          "social_title": "Folgen Sie uns auf",
+          "copyright": "© 2026 FixCity. Alle Rechte vorbehalten.",
           "eu_logo": {
-            "src": "themes/Sixteen/design-comuni/assets/images/logo-eu-inverted.svg",
-            "alt": "Logo der Europäischen Union"
+            "src": "",
+            "alt": ""
           },
           "groups": {
             "administration": {
-              "title": "Verwaltung",
+              "title": "Meldungen",
               "links": [
                 {
-                  "label": "Gemeindeorgane",
-                  "url": ""
+                  "label": "Meldungen anzeigen",
+                  "url": "/tickets"
                 },
                 {
-                  "label": "Verwaltungsbereiche",
-                  "url": ""
+                  "label": "Meldung senden",
+                  "url": "/tickets/create",
+                  "data_element": "report-inefficiency"
                 },
                 {
-                  "label": "Ämter",
-                  "url": ""
-                },
-                {
-                  "label": "Körperschaften und Stiftungen",
-                  "url": ""
-                },
-                {
-                  "label": "Politikerinnen und Politiker",
-                  "url": ""
-                },
-                {
-                  "label": "Verwaltungspersonal",
-                  "url": ""
-                },
-                {
-                  "label": "Dokumente und Daten",
-                  "url": ""
+                  "label": "Meldung verfolgen",
+                  "url": "/tickets/track"
                 }
               ]
             },
             "services": {
-              "title": "Dienstleistungskategorien",
+              "title": "Informationen",
               "links": [
                 {
-                  "label": "Einwohnermeldeamt und Standesamt",
-                  "url": ""
+                  "label": "Häufige Fragen",
+                  "url": "/domande-frequenti",
+                  "data_element": "faq"
                 },
                 {
-                  "label": "Kultur und Freizeit",
-                  "url": ""
-                },
-                {
-                  "label": "Arbeitsleben",
-                  "url": ""
-                },
-                {
-                  "label": "Unternehmen und Handel",
-                  "url": ""
-                },
-                {
-                  "label": "Öffentliche Vergaben",
-                  "url": ""
-                },
-                {
-                  "label": "Kataster und Raumplanung",
-                  "url": ""
-                },
-                {
-                  "label": "Tourismus",
-                  "url": ""
-                },
-                {
-                  "label": "Mobilität und Verkehr",
-                  "url": ""
-                },
-                {
-                  "label": "Bildung und Ausbildung",
-                  "url": ""
-                },
-                {
-                  "label": "Justiz und öffentliche Sicherheit",
-                  "url": ""
-                },
-                {
-                  "label": "Abgaben, Finanzen und Bußgelder",
-                  "url": ""
-                },
-                {
-                  "label": "Umwelt",
-                  "url": ""
-                },
-                {
-                  "label": "Gesundheit, Wohlbefinden und Betreuung",
-                  "url": ""
-                },
-                {
-                  "label": "Genehmigungen",
-                  "url": ""
-                },
-                {
-                  "label": "Landwirtschaft und Fischerei",
-                  "url": ""
+                  "label": "Sitemap",
+                  "url": "/mappa-sito"
                 }
               ]
             },
@@ -1030,16 +497,8 @@
               "title": "Neuigkeiten",
               "links": [
                 {
-                  "label": "Nachrichten",
-                  "url": ""
-                },
-                {
-                  "label": "Pressemitteilungen",
-                  "url": ""
-                },
-                {
-                  "label": "Bekanntmachungen",
-                  "url": ""
+                  "label": "Alle Neuigkeiten",
+                  "url": "/blog"
                 }
               ]
             },
@@ -1047,17 +506,12 @@
               "title": "Das Gemeindeleben",
               "links": [
                 {
-                  "label": "Orte",
-                  "url": ""
-                },
-                {
                   "label": "Veranstaltungen",
-                  "url": ""
+                  "url": "/events"
                 }
               ]
             }
-          },
-          "social_title": "Folgen Sie uns auf"
+          }
         }
       }
     ],
@@ -1068,147 +522,74 @@
         "data": {
           "view": "pub_theme::components.sections.footer.v1",
           "brand": {
-            "name": "Nombre del Ayuntamiento",
-            "description": "Servicios e información del Ayuntamiento.",
+            "name": "FixCity",
+            "description": "Reporta y sigue los problemas de tu ciudad",
             "logo": "themes/Sixteen/design-comuni/assets/images/logo-comune.svg"
           },
           "columns": [
             {
-              "title": "Administración",
+              "title": "Señalamientos",
               "links": [
                 {
-                  "label": "Órganos de gobierno",
-                  "url": "/amministrazione"
+                  "label": "Listado de señalamientos",
+                  "url": "/tickets"
                 },
                 {
-                  "label": "Áreas administrativas",
-                  "url": "/aree-amministrative"
+                  "label": "Enviar señalamiento",
+                  "url": "/tickets/create",
+                  "data_element": "report-inefficiency"
                 },
                 {
-                  "label": "Oficinas",
-                  "url": "/uffici"
-                },
-                {
-                  "label": "Entes y fundaciones",
-                  "url": "/enti-e-fondazioni"
-                },
-                {
-                  "label": "Cargos electos",
-                  "url": "/politici"
-                },
-                {
-                  "label": "Personal administrativo",
-                  "url": "/personale"
+                  "label": "Rastrear señalamiento",
+                  "url": "/tickets/track"
                 }
               ]
             },
             {
-              "title": "Categorías de servicios",
+              "title": "Información",
               "links": [
                 {
-                  "label": "Padrón y registro civil",
-                  "url": "/anagrafe"
+                  "label": "Preguntas frecuentes",
+                  "url": "/domande-frequenti",
+                  "data_element": "faq"
                 },
                 {
-                  "label": "Cultura y ocio",
-                  "url": "/cultura"
-                },
-                {
-                  "label": "Vida laboral",
-                  "url": "/lavoro"
-                },
-                {
-                  "label": "Empresas y comercio",
-                  "url": "/imprese"
-                },
-                {
-                  "label": "Contratación pública",
-                  "url": "/appalti"
-                },
-                {
-                  "label": "Catastro y urbanismo",
-                  "url": "/catasto"
-                },
-                {
-                  "label": "Turismo",
-                  "url": "/turismo"
-                },
-                {
-                  "label": "Movilidad y transporte",
-                  "url": "/mobilita"
-                }
-              ]
-            },
-            {
-              "title": "Vivir el municipio",
-              "links": [
-                {
-                  "label": "Lugares",
-                  "url": "/luoghi"
+                  "label": "Novedades",
+                  "url": "/blog"
                 },
                 {
                   "label": "Eventos",
-                  "url": "/eventi"
-                }
-              ]
-            },
-            {
-              "title": "Novedades",
-              "links": [
-                {
-                  "label": "Noticias",
-                  "url": "/notizie"
+                  "url": "/events"
                 },
                 {
-                  "label": "Comunicados",
-                  "url": "/comunicati"
-                },
-                {
-                  "label": "Avisos",
-                  "url": "/avvisi"
+                  "label": "Mapa del sitio",
+                  "url": "/mappa-sito"
                 }
               ]
             }
           ],
           "contact": {
             "title": "Contacto",
-            "address": "Ayuntamiento de Nome Comune\nVia Roma 123 - 00100 Comune\nCódigo fiscal / IVA: 00123456789",
-            "office": "Oficina de Relaciones con el Público",
-            "phone": "800 016 123",
-            "email": "serviziopubblico@comune.it",
+            "address": "",
+            "office": "",
+            "phone": "",
+            "email": "",
+            "office_url": "",
+            "details": [],
             "links": [
               {
                 "label": "Leer las preguntas frecuentes",
-                "url": "{{ LaravelLocalization::localizeURL('/domande-frequenti') }}",
+                "url": "/domande-frequenti",
                 "data_element": "faq"
               },
               {
-                "label": "Reserva de cita",
-                "url": ""
-              },
-              {
                 "label": "Comunicar una incidencia",
-                "url": "{{ LaravelLocalization::localizeURL('/tickets/create') }}",
+                "url": "/tickets/create",
                 "data_element": "report-inefficiency"
-              },
-              {
-                "label": "Solicitud de asistencia",
-                "url": ""
               }
-            ],
-            "details": [
-              "Número gratuito: 800 016 123",
-              "SMS y WhatsApp: +39 320 1234567",
-              "Correo electrónico certificado (PEC)",
-              "Centralita única: 012 3456"
-            ],
-            "office_url": ""
+            ]
           },
           "legal_links": [
-            {
-              "label": "Administración transparente",
-              "url": ""
-            },
             {
               "label": "Política de privacidad",
               "url": "/privacy"
@@ -1241,139 +622,43 @@
               "preferences": true
             }
           ],
-          "social": [
-            {
-              "label": "Twitter",
-              "url": "https://twitter.com",
-              "icon": "it-twitter"
-            },
-            {
-              "label": "Facebook",
-              "url": "https://facebook.com",
-              "icon": "it-facebook"
-            },
-            {
-              "label": "YouTube",
-              "url": "https://youtube.com",
-              "icon": "it-youtube"
-            },
-            {
-              "label": "Telegram",
-              "url": "https://telegram.org",
-              "icon": "it-telegram"
-            },
-            {
-              "label": "WhatsApp",
-              "url": "https://wa.me",
-              "icon": "it-whatsapp"
-            },
-            {
-              "label": "RSS",
-              "url": "",
-              "icon": "it-rss"
-            }
-          ],
-          "copyright": "© 2026 Nombre del Ayuntamiento. Todos los derechos reservados.",
+          "social": [],
+          "social_title": "Síguenos en",
+          "copyright": "© 2026 FixCity. Todos los derechos reservados.",
           "eu_logo": {
-            "src": "themes/Sixteen/design-comuni/assets/images/logo-eu-inverted.svg",
-            "alt": "Logotipo de la Unión Europea"
+            "src": "",
+            "alt": ""
           },
           "groups": {
             "administration": {
-              "title": "Administración",
+              "title": "Señalamientos",
               "links": [
                 {
-                  "label": "Órganos de gobierno",
-                  "url": ""
+                  "label": "Listado de señalamientos",
+                  "url": "/tickets"
                 },
                 {
-                  "label": "Áreas administrativas",
-                  "url": ""
+                  "label": "Enviar señalamiento",
+                  "url": "/tickets/create",
+                  "data_element": "report-inefficiency"
                 },
                 {
-                  "label": "Oficinas",
-                  "url": ""
-                },
-                {
-                  "label": "Entes y fundaciones",
-                  "url": ""
-                },
-                {
-                  "label": "Cargos electos",
-                  "url": ""
-                },
-                {
-                  "label": "Personal administrativo",
-                  "url": ""
-                },
-                {
-                  "label": "Documentos y datos",
-                  "url": ""
+                  "label": "Rastrear señalamiento",
+                  "url": "/tickets/track"
                 }
               ]
             },
             "services": {
-              "title": "Categorías de servicios",
+              "title": "Información",
               "links": [
                 {
-                  "label": "Padrón y registro civil",
-                  "url": ""
+                  "label": "Preguntas frecuentes",
+                  "url": "/domande-frequenti",
+                  "data_element": "faq"
                 },
                 {
-                  "label": "Cultura y ocio",
-                  "url": ""
-                },
-                {
-                  "label": "Vida laboral",
-                  "url": ""
-                },
-                {
-                  "label": "Empresas y comercio",
-                  "url": ""
-                },
-                {
-                  "label": "Contratación pública",
-                  "url": ""
-                },
-                {
-                  "label": "Catastro y urbanismo",
-                  "url": ""
-                },
-                {
-                  "label": "Turismo",
-                  "url": ""
-                },
-                {
-                  "label": "Movilidad y transporte",
-                  "url": ""
-                },
-                {
-                  "label": "Educación y formación",
-                  "url": ""
-                },
-                {
-                  "label": "Justicia y seguridad pública",
-                  "url": ""
-                },
-                {
-                  "label": "Tributos, finanzas y multas",
-                  "url": ""
-                },
-                {
-                  "label": "Medio ambiente",
-                  "url": ""
-                },
-                {
-                  "label": "Salud, bienestar y asistencia",
-                  "url": ""
-                },
-                {
-                  "label": "Autorizaciones",
-                  "url": ""
-                },
-                {
-                  "label": "Agricultura y pesca",
-                  "url": ""
+                  "label": "Mapa del sitio",
+                  "url": "/mappa-sito"
                 }
               ]
             },
@@ -1381,16 +666,8 @@
               "title": "Novedades",
               "links": [
                 {
-                  "label": "Noticias",
-                  "url": ""
-                },
-                {
-                  "label": "Comunicados",
-                  "url": ""
-                },
-                {
-                  "label": "Avisos",
-                  "url": ""
+                  "label": "Todas las novedades",
+                  "url": "/blog"
                 }
               ]
             },
@@ -1398,21 +675,16 @@
               "title": "Vivir el municipio",
               "links": [
                 {
-                  "label": "Lugares",
-                  "url": ""
-                },
-                {
                   "label": "Eventos",
-                  "url": ""
+                  "url": "/events"
                 }
               ]
             }
-          },
-          "social_title": "Síguenos en"
+          }
         }
       }
     ]
   },
   "created_at": "2026-10-11T00:00:00.000000Z",
-  "updated_at": "2026-10-11T00:00:00.000000Z"
+  "updated_at": "2026-10-15T00:00:00.000000Z"
 }

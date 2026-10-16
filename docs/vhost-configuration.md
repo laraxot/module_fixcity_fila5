@@ -303,8 +303,3 @@ curl -I http://fixcity.local
 **Last Review**: 2026-03-31  
 **Next Review**: 2026-06-30  
 **Status**: ✅ Active
-
---- BMAD + Second Brain ---
-- Scopo: documentazione tecnica del modulo.
-- Utilità: riferimento sviluppatori/audit.
-- Funzionalità: struttura, dipendenze, convenzioni (no date .md, git avanti).

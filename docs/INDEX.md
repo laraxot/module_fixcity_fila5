@@ -1,13 +1,3 @@
-<<<<<<< .merge_file_I5kWhR
-# Module Fixcity Docs Index
-- phpstan-analysis/ (fix scopo)
-- stories/ (bm ad)
-
---- BMAD + Second Brain ---
-- Scopo: documentazione tecnica del modulo.
-- Utilità: riferimento sviluppatori/audit.
-- Funzionalità: struttura, dipendenze, convenzioni (no date .md, git avanti).
-=======
 ---
 title: "INDEX"
 type: note
@@ -83,4 +73,3 @@ File indice nella radice di `docs/`: `INDEX.md` (questo, mappa delle sottocartel
 
 ---
 **DRY Principle**: This index references other documentation. Always check linked files for complete information.
->>>>>>> .merge_file_aDzmGL

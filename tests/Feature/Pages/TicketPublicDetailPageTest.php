@@ -187,6 +187,7 @@ describe('public timeline', function (): void {
             ->assertSee('In revisione')
             ->assertSee('Presa in carico dal Comune')
             ->assertSee('15 marzo 2026')
+            ->assertSee('datetime="2026-03-15"', false)
             ->assertDontSee('09:30')
             ->assertDontSee('Nota interna riservata')
             ->assertDontSee('Solo per l’autore')

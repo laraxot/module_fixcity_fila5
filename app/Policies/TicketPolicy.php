@@ -57,6 +57,11 @@ final class TicketPolicy extends BasePolicy
         return $this->isPaOperator($user) || $user->hasPermissionToOrCreate('ticket.changeStatus');
     }
 
+    public function communicate(UserContract $user, Ticket $_ticket): bool
+    {
+        return $this->isPaOperator($user) || $user->hasPermissionToOrCreate('ticket.communicate');
+    }
+
     public function changePriority(UserContract $user, Ticket $_ticket): bool
     {
         return $this->isPaOperator($user) || $user->hasPermissionToOrCreate('ticket.changePriority');

@@ -97,13 +97,11 @@ enum TicketStatusEnum: string implements HasColor, HasIcon, HasLabel
 
             self::PENDING->value => [
                 self::IN_REVIEW,
-                self::CLOSED,
             ],
 
             self::IN_REVIEW->value => [
                 self::IN_PROGRESS,
                 self::ON_HOLD,
-                self::CLOSED,
             ],
 
             self::IN_PROGRESS->value => [
@@ -125,7 +123,6 @@ enum TicketStatusEnum: string implements HasColor, HasIcon, HasLabel
 
             self::REOPENED->value => [
                 self::IN_PROGRESS,
-                self::CLOSED,
             ],
 
             self::OPEN->value => [

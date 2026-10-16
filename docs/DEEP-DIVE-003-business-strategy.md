@@ -525,8 +525,3 @@ created: 2026-06-17
 ---
 
 *Strategy based on: competitor analysis, civic tech market research, Italian municipal structure, startup best practices.*
-
---- BMAD + Second Brain ---
-- Scopo: documentazione tecnica del modulo.
-- Utilità: riferimento sviluppatori/audit.
-- Funzionalità: struttura, dipendenze, convenzioni (no date .md, git avanti).

@@ -340,8 +340,3 @@ Per evitare failure patterns:
 ---
 
 *Analysis based on: Capterra reviews, CivicPlus docs, mySociety case studies, AidData research, IRI white paper, academic journals.*
-
---- BMAD + Second Brain ---
-- Scopo: documentazione tecnica del modulo.
-- Utilità: riferimento sviluppatori/audit.
-- Funzionalità: struttura, dipendenze, convenzioni (no date .md, git avanti).

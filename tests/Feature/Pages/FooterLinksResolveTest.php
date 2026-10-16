@@ -49,11 +49,11 @@ it('has footer links that all resolve in the visitor language and no dead link',
     foreach (['privacy', 'accessibilita', 'note-legali', 'media-policy', 'mappa-sito'] as $page) {
         Assert::assertArrayHasKey("/{$locale}/{$page}", $resolved, "Footer ({$locale}) senza il link a /{$locale}/{$page}.");
     }
-    Assert::assertGreaterThan(0, $inactive, 'Le voci senza pagina fornita dall’ente devono restare come testo non attivo.');
+    // DCP-222 / A5: le voci senza URL non si rendono piu' come `<a>` nudi — si omettono dal vestito.
+    Assert::assertSame(0, $inactive, "Footer ({$locale}): trovati {$inactive} <a> senza href (devono essere filtrati).");
 })->with(['it', 'en', 'de', 'es']);
 
 it('keeps the legal pages of the footer reachable in four languages', function (string $page, string $locale): void {
     $this->get("/{$locale}/{$page}")->assertOk()->assertSee('<h1', false);
 })->with(['privacy', 'accessibilita', 'note-legali', 'media-policy'])->with(['it', 'en', 'de', 'es']);
 
-it('has header links that resolve too')->todo('Header fuori dal perimetro di DCP-131: /regione, /amministrazione, /novita, /servizi, /eventi, /argomenti* rispondono 404 senza prefisso lingua e 12 voci hanno href="#" (agente dell’header).');

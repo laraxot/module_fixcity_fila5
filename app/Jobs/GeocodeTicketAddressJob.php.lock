@@ -1,0 +1,6 @@
+LOCKED at 2026-10-15T13:37:13+00:00
+Task: phpstan-swarm-coord
+Agent: fixcity-geocode-job
+Session: unknown
+PID: 3875128
+PID note: subshell di lock.sh, gia' terminato — NON usarlo per giudicare il lock stale, guarda 'LOCKED at'

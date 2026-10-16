@@ -32,8 +32,3 @@ OpenRouter documenta `plugins: [{ "id": "context-compression" }]` come opzione p
 
 Localmente e presente `context-mode` v1.0.89 per ridurre output tool e aiutare l'MCP, ma non modifica automaticamente le richieste OpenRouter.
 
-
---- BMAD + Second Brain ---
-- Scopo: documentazione tecnica del modulo.
-- Utilità: riferimento sviluppatori/audit.
-- Funzionalità: struttura, dipendenze, convenzioni (no date .md, git avanti).

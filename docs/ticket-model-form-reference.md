@@ -121,8 +121,3 @@ Il `form->fill()` DEVE essere chiamato nel `mount()` per inizializzare il Livewi
 - `Modules/Fixcity/app/Filament/Widgets/CreateTicketWizardWidget.php`
 - `Modules/Fixcity/docs/filament-summary-infolist-guidance.md`
 - `Modules/Fixcity/docs/filament-wizard-pattern.md`
-
---- BMAD + Second Brain ---
-- Scopo: documentazione tecnica del modulo.
-- Utilità: riferimento sviluppatori/audit.
-- Funzionalità: struttura, dipendenze, convenzioni (no date .md, git avanti).

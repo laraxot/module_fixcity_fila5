@@ -65,7 +65,3 @@ activity()->causedBy($user)->log('Ticket created');
 // Use metrics for tracking
 Metrics::increment('tickets.created');
 ```
---- BMAD + Second Brain ---
-- Scopo: documentazione tecnica del modulo.
-- Utilità: riferimento sviluppatori/audit.
-- Funzionalità: struttura, dipendenze, convenzioni (no date .md, git avanti).

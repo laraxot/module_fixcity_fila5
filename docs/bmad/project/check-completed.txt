@@ -1,0 +1,10 @@
+## BMAD check completed
+
+Task: Create UiGroupColumnTypeEnum enum class with getLabel() method for UI tests.
+
+- Fixture updated: `laravel/Modules/UI/tests/Fixtures/UiGroupColumnTypeEnum.php` now returns `'Dipendente'` from `getLabel()`.
+- Test passes: `pest Modules/UI/tests/Feature/GroupColumnTest.php --filter='BackedEnum'` → 1 passed.
+- PHPStan passes: 0 errors on `Modules/UI`.
+- Story created: `laravel/Modules/UI/docs/bmad/stories/group-column-type-enum-getlabel-fix.story.md`.
+
+All verification steps completed. No remaining blockers.

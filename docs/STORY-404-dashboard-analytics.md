@@ -597,8 +597,3 @@ class PredictionService
 
 - Degradozero Dashboard: https://github.com/gbvitrano/Segnalazioni
 - SeeClickFix Open Data: https://www.civicplus.help/seeclickfix/docs/available-seeclickfix-api
-
---- BMAD + Second Brain ---
-- Scopo: documentazione tecnica del modulo.
-- Utilità: riferimento sviluppatori/audit.
-- Funzionalità: struttura, dipendenze, convenzioni (no date .md, git avanti).

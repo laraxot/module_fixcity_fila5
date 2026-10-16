@@ -33,8 +33,3 @@ topic: Forms
 canonical: ../../docs/shared/forms.md
 ---
 See canonical forms documentation: ../../docs/shared/forms.md
-
---- BMAD + Second Brain ---
-- Scopo: documentazione tecnica del modulo.
-- Utilità: riferimento sviluppatori/audit.
-- Funzionalità: struttura, dipendenze, convenzioni (no date .md, git avanti).
