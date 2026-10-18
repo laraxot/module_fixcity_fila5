@@ -27,6 +27,10 @@ cittadino, moderatore, operatore, supervisor
 1. Docs solo in questo owner (`docs/`), mai `bmad-output/`.
 2. Actions + XotBase Filament; mai Controllers.
 3. Non assorbire scope degli owner collegati (vedi Out nel planning).
+4. **Dati sacri:** mai `migrate:fresh`, `migrate:refresh`, `migrate:reset`,
+   `db:wipe` o `migrate --force`; vale anche per test, fixture e script.
+   Le migrazioni sono forward-only e i test usano isolamento transazionale o
+   database dedicato non distruttivo.
 
 ## Artefatti
 

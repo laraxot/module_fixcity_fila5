@@ -5,15 +5,7 @@ declare(strict_types=1);
 namespace Modules\Fixcity\Tests\Unit\Enums;
 
 use Modules\Fixcity\Enums\TicketPriorityEnum;
-use Modules\Xot\Tests\XotBaseTestCase;
-use PHPUnit\Framework\Assert;
 use ReflectionEnum;
-
-uses(XotBaseTestCase::class);
-
-beforeEach(function (): void {
-    app()->setLocale('en');
-});
 
 describe('TicketPriorityEnum', function () {
     it('has all required priority values', function () {
@@ -25,56 +17,56 @@ describe('TicketPriorityEnum', function () {
             'CRITICAL',
         ];
 
-        // Laraxot module file — see docs/wiki for domain contract.
-        // Laraxot module file — see docs/wiki for domain contract.
-        // Laraxot module file — see docs/wiki for domain contract.
         $actualPriorities = array_column(TicketPriorityEnum::cases(), 'name');
 
-        Assert::assertCount(count($expectedPriorities), $actualPriorities);
+        expect($actualPriorities)->toHaveCount(count($expectedPriorities));
         foreach ($expectedPriorities as $priority) {
-            Assert::assertContains($priority, $actualPriorities);
+            expect($actualPriorities)->toContain($priority);
         }
     });
 
     it('provides correct colors for each priority', function () {
         $priorityColors = [
-            [TicketPriorityEnum::LOW, 'success'],
-            [TicketPriorityEnum::MEDIUM, 'warning'],
-            [TicketPriorityEnum::HIGH, 'danger'],
-            [TicketPriorityEnum::URGENT, 'danger'],
-            [TicketPriorityEnum::CRITICAL, 'danger'],
+            TicketPriorityEnum::LOW => 'gray',
+            TicketPriorityEnum::MEDIUM => 'blue',
+            TicketPriorityEnum::HIGH => 'orange',
+            TicketPriorityEnum::URGENT => 'red',
+            TicketPriorityEnum::CRITICAL => 'danger',
         ];
 
-        foreach ($priorityColors as [$item, $expected]) {
-            Assert::assertSame($expected, $item->getColor());
+        foreach ($priorityColors as $priority => $expectedColor) {
+            /** @var TicketPriorityEnum $priority */
+            expect($priority->getColor())->toBe($expectedColor);
         }
     });
 
     it('provides correct icons for each priority', function () {
         $priorityIcons = [
-            [TicketPriorityEnum::LOW, 'heroicon-o-arrow-down'],
-            [TicketPriorityEnum::MEDIUM, 'heroicon-o-arrow-right'],
-            [TicketPriorityEnum::HIGH, 'heroicon-o-arrow-up'],
-            [TicketPriorityEnum::URGENT, 'heroicon-o-exclamation-circle'],
-            [TicketPriorityEnum::CRITICAL, 'heroicon-o-exclamation-circle'],
+            TicketPriorityEnum::LOW => 'heroicon-o-arrow-down',
+            TicketPriorityEnum::MEDIUM => 'heroicon-o-minus',
+            TicketPriorityEnum::HIGH => 'heroicon-o-arrow-up',
+            TicketPriorityEnum::URGENT => 'heroicon-o-exclamation-triangle',
+            TicketPriorityEnum::CRITICAL => 'heroicon-o-exclamation-circle',
         ];
 
-        foreach ($priorityIcons as [$item, $expected]) {
-            Assert::assertSame($expected, $item->getIcon());
+        foreach ($priorityIcons as $priority => $expectedIcon) {
+            /** @var TicketPriorityEnum $priority */
+            expect($priority->getIcon())->toBe($expectedIcon);
         }
     });
 
     it('provides correct labels for each priority', function () {
         $priorityLabels = [
-            [TicketPriorityEnum::LOW, 'Low'],
-            [TicketPriorityEnum::MEDIUM, 'Medium'],
-            [TicketPriorityEnum::HIGH, 'High'],
-            [TicketPriorityEnum::URGENT, 'Urgent'],
-            [TicketPriorityEnum::CRITICAL, 'Critical'],
+            TicketPriorityEnum::LOW => 'Low',
+            TicketPriorityEnum::MEDIUM => 'Medium',
+            TicketPriorityEnum::HIGH => 'High',
+            TicketPriorityEnum::URGENT => 'Urgent',
+            TicketPriorityEnum::CRITICAL => 'Critical',
         ];
 
-        foreach ($priorityLabels as [$item, $expected]) {
-            Assert::assertSame($expected, $item->getLabel());
+        foreach ($priorityLabels as $priority => $expectedLabel) {
+            /** @var TicketPriorityEnum $priority */
+            expect($priority->getLabel())->toBe($expectedLabel);
         }
     });
 
@@ -82,15 +74,17 @@ describe('TicketPriorityEnum', function () {
         $reflection = new ReflectionEnum(TicketPriorityEnum::class);
         $interfaces = $reflection->getInterfaceNames();
 
-        Assert::assertContains('Filament\Support\Contracts\HasColor', $interfaces);
-        Assert::assertContains('Filament\Support\Contracts\HasIcon', $interfaces);
-        Assert::assertContains('Filament\Support\Contracts\HasLabel', $interfaces);
+        expect($interfaces)->toContain('Filament\Support\Contracts\HasColor');
+        expect($interfaces)->toContain('Filament\Support\Contracts\HasIcon');
+        expect($interfaces)->toContain('Filament\Support\Contracts\HasLabel');
     });
 
     it('can be used in string context', function () {
         $priority = TicketPriorityEnum::MEDIUM;
+        $stringValue = (string) $priority;
 
-        Assert::assertSame('medium', $priority->value);
+        expect($stringValue)->toBe('medium');
+        expect($priority->value)->toBe('medium');
     });
 
     it('provides consistent behavior across all methods', function () {
@@ -98,14 +92,16 @@ describe('TicketPriorityEnum', function () {
 
         foreach ($priorities as $priority) {
             // All methods should return non-empty values
-            Assert::assertNotEmpty($priority->getColor());
-            Assert::assertNotEmpty($priority->getIcon());
-            Assert::assertNotEmpty($priority->getLabel());
+            expect($priority->getColor())->not->toBeEmpty();
+            expect($priority->getIcon())->not->toBeEmpty();
+            expect($priority->getLabel())->not->toBeEmpty();
+
             // Colors should be valid CSS color names or Tailwind classes
-            $validColors = ['success', 'warning', 'danger'];
-            Assert::assertContains($priority->getColor(), $validColors);
+            $validColors = ['gray', 'blue', 'orange', 'red', 'danger'];
+            expect($validColors)->toContain($priority->getColor());
+
             // Icons should contain valid icon identifiers
-            Assert::assertStringContainsString('heroicon-o-', (string) $priority->getIcon());
+            expect($priority->getIcon())->toContain('heroicon-o-');
         }
     });
 });

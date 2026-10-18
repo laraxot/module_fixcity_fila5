@@ -57,6 +57,8 @@ laravel/Modules/Fixcity/database/migrations/
 
 ⚠️ **Aderenza parziale**: `tickets` ha 4 migration (1 create + 3 add/update). Per essere **R3-strict**, il file `2014_10_12_000000_create_users_table.php` non dovrebbe esistere se gli utenti sono in `Modules\User` (ma è di Laravel stock). Le 3 add/update su tickets dovrebbero essere **consolidate** in un'unica `2026_06_05_create_tickets_table.php` con TUTTE le colonne.
 
+**BMAD + Second Brain — Second Brain Insight (User model cross-module inheritance)**: `Modules\Fixcity\app\Models\User.php` estende `Modules\User\Models\User` (BaseUser) → usa la tabella `users` del modulo `User` (`Modules/User/database/migrations/2026_09_01_150113_create_users_table.php`). Quindi nel modulo `Fixcity` NON serve `create_users_table.php`; la migrazione owner è nel modulo `User`. R3 è rispettato perché il modello `User` è definito in `User` e `Fixcity` ne eredita la tabella via `BaseUser`. Per documentare: aggiungere nota nella doc R3 e nei docs del modulo Fixcity (vedi `docs/bmad/`).
+
 ## R3.5 — `updateTimestamps()` è l'unica fonte
 
 ```php

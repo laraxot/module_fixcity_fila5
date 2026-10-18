@@ -1,4 +1,7 @@
 <?php
+namespace Modules\Fixcity\Tests\Unit\Filament;
+
+<?php
 
 declare(strict_types=1);
 

@@ -1,0 +1,40 @@
+{
+    "id": "auth-login",
+    "title": {"it": "Accedi", "en": "Login", "de": "Anmelden", "es": "Iniciar sesión"},
+    "slug": "auth.login",
+    "layout": "design-comuni",
+    "description": {"it": "Pagina di accesso per inviare e seguire le segnalazioni.", "en": "Login page to submit and track reports.", "de": "Anmeldeseite zur Einreichung und Verfolgung von Meldungen.", "es": "Página de inicio de sesión para enviar y seguir reportes."},
+    "content": null,
+    "content_blocks": {
+        "it": [{
+            "type": "login",
+            "data": {
+                "view": "pub_theme::components.pages.auth.login",
+                "header_active": "login"
+            }
+        }],
+        "en": [{
+            "type": "login",
+            "data": {
+                "view": "pub_theme::components.pages.auth.login",
+                "header_active": "login"
+            }
+        }],
+        "de": [{
+            "type": "login",
+            "data": {
+                "view": "pub_theme::components.pages.auth.login",
+                "header_active": "login"
+            }
+        }],
+        "es": [{
+            "type": "login",
+            "data": {
+                "view": "pub_theme::components.pages.auth.login",
+                "header_active": "login"
+            }
+        }]
+    },
+    "sidebar_blocks": {"it": [], "en": [], "de": [], "es": []},
+    "footer_blocks": null
+}

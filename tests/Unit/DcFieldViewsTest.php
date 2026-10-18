@@ -1,4 +1,6 @@
 <?php
+namespace Modules\Fixcity\Tests\Unit;
+<?php
 
 declare(strict_types=1);
 

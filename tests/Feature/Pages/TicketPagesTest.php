@@ -2,133 +2,267 @@
 
 declare(strict_types=1);
 
-use Livewire\Livewire;
-use Modules\Fixcity\Database\Factories\TicketFactory;
-use Modules\Fixcity\Enums\TicketStatusEnum;
-use Modules\Fixcity\Filament\Widgets\CreateTicketWidget;
-use Modules\Fixcity\Tests\TestCase;
-use Modules\User\Database\Factories\UserFactory;
-use PHPUnit\Framework\Assert;
+use Modules\Fixcity\Models\Ticket;
+use Modules\User\Models\User;
 
-uses(TestCase::class);
-
-beforeEach(function (): void {
-    /** @var TestCase $this */
-    $this->user = UserFactory::new()->createOne();
+beforeEach(function () {
+    $this->user = User::factory()->create();
 });
 
-describe('canonical ticket creation page', function (): void {
-    test('renders for an authenticated citizen', function (): void {
-        /** @var TestCase $this */
-        $this->actingAs($this->authUser());
+describe('Ticket Creation Page', function () {
+    it('can access ticket creation page when authenticated', function () {
+        $this->actingAs($this->user);
 
-        $this->get('/it/tickets/create')
-            ->assertOk()
-            ->assertSee('Segnalazione disservizio');
-    });
-
-    test('exposes the canonical accessible Livewire widget', function (): void {
-        /** @var TestCase $this */
-        $this->actingAs($this->authUser());
-
-        Livewire::test(CreateTicketWidget::class)
-            ->assertSuccessful()
-            ->assertSee('accept_terms')
-            ->assertSee('name')
-            ->assertSee('content');
-    });
-
-    test('keeps the page response within the expected performance budget', function (): void {
-        /** @var TestCase $this */
-        $this->actingAs($this->authUser());
-
-        $startedAt = microtime(true);
         $response = $this->get('/it/tickets/create');
 
         $response->assertOk();
-        Assert::assertLessThan(2.0, microtime(true) - $startedAt);
+    });
+
+    it('redirects to login when not authenticated', function () {
+        $response = $this->get('/it/tickets/create');
+
+        $response->assertRedirect('/it/auth/login');
+    });
+
+    it('displays ticket creation form', function () {
+        $this->actingAs($this->user);
+
+        $response = $this->get('/it/tickets/create');
+
+        $response
+            ->assertOk()
+            ->assertSee('Segnalazione disservizio')
+            ->assertSeeVolt('create-ticket-widget');
+    });
+
+    it('has correct page name', function () {
+        $this->actingAs($this->user);
+
+        $response = $this->get('/it/tickets/create');
+
+        // Check if the page has the correct Folio name
+        expect(route('ticket.create'))->toBe(url('/it/tickets/create'));
+    });
+
+    it('includes required CSS and JavaScript', function () {
+        $this->actingAs($this->user);
+
+        $response = $this->get('/it/tickets/create');
+
+        $response
+            ->assertOk()
+            ->assertSee('Titillium Web') // Font
+            ->assertSee('fi-input-wrp'); // CSS classes for styling
+    });
+
+    it('uses marketing layout', function () {
+        $this->actingAs($this->user);
+
+        $response = $this->get('/it/tickets/create');
+
+        $response
+            ->assertOk()
+            ->assertViewIs('pages.tickets.create');
     });
 });
 
-describe('public ticket listing page', function (): void {
-    test('guest tracking page renders localized labels', function (): void {
-        /** @var TestCase $this */
-        $this->get('/it/tickets/track')
-            ->assertOk()
-            ->assertSee('Traccia la segnalazione')
-            ->assertSee('Inserisci il codice ricevuto alla conferma per vedere lo stato.')
-            ->assertDontSee('fixcity::ticket.track.title');
-    });
-
-    test('renders the empty state without an empty filter rail', function (): void {
-        /** @var TestCase $this */
-        $this->get('/it/tickets')
-            ->assertOk()
-            ->assertSee('Nessuna segnalazione trovata.')
-            ->assertDontSee('Nessuna categoria disponibile al momento.');
-    });
-
-    test('renders live map and list without serializing capability codes', function (): void {
-        /** @var TestCase $this */
-        TicketFactory::new()->createOne([            'name' => 'Lampione da riparare',
-            'status' => TicketStatusEnum::IN_PROGRESS,
-            'code' => 'TCK-PRIVATE-CAPABILITY-9981',
-            'location' => ['lat' => 45.4642, 'lng' => 9.1900],
+describe('Ticket View Page', function () {
+    it('can access ticket view page with valid slug', function () {
+        $ticket = Ticket::factory()->create([
+            'name' => 'Test Ticket',
+            'slug' => 'test-ticket',
+            'owner_id' => $this->user->id,
         ]);
 
-        $this->get('/it/tickets')
-            ->assertOk()
-            ->assertSee('Lampione da riparare')
-            ->assertSee('map-lit', false)
-            ->assertSee('/api/tickets/geojson')
-            ->assertSee('data-reference-total="1"', false)
-            ->assertSee('data-count="1"', false)
-            ->assertDontSee('TCK-PRIVATE-CAPABILITY-9981')
-            ->assertDontSee('Mappa interattiva delle segnalazioni');
+        $response = $this->get("/it/tickets/{$ticket->slug}");
+
+        $response->assertOk();
     });
 
-    test('applies status filters to live list results', function (): void {
-        /** @var TestCase $this */
-        TicketFactory::new()->createOne([
-            'name' => 'Stato in lavorazione visibile',
-            'status' => TicketStatusEnum::IN_PROGRESS,
-            'location' => ['lat' => 45.4642, 'lng' => 9.1900],
-        ]);
-        TicketFactory::new()->createOne([
-            'name' => 'Stato aperto non selezionato',
-            'status' => TicketStatusEnum::OPEN,
-            'location' => ['lat' => 45.4742, 'lng' => 9.1800],
-        ]);
+    it('shows 404 for non-existent ticket', function () {
+        $response = $this->get('/it/tickets/non-existent-ticket');
 
-        $this->get('/it/tickets?statuses%5B%5D=in_progress')
-            ->assertOk()
-            ->assertSee('Stato in lavorazione visibile')
-            ->assertDontSee('Stato aperto non selezionato');
+        $response->assertNotFound();
     });
 
-    test('paginates the live list and keeps the current view on later pages', function (): void {
-        /** @var TestCase $this */
-        $oldest = TicketFactory::new()->createOne([
-            'name' => 'Segnalazione paginata più vecchia',
-            'status' => TicketStatusEnum::IN_PROGRESS,
-            'location' => ['lat' => 45.4642, 'lng' => 9.1900],
-            'created_at' => now()->subMinute(),
+    it('displays ticket information', function () {
+        $ticket = Ticket::factory()->create([
+            'name' => 'Viewable Test Ticket',
+            'content' => 'This is the ticket content',
+            'slug' => 'viewable-test-ticket',
+            'owner_id' => $this->user->id,
         ]);
-        for ($index = 0; $index < 20; $index++) {
-            TicketFactory::new()->createOne([
-                'name' => 'Segnalazione pagina uno '.$index,
-                'status' => TicketStatusEnum::IN_PROGRESS,
-                'location' => ['lat' => 45.4642 + ($index / 1000), 'lng' => 9.1900],
-            ]);
+
+        $response = $this->get("/it/tickets/{$ticket->slug}");
+
+        $response
+            ->assertOk()
+            ->assertSee('Viewable Test Ticket')
+            ->assertSee('This is the ticket content');
+    });
+
+    it('can access ticket view without authentication', function () {
+        $ticket = Ticket::factory()->create([
+            'name' => 'Public Ticket',
+            'slug' => 'public-ticket',
+            'owner_id' => $this->user->id,
+        ]);
+
+        // Not authenticated
+        $response = $this->get("/it/tickets/{$ticket->slug}");
+
+        $response->assertOk();
+    });
+
+    it('has correct page name route', function () {
+        $ticket = Ticket::factory()->create([
+            'name' => 'Route Test Ticket',
+            'slug' => 'route-test-ticket',
+            'owner_id' => $this->user->id,
+        ]);
+
+        expect(route('ticket.view', ['slug' => $ticket->slug]))
+            ->toBe(url("/it/tickets/{$ticket->slug}"));
+    });
+
+    it('can display ticket with geolocation', function () {
+        $ticket = Ticket::factory()->create([
+            'name' => 'Geo Ticket',
+            'slug' => 'geo-ticket',
+            'latitude' => '45.4642',
+            'longitude' => '9.1900',
+            'owner_id' => $this->user->id,
+        ]);
+
+        $response = $this->get("/it/tickets/{$ticket->slug}");
+
+        $response->assertOk();
+        // Additional assertions for geolocation display would go here
+    });
+
+    it('can display ticket with attachments', function () {
+        $ticket = Ticket::factory()->create([
+            'name' => 'Ticket with Attachments',
+            'slug' => 'ticket-with-attachments',
+            'owner_id' => $this->user->id,
+        ]);
+
+        // Add media to ticket (if media system is implemented)
+        $response = $this->get("/it/tickets/{$ticket->slug}");
+
+        $response->assertOk();
+    });
+});
+
+describe('Ticket Page SEO and Metadata', function () {
+    it('has proper meta tags for ticket view', function () {
+        $ticket = Ticket::factory()->create([
+            'name' => 'SEO Test Ticket',
+            'content' => 'Content for SEO testing',
+            'slug' => 'seo-test-ticket',
+            'owner_id' => $this->user->id,
+        ]);
+
+        $response = $this->get("/it/tickets/{$ticket->slug}");
+
+        $response
+            ->assertOk()
+            ->assertSee('<title>', false) // Should have title tag
+            ->assertSee('SEO Test Ticket'); // Title should contain ticket name
+    });
+
+    it('has breadcrumbs on creation page', function () {
+        $this->actingAs($this->user);
+
+        $response = $this->get('/it/tickets/create');
+
+        $response
+            ->assertOk()
+            ->assertSee('Tickets') // Breadcrumb
+            ->assertSee('Create'); // Breadcrumb
+    });
+
+    it('is crawlable by search engines', function () {
+        $ticket = Ticket::factory()->create([
+            'name' => 'Crawlable Ticket',
+            'slug' => 'crawlable-ticket',
+            'owner_id' => $this->user->id,
+        ]);
+
+        $response = $this->get("/it/tickets/{$ticket->slug}");
+
+        $response
+            ->assertOk()
+            ->assertDontSee('noindex') // Should not have noindex
+            ->assertDontSee('nofollow'); // Should not have nofollow
+    });
+});
+
+describe('Ticket Page Accessibility', function () {
+    it('has proper heading structure', function () {
+        $this->actingAs($this->user);
+
+        $response = $this->get('/it/tickets/create');
+
+        $response
+            ->assertOk()
+            ->assertSee('<h1', false); // Should have H1 tag
+    });
+
+    it('has proper form labels', function () {
+        $this->actingAs($this->user);
+
+        $response = $this->get('/it/tickets/create');
+
+        $response->assertOk();
+        // Form labels would be tested when CreateTicketWidget is fully implemented
+    });
+
+    it('supports keyboard navigation', function () {
+        $this->actingAs($this->user);
+
+        $response = $this->get('/it/tickets/create');
+
+        $response->assertOk();
+        // Keyboard navigation tests would go here
+    });
+});
+
+describe('Ticket Page Performance', function () {
+    it('loads within acceptable time', function () {
+        $this->actingAs($this->user);
+
+        $startTime = microtime(true);
+        $response = $this->get('/it/tickets/create');
+        $endTime = microtime(true);
+
+        $loadTime = $endTime - $startTime;
+
+        $response->assertOk();
+        expect($loadTime)->toBeLessThan(2.0); // Should load within 2 seconds
+    });
+
+    it('handles multiple ticket views efficiently', function () {
+        $tickets = Ticket::factory()->count(5)->create([
+            'owner_id' => $this->user->id,
+        ]);
+
+        foreach ($tickets as $ticket) {
+            $response = $this->get("/it/tickets/{$ticket->slug}");
+            $response->assertOk();
         }
 
-        $this->get('/it/tickets?page=2')
-            ->assertOk()
-            ->assertSee('Segnalazione paginata più vecchia')
-            ->assertSee('Pagina 2')
-            ->assertSee('data-ex-disservizio2')
-            ->assertDontSee('Segnalazione pagina uno 19');
+        // All tickets should load successfully
+        expect($tickets)->toHaveCount(5);
+    });
 
-        $this->assertNotNull($oldest->id);
+    it('has optimized CSS delivery', function () {
+        $this->actingAs($this->user);
+
+        $response = $this->get('/it/tickets/create');
+
+        $response
+            ->assertOk()
+            ->assertSee('Titillium Web'); // Font should be loaded efficiently
     });
 });

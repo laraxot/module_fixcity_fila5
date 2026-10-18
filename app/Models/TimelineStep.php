@@ -42,7 +42,6 @@ use Modules\Xot\Datas\XotData;
  * @method static Builder|TimelineStep whereTicketId($value)
  * @method static Builder|TimelineStep wherePerformedAt($value)
  * @method static Builder|TimelineStep whereResponsible($value)
- * @method static Builder|TimelineStep whereActionNote($value)
  * @method static Builder|TimelineStep whereRequiresFollowup($value)
  * @method static Builder|TimelineStep whereFollowupAt($value)
  * @method static Builder|TimelineStep whereAttachmentId($value)
@@ -115,20 +114,27 @@ class TimelineStep extends BaseModel
      */
     public function getClosureType(): ?string
     {
+        $type = $this->type;
+        $esito = ($this->metadata['esito'] ?? 'unknown');
+
         $map = [
-            'response_received' => match ($this->metadata?['esito'] ?? null) ?? 'unknown' {
                 'risolto' => 'resolved',
                 'delegato' => 'delegated',
                 'non risolto' => 'not_resolved',
-                default => 'not_resolved',
-            },
-            'response_negative' => 'rejected',
-            'response_delegated' => 'delegated',
-            'response_soon' => null, // non chiudibile, rimane in attesa
-            default => null,
-        ];
+            ];
+            return $map[$esito] ?? 'not_resolved';
 
-        return $map[$this->type] ?? null;
+        if ($type === 'response_negative') {
+            return 'rejected';
+        }
+        if ($type === 'response_delegated') {
+            return 'delegated';
+        }
+        if ($type === 'response_soon') {
+            return null;
+        }
+
+        return null;
     }
 
     /**
@@ -139,7 +145,7 @@ class TimelineStep extends BaseModel
         $map = [
             'resolved' => 'Risolto',
             'rejected' => 'Scartato',
-            'delegated' => 'Delegato',
+            'delegato' => 'Delegato',
             'not_resolved' => 'Non risolto',
         ];
 

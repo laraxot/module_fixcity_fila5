@@ -35,6 +35,30 @@ Non creare una seconda sequenza equivalente in questo indice.
 
 ## Documentazione Architetturale
 
+### Dati sacri — regola permanente
+
+I dati persistenti non sono sacrificabili. È vietato usare `migrate:fresh`,
+`migrate:refresh`, `migrate:reset`, `db:wipe`, `RefreshDatabase` o
+`php artisan migrate --force`, anche nei test. Le migrazioni devono essere
+forward-only; per isolare i test usare `DatabaseTransactions`, transazioni
+manuali o un database esplicitamente dedicato senza cancellare dati condivisi.
+
+Questa regola prevale su snippet legacy nella documentazione e sulle
+impostazioni standard di Laravel. Prima di eseguire un comando database,
+verificare sempre che sia non distruttivo.
+
+### Migrazioni e ownership
+
+Per `TicketSubscriber` la regola R3, la scelta UUID cross-connection e la
+checklist preventiva sono registrate nel dossier BMAD
+[migration-ticket-subscribers-audit](bmad/migration-ticket-subscribers-audit.md).
+La cartella `database/migrations/README.md` indica inoltre le migration
+storiche archiviate come `*.php.old`.
+
+Il model `Modules\Fixcity\Models\User` eredita intenzionalmente la connessione
+`user` da `BaseUser`: il model Fixcity estende il comportamento, non la
+proprietà del database. Vedi [filament-user-uuid-connection-audit](bmad/filament-user-uuid-connection-audit.md).
+
 ### 5. PHPStan generics
 Le relazioni Eloquent devono dichiarare entrambi i tipi del generic (`RelatedModel` e
 `DeclaringModel`). I docblock vanno verificati dopo aver pulito la result cache; non si

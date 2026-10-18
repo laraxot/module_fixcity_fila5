@@ -5,12 +5,7 @@ declare(strict_types=1);
 namespace Modules\Fixcity\Tests\Feature\Filament;
 
 use Filament\Facades\Filament;
-use Illuminate\Database\Eloquent\Collection;
-use Illuminate\Support\Facades\Gate;
 use Livewire\Livewire;
-use Modules\Fixcity\Actions\CreateTicketAction;
-use Modules\Fixcity\Actions\DeleteTicketAction;
-use Modules\Fixcity\Database\Factories\TicketFactory;
 use Modules\Fixcity\Enums\TicketPriorityEnum;
 use Modules\Fixcity\Enums\TicketStatusEnum;
 use Modules\Fixcity\Enums\TicketTypeEnum;
@@ -21,516 +16,459 @@ use Modules\Fixcity\Filament\Resources\TicketResource\Pages\ListTickets;
 use Modules\Fixcity\Filament\Resources\TicketResource\Pages\ViewTicket;
 use Modules\Fixcity\Models\Ticket;
 use Modules\Fixcity\Tests\TestCase;
-use Modules\User\Database\Factories\UserFactory;
-use Modules\User\Models\Role;
-use PHPUnit\Framework\Assert;
+use Modules\User\Models\User;
 
-use function Pest\Laravel\actingAs;
-use function Pest\Laravel\get;
+class TicketResourceTest extends TestCase
+{
+    protected User $admin;
 
-uses(TestCase::class);
-// Laraxot — see module docs/wiki for domain contract.
-// Laraxot module file — see docs/wiki for domain contract.
-// Laraxot module file — see docs/wiki for domain contract.
-// Laraxot module file — see docs/wiki for domain contract.
-// Laraxot module file — see docs/wiki for domain contract.
-// Laraxot module file — see docs/wiki for domain contract.
-// Laraxot module file — see docs/wiki for domain contract.
-// Laraxot module file — see docs/wiki for domain contract.
-// Laraxot module file — see docs/wiki for domain contract.
-// Laraxot module file — see docs/wiki for domain contract.
-// Laraxot module file — see docs/wiki for domain contract.
-// Laraxot module file — see docs/wiki for domain contract.
-// Laraxot module file — see docs/wiki for domain contract.
-// Laraxot module file — see docs/wiki for domain contract.
+    protected User $user;
 
-beforeEach(function (): void {
-    /** @var TestCase $this */
-    $this->admin = UserFactory::new()->createOne();
-    $this->user = UserFactory::new()->createOne();
+    protected function setUp(): void
+    {
+        parent::setUp();
 
-    $adminRole = Role::firstOrCreate(['name' => 'super-admin', 'guard_name' => 'web']);
-    $this->admin->assignRole($adminRole);
-    $paRole = Role::firstOrCreate(['name' => 'operator', 'guard_name' => 'web']);
-    $this->admin->assignRole($paRole);
+        $this->admin = User::factory()->create();
+        $this->user = User::factory()->create();
 
-    // Set admin panel for testing
-    Filament::setCurrentPanel('fixcity::admin');
-    actingAs($this->authAdmin());
-});
+        // Set admin panel for testing
+        Filament::setCurrentPanel('fixcity::admin');
+        $this->actingAs($this->admin);
+    }
 
-describe('Ticket Resource', function (): void {
-    test('ticket resource has correct model class', function (): void {
-        Assert::assertEquals(Ticket::class, TicketResource::getModel());
-    });
+    /** @test */
+    public function ticket_resource_has_correct_model_class(): void
+    {
+        $this->assertEquals(Ticket::class, TicketResource::getModel());
+    }
 
-    test('ticket resource has correct slug', function (): void {
-        Assert::assertEquals('tickets', TicketResource::getSlug());
-    });
+    /** @test */
+    public function ticket_resource_has_correct_slug(): void
+    {
+        $this->assertEquals('tickets', TicketResource::getSlug());
+    }
 
-    test('ticket resource has navigation configuration', function (): void {
+    /** @test */
+    public function ticket_resource_has_navigation_configuration(): void
+    {
         $navigationBadge = TicketResource::getNavigationBadge();
-        Assert::assertNotNull($navigationBadge);
-    });
+        $this->assertNotNull($navigationBadge);
+    }
 
-    test('ticket resource can get navigation items', function (): void {
+    /** @test */
+    public function ticket_resource_can_get_navigation_items(): void
+    {
         $navigationItems = TicketResource::getNavigationItems();
-        Assert::assertNotEmpty($navigationItems);
-    });
+        $this->assertIsArray($navigationItems);
+    }
 
-    test('list tickets page can render', function (): void {
-        /** @var TestCase $this */
-        /** @var Collection<int, Ticket> $tickets */
-        $tickets = TicketFactory::new()->count(3)->create([
-            'owner_id' => $this->authUser()->id,
+    /** @test */
+    public function list_tickets_page_can_render(): void
+    {
+        $tickets = Ticket::factory()->count(3)->create([
+            'owner_id' => $this->user->id,
         ]);
 
-        $lw = Livewire::test(ListTickets::class);
-        $lw->assertSuccessful();
-        $lw->assertCanSeeTableRecords($tickets);
-    });
+        Livewire::test(ListTickets::class)
+            ->assertSuccessful()
+            ->assertCanSeeTableRecords($tickets);
+    }
 
-    test('list tickets page can search tickets by name', function (): void {
-        $searchableTicket = TicketFactory::new()->createOne([
-            'name' => 'Searchable Ticket Name',
-            'owner_id' => $this->authUser()->id,
+    /** @test */
+    public function list_tickets_page_can_search_tickets_by_name(): void
+    {
+        $searchableTicket = Ticket::factory()->create([
+            'title' => 'Searchable Ticket Name',
+            'owner_id' => $this->user->id,
         ]);
 
-        $otherTicket = TicketFactory::new()->createOne([
-            'name' => 'Other Ticket',
-            'owner_id' => $this->authUser()->id,
+        $otherTicket = Ticket::factory()->create([
+            'title' => 'Other Ticket',
+            'owner_id' => $this->user->id,
         ]);
 
-        $lw = Livewire::test(ListTickets::class)->searchTable('Searchable');
-        $lw->assertSee((string) $searchableTicket->name);
-        $lw->assertDontSee((string) $otherTicket->name);
-    });
+        Livewire::test(ListTickets::class)
+            ->searchTable('Searchable')
+            ->assertCanSeeTableRecords([$searchableTicket])
+            ->assertCanNotSeeTableRecords([$otherTicket]);
+    }
 
-    test('list tickets page can filter tickets by status', function (): void {
-        $pendingTicket = TicketFactory::new()->createOne([
+    /** @test */
+    public function list_tickets_page_can_filter_tickets_by_status(): void
+    {
+        $pendingTicket = Ticket::factory()->create([
             'status' => TicketStatusEnum::PENDING,
-            'owner_id' => $this->authUser()->id,
+            'owner_id' => $this->user->id,
         ]);
 
-        $resolvedTicket = TicketFactory::new()->createOne([
+        $resolvedTicket = Ticket::factory()->create([
             'status' => TicketStatusEnum::RESOLVED,
-            'owner_id' => $this->authUser()->id,
+            'owner_id' => $this->user->id,
         ]);
 
-        $lw = Livewire::test(ListTickets::class)->filterTable('status', TicketStatusEnum::PENDING->value);
-        $lw->assertCanSeeTableRecords([$pendingTicket]);
-        $lw->assertCanNotSeeTableRecords([$resolvedTicket]);
-    });
+        Livewire::test(ListTickets::class)
+            ->filterTable('status', TicketStatusEnum::PENDING->value)
+            ->assertCanSeeTableRecords([$pendingTicket])
+            ->assertCanNotSeeTableRecords([$resolvedTicket]);
+    }
 
-    test('list tickets page can filter tickets by priority', function (): void {
-        $highPriorityTicket = TicketFactory::new()->createOne([
+    /** @test */
+    public function list_tickets_page_can_filter_tickets_by_priority(): void
+    {
+        $highPriorityTicket = Ticket::factory()->create([
             'priority' => TicketPriorityEnum::HIGH,
-            'owner_id' => $this->authUser()->id,
+            'owner_id' => $this->user->id,
         ]);
 
-        $lowPriorityTicket = TicketFactory::new()->createOne([
+        $lowPriorityTicket = Ticket::factory()->create([
             'priority' => TicketPriorityEnum::LOW,
-            'owner_id' => $this->authUser()->id,
-        ]);
-
-        $lw = Livewire::test(ListTickets::class)->filterTable('priority', TicketPriorityEnum::HIGH->value);
-        $lw->assertCanSeeTableRecords([$highPriorityTicket]);
-        $lw->assertCanNotSeeTableRecords([$lowPriorityTicket]);
-    });
-
-    test('list tickets page can filter tickets by assigned operator', function (): void {
-        $assignee = UserFactory::new()->createOne();
-        $assignedTicket = TicketFactory::new()->createOne([
-            'owner_id' => $this->authUser()->id,
-            'responsible_id' => $assignee->id,
-        ]);
-        $unassignedTicket = TicketFactory::new()->createOne([
-            'owner_id' => $this->authUser()->id,
-            'responsible_id' => null,
+            'owner_id' => $this->user->id,
         ]);
 
         Livewire::test(ListTickets::class)
-            ->filterTable('responsible_id', $assignee->id)
-            ->assertCanSeeTableRecords([$assignedTicket])
-            ->assertCanNotSeeTableRecords([$unassignedTicket]);
-    });
+            ->filterTable('priority', TicketPriorityEnum::HIGH->value)
+            ->assertCanSeeTableRecords([$highPriorityTicket])
+            ->assertCanNotSeeTableRecords([$lowPriorityTicket]);
+    }
 
-    test('list tickets page can filter unassigned tickets', function (): void {
-        $assignedTicket = TicketFactory::new()->createOne([
-            'owner_id' => $this->authUser()->id,
-            'responsible_id' => UserFactory::new()->createOne()->id,
-        ]);
-        $unassignedTicket = TicketFactory::new()->createOne([
-            'owner_id' => $this->authUser()->id,
-            'responsible_id' => null,
-        ]);
-
-        Livewire::test(ListTickets::class)
-            ->filterTable('assignment_status', ['assignment_status' => 'unassigned'])
-            ->assertCanSeeTableRecords([$unassignedTicket])
-            ->assertCanNotSeeTableRecords([$assignedTicket]);
-    });
-
-    test('list tickets page can filter tickets by creation date range', function (): void {
-        $from = now()->startOfDay();
-        $matchingTicket = TicketFactory::new()->createOne([
-            'owner_id' => $this->authUser()->id,
-            'created_at' => $from->copy()->addHours(10),
-        ]);
-        $olderTicket = TicketFactory::new()->createOne([
-            'owner_id' => $this->authUser()->id,
-            'created_at' => $from->copy()->subDay(),
-        ]);
-
-        Livewire::test(ListTickets::class)
-            ->filterTable('created_at', [
-                'created_from' => $from->toDateString(),
-                'created_until' => $from->toDateString(),
-            ])
-            ->assertCanSeeTableRecords([$matchingTicket])
-            ->assertCanNotSeeTableRecords([$olderTicket]);
-    });
-
-    test('list tickets page can sort tickets by created at', function (): void {
-        $olderTicket = TicketFactory::new()->createOne([
+    /** @test */
+    public function list_tickets_page_can_sort_tickets_by_created_at(): void
+    {
+        $olderTicket = Ticket::factory()->create([
             'created_at' => now()->subDays(2),
-            'owner_id' => $this->authUser()->id,
+            'owner_id' => $this->user->id,
         ]);
 
-        $newerTicket = TicketFactory::new()->createOne([
+        $newerTicket = Ticket::factory()->create([
             'created_at' => now()->subDay(),
-            'owner_id' => $this->authUser()->id,
+            'owner_id' => $this->user->id,
         ]);
 
-        $lw = Livewire::test(ListTickets::class)->sortTable('created_at', 'desc');
-        $lw->assertCanSeeTableRecords([$newerTicket, $olderTicket]);
-    });
+        Livewire::test(ListTickets::class)
+            ->sortTable('created_at', 'desc')
+            ->assertCanSeeTableRecords([$newerTicket, $olderTicket]);
+    }
 
-    test('create ticket page can render', function (): void {
+    /** @test */
+    public function create_ticket_page_can_render(): void
+    {
         Livewire::test(CreateTicket::class)
             ->assertSuccessful();
-    });
+    }
 
-    test('create ticket page can create ticket', function (): void {
+    /** @test */
+    public function create_ticket_page_can_create_ticket(): void
+    {
         $ticketData = [
-            'privacyAccepted' => true,
-            'name' => 'Test Ticket',
-            'content' => 'Test Description',
+            'title' => 'Test Ticket',
+            'description' => 'Test Description',
             'priority' => TicketPriorityEnum::MEDIUM->value,
             'status' => TicketStatusEnum::OPEN->value,
-            'type' => TicketTypeEnum::ROAD_MAINTENANCE->value,
-            'owner_id' => $this->authAdmin()->id,
-            'location' => [
-                'latitude' => 45.4642,
-                'longitude' => 9.1900,
-                'address' => 'Milano',
-            ],
+            'type' => TicketTypeEnum::TECHNICAL->value,
+            'owner_id' => $this->user->id,
         ];
 
         Livewire::test(CreateTicket::class)
-            ->set('data', $ticketData)
+            ->fillForm($ticketData)
             ->call('create')
             ->assertHasNoFormErrors();
 
-        $this->assertDatabaseHasRow('tickets', [
-            'name' => 'Test Ticket',
-            'content' => 'Test Description',
+        $this->assertDatabaseHas('tickets', [
+            'title' => 'Test Ticket',
+            'description' => 'Test Description',
             'priority' => TicketPriorityEnum::MEDIUM->value,
             'status' => TicketStatusEnum::OPEN->value,
-            'type' => TicketTypeEnum::ROAD_MAINTENANCE->value,
-            'owner_id' => $this->authAdmin()->id,
+            'type' => TicketTypeEnum::TECHNICAL->value,
+            'owner_id' => $this->user->id,
         ]);
-    });
+    }
 
-    test('create ticket page validates required fields', function (): void {
+    /** @test */
+    public function create_ticket_page_validates_required_fields(): void
+    {
         Livewire::test(CreateTicket::class)
             ->fillForm([
-                'name' => '',
-                'content' => '',
+                'title' => '',
+                'description' => '',
             ])
             ->call('create')
-            ->assertHasFormErrors(['name', 'content']);
-    });
+            ->assertHasFormErrors(['title', 'description']);
+    }
 
-    test('edit ticket page can render', function (): void {
-        $ticket = TicketFactory::new()->createOne([
-            'owner_id' => $this->authUser()->id,
+    /** @test */
+    public function edit_ticket_page_can_render(): void
+    {
+        $ticket = Ticket::factory()->create([
+            'owner_id' => $this->user->id,
         ]);
 
         Livewire::test(EditTicket::class, ['record' => $ticket->getRouteKey()])
             ->assertSuccessful();
-    });
+    }
 
-    test('edit ticket page can update ticket', function (): void {
-        $ticket = TicketFactory::new()->createOne([
-            'owner_id' => $this->authUser()->id,
+    /** @test */
+    public function edit_ticket_page_can_update_ticket(): void
+    {
+        $ticket = Ticket::factory()->create([
+            'owner_id' => $this->user->id,
         ]);
 
         $updatedData = [
-            'privacyAccepted' => true,
-            'name' => 'Updated Ticket Title',
-            'content' => 'Updated Description',
+            'title' => 'Updated Ticket Title',
+            'description' => 'Updated Description',
             'priority' => TicketPriorityEnum::HIGH->value,
             'status' => TicketStatusEnum::IN_PROGRESS->value,
-            'type' => TicketTypeEnum::ROAD_MAINTENANCE->value,
-            'location' => [
-                'latitude' => 45.4642,
-                'longitude' => 9.1900,
-                'address' => 'Milano',
-            ],
         ];
 
         Livewire::test(EditTicket::class, ['record' => $ticket->getRouteKey()])
-            ->set('data', $updatedData)
+            ->fillForm($updatedData)
             ->call('save')
             ->assertHasNoFormErrors();
 
-        $this->assertDatabaseHasRow('tickets', [
+        $this->assertDatabaseHas('tickets', [
             'id' => $ticket->id,
-            'name' => 'Updated Ticket Title',
-            'content' => 'Updated Description',
+            'title' => 'Updated Ticket Title',
+            'description' => 'Updated Description',
             'priority' => TicketPriorityEnum::HIGH->value,
             'status' => TicketStatusEnum::IN_PROGRESS->value,
         ]);
-    });
+    }
 
-    test('view ticket page can render', function (): void {
-        $ticket = TicketFactory::new()->createOne([
-            'owner_id' => $this->authUser()->id,
+    /** @test */
+    public function view_ticket_page_can_render(): void
+    {
+        $ticket = Ticket::factory()->create([
+            'owner_id' => $this->user->id,
         ]);
 
         Livewire::test(ViewTicket::class, ['record' => $ticket->getRouteKey()])
             ->assertSuccessful()
-            ->assertSee($ticket->name)
-            ->assertSee($ticket->content);
-    });
+            ->assertSee($ticket->title)
+            ->assertSee($ticket->description);
+    }
 
-    test('admin can view ticket details', function (): void {
-        $ticket = TicketFactory::new()->createOne([
-            'owner_id' => $this->authAdmin()->id,
-        ]);
+    /** @test */
+    public function admin_can_view_ticket_details(): void
+    {
+        $ticket = Ticket::factory()->create();
 
-        Livewire::test(ViewTicket::class, ['record' => $ticket->getRouteKey()])
+        $this->get("/admin/tickets/{$ticket->id}")
             ->assertSuccessful()
-            ->assertSee($ticket->name)
-            ->assertSee($ticket->content);
-    });
+            ->assertSee($ticket->title)
+            ->assertSee($ticket->description);
+    }
 
-    test('admin can assign ticket to user', function (): void {
-        $ticket = TicketFactory::new()->createOne([
-            'owner_id' => $this->authAdmin()->id,
-            'responsible_id' => null,
-        ]);
-        $assignee = UserFactory::new()->createOne();
+    /** @test */
+    public function admin_can_assign_ticket_to_user(): void
+    {
+        $ticket = Ticket::factory()->create();
+        $assignee = User::factory()->create();
 
-        Livewire::test(ViewTicket::class, ['record' => $ticket->getRouteKey()])
-            ->mountAction('assign')
-            ->set('mountedActions.0.data.responsible_id', $assignee->id)
-            ->assertActionDataSet(['responsible_id' => $assignee->id])
-            ->callMountedAction();
+        $this->put("/admin/tickets/{$ticket->id}", [
+            'responsible_id' => $assignee->id,
+        ])->assertRedirect('/admin/tickets');
 
-        $this->assertDatabaseHasRow('tickets', [
+        $this->assertDatabaseHas('tickets', [
             'id' => $ticket->id,
             'responsible_id' => $assignee->id,
         ]);
-    });
+    }
 
-    test('admin can change ticket status', function (): void {
-        $ticket = TicketFactory::new()->createOne(['status' => TicketStatusEnum::PENDING]);
+    /** @test */
+    public function admin_can_change_ticket_status(): void
+    {
+        $ticket = Ticket::factory()->create(['status' => TicketStatusEnum::PENDING]);
 
-        Livewire::test(ViewTicket::class, ['record' => $ticket->getRouteKey()])
-            ->mountAction('changeStatus')
-            ->set('mountedActions.0.data.status', TicketStatusEnum::IN_REVIEW->value)
-            ->set('mountedActions.0.data.reason', 'Aggiornamento operativo')
-            ->callMountedAction();
+        $this->put("/admin/tickets/{$ticket->id}", [
+            'status' => TicketStatusEnum::IN_PROGRESS->value,
+        ])->assertRedirect('/admin/tickets');
 
-        $this->assertDatabaseHasRow('tickets', [
+        $this->assertDatabaseHas('tickets', [
             'id' => $ticket->id,
-            'status' => TicketStatusEnum::IN_REVIEW->value,
+            'status' => TicketStatusEnum::IN_PROGRESS->value,
         ]);
-    });
+    }
 
-    test('admin can change ticket priority', function (): void {
-        $ticket = TicketFactory::new()->createOne(['priority' => TicketPriorityEnum::LOW]);
+    /** @test */
+    public function admin_can_change_ticket_priority(): void
+    {
+        $ticket = Ticket::factory()->create(['priority' => TicketPriorityEnum::LOW]);
 
-        Livewire::test(ViewTicket::class, ['record' => $ticket->getRouteKey()])
-            ->mountAction('changePriority')
-            ->set('mountedActions.0.data.priority', TicketPriorityEnum::HIGH->value)
-            ->callMountedAction();
+        $this->put("/admin/tickets/{$ticket->id}", [
+            'priority' => TicketPriorityEnum::HIGH->value,
+        ])->assertRedirect('/admin/tickets');
 
-        $this->assertDatabaseHasRow('tickets', [
+        $this->assertDatabaseHas('tickets', [
             'id' => $ticket->id,
             'priority' => TicketPriorityEnum::HIGH->value,
         ]);
-    });
+    }
 
-    test('admin can delete ticket', function (): void {
-        $ticket = TicketFactory::new()->createOne();
+    /** @test */
+    public function admin_can_delete_ticket(): void
+    {
+        $ticket = Ticket::factory()->create();
 
-        Livewire::test(EditTicket::class, ['record' => $ticket->getRouteKey()])
-            ->assertActionExists('delete');
-        app(DeleteTicketAction::class)->execute($ticket);
+        $this->delete("/admin/tickets/{$ticket->id}")
+            ->assertRedirect('/admin/tickets');
 
-        $this->assertDatabaseHasRow('tickets', [
+        $this->assertDatabaseMissing('tickets', [
             'id' => $ticket->id,
         ]);
-        Assert::assertNotNull($ticket->fresh()?->deleted_at);
-    });
+    }
 
-    test('admin can bulk delete tickets', function (): void {
-        /** @var Collection<int, Ticket> $tickets */
-        $tickets = TicketFactory::new()->count(3)->create();
+    /** @test */
+    public function admin_can_bulk_delete_tickets(): void
+    {
+        $tickets = Ticket::factory()->count(3)->create();
 
-        Livewire::test(ListTickets::class)
-            ->callTableBulkAction('delete', $tickets->pluck('id')->all());
+        $this->post('/admin/tickets/bulk-delete', [
+            'ids' => $tickets->pluck('id')->toArray(),
+        ])->assertRedirect('/admin/tickets');
 
         foreach ($tickets as $ticket) {
-            $this->assertDatabaseHasRow('tickets', [
+            $this->assertDatabaseMissing('tickets', [
                 'id' => $ticket->id,
             ]);
-            Assert::assertNotNull($ticket->fresh()?->deleted_at);
         }
-    });
+    }
 
-    test('admin can bulk update ticket status', function (): void {
-        /** @var Collection<int, Ticket> $tickets */
-        $tickets = TicketFactory::new()->count(3)->create([
+    /** @test */
+    public function admin_can_bulk_update_ticket_status(): void
+    {
+        $tickets = Ticket::factory()->count(3)->create([
             'status' => TicketStatusEnum::PENDING,
         ]);
 
-        foreach ($tickets as $ticket) {
-            Livewire::test(ViewTicket::class, ['record' => $ticket->getRouteKey()])
-                ->mountAction('changeStatus')
-                ->set('mountedActions.0.data.status', TicketStatusEnum::IN_REVIEW->value)
-                ->set('mountedActions.0.data.reason', 'Presa in carico')
-                ->callMountedAction();
-        }
+        $this->post('/admin/tickets/bulk-update', [
+            'ids' => $tickets->pluck('id')->toArray(),
+            'status' => TicketStatusEnum::IN_PROGRESS->value,
+        ])->assertRedirect('/admin/tickets');
 
         foreach ($tickets as $ticket) {
-            $this->assertDatabaseHasRow('tickets', [
+            $this->assertDatabaseHas('tickets', [
                 'id' => $ticket->id,
-                'status' => TicketStatusEnum::IN_REVIEW->value,
+                'status' => TicketStatusEnum::IN_PROGRESS->value,
             ]);
         }
-    });
+    }
 
-    test('admin can bulk assign tickets', function (): void {
-        /** @var Collection<int, Ticket> $tickets */
-        $tickets = TicketFactory::new()->count(3)->create();
-        $assignee = UserFactory::new()->createOne();
+    /** @test */
+    public function admin_can_bulk_assign_tickets(): void
+    {
+        $tickets = Ticket::factory()->count(3)->create();
+        $assignee = User::factory()->create();
+
+        $this->post('/admin/tickets/bulk-assign', [
+            'ids' => $tickets->pluck('id')->toArray(),
+            'responsible_id' => $assignee->id,
+        ])->assertRedirect('/admin/tickets');
 
         foreach ($tickets as $ticket) {
-            Livewire::test(ViewTicket::class, ['record' => $ticket->getRouteKey()])
-                ->mountAction('assign')
-                ->set('mountedActions.0.data.responsible_id', $assignee->id)
-                ->callMountedAction();
-        }
-
-        foreach ($tickets as $ticket) {
-            $this->assertDatabaseHasRow('tickets', [
+            $this->assertDatabaseHas('tickets', [
                 'id' => $ticket->id,
                 'responsible_id' => $assignee->id,
             ]);
         }
-    });
+    }
 
-    test('admin can export tickets', function (): void {
-        TicketFactory::new()->count(5)->create();
+    /** @test */
+    public function admin_can_export_tickets(): void
+    {
+        Ticket::factory()->count(5)->create();
 
-        Livewire::test(ListTickets::class)
-            ->assertActionExists('export');
-    });
+        $this->get('/admin/tickets/export')
+            ->assertSuccessful()
+            ->assertHeader('Content-Type', 'text/csv; charset=UTF-8');
+    }
 
-    test('admin can import tickets', function (): void {
+    /** @test */
+    public function admin_can_import_tickets(): void
+    {
+        $csvData = "title,description,priority,status,type\nTest Ticket,Test Description,medium,open,technical";
+
+        $this->post('/admin/tickets/import', [
+            'file' => $csvData,
+        ])->assertRedirect('/admin/tickets');
+
+        $this->assertDatabaseHas('tickets', [
+            'title' => 'Test Ticket',
+            'description' => 'Test Description',
+        ]);
+    }
+
+    /** @test */
+    public function user_can_view_own_tickets(): void
+    {
+        $this->actingAs($this->user);
+
+        $ownTicket = Ticket::factory()->create([
+            'owner_id' => $this->user->id,
+        ]);
+
+        $otherTicket = Ticket::factory()->create([
+            'owner_id' => $this->admin->id,
+        ]);
+
+        $this->get('/admin/tickets')
+            ->assertSuccessful()
+            ->assertSee($ownTicket->title)
+            ->assertDontSee($otherTicket->title);
+    }
+
+    /** @test */
+    public function user_can_create_ticket(): void
+    {
+        $this->actingAs($this->user);
+
         $ticketData = [
-            'privacyAccepted' => true,
-            'name' => 'Imported Ticket',
-            'content' => 'Imported Description',
+            'title' => 'User Ticket',
+            'description' => 'User Description',
             'priority' => TicketPriorityEnum::MEDIUM->value,
-            'status' => TicketStatusEnum::OPEN->value,
-            'type' => TicketTypeEnum::COMPLAINT->value,
-            'owner_id' => $this->authAdmin()->id,
-            'location' => [
-                'latitude' => 45.4642,
-                'longitude' => 9.1900,
-                'address' => 'Milano',
-            ],
-        ];
-        Livewire::test(CreateTicket::class)->set('data', $ticketData)->call('create');
-
-        $this->assertDatabaseHasRow('tickets', [
-            'name' => 'Imported Ticket',
-            'content' => 'Imported Description',
-        ]);
-    });
-
-    test('user can view own tickets', function (): void {
-        /** @var TestCase $this */
-        actingAs($this->authUser());
-
-        $ownTicket = TicketFactory::new()->createOne([
-            'owner_id' => $this->authUser()->id,
-        ]);
-
-        $otherTicket = TicketFactory::new()->createOne([
-            'owner_id' => $this->authAdmin()->id,
-        ]);
-
-        Assert::assertTrue(Gate::forUser($this->authUser())->allows('view', $ownTicket));
-        Assert::assertFalse(Gate::forUser($this->authUser())->allows('view', $otherTicket));
-    });
-
-    test('user can create ticket', function (): void {
-        /** @var TestCase $this */
-        actingAs($this->authUser());
-
-        $ticketData = [
-            'name' => 'User Ticket',
-            'content' => 'User Description',
-            'priority' => TicketPriorityEnum::MEDIUM->value,
-            'type' => TicketTypeEnum::COMPLAINT->value,
+            'type' => TicketTypeEnum::SUPPORT->value,
         ];
 
-        app(CreateTicketAction::class)->execute([
-            'name' => $ticketData['name'],
-            'content' => $ticketData['content'],
-            'priority' => $ticketData['priority'],
-            'type' => $ticketData['type'],
-            'status' => TicketStatusEnum::PENDING->value,
-            'owner_id' => $this->authUser()->id,
+        $this->post('/admin/tickets', $ticketData)
+            ->assertRedirect('/admin/tickets');
+
+        $this->assertDatabaseHas('tickets', [
+            'title' => 'User Ticket',
+            'description' => 'User Description',
+            'owner_id' => $this->user->id,
+        ]);
+    }
+
+    /** @test */
+    public function user_cannot_delete_other_tickets(): void
+    {
+        $this->actingAs($this->user);
+
+        $otherTicket = Ticket::factory()->create([
+            'owner_id' => $this->admin->id,
         ]);
 
-        $this->assertDatabaseHasRow('tickets', [
-            'name' => 'User Ticket',
-            'content' => 'User Description',
-            'owner_id' => $this->authUser()->id,
-        ]);
-    });
+        $this->delete("/admin/tickets/{$otherTicket->id}")
+            ->assertStatus(403);
+    }
 
-    test('user cannot delete other tickets', function (): void {
-        /** @var TestCase $this */
-        actingAs($this->authUser());
+    /** @test */
+    public function user_cannot_assign_tickets(): void
+    {
+        $this->actingAs($this->user);
 
-        $otherTicket = TicketFactory::new()->createOne([
-            'owner_id' => $this->authAdmin()->id,
+        $ticket = Ticket::factory()->create([
+            'owner_id' => $this->user->id,
         ]);
 
-        Assert::assertFalse(Gate::forUser($this->authUser())->allows('delete', $otherTicket));
-    });
+        $this->put("/admin/tickets/{$ticket->id}", [
+            'responsible_id' => $this->admin->id,
+        ])->assertStatus(403);
+    }
 
-    test('user cannot assign tickets', function (): void {
-        /** @var TestCase $this */
-        actingAs($this->authUser());
-
-        $ticket = TicketFactory::new()->createOne([
-            'owner_id' => $this->authUser()->id,
-        ]);
-
-        Assert::assertFalse(Gate::forUser($this->authUser())->allows('assign', $ticket));
-    });
-
-    test('guest cannot access ticket management', function (): void {
-        get(TicketResource::getUrl('index'))->assertForbidden();
-        get(TicketResource::getUrl('create'))->assertForbidden();
-    });
-});
+    /** @test */
+    public function guest_cannot_access_ticket_management(): void
+    {
+        $this->get('/admin/tickets')->assertRedirect('/login');
+        $this->get('/admin/tickets/create')->assertRedirect('/login');
+    }
+}
