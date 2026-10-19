@@ -140,7 +140,7 @@ class TicketSeeder extends Seeder
      * @param  non-empty-list<PersonRow>  $citizens
      * @return TicketPlan
      */
-    private function plan(Generator $faker, int $index, array $categories, array $citizens): array
+    private function plan(Generator $faker, int $index, array $categories, array $citizens): TicketPlan
     {
         $category = self::weighted($faker, $categories, static fn (array $row): int => $row['weight']);
         $municipality = DemoMunicipalityProvider::pickWeighted($faker);

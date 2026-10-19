@@ -105,7 +105,7 @@ final class DemoPeopleProvider
      *
      * @return PersonRecord
      */
-    public static function staffFor(Generator $faker, string $department): array
+    public static function staffFor(Generator $faker, string $department): PersonRecord
     {
         $staff = self::staff($faker);
 
