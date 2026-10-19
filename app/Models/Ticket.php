@@ -85,7 +85,6 @@ use Webmozart\Assert\Assert;
  * @property int|null $relations_count
  * @property User|null $responsible
  * @property TicketStatusEnum|null $status
- * @property Collection<int, User> $ticketSubscribers
  * @property int|null $ticket_subscribers_count
  * @property mixed $total_logged_hours
  * @property mixed $total_logged_in_hours

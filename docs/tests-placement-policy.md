@@ -71,3 +71,8 @@ laravel/Modules/Fixcity/tests/Playwright/ticket-list.spec.js
 - Story 8-74: Agent directory audit and reduction
 - Modules/Geo/docs/agents-consolidation.md — agent cleanup rationale
 - bashscripts/ai/.claude/rules/second-brain-always-first.md — context ownership
+
+## ticket business logic phpstan (2026-10)
+
+`TicketBusinessLogicTest` è una classe PHPUnit su `Modules\Fixcity\Tests\TestCase` con `Assert` e factory `createOne()` per tipizzazione statica.
+

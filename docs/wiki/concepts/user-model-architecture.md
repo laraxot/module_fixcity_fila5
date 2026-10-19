@@ -5,10 +5,11 @@ title: "Fixcity User Model Architecture"
 type: concept
 tags: [architecture, user, comment, baseuser, cancomment, contract]
 created: 2026-06-18
-updated: 2026-06-18
+updated: 2026-10-18
 qmd: "fixcity user model architecture baseuser cancomment contract extends implements"
 related:
   - laravel/Modules/User/docs/wiki/concepts/baseuser-hierarchy.md
+  - laravel/Modules/User/docs/wiki/concepts/usercontract-boundary.md
   - laravel/Modules/Comment/docs/wiki/concepts/can-comment-contract-owner.md
 status: draft
 ---
@@ -18,6 +19,10 @@ status: draft
 ## Overview
 
 The Fixcity module extends the User domain with civic reporting capabilities while maintaining clean separation of concerns through contract-based composition.
+
+**Confine consumer (2026-10-18):** `BaseUser` è solo la base ereditata.
+Fuori dal modello concreto, identità = `UserContract`; capability log =
+`HasAuthentications`. Mai `instanceof BaseUser` nei consumer.
 
 ## Architecture Pattern
 

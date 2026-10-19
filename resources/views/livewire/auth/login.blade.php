@@ -68,7 +68,7 @@
                         <div class="col-12">
                             <div class="it-hero-text-wrapper bg-dark px-4 py-5">
                                 <h1 class="text-center mb-4">
-                                    {{ __('fixcity::auth.title') }}
+                                    {{ __('fixcity::auth.login.title.text') }}
                                 </h1>
 // Laraxot module file — see docs/wiki for domain contract.
 // Laraxot module file — see docs/wiki for domain contract.
@@ -90,7 +90,7 @@
                                             <input type="email" 
                                                 class="form-control @error('email') is-invalid @enderror" 
                                                 wire:model.defer="email"
-                                                placeholder="{{ __('fixcity::auth.email') }}"
+                                                placeholder="{{ __('fixcity::auth.login.email.placeholder') }}"
                                                 required>
                                             @error('email')
                                                 <div class="invalid-feedback">{{ $message }}</div>
@@ -108,7 +108,7 @@
                                             <input type="password" 
                                                 class="form-control @error('password') is-invalid @enderror" 
                                                 wire:model.defer="password"
-                                                placeholder="{{ __('fixcity::auth.password') }}"
+                                                placeholder="{{ __('fixcity::auth.login.password.placeholder') }}"
                                                 required>
                                             @error('password')
                                                 <div class="invalid-feedback">{{ $message }}</div>
@@ -122,7 +122,7 @@
                                             wire:model.defer="remember"
                                             id="remember">
                                         <label class="form-check-label" for="remember">
-                                            {{ __('fixcity::auth.remember') }}
+                                            {{ __('fixcity::auth.login.remember.text') }}
                                         </label>
                                     </div>
 
@@ -136,24 +136,24 @@
                                         <button type="submit" 
                                             class="btn btn-primary btn-lg"
                                             wire:loading.attr="disabled">
-                                                <span wire:loading.remove>{{ __('fixcity::auth.submit') }}</span>
+                                                <span wire:loading.remove>{{ __('fixcity::auth.login.submit.text') }}</span>
                                             <span wire:loading>
                                                 <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
-                                                {{ __('fixcity::auth.loading') }}
+                                                {{ __('fixcity::auth.login.loading.text') }}
                                             </span>
                                         </button>
 
                                         @if (Route::has('password.request'))
                                             <a href="{{ route('password.request') }}" class="btn btn-outline-primary">
-                                                {{ __('fixcity::auth.forgot_password') }}
+                                                {{ __('fixcity::auth.login.forgot_password.text') }}
                                             </a>
                                         @endif
                                     </div>
 
                                     <div class="text-center mt-4">
-                                        <p class="mb-0">{{ __('fixcity::auth.no_account') }}</p>
+                                        <p class="mb-0">{{ __('fixcity::auth.login.no_account.text') }}</p>
                                         <a href="{{ route('register') }}" class="btn btn-link">
-                                            {{ __('fixcity::auth.register') }}
+                                            {{ __('fixcity::auth.login.register.text') }}
                                         </a>
                                     </div>
                                 </form>

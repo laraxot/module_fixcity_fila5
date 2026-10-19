@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 use Modules\Fixcity\Database\Factories\TicketFactory;
 use Modules\Fixcity\Enums\TicketStatusEnum;
+use Modules\Fixcity\Models\TicketSubscriber;
 use Modules\Fixcity\Tests\TestCase;
 use Modules\User\Database\Factories\UserFactory;
 
@@ -17,7 +18,7 @@ it('links followed reports to tracking by capability code and never by database 
         'code' => 'TCK-FOLLOWED123456',
         'status' => TicketStatusEnum::IN_PROGRESS,
     ]);
-    $ticket->ticketSubscribers()->attach($citizen->getAuthIdentifier());
+    TicketSubscriber::query()->create(['ticket_id' => $ticket->getKey(), 'user_id' => $citizen->getAuthIdentifier()]);
 
     $this->get('/it/area-personale/seguite')
         ->assertOk()
@@ -33,7 +34,7 @@ it('shows an honest tracking fallback when a legacy ticket has no code', functio
         'code' => null,
         'status' => TicketStatusEnum::IN_PROGRESS,
     ]);
-    $ticket->ticketSubscribers()->attach($citizen->getAuthIdentifier());
+    TicketSubscriber::query()->create(['ticket_id' => $ticket->getKey(), 'user_id' => $citizen->getAuthIdentifier()]);
 
     $this->get('/it/area-personale/seguite')
         ->assertOk()

@@ -50,3 +50,29 @@ related:
 - **Anti-pattern:** non creare `update_users_id_to_string_uuid` su
   `fixcity.users` (archiviato come `.php.old`); il fix è la connessione, non
   lo schema legacy.
+
+## 2026-10-18 — authentication_logs non in fixcity_data
+
+- **Decisione:** i log auth restano nel modulo User (`fixcity_user`); Fixcity
+  non possiede né migra `authentication_logs`.
+- **Motivo:** stesso ownership di `users` UUID; errore prod su fixcity.eu
+  (`fixcity_data.authentication_logs` missing) = env/migrate su connection
+  `user`, non dominio Fixcity.
+- **Artefatto User:** [authentication-logs-connection-ownership.md](../../User/docs/bmad/authentication-logs-connection-ownership.md)
+
+## 2026-10-18 — Consumer vedono UserContract, non BaseUser
+
+- **Decisione:** i consumer (Auth listener/action, policy, tema) riconoscono
+  l'utente con `UserContract` (+ capability come `HasAuthentications`), mai
+  con `instanceof BaseUser` / type-hint `BaseUser`.
+- **Motivo:** `Modules\Fixcity\Models\User` è sostituibile via contratto;
+  vincolare l'astratta rompe l'estensibilità cross-modulo.
+- **Artefatto:** [usercontract-boundary](../../User/docs/wiki/concepts/usercontract-boundary.md),
+  [user-model-architecture](../wiki/concepts/user-model-architecture.md).
+
+## [2026-10-18] permissions su fixcity_user (non Fixcity)
+
+- **Decisione:** Spatie `permissions` resta nel modulo User / `fixcity_user`.
+- **Sintomo:** dettaglio ticket pubblico 500 via `BuildTicketTimelineAction`.
+- **Mitigazione Fixcity:** soft-guard se tabella assente; ownership canonica User.
+- **Artefatto:** [../../User/docs/bmad/permissions-connection-ownership.md](../../User/docs/bmad/permissions-connection-ownership.md)

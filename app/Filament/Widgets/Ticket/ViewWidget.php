@@ -40,7 +40,7 @@ class ViewWidget extends XotBaseInfolistWidget
             $this->ticket = $found;
             $userId = auth()->id();
             $this->isFollowing = $userId !== null
-                && $found->ticketSubscribers()->wherePivot('user_id', $userId)->exists();
+                && $found->ticketSubscriberQuery()->where('user_id', $userId)->exists();
         }
     }
 

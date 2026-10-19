@@ -54,7 +54,11 @@ describe('data step markup', function (): void {
 
         $upload = $document->querySelector('.btn-wrapper input[type=file]');
         Assert::assertNotNull($upload);
-        Assert::assertSame('image/jpeg,image/png,application/pdf', $upload->getAttribute('accept'));
+        Assert::assertSame('image/jpeg,image/png,application/pdf,image/heic,image/heif', $upload->getAttribute('accept'));
+        Assert::assertStringContainsString('normalizeCameraImage', $html);
+        Assert::assertStringContainsString('FixcityCameraUpload', $html);
+        Assert::assertStringContainsString("type: 'image/jpeg'", $html);
+        Assert::assertSame('environment', $upload->getAttribute('capture'));
         Assert::assertNotNull($upload->getAttribute('multiple'));
         Assert::assertNull($document->querySelector('.filepond--root'), 'il tema non carica il CSS di FilePond: il widget di Filament non va usato');
 

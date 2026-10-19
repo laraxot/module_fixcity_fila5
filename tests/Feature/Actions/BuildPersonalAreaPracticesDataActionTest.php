@@ -6,6 +6,7 @@ use Illuminate\Support\Carbon;
 use Modules\Fixcity\Actions\BuildPersonalAreaPracticesDataAction;
 use Modules\Fixcity\Database\Factories\TicketFactory;
 use Modules\Fixcity\Enums\TicketStatusEnum;
+use Modules\Fixcity\Models\TicketSubscriber;
 use Modules\Fixcity\Tests\TestCase;
 use Modules\User\Database\Factories\UserFactory;
 use PHPUnit\Framework\Assert;
@@ -115,7 +116,7 @@ it('never includes tickets owned or followed by someone else, nor their codes', 
     $other = UserFactory::new()->createOne();
     $mine = TicketFactory::new()->createOne(['owner_id' => $citizen->getKey(), 'code' => 'TCK-MINE-0001']);
     $theirs = TicketFactory::new()->createOne(['owner_id' => $other->getKey(), 'code' => 'TCK-THEIRS-0001']);
-    $theirs->ticketSubscribers()->attach($citizen->getKey());
+    TicketSubscriber::query()->create(['ticket_id' => $theirs->getKey(), 'user_id' => $citizen->getKey()]);
 
     $data = app(BuildPersonalAreaPracticesDataAction::class)->execute($citizen, 'it');
 

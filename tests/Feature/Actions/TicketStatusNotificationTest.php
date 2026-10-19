@@ -9,6 +9,7 @@ use Modules\Fixcity\Enums\TicketActivityEventTypeEnum;
 use Modules\Fixcity\Enums\TicketActivityVisibilityEnum;
 use Modules\Fixcity\Enums\TicketStatusEnum;
 use Modules\Fixcity\Models\TicketActivity;
+use Modules\Fixcity\Models\TicketSubscriber;
 use Modules\Fixcity\Notifications\TicketStatusChangedNotification;
 use Modules\Fixcity\Tests\TestCase;
 use Modules\User\Database\Factories\UserFactory;
@@ -24,8 +25,8 @@ it('notifies the owner and followers once for a public status change', function 
         'owner_id' => $owner->getAuthIdentifier(),
         'code' => 'TCK-0123456789ABCDEF',
     ]);
-    $ticket->ticketSubscribers()->attach($follower->getAuthIdentifier());
-    $ticket->ticketSubscribers()->attach($owner->getAuthIdentifier());
+    TicketSubscriber::query()->create(['ticket_id' => $ticket->getKey(), 'user_id' => $follower->getAuthIdentifier()]);
+    TicketSubscriber::query()->create(['ticket_id' => $ticket->getKey(), 'user_id' => $owner->getAuthIdentifier()]);
 
     TicketActivity::query()->create([
         'ticket_id' => $ticket->getKey(),

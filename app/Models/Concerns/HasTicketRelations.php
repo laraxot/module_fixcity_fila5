@@ -4,14 +4,15 @@ declare(strict_types=1);
 
 namespace Modules\Fixcity\Models\Concerns;
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Modules\Fixcity\Models\TicketActivity;
 use Modules\Fixcity\Models\TicketComment;
 use Modules\Fixcity\Models\TicketHour;
 use Modules\Fixcity\Models\TicketRelation;
+use Modules\Fixcity\Models\TicketSubscriber;
 use Modules\Xot\Contracts\UserContract;
 use Modules\Xot\Datas\XotData;
 
@@ -60,16 +61,17 @@ trait HasTicketRelations
     }
 
     /**
-     * Utenti iscritti alle notifiche del ticket (pivot ticket_subscribers).
+     * Query degli iscritti al ticket sulla connessione `user`.
      *
-     * @return BelongsToMany<Model&UserContract, $this>
+     * Il pivot è deliberatamente separato dai ticket: una relazione
+     * `belongsToMany()` costruita dal Ticket userebbe la connessione
+     * `fixcity` anche per il pivot e cercherebbe `fixcity_data.ticket_subscribers`.
+     *
+     * @return Builder<TicketSubscriber>
      */
-    public function ticketSubscribers(): BelongsToMany
+    public function ticketSubscriberQuery(): Builder
     {
-        $userClass = XotData::make()->getUserClass();
-
-        return $this->belongsToMany($userClass, 'ticket_subscribers', 'ticket_id', 'user_id')
-            ->withTimestamps();
+        return TicketSubscriber::query()->where('ticket_id', $this->getKey());
     }
 
     /**

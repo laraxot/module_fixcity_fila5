@@ -15,7 +15,12 @@ test('ticket subscribers has one active migration owner', function (): void {
         ->not->toContain('$table->timestamps();')
         ->not->toContain('$table->softDeletes();');
 
-    expect(glob($migrationPath.'/*ticket_subscribers*.php') ?: [])
+    $ticketSubscriberOwners = array_filter(
+        glob($migrationPath.'/*ticket_subscribers*.php') ?: [],
+        static fn (string $path): bool => ! str_contains(basename($path), '_repair_'),
+    );
+
+    expect($ticketSubscriberOwners)
         ->toHaveCount(1);
 
     expect(glob($migrationPath.'/*create_users_table.php') ?: [])
@@ -36,4 +41,21 @@ test('fixcity user keeps the user module UUID connection', function (): void {
         ->toBe('string');
     expect($user->getIncrementing())
         ->toBeFalse();
+});
+
+test('fixcity configuration keeps user-owned tables outside the data database', function (): void {
+    $tenantDatabase = file_get_contents(dirname(__DIR__, 4).'/config/local/fixcity/database.php');
+    $moduleDatabase = file_get_contents(dirname(__DIR__, 2).'/config/database.php');
+
+    expect($tenantDatabase)
+        ->toContain("\$userDatabase = env('DB_DATABASE_USER', 'fixcity_user');")
+        ->toContain("\$userDatabase = 'fixcity_user';")
+        ->toContain("'database' => \$userDatabase,")
+        ->toContain("if (\$userDatabase === \$applicationDatabase)")
+        ->toContain("\$userDatabase = 'fixcity_user';");
+
+    expect($moduleDatabase)
+        ->toContain("if (\$user_database_name === \$database_name)")
+        ->toContain("\$user_database_name = 'fixcity_user';")
+        ->toContain("'database' => \$user_database_name,");
 });

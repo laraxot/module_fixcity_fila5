@@ -6,6 +6,7 @@ use Illuminate\Support\Carbon;
 use Modules\Fixcity\Actions\BuildPersonalAreaFollowedDataAction;
 use Modules\Fixcity\Database\Factories\TicketFactory;
 use Modules\Fixcity\Enums\TicketStatusEnum;
+use Modules\Fixcity\Models\TicketSubscriber;
 use Modules\Fixcity\Tests\TestCase;
 use Modules\User\Database\Factories\UserFactory;
 use PHPUnit\Framework\Assert;
@@ -22,8 +23,8 @@ it('lists the followed tickets newest first with the tracking link built from th
     $citizen = UserFactory::new()->createOne();
     $older = TicketFactory::new()->createOne(['status' => TicketStatusEnum::OPEN, 'code' => 'TCK-FOL-0001', 'created_at' => Carbon::parse('2026-01-10')]);
     $newer = TicketFactory::new()->createOne(['status' => TicketStatusEnum::IN_PROGRESS, 'code' => 'TCK-FOL-0002', 'created_at' => Carbon::parse('2026-02-10')]);
-    $older->ticketSubscribers()->attach($citizen->getKey());
-    $newer->ticketSubscribers()->attach($citizen->getKey());
+    TicketSubscriber::query()->create(['ticket_id' => $older->getKey(), 'user_id' => $citizen->getKey()]);
+    TicketSubscriber::query()->create(['ticket_id' => $newer->getKey(), 'user_id' => $citizen->getKey()]);
 
     $data = app(BuildPersonalAreaFollowedDataAction::class)->execute($citizen, 'it');
 
@@ -40,9 +41,9 @@ it('does not list tickets followed by other citizens nor private tickets of othe
     $followed = TicketFactory::new()->createOne(['status' => TicketStatusEnum::OPEN, 'code' => 'TCK-FOL-MINE']);
     $notFollowed = TicketFactory::new()->createOne(['status' => TicketStatusEnum::OPEN, 'code' => 'TCK-FOL-NOT']);
     $privateOfOthers = TicketFactory::new()->createOne(['status' => TicketStatusEnum::PENDING, 'code' => 'TCK-FOL-PRIV']);
-    $followed->ticketSubscribers()->attach($citizen->getKey());
-    $notFollowed->ticketSubscribers()->attach($other->getKey());
-    $privateOfOthers->ticketSubscribers()->attach($citizen->getKey());
+    TicketSubscriber::query()->create(['ticket_id' => $followed->getKey(), 'user_id' => $citizen->getKey()]);
+    TicketSubscriber::query()->create(['ticket_id' => $notFollowed->getKey(), 'user_id' => $other->getKey()]);
+    TicketSubscriber::query()->create(['ticket_id' => $privateOfOthers->getKey(), 'user_id' => $citizen->getKey()]);
 
     $data = app(BuildPersonalAreaFollowedDataAction::class)->execute($citizen, 'it');
 
@@ -55,7 +56,7 @@ it('does not list tickets followed by other citizens nor private tickets of othe
 it('gives no tracking link to a followed ticket without code', function (): void {
     $citizen = UserFactory::new()->createOne();
     $legacy = TicketFactory::new()->createOne(['status' => TicketStatusEnum::IN_PROGRESS, 'code' => null]);
-    $legacy->ticketSubscribers()->attach($citizen->getKey());
+    TicketSubscriber::query()->create(['ticket_id' => $legacy->getKey(), 'user_id' => $citizen->getKey()]);
 
     $row = app(BuildPersonalAreaFollowedDataAction::class)->execute($citizen, 'it')['rows'][0];
 
@@ -75,7 +76,7 @@ it('keeps the real total and flags the list as truncated when it exceeds the lim
     $citizen = UserFactory::new()->createOne();
     foreach ([1, 2, 3] as $day) {
         $ticket = TicketFactory::new()->createOne(['status' => TicketStatusEnum::OPEN, 'created_at' => Carbon::parse('2026-02-0'.$day)]);
-        $ticket->ticketSubscribers()->attach($citizen->getKey());
+        TicketSubscriber::query()->create(['ticket_id' => $ticket->getKey(), 'user_id' => $citizen->getKey()]);
     }
 
     $data = app(BuildPersonalAreaFollowedDataAction::class)->execute($citizen, 'it', 2);

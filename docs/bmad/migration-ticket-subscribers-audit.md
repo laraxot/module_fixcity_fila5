@@ -50,3 +50,30 @@ bigint o un vincolo fisico non valido. L'`align_*` mescolava anche DDL di
 La tabella esistente `user.ticket_subscribers` è già compatibile: UUID,
 bigint, indici, unique composta e colonne audit. La correzione non converte né
 cancella dati esistenti.
+
+## Ripristino produzione
+
+La connessione `user` deve risolvere a `DB_DATABASE_USER=fixcity_user`, distinta
+da `DB_DATABASE=fixcity_data`. Dopo il deploy, senza comandi distruttivi:
+
+```bash
+php artisan config:clear
+php artisan migrate --database=user
+php artisan tinker --execute='dump(config("database.connections.user.database"));'
+```
+
+Il valore stampato deve essere `fixcity_user`; altrimenti il deploy sta
+caricando un `.env` o una cache diversa dal repository.
+
+## Incident 2026-10-18 — installazioni con migration registrata ma tabella assente
+
+L'area personale usava `TicketSubscriber` sulla connessione `user`, ma alcune
+installazioni avevano registrato la migration owner senza avere la tabella in
+`fixcity_user`. Il fallback non è spostare la query su `fixcity_data`: sarebbe
+una violazione del confine dati. È stata aggiunta la repair migration
+`2026_10_18_180002_repair_ticket_subscribers_table.php`, che crea la tabella
+solo se manca e lascia intatti i dati presenti.
+
+Prima di verificare il deploy: `config:clear`, `migrate --no-interaction` e
+`migrate:status` sulla connessione reale; mai `migrate:fresh`, `refresh`,
+`reset` o `db:wipe`.

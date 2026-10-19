@@ -5,12 +5,16 @@ declare(strict_types=1);
 namespace Modules\Fixcity\Actions;
 
 use Illuminate\Contracts\Auth\Authenticatable;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Schema;
 use Modules\Fixcity\Enums\TicketActivityEventTypeEnum;
 use Modules\Fixcity\Enums\TicketActivityVisibilityEnum;
 use Modules\Fixcity\Enums\TicketStatusEnum;
 use Modules\Fixcity\Models\Ticket;
 use Modules\Fixcity\Models\TicketActivity;
+use Modules\Xot\Actions\Cast\SafeStringCastAction;
 use Spatie\QueueableAction\QueueableAction;
+use Throwable;
 
 final class BuildTicketTimelineAction
 {
@@ -24,14 +28,8 @@ final class BuildTicketTimelineAction
     public function execute(Ticket $ticket, ?Authenticatable $viewer = null): array
     {
         $isOwner = $viewer !== null
-            && (string) $ticket->owner_id === (string) $viewer->getAuthIdentifier();
-        $isOperator = $viewer !== null
-            && method_exists($viewer, 'can')
-            && (
-                (bool) $viewer->can('changeStatus', $ticket)
-                || (bool) $viewer->can('assign', $ticket)
-                || (bool) $viewer->can('viewAny', Ticket::class)
-            );
+            && SafeStringCastAction::cast($ticket->owner_id) === SafeStringCastAction::cast($viewer->getAuthIdentifier());
+        $isOperator = $this->viewerIsOperator($viewer, $ticket);
 
         $activities = $ticket->activities()
             ->where(function ($query) use ($isOwner, $isOperator): void {
@@ -126,5 +124,43 @@ final class BuildTicketTimelineAction
         }
 
         return $activity->reason;
+    }
+
+    /**
+     * Operator visibility needs Spatie permissions on connection `user`
+     * (`fixcity_user`). Never crash the public ticket page when that table is
+     * missing or the connection still points at `fixcity_data`.
+     */
+    private function viewerIsOperator(?Authenticatable $viewer, Ticket $ticket): bool
+    {
+        if ($viewer === null || ! method_exists($viewer, 'can')) {
+            return false;
+        }
+
+        if (! $this->userPermissionsReady()) {
+            return false;
+        }
+
+        try {
+            return (bool) $viewer->can('changeStatus', $ticket)
+                || (bool) $viewer->can('assign', $ticket)
+                || (bool) $viewer->can('viewAny', Ticket::class);
+        } catch (Throwable $e) {
+            Log::warning('ticket timeline operator check skipped', [
+                'ticket_id' => $ticket->id,
+                'error' => $e->getMessage(),
+            ]);
+
+            return false;
+        }
+    }
+
+    private function userPermissionsReady(): bool
+    {
+        try {
+            return Schema::connection('user')->hasTable('permissions');
+        } catch (Throwable) {
+            return false;
+        }
     }
 }

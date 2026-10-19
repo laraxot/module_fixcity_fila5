@@ -3,7 +3,7 @@ title: "Blueprint: anteprima delle foto nel passo riepilogo del wizard di segnal
 type: blueprint
 status: implemented
 created: 2026-10-14
-updated: 2026-10-14
+updated: 2026-10-18
 module: Fixcity
 tags: [blueprint, filament, wizard, riepilogo, upload, anteprima, dcp-182]
 qmd: "blueprint filament wizard riepilogo anteprima foto allegati images SpatieMediaLibraryFileUpload TemporaryUploadedFile temporaryUrl preview-file BuildTicketReviewSummaryAction summary-sections dcp-182"
@@ -17,6 +17,9 @@ related:
 # Blueprint: anteprima delle foto nel passo riepilogo
 
 Piano `planning-filament` (filament/blueprint 2.4.0, Filament 5.10.1, Livewire 4.4.7, Laravel 13.35.0). **E' un piano di aggiornamento**: nessun resource, modello o migrazione nuovi; solo modifiche (Modify/Add) a un'Action, a una vista Blade, ai file di lingua e ai test. Non contiene codice applicativo.
+Quando si modifica `resources/js/app.js`, `camera-upload.js`, `package.json` o
+la configurazione Vite del tema, il build Sixteen è parte obbligatoria della
+verifica: il comportamento mobile esiste solo nel bundle servito dal manifest.
 
 ## Richiesta
 Alla pagina `/{lang}/tickets/create?step=form.riepilogo::data::wizard-step` (passo `summary` del wizard) il cittadino deve vedere come **anteprima** le foto caricate nel passo precedente (`data`). Oggi vede solo i nomi dei file nella riga «Immagini» e nella lista `report.images`.
@@ -38,7 +41,7 @@ Se non ci sono allegati **non si aggiunge nessun markup**: la parity pixel/HTML 
 - **Denial prima della mutazione:** il riepilogo non scrive nulla; l'anteprima non cambia lo stato del form. Un file con estensione non ammessa non arriva mai a `temporaryUrl()` (verificato prima).
 
 ## 1. Commands
-Nessun comando di scaffolding. Dopo le modifiche: `php artisan view:clear` (le viste sono in cache) e, solo se si e' modificato un asset del tema, il build del tema (**non necessario**: si usano solo classi gia' presenti nel CSS compilato, vedi 3.2).
+Nessun comando di scaffolding. Dopo le modifiche: `php artisan view:clear` (le viste sono in cache) e, se si è modificato un asset del tema, `npm run build` da `Themes/Sixteen`, seguito dalla verifica del manifest e della presenza di `FixcityCameraUpload` nel bundle.
 
 ## 2. Models
 Nessuna modifica. Lo stato del campo e' `data.images` (campo `Filament\Forms\Components\SpatieMediaLibraryFileUpload`, collezione `attachments`, `maxFiles(5)`, `maxSize(10 * 1024)` KB, `acceptedFileTypes(['image/jpeg', 'image/png', 'application/pdf'])`, definito in `TicketForm::getDataSchema()`).
@@ -86,6 +89,10 @@ Pest, con `pest-scratch-db.sh` (mai il DB di sviluppo); i test di `Modules/Gdpr`
 ## Verifiche fatte e non fatte
 Fatte sul sorgente installato: `TemporaryUploadedFile::isPreviewable()` e `temporaryUrl()` (Livewire 4.4.7: rotta firmata `livewire.preview-file`, scadenza 30 minuti, throttle `60,1`), campo `SpatieMediaLibraryFileUpload` e mime ammessi in `TicketForm.php`, struttura e test della `BuildTicketReviewSummaryAction`.
 **Non fatte:** `search-docs` di Boost non raggiungibile in questa sessione (server MCP non connesso): gli URL `filamentphp.com/docs/5.x/...` non sono stati aperti; il comportamento esatto dello stato `data.images` dopo ogni passaggio (`livewire-file:` o oggetto) va confermato dal test 3; le classi CSS del punto 3.2 sono state misurate nel CSS compilato (tutte presenti, tranne quelle elencate come assenti); l'aspetto reale va confermato dal test del browser.
+
+## Correzione 2026-10-18 — fotocamera mobile
+
+Le fotocamere iOS possono fornire file HEIC/HEIF, mentre la collezione `attachments` accetta intenzionalmente solo JPEG, PNG e PDF. Il picker client espone HEIC/HEIF e il bundle Sixteen li converte in JPEG con `heic2any` prima di chiamare `$wire.upload()`; la whitelist server non viene ampliata e quindi il vincolo di sicurezza resta unico. Il fallback con canvas copre i browser che decodificano nativamente HEIC. Se nessun decoder e' disponibile, l'upload viene rifiutato senza creare ticket o media orfani. Le estensioni JPEG/PNG/PDF vengono riconosciute anche quando il browser mobile omette il MIME.
 
 
 ## Esito della revisione `reviewing-filament-plans` (2026-10-14)

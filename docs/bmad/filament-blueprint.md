@@ -49,3 +49,12 @@ cross-tenant per comodita admin.
 - [ticket-lifecycle-filament-blueprint.md](./ticket-lifecycle-filament-blueprint.md)
 - [ticket-lifecycle-blueprint.md](./ticket-lifecycle-blueprint.md)
 - Ledger: `TicketActivity` — **non** `timeline_steps`.
+
+## Upload da fotocamera mobile
+
+Il campo `TicketForm::images` mantiene la whitelist server `image/jpeg`, `image/png`,
+`application/pdf`. Il picker del tema puo' esporre anche `image/heic` e `image/heif`
+per i dispositivi iOS, ma `dc-file-upload.blade.php` li converte in JPEG prima di
+`$wire.upload()`. Non ampliare la collezione Media Library per risolvere il problema:
+la conversione client mantiene una sola regola di sicurezza e impedisce il messaggio
+generico di upload fallito per le foto scattate dalla fotocamera.

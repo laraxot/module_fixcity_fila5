@@ -19,6 +19,9 @@
     $maxFiles = $getMaxFiles() ?? 5;
     $maxKb = $getMaxSize();
     $accepted = array_values($getAcceptedFileTypes() ?? []);
+    // iOS puo' consegnare alla fotocamera HEIC/HEIF: il picker li mostra solo per
+    // convertirli in JPEG nel browser; la whitelist server resta invariata.
+    $clientAccepted = array_values(array_unique([...$accepted, 'image/heic', 'image/heif']));
     $sprite = '/themes/Sixteen/design-comuni/assets/bootstrap-italia/dist/svg/sprites.svg';
     $serverErrors = collect([$errors->first($statePath)])
         ->merge(collect($errors->get($statePath . '.*'))->flatten())
@@ -44,7 +47,7 @@
         x-data="{
             statePath: @js($statePath),
             componentKey: @js($getKey()),
-            accept: @js($accepted),
+            clientAccepted: @js($clientAccepted),
             maxFiles: @js($maxFiles),
             maxBytes: @js($maxKb ? $maxKb * 1024 : null),
             texts: @js($texts),
@@ -54,13 +57,64 @@
                 const item = this.files.find((file) => file.key === key)
                 if (item) Object.assign(item, props)
             },
-            pick(event) {
+            isCameraFormat(file) {
+                return ['image/heic', 'image/heif'].includes((file.type || '').toLowerCase()) || /\.(heic|heif)$/i.test(file.name || '')
+            },
+            isAcceptedFile(file) {
+                const type = (file.type || '').toLowerCase()
+                const extension = (file.name || '').toLowerCase().split('.').pop()
+                const mimeByExtension = { jpg: 'image/jpeg', jpeg: 'image/jpeg', png: 'image/png', pdf: 'application/pdf' }
+                const normalizedType = type || mimeByExtension[extension] || ''
+
+                return this.clientAccepted.includes(normalizedType) || ['jpg', 'jpeg', 'png', 'pdf'].includes(extension)
+            },
+            async normalizeCameraImage(file) {
+                if (!this.isCameraFormat(file)) return file
+
+                if (window.FixcityCameraUpload?.toJpeg) {
+                    try {
+                        return await window.FixcityCameraUpload.toJpeg(file)
+                    } catch (error) {
+                        // Some browsers can decode HEIC natively even when the
+                        // converter is unavailable; keep that path as fallback.
+                    }
+                }
+
+                const source = URL.createObjectURL(file)
+                try {
+                    const image = new Image()
+                    image.src = source
+                    await image.decode()
+
+                    const canvas = document.createElement('canvas')
+                    canvas.width = image.naturalWidth
+                    canvas.height = image.naturalHeight
+                    const context = canvas.getContext('2d')
+                    if (!context || !canvas.width || !canvas.height) return null
+                    context.drawImage(image, 0, 0)
+
+                    const blob = await new Promise((resolve) => canvas.toBlob(resolve, 'image/jpeg', 0.92))
+                    if (!(blob instanceof Blob)) return null
+
+                    return new File([blob], file.name.replace(/\.(heic|heif)$/i, '.jpg'), {
+                        type: 'image/jpeg',
+                        lastModified: file.lastModified,
+                    })
+                } catch {
+                    return null
+                } finally {
+                    URL.revokeObjectURL(source)
+                }
+            },
+            async pick(event) {
                 const picked = [...event.target.files]
                 event.target.value = ''
                 this.message = ''
-                for (const file of picked) {
+                for (const sourceFile of picked) {
                     if (this.files.length >= this.maxFiles) return void (this.message = this.texts.count)
-                    if (this.accept.length && ! this.accept.includes(file.type)) { this.message = this.texts.type; continue }
+                    if (this.clientAccepted.length && ! this.isAcceptedFile(sourceFile) && ! this.isCameraFormat(sourceFile)) { this.message = this.texts.type; continue }
+                    const file = await this.normalizeCameraImage(sourceFile)
+                    if (!file) { this.message = this.texts.upload; continue }
                     if (this.maxBytes && file.size > this.maxBytes) { this.message = this.texts.size; continue }
                     this.send(file)
                 }
@@ -108,7 +162,8 @@
             x-ref="input"
             class="visually-hidden"
             multiple
-            @if ($accepted !== []) accept="{{ implode(',', $accepted) }}" @endif
+            @if ($clientAccepted !== []) accept="{{ implode(',', $clientAccepted) }}" @endif
+            capture="environment"
             @disabled($isDisabledField)
             aria-describedby="{{ $id }}-help"
             x-on:change="pick($event)"

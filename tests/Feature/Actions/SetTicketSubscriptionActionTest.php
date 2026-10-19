@@ -5,6 +5,7 @@ declare(strict_types=1);
 use Illuminate\Auth\Access\AuthorizationException;
 use Modules\Fixcity\Actions\SetTicketSubscriptionAction;
 use Modules\Fixcity\Database\Factories\TicketFactory;
+use Modules\Fixcity\Models\TicketSubscriber;
 use Modules\Fixcity\Tests\TestCase;
 use Modules\User\Database\Factories\UserFactory;
 use PHPUnit\Framework\Assert;
@@ -20,11 +21,11 @@ it('sets the authenticated citizen ticket subscription idempotently', function (
 
     Assert::assertTrue($action->execute($ticket, $citizen, true));
     Assert::assertTrue($action->execute($ticket, $citizen, true));
-    Assert::assertSame(1, $ticket->ticketSubscribers()->count());
+    Assert::assertSame(1, TicketSubscriber::query()->where('ticket_id', $ticket->getKey())->count());
 
     Assert::assertFalse($action->execute($ticket, $citizen, false));
     Assert::assertFalse($action->execute($ticket, $citizen, false));
-    Assert::assertSame(0, $ticket->ticketSubscribers()->count());
+    Assert::assertSame(0, TicketSubscriber::query()->where('ticket_id', $ticket->getKey())->count());
 });
 
 it('does not allow following a private ticket owned by another citizen', function (): void {

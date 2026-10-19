@@ -85,7 +85,9 @@ public function tableCreate(Blueprint $table): void
 
 ❌ `add_*_to_*` migration separata
 ❌ `update_*_add_*` migration separata
-❌ `repair_*` migration (correggere con bump della migration originale)
+⚠️ `repair_*` migration: normalmente vietata; ammessa solo come eccezione
+forward-only, idempotente e documentata quando una installazione ha registrato
+una migration ma non possiede la tabella. Non deve mai cancellare dati.
 ❌ `$table->timestamps()` se `updateTimestamps()` è già in `tableUpdate()`
 ❌ `$table->softDeletes()` se `updateTimestamps(hasSoftDeletes:true)` è già in `tableUpdate()`
 ❌ `$table->string('*_by')` esplicito (coperto da `updateTimestamps()`)

@@ -2,11 +2,13 @@
 
 declare(strict_types=1);
 
+use Dom\Element;
 use Dom\HTMLDocument;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Uri;
 use Modules\Fixcity\Database\Factories\TicketFactory;
 use Modules\Fixcity\Enums\TicketStatusEnum;
+use Modules\Fixcity\Models\TicketSubscriber;
 use Modules\Fixcity\Tests\TestCase;
 use Modules\User\Database\Factories\UserFactory;
 use PHPUnit\Framework\Assert;
@@ -26,7 +28,7 @@ function personalAreaDocument(string $html): HTMLDocument
 }
 
 /**
- * @return list<Dom\Element>
+ * @return list<Element>
  */
 function personalAreaElements(HTMLDocument $document, string $selector): array
 {
@@ -34,7 +36,7 @@ function personalAreaElements(HTMLDocument $document, string $selector): array
     $elements = [];
     for ($index = 0; $index < $list->length; $index++) {
         $node = $list->item($index);
-        Assert::assertInstanceOf(Dom\Element::class, $node);
+        Assert::assertInstanceOf(Element::class, $node);
         $elements[] = $node;
     }
 
@@ -90,7 +92,7 @@ it('links the four personal area pages in the local navigation and marks the cur
     $document = personalAreaDocument((string) $this->actingAs($citizen)->get("/it/area-personale/{$page}")->assertOk()->getContent());
 
     $hrefs = array_map(
-        static fn (Dom\Element $link): string => personalAreaPath($link->getAttribute('href')),
+        static fn (Element $link): string => personalAreaPath($link->getAttribute('href')),
         personalAreaElements($document, 'main nav.cmp-nav-tab a.nav-link'),
     );
     Assert::assertSame(
@@ -156,7 +158,7 @@ it('does not show another citizen tickets, codes or ids, in either page', functi
     $other = UserFactory::new()->createOne();
     TicketFactory::new()->createOne(['name' => 'Segnalazione mia', 'owner_id' => $citizen->getKey(), 'code' => 'TCK-AREA-MINE']);
     $theirs = TicketFactory::new()->createOne(['name' => 'Segnalazione di un altro cittadino', 'owner_id' => $other->getKey(), 'code' => 'TCK-AREA-THEIRS', 'status' => TicketStatusEnum::PENDING]);
-    $theirs->ticketSubscribers()->attach($citizen->getKey());
+    TicketSubscriber::query()->create(['ticket_id' => $theirs->getKey(), 'user_id' => $citizen->getKey()]);
 
     foreach (['pratiche', 'seguite'] as $page) {
         $this->actingAs($citizen)->get("/it/area-personale/{$page}")
@@ -216,8 +218,8 @@ it('tracks followed tickets by code in every language and never by database id',
     $citizen = UserFactory::new()->createOne();
     $withCode = TicketFactory::new()->createOne(['code' => 'TCK-AREA-FOLL1', 'status' => TicketStatusEnum::IN_PROGRESS]);
     $withoutCode = TicketFactory::new()->createOne(['code' => null, 'status' => TicketStatusEnum::IN_PROGRESS]);
-    $withCode->ticketSubscribers()->attach($citizen->getKey());
-    $withoutCode->ticketSubscribers()->attach($citizen->getKey());
+    TicketSubscriber::query()->create(['ticket_id' => $withCode->getKey(), 'user_id' => $citizen->getKey()]);
+    TicketSubscriber::query()->create(['ticket_id' => $withoutCode->getKey(), 'user_id' => $citizen->getKey()]);
 
     $this->actingAs($citizen)->get("/{$locale}/area-personale/seguite")
         ->assertOk()
@@ -236,7 +238,7 @@ it('has no placeholder link in the page content', function (string $page): void 
     /** @var TestCase $this */
     $citizen = UserFactory::new()->createOne();
     $ticket = TicketFactory::new()->createOne(['owner_id' => $citizen->getKey(), 'code' => 'TCK-AREA-HASH1', 'status' => TicketStatusEnum::OPEN]);
-    $ticket->ticketSubscribers()->attach($citizen->getKey());
+    TicketSubscriber::query()->create(['ticket_id' => $ticket->getKey(), 'user_id' => $citizen->getKey()]);
 
     $document = personalAreaDocument((string) $this->actingAs($citizen)->get("/it/area-personale/{$page}")->assertOk()->getContent());
 

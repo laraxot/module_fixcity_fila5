@@ -6,6 +6,7 @@ namespace Modules\Fixcity\Actions;
 
 use Illuminate\Support\Facades\Gate;
 use Modules\Fixcity\Models\Ticket;
+use Modules\Fixcity\Models\TicketSubscriber;
 use Modules\Xot\Contracts\UserContract;
 use Spatie\QueueableAction\QueueableAction;
 
@@ -25,18 +26,19 @@ final class SetTicketSubscriptionAction
             throw new \InvalidArgumentException('L’utente deve avere un identificativo persistito.');
         }
 
-        return $ticket->getConnection()->transaction(function () use ($ticket, $userId, $following): bool {
-            $lockedTicket = $ticket->newQuery()
-                ->whereKey($ticket->getKey())
-                ->lockForUpdate()
-                ->firstOrFail();
-            $subscribers = $lockedTicket->ticketSubscribers();
-            $isFollowing = $subscribers->wherePivot('user_id', $userId)->exists();
+        return TicketSubscriber::query()->getConnection()->transaction(function () use ($ticket, $userId, $following): bool {
+            $subscriber = TicketSubscriber::query()
+                ->where('ticket_id', $ticket->getKey())
+                ->where('user_id', $userId)
+                ->first();
 
-            if ($following && ! $isFollowing) {
-                $subscribers->attach($userId);
-            } elseif (! $following && $isFollowing) {
-                $subscribers->detach($userId);
+            if ($following && $subscriber === null) {
+                TicketSubscriber::query()->create([
+                    'ticket_id' => $ticket->getKey(),
+                    'user_id' => $userId,
+                ]);
+            } elseif (! $following && $subscriber !== null) {
+                $subscriber->delete();
             }
 
             return $following;

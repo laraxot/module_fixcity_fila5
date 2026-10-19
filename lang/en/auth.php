@@ -8,7 +8,12 @@ return [
     'loading' => 'Signing in...',
     'forgot_password' => 'Forgot your password?',
     'no_account' => "Don't have an account?",
-    'register' => 'Create an account',
+    'register' => [
+        'title' => ['text' => 'Create your account'],
+        'intro' => ['text' => 'Create an account to submit and follow your reports.'],
+        'meta_description' => ['text' => 'Create a FixCity account to submit and follow your reports about local issues in your municipality.'],
+        'text' => 'Create an account',
+    ],
     'remember' => 'Remember me',
     'email' => 'Email',
     'password' => 'Password',
@@ -39,15 +44,22 @@ return [
             'action' => [
                 'text' => 'Create an account',
             ],
+            'text' => 'Create an account',
         ],
         'forgot_password' => [
             'action' => [
                 'text' => 'Forgot your password?',
             ],
+            'text' => 'Forgot your password?',
         ],
         'meta_description' => [
             'text' => 'Sign in to FixCity to submit and follow your reports.',
         ],
+        'intro' => ['text' => 'Sign in to submit and follow your reports.'],
+        'remember' => ['text' => 'Remember me'],
+        'submit' => ['text' => 'Sign in'],
+        'loading' => ['text' => 'Signing in...'],
+        'no_account' => ['text' => "Don't have an account?"],
     ],
     'register_title' => 'Create your account',
     'register_intro' => 'Create an account to submit and follow your reports.',

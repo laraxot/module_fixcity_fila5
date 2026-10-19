@@ -1,8 +1,8 @@
 <?php
-namespace Modules\Fixcity\Tests\Feature\Filament;
-<?php
 
 declare(strict_types=1);
+
+namespace Modules\Fixcity\Tests\Feature\Filament;
 
 use Livewire\Livewire;
 use Modules\Fixcity\Filament\Widgets\CreateTicketWizardWidget;

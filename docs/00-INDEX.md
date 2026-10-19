@@ -49,6 +49,10 @@ Nuovi Markdown: nome lowercase, senza date/timestamp e mai con suffisso `-1`, `-
 - [HTML Body Parity Rule](./html-body-parity-rule.md)
 - [Filament Components Guidelines](./filament-components-guidelines.md)
 
+## Translation & public authentication
+- [Translation key convention](./translation-key-convention.md) — five-element keys for
+  auth labels, placeholders, actions, and metadata.
+
 ## Technical Debt & Quality
 - [PHPStan Fix Plan](./phpstan-fix-plan.md)
 - [PHPStan Immediate Fixes](./phpstan-immediate-fixes.md)

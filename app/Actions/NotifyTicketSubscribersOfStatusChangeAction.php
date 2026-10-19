@@ -12,6 +12,7 @@ use Modules\Fixcity\Enums\TicketStatusEnum;
 use Modules\Fixcity\Models\TicketActivity;
 use Modules\Fixcity\Notifications\TicketStatusChangedNotification;
 use Modules\Xot\Contracts\UserContract;
+use Modules\Xot\Datas\XotData;
 use Spatie\QueueableAction\QueueableAction;
 use Throwable;
 
@@ -50,7 +51,9 @@ final class NotifyTicketSubscribersOfStatusChangeAction
             return;
         }
 
-        $recipients = $ticket->ticketSubscribers()->get();
+        $subscriberIds = $ticket->ticketSubscriberQuery()->pluck('user_id');
+        $userClass = XotData::make()->getUserClass();
+        $recipients = $userClass::query()->whereIn('id', $subscriberIds)->get();
         $owner = $ticket->owner;
         if ($owner instanceof UserContract) {
             $recipients->push($owner);

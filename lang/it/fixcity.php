@@ -66,7 +66,6 @@ return [
             'accept_terms' => "Devi accettare l'informativa sulla privacy per continuare.",
         ],
     ],
-,
 
     // BMAD + Second Brain — Auth login translations (5-element convention)
     'auth.login.register.action.text' => 'Registrati',

@@ -5,6 +5,7 @@ declare(strict_types=1);
 use Modules\Fixcity\Actions\BuildAuthenticatedUserFollowedTicketsQueryAction;
 use Modules\Fixcity\Database\Factories\TicketFactory;
 use Modules\Fixcity\Enums\TicketStatusEnum;
+use Modules\Fixcity\Models\TicketSubscriber;
 use Modules\Fixcity\Tests\TestCase;
 use Modules\User\Database\Factories\UserFactory;
 use PHPUnit\Framework\Assert;
@@ -23,11 +24,10 @@ it('returns only tickets followed by the requested citizen in newest-first order
     ]);
     $notFollowedTicket = TicketFactory::new()->createOne(['status' => TicketStatusEnum::OPEN]);
 
-    $olderFollowedTicket->ticketSubscribers()->attach($citizen->getAuthIdentifier());
-    $newerFollowedTicket->ticketSubscribers()->attach($citizen->getAuthIdentifier());
-    $privateFollowedTicket->ticketSubscribers()->attach($citizen->getAuthIdentifier());
-    $ownedPrivateFollowedTicket->ticketSubscribers()->attach($citizen->getAuthIdentifier());
-    $notFollowedTicket->ticketSubscribers()->attach($otherCitizen->getAuthIdentifier());
+    foreach ([$olderFollowedTicket, $newerFollowedTicket, $privateFollowedTicket, $ownedPrivateFollowedTicket] as $followedTicket) {
+        TicketSubscriber::query()->create(['ticket_id' => $followedTicket->getKey(), 'user_id' => $citizen->getAuthIdentifier()]);
+    }
+    TicketSubscriber::query()->create(['ticket_id' => $notFollowedTicket->getKey(), 'user_id' => $otherCitizen->getAuthIdentifier()]);
 
     $tickets = app(BuildAuthenticatedUserFollowedTicketsQueryAction::class)
         ->execute($citizen)

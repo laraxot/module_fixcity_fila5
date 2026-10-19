@@ -1,9 +1,8 @@
 <?php
-namespace Modules\Fixcity\Tests\Unit\Filament;
-
-<?php
 
 declare(strict_types=1);
+
+namespace Modules\Fixcity\Tests\Unit\Filament;
 
 use Filament\Actions\DeleteBulkAction;
 use Illuminate\Database\Eloquent\Model;

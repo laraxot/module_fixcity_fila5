@@ -9,6 +9,14 @@ $database_name = is_string($database_name) ? $database_name : 'database';
 $user_database_name = (config('env.DB_DATABASE_USER') ?? 'fixcity_user');
 $user_database_name = is_string($user_database_name) ? $user_database_name : 'fixcity_user';
 
+// User-owned tables (users, devices, authentication_logs, permissions/roles) must never fall
+// back to the application database. A copied production .env historically
+// set DB_DATABASE_USER equal to DB_DATABASE; keep the boundary safe even when
+// that deployment mistake is present.
+if ($user_database_name === $database_name) {
+    $user_database_name = 'fixcity_user';
+}
+
 $res = [
     'connections' => [
         'mysql' => [
@@ -67,7 +75,7 @@ $res = [
             'host' => (config('env.DB_HOST') ?? '127.0.0.1'),
             'port' => (config('env.DB_PORT') ?? '3306'),
             // 'unix_socket' => '/Applications/MAMP/tmp/mysql/mysql.sock',
-            'database' => (config('env.DB_DATABASE_USER') ?? 'forge86'),
+            'database' => $user_database_name,
             'username' => (config('env.DB_USERNAME_USER') ?? 'forge_user_04_1b'),
             'password' => (config('env.DB_PASSWORD_USER') ?? ''),
             'charset' => 'utf8mb4',
@@ -82,7 +90,7 @@ $res = [
             'host' => (config('env.DB_HOST') ?? '127.0.0.1'),
             'port' => (config('env.DB_PORT') ?? '3306'),
             // 'unix_socket' => '/Applications/MAMP/tmp/mysql/mysql.sock',
-            'database' => (config('env.DB_DATABASE_USER') ?? 'forge86'),
+            'database' => $user_database_name,
             'username' => (config('env.DB_USERNAME_USER') ?? 'forge_user_02_1'),
             'password' => (config('env.DB_PASSWORD_USER') ?? ''),
             'charset' => 'utf8mb4',

@@ -27,13 +27,13 @@ status: draft
 
 | Metodo | Tipo | Tabella / sorgente | Uso |
 |--------|------|-------------------|-----|
-| `ticketSubscribers()` | `BelongsToMany<UserContract>` | `ticket_subscribers` | Notifiche workflow ticket (owner, assignee, watcher) |
+| `ticketSubscriberQuery()` | `Builder<TicketSubscriber>` su `user` | `fixcity_user.ticket_subscribers` | Notifiche workflow ticket (owner, assignee, watcher) |
 | `subscribers(?NotificationSubscriptionType)` | `Collection<CanComment>` | `HasComments` → `comment_notification_subscriptions` | Notifiche thread commenti (All / Participating / None) |
 
 ## Regola (religione)
 
 - **Vietato** ridefinire `subscribers()` su `Ticket` con `BelongsToMany` — rompe il contratto `SupportsCommentNotifications` e PHPStan L10.
-- **Obbligatorio** usare `ticketSubscribers()` per `attach()` / `whereHas` sulla pivot ticket.
+- **Obbligatorio** usare `TicketSubscriber::query()` o `ticketSubscriberQuery()` per leggere/scrivere il pivot; non usare una relazione Eloquent cross-database.
 - `NotificationService::getUsersToNotify()` merge su `$ticket->ticketSubscribers`, non su `subscribers()`.
 - In `TicketSubscriber::ticket()` la foreign key canonica è `ticket_id`; usare `user_id` qui causa il lookup sul ticket errato.
 - `ticket_subscribers.user_id` deve avere tipo UUID/stringa a 36 caratteri perché `User` usa chiavi stringa; la migrazione evolutiva usa `foreignIdFor(XotData::make()->getUserClass(), 'user_id')` e conserva i valori legacy per audit.
@@ -42,7 +42,7 @@ status: draft
 
 ```php
 // Pivot workflow
-$ticket->ticketSubscribers()->attach($user->id);
+TicketSubscriber::query()->create(['ticket_id' => $ticket->getKey(), 'user_id' => $user->getAuthIdentifier()]);
 
 // Comment module (trait)
 $commentable->subscribers(NotificationSubscriptionType::All);
@@ -50,5 +50,5 @@ $commentable->subscribers(NotificationSubscriptionType::All);
 
 ## Riferimenti codice
 
-- `laravel/Modules/Fixcity/app/Models/Ticket.php` — `ticketSubscribers()`, `use HasComments`
+- `laravel/Modules/Fixcity/app/Models/Concerns/HasTicketRelations.php` — `ticketSubscriberQuery()`, `use HasComments`
 - `laravel/Modules/Comment/app/Models/Concerns/HasComments.php` — `subscribers()`
