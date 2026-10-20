@@ -32,6 +32,7 @@ return [
         'loading' => ['text' => 'Accediendo...'],
         'forgot_password' => ['text' => '¿Has olvidado la contraseña?'],
         'no_account' => ['text' => '¿No tienes una cuenta?'],
+        'create_account' => ['text' => 'Crear una cuenta'],
         'register' => ['text' => 'Crear una cuenta'],
         'meta_description' => ['text' => 'Accede a FixCity para enviar y seguir tus incidencias sobre problemas de tu municipio.'],
     ],

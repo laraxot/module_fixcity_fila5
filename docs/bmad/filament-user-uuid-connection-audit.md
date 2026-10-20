@@ -63,6 +63,17 @@ modificato alcun dato. Il controllo statico del modulo conferma inoltre
   (alterava `fixcity.users` invece di correggere la connessione).
 - Guardrail: `tests/Unit/MigrationConventionsTest.php`.
 
+## [2026-10-19] Registrazione e colonna `type`
+
+`POST /it/auth/register` falliva con `Unknown column 'type'` su
+`fixcity_data.users`. L'host `fixcity.eu` sceglieva il tenant `eu/fixcity`
+(symlink di `local/fixcity`). Laravel carica le config dal path reale
+(`local.fixcity.database`), quindi `eu.fixcity.database` era vuoto e la
+connessione `user` diventava una copia di `fixcity_data`.
+
+`fixcity_user.users` ha già `type`. Lo schema nuovo passa da `UserData`.
+La tabella legacy su `fixcity_data` non si altera.
+
 ## Regola preventiva
 
 Quando un model estende `BaseUser`, verificare sempre insieme:

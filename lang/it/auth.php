@@ -18,6 +18,7 @@ return [
         'submit' => ['text' => 'Accedi'],
         'loading' => ['text' => 'Accesso in corso...'],
         'no_account' => ['text' => 'Non hai un account?'],
+        'create_account' => ['text' => 'Crea un account'],
         'main_label' => ['text' => 'Pagina di accesso', 'context' => 'login_form', 'aria' => 'Aria label'],
         'register_action' => ['text' => 'Registrati', 'context' => 'login_form', 'label' => 'Registrazione'],
         'forgot_password_action' => ['text' => 'Password dimenticata?', 'context' => 'login_form', 'label' => 'Recupero']

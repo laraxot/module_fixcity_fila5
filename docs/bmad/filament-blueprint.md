@@ -4,7 +4,7 @@ type: filament-blueprint
 status: active
 module: Fixcity
 created: 2026-10-16
-updated: 2026-10-16
+updated: 2026-10-20
 tags: [bmad, filament, blueprint, fixcity]
 qmd: "filament blueprint fixcity xotbase resource widget"
 related:
@@ -27,6 +27,16 @@ i confini di dominio.
 ## Resource / widget
 
 - `TicketResource`
+
+Le FAQ pubbliche non sono un blocco del tema. Sono contenuto di prodotto:
+`Faq` sulla connessione `fixcity`, catalogo `CivicFaqCatalog`, `FaqSeeder`
+(idempotente, anche fuori dalla demo) e `FaqFactory` per i test. La pagina
+`/it/domande-frequenti` le legge con `ListPublishedFaqsAction`. Una Resource
+BO, quando servirà all'ufficio, estende `XotBaseResource` e non mette label
+nel form.
+
+Le migration `create_{modello}_table` non dichiarano `$model_class`.
+La Resource usa lo stesso modello che `XotBaseMigration` ricava dal nome file.
 
 ## Form / Table / Infolist
 

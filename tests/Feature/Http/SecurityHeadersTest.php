@@ -45,7 +45,8 @@ it('lists the hosts really loaded by the pages in the report-only policy', funct
     expect($csp)->toContain('https://*.tile.openstreetmap.org')
         ->toContain('https://nominatim.openstreetmap.org')
         ->toContain('https://fonts.googleapis.com')
-        ->toContain('https://fonts.gstatic.com');
+        ->toContain('https://fonts.gstatic.com')
+        ->toContain("worker-src 'self' blob:");
 });
 
 it('sends Strict-Transport-Security only on HTTPS requests and honours the configured max age', function (): void {

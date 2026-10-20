@@ -1,16 +1,16 @@
 ---
-title: "README"
-type: note
-tags: [documentation]
+title: "Fixcity: documentazione del modulo"
+type: readme
+tags: [module, documentation, fixcity, ownership]
 created: 2026-09-26
-updated: 2026-09-26
-qmd: "README"
+updated: 2026-10-20
+qmd: "Fixcity modulo ownership ticket FAQ documentazione"
 issues: []
 discussions: []
-status: draft
+status: active
 ---
 
-# Laravel Modules Documentation
+# Modulo Fixcity
 
 This directory routes to the active documentation roots for the Laravel modules in this repository.
 
@@ -33,8 +33,11 @@ This directory routes to the active documentation roots for the Laravel modules 
 - Then open that module's `docs/README.md`.
 - Use archive files only when the active docs do not answer the question.
 
-The governing rule for all module docs is in
+Il contratto comune per tutti i docs di moduli e temi è in
 [docs/project/docs-governance.md](../../../../docs/project/docs-governance.md).
+Questo `README.md` è l'ingresso canonico del modulo; `00-INDEX.md` resta una
+mappa operativa compatibile con la documentazione storica e non una seconda
+fonte di verità.
 
 ## Core Modules
 
@@ -77,12 +80,21 @@ The governing rule for all module docs is in
 
 - Shared project rules: [docs/README.md](../../../../docs/README.md)
 - Project documentation governance: [docs/project/docs-governance.md](../../../../docs/project/docs-governance.md)
-- Theme docs: `laravel/Themes/docs/README.md` does not exist (verified 2026-10-14); each theme owns its docs, for example [Sixteen](../../../Themes/Sixteen/docs/README.md)
+- Theme docs: [laravel/Themes/docs/README.md](../../../Themes/docs/README.md); each theme owns its docs, for example [Sixteen](../../../Themes/Sixteen/docs/README.md)
 - LLM wiki workflow: [docs/wiki/README.md](../../../../docs/wiki/README.md)
 - Modules note: [llm-wiki.md](./llm-wiki.md)
 - Agent rules: [AGENTS.md](../../../AGENTS.md)
 
 ## Documentation
+
+- [FAQ catalog ownership](./faq-catalog-ownership.md) — dominio FAQ in Fixcity,
+  composizione in Cms e renderer nel tema Sixteen.
+
+Il modulo possiede significato, catalogo, pubblicazione e fallback delle FAQ;
+non possiede la route Folio né il markup del tema. Una modifica a domande o
+risposte parte da `CivicFaqCatalog`/`ListPublishedFaqsAction`; una modifica
+visuale parte dal blocco Sixteen. Non creare view FAQ nel tema per compensare
+un difetto del catalogo.
 
 - [On-Demand Pattern](./ON-DEMAND-PATTERN.md) — Pattern per caricamento efficiente
 - [QMD Setup](./QMD-SETUP.md) — Configurazione ricerca locale

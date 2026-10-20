@@ -68,6 +68,12 @@ return [
     ],
 
     // BMAD + Second Brain — Auth login translations (5-element convention)
+    'auth.login.title.text' => 'Accedi ai servizi',
+    'auth.login.intro.text' => 'Utilizza le tue credenziali per accedere all’area riservata.',
+    'auth.login.no_account.text' => 'Non hai ancora un account?',
+    'auth.login.create_account.text' => 'Registrati',
+    'auth.login.forgot_password.text' => 'Password dimenticata?',
+    'auth.login.submitting.text' => 'Accesso in corso…',
     'auth.login.register.action.text' => 'Registrati',
     'auth.login.forgot_password.action.text' => 'Password dimenticata?',
     'auth.login.email.text' => 'Email',

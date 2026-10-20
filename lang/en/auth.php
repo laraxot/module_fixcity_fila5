@@ -60,6 +60,7 @@ return [
         'submit' => ['text' => 'Sign in'],
         'loading' => ['text' => 'Signing in...'],
         'no_account' => ['text' => "Don't have an account?"],
+        'create_account' => ['text' => 'Create an account'],
     ],
     'register_title' => 'Create your account',
     'register_intro' => 'Create an account to submit and follow your reports.',

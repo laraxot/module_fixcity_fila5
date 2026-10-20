@@ -4,7 +4,7 @@ type: decision-log
 module: Fixcity
 status: active
 created: 2026-10-16
-updated: 2026-10-16
+updated: 2026-10-19
 tags: [bmad, decision-log, fixcity]
 qmd: "decision log fixcity"
 related:
@@ -14,6 +14,14 @@ related:
 ---
 
 # Decision log — Fixcity
+
+## 2026-10-19 — Niente `$model_class` se il file è `create_{modello}_table`
+
+- **Decisione:** `2026_01_01_000001_create_users_table.php` non assegna
+  `$model_class`. `XotBaseMigration::getModelClass()` legge
+  `_create_users_table.php` nel modulo Fixcity e ottiene
+  `Modules\Fixcity\Models\User`.
+- **Perché:** una riga in più non aggiunge un contratto. Il nome file è già il contratto.
 
 ## 2026-10-16 — Kit BMAD owner
 

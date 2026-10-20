@@ -32,6 +32,7 @@ return [
         'loading' => ['text' => 'Anmeldung läuft ...'],
         'forgot_password' => ['text' => 'Passwort vergessen?'],
         'no_account' => ['text' => 'Noch kein Konto?'],
+        'create_account' => ['text' => 'Konto erstellen'],
         'register' => ['text' => 'Konto erstellen'],
         'meta_description' => ['text' => 'Melden Sie sich bei FixCity an, um Meldungen zu Missständen in Ihrer Gemeinde einzureichen und zu verfolgen.'],
     ],
