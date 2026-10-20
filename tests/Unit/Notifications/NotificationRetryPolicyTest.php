@@ -7,8 +7,11 @@ use Illuminate\Notifications\SendQueuedNotifications;
 use Modules\Fixcity\Enums\TicketStatusEnum;
 use Modules\Fixcity\Notifications\TicketAssignedNotification;
 use Modules\Fixcity\Notifications\TicketStatusChangedNotification;
+use Modules\Fixcity\Tests\TestCase;
 
 use function Safe\class_implements;
+
+uses(TestCase::class);
 
 it('configures bounded retry and backoff after the database commit', function (): void {
     $notifications = [

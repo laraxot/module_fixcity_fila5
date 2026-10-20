@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Modules\Fixcity\Tests\Unit\Models;
 
-use Illuminate\Database\Eloquent\Relations\HasMany;
+use Modules\Comment\Models\Comment;
 use Modules\Fixcity\Database\Factories\TicketFactory;
 use Modules\Fixcity\Database\Factories\TicketHourFactory;
 use Modules\Fixcity\Enums\TicketStatusEnum;
@@ -181,7 +181,7 @@ final class TicketBusinessLogicTest extends TestCase
 
     public function test_comments_relation_is_has_many(): void
     {
-        Assert::assertInstanceOf(HasMany::class, $this->ticket()->comments());
+        Assert::assertSame(Comment::class, $this->ticket()->comments()->getRelated()::class);
     }
 
     public function test_can_transition_between_statuses(): void

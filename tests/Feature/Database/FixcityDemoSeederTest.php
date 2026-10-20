@@ -23,7 +23,6 @@ use Modules\Xot\Actions\Cast\SafeStringCastAction;
 use PHPUnit\Framework\Assert;
 
 uses(TestCase::class);
-
 beforeEach(function (): void {
     if (! Schema::connection('fixcity')->hasTable('tickets') || ! Schema::connection('fixcity')->hasTable('categories')) {
         Assert::markTestSkipped('Fixcity migrations required on connection fixcity');
@@ -100,7 +99,7 @@ it('writes discussion messages and work hours only for DMO tickets', function ()
     $db = DB::connection('fixcity');
     // Il modello Comment vive su una connessione propria: leggere dalla
     // connessione di Fixcity darebbe sempre zero righe.
-    $commentDb = (new \Modules\Comment\Models\Comment)->getConnection();
+    $commentDb = (new Comment)->getConnection();
     $touched = $commentDb->table('comments')
         ->where('commentable_type', Ticket::class)
         ->whereIn('commentable_id', $ids)

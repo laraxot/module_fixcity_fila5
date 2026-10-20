@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Modules\Fixcity\Actions\Faq;
 
-use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Facades\Schema;
 use Modules\Fixcity\Database\Seeders\Support\CivicFaqCatalog;
 use Modules\Fixcity\Models\Faq;
@@ -24,9 +23,6 @@ final class ListPublishedFaqsAction
     public function execute(?string $locale = null): array
     {
         $locale = $this->locale($locale);
-
-        /** @var Collection<int, Faq> $rows */
-        $rows = new Collection();
 
         try {
             if (! Schema::connection('fixcity')->hasTable('faqs')) {
@@ -56,8 +52,10 @@ final class ListPublishedFaqsAction
 
         $items = [];
         foreach ($rows as $row) {
-            $question = trim((string) $row->getAttribute('question'));
-            $answer = trim((string) $row->getAttribute('answer'));
+            $questionValue = $row->getAttribute('question');
+            $answerValue = $row->getAttribute('answer');
+            $question = is_string($questionValue) ? trim($questionValue) : '';
+            $answer = is_string($answerValue) ? trim($answerValue) : '';
             if ($question === '' || $answer === '') {
                 continue;
             }

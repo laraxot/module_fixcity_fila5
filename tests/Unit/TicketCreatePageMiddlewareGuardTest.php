@@ -2,10 +2,13 @@
 
 declare(strict_types=1);
 
+use Modules\Fixcity\Tests\TestCase;
 use PHPUnit\Framework\Assert;
 
 use function Safe\file_get_contents;
 use function Safe\json_decode;
+
+uses(TestCase::class);
 
 /*
  * Guardia di accesso (DCP-42, STORY-357): `/it/tickets/create` si apre solo da autenticati e lo dice il JSON CMS della pagina.

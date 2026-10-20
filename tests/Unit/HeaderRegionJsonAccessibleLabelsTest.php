@@ -2,11 +2,14 @@
 
 declare(strict_types=1);
 
+use Modules\Fixcity\Tests\TestCase;
 use PHPUnit\Framework\Assert;
 use Themes\Sixteen\Support\RegionPortalLinkLabels;
 
 use function Safe\file_get_contents;
 use function Safe\json_decode;
+
+uses(TestCase::class);
 
 require_once dirname(__DIR__, 4).'/Themes/Sixteen/app/Support/RegionPortalLinkLabels.php';
 

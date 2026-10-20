@@ -1,15 +1,25 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Modules\Fixcity\View\Components\Blocks;
 
+use Illuminate\Contracts\Pagination\LengthAwarePaginator;
+use Illuminate\Contracts\View\View;
 use Illuminate\View\Component;
 use Modules\Fixcity\Models\Ticket;
 
+/**
+ * Blocco lista segnalazioni FO: categorie statiche + paginazione ticket recenti.
+ * I conteggi nelle label sono placeholder editoriali del blocco CMS, non query live.
+ */
 class TicketList extends Component
 {
+    /** @var list<string> */
     public array $categories;
 
-    public $tickets;
+    /** @var LengthAwarePaginator<int, Ticket> */
+    public LengthAwarePaginator $tickets;
 
     public function __construct()
     {
@@ -32,7 +42,7 @@ class TicketList extends Component
             ->paginate(10);
     }
 
-    public function render()
+    public function render(): View
     {
         return view('fixcity::components.blocks.ticket_list.ticket_list');
     }

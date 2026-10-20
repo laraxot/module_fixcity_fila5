@@ -2,10 +2,13 @@
 
 declare(strict_types=1);
 
+use Modules\Fixcity\Tests\TestCase;
 use PHPUnit\Framework\Assert;
 
 use function Safe\preg_match;
 use function Safe\preg_match_all;
+
+uses(TestCase::class);
 
 /*
  * DCP-55 difetto 2: il wizard tickets/create in de ed es era quasi tutto in italiano, perche' `lang/{de,es}/ticket_form.php`

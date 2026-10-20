@@ -3,9 +3,10 @@
 declare(strict_types=1);
 
 use Filament\Panel;
+use Illuminate\Foundation\Auth\User;
 use Modules\Fixcity\Providers\Filament\AdminPanelProvider;
-use Modules\Xot\Filament\AvatarProviders\InitialsAvatarProvider;
 use Modules\Fixcity\Tests\TestCase;
+use Modules\Xot\Filament\AvatarProviders\InitialsAvatarProvider;
 use PHPUnit\Framework\Assert;
 
 use function Safe\base64_decode;
@@ -19,7 +20,7 @@ uses(TestCase::class);
  */
 function xotAvatarFor(string $name): string
 {
-    $record = new Illuminate\Foundation\Auth\User;
+    $record = new User;
     $record->setAttribute('name', $name);
 
     return (new InitialsAvatarProvider)->get($record);
@@ -54,7 +55,7 @@ test('a name with markup cannot inject into the image', function (): void {
     $svg = xotAvatarSvg(xotAvatarFor('<script>alert(1)</script> x'));
 
     Assert::assertStringNotContainsString('<script', $svg);
-    Assert::assertInstanceOf(SimpleXMLElement::class, simplexml_load_string($svg), 'L\'SVG deve restare XML valido.');
+    Assert::assertSame('svg', simplexml_load_string($svg)->getName(), 'L\'SVG deve restare XML valido.');
 });
 
 test('the panels of every module use the local avatar provider', function (): void {

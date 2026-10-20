@@ -2,10 +2,13 @@
 
 declare(strict_types=1);
 
+use Modules\Fixcity\Tests\TestCase;
 use PHPUnit\Framework\Assert;
 
 use function Safe\file_get_contents;
 use function Safe\json_decode;
+
+uses(TestCase::class);
 
 /*
  * Guardia del freno alla ricerca per codice (DCP-102, DCP-149): il codice di tracciamento e' un capability token e `/{lang}/tickets/track` e' servita dal

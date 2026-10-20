@@ -11,7 +11,6 @@ use Modules\Fixcity\Tests\TestCase;
 use Modules\Xot\Filament\Traits\HasXotTable;
 
 uses(TestCase::class);
-
 /*
  * DCP-181 (audit Filament, A-1): l'azione di eliminazione di gruppo autorizzava una sola volta con `deleteAny()`, che molte policy del progetto non
  * definiscono. La regola per record deve negare dove la policy nega, e lasciare passare i modelli senza policy come fa Filament.

@@ -2,9 +2,12 @@
 
 declare(strict_types=1);
 
+use Modules\Fixcity\Tests\TestCase;
 use PHPUnit\Framework\Assert;
 
 use function Safe\preg_match_all;
+
+uses(TestCase::class);
 
 /*
  * Guardia i18n (DCP-111): i testi delle pagine "Notifiche" e "Impostazioni e privacy" esistono in it, en, de, es con le stesse chiavi,

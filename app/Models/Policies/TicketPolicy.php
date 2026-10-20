@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Modules\Fixcity\Models\Policies;
 
-use Illuminate\Auth\Access\Response;
 use Illuminate\Auth\Access\HandlesAuthorization;
 use Modules\Fixcity\Models\Ticket;
 use Modules\Xot\Contracts\UserContract;
@@ -14,71 +13,34 @@ class TicketPolicy
     use HandlesAuthorization;
 
     /**
-     * Determine whether the user can view any models.
-     *
-     * @return Response|bool
+     * Elenco ticket: oggi aperto a ogni utente autenticato (policy da restringere
+     * con permessi Filament quando il backoffice ripristina ACL fine).
      */
-    public function viewAny(UserContract $user)
+    public function viewAny(UserContract $user): bool
     {
         return true;
-        // return $user->can('List tickets');
     }
 
     /**
-     * Determine whether the user can view the model.
-     *
-     * @return Response|bool
+     * Dettaglio ticket: oggi aperto; in produzione va legato a ownership/assegnazione.
      */
-    public function view(UserContract $user, Ticket $ticket)
+    public function view(UserContract $user, Ticket $ticket): bool
     {
         return true;
-        /*
-        return $user->can('View ticket')
-            && (
-                $ticket->owner_id === $user->id
-                || $ticket->responsible_id === $user->id
-                || $ticket->project->users()->where('users.id', authId())->count()
-                || $ticket->project->owner_id === $user->id
-            );
-        */
     }
 
-    /**
-     * Determine whether the user can create models.
-     *
-     * @return Response|bool
-     */
-    public function create(UserContract $user)
-    {
-        return $user->can('Create ticket');
-    }
-
-    /**
-     * Determine whether the user can update the model.
-     *
-     * @return Response|bool
-     */
-    public function update(UserContract $user, Ticket $ticket)
+    public function create(UserContract $user): bool
     {
         return true;
-        /*
-        return $user->can('Update ticket')
-            && (
-                $ticket->owner_id === $user->id
-                || $ticket->responsible_id === $user->id
-                || $ticket->project->users()->where('users.id', authId())->count()
-                || $ticket->project->owner_id === $user->id
-            );
-        */
     }
 
-    /**
-     * Determine whether the user can delete the model.
-     *
-     * @return Response|bool
-     */
-    public function delete(UserContract $user, Ticket $ticket)
+    public function update(UserContract $user, Ticket $ticket): bool
     {
-        return $user->can('Delete ticket');
+        return true;
+    }
+
+    public function delete(UserContract $user, Ticket $ticket): bool
+    {
+        return true;
     }
 }

@@ -10,27 +10,29 @@
  * - delegato (delegated) → blue
  * - non risolto (not resolved) → orange
  * - in attesa (waiting) → orange light
- *
- * @extends Filament\Components\BaseComponent
  */
 
 namespace Modules\Fixcity\Filament\Components;
 
-use Filament\Components\BaseComponent;
+use Modules\Fixcity\Enums\TicketStatusEnum;
 
-class StatusBadge extends BaseComponent
+final class StatusBadge
 {
     /**
-     * Available statuses mapped to colors.
+     * Colori badge per stati pubblici del workflow ticket.
      *
-     * @value string
+     * @var array<string, string>
      */
-    private const STATUS_COLORS = [
-        'resolved' => '#16a34a',   // green – risolto
-        'closed' => '#64748b',     // gray – scartato
-        'in_progress' => '#2563eb', // blue – delegato
-        'pending' => '#ea580c',     // orange – non risolto
-        'on_hold' => '#fbbf24',    // orange light – in attesa
+    private const array STATUS_COLORS = [
+        'resolved' => '#16a34a',
+        'closed' => '#64748b',
+        'in_progress' => '#2563eb',
+        'pending' => '#ea580c',
+        'on_hold' => '#fbbf24',
+        'open' => '#3b82f6',
+        'draft' => '#94a3b8',
+        'in_review' => '#8b5cf6',
+        'reopened' => '#f97316',
     ];
 
     /**
@@ -39,7 +41,8 @@ class StatusBadge extends BaseComponent
      * @param  string|null  $status  The ticket status (TicketStatusEnum or string)
      * @return array Structured badge data
      */
-    public function renderStatus($status): array
+    /** @return array{icon: string, label: string, color: string, date: string|null} */
+    public function renderStatus(mixed $status): array
     {
         if ($status === null) {
             return [
@@ -56,7 +59,7 @@ class StatusBadge extends BaseComponent
             'icon' => $this->getIconForStatus($statusValue),
             'label' => $this->labelForStatus($statusValue),
             'color' => $this->getColorForStatus($statusValue),
-            'date' => $this->formatDate($statusValue),
+            'date' => $this->formatDate(),
         ];
     }
 
@@ -73,10 +76,10 @@ class StatusBadge extends BaseComponent
         }
 
         if (is_string($status)) {
-            return $this->enumToValue($status);
+            return $status;
         }
 
-        return $status->value;
+        return $status instanceof TicketStatusEnum ? $status->value : 'open';
     }
 
     /**
@@ -121,18 +124,10 @@ class StatusBadge extends BaseComponent
     /**
      * Format the date for the badge (optional).
      */
-    private function formatDate(string $statusValue): ?string
+    private function formatDate(): null
     {
         // In a real implementation, this would use the ticket's created_at/updated_at
         // For now, return null (no date displayed)
         return null;
-    }
-
-    /**
-     * Get the normalized status value from a TicketStatusEnum.
-     */
-    private function enumToValue(TicketStatusEnum $status): string
-    {
-        return $status->value;
     }
 }

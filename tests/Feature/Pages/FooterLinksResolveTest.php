@@ -56,4 +56,3 @@ it('has footer links that all resolve in the visitor language and no dead link',
 it('keeps the legal pages of the footer reachable in four languages', function (string $page, string $locale): void {
     $this->get("/{$locale}/{$page}")->assertOk()->assertSee('<h1', false);
 })->with(['privacy', 'accessibilita', 'note-legali', 'media-policy'])->with(['it', 'en', 'de', 'es']);
-

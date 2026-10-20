@@ -1,7 +1,9 @@
 <?php
 
 declare(strict_types=1);
-use PHPUnit\Framework\TestCase;
+use Modules\Fixcity\Tests\TestCase;
+
+use function Safe\file_get_contents;
 
 uses(TestCase::class);
 

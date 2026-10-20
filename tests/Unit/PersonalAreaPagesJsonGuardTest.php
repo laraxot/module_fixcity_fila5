@@ -2,10 +2,13 @@
 
 declare(strict_types=1);
 
+use Modules\Fixcity\Tests\TestCase;
 use PHPUnit\Framework\Assert;
 
 use function Safe\file_get_contents;
 use function Safe\json_decode;
+
+uses(TestCase::class);
 
 /*
  * Guardia delle pagine JSON dell'area personale (DCP-110, DCP-106): `area-personale.pratiche` e `area-personale.seguite` si aprono

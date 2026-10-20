@@ -14,7 +14,6 @@ use Modules\User\Database\Factories\UserFactory;
 use PHPUnit\Framework\Assert;
 
 uses(TestCase::class);
-
 describe('Get Ticket Kpi Aggregate Action', function (): void {
     test('_it_aggregates_ticket_counts_by_status', function (): void {
         $owner = UserFactory::new()->createOne();

@@ -8,13 +8,15 @@ use Illuminate\Support\Facades\Log;
 use Modules\Fixcity\Database\Factories\TicketFactory;
 use Modules\Fixcity\Jobs\GeocodeTicketAddressJob;
 use Modules\Fixcity\Models\Ticket;
+use Modules\Fixcity\Tests\TestCase;
 use PHPUnit\Framework\Assert;
+
+uses(TestCase::class);
 
 /**
  * Scopo: reverse-geocode Nominatim → `location.address` (nessuna colonna address).
  * Cache per coordinate uguali; warning/error su log; retry su HTTP 500.
  */
-
 test('it geocodes ticket address successfully', function (): void {
     $ticket = TicketFactory::new()->create([
         'latitude' => '45.4642',

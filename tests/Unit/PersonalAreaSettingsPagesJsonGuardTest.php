@@ -3,11 +3,14 @@
 declare(strict_types=1);
 
 use Illuminate\Support\Arr;
+use Modules\Fixcity\Tests\TestCase;
 use PHPUnit\Framework\Assert;
 
 use function Safe\file_get_contents;
 use function Safe\glob;
 use function Safe\json_decode;
+
+uses(TestCase::class);
 
 /*
  * Guardia page-json (DCP-111): `/{lang}/area-personale/notifiche` e `/impostazioni` sono pagine JSON CMS riservate agli autenticati.

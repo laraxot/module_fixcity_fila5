@@ -2,11 +2,14 @@
 
 declare(strict_types=1);
 
+use Modules\Fixcity\Tests\TestCase;
 use PHPUnit\Framework\Assert;
 
 use function Safe\file_get_contents;
 use function Safe\glob;
 use function Safe\json_decode;
+
+uses(TestCase::class);
 
 /*
  * DCP-92: la voce di menu attiva dell'header Design Comuni e' un dato del primo blocco di ogni pagina (`header_active`, valore = `data-element`

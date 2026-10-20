@@ -2,10 +2,13 @@
 
 declare(strict_types=1);
 
+use Modules\Fixcity\Tests\TestCase;
 use PHPUnit\Framework\Assert;
 
 use function Safe\file_get_contents;
 use function Safe\json_decode;
+
+uses(TestCase::class);
 
 /*
  * Footer FO: <x-section slug="footer"> → Section::getBlocksBySlug('footer') → sections/footer.json.
@@ -31,7 +34,6 @@ it('keeps FixCity brand slogan and real footer urls in every footer.json copy', 
                 throw new LogicException($path.' '.$locale.' data must be an array');
             }
             /** @var array<string, mixed> $data */
-
             $brand = $data['brand'] ?? [];
             if (! is_array($brand)) {
                 throw new LogicException($path.' '.$locale.' brand must be an array');

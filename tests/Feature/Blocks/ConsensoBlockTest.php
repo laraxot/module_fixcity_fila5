@@ -90,9 +90,9 @@ describe('Blocco consenso — contratto e accessibilita', function (): void {
         preg_match_all('/<input[^>]*id="(consenso-[^"]+)"/', $html, $ids);
 
         Assert::assertNotEmpty($ids[1]);
-        Assert::assertSame(
+        Assert::assertCount(
             count($ids[1]),
-            count(array_unique($ids[1])),
+            array_unique($ids[1]),
             'Ogni istanza del blocco deve avere un id univoco.',
         );
     });

@@ -1,16 +1,32 @@
 ---
-title: "INDEX"
-type: note
-tags: [documentation]
-created: 2026-09-26
-updated: 2026-10-13
-qmd: "INDEX"
-issues: []
-discussions: []
-status: draft
+title: "Fixcity — INDEX (verified)"
+type: index
+status: verified
+module: Fixcity
+date: 2026-10-20
+updated: 2026-10-20
+tags: [fixcity, docs, module, index, bmad, no-services, verified, actions, ticket]
 ---
+# Fixcity — Indice docs (verified 2026-10-20)
 
-# Documentation Index
+**Status:** verified · **Date:** 2026-10-20 · **No-Services applicato:** `app/Services/` assente (3 file eliminati); 77 Actions in `app/Actions/` (`TransitionTicketStatusAction`).
+
+## File chiave / Key files
+- `docs/` — `INDEX.md`, `00-INDEX.md` (BMAD), `DOCUMENTATION_INDEX.md`, `bmad/`, `stories/`, `decisions/`
+- `docs/decisions/` — `bmad-plan-services-to-actions.md`, `no-services-final-status.md`
+- `app/Actions/` — `TransitionTicketStatusAction.php`, `AssignTicketAction`, `CloseTicketAction`, `CreateTicketAction`, `ApproveTicketAction`, `ResolveTicketAction`, etc.
+- `app/Models/` — `Ticket` e correlati; `app/Filament/` — form/widget per segnalazioni
+
+## Relazioni
+- **Geo** — coordinate, geocoding, indirizzi (consumer)
+- **User** — profili operatore, assegnatari (consumer)
+- **Xot** — framework (`BaseResource`, `BasePage`, `QueueableAction` contract)
+- **Ticket** — dominio correlato (fixcity è il modulo primario per le segnalazioni)
+- **Cms / Sixteen** — rendering pagine front-office (segnalazione-dettaglio)
+
+## Decisioni
+- [`docs/decisions/bmad-plan-services-to-actions.md`](docs/decisions/bmad-plan-services-to-actions.md) — conversione Service → Queueable Action
+- [`docs/decisions/no-services-final-status.md`](docs/decisions/no-services-final-status.md) — stato No-Services finale 2026-10-20
 
 Elenco dei file markdown in questa directory.
 

@@ -128,6 +128,23 @@ class User extends BaseUser implements CanComment
         'technician' => self::class,
     ];
 
+    public function getKey(): int|string|null
+    {
+        $key = parent::getKey();
+
+        return is_int($key) || is_string($key) ? $key : null;
+    }
+
+    public function getMorphClass(): string
+    {
+        return parent::getMorphClass();
+    }
+
+    public function notify(mixed $instance): void
+    {
+        parent::notify($instance);
+    }
+
     /**
      * @return HasMany<TicketComment, $this>
      */

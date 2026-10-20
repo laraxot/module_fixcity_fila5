@@ -5,9 +5,12 @@ declare(strict_types=1);
 namespace Modules\Fixcity\Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
-use Modules\Fixcity\Models\Report;
 use Modules\Fixcity\Enums\ReportStatusEnum;
+use Modules\Fixcity\Models\Report;
 
+/**
+ * @extends Factory<Report>
+ */
 class ReportFactory extends Factory
 {
     protected $model = Report::class;
@@ -27,15 +30,15 @@ class ReportFactory extends Factory
                 'illuminazione',
                 'rifiuti',
                 'verde_pubblico',
-                'arredo_urbano'
+                'arredo_urbano',
             ]),
             'reporter_email' => $this->faker->email(),
             'status' => $this->faker->randomElement(ReportStatusEnum::cases()),
             'metadata' => [
                 'priority' => $this->faker->randomElement(['alta', 'media', 'bassa']),
                 'zone' => $this->faker->city(),
-                'created_at' => $this->faker->dateTimeThisYear()->format('Y-m-d H:i:s')
-            ]
+                'created_at' => $this->faker->dateTimeThisYear()->format('Y-m-d H:i:s'),
+            ],
         ];
     }
-} 
+}

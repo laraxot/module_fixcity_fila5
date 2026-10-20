@@ -2,9 +2,12 @@
 
 declare(strict_types=1);
 
+use Modules\Fixcity\Tests\TestCase;
 use PHPUnit\Framework\Assert;
 
 use function Safe\glob;
+
+uses(TestCase::class);
 
 /*
  * Guardia page-json (DCP-35): /it/tickets/create e' servita da `tickets.create.json` del tenant fixcity.

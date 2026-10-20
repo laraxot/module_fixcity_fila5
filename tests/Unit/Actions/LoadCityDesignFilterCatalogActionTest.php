@@ -10,7 +10,6 @@ use Modules\Xot\Actions\Cast\SafeStringCastAction;
 use PHPUnit\Framework\Assert;
 
 uses(TestCase::class);
-
 describe('Load City Design Filter Catalog Action', function (): void {
     test('_it_loads_eleven_city_design_categories', function (): void {
         $catalog = app(LoadCityDesignFilterCatalogAction::class)->execute();

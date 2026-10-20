@@ -15,7 +15,6 @@ use Modules\Xot\Datas\XotData;
 use PHPUnit\Framework\Assert;
 
 uses(TestCase::class);
-
 beforeEach(function (): void {
     (new DemoUsersSeeder)->run();
 });

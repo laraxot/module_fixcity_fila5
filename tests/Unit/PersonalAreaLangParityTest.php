@@ -3,9 +3,12 @@
 declare(strict_types=1);
 
 use Modules\Fixcity\Enums\TicketStatusEnum;
+use Modules\Fixcity\Tests\TestCase;
 use PHPUnit\Framework\Assert;
 
 use function Safe\preg_match_all;
+
+uses(TestCase::class);
 
 /*
  * Parita' delle traduzioni di fixcity::personal_area (DCP-110): il fallback del sito e' l'italiano, quindi una chiave mancante in

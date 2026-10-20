@@ -138,10 +138,14 @@ final class CivicFaqCatalog
     }
 
     /**
-     * @return FaqEntry
+     * @return array{slug: non-empty-string, sort_order: int, question: non-empty-string, answer: non-empty-string}
      */
     private static function entry(string $slug, int $sortOrder, string $question, string $answer): array
     {
+        if ($slug === '' || $question === '' || $answer === '') {
+            throw new \InvalidArgumentException('FAQ entries require non-empty text.');
+        }
+
         return [
             'slug' => $slug,
             'sort_order' => $sortOrder,

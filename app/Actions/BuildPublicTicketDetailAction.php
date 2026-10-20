@@ -6,6 +6,8 @@ namespace Modules\Fixcity\Actions;
 
 use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Support\Str;
+use Modules\Fixcity\Enums\TicketStatusEnum;
+use Modules\Fixcity\Enums\TicketTypeEnum;
 use Modules\Fixcity\Models\Ticket;
 use Modules\Fixcity\Models\TicketSubscriber;
 use Modules\Xot\Actions\Cast\SafeFloatCastAction;
@@ -40,7 +42,7 @@ final class BuildPublicTicketDetailAction
      *     longitude: float|null,
      *     description: string,
      *     meta_description: string,
-     *     timeline: list<array{occurred_at: string, occurred_date: string, occurred_on: string, from_label: string|null, to_label: string, reason: string|null}>,
+     *     timeline: list<array{occurred_at: string, occurred_date: string, occurred_on: string, from_label: string|null, to_label: string|null, reason: string|null}>,
      *     is_following: bool
      * }|null null se la segnalazione non esiste o non e' visibile al pubblico
      */
@@ -63,14 +65,16 @@ final class BuildPublicTicketDetailAction
         $description = (string) $ticket->content;
         $type = $ticket->type;
         $status = $ticket->status;
+        $typeValue = $this->stringValue($type instanceof TicketTypeEnum ? $type->value : $type);
+        $statusValue = $this->stringValue($status instanceof TicketStatusEnum ? $status->value : $status);
 
         return [
             'id' => $ticket->id,
             'title' => $ticket->name,
-            'type' => $type->value ?? '',
-            'type_label' => $type?->getLabel() ?? '',
-            'status' => $status->value ?? '',
-            'status_label' => $status?->getLabel() ?? '',
+            'type' => $typeValue,
+            'type_label' => $type instanceof TicketTypeEnum ? $type->getLabel() : $typeValue,
+            'status' => $statusValue,
+            'status_label' => $status instanceof TicketStatusEnum ? $status->getLabel() : $statusValue,
             'created_date' => $ticket->created_at?->toDateString() ?? '',
             'address' => is_string($address) ? $address : '',
             'latitude' => $hasPoint ? $lat : null,
@@ -90,5 +94,10 @@ final class BuildPublicTicketDetailAction
         }
 
         return TicketSubscriber::query()->where('ticket_id', $ticket->id)->where('user_id', $viewerId)->exists();
+    }
+
+    private function stringValue(mixed $value): string
+    {
+        return is_string($value) ? $value : '';
     }
 }

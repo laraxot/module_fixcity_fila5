@@ -2,10 +2,13 @@
 
 declare(strict_types=1);
 
+use Modules\Fixcity\Tests\TestCase;
 use PHPUnit\Framework\Assert;
 
 use function Safe\file_get_contents;
 use function Safe\json_decode;
+
+uses(TestCase::class);
 
 /*
  * DCP-55 difetto 2: `tickets.create.json` aveva blocchi solo per it ed en, quindi in de ed es "Avanti", "Indietro", "Invia", il titolo,

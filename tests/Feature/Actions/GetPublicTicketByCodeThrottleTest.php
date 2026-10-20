@@ -97,4 +97,3 @@ test('the 429 shows the themed page with the message in the language of the visi
     'de' => ['de', 'Zu viele Anfragen'],
     'es' => ['es', 'Demasiadas solicitudes'],
 ]);
-

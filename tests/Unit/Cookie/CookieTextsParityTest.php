@@ -5,10 +5,10 @@ declare(strict_types=1);
 use Modules\Fixcity\Tests\TestCase;
 use PHPUnit\Framework\Assert;
 
-uses(TestCase::class);
-
 use function Safe\file_get_contents;
 use function Safe\preg_match_all;
+
+uses(TestCase::class);
 
 /*
  * DCP-153: il sito e' in 4 lingue. Ogni testo del banner e della cookie policy deve esistere in tutte (la lingua di ripiego e' l'italiano e

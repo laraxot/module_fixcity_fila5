@@ -12,7 +12,6 @@ use Modules\User\Database\Factories\UserFactory;
 use Modules\Xot\Actions\Cast\SafeStringCastAction;
 
 uses(TestCase::class);
-
 it('returns geojson feature collection from live api', function (): void {
     /** @var TestCase $this */
     $response = $this->getJson('/api/tickets/geojson');

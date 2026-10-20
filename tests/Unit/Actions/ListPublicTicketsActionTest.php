@@ -137,9 +137,9 @@ describe('ListPublicTicketsAction pagination and facets', function (): void {
         $beyond = listFor(['page' => 99]);
 
         Assert::assertSame([23, 20, 2, 1], [$first['total'], count($first['items']), $first['last_page'], $first['page']]);
-        Assert::assertSame(3, count($last['items']));
+        Assert::assertCount(3, $last['items']);
         Assert::assertSame(2, $beyond['page']);
-        Assert::assertSame(3, count($beyond['items']));
+        Assert::assertCount(3, $beyond['items']);
         Assert::assertSame([], array_intersect(array_column($first['items'], 'id'), array_column($last['items'], 'id')));
     });
 

@@ -9,7 +9,6 @@ use Modules\Fixcity\Tests\TestCase;
 use PHPUnit\Framework\Assert;
 
 uses(TestCase::class);
-
 it('returns zero count and null average when no ratings exist', function (): void {
     $result = app(GetCitizenRatingAggregateAction::class)->execute();
 

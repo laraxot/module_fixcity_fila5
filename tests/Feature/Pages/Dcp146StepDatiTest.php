@@ -102,7 +102,6 @@ it('ships the map with a default view and non-world zoom, in every language', fu
     /** @var TestCase $this */
     $document = dcp146Page($this, $locale);
     $picker = $document->querySelector('coordinate-picker-lit') ?? Assert::fail('coordinate-picker-lit assente dalla pagina.');
-    Assert::assertInstanceOf(Element::class, $picker);
 
     $defaultView = json_decode($picker->getAttribute('default-view') ?? '', true);
     Assert::assertIsArray($defaultView, "Attributo default-view assente o non JSON su coordinate-picker-lit ({$locale}).");

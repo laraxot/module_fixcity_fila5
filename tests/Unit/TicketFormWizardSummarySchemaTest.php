@@ -11,10 +11,10 @@ use Filament\Schemas\Components\Component as SchemaComponent;
 use Filament\Schemas\Components\Section;
 use Filament\Schemas\Schema;
 use Illuminate\Contracts\Support\Htmlable;
-use Modules\Geo\Filament\Forms\Components\CoordinatePicker;
 use Modules\Fixcity\Filament\Resources\TicketResource\Schemas\TicketForm;
 use Modules\Fixcity\Filament\Resources\TicketResource\Schemas\TicketFormReviewInfolist;
 use Modules\Fixcity\Tests\TestCase;
+use Modules\Geo\Filament\Forms\Components\CoordinatePicker;
 use PHPUnit\Framework\Assert;
 
 uses(TestCase::class);
@@ -106,7 +106,6 @@ describe('ticket wizard summary step schema', function (): void {
         $schema = TicketForm::getDataSchema();
 
         Assert::assertInstanceOf(Hidden::class, $schema['priority'] ?? null);
-        Assert::assertNotInstanceOf(Select::class, $schema['priority']);
         Assert::assertInstanceOf(Section::class, $schema['locationSection'] ?? null);
         Assert::assertInstanceOf(Section::class, $schema['issueSection'] ?? null);
 

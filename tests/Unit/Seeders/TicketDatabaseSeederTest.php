@@ -14,6 +14,8 @@ use Modules\Fixcity\Tests\TestCase;
 use Modules\User\Database\Factories\UserFactory;
 use Modules\User\Models\User;
 
+uses(TestCase::class);
+
 /**
  * Scopo: il seeder di presentazione popola il front office pubblico con un
  * dataset demo stabile (20 ticket, Mogliano Veneto) ed e' idempotente.
@@ -29,9 +31,6 @@ use Modules\User\Models\User;
  * @see docs/bmad/stories/STORY-521-demo-ticket-owner-assignment.md
  * @see docs/stories/dcp-241-test-geocodifica-ticket-contro-job-inesistente.story.md
  */
-
-uses(TestCase::class);
-
 beforeEach(function (): void {
     UserFactory::new()->create(['email' => DemoUsersSeeder::CITIZEN_EMAIL]);
 

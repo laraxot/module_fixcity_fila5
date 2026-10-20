@@ -18,6 +18,6 @@ it('rejects rating outside 1-5 range', function (): void {
         app(SubmitCitizenTicketRatingAction::class)->execute($ticket, 0);
         Assert::fail('Expected ValidationException was not thrown');
     } catch (ValidationException $exception) {
-        Assert::assertInstanceOf(ValidationException::class, $exception);
+        Assert::assertSame(ValidationException::class, $exception::class);
     }
 });

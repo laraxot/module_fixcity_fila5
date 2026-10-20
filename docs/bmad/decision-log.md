@@ -4,16 +4,66 @@ type: decision-log
 module: Fixcity
 status: active
 created: 2026-10-16
-updated: 2026-10-19
+updated: 2026-10-20
 tags: [bmad, decision-log, fixcity]
 qmd: "decision log fixcity"
 related:
   - ../bmad-planning.md
   - ../bmad-brainstorming.md
   - ./project-context.md
+  - ../phpstan-fixes.md
 ---
 
 # Decision log — Fixcity
+
+## 2026-10-20 — Filament blueprint + PHPStan (sorgente, non messaggio)
+
+- **Decisione:** con Modules a zero, ogni nuova segnalazione Filament si risolve leggendo prima `filament-blueprint.md` (scopo UI) poi tipizzando; mai zittire.
+- **Track:** BMAD + second brain + PHPStan standing order
+
+## 2026-10-20 — Services ticket: assenti, Actions = SSoT (boy scout)
+
+- **Stato:** `Modules/Fixcity/app/Services/` **assente** (0 `*Service.php`). Workflow/notifiche/ticket = cartella `app/Actions/` (es. `TransitionTicketStatusAction`, notify Actions, CRUD/timeline Actions).
+- **Da non migrare ora:** nessun monolite da spezzare in questo turn; eventuali test storici sotto `Unit/Services/` vanno riscritti su Actions se riesumati da merge, non reimportando Service.
+- **Track:** [decisions/bmad-plan-services-to-actions.md](../decisions/bmad-plan-services-to-actions.md), census Xot [decision-log](../../Xot/docs/bmad/decision-log.md).
+
+## 2026-10-20 — PHPStan Modules a zero verificato
+
+- **Decisione:** il gate `analyse Modules` e' a `[OK] No errors` (cache cleared).
+- **Perche:** standing order permanente (swarm + BMAD + second brain); zero = base per boy scout.
+- **Track:** PHPStan Modules zero
+
+## 2026-10-20 — Stati ticket: eventi ≠ status enum
+
+- **Decisione:** `DemoTicketsSeeder` e ogni seed/demo usano solo case di
+  `TicketStatusEnum` (`PENDING`, `IN_REVIEW`, `IN_PROGRESS`, `RESOLVED`,
+  `CLOSED`, …). `Approved` / `Assigned` restano **eventi** di
+  `TicketActivityEventTypeEnum`, non stati del ticket.
+- **Perché:** lo scopo del workflow è la matrice `allowedTransitions()`;
+  inventare case PascalCase (`Pending`, `Approved`) spezza demo e PHPStan
+  (`classConstant.notFound`) e confonde moderazione/assegnazione con lo stato.
+- **Route:** `routes/api_ticket.php` è stub senza controller (Folio + Actions).
+- **Track:** PHPStan Modules zero + BMAD
+
+## 2026-10-20 — PHPStan zero su `Modules/Fixcity/tests`
+
+- **Decisione:** la suite test Fixcity resta analizzabile con Larastan senza
+  `@phpstan-ignore`; i test verificano il contratto reale (modello `Ticket`,
+  Actions, enum), non API legacy o case enum inventati.
+- **Verifica:** snapshot `/tmp/phpstan-by-mod/Fixcity.json` (791 voci con
+  `/tests/`); run `cd laravel && ./vendor/bin/phpstan analyse Modules/Fixcity/tests --no-progress` → **0 errori** (2026-10-20).
+- **Pattern:** `method.notFound` / `property.nonObject` → factory `createOne()` +
+  metodi esistenti; `classConstant.notFound` → case `TicketStatusEnum` reali
+  (`PENDING`, non `Pending`; `Approved` è evento activity, non status);
+  `pest.expectation.redundant` → assert semplificati; `missingType.return` →
+  return type sulle closure Pest; `class.notFound` su Pest →
+  `uses(\Modules\Fixcity\Tests\TestCase::class)` **prima** di `use TestCase`
+  (FQCN obbligatorio per Larastan).
+- **Ex-top file (snapshot):** `Feature/Livewire/TicketFormTest.php`,
+  `Feature/Pages/TicketPagesTest.php`, `Unit/Services/NotificationServiceTest.php`,
+  test enum ticket, `TicketControllerTest`, `TicketWorkflowIntegrationTest`.
+- **Riferimento:** [tests-placement-policy.md](../tests-placement-policy.md),
+  [wiki/concepts/phpstan-pest-testcase-helpers.md](../wiki/concepts/phpstan-pest-testcase-helpers.md).
 
 ## 2026-10-19 — Niente `$model_class` se il file è `create_{modello}_table`
 

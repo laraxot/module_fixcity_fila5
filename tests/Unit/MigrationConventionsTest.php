@@ -3,6 +3,12 @@
 declare(strict_types=1);
 
 use Modules\Fixcity\Models\User;
+use Modules\Fixcity\Tests\TestCase;
+
+use function Safe\file_get_contents;
+use function Safe\glob;
+
+uses(TestCase::class);
 
 test('ticket subscribers has one active migration owner', function (): void {
     $migrationPath = dirname(__DIR__, 2).'/database/migrations';
@@ -17,7 +23,7 @@ test('ticket subscribers has one active migration owner', function (): void {
 
     $ticketSubscriberOwners = array_filter(
         glob($migrationPath.'/*ticket_subscribers*.php') ?: [],
-        static fn (string $path): bool => ! str_contains(basename($path), '_repair_'),
+        static fn (mixed $path): bool => is_string($path) && ! str_contains(basename($path), '_repair_'),
     );
 
     expect($ticketSubscriberOwners)
@@ -51,11 +57,11 @@ test('fixcity configuration keeps user-owned tables outside the data database', 
         ->toContain("\$userDatabase = env('DB_DATABASE_USER', 'fixcity_user');")
         ->toContain("\$userDatabase = 'fixcity_user';")
         ->toContain("'database' => \$userDatabase,")
-        ->toContain("if (\$userDatabase === \$applicationDatabase)")
+        ->toContain('if ($userDatabase === $applicationDatabase)')
         ->toContain("\$userDatabase = 'fixcity_user';");
 
     expect($moduleDatabase)
-        ->toContain("if (\$user_database_name === \$database_name)")
+        ->toContain('if ($user_database_name === $database_name)')
         ->toContain("\$user_database_name = 'fixcity_user';")
         ->toContain("'database' => \$user_database_name,");
 });

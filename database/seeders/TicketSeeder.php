@@ -38,9 +38,9 @@ use Modules\Fixcity\Models\TicketActivity;
  * Uso:
  *   php artisan db:seed --class="Modules\Fixcity\Database\Seeders\TicketSeeder"
  *
- * @phpstan-import-type TicketPlan from Support\DemoTicketWriter
- * @phpstan-import-type CategoryRow from Support\DemoTicketWriter
- * @phpstan-import-type PersonRow from Support\DemoTicketWriter
+ * @phpstan-import-type TicketPlan from \Modules\Fixcity\Database\Seeders\Support\DemoTicketWriter
+ * @phpstan-import-type CategoryRow from \Modules\Fixcity\Database\Seeders\Support\DemoTicketWriter
+ * @phpstan-import-type PersonRow from \Modules\Fixcity\Database\Seeders\Support\DemoTicketWriter
  */
 class TicketSeeder extends Seeder
 {
@@ -140,8 +140,12 @@ class TicketSeeder extends Seeder
      * @param  non-empty-list<PersonRow>  $citizens
      * @return TicketPlan
      */
-    private function plan(Generator $faker, int $index, array $categories, array $citizens): TicketPlan
+    private function plan(Generator $faker, int $index, array $categories, array $citizens): array
     {
+        if ($citizens === []) {
+            throw new \LogicException('Ticket plans require at least one citizen.');
+        }
+
         $category = self::weighted($faker, $categories, static fn (array $row): int => $row['weight']);
         $municipality = DemoMunicipalityProvider::pickWeighted($faker);
         $address = DemoMunicipalityProvider::streetAddress($faker, $municipality);

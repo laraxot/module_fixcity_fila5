@@ -10,7 +10,6 @@ use Modules\Fixcity\ViewModels\SegnalazioniFilterViewModel;
 use PHPUnit\Framework\Assert;
 
 uses(TestCase::class);
-
 describe('Segnalazioni Filter View Model', function (): void {
     test('_it_exposes_filter_items_from_aggregate_action', function (): void {
         /** @var TestCase $this */

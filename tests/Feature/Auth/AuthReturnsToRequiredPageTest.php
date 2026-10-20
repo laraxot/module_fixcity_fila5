@@ -48,7 +48,8 @@ it('sends a newly registered user back to the required page, not to a missing ro
     session(['url.intended' => url('/it/tickets/create')]);
     $user = UserFactory::new()->createOne();
     // widget minimo: registra dove la registrazione manda l'utente invece di rispondere al browser
-    $widget = new class extends XotBaseWidget {
+    $widget = new class extends XotBaseWidget
+    {
         public string $destination = '';
 
         public function redirectIntended(mixed $default = '/', mixed $navigate = false): void

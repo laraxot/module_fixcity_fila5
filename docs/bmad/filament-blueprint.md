@@ -19,6 +19,7 @@ i confini di dominio.
 
 ## Regole non negoziabili
 
+0. PHPStan Modules a zero: errori in `app/Filament/*` si correggono alla **sorgente** (contratto blueprint + tipi veri), mai con ignore/baseline. Gate: `cd laravel && ./vendor/bin/phpstan analyse Modules`.
 1. Estendere solo `XotBaseResource` / `XotBaseWidget` / basi Xot — mai classi Filament dirette.
 2. Nessun `->label()` hardcoded: chiavi in `lang/<locale>/` del modulo.
 3. Business logic nelle Actions del modulo, non nei form hooks grassi.

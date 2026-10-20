@@ -86,12 +86,26 @@ Questo documento raccoglie le segnalazioni PHPStan attuali sul modulo `Fixcity` 
     - Tipizzare i dati di input (array shape chiari) e usare le funzioni `Safe\json_encode`.
     - Allineare le factory ai modelli realmente esistenti (o creare i modelli mancanti se fanno parte della business logic).
 
-- **File**: `routes/api_ticket.php.old`  
-  - **Nota architetturale**: il file è stato rinominato `.old` perché in Laraxot lo stack ufficiale per il dominio applicativo è **Volt + Folio + Filament + Azioni**, non controller/rotte API ad hoc.  
-  - **Piano di fix**:
-    - Migrare eventuali esigenze di API verso Actions + integrazioni specifiche (es. endpoints pubblici centralizzati nel modulo `Xot`), documentando ogni deviazione.
+- **File**: `routes/api_ticket.php`  
+  - **Stato 2026-10-20**: stub senza `TicketController` (regola no-controllers).
+    La surface HTTP ticket resta Folio `pages/api` + QueueableAction.
+  - **Non fare**: ricreare `Http/Controllers/Api/TicketController`.
 
 ### 6. Correzioni completate
+
+#### DemoTicketsSeeder — enum workflow (2026-10-20)
+- **Errore**: `TicketStatusEnum::Pending|Approved|Assigned` inesistenti.
+- **Scopo**: timeline demo FO allineata al percorso cittadino (ricevuta → review → in corso → chiusa).
+- **Fix**: case reali `PENDING` / `IN_REVIEW` / `IN_PROGRESS` / `CLOSED`;
+  `Approved`/`Assignment` solo come `TicketActivityEventTypeEnum`.
+
+#### TicketPolicy / StatusBadge / TicketList — typeCoverage
+- Return type nativi `: bool` / `const array` / `: View` dove PHPStan segnalava soglia 99%.
+
+#### TicketSeeder — `@phpstan-import-type` FQCN
+- Import da `\Modules\Fixcity\Database\Seeders\Support\DemoTicketWriter`
+  (il path relativo `Support\…` non risolveva `TicketPlan`/`PersonRow`).
+
 
 #### TicketActivity.php - `$fillable` PHPDoc covariance (fixed)
 - **Errore**: `PHPDoc type array<int, string> of property $fillable is not covariant with PHPDoc type list<string> of overridden property BaseModel::$fillable`
@@ -103,8 +117,20 @@ Questo documento raccoglie le segnalazioni PHPStan attuali sul modulo `Fixcity` 
 - **Fix**: Aggiunto `@phpstan-ignore method.notFound` nel PHPDoc della relazione `ticket()`
 - **Nota**: `withTrashed()` su BelongsTo è un pattern Laravel valido ma non riconosciuto dal type system di PHPStan con Larastan
 
-### 7. Prossimi step
+### 7. Gate 2026-10-20 — Modules a zero
 
-1. Prioritizzare le correzioni legate ai **modelli** e alle **Actions di dominio** (ChangeStatus, GenerateTicketsAction), perché hanno impatto diretto sulla business logic.
-2. Allineare i componenti Livewire/Filament agli stack già consolidati in `Cms`, `User`, `Activity`.
-3. Rieseguire `./vendor/bin/phpstan analyse Modules/Fixcity` e aggiornare questa pagina con l'elenco degli errori risolti e quelli ancora aperti.
+Verifica coordinatore (dopo swarm BMAD + second brain), anche con result-cache cleared:
+
+```bash
+cd laravel && flock -w 300 /tmp/phpstan-gate.lock \
+  ./vendor/bin/phpstan analyse Modules --no-progress
+# [OK] No errors
+```
+
+Partenza sessione: **1665** `file_errors` su 19 moduli. Fixcity: seed/workflow enum + stub `api_ticket` + typeCoverage policy/badge.
+
+### 8. Prossimi step (boy scout, non regressione)
+
+1. Dopo ogni turn non banale: rieseguire il gate Modules (ordine permanente).
+2. Services → Actions se restano `app/Services` di dominio.
+3. Tenere `HasRecursiveRelationshipsContract` **senza** return type nativi (FATAL Rating).

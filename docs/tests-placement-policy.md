@@ -76,3 +76,13 @@ laravel/Modules/Fixcity/tests/Playwright/ticket-list.spec.js
 
 `TicketBusinessLogicTest` è una classe PHPUnit su `Modules\Fixcity\Tests\TestCase` con `Assert` e factory `createOne()` per tipizzazione statica.
 
+Verifica suite test (2026-10-20):
+
+```bash
+cd laravel && ./vendor/bin/phpstan analyse Modules/Fixcity/tests --no-progress
+```
+
+Esito atteso: **0 errori**. Regole operative: allineare i test al contratto reale del dominio ticket; non introdurre case enum inventati; preferire `Assert::assert*` o `expect()` coerente, mai mix che confonde Larastan/Pest.
+
+Ordine Pest + Larastan: tutti gli `use` (incluso `Modules\Fixcity\Tests\TestCase`), poi `uses(TestCase::class);`. Nei file con `namespace Modules\Fixcity\Tests\…` importare sempre il TestCase del modulo, non un `TestCase` relativo al sotto-namespace. PHPDoc `@var TestCase $this` richiede lo stesso import.
+

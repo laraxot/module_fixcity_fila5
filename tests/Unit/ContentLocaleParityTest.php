@@ -2,12 +2,15 @@
 
 declare(strict_types=1);
 
+use Modules\Fixcity\Tests\TestCase;
 use PHPUnit\Framework\Assert;
 
 use function Safe\file_get_contents;
 use function Safe\glob;
 use function Safe\json_decode;
 use function Safe\json_encode;
+
+uses(TestCase::class);
 
 /*
  * DCP-120: parita' multilingua dei contenuti del chrome e della home.

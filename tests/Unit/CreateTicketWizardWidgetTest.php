@@ -3,6 +3,9 @@
 declare(strict_types=1);
 
 use Modules\Fixcity\Filament\Widgets\CreateTicketWizardWidget;
+use Modules\Fixcity\Tests\TestCase;
+
+uses(TestCase::class);
 
 describe('CreateTicketWizardWidget', function (): void {
     it('is the canonical FixCity wizard widget', function (): void {

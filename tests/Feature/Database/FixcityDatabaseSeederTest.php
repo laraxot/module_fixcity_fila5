@@ -22,7 +22,6 @@ use Modules\Xot\Datas\XotData;
 use PHPUnit\Framework\Assert;
 
 uses(TestCase::class);
-
 it('assigns demo tickets to the declared citizen despite unrelated existing users', function (): void {
     if (! Schema::connection('fixcity')->hasTable('categories')
         || ! Schema::connection('fixcity')->hasTable('tickets')) {

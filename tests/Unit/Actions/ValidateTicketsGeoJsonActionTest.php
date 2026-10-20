@@ -6,7 +6,9 @@ namespace Modules\Fixcity\Tests\Unit\Actions;
 
 use InvalidArgumentException;
 use Modules\Fixcity\Actions\ValidateTicketsGeoJsonAction;
+use Modules\Fixcity\Tests\TestCase;
 
+uses(TestCase::class);
 it('accepts a RFC 7946 point feature collection with longitude first', function (): void {
     $payload = [
         'type' => 'FeatureCollection',

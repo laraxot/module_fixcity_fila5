@@ -14,7 +14,6 @@ use Modules\Fixcity\Tests\TestCase;
 use PHPUnit\Framework\Assert;
 
 uses(TestCase::class);
-
 describe('Get Ticket Sla Metrics Action', function (): void {
     test('_it_returns_null_average_when_no_resolved_tickets', function (): void {
         /** @var TestCase $this */

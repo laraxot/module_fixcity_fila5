@@ -155,7 +155,9 @@ class CategoryMigrationTest extends TestCase
         // Test scope active
         $activeCategories = Category::active()->get();
         $this->assertEquals(1, $activeCategories->count());
-        $this->assertEquals('active-category', $activeCategories->first()->id);
+        $active = $activeCategories->first();
+        $this->assertNotNull($active);
+        $this->assertEquals('active-category', $active->id);
 
         // Test scope root
         $rootCategories = Category::root()->get();
@@ -221,6 +223,8 @@ class CategoryMigrationTest extends TestCase
             'sort_order' => 1,
         ]);
 
-        $this->assertTrue($parent->fresh()->hasChildren());
+        $freshParent = $parent->fresh();
+        $this->assertNotNull($freshParent);
+        $this->assertTrue($freshParent->hasChildren());
     }
 }

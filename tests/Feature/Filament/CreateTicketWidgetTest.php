@@ -8,7 +8,10 @@ use Modules\Fixcity\Enums\TicketStatusEnum;
 use Modules\Fixcity\Enums\TicketTypeEnum;
 use Modules\Fixcity\Filament\Widgets\CreateTicketWidget;
 use Modules\Fixcity\Models\Ticket;
+use Modules\Fixcity\Tests\TestCase;
 use Modules\User\Models\User;
+
+uses(TestCase::class);
 
 beforeEach(function () {
     $this->user = User::factory()->create();
@@ -26,7 +29,7 @@ describe('CreateTicketWidget', function () {
         $ticketData = [
             'name' => 'Test Ticket Creation',
             'content' => 'This is a test ticket created via widget',
-            'type' => TicketTypeEnum::BUG->value,
+            'type' => TicketTypeEnum::REPORT->value,
             'priority' => TicketPriorityEnum::MEDIUM->value,
         ];
 
@@ -73,13 +76,13 @@ describe('CreateTicketWidget', function () {
         $ticketData = [
             'name' => 'Widget Test Ticket',
             'content' => 'Test content for widget submission',
-            'type' => TicketTypeEnum::FEATURE->value,
+            'type' => TicketTypeEnum::SUGGESTION->value,
             'priority' => TicketPriorityEnum::HIGH->value,
             'latitude' => '45.4642',
             'longitude' => '9.1900',
         ];
 
-        $component = Livewire::test(CreateTicketWidget::class)
+        Livewire::test(CreateTicketWidget::class)
             ->set('data', $ticketData)
             ->call('submit');
 
@@ -129,15 +132,15 @@ describe('CreateTicketWidget Validation', function () {
 
 describe('CreateTicketWidget User Association', function () {
     it('automatically sets current user as owner', function () {
-        $component = Livewire::test(CreateTicketWidget::class)
+        Livewire::test(CreateTicketWidget::class)
             ->set('data.name', 'User Association Test')
             ->set('data.content', 'Test content')
             ->call('submit');
 
         $ticket = Ticket::latest()->first();
-        
-        if ($ticket) {
-            expect($ticket->owner_id)->toBe($this->user->id);
+
+        if ($ticket !== null) {
+            expect($ticket->owner_id)->toBe($this->user?->id);
         }
     });
 

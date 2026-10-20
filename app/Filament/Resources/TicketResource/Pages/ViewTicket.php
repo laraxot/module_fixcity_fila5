@@ -167,9 +167,20 @@ class ViewTicket extends XotBaseViewRecord
                 ->schema([
                     Select::make('recipient_label')
                         ->label(__('fixcity::ticket.actions.send_communication.recipient_label'))
-                        ->options(fn (): array => $this->record instanceof Ticket && $this->record->assignee !== null
-                            ? [(string) $this->record->assignee->getKey() => (string) ($this->record->assignee->name ?? __('fixcity::ticket.actions.send_communication.assignee_fallback'))]
-                            : [])
+                        ->options(function (): array {
+                            if (! $this->record instanceof Ticket || $this->record->assignee === null) {
+                                return [];
+                            }
+
+                            $name = $this->record->assignee->name;
+
+                            $key = $this->record->assignee->getKey();
+                            if (! is_int($key) && ! is_string($key)) {
+                                return [];
+                            }
+
+                            return [$key => is_string($name) ? $name : __('fixcity::ticket.actions.send_communication.assignee_fallback')];
+                        })
                         ->helperText(__('fixcity::ticket.actions.send_communication.recipient_help'))
                         ->required(false),
                     TextInput::make('recipient')
@@ -188,12 +199,17 @@ class ViewTicket extends XotBaseViewRecord
                 ])
                 ->action(function (array $data): void {
                     Assert::isInstanceOf($this->record, Ticket::class);
+                    Assert::string($data['recipient'] ?? null);
+                    $recipientLabel = $data['recipient_label'] ?? __('fixcity::ticket.actions.send_communication.office_fallback');
+                    Assert::string($recipientLabel);
+                    Assert::string($data['subject'] ?? null);
+                    Assert::string($data['body'] ?? null);
                     app(RecordTicketCommunicationAction::class)->send(
                         $this->record,
-                        (string) $data['recipient'],
-                        (string) ($data['recipient_label'] ?? __('fixcity::ticket.actions.send_communication.office_fallback')),
-                        (string) $data['subject'],
-                        (string) $data['body'],
+                        $data['recipient'],
+                        $recipientLabel,
+                        $data['subject'],
+                        $data['body'],
                     );
                 }),
             'recordInboundReply' => Action::make('recordInboundReply')
@@ -214,10 +230,12 @@ class ViewTicket extends XotBaseViewRecord
                 ])
                 ->action(function (array $data): void {
                     Assert::isInstanceOf($this->record, Ticket::class);
+                    Assert::string($data['sender_label'] ?? null);
+                    Assert::string($data['summary'] ?? null);
                     app(RecordTicketCommunicationAction::class)->recordInbound(
                         $this->record,
-                        (string) $data['sender_label'],
-                        (string) $data['summary'],
+                        $data['sender_label'],
+                        $data['summary'],
                     );
                 }),
             'sendFollowup' => Action::make('sendFollowup')
@@ -245,12 +263,16 @@ class ViewTicket extends XotBaseViewRecord
                 ])
                 ->action(function (array $data): void {
                     Assert::isInstanceOf($this->record, Ticket::class);
+                    Assert::string($data['recipient'] ?? null);
+                    Assert::string($data['recipient_label'] ?? null);
+                    Assert::string($data['subject'] ?? null);
+                    Assert::string($data['body'] ?? null);
                     app(RecordTicketCommunicationAction::class)->send(
                         $this->record,
-                        (string) $data['recipient'],
-                        (string) $data['recipient_label'],
-                        (string) $data['subject'],
-                        (string) $data['body'],
+                        $data['recipient'],
+                        $data['recipient_label'],
+                        $data['subject'],
+                        $data['body'],
                         true,
                     );
                 }),

@@ -103,11 +103,14 @@ final class DemoPeopleProvider
     /**
      * Operatore assegnato all'ufficio indicato; ripiega sul primo se non trovato.
      *
-     * @return PersonRecord
+     * @return array{id: int|string, email: non-empty-string, department: non-empty-string|null}
      */
-    public static function staffFor(Generator $faker, string $department): PersonRecord
+    public static function staffFor(Generator $faker, string $department): array
     {
         $staff = self::staff($faker);
+        if ($staff === []) {
+            throw new \LogicException('Demo staff pool is empty.');
+        }
 
         foreach ($staff as $record) {
             if ($record['department'] === $department) {

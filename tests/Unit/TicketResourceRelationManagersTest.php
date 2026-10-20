@@ -4,7 +4,10 @@ declare(strict_types=1);
 
 use Modules\Fixcity\Filament\Resources\TicketResource;
 use Modules\Fixcity\Filament\Resources\TicketResource\RelationManagers\CommentsRelationManager;
+use Modules\Fixcity\Tests\TestCase;
 use PHPUnit\Framework\Assert;
+
+uses(TestCase::class);
 
 /*
  * Audit Blueprint F-01 (DCP-180): XotBaseResource::getRelations() scopre per glob ogni *RelationManager.php

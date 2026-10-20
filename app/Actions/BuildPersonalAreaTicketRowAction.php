@@ -42,7 +42,7 @@ final class BuildPersonalAreaTicketRowAction
     /**
      * @return TicketRow
      */
-    public function execute(Ticket $ticket, string $locale): TicketRow
+    public function execute(Ticket $ticket, string $locale): array
     {
         $status = $ticket->status;
         $statusValue = $status instanceof TicketStatusEnum ? $status->value : SafeStringCastAction::cast($ticket->getRawOriginal('status'));

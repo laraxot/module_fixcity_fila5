@@ -5,13 +5,9 @@ declare(strict_types=1);
 namespace Modules\Fixcity\Models;
 
 use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Support\Carbon;
-use Modules\Fixcity\Database\Factories\TimelineStepFactory;
-use Modules\User\Models\User;
-use Modules\Xot\Contracts\UserContract;
-use Modules\Xot\Datas\XotData;
+use Modules\Fixcity\Enums\TicketStatusEnum;
 
 /**
  * @property int $id
@@ -25,7 +21,7 @@ use Modules\Xot\Datas\XotData;
  * @property Carbon|null $followup_at
  * @property TimelineAttachment|null $attachment
  * @property bool $private_note
- * @property json|null $metadata
+ * @property array<string, mixed>|null $metadata
  * @property Carbon|null $deleted_at
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
@@ -33,7 +29,6 @@ use Modules\Xot\Datas\XotData;
  * @property string|null $created_by
  * @property Ticket|null $ticket
  *
- * @method static TimelineStepFactory factory($count = null, $state = [])
  * @method static Builder|TimelineStep newModelQuery()
  * @method static Builder|TimelineStep newQuery()
  * @method static Builder|TimelineStep onlyTrashed()
@@ -90,7 +85,7 @@ class TimelineStep extends BaseModel
         return $this->belongsTo(Ticket::class, 'ticket_id', 'id');
     }
 
-    /** @return \Illuminate\Database\Eloquent\Relations\BelongsTo|TimelineAttachment|null */
+    /** @return BelongsTo<TimelineAttachment, $this> */
     public function attachment(): BelongsTo
     {
         return $this->belongsTo(TimelineAttachment::class, 'attachment_id', 'id');
@@ -114,27 +109,22 @@ class TimelineStep extends BaseModel
      */
     public function getClosureType(): ?string
     {
-        $type = $this->type;
-        $esito = ($this->metadata['esito'] ?? 'unknown');
+        $metadata = is_array($this->metadata) ? $this->metadata : [];
+        $esitoValue = $metadata['esito'] ?? 'unknown';
+        $esito = is_string($esitoValue) ? $esitoValue : 'unknown';
 
         $map = [
-                'risolto' => 'resolved',
-                'delegato' => 'delegated',
-                'non risolto' => 'not_resolved',
-            ];
-            return $map[$esito] ?? 'not_resolved';
+            'risolto' => 'resolved',
+            'delegato' => 'delegated',
+            'non risolto' => 'not_resolved',
+        ];
 
-        if ($type === 'response_negative') {
-            return 'rejected';
-        }
-        if ($type === 'response_delegated') {
-            return 'delegated';
-        }
-        if ($type === 'response_soon') {
-            return null;
-        }
-
-        return null;
+        return $map[$esito] ?? match ($this->type) {
+            'response_negative' => 'rejected',
+            'response_delegated' => 'delegated',
+            'response_soon' => null,
+            default => null,
+        };
     }
 
     /**
@@ -157,6 +147,18 @@ class TimelineStep extends BaseModel
      */
     public function needsReminder(): bool
     {
-        return $this->requires_followup && $this->followup_at && $this->followup_at->isPast() && $this->ticket->isWaitingForReminder();
+        if (! $this->requires_followup || ! $this->followup_at instanceof Carbon || ! $this->followup_at->isPast()) {
+            return false;
+        }
+
+        $ticket = $this->ticket;
+        if (! $ticket instanceof Ticket) {
+            return false;
+        }
+
+        $status = $ticket->status;
+        $statusValue = $status instanceof TicketStatusEnum ? $status->value : (is_string($status) ? $status : '');
+
+        return in_array($statusValue, [TicketStatusEnum::PENDING->value, TicketStatusEnum::ON_HOLD->value], true);
     }
 }
