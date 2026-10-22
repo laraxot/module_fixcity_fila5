@@ -16,6 +16,11 @@ related:
 
 # Decision log — Fixcity
 
+## 2026-10-20 — Gate PHPStan Modules zero; Filament blueprint SSoT UI admin
+
+- **Decisione:** gate `analyse Modules` confermato a zero; ticket/segnalazioni BO e widget FO restano definiti in [filament-blueprint.md](./filament-blueprint.md), non duplicati nel tema.
+- **Track:** voce sotto «Filament blueprint + PHPStan»; lifecycle [ticket-lifecycle-filament-blueprint.md](./ticket-lifecycle-filament-blueprint.md).
+
 ## 2026-10-20 — Filament blueprint + PHPStan (sorgente, non messaggio)
 
 - **Decisione:** con Modules a zero, ogni nuova segnalazione Filament si risolve leggendo prima `filament-blueprint.md` (scopo UI) poi tipizzando; mai zittire.
@@ -23,7 +28,7 @@ related:
 
 ## 2026-10-20 — Services ticket: assenti, Actions = SSoT (boy scout)
 
-- **Stato:** `Modules/Fixcity/app/Services/` **assente** (0 `*Service.php`). Workflow/notifiche/ticket = cartella `app/Actions/` (es. `TransitionTicketStatusAction`, notify Actions, CRUD/timeline Actions).
+- **Stato:** `Modules/Fixcity/app/Services/` **assente** (0 `*Service.php`). Workflow/notifiche/ticket = cartella `app/Actions/` (es. `TransitionTicketStatusAction`, notify Actions, CRUD/timeline Actions). Census sera Xot: campione `laraxot/dev` Fixcity = **0** file in `app/Services/` (allineato a [no-services-rule](../../../bashscripts/ai/wiki/rules/no-services-rule.md)).
 - **Da non migrare ora:** nessun monolite da spezzare in questo turn; eventuali test storici sotto `Unit/Services/` vanno riscritti su Actions se riesumati da merge, non reimportando Service.
 - **Track:** [decisions/bmad-plan-services-to-actions.md](../decisions/bmad-plan-services-to-actions.md), census Xot [decision-log](../../Xot/docs/bmad/decision-log.md).
 

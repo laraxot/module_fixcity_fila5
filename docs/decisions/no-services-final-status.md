@@ -35,3 +35,10 @@ Lo scopo del `No-Services` è eliminare i **monoliti stateful di business logic*
 - `TransitionTicketStatusAction` usa il trait `Spatie\QueueableAction\QueueableAction` e il contratto `execute(Ticket, targetStatus)`, quindi il confine applicativo è unico e può essere eseguito in modo sincrono o accodato.
 - Il vecchio monolite `WorkflowService` è stato scomposto nelle Actions già presenti (`AssignTicketAction`, `ChangeStatus`, `CloseTicketAction`, `CreateTicketAction`, `ResolveTicketAction`, `RejectTicketAction` e notifiche); la primitive di transizione copre il contratto residuo.
 - Loop aperto per: test conversion (`tests/Unit/Services/*` → `tests/Unit/Actions/`), presto `HasPlaceTrait.php` `trait.unused`, docs consolidamento.
+
+## Aggiornamento 2026-10-20 19:45 (boy scout)
+
+- Eliminato residuo `tests/Feature/TicketWorkflowIntegrationTest.php.old` che
+  importava ancora `NotificationService`/`TicketService`/`WorkflowService`
+  (gia' migrati ad Actions). Nessun test vivo sostitutivo con quel nome: il
+  debito e' chiuso come DELETE zombie, non come MIGRATE.

@@ -19,7 +19,7 @@ i confini di dominio.
 
 ## Regole non negoziabili
 
-0. PHPStan Modules a zero: errori in `app/Filament/*` si correggono alla **sorgente** (contratto blueprint + tipi veri), mai con ignore/baseline. Gate: `cd laravel && ./vendor/bin/phpstan analyse Modules`.
+0. PHPStan Modules a zero: errori in `app/Filament/*` → **scopo** (questo blueprint) → chiamanti → tipi veri; **mai zittire** (ignore/baseline/exclude). Gate: `cd laravel && ./vendor/bin/phpstan analyse Modules` ([phpstan-modules-zero-standing-order](../../Xot/docs/wiki/memories/phpstan-modules-zero-standing-order.md), [00-start.md](../../../../../bashscripts/docs/prompts/00-start.md#ordine-permanente-dellutente), [11-phpstan.md](../../../../../bashscripts/docs/prompts/11-phpstan.md)).
 1. Estendere solo `XotBaseResource` / `XotBaseWidget` / basi Xot — mai classi Filament dirette.
 2. Nessun `->label()` hardcoded: chiavi in `lang/<locale>/` del modulo.
 3. Business logic nelle Actions del modulo, non nei form hooks grassi.
