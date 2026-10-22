@@ -69,3 +69,9 @@ per i dispositivi iOS, ma `dc-file-upload.blade.php` li converte in JPEG prima d
 `$wire.upload()`. Non ampliare la collezione Media Library per risolvere il problema:
 la conversione client mantiene una sola regola di sicurezza e impedisce il messaggio
 generico di upload fallito per le foto scattate dalla fotocamera.
+
+## Etichette ciclo su ViewTicket (qualita)
+
+Le azioni header (`approve`, `reject`, `resolve`, `close`, `changeStatus`,
+`send_communication`, …) leggono `fixcity::ticket.actions.*` — le chiavi devono
+essere copy reale per l'operatore, non stub. Canon: [filament-viewticket-lifecycle-labels-quality.story.md](../stories/filament-viewticket-lifecycle-labels-quality.story.md).
