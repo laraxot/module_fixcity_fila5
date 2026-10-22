@@ -107,7 +107,12 @@ it('writes discussion messages and work hours only for DMO tickets', function ()
     Assert::assertSame($comments, $touched);
 
     foreach ($db->table('ticket_hours')->whereIn('ticket_id', $ids)->get() as $row) {
-        Assert::assertContains($row->value, [0.5, 1.0, 1.5, 2.0, 2.5, 3.0, 3.5, 4.0, 4.5, 5.0, 5.5, 6.0, 6.5, 7.0, 7.5]);
+        $raw = $row->value;
+        Assert::assertTrue(is_numeric($raw), 'ticket_hours.value must be numeric');
+        Assert::assertContains(
+            (float) $raw,
+            [0.5, 1.0, 1.5, 2.0, 2.5, 3.0, 3.5, 4.0, 4.5, 5.0, 5.5, 6.0, 6.5, 7.0, 7.5],
+        );
     }
 });
 

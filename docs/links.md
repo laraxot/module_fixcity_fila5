@@ -16,6 +16,8 @@ status: draft
 https://italia.github.io/design-comuni-pagine-statiche/sito/
 
 ## Documentazione Modulo Fixcity
+- [FO link conventions (religione)](./frontoffice-link-conventions.md) — `container0.view`, mai localizeUrl / tickets.show
+- [FO link coherence audit](./stories/fo-link-coherence-audit.story.md) — search-modal, profile/logout, area-personale
 - [README](./README.md) — indice principale del modulo
 - [CreateTicketWizardWidget](./CreateTicketWizardWidget.md) — dettaglio widget wizard frontoffice
 - [Ticket Wizard Frontoffice](./ticket-wizard-frontoffice.md) — wizard creazione ticket (`CreateTicketWizardWidget`, Filament `Wizard`/`Step`, un solo file sorgente di verità)

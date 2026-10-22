@@ -23,27 +23,27 @@
           "suggestions": [
             {
               "label": "Rilascio Carta Identità Elettronica (CIE)",
-              "url": "#"
+              "url": "/services/anagrafe"
             },
             {
               "label": "Cambio di residenza",
-              "url": "#"
+              "url": "/services/anagrafe"
             },
             {
               "label": "Tributi online",
-              "url": "#"
+              "url": "/services/tributi"
             },
             {
               "label": "Prenotazione appuntamenti",
-              "url": "#"
+              "url": "/appointments"
             },
             {
               "label": "Rilascio tessera elettorale",
-              "url": "#"
+              "url": "/services/anagrafe"
             },
             {
               "label": "Voucher connettività",
-              "url": "#"
+              "url": "/services"
             }
           ]
         }
@@ -64,27 +64,27 @@
           "suggestions": [
             {
               "label": "Electronic Identity Card (CIE) issue",
-              "url": "#"
+              "url": "/services"
             },
             {
               "label": "Change of residence",
-              "url": "#"
+              "url": "/services"
             },
             {
               "label": "Online taxes",
-              "url": "#"
+              "url": "/services"
             },
             {
               "label": "Appointment booking",
-              "url": "#"
+              "url": "/services"
             },
             {
               "label": "Electoral card issue",
-              "url": "#"
+              "url": "/services"
             },
             {
               "label": "Connectivity voucher",
-              "url": "#"
+              "url": "/services"
             }
           ]
         }
@@ -105,27 +105,27 @@
           "suggestions": [
             {
               "label": "Ausstellung des elektronischen Personalausweises (CIE)",
-              "url": "#"
+              "url": "/services"
             },
             {
               "label": "Wohnsitzwechsel",
-              "url": "#"
+              "url": "/services"
             },
             {
               "label": "Online-Abgaben",
-              "url": "#"
+              "url": "/services"
             },
             {
               "label": "Terminbuchung",
-              "url": "#"
+              "url": "/services"
             },
             {
               "label": "Ausstellung der Wahlkarte",
-              "url": "#"
+              "url": "/services"
             },
             {
               "label": "Konnektivitätsgutschein",
-              "url": "#"
+              "url": "/services"
             }
           ]
         }
@@ -146,27 +146,27 @@
           "suggestions": [
             {
               "label": "Emisión del Documento de Identidad Electrónico (CIE)",
-              "url": "#"
+              "url": "/services"
             },
             {
               "label": "Cambio de residencia",
-              "url": "#"
+              "url": "/services"
             },
             {
               "label": "Tributos en línea",
-              "url": "#"
+              "url": "/services"
             },
             {
               "label": "Reserva de citas",
-              "url": "#"
+              "url": "/services"
             },
             {
               "label": "Emisión de la tarjeta electoral",
-              "url": "#"
+              "url": "/services"
             },
             {
               "label": "Bono de conectividad",
-              "url": "#"
+              "url": "/services"
             }
           ]
         }

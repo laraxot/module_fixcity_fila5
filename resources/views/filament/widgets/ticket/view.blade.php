@@ -33,7 +33,7 @@ declare(strict_types=1);
                 </section>
             @else
                 <p class="mt-4">
-                    <a href="{{ LaravelLocalization::localizeUrl('/auth/login') }}">
+                    <a href="{{ route('login') }}">
                         {{ __('fixcity::ticket.subscription.login_to_follow') }}
                     </a>
                 </p>

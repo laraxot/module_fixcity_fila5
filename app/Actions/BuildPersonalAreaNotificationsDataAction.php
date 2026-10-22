@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Modules\Fixcity\Actions;
 
 use Carbon\CarbonInterface;
-use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 use Modules\Fixcity\Enums\TicketStatusEnum;
 use Modules\User\Models\Notification;
 use Modules\Xot\Actions\Cast\SafeStringCastAction;
@@ -63,6 +62,11 @@ final class BuildPersonalAreaNotificationsDataAction
             return null;
         }
         $createdAt = $notification->getAttribute('created_at');
+        // Canon FO: shell tema `container0.view` (mai tickets.track / localizeUrl).
+        $trackUrl = route('container0.view', [
+            'container0' => 'tickets',
+            'slug0' => 'track',
+        ]).'?code='.rawurlencode($code);
 
         return [
             'id' => SafeStringCastAction::cast($notification->getKey()),
@@ -71,7 +75,7 @@ final class BuildPersonalAreaNotificationsDataAction
             'occurred_at' => $createdAt instanceof CarbonInterface ? $createdAt->translatedFormat('d F Y H:i') : '',
             'occurred_iso' => $createdAt instanceof CarbonInterface ? $createdAt->toIso8601String() : '',
             'is_read' => $notification->getAttribute('read_at') !== null,
-            'track_url' => LaravelLocalization::localizeUrl('/tickets/track?code='.rawurlencode($code)),
+            'track_url' => $trackUrl,
         ];
     }
 }

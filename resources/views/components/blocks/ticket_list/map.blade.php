@@ -6,7 +6,7 @@
     --}}    
     <div class="container p-4 mx-auto sm:hidden">
         <x-filament::button class="w-full py-4 bg-blue-500 hover:bg-blue-700" icon="heroicon-m-sparkles"
-            href="{{ route('ticket.create', ['lang'=>$lang]) }}"
+            href="{{ route('container0.view', ['container0' => 'tickets', 'slug0' => 'create']) }}"
             tag="a"
             >
             {{ __('ticket::txt.click-here-to-submit-a-new-ticket') }}

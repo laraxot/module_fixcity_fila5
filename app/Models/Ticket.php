@@ -245,12 +245,17 @@ class Ticket extends BaseModel implements Commentable, HasMedia
 
     public function resolveTicketStatusValue(): string
     {
+        // The enum-backed status column is the workflow source of truth. The
+        // legacy status history can lag behind it and must only be a fallback.
+        $raw = $this->getRawOriginal('status');
+        if (is_string($raw) && $raw !== '') {
+            return $raw;
+        }
+
         $currentStatus = $this->currentStatus();
         if (is_object($currentStatus) && isset($currentStatus->name) && is_string($currentStatus->name)) {
             return $currentStatus->name;
         }
-
-        $raw = $this->getRawOriginal('status');
 
         return is_string($raw) ? $raw : '';
     }

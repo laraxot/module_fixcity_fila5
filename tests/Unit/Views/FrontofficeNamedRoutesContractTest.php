@@ -1,0 +1,44 @@
+<?php
+
+declare(strict_types=1);
+
+use PHPUnit\Framework\Assert;
+
+use function Safe\file_get_contents;
+
+/**
+ * Anti-regressione: Blade FO usano route Folio / FrontofficeUrl, mai localizeUrl.
+ * Canon: docs/frontoffice-link-conventions.md
+ */
+test('front office links use named Folio routes or the CMS URL normalizer', function (): void {
+    $laravelRoot = dirname(__DIR__, 5);
+    $routeContracts = [
+        'Themes/Sixteen/resources/views/components/blocks/personal-area-settings/breadcrumb.blade.php' => "route('home')",
+        'Themes/Sixteen/resources/views/components/blocks/personal-area-settings/notifications.blade.php' => "route('container0.view'",
+        'Themes/Sixteen/resources/views/components/blocks/personal-area-settings/settings.blade.php' => "route('container0.view'",
+        'Themes/Sixteen/resources/views/components/blocks/personal-area-settings/notifications-list.blade.php' => "route('container0.view'",
+        'Themes/Sixteen/resources/views/components/sections/header/partials/user-dropdown.blade.php' => "route('container0.view'",
+        'Themes/Sixteen/resources/views/pages/profile/edit.blade.php' => "route('container0.view'",
+        'Themes/Sixteen/resources/views/pages/auth/logout.blade.php' => "route('container0.view'",
+        'Modules/Fixcity/resources/views/components/blocks/ticket_list/ticket_list.blade.php' => "route('container0.",
+        'Modules/User/resources/views/filament/widgets/user-dropdown.blade.php' => "route('profile.edit')",
+    ];
+
+    foreach ($routeContracts as $relativePath => $expected) {
+        $full = $laravelRoot.'/'.$relativePath;
+        if (! is_file($full)) {
+            continue;
+        }
+        $content = file_get_contents($full);
+
+        Assert::assertStringContainsString($expected, $content, $relativePath);
+        Assert::assertStringNotContainsString('LaravelLocalization::localizeUrl', $content, $relativePath);
+        Assert::assertStringNotContainsString('LaravelLocalization::localizeURL', $content, $relativePath);
+        Assert::assertStringNotContainsString('localizeURL(', $content, $relativePath);
+    }
+
+    $searchModal = file_get_contents($laravelRoot.'/Themes/Sixteen/resources/views/components/sections/search-modal/design-comuni.blade.php');
+    Assert::assertStringContainsString('FrontofficeUrl::fromStoredUrl', $searchModal);
+    Assert::assertStringNotContainsString('LaravelLocalization::localizeUrl', $searchModal);
+    Assert::assertStringNotContainsString('LaravelLocalization::localizeURL', $searchModal);
+});

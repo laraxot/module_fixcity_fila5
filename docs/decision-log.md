@@ -11,6 +11,27 @@ qmd: "decision log   fixcity fixcity"
 
 ## Decisions
 
+### 2026-10-22: Canonical Folio routes for public ticket links
+- **Choice**: Solo shell tema — `container0.index` (lista) e `container0.view` con
+  `container0=tickets` e `slug0=<id|create|track>` (dettaglio / crea / traccia).
+  Area personale: `container0.view` + `area-personale` + slug CMS. **Vietati**
+  `route('tickets.*')`, `route('tickets.show')`, e `LaravelLocalization::localizeUrl()`
+  nei Blade FO.
+- **Rationale**: La risposta HTTP arriva da `[container0]/[slug0]` del tema, non
+  dalle Folio modulo omonime. `localizeUrl` nel Blade duplica la responsabilità
+  della rotta e reincarna regressioni (vedi [frontoffice-link-conventions.md](./frontoffice-link-conventions.md)).
+- **Status**: Required (religione)
+- **Scope**: Fixcity contract + Sixteen blocks; test Unit/Views `Frontoffice*ContractTest`.
+
+### 2026-10-22: FO i18n — chiavi traduzione, non stringhe nel Blade
+- **Choice**: Multilingua `it|en|de|es`. Chrome tema → `pub_theme::` (navigation /
+  header / auth.logout / ui); dominio → modulo owner (`fixcity::…`); Filament
+  senza `->label()`. Pattern `module::context.collection.element.type`.
+- **Rationale**: URL localizzati dalla rotta Folio; la copy non può restare italiana
+  hardcoded nei Blade blog/events/logout. Governance Lang + blueprint Fixcity/Sixteen.
+- **Status**: Required (religione)
+- **Scope**: Sixteen blocks + lang; docs frontoffice-link-conventions + filament-blueprint.
+
 ### 2026-01-01: DesignComuni Frontend Redesign — TailwindCSS + Alpine.js + Lit + DaisyUI
 - **Choice**: Replace Bootstrap Italia with TailwindCSS + Alpine.js + Lit + DaisyUI + Flowbite + Filament
 - **Rationale**: Modern utility-first approach following impeccable.style and tasteskill.dev principles; aligns with Design Comuni visual requirements using token-based design

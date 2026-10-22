@@ -53,7 +53,7 @@ render(function (View $view, string $slug) {
 <x-layouts.marketing>
     <x-ui.marketing.breadcrumbs :crumbs="[
         [
-            'href' => '/tickets',
+            'href' => route('container0.index', ['container0' => 'tickets']),
             'text' => 'Tickets'
         ],
         [

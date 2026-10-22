@@ -8,7 +8,6 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueueAfterCommit;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
-use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 use Modules\Fixcity\Actions\GetFixcityEmailNotificationPreferenceAction;
 use Modules\Fixcity\Enums\TicketStatusEnum;
 use Modules\Xot\Contracts\UserContract;
@@ -57,6 +56,11 @@ final class TicketStatusChangedNotification extends Notification implements Shou
      */
     public function toArray(object $notifiable): array
     {
+        $actionUrl = route('container0.view', [
+            'container0' => 'tickets',
+            'slug0' => 'track',
+        ]).'?code='.rawurlencode($this->ticketCode);
+
         return [
             'title' => __('fixcity::ticket.notification.title'),
             'body' => __('fixcity::ticket.notification.status_changed', [
@@ -65,9 +69,7 @@ final class TicketStatusChangedNotification extends Notification implements Shou
             ]),
             'ticket_code' => $this->ticketCode,
             'status' => $this->status->value,
-            'action_url' => LaravelLocalization::localizeUrl(
-                '/tickets/track?code='.rawurlencode($this->ticketCode),
-            ),
+            'action_url' => $actionUrl,
         ];
     }
 

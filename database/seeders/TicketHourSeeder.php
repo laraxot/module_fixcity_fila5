@@ -147,18 +147,26 @@ class TicketHourSeeder extends Seeder
         }
 
         [$min, $max] = self::ENTRIES_PER_TICKET;
-        $entries = min($faker->numberBetween($min, $max), count($workMoments));
-        $moments = array_slice($workMoments, 0, $entries);
-
         // Il totale e' contato in mezz'ore intere: `estimation` arriva dalla stima
         // in ore decimali, e sommare 0.5 + 7.0 in floating point lascia un resto
         // che fa superare la stima di qualche ul. Le mezze ore sono esatte in
         // base 2, quindi il totale resta <= estimation senza arrotondamenti.
         $left = (int) floor(((float) $ticket->estimation) * self::UNITS_PER_HOUR);
-        $left = max(self::MIN_UNITS, $left);
+        if ($left < self::MIN_UNITS) {
+            return 0;
+        }
+
+        $entries = min($faker->numberBetween($min, $max), count($workMoments), $left);
+        $moments = array_slice($workMoments, 0, $entries);
         $written = 0;
 
         foreach ($moments as $position => $moment) {
+            // Se le voci precedenti hanno esaurito il budget in mezze ore, stop:
+            // altrimenti `min(0, max(MIN_UNITS, …))` scriveva value=0.0 (DCP-103).
+            if ($left < self::MIN_UNITS) {
+                break;
+            }
+
             $isLast = $position === count($moments) - 1;
             $share = $isLast
                 ? $left

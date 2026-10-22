@@ -62,6 +62,7 @@ return [
         'title' => 'Descrizione',
         'empty' => 'Nessuna descrizione.',
     ],
+    'comments' => ['heading' => 'Commenti e aggiornamenti'],
     'actions' => [
         'title' => 'Cosa puoi fare',
         'back' => 'Torna all’elenco',

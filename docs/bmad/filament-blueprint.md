@@ -82,3 +82,25 @@ Il blocco test `segnalazione-dettaglio` e il dettaglio pubblico usano
 `fixcity::ticket_detail.*` (breadcrumb, meta, where, description). Nessun
 `->label()` / stringa UI nel blade. Widget rating cittadino: solo `@auth` +
 `TicketCitizenRatingPromptWidget` (XotBase), montaggio esplicito.
+
+## FO link / navigazione (non Filament)
+
+Chrome FO = JSON header/footer + Folio/CMS, non Resource Filament.
+**Religione URL:** solo `route('container0.index|view', …)` (e `login` /
+`logout` POST). Vietati `LaravelLocalization::localizeUrl` nel Blade e
+`route('tickets.show|create|track')`. Canon:
+[frontoffice-link-conventions.md](../frontoffice-link-conventions.md).
+Audit: [fo-link-coherence-audit.story.md](../stories/fo-link-coherence-audit.story.md).
+
+**Religione i18n:** sito `it|en|de|es`; nessun testo UI hardcoded nel Blade.
+Chrome tema → `pub_theme::` (es. `navigation.homepage.news`); dominio
+Fixcity → `fixcity::…` in `lang/<locale>/`; Filament senza `->label()`.
+Governance: [translation-key-governance.md](../../Lang/docs/wiki/rules/translation-key-governance.md).
+
+## CreateTicketWidget / location
+
+Il passo dati riusa `TicketForm::getDataSchema()`: il punto mappa e'
+`data.location.{latitude,longitude,address}` (CoordinatePicker + `coordinatesRule`).
+I test non devono impostare `latitude`/`longitude` piatti. Ore DMO:
+`ticket_hours.user_id` e' UUID (`varchar(36)`), vedi
+[ticket-hours-user-boundary](../decisions/ticket-hours-user-boundary.md).

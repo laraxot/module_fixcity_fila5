@@ -28,6 +28,7 @@ final class SetTicketSubscriptionAction
 
         return TicketSubscriber::query()->getConnection()->transaction(function () use ($ticket, $userId, $following): bool {
             $subscriber = TicketSubscriber::query()
+                ->withTrashed()
                 ->where('ticket_id', $ticket->getKey())
                 ->where('user_id', $userId)
                 ->first();
@@ -37,6 +38,8 @@ final class SetTicketSubscriptionAction
                     'ticket_id' => $ticket->getKey(),
                     'user_id' => $userId,
                 ]);
+            } elseif ($following && $subscriber?->trashed()) {
+                $subscriber->restore();
             } elseif (! $following && $subscriber !== null) {
                 $subscriber->delete();
             }

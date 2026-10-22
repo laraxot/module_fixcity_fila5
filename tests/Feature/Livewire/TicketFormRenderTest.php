@@ -42,6 +42,7 @@ describe('CreateTicketWidget current contract', function (): void {
     });
 
     test('creates a pending ticket for the authenticated citizen', function (): void {
+        // TicketForm SSoT: CoordinatePicker su `location` (lat/lng annidati), non campi piatti.
         Livewire::test(CreateTicketWidget::class)
             ->set('data', [
                 'accept_terms' => true,
@@ -49,8 +50,11 @@ describe('CreateTicketWidget current contract', function (): void {
                 'content' => 'Test Description',
                 'type' => TicketTypeEnum::ROAD_MAINTENANCE->value,
                 'priority' => TicketPriorityEnum::MEDIUM->value,
-                'latitude' => '41.9028',
-                'longitude' => '12.4964',
+                'location' => [
+                    'latitude' => 41.9028,
+                    'longitude' => 12.4964,
+                    'address' => 'Roma',
+                ],
             ])
             ->upload('data.images', [UploadedFile::fake()->image('ticket.jpg')], true)
             ->call('submit')
@@ -68,11 +72,16 @@ describe('CreateTicketWidget current contract', function (): void {
 
     test('keeps the form state available for geolocation UX', function (): void {
         $component = Livewire::test(CreateTicketWidget::class)
-            ->set('data.latitude', '45.4642')
-            ->set('data.longitude', '9.1900');
+            ->set('data.location', [
+                'latitude' => 45.4642,
+                'longitude' => 9.1900,
+                'address' => 'Milano',
+            ]);
 
-        Assert::assertSame('45.4642', $component->get('data.latitude'));
-        Assert::assertSame('9.1900', $component->get('data.longitude'));
+        /** @var array<string, mixed> $location */
+        $location = $component->get('data.location');
+        Assert::assertSame(45.4642, $location['latitude'] ?? null);
+        Assert::assertSame(9.1900, $location['longitude'] ?? null);
     });
 
     test('associates a created ticket with the authenticated user', function (): void {
@@ -83,8 +92,11 @@ describe('CreateTicketWidget current contract', function (): void {
                 'content' => 'A citizen-owned report',
                 'type' => TicketTypeEnum::COMPLAINT->value,
                 'priority' => TicketPriorityEnum::LOW->value,
-                'latitude' => '45.4642',
-                'longitude' => '9.1900',
+                'location' => [
+                    'latitude' => 45.4642,
+                    'longitude' => 9.1900,
+                    'address' => 'Milano',
+                ],
             ])
             ->upload('data.images', [UploadedFile::fake()->image('owned-ticket.jpg')], true)
             ->call('submit');

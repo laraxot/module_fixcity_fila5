@@ -74,18 +74,18 @@
                 {
                   "icon": "it-mail",
                   "label": "Richiedi assistenza",
-                  "url": "#",
+                  "url": "/contatti",
                   "element": "contacts"
                 },
                 {
                   "icon": "it-hearing",
                   "label": "Chiama il numero verde 05 0505",
-                  "url": "#"
+                  "url": "tel:050505"
                 },
                 {
                   "icon": "it-calendar",
                   "label": "Prenota appuntamento",
-                  "url": "#",
+                  "url": "/lista-categorie",
                   "element": "appointment-booking"
                 }
               ]

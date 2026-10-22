@@ -48,6 +48,7 @@ return [
         'title' => 'Beschreibung',
         'empty' => 'Keine Beschreibung angegeben.',
     ],
+    'comments' => ['heading' => 'Kommentare und Aktualisierungen'],
     'actions' => [
         'title' => 'Was Sie tun können',
         'back' => 'Zurück zur Liste',

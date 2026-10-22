@@ -313,7 +313,7 @@ new class extends Component
                                     <header class="mb-4">
                                         <h3 id="ticket-{{ $ticket->id }}-title" class="text-lg font-semibold text-gray-900 dark:text-white mb-2">
                                             <a
-                                                href="{{ route('ticket.view', ['slug' => $ticket->slug]) }}"
+                                                href="{{ route('container0.view', ['container0' => 'tickets', 'slug0' => $ticket->getKey()]) }}"
                                                 class="text-primary-600 hover:text-primary-800 dark:text-primary-400 dark:hover:text-primary-200 agid-focus"
                                                 target="_blank"
                                                 rel="noopener"
@@ -503,7 +503,7 @@ new class extends Component
             </p>
             <div class="space-y-4 sm:space-y-0 sm:space-x-4 sm:flex sm:justify-center">
                 <a
-                    href="{{ route('tickets.create') }}"
+                    href="{{ route('container0.view', ['container0' => 'tickets', 'slug0' => 'create']) }}"
                     class="inline-flex items-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-white bg-success-600 hover:bg-success-700 agid-focus"
                 >
                     <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
@@ -512,13 +512,13 @@ new class extends Component
                     Segnala un disservizio
                 </a>
                 <a
-                    href="/come-funziona"
+                    href="{{ route('container0.index', ['container0' => 'domande-frequenti']) }}"
                     class="inline-flex items-center px-8 py-3 border border-success-600 text-success-600 hover:bg-success-50 dark:border-success-400 dark:text-success-400 dark:hover:bg-success-900 rounded-md font-medium agid-focus"
                 >
                     <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
                         <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd" />
                     </svg>
-                    Come funziona
+                    Domande frequenti
                 </a>
             </div>
         </div>

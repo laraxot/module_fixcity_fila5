@@ -53,6 +53,7 @@ return [
         'title' => 'Description',
         'empty' => 'No description provided.',
     ],
+    'comments' => ['heading' => 'Comments and updates'],
     'actions' => [
         'title' => 'What you can do',
         'back' => 'Back to the list',

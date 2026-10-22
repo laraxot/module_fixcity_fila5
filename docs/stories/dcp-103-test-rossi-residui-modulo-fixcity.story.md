@@ -39,15 +39,15 @@ Sottoinsieme wizard + pagine + conferma (`CreateTicketWizardWidgetTest`, `Ticket
 
 | Gruppo | N | Causa provata | Stato |
 |---|---|---|---|
-| `ticket_hours.user_id` intero, utenti UUID | 20 | `fixcity_data.ticket_hours.user_id` e' `bigint unsigned`, `users.id` e' `varchar(36)`; `created_by`/`updated_by` della stessa tabella sono gia' `uuid`. Nessuna ora di lavoro puo' essere registrata per nessun utente. Tabella con 0 righe; nessuna migrazione attiva la crea (solo `database/migrations/_bak/*.merged`); nessuna UI scrive `TicketHour` (solo `Ticket::hours()` per la somma a `Ticket.php:360` e `Profile::hours()`). Il docblock del model dice `@property int $user_id`. | **Serve una decisione** (vedi sotto) |
+| `ticket_hours.user_id` intero, utenti UUID | 20 | Decisione (a) in [ticket-hours-user-boundary](../decisions/ticket-hours-user-boundary.md); migrazione `2026_10_22_000003_…` applicata; `user_id` = `varchar(36)` su `fixcity_data` | **chiuso** — vedi [dcp-210](./dcp-210-ore-di-lavoro-dei-ticket-user-id-intero-con-utenti-uuid.story.md) |
 | Contratto di parita' lingue | 1 | «Cookie policy» e' il termine inglese stesso (de/es tradotte, `local` ed `eu` identici) | **Chiuso**: aggiunto alle eccezioni documentate `en` di `ContentLocaleParityTest` (accanto a «Media policy»); 5/5 verdi |
 | Factory dei ticket | 1 | `GenerateTicketsActionTest` non e' piu' nel tree; `GenerateTicketsAction` dispatcha stati `open`/`urgent`/`resolved` | **chiuso** (test assente; action coerente) |
-| `TicketFormRenderTest` | 2 | un `Failed asserting that false is true` e un errore `data.location` («Indica un punto valido sulla mappa»): non indagati | aperto |
+| `TicketFormRenderTest` | 2 | il test impostava `latitude`/`longitude` piatti; `TicketForm` valida `location.{latitude,longitude}` (CoordinatePicker) | **chiuso** (test allineato allo schema form) |
 | `CategoryMigrationTest` | 1 | causa radice: `RefreshDatabase` Unit suite sostituiva `categories` con schema Blog; test riallineato a `Schema::connection('fixcity')` + indici reali (no `categories_name_idx`) | **chiuso** — vedi [refreshdatabase-wipe-shared-test-db](./refreshdatabase-wipe-shared-test-db.story.md) |
-| `FixcityDemoSeederTest` | 1 | asserisce `N > N` su dati: il DB di prova ha solo la struttura | da verificare se e' un limite dell'harness |
+| `FixcityDemoSeederTest` | 1 | `TicketHourSeeder` poteva scrivere `value=0.0` quando il budget mezze-ore era esaurito a meta' loop | **chiuso** (guard `left < MIN_UNITS`) |
 | `PersonalAreaSettingsPagesTest` | 1 | due stringhe diverse, non indagato | aperto |
 
-**Decisione per il gruppo `ticket_hours`** (nessuna scelta presa): (a) tenere la funzione e correggere il tipo con una migrazione forward-only `user_id` -> `string(36)` (la tabella e' vuota: nessun dato a rischio; poi docblock `@property string`); oppure (b) togliere la funzione (`TicketHour`, factory, i 3 punti d'uso e i test), perche' nessuna UI la usa. Raccomandazione: (a) se le ore di lavoro servono ai ticket DMO, altrimenti (b); e' un cambio di schema del database dei dati, quindi aspetta il via libera esplicito.
+**Decisione `ticket_hours`:** (a) applicata — vedi [ticket-hours-user-boundary](../decisions/ticket-hours-user-boundary.md) e [dcp-210](./dcp-210-ore-di-lavoro-dei-ticket-user-id-intero-con-utenti-uuid.story.md).
 
 **Cosa dice di piu' il gruppo:** altre tabelle del DB dati hanno `user_id` intero con utenti UUID (`comments` int(11), `contacts` int(11), `posts`, `post_views`, `translations`, `upvote_downvotes`, `ai_messages`, `ai_tool_logs` bigint). Non provato se siano usate da FixCity: nessun test le ha colpite.
 
