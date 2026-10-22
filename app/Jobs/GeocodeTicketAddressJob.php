@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Log;
 use Modules\Fixcity\Models\Ticket;
-use Modules\Geo\Support\GeoApiEndpoints;
+use Modules\Geo\Infrastructure\Config\GeoApiEndpoints;
 
 /**
  * Reverse-geocode delle coordinate di un ticket verso Nominatim.

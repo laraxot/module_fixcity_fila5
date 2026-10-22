@@ -85,6 +85,29 @@ href="/{{ app()->getLocale() }}/tickets/…"
 Folio può far vincere l’ultima lingua sul `name()` duplicato (DCP-123): si
 corregge nel provider, **non** con `localizeUrl` nei template.
 
+Corretto il 2026-10-22: `FolioVoltServiceProvider::localizeFolioNamedRoutes()` sostituisce il
+resolver di Folio con uno che sposta il prefisso sulla lingua corrente, quindi
+`route('container0.view', …)` dà `/de/…` con locale `de`. Guardia:
+`Modules/Cms/tests/Unit/Support/LocalizedFolioRoutesTest.php`.
+
+Recupero password: l'indirizzo è `route('password.request')` (`/{lang}/auth/password/reset`).
+`/auth/password/forgot` **non è una rotta**: cade su `auth/password/[token]` e mostra il
+form di nuova password in inglese, senza titolo.
+
+## Alias path Design Comuni → container FixCity
+
+In `pages/[container0]/index.blade.php` (Folio `render`):
+
+| Path IT | Destinazione | HTTP |
+| --- | --- | --- |
+| `servizi` | `services` | 301 |
+| `eventi` | `events` | 301 |
+| `novita` | `blog` | 301 |
+| `faq` | `domande-frequenti` | 301 |
+| `segnalazioni` | `tickets` | 301 |
+| `area-personale` (senza slug) | login (ospite) / `pratiche` (auth) | 302 |
+| container senza CMS `*.index` | — | **404** (mai shell vuota) |
+
 ## Copy / i18n (stesso contratto BMAD)
 
 Il sito è **multilingua** (`it|en|de|es`). Gli URL usano `route('container0…')`;

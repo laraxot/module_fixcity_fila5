@@ -7,7 +7,7 @@ namespace Modules\Fixcity\Database\Factories;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
 use LogicException;
-use Modules\Fixcity\Database\Seeders\Support\CivicFaqCatalog;
+use Modules\Fixcity\Database\Seeders\Demo\CivicFaqCatalog;
 use Modules\Fixcity\Models\Faq;
 
 /**

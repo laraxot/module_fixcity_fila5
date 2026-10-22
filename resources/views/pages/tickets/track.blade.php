@@ -56,11 +56,12 @@ render(function (View $view): View {
 ?>
 
 <x-layouts.app :title="__('fixcity::ticket.track.title')">
-            <div class="bg-slate-50 px-4 py-10 sm:px-6 lg:px-8">
+            <div class="bg-gradient-to-b from-[var(--fc-green-dark)] via-[var(--fc-green-dark)] to-[#0a2e2e] px-4 py-12 sm:px-6 lg:px-8">
         <div class="mx-auto max-w-3xl">
-            <header class="mb-8">
-                <h1 class="text-3xl font-bold tracking-tight text-slate-950 sm:text-4xl">{{ __('fixcity::ticket.track.title') }}</h1>
-                <p class="mt-3 text-lg leading-8 text-slate-700">
+            <header class="mb-10">
+                <p class="fc-eyebrow">Segnalazione</p>
+                <h1 class="font-serif text-3xl font-bold tracking-tight text-white sm:text-4xl">{{ __('fixcity::ticket.track.title') }}</h1>
+                <p class="mt-3 text-lg leading-8 text-white/90">
                         @if ($authenticatedLookup)
                             {{ __('fixcity::ticket.track.account_subtitle') }}
                         @else
@@ -70,9 +71,9 @@ render(function (View $view): View {
             </header>
 
                 @unless ($authenticatedLookup)
-            <form method="get" action="{{ url()->current() }}" class="ticket-track-form rounded-xl border border-slate-200 bg-white p-6 shadow-sm sm:p-8">
+            <form method="get" action="{{ url()->current() }}" class="fc-card bg-white rounded-xl border border-[var(--fc-line)] p-6 shadow-sm sm:p-8">
                 <div>
-                    <label class="block text-base font-semibold text-slate-950" for="ticket-track-code">
+                    <label class="block text-base font-semibold text-[var(--fc-ink)]" for="ticket-track-code">
                             {{ __('fixcity::ticket.fields.code.label') }}
                     </label>
                     <div class="mt-2 flex flex-col gap-3 sm:flex-row">
@@ -80,18 +81,18 @@ render(function (View $view): View {
                                 id="ticket-track-code"
                                 name="code"
                                 type="text"
-                                class="min-h-12 w-full rounded-lg border border-slate-400 bg-white px-4 text-base text-slate-950 shadow-sm outline-none transition placeholder:text-slate-500 focus:border-sky-700 focus:ring-4 focus:ring-sky-700/20"
+                                class="fc-input min-h-12 w-full rounded-lg border border-[var(--fc-line)] bg-white px-4 text-base text-[var(--fc-ink)] shadow-sm outline-none transition placeholder:text-[var(--fc-ink-soft)] focus:border-[var(--fc-green)] focus:ring-4 focus:ring-[var(--fc-green)]/20"
                                 value="{{ $code }}"
                                 required
                                 autocomplete="off"
                                 aria-invalid="{{ $notFound ? 'true' : 'false' }}"
                                 aria-describedby="ticket-track-help{{ $notFound ? ' ticket-track-error' : '' }}"
                             >
-                            <button type="submit" class="min-h-12 rounded-lg bg-sky-800 px-5 py-3 font-semibold text-white shadow-sm transition hover:bg-sky-900 focus:outline-none focus:ring-4 focus:ring-sky-800/30">
+                            <button type="submit" class="fc-button fc-button--sun min-h-12 rounded-lg px-5 py-3 font-semibold shadow-sm transition">
                                 {{ __('fixcity::ticket.track.submit') }}
                             </button>
                     </div>
-                    <p id="ticket-track-help" class="mt-2 text-sm text-slate-700">
+                    <p id="ticket-track-help" class="mt-2 text-sm text-[var(--fc-ink-soft)]">
                             {{ __('fixcity::ticket.track.help') }}
                     </p>
                 </div>
@@ -99,48 +100,48 @@ render(function (View $view): View {
                 @endunless
 
                 @if ($notFound)
-                    <div id="ticket-track-error" class="mt-4 rounded-lg border border-amber-700 bg-amber-50 p-4 text-amber-950" role="alert">
+                    <div id="ticket-track-error" class="fc-alert fc-alert--warning mt-4 rounded-lg border border-[var(--fc-sun)] bg-[var(--fc-mint)] p-4 text-[var(--fc-ink)]" role="alert">
                         {{ __('fixcity::ticket.track.not_found') }}
                     </div>
                 @endif
 
                 @if (is_array($payload))
-                    <article class="mt-8 rounded-xl border border-slate-200 bg-white p-6 shadow-sm sm:p-8" aria-live="polite">
-                            <h2 class="text-2xl font-bold text-slate-950">{{ $payload['title'] }}</h2>
-                            <dl class="mt-6 grid gap-4 border-y border-slate-200 py-5 sm:grid-cols-[minmax(0,1fr)_2fr]">
+                    <article class="fc-card mt-8 rounded-xl border border-[var(--fc-line)] bg-white p-6 shadow-sm sm:p-8" aria-live="polite">
+                            <h2 class="text-2xl font-bold text-[var(--fc-ink)]">{{ $payload['title'] }}</h2>
+                            <dl class="mt-6 grid gap-4 border-y border-[var(--fc-line)] py-5 sm:grid-cols-[minmax(0,1fr)_2fr]">
                                 @if ($payload['code'] !== '')
-                                    <dt class="font-semibold text-slate-700">{{ __('fixcity::ticket.fields.code.label') }}</dt>
-                                    <dd class="font-mono text-slate-950">{{ $payload['code'] }}</dd>
+                                    <dt class="font-semibold text-[var(--fc-ink-soft)]">{{ __('fixcity::ticket.fields.code.label') }}</dt>
+                                    <dd class="font-mono text-[var(--fc-ink)]">{{ $payload['code'] }}</dd>
                                 @endif
-                                <dt class="font-semibold text-slate-700">{{ __('fixcity::ticket.fields.status.label') }}</dt>
-                                <dd class="font-semibold text-slate-950">{{ TicketStatusEnum::tryFrom($payload['status'])?->getLabel() ?? $payload['status'] }}</dd>
+                                <dt class="font-semibold text-[var(--fc-ink-soft)]">{{ __('fixcity::ticket.fields.status.label') }}</dt>
+                                <dd class="font-semibold text-[var(--fc-ink)]">{{ TicketStatusEnum::tryFrom($payload['status'])?->getLabel() ?? $payload['status'] }}</dd>
                             </dl>
                             @if ($payload['description'] !== '')
-                                <p class="mt-5 leading-7 text-slate-800">{{ $payload['description'] }}</p>
+                                <p class="mt-5 leading-7 text-[var(--fc-ink)]/90">{{ $payload['description'] }}</p>
                             @endif
                     </article>
 
                     <section class="mt-4" aria-labelledby="ticket-track-timeline-heading">
-                        <h2 id="ticket-track-timeline-heading" class="text-2xl font-bold text-slate-950">
+                        <h2 id="ticket-track-timeline-heading" class="text-2xl font-bold text-[var(--fc-ink)]">
                             {{ __('fixcity::ticket.track.timeline_title') }}
                         </h2>
 
                         @if ($timeline === [])
-                            <p class="mt-4 text-slate-700" role="status">
+                            <p class="mt-4 text-[var(--fc-ink-soft)]" role="status">
                                 {{ __('fixcity::ticket.track.timeline_empty') }}
                             </p>
                         @else
                             <ol class="mt-4 space-y-3" aria-label="{{ __('fixcity::ticket.track.timeline_title') }}">
                                 @foreach ($timeline as $entry)
-                                    <li class="rounded-xl border border-slate-200 bg-white p-5 shadow-sm">
+                                    <li class="fc-card rounded-xl border border-[var(--fc-line)] bg-white p-5 shadow-sm">
                                         <div class="flex flex-col justify-between gap-1 sm:flex-row">
-                                            <strong class="text-slate-950">{{ $entry['to_label'] }}</strong>
+                                            <strong class="text-[var(--fc-ink)]">{{ $entry['to_label'] }}</strong>
                                             @if ($entry['occurred_at'] !== '')
-                                                <time class="text-sm text-slate-600">{{ $entry['occurred_at'] }}</time>
+                                                <time class="text-sm text-[var(--fc-ink-soft)]">{{ $entry['occurred_at'] }}</time>
                                             @endif
                                         </div>
                                         @if ($entry['reason'] !== null && $entry['reason'] !== '')
-                                            <p class="mt-2 leading-7 text-slate-700">{{ $entry['reason'] }}</p>
+                                            <p class="mt-2 leading-7 text-[var(--fc-ink)]/90">{{ $entry['reason'] }}</p>
                                         @endif
                                     </li>
                                 @endforeach

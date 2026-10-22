@@ -96,7 +96,10 @@ final class ListPublicTicketsAction
         return [
             'id' => $ticket->id,
             'title' => $ticket->name,
-            'url' => '/'.app()->getLocale().'/tickets/'.$ticket->id,
+            'url' => route('container0.view', [
+                'container0' => 'tickets',
+                'slug0' => (string) $ticket->id,
+            ]),
             'type' => $type->value ?? '',
             'type_label' => $type?->getLabel() ?? '',
             'status' => $status->value ?? '',

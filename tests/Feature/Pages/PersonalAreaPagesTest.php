@@ -105,6 +105,8 @@ it('links the four personal area pages in the local navigation and marks the cur
 })->with([
     'practices' => ['pratiche', '/it/area-personale/pratiche'],
     'followed' => ['seguite', '/it/area-personale/seguite'],
+    'notifications' => ['notifiche', '/it/area-personale/notifiche'],
+    'settings' => ['impostazioni', '/it/area-personale/impostazioni'],
 ]);
 
 it('lists the owned tickets by state with title, code, date, status, detail and tracking links', function (): void {

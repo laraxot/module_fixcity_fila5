@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 use Illuminate\Http\Request;
 use Modules\Fixcity\Tests\TestCase;
-use Themes\Sixteen\Support\DesignComuniAssets;
+use Themes\Sixteen\Infrastructure\Assets\DesignComuniAssets;
 
 uses(TestCase::class);
 

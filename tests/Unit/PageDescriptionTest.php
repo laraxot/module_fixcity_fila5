@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 use Modules\Fixcity\Tests\TestCase;
 use PHPUnit\Framework\Assert;
-use Themes\Sixteen\Support\PageDescription;
+use Themes\Sixteen\Presentation\Metadata\PageDescription;
 
 use function Safe\file_get_contents;
 use function Safe\json_decode;
@@ -47,6 +47,17 @@ describe('descrizioni delle pagine pubbliche', function (): void {
 
         foreach (['it', 'en', 'de', 'es'] as $locale) {
             Assert::assertNotSame('', PageDescription::resolve($raw, $locale), 'descrizione vuota in '.$locale);
+        }
+    });
+
+    test('la homepage espone titolo e descrizione localizzati per ogni lingua pubblica', function (): void {
+        $root = dirname(__DIR__, 4);
+        $page = json_decode(file_get_contents($root.'/config/local/fixcity/database/content/pages/home.json'), true);
+        Assert::assertIsArray($page);
+
+        foreach (['it', 'en', 'de', 'es'] as $locale) {
+            Assert::assertNotSame('', PageDescription::resolve(json_encode($page['title'] ?? null), $locale));
+            Assert::assertNotSame('', PageDescription::resolve(json_encode($page['description'] ?? null), $locale));
         }
     });
 });

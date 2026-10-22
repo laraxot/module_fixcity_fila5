@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Modules\Fixcity\Database\Seeders;
 
 use Illuminate\Database\Seeder;
-use Modules\Fixcity\Database\Seeders\Support\CivicFaqCatalog;
+use Modules\Fixcity\Database\Seeders\Demo\CivicFaqCatalog;
 use Modules\Fixcity\Models\Faq;
 
 /**

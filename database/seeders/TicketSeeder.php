@@ -9,14 +9,14 @@ use Faker\Generator;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Schema;
-use Modules\Fixcity\Database\Seeders\Support\DemoCategoryCatalog;
-use Modules\Fixcity\Database\Seeders\Support\DemoMunicipalityProvider;
-use Modules\Fixcity\Database\Seeders\Support\DemoNarrative;
-use Modules\Fixcity\Database\Seeders\Support\DemoPeopleProvider;
-use Modules\Fixcity\Database\Seeders\Support\DemoSlaTimeline;
-use Modules\Fixcity\Database\Seeders\Support\DemoText;
-use Modules\Fixcity\Database\Seeders\Support\DemoTicketWriter;
-use Modules\Fixcity\Database\Seeders\Support\DemoWeightedChoice;
+use Modules\Fixcity\Database\Seeders\Demo\DemoCategoryCatalog;
+use Modules\Fixcity\Database\Seeders\Demo\DemoMunicipalityProvider;
+use Modules\Fixcity\Database\Seeders\Demo\DemoNarrative;
+use Modules\Fixcity\Database\Seeders\Demo\DemoPeopleProvider;
+use Modules\Fixcity\Database\Seeders\Demo\DemoSlaTimeline;
+use Modules\Fixcity\Database\Seeders\Demo\DemoText;
+use Modules\Fixcity\Database\Seeders\Demo\DemoTicketWriter;
+use Modules\Fixcity\Database\Seeders\Demo\DemoWeightedChoice;
 use Modules\Fixcity\Enums\TicketPriorityEnum;
 use Modules\Fixcity\Enums\TicketStatusEnum;
 use Modules\Fixcity\Models\TicketActivity;
@@ -38,9 +38,9 @@ use Modules\Fixcity\Models\TicketActivity;
  * Uso:
  *   php artisan db:seed --class="Modules\Fixcity\Database\Seeders\TicketSeeder"
  *
- * @phpstan-import-type TicketPlan from \Modules\Fixcity\Database\Seeders\Support\DemoTicketWriter
- * @phpstan-import-type CategoryRow from \Modules\Fixcity\Database\Seeders\Support\DemoTicketWriter
- * @phpstan-import-type PersonRow from \Modules\Fixcity\Database\Seeders\Support\DemoTicketWriter
+ * @phpstan-import-type TicketPlan from \Modules\Fixcity\Database\Seeders\Demo\DemoTicketWriter
+ * @phpstan-import-type CategoryRow from \Modules\Fixcity\Database\Seeders\Demo\DemoTicketWriter
+ * @phpstan-import-type PersonRow from \Modules\Fixcity\Database\Seeders\Demo\DemoTicketWriter
  */
 class TicketSeeder extends Seeder
 {

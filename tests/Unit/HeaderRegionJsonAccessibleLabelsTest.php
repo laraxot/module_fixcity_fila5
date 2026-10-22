@@ -4,14 +4,14 @@ declare(strict_types=1);
 
 use Modules\Fixcity\Tests\TestCase;
 use PHPUnit\Framework\Assert;
-use Themes\Sixteen\Support\RegionPortalLinkLabels;
+use Themes\Sixteen\Presentation\Accessibility\RegionPortalLinkLabels;
 
 use function Safe\file_get_contents;
 use function Safe\json_decode;
 
 uses(TestCase::class);
 
-require_once dirname(__DIR__, 4).'/Themes/Sixteen/app/Support/RegionPortalLinkLabels.php';
+require_once dirname(__DIR__, 4).'/Themes/Sixteen/app/Presentation/Accessibility/RegionPortalLinkLabels.php';
 
 /*
  * DCP-198 A10: i template `region.title` / `region.aria_label` in header.json usano graffe CMS; il front office deve risolverle.

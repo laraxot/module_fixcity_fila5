@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Modules\Fixcity\Database\Seeders\Support;
+namespace Modules\Fixcity\Database\Seeders\Demo;
 
 use Faker\Generator;
 use Illuminate\Database\Eloquent\Builder;

@@ -3,7 +3,7 @@ title: "no app/Support — Fixcity QueueableAction"
 type: concept
 tags: [fixcity, actions, queueable-action, support, export]
 created: 2026-07-12
-updated: 2026-07-12
+updated: 2026-10-22
 qmd: "Fixcity module no Support SpreadsheetCellSanitizer CSV export sanitize"
 issues:
   - "https://github.com/laraxot/base_fixcity_fila5/issues/372"
@@ -30,3 +30,8 @@ Consumer: `TicketExporter` (formatStateUsing).
 ## Collegamenti
 
 - [no-app-support-monorepo-migration](../../../../../../docs/wiki/concepts/no-app-support-monorepo-migration.md)
+
+## Seeders (2026-10-22)
+
+`database/seeders/Support/` → `database/seeders/Demo/` (`CivicFaqCatalog`, `DemoTicketWriter`, …).
+Non sono QueueableAction: fixture deterministiche, non use-case asincroni.

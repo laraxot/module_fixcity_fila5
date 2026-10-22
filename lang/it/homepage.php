@@ -15,6 +15,10 @@ declare(strict_types=1);
  * Used by: Themes/Sixteen/resources/views/components/blocks/ticket/map-preview.blade.php
  */
 return [
+    'seo' => [
+        'title' => 'FixCity — Segnala un problema, segui la soluzione',
+        'description' => 'Segnala un disservizio al Comune, consulta la mappa delle segnalazioni e segui gli aggiornamenti della tua pratica.',
+    ],
     'map_preview' => [
         'section' => [
             'title' => [

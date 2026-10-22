@@ -32,6 +32,17 @@ qmd: "decision log   fixcity fixcity"
 - **Status**: Required (religione)
 - **Scope**: Sixteen blocks + lang; docs frontoffice-link-conventions + filament-blueprint.
 
+### 2026-10-22: FO shell — alias IT + 404 senza CMS + APP_ENV local
+<!-- Supersedes: shell vuote 200 su path IT; linked from frontoffice-link-conventions.
+User: «analizzare tutto il front office… bmad + second brain + filament blueprint + playwright mcp» -->
+- **Choice**: Alias `servizi|eventi|novita|faq|segnalazioni` → container canonici (301);
+  `area-personale` index → login/pratiche; container senza `*.index` CMS → **404**.
+  Dev server FO: `APP_ENV=local` (mai `testing`: lista ticket risulta vuota).
+- **Rationale**: Shell solo header/footer sono incoerenti; path Design Comuni IT devono
+  risolvere. Elenco pubblico = stati `canViewByAll` + `location` not null.
+- **Status**: Required
+- **Scope**: Sixteen Folio `[container0]/index`; `ListPublicTicketsAction` URL `container0.view`.
+
 ### 2026-01-01: DesignComuni Frontend Redesign — TailwindCSS + Alpine.js + Lit + DaisyUI
 - **Choice**: Replace Bootstrap Italia with TailwindCSS + Alpine.js + Lit + DaisyUI + Flowbite + Filament
 - **Rationale**: Modern utility-first approach following impeccable.style and tasteskill.dev principles; aligns with Design Comuni visual requirements using token-based design
@@ -87,3 +98,8 @@ qmd: "decision log   fixcity fixcity"
 - [ ] Define success metrics and measurement methodology
 - [ ] Establish feedback collection process for iteration
 
+## D-PA-NAV — Tab area personale identici su tutte le pagine (2026-10-22)
+
+- **Decisione:** chrome unico `Themes/Sixteen/.../personal-area/heading.blade.php` + `navigation.blade.php` per pratiche, seguite, notifiche, impostazioni.
+- **Perche:** i tab sono la mappa dell'area; placement diverso o nav assente su una sorella e' bug di prodotto (DCP-110/111).
+- **Anti-regressione:** feature test sulle quattro rotte; docs Sixteen `personal-area-shared-nav-tabs-contract` + `why-personal-area-tabs-must-be-identical`.

@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Modules\Fixcity\Actions\Faq;
 
 use Illuminate\Support\Facades\Schema;
-use Modules\Fixcity\Database\Seeders\Support\CivicFaqCatalog;
+use Modules\Fixcity\Database\Seeders\Demo\CivicFaqCatalog;
 use Modules\Fixcity\Models\Faq;
 use Throwable;
 

@@ -25,6 +25,10 @@ it('keeps FixCity brand slogan and real footer urls in every footer.json copy', 
         Assert::assertFileExists($path, $path);
         /** @var array{blocks: array<string, list<array{data: array<string, mixed>}>>} $json */
         $json = json_decode(file_get_contents($path), true, 512, JSON_THROW_ON_ERROR);
+        $headerPath = $root.'/database/content/sections/header.json';
+        Assert::assertFileExists($headerPath, $headerPath);
+        /** @var array{blocks: array<string, list<array{data: array<string, mixed>}>>} $headerJson */
+        $headerJson = json_decode(file_get_contents($headerPath), true, 512, JSON_THROW_ON_ERROR);
 
         foreach (['it', 'en', 'de', 'es'] as $locale) {
             $data = $json['blocks'][$locale][0]['data'] ?? null;
@@ -41,6 +45,11 @@ it('keeps FixCity brand slogan and real footer urls in every footer.json copy', 
             Assert::assertIsString($brand['description'] ?? null);
             Assert::assertNotSame('', trim((string) ($brand['description'] ?? '')), $path.' '.$locale.' brand.description (slogan)');
             Assert::assertStringNotContainsString('Nome del Comune', (string) ($brand['name'] ?? ''));
+            Assert::assertSame(
+                data_get($headerJson, 'blocks.'.$locale.'.0.data.brand.logo'),
+                $brand['logo'] ?? null,
+                $path.' '.$locale.' must reuse the header brand logo'
+            );
 
             $urls = [];
             $collect = static function (mixed $links) use (&$urls): void {
@@ -91,6 +100,8 @@ it('does not emit bare anchors or invent comune copy in footer vestiti', functio
     Assert::assertStringContainsString('FrontofficeUrl::fromStoredUrl', $dc);
     Assert::assertStringContainsString('FrontofficeUrl::fromStoredUrl', $v1);
     Assert::assertStringContainsString('$activeLinks', $dc);
+    Assert::assertStringContainsString("\$d('brand.logo'", $dc);
+    Assert::assertStringNotContainsString("\$icon('it-pa')", $dc);
     Assert::assertStringNotContainsString('Nome del Comune', $dc);
     Assert::assertStringNotContainsString('Nome del Comune', $v1);
     Assert::assertStringNotContainsString('Servizi e informazioni del Comune.', $v1);

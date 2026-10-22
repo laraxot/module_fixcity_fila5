@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Modules\Fixcity\Database\Seeders;
 
 use Illuminate\Database\Seeder;
-use Modules\Fixcity\Database\Seeders\Support\DemoCategoryCatalog;
+use Modules\Fixcity\Database\Seeders\Demo\DemoCategoryCatalog;
 use Modules\Fixcity\Models\Category;
 
 /**

@@ -25,7 +25,8 @@ it('offers registration and password recovery from the login page', function (st
         $paths[] = is_string($path) ? $path : '';
     }
 
-    foreach (["/{$locale}/auth/register", "/{$locale}/auth/password/forgot"] as $expected) {
+    // `password.request` e' la rotta che invia il link di recupero; `/auth/password/forgot` cadeva su `[token]` (form di nuova password).
+    foreach (["/{$locale}/auth/register", "/{$locale}/auth/password/reset"] as $expected) {
         Assert::assertContains($expected, $paths, "Login ({$locale}) senza il link a {$expected}.");
         $this->get($expected)->assertOk();
     }

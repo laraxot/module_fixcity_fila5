@@ -76,7 +76,10 @@ describe('ListPublicTicketsAction visibility and privacy', function (): void {
 
         $item = listFor()['items'][0];
 
-        Assert::assertSame('/it/tickets/'.$item['id'], $item['url']);
+        Assert::assertSame(
+            route('container0.view', ['container0' => 'tickets', 'slug0' => (string) $item['id']]),
+            $item['url'],
+        );
     });
 });
 

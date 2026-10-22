@@ -64,6 +64,23 @@ describe('guest', function (): void {
     })->with('personal area pages')->with(['it', 'en', 'de', 'es']);
 });
 
+it('shows the same four personal-area tabs as pratiche/seguite and marks the current page', function (string $slug, string $current): void {
+    /** @var TestCase $this */
+    $citizen = UserFactory::new()->createOne();
+    $html = (string) $this->actingAs($citizen)->get("/it/area-personale/{$slug}")->assertOk()->getContent();
+
+    expect($html)->toContain('cmp-nav-tab');
+    expect(substr_count($html, 'area-personale/pratiche'))->toBeGreaterThan(0)
+        ->and(substr_count($html, 'area-personale/seguite'))->toBeGreaterThan(0)
+        ->and(substr_count($html, 'area-personale/notifiche'))->toBeGreaterThan(0)
+        ->and(substr_count($html, 'area-personale/impostazioni'))->toBeGreaterThan(0);
+    expect($html)->toContain('aria-current="page"');
+    expect($html)->toContain($current);
+})->with([
+    'notifiche' => ['notifiche', '/it/area-personale/notifiche'],
+    'impostazioni' => ['impostazioni', '/it/area-personale/impostazioni'],
+]);
+
 describe('notifications page', function (): void {
     it('shows the real status updates of the citizen in every language', function (string $locale, string $title): void {
         /** @var TestCase $this */
