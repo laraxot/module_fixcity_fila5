@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Modules\Fixcity\Actions\Workflow;
 
+use Modules\Fixcity\Enums\TicketStatusEnum;
 use Modules\Fixcity\Models\Ticket;
 use Spatie\QueueableAction\QueueableAction;
 
@@ -24,26 +25,15 @@ final class TransitionTicketStatusAction
      */
     public function execute(Ticket $ticket, string $targetStatus): bool
     {
-        $valid = [
-            'draft' => ['pending'],
-            'pending' => ['assigned', 'escalated'],
-            'assigned' => ['in_progress', 'escalated'],
-            'in_progress' => ['review', 'escalated'],
-            'review' => ['approved', 'rejected', 'return_to_work'],
-            'approved' => ['resolved'],
-            'rejected' => ['draft'],
-            'resolved' => ['closed'],
-            'closed' => ['reopened'],
-            'escalated' => ['assigned'],
-            'reopened' => ['assigned'],
-        ];
+        $current = TicketStatusEnum::tryFrom($ticket->resolveTicketStatusValue());
+        $target = TicketStatusEnum::tryFrom($targetStatus);
 
-        $current = $ticket->resolveTicketStatusValue();
-        if (! in_array($targetStatus, $valid[$current] ?? [], true)) {
-            throw new \InvalidArgumentException("Invalid transition from {$current} to {$targetStatus}");
+        if (! $current instanceof TicketStatusEnum || ! $target instanceof TicketStatusEnum) {
+            throw new \InvalidArgumentException("Invalid ticket status transition target: {$targetStatus}");
         }
 
-        $ticket->update(['status' => $targetStatus]);
+        $current->assertCanTransitionTo($target);
+        $ticket->update(['status' => $target]);
 
         return true;
     }

@@ -54,8 +54,10 @@ class ListTickets extends XotBaseListRecords
                     $path = app(GenerateTicketsJsonAction::class)->execute();
                     Notification::make()
                         ->success()
-                        ->title('JSON mappa generato')
-                        ->body('File scritto in '.basename(dirname($path)).'/'.basename($path))
+                        ->title(__('fixcity::ticket_kpi.export_map_json.title'))
+                        ->body(__('fixcity::ticket_kpi.export_map_json.body', [
+                            'path' => basename(dirname($path)).'/'.basename($path),
+                        ]))
                         ->send();
                 }),
         ];

@@ -502,9 +502,10 @@ return [
             'description' => 'slug',
         ],
         'responsible_id' => [
-            'placeholder' => 'responsible_id',
-            'helper_text' => 'responsible_id',
-            'description' => 'responsible_id',
+            'label' => 'Operatore responsabile',
+            'placeholder' => 'Seleziona un operatore',
+            'helper_text' => 'Chi prende in carico la segnalazione per il Comune',
+            'description' => 'Responsabile assegnato alla pratica',
         ],
     ],
     'sections' => [
@@ -755,9 +756,49 @@ return [
             'label' => 'edit',
         ],
         'changeStatus' => [
-            'tooltip' => 'changeStatus',
+            'tooltip' => 'Cambia lo stato della segnalazione',
             'icon' => 'changeStatus',
-            'label' => 'changeStatus',
+            'label' => 'Cambia stato',
+            'reason_label' => 'Motivo della modifica di stato',
+            'reason_help' => 'La motivazione resta in cronologia. Gli aggiornamenti pubblici sono visibili al cittadino.',
+            'modal_heading' => 'Modifica stato',
+            'modal_submit' => 'Salva stato',
+        ],
+        'approve' => [
+            'label' => 'Approva',
+            'reason_label' => 'Motivo dell\'approvazione',
+        ],
+        'reject' => [
+            'label' => 'Scarta',
+            'reason_label' => 'Motivo dello scarto',
+        ],
+        'resolve' => [
+            'label' => 'Segna come risolta',
+            'reason_label' => 'Come e\' stata risolta',
+        ],
+        'close' => [
+            'label' => 'Chiudi pratica',
+            'reason_label' => 'Motivo della chiusura',
+        ],
+        'send_communication' => [
+            'label' => 'Invia comunicazione',
+            'recipient_label' => 'Destinatario (assegnatario)',
+            'recipient_help' => 'Opzionale: collega la mail a un assegnatario gia\' sulla pratica',
+            'recipient_email' => 'Email destinatario',
+            'subject' => 'Oggetto',
+            'body' => 'Messaggio',
+            'assignee_fallback' => 'Assegnatario',
+            'office_fallback' => 'Ufficio',
+        ],
+        'record_inbound' => [
+            'label' => 'Registra risposta ricevuta',
+            'sender' => 'Mittente',
+            'summary' => 'Sintesi della risposta',
+            'summary_help' => 'Resta nella cronologia della pratica, non e\' un invio email',
+        ],
+        'send_followup' => [
+            'label' => 'Sollecita aggiornamento',
+            'office' => 'Ufficio / destinatario etichetta',
         ],
         'save' => [
             'tooltip' => 'save',
@@ -804,13 +845,14 @@ return [
             'tooltip' => 'createAnother',
         ],
         'assign' => [
+            'label' => 'Assegna operatore',
             'icon' => 'assign',
-            'tooltip' => 'assign',
+            'tooltip' => 'Assegna un responsabile alla segnalazione',
         ],
         'changePriority' => [
-            'label' => 'changePriority',
+            'label' => 'Cambia priorita\'',
             'icon' => 'changePriority',
-            'tooltip' => 'changePriority',
+            'tooltip' => 'Aggiorna la priorita\' operativa della segnalazione',
         ],
         'submit' => [
             'icon' => 'submit',

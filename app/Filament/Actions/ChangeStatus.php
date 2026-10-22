@@ -18,6 +18,8 @@ class ChangeStatus extends Action
     {
         parent::setUp();
 
+        // Etichette da lang (filament-blueprint Fixcity): niente stringhe hardcoded —
+        // l'operatore registra motivo e stato nella cronologia visibile al cittadino.
         $this->translateLabel()
             ->authorize('changeStatus')
             ->action(
@@ -36,16 +38,14 @@ class ChangeStatus extends Action
                     ->options(TicketStatusEnum::class)
                     ->required(),
                 TextInput::make('reason')
-                    ->label('Per quale motivo stai modificando lo stato?')
-                    ->helperText('La motivazione viene registrata nella cronologia. Gli aggiornamenti pubblici sono visibili al cittadino.')
+                    ->label(__('fixcity::ticket.actions.changeStatus.reason_label'))
+                    ->helperText(__('fixcity::ticket.actions.changeStatus.reason_help'))
                     ->required(),
             ])
-            ->label('Change Status')
             ->icon('ui-status')
-            ->tooltip('Change Status')
-            ->modalHeading('Modifica Status')
-            // ->requiresConfirmation()
-            ->modalSubmitActionLabel('Modifica');
+            ->tooltip(__('fixcity::ticket.actions.changeStatus.tooltip'))
+            ->modalHeading(__('fixcity::ticket.actions.changeStatus.modal_heading'))
+            ->modalSubmitActionLabel(__('fixcity::ticket.actions.changeStatus.modal_submit'));
     }
 
     public static function getDefaultName(): ?string

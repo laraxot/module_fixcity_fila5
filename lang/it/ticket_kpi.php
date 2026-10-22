@@ -58,4 +58,8 @@ return [
             'label' => 'Esporta elenco',
         ],
     ],
+    'export_map_json' => [
+        'title' => 'JSON della mappa generato',
+        'body' => 'File scritto in :path',
+    ],
 ];
