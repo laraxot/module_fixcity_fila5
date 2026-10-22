@@ -10,6 +10,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Schema;
+use Modules\Fixcity\Actions\RecordTicketActivityAction;
 use Modules\Fixcity\Enums\TicketActivityEventTypeEnum;
 use Modules\Fixcity\Enums\TicketActivityVisibilityEnum;
 use Modules\Fixcity\Enums\TicketPriorityEnum;
@@ -17,6 +18,7 @@ use Modules\Fixcity\Enums\TicketStatusEnum;
 use Modules\Fixcity\Enums\TicketTypeEnum;
 use Modules\Fixcity\Models\Ticket;
 use Modules\Fixcity\Models\TicketActivity;
+use Modules\Media\Models\Media;
 use Modules\Xot\Actions\Cast\SafeStringCastAction;
 
 /**
@@ -280,7 +282,7 @@ final class DemoTicketWriter
      * casuale: rilanciando il seeder gli stessi ticket restano fotografati e gli
      * altri restano senza foto.
      */
-    public function maybeAttachPhoto(string $code, int|string $ticketId, Generator $faker): int
+    public function maybeAttachPhoto(string $code, int|string $ticketId): int
     {
         $path = self::photoPlaceholder();
         if ($path === null || ! self::isPhotographed($code)) {
@@ -290,19 +292,64 @@ final class DemoTicketWriter
         try {
             /** @var Ticket|null $ticket */
             $ticket = Ticket::query()->find($ticketId);
-            if ($ticket === null || ! $ticket->getMedia('ticket')->isEmpty()) {
+            if ($ticket === null) {
+                return 0;
+            }
+
+            $existing = $ticket->getMedia('ticket')->first();
+            if ($existing instanceof Media) {
+                $this->restoreMediaActivity($ticket, $existing);
+
                 return 0;
             }
 
             $ticket->addMedia($path)
                 ->preservingOriginal()
-                ->withCustomProperties(['source' => 'fixcity-demo', 'frame' => $faker->numberBetween(1, 3)])
+                ->withCustomProperties(['source' => 'fixcity-demo', 'frame' => self::photoFrame($code)])
                 ->toMediaCollection('ticket');
         } catch (\Throwable) {
             return 0;
         }
 
         return 1;
+    }
+
+    private function restoreMediaActivity(Ticket $ticket, Media $media): void
+    {
+        $exists = TicketActivity::query()
+            ->where('ticket_id', $ticket->getKey())
+            ->where('event_type', TicketActivityEventTypeEnum::MediaAdded->value)
+            ->where('payload->media_id', $media->getKey())
+            ->exists();
+
+        if ($exists) {
+            return;
+        }
+
+        $status = TicketStatusEnum::tryFrom($ticket->resolveTicketStatusValue()) ?? TicketStatusEnum::PENDING;
+        app(RecordTicketActivityAction::class)->execute(
+            $ticket,
+            TicketActivityEventTypeEnum::MediaAdded,
+            $status,
+            $status,
+            null,
+            in_array($status, TicketStatusEnum::canViewByAll(), true)
+                ? TicketActivityVisibilityEnum::Public
+                : TicketActivityVisibilityEnum::AuthorOnly,
+            $media->created_by,
+            [
+                'source' => 'fixcity-demo',
+                'media_id' => $media->getKey(),
+                'collection' => (string) $media->collection_name,
+                'file_name' => basename((string) $media->file_name),
+                'mime_type' => (string) $media->mime_type,
+            ],
+        );
+    }
+
+    private static function photoFrame(string $code): int
+    {
+        return (hexdec(substr(md5($code), 4, 2)) % 3) + 1;
     }
 
     /**

@@ -13,6 +13,7 @@ use Modules\Fixcity\Models\Ticket;
 use Modules\Fixcity\Tests\TestCase;
 use Modules\User\Database\Factories\UserFactory;
 use Modules\User\Models\User;
+use Modules\Xot\Actions\Cast\SafeStringCastAction;
 use PHPUnit\Framework\Assert;
 
 /**
@@ -108,7 +109,10 @@ final class TicketBusinessLogicTest extends TestCase
 
     public function test_provides_comment_url(): void
     {
-        Assert::assertSame('#', $this->ticket()->commentUrl());
+        Assert::assertStringEndsWith(
+            '/it/tickets/'.SafeStringCastAction::cast($this->ticket()->getKey()),
+            $this->ticket()->commentUrl(),
+        );
     }
 
     public function test_provides_correct_latitude_longitude_attribute_mapping(): void

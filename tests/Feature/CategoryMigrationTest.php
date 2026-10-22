@@ -9,24 +9,41 @@ use Modules\Fixcity\Models\Category;
 use Modules\Fixcity\Tests\TestCase;
 
 /**
- * Class CategoryMigrationTest.
+ * Contratto schema `categories` sulla connessione `fixcity` (owner Fixcity).
  *
- * Test per verificare la corretta struttura della tabella categories
- * e il funzionamento del modello Category.
+ * Non usare Schema:: senza connection: `blog` e `fixcity` condividono il nome
+ * tabella su MariaDB; dopo un migrate:fresh errato lo schema Blog (`title`)
+ * maschera quello Fixcity (`name`).
  */
 class CategoryMigrationTest extends TestCase
 {
-    /**
-     * Test che la tabella categories sia stata creata correttamente.
-     */
-    public function test_categories_table_exists(): void
+    private function fixcitySchema(): \Illuminate\Database\Schema\Builder
     {
-        $this->assertTrue(Schema::hasTable('categories'));
+        return Schema::connection('fixcity');
     }
 
     /**
-     * Test che la tabella categories abbia tutte le colonne richieste.
+     * @return list<string>
      */
+    private function indexNames(): array
+    {
+        $indexes = $this->fixcitySchema()->getIndexes('categories');
+
+        return array_values(array_filter(array_map(
+            static function (array $index): string {
+                $name = $index['name'];
+
+                return is_string($name) ? $name : '';
+            },
+            $indexes,
+        )));
+    }
+
+    public function test_categories_table_exists(): void
+    {
+        $this->assertTrue($this->fixcitySchema()->hasTable('categories'));
+    }
+
     public function test_categories_table_has_required_columns(): void
     {
         $requiredColumns = [
@@ -44,40 +61,35 @@ class CategoryMigrationTest extends TestCase
 
         foreach ($requiredColumns as $column) {
             $this->assertTrue(
-                Schema::hasColumn('categories', $column),
-                "Column '{$column}' is missing from categories table"
+                $this->fixcitySchema()->hasColumn('categories', $column),
+                "Column '{$column}' is missing from fixcity.categories"
             );
         }
     }
 
-    /**
-     * Test che la tabella categories abbia gli indici richiesti.
-     */
     public function test_categories_table_has_required_indexes(): void
     {
-        $indexes = Schema::getIndexes('categories');
+        $indexNames = $this->indexNames();
 
+        // Allineato allo schema produzione fixcity_data (nessun categories_name_idx).
         $requiredIndexes = [
-            'categories_name_idx',
             'categories_parent_id_idx',
             'categories_is_active_idx',
             'categories_sort_order_idx',
         ];
 
         foreach ($requiredIndexes as $index) {
-            $this->assertTrue(
-                in_array($index, $indexes, true),
-                "Index '{$index}' is missing from categories table"
+            $this->assertContains(
+                $index,
+                $indexNames,
+                "Index '{$index}' is missing from fixcity.categories"
             );
         }
     }
 
-    /**
-     * Test che il modello Category possa essere creato.
-     */
     public function test_category_model_can_be_created(): void
     {
-        $category = Category::create([
+        $category = Category::query()->create([
             'id' => 'test-category',
             'name' => 'Test Category',
             'description' => 'Test description',
@@ -92,13 +104,9 @@ class CategoryMigrationTest extends TestCase
         $this->assertTrue($category->is_active);
     }
 
-    /**
-     * Test che il modello Category supporti le relazioni gerarchiche.
-     */
     public function test_category_model_supports_hierarchical_relationships(): void
     {
-        // Crea categoria padre
-        $parent = Category::create([
+        $parent = Category::query()->create([
             'id' => 'parent-category',
             'name' => 'Parent Category',
             'description' => 'Parent description',
@@ -107,8 +115,7 @@ class CategoryMigrationTest extends TestCase
             'sort_order' => 1,
         ]);
 
-        // Crea categoria figlia
-        $child = Category::create([
+        $child = Category::query()->create([
             'id' => 'child-category',
             'name' => 'Child Category',
             'description' => 'Child description',
@@ -118,23 +125,17 @@ class CategoryMigrationTest extends TestCase
             'sort_order' => 1,
         ]);
 
-        // Test relazione padre
         $this->assertEquals('parent-category', $child->parent_id);
         $this->assertInstanceOf(Category::class, $child->parent);
         $this->assertEquals('Parent Category', $child->parent->name);
 
-        // Test relazione figli
         $this->assertTrue($parent->children()->exists());
         $this->assertEquals(1, $parent->children()->count());
     }
 
-    /**
-     * Test che il modello Category supporti gli scope.
-     */
     public function test_category_model_supports_scopes(): void
     {
-        // Crea categorie attive e inattive
-        Category::create([
+        Category::query()->create([
             'id' => 'active-category',
             'name' => 'Active Category',
             'description' => 'Active description',
@@ -143,7 +144,7 @@ class CategoryMigrationTest extends TestCase
             'sort_order' => 1,
         ]);
 
-        Category::create([
+        Category::query()->create([
             'id' => 'inactive-category',
             'name' => 'Inactive Category',
             'description' => 'Inactive description',
@@ -152,25 +153,19 @@ class CategoryMigrationTest extends TestCase
             'sort_order' => 2,
         ]);
 
-        // Test scope active
-        $activeCategories = Category::active()->get();
+        $activeCategories = Category::query()->active()->get();
         $this->assertEquals(1, $activeCategories->count());
         $active = $activeCategories->first();
         $this->assertNotNull($active);
         $this->assertEquals('active-category', $active->id);
 
-        // Test scope root
-        $rootCategories = Category::root()->get();
+        $rootCategories = Category::query()->root()->get();
         $this->assertEquals(2, $rootCategories->count());
     }
 
-    /**
-     * Test che il modello Category calcoli correttamente il nome completo.
-     */
     public function test_category_model_calculates_full_name_correctly(): void
     {
-        // Crea categoria padre
-        $parent = Category::create([
+        $parent = Category::query()->create([
             'id' => 'parent',
             'name' => 'Parent',
             'description' => 'Parent description',
@@ -179,8 +174,7 @@ class CategoryMigrationTest extends TestCase
             'sort_order' => 1,
         ]);
 
-        // Crea categoria figlia
-        $child = Category::create([
+        $child = Category::query()->create([
             'id' => 'child',
             'name' => 'Child',
             'description' => 'Child description',
@@ -190,18 +184,13 @@ class CategoryMigrationTest extends TestCase
             'sort_order' => 1,
         ]);
 
-        // Test nome completo
         $this->assertEquals('Parent', $parent->full_name);
         $this->assertEquals('Parent > Child', $child->full_name);
     }
 
-    /**
-     * Test che il modello Category verifichi correttamente se ha figli.
-     */
     public function test_category_model_checks_children_correctly(): void
     {
-        // Crea categoria senza figli
-        $parent = Category::create([
+        $parent = Category::query()->create([
             'id' => 'parent',
             'name' => 'Parent',
             'description' => 'Parent description',
@@ -212,8 +201,7 @@ class CategoryMigrationTest extends TestCase
 
         $this->assertFalse($parent->hasChildren());
 
-        // Aggiungi figlio
-        Category::create([
+        Category::query()->create([
             'id' => 'child',
             'name' => 'Child',
             'description' => 'Child description',

@@ -41,7 +41,7 @@ describe('PageDescription::resolve', function (): void {
 describe('descrizioni delle pagine pubbliche', function (): void {
     test('tickets.index ha una descrizione non vuota in tutte le lingue', function (): void {
         $root = dirname(__DIR__, 4);
-        $page = json_decode(file_get_contents($root.'/config/local/fixcity/database/content/pages/tickets.index.json'), true);
+        $page = json_decode(file_get_contents($root.'/config/local/fixcity/database/content/pages/tickets/index.json'), true);
         Assert::assertIsArray($page);
         $raw = json_encode($page['description'] ?? null);
 

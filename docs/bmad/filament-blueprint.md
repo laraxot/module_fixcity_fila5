@@ -4,7 +4,7 @@ type: filament-blueprint
 status: active
 module: Fixcity
 created: 2026-10-16
-updated: 2026-10-20
+updated: 2026-10-22
 tags: [bmad, filament, blueprint, fixcity]
 qmd: "filament blueprint fixcity xotbase resource widget"
 related:
@@ -75,3 +75,10 @@ generico di upload fallito per le foto scattate dalla fotocamera.
 Le azioni header (`approve`, `reject`, `resolve`, `close`, `changeStatus`,
 `send_communication`, …) leggono `fixcity::ticket.actions.*` — le chiavi devono
 essere copy reale per l'operatore, non stub. Canon: [filament-viewticket-lifecycle-labels-quality.story.md](../stories/filament-viewticket-lifecycle-labels-quality.story.md).
+
+## FO dettaglio (Sixteen + lang)
+
+Il blocco test `segnalazione-dettaglio` e il dettaglio pubblico usano
+`fixcity::ticket_detail.*` (breadcrumb, meta, where, description). Nessun
+`->label()` / stringa UI nel blade. Widget rating cittadino: solo `@auth` +
+`TicketCitizenRatingPromptWidget` (XotBase), montaggio esplicito.

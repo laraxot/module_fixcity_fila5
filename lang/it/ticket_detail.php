@@ -6,7 +6,12 @@ declare(strict_types=1);
 // File: lang/it/ticket_detail.php
 // Testi del dettaglio pubblico /{lang}/tickets/{id} e del messaggio di "Segui" (story DCP-148).
 return [
+    'not_found' => 'Segnalazione non trovata o non visibile.',
+    'not_available' => 'N/D',
+    'images' => 'Immagini',
+    'image_alt' => 'Immagine della segnalazione :name',
     'breadcrumb' => [
+        'aria' => 'Percorso di navigazione',
         'home' => 'Home',
         'list' => 'Elenco segnalazioni',
     ],

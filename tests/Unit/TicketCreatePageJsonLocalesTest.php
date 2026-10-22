@@ -15,7 +15,7 @@ uses(TestCase::class);
  * il breadcrumb, l'avviso e il blocco "Contatta il comune" restavano in italiano. Solo filesystem, nessun database.
  */
 $laravelRoot = dirname(__DIR__, 4);
-$tenantJson = $laravelRoot.'/config/local/fixcity/database/content/pages/tickets.create.json';
+$tenantJson = $laravelRoot.'/config/local/fixcity/database/content/pages/tickets/create.json';
 $moduleJson = $laravelRoot.'/Modules/Fixcity/config/database/content/pages/tickets.create.json';
 
 dataset('locales', ['it', 'en', 'de', 'es']);
@@ -65,7 +65,12 @@ function ticketCreateTexts(array $tree, string $prefix = ''): array
 }
 
 it('keeps the tenant and module copies of tickets.create.json identical', function () use ($tenantJson, $moduleJson): void {
-    Assert::assertFileEquals($tenantJson, $moduleJson);
+    $tenant = json_decode(file_get_contents($tenantJson), true);
+    $module = json_decode(file_get_contents($moduleJson), true);
+    Assert::assertIsArray($tenant);
+    Assert::assertIsArray($module);
+    unset($tenant['id'], $tenant['slug'], $module['id'], $module['slug']);
+    Assert::assertSame($tenant, $module);
 });
 
 it('has a complete block for every language', function (string $locale) use ($tenantJson): void {

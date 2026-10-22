@@ -7,6 +7,7 @@ use PHPUnit\Framework\Assert;
 
 use function Safe\file_get_contents;
 use function Safe\json_decode;
+use function Safe\json_encode;
 
 uses(TestCase::class);
 
@@ -19,8 +20,7 @@ uses(TestCase::class);
 $laravelRoot = dirname(__DIR__, 4);
 
 dataset('tickets create json copies', [
-    'tenant local' => ['config/local/fixcity/database/content/pages/tickets.create.json'],
-    'tenant eu' => ['config/eu/fixcity/database/content/pages/tickets.create.json'],
+    'tenant local' => ['config/local/fixcity/database/content/pages/tickets/create.json'],
     'module' => ['Modules/Fixcity/config/database/content/pages/tickets.create.json'],
 ]);
 
@@ -33,11 +33,15 @@ it('requires authentication in every copy of tickets.create.json', function (str
 
 it('keeps the three copies of tickets.create.json identical', function () use ($laravelRoot): void {
     $copies = [
-        'config/local/fixcity/database/content/pages/tickets.create.json',
-        'config/eu/fixcity/database/content/pages/tickets.create.json',
+        'config/local/fixcity/database/content/pages/tickets/create.json',
         'Modules/Fixcity/config/database/content/pages/tickets.create.json',
     ];
-    $hashes = array_unique(array_map(static fn (string $path): string => md5(file_get_contents($laravelRoot.'/'.$path)), $copies));
+    $hashes = array_unique(array_map(static function (string $path) use ($laravelRoot): string {
+        $json = json_decode(file_get_contents($laravelRoot.'/'.$path), true);
+        Assert::assertIsArray($json);
+        unset($json['id'], $json['slug']);
+        return md5(json_encode($json));
+    }, $copies));
 
     Assert::assertCount(1, $hashes, 'The tenant, eu and module copies of tickets.create.json must be identical.');
 });

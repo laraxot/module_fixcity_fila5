@@ -12,6 +12,9 @@ tags: [bmad, second-brain, dati-sacri, migrate, tests]
 - `php artisan migrate --force` — mai
 - `php artisan migrate:refresh` — mai
 - Nei test: `RefreshDatabase`, `RefreshDatabase` trait, `LazilyRefreshDatabase` se cancella dati esistenti
+  (in testing `blog`/`fixcity`/`mariadb` condividono `fixcity_data_test`: un solo
+  `migrate:fresh` sostituisce `categories` Fixcity con lo schema Blog — vedi
+  [stories/refreshdatabase-wipe-shared-test-db.story.md](./stories/refreshdatabase-wipe-shared-test-db.story.md))
 - `DatabaseTruncation` se tocca dati reali
 
 ## Perché

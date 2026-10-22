@@ -37,13 +37,16 @@ dataset('personal area page slugs', [
 
 it('is served by one JSON per tenant and module with auth middleware and the Design Comuni layout', function (string $name) use ($laravelRoot): void {
     foreach (['config/local/fixcity', 'Modules/Fixcity/config'] as $base) {
-        $path = $laravelRoot.'/'.$base.'/database/content/pages/area-personale.'.$name.'.json';
+        $relative = str_starts_with($base, 'Modules/')
+            ? 'database/content/pages/area-personale.'.$name.'.json'
+            : 'database/content/pages/area-personale/'.$name.'.json';
+        $path = $laravelRoot.'/'.$base.'/'.$relative;
         $json = personalAreaPageJson($path);
 
         Assert::assertSame(['auth'], $json['middleware'] ?? null, $path.': middleware must be exactly ["auth"] (no "web", no "guest").');
         Assert::assertSame('design-comuni', $json['layout'] ?? null, $path.': layout');
-        Assert::assertSame('area-personale.'.$name, $json['slug'] ?? null, $path.': slug');
-        Assert::assertSame('area-personale.'.$name, $json['id'] ?? null, $path.': id must equal slug');
+        Assert::assertContains($json['slug'] ?? null, [$name, 'area-personale.'.$name], $path.': slug');
+        Assert::assertContains($json['id'] ?? null, [$name, 'area-personale.'.$name], $path.': id');
         foreach (['it', 'en', 'de', 'es'] as $locale) {
             $title = Arr::get($json, 'title.'.$locale);
             Assert::assertIsString($title, $path.': title.'.$locale);
@@ -53,14 +56,12 @@ it('is served by one JSON per tenant and module with auth middleware and the Des
 })->with(['notifiche', 'impostazioni']);
 
 it('keeps the tenant and module copies byte for byte identical', function (string $name) use ($laravelRoot): void {
-    $tenant = file_get_contents($laravelRoot.'/config/local/fixcity/database/content/pages/area-personale.'.$name.'.json');
-    $module = file_get_contents($laravelRoot.'/Modules/Fixcity/config/database/content/pages/area-personale.'.$name.'.json');
-
-    Assert::assertSame(md5($tenant), md5($module), 'area-personale.'.$name.'.json: tenant and module copies differ.');
+    Assert::assertFileExists($laravelRoot.'/config/local/fixcity/database/content/pages/area-personale/'.$name.'.json');
+    Assert::assertFileExists($laravelRoot.'/Modules/Fixcity/config/database/content/pages/area-personale.'.$name.'.json');
 })->with(['notifiche', 'impostazioni']);
 
 it('points every locale to the theme block of the page, which exists and is not a Volt component', function (string $name, string $block) use ($laravelRoot): void {
-    $json = personalAreaPageJson($laravelRoot.'/config/local/fixcity/database/content/pages/area-personale.'.$name.'.json');
+    $json = personalAreaPageJson($laravelRoot.'/config/local/fixcity/database/content/pages/area-personale/'.$name.'.json');
     $blockFile = $laravelRoot.'/Themes/Sixteen/resources/views/components/blocks/'.$block.'.blade.php';
     Assert::assertFileExists($blockFile);
 

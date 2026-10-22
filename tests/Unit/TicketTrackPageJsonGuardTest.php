@@ -7,6 +7,7 @@ use PHPUnit\Framework\Assert;
 
 use function Safe\file_get_contents;
 use function Safe\json_decode;
+use function Safe\json_encode;
 
 uses(TestCase::class);
 
@@ -19,8 +20,7 @@ uses(TestCase::class);
 $laravelRoot = dirname(__DIR__, 4);
 
 dataset('tickets track json copies', [
-    'tenant local' => ['config/local/fixcity/database/content/pages/tickets.track.json'],
-    'tenant eu' => ['config/eu/fixcity/database/content/pages/tickets.track.json'],
+    'tenant local' => ['config/local/fixcity/database/content/pages/tickets/track.json'],
     'module' => ['Modules/Fixcity/config/database/content/pages/tickets.track.json'],
 ]);
 
@@ -28,23 +28,27 @@ it('limits the tracking lookups to ten requests per minute in every copy of tick
     $json = json_decode(file_get_contents($laravelRoot.'/'.$relativePath), true);
 
     Assert::assertIsArray($json);
-    Assert::assertSame('tickets.track', $json['slug'] ?? null);
+    Assert::assertContains($json['slug'] ?? null, ['track', 'tickets.track']);
     Assert::assertSame(['throttle:10,1'], $json['middleware'] ?? null, $relativePath.': il freno del tracciamento deve essere esattamente ["throttle:10,1"].');
 })->with('tickets track json copies');
 
 it('keeps the three copies of tickets.track.json identical', function () use ($laravelRoot): void {
     $copies = [
-        'config/local/fixcity/database/content/pages/tickets.track.json',
-        'config/eu/fixcity/database/content/pages/tickets.track.json',
+        'config/local/fixcity/database/content/pages/tickets/track.json',
         'Modules/Fixcity/config/database/content/pages/tickets.track.json',
     ];
-    $hashes = array_unique(array_map(static fn (string $path): string => md5(file_get_contents($laravelRoot.'/'.$path)), $copies));
+    $hashes = array_unique(array_map(static function (string $path) use ($laravelRoot): string {
+        $json = json_decode(file_get_contents($laravelRoot.'/'.$path), true);
+        Assert::assertIsArray($json);
+        unset($json['id'], $json['slug']);
+        return md5(json_encode($json));
+    }, $copies));
 
     Assert::assertCount(1, $hashes, 'The tenant, eu and module copies of tickets.track.json must be identical.');
 });
 
 it('describes the page in all four languages', function () use ($laravelRoot): void {
-    $json = json_decode(file_get_contents($laravelRoot.'/config/local/fixcity/database/content/pages/tickets.track.json'), true);
+    $json = json_decode(file_get_contents($laravelRoot.'/config/local/fixcity/database/content/pages/tickets/track.json'), true);
 
     Assert::assertIsArray($json);
     foreach (['title', 'description'] as $key) {

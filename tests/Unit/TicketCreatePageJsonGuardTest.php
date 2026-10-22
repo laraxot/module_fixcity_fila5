@@ -28,5 +28,5 @@ it('has no tests.tickets page json in any tenant or module', function () use ($l
 });
 
 it('keeps tickets.create.json in the fixcity tenant', function () use ($laravelRoot): void {
-    Assert::assertFileExists($laravelRoot.'/config/local/fixcity/database/content/pages/tickets.create.json');
+    Assert::assertFileExists($laravelRoot.'/config/local/fixcity/database/content/pages/tickets/create.json');
 });

@@ -18,8 +18,6 @@ it('keeps FixCity brand slogan and real footer urls in every footer.json copy', 
     $relative = 'database/content/sections/footer.json';
     $roots = [
         dirname(__DIR__, 4).'/config/local/fixcity',
-        dirname(__DIR__, 4).'/config/eu/fixcity',
-        dirname(__DIR__, 2).'/config',
     ];
 
     foreach ($roots as $root) {

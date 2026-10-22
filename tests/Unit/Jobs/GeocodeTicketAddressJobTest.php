@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 use Illuminate\Http\Client\Request;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Log;
 use Modules\Fixcity\Database\Factories\TicketFactory;
@@ -12,6 +13,10 @@ use Modules\Fixcity\Tests\TestCase;
 use PHPUnit\Framework\Assert;
 
 uses(TestCase::class);
+
+beforeEach(function (): void {
+    Cache::flush();
+});
 
 /**
  * Scopo: reverse-geocode Nominatim → `location.address` (nessuna colonna address).
@@ -40,11 +45,9 @@ test('it geocodes ticket address successfully', function (): void {
     Assert::assertSame('Milano, Lombardia, Italia', $location['address'] ?? null);
 
     Http::assertSent(static function (Request $request): bool {
-        $data = $request->data();
-
-        return $request->url() === 'https://nominatim.openstreetmap.org/reverse'
-            && ($data['lat'] ?? null) === '45.4642'
-            && ($data['lon'] ?? null) === '9.1900';
+        return str_starts_with($request->url(), 'https://nominatim.openstreetmap.org/reverse')
+            && str_contains($request->url(), 'lat=45.4642')
+            && str_contains($request->url(), 'lon=9.1900');
     });
 });
 

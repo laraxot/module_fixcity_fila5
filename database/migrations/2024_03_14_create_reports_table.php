@@ -23,7 +23,7 @@ return new class extends XotBaseMigration
                 $table->text('description');
                 $table->json('location');
                 $table->string('address');
-                $table->string('category');
+                $table->unsignedBigInteger('category');
                 $table->string('status');
                 $table->json('metadata');
                 $table->timestamps();

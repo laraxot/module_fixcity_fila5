@@ -6,7 +6,12 @@ declare(strict_types=1);
 // File: lang/en/ticket_detail.php
 // Texts of the public detail page /{lang}/tickets/{id} and of the "Follow" message (story DCP-148).
 return [
+    'not_found' => 'Report not found or not visible.',
+    'not_available' => 'N/A',
+    'images' => 'Images',
+    'image_alt' => 'Image for report :name',
     'breadcrumb' => [
+        'aria' => 'Breadcrumb',
         'home' => 'Home',
         'list' => 'Reported issues',
     ],

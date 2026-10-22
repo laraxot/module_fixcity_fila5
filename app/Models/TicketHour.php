@@ -18,7 +18,7 @@ use Modules\Xot\Datas\XotData;
 /**
  * @property int $id
  * @property int $ticket_id
- * @property int $user_id
+ * @property string $user_id
  * @property int|null $activity_id
  * @property float $value
  * @property string|null $comment

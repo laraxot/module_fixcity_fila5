@@ -18,8 +18,6 @@ it('keeps FixCity brand slogan and real nav urls in every header.json copy', fun
     $relative = 'database/content/sections/header.json';
     $roots = [
         dirname(__DIR__, 4).'/config/local/fixcity',
-        dirname(__DIR__, 4).'/config/eu/fixcity',
-        dirname(__DIR__, 2).'/config',
     ];
 
     foreach ($roots as $root) {

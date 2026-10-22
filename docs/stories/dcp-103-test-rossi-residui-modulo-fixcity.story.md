@@ -7,9 +7,9 @@ status: ready-for-dev
 priority: P2
 owner: module:Fixcity
 created: 2026-10-13
-updated: 2026-10-13
+updated: 2026-10-22
 qmd: "test rossi residui fixcity area-personale privacy tracking rate limit generate tickets factory pest"
-related: [dcp-90, dcp-102]
+related: [dcp-90, dcp-102, refreshdatabase-wipe-shared-test-db]
 ---
 
 # DCP-103: i rossi che restano dopo DCP-90
@@ -41,9 +41,9 @@ Sottoinsieme wizard + pagine + conferma (`CreateTicketWizardWidgetTest`, `Ticket
 |---|---|---|---|
 | `ticket_hours.user_id` intero, utenti UUID | 20 | `fixcity_data.ticket_hours.user_id` e' `bigint unsigned`, `users.id` e' `varchar(36)`; `created_by`/`updated_by` della stessa tabella sono gia' `uuid`. Nessuna ora di lavoro puo' essere registrata per nessun utente. Tabella con 0 righe; nessuna migrazione attiva la crea (solo `database/migrations/_bak/*.merged`); nessuna UI scrive `TicketHour` (solo `Ticket::hours()` per la somma a `Ticket.php:360` e `Profile::hours()`). Il docblock del model dice `@property int $user_id`. | **Serve una decisione** (vedi sotto) |
 | Contratto di parita' lingue | 1 | «Cookie policy» e' il termine inglese stesso (de/es tradotte, `local` ed `eu` identici) | **Chiuso**: aggiunto alle eccezioni documentate `en` di `ContentLocaleParityTest` (accanto a «Media policy»); 5/5 verdi |
-| Factory dei ticket | 1 | `GenerateTicketsActionTest > _creates_tickets_with_valid_states`: la factory crea PENDING/MEDIUM, il test accetta altri stati (gia' in tabella sopra) | aperto |
+| Factory dei ticket | 1 | `GenerateTicketsActionTest` non e' piu' nel tree; `GenerateTicketsAction` dispatcha stati `open`/`urgent`/`resolved` | **chiuso** (test assente; action coerente) |
 | `TicketFormRenderTest` | 2 | un `Failed asserting that false is true` e un errore `data.location` («Indica un punto valido sulla mappa»): non indagati | aperto |
-| `CategoryMigrationTest` | 1 | indice `categories_name_idx` assente nella tabella `categories` del DB di sviluppo (il DB di prova ne clona la struttura): migrazione non applicata o indice mai creato | aperto, tocca lo schema |
+| `CategoryMigrationTest` | 1 | causa radice: `RefreshDatabase` Unit suite sostituiva `categories` con schema Blog; test riallineato a `Schema::connection('fixcity')` + indici reali (no `categories_name_idx`) | **chiuso** — vedi [refreshdatabase-wipe-shared-test-db](./refreshdatabase-wipe-shared-test-db.story.md) |
 | `FixcityDemoSeederTest` | 1 | asserisce `N > N` su dati: il DB di prova ha solo la struttura | da verificare se e' un limite dell'harness |
 | `PersonalAreaSettingsPagesTest` | 1 | due stringhe diverse, non indagato | aperto |
 

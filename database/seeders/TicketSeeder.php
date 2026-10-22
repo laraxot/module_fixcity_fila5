@@ -103,14 +103,18 @@ class TicketSeeder extends Seeder
         }
 
         $faker = Factory::create('it_IT');
-        $faker->seed($randomSeed ?? self::RANDOM_SEED);
-
+        DemoPeopleProvider::flush();
         $citizens = DemoPeopleProvider::citizens($faker);
         if ($citizens === []) {
             $this->command?->warn('TicketSeeder: nessun cittadino disponibile, seed saltato.');
 
             return [];
         }
+
+        // I pool demo possono creare utenti al primo avvio: prepararli prima di
+        // inizializzare Faker impedisce che quel side effect alteri il dataset.
+        DemoPeopleProvider::staff($faker);
+        $seed = $randomSeed ?? self::RANDOM_SEED;
 
         $writer = new DemoTicketWriter(self::CODE_PREFIX);
         $writer->clearDemoActivities();
@@ -121,10 +125,13 @@ class TicketSeeder extends Seeder
         $photos = 0;
 
         for ($index = 1; $index <= $count; $index++) {
+            // Ogni ticket ha una sequenza propria: i campi opzionali di un ticket
+            // non possono spostare la casualità del ticket successivo.
+            $faker->seed($seed + $index);
             $plan = $this->plan($faker, $index, $categories, $citizens);
             $ticketId = $writer->persist($faker, $plan);
             $writer->writeActivities($faker, $plan, $ticketId);
-            $photos += $writer->maybeAttachPhoto($plan['code'], $ticketId, $faker);
+            $photos += $writer->maybeAttachPhoto($plan['code'], $ticketId);
             $ticketIds[] = $ticketId;
         }
 
