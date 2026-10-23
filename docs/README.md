@@ -18,6 +18,7 @@ This directory routes to the active documentation roots for the Laravel modules 
 
 - **Identita**: modulo nwidart `Fixcity` (alias `fixcity`, namespace `Modules\Fixcity`, package `laraxot/module_fixcity_fila5`, repo git separato). Provider in `module.json`: `Providers/FixcityServiceProvider` e `Providers/Filament/AdminPanelProvider`. `php artisan module:list` lo mostra `Enabled`.
 - **Cosa possiede**: le segnalazioni dei cittadini (ticket). Modello `app/Models/Ticket.php`, enum `app/Enums/Ticket{Status,Priority,Type}Enum.php`, 64 file in `app/Actions/` (QueueableAction, nessun Controller), wizard `app/Filament/Widgets/CreateTicketWizardWidget.php` con schema `app/Filament/Resources/TicketResource/Schemas/TicketForm.php` (passi `privacy`, `data`, `summary`), pagine Folio in `resources/views/pages/` (`tickets/create`, `tickets/confirmation`, `tickets/track`, `tickets/[id]`, API JSON in `pages/api/`), area personale e pagine legali.
+- Le operazioni asincrone dei ticket sono Queueable Actions in `app/Actions/`; non esistono `app/Jobs/` o `app/Services/`. Il contratto e la motivazione sono in [Queueable Actions](../../Xot/docs/architecture/queueable-actions.md).
 - **Cosa NON possiede**: mappe e picker di coordinate (modulo Geo), layout, Design Comuni e blocchi del front office (tema Sixteen), il motore delle pagine dinamiche (modulo Cms: `PageSlugMiddleware`, `Page`). I JSON delle pagine di Fixcity stanno in `config/database/content/pages/` (105 file) e hanno copie in `laravel/config/local/fixcity/`.
 - **Superficie HTTP**: `routes/web.php` e `routes/api.php` del modulo sono vuoti. I POST stanno in `laravel/routes/web.php` (`/livewire/form-create-ticket` verso `CreateTicketWizardWidget@submit`, `/{lang}/tickets/{ticket}/follow` verso `FollowTicketAction`). Il pannello admin risponde su `/fixcity/admin/tickets` (da `php artisan route:list`).
 - **Quick start** (dalla cartella `laravel/`):
@@ -34,7 +35,7 @@ This directory routes to the active documentation roots for the Laravel modules 
 - Use archive files only when the active docs do not answer the question.
 
 Il contratto comune per tutti i docs di moduli e temi è in
-[docs/project/docs-governance.md](../../../../docs/project/docs-governance.md).
+[DOCUMENTATION_GOVERNANCE.md](../../../../docs/DOCUMENTATION_GOVERNANCE.md).
 Questo `README.md` è l'ingresso canonico del modulo; `00-INDEX.md` resta una
 mappa operativa compatibile con la documentazione storica e non una seconda
 fonte di verità.
@@ -79,7 +80,7 @@ fonte di verità.
 ## Fast Paths
 
 - Shared project rules: [docs/README.md](../../../../docs/README.md)
-- Project documentation governance: [docs/project/docs-governance.md](../../../../docs/project/docs-governance.md)
+- Project documentation governance: [DOCUMENTATION_GOVERNANCE.md](../../../../docs/DOCUMENTATION_GOVERNANCE.md)
 - Theme docs: [laravel/Themes/docs/README.md](../../../Themes/docs/README.md); each theme owns its docs, for example [Sixteen](../../../Themes/Sixteen/docs/README.md)
 - LLM wiki workflow: [docs/wiki/README.md](../../../../docs/wiki/README.md)
 - Modules note: [llm-wiki.md](./llm-wiki.md)

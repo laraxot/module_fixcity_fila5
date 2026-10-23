@@ -1,5 +1,5 @@
 ---
-updated: 2026-09-26
+updated: 2026-10-23
 qmd: "DEEP DIVE 002 architecture patterns"
 issues: []
 discussions: []
@@ -575,14 +575,18 @@ public function show(Ticket $ticket)
 
 ### 4.3 Image Optimization Pipeline
 
+The pipeline is one Spatie QueueableAction in `app/Actions/`, not a Job: modules have no `app/Jobs/` (rule: [no-module-jobs-queueable-action](../../../../bashscripts/ai/wiki/rules/no-module-jobs-queueable-action.md)). The same `execute()` runs inline, queued, or in a test, so there is no second class wrapping the logic.
+
 ```php
-// app/Jobs/ProcessTicketImage.php
-class ProcessTicketImage implements ShouldQueue
+// app/Actions/ProcessTicketImageAction.php (illustrative sketch)
+use Spatie\QueueableAction\QueueableAction;
+
+class ProcessTicketImageAction
 {
-    public function handle(): void
+    use QueueableAction;
+
+    public function execute(TicketImage $image): void
     {
-        $image = $this->ticketImage;
-        
         // 1. Resize to max 1920x1080
         $resized = Image::make($image->path)
             ->resize(1920, 1080, function ($constraint) {
@@ -614,6 +618,10 @@ class ProcessTicketImage implements ShouldQueue
         ]);
     }
 }
+
+// sync:    app(ProcessTicketImageAction::class)->execute($image);
+// async:   app(ProcessTicketImageAction::class)->onQueue()->execute($image);
+// delayed: ActionJob::dispatch(app(ProcessTicketImageAction::class), [$image])->delay(now()->addMinute());
 ```
 
 ---

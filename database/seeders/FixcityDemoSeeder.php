@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Modules\Fixcity\Database\Seeders;
 
 use Faker\Factory;
+use Illuminate\Console\Command;
 use Illuminate\Database\Seeder;
 use Modules\Blog\Database\Seeders\DemoContentSeeder;
 use Modules\Fixcity\Database\Seeders\Demo\DemoCategoryCatalog;
@@ -114,7 +115,9 @@ class FixcityDemoSeeder extends Seeder
         }
 
         /** @var T $instance */
-        $instance->setCommand($this->command);
+        if ($this->command instanceof Command) {
+            $instance->setCommand($this->command);
+        }
 
         return $instance;
     }
