@@ -104,7 +104,7 @@ function contentParityIsText(string $path, mixed $value): bool
         return false;
     }
     $leaf = substr($path, (int) strrpos($path, '.') + 1);
-    if (in_array($leaf, ['url', 'view', 'icon', 'logo', 'element', 'locale', 'data_element', 'src', 'office_url', 'email', 'phone', 'height', 'type', 'slug', 'class', 'style'], true) || str_ends_with($leaf, '_url')) {
+    if (in_array($leaf, ['url', 'view', 'icon', 'logo', 'element', 'locale', 'data_element', 'src', 'office_url', 'email', 'phone', 'height', 'map_height', 'type', 'slug', 'class', 'style'], true) || str_ends_with($leaf, '_url')) {
         return false;
     }
 

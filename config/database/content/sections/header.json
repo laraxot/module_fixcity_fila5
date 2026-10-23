@@ -1,556 +1,556 @@
 {
-  "id": "sixteen-header",
-  "slug": "header",
-  "name": {
-    "it": "Intestazione Design Comuni",
-    "en": "Design Comuni header",
-    "de": "Design-Comuni-Kopfbereich",
-    "es": "Cabecera Design Comuni"
-  },
-  "blocks": {
-    "it": [
-      {
-        "type": "header",
-        "slug": "design-comuni-header",
-        "data": {
-          "view": "pub_theme::components.sections.header.v1",
-          "brand": {
-            "name": "FixCity",
-            "tagline": "Segnala e segui i problemi della tua città",
-            "logo": "themes/Sixteen/design-comuni/assets/images/logo-comune.svg",
-            "header_title": "FixCity",
-            "menu_title": "FixCity",
-            "link_title": "Vai alla homepage di FixCity"
-          },
-          "region": {
-            "name": "Nome della Regione",
-            "url": "",
-            "title": "Vai al portale {Nome della Regione}",
-            "aria_label": "Vai al portale {Nome della Regione} - link esterno - apertura nuova scheda"
-          },
-          "utility_links": [
+    "id": "sixteen-header",
+    "slug": "header",
+    "name": {
+        "it": "Intestazione Design Comuni",
+        "en": "Design Comuni header",
+        "de": "Design-Comuni-Kopfbereich",
+        "es": "Cabecera Design Comuni"
+    },
+    "blocks": {
+        "it": [
             {
-              "label": "Privacy",
-              "url": "/privacy"
-            },
-            {
-              "label": "Accessibilità",
-              "url": "/accessibilita"
-            }
-          ],
-          "account": {
-            "label": "Accedi all'area personale",
-            "url": "/auth/login",
-            "element": "personal-area-login",
-            "login_label": "Accedi all'area personale",
-            "signed_in": {
-              "name": "Area personale",
-              "menu": [
-                {
-                  "label": "Le mie pratiche",
-                  "url": "/area-personale/pratiche"
-                },
-                {
-                  "label": "Segnalazioni seguite",
-                  "url": "/area-personale/seguite"
-                },
-                {
-                  "label": "Notifiche",
-                  "url": "/area-personale/notifiche"
-                },
-                {
-                  "divider": true
-                },
-                {
-                  "label": "Impostazioni",
-                  "url": "/area-personale/impostazioni"
-                },
-                {
-                  "label": "Esci",
-                  "url": "/auth/logout",
-                  "icon": "it-external-link"
+                "type": "header",
+                "slug": "design-comuni-header",
+                "data": {
+                    "view": "pub_theme::components.sections.header.v1",
+                    "brand": {
+                        "name": "FixCity",
+                        "tagline": "Segnala e segui i problemi della tua città",
+                        "logo": "assets/fixcity/svg/logo.svg",
+                        "header_title": "FixCity",
+                        "menu_title": "FixCity",
+                        "link_title": "Vai alla homepage di FixCity"
+                    },
+                    "region": {
+                        "name": "Nome della Regione",
+                        "url": "",
+                        "title": "Vai al portale {Nome della Regione}",
+                        "aria_label": "Vai al portale {Nome della Regione} - link esterno - apertura nuova scheda"
+                    },
+                    "utility_links": [
+                        {
+                            "label": "Privacy",
+                            "url": "/privacy"
+                        },
+                        {
+                            "label": "Accessibilità",
+                            "url": "/accessibilita"
+                        }
+                    ],
+                    "account": {
+                        "label": "Accedi all'area personale",
+                        "url": "/auth/login",
+                        "element": "personal-area-login",
+                        "login_label": "Accedi all'area personale",
+                        "signed_in": {
+                            "name": "Area personale",
+                            "menu": [
+                                {
+                                    "label": "Le mie pratiche",
+                                    "url": "/area-personale/pratiche"
+                                },
+                                {
+                                    "label": "Segnalazioni seguite",
+                                    "url": "/area-personale/seguite"
+                                },
+                                {
+                                    "label": "Notifiche",
+                                    "url": "/area-personale/notifiche"
+                                },
+                                {
+                                    "divider": true
+                                },
+                                {
+                                    "label": "Impostazioni",
+                                    "url": "/area-personale/impostazioni"
+                                },
+                                {
+                                    "label": "Esci",
+                                    "url": "/auth/logout",
+                                    "icon": "it-external-link"
+                                }
+                            ]
+                        }
+                    },
+                    "social": {},
+                    "navigation": [
+                        {
+                            "label": "Segnalazioni",
+                            "url": "/tickets",
+                            "element": "all-services"
+                        },
+                        {
+                            "label": "Segnala",
+                            "url": "/tickets/create",
+                            "element": "report"
+                        },
+                        {
+                            "label": "Traccia",
+                            "url": "/tickets/track",
+                            "element": "track"
+                        },
+                        {
+                            "label": "Novità",
+                            "url": "/blog",
+                            "element": "news"
+                        },
+                        {
+                            "label": "Eventi",
+                            "url": "/events",
+                            "element": "live"
+                        },
+                        {
+                            "label": "Domande frequenti",
+                            "url": "/domande-frequenti",
+                            "element": "faq"
+                        }
+                    ],
+                    "secondary_navigation": [],
+                    "languages": {
+                        "active_label": "Lingua attiva:",
+                        "selected_label": "selezionata",
+                        "items": [
+                            {
+                                "locale": "it",
+                                "label": "ITA"
+                            },
+                            {
+                                "locale": "en",
+                                "label": "ENG"
+                            },
+                            {
+                                "locale": "de",
+                                "label": "DEU"
+                            },
+                            {
+                                "locale": "es",
+                                "label": "SPA"
+                            }
+                        ]
+                    },
+                    "follow_us": "Seguici su",
+                    "social_links": [],
+                    "search": {
+                        "label": "Cerca",
+                        "aria_label": "Cerca nel sito"
+                    },
+                    "menu": {
+                        "toggle_label": "Mostra/Nascondi la navigazione",
+                        "close_label": "Nascondi la navigazione",
+                        "main_label": "Principale",
+                        "secondary_label": "Secondaria"
+                    }
                 }
-              ]
             }
-          },
-          "social": {},
-          "navigation": [
+        ],
+        "en": [
             {
-              "label": "Segnalazioni",
-              "url": "/tickets",
-              "element": "all-services"
-            },
-            {
-              "label": "Segnala",
-              "url": "/tickets/create",
-              "element": "report"
-            },
-            {
-              "label": "Traccia",
-              "url": "/tickets/track",
-              "element": "track"
-            },
-            {
-              "label": "Novità",
-              "url": "/blog",
-              "element": "news"
-            },
-            {
-              "label": "Eventi",
-              "url": "/events",
-              "element": "live"
-            },
-            {
-              "label": "Domande frequenti",
-              "url": "/domande-frequenti",
-              "element": "faq"
-            }
-          ],
-          "secondary_navigation": [],
-          "languages": {
-            "active_label": "Lingua attiva:",
-            "selected_label": "selezionata",
-            "items": [
-              {
-                "locale": "it",
-                "label": "ITA"
-              },
-              {
-                "locale": "en",
-                "label": "ENG"
-              },
-              {
-                "locale": "de",
-                "label": "DEU"
-              },
-              {
-                "locale": "es",
-                "label": "SPA"
-              }
-            ]
-          },
-          "follow_us": "Seguici su",
-          "social_links": [],
-          "search": {
-            "label": "Cerca",
-            "aria_label": "Cerca nel sito"
-          },
-          "menu": {
-            "toggle_label": "Mostra/Nascondi la navigazione",
-            "close_label": "Nascondi la navigazione",
-            "main_label": "Principale",
-            "secondary_label": "Secondaria"
-          }
-        }
-      }
-    ],
-    "en": [
-      {
-        "type": "header",
-        "slug": "design-comuni-header",
-        "data": {
-          "view": "pub_theme::components.sections.header.v1",
-          "brand": {
-            "name": "FixCity",
-            "tagline": "Report and track issues in your city",
-            "logo": "themes/Sixteen/design-comuni/assets/images/logo-comune.svg",
-            "header_title": "FixCity",
-            "menu_title": "FixCity",
-            "link_title": "Go to the FixCity homepage"
-          },
-          "region": {
-            "name": "Name of the Region",
-            "url": "",
-            "title": "Go to the {Region name} portal",
-            "aria_label": "Go to the {Region name} portal - external link - opens in a new tab"
-          },
-          "utility_links": [
-            {
-              "label": "Privacy",
-              "url": "/privacy"
-            },
-            {
-              "label": "Accessibility",
-              "url": "/accessibilita"
-            }
-          ],
-          "account": {
-            "label": "Access personal area",
-            "url": "/auth/login",
-            "element": "personal-area-login",
-            "login_label": "Access personal area",
-            "signed_in": {
-              "name": "Personal area",
-              "menu": [
-                {
-                  "label": "My cases",
-                  "url": "/area-personale/pratiche"
-                },
-                {
-                  "label": "Followed reports",
-                  "url": "/area-personale/seguite"
-                },
-                {
-                  "label": "Notifications",
-                  "url": "/area-personale/notifiche"
-                },
-                {
-                  "divider": true
-                },
-                {
-                  "label": "Settings",
-                  "url": "/area-personale/impostazioni"
-                },
-                {
-                  "label": "Sign out",
-                  "url": "/auth/logout",
-                  "icon": "it-external-link"
+                "type": "header",
+                "slug": "design-comuni-header",
+                "data": {
+                    "view": "pub_theme::components.sections.header.v1",
+                    "brand": {
+                        "name": "FixCity",
+                        "tagline": "Report and track issues in your city",
+                        "logo": "assets/fixcity/svg/logo.svg",
+                        "header_title": "FixCity",
+                        "menu_title": "FixCity",
+                        "link_title": "Go to the FixCity homepage"
+                    },
+                    "region": {
+                        "name": "Name of the Region",
+                        "url": "",
+                        "title": "Go to the {Region name} portal",
+                        "aria_label": "Go to the {Region name} portal - external link - opens in a new tab"
+                    },
+                    "utility_links": [
+                        {
+                            "label": "Privacy",
+                            "url": "/privacy"
+                        },
+                        {
+                            "label": "Accessibility",
+                            "url": "/accessibilita"
+                        }
+                    ],
+                    "account": {
+                        "label": "Access personal area",
+                        "url": "/auth/login",
+                        "element": "personal-area-login",
+                        "login_label": "Access personal area",
+                        "signed_in": {
+                            "name": "Personal area",
+                            "menu": [
+                                {
+                                    "label": "My cases",
+                                    "url": "/area-personale/pratiche"
+                                },
+                                {
+                                    "label": "Followed reports",
+                                    "url": "/area-personale/seguite"
+                                },
+                                {
+                                    "label": "Notifications",
+                                    "url": "/area-personale/notifiche"
+                                },
+                                {
+                                    "divider": true
+                                },
+                                {
+                                    "label": "Settings",
+                                    "url": "/area-personale/impostazioni"
+                                },
+                                {
+                                    "label": "Sign out",
+                                    "url": "/auth/logout",
+                                    "icon": "it-external-link"
+                                }
+                            ]
+                        }
+                    },
+                    "social": {},
+                    "navigation": [
+                        {
+                            "label": "Reports",
+                            "url": "/tickets",
+                            "element": "all-services"
+                        },
+                        {
+                            "label": "Report an issue",
+                            "url": "/tickets/create",
+                            "element": "report"
+                        },
+                        {
+                            "label": "Track",
+                            "url": "/tickets/track",
+                            "element": "track"
+                        },
+                        {
+                            "label": "News",
+                            "url": "/blog",
+                            "element": "news"
+                        },
+                        {
+                            "label": "Events",
+                            "url": "/events",
+                            "element": "live"
+                        },
+                        {
+                            "label": "FAQ",
+                            "url": "/domande-frequenti",
+                            "element": "faq"
+                        }
+                    ],
+                    "secondary_navigation": [],
+                    "languages": {
+                        "active_label": "Active language:",
+                        "selected_label": "selected",
+                        "items": [
+                            {
+                                "locale": "it",
+                                "label": "ITA"
+                            },
+                            {
+                                "locale": "en",
+                                "label": "ENG"
+                            },
+                            {
+                                "locale": "de",
+                                "label": "DEU"
+                            },
+                            {
+                                "locale": "es",
+                                "label": "SPA"
+                            }
+                        ]
+                    },
+                    "follow_us": "Follow us on",
+                    "social_links": [],
+                    "search": {
+                        "label": "Search",
+                        "aria_label": "Search the site"
+                    },
+                    "menu": {
+                        "toggle_label": "Show/Hide navigation",
+                        "close_label": "Hide navigation",
+                        "main_label": "Main",
+                        "secondary_label": "Secondary"
+                    }
                 }
-              ]
             }
-          },
-          "social": {},
-          "navigation": [
+        ],
+        "de": [
             {
-              "label": "Reports",
-              "url": "/tickets",
-              "element": "all-services"
-            },
-            {
-              "label": "Report an issue",
-              "url": "/tickets/create",
-              "element": "report"
-            },
-            {
-              "label": "Track",
-              "url": "/tickets/track",
-              "element": "track"
-            },
-            {
-              "label": "News",
-              "url": "/blog",
-              "element": "news"
-            },
-            {
-              "label": "Events",
-              "url": "/events",
-              "element": "live"
-            },
-            {
-              "label": "FAQ",
-              "url": "/domande-frequenti",
-              "element": "faq"
-            }
-          ],
-          "secondary_navigation": [],
-          "languages": {
-            "active_label": "Active language:",
-            "selected_label": "selected",
-            "items": [
-              {
-                "locale": "it",
-                "label": "ITA"
-              },
-              {
-                "locale": "en",
-                "label": "ENG"
-              },
-              {
-                "locale": "de",
-                "label": "DEU"
-              },
-              {
-                "locale": "es",
-                "label": "SPA"
-              }
-            ]
-          },
-          "follow_us": "Follow us on",
-          "social_links": [],
-          "search": {
-            "label": "Search",
-            "aria_label": "Search the site"
-          },
-          "menu": {
-            "toggle_label": "Show/Hide navigation",
-            "close_label": "Hide navigation",
-            "main_label": "Main",
-            "secondary_label": "Secondary"
-          }
-        }
-      }
-    ],
-    "de": [
-      {
-        "type": "header",
-        "slug": "design-comuni-header",
-        "data": {
-          "view": "pub_theme::components.sections.header.v1",
-          "brand": {
-            "name": "FixCity",
-            "tagline": "Melden und verfolgen Sie Probleme in Ihrer Stadt",
-            "logo": "themes/Sixteen/design-comuni/assets/images/logo-comune.svg",
-            "header_title": "FixCity",
-            "menu_title": "FixCity",
-            "link_title": "Zur FixCity-Startseite"
-          },
-          "region": {
-            "name": "Name der Region",
-            "url": "",
-            "title": "Zum Portal {Name der Region}",
-            "aria_label": "Zum Portal {Name der Region} - externer Link - öffnet in einem neuen Tab"
-          },
-          "utility_links": [
-            {
-              "label": "Datenschutz",
-              "url": "/privacy"
-            },
-            {
-              "label": "Barrierefreiheit",
-              "url": "/accessibilita"
-            }
-          ],
-          "account": {
-            "label": "Persönlichen Bereich öffnen",
-            "url": "/auth/login",
-            "element": "personal-area-login",
-            "login_label": "Persönlichen Bereich öffnen",
-            "signed_in": {
-              "name": "Persönlicher Bereich",
-              "menu": [
-                {
-                  "label": "Meine Vorgänge",
-                  "url": "/area-personale/pratiche"
-                },
-                {
-                  "label": "Verfolgte Meldungen",
-                  "url": "/area-personale/seguite"
-                },
-                {
-                  "label": "Benachrichtigungen",
-                  "url": "/area-personale/notifiche"
-                },
-                {
-                  "divider": true
-                },
-                {
-                  "label": "Einstellungen",
-                  "url": "/area-personale/impostazioni"
-                },
-                {
-                  "label": "Abmelden",
-                  "url": "/auth/logout",
-                  "icon": "it-external-link"
+                "type": "header",
+                "slug": "design-comuni-header",
+                "data": {
+                    "view": "pub_theme::components.sections.header.v1",
+                    "brand": {
+                        "name": "FixCity",
+                        "tagline": "Melden und verfolgen Sie Probleme in Ihrer Stadt",
+                        "logo": "assets/fixcity/svg/logo.svg",
+                        "header_title": "FixCity",
+                        "menu_title": "FixCity",
+                        "link_title": "Zur FixCity-Startseite"
+                    },
+                    "region": {
+                        "name": "Name der Region",
+                        "url": "",
+                        "title": "Zum Portal {Name der Region}",
+                        "aria_label": "Zum Portal {Name der Region} - externer Link - öffnet in einem neuen Tab"
+                    },
+                    "utility_links": [
+                        {
+                            "label": "Datenschutz",
+                            "url": "/privacy"
+                        },
+                        {
+                            "label": "Barrierefreiheit",
+                            "url": "/accessibilita"
+                        }
+                    ],
+                    "account": {
+                        "label": "Persönlichen Bereich öffnen",
+                        "url": "/auth/login",
+                        "element": "personal-area-login",
+                        "login_label": "Persönlichen Bereich öffnen",
+                        "signed_in": {
+                            "name": "Persönlicher Bereich",
+                            "menu": [
+                                {
+                                    "label": "Meine Vorgänge",
+                                    "url": "/area-personale/pratiche"
+                                },
+                                {
+                                    "label": "Verfolgte Meldungen",
+                                    "url": "/area-personale/seguite"
+                                },
+                                {
+                                    "label": "Benachrichtigungen",
+                                    "url": "/area-personale/notifiche"
+                                },
+                                {
+                                    "divider": true
+                                },
+                                {
+                                    "label": "Einstellungen",
+                                    "url": "/area-personale/impostazioni"
+                                },
+                                {
+                                    "label": "Abmelden",
+                                    "url": "/auth/logout",
+                                    "icon": "it-external-link"
+                                }
+                            ]
+                        }
+                    },
+                    "social": {},
+                    "navigation": [
+                        {
+                            "label": "Meldungen",
+                            "url": "/tickets",
+                            "element": "all-services"
+                        },
+                        {
+                            "label": "Meldung erstatten",
+                            "url": "/tickets/create",
+                            "element": "report"
+                        },
+                        {
+                            "label": "Verfolgen",
+                            "url": "/tickets/track",
+                            "element": "track"
+                        },
+                        {
+                            "label": "Neuigkeiten",
+                            "url": "/blog",
+                            "element": "news"
+                        },
+                        {
+                            "label": "Veranstaltungen",
+                            "url": "/events",
+                            "element": "live"
+                        },
+                        {
+                            "label": "Häufige Fragen",
+                            "url": "/domande-frequenti",
+                            "element": "faq"
+                        }
+                    ],
+                    "secondary_navigation": [],
+                    "languages": {
+                        "active_label": "Aktuelle Sprache:",
+                        "selected_label": "ausgewählt",
+                        "items": [
+                            {
+                                "locale": "it",
+                                "label": "ITA"
+                            },
+                            {
+                                "locale": "en",
+                                "label": "ENG"
+                            },
+                            {
+                                "locale": "de",
+                                "label": "DEU"
+                            },
+                            {
+                                "locale": "es",
+                                "label": "SPA"
+                            }
+                        ]
+                    },
+                    "follow_us": "Folgen Sie uns auf",
+                    "social_links": [],
+                    "search": {
+                        "label": "Suchen",
+                        "aria_label": "Website durchsuchen"
+                    },
+                    "menu": {
+                        "toggle_label": "Navigation anzeigen/ausblenden",
+                        "close_label": "Navigation ausblenden",
+                        "main_label": "Hauptnavigation",
+                        "secondary_label": "Sekundärnavigation"
+                    }
                 }
-              ]
             }
-          },
-          "social": {},
-          "navigation": [
+        ],
+        "es": [
             {
-              "label": "Meldungen",
-              "url": "/tickets",
-              "element": "all-services"
-            },
-            {
-              "label": "Meldung erstatten",
-              "url": "/tickets/create",
-              "element": "report"
-            },
-            {
-              "label": "Verfolgen",
-              "url": "/tickets/track",
-              "element": "track"
-            },
-            {
-              "label": "Neuigkeiten",
-              "url": "/blog",
-              "element": "news"
-            },
-            {
-              "label": "Veranstaltungen",
-              "url": "/events",
-              "element": "live"
-            },
-            {
-              "label": "Häufige Fragen",
-              "url": "/domande-frequenti",
-              "element": "faq"
-            }
-          ],
-          "secondary_navigation": [],
-          "languages": {
-            "active_label": "Aktuelle Sprache:",
-            "selected_label": "ausgewählt",
-            "items": [
-              {
-                "locale": "it",
-                "label": "ITA"
-              },
-              {
-                "locale": "en",
-                "label": "ENG"
-              },
-              {
-                "locale": "de",
-                "label": "DEU"
-              },
-              {
-                "locale": "es",
-                "label": "SPA"
-              }
-            ]
-          },
-          "follow_us": "Folgen Sie uns auf",
-          "social_links": [],
-          "search": {
-            "label": "Suchen",
-            "aria_label": "Website durchsuchen"
-          },
-          "menu": {
-            "toggle_label": "Navigation anzeigen/ausblenden",
-            "close_label": "Navigation ausblenden",
-            "main_label": "Hauptnavigation",
-            "secondary_label": "Sekundärnavigation"
-          }
-        }
-      }
-    ],
-    "es": [
-      {
-        "type": "header",
-        "slug": "design-comuni-header",
-        "data": {
-          "view": "pub_theme::components.sections.header.v1",
-          "brand": {
-            "name": "FixCity",
-            "tagline": "Avisa y sigue los problemas de tu ciudad",
-            "logo": "themes/Sixteen/design-comuni/assets/images/logo-comune.svg",
-            "header_title": "FixCity",
-            "menu_title": "FixCity",
-            "link_title": "Ir a la página de inicio de FixCity"
-          },
-          "region": {
-            "name": "Nombre de la Región",
-            "url": "",
-            "title": "Ir al portal de {Nombre de la Región}",
-            "aria_label": "Ir al portal de {Nombre de la Región} - enlace externo - se abre en una pestaña nueva"
-          },
-          "utility_links": [
-            {
-              "label": "Privacidad",
-              "url": "/privacy"
-            },
-            {
-              "label": "Accesibilidad",
-              "url": "/accessibilita"
-            }
-          ],
-          "account": {
-            "label": "Acceder al área personal",
-            "url": "/auth/login",
-            "element": "personal-area-login",
-            "login_label": "Acceder al área personal",
-            "signed_in": {
-              "name": "Área personal",
-              "menu": [
-                {
-                  "label": "Mis trámites",
-                  "url": "/area-personale/pratiche"
-                },
-                {
-                  "label": "Avisos seguidos",
-                  "url": "/area-personale/seguite"
-                },
-                {
-                  "label": "Notificaciones",
-                  "url": "/area-personale/notifiche"
-                },
-                {
-                  "divider": true
-                },
-                {
-                  "label": "Ajustes",
-                  "url": "/area-personale/impostazioni"
-                },
-                {
-                  "label": "Salir",
-                  "url": "/auth/logout",
-                  "icon": "it-external-link"
+                "type": "header",
+                "slug": "design-comuni-header",
+                "data": {
+                    "view": "pub_theme::components.sections.header.v1",
+                    "brand": {
+                        "name": "FixCity",
+                        "tagline": "Avisa y sigue los problemas de tu ciudad",
+                        "logo": "assets/fixcity/svg/logo.svg",
+                        "header_title": "FixCity",
+                        "menu_title": "FixCity",
+                        "link_title": "Ir a la página de inicio de FixCity"
+                    },
+                    "region": {
+                        "name": "Nombre de la Región",
+                        "url": "",
+                        "title": "Ir al portal de {Nombre de la Región}",
+                        "aria_label": "Ir al portal de {Nombre de la Región} - enlace externo - se abre en una pestaña nueva"
+                    },
+                    "utility_links": [
+                        {
+                            "label": "Privacidad",
+                            "url": "/privacy"
+                        },
+                        {
+                            "label": "Accesibilidad",
+                            "url": "/accessibilita"
+                        }
+                    ],
+                    "account": {
+                        "label": "Acceder al área personal",
+                        "url": "/auth/login",
+                        "element": "personal-area-login",
+                        "login_label": "Acceder al área personal",
+                        "signed_in": {
+                            "name": "Área personal",
+                            "menu": [
+                                {
+                                    "label": "Mis trámites",
+                                    "url": "/area-personale/pratiche"
+                                },
+                                {
+                                    "label": "Avisos seguidos",
+                                    "url": "/area-personale/seguite"
+                                },
+                                {
+                                    "label": "Notificaciones",
+                                    "url": "/area-personale/notifiche"
+                                },
+                                {
+                                    "divider": true
+                                },
+                                {
+                                    "label": "Ajustes",
+                                    "url": "/area-personale/impostazioni"
+                                },
+                                {
+                                    "label": "Salir",
+                                    "url": "/auth/logout",
+                                    "icon": "it-external-link"
+                                }
+                            ]
+                        }
+                    },
+                    "social": {},
+                    "navigation": [
+                        {
+                            "label": "Reportes",
+                            "url": "/tickets",
+                            "element": "all-services"
+                        },
+                        {
+                            "label": "Reportar",
+                            "url": "/tickets/create",
+                            "element": "report"
+                        },
+                        {
+                            "label": "Seguir",
+                            "url": "/tickets/track",
+                            "element": "track"
+                        },
+                        {
+                            "label": "Novedades",
+                            "url": "/blog",
+                            "element": "news"
+                        },
+                        {
+                            "label": "Eventos",
+                            "url": "/events",
+                            "element": "live"
+                        },
+                        {
+                            "label": "Preguntas frecuentes",
+                            "url": "/domande-frequenti",
+                            "element": "faq"
+                        }
+                    ],
+                    "secondary_navigation": [],
+                    "languages": {
+                        "active_label": "Idioma actual:",
+                        "selected_label": "seleccionado",
+                        "items": [
+                            {
+                                "locale": "it",
+                                "label": "ITA"
+                            },
+                            {
+                                "locale": "en",
+                                "label": "ENG"
+                            },
+                            {
+                                "locale": "de",
+                                "label": "DEU"
+                            },
+                            {
+                                "locale": "es",
+                                "label": "SPA"
+                            }
+                        ]
+                    },
+                    "follow_us": "Síguenos en",
+                    "social_links": [],
+                    "search": {
+                        "label": "Buscar",
+                        "aria_label": "Buscar en el sitio"
+                    },
+                    "menu": {
+                        "toggle_label": "Mostrar/ocultar la navegación",
+                        "close_label": "Ocultar la navegación",
+                        "main_label": "Navegación principal",
+                        "secondary_label": "Navegación secundaria"
+                    }
                 }
-              ]
             }
-          },
-          "social": {},
-          "navigation": [
-            {
-              "label": "Reportes",
-              "url": "/tickets",
-              "element": "all-services"
-            },
-            {
-              "label": "Reportar",
-              "url": "/tickets/create",
-              "element": "report"
-            },
-            {
-              "label": "Seguir",
-              "url": "/tickets/track",
-              "element": "track"
-            },
-            {
-              "label": "Novedades",
-              "url": "/blog",
-              "element": "news"
-            },
-            {
-              "label": "Eventos",
-              "url": "/events",
-              "element": "live"
-            },
-            {
-              "label": "Preguntas frecuentes",
-              "url": "/domande-frequenti",
-              "element": "faq"
-            }
-          ],
-          "secondary_navigation": [],
-          "languages": {
-            "active_label": "Idioma actual:",
-            "selected_label": "seleccionado",
-            "items": [
-              {
-                "locale": "it",
-                "label": "ITA"
-              },
-              {
-                "locale": "en",
-                "label": "ENG"
-              },
-              {
-                "locale": "de",
-                "label": "DEU"
-              },
-              {
-                "locale": "es",
-                "label": "SPA"
-              }
-            ]
-          },
-          "follow_us": "Síguenos en",
-          "social_links": [],
-          "search": {
-            "label": "Buscar",
-            "aria_label": "Buscar en el sitio"
-          },
-          "menu": {
-            "toggle_label": "Mostrar/ocultar la navegación",
-            "close_label": "Ocultar la navegación",
-            "main_label": "Navegación principal",
-            "secondary_label": "Navegación secundaria"
-          }
-        }
-      }
-    ]
-  }
+        ]
+    }
 }

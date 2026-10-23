@@ -20,6 +20,15 @@ return [
         'description' => 'Segnala un disservizio al Comune, consulta la mappa delle segnalazioni e segui gli aggiornamenti della tua pratica.',
     ],
     'map_preview' => [
+        'eyebrow' => [
+            'label' => 'Mappa della comunità',
+        ],
+        'intro' => [
+            'text' => 'Consulta la mappa per conoscere i problemi già segnalati e gli interventi in corso.',
+        ],
+        'legend' => [
+            'label' => 'Segnalazioni pubbliche',
+        ],
         'section' => [
             'title' => [
                 'label' => 'Segnalazioni sul territorio',

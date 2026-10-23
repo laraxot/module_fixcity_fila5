@@ -18,6 +18,15 @@ return [
         'description' => 'Comunica una incidencia local, consulta el mapa público y sigue las actualizaciones de tu trámite desde una sola plataforma.',
     ],
     'map_preview' => [
+        'eyebrow' => [
+            'label' => 'Mapa de la comunidad',
+        ],
+        'intro' => [
+            'text' => 'Consulta el mapa para conocer los problemas ya señalados y los trabajos en curso.',
+        ],
+        'legend' => [
+            'label' => 'Incidencias públicas',
+        ],
         'section' => [
             'title' => [
                 'label' => 'Incidencias en el territorio',

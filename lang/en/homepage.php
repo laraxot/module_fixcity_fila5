@@ -20,6 +20,15 @@ return [
         'description' => 'Report a local issue, explore the public reports map and follow updates on your request from one civic platform.',
     ],
     'map_preview' => [
+        'eyebrow' => [
+            'label' => 'Community map',
+        ],
+        'intro' => [
+            'text' => 'Explore the map to see reported issues and work in progress.',
+        ],
+        'legend' => [
+            'label' => 'Public reports',
+        ],
         'section' => [
             'title' => [
                 'label' => 'Reports on the territory',
