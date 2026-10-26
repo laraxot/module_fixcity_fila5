@@ -88,6 +88,8 @@ fonte di verità.
 
 ## Documentation
 
+- [Agent confidence brief](./agent-confidence-brief.md) — snapshot operativo
+  verificato (stack, ownership, Sixteen pages, OmniRoute/Claude, memoria agenti).
 - [FAQ catalog ownership](./faq-catalog-ownership.md) — dominio FAQ in Fixcity,
   composizione in Cms e renderer nel tema Sixteen.
 

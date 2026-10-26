@@ -16,6 +16,13 @@ related:
 
 # Decision log — Fixcity
 
+## 2026-10-26 — Gate PHPStan completo verificato
+
+- **Decisione:** il gate canonico `cd laravel && ./vendor/bin/phpstan analyse Modules --no-progress --error-format=table` ha restituito `[OK] No errors` con exit code 0.
+- **Perché:** il gate misura il working tree reale e conferma che non servono ignore, baseline, cast o modifiche a `phpstan.neon`.
+- **Vincolo:** il risultato va rieseguito dopo ogni modifica PHP; non sostituisce i test runtime, i gate browser, l'accessibilità o la verifica staging.
+- **Riferimento:** [prompt PHPStan canonico](../../../../bashscripts/docs/prompts/11-phpstan.md).
+
 ## 2026-10-20 — Gate PHPStan Modules zero; Filament blueprint SSoT UI admin
 
 - **Decisione:** gate `analyse Modules` confermato a zero; ticket/segnalazioni BO e widget FO restano definiti in [filament-blueprint.md](./filament-blueprint.md), non duplicati nel tema.

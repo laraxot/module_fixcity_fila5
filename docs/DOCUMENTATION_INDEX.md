@@ -490,7 +490,7 @@ status: draft
 
 **Single Sources of Truth:**
 1. [`UI/docs/filament-components-usage.md`](../UI/docs/filament-components-usage.md) - **MASTER GUIDE**
-2. [`Cms/docs/FILAMENT-RESOURCE-GUIDELINES.md`](../../Cms/docs/FILAMENT-RESOURCE-GUIDELINES.md)
+2. [`Cms/docs/FILAMENT-RESOURCE-GUIDELINES.md`](../../Cms/docs/filament-resource-guidelines.md)
 
 **Related:**
 - `Xot/docs/volt-folio-best-practices.md`

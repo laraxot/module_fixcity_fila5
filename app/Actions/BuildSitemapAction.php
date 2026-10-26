@@ -23,8 +23,13 @@ final class BuildSitemapAction
 {
     use QueueableAction;
 
-    /** @var list<string> */
-    private const array NOT_INDEXABLE = ['tickets.confirmation', 'segnalazione-dettaglio'];
+    /**
+     * `segnalazioni.index` e' l'alias Design Comuni di `tickets` (301 a /{lang}/tickets, FrontofficeContainerAliases del tema):
+     * in sitemap va solo l'URL finale, un reindirizzamento e' un «URL non seguito» per Search Console (DCP-272).
+     *
+     * @var list<string>
+     */
+    private const array NOT_INDEXABLE = ['tickets.confirmation', 'segnalazione-dettaglio', 'segnalazioni.index'];
 
     /** Risposta HTTP della rotta `/sitemap.xml` (invokable: `route:cache` non ammette closure). */
     public function __invoke(): Response
@@ -63,7 +68,8 @@ final class BuildSitemapAction
         foreach (Page::query()->get() as $page) {
             $slug = app(SafeStringCastAction::class)->execute($page->getAttribute('slug'));
             $middleware = $page->getAttribute('middleware');
-            if ($slug === '' || str_starts_with($slug, 'tests.') || in_array($slug, self::NOT_INDEXABLE, true)) {
+            // `auth.login` e `auth.register` sono pagine per ospiti (senza middleware `auth`) ma robots.txt chiude /{lang}/auth.
+            if ($slug === '' || str_starts_with($slug, 'tests.') || str_starts_with($slug, 'auth.') || in_array($slug, self::NOT_INDEXABLE, true)) {
                 continue;
             }
             if (is_array($middleware) && in_array('auth', $middleware, true)) {

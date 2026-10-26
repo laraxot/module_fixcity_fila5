@@ -34,7 +34,7 @@ class Agid extends Component
             ->map(function (object $report): array {
                 $location = is_string($report->location) ? json_decode($report->location, true) : [];
                 $metadata = is_string($report->metadata) ? json_decode($report->metadata, true) : [];
-                $status = is_int($report->status) || is_string($report->status) ? $report->status : '';
+                $status = is_string($report->status) ? $report->status : '';
 
                 return [
                     'id' => $report->id,
