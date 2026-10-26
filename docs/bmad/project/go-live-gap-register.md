@@ -3,6 +3,8 @@ title: "FixCity go-live gap register"
 type: bmad-go-live-register
 status: no-go
 updated: 2026-10-14
+tags: [docs, fixcity, bmad]
+qmd: "stato go-live fixcity"
 ---
 
 # Stato go-live

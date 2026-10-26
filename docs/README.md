@@ -104,7 +104,7 @@ un difetto del catalogo.
 - [Performance](./PERFORMANCE-OPTIMIZATION.md) — Metriche e best practice
 - [Project Structure](./PROJECT-STRUCTURE.md) — Directory layout
 - [File di contenuto delle pagine /it/tests](./tests-pages-content-files.md) — `tests.<slug>.json`, stato e regole (2026-10-13)
-- [Indice canonico del modulo](./00-INDEX.md), [mappa delle sottocartelle](./INDEX.md), [panoramica](./index.md)
+- [Indice canonico del modulo](./00-INDEX.md), [mappa delle sottocartelle](./index.md), [panoramica](./index.md)
 - [Scopo e conformita' normativa](./compliance/00-scopo-del-progetto.md), [decision log](./decision-log.md), [wiki](./wiki/index.md), [story](./stories/index.md)
 
 ## BMAD — inbound marketing (blog + eventi)

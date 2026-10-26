@@ -4,6 +4,7 @@ type: research-report
 status: decision-input
 updated: 2026-10-15
 tags: [bmad, marketing, sponsorship, civic-tech, accessibility, fixcity]
+qmd: "research report   sostenibilità del progetto nel footer fixcity"
 ---
 
 # Research report — sostenibilità del progetto nel footer

@@ -1,3 +1,11 @@
+---
+title: "MIGRATIONS-MODELS PARITY (BMAD + Second Brain)"
+type: note
+status: draft
+updated: 2026-10-18
+tags: [docs, fixcity, bmad]
+qmd: "migrations-models parity (bmad + second brain) fixcity"
+---
 # MIGRATIONS-MODELS PARITY (BMAD + Second Brain)
 
 ## Stato

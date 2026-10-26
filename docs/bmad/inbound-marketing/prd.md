@@ -3,6 +3,8 @@ title: "PRD — inbound blog ed eventi"
 type: prd
 status: proposed
 updated: 2026-10-15
+tags: [docs, fixcity, bmad]
+qmd: "prd discovery fixcity"
 ---
 
 # PRD discovery

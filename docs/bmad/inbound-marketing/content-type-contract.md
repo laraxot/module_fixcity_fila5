@@ -44,6 +44,6 @@ Il dominio riusa `Modules\Blog\Models\Article`. Non si introduce un modulo
 Filament: Select `content_type` (label «Post / Novità», «Evento»).  
 Sixteen: etichette Novità/Eventi; path `/blog` `/events`.  
 Demo: `DemoContentSeeder` scrive solo `post|event`.  
-Rename classe: [IM-BLOG-008](../../../Blog/docs/stories/inbound-rename-article-to-post.story.md) deferred.
+Rename classe: [IM-BLOG-008](../../../../Blog/docs/stories/inbound-rename-article-to-post.story.md) deferred.
 
-SSoT brainstorm: [brainstorming-post-vs-article.md](../../../Blog/docs/brainstorming-post-vs-article.md).
+SSoT brainstorm: [brainstorming-post-vs-article.md](../../../../Blog/docs/brainstorming-post-vs-article.md).

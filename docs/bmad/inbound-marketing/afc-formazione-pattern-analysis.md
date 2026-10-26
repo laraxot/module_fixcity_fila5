@@ -5,6 +5,8 @@ status: decision-input
 updated: 2026-10-15
 source_observed: https://www.afcformazione.it/
 observed_on: 2026-10-15
+tags: [docs, fixcity, bmad]
+qmd: "analisi afc formazione → fixcity fixcity"
 ---
 
 # Analisi AFC Formazione → FixCity

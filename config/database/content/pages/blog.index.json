@@ -79,8 +79,8 @@
                 },
                 {
                   "icon": "it-hearing",
-                  "label": "Chiama il numero verde 05 0505",
-                  "url": "tel:050505"
+                  "label": "Chiama il numero verde :value",
+                  "ente": "toll_free"
                 },
                 {
                   "icon": "it-calendar",

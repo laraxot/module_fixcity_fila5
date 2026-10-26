@@ -2,8 +2,11 @@
 
 declare(strict_types=1);
 
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
+use Illuminate\Support\Uri;
 use Illuminate\Testing\TestResponse;
+use Livewire\Livewire;
 use Modules\Fixcity\Actions\ResolveTicketStatusMarkerPropertiesAction;
 use Modules\Fixcity\Database\Factories\TicketActivityFactory;
 use Modules\Fixcity\Database\Factories\TicketFactory;
@@ -12,6 +15,7 @@ use Modules\Fixcity\Enums\TicketTypeEnum;
 use Modules\Fixcity\Models\TicketSubscriber;
 use Modules\Fixcity\Tests\TestCase;
 use Modules\User\Database\Factories\UserFactory;
+use Modules\User\Filament\Widgets\Auth\LoginWidget;
 use PHPUnit\Framework\Assert;
 
 uses(TestCase::class);
@@ -118,7 +122,7 @@ describe('guest access and languages', function (): void {
         $links = detailNodes($html, '//*[@id="main-container"]//a/@href');
         Assert::assertNotContains('#', $links);
         Assert::assertNotContains('', $links);
-        foreach (['/en', '/en/tickets', '/en/tickets/create', '/en/auth/login'] as $expectedLink) {
+        foreach (['/en', '/en/tickets', '/en/tickets/create', '/en/auth/login?redirect=%2Fen%2Ftickets%2F'.$id] as $expectedLink) {
             Assert::assertContains($expectedLink, $links);
         }
     });
@@ -201,6 +205,33 @@ describe('public timeline', function (): void {
         $this->get('/it/tickets/'.$id)->assertOk()->assertSee('Per ora non ci sono aggiornamenti: la segnalazione è «In lavorazione».');
         $this->get('/en/tickets/'.$id)->assertOk()->assertSee('There are no updates yet: the report is “In Progress”.');
     });
+
+    // DCP-287 (FO-2-16): una segnalazione conclusa senza cambi di stato pubblici non e' "in attesa di aggiornamenti"
+    test('does not say that a concluded report has no updates yet', function (TicketStatusEnum $status, string $it, string $en): void {
+        /** @var TestCase $this */
+        $id = detailTicket(['status' => $status]);
+
+        $this->get('/it/tickets/'.$id)->assertOk()
+            ->assertDontSee('Per ora non ci sono aggiornamenti')
+            ->assertSee($it);
+        $this->get('/en/tickets/'.$id)->assertOk()
+            ->assertDontSee('There are no updates yet')
+            ->assertSee($en);
+    })->with([
+        'resolved' => [TicketStatusEnum::RESOLVED, 'La segnalazione è «Risolto». Nella cronologia pubblica non ci sono altri aggiornamenti.', 'The report is “Resolved”. The public history has no other updates.'],
+        'closed' => [TicketStatusEnum::CLOSED, 'La segnalazione è «Chiuso». Nella cronologia pubblica non ci sono altri aggiornamenti.', 'The report is “Closed”. The public history has no other updates.'],
+    ]);
+
+    // DCP-287 (FO-2-16): "Prossimi passi" di una segnalazione riaperta non e' quello di una appena aperta
+    test('tells a reopened report apart from an open one in the next steps', function (): void {
+        /** @var TestCase $this */
+        $open = detailTicket(['status' => TicketStatusEnum::OPEN]);
+        $reopened = detailTicket(['status' => TicketStatusEnum::REOPENED]);
+
+        $this->get('/it/tickets/'.$open)->assertOk()->assertSee('Lavorazione')->assertDontSee('Segnalazione riaperta');
+        $this->get('/it/tickets/'.$reopened)->assertOk()->assertSee('Segnalazione riaperta')->assertDontSee('La segnalazione è stata presa in carico. Gli aggiornamenti compariranno qui.');
+        $this->get('/en/tickets/'.$reopened)->assertOk()->assertSee('Report reopened');
+    });
 });
 
 describe('follow', function (): void {
@@ -214,6 +245,27 @@ describe('follow', function (): void {
         $html = $this->get('/it/tickets/'.$id)->assertOk()->getContent();
         Assert::assertIsString($html);
         Assert::assertSame([], detailNodes($html, '//form[contains(@action,"/follow")]'));
+    });
+
+    test('brings the guest back to this report after the login, through the redirect of the login link', function (): void {
+        /** @var TestCase $this */
+        $id = detailTicket();
+        $user = UserFactory::new()->createOne(['password' => Hash::make('password123')]);
+        $html = $this->get('/it/tickets/'.$id)->assertOk()->getContent();
+        Assert::assertIsString($html);
+
+        $hrefs = detailNodes($html, '//*[contains(@class,"td-actions")]//a[contains(@href,"/auth/login")]/@href');
+        Assert::assertCount(1, $hrefs);
+        $redirect = Uri::of($hrefs[0])->query()->get('redirect');
+        Assert::assertSame('/it/tickets/'.$id, $redirect);
+
+        session()->forget('url.intended');
+        Livewire::withQueryParams(['redirect' => $redirect])
+            ->test(LoginWidget::class)
+            ->set('data.email', $user->email)
+            ->set('data.password', 'password123')
+            ->call('save')
+            ->assertRedirect(url('/it/tickets/'.$id));
     });
 
     test('offers a logged citizen a protected form to follow', function (): void {

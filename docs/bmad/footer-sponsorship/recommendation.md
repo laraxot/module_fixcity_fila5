@@ -4,6 +4,7 @@ type: recommendation
 status: decision-input
 updated: 2026-10-15
 tags: [bmad, marketing, sponsorship, footer, fixcity]
+qmd: "raccomandazione esecutiva fixcity"
 ---
 
 # Raccomandazione esecutiva

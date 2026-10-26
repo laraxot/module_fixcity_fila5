@@ -10,7 +10,7 @@ return [
     'fields' => [
         'location' => [
             'label' => 'Location',
-            'invalid' => 'Pick a valid point on the map: latitude between -90 and 90, longitude between -180 and 180.',
+            'invalid' => 'Choose the point on the map or search for an address: we need it to know where the problem is.',
             'placeholder' => 'Search for a place',
             'helper_text' => 'Indicate where the issue is located',
             'address' => [

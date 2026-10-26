@@ -3,6 +3,10 @@ type: investigation
 issue: livewire-schema-method-not-found
 date: 2026-10-13
 status: resolved-pending-browser-gate
+title: "Investigation — Livewire schema method not found"
+updated: 2026-10-17
+tags: [docs, fixcity, bmad]
+qmd: "investigation   livewire schema method not found fixcity"
 ---
 
 # Investigation — Livewire schema method not found

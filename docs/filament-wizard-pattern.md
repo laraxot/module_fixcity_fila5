@@ -71,6 +71,6 @@ Lo schema piatto con `Section` e `TextEntry` (`TicketForm::getSummarySchema()`, 
 
 ## 📚 Altri Riferimenti
 
-- [Fixcity Documentation Index](./INDEX.md)
+- [Fixcity Documentation Index](./index.md)
 - [Geolocation AddressInput Component](../../Geo/docs/address-input-component.md)
 - [Design Comuni - Ticket Creation Wizard](../../../Themes/Sixteen/docs/design-comuni/TICKET-CREATION-WIZARD.md)

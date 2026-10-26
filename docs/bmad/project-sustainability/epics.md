@@ -3,6 +3,8 @@ title: "Epics — sostenibilità FixCity"
 type: epics
 status: proposed
 updated: 2026-10-15
+tags: [docs, fixcity, bmad]
+qmd: "epic map fixcity"
 ---
 
 # Epic map

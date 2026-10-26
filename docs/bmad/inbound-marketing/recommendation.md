@@ -3,6 +3,8 @@ title: "Raccomandazione — blog ed eventi inbound"
 type: recommendation
 status: decision-input
 updated: 2026-10-15
+tags: [docs, fixcity, bmad]
+qmd: "raccomandazione fixcity"
 ---
 
 # Raccomandazione

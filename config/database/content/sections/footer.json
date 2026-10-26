@@ -63,12 +63,16 @@
                     ],
                     "contact": {
                         "title": "Contatti",
-                        "address": "",
-                        "office": "",
-                        "phone": "",
-                        "email": "",
-                        "office_url": "",
-                        "details": [],
+                        "labels": {
+                            "hours": "Orari",
+                            "phone": "Telefono",
+                            "toll_free": "Numero verde",
+                            "email": "Email",
+                            "pec": "PEC",
+                            "tax_code": "Codice fiscale",
+                            "vat": "Partita IVA",
+                            "dpo_email": "Responsabile protezione dati"
+                        },
                         "links": [
                             {
                                 "label": "Leggi le FAQ",
@@ -232,12 +236,16 @@
                     ],
                     "contact": {
                         "title": "Contacts",
-                        "address": "",
-                        "office": "",
-                        "phone": "",
-                        "email": "",
-                        "office_url": "",
-                        "details": [],
+                        "labels": {
+                            "hours": "Opening hours",
+                            "phone": "Phone",
+                            "toll_free": "Toll-free number",
+                            "email": "Email",
+                            "pec": "Certified email (PEC)",
+                            "tax_code": "Tax code",
+                            "vat": "VAT number",
+                            "dpo_email": "Data protection officer"
+                        },
                         "links": [
                             {
                                 "label": "Read FAQs",
@@ -401,12 +409,16 @@
                     ],
                     "contact": {
                         "title": "Kontakt",
-                        "address": "",
-                        "office": "",
-                        "phone": "",
-                        "email": "",
-                        "office_url": "",
-                        "details": [],
+                        "labels": {
+                            "hours": "Öffnungszeiten",
+                            "phone": "Telefon",
+                            "toll_free": "Gebührenfreie Nummer",
+                            "email": "E-Mail",
+                            "pec": "PEC (zertifizierte E-Mail)",
+                            "tax_code": "Steuernummer",
+                            "vat": "USt-IdNr.",
+                            "dpo_email": "Datenschutzbeauftragter"
+                        },
                         "links": [
                             {
                                 "label": "Häufige Fragen lesen",
@@ -570,12 +582,16 @@
                     ],
                     "contact": {
                         "title": "Contacto",
-                        "address": "",
-                        "office": "",
-                        "phone": "",
-                        "email": "",
-                        "office_url": "",
-                        "details": [],
+                        "labels": {
+                            "hours": "Horario",
+                            "phone": "Teléfono",
+                            "toll_free": "Número gratuito",
+                            "email": "Correo electrónico",
+                            "pec": "PEC (correo certificado)",
+                            "tax_code": "Código fiscal",
+                            "vat": "Número de IVA",
+                            "dpo_email": "Delegado de protección de datos"
+                        },
                         "links": [
                             {
                                 "label": "Leer las preguntas frecuentes",

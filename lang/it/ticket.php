@@ -40,6 +40,9 @@ return [
         'rate_limited_retry' => 'Torna alla ricerca del codice',
         'timeline_title' => 'Aggiornamenti',
         'timeline_empty' => 'Non ci sono ancora aggiornamenti pubblici.',
+        'photos_title' => 'Foto allegate',
+        'photo_alt' => 'Foto :number della segnalazione «:title»',
+        'photo_opens_new_window' => '(apre l’immagine intera in una nuova finestra)',
     ],
     'pratiche' => [
         'description' => 'Elenco delle tue segnalazioni.',

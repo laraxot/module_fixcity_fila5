@@ -3,6 +3,8 @@ title: "BMAD dossier — sostenibilità e partner nel footer"
 type: index
 status: decision-input
 updated: 2026-10-15
+tags: [docs, fixcity, bmad]
+qmd: "dossier bmad fixcity"
 ---
 
 # Dossier BMAD

@@ -1,3 +1,11 @@
+---
+title: "Project Context — FixCity"
+type: note
+status: draft
+updated: 2026-10-17
+tags: [docs, fixcity, bmad]
+qmd: "project context   fixcity fixcity"
+---
 # Project Context — FixCity
 
 > The project **constitution**. This document is loaded by every BMAD planning skill

@@ -3,6 +3,8 @@ title: "Product brief — contenuti inbound FixCity"
 type: bmad-product-brief
 status: proposed
 updated: 2026-10-15
+tags: [docs, fixcity, bmad]
+qmd: "problema fixcity"
 ---
 
 # Problema

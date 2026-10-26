@@ -4,6 +4,7 @@ type: index
 status: decision-input
 updated: 2026-10-15
 tags: [bmad, sustainability, fixcity, second-brain]
+qmd: "come sostenere fixcity fixcity"
 ---
 
 # Come sostenere FixCity

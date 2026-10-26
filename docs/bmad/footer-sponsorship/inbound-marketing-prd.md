@@ -3,6 +3,8 @@ title: "PRD discovery — blog ed eventi inbound"
 type: bmad-prd
 status: proposed-for-validation
 updated: 2026-10-15
+tags: [docs, fixcity, bmad]
+qmd: "requisiti di discovery fixcity"
 ---
 
 # Requisiti di discovery

@@ -81,7 +81,7 @@ Nuovi Markdown: nome lowercase, senza date/timestamp e mai con suffisso `-1`, `-
 
 ## Classificazione delle directory (verificata il 2026-10-14)
 
-Mappa completa con lo scopo di ogni cartella: [INDEX.md](./INDEX.md). Stato verificato del codice (azioni, rotte, test, PHPStan): [README.md](./README.md), sezione Fixcity. Nessun file e' stato spostato o rinominato.
+Mappa completa con lo scopo di ogni cartella: [INDEX.md](./index.md). Stato verificato del codice (azioni, rotte, test, PHPStan): [README.md](./README.md), sezione Fixcity. Nessun file e' stato spostato o rinominato.
 
 | Classe | Cartelle e file | Come usarli |
 |---|---|---|

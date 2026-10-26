@@ -14,6 +14,8 @@ use Modules\Fixcity\Notifications\TicketStatusChangedNotification;
 use Modules\Fixcity\Tests\TestCase;
 use Modules\User\Database\Factories\UserFactory;
 
+use function Safe\json_encode;
+
 uses(TestCase::class);
 
 it('notifies the owner and followers once for a public status change', function (): void {
@@ -39,8 +41,8 @@ it('notifies the owner and followers once for a public status change', function 
     Notification::assertSentTo($follower, TicketStatusChangedNotification::class);
     Notification::assertSentToTimes($owner, TicketStatusChangedNotification::class, 1);
     Notification::assertSentToTimes($follower, TicketStatusChangedNotification::class, 1);
-    Notification::assertSentTo($follower, TicketStatusChangedNotification::class, function (TicketStatusChangedNotification $notification) use ($follower, $ticket): bool {
-        $data = $notification->toArray($follower);
+    Notification::assertSentTo($owner, TicketStatusChangedNotification::class, function (TicketStatusChangedNotification $notification) use ($owner, $ticket): bool {
+        $data = $notification->toArray($owner);
         $actionUrl = $data['action_url'] ?? '';
 
         return is_string($actionUrl)
@@ -48,6 +50,17 @@ it('notifies the owner and followers once for a public status change', function 
             && ! str_contains($actionUrl, 'ticket_id=')
             && ($data['ticket_code'] ?? null) === $ticket->code
             && ! array_key_exists('ticket_id', $data);
+    });
+    // DCP-287: il codice di tracciamento e' una capability del proprietario; chi segue riceve il link al dettaglio pubblico
+    Notification::assertSentTo($follower, TicketStatusChangedNotification::class, function (TicketStatusChangedNotification $notification) use ($follower, $ticket): bool {
+        $data = $notification->toArray($follower);
+        $actionUrl = $data['action_url'] ?? '';
+
+        return is_string($actionUrl)
+            && str_ends_with($actionUrl, '/tickets/'.$ticket->id)
+            && ! str_contains($actionUrl, 'code=')
+            && ! array_key_exists('ticket_code', $data)
+            && ! str_contains(json_encode($data), (string) $ticket->code);
     });
 });
 

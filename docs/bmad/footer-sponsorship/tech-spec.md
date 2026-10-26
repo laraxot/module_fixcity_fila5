@@ -4,6 +4,7 @@ type: tech-spec
 status: proposed
 updated: 2026-10-15
 tags: [bmad, tech-spec, cms, footer, sponsorship]
+qmd: "tech spec (non autorizzata all'implementazione) fixcity"
 ---
 
 # Tech spec (non autorizzata all'implementazione)

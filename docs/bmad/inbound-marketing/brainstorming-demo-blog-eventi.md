@@ -4,6 +4,7 @@ type: brainstorming-report
 status: decision-input
 updated: 2026-10-15
 tags: [bmad, second-brain, blog, eventi, demo, commenti, media, ponytail]
+qmd: "obiettivo fixcity"
 ---
 
 # Obiettivo

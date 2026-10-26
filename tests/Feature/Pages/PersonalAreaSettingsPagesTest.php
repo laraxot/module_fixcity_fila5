@@ -178,6 +178,7 @@ describe('notifications widget', function (): void {
 describe('settings page', function (): void {
     it('shows preferences, own account data and data rights in every language', function (string $locale, string $notificationsTitle, string $title, string $rightsTitle): void {
         /** @var TestCase $this */
+        config(['ente' => []]);
         $citizen = UserFactory::new()->createOne(['name' => 'Giulia Verdi', 'email' => 'giulia.verdi@example.test']);
         UserFactory::new()->createOne(['name' => 'Estraneo Rossi', 'email' => 'estraneo.rossi@example.test']);
 
@@ -199,15 +200,33 @@ describe('settings page', function (): void {
             ->assertDontSee('estraneo.rossi@example.test')
             ->getContent();
 
-        expect(mainHtml((string) $html))->not->toContain('href="#"')->and($html)->toContain('href="#footer"');
+        // DCP-289: senza i recapiti dell'ente il link non punta a un footer vuoto (il salto al footer del layout e' fuori da <main>), e la pagina lo dice onestamente
+        expect(mainHtml((string) $html))->not->toContain('href="#"')->not->toContain('href="#footer"')
+            ->toContain(e(__('fixcity::ente.rights.missing', [], $locale)));
     })->with('personal area locales');
 
-    it('links the rights section to the contacts that really exist in the footer', function (): void {
+    it('points the rights link to the footer only when the footer really lists the contacts of the ente', function (): void {
         /** @var TestCase $this */
+        config(['ente' => ['address' => 'Via di Prova 1', 'social' => []]]);
         $html = (string) $this->actingAs(UserFactory::new()->createOne())->get('/it/area-personale/impostazioni')->assertOk()->getContent();
 
-        expect($html)->toContain('id="footer"');
+        expect($html)->toContain('id="footer"')->toContain('Via di Prova 1');
+        expect(mainHtml($html))->toContain('href="#footer"')->not->toContain(e(__('fixcity::ente.rights.missing', [], 'it')));
     });
+
+    it('lets the citizen write to the dpo, else to the pec, else to the email of the ente', function (array $ente, string $address): void {
+        /** @var TestCase $this */
+        config(['ente' => [...$ente, 'social' => []]]);
+        $html = (string) $this->actingAs(UserFactory::new()->createOne())->get('/en/area-personale/impostazioni')->assertOk()->getContent();
+
+        expect($html)->toContain('href="mailto:'.$address.'"')
+            ->toContain(e(__('fixcity::ente.rights.write', ['address' => $address], 'en')))
+            ->not->toContain(e(__('fixcity::ente.rights.missing', [], 'en')));
+    })->with([
+        'dpo first' => [['dpo_email' => 'dpo@ente.example.test', 'pec' => 'ente@pec.example.test', 'email' => 'urp@ente.example.test'], 'dpo@ente.example.test'],
+        'then pec' => [['pec' => 'ente@pec.example.test', 'email' => 'urp@ente.example.test'], 'ente@pec.example.test'],
+        'then email' => [['email' => 'urp@ente.example.test'], 'urp@ente.example.test'],
+    ]);
 
     it('says honestly whether the email address is verified', function (): void {
         /** @var TestCase $this */

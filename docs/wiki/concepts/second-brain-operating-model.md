@@ -13,6 +13,7 @@ related:
   - ./ai-harness-module-discipline.md
   - ../../../../../../docs/wiki/concepts/hackernoon-ai-coding-tips-fixcity-map.md
   - second-brain-local-discipline.md
+status: draft
 ---
 
 # Second Brain Operating Model (Modules)

@@ -49,7 +49,7 @@ function confirmationBlock(string $file, string $locale): array
  */
 function confirmationTexts(array $tree, string $prefix = ''): array
 {
-    $technical = ['view', 'layout', 'class', 'col_class', 'icon', 'url', 'element', 'header_active', 'type'];
+    $technical = ['view', 'layout', 'class', 'col_class', 'icon', 'url', 'element', 'header_active', 'type', 'when', 'ente'];
     $texts = [];
     foreach ($tree as $key => $value) {
         $path = $prefix.$key;

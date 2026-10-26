@@ -4,6 +4,7 @@ type: index
 status: decision-input
 updated: 2026-10-16
 tags: [bmad, inbound-marketing, blog, eventi, afc, second-brain]
+qmd: "inbound marketing: blog ed eventi fixcity"
 ---
 
 # Inbound marketing: blog ed eventi

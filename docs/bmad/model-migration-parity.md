@@ -1,3 +1,11 @@
+---
+title: "BMAD + Second Brain — Model-Migration Parity Check (Fixcity Module)"
+type: note
+status: draft
+updated: 2026-10-18
+tags: [docs, fixcity, bmad]
+qmd: "bmad + second brain   model-migration parity check (fixcity module) fixcity"
+---
 # BMAD + Second Brain — Model-Migration Parity Check (Fixcity Module)
 
 ## Benchmark

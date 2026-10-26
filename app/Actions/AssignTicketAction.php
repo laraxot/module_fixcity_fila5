@@ -38,7 +38,7 @@ final class AssignTicketAction
                 $statusValue = $lockedTicket->resolveTicketStatusValue();
                 $status = TicketStatusEnum::tryFrom($statusValue) ?? TicketStatusEnum::PENDING;
                 $actorId = auth()->id();
-                $userId = is_int($actorId) ? $actorId : null;
+                $userId = is_int($actorId) || is_string($actorId) ? $actorId : null;
                 $reason = $responsibleId === null
                     ? 'Rimossa assegnazione'
                     : 'Assegnato a responsabile #'.$responsibleId;

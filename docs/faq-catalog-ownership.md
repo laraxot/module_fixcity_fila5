@@ -5,6 +5,7 @@ status: active
 created: 2026-10-20
 updated: 2026-10-20
 tags: [faq, fixcity, cms, catalog, localization]
+qmd: "ownership faq fixcity"
 ---
 
 # Ownership FAQ

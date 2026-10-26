@@ -23,8 +23,6 @@
                         "link_title": "Vai alla homepage di FixCity"
                     },
                     "region": {
-                        "name": "Nome della Regione",
-                        "url": "",
                         "title": "Vai al portale {Nome della Regione}",
                         "aria_label": "Vai al portale {Nome della Regione} - link esterno - apertura nuova scheda"
                     },
@@ -159,8 +157,6 @@
                         "link_title": "Go to the FixCity homepage"
                     },
                     "region": {
-                        "name": "Name of the Region",
-                        "url": "",
                         "title": "Go to the {Region name} portal",
                         "aria_label": "Go to the {Region name} portal - external link - opens in a new tab"
                     },
@@ -295,8 +291,6 @@
                         "link_title": "Zur FixCity-Startseite"
                     },
                     "region": {
-                        "name": "Name der Region",
-                        "url": "",
                         "title": "Zum Portal {Name der Region}",
                         "aria_label": "Zum Portal {Name der Region} - externer Link - öffnet in einem neuen Tab"
                     },
@@ -431,8 +425,6 @@
                         "link_title": "Ir a la página de inicio de FixCity"
                     },
                     "region": {
-                        "name": "Nombre de la Región",
-                        "url": "",
                         "title": "Ir al portal de {Nombre de la Región}",
                         "aria_label": "Ir al portal de {Nombre de la Región} - enlace externo - se abre en una pestaña nueva"
                     },

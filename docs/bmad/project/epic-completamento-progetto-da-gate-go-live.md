@@ -7,6 +7,8 @@ created: 2026-10-15
 updated: 2026-10-15
 related: [DCP-240, DCP-251, DCP-252, DCP-253, DCP-254]
 reserved_numbers: DCP-250..259
+tags: [docs, fixcity, bmad]
+qmd: "dcp-250: completamento del progetto misurato dal gate fixcity"
 ---
 
 # DCP-250: completamento del progetto misurato dal gate

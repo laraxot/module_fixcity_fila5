@@ -27,6 +27,7 @@
                                 {{ $errors->first('data.submit') ?: $errors->first('submit') }}
                             </div>
                         @endif
+                        @include('fixcity::filament.widgets.partials.session-expired-alert')
                         {{ $this->form }}
                     </div>
                 </div>

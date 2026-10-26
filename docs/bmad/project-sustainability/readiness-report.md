@@ -3,6 +3,8 @@ title: "Readiness — project sustainability"
 type: readiness-report
 status: CONCERNS
 updated: 2026-10-15
+tags: [docs, fixcity, bmad]
+qmd: "solutioning gate fixcity"
 ---
 
 # Solutioning gate

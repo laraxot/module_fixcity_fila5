@@ -4,6 +4,7 @@ type: bmad-plan
 status: proposed-for-validation
 updated: 2026-10-15
 tags: [bmad, inbound-marketing, blog, eventi, content-operations, filament]
+qmd: "obiettivo fixcity"
 ---
 
 # Obiettivo

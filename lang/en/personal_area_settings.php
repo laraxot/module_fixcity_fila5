@@ -17,6 +17,7 @@ return [
         'count' => '{0} No notifications|{1} :count notification|[2,*] :count notifications',
         'unread' => '{0} none unread|{1} :count unread|[2,*] :count unread',
         'item_text' => 'Report :code has a new status: :status.',
+        'followed_label' => '“:title”',
         'new_badge' => 'New',
         'open_report' => 'Open the report',
         'open_report_aria' => 'Open the report :code',

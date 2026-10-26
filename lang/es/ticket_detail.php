@@ -21,6 +21,7 @@ return [
         'history' => 'Historial de actualizaciones',
         'previous' => 'Antes: :status',
         'empty' => 'Todavía no hay actualizaciones: la incidencia está «:status».',
+        'empty_concluded' => 'La incidencia está «:status». El historial público no tiene otras actualizaciones.',
     ],
     'next_steps' => [
         'title' => 'Próximos pasos',
@@ -28,6 +29,7 @@ return [
         'moderation' => ['title' => 'Revisión de la incidencia', 'description' => 'Un moderador comprobará la incidencia antes de tramitarla.'],
         'review' => ['title' => 'Asunción del caso', 'description' => 'Un operador está verificando los datos y localizará la oficina responsable.'],
         'processing' => ['title' => 'En trámite', 'description' => 'La incidencia está siendo gestionada. Las actualizaciones aparecerán aquí.'],
+        'reopened' => ['title' => 'Incidencia reabierta', 'description' => 'La incidencia se ha reabierto y se volverá a revisar. Las actualizaciones aparecerán aquí.'],
         'waiting' => ['title' => 'En espera', 'description' => 'La tramitación espera información o una respuesta externa.'],
         'confirmation' => ['title' => 'Comprobación de la resolución', 'description' => 'La resolución se ha registrado; el ticket se cerrará tras la comprobación prevista.'],
         'closed' => ['title' => 'Proceso finalizado', 'description' => 'La incidencia se ha resuelto y cerrado.'],
@@ -49,6 +51,12 @@ return [
         'empty' => 'No hay descripción.',
     ],
     'comments' => ['heading' => 'Comentarios y actualizaciones'],
+    'owner' => [
+        'title' => 'Tu incidencia',
+        'private' => 'Por ahora solo la ves tú: todavía no es pública.',
+        'code' => 'Código de seguimiento',
+        'code_help' => 'Guárdalo: te permite consultar el estado sin iniciar sesión. No lo compartas.',
+    ],
     'actions' => [
         'title' => 'Qué puedes hacer',
         'back' => 'Volver a la lista',

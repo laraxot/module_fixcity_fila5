@@ -1,3 +1,11 @@
+---
+title: "Migration map — left bmad-output (2026-10-15)"
+type: note
+status: draft
+updated: 2026-10-17
+tags: [docs, fixcity, bmad]
+qmd: "migration map   left bmad-output (2026-10-15) fixcity"
+---
 # Migration map — left bmad-output (2026-10-15)
 
 | From (bmad-output) | To |

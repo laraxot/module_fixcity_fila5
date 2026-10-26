@@ -10,7 +10,7 @@ return [
     'fields' => [
         'location' => [
             'label' => 'Lugar',
-            'invalid' => 'Indica un punto válido en el mapa: latitud entre -90 y 90, longitud entre -180 y 180.',
+            'invalid' => 'Elige el punto en el mapa o busca una dirección: lo necesitamos para saber dónde está la incidencia.',
             'placeholder' => 'Busca un lugar',
             'helper_text' => 'Indica dónde se ha producido la incidencia',
             'address' => [

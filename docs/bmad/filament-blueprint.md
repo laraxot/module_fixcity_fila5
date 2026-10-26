@@ -19,7 +19,7 @@ i confini di dominio.
 
 ## Regole non negoziabili
 
-0. PHPStan Modules a zero: errori in `app/Filament/*` → **scopo** (questo blueprint) → chiamanti → tipi veri; **mai zittire** (ignore/baseline/exclude). Gate: `cd laravel && ./vendor/bin/phpstan analyse Modules` ([phpstan-modules-zero-standing-order](../../Xot/docs/wiki/memories/phpstan-modules-zero-standing-order.md), [00-start.md](../../../../../bashscripts/docs/prompts/00-start.md#ordine-permanente-dellutente), [11-phpstan.md](../../../../../bashscripts/docs/prompts/11-phpstan.md)).
+0. PHPStan Modules a zero: errori in `app/Filament/*` → **scopo** (questo blueprint) → chiamanti → tipi veri; **mai zittire** (ignore/baseline/exclude). Gate: `cd laravel && ./vendor/bin/phpstan analyse Modules` ([phpstan-modules-zero-standing-order](../../../Xot/docs/wiki/memories/phpstan-modules-zero-standing-order.md), [00-start.md](../../../../../bashscripts/docs/prompts/00-start.md#ordine-permanente-dellutente), [11-phpstan.md](../../../../../bashscripts/docs/prompts/11-phpstan.md)).
 1. Estendere solo `XotBaseResource` / `XotBaseWidget` / basi Xot — mai classi Filament dirette.
 2. Nessun `->label()` hardcoded: chiavi in `lang/<locale>/` del modulo.
 3. Business logic nelle Actions del modulo, non nei form hooks grassi.
@@ -95,7 +95,7 @@ Audit: [fo-link-coherence-audit.story.md](../stories/fo-link-coherence-audit.sto
 **Religione i18n:** sito `it|en|de|es`; nessun testo UI hardcoded nel Blade.
 Chrome tema → `pub_theme::` (es. `navigation.homepage.news`); dominio
 Fixcity → `fixcity::…` in `lang/<locale>/`; Filament senza `->label()`.
-Governance: [translation-key-governance.md](../../Lang/docs/wiki/rules/translation-key-governance.md).
+Governance: [translation-key-governance.md](../../../Lang/docs/wiki/rules/translation-key-governance.md).
 
 ## CreateTicketWidget / location
 

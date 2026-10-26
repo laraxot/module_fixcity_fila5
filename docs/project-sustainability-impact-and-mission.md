@@ -5,6 +5,7 @@ module: Fixcity
 status: decision-input
 updated: 2026-10-15
 tags: [sustainability, impact, fixcity, bmad]
+qmd: "missione e metriche di impatto (ownership fixcity) fixcity"
 ---
 
 # Missione e metriche di impatto (ownership Fixcity)

@@ -4,6 +4,7 @@ type: bmad-research-and-strategy
 status: discovery
 updated: 2026-10-15
 tags: [bmad, inbound-marketing, blog, eventi, civic-tech, accessibility]
+qmd: "perché blog ed eventi fixcity"
 ---
 
 # Perché blog ed eventi

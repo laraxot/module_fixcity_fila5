@@ -3,6 +3,8 @@ title: "Product brief — inbound blog ed eventi"
 type: product-brief
 status: proposed
 updated: 2026-10-15
+tags: [docs, fixcity, bmad]
+qmd: "product brief fixcity"
 ---
 
 # Product brief

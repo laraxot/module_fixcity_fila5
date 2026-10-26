@@ -1,3 +1,11 @@
+---
+title: "PHPStan Analysis Summary - Fixcity Module"
+type: note
+status: draft
+updated: 2026-10-15
+tags: [docs, fixcity, phpstan-analysis]
+qmd: "phpstan analysis summary - fixcity module fixcity"
+---
 # PHPStan Analysis Summary - Fixcity Module
 
 ## Error Clusters

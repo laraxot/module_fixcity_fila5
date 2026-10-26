@@ -6,6 +6,7 @@ namespace Modules\Fixcity\Filament\Resources\TicketResource\Schemas;
 
 use Filament\Facades\Filament;
 use Filament\Forms\Components\Checkbox;
+use Filament\Forms\Components\Field;
 use Filament\Forms\Components\Hidden;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\SpatieMediaLibraryFileUpload;
@@ -19,6 +20,7 @@ use Filament\Schemas\Components\Wizard\Step;
 use Illuminate\Support\HtmlString;
 use Illuminate\Support\MessageBag;
 use Illuminate\Support\Str;
+use Livewire\Component as LivewireComponent;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 use Modules\Fixcity\Actions\BuildTicketReviewSummaryAction;
 use Modules\Fixcity\Actions\GetPublishedPrivacyPolicyAction;
@@ -285,9 +287,32 @@ class TicketForm extends XotBaseResourceForm
         $address->hiddenLabel()->required()->validationMessages(static::getDataStepValidationMessages())->view('fixcity::filament.forms.components.dc-place-autocomplete');
         // L'aiuto "Indica il luogo del disservizio" ripeterebbe la descrizione della scheda: non serve sotto la mappa.
         $map->hiddenLabel()->helperText(null)->validationMessages(static::getDataStepValidationMessages())->extraFieldWrapperAttributes(['class' => 'bg-white p-3 mt-3', 'data-element' => 'location-map']);
+        // FO-3-07: l'errore di un "Avanti" a vuoto restava a campo compilato fino al successivo "Avanti": indirizzo e punto lo rivalidano da soli.
+        static::revalidateWhileInvalid($address, onBlur: true);
+        static::revalidateWhileInvalid($map, ['address']);
 
         return $section->id('report-place')
             ->view('pub_theme::components.wizard.dc-section-card', ['cardClass' => 'p-big p-lg-4']);
+    }
+
+    /**
+     * Un campo che sta mostrando un errore lo rivalida da solo quando cambia, cosi' l'errore sparisce appena il dato c'e' (DCP-286, FO-3-07).
+     * Non rivalida i campi senza errore: nessun errore nuovo prima che l'utente abbia provato ad andare avanti. `$childSuffixes` sono i campi
+     * figli aggiornati insieme (il picker scrive punto e indirizzo in un colpo solo).
+     *
+     * @param  list<string>  $childSuffixes
+     */
+    protected static function revalidateWhileInvalid(Field $field, array $childSuffixes = [], bool $onBlur = false): void
+    {
+        $field->live(onBlur: $onBlur)->afterStateUpdated(static function (Field $component, LivewireComponent $livewire) use ($childSuffixes): void {
+            $path = $component->getStatePath();
+            foreach ([$path, ...array_map(static fn (string $suffix): string => $path.'.'.$suffix, $childSuffixes)] as $candidate) {
+                $errors = $livewire->getErrorBag();
+                if ($errors instanceof MessageBag && $errors->has($candidate)) {
+                    $livewire->validateOnly($candidate);
+                }
+            }
+        });
     }
 
     protected static function getIssueSection(bool $designComuni): Section

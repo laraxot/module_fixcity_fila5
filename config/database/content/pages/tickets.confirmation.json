@@ -74,15 +74,25 @@
                             },
                             {
                                 "class": "subtitle-small pt-3 pt-lg-4",
+                                "when": "mail",
                                 "parts": [
                                     {
-                                        "text": "Abbiamo inviato il riepilogo all’email:"
+                                        "text": "Ti invieremo il riepilogo all’email:"
                                     },
                                     {
                                         "br": true
                                     },
                                     {
                                         "strong": ":email"
+                                    }
+                                ]
+                            },
+                            {
+                                "class": "subtitle-small pt-3 pt-lg-4",
+                                "when": "in_app",
+                                "parts": [
+                                    {
+                                        "text": "Non ti scriviamo per email: l’indirizzo non risulta verificato o hai disattivato gli avvisi via email. Il riepilogo e gli aggiornamenti li trovi nella tua area personale."
                                     }
                                 ]
                             }
@@ -95,52 +105,8 @@
                         "followup": {
                             "label": "Consulta la richiesta",
                             "url": ":area_url",
-                            "text": "nella tua area riservata"
+                            "text": "nella tua area personale"
                         }
-                    },
-                    "related": {
-                        "title": "Servizi correlati",
-                        "items": [
-                            {
-                                "label": "Richiesta appuntamento",
-                                "url": "#",
-                                "icon": "it-settings"
-                            }
-                        ]
-                    },
-                    "feedback": {
-                        "title": "Quanto è stato facile usare questo servizio?",
-                        "col_class": "col-12 col-lg-6 p-lg-0 px-4",
-                        "legend": "Valuta da 1 a 5 stelle la pagina",
-                        "star_label": "Valuta %d stelle su 5",
-                        "thanks": "Grazie, il tuo parere ci aiuterà a migliorare il servizio!",
-                        "positive": {
-                            "question": "Quali sono stati gli aspetti che hai preferito?",
-                            "answers": [
-                                "Le indicazioni erano chiare",
-                                "Le indicazioni erano complete",
-                                "Capivo sempre che stavo procedendo correttamente",
-                                "Non ho avuto problemi tecnici",
-                                "Altro"
-                            ]
-                        },
-                        "negative": {
-                            "question": "Dove hai incontrato le maggiori difficoltà?",
-                            "answers": [
-                                "A volte le indicazioni non erano chiare",
-                                "A volte le indicazioni non erano complete",
-                                "A volte non capivo se stavo procedendo correttamente",
-                                "Ho avuto problemi tecnici",
-                                "Altro"
-                            ]
-                        },
-                        "detail": {
-                            "question": "Vuoi aggiungere altri dettagli?",
-                            "label": "Dettaglio",
-                            "help": "Inserire massimo 200 caratteri"
-                        },
-                        "back": "Indietro",
-                        "next": "Avanti"
                     },
                     "contacts": {
                         "layout": "offset",
@@ -150,7 +116,7 @@
                                 {
                                     "icon": "it-help-circle",
                                     "label": "Leggi le domande frequenti",
-                                    "url": "#"
+                                    "url": "/it/domande-frequenti"
                                 },
                                 {
                                     "icon": "it-mail",
@@ -160,14 +126,8 @@
                                 },
                                 {
                                     "icon": "it-hearing",
-                                    "label": "Chiama il numero verde 05 0505",
-                                    "url": "#"
-                                },
-                                {
-                                    "icon": "it-calendar",
-                                    "label": "Prenota appuntamento",
-                                    "url": "#",
-                                    "element": "appointment-booking"
+                                    "label": "Chiama il numero verde :value",
+                                    "ente": "toll_free"
                                 }
                             ]
                         }
@@ -258,15 +218,25 @@
                             },
                             {
                                 "class": "subtitle-small pt-3 pt-lg-4",
+                                "when": "mail",
                                 "parts": [
                                     {
-                                        "text": "We have sent the summary to the email:"
+                                        "text": "We will send the summary to the email:"
                                     },
                                     {
                                         "br": true
                                     },
                                     {
                                         "strong": ":email"
+                                    }
+                                ]
+                            },
+                            {
+                                "class": "subtitle-small pt-3 pt-lg-4",
+                                "when": "in_app",
+                                "parts": [
+                                    {
+                                        "text": "We are not sending you an email: your address is not verified or you have turned off email alerts. You can find the summary and updates in your personal area."
                                     }
                                 ]
                             }
@@ -279,52 +249,8 @@
                         "followup": {
                             "label": "View the request",
                             "url": ":area_url",
-                            "text": "in your private area"
+                            "text": "in your personal area"
                         }
-                    },
-                    "related": {
-                        "title": "Related services",
-                        "items": [
-                            {
-                                "label": "Appointment request",
-                                "url": "#",
-                                "icon": "it-settings"
-                            }
-                        ]
-                    },
-                    "feedback": {
-                        "title": "How easy was it to use this service?",
-                        "col_class": "col-12 col-lg-6 p-lg-0 px-4",
-                        "legend": "Rate the page from 1 to 5 stars",
-                        "star_label": "Rate %d stars out of 5",
-                        "thanks": "Thank you, your feedback will help us improve the service!",
-                        "positive": {
-                            "question": "Which aspects did you prefer?",
-                            "answers": [
-                                "The instructions were clear",
-                                "The instructions were complete",
-                                "I always understood I was proceeding correctly",
-                                "I had no technical problems",
-                                "Other"
-                            ]
-                        },
-                        "negative": {
-                            "question": "Where did you find the greatest difficulties?",
-                            "answers": [
-                                "Sometimes the instructions were not clear",
-                                "Sometimes the instructions were not complete",
-                                "Sometimes I did not understand whether I was proceeding correctly",
-                                "I had technical problems",
-                                "Other"
-                            ]
-                        },
-                        "detail": {
-                            "question": "Would you like to add more details?",
-                            "label": "Details",
-                            "help": "Enter 200 characters at most"
-                        },
-                        "back": "Back",
-                        "next": "Next"
                     },
                     "contacts": {
                         "layout": "offset",
@@ -334,7 +260,7 @@
                                 {
                                     "icon": "it-help-circle",
                                     "label": "Read the frequently asked questions",
-                                    "url": "#"
+                                    "url": "/en/domande-frequenti"
                                 },
                                 {
                                     "icon": "it-mail",
@@ -344,14 +270,8 @@
                                 },
                                 {
                                     "icon": "it-hearing",
-                                    "label": "Call the toll-free number 05 0505",
-                                    "url": "#"
-                                },
-                                {
-                                    "icon": "it-calendar",
-                                    "label": "Book an appointment",
-                                    "url": "#",
-                                    "element": "appointment-booking"
+                                    "label": "Call the toll-free number :value",
+                                    "ente": "toll_free"
                                 }
                             ]
                         }
@@ -442,15 +362,25 @@
                             },
                             {
                                 "class": "subtitle-small pt-3 pt-lg-4",
+                                "when": "mail",
                                 "parts": [
                                     {
-                                        "text": "Wir haben die Zusammenfassung an diese E-Mail-Adresse gesendet:"
+                                        "text": "Wir senden Ihnen die Zusammenfassung an diese E-Mail-Adresse:"
                                     },
                                     {
                                         "br": true
                                     },
                                     {
                                         "strong": ":email"
+                                    }
+                                ]
+                            },
+                            {
+                                "class": "subtitle-small pt-3 pt-lg-4",
+                                "when": "in_app",
+                                "parts": [
+                                    {
+                                        "text": "Wir senden Ihnen keine E-Mail: Ihre Adresse ist nicht bestätigt oder Sie haben E-Mail-Benachrichtigungen deaktiviert. Die Zusammenfassung und Neuigkeiten finden Sie in Ihrem persönlichen Bereich."
                                     }
                                 ]
                             }
@@ -466,50 +396,6 @@
                             "text": "in Ihrem persönlichen Bereich"
                         }
                     },
-                    "related": {
-                        "title": "Verwandte Dienste",
-                        "items": [
-                            {
-                                "label": "Terminanfrage",
-                                "url": "#",
-                                "icon": "it-settings"
-                            }
-                        ]
-                    },
-                    "feedback": {
-                        "title": "Wie einfach war die Nutzung dieses Dienstes?",
-                        "col_class": "col-12 col-lg-6 p-lg-0 px-4",
-                        "legend": "Bewerten Sie die Seite mit 1 bis 5 Sternen",
-                        "star_label": "%d von 5 Sternen vergeben",
-                        "thanks": "Vielen Dank, Ihre Rückmeldung hilft uns, den Dienst zu verbessern!",
-                        "positive": {
-                            "question": "Welche Aspekte haben Ihnen am besten gefallen?",
-                            "answers": [
-                                "Die Hinweise waren klar",
-                                "Die Hinweise waren vollständig",
-                                "Ich wusste immer, dass ich richtig vorgehe",
-                                "Ich hatte keine technischen Probleme",
-                                "Sonstiges"
-                            ]
-                        },
-                        "negative": {
-                            "question": "Wo sind Sie auf die größten Schwierigkeiten gestoßen?",
-                            "answers": [
-                                "Die Hinweise waren manchmal nicht klar",
-                                "Die Hinweise waren manchmal nicht vollständig",
-                                "Manchmal war mir nicht klar, ob ich richtig vorgehe",
-                                "Ich hatte technische Probleme",
-                                "Sonstiges"
-                            ]
-                        },
-                        "detail": {
-                            "question": "Möchten Sie weitere Angaben machen?",
-                            "label": "Einzelheiten",
-                            "help": "Geben Sie höchstens 200 Zeichen ein"
-                        },
-                        "back": "Zurück",
-                        "next": "Weiter"
-                    },
                     "contacts": {
                         "layout": "offset",
                         "main": {
@@ -518,7 +404,7 @@
                                 {
                                     "icon": "it-help-circle",
                                     "label": "Häufige Fragen lesen",
-                                    "url": "#"
+                                    "url": "/de/domande-frequenti"
                                 },
                                 {
                                     "icon": "it-mail",
@@ -528,14 +414,8 @@
                                 },
                                 {
                                     "icon": "it-hearing",
-                                    "label": "Gebührenfreie Nummer 05 0505 anrufen",
-                                    "url": "#"
-                                },
-                                {
-                                    "icon": "it-calendar",
-                                    "label": "Termin vereinbaren",
-                                    "url": "#",
-                                    "element": "appointment-booking"
+                                    "label": "Gebührenfreie Nummer :value anrufen",
+                                    "ente": "toll_free"
                                 }
                             ]
                         }
@@ -626,15 +506,25 @@
                             },
                             {
                                 "class": "subtitle-small pt-3 pt-lg-4",
+                                "when": "mail",
                                 "parts": [
                                     {
-                                        "text": "Hemos enviado el resumen al correo electrónico:"
+                                        "text": "Te enviaremos el resumen al correo electrónico:"
                                     },
                                     {
                                         "br": true
                                     },
                                     {
                                         "strong": ":email"
+                                    }
+                                ]
+                            },
+                            {
+                                "class": "subtitle-small pt-3 pt-lg-4",
+                                "when": "in_app",
+                                "parts": [
+                                    {
+                                        "text": "No te enviamos un correo: tu dirección no está verificada o has desactivado los avisos por correo. Encontrarás el resumen y las novedades en tu área personal."
                                     }
                                 ]
                             }
@@ -650,50 +540,6 @@
                             "text": "en tu área personal"
                         }
                     },
-                    "related": {
-                        "title": "Servicios relacionados",
-                        "items": [
-                            {
-                                "label": "Solicitud de cita",
-                                "url": "#",
-                                "icon": "it-settings"
-                            }
-                        ]
-                    },
-                    "feedback": {
-                        "title": "¿Qué tan fácil te ha resultado usar este servicio?",
-                        "col_class": "col-12 col-lg-6 p-lg-0 px-4",
-                        "legend": "Valora la página de 1 a 5 estrellas",
-                        "star_label": "Valorar con %d estrellas de 5",
-                        "thanks": "¡Gracias, tu opinión nos ayudará a mejorar el servicio!",
-                        "positive": {
-                            "question": "¿Qué aspectos has preferido?",
-                            "answers": [
-                                "Las indicaciones eran claras",
-                                "Las indicaciones eran completas",
-                                "Siempre entendí que estaba avanzando correctamente",
-                                "No he tenido problemas técnicos",
-                                "Otro"
-                            ]
-                        },
-                        "negative": {
-                            "question": "¿Dónde has encontrado más dificultades?",
-                            "answers": [
-                                "A veces las indicaciones no eran claras",
-                                "A veces las indicaciones no eran completas",
-                                "A veces no entendía si estaba avanzando correctamente",
-                                "He tenido problemas técnicos",
-                                "Otro"
-                            ]
-                        },
-                        "detail": {
-                            "question": "¿Quieres añadir más detalles?",
-                            "label": "Detalles",
-                            "help": "Introduce como máximo 200 caracteres"
-                        },
-                        "back": "Atrás",
-                        "next": "Siguiente"
-                    },
                     "contacts": {
                         "layout": "offset",
                         "main": {
@@ -702,7 +548,7 @@
                                 {
                                     "icon": "it-help-circle",
                                     "label": "Lee las preguntas frecuentes",
-                                    "url": "#"
+                                    "url": "/es/domande-frequenti"
                                 },
                                 {
                                     "icon": "it-mail",
@@ -712,14 +558,8 @@
                                 },
                                 {
                                     "icon": "it-hearing",
-                                    "label": "Llama al número gratuito 05 0505",
-                                    "url": "#"
-                                },
-                                {
-                                    "icon": "it-calendar",
-                                    "label": "Reserva una cita",
-                                    "url": "#",
-                                    "element": "appointment-booking"
+                                    "label": "Llama al número gratuito :value",
+                                    "ente": "toll_free"
                                 }
                             ]
                         }

@@ -10,7 +10,7 @@ return [
     'fields' => [
         'location' => [
             'label' => 'Ort',
-            'invalid' => 'Geben Sie einen gültigen Punkt auf der Karte an: Breitengrad zwischen -90 und 90, Längengrad zwischen -180 und 180.',
+            'invalid' => 'Wählen Sie den Punkt auf der Karte oder suchen Sie eine Adresse: Wir brauchen ihn, um zu wissen, wo die Störung ist.',
             'placeholder' => 'Ort suchen',
             'helper_text' => 'Geben Sie an, wo die Störung aufgetreten ist',
             'address' => [

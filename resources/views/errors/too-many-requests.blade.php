@@ -1,5 +1,5 @@
 <x-layouts.app :title="__('fixcity::ticket.track.rate_limited_title')">
-    <main id="main-container" class="container py-5">
+    <div class="container py-5">
         <div class="row justify-content-center">
             <div class="col-12 col-md-9 col-lg-7">
                 <section class="card shadow-sm border-0" aria-labelledby="rate-limit-heading">
@@ -18,5 +18,5 @@
                 </section>
             </div>
         </div>
-    </main>
+    </div>
 </x-layouts.app>

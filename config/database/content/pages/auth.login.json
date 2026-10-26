@@ -9,28 +9,28 @@
         "it": [{
             "type": "login",
             "data": {
-                "view": "pub_theme::components.pages.auth.login",
+                "view": "pub_theme::components.pages.auth-login",
                 "header_active": "login"
             }
         }],
         "en": [{
             "type": "login",
             "data": {
-                "view": "pub_theme::components.pages.auth.login",
+                "view": "pub_theme::components.pages.auth-login",
                 "header_active": "login"
             }
         }],
         "de": [{
             "type": "login",
             "data": {
-                "view": "pub_theme::components.pages.auth.login",
+                "view": "pub_theme::components.pages.auth-login",
                 "header_active": "login"
             }
         }],
         "es": [{
             "type": "login",
             "data": {
-                "view": "pub_theme::components.pages.auth.login",
+                "view": "pub_theme::components.pages.auth-login",
                 "header_active": "login"
             }
         }]

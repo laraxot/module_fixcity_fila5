@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Modules\Fixcity\Actions;
 
+use Illuminate\Validation\ValidationException;
 use Modules\Fixcity\Events\TicketCreatedEvent;
 use Modules\Fixcity\Models\Ticket;
 use Modules\Xot\Actions\Cast\SafeStringCastAction;
@@ -23,7 +24,7 @@ class CreateTicketAction
         if (! isset($data['owner_id'])) {
             $user = auth()->user();
             if (! $user) {
-                throw new \Illuminate\Validation\ValidationException(
+                throw new ValidationException(
                     validator([], ['owner_id' => 'required'])
                 )->withMessages(['owner_id' => __('fixcity::ticket.owner.auth_required')]);
             }
@@ -39,6 +40,7 @@ class CreateTicketAction
 
         $ticket = Ticket::create($data);
         TicketCreatedEvent::dispatch($ticket);
+        app(SendTicketReceiptAction::class)->execute($ticket);
         app(BuildTicketConfirmationDataAction::class)->flash($ticket, $locale);
 
         return $ticket;

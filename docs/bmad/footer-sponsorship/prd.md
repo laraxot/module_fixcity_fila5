@@ -4,6 +4,7 @@ type: prd
 status: proposed-for-owner-review
 updated: 2026-10-15
 tags: [bmad, prd, footer, sponsorship, accessibility]
+qmd: "product requirements document fixcity"
 ---
 
 # Product Requirements Document

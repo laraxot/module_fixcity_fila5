@@ -10,7 +10,7 @@ qmd: "post agnostico content_type puntatore Fixcity Blog"
 # Post agnostico
 
 SSoT della decisione:  
-[brainstorming-post-vs-article.md](../../../Blog/docs/brainstorming-post-vs-article.md)
+[brainstorming-post-vs-article.md](../../../../Blog/docs/brainstorming-post-vs-article.md)
 
 In sintesi: linguaggio **post**; DB `content_type=post|event`; model PHP
 `Article` (rename deferred); mai Parental `type` per la tassonomia.

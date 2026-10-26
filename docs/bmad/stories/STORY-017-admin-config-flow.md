@@ -2,12 +2,13 @@
 title: Admin Configuration Flow
 id: STORY-017
 author: BMAD
-status: done
 priority: high
 type: note
 updated: 2026-10-13
 tags: [docs, fixcity, bmad]
 qmd: "story 017 admin config flow fixcity"
+status: superseded
+superseded_by: STORY-010-admin-config-flow.md
 ---
 
 ## Attore: Admin (Super Admin)

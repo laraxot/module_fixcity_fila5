@@ -79,7 +79,7 @@ Per evitare file doppi:
 
 ## collegamenti bidirezionali
 
-- [Fixcity docs index](./INDEX.md)
+- [Fixcity docs index](./index.md)
 - [CreateTicketWizardWidget](./CreateTicketWizardWidget.md)
 - [Filament wizard rules](./rules/filament-wizard-rules.md)
 - [Governance story](./stories/wizard-governance-langserviceprovider-and-xotbase-refactor.md)

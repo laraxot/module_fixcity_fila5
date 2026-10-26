@@ -9,6 +9,9 @@ summary: |
 references:
   - https://italia.github.io/design-comuni-pagine-statiche/sito/domande-frequenti.html
   - laravel/Themes/Sixteen/resources/views/components/blocks/content-page/design-comuni.blade.php
+title: "Contenuto"
+tags: [docs, fixcity, bmad]
+qmd: "contenuto fixcity"
 ---
 
 # Contenuto

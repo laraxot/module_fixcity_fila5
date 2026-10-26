@@ -4,6 +4,7 @@ type: research-report
 status: complete-for-planning
 updated: 2026-10-14
 tags: [bmad, domain-research, legal-content, disclaimer, gdpr, multilingual]
+qmd: "executive summary fixcity"
 ---
 
 # Executive Summary

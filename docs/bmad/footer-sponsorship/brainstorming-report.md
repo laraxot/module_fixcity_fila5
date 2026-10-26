@@ -4,6 +4,7 @@ type: brainstorm
 status: synthesized
 updated: 2026-10-15
 tags: [bmad, brainstorm, marketing, civic-tech]
+qmd: "brainstorming report fixcity"
 ---
 
 # Brainstorming report

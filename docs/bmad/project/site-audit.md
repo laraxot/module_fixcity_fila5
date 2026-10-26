@@ -4,6 +4,7 @@ type: bmad-audit
 status: active
 updated: 2026-10-14
 tags: [bmad, audit, release, sixteeen, localization, accessibility]
+qmd: "scope fixcity"
 ---
 
 # Scope

@@ -3,6 +3,8 @@ title: "AI agent and plugin governance"
 type: bmad-tooling-governance
 status: proposed
 updated: 2026-10-14
+tags: [docs, fixcity, bmad]
+qmd: "ai agent and plugin governance fixcity"
 ---
 
 # AI agent and plugin governance

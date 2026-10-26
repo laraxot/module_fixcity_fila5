@@ -4,6 +4,7 @@ type: readiness-report
 status: CONCERNS
 updated: 2026-10-15
 tags: [bmad, readiness, footer, sponsorship]
+qmd: "solutioning gate fixcity"
 ---
 
 # Solutioning gate

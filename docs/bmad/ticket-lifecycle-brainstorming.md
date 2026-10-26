@@ -6,6 +6,8 @@ module: Fixcity
 created: 2026-10-16
 tags: [bmad, brainstorming, scamper, starbursting, reverse-brainstorming]
 related: [./ticket-lifecycle-planning.md, ./ticket-lifecycle-blueprint.md]
+updated: 2026-10-17
+qmd: "domanda guida fixcity"
 ---
 
 # Domanda guida

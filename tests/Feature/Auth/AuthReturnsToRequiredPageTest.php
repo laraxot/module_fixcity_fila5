@@ -31,6 +31,36 @@ it('returns to the page that required the login', function (): void {
         ->assertRedirect(url('/it/tickets/create'));
 });
 
+it('returns to the page named by the redirect parameter of the login link', function (): void {
+    /** @var TestCase $this */
+    $user = UserFactory::new()->createOne(['password' => Hash::make('password123')]);
+    session()->forget('url.intended');
+
+    Livewire::withQueryParams(['redirect' => '/it/blog/una-guida?page=2'])
+        ->test(LoginWidget::class)
+        ->set('data.email', $user->email)
+        ->set('data.password', 'password123')
+        ->call('save')
+        ->assertRedirect(url('/it/blog/una-guida?page=2'));
+});
+
+it('ignores a redirect parameter that is not an internal path', function (string $target): void {
+    /** @var TestCase $this */
+    session()->forget('url.intended');
+
+    Livewire::withQueryParams(['redirect' => $target])->test(LoginWidget::class);
+
+    expect(session('url.intended'))->toBeNull();
+})->with([
+    'sito esterno' => ['https://evil.example/it/blog'],
+    'schema implicito' => ['//evil.example/it/blog'],
+    'backslash' => ['/\\evil.example'],
+    'javascript' => ['javascript:alert(1)'],
+    'a capo' => ["/it/blog\r\nLocation: https://evil.example"],
+    'relativo' => ['it/blog'],
+    'vuoto' => [''],
+]);
+
 it('goes to the home of the current language when no page was required', function (): void {
     /** @var TestCase $this */
     $user = UserFactory::new()->createOne(['password' => Hash::make('password123')]);

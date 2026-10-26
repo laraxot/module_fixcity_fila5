@@ -4,6 +4,7 @@ type: index
 status: decision-input
 updated: 2026-10-15
 tags: [bmad, inbound-marketing, blog, eventi, afc, second-brain, ponytail, filament-blueprint]
+qmd: "inbound marketing: blog ed eventi fixcity"
 ---
 
 # Inbound marketing: blog ed eventi

@@ -5,6 +5,7 @@ type: story
 status: ready-for-dev
 updated: 2026-10-15
 tags: [bmad, blog, eventi, seeder, factory, commenti, media, demo]
+qmd: "story fixcity"
 ---
 
 # Story

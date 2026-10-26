@@ -4,6 +4,7 @@ type: product-brief
 status: proposed
 updated: 2026-10-15
 tags: [bmad, product-brief, civic-tech, sustainability]
+qmd: "product brief fixcity"
 ---
 
 # Product brief

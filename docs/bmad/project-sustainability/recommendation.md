@@ -3,6 +3,8 @@ title: "Raccomandazione — modelli per sostenere FixCity"
 type: recommendation
 status: decision-input
 updated: 2026-10-15
+tags: [docs, fixcity, bmad]
+qmd: "raccomandazione fixcity"
 ---
 
 # Raccomandazione

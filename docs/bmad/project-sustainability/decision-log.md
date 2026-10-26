@@ -2,6 +2,9 @@
 title: "Decision log — project sustainability"
 type: decision-log
 updated: 2026-10-15
+status: draft
+tags: [docs, fixcity, bmad]
+qmd: "decision log fixcity"
 ---
 
 # Decision log

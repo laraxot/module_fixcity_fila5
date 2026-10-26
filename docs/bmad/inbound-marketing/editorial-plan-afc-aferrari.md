@@ -12,6 +12,7 @@ sources:
   - https://www.aferrari.it/blog/customer-journey-b2b/
   - https://www.aferrari.it/blog/kpi-marketing-pmi/
 tags: [bmad, inbound, editorial-plan, afc, aferrari, second-brain]
+qmd: "piano editoriale fixcity (studio a fondo 2026-10-15) fixcity"
 ---
 
 <!--

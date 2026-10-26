@@ -9,6 +9,7 @@ observed_urls:
   - https://www.afcformazione.it/blog/
   - https://www.afcformazione.it/blog/differenza-tra-capo-e-leader/
   - https://www.afcformazione.it/risorse-strumenti-comunicazione-aziendale/
+qmd: "analisi afc formazione (osservazione 2026-10-15) fixcity"
 ---
 
 <!--

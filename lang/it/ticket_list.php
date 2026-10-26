@@ -131,6 +131,6 @@ return [
         'faq' => 'Leggi le domande frequenti',
         'track' => 'Traccia una segnalazione',
         'account' => 'Consulta le tue segnalazioni',
-        'phone' => 'Chiama il numero verde 05 0505',
+        'phone' => 'Chiama il numero verde :value',
     ],
 ];

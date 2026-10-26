@@ -10,7 +10,7 @@ return [
     'fields' => [
         'location' => [
             'label' => 'Luogo',
-            'invalid' => 'Indica un punto valido sulla mappa: latitudine tra -90 e 90, longitudine tra -180 e 180.',
+            'invalid' => 'Scegli il punto sulla mappa o cerca un indirizzo: serve per sapere dove si trova il disservizio.',
             'placeholder' => 'Cerca un luogo',
             'helper_text' => 'Indica il luogo del disservizio',
             'address' => [

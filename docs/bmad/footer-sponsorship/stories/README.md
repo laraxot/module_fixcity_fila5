@@ -2,6 +2,9 @@
 title: "Stories — footer sponsorship (discovery only)"
 type: index
 updated: 2026-10-15
+status: draft
+tags: [docs, fixcity, bmad]
+qmd: "stories fixcity"
 ---
 
 # Stories

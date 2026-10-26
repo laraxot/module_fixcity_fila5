@@ -3,6 +3,8 @@ title: "Ownership map — sostenibilità"
 type: architecture
 status: proposed
 updated: 2026-10-15
+tags: [docs, fixcity, bmad]
+qmd: "mappa di ownership fixcity"
 ---
 
 # Mappa di ownership

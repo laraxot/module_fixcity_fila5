@@ -48,7 +48,7 @@ Linguaggio prodotto:
 - Path: `/blog` / `/events`
 - Codice: `Article` + `content_type ∈ {post,event}`
 
-Vedi [brainstorming-post-vs-article.md](../../../Blog/docs/brainstorming-post-vs-article.md).
+Vedi [brainstorming-post-vs-article.md](../../../../Blog/docs/brainstorming-post-vs-article.md).
 
 **Upgrade path (quando aprire `Modules/Event`):**
 
@@ -114,4 +114,4 @@ il dominio resta un solo authoring Blog. L’argomento (`argomento.html`) aggreg
 novità+eventi+servizi — hub Cms, non motivo per creare Event.
 
 Commenti FO autenticati: modulo Comment + Filament `CommentsWidget`
-([fo-comments](../../../Comment/docs/bmad/fo-comments/)).
+([fo-comments](../../../../Comment/docs/bmad/fo-comments)).

@@ -23,17 +23,6 @@ return [
         'in_progress' => 'Laufend',
         'concluded' => 'Abgeschlossen',
     ],
-    'status' => [
-        'draft' => 'Entwurf',
-        'pending' => 'Ausstehend',
-        'open' => 'Offen',
-        'in_review' => 'In Prüfung',
-        'in_progress' => 'In Bearbeitung',
-        'on_hold' => 'Zurückgestellt',
-        'reopened' => 'Wieder geöffnet',
-        'resolved' => 'Gelöst',
-        'closed' => 'Geschlossen',
-    ],
     'ticket' => [
         'code' => 'Verfolgungscode:',
         'detail' => 'Details ansehen',

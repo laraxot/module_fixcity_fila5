@@ -4,6 +4,7 @@ type: bmad-strategy
 status: decision-input
 updated: 2026-10-15
 tags: [bmad, sustainability, funding, civic-tech, fixcity]
+qmd: "come sostenere il progetto fixcity"
 ---
 
 <!--

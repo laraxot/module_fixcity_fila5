@@ -4,6 +4,7 @@ type: ux-design
 status: proposed
 updated: 2026-10-15
 tags: [bmad, ux, wcag, footer, sponsorship]
+qmd: "ux contract fixcity"
 ---
 
 # UX contract

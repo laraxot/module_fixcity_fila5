@@ -1,3 +1,11 @@
+---
+title: "FixCity translation keys"
+type: note
+status: draft
+updated: 2026-10-19
+tags: [docs, fixcity]
+qmd: "fixcity translation keys fixcity"
+---
 # FixCity translation keys
 
 FixCity follows the shared five-element translation contract:

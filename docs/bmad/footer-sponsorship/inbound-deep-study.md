@@ -4,6 +4,7 @@ type: bmad-research-report
 status: discovery
 updated: 2026-10-15
 tags: [bmad, inbound-marketing, content-strategy, blog, civic-tech]
+qmd: "scopo fixcity"
 ---
 
 # Scopo

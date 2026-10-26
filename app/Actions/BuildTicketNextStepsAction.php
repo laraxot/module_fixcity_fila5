@@ -19,7 +19,8 @@ final class BuildTicketNextStepsAction
         $key = match ($status) {
             TicketStatusEnum::PENDING, TicketStatusEnum::DRAFT => 'moderation',
             TicketStatusEnum::IN_REVIEW => 'review',
-            TicketStatusEnum::OPEN, TicketStatusEnum::IN_PROGRESS, TicketStatusEnum::REOPENED => 'processing',
+            TicketStatusEnum::OPEN, TicketStatusEnum::IN_PROGRESS => 'processing',
+            TicketStatusEnum::REOPENED => 'reopened',
             TicketStatusEnum::ON_HOLD => 'waiting',
             TicketStatusEnum::RESOLVED => 'confirmation',
             TicketStatusEnum::CLOSED => 'closed',

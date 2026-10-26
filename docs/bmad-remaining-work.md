@@ -8,6 +8,8 @@ updated: 2026-10-26
 tags: [bmad, fixcity, module, stories, remaining-work, civic]
 related:
   - ../../docs/second-brain/project/bmad-architecture.md
+status: draft
+qmd: "fixcity module   bmad stories & remaining work fixcity"
 ---
 
 # Fixcity Module — BMAD Stories & Remaining Work

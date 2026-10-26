@@ -48,10 +48,13 @@ test('exposes exactly the public fields and nothing else', function (): void {
     $keys = array_keys($detail);
     sort($keys);
     Assert::assertSame(
-        ['address', 'created_date', 'description', 'id', 'is_following', 'latitude', 'longitude', 'meta_description', 'status', 'status_label', 'timeline', 'title', 'type', 'type_label'],
+        ['address', 'created_date', 'description', 'id', 'is_following', 'is_owner', 'is_public', 'latitude', 'longitude', 'meta_description', 'status', 'status_label', 'timeline', 'title', 'tracking_code', 'type', 'type_label'],
         $keys,
     );
     Assert::assertStringNotContainsString('TCK-SEGRETO-0001', (string) json_encode($detail));
+    Assert::assertNull($detail['tracking_code']);
+    Assert::assertFalse($detail['is_owner']);
+    Assert::assertTrue($detail['is_public']);
     Assert::assertSame('Cestino rotto', $detail['title']);
     Assert::assertSame('resolved', $detail['status']);
     Assert::assertSame('2026-03-14', $detail['created_date']);
@@ -79,6 +82,61 @@ test('lets the owner open the own report even when it is not public yet', functi
     $this->actingAs($owner);
 
     Assert::assertIsArray(app(BuildPublicTicketDetailAction::class)->execute($ticket->id));
+});
+
+test('lets the owner open the own report even without a position, and tells that it is not public', function (): void {
+    /** @var TestCase $this */
+    $owner = UserFactory::new()->createOne();
+    $ticket = detailActionTicket(['status' => TicketStatusEnum::PENDING, 'owner_id' => $owner->getKey(), 'location' => null, 'latitude' => null, 'longitude' => null]);
+    $action = app(BuildPublicTicketDetailAction::class);
+
+    Assert::assertNull($action->execute($ticket->id));
+    Assert::assertNull($action->execute($ticket->id, UserFactory::new()->createOne()));
+
+    $detail = $action->execute($ticket->id, $owner);
+
+    Assert::assertIsArray($detail);
+    Assert::assertTrue($detail['is_owner']);
+    Assert::assertFalse($detail['is_public']);
+    Assert::assertSame('TCK-SEGRETO-0001', $detail['tracking_code']);
+    Assert::assertSame('', $detail['address']);
+    Assert::assertNull($detail['latitude']);
+});
+
+test('gives the tracking code to the owner only, never to a follower or another citizen', function (): void {
+    /** @var TestCase $this */
+    $owner = UserFactory::new()->createOne();
+    $follower = UserFactory::new()->createOne();
+    $ticket = detailActionTicket(['owner_id' => $owner->getKey()]);
+    TicketSubscriber::query()->create(['ticket_id' => $ticket->id, 'user_id' => $follower->getKey()]);
+    $action = app(BuildPublicTicketDetailAction::class);
+
+    $forOwner = $action->execute($ticket->id, $owner);
+    $forFollower = $action->execute($ticket->id, $follower);
+    $forGuest = $action->execute($ticket->id);
+
+    Assert::assertIsArray($forOwner);
+    Assert::assertIsArray($forFollower);
+    Assert::assertIsArray($forGuest);
+    Assert::assertSame('TCK-SEGRETO-0001', $forOwner['tracking_code']);
+    Assert::assertTrue($forOwner['is_owner']);
+    Assert::assertNull($forFollower['tracking_code']);
+    Assert::assertFalse($forFollower['is_owner']);
+    Assert::assertTrue($forFollower['is_following']);
+    Assert::assertNull($forGuest['tracking_code']);
+    Assert::assertStringNotContainsString('TCK-SEGRETO-0001', (string) json_encode([$forFollower, $forGuest]));
+});
+
+test('gives no tracking code when the owner report has none', function (): void {
+    /** @var TestCase $this */
+    $owner = UserFactory::new()->createOne();
+    $ticket = detailActionTicket(['owner_id' => $owner->getKey(), 'code' => null]);
+
+    $detail = app(BuildPublicTicketDetailAction::class)->execute($ticket->id, $owner);
+
+    Assert::assertIsArray($detail);
+    Assert::assertTrue($detail['is_owner']);
+    Assert::assertNull($detail['tracking_code']);
 });
 
 test('tells whether the viewer follows the report', function (): void {

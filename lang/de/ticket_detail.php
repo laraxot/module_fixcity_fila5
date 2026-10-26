@@ -21,6 +21,7 @@ return [
         'history' => 'Verlauf der Aktualisierungen',
         'previous' => 'Zuvor: :status',
         'empty' => 'Es gibt noch keine Aktualisierungen: Die Meldung hat den Status „:status“.',
+        'empty_concluded' => 'Die Meldung hat den Status „:status“. Der öffentliche Verlauf enthält keine weiteren Aktualisierungen.',
     ],
     'next_steps' => [
         'title' => 'Nächste Schritte',
@@ -28,6 +29,7 @@ return [
         'moderation' => ['title' => 'Prüfung der Meldung', 'description' => 'Eine Moderation prüft die Meldung, bevor sie bearbeitet wird.'],
         'review' => ['title' => 'Übernahme', 'description' => 'Ein Bearbeiter prüft die Angaben und bestimmt die zuständige Stelle.'],
         'processing' => ['title' => 'In Bearbeitung', 'description' => 'Die Meldung wird bearbeitet. Aktualisierungen erscheinen hier.'],
+        'reopened' => ['title' => 'Meldung wieder geöffnet', 'description' => 'Die Meldung wurde wieder geöffnet und wird erneut geprüft. Aktualisierungen erscheinen hier.'],
         'waiting' => ['title' => 'Warten', 'description' => 'Die Bearbeitung wartet auf Informationen oder eine externe Antwort.'],
         'confirmation' => ['title' => 'Prüfung der Lösung', 'description' => 'Die Lösung wurde erfasst; das Ticket wird erst nach der vorgesehenen Prüfung geschlossen.'],
         'closed' => ['title' => 'Vorgang abgeschlossen', 'description' => 'Die Meldung wurde gelöst und geschlossen.'],
@@ -49,6 +51,12 @@ return [
         'empty' => 'Keine Beschreibung angegeben.',
     ],
     'comments' => ['heading' => 'Kommentare und Aktualisierungen'],
+    'owner' => [
+        'title' => 'Ihre Meldung',
+        'private' => 'Im Moment sehen nur Sie diese Meldung: Sie ist noch nicht öffentlich.',
+        'code' => 'Verfolgungscode',
+        'code_help' => 'Bewahren Sie ihn auf: Damit können Sie den Status auch ohne Anmeldung abrufen. Geben Sie ihn nicht weiter.',
+    ],
     'actions' => [
         'title' => 'Was Sie tun können',
         'back' => 'Zurück zur Liste',

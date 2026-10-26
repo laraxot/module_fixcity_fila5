@@ -12,6 +12,7 @@ related:
   - ./stories/5.6.verified-registration-multilingual.story.md
   - ./stories/6.14.legal-acceptance-version-evidence.story.md
   - ./stories/9.3.legal-privacy-owner-approval.story.md
+tags: [docs, fixcity, bmad]
 ---
 
 # Audit registrazione, consensi e cancellazione account

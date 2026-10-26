@@ -19,5 +19,8 @@ return [
         'rate_limited_retry' => 'Return to tracking search',
         'timeline_title' => 'Updates',
         'timeline_empty' => 'There are no public updates yet.',
+        'photos_title' => 'Attached photos',
+        'photo_alt' => 'Photo :number of the report “:title”',
+        'photo_opens_new_window' => '(opens the full image in a new window)',
     ],
 ];

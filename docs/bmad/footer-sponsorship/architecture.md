@@ -4,6 +4,7 @@ type: architecture
 status: proposed
 updated: 2026-10-15
 tags: [bmad, architecture, cms, filament, footer, multi-tenant]
+qmd: "architecture decision record fixcity"
 ---
 
 # Architecture decision record

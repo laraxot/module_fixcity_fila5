@@ -4,6 +4,7 @@ type: concept
 status: decision-input
 updated: 2026-10-15
 tags: [fixcity, sustainability, bmad]
+qmd: "sostenibilità del progetto (concetto) fixcity"
 ---
 
 <!--

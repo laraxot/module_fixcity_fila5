@@ -14,6 +14,7 @@ related:
   - ./concepts/ai-harness-module-discipline.md
   - ../../../../../docs/wiki/concepts/hackernoon-ai-coding-tips-fixcity-map.md
   - ../../../../../docs/wiki/bmad/architecture.md
+status: draft
 ---
 
 # Modules Wiki Index

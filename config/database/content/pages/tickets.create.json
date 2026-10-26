@@ -62,14 +62,8 @@
                                 },
                                 {
                                     "icon": "it-hearing",
-                                    "label": "Chiama il numero verde 05 0505",
-                                    "url": "#"
-                                },
-                                {
-                                    "icon": "it-calendar",
-                                    "label": "Prenota appuntamento",
-                                    "url": "#",
-                                    "element": "appointment-booking"
+                                    "label": "Chiama il numero verde :value",
+                                    "ente": "toll_free"
                                 }
                             ]
                         }
@@ -131,14 +125,8 @@
                                 },
                                 {
                                     "icon": "it-hearing",
-                                    "label": "Call the toll-free number 05 0505",
-                                    "url": "#"
-                                },
-                                {
-                                    "icon": "it-calendar",
-                                    "label": "Book an appointment",
-                                    "url": "#",
-                                    "element": "appointment-booking"
+                                    "label": "Call the toll-free number :value",
+                                    "ente": "toll_free"
                                 }
                             ]
                         }
@@ -200,14 +188,8 @@
                                 },
                                 {
                                     "icon": "it-hearing",
-                                    "label": "Gebührenfreie Nummer 05 0505 anrufen",
-                                    "url": "#"
-                                },
-                                {
-                                    "icon": "it-calendar",
-                                    "label": "Termin vereinbaren",
-                                    "url": "#",
-                                    "element": "appointment-booking"
+                                    "label": "Gebührenfreie Nummer :value anrufen",
+                                    "ente": "toll_free"
                                 }
                             ]
                         }
@@ -269,14 +251,8 @@
                                 },
                                 {
                                     "icon": "it-hearing",
-                                    "label": "Llama al número gratuito 05 0505",
-                                    "url": "#"
-                                },
-                                {
-                                    "icon": "it-calendar",
-                                    "label": "Reserva una cita",
-                                    "url": "#",
-                                    "element": "appointment-booking"
+                                    "label": "Llama al número gratuito :value",
+                                    "ente": "toll_free"
                                 }
                             ]
                         }

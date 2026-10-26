@@ -31,8 +31,28 @@ it('lists the followed tickets newest first with the tracking link built from th
     Assert::assertSame(2, $data['total']);
     Assert::assertFalse($data['truncated']);
     Assert::assertSame([$newer->getKey(), $older->getKey()], array_column($data['rows'], 'id'));
-    Assert::assertStringEndsWith('/it/tickets/track?code=TCK-FOL-0002', (string) $data['rows'][0]['track_query_url']);
+    Assert::assertStringEndsWith('/it/tickets/'.$newer->id, $data['rows'][0]['detail_url']);
     Assert::assertStringNotContainsString('ticket_id', json_encode($data));
+});
+
+it('builds the tracking link from the code only for the owner who follows the own ticket, never for a follower of others', function (): void {
+    $citizen = UserFactory::new()->createOne();
+    $mine = TicketFactory::new()->createOne(['owner_id' => $citizen->getKey(), 'status' => TicketStatusEnum::OPEN, 'code' => 'TCK-FOL-OWN1', 'created_at' => Carbon::parse('2026-02-10')]);
+    $theirs = TicketFactory::new()->createOne(['status' => TicketStatusEnum::OPEN, 'code' => 'TCK-FOL-THEIRS1', 'created_at' => Carbon::parse('2026-01-10')]);
+    TicketSubscriber::query()->create(['ticket_id' => $mine->getKey(), 'user_id' => $citizen->getKey()]);
+    TicketSubscriber::query()->create(['ticket_id' => $theirs->getKey(), 'user_id' => $citizen->getKey()]);
+
+    $data = app(BuildPersonalAreaFollowedDataAction::class)->execute($citizen, 'it');
+    [$ownRow, $followedRow] = $data['rows'];
+
+    Assert::assertTrue($ownRow['is_owner']);
+    Assert::assertSame('TCK-FOL-OWN1', $ownRow['code']);
+    Assert::assertStringEndsWith('/it/tickets/track?code=TCK-FOL-OWN1', (string) $ownRow['track_query_url']);
+    Assert::assertFalse($followedRow['is_owner']);
+    Assert::assertNull($followedRow['code']);
+    Assert::assertNull($followedRow['track_query_url']);
+    Assert::assertNull($followedRow['track_url']);
+    Assert::assertStringNotContainsString('TCK-FOL-THEIRS1', json_encode($data));
 });
 
 it('does not list tickets followed by other citizens nor private tickets of other owners', function (): void {
@@ -55,7 +75,7 @@ it('does not list tickets followed by other citizens nor private tickets of othe
 
 it('gives no tracking link to a followed ticket without code', function (): void {
     $citizen = UserFactory::new()->createOne();
-    $legacy = TicketFactory::new()->createOne(['status' => TicketStatusEnum::IN_PROGRESS, 'code' => null]);
+    $legacy = TicketFactory::new()->createOne(['owner_id' => $citizen->getKey(), 'status' => TicketStatusEnum::IN_PROGRESS, 'code' => null]);
     TicketSubscriber::query()->create(['ticket_id' => $legacy->getKey(), 'user_id' => $citizen->getKey()]);
 
     $row = app(BuildPersonalAreaFollowedDataAction::class)->execute($citizen, 'it')['rows'][0];

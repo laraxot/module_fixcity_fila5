@@ -4,6 +4,7 @@ type: prfaq
 status: proposed
 updated: 2026-10-15
 tags: [bmad, prfaq, marketing, footer]
+qmd: "press release (fittizia) fixcity"
 ---
 
 # Press release (fittizia)

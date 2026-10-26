@@ -119,6 +119,6 @@ return [
         'faq' => 'Lee las preguntas frecuentes',
         'track' => 'Sigue una incidencia',
         'account' => 'Consulta tus incidencias',
-        'phone' => 'Llama al número gratuito 05 0505',
+        'phone' => 'Llama al número gratuito :value',
     ],
 ];

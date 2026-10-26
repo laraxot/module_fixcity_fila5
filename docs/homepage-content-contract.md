@@ -8,9 +8,9 @@ tags: [bmad, fixcity, homepage, cms, json, folio]
 qmd: "homepage content contract home.json folio no pages home blade"
 related:
   - ./bmad/homepage-guest-expected-visual.md
-  - ../../Themes/Sixteen/docs/bmad/knowledge/why-home-blade-must-not-exist.md
-  - ../../Themes/Sixteen/docs/bmad/homepage-guest-visual-contract.md
-  - ../../Themes/Sixteen/docs/bmad/filament-blueprint.md
+  - ../../../Themes/Sixteen/docs/bmad/knowledge/why-home-blade-must-not-exist.md
+  - ../../../Themes/Sixteen/docs/bmad/homepage-guest-visual-contract.md
+  - ../../../Themes/Sixteen/docs/bmad/filament-blueprint.md
   - ../../../../docs/second-brain/process/sixteen-pages-folder-religion.md
 ---
 
@@ -61,10 +61,10 @@ Niente hero/mappa/copy in quella vista.
 Crearli bypassa CMS e Filament, duplica `name('home')` con `index.blade.php`,
 rompe i18n JSON-driven e viola la religione `pages/` (solo `index`, `auth`,
 `[container0]`, `tests`). Dettaglio misurato:
-[why-home-blade-must-not-exist.md](../../Themes/Sixteen/docs/bmad/knowledge/why-home-blade-must-not-exist.md).
+[why-home-blade-must-not-exist.md](../../../Themes/Sixteen/docs/bmad/knowledge/why-home-blade-must-not-exist.md).
 
 ## Collegamenti
 
 - Visuale guest: [homepage-guest-expected-visual.md](./bmad/homepage-guest-expected-visual.md)
-- Tema visual + Folio: [homepage-guest-visual-contract.md](../../Themes/Sixteen/docs/bmad/homepage-guest-visual-contract.md)
-- Blueprint: [filament-blueprint.md](../../Themes/Sixteen/docs/bmad/filament-blueprint.md)
+- Tema visual + Folio: [homepage-guest-visual-contract.md](../../../Themes/Sixteen/docs/bmad/homepage-guest-visual-contract.md)
+- Blueprint: [filament-blueprint.md](../../../Themes/Sixteen/docs/bmad/filament-blueprint.md)

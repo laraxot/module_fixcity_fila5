@@ -6,6 +6,9 @@ status: in_progress
 created: 2026-10-15
 related: [DCP-241, DCP-242, DCP-243]
 reserved_numbers: DCP-240..249
+updated: 2026-10-17
+tags: [docs, fixcity, bmad]
+qmd: "dcp-240: phpstan su modules, test scritti contro api inesistenti fixcity"
 ---
 
 # DCP-240: PHPStan su Modules, test scritti contro API inesistenti

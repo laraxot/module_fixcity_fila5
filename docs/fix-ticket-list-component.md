@@ -1,3 +1,11 @@
+---
+title: "Fix: ComponentNotFoundException ticket_list (BMAD + Second Brain)"
+type: note
+status: draft
+updated: 2026-10-22
+tags: [docs, fixcity]
+qmd: "fix: componentnotfoundexception ticket_list (bmad + second brain) fixcity"
+---
 # Fix: ComponentNotFoundException ticket_list (BMAD + Second Brain)
 
 ## Analisi (BMAD)

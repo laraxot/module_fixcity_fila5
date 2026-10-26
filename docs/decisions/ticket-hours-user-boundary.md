@@ -1,3 +1,11 @@
+---
+title: "Ticket hours user boundary"
+type: note
+status: draft
+updated: 2026-10-22
+tags: [docs, fixcity, decisions]
+qmd: "ticket hours user boundary fixcity"
+---
 # Ticket hours user boundary
 
 ticket_hours.user_id stores the UUID of the operator who logged work. The

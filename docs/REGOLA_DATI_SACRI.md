@@ -3,6 +3,9 @@ title: "Regola Sacra — Dati non si toccano mai"
 status: active
 decision: D35
 tags: [bmad, second-brain, dati-sacri, migrate, tests]
+type: note
+updated: 2026-10-22
+qmd: "i dati sono sacri   regola inviolabile fixcity"
 ---
 
 # I dati sono sacri — regola inviolabile

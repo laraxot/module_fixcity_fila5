@@ -9,6 +9,8 @@ tags: [fixcity, no-services, services-to-actions, queueable-action, bmad, decisi
 related:
   - ./bmad-plan-services-to-actions.md
   - ../INDEX.md
+type: note
+qmd: "bmad   stato no-services (correzione completa) fixcity"
 ---
 
 # BMAD — Stato No-Services (correzione completa)

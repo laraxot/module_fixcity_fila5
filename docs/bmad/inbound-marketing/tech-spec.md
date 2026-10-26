@@ -3,6 +3,8 @@ title: "Tech-spec — inbound (post-governance)"
 type: tech-spec
 status: draft
 updated: 2026-10-15
+tags: [docs, fixcity, bmad]
+qmd: "tech-spec (non autorizza codice) fixcity"
 ---
 
 # Tech-spec (non autorizza codice)

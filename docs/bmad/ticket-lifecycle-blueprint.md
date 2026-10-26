@@ -9,6 +9,9 @@ related:
   - ./investigation/ticket-detail-passaggi-commenti.md
   - ../Comment/docs/bmad/fo-comments/filament-blueprint.md
   - ../Fixcity/docs/bmad/design-comuni-service-workflow-audit.md
+updated: 2026-10-17
+tags: [docs, fixcity, bmad]
+qmd: "objective fixcity"
 ---
 
 # Objective

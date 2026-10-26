@@ -11,9 +11,10 @@ use Modules\Xot\Actions\Cast\SafeStringCastAction;
 use Spatie\QueueableAction\QueueableAction;
 
 /**
- * Riga di una segnalazione nelle pagine dell'area personale (DCP-110): solo dati di presentazione, nessuna regola di accesso.
- * Chi la chiama ha gia' filtrato i ticket (proprietario o seguace): qui il codice di tracciamento, che e' un capability token,
- * finisce nei link solo se il ticket e' stato consegnato dalla query autorizzata.
+ * Riga di una segnalazione nelle pagine dell'area personale (DCP-110): solo dati di presentazione, nessuna regola di accesso alla riga.
+ * Chi la chiama ha gia' filtrato i ticket (proprietario o seguace). Il codice di tracciamento e' un capability token e permette di
+ * leggere la segnalazione anche quando non e' pubblica (DCP-287): finisce nella riga e nei link SOLO se il chiamante dice che il
+ * ticket e' del visitatore (`$isOwner`); un follower ha il link al dettaglio e basta. Senza dirlo, il default e' non esporlo.
  *
  * Il tracciamento ha due forme perche' i due elenchi hanno due contratti: `/tickets/track/{code}` (Le mie segnalazioni, la stessa
  * del link della ricevuta) e `/tickets/track?code={code}` (Segnalazioni che seguo). Senza codice (ticket storici) entrambe sono null.
@@ -25,6 +26,7 @@ use Spatie\QueueableAction\QueueableAction;
  *     status: string,
  *     status_label: string,
  *     is_concluded: bool,
+ *     is_owner: bool,
  *     date: string,
  *     date_iso: string,
  *     detail_url: string,
@@ -42,11 +44,11 @@ final class BuildPersonalAreaTicketRowAction
     /**
      * @return TicketRow
      */
-    public function execute(Ticket $ticket, string $locale): array
+    public function execute(Ticket $ticket, string $locale, bool $isOwner = false): array
     {
         $status = $ticket->status;
         $statusValue = $status instanceof TicketStatusEnum ? $status->value : SafeStringCastAction::cast($ticket->getRawOriginal('status'));
-        $code = is_string($ticket->code) && trim($ticket->code) !== '' ? trim($ticket->code) : null;
+        $code = $isOwner && is_string($ticket->code) && trim($ticket->code) !== '' ? trim($ticket->code) : null;
         $createdAt = $ticket->created_at;
 
         return [
@@ -56,6 +58,7 @@ final class BuildPersonalAreaTicketRowAction
             'status' => $statusValue,
             'status_label' => $this->statusLabel($statusValue, $locale),
             'is_concluded' => $status instanceof TicketStatusEnum && in_array($status, self::CONCLUDED, true),
+            'is_owner' => $isOwner,
             // en_GB: "5 March 2026" come nel resto del sito, invece del "March 5, 2026" americano di `en`
             'date' => $createdAt === null ? '' : $createdAt->toImmutable()->settings(['locale' => $locale === 'en' ? 'en_GB' : $locale])->isoFormat('LL'),
             'date_iso' => $createdAt === null ? '' : $createdAt->format('Y-m-d'),
@@ -65,10 +68,13 @@ final class BuildPersonalAreaTicketRowAction
         ];
     }
 
-    /** Etichetta nella lingua richiesta; uno stato sconosciuto (dato storico) si mostra com'e', mai come chiave grezza. */
+    /**
+     * Etichetta nella lingua richiesta, dalla traduzione dell'enum: la stessa di elenco, dettaglio e notifiche (DCP-287, FO-2-32).
+     * Uno stato sconosciuto (dato storico) si mostra com'e', mai come chiave grezza.
+     */
     private function statusLabel(string $statusValue, string $locale): string
     {
-        $key = 'fixcity::personal_area.status.'.$statusValue;
+        $key = 'fixcity::ticket_status_enum.values.'.$statusValue.'.label';
         $label = trans($key, [], $locale);
 
         return is_string($label) && $label !== $key ? $label : $statusValue;

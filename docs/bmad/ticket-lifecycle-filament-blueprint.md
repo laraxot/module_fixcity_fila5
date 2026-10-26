@@ -6,6 +6,8 @@ module: Fixcity
 created: 2026-10-16
 tags: [filament, blueprint, ticket, moderation, communication]
 related: [./ticket-lifecycle-planning.md, ../../Comment/docs/bmad/fo-comments/filament-blueprint.md]
+updated: 2026-10-17
+qmd: "superficie filament fixcity"
 ---
 
 # Superficie Filament

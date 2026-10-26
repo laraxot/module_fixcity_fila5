@@ -1,3 +1,11 @@
+---
+title: "Decision Log — FixCity"
+type: note
+status: draft
+updated: 2026-10-17
+tags: [docs, fixcity, bmad]
+qmd: "decision log   fixcity fixcity"
+---
 # Decision Log — FixCity
 
 ### 2026-10-16 — BMAD dossier ticket lifecycle distribuito per ownership

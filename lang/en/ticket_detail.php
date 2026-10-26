@@ -26,6 +26,7 @@ return [
         'history' => 'Update history',
         'previous' => 'Before: :status',
         'empty' => 'There are no updates yet: the report is “:status”.',
+        'empty_concluded' => 'The report is “:status”. The public history has no other updates.',
     ],
     'next_steps' => [
         'title' => 'Next steps',
@@ -33,6 +34,7 @@ return [
         'moderation' => ['title' => 'Report review', 'description' => 'A moderator will check the report before it becomes operational.'],
         'review' => ['title' => 'Taking charge', 'description' => 'An operator is checking the data and will identify the responsible office.'],
         'processing' => ['title' => 'In progress', 'description' => 'The report is being handled. Updates will appear here.'],
+        'reopened' => ['title' => 'Report reopened', 'description' => 'The report was reopened and will be reviewed again. Updates will appear here.'],
         'waiting' => ['title' => 'Waiting', 'description' => 'Work is waiting for information or an external response.'],
         'confirmation' => ['title' => 'Resolution check', 'description' => 'The resolution was recorded; the ticket closes only after the expected check.'],
         'closed' => ['title' => 'Process completed', 'description' => 'The report was resolved and closed.'],
@@ -54,6 +56,12 @@ return [
         'empty' => 'No description provided.',
     ],
     'comments' => ['heading' => 'Comments and updates'],
+    'owner' => [
+        'title' => 'Your report',
+        'private' => 'For now only you can see it: it is not public yet.',
+        'code' => 'Tracking code',
+        'code_help' => 'Keep it: it lets you check the status without signing in. Do not share it.',
+    ],
     'actions' => [
         'title' => 'What you can do',
         'back' => 'Back to the list',

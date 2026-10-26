@@ -119,6 +119,6 @@ return [
         'faq' => 'Häufige Fragen lesen',
         'track' => 'Meldung verfolgen',
         'account' => 'Ihre Meldungen ansehen',
-        'phone' => 'Kostenlose Nummer 05 0505 anrufen',
+        'phone' => 'Kostenlose Nummer :value anrufen',
     ],
 ];

@@ -14,6 +14,7 @@ use Modules\Fixcity\Actions\ApproveTicketAction;
 use Modules\Fixcity\Actions\AssignTicketAction;
 use Modules\Fixcity\Actions\CloseTicketAction;
 use Modules\Fixcity\Actions\DeleteTicketAction;
+use Modules\Fixcity\Actions\ListAssignableTicketOperatorsAction;
 use Modules\Fixcity\Actions\RecordTicketCommunicationAction;
 use Modules\Fixcity\Actions\RejectTicketAction;
 use Modules\Fixcity\Actions\ResolveTicketAction;
@@ -23,7 +24,6 @@ use Modules\Fixcity\Filament\Actions\ChangeStatus;
 use Modules\Fixcity\Filament\Resources\TicketResource;
 use Modules\Fixcity\Models\Ticket;
 use Modules\Xot\Actions\Cast\SafeStringCastAction;
-use Modules\Xot\Datas\XotData;
 use Modules\Xot\Filament\Resources\Pages\XotBaseViewRecord;
 use Webmozart\Assert\Assert;
 
@@ -51,15 +51,7 @@ class ViewTicket extends XotBaseViewRecord
                 ->schema([
                     Select::make('responsible_id')
                         ->label(__('fixcity::ticket.fields.responsible_id.label'))
-                        ->options(static function (): array {
-                            $userClass = XotData::make()->getUserClass();
-
-                            return $userClass::query()
-                                ->orderBy('name')
-                                ->pluck('name', 'id')
-                                ->map(static fn (mixed $name): string => is_scalar($name) ? (string) $name : '')
-                                ->all();
-                        })
+                        ->options(static fn (): array => app(ListAssignableTicketOperatorsAction::class)->execute())
                         ->searchable()
                         ->preload()
                         ->nullable()

@@ -4,6 +4,7 @@ type: research-report
 status: decision-input
 updated: 2026-10-15
 tags: [bmad, sustainability, civic-tech, oss, pa]
+qmd: "research report   come sostenere fixcity fixcity"
 ---
 
 # Research report — come sostenere FixCity

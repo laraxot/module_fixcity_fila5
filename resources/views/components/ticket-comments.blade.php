@@ -17,7 +17,7 @@
                 'commentableKey' => (string) $ticket->getKey(),
                 'readOnly' => false,
                 'hideNotifications' => true,
-                'noReplies' => true,
+                'noReplies' => false,
                 'noReactions' => true,
             ], key('ticket-comments-'.$ticket->getKey()))
         @endcan

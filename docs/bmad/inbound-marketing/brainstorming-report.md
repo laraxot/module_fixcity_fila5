@@ -3,6 +3,8 @@ title: "Brainstorm — inbound FixCity da tre siti"
 type: brainstorm
 status: synthesized
 updated: 2026-10-15
+tags: [docs, fixcity, bmad]
+qmd: "brainstorm fixcity"
 ---
 
 # Brainstorm

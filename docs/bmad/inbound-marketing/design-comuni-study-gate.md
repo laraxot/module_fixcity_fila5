@@ -8,10 +8,10 @@ updated: 2026-10-16
 tags: [bmad, design-comuni, novita, eventi, argomenti, gate]
 qmd: "Design Comuni gate novità eventi argomenti lista risorse header footer"
 related:
-  - ../../../../Themes/Sixteen/docs/design-comuni-novita-eventi-fo.md
+  - ../../../../../Themes/Sixteen/docs/design-comuni-novita-eventi-fo.md
   - ./brainstorming-event-module-vs-article-type.md
   - ./brainstorming-demo-blog-eventi.md
-  - ../../../Comment/docs/bmad/fo-comments/README.md
+  - ../../../../Comment/docs/bmad/fo-comments/README.md
 issues: []
 discussions: []
 ---
@@ -61,5 +61,5 @@ cd laravel && php artisan db:seed --class="Modules\\Blog\\Database\\Seeders\\Dem
 
 ## Commenti autenticati
 
-[fo-comments](../../../Comment/docs/bmad/fo-comments/) — Filament
+[fo-comments](../../../../Comment/docs/bmad/fo-comments) — Filament
 `CommentsWidget` only.

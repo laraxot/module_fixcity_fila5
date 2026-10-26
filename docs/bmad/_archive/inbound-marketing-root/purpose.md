@@ -4,6 +4,7 @@ type: purpose
 status: decision-input
 updated: 2026-10-15
 tags: [bmad, inbound-marketing, purpose, philosophy, afc]
+qmd: "lo scopo (prima di ogni feature) fixcity"
 ---
 
 # Lo scopo (prima di ogni feature)

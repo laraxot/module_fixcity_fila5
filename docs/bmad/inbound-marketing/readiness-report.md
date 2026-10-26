@@ -3,6 +3,8 @@ title: "Readiness — inbound marketing"
 type: readiness-report
 status: CONCERNS
 updated: 2026-10-15
+tags: [docs, fixcity, bmad]
+qmd: "gate fixcity"
 ---
 
 # Gate

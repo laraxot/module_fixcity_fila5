@@ -1,3 +1,11 @@
+---
+title: "BMAD — Phpstan Analysis & Fix (Cms, Fixcity, User, Xot)"
+type: story
+status: draft
+updated: 2026-10-17
+tags: [docs, fixcity, bmad]
+qmd: "bmad   phpstan analysis & fix (cms, fixcity, user, xot) fixcity"
+---
 # BMAD — Phpstan Analysis & Fix (Cms, Fixcity, User, Xot)
 
 **Phase:** Execute  

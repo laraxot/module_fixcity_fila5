@@ -7,6 +7,8 @@ date: 2026-10-20
 updated: 2026-10-20
 relates_to: services-to-actions-geo.story.md, decision-log.md (Geo), docs/INDEX.md
 tags: [fixcity, services-to-actions, bmad, plan, verified, no-services, queueable-action]
+type: note
+qmd: "bmad   conversione services → spatie queueable actions fixcity"
 ---
 
 # BMAD — Conversione Services → Spatie Queueable Actions

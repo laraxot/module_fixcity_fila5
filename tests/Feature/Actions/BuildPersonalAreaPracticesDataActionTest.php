@@ -91,9 +91,9 @@ it('localizes status label, date and links for every served language', function 
     Assert::assertStringContainsString('/'.$locale.'/tickets/', $row['detail_url']);
     Assert::assertStringContainsString('/'.$locale.'/tickets/track/TCK-LOC-0001', (string) $row['track_url']);
 })->with([
-    'it' => ['it', 'Risolta', '5 marzo 2026'],
+    'it' => ['it', 'Risolto', '5 marzo 2026'],
     'en' => ['en', 'Resolved', '5 March 2026'],
-    'de' => ['de', 'Gelöst', '5. März 2026'],
+    'de' => ['de', 'Erledigt', '5. März 2026'],
     'es' => ['es', 'Resuelta', '5 de marzo de 2026'],
 ]);
 

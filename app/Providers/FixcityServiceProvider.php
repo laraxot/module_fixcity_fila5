@@ -7,12 +7,14 @@ namespace Modules\Fixcity\Providers;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Gate;
 use Laravel\Folio\Folio;
+use Modules\Fixcity\Actions\Ticket\ListPublicTicketPathsAction;
 use Modules\Fixcity\Models\Ticket;
 use Modules\Fixcity\Models\TicketActivity;
 use Modules\Fixcity\Observers\TicketActivityObserver;
 use Modules\Fixcity\Observers\TicketMediaObserver;
 use Modules\Fixcity\Policies\TicketPolicy;
 use Modules\Media\Models\Media;
+use Modules\Seo\Contracts\SitemapPathsContract;
 use Modules\Xot\Providers\XotBaseServiceProvider;
 
 class FixcityServiceProvider extends XotBaseServiceProvider
@@ -26,6 +28,9 @@ class FixcityServiceProvider extends XotBaseServiceProvider
     public function register(): void
     {
         parent::register();
+
+        // Le segnalazioni pubbliche entrano nella sitemap di Seo senza che Seo conosca Fixcity (DCP-273).
+        $this->app->tag([ListPublicTicketPathsAction::class], SitemapPathsContract::TAG);
     }
 
     public function boot(): void

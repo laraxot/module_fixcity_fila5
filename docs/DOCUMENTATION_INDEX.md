@@ -141,7 +141,7 @@ status: draft
 ### Comment Module
 **Location:** `laravel/Modules/Comment/docs/`  
 **Files:** ~30  
-**Entry Point:** [`00-INDEX.md`](../../Comment/docs/00-INDEX.md)
+**Entry Point:** [`00-INDEX.md`](../../Comment/docs/00-index.md)
 
 **Key Topics:**
 - Comment system
@@ -287,7 +287,7 @@ status: draft
 ### Rating Module
 **Location:** `laravel/Modules/Rating/docs/`  
 **Files:** ~40  
-**Entry Point:** [`00-INDEX.md`](../../Rating/docs/00-INDEX.md)
+**Entry Point:** [`00-INDEX.md`](../../Rating/docs/00-index.md)
 
 **Key Topics:**
 - Rating system
@@ -302,7 +302,7 @@ status: draft
 ### Seo Module
 **Location:** `laravel/Modules/Seo/docs/`  
 **Files:** ~100  
-**Entry Point:** [`00-INDEX.md`](../../Seo/docs/00-INDEX.md)
+**Entry Point:** [`00-INDEX.md`](../../Seo/docs/00-index.md)
 
 **Key Topics:**
 - SEO optimization
@@ -335,7 +335,7 @@ status: draft
 ### UI Module
 **Location:** `laravel/Modules/UI/docs/`  
 **Files:** 589  
-**Entry Point:** [`index.md`](../UI/docs/index.md)
+**Entry Point:** [`index.md`](../../UI/docs/index.md)
 
 **Key Topics:**
 - **SSOT** for UI components
@@ -347,8 +347,8 @@ status: draft
 **⚠️ Audit Note:** 400+ files in `archive/` directory
 
 **Key Documents:**
-- [`components.md`](../UI/docs/components.md) - **SSOT**
-- [`filament-components-usage.md`](../UI/docs/filament-components-usage.md)
+- [`components.md`](../../UI/docs/components.md) - **SSOT**
+- [`filament-components-usage.md`](../../UI/docs/filament-components-usage.md)
 - [`folo-volt-best-practices.md`](../UI/docs/folio-volt-best-practices.md)
 - [`architecture.md`](../UI/docs/architecture.md)
 
@@ -358,7 +358,7 @@ status: draft
 
 **Cross-References:**
 - Used by: **All modules with UI**
-- Related: [Themes](../Themes/docs/README.md)
+- Related: [Themes](../../../Themes/docs/README.md)
 
 ---
 
@@ -396,7 +396,7 @@ status: draft
 ### Xot Module
 **Location:** `laravel/Modules/Xot/docs/`  
 **Files:** 4,993  
-**Entry Point:** [`00-INDEX.md`](../../Xot/docs/00-INDEX.md)
+**Entry Point:** [`00-INDEX.md`](../../Xot/docs/00-index.md)
 
 **Key Topics:**
 - **SSOT** for core architecture
@@ -411,7 +411,7 @@ status: draft
 
 **Key Documents:**
 - [`xot-engine.md`](../Xot/docs/xot-engine.md) - **SSOT**
-- [`testing-best-practices.md`](../Xot/docs/testing-best-practices.md) - **SSOT**
+- [`testing-best-practices.md`](../../Xot/docs/testing-best-practices.md) - **SSOT**
 - [`module-architecture.md`](../Xot/docs/module-architecture.md) - **SSOT**
 
 **Deprecated:**
@@ -443,7 +443,7 @@ status: draft
 ### Testing
 
 **Single Sources of Truth:**
-1. [`Xot/docs/testing-best-practices.md`](../Xot/docs/testing-best-practices.md) - **MASTER GUIDE**
+1. [`Xot/docs/testing-best-practices.md`](../../Xot/docs/testing-best-practices.md) - **MASTER GUIDE**
 2. [`Xot/docs/testing/pest-complete-guide.md`](../Xot/docs/testing/pest-complete-guide.md)
 
 **Module-Specific:**
@@ -489,7 +489,7 @@ status: draft
 ### Filament
 
 **Single Sources of Truth:**
-1. [`UI/docs/filament-components-usage.md`](../UI/docs/filament-components-usage.md) - **MASTER GUIDE**
+1. [`UI/docs/filament-components-usage.md`](../../UI/docs/filament-components-usage.md) - **MASTER GUIDE**
 2. [`Cms/docs/FILAMENT-RESOURCE-GUIDELINES.md`](../../Cms/docs/filament-resource-guidelines.md)
 
 **Related:**

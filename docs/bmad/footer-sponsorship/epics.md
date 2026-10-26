@@ -4,6 +4,7 @@ type: epics
 status: proposed
 updated: 2026-10-15
 tags: [bmad, epics, footer, sponsorship]
+qmd: "epic map fixcity"
 ---
 
 # Epic map

@@ -6,6 +6,8 @@ versione-corrente: "current"
 accessed: 2026-10-15
 owner: release
 tags: [designers-italia, design-system, accessibility, release-evidence]
+updated: 2026-10-17
+qmd: "designers italia baseline fixcity"
 ---
 
 # Designers Italia baseline

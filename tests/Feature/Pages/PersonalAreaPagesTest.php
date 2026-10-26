@@ -137,7 +137,7 @@ it('lists the owned tickets by state with title, code, date, status, detail and 
         ->assertSee('TCK-AREA-DONE1')
         ->assertSee('5 marzo 2026')
         ->assertSee('In lavorazione')
-        ->assertSee('Risolta')
+        ->assertSee('Risolto')
         ->assertSee('/it/tickets/'.$open->id, false)
         ->assertSee('/it/tickets/track/TCK-AREA-OPEN1', false)
         ->assertSee('/it/tickets/'.$done->id, false)
@@ -209,17 +209,18 @@ it('localizes status, date and the call to action in every served language', fun
         ->assertSee("/{$locale}/tickets/track/TCK-AREA-LANG1", false)
         ->assertSee("/{$locale}/tickets/create", false);
 })->with([
-    'it' => ['it', 'Risolta', '5 marzo 2026', 'Nuova segnalazione'],
+    'it' => ['it', 'Risolto', '5 marzo 2026', 'Nuova segnalazione'],
     'en' => ['en', 'Resolved', '5 March 2026', 'New report'],
-    'de' => ['de', 'Gelöst', '5. März 2026', 'Neue Meldung'],
+    'de' => ['de', 'Erledigt', '5. März 2026', 'Neue Meldung'],
     'es' => ['es', 'Resuelta', '5 de marzo de 2026', 'Nueva incidencia'],
 ]);
 
 it('tracks followed tickets by code in every language and never by database id', function (string $locale, string $unavailable): void {
     /** @var TestCase $this */
     $citizen = UserFactory::new()->createOne();
-    $withCode = TicketFactory::new()->createOne(['code' => 'TCK-AREA-FOLL1', 'status' => TicketStatusEnum::IN_PROGRESS]);
-    $withoutCode = TicketFactory::new()->createOne(['code' => null, 'status' => TicketStatusEnum::IN_PROGRESS]);
+    // segue le PROPRIE segnalazioni: il codice di tracciamento e' solo del proprietario (DCP-287)
+    $withCode = TicketFactory::new()->createOne(['owner_id' => $citizen->getKey(), 'code' => 'TCK-AREA-FOLL1', 'status' => TicketStatusEnum::IN_PROGRESS]);
+    $withoutCode = TicketFactory::new()->createOne(['owner_id' => $citizen->getKey(), 'code' => null, 'status' => TicketStatusEnum::IN_PROGRESS]);
     TicketSubscriber::query()->create(['ticket_id' => $withCode->getKey(), 'user_id' => $citizen->getKey()]);
     TicketSubscriber::query()->create(['ticket_id' => $withoutCode->getKey(), 'user_id' => $citizen->getKey()]);
 

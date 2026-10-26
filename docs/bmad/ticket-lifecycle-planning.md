@@ -11,6 +11,8 @@ related:
   - ./ticket-lifecycle-brainstorming.md
   - ../../Comment/docs/bmad/ticket-comments-planning.md
   - ../../../Themes/Sixteen/docs/bmad/ticket-detail-planning.md
+updated: 2026-10-17
+qmd: "obiettivo fixcity"
 ---
 
 # Obiettivo

@@ -26,6 +26,7 @@ return [
         'history' => 'Cronologia degli aggiornamenti',
         'previous' => 'Prima: :status',
         'empty' => 'Per ora non ci sono aggiornamenti: la segnalazione è «:status».',
+        'empty_concluded' => 'La segnalazione è «:status». Nella cronologia pubblica non ci sono altri aggiornamenti.',
     ],
     'next_steps' => [
         'title' => 'Prossimi passi',
@@ -33,6 +34,7 @@ return [
         'moderation' => ['title' => 'Valutazione della segnalazione', 'description' => 'La segnalazione sarà verificata da un moderatore prima di essere resa operativa.'],
         'review' => ['title' => 'Presa in carico', 'description' => 'Un operatore sta verificando i dati e individuerà l’ufficio competente.'],
         'processing' => ['title' => 'Lavorazione', 'description' => 'La segnalazione è stata presa in carico. Gli aggiornamenti compariranno qui.'],
+        'reopened' => ['title' => 'Segnalazione riaperta', 'description' => 'La segnalazione è stata riaperta e sarà riesaminata. Gli aggiornamenti compariranno qui.'],
         'waiting' => ['title' => 'In attesa', 'description' => 'La lavorazione attende informazioni o un riscontro esterno.'],
         'confirmation' => ['title' => 'Verifica della risoluzione', 'description' => 'La risoluzione è stata registrata; il ticket sarà chiuso solo dopo la verifica prevista.'],
         'closed' => ['title' => 'Procedimento concluso', 'description' => 'La segnalazione è stata risolta e chiusa.'],
@@ -63,6 +65,12 @@ return [
         'empty' => 'Nessuna descrizione.',
     ],
     'comments' => ['heading' => 'Commenti e aggiornamenti'],
+    'owner' => [
+        'title' => 'La tua segnalazione',
+        'private' => 'Per ora la vedi solo tu: non è ancora visibile al pubblico.',
+        'code' => 'Codice di tracciamento',
+        'code_help' => 'Conservalo: ti serve per consultare lo stato anche senza accedere. Non condividerlo.',
+    ],
     'actions' => [
         'title' => 'Cosa puoi fare',
         'back' => 'Torna all’elenco',

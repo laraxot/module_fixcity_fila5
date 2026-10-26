@@ -23,17 +23,6 @@ return [
         'in_progress' => 'In progress',
         'concluded' => 'Concluded',
     ],
-    'status' => [
-        'draft' => 'Draft',
-        'pending' => 'Pending',
-        'open' => 'Open',
-        'in_review' => 'In review',
-        'in_progress' => 'In progress',
-        'on_hold' => 'On hold',
-        'reopened' => 'Reopened',
-        'resolved' => 'Resolved',
-        'closed' => 'Closed',
-    ],
     'ticket' => [
         'code' => 'Tracking code:',
         'detail' => 'View details',
