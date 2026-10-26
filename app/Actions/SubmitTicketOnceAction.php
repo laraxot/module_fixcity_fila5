@@ -22,9 +22,9 @@ class SubmitTicketOnceAction
 {
     use QueueableAction;
 
-    private const REMEMBER_SECONDS = 3600;
+    private const int REMEMBER_SECONDS = 3600;
 
-    private const LOCK_SECONDS = 60;
+    private const int LOCK_SECONDS = 60;
 
     public static function lockKey(string $ownerId, string $token): string
     {
