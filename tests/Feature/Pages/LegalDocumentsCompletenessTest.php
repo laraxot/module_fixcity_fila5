@@ -7,6 +7,8 @@ use Modules\Fixcity\Actions\BuildLegalDocumentAction;
 use Modules\Fixcity\Actions\GetPublishedLegalDocumentAction;
 use Modules\Fixcity\Tests\TestCase;
 
+use function Safe\preg_match_all;
+
 uses(TestCase::class);
 
 /*
