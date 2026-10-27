@@ -28,6 +28,14 @@ return [
             'title' => 'Fecha de la última actualización',
             'hint' => 'Fecha de la última revisión de la declaración (formato AAAA-MM-DD); debe revisarse cada año.',
         ],
+        'entity' => [
+            'title' => 'Denominación del ente',
+            'hint' => 'Nombre del ente (por ejemplo «Ayuntamiento de …»), en la clave name del archivo ente.php del inquilino: es la única fuente de los datos del ente.',
+        ],
+        'officer' => [
+            'title' => 'Responsable de accesibilidad',
+            'hint' => 'Nombre y cargo (o unidad) de la persona responsable de la accesibilidad y de la gestión de las comunicaciones, en el campo officer de la declaración.',
+        ],
         'feedback_email' => [
             'title' => 'Dirección para las comunicaciones',
             'hint' => 'Buzón del Ayuntamiento que recibe las comunicaciones de accesibilidad: sin él, el formulario no puede enviar.',

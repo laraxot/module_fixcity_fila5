@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Modules\Fixcity\Actions;
 
+use Modules\Tenant\Actions\Ente\GetEnteDataAction;
 use Spatie\QueueableAction\QueueableAction;
 
 use function Safe\json_encode;
@@ -14,8 +15,11 @@ use function Safe\preg_match;
  *
  * Il codice non decide mai lo stato di conformita': lo fornisce l'ente dopo la valutazione. Qui si controlla solo che i dati ci siano e
  * siano coerenti: stato valido, metodo e data della valutazione (nessuna dichiarazione "conforme" senza valutazione), date di
- * pubblicazione e di aggiornamento, indirizzo per le segnalazioni, link alla procedura dell'art. 3-quinquies, e, se il sito non e'
+ * pubblicazione e di aggiornamento, denominazione dell'ente (UNICA sorgente: `config/<tenant>/ente.php`, chiave `name`), responsabile
+ * dell'accessibilita', indirizzo per le segnalazioni, link alla procedura dell'art. 3-quinquies, e, se il sito non e'
  * conforme, l'elenco delle parti non accessibili con la motivazione. Nessun valore d'esempio (example.it, xxxx, [[...]]).
+ * Denominazione e recapiti rispondono al modello della Decisione (UE) 2018/1523: «[Denominazione dell'ente pubblico] si impegna...» e
+ * «recapiti [...] della persona responsabile dell'accessibilita'».
  *
  * Restituisce le voci non pubblicabili: chiave => 'missing' | 'invalid' | 'placeholder'. Array vuoto = dichiarazione completa.
  */
@@ -54,6 +58,12 @@ final class AssessAccessibilityStatementAction
             $this->check($issues, $key, $this->isDate($declaration[$key] ?? null), ($declaration[$key] ?? null) === null);
         }
 
+        $entity = app(GetEnteDataAction::class)->execute()->name;
+        $this->check($issues, 'entity', $entity !== '', true);
+
+        $officer = $declaration['officer'] ?? null;
+        $this->check($issues, 'officer', is_string($officer) && $this->isFilled($officer) && ! str_contains($officer, '[['), $officer === null || $officer === '');
+
         $email = $declaration['feedback_email'] ?? null;
         $this->check($issues, 'feedback_email', is_string($email) && filter_var($email, FILTER_VALIDATE_EMAIL) !== false, $email === null || $email === '');
 
@@ -64,7 +74,8 @@ final class AssessAccessibilityStatementAction
             $issues['non_accessible'] = self::MISSING;
         }
 
-        if (! in_array(self::PLACEHOLDER, $issues, true) && preg_match(self::PLACEHOLDER_PATTERN, json_encode($declaration)) === 1) {
+        // le voci gia' segnalate (per esempio un segnaposto al posto di una data) non vanno ripetute come "valori d'esempio"
+        if (! in_array(self::PLACEHOLDER, $issues, true) && preg_match(self::PLACEHOLDER_PATTERN, json_encode(array_diff_key($declaration, $issues))) === 1) {
             $issues['document'] = self::PLACEHOLDER;
         }
 

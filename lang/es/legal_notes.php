@@ -35,7 +35,7 @@ return [
         ],
         'ip' => [
             'title' => 'Propiedad intelectual, licencia de los contenidos y reutilización',
-            'hint' => 'Derechos sobre textos, imágenes y datos del sitio, licencia de reutilización, marcas y software de terceros con sus atribuciones.',
+            'hint' => 'Indicar la licencia de los contenidos en lugar del marcador: el modelo Design Comuni (requisito C.SI.3.4) pide la sección «Licenza dei contenuti» con la fórmula open by default (CAD artículo 52) y CC-BY 4.0. El resto de la sección ya está redactado.',
         ],
         'privacy' => [
             'title' => 'Datos personales, cookies y accesibilidad',
@@ -47,11 +47,11 @@ return [
         ],
         'law' => [
             'title' => 'Ley aplicable y jurisdicción',
-            'hint' => 'Ley aplicable y órgano jurisdiccional o foro competente para las controversias; a indicar por el ayuntamiento.',
+            'hint' => 'Indicar el foro elegido por el ayuntamiento o confirmar que se aplican las reglas de la ley. Una excepción al foro solo vale si se aprueba específicamente por escrito (artículo 1341, párrafo segundo, del Código Civil italiano): a valorar con el asesor jurídico.',
         ],
         'contacts' => [
             'title' => 'Contactos sobre el sitio',
-            'hint' => 'A quién escribir para pedir la retirada de un contenido o comunicar una infracción de derechos o un problema del sitio.',
+            'hint' => 'Dirección de correo electrónico o PEC que recibe las solicitudes de retirada y las comunicaciones sobre el sitio: la oficina debe poder confirmar la recepción y comunicar la decisión.',
         ],
     ],
 ];

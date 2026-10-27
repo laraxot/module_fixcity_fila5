@@ -28,6 +28,14 @@ return [
             'title' => 'Data dell’ultimo aggiornamento',
             'hint' => 'Data dell’ultima revisione della dichiarazione (formato AAAA-MM-GG); va riesaminata ogni anno.',
         ],
+        'entity' => [
+            'title' => 'Denominazione dell’ente',
+            'hint' => 'Nome dell’ente (per esempio «Comune di …»), nella chiave name del file ente.php del tenant: è l’unica sorgente dei dati dell’ente.',
+        ],
+        'officer' => [
+            'title' => 'Responsabile dell’accessibilità',
+            'hint' => 'Nome e ruolo (o ufficio) della persona responsabile dell’accessibilità e della gestione delle segnalazioni, nel campo officer della dichiarazione.',
+        ],
         'feedback_email' => [
             'title' => 'Indirizzo per le segnalazioni',
             'hint' => 'Casella email dell’ente che riceve le segnalazioni di accessibilità: senza, il modulo di feedback non può inviare.',

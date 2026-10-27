@@ -24,11 +24,14 @@ function declarationForPage(): array
         'evaluation' => ['method' => 'third_party', 'date' => '2026-09-01'],
         'published_at' => '2026-09-15',
         'updated_at' => '2026-09-20',
+        'officer' => 'Maria Verdi, responsabile dell’accessibilità',
         'feedback_email' => 'segnalazioni@ente.test',
         'procedure_url' => 'https://www.agid.gov.it/it/design-servizi/accessibilita/procedura-attuazione',
         'non_accessible' => [['content' => 'Mappa interattiva', 'reason' => 'Alternativa da tastiera in sviluppo']],
         'disproportionate_burden' => [],
         'out_of_scope' => [['content' => 'Allegati PDF anteriori al 2018', 'reason' => 'Non soggetti alla legge']],
+        'verified' => ['Controllo automatico di prova'],
+        'not_verified' => ['Lettori di schermo reali: mai provati'],
     ];
 }
 
@@ -44,17 +47,25 @@ it('serves the page with heading, feedback and procedure and no example values',
         ->and($html)->not->toContain('xxxxxxxx');
 })->with('accessibility locales');
 
-it('says what the municipality still has to provide while the tenant declaration is empty', function (string $locale): void {
+it('says what the municipality still has to provide: only its own facts, never the compliance status already evaluated', function (string $locale): void {
+    config(['ente' => []]);
     app()->setLocale($locale);
     $response = $this->get("/{$locale}/accessibilita")->assertOk()->assertSee('data-element="accessibility-incomplete"', false);
 
-    foreach (['status', 'evaluation', 'published_at', 'updated_at', 'feedback_email'] as $key) {
+    foreach (['published_at', 'updated_at', 'entity', 'officer', 'feedback_email'] as $key) {
         $response->assertSee('<strong>'.e((string) __('fixcity::accessibility.issues.'.$key.'.title')).'</strong>', false);
     }
-    $response->assertSee(e((string) __('pub_theme::accessibility.status.pending')), false);
+    foreach (['status', 'evaluation'] as $key) {
+        $response->assertDontSee('<strong>'.e((string) __('fixcity::accessibility.issues.'.$key.'.title')).'</strong>', false);
+    }
+    $response->assertSee(e((string) __('pub_theme::accessibility.status.partially_compliant')), false)
+        ->assertDontSee(e((string) __('pub_theme::accessibility.status.pending')), false)
+        ->assertSee('data-element="accessibility-verified"', false)
+        ->assertSee('data-element="accessibility-not-verified"', false);
 })->with('accessibility locales');
 
 it('shows status, dates, parts, mailbox and procedure when the municipality provided them', function (): void {
+    config(['ente' => ['name' => 'Comune di Prova']]);
     app()->setLocale('it');
     app()->instance(GetAccessibilityDeclarationAction::class, new class extends GetAccessibilityDeclarationAction
     {
@@ -76,6 +87,10 @@ it('shows status, dates, parts, mailbox and procedure when the municipality prov
         ->and($html)->toContain((string) __('pub_theme::accessibility.drafting.methods.third_party'))
         ->and($html)->toContain('15 settembre 2026')
         ->and($html)->toContain('20 settembre 2026')
+        ->and($html)->toContain('Comune di Prova si impegna')
+        ->and($html)->toContain('Maria Verdi, responsabile dell’accessibilità')
+        ->and($html)->toContain('Controllo automatico di prova')
+        ->and($html)->toContain('Lettori di schermo reali: mai provati')
         ->and($html)->toContain('<textarea')
         ->and($html)->toContain('https://www.agid.gov.it/it/design-servizi/accessibilita/procedura-attuazione');
 });

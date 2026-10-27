@@ -1,16 +1,267 @@
 {
     "id": "accessibilita-index",
-    "title": {"it": "Dichiarazione di accessibilità", "en": "Accessibility statement", "de": "Erklärung zur Barrierefreiheit", "es": "Declaración de accesibilidad"},
+    "title": {
+        "it": "Dichiarazione di accessibilità",
+        "en": "Accessibility statement",
+        "de": "Erklärung zur Barrierefreiheit",
+        "es": "Declaración de accesibilidad"
+    },
     "slug": "accessibilita.index",
     "layout": "design-comuni",
-    "description": {"it": "Dichiarazione di accessibilità del servizio di segnalazioni, con il meccanismo di feedback e la procedura di attuazione (legge 4/2004, art. 3-quater).", "en": "Accessibility statement of the reporting service, with the feedback mechanism and the enforcement procedure (Law 4/2004, art. 3-quater).", "de": "Erklärung zur Barrierefreiheit des Meldedienstes mit Feedback-Mechanismus und Durchsetzungsverfahren (Gesetz 4/2004, Art. 3-quater).", "es": "Declaración de accesibilidad del servicio de incidencias, con el mecanismo de comentarios y el procedimiento de aplicación (ley 4/2004, art. 3-quater)."},
+    "description": {
+        "it": "Dichiarazione di accessibilità del servizio di segnalazioni, con il meccanismo di feedback e la procedura di attuazione (legge 4/2004, art. 3-quater).",
+        "en": "Accessibility statement of the reporting service, with the feedback mechanism and the enforcement procedure (Law 4/2004, art. 3-quater).",
+        "de": "Erklärung zur Barrierefreiheit des Meldedienstes mit Feedback-Mechanismus und Durchsetzungsverfahren (Gesetz 4/2004, Art. 3-quater).",
+        "es": "Declaración de accesibilidad del servicio de incidencias, con el mecanismo de comentarios y el procedimiento de aplicación (ley 4/2004, art. 3-quater)."
+    },
     "content": null,
     "content_blocks": {
-        "it": [{"type": "accessibility_statement", "data": {"view": "pub_theme::components.blocks.accessibility-statement.design-comuni", "header_active": "", "declaration": {"status": null, "evaluation": {"method": null, "date": null}, "published_at": null, "updated_at": null, "feedback_email": null, "agid_declaration_url": null, "procedure_url": "https://www.agid.gov.it/it/design-servizi/accessibilita/procedura-attuazione", "non_accessible": [], "disproportionate_burden": [], "out_of_scope": []}}}],
-        "en": [{"type": "accessibility_statement", "data": {"view": "pub_theme::components.blocks.accessibility-statement.design-comuni", "header_active": "", "declaration": {"status": null, "evaluation": {"method": null, "date": null}, "published_at": null, "updated_at": null, "feedback_email": null, "agid_declaration_url": null, "procedure_url": "https://www.agid.gov.it/it/design-servizi/accessibilita/procedura-attuazione", "non_accessible": [], "disproportionate_burden": [], "out_of_scope": []}}}],
-        "de": [{"type": "accessibility_statement", "data": {"view": "pub_theme::components.blocks.accessibility-statement.design-comuni", "header_active": "", "declaration": {"status": null, "evaluation": {"method": null, "date": null}, "published_at": null, "updated_at": null, "feedback_email": null, "agid_declaration_url": null, "procedure_url": "https://www.agid.gov.it/it/design-servizi/accessibilita/procedura-attuazione", "non_accessible": [], "disproportionate_burden": [], "out_of_scope": []}}}],
-        "es": [{"type": "accessibility_statement", "data": {"view": "pub_theme::components.blocks.accessibility-statement.design-comuni", "header_active": "", "declaration": {"status": null, "evaluation": {"method": null, "date": null}, "published_at": null, "updated_at": null, "feedback_email": null, "agid_declaration_url": null, "procedure_url": "https://www.agid.gov.it/it/design-servizi/accessibilita/procedura-attuazione", "non_accessible": [], "disproportionate_burden": [], "out_of_scope": []}}}]
+        "it": [
+            {
+                "type": "accessibility_statement",
+                "data": {
+                    "view": "pub_theme::components.blocks.accessibility-statement.design-comuni",
+                    "header_active": "",
+                    "declaration": {
+                        "status": "partially_compliant",
+                        "evaluation": {
+                            "method": "self",
+                            "date": "2026-10-26"
+                        },
+                        "published_at": "[[data di pubblicazione scelta dall'ente, AAAA-MM-GG]]",
+                        "updated_at": "[[data di redazione o dell'ultimo riesame della dichiarazione, AAAA-MM-GG]]",
+                        "officer": "[[nome e ruolo del responsabile dell'accessibilità dell'ente]]",
+                        "feedback_email": "[[indirizzo email o PEC del canale di feedback sull'accessibilità]]",
+                        "agid_declaration_url": null,
+                        "procedure_url": "https://www.agid.gov.it/it/design-servizi/accessibilita/procedura-attuazione",
+                        "non_accessible": [
+                            {
+                                "content": "Pagina «Domande frequenti»: i pulsanti che aprono le risposte non mostrano il segno del focus quando si naviga con la tastiera",
+                                "reason": "Criterio WCAG 2.1 2.4.7 (Focus visibile). Misurato il 26 ottobre 2026: contorno bianco su sfondo bianco, nessuna ombra, immagine del pulsante identica con e senza focus. Non ancora corretto"
+                            },
+                            {
+                                "content": "Home page: con il testo ingrandito al 200% su uno schermo largo 375 pixel il titolo e il testo dell’area iniziale sono tagliati sul lato destro",
+                                "reason": "Criterio WCAG 2.1 1.4.4 (Ridimensionamento del testo). Misurato il 26 ottobre 2026 con una simulazione in Chromium (dimensione del carattere al 200%), non con l’ingrandimento reale del sistema operativo. Non ancora corretto"
+                            },
+                            {
+                                "content": "Procedura guidata di invio della segnalazione, nell’area riservata: dopo «Avanti» il focus torna all’inizio della pagina, gli errori di compilazione non sono annunciati in modo affidabile dai lettori di schermo, «Usa la tua posizione» non si attiva con la barra spaziatrice e il riquadro della mappa riceve il focus senza un nome",
+                                "reason": "Criteri WCAG 2.1 2.4.3 (Ordine del focus), 3.3.1 (Identificazione degli errori), 4.1.3 (Messaggi di stato), 2.1.1 (Tastiera) e 4.1.2 (Nome, ruolo, valore). Rilevato dagli audit del 13 e del 26 ottobre 2026 (l’annuncio degli errori è dedotto dal codice, non provato con un lettore di schermo). La procedura richiede l’accesso e non è stata riverificata il 26 ottobre 2026: lo stato attuale va confermato"
+                            },
+                            {
+                                "content": "Mappa delle segnalazioni (home ed elenco delle segnalazioni): la finestra con i dettagli di un punto non è utilizzabile in modo completo con la tastiera",
+                                "reason": "Criteri WCAG 2.1 2.1.1 (Tastiera) e 2.4.3 (Ordine del focus). Rilevato dall’audit del 26 ottobre 2026; nel controllo automatico dello stesso giorno la finestra non si apre con il tasto Invio, quindi il comportamento va riverificato. Alternativa accessibile: la pagina delle segnalazioni offre un elenco con le stesse informazioni"
+                            },
+                            {
+                                "content": "Intestazione: al passaggio del mouse il pulsante di accesso all’area personale ha un contrasto del testo di 3,77:1 (bianco su verde, 14 pixel) e le voci del menu principale di 4,13:1",
+                                "reason": "Criterio WCAG 2.1 1.4.3 (Contrasto minimo), richiesto 4,5:1. Pulsante misurato il 26 ottobre 2026; voci di menu misurate dall’audit dello stesso giorno. Non ancora corretto"
+                            }
+                        ],
+                        "disproportionate_burden": [],
+                        "out_of_scope": [],
+                        "verified": [
+                            "Controllo automatico con axe-core (regole WCAG 2.1 livelli A e AA) il 26 ottobre 2026 su 24 pagine pubbliche, a larghezza 1280 e 375 pixel: nessuna violazione rilevata in 48 misure su 48. Pagine: home, segnalazioni, traccia (modulo ed esempio di risultato), accesso, registrazione, password dimenticata, domande frequenti, mappa del sito, privacy, note legali, accessibilità, cookie policy, blog, eventi; home, accessibilità e cookie policy anche in inglese, tedesco e spagnolo. Strumenti: Chromium 156 con Playwright 1.64 e axe-core 4.14",
+                            "Audit tecnico del 26 ottobre 2026 su 39 pagine (tastiera, focus visibile, contrasto, ridimensionamento del testo e reflow, moduli, banner dei cookie) con Playwright, Chromium e axe-core su un’istanza isolata. Il rapporto è conservato nella documentazione del progetto (scheda FO-5)",
+                            "Audit del 13 ottobre 2026 (DCP-143) con tastiera e axe-core su 15 pagine, comprese la procedura guidata di segnalazione e l’area personale: nessuna violazione automatica; checklist manuale WCAG 2.1 AA compilata per i criteri provati",
+                            "Controlli mirati del 26 ottobre 2026: salto ai contenuti, un solo titolo di primo livello e un solo contenuto principale per pagina, lingua della pagina, errori della registrazione collegati ai campi, gestione del focus della finestra di ricerca"
+                        ],
+                        "not_verified": [
+                            "Prova con lettori di schermo reali (NVDA, JAWS, VoiceOver, TalkBack): mai eseguita. Gli annunci vocali sono dedotti dal codice, non ascoltati",
+                            "Prove con persone con disabilità e su dispositivi reali (tocco, tastiera esterna, ingrandimento del sistema operativo, colori forzati). Browser provato: solo Chromium; Firefox e Safari non provati",
+                            "Criteri che richiedono un giudizio umano: qualità dei testi alternativi, dei titoli, delle etichette e dello scopo dei collegamenti, semplicità del linguaggio",
+                            "Il sito in produzione: la valutazione riguarda l’istanza di sviluppo con contenuti dimostrativi, non i contenuti che l’ente pubblicherà",
+                            "L’area di amministrazione riservata al personale dell’ente e gli allegati caricati da cittadini e personale (immagini, documenti): non valutati",
+                            "Criteri delle WCAG 2.2 (per esempio 2.4.11 e 2.5.8): non richiesti dalle linee guida AgID, non valutati come requisito"
+                        ]
+                    }
+                }
+            }
+        ],
+        "en": [
+            {
+                "type": "accessibility_statement",
+                "data": {
+                    "view": "pub_theme::components.blocks.accessibility-statement.design-comuni",
+                    "header_active": "",
+                    "declaration": {
+                        "status": "partially_compliant",
+                        "evaluation": {
+                            "method": "self",
+                            "date": "2026-10-26"
+                        },
+                        "published_at": "[[data di pubblicazione scelta dall'ente, AAAA-MM-GG]]",
+                        "updated_at": "[[data di redazione o dell'ultimo riesame della dichiarazione, AAAA-MM-GG]]",
+                        "officer": "[[nome e ruolo del responsabile dell'accessibilità dell'ente]]",
+                        "feedback_email": "[[indirizzo email o PEC del canale di feedback sull'accessibilità]]",
+                        "agid_declaration_url": null,
+                        "procedure_url": "https://www.agid.gov.it/it/design-servizi/accessibilita/procedura-attuazione",
+                        "non_accessible": [
+                            {
+                                "content": "FAQ page: the buttons that open the answers do not show a focus indicator when navigating with the keyboard",
+                                "reason": "WCAG 2.1 success criterion 2.4.7 (Focus Visible). Measured on 26 October 2026: white outline on a white background, no shadow, identical button image with and without focus. Not yet fixed"
+                            },
+                            {
+                                "content": "Home page: with text enlarged to 200% on a screen 375 pixels wide, the heading and text of the opening section are cut off on the right",
+                                "reason": "WCAG 2.1 success criterion 1.4.4 (Resize Text). Measured on 26 October 2026 with a simulation in Chromium (font size set to 200%), not with real operating system magnification. Not yet fixed"
+                            },
+                            {
+                                "content": "Report submission wizard, in the signed-in area: after the next button the focus returns to the top of the page, form errors are not reliably announced by screen readers, the button to use your current location cannot be activated with the space bar, and the map frame receives focus without a name",
+                                "reason": "WCAG 2.1 success criteria 2.4.3 (Focus Order), 3.3.1 (Error Identification), 4.1.3 (Status Messages), 2.1.1 (Keyboard) and 4.1.2 (Name, Role, Value). Found by the audits of 13 and 26 October 2026 (the announcement of errors is inferred from the code, not tested with a screen reader). The wizard requires signing in and was not re-checked on 26 October 2026: its current state must be confirmed"
+                            },
+                            {
+                                "content": "Map of reports (home page and reports list): the window with the details of a point is not fully usable with the keyboard",
+                                "reason": "WCAG 2.1 success criteria 2.1.1 (Keyboard) and 2.4.3 (Focus Order). Found by the audit of 26 October 2026; in the automatic check of the same day the window does not open with the Enter key, so the behaviour must be checked again. Accessible alternative: the reports page offers a list with the same information"
+                            },
+                            {
+                                "content": "Header: on hover, the button to access the personal area has a text contrast of 3.77:1 (white on green, 14 pixels) and the main menu items 4.13:1",
+                                "reason": "WCAG 2.1 success criterion 1.4.3 (Contrast Minimum), 4.5:1 required. Button measured on 26 October 2026; menu items measured by the audit of the same day. Not yet fixed"
+                            }
+                        ],
+                        "disproportionate_burden": [],
+                        "out_of_scope": [],
+                        "verified": [
+                            "Automatic check with axe-core (WCAG 2.1 level A and AA rules) on 26 October 2026 on 24 public pages at widths of 1280 and 375 pixels: no violation found in 48 measurements out of 48. Pages: home, reports, tracking (form and an example result), sign in, registration, forgotten password, FAQ, site map, privacy, legal notes, accessibility, cookie policy, blog, events; home, accessibility and cookie policy also in English, German and Spanish. Tools: Chromium 156 with Playwright 1.64 and axe-core 4.14",
+                            "Technical audit of 26 October 2026 on 39 pages (keyboard, visible focus, contrast, text resizing and reflow, forms, cookie banner) with Playwright, Chromium and axe-core on an isolated instance. The report is kept in the project documentation (sheet FO-5)",
+                            "Audit of 13 October 2026 (DCP-143) with keyboard and axe-core on 15 pages, including the report submission wizard and the personal area: no automatic violation; WCAG 2.1 AA manual checklist completed for the criteria tested",
+                            "Targeted checks of 26 October 2026: skip to content, a single level-1 heading and a single main content area per page, page language, registration errors linked to their fields, focus handling of the search window"
+                        ],
+                        "not_verified": [
+                            "Testing with real screen readers (NVDA, JAWS, VoiceOver, TalkBack): never carried out. Spoken announcements are inferred from the code, not listened to",
+                            "Testing with people with disabilities and on real devices (touch, external keyboard, operating system magnification, forced colours). Browser tested: Chromium only; Firefox and Safari not tested",
+                            "Criteria that need human judgement: quality of alternative texts, titles, labels and link purpose, plain language",
+                            "The production site: the evaluation covers the development instance with demonstration content, not the content the municipality will publish",
+                            "The administration area reserved for the municipality’s staff and the attachments uploaded by citizens and staff (images, documents): not evaluated",
+                            "WCAG 2.2 criteria (for example 2.4.11 and 2.5.8): not required by the AgID guidelines, not evaluated as a requirement"
+                        ]
+                    }
+                }
+            }
+        ],
+        "de": [
+            {
+                "type": "accessibility_statement",
+                "data": {
+                    "view": "pub_theme::components.blocks.accessibility-statement.design-comuni",
+                    "header_active": "",
+                    "declaration": {
+                        "status": "partially_compliant",
+                        "evaluation": {
+                            "method": "self",
+                            "date": "2026-10-26"
+                        },
+                        "published_at": "[[data di pubblicazione scelta dall'ente, AAAA-MM-GG]]",
+                        "updated_at": "[[data di redazione o dell'ultimo riesame della dichiarazione, AAAA-MM-GG]]",
+                        "officer": "[[nome e ruolo del responsabile dell'accessibilità dell'ente]]",
+                        "feedback_email": "[[indirizzo email o PEC del canale di feedback sull'accessibilità]]",
+                        "agid_declaration_url": null,
+                        "procedure_url": "https://www.agid.gov.it/it/design-servizi/accessibilita/procedura-attuazione",
+                        "non_accessible": [
+                            {
+                                "content": "Seite mit den häufigen Fragen: Die Schaltflächen, die die Antworten öffnen, zeigen bei Tastaturbedienung keine Fokusmarkierung",
+                                "reason": "WCAG-2.1-Erfolgskriterium 2.4.7 (Fokus sichtbar). Gemessen am 26. Oktober 2026: weiße Kontur auf weißem Hintergrund, kein Schatten, Bild der Schaltfläche mit und ohne Fokus identisch. Noch nicht behoben"
+                            },
+                            {
+                                "content": "Startseite: Bei auf 200 % vergrößertem Text und einer Bildschirmbreite von 375 Pixeln werden Überschrift und Text des Einstiegsbereichs rechts abgeschnitten",
+                                "reason": "WCAG-2.1-Erfolgskriterium 1.4.4 (Größe von Text ändern). Gemessen am 26. Oktober 2026 mit einer Simulation in Chromium (Schriftgröße auf 200 % gesetzt), nicht mit der echten Vergrößerung des Betriebssystems. Noch nicht behoben"
+                            },
+                            {
+                                "content": "Assistent zum Absenden einer Meldung im angemeldeten Bereich: Nach der Schaltfläche „Weiter“ springt der Fokus an den Seitenanfang, Formularfehler werden von Screenreadern nicht zuverlässig angesagt, die Schaltfläche zur Verwendung des aktuellen Standorts lässt sich nicht mit der Leertaste auslösen und der Kartenrahmen erhält den Fokus ohne Namen",
+                                "reason": "WCAG-2.1-Erfolgskriterien 2.4.3 (Fokusreihenfolge), 3.3.1 (Fehlererkennung), 4.1.3 (Statusmeldungen), 2.1.1 (Tastatur) und 4.1.2 (Name, Rolle, Wert). Festgestellt bei den Audits vom 13. und 26. Oktober 2026 (die Ansage der Fehler ist aus dem Code abgeleitet, nicht mit einem Screenreader getestet). Der Assistent erfordert eine Anmeldung und wurde am 26. Oktober 2026 nicht erneut geprüft: Sein aktueller Zustand ist zu bestätigen"
+                            },
+                            {
+                                "content": "Karte der Meldungen (Startseite und Meldungsliste): Das Fenster mit den Details eines Punkts ist mit der Tastatur nicht vollständig bedienbar",
+                                "reason": "WCAG-2.1-Erfolgskriterien 2.1.1 (Tastatur) und 2.4.3 (Fokusreihenfolge). Festgestellt beim Audit vom 26. Oktober 2026; bei der automatischen Prüfung desselben Tages öffnet sich das Fenster mit der Eingabetaste nicht, das Verhalten ist daher erneut zu prüfen. Barrierefreie Alternative: Die Seite mit den Meldungen bietet eine Liste mit denselben Informationen"
+                            },
+                            {
+                                "content": "Kopfbereich: Beim Überfahren mit der Maus hat die Schaltfläche für den Zugang zum persönlichen Bereich einen Textkontrast von 3,77:1 (weiß auf grün, 14 Pixel) und haben die Einträge des Hauptmenüs 4,13:1",
+                                "reason": "WCAG-2.1-Erfolgskriterium 1.4.3 (Kontrast (Minimum)), erforderlich sind 4,5:1. Schaltfläche gemessen am 26. Oktober 2026; Menüeinträge gemessen beim Audit desselben Tages. Noch nicht behoben"
+                            }
+                        ],
+                        "disproportionate_burden": [],
+                        "out_of_scope": [],
+                        "verified": [
+                            "Automatische Prüfung mit axe-core (WCAG-2.1-Regeln der Stufen A und AA) am 26. Oktober 2026 auf 24 öffentlichen Seiten bei Breiten von 1280 und 375 Pixeln: keine Verletzung in 48 von 48 Messungen. Seiten: Startseite, Meldungen, Nachverfolgung (Formular und ein Beispielergebnis), Anmeldung, Registrierung, Passwort vergessen, häufige Fragen, Seitenübersicht, Datenschutz, rechtliche Hinweise, Barrierefreiheit, Cookie-Richtlinie, Blog, Veranstaltungen; Startseite, Barrierefreiheit und Cookie-Richtlinie auch auf Englisch, Deutsch und Spanisch. Werkzeuge: Chromium 156 mit Playwright 1.64 und axe-core 4.14",
+                            "Technisches Audit vom 26. Oktober 2026 auf 39 Seiten (Tastatur, sichtbarer Fokus, Kontrast, Textvergrößerung und Umbruch, Formulare, Cookie-Banner) mit Playwright, Chromium und axe-core auf einer isolierten Instanz. Der Bericht liegt in der Projektdokumentation (Blatt FO-5)",
+                            "Audit vom 13. Oktober 2026 (DCP-143) mit Tastatur und axe-core auf 15 Seiten, einschließlich des Assistenten zum Absenden einer Meldung und des persönlichen Bereichs: keine automatische Verletzung; manuelle Checkliste WCAG 2.1 AA für die getesteten Kriterien ausgefüllt",
+                            "Gezielte Prüfungen vom 26. Oktober 2026: Sprung zum Inhalt, genau eine Überschrift der ersten Ebene und genau ein Hauptinhaltsbereich pro Seite, Seitensprache, mit den Feldern verknüpfte Fehler der Registrierung, Fokusführung des Suchfensters"
+                        ],
+                        "not_verified": [
+                            "Tests mit echten Screenreadern (NVDA, JAWS, VoiceOver, TalkBack): nie durchgeführt. Sprachausgaben sind aus dem Code abgeleitet, nicht abgehört",
+                            "Tests mit Menschen mit Behinderungen und auf echten Geräten (Touch, externe Tastatur, Vergrößerung des Betriebssystems, erzwungene Farben). Getesteter Browser: nur Chromium; Firefox und Safari nicht getestet",
+                            "Kriterien, die menschliche Beurteilung erfordern: Qualität von Alternativtexten, Titeln, Beschriftungen und Linkzweck, einfache Sprache",
+                            "Die Website im Produktivbetrieb: Die Bewertung betrifft die Entwicklungsinstanz mit Demonstrationsinhalten, nicht die Inhalte, die die Gemeinde veröffentlichen wird",
+                            "Der Verwaltungsbereich für das Personal der Gemeinde und die von Bürgerinnen, Bürgern und Personal hochgeladenen Anhänge (Bilder, Dokumente): nicht bewertet",
+                            "WCAG-2.2-Kriterien (zum Beispiel 2.4.11 und 2.5.8): von den AgID-Leitlinien nicht verlangt, nicht als Anforderung bewertet"
+                        ]
+                    }
+                }
+            }
+        ],
+        "es": [
+            {
+                "type": "accessibility_statement",
+                "data": {
+                    "view": "pub_theme::components.blocks.accessibility-statement.design-comuni",
+                    "header_active": "",
+                    "declaration": {
+                        "status": "partially_compliant",
+                        "evaluation": {
+                            "method": "self",
+                            "date": "2026-10-26"
+                        },
+                        "published_at": "[[data di pubblicazione scelta dall'ente, AAAA-MM-GG]]",
+                        "updated_at": "[[data di redazione o dell'ultimo riesame della dichiarazione, AAAA-MM-GG]]",
+                        "officer": "[[nome e ruolo del responsabile dell'accessibilità dell'ente]]",
+                        "feedback_email": "[[indirizzo email o PEC del canale di feedback sull'accessibilità]]",
+                        "agid_declaration_url": null,
+                        "procedure_url": "https://www.agid.gov.it/it/design-servizi/accessibilita/procedura-attuazione",
+                        "non_accessible": [
+                            {
+                                "content": "Página de preguntas frecuentes: los botones que abren las respuestas no muestran el indicador de foco al navegar con el teclado",
+                                "reason": "Criterio 2.4.7 de las WCAG 2.1 (Foco visible). Medido el 26 de octubre de 2026: contorno blanco sobre fondo blanco, sin sombra, imagen del botón idéntica con y sin foco. Aún no corregido"
+                            },
+                            {
+                                "content": "Página de inicio: con el texto ampliado al 200 % en una pantalla de 375 píxeles de ancho, el título y el texto de la zona inicial se cortan por la derecha",
+                                "reason": "Criterio 1.4.4 de las WCAG 2.1 (Cambio de tamaño del texto). Medido el 26 de octubre de 2026 con una simulación en Chromium (tamaño de fuente al 200 %), no con la ampliación real del sistema operativo. Aún no corregido"
+                            },
+                            {
+                                "content": "Asistente de envío de incidencias, en el área reservada: tras el botón «Siguiente» el foco vuelve al principio de la página, los errores del formulario no se anuncian de forma fiable en los lectores de pantalla, el botón para usar la ubicación actual no se activa con la barra espaciadora y el recuadro del mapa recibe el foco sin nombre",
+                                "reason": "Criterios 2.4.3 (Orden del foco), 3.3.1 (Identificación de errores), 4.1.3 (Mensajes de estado), 2.1.1 (Teclado) y 4.1.2 (Nombre, función, valor) de las WCAG 2.1. Detectado en las auditorías del 13 y del 26 de octubre de 2026 (el anuncio de los errores se deduce del código, no se ha probado con un lector de pantalla). El asistente exige iniciar sesión y no se volvió a comprobar el 26 de octubre de 2026: su estado actual debe confirmarse"
+                            },
+                            {
+                                "content": "Mapa de incidencias (inicio y listado de incidencias): la ventana con los detalles de un punto no se puede usar por completo con el teclado",
+                                "reason": "Criterios 2.1.1 (Teclado) y 2.4.3 (Orden del foco) de las WCAG 2.1. Detectado en la auditoría del 26 de octubre de 2026; en la comprobación automática del mismo día la ventana no se abre con la tecla Intro, por lo que el comportamiento debe verificarse de nuevo. Alternativa accesible: la página de incidencias ofrece un listado con la misma información"
+                            },
+                            {
+                                "content": "Cabecera: al pasar el ratón, el botón de acceso al área personal tiene un contraste de texto de 3,77:1 (blanco sobre verde, 14 píxeles) y las opciones del menú principal de 4,13:1",
+                                "reason": "Criterio 1.4.3 de las WCAG 2.1 (Contraste mínimo), se exigen 4,5:1. Botón medido el 26 de octubre de 2026; opciones del menú medidas en la auditoría del mismo día. Aún no corregido"
+                            }
+                        ],
+                        "disproportionate_burden": [],
+                        "out_of_scope": [],
+                        "verified": [
+                            "Comprobación automática con axe-core (reglas WCAG 2.1 de niveles A y AA) el 26 de octubre de 2026 en 24 páginas públicas, con anchos de 1280 y 375 píxeles: ninguna infracción detectada en 48 mediciones de 48. Páginas: inicio, incidencias, seguimiento (formulario y un resultado de ejemplo), acceso, registro, contraseña olvidada, preguntas frecuentes, mapa del sitio, privacidad, avisos legales, accesibilidad, política de cookies, blog, eventos; inicio, accesibilidad y política de cookies también en inglés, alemán y español. Herramientas: Chromium 156 con Playwright 1.64 y axe-core 4.14",
+                            "Auditoría técnica del 26 de octubre de 2026 en 39 páginas (teclado, foco visible, contraste, cambio de tamaño del texto y reflujo, formularios, aviso de cookies) con Playwright, Chromium y axe-core en una instancia aislada. El informe se conserva en la documentación del proyecto (ficha FO-5)",
+                            "Auditoría del 13 de octubre de 2026 (DCP-143) con teclado y axe-core en 15 páginas, incluidos el asistente de envío de incidencias y el área personal: ninguna infracción automática; lista de comprobación manual WCAG 2.1 AA completada para los criterios probados",
+                            "Comprobaciones específicas del 26 de octubre de 2026: salto al contenido, un único título de primer nivel y un único contenido principal por página, idioma de la página, errores del registro vinculados a sus campos, gestión del foco de la ventana de búsqueda"
+                        ],
+                        "not_verified": [
+                            "Pruebas con lectores de pantalla reales (NVDA, JAWS, VoiceOver, TalkBack): nunca realizadas. Los anuncios de voz se deducen del código, no se han escuchado",
+                            "Pruebas con personas con discapacidad y en dispositivos reales (táctil, teclado externo, ampliación del sistema operativo, colores forzados). Navegador probado: solo Chromium; Firefox y Safari no probados",
+                            "Criterios que requieren juicio humano: calidad de los textos alternativos, de los títulos, de las etiquetas y del propósito de los enlaces, sencillez del lenguaje",
+                            "El sitio en producción: la evaluación se refiere a la instancia de desarrollo con contenidos de demostración, no a los contenidos que publique el Ayuntamiento",
+                            "El área de administración reservada al personal del Ayuntamiento y los adjuntos subidos por la ciudadanía y el personal (imágenes, documentos): no evaluados",
+                            "Criterios de las WCAG 2.2 (por ejemplo 2.4.11 y 2.5.8): no exigidos por las directrices de la AgID, no evaluados como requisito"
+                        ]
+                    }
+                }
+            }
+        ]
     },
-    "sidebar_blocks": {"it": [], "en": [], "de": [], "es": []},
+    "sidebar_blocks": {
+        "it": [],
+        "en": [],
+        "de": [],
+        "es": []
+    },
     "footer_blocks": null
 }

@@ -28,6 +28,14 @@ return [
             'title' => 'Datum der letzten Aktualisierung',
             'hint' => 'Datum der letzten Überprüfung der Erklärung (Format JJJJ-MM-TT); sie muss jedes Jahr überprüft werden.',
         ],
+        'entity' => [
+            'title' => 'Bezeichnung der Körperschaft',
+            'hint' => 'Name der Körperschaft (zum Beispiel „Gemeinde …“), im Schlüssel name der Datei ente.php des Mandanten: die einzige Quelle der Daten der Körperschaft.',
+        ],
+        'officer' => [
+            'title' => 'Verantwortliche Person für Barrierefreiheit',
+            'hint' => 'Name und Funktion (oder Stelle) der für Barrierefreiheit und die Bearbeitung von Meldungen verantwortlichen Person, im Feld officer der Erklärung.',
+        ],
         'feedback_email' => [
             'title' => 'Adresse für Meldungen',
             'hint' => 'Postfach der Gemeinde, das Meldungen zur Barrierefreiheit erhält: ohne es kann das Feedbackformular nichts senden.',

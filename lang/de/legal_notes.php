@@ -35,7 +35,7 @@ return [
         ],
         'ip' => [
             'title' => 'Geistiges Eigentum, Inhaltslizenz und Weiterverwendung',
-            'hint' => 'Rechte an Texten, Bildern und Daten der Website, Lizenz zur Weiterverwendung, Marken und Software Dritter mit Quellenangaben.',
+            'hint' => 'Die Inhaltslizenz anstelle des Platzhalters angeben: Das Modell Design Comuni (Anforderung C.SI.3.4) verlangt den Abschnitt „Licenza dei contenuti“ mit dem Wortlaut „open by default“ (CAD Artikel 52) und CC-BY 4.0. Der Rest des Abschnitts ist bereits geschrieben.',
         ],
         'privacy' => [
             'title' => 'Personenbezogene Daten, Cookies und Barrierefreiheit',
@@ -47,11 +47,11 @@ return [
         ],
         'law' => [
             'title' => 'Anwendbares Recht und Gerichtsstand',
-            'hint' => 'Anwendbares Recht und zuständiges Gericht oder Gerichtsstand für Streitigkeiten; von der Gemeinde anzugeben.',
+            'hint' => 'Den von der Gemeinde gewählten Gerichtsstand angeben oder bestätigen, dass die gesetzlichen Regeln gelten. Eine Abweichung vom Gerichtsstand gilt nur, wenn sie ausdrücklich schriftlich genehmigt wurde (Artikel 1341 Absatz 2 des italienischen Zivilgesetzbuchs): mit dem Rechtsberater zu prüfen.',
         ],
         'contacts' => [
             'title' => 'Kontakt zur Website',
-            'hint' => 'An wen man sich wendet, um die Entfernung von Inhalten zu verlangen oder eine Rechtsverletzung oder ein Problem der Website zu melden.',
+            'hint' => 'E-Mail- oder PEC-Adresse, die Löschungsanträge und Meldungen zur Website empfängt: Das Amt muss den Eingang bestätigen und die Entscheidung mitteilen können.',
         ],
     ],
 ];

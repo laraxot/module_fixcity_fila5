@@ -35,7 +35,7 @@ return [
         ],
         'ip' => [
             'title' => 'Intellectual property, content licence and reuse',
-            'hint' => 'Rights in the texts, images and data of the site, reuse licence, trademarks and third-party software with attributions.',
+            'hint' => 'State the content licence in place of the placeholder: the Design Comuni model (requirement C.SI.3.4) asks for the section "Licenza dei contenuti" with the open by default wording (CAD Article 52) and CC-BY 4.0. The rest of the section is already written.',
         ],
         'privacy' => [
             'title' => 'Personal data, cookies and accessibility',
@@ -47,11 +47,11 @@ return [
         ],
         'law' => [
             'title' => 'Governing law and jurisdiction',
-            'hint' => 'Governing law and the court or forum for disputes; to be stated by the municipality.',
+            'hint' => 'State the forum chosen by the municipality, or confirm that the rules set by law apply. A derogation from the forum is valid only if specifically approved in writing (Article 1341, second paragraph, Italian Civil Code): to be assessed with the legal adviser.',
         ],
         'contacts' => [
             'title' => 'Contacts about the site',
-            'hint' => 'Whom to write to in order to ask for the removal of content, or to report an infringement of rights or a problem with the site.',
+            'hint' => 'Email or PEC address that receives removal requests and reports about the site: the office must be able to confirm receipt and communicate the decision.',
         ],
     ],
 ];

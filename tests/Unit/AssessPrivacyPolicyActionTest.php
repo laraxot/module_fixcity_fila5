@@ -80,12 +80,17 @@ it('keeps sub-headings and numbered titles inside their section', function (): v
     expect(assessPrivacy($text))->toBe([]);
 });
 
-it('ships a template per locale with every section and only placeholders as content', function (string $locale): void {
+/*
+ * Il modello scrive tutto cio' che e' diritto e struttura (finalita', diritti, reclamo, conferimento, decisioni automatizzate) e lascia
+ * `[[DA COMPILARE]]` solo dove il fatto e' dell'ente: titolare, DPO, destinatari, trasferimenti, conservazione. Se una di queste cinque
+ * smette di essere segnaposto qualcuno ha inventato un fatto; se un'altra lo diventa, il modello ha perso testo.
+ */
+it('ships a template per locale with every section and placeholders only for the facts the ente owns', function (string $locale): void {
     app()->setLocale($locale);
     $template = file_get_contents(dirname(__DIR__, 2)."/resources/templates/privacy-policy.{$locale}.md");
 
     foreach (AssessPrivacyPolicyAction::SECTIONS as $key) {
         Assert::assertStringContainsString("\n## ".__('fixcity::privacy.sections.'.$key.'.title')."\n", $template, "Modello {$locale} senza la sezione {$key}.");
     }
-    expect(assessPrivacy($template))->toBe(array_fill_keys(AssessPrivacyPolicyAction::SECTIONS, 'placeholder'));
+    expect(assessPrivacy($template))->toBe(array_fill_keys(['controller', 'dpo', 'recipients', 'transfers', 'retention'], 'placeholder'));
 })->with('privacy locales');

@@ -18,8 +18,8 @@ uses(TestCase::class);
  */
 dataset('notes locales', ['it', 'en', 'de', 'es']);
 
-/** Sezioni del modello che richiedono un dato dell'ente (contengono `[[...]]` nel modello). */
-const NOTES_WITH_ENTITY_DATA = ['owner', 'purpose', 'contributions', 'liability', 'ip', 'changes', 'law', 'contacts'];
+/** Sezioni del modello che richiedono un dato dell'ente (contengono `[[...]]` nel modello); le altre sono testo completo da far rivedere al legale. */
+const NOTES_WITH_ENTITY_DATA = ['owner', 'ip', 'changes', 'law', 'contacts'];
 
 /**
  * @param  list<string>  $without

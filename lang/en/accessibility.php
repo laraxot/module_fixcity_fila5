@@ -28,6 +28,14 @@ return [
             'title' => 'Date of last update',
             'hint' => 'Date of the last review of the statement (format YYYY-MM-DD); it must be reviewed every year.',
         ],
+        'entity' => [
+            'title' => 'Name of the municipality',
+            'hint' => 'Name of the body (for example “Municipality of …”), in the name key of the tenant’s ente.php file: it is the single source of the body’s data.',
+        ],
+        'officer' => [
+            'title' => 'Accessibility officer',
+            'hint' => 'Name and role (or office) of the person responsible for accessibility and for handling reports, in the officer field of the statement.',
+        ],
         'feedback_email' => [
             'title' => 'Address for reports',
             'hint' => 'Mailbox of the municipality that receives accessibility reports: without it the feedback form cannot send.',
