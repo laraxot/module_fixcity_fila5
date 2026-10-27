@@ -194,6 +194,7 @@ return [
         'required' => 'Il campo :attribute è obbligatorio.',
         'min' => 'Il campo :attribute deve contenere almeno :min caratteri.',
         'max' => 'Il campo :attribute non può superare :max caratteri.',
+        'privacy_accepted' => 'Per inviare la segnalazione devi accettare l\'informativa sulla privacy.',
     ],
     'sections' => [
         'Riepilogo' => [

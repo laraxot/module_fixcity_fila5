@@ -194,6 +194,7 @@ return [
         'required' => 'Das Feld :attribute ist erforderlich.',
         'min' => 'Das Feld :attribute muss mindestens :min Zeichen enthalten.',
         'max' => 'Das Feld :attribute darf höchstens :max Zeichen enthalten.',
+        'privacy_accepted' => 'Um die Meldung zu senden, müssen Sie die Datenschutzerklärung akzeptieren.',
     ],
     'sections' => [
         'Riepilogo' => [
