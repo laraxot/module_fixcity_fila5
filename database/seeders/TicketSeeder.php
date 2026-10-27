@@ -9,14 +9,14 @@ use Faker\Generator;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Schema;
-use Modules\Fixcity\Database\Seeders\Support\DemoCategoryCatalog;
-use Modules\Fixcity\Database\Seeders\Support\DemoMunicipalityProvider;
-use Modules\Fixcity\Database\Seeders\Support\DemoNarrative;
-use Modules\Fixcity\Database\Seeders\Support\DemoPeopleProvider;
-use Modules\Fixcity\Database\Seeders\Support\DemoSlaTimeline;
-use Modules\Fixcity\Database\Seeders\Support\DemoText;
-use Modules\Fixcity\Database\Seeders\Support\DemoTicketWriter;
-use Modules\Fixcity\Database\Seeders\Support\DemoWeightedChoice;
+use Modules\Fixcity\Database\Seeders\Demo\DemoCategoryCatalog;
+use Modules\Fixcity\Database\Seeders\Demo\DemoMunicipalityProvider;
+use Modules\Fixcity\Database\Seeders\Demo\DemoNarrative;
+use Modules\Fixcity\Database\Seeders\Demo\DemoPeopleProvider;
+use Modules\Fixcity\Database\Seeders\Demo\DemoSlaTimeline;
+use Modules\Fixcity\Database\Seeders\Demo\DemoText;
+use Modules\Fixcity\Database\Seeders\Demo\DemoTicketWriter;
+use Modules\Fixcity\Database\Seeders\Demo\DemoWeightedChoice;
 use Modules\Fixcity\Enums\TicketPriorityEnum;
 use Modules\Fixcity\Enums\TicketStatusEnum;
 use Modules\Fixcity\Models\TicketActivity;
@@ -38,9 +38,9 @@ use Modules\Fixcity\Models\TicketActivity;
  * Uso:
  *   php artisan db:seed --class="Modules\Fixcity\Database\Seeders\TicketSeeder"
  *
- * @phpstan-import-type TicketPlan from Support\DemoTicketWriter
- * @phpstan-import-type CategoryRow from Support\DemoTicketWriter
- * @phpstan-import-type PersonRow from Support\DemoTicketWriter
+ * @phpstan-import-type TicketPlan from \Modules\Fixcity\Database\Seeders\Demo\DemoTicketWriter
+ * @phpstan-import-type CategoryRow from \Modules\Fixcity\Database\Seeders\Demo\DemoTicketWriter
+ * @phpstan-import-type PersonRow from \Modules\Fixcity\Database\Seeders\Demo\DemoTicketWriter
  */
 class TicketSeeder extends Seeder
 {
@@ -103,14 +103,18 @@ class TicketSeeder extends Seeder
         }
 
         $faker = Factory::create('it_IT');
-        $faker->seed($randomSeed ?? self::RANDOM_SEED);
-
+        DemoPeopleProvider::flush();
         $citizens = DemoPeopleProvider::citizens($faker);
         if ($citizens === []) {
             $this->command?->warn('TicketSeeder: nessun cittadino disponibile, seed saltato.');
 
             return [];
         }
+
+        // I pool demo possono creare utenti al primo avvio: prepararli prima di
+        // inizializzare Faker impedisce che quel side effect alteri il dataset.
+        DemoPeopleProvider::staff($faker);
+        $seed = $randomSeed ?? self::RANDOM_SEED;
 
         $writer = new DemoTicketWriter(self::CODE_PREFIX);
         $writer->clearDemoActivities();
@@ -121,10 +125,13 @@ class TicketSeeder extends Seeder
         $photos = 0;
 
         for ($index = 1; $index <= $count; $index++) {
+            // Ogni ticket ha una sequenza propria: i campi opzionali di un ticket
+            // non possono spostare la casualità del ticket successivo.
+            $faker->seed($seed + $index);
             $plan = $this->plan($faker, $index, $categories, $citizens);
             $ticketId = $writer->persist($faker, $plan);
             $writer->writeActivities($faker, $plan, $ticketId);
-            $photos += $writer->maybeAttachPhoto($plan['code'], $ticketId, $faker);
+            $photos += $writer->maybeAttachPhoto($plan['code'], $ticketId);
             $ticketIds[] = $ticketId;
         }
 
@@ -142,6 +149,10 @@ class TicketSeeder extends Seeder
      */
     private function plan(Generator $faker, int $index, array $categories, array $citizens): array
     {
+        if ($citizens === []) {
+            throw new \LogicException('Ticket plans require at least one citizen.');
+        }
+
         $category = self::weighted($faker, $categories, static fn (array $row): int => $row['weight']);
         $municipality = DemoMunicipalityProvider::pickWeighted($faker);
         $address = DemoMunicipalityProvider::streetAddress($faker, $municipality);

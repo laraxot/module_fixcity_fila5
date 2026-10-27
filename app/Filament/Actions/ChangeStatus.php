@@ -7,6 +7,7 @@ namespace Modules\Fixcity\Filament\Actions;
 use Filament\Actions\Action;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
+use Illuminate\Database\Eloquent\Model;
 use Modules\Fixcity\Actions\ChangeStatus as ActionChangeStatus;
 use Modules\Fixcity\Enums\TicketStatusEnum;
 use Modules\Fixcity\Models\Ticket;
@@ -18,8 +19,11 @@ class ChangeStatus extends Action
     {
         parent::setUp();
 
+        // Etichette da lang (filament-blueprint Fixcity): niente stringhe hardcoded —
+        // l'operatore registra motivo e stato nella cronologia visibile al cittadino.
         $this->translateLabel()
             ->authorize('changeStatus')
+            ->visible(static fn (?Model $record): bool => $record instanceof Ticket && self::targetsFor($record) !== [])
             ->action(
                 static function (Ticket $record, array $data): void {
                     $status = $data['status'] instanceof TicketStatusEnum
@@ -33,19 +37,47 @@ class ChangeStatus extends Action
             )
             ->schema([
                 Select::make('status')
-                    ->options(TicketStatusEnum::class)
+                    ->options(static fn (?Model $record): array => $record instanceof Ticket ? self::optionsFor($record) : [])
                     ->required(),
                 TextInput::make('reason')
-                    ->label('Per quale motivo stai modificando lo stato?')
-                    ->helperText('La motivazione viene registrata nella cronologia. Gli aggiornamenti pubblici sono visibili al cittadino.')
+                    ->label(__('fixcity::ticket.actions.changeStatus.reason_label'))
+                    ->helperText(__('fixcity::ticket.actions.changeStatus.reason_help'))
                     ->required(),
             ])
-            ->label('Change Status')
             ->icon('ui-status')
-            ->tooltip('Change Status')
-            ->modalHeading('Modifica Status')
-            // ->requiresConfirmation()
-            ->modalSubmitActionLabel('Modifica');
+            ->tooltip(__('fixcity::ticket.actions.changeStatus.tooltip'))
+            ->modalHeading(__('fixcity::ticket.actions.changeStatus.modal_heading'))
+            ->modalSubmitActionLabel(__('fixcity::ticket.actions.changeStatus.modal_submit'));
+    }
+
+    /**
+     * Target consentiti dalla matrice di `TicketStatusEnum` per lo stato corrente del ticket (DCP-281, A-13).
+     * Stato vuoto: nessun vincolo, come in `Actions\ChangeStatus`. Stato non riconosciuto: nessun target.
+     *
+     * @return list<TicketStatusEnum>
+     */
+    private static function targetsFor(Ticket $ticket): array
+    {
+        $current = $ticket->resolveTicketStatusValue();
+
+        if ($current === '') {
+            return TicketStatusEnum::cases();
+        }
+
+        return TicketStatusEnum::tryFrom($current)?->allowedTargets() ?? [];
+    }
+
+    /**
+     * @return array<string, string> valore => etichetta, nel formato della Select
+     */
+    private static function optionsFor(Ticket $ticket): array
+    {
+        $options = [];
+        foreach (self::targetsFor($ticket) as $target) {
+            $options[$target->value] = $target->getLabel();
+        }
+
+        return $options;
     }
 
     public static function getDefaultName(): ?string

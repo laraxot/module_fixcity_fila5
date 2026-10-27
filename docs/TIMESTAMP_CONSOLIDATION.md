@@ -96,7 +96,3 @@ public function up(): void
 ---
 
 *Prepared for the **Fixcity** module – version 1.0, 2026‑06‑05.*
---- BMAD + Second Brain ---
-- Scopo: documentazione tecnica del modulo.
-- Utilità: riferimento sviluppatori/audit.
-- Funzionalità: struttura, dipendenze, convenzioni (no date .md, git avanti).

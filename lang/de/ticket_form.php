@@ -10,7 +10,7 @@ return [
     'fields' => [
         'location' => [
             'label' => 'Ort',
-            'invalid' => 'Geben Sie einen gültigen Punkt auf der Karte an: Breitengrad zwischen -90 und 90, Längengrad zwischen -180 und 180.',
+            'invalid' => 'Wählen Sie den Punkt auf der Karte oder suchen Sie eine Adresse: Wir brauchen ihn, um zu wissen, wo die Störung ist.',
             'placeholder' => 'Ort suchen',
             'helper_text' => 'Geben Sie an, wo die Störung aufgetreten ist',
             'address' => [
@@ -43,7 +43,7 @@ return [
             'error_count' => 'Es können höchstens :max Dateien angehängt werden',
             'error_upload' => 'Hochladen fehlgeschlagen, bitte erneut versuchen',
             'label' => 'Bilder',
-            'helper_text' => 'Wählen Sie ein oder mehrere Bilder aus, die der Meldung beigefügt werden sollen',
+            'helper_text' => 'Zulässige Formate: :formats. Bis zu :max_files Dateien, jeweils höchstens :max_size MB.',
             'placeholder' => 'Bilder hinzufügen (optional)',
             'description' => 'Bilder zur Unterstützung der Meldung',
         ],

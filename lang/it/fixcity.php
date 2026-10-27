@@ -66,4 +66,23 @@ return [
             'accept_terms' => "Devi accettare l'informativa sulla privacy per continuare.",
         ],
     ],
+
+    // BMAD + Second Brain — Auth login translations (5-element convention)
+    'auth.login.title.text' => 'Accedi ai servizi',
+    'auth.login.intro.text' => 'Utilizza le tue credenziali per accedere all’area riservata.',
+    'auth.login.no_account.text' => 'Non hai ancora un account?',
+    'auth.login.create_account.text' => 'Registrati',
+    'auth.login.forgot_password.text' => 'Password dimenticata?',
+    'auth.login.submitting.text' => 'Accesso in corso…',
+    'auth.login.register.action.text' => 'Registrati',
+    'auth.login.forgot_password.action.text' => 'Password dimenticata?',
+    'auth.login.email.text' => 'Email',
+    'auth.login.email.placeholder.text' => 'nome@esempio.it',
+    'auth.login.password.text' => 'Password',
+    'auth.login.password.placeholder.text' => '••••••••',
+    'auth.login.heading.text' => 'Accedi al tuo account',
+    'auth.login.subtitle.text' => 'Portale digitale del Comune di Fixcity',
+    'auth.login.button.text' => 'Accedi',
+    'auth.login.meta.description' => 'Accedi al portale digitale del Comune di Fixcity',
+
 ];

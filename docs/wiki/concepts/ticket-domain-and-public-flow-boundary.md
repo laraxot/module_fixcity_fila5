@@ -13,6 +13,8 @@ related:
   - "../../../../Cms/docs/wiki/concepts/cms-content-routing-theme-boundary.md"
   - "../../../../Geo/docs/wiki/concepts/geo-data-and-map-boundary.md"
   - "../../../../../Themes/Sixteen/docs/wiki/concepts/legal-consent-ui-boundary.md"
+status: draft
+qmd: "ticket domain and public flow boundary fixcity"
 ---
 
 # Ticket domain and public flow boundary

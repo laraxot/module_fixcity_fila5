@@ -4,7 +4,7 @@ type: bmad-ux-spec
 status: approved
 module: Fixcity
 created: 2026-09-27
-updated: 2026-09-27
+updated: 2026-10-23
 tags: [bmad, fixcity, sixteen, homepage, guest, design-comuni, visual-contract]
 qmd: "homepage guest expected visual design comuni hero map cta"
 issues:
@@ -17,6 +17,8 @@ related:
   - ./homepage-guest-visual-comparison.md
   - ./homepage-guest-visual-correction-plan.md
   - ../../../../Themes/Sixteen/docs/bmad/homepage-guest-visual-contract.md
+  - ../homepage-content-contract.md
+  - ../../../../Themes/Sixteen/docs/bmad/homepage-a11y-pixel-verification.md
   - ../wiki/concepts/user-journey-map.md
 ---
 
@@ -28,6 +30,12 @@ Il visitatore anonimo apre `http://localhost:8001/it` (o `/en`) e deve capire in
 un colpo d’occhio: cos’è FixCity, come segnalare, dove sono le segnalazioni
 pubbliche. La home non è un mock Tailwind generico: è frontoffice Design Comuni
 (tema Sixteen) + dominio FixCity (ticket pubblici).
+
+## Contenuto (SSOT)
+
+`laravel/config/local/fixcity/database/content/pages/home.json` —
+[homepage-content-contract.md](../homepage-content-contract.md).
+Niente `Themes/.../pages/home.blade.php`.
 
 ## Ownership
 
@@ -52,10 +60,13 @@ pubbliche. La home non è un mock Tailwind generico: è frontoffice Design Comun
 - Navbar temi Design Comuni (Amministrazione / Novità / Servizi / …) senza chiavi grezze `__()`
 - Un solo `<main>` con contenuto focusabile
 
-### 2. Hero civica (`#head-section`)
+### 2. Hero civica (`#head-section.fc-home-head`)
+
+Studio pages_old → avanti: mappa viva nella hero, non charcoal marketing.
 
 - Sfondo primario ente (verde Design Comuni / BI)
-- Overline: `pub_theme::navigation.site_title` → FixCity
+- Overline: servizio ente (CMS) / FixCity
+- Trust line: `pub_theme::home.hero.trust`
 - Titolo bianco contrasto alto: `pub_theme::home.hero.title`
 - Sottotitolo bianco leggibile: `pub_theme::home.hero.subtitle`
 - CTA primaria piena (sfondo bianco, testo verde): “Invia una segnalazione” →

@@ -46,5 +46,15 @@ Rapporto: `laravel/Modules/Fixcity/docs/security/filament-security-audit-altri-p
 - [ ] Decisioni D1-D7 dell'utente e DPO.
 - [ ] Implementazione del registro e poi `reviewing-filament-plans`.
 
+## Chiusura di C-3, contenuto CMS valutato come Blade (2026-10-15)
+- **Prova del difetto**: un blocco con `{{ system('id') }}` eseguiva `id` sul server. Test rosso in `Modules/Cms/tests/Unit/Models/Traits/HasBlocksTest.php`, output `uid=1000(...)`.
+- **Causa**: `HasBlocks::compile()` passava a `Blade::render()` ogni stringa con `{{ }}`; il blocco `Themes/Sixteen/.../sidebar/system-info.blade.php` rivalutava poi i valori con un secondo `Blade::render` non escapato (blocco oggi non usato da nessun JSON).
+- **Correzione**: `compile()` rende solo `LaravelLocalization::localizeURL('...')` e `route('...', [...])` con soli letterali stringa (`SAFE_EXPRESSION`); ogni altra espressione o direttiva resta testo e va in `Log::warning`. Nella vista tolto il secondo render. Nessun file nuovo.
+- **Uso legittimo misurato**: DB di sviluppo, 101 pagine con 0 espressioni e 8 sezioni con 8 espressioni di 2 forme (`localizeURL`); JSON del repo, `localizeURL` e `route`. I `{{ name }}` e `{{#each}}` sono template email, un altro percorso.
+- **Verifica**: HasBlocksTest 8/8 (5 rossi prima); vista reale con payload ostile, non eseguito e mostrato come testo; `/it` risponde 200 con gli stessi 8 link e nessuna `{{` grezza; PHPStan `Modules` senza errori su questi file.
+- **Modifica a un test esistente**: l'asserzione `{{ 1 + 1 }}` uguale a `2` dava per atteso il comportamento pericoloso; ora il caso vale come input da lasciare invariato. Il test non e' stato cancellato.
+- **Aperto**: `NotificationTemplate::compileString` (Notify) rende con `Blade::render` i template salvati nel DB, quindi chi li modifica puo' eseguire PHP. Scelta: limitare la modifica ai super-admin oppure usare un motore senza PHP. Non toccato. Contenuti di produzione con altre espressioni non misurati: ora restano testo e compaiono nel log.
+- **Limite dei test**: il runner da `laravel/` non carica `tests/Pest.php` di modulo e `Cms\Tests\TestCase` ripunta sqlite sul DB di sviluppo; per questo `HasBlocksTest` usa `XotBaseTestCase`. `SectionModelTest` e' rosso 8/8 per lo stesso motivo (non toccato).
+
 ## Non verificato
 Le URL `filamentphp.com/docs/5.x/...` del piano non sono state aperte; `search-docs` non disponibile; il costo e la durata della licenza non sono noti.

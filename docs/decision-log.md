@@ -11,6 +11,38 @@ qmd: "decision log   fixcity fixcity"
 
 ## Decisions
 
+### 2026-10-22: Canonical Folio routes for public ticket links
+- **Choice**: Solo shell tema — `container0.index` (lista) e `container0.view` con
+  `container0=tickets` e `slug0=<id|create|track>` (dettaglio / crea / traccia).
+  Area personale: `container0.view` + `area-personale` + slug CMS. **Vietati**
+  `route('tickets.*')`, `route('tickets.show')`, e `LaravelLocalization::localizeUrl()`
+  nei Blade FO.
+- **Rationale**: La risposta HTTP arriva da `[container0]/[slug0]` del tema, non
+  dalle Folio modulo omonime. `localizeUrl` nel Blade duplica la responsabilità
+  della rotta e reincarna regressioni (vedi [frontoffice-link-conventions.md](./frontoffice-link-conventions.md)).
+- **Status**: Required (religione)
+- **Scope**: Fixcity contract + Sixteen blocks; test Unit/Views `Frontoffice*ContractTest`.
+
+### 2026-10-22: FO i18n — chiavi traduzione, non stringhe nel Blade
+- **Choice**: Multilingua `it|en|de|es`. Chrome tema → `pub_theme::` (navigation /
+  header / auth.logout / ui); dominio → modulo owner (`fixcity::…`); Filament
+  senza `->label()`. Pattern `module::context.collection.element.type`.
+- **Rationale**: URL localizzati dalla rotta Folio; la copy non può restare italiana
+  hardcoded nei Blade blog/events/logout. Governance Lang + blueprint Fixcity/Sixteen.
+- **Status**: Required (religione)
+- **Scope**: Sixteen blocks + lang; docs frontoffice-link-conventions + filament-blueprint.
+
+### 2026-10-22: FO shell — alias IT + 404 senza CMS + APP_ENV local
+<!-- Supersedes: shell vuote 200 su path IT; linked from frontoffice-link-conventions.
+User: «analizzare tutto il front office… bmad + second brain + filament blueprint + playwright mcp» -->
+- **Choice**: Alias `servizi|eventi|novita|faq|segnalazioni` → container canonici (301);
+  `area-personale` index → login/pratiche; container senza `*.index` CMS → **404**.
+  Dev server FO: `APP_ENV=local` (mai `testing`: lista ticket risulta vuota).
+- **Rationale**: Shell solo header/footer sono incoerenti; path Design Comuni IT devono
+  risolvere. Elenco pubblico = stati `canViewByAll` + `location` not null.
+- **Status**: Required
+- **Scope**: Sixteen Folio `[container0]/index`; `ListPublicTicketsAction` URL `container0.view`.
+
 ### 2026-01-01: DesignComuni Frontend Redesign — TailwindCSS + Alpine.js + Lit + DaisyUI
 - **Choice**: Replace Bootstrap Italia with TailwindCSS + Alpine.js + Lit + DaisyUI + Flowbite + Filament
 - **Rationale**: Modern utility-first approach following impeccable.style and tasteskill.dev principles; aligns with Design Comuni visual requirements using token-based design
@@ -66,11 +98,24 @@ qmd: "decision log   fixcity fixcity"
 - [ ] Define success metrics and measurement methodology
 - [ ] Establish feedback collection process for iteration
 
-<<<<<<< .merge_file_DIoIQs
+## D-PA-NAV — Tab area personale identici su tutte le pagine (2026-10-22)
 
---- BMAD + Second Brain ---
-- Scopo: documentazione tecnica del modulo.
-- Utilità: riferimento sviluppatori/audit.
-- Funzionalità: struttura, dipendenze, convenzioni (no date .md, git avanti).
-=======
->>>>>>> .merge_file_Ecrq7o
+- **Decisione:** chrome unico `Themes/Sixteen/.../personal-area/heading.blade.php` + `navigation.blade.php` per pratiche, seguite, notifiche, impostazioni.
+- **Perche:** i tab sono la mappa dell'area; placement diverso o nav assente su una sorella e' bug di prodotto (DCP-110/111).
+- **Anti-regressione:** feature test sulle quattro rotte; docs Sixteen `personal-area-shared-nav-tabs-contract` + `why-personal-area-tabs-must-be-identical`.
+
+## 2026-10-26: Frontoffice ownership and superseded frontend plan
+
+- **Decision:** Sixteen owns presentation and responsive parity; Fixcity owns domain Actions, data and contracts. The old frontend implementation plan is superseded.
+- **Rationale:** ticket-list and footer are theme views, while tenant/contact resolution is domain-owned; keeping those boundaries prevents duplicate UI logic and semantic merge collisions.
+- **References:** `Modules/Fixcity/docs/bmad/design-comuni-frontend-plan.md`, `Themes/Sixteen/docs/MERGE_CONFLICT_RESOLUTION_LOG.md`.
+
+## 2026-10-26: Legal pages require tenant-approved facts
+- **Decision:** Do not replace `Testo non ancora completo` with fabricated municipality or DPO data. Keep the publication gate until the tenant supplies approved legal content and operational facts.
+- **Rationale:** `config/local/fixcity/ente.php` is intentionally empty; controller identity, legal bases, recipients, retention, cookies and accessibility status cannot be inferred safely from the application.
+- **Impact:** Added `docs/bmad/legal-content-completion.md`; privacy, legal notes, terms, media policy and accessibility remain blocked by tenant input, with official sources and a completion checklist recorded.
+## 2026-10-26 — Header CMS come fonte primaria
+
+- Il contratto del frontoffice mantiene `header.json` come sorgente di contenuti: il nome demo `Demo` non viene hardcodato nella Blade.
+- `header/v1.blade.php` usa `ente.region_name` solo quando è valorizzato; in caso contrario conserva `region.name` dal JSON (`Demo`). Questo evita sia placeholder vuoti sia la perdita dell’identità reale dell’ente.
+- La verifica deve includere il CTA area personale e l’avatar a 375, 768 e 1440px.

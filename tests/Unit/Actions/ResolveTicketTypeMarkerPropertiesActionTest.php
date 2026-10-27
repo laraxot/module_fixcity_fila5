@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 use Modules\Fixcity\Actions\ResolveTicketTypeMarkerPropertiesAction;
 use Modules\Fixcity\Enums\TicketTypeEnum;
-use Tests\Modules\Fixcity\TestCase;
+use Modules\Fixcity\Tests\TestCase;
 use PHPUnit\Framework\Assert;
 
 uses(TestCase::class);

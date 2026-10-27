@@ -1,16 +1,16 @@
 ---
-title: "README"
-type: note
-tags: [documentation]
+title: "Fixcity: documentazione del modulo"
+type: readme
+tags: [module, documentation, fixcity, ownership]
 created: 2026-09-26
-updated: 2026-09-26
-qmd: "README"
+updated: 2026-10-20
+qmd: "Fixcity modulo ownership ticket FAQ documentazione"
 issues: []
 discussions: []
-status: draft
+status: active
 ---
 
-# Laravel Modules Documentation
+# Modulo Fixcity
 
 This directory routes to the active documentation roots for the Laravel modules in this repository.
 
@@ -18,6 +18,7 @@ This directory routes to the active documentation roots for the Laravel modules 
 
 - **Identita**: modulo nwidart `Fixcity` (alias `fixcity`, namespace `Modules\Fixcity`, package `laraxot/module_fixcity_fila5`, repo git separato). Provider in `module.json`: `Providers/FixcityServiceProvider` e `Providers/Filament/AdminPanelProvider`. `php artisan module:list` lo mostra `Enabled`.
 - **Cosa possiede**: le segnalazioni dei cittadini (ticket). Modello `app/Models/Ticket.php`, enum `app/Enums/Ticket{Status,Priority,Type}Enum.php`, 64 file in `app/Actions/` (QueueableAction, nessun Controller), wizard `app/Filament/Widgets/CreateTicketWizardWidget.php` con schema `app/Filament/Resources/TicketResource/Schemas/TicketForm.php` (passi `privacy`, `data`, `summary`), pagine Folio in `resources/views/pages/` (`tickets/create`, `tickets/confirmation`, `tickets/track`, `tickets/[id]`, API JSON in `pages/api/`), area personale e pagine legali.
+- Le operazioni asincrone dei ticket sono Queueable Actions in `app/Actions/`; non esistono `app/Jobs/` o `app/Services/`. Il contratto e la motivazione sono in [Queueable Actions](../../Xot/docs/architecture/queueable-actions.md).
 - **Cosa NON possiede**: mappe e picker di coordinate (modulo Geo), layout, Design Comuni e blocchi del front office (tema Sixteen), il motore delle pagine dinamiche (modulo Cms: `PageSlugMiddleware`, `Page`). I JSON delle pagine di Fixcity stanno in `config/database/content/pages/` (105 file) e hanno copie in `laravel/config/local/fixcity/`.
 - **Superficie HTTP**: `routes/web.php` e `routes/api.php` del modulo sono vuoti. I POST stanno in `laravel/routes/web.php` (`/livewire/form-create-ticket` verso `CreateTicketWizardWidget@submit`, `/{lang}/tickets/{ticket}/follow` verso `FollowTicketAction`). Il pannello admin risponde su `/fixcity/admin/tickets` (da `php artisan route:list`).
 - **Quick start** (dalla cartella `laravel/`):
@@ -33,8 +34,11 @@ This directory routes to the active documentation roots for the Laravel modules 
 - Then open that module's `docs/README.md`.
 - Use archive files only when the active docs do not answer the question.
 
-The governing rule for all module docs is in
-[docs/project/docs-governance.md](../../../../docs/project/docs-governance.md).
+Il contratto comune per tutti i docs di moduli e temi è in
+[DOCUMENTATION_GOVERNANCE.md](../../../../docs/DOCUMENTATION_GOVERNANCE.md).
+Questo `README.md` è l'ingresso canonico del modulo; `00-INDEX.md` resta una
+mappa operativa compatibile con la documentazione storica e non una seconda
+fonte di verità.
 
 ## Core Modules
 
@@ -76,26 +80,35 @@ The governing rule for all module docs is in
 ## Fast Paths
 
 - Shared project rules: [docs/README.md](../../../../docs/README.md)
-- Project documentation governance: [docs/project/docs-governance.md](../../../../docs/project/docs-governance.md)
-- Theme docs: `laravel/Themes/docs/README.md` does not exist (verified 2026-10-14); each theme owns its docs, for example [Sixteen](../../../Themes/Sixteen/docs/README.md)
+- Project documentation governance: [DOCUMENTATION_GOVERNANCE.md](../../../../docs/DOCUMENTATION_GOVERNANCE.md)
+- Theme docs: [laravel/Themes/docs/README.md](../../../Themes/docs/README.md); each theme owns its docs, for example [Sixteen](../../../Themes/Sixteen/docs/README.md)
 - LLM wiki workflow: [docs/wiki/README.md](../../../../docs/wiki/README.md)
 - Modules note: [llm-wiki.md](./llm-wiki.md)
 - Agent rules: [AGENTS.md](../../../AGENTS.md)
 
 ## Documentation
 
+- [Agent confidence brief](./agent-confidence-brief.md) — snapshot operativo
+  verificato (stack, ownership, Sixteen pages, OmniRoute/Claude, memoria agenti).
+- [FAQ catalog ownership](./faq-catalog-ownership.md) — dominio FAQ in Fixcity,
+  composizione in Cms e renderer nel tema Sixteen.
+
+Il modulo possiede significato, catalogo, pubblicazione e fallback delle FAQ;
+non possiede la route Folio né il markup del tema. Una modifica a domande o
+risposte parte da `CivicFaqCatalog`/`ListPublishedFaqsAction`; una modifica
+visuale parte dal blocco Sixteen. Non creare view FAQ nel tema per compensare
+un difetto del catalogo.
+
 - [On-Demand Pattern](./ON-DEMAND-PATTERN.md) — Pattern per caricamento efficiente
 - [QMD Setup](./QMD-SETUP.md) — Configurazione ricerca locale
 - [Performance](./PERFORMANCE-OPTIMIZATION.md) — Metriche e best practice
 - [Project Structure](./PROJECT-STRUCTURE.md) — Directory layout
 - [File di contenuto delle pagine /it/tests](./tests-pages-content-files.md) — `tests.<slug>.json`, stato e regole (2026-10-13)
-- [Indice canonico del modulo](./00-INDEX.md), [mappa delle sottocartelle](./INDEX.md), [panoramica](./index.md)
+- [Indice canonico del modulo](./00-INDEX.md), [mappa delle sottocartelle](./index.md), [panoramica](./index.md)
 - [Scopo e conformita' normativa](./compliance/00-scopo-del-progetto.md), [decision log](./decision-log.md), [wiki](./wiki/index.md), [story](./stories/index.md)
-<<<<<<< .merge_file_I27SSY
 
---- BMAD + Second Brain ---
-- Scopo: documentazione tecnica del modulo.
-- Utilità: riferimento sviluppatori/audit.
-- Funzionalità: struttura, dipendenze, convenzioni (no date .md, git avanti).
-=======
->>>>>>> .merge_file_K7mdNd
+## BMAD — inbound marketing (blog + eventi)
+
+SSoT: [bmad/inbound-marketing/README.md](./bmad/inbound-marketing/README.md)
+
+Wiki: skill/rule/memory `fixcity-inbound-editorial*` in `docs/wiki/`.

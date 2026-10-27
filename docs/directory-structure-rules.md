@@ -28,11 +28,3 @@ find laravel/Modules -type d \( -path '*/lang/lang' -o -name '_docs' \) | sort
 Il comando deve produrre output vuoto.
 
 Regola canonica: [docs/wiki/concepts/no-lang-lang-and-no-underscore-docs-rule.md](../../../../docs/wiki/concepts/no-lang-lang-and-no-underscore-docs-rule.md).
-<<<<<<< .merge_file_isd6X9
-
---- BMAD + Second Brain ---
-- Scopo: documentazione tecnica del modulo.
-- Utilità: riferimento sviluppatori/audit.
-- Funzionalità: struttura, dipendenze, convenzioni (no date .md, git avanti).
-=======
->>>>>>> .merge_file_1hKWW2

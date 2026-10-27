@@ -331,8 +331,3 @@ Ridondanza **runtime** (non solo documentazione): più file `Schema::create` per
 | `temporary_uploads` | Media | `2023` e `2026_01_18` | Idem |
 
 Indice concettuale globale: [`../Xot/docs/wiki/concepts/ridondanze-cross-cutting-codebase.md`](../Xot/docs/wiki/concepts/ridondanze-cross-cutting-codebase.md). Documentazione temi: [`../../Themes/docs/ridondanze-documentazione-temi.md`](../../Themes/docs/ridondanze-documentazione-temi.md).
-
---- BMAD + Second Brain ---
-- Scopo: documentazione tecnica del modulo.
-- Utilità: riferimento sviluppatori/audit.
-- Funzionalità: struttura, dipendenze, convenzioni (no date .md, git avanti).

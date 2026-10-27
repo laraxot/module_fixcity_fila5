@@ -159,8 +159,3 @@ Application UI:
 - [Naming Convention Cartelle](./BLOCKS-FOLDER-NAMING.md)
 - [Design Comuni Reference](https://italia.github.io/design-comuni-pagine-statiche/)
 - [Tailwind UI Blocks](https://tailwindcss.com/plus/ui-blocks)
-
---- BMAD + Second Brain ---
-- Scopo: documentazione tecnica del modulo.
-- Utilità: riferimento sviluppatori/audit.
-- Funzionalità: struttura, dipendenze, convenzioni (no date .md, git avanti).

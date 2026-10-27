@@ -2,17 +2,16 @@
 
 declare(strict_types=1);
 
-namespace Tests\Modules\Fixcity\Feature\Api;
+namespace Modules\Fixcity\Tests\Feature\Api;
 
 use Modules\Fixcity\Database\Factories\TicketFactory;
 use Modules\Fixcity\Enums\TicketStatusEnum;
 use Modules\Fixcity\Enums\TicketTypeEnum;
-use Tests\Modules\Fixcity\TestCase;
+use Modules\Fixcity\Tests\TestCase;
 use Modules\User\Database\Factories\UserFactory;
 use Modules\Xot\Actions\Cast\SafeStringCastAction;
 
 uses(TestCase::class);
-
 it('returns geojson feature collection from live api', function (): void {
     /** @var TestCase $this */
     $response = $this->getJson('/api/tickets/geojson');

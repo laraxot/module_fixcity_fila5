@@ -9,7 +9,7 @@ use Modules\Fixcity\Actions\TicketCitizenRating\EnsureTicketCitizenRatingDefinit
 use Modules\Fixcity\Database\Factories\TicketFactory;
 use Modules\Fixcity\Filament\Widgets\CitizenRatingOverviewWidget;
 use Modules\Fixcity\Models\Ticket;
-use Tests\Modules\Fixcity\TestCase;
+use Modules\Fixcity\Tests\TestCase;
 use Modules\Rating\Models\RatingMorph;
 use Modules\User\Database\Factories\UserFactory;
 

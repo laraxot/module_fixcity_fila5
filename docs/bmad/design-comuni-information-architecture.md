@@ -31,7 +31,7 @@ catalogo autonomo scollegato da servizi, pratiche e punti di contatto.
 | **Luogo** | posizione della segnalazione e mappa pubblica |
 | **Messaggio** | comunicazioni di stato e avvisi verso il cittadino |
 | **Documento pubblico** | privacy, accessibilità, regolamenti e istruzioni |
-| **Notizia/Evento** | contenuti editoriali eventualmente pubblicati nel CMS comunale |
+| **Notizia/Evento** | `Article content_type=post|event`; FO etichette Design Comuni Novità/Eventi; path `/blog`/`/events`; nav solo via header/footer JSON — vedi [design-comuni-static-pages-study.md](design-comuni-static-pages-study.md) |
 
 “Segnalazione” è un’estensione del dominio Fixcity e non una nuova tipologia
 ufficiale del modello ODS. Va esposta come pratica/servizio civico, conservando

@@ -18,7 +18,7 @@ use Modules\Fixcity\Models\Ticket;
                 'commentableType' => Ticket::class,
                 'commentableKey' => (string) $record->getKey(),
                 'readOnly' => false,
-                'hideNotificationOptions' => true,
+                'hideNotifications' => true,
                 'noReplies' => true,
                 'noReactions' => true,
             ], key('ticket-comments-'.$record->getKey()))
@@ -29,7 +29,7 @@ use Modules\Fixcity\Models\Ticket;
                 'commentableType' => Ticket::class,
                 'commentableKey' => (string) $record->getKey(),
                 'readOnly' => true,
-                'hideNotificationOptions' => true,
+                'hideNotifications' => true,
                 'noReplies' => true,
                 'noReactions' => true,
             ], key('ticket-comments-ro-'.$record->getKey()))

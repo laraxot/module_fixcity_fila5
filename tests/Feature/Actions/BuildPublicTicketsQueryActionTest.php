@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\Auth;
 use Modules\Fixcity\Actions\BuildPublicTicketsQueryAction;
 use Modules\Fixcity\Database\Factories\TicketFactory;
 use Modules\Fixcity\Enums\TicketStatusEnum;
-use Tests\Modules\Fixcity\TestCase;
+use Modules\Fixcity\Tests\TestCase;
 use Modules\User\Database\Factories\UserFactory;
 
 uses(TestCase::class);

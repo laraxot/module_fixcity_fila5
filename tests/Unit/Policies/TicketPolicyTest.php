@@ -5,7 +5,7 @@ declare(strict_types=1);
 use Mockery\MockInterface;
 use Modules\Fixcity\Models\Ticket;
 use Modules\Fixcity\Policies\TicketPolicy;
-use Tests\Modules\Fixcity\TestCase;
+use Modules\Fixcity\Tests\TestCase;
 use Modules\Xot\Contracts\UserContract;
 use PHPUnit\Framework\Assert;
 

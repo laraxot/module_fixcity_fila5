@@ -5,7 +5,7 @@ declare(strict_types=1);
 use Livewire\Livewire;
 use Modules\Fixcity\Actions\GetFixcityEmailNotificationPreferenceAction;
 use Modules\Fixcity\Livewire\TicketNotificationPreferencesWidget;
-use Tests\Modules\Fixcity\TestCase;
+use Modules\Fixcity\Tests\TestCase;
 use Modules\User\Database\Factories\UserFactory;
 
 uses(TestCase::class);

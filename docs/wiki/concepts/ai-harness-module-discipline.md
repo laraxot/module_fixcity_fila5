@@ -15,6 +15,7 @@ related:
   - ../../../../../../docs/wiki/bmad/architecture.md
   - ../../../../../../docs/wiki/rules/wiki-markdown-frontmatter-mandatory.md
   - second-brain-local-discipline.md
+status: draft
 ---
 
 # AI harness — moduli Laraxot

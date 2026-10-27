@@ -6,7 +6,7 @@ use Illuminate\Validation\ValidationException;
 use Modules\Fixcity\Actions\SubmitCitizenTicketRatingAction;
 use Modules\Fixcity\Enums\TicketStatusEnum;
 use Modules\Fixcity\Models\Ticket;
-use Tests\Modules\Fixcity\TestCase;
+use Modules\Fixcity\Tests\TestCase;
 use PHPUnit\Framework\Assert;
 
 uses(TestCase::class);
@@ -18,6 +18,6 @@ it('rejects rating outside 1-5 range', function (): void {
         app(SubmitCitizenTicketRatingAction::class)->execute($ticket, 0);
         Assert::fail('Expected ValidationException was not thrown');
     } catch (ValidationException $exception) {
-        Assert::assertInstanceOf(ValidationException::class, $exception);
+        Assert::assertSame(ValidationException::class, $exception::class);
     }
 });

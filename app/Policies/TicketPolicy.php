@@ -15,8 +15,12 @@ final class TicketPolicy extends BasePolicy
         return $this->isPaOperator($user) || $user->hasPermissionToOrCreate('ticket.viewAny');
     }
 
-    public function view(UserContract $user, Ticket $ticket): bool
+    public function view(?UserContract $user, Ticket $ticket): bool
     {
+        if ($user === null) {
+            return $ticket->isVisibleOnPublicFrontoffice();
+        }
+
         return $this->isPaOperator($user)
             || $user->hasPermissionToOrCreate('ticket.view')
             || $ticket->isVisibleOnPublicFrontoffice()
@@ -55,6 +59,11 @@ final class TicketPolicy extends BasePolicy
     public function changeStatus(UserContract $user, Ticket $_ticket): bool
     {
         return $this->isPaOperator($user) || $user->hasPermissionToOrCreate('ticket.changeStatus');
+    }
+
+    public function communicate(UserContract $user, Ticket $_ticket): bool
+    {
+        return $this->isPaOperator($user) || $user->hasPermissionToOrCreate('ticket.communicate');
     }
 
     public function changePriority(UserContract $user, Ticket $_ticket): bool

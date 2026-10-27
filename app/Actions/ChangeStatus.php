@@ -46,7 +46,7 @@ class ChangeStatus
             : TicketActivityVisibilityEnum::Internal;
 
         $actorId = auth()->id();
-        $userId = is_int($actorId) ? $actorId : null;
+        $userId = is_int($actorId) || is_string($actorId) ? $actorId : null;
 
         $ticket->getConnection()->transaction(function () use ($ticket, $target, $current, $reason, $visibility, $userId): void {
             $ticket->setStatus($target);

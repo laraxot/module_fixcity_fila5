@@ -4,7 +4,9 @@ declare(strict_types=1);
 
 namespace Modules\Fixcity\Filament\Resources\TicketResource\Schemas;
 
+use Filament\Facades\Filament;
 use Filament\Forms\Components\Checkbox;
+use Filament\Forms\Components\Field;
 use Filament\Forms\Components\Hidden;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\SpatieMediaLibraryFileUpload;
@@ -15,10 +17,10 @@ use Filament\Schemas\Components\Html;
 use Filament\Schemas\Components\Section;
 use Filament\Schemas\Components\View;
 use Filament\Schemas\Components\Wizard\Step;
-use Filament\Facades\Filament;
 use Illuminate\Support\HtmlString;
 use Illuminate\Support\MessageBag;
 use Illuminate\Support\Str;
+use Livewire\Component as LivewireComponent;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 use Modules\Fixcity\Actions\BuildTicketReviewSummaryAction;
 use Modules\Fixcity\Actions\GetPublishedPrivacyPolicyAction;
@@ -62,7 +64,7 @@ class TicketForm extends XotBaseResourceForm
             'reviewSummary' => View::make('pub_theme::components.wizard.summary-step')
                 ->viewData(static fn (object $livewire): array => [
                     'review' => app(BuildTicketReviewSummaryAction::class)->execute(
-                        static::reviewFormState($livewire),
+                        array_filter((array) data_get($livewire, 'data', []), is_string(...), ARRAY_FILTER_USE_KEY),
                         Filament::auth()->user(),
                     ),
                     'data' => (array) data_get($livewire, 'blockData', []),
@@ -72,34 +74,6 @@ class TicketForm extends XotBaseResourceForm
                 ])
                 ->columnSpanFull(),
         ];
-    }
-
-    /**
-     * Stato del form a chiavi stringa per l'action di riepilogo.
-     *
-     * `data_get()` torna `mixed` e il cast `(array)` propagherebbe chiavi `array-key`,
-     * mentre l'action richiede `array<string, mixed>`: si tengono solo le chiavi stringa,
-     * come faceva il precedente `array_filter(..., ARRAY_FILTER_USE_KEY)`.
-     *
-     * @return array<string, mixed>
-     */
-    public static function reviewFormState(object $livewire): array
-    {
-        $raw = data_get($livewire, 'data', []);
-
-        if (! is_array($raw)) {
-            return [];
-        }
-
-        $state = [];
-
-        foreach ($raw as $key => $value) {
-            if (is_string($key)) {
-                $state[$key] = $value;
-            }
-        }
-
-        return $state;
     }
 
     /**
@@ -313,9 +287,32 @@ class TicketForm extends XotBaseResourceForm
         $address->hiddenLabel()->required()->validationMessages(static::getDataStepValidationMessages())->view('fixcity::filament.forms.components.dc-place-autocomplete');
         // L'aiuto "Indica il luogo del disservizio" ripeterebbe la descrizione della scheda: non serve sotto la mappa.
         $map->hiddenLabel()->helperText(null)->validationMessages(static::getDataStepValidationMessages())->extraFieldWrapperAttributes(['class' => 'bg-white p-3 mt-3', 'data-element' => 'location-map']);
+        // FO-3-07: l'errore di un "Avanti" a vuoto restava a campo compilato fino al successivo "Avanti": indirizzo e punto lo rivalidano da soli.
+        static::revalidateWhileInvalid($address, onBlur: true);
+        static::revalidateWhileInvalid($map, ['address']);
 
         return $section->id('report-place')
             ->view('pub_theme::components.wizard.dc-section-card', ['cardClass' => 'p-big p-lg-4']);
+    }
+
+    /**
+     * Un campo che sta mostrando un errore lo rivalida da solo quando cambia, cosi' l'errore sparisce appena il dato c'e' (DCP-286, FO-3-07).
+     * Non rivalida i campi senza errore: nessun errore nuovo prima che l'utente abbia provato ad andare avanti. `$childSuffixes` sono i campi
+     * figli aggiornati insieme (il picker scrive punto e indirizzo in un colpo solo).
+     *
+     * @param  list<string>  $childSuffixes
+     */
+    protected static function revalidateWhileInvalid(Field $field, array $childSuffixes = [], bool $onBlur = false): void
+    {
+        $field->live(onBlur: $onBlur)->afterStateUpdated(static function (Field $component, LivewireComponent $livewire) use ($childSuffixes): void {
+            $path = $component->getStatePath();
+            foreach ([$path, ...array_map(static fn (string $suffix): string => $path.'.'.$suffix, $childSuffixes)] as $candidate) {
+                $errors = $livewire->getErrorBag();
+                if ($errors instanceof MessageBag && $errors->has($candidate)) {
+                    $livewire->validateOnly($candidate);
+                }
+            }
+        });
     }
 
     protected static function getIssueSection(bool $designComuni): Section

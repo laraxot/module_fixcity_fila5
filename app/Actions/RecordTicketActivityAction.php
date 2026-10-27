@@ -25,7 +25,7 @@ final class RecordTicketActivityAction
         TicketStatusEnum $to,
         ?string $reason,
         TicketActivityVisibilityEnum $visibility,
-        ?int $userId,
+        int|string|null $userId,
         array $payload = [],
     ): TicketActivity {
         return TicketActivity::query()->create([

@@ -6,7 +6,7 @@ use Filament\Facades\Filament;
 use Livewire\Livewire;
 use Modules\Fixcity\Filament\Widgets\TicketOverview;
 use Modules\Fixcity\Filament\Widgets\TicketSlaOverviewWidget;
-use Tests\Modules\Fixcity\TestCase;
+use Modules\Fixcity\Tests\TestCase;
 use Modules\User\Database\Factories\UserFactory;
 use Modules\Xot\Filament\Widgets\XotBaseStatsOverviewWidget;
 

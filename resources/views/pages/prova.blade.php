@@ -43,7 +43,7 @@ middleware(['guest']);
 
         <div class="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
             <div class="px-10 py-0 sm:py-8 sm:shadow-sm sm:bg-white dark:sm:bg-gray-950/50 dark:border-gray-200/10 sm:border sm:rounded-lg border-gray-200/60">
-                @volt('auth.login')
+                @volt('fixcity.prova')
                 <form wire:submit="authenticate" class="space-y-6">
 
                     <h1>{{-- $count --}}</h1>

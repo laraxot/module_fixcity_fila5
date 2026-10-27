@@ -2,19 +2,18 @@
 
 declare(strict_types=1);
 
-namespace Tests\Modules\Fixcity\Feature\Livewire;
+namespace Modules\Fixcity\Tests\Feature\Livewire;
 
 use Livewire\Livewire;
 use Modules\Fixcity\Actions\GetPublishedPrivacyPolicyAction;
 use Modules\Fixcity\Enums\TicketTypeEnum;
 use Modules\Fixcity\Filament\Widgets\CreateTicketWidget;
-use Tests\Modules\Fixcity\TestCase;
+use Modules\Fixcity\Tests\TestCase;
 use Modules\User\Database\Factories\UserFactory;
 
 use function Pest\Laravel\actingAs;
 
 uses(TestCase::class);
-
 beforeEach(function (): void {
     /** @var TestCase $this */
     $this->instance(GetPublishedPrivacyPolicyAction::class, new class extends GetPublishedPrivacyPolicyAction

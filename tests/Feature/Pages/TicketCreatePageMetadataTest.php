@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-use Tests\Modules\Fixcity\TestCase;
+use Modules\Fixcity\Tests\TestCase;
 use Modules\User\Database\Factories\UserFactory;
 
 uses(TestCase::class);

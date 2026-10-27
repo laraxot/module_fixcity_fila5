@@ -8,10 +8,15 @@ use Illuminate\Support\Facades\Session;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 use Modules\Fixcity\Models\Ticket;
 use Modules\Xot\Actions\Cast\SafeStringCastAction;
+use Modules\Xot\Contracts\UserContract;
 use Spatie\QueueableAction\QueueableAction;
 
 /**
  * Data bag CMS per la pagina di conferma post-create (email, receipt, area riservata).
+ *
+ * `email_delivery` dice cosa succede davvero all'avviso di ricezione (DCP-284): `mail` se partira' anche una email (stessa regola dei
+ * canali, {@see CanUserReceiveTicketMailAction}), `in_app` se ci sara' solo la notifica nell'area personale, stringa vuota se non c'e'
+ * un proprietario. La pagina sceglie la riga di testo da mostrare con questo valore.
  */
 final class BuildTicketConfirmationDataAction
 {
@@ -25,6 +30,7 @@ final class BuildTicketConfirmationDataAction
      *     slug: string,
      *     status: string,
      *     email: string,
+     *     email_delivery: string,
      *     summary_html: string,
      *     visibility_html: string,
      *     email_intro_html: string,
@@ -42,11 +48,13 @@ final class BuildTicketConfirmationDataAction
         $trackUrl = $this->localize($trackPath, $locale);
         $praticheUrl = $this->localize('/area-personale/pratiche', $locale);
 
-        $email = '';
         $owner = $ticket->owner;
-        if (is_object($owner) && isset($owner->email) && is_string($owner->email)) {
-            $email = $owner->email;
-        }
+        $email = app(SendTicketReceiptAction::class)->mailedTo($ticket);
+        $emailDelivery = match (true) {
+            ! $owner instanceof UserContract => '',
+            $email !== '' => 'mail',
+            default => 'in_app',
+        };
 
         $summary = $code !== ''
             ? (string) trans('fixcity::ticket_confirmation.summary.with_code', ['code' => e($code)], $locale)
@@ -60,6 +68,7 @@ final class BuildTicketConfirmationDataAction
             'slug' => $slug,
             'status' => $status,
             'email' => $email,
+            'email_delivery' => $emailDelivery,
             'summary_html' => $summary,
             'visibility_html' => $visibility,
             'email_intro_html' => (string) trans('fixcity::ticket_confirmation.email_intro', [], $locale),

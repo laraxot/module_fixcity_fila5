@@ -9,7 +9,7 @@ use Modules\Fixcity\Database\Factories\TicketFactory;
 use Modules\Fixcity\Filament\Resources\TicketResource\Pages\EditTicket;
 use Modules\Fixcity\Filament\Resources\TicketResource\Pages\ListTickets;
 use Modules\Fixcity\Filament\Resources\TicketResource\Pages\ViewTicket;
-use Tests\Modules\Fixcity\TestCase;
+use Modules\Fixcity\Tests\TestCase;
 use Modules\User\Database\Factories\UserFactory;
 use Modules\User\Models\Permission;
 use Modules\User\Models\Role;

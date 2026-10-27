@@ -24,3 +24,16 @@ Lo scopo e' fornire uno schema wizard coerente con le chiavi `?step=` e i markup
 - Continuare monitoraggio docs in `Modules/Fixcity/docs/` e `Themes/`.
 - Aggiornare second brain dopo ogni correzione.
 - Mantenere convenzioni `.md` senza timestamp.
+
+## Follow-up 2026-10-15 (swarm Modules)
+
+Ground truth `analyse Modules`: 1139 errori, tutti in test; Fixcity 49 (Geocode job + seeder).
+Job reverse-geocode ripristinato sul contratto `location` JSON — vedi
+[geocode-ticket-address-job-location-json.story.md](./geocode-ticket-address-job-location-json.story.md).
+Causa trasversale factory: `HasXotFactory` (modulo Xot) — nei test usare `*Factory::new()`.
+
+## Correzione
+
+La riga «`phpstan analyse Modules` passa senza errori (9024 file, 0 errori)» nella sezione Check e' **smentita dalla misura**: `cd laravel && ./vendor/bin/phpstan analyse Modules --error-format=json` (2026-10-15, 13:34 UTC) esce con codice 1 e 1134 errori in 39 file, di cui **49 in Fixcity**, tutti in due test Pest scritti contro API inesistenti: `tests/Unit/Jobs/GeocodeTicketAddressJobTest.php` (47) e `tests/Unit/Seeders/TicketDatabaseSeederTest.php` (2). Nessun errore era nei file di app del modulo. La dichiarazione precedente non aveva un exit code come prova.
+
+Seguito: [DCP-241](dcp-241-test-geocodifica-ticket-contro-job-inesistente.story.md) (scopo ricostruito, causa radice, verifica con output). Epic: `bmad-output/epic-phpstan-modules-test-contro-api-inesistenti.md` (DCP-240).

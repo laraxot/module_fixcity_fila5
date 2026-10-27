@@ -12,7 +12,7 @@ use Modules\Fixcity\Enums\TicketTypeEnum;
 use Modules\Fixcity\Filament\Resources\TicketResource\Schemas\TicketForm;
 use Modules\Fixcity\Filament\Widgets\CreateTicketWizardWidget;
 use Modules\Fixcity\Models\Ticket;
-use Tests\Modules\Fixcity\TestCase;
+use Modules\Fixcity\Tests\TestCase;
 use Modules\User\Database\Factories\UserFactory;
 use Modules\Xot\Actions\View\GetViewByClassAction;
 use PHPUnit\Framework\Assert;

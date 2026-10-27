@@ -10,7 +10,7 @@ return [
     'fields' => [
         'location' => [
             'label' => 'Luogo',
-            'invalid' => 'Indica un punto valido sulla mappa: latitudine tra -90 e 90, longitudine tra -180 e 180.',
+            'invalid' => 'Scegli il punto sulla mappa o cerca un indirizzo: serve per sapere dove si trova il disservizio.',
             'placeholder' => 'Cerca un luogo',
             'helper_text' => 'Indica il luogo del disservizio',
             'address' => [
@@ -43,7 +43,7 @@ return [
             'error_count' => 'Puoi allegare al massimo :max file',
             'error_upload' => 'Caricamento non riuscito, riprova',
             'label' => 'Immagini',
-            'helper_text' => 'Seleziona una o più immagini da allegare alla segnalazione',
+            'helper_text' => 'Formati ammessi: :formats. Fino a :max_files file, massimo :max_size MB ciascuno.',
             'placeholder' => 'Aggiungi immagini (facoltativo)',
             'description' => 'Immagini a supporto della segnalazione',
         ],

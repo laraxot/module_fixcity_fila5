@@ -4,11 +4,18 @@ type: implementation-plan
 created: 2026-10-11
 updated: 2026-10-11
 qmd: "design-comuni-frontend-plan"
-status: draft
+status: superseded
 tags: [docs, fixcity, bmad]
 ---
 
 # DesignComuni Frontend Implementation Plan
+
+> **Superseded (2026-10-26).** Questo documento descriveva un frontend futuro
+> assegnato a Fixcity e una migrazione completa fuori da Bootstrap Italia. Oggi
+> il tema `Themes/Sixteen` possiede presentazione, Blade, CSS e parity Design
+> Comuni; Fixcity conserva Actions, dati e contratti. Usare i contratti e le
+> story correnti in `docs/bmad/` del tema e del modulo, non questo piano come
+> piano esecutivo.
 
 ## Project Overview
 

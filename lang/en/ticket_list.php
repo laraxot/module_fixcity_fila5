@@ -119,6 +119,6 @@ return [
         'faq' => 'Read the FAQ',
         'track' => 'Track a report',
         'account' => 'View your reports',
-        'phone' => 'Call the toll-free number 05 0505',
+        'phone' => 'Call the toll-free number :value',
     ],
 ];

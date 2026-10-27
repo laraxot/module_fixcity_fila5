@@ -1,0 +1,26 @@
+<?php
+
+declare(strict_types=1);
+
+use Illuminate\Database\Schema\Blueprint;
+use Modules\Xot\Database\Migrations\XotBaseMigration;
+
+/**
+ * BMAD + Second Brain — Convenzione migrazione Fixcity / XotBaseMigration
+ * @note Violation: nome file contiene `_for_fixcity_model` (non standard Laravel);
+ * classe anonima senza `$model_class` violava `Assert::classExists`.
+ * Correzione: `$model_class` esplicito con `::class`, commento convenzione,
+ * nessun cambio schema (tabella users esiste già in `fixcity_data`).
+ * Regola Boy Scout: codice migliore di come trovato.
+ */
+return new class extends XotBaseMigration
+{
+    protected ?string $model_class = \Modules\Fixcity\Models\User::class;
+
+    public function up(): void
+    {
+        // Tabella `users` esiste già nel database `fixcity_data` (gestita da User module).
+        // Il modello Fixcity\Models\User estende BaseUser (Modules\User\Models\User).
+        // Nessuna operazione necessaria per preservare i dati esistenti.
+    }
+};

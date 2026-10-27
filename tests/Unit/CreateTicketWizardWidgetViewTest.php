@@ -6,7 +6,7 @@ use Modules\Fixcity\Filament\Resources\TicketResource;
 use Modules\Fixcity\Filament\Widgets\CreateTicketWizardWidget;
 use Modules\Xot\Filament\Widgets\XotBaseWidget;
 use Modules\Xot\Filament\Widgets\XotBaseWizardWidget;
-use Tests\Modules\Xot\XotBaseTestCase;
+use Modules\Xot\Tests\XotBaseTestCase;
 use PHPUnit\Framework\Assert;
 
 use function Safe\file_get_contents;

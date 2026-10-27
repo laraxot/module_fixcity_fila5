@@ -5,10 +5,12 @@ declare(strict_types=1);
 namespace Modules\Fixcity\Database\Seeders;
 
 use Faker\Factory;
+use Illuminate\Console\Command;
 use Illuminate\Database\Seeder;
-use Modules\Fixcity\Database\Seeders\Support\DemoCategoryCatalog;
-use Modules\Fixcity\Database\Seeders\Support\DemoMunicipalityProvider;
-use Modules\Fixcity\Database\Seeders\Support\DemoPeopleProvider;
+use Modules\Blog\Database\Seeders\DemoContentSeeder;
+use Modules\Fixcity\Database\Seeders\Demo\DemoCategoryCatalog;
+use Modules\Fixcity\Database\Seeders\Demo\DemoMunicipalityProvider;
+use Modules\Fixcity\Database\Seeders\Demo\DemoPeopleProvider;
 use Modules\Fixcity\Models\Category;
 use Modules\Fixcity\Models\Ticket;
 use Modules\Fixcity\Models\TicketActivity;
@@ -78,13 +80,19 @@ class FixcityDemoSeeder extends Seeder
         });
 
         $commentCount = 0;
-        $this->step('5/6 Commenti', function () use (&$ticketIds, &$commentCount): void {
+        $this->step('5/7 Commenti ticket', function () use (&$ticketIds, &$commentCount): void {
             $commentCount = $this->seeder(TicketCommentSeeder::class)->seedDatasetComments($ticketIds);
         });
 
         $hourCount = 0;
-        $this->step('6/6 Ore lavorate', function () use (&$ticketIds, &$hourCount): void {
+        $this->step('6/7 Ore lavorate', function () use (&$ticketIds, &$hourCount): void {
             $hourCount = $this->seeder(TicketHourSeeder::class)->seedDatasetHours($ticketIds);
+        });
+
+        $this->step('7/7 Blog + eventi demo (Novità/Eventi)', function (): void {
+            // Post demo: Article.type=post|event + Comment morph + immagini Design Comuni.
+            // Nessun modulo Event: Ponytail / Existing Assets First.
+            $this->call(DemoContentSeeder::class);
         });
 
         $this->summary($ticketIds, $commentCount, $hourCount, microtime(true) - $started);
@@ -107,7 +115,9 @@ class FixcityDemoSeeder extends Seeder
         }
 
         /** @var T $instance */
-        $instance->setCommand($this->command);
+        if ($this->command instanceof Command) {
+            $instance->setCommand($this->command);
+        }
 
         return $instance;
     }

@@ -16,8 +16,3 @@ status: draft
 - [ ] Codice analizzato (Level 10).
 - [ ] Test superati.
 - [ ] Formattazione Pint OK.
-
---- BMAD + Second Brain ---
-- Scopo: documentazione tecnica del modulo.
-- Utilità: riferimento sviluppatori/audit.
-- Funzionalità: struttura, dipendenze, convenzioni (no date .md, git avanti).

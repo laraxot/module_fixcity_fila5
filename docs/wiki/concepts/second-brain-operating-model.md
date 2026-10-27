@@ -3,7 +3,7 @@ title: "Second Brain Operating Model (Modules)"
 type: concept
 tags: [second-brain, modules, para, llm-wiki, bmad]
 created: 2026-05-19
-updated: 2026-06-05
+updated: 2026-10-26
 qmd: "second brain operating model modules para capture organize distill express bmad"
 issues:
   - "https://github.com/laraxot/base_fixcity_fila5/issues/272"
@@ -13,6 +13,7 @@ related:
   - ./ai-harness-module-discipline.md
   - ../../../../../../docs/wiki/concepts/hackernoon-ai-coding-tips-fixcity-map.md
   - second-brain-local-discipline.md
+status: draft
 ---
 
 # Second Brain Operating Model (Modules)
@@ -66,5 +67,6 @@ QMD primario; Redis (cache/lock) ed Elasticsearch solo se pain misurato — [sec
 
 ## Collegamenti
 
+- [Agent confidence brief](../../agent-confidence-brief.md) — snapshot verificato stack/ownership/Sixteen/OmniRoute
 - [ai-harness-module-discipline.md](./ai-harness-module-discipline.md)
 - [bmad architecture](../../../../../../docs/wiki/bmad/architecture.md)

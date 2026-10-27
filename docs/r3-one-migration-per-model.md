@@ -57,6 +57,8 @@ laravel/Modules/Fixcity/database/migrations/
 
 ⚠️ **Aderenza parziale**: `tickets` ha 4 migration (1 create + 3 add/update). Per essere **R3-strict**, il file `2014_10_12_000000_create_users_table.php` non dovrebbe esistere se gli utenti sono in `Modules\User` (ma è di Laravel stock). Le 3 add/update su tickets dovrebbero essere **consolidate** in un'unica `2026_06_05_create_tickets_table.php` con TUTTE le colonne.
 
+**BMAD + Second Brain — Second Brain Insight (User model cross-module inheritance)**: `Modules\Fixcity\app\Models\User.php` estende `Modules\User\Models\User` (BaseUser) → usa la tabella `users` del modulo `User` (`Modules/User/database/migrations/2026_09_01_150113_create_users_table.php`). Quindi nel modulo `Fixcity` NON serve `create_users_table.php`; la migrazione owner è nel modulo `User`. R3 è rispettato perché il modello `User` è definito in `User` e `Fixcity` ne eredita la tabella via `BaseUser`. Per documentare: aggiungere nota nella doc R3 e nei docs del modulo Fixcity (vedi `docs/bmad/`).
+
 ## R3.5 — `updateTimestamps()` è l'unica fonte
 
 ```php
@@ -83,7 +85,9 @@ public function tableCreate(Blueprint $table): void
 
 ❌ `add_*_to_*` migration separata
 ❌ `update_*_add_*` migration separata
-❌ `repair_*` migration (correggere con bump della migration originale)
+⚠️ `repair_*` migration: normalmente vietata; ammessa solo come eccezione
+forward-only, idempotente e documentata quando una installazione ha registrato
+una migration ma non possiede la tabella. Non deve mai cancellare dati.
 ❌ `$table->timestamps()` se `updateTimestamps()` è già in `tableUpdate()`
 ❌ `$table->softDeletes()` se `updateTimestamps(hasSoftDeletes:true)` è già in `tableUpdate()`
 ❌ `$table->string('*_by')` esplicito (coperto da `updateTimestamps()`)
@@ -95,7 +99,6 @@ public function tableCreate(Blueprint $table): void
 Per ogni relazione Eloquent usare `foreignIdFor(Model::class, 'column')`; per User usare `XotData::make()->getUserClass()`. Aggiungere `constrained()` solo quando i modelli condividono la stessa connessione/database; sui riferimenti cross-connection definire invece type/index senza vincolo fisico. Non usare `foreignId()` nudo.
 
 ## TicketSubscriber: consolidamento migration (2026-10-11)
-<<<<<<< .merge_file_P2P5UY
 
 Prima del consolidamento, `ticket_subscribers` aveva 3 migration:
 
@@ -152,64 +155,6 @@ return new class extends XotBaseMigration {
 };
 ```
 
-=======
-
-Prima del consolidamento, `ticket_subscribers` aveva 3 migration:
-
-```
-2023_01_01_000000_create_ticket_subscribers_table.php   ← owner
-2026_09_26_200000_update_ticket_subscribers_user_id_to_uuid.php  ⚠️ update_* (viola R3)
-2026_09_27_230000_align_ticket_subscribers_and_coordinates.php  ⚠️ align_* (viola R3)
-```
-
-Problemi:
-- `user_id` definito come `foreignId('user_id')` (bigint) in `create_`, ma il modello `TicketSubscriber`
-  si aspetta `string('user_id', 36)` (UUID) -> cast mismatch su MySQL.
-- Migration `update_*` e `align_*` sono separate e violano "1 modello = 1 migration".
-
-Soluzione applicata (forward-only):
-- `create_ticket_subscribers_table.php` aggiornato con `string('user_id', 36)->index()` (UUID-compatible).
-- `tableUpdate()` consolidato con controlli di idempotenza (`hasColumn`, `getColumnType`).
-- `tableCreate()` usa `foreignIdFor(Ticket::class, 'ticket_id')->nullable()` (stessa connessione, physical FK valido).
-- Le migration `2026_09_26_*` e `2026_09_27_*` marcate come superseded (non cancellate per forward-only policy).
-
-## Pattern corretto (R3 religion)
-
-```php
-use Illuminate\Database\Schema\Blueprint;
-use Modules\Fixcity\Models\Category;
-use Modules\Fixcity\Models\Ticket;
-use Modules\Xot\Datas\XotData;
-use Modules\Xot\Database\Migrations\XotBaseMigration;
-
-return new class extends XotBaseMigration {
-    protected ?string $model_class = Ticket::class;
-
-    public function up(): void
-    {
-        $userClass = XotData::make()->getUserClass();
-
-        $this->tableCreate(static function (Blueprint $table) use ($userClass): void {
-            $table->id();
-            $table->string('title');
-            $table->text('description');
-            $table->string('status', 32)->default('open');
-            $table->string('priority', 16)->default('normal');
-            $table->string('uuid', 36)->nullable()->index();
-            // User may live on another connection: no physical FK constraint.
-            $table->foreignIdFor($userClass, 'user_id')->nullable()->index();
-            // Category shares the Fixcity connection: the physical constraint is valid.
-            $table->foreignIdFor(Category::class, 'category_id')->nullable()->constrained();
-        });
-
-        $this->tableUpdate(function (Blueprint $table): void {
-            $this->updateTimestamps($table, hasSoftDeletes: true);
-        });
-    }
-};
-```
-
->>>>>>> .merge_file_Siy0KE
 Per nuove entità seguire il modello e la migration owner in `XotBaseMigration`; non usare `Schema::create()` o la base Laravel `Migration`. Per evoluzioni rispettare la regola forward-only e aggiornare solo la migration owner secondo la convenzione timestamp del progetto.
 
 ## R3 religion enforcement (R20 verifier)
@@ -239,8 +184,3 @@ Per nuove entità seguire il modello e la migration owner in `XotBaseMigration`;
 
 ---
 *opencode (MiniMax-M3) · 2026-06-05*
-
---- BMAD + Second Brain ---
-- Scopo: documentazione tecnica del modulo.
-- Utilità: riferimento sviluppatori/audit.
-- Funzionalità: struttura, dipendenze, convenzioni (no date .md, git avanti).

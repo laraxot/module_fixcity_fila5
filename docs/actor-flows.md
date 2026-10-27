@@ -16,10 +16,12 @@ status: draft
 ## Attori
 
 ### 1. Citttadino (Citizen / Cittadino)
-- **Ruolo**: chiamante pubblico, senza accesso PA
-- **Azione principale**: crea `segala` (ticket) tramite wizard pubblico
+- **Ruolo**: cittadino senza accesso PA; autenticato per inviare una segnalazione, guest per la sola consultazione pubblica
+- **Azione principale**: crea una segnalazione (ticket) tramite wizard dopo l’accesso
 - **Flusso**: `segnalazione-crea` (Folio) → `CreateTicketWizardWidget` → `CreateTicketAction` → salva `Ticket` → notifica PA
-- **Permessi**: `viewAny` pubblico, `create` pubblico, nessun `update/delete`
+- **Permessi**: il [JSON canonico tickets.create](../config/database/content/pages/tickets.create.json) richiede `auth`. `TicketPolicy::create()` richiede un utente identificato o la permission dedicata. `viewAny()` della resource è PA/permission, non guest.
+- **Consultazione pubblica**: passa da `BuildPublicTicketsQueryAction` e dalla proiezione esplicita `BuildPublicTicketDetailAction`, non da un’autorizzazione amministrativa generale.
+- **Modifica/cancellazione**: `TicketPolicy::update()` contempla il proprietario; `delete()` richiede admin o permission specifica, con le eventuali regole `before()` ereditate.
 - **Files chiave**: `Pages/CreateTicket.php` (Folio), `CreateTicketWizardWidget`, `TicketForm`, `CreateTicketAction`
 - **Traduzioni**: `fixcity::ticket.*` (IT/EN)
 
@@ -28,13 +30,13 @@ status: draft
 - **Azione**: visualizza, aggiorna stato, assegna, commenta
 - **Flusso**: `TicketResource` (Filament) → `EditTicket.php` → `ChangeStatus` → `RecordTicketActivityAction`
 - **Permessi**: `update` (se proprietario o operatore), `assign`, `changeStatus` (se operatore/supervisore/admin)
-- **Policy**: `TicketPolicy::update()` → `$user->hasRole('operator') || $ticket->isOwnedByAuthenticatedUser()`
+- **Policy**: `TicketPolicy::update()` → ruolo PA oppure permission `ticket.update` oppure proprietario (confronto dell’identità autenticata)
 - **Files**: `TicketResource/Pages/EditTicket.php`, `ChangeStatus.php`, `HasTicketRelations.php`
 
 ### 3. Supervisore / Admin (Supervisore / Admin)
 - **Ruolo**: supervisione completa, gestione ruoli
-- **Azione**: visualizza tutto, modifica, elimina, gestisce utenti
-- **Permessi**: `viewAny` (tutti), `update/delete` (tutti se admin/supervisor)
+- **Azione**: supervisione e gestione secondo le capability effettive; la cancellazione non è concessa automaticamente al supervisore dalla sola appartenenza a un ruolo PA
+- **Permessi**: `viewAny` e `update` seguono le policy PA; `delete/deleteAny` seguono la regola privilegiata di `TicketPolicy`, oltre alle eventuali autorizzazioni ereditate
 - **Policy**: `BasePolicy::PA_ROLES = ['operator', 'supervisor', 'admin']`
 - **Files**: `TicketPolicy`, `UserBasePolicy`, `XotBasePolicy` (before super-admin)
 
@@ -77,7 +79,7 @@ PA (Operatore) → Filament TicketResource → Lista/Dettaglio
 
 Supervisore/Admin → Dashboard (XotBaseDashboard) → Analytics
   → Export (TicketExporter) → Spreadsheet
-  → Policy override → BasePolicy (tutti i ruoli PA)
+  → Policy specifiche → before() per super-admin; capability PA nei singoli metodi
 ```
 
 ---

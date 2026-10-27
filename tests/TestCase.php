@@ -2,12 +2,13 @@
 
 declare(strict_types=1);
 
-namespace Tests\Modules\Fixcity;
+namespace Modules\Fixcity\Tests;
 
 use Illuminate\Foundation\Testing\DatabaseTransactions;
+use Illuminate\Support\Facades\Mail;
 use Modules\Fixcity\Models\Ticket;
 use Modules\User\Models\User;
-use Tests\Modules\Xot\XotBaseTestCase;
+use Modules\Xot\Tests\XotBaseTestCase;
 use PHPUnit\Framework\Assert;
 
 /**
@@ -31,7 +32,7 @@ abstract class TestCase extends XotBaseTestCase
     public ?\Closure $callStatic = null;
 
     /** @var list<string> */
-    protected $connectionsToTransact = ['fixcity', 'user', 'comment', 'media'];
+    protected $connectionsToTransact = ['fixcity', 'user', 'comment', 'media', 'blog'];
 
     /**
      * Fixcity models run on the dedicated connection; keep assertions inside
@@ -76,5 +77,8 @@ abstract class TestCase extends XotBaseTestCase
         parent::setUp();
 
         config(['auth.providers.users.model' => User::class]);
+
+        // nessuna email reale dai test: creare una segnalazione invia la ricevuta al proprietario
+        Mail::fake();
     }
 }

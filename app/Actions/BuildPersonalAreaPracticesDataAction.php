@@ -38,7 +38,8 @@ final class BuildPersonalAreaPracticesDataAction
         $inProgress = [];
         $concluded = [];
         foreach ($query->limit($limit)->get() as $ticket) {
-            $row = $this->buildRow->execute($ticket, $locale);
+            // sono tutte del proprietario (query per owner_id): codice e link di tracciamento sono suoi
+            $row = $this->buildRow->execute($ticket, $locale, isOwner: true);
             if ($row['is_concluded']) {
                 $concluded[] = $row;
             } else {

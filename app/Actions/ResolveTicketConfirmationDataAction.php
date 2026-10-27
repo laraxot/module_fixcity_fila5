@@ -10,7 +10,7 @@ use Spatie\QueueableAction\QueueableAction;
 /**
  * Dati della pagina di conferma post-create: il flash di sessione scritto da CreateTicketAction (letto una volta sola) oppure, se manca
  * (refresh, link salvato), il ticket indicato dal codice di tracciamento. Senza nessuno dei due restituisce un array vuoto.
- * Il codice e' un capability token: nel ripiego l'email del proprietario la vede solo il proprietario autenticato (chi ha appena creato il ticket la vede dal flash).
+ * Il codice e' un capability token: nel ripiego l'email del proprietario (e se gli arrivano le mail) la vede solo il proprietario autenticato (chi ha appena creato il ticket la vede dal flash).
  */
 final class ResolveTicketConfirmationDataAction
 {
@@ -38,6 +38,7 @@ final class ResolveTicketConfirmationDataAction
         $viewerId = auth()->id();
         $isOwner = $viewerId !== null && (string) $viewerId === (string) $ticket->owner_id;
 
-        return $isOwner ? $data : [...$data, 'email' => ''];
+        // chi ha solo il codice non vede ne' l'email ne' se il proprietario riceve le mail (e' un dato dell'account altrui)
+        return $isOwner ? $data : [...$data, 'email' => '', 'email_delivery' => ''];
     }
 }

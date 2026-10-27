@@ -8,7 +8,7 @@ use Modules\Fixcity\Actions\GetPublishedPrivacyPolicyAction;
 use Modules\Fixcity\Filament\Widgets\CreateTicketWidget;
 use Modules\Fixcity\Filament\Widgets\CreateTicketWizardWidget;
 use Modules\Fixcity\Models\Ticket;
-use Tests\Modules\Fixcity\TestCase;
+use Modules\Fixcity\Tests\TestCase;
 use Modules\User\Database\Factories\UserFactory;
 
 uses(TestCase::class);

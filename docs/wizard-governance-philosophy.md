@@ -79,18 +79,10 @@ Per evitare file doppi:
 
 ## collegamenti bidirezionali
 
-- [Fixcity docs index](./INDEX.md)
+- [Fixcity docs index](./index.md)
 - [CreateTicketWizardWidget](./CreateTicketWizardWidget.md)
 - [Filament wizard rules](./rules/filament-wizard-rules.md)
 - [Governance story](./stories/wizard-governance-langserviceprovider-and-xotbase-refactor.md)
 - [Infolist summary story](./stories/wizard-summary-infolist-alignment.md)
 - [Theme bridge](../../../Themes/Sixteen/docs/design-comuni/wizard-governance-bridge.md)
 - [Xot base wizard](../../Xot/docs/wiki/concepts/filament-wizard-architecture-right-way.md)
-<<<<<<< .merge_file_emR4D5
-
---- BMAD + Second Brain ---
-- Scopo: documentazione tecnica del modulo.
-- Utilità: riferimento sviluppatori/audit.
-- Funzionalità: struttura, dipendenze, convenzioni (no date .md, git avanti).
-=======
->>>>>>> .merge_file_TJl6hY

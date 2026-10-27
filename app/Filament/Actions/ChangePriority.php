@@ -17,8 +17,8 @@ final class ChangePriority extends Action
     {
         parent::setUp();
 
+        // Priorita' operativa: etichette solo da lang (blueprint Fixcity, no hardcoded).
         $this->translateLabel()
-            ->label('Change Priority')
             ->icon('heroicon-o-flag')
             ->authorize('changePriority')
             ->schema([

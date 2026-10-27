@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Tests\Modules\Fixcity\Unit\Actions;
+namespace Modules\Fixcity\Tests\Unit\Actions;
 
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
@@ -10,11 +10,10 @@ use Modules\Fixcity\Actions\GetTicketSlaMetricsAction;
 use Modules\Fixcity\Database\Factories\TicketFactory;
 use Modules\Fixcity\Enums\TicketStatusEnum;
 use Modules\Fixcity\Enums\TicketTypeEnum;
-use Tests\Modules\Fixcity\TestCase;
+use Modules\Fixcity\Tests\TestCase;
 use PHPUnit\Framework\Assert;
 
 uses(TestCase::class);
-
 describe('Get Ticket Sla Metrics Action', function (): void {
     test('_it_returns_null_average_when_no_resolved_tickets', function (): void {
         /** @var TestCase $this */

@@ -17,11 +17,3 @@ consolidamento è [`wiki/comparisons/redundancy-audit-2026-09-26.md`](wiki/compa
 Questo file è solo un alias di navigazione: non mantenere qui conteggi o analisi
 parallele. Le verifiche PHPStan correnti fanno riferimento ai comandi quality gate e
 al relativo output datato, non a una lista statica di presunti falsi positivi.
-<<<<<<< .merge_file_iJVNTZ
-
---- BMAD + Second Brain ---
-- Scopo: documentazione tecnica del modulo.
-- Utilità: riferimento sviluppatori/audit.
-- Funzionalità: struttura, dipendenze, convenzioni (no date .md, git avanti).
-=======
->>>>>>> .merge_file_PS9VBq

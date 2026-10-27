@@ -115,6 +115,10 @@ class User extends BaseUser implements CanComment
 {
     use InteractsWithComments;
 
+    // User data is owned by the User module and stored on the `user` connection.
+    // Do not override BaseUser::$connection here: this model adds Fixcity
+    // behaviour, but must keep the UUID users table used by authentication.
+
     /** @var array<string, class-string<self>> */
     protected $childTypes = [
         'master_admin' => self::class,
@@ -123,6 +127,23 @@ class User extends BaseUser implements CanComment
         'system' => self::class,
         'technician' => self::class,
     ];
+
+    public function getKey(): int|string|null
+    {
+        $key = parent::getKey();
+
+        return is_int($key) || is_string($key) ? $key : null;
+    }
+
+    public function getMorphClass(): string
+    {
+        return parent::getMorphClass();
+    }
+
+    public function notify(mixed $instance): void
+    {
+        parent::notify($instance);
+    }
 
     /**
      * @return HasMany<TicketComment, $this>

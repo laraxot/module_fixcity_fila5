@@ -23,17 +23,6 @@ return [
         'in_progress' => 'En curso',
         'concluded' => 'Concluidas',
     ],
-    'status' => [
-        'draft' => 'Borrador',
-        'pending' => 'Pendiente',
-        'open' => 'Abierta',
-        'in_review' => 'En revisión',
-        'in_progress' => 'En tramitación',
-        'on_hold' => 'En espera',
-        'reopened' => 'Reabierta',
-        'resolved' => 'Resuelta',
-        'closed' => 'Cerrada',
-    ],
     'ticket' => [
         'code' => 'Código de seguimiento:',
         'detail' => 'Ver el detalle',

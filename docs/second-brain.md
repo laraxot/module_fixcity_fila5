@@ -35,6 +35,49 @@ Non creare una seconda sequenza equivalente in questo indice.
 
 ## Documentazione Architetturale
 
+### Dati sacri — regola permanente
+
+I dati persistenti non sono sacrificabili. È vietato usare `migrate:fresh`,
+`migrate:refresh`, `migrate:reset`, `db:wipe`, `RefreshDatabase` o
+`php artisan migrate --force`, anche nei test. Le migrazioni devono essere
+forward-only; per isolare i test usare `DatabaseTransactions`, transazioni
+manuali o un database esplicitamente dedicato senza cancellare dati condivisi.
+
+Questa regola prevale su snippet legacy nella documentazione e sulle
+impostazioni standard di Laravel. Prima di eseguire un comando database,
+verificare sempre che sia non distruttivo.
+
+### Migrazioni e ownership
+
+Per `TicketSubscriber` la regola R3, la scelta UUID cross-connection e la
+checklist preventiva sono registrate nel dossier BMAD
+[migration-ticket-subscribers-audit](bmad/migration-ticket-subscribers-audit.md).
+La cartella `database/migrations/README.md` indica inoltre le migration
+storiche archiviate come `*.php.old`.
+
+Il model `Modules\Fixcity\Models\User` eredita intenzionalmente la connessione
+`user` da `BaseUser`: il model Fixcity estende il comportamento, non la
+proprietà del database. Vedi [filament-user-uuid-connection-audit](bmad/filament-user-uuid-connection-audit.md).
+
+`authentication_logs` non è dominio Fixcity: vive su `fixcity_user` (modulo
+User). Su prod, se `Connection: user` punta a `fixcity_data`, è un errore di
+env/migrate — non una migrazione da creare in Fixcity. Canonico User:
+[authentication-logs-connection-ownership](../../User/docs/bmad/authentication-logs-connection-ownership.md).
+
+`permissions` (Spatie) non è dominio Fixcity: vive su `fixcity_user` (modulo
+User). Su prod, se `Connection: user` punta a `fixcity_data`, è un errore di
+env/migrate — non una migrazione da creare in Fixcity. Canonico User:
+[permissions-connection-ownership](../../User/docs/bmad/permissions-connection-ownership.md).
+La timeline pubblica (`BuildTicketTimelineAction`) soft-guarda la tabella
+assente per non trasformare un gap RBAC in HTTP 500 sul dettaglio ticket.
+
+
+`ticket_subscribers` segue la stessa regola: il pivot vive su `fixcity_user`,
+mentre i ticket vivono su `fixcity_data`. Non usare `belongsToMany()` dal
+modello Ticket: `ticketSubscriberQuery()` legge il pivot sulla connessione
+`user`, poi le action risolvono gli utenti con una seconda query. Questo evita
+che Eloquent cerchi silenziosamente `fixcity_data.ticket_subscribers`.
+
 ### 5. PHPStan generics
 Le relazioni Eloquent devono dichiarare entrambi i tipi del generic (`RelatedModel` e
 `DeclaringModel`). I docblock vanno verificati dopo aver pulito la result cache; non si
@@ -46,8 +89,13 @@ accettano falsi positivi documentati né `@phpstan-ignore` come sostituto del fi
 Le costanti array di dominio devono dichiarare `array` quando il gate `typeCoverage`
 richiede la copertura della dichiarazione. Il gate si corregge nel codice, mai nel neon.
 
-### 7. UserContract pattern (non User model direct usage)
-Sempre usare `UserContract` per l'autorizzazione, mai `Modules\User\Models\User` direttamente. Questo garantisce l'astrazione del modello utente e permette implementazioni diverse.
+### 7. UserContract pattern (non User / BaseUser diretti)
+Sempre usare `UserContract` per identità e autorizzazione: mai
+`Modules\User\Models\User` e mai `instanceof BaseUser` / type-hint `BaseUser`.
+`Modules\Fixcity\Models\User` estende `BaseUser` e implementa il contratto;
+i consumer (listener Auth, action, policy, tema) devono vedere solo il contratto.
+Capability opzionali (es. `authentications()`) → `HasAuthentications`, non
+ricadere sull'astratta. SSoT: `Modules/User/docs/wiki/concepts/usercontract-boundary.md`.
 
 ---
 

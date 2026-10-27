@@ -135,6 +135,6 @@ resources/views/pages/api/segnalazioni/
 
 ## Collegamenti
 
-- [Project Roadmap](../../../Activity/docs/wiki/PROJECT-ROADMAP.md)
+- [Project Roadmap](../../../Activity/docs/wiki/project-roadmap.md)
 - Xot PHPStan Best Practices _(target mancante, verificato 2026-10-14: `Modules/Xot/docs/wiki/PHPSTAN-BEST-PRACTICES.md` non esiste)_
 - [No Controllers Rule](../../../../../docs/wiki/rules/no-controllers-rule.md)

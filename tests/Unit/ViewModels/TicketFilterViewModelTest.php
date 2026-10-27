@@ -2,15 +2,14 @@
 
 declare(strict_types=1);
 
-namespace Tests\Modules\Fixcity\Unit\ViewModels;
+namespace Modules\Fixcity\Tests\Unit\ViewModels;
 
 use Modules\Fixcity\Actions\BuildSegnalazioniFilterAggregateAction;
-use Tests\Modules\Fixcity\TestCase;
+use Modules\Fixcity\Tests\TestCase;
 use Modules\Fixcity\ViewModels\TicketFilterViewModel;
 use PHPUnit\Framework\Assert;
 
 uses(TestCase::class);
-
 describe('Ticket Filter View Model', function (): void {
     test('_it_exposes_filter_items_from_aggregate_action', function (): void {
         /** @var TestCase $this */

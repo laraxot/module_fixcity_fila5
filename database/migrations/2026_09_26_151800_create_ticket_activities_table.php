@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\DB;
 use Modules\Fixcity\Models\Ticket;
 use Modules\Fixcity\Models\TicketActivity;
 use Modules\Xot\Database\Migrations\XotBaseMigration;
@@ -58,11 +59,45 @@ return new class extends XotBaseMigration
                 if ($this->hasColumn('new_status_id')) {
                     $table->unsignedBigInteger('new_status_id')->nullable()->change();
                 }
-                if ($this->hasColumn('user_id')) {
-                    $table->foreignIdFor($userClass, 'user_id')->nullable()->change();
-                }
+                $this->alignUserIdColumn($table, $userClass);
                 $this->updateTimestamps(table: $table, hasSoftDeletes: true);
             }
         );
+    }
+
+    /**
+     * User ids are UUIDs in the current User contract. Preserve legacy numeric
+     * ids before replacing the column so an existing installation never loses
+     * audit data during the type migration.
+     *
+     * @param class-string<\Illuminate\Database\Eloquent\Model> $userClass
+     */
+    private function alignUserIdColumn(Blueprint $table, string $userClass): void
+    {
+        if (! $this->hasColumn('user_id')) {
+            return;
+        }
+
+        if ($this->getColumnType('user_id') === 'bigint') {
+            $connection = $this->model->getConnectionName() ?? 'fixcity';
+            $hasRows = DB::connection($connection)->table($this->getTable())->exists();
+
+            if ($hasRows) {
+                if (! $this->hasColumn('legacy_user_id')) {
+                    $table->renameColumn('user_id', 'legacy_user_id');
+                }
+
+                $table->uuid('user_id')->nullable()->index();
+
+                return;
+            }
+
+            $table->dropColumn('user_id');
+            $table->uuid('user_id')->nullable()->index();
+
+            return;
+        }
+
+        $table->foreignIdFor($userClass, 'user_id')->nullable()->change();
     }
 };

@@ -534,8 +534,3 @@ velero restore create --from-backup fixcity-emergency-backup
 ---
 
 *Infrastructure based on: AWS Well-Architected Framework, Kubernetes best practices, 12-Factor App methodology.*
-
---- BMAD + Second Brain ---
-- Scopo: documentazione tecnica del modulo.
-- Utilità: riferimento sviluppatori/audit.
-- Funzionalità: struttura, dipendenze, convenzioni (no date .md, git avanti).

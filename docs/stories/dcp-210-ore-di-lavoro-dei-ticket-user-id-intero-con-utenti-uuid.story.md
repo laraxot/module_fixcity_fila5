@@ -3,21 +3,23 @@ id: dcp-210
 title: "DCP-210: le ore di lavoro dei ticket non si possono registrare (ticket_hours.user_id intero, utenti UUID)"
 type: story
 epic: dc-parity-v2
-status: ready-for-decision
+status: done
 priority: P1
 owner: module:Fixcity
 module: Fixcity
 created: 2026-10-15
-updated: 2026-10-15
+updated: 2026-10-22
 qmd: "ticket_hours user_id bigint uuid varchar 36 ore di lavoro ticket DMO schema migrazione test rossi TicketHour"
-related: [dcp-103, dcp-200]
+related: [dcp-103, dcp-200, ../decisions/ticket-hours-user-boundary.md]
 tags: [schema, database, test, decisione]
 ---
 
 # DCP-210: le ore di lavoro dei ticket non si possono registrare
 
 ## Fase BMAD
-Analyze e Plan. **Nessuna modifica allo schema finche' non c'e' la decisione DEC-35** del registro [DCP-200](./dcp-200-registro-unico-delle-decisioni-aperte.story.md): cambiare il tipo di una colonna del database dei dati richiede approvazione, anche se la tabella e' vuota.
+**Chiuso (opzione a).** Decisione in [ticket-hours-user-boundary](../decisions/ticket-hours-user-boundary.md):
+migrazione `2026_10_22_000003_align_ticket_hours_user_id_with_uuid_users` applicata su
+`fixcity` (`user_id` → `varchar(36)`); model `@property string $user_id`; tabella era a 0 righe.
 
 ## Scopo ricostruito
 `ticket_hours` doveva registrare le ore di lavoro che un operatore dedica a un ticket (colonne `ticket_id`, `user_id`, `value` in ore, `comment`, `activity_id`). Oggi serve a due cose nel codice: `Ticket::hours()` somma `value` (`Ticket.php:360`) e `Profile::hours()` raccoglie le ore di un utente (`Profile.php:156-159`); la relazione sta in `HasTicketRelations.php:86-92`. Nessuna schermata scrive un `TicketHour`: la funzione e' rimasta a meta' dalla versione precedente del prodotto (le migrazioni che la creavano sono solo in `database/migrations/_bak/*.merged`).

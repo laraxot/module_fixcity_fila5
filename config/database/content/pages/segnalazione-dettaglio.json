@@ -11,7 +11,7 @@
           "view": "pub_theme::components.blocks.breadcrumb.default",
           "items": [
             {"label":"Home","url":"{{ route('home') }}"},
-            {"label":"Servizi","url":"{{ route('tests.view',['slug'=>'servizi']) }}"},
+            {"label":"Servizi","url":"{{ route('container0.index',['container0'=>'lista-categorie']) }}"},
             {"label":"Segnalazione disservizio","is_current":true}
           ]
         }

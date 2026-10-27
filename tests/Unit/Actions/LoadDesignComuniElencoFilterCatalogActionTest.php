@@ -2,15 +2,14 @@
 
 declare(strict_types=1);
 
-namespace Tests\Modules\Fixcity\Unit\Actions;
+namespace Modules\Fixcity\Tests\Unit\Actions;
 
 use Modules\Fixcity\Actions\LoadDesignComuniElencoFilterCatalogAction;
-use Tests\Modules\Fixcity\TestCase;
+use Modules\Fixcity\Tests\TestCase;
 use Modules\Xot\Actions\Cast\SafeStringCastAction;
 use PHPUnit\Framework\Assert;
 
 uses(TestCase::class);
-
 describe('Load Design Comuni Elenco Filter Catalog Action', function (): void {
     test('_it_loads_eleven_design_comuni_categories', function (): void {
         $catalog = app(LoadDesignComuniElencoFilterCatalogAction::class)->execute();

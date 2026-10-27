@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Tests\Modules\Fixcity\Feature\Database;
+namespace Modules\Fixcity\Tests\Feature\Database;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Artisan;
@@ -14,7 +14,7 @@ use Modules\Fixcity\Database\Seeders\FixcityDatabaseSeeder;
 use Modules\Fixcity\Database\Seeders\TicketDatabaseSeeder;
 use Modules\Fixcity\Models\Category;
 use Modules\Fixcity\Models\Ticket;
-use Tests\Modules\Fixcity\TestCase;
+use Modules\Fixcity\Tests\TestCase;
 use Modules\User\Database\Factories\UserFactory;
 use Modules\Xot\Actions\Cast\SafeStringCastAction;
 use Modules\Xot\Contracts\UserContract;
@@ -22,7 +22,6 @@ use Modules\Xot\Datas\XotData;
 use PHPUnit\Framework\Assert;
 
 uses(TestCase::class);
-
 it('assigns demo tickets to the declared citizen despite unrelated existing users', function (): void {
     if (! Schema::connection('fixcity')->hasTable('categories')
         || ! Schema::connection('fixcity')->hasTable('tickets')) {

@@ -15,6 +15,8 @@ class FixcityDatabaseSeeder extends Seeder
 {
     public function run(): void
     {
+        $this->call(FaqSeeder::class);
+
         if (! app()->environment(['local', 'testing', 'demo'])) {
             if ($this->command !== null) {
                 $this->command->warn('Fixcity demo data skipped outside local, testing and demo environments.');

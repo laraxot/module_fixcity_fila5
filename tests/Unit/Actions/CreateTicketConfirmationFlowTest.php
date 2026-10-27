@@ -13,7 +13,7 @@ use Modules\Fixcity\Enums\TicketActivityEventTypeEnum;
 use Modules\Fixcity\Enums\TicketActivityVisibilityEnum;
 use Modules\Fixcity\Enums\TicketStatusEnum;
 use Modules\Fixcity\Models\TicketActivity;
-use Tests\Modules\Fixcity\TestCase;
+use Modules\Fixcity\Tests\TestCase;
 use Modules\User\Database\Factories\UserFactory;
 use PHPUnit\Framework\Assert;
 

@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 use Modules\Fixcity\Actions\Export\SanitizeSpreadsheetCellAction;
-use Tests\Modules\Fixcity\TestCase;
+use Modules\Fixcity\Tests\TestCase;
 use PHPUnit\Framework\Assert;
 
 uses(TestCase::class);

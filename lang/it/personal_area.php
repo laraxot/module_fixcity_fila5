@@ -23,17 +23,6 @@ return [
         'in_progress' => 'In corso',
         'concluded' => 'Concluse',
     ],
-    'status' => [
-        'draft' => 'Bozza',
-        'pending' => 'In attesa',
-        'open' => 'Aperta',
-        'in_review' => 'In revisione',
-        'in_progress' => 'In lavorazione',
-        'on_hold' => 'In sospeso',
-        'reopened' => 'Riaperta',
-        'resolved' => 'Risolta',
-        'closed' => 'Chiusa',
-    ],
     'ticket' => [
         'code' => 'Codice di tracciamento:',
         'detail' => 'Vedi il dettaglio',

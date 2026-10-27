@@ -20,7 +20,3 @@ Cosa fare nei moduli
 - Se un modulo richiede una classe globale, documentare la necessità e proporre una soluzione centralizzata nel tema.
 
 Questa nota è stata aggiunta automaticamente dal processo di auditing.
---- BMAD + Second Brain ---
-- Scopo: documentazione tecnica del modulo.
-- Utilità: riferimento sviluppatori/audit.
-- Funzionalità: struttura, dipendenze, convenzioni (no date .md, git avanti).

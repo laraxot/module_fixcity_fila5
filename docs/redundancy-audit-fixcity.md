@@ -35,11 +35,3 @@ Suggested cleanup order:
 Evidence commands:
 - Per-owner static scan for case-only paths, byte-identical files, and duplicate FQCN.
 - GitHub tracker: issue #89.
-<<<<<<< .merge_file_pxeXlf
-
---- BMAD + Second Brain ---
-- Scopo: documentazione tecnica del modulo.
-- Utilità: riferimento sviluppatori/audit.
-- Funzionalità: struttura, dipendenze, convenzioni (no date .md, git avanti).
-=======
->>>>>>> .merge_file_Wb4qbn

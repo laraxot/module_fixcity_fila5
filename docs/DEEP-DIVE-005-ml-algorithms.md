@@ -799,8 +799,3 @@ def evaluate(predictions, ground_truth, threshold=0.85):
 ---
 
 *Algorithm design based on: computer vision best practices, information retrieval theory, geospatial analysis, and civic tech domain expertise.*
-
---- BMAD + Second Brain ---
-- Scopo: documentazione tecnica del modulo.
-- Utilità: riferimento sviluppatori/audit.
-- Funzionalità: struttura, dipendenze, convenzioni (no date .md, git avanti).

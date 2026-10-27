@@ -8,7 +8,7 @@ use Modules\Fixcity\Actions\AssignTicketAction;
 use Modules\Fixcity\Actions\SetFixcityEmailNotificationPreferenceAction;
 use Modules\Fixcity\Database\Factories\TicketFactory;
 use Modules\Fixcity\Notifications\TicketAssignedNotification;
-use Tests\Modules\Fixcity\TestCase;
+use Modules\Fixcity\Tests\TestCase;
 use Modules\User\Database\Factories\UserFactory;
 use Modules\User\Models\Role;
 use Modules\Xot\Actions\Cast\SafeStringCastAction;

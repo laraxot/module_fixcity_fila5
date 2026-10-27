@@ -173,8 +173,3 @@ This component provides:
 - [Module Boundary Philosophy](./MODULE-BOUNDARY-PHILOSOPHY.md)
 - [XotBaseWizard Philosophy](./XOTBASE-WIZARD-PHILOSOPHY.md)
 - [CMS-Driven Blocks](../../../Themes/Sixteen/docs/architecture/CMS-DRIVEN-BLOCKS.md)
-
---- BMAD + Second Brain ---
-- Scopo: documentazione tecnica del modulo.
-- Utilità: riferimento sviluppatori/audit.
-- Funzionalità: struttura, dipendenze, convenzioni (no date .md, git avanti).

@@ -35,7 +35,7 @@ return [
         ],
         'ip' => [
             'title' => 'Proprietà intellettuale, licenza dei contenuti e riuso',
-            'hint' => 'Diritti sui testi, immagini e dati del sito, licenza di riuso, marchi e software di terzi con le relative attribuzioni.',
+            'hint' => 'Indica la licenza dei contenuti al posto del segnaposto: il modello Design Comuni (requisito C.SI.3.4) chiede la sezione «Licenza dei contenuti» con la dicitura open by default (CAD art. 52) e CC-BY 4.0. Il resto della sezione è già scritto.',
         ],
         'privacy' => [
             'title' => 'Dati personali, cookie e accessibilità',
@@ -47,11 +47,11 @@ return [
         ],
         'law' => [
             'title' => 'Legge applicabile e foro competente',
-            'hint' => 'Legge applicabile e giurisdizione o foro competente per le controversie; da indicare dall\'ente.',
+            'hint' => 'Indica il foro scelto dall\'ente, oppure conferma che valgono i criteri di legge. Una deroga al foro vale solo se approvata specificamente per iscritto (art. 1341, secondo comma, codice civile): da valutare con il legale.',
         ],
         'contacts' => [
             'title' => 'Contatti per segnalazioni sul sito',
-            'hint' => 'A chi scrivere per chiedere la rimozione di un contenuto, segnalare una violazione di diritti o un problema del sito.',
+            'hint' => 'Indirizzo email o PEC che riceve le richieste di rimozione e le segnalazioni sul sito: l\'ufficio deve poter confermare il ricevimento e comunicare la decisione.',
         ],
     ],
 ];

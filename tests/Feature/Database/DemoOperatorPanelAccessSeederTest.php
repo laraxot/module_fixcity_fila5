@@ -2,20 +2,19 @@
 
 declare(strict_types=1);
 
-namespace Tests\Modules\Fixcity\Feature\Database;
+namespace Modules\Fixcity\Tests\Feature\Database;
 
 use Filament\Facades\Filament;
 use Filament\Models\Contracts\FilamentUser;
 use Filament\Panel;
 use Modules\Fixcity\Database\Seeders\DemoOperatorPanelAccessSeeder;
 use Modules\Fixcity\Database\Seeders\DemoUsersSeeder;
-use Tests\Modules\Fixcity\TestCase;
+use Modules\Fixcity\Tests\TestCase;
 use Modules\Xot\Contracts\UserContract;
 use Modules\Xot\Datas\XotData;
 use PHPUnit\Framework\Assert;
 
 uses(TestCase::class);
-
 beforeEach(function (): void {
     (new DemoUsersSeeder)->run();
 });

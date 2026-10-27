@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
-use Tests\Modules\Fixcity\TestCase;
+use Modules\Fixcity\Tests\TestCase;
 use PHPUnit\Framework\Assert;
 
 use function Safe\parse_url;

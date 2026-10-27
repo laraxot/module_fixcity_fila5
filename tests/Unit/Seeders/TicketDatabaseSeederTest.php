@@ -2,39 +2,55 @@
 
 declare(strict_types=1);
 
-use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Facades\Artisan;
+use Illuminate\Support\Facades\Storage;
+use Modules\Fixcity\Actions\GenerateTicketsJsonAction;
+use Modules\Fixcity\Database\Seeders\DemoUsersSeeder;
 use Modules\Fixcity\Database\Seeders\TicketDatabaseSeeder;
 use Modules\Fixcity\Enums\TicketStatusEnum;
 use Modules\Fixcity\Models\Ticket;
+use Modules\Fixcity\Tests\TestCase;
+use Modules\User\Database\Factories\UserFactory;
 use Modules\User\Models\User;
-use Tests\TestCase;
+
+uses(TestCase::class);
 
 /**
- * Pest tests for STORY-135 TicketDatabaseSeeder.
+ * Scopo: il seeder di presentazione popola il front office pubblico con un
+ * dataset demo stabile (20 ticket, Mogliano Veneto) ed e' idempotente.
  *
- * Verifies that the presentation seeder populates the public FO with a stable
- * demo dataset (15 tickets, Mogliano Veneto) and is idempotent across runs.
+ * Contratto reale (non piu' "15 ticket"): `TicketDatabaseSeeder::presentationRecords()`
+ * ha DEMO-001..DEMO-020, assegnati al cittadino `DemoUsersSeeder::CITIZEN_EMAIL`
+ * (se manca, il seeder salta tutto: STORY-521).
  *
- * @see docs/stories/STORY-135-presentation-ticket-seeder.md
+ * Isolamento: TestCase di modulo con DatabaseTransactions (mai RefreshDatabase,
+ * che farebbe migrate:fresh sul database configurato) e GenerateTicketsJsonAction
+ * sostituita, perche' il seeder altrimenti riscrive `public_html/data/tickets.json`.
+ *
+ * @see docs/bmad/stories/STORY-521-demo-ticket-owner-assignment.md
+ * @see docs/stories/dcp-241-test-geocodifica-ticket-contro-job-inesistente.story.md
  */
-
-uses(TestCase::class, RefreshDatabase::class);
-
 beforeEach(function (): void {
-    User::factory()->create();
+    UserFactory::new()->create(['email' => DemoUsersSeeder::CITIZEN_EMAIL]);
+
+    Storage::fake('public');
+
+    $geoJsonAction = Mockery::mock(GenerateTicketsJsonAction::class);
+    $geoJsonAction->shouldReceive('execute')->atLeast()->once()->andReturn('/tmp/fixcity-ticket-seeder-test.json');
+    app()->instance(GenerateTicketsJsonAction::class, $geoJsonAction);
 });
 
 describe('TicketDatabaseSeeder', function () {
-    it('creates exactly 15 presentation tickets', function () {
+    it('creates exactly 20 presentation tickets', function () {
         runTicketSeeder();
 
         $demoTickets = Ticket::query()->where('ticket_prefix', 'DEMO')->get();
 
-        expect($demoTickets)->toHaveCount(15);
+        expect($demoTickets)->toHaveCount(20);
     });
 
-    it('uses canonical codes DEMO-001 .. DEMO-015', function () {
+    it('uses canonical codes DEMO-001 .. DEMO-020', function () {
         runTicketSeeder();
 
         $codes = Ticket::query()
@@ -46,18 +62,14 @@ describe('TicketDatabaseSeeder', function () {
 
         $expected = array_map(
             static fn (int $i) => sprintf('DEMO-%03d', $i),
-            range(1, 15),
+            range(1, 20),
         );
 
         expect($codes)->toEqual($expected);
     });
 
     it('geocodes every demo ticket inside the Mogliano Veneto bounding box', function () {
-        runTicketSeeder();
-
-        $demoTickets = Ticket::query()->where('ticket_prefix', 'DEMO')->get();
-
-        foreach ($demoTickets as $ticket) {
+        foreach (seededDemoTickets() as $ticket) {
             $lat = (float) $ticket->latitude;
             $lng = (float) $ticket->longitude;
 
@@ -67,11 +79,7 @@ describe('TicketDatabaseSeeder', function () {
     });
 
     it('stores city metadata in the location payload', function () {
-        runTicketSeeder();
-
-        $demoTickets = Ticket::query()->where('ticket_prefix', 'DEMO')->get();
-
-        foreach ($demoTickets as $ticket) {
+        foreach (seededDemoTickets() as $ticket) {
             $location = $ticket->location;
 
             expect($location)->toBeArray()
@@ -82,20 +90,14 @@ describe('TicketDatabaseSeeder', function () {
     });
 
     it('uses statuses that are publicly visible', function () {
-        runTicketSeeder();
-
         $allowed = array_map(
             static fn (TicketStatusEnum $case) => $case->value,
             TicketStatusEnum::canViewByAll(),
         );
 
-        $statuses = Ticket::query()
-            ->where('ticket_prefix', 'DEMO')
-            ->get()
-            ->map(static fn (Ticket $ticket) => (string) $ticket->getRawOriginal('status'))
+        $statuses = seededDemoTickets()
+            ->map(static fn (Ticket $ticket): string => $ticket->resolveTicketStatusValue())
             ->all();
-
-        expect($statuses)->not->toBeEmpty();
 
         foreach ($statuses as $status) {
             expect($status)->toBeIn($allowed);
@@ -103,11 +105,7 @@ describe('TicketDatabaseSeeder', function () {
     });
 
     it('marks every demo ticket as visible on the public frontoffice', function () {
-        runTicketSeeder();
-
-        $demoTickets = Ticket::query()->where('ticket_prefix', 'DEMO')->get();
-
-        foreach ($demoTickets as $ticket) {
+        foreach (seededDemoTickets() as $ticket) {
             expect($ticket->isVisibleOnPublicFrontoffice())->toBeTrue();
         }
     });
@@ -127,7 +125,8 @@ describe('TicketDatabaseSeeder', function () {
             ->pluck('slug', 'code')
             ->all();
 
-        expect($secondRun)->toEqual($firstRun);
+        expect($firstRun)->toHaveCount(20)
+            ->and($secondRun)->toEqual($firstRun);
     });
 
     it('is idempotent on triple execution', function () {
@@ -135,7 +134,7 @@ describe('TicketDatabaseSeeder', function () {
         runTicketSeeder();
         runTicketSeeder();
 
-        expect(Ticket::query()->where('ticket_prefix', 'DEMO')->count())->toBe(15);
+        expect(Ticket::query()->where('ticket_prefix', 'DEMO')->count())->toBe(20);
     });
 
     it('does not touch legacy pending tickets already in the database', function () {
@@ -155,7 +154,7 @@ describe('TicketDatabaseSeeder', function () {
         runTicketSeeder();
 
         expect(Ticket::query()->where('code', 'LEGACY-001')->count())->toBe(1)
-            ->and(Ticket::query()->where('ticket_prefix', 'DEMO')->count())->toBe(15);
+            ->and(Ticket::query()->where('ticket_prefix', 'DEMO')->count())->toBe(20);
     });
 });
 
@@ -167,4 +166,21 @@ function runTicketSeeder(): void
     ]);
 
     expect($exit)->toBe(0);
+}
+
+/**
+ * Esegue il seeder e restituisce i ticket demo; non vuota per costruzione, cosi'
+ * i test che iterano non passano a vuoto se il seeder salta i ticket.
+ *
+ * @return Collection<int, Ticket>
+ */
+function seededDemoTickets(): Collection
+{
+    runTicketSeeder();
+
+    $demoTickets = Ticket::query()->where('ticket_prefix', 'DEMO')->get();
+
+    expect($demoTickets)->not->toBeEmpty();
+
+    return $demoTickets;
 }

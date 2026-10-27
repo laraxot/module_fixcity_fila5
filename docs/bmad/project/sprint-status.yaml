@@ -1,0 +1,621 @@
+project: FixCity
+track: enterprise
+updated: 2026-10-13
+delivery: count-based
+# Significato di `status` (verificato 2026-10-14, story 1.3): nel tracker dice se la story e' avviabile
+# (`backlog` = dipendenze ancora aperte, `blocked` = serve una decisione o un'approvazione); nel file della story
+# dice lo stato del documento (`ready-for-dev` = compilata e validabile). I due valori possono differire senza
+# errore: non si allineano a occhio. Uno scarto e' un difetto solo quando le dipendenze sono tutte `done`.
+epics:
+  - id: E1
+    title: Product and component truth
+    status: in-progress
+  - id: E2
+    title: Citizen vertical slice
+    status: backlog
+  - id: E3
+    title: PA operations and audit
+    status: backlog
+  - id: E4
+    title: Notifications and resilience
+    status: backlog
+  - id: E5
+    title: Security, privacy and data lifecycle
+    status: backlog
+  - id: E6
+    title: UX/accessibility and themes
+    status: backlog
+  - id: E7
+    title: Release closure
+    status: backlog
+  - id: E8
+    title: Designers Italia service-design alignment
+    status: backlog
+  - id: E9
+    title: Go-live closure
+    status: backlog
+  - id: E10
+    title: Agentic engineering governance
+    status: backlog
+stories:
+  - id: 1.1
+    file: stories/1.1.component-catalog.story.md
+    title: Canonical component catalog
+    status: ready-for-dev
+    dependencies: []
+    parallel_set: 1
+    owned_scope: [bmad-output/component-catalog.md]
+  - id: 1.2
+    file: stories/1.2.module-theme-docs.story.md
+    title: Module and theme documentation architecture
+    status: ready-for-dev
+    dependencies: [1.1]
+    parallel_set: 2
+    owned_scope: [bmad-output/docs-architecture, laravel/Modules/*/docs, laravel/Themes/*/docs]
+  - id: DOC-001
+    file: stories/docs-organization/DOC-001.inventory-ownership.story.md
+    title: Documentation inventory and ownership
+    status: ready-for-dev
+    dependencies: [1.2]
+    parallel_set: 3
+    owned_scope: [bmad-output/docs-architecture/inventory.md]
+  - id: DOC-002
+    file: stories/docs-organization/DOC-002.canonical-entrypoints.story.md
+    title: Canonical documentation entrypoints
+    status: ready-for-dev
+    dependencies: [DOC-001]
+    parallel_set: 4
+    owned_scope: [laravel/Modules/*/docs/00-INDEX.md, laravel/Themes/*/docs/00-INDEX.md]
+  - id: DOC-003
+    file: stories/docs-organization/DOC-003.frontmatter-audit.story.md
+    title: Documentation front matter audit
+    status: ready-for-dev
+    dependencies: [DOC-001]
+    parallel_set: 4
+    owned_scope: [bmad-output/docs-architecture/frontmatter-audit.md]
+  - id: DOC-004
+    file: stories/docs-organization/DOC-004.duplicate-classification.story.md
+    title: Duplicate and index classification
+    status: ready-for-dev
+    dependencies: [DOC-001]
+    parallel_set: 4
+    owned_scope: [bmad-output/docs-architecture/duplicate-map.md]
+  - id: DOC-005
+    file: stories/docs-organization/DOC-005.link-integrity.story.md
+    title: Documentation link integrity
+    status: ready-for-dev
+    dependencies: [DOC-002, DOC-004]
+    parallel_set: 5
+    owned_scope: [bmad-output/docs-architecture/link-audit.md]
+  - id: DOC-006
+    file: stories/docs-organization/DOC-006.non-destructive-consolidation.story.md
+    title: Non-destructive documentation consolidation
+    status: backlog
+    dependencies: [DOC-003, DOC-004, DOC-005]
+    parallel_set: 6
+    owned_scope: [bmad-output/docs-architecture/migration-map.md]
+  - id: DOC-007
+    file: stories/docs-organization/DOC-007.qmd-health.story.md
+    title: QMD documentation health
+    status: backlog
+    dependencies: [DOC-002, DOC-006]
+    parallel_set: 7
+    owned_scope: [bmad-output/docs-architecture/qmd-health-report.md]
+  - id: DOC-008
+    file: stories/docs-organization/DOC-008.graphify-health.story.md
+    title: Graphify documentation health
+    status: backlog
+    dependencies: [DOC-005, DOC-006]
+    parallel_set: 7
+    owned_scope: [bmad-output/docs-architecture/graphify-health-report.md]
+  - id: DOC-009
+    file: stories/docs-organization/DOC-009.second-brain-curation.story.md
+    title: Second Brain documentation curation
+    status: backlog
+    dependencies: [DOC-006, DOC-007, DOC-008]
+    parallel_set: 8
+    owned_scope: [bmad-output/docs-architecture/second-brain-integration.md]
+  - id: DOC-010
+    file: stories/docs-organization/DOC-010.module-theme-quality.story.md
+    title: Module and theme documentation quality
+    status: backlog
+    dependencies: [DOC-002, DOC-006]
+    parallel_set: 7
+    owned_scope: [laravel/Modules/*/docs, laravel/Themes/*/docs]
+  - id: DOC-011
+    file: stories/docs-organization/DOC-011.continuous-gate.story.md
+    title: Continuous documentation gate
+    status: backlog
+    dependencies: [DOC-007, DOC-008, DOC-009, DOC-010]
+    parallel_set: 9
+    owned_scope: [bmad-output/docs-architecture, bashscripts/docs]
+  - id: 1.3
+    file: stories/1.3.story-tracker-normalization.story.md
+    title: BMAD story tracker normalization
+    status: in-progress
+    dependencies: [1.1]
+    parallel_set: 2
+    owned_scope: [bmad-output/sprint-status.yaml, docs/sprint-status.yaml]
+  - id: 1.4
+    file: stories/1.4.view-cache-component-integrity.story.md
+    title: View-cache and component integrity
+    status: done
+    dependencies: [1.1, 1.2]
+    parallel_set: 3
+    owned_scope: [laravel/Themes/Sixteen/resources/views/components/blocks/tests/segnalazione-crea.blade.php, laravel/Themes/Sixteen/resources/views/components/blocks/geo/mappa-static.blade.php]
+  - id: 2.1
+    file: stories/2.1.candidate-citizen-flow.story.md
+    title: Candidate citizen vertical slice
+    status: backlog
+    dependencies: [2.3]
+    parallel_set: 3
+    owned_scope: [laravel/Modules/Fixcity, laravel/Modules/User, laravel/Themes/Sixteen]
+  - id: 2.2
+    file: stories/2.2.media-location-errors.story.md
+    title: Media and location failure recovery
+    status: backlog
+    dependencies: [1.1]
+    parallel_set: 3
+    owned_scope: [laravel/Modules/Media, laravel/Modules/Geo]
+  - id: 2.3
+    file: stories/2.3.privacy-acknowledgement.story.md
+    title: Privacy acknowledgement semantics
+    status: blocked
+    dependencies: []
+    parallel_set: 1
+    owned_scope: [laravel/Modules/Fixcity, laravel/Modules/Gdpr, laravel/Modules/Tenant]
+  - id: 3.1
+    file: stories/3.1.role-matrix.story.md
+    title: PA role and denial matrix
+    status: backlog
+    dependencies: [1.1]
+    parallel_set: 3
+    owned_scope: [laravel/Modules/User, laravel/Modules/Fixcity]
+  - id: 3.2
+    file: stories/3.2.sla-work-order-decision.story.md
+    title: SLA and work-order semantics
+    status: backlog
+    dependencies: [1.1]
+    parallel_set: 3
+    owned_scope: [laravel/Modules/Fixcity, laravel/Modules/Job]
+  - id: 3.3
+    file: stories/3.3.audit-timeline-evidence.story.md
+    title: Audit timeline evidence
+    status: backlog
+    dependencies: [3.1]
+    parallel_set: 4
+    owned_scope: [laravel/Modules/Fixcity, laravel/Modules/Activity]
+  - id: 4.1
+    file: stories/4.1.worker-provider-drill.story.md
+    title: Notification worker and provider drill
+    status: backlog
+    dependencies: [1.1]
+    parallel_set: 3
+    owned_scope: [laravel/Modules/Notify, laravel/Modules/Job]
+  - id: 4.2
+    file: stories/4.2.retry-failure-alerting.story.md
+    title: Notification retry and alerting
+    status: backlog
+    dependencies: [4.1]
+    parallel_set: 4
+    owned_scope: [laravel/Modules/Notify, laravel/Modules/Job]
+  - id: 5.1
+    file: stories/5.1.media-retention.story.md
+    title: Media privacy and retention
+    status: backlog
+    dependencies: [2.2, 2.3]
+    parallel_set: 4
+    owned_scope: [laravel/Modules/Media, laravel/Modules/Gdpr]
+  - id: 5.2
+    file: stories/5.2.backup-restore.story.md
+    title: Candidate backup and restore
+    status: backlog
+    dependencies: [1.1]
+    parallel_set: 3
+    owned_scope: [laravel/Modules/Job, laravel/database]
+  - id: 6.1
+    file: stories/6.1.accessibility-candidate.story.md
+    title: Critical-flow accessibility candidate audit
+    status: backlog
+    dependencies: [2.1]
+    parallel_set: 4
+    owned_scope: [laravel/Themes/Sixteen, bmad-output/DESIGN.md, bmad-output/EXPERIENCE.md]
+  - id: 6.2
+    file: stories/6.2.theme-support-decision.story.md
+    title: Theme support classification
+    status: backlog
+    dependencies: [1.1]
+    parallel_set: 2
+    owned_scope: [laravel/Themes]
+  - id: 6.3
+    file: stories/6.3.cookiebar-gdpr-bootstrap-italia.story.md
+    title: Cookiebar and Gdpr consent boundary
+    status: ready-for-dev
+    dependencies: [1.1]
+    parallel_set: 2
+    owned_scope: [laravel/Modules/Gdpr, laravel/Themes/Sixteen/resources/views/components/feedback/cookiebar.blade.php]
+  - id: 6.4
+    file: stories/6.4.cookie-policy-localized-inventory.story.md
+    title: Localized cookie inventory
+    status: ready-for-dev
+    dependencies: [6.3]
+    parallel_set: 3
+    owned_scope: [laravel/Modules/Fixcity/app/Actions/GetCookieInventoryAction.php, laravel/Themes/Sixteen/resources/views/components/blocks/cookie-policy]
+  - id: 6.5
+    file: stories/6.5.consent-gated-optional-processing.story.md
+    title: Consent-gated optional processing
+    status: ready-for-dev
+    dependencies: [6.3]
+    parallel_set: 3
+    owned_scope: [laravel/Modules/Gdpr, laravel/Themes/Sixteen/resources/js/cookie-consent.js]
+  - id: 6.6
+    file: stories/6.6.gdpr-revocation-and-audit-boundary.story.md
+    title: Gdpr revocation and audit boundary
+    status: ready-for-dev
+    dependencies: [6.4, 6.5]
+    parallel_set: 4
+    owned_scope: [laravel/Modules/Gdpr, laravel/Modules/Fixcity]
+  - id: 6.7
+    file: stories/6.7.cookiebar-accessibility-and-localization-qa.story.md
+    title: Cookiebar accessibility and localization QA
+    status: ready-for-dev
+    dependencies: [6.6, "6.10", 6.11, 6.17]
+    parallel_set: 8
+    owned_scope: [laravel/Themes/Sixteen/tests/browser, laravel/Modules/Fixcity/tests/Feature/Pages/CookieBannerPagesTest.php]
+  - id: 6.8
+    file: stories/6.8.cookie-compliance-owner-approval.story.md
+    title: Cookie compliance owner approval
+    status: ready-for-dev
+    dependencies: [6.7]
+    parallel_set: 9
+    owned_scope: [bmad-output/release-plan.md, bmad-output/decision-log.md]
+  - id: 6.9
+    file: stories/6.9.cookie-consent-release-regression-gate.story.md
+    title: Cookie consent release regression gate
+    status: ready-for-dev
+    dependencies: [6.8, 6.15, 6.16, 6.17]
+    parallel_set: 10
+    owned_scope: [bmad-output/test-strategy.md, bmad-output/release-plan.md]
+  - id: "6.10"
+    file: stories/6.10.localized-legal-route-inventory.story.md
+    title: Localized legal route inventory
+    status: ready-for-dev
+    dependencies: [6.8]
+    parallel_set: 4
+    owned_scope: [laravel/Modules/Cms, laravel/Themes/Sixteen/resources/views/components/footer]
+  - id: 6.11
+    file: stories/6.11.no-bootstrap-runtime-boundary.story.md
+    title: No-Bootstrap runtime boundary
+    status: ready-for-dev
+    dependencies: [6.2, 6.3]
+    parallel_set: 3
+    owned_scope: [laravel/Themes/Sixteen/resources/css, laravel/Themes/Sixteen/resources/js]
+  - id: 6.12
+    file: stories/6.12.terms-disclaimer-contract.story.md
+    title: Terms and disclaimer contract
+    status: ready-for-dev
+    dependencies: ["6.10"]
+    parallel_set: 5
+    owned_scope: [bmad-output/research-report.md, bmad-output/decision-log.md]
+  - id: 6.13
+    file: stories/6.13.legal-identity-content-checklist.story.md
+    title: Legal identity and content checklist
+    status: ready-for-dev
+    dependencies: [6.12]
+    parallel_set: 6
+    owned_scope: [bmad-output/completion-gap-analysis.md, bmad-output/release-plan.md]
+  - id: 6.14
+    file: stories/6.14.legal-acceptance-version-evidence.story.md
+    title: Legal acceptance and version evidence
+    status: ready-for-dev
+    dependencies: [6.12]
+    parallel_set: 6
+    owned_scope: [laravel/Modules/Gdpr, laravel/Modules/User, bmad-output/test-strategy.md]
+  - id: 6.15
+    file: stories/6.15.legal-publication-gate.story.md
+    title: Legal publication gate
+    status: ready-for-dev
+    dependencies: [6.13, 6.14]
+    parallel_set: 7
+    owned_scope: [laravel/Modules/Fixcity/app/Actions/Assess*Action.php, laravel/Modules/Fixcity/tests/Feature/Pages/*PublicationGateTest.php]
+  - id: 6.16
+    file: stories/6.16.terms-disclaimer-publication-surface.story.md
+    title: Terms and disclaimer publication surface
+    status: ready-for-dev
+    dependencies: [6.15]
+    parallel_set: 8
+    owned_scope: [laravel/Modules/Fixcity/config/database/content/pages/terms.index.json, laravel/Themes/Sixteen/lang, laravel/Themes/Sixteen/resources/views/components/sections/footer/v1.blade.php]
+  - id: 6.17
+    file: stories/6.17.legal-link-runtime-normalization.story.md
+    title: Runtime legal-link normalization
+    status: ready-for-dev
+    dependencies: ["6.10"]
+    parallel_set: 5
+    owned_scope: [laravel/Themes/Sixteen/resources/views/components/ui/footer.blade.php, laravel/Themes/Sixteen/resources/views/components/agid/footer.blade.php, laravel/Themes/Sixteen/resources/views/components/municipal/service-form.blade.php]
+  - id: 8.1
+    file: stories/8.1.design-guideline-baseline.story.md
+    title: Designers Italia baseline
+    status: done
+    dependencies: []
+    parallel_set: 1
+    owned_scope: [bmad-output/design-guideline-baseline.md]
+  - id: 8.2
+    file: stories/8.2.service-design-outcomes.story.md
+    title: Service design outcomes
+    status: backlog
+    dependencies: [8.1]
+    parallel_set: 2
+    owned_scope: [bmad-output/service-design-outcomes.md, bmad-output/EXPERIENCE.md]
+  - id: 8.3
+    file: stories/8.3.information-architecture.story.md
+    title: Information architecture
+    status: backlog
+    dependencies: [8.1]
+    parallel_set: 2
+    owned_scope: [bmad-output/information-architecture.md]
+  - id: 8.4
+    file: stories/8.4.content-language-seo.story.md
+    title: Content, language and SEO
+    status: backlog
+    dependencies: [8.1, 8.3]
+    parallel_set: 3
+    owned_scope: [bmad-output/content-design-seo.md]
+  - id: 8.5
+    file: stories/8.5.inclusive-accessibility-design.story.md
+    title: Inclusive accessibility design
+    status: backlog
+    dependencies: [8.1, 8.3]
+    parallel_set: 3
+    owned_scope: [bmad-output/accessibility-design-audit.md]
+  - id: 8.6
+    file: stories/8.6.user-research-usability.story.md
+    title: User research and usability
+    status: backlog
+    dependencies: [8.2, 8.3]
+    parallel_set: 3
+    owned_scope: [bmad-output/user-research-plan.md, bmad-output/usability-findings.md]
+  - id: 8.7
+    file: stories/8.7.privacy-by-design-alignment.story.md
+    title: Privacy by design alignment
+    status: backlog
+    dependencies: [8.1, 6.17]
+    parallel_set: 5
+    owned_scope: [bmad-output/privacy-by-design-map.md]
+  - id: 8.8
+    file: stories/8.8.continuous-improvement-release-evidence.story.md
+    title: Continuous design improvement gate
+    status: backlog
+    dependencies: [8.2, 8.4, 8.5, 8.6, 8.7]
+    parallel_set: 6
+    owned_scope: [bmad-output/design-evidence-index.md]
+  - id: 8.9
+    file: stories/8.9.project-governance-and-responsibilities.story.md
+    title: Design governance and responsibilities
+    status: ready-for-dev
+    dependencies: [8.1]
+    parallel_set: 2
+    owned_scope: [bmad-output/design-governance.md]
+  - id: "8.10"
+    file: stories/8.10.service-model-and-ecosystem.story.md
+    title: Service model and ecosystem
+    status: ready-for-dev
+    dependencies: [8.1, 8.2]
+    parallel_set: 3
+    owned_scope: [bmad-output/service-model-and-ecosystem.md]
+  - id: 8.11
+    file: stories/8.11.content-inventory-localization-and-rights.story.md
+    title: Content inventory, localization and rights
+    status: ready-for-dev
+    dependencies: [8.3, 8.4, 6.13]
+    parallel_set: 4
+    owned_scope: [bmad-output/content-inventory.md, bmad-output/content-rights-register.md]
+  - id: 8.12
+    file: stories/8.12.interaction-prototyping-and-validation.story.md
+    title: Interaction prototyping and validation
+    status: ready-for-dev
+    dependencies: [8.2, 8.3, 8.10]
+    parallel_set: 4
+    owned_scope: [bmad-output/interaction-flows.md, bmad-output/prototype-validation.md]
+  - id: 8.13
+    file: stories/8.13.design-system-and-component-contract.story.md
+    title: Design system and component contract
+    status: ready-for-dev
+    dependencies: [8.5, 8.12, 6.11]
+    parallel_set: 5
+    owned_scope: [bmad-output/design-system-component-contract.md]
+  - id: 8.14
+    file: stories/8.14.reliability-transparency-security.story.md
+    title: Reliability, transparency and security
+    status: ready-for-dev
+    dependencies: [8.7, 5.1, 6.15]
+    parallel_set: 6
+    owned_scope: [bmad-output/reliability-transparency-security.md]
+  - id: 8.15
+    file: stories/8.15.platforms-and-authentication.story.md
+    title: Platforms and authentication assessment
+    status: ready-for-dev
+    dependencies: [8.9, "8.10"]
+    parallel_set: 4
+    owned_scope: [bmad-output/platform-applicability-matrix.md]
+  - id: 8.16
+    file: stories/8.16.licenses-and-open-content.story.md
+    title: Licenses and open content
+    status: ready-for-dev
+    dependencies: [8.11, 6.13]
+    parallel_set: 5
+    owned_scope: [bmad-output/license-attribution-register.md]
+  - id: 8.17
+    file: stories/8.17.monitoring-feedback-and-satisfaction.story.md
+    title: Monitoring, feedback and satisfaction
+    status: ready-for-dev
+    dependencies: [8.2, 8.7, 6.5, 6.6]
+    parallel_set: 6
+    owned_scope: [bmad-output/monitoring-feedback-plan.md]
+  - id: 8.18
+    file: stories/8.18.normative-requirements-and-procurement-gate.story.md
+    title: Normative requirements and procurement gate
+    status: ready-for-dev
+    dependencies: [8.1, 8.2, 8.3, 8.4, 8.5, 8.6, 8.7, 8.8, 8.9, "8.10", 8.11, 8.12, 8.13, 8.14, 8.15, 8.16, 8.17]
+    parallel_set: 7
+    owned_scope: [bmad-output/designers-italia-requirements-matrix.md]
+  - id: 7.1
+    file: stories/7.1.readiness-evidence-index.story.md
+    title: Release readiness evidence index
+    status: backlog
+    dependencies: [2.1, 3.3, 4.2, 5.1, 5.2, 6.1, 6.2, 7.3, 8.8, 8.18]
+    parallel_set: 8
+    owned_scope: [bmad-output/release-plan.md, bmad-output/completion-gap-analysis.md]
+  - id: 7.2
+    file: stories/7.2.release-sign-off.story.md
+    title: Municipal release sign-off
+    status: blocked
+    dependencies: [7.1, 9.6]
+    parallel_set: 6
+    owned_scope: [bmad-output/release-plan.md]
+  - id: 7.3
+    file: stories/7.3.code-quality-static-analysis-gate.story.md
+    title: Code-quality and static-analysis gate
+    status: ready-for-dev
+    dependencies: [1.1, 1.2]
+    parallel_set: 7
+    owned_scope: [bmad-output/code-quality-gate.md]
+  - id: DCP-170
+    file: ../laravel/Themes/Sixteen/docs/bmad/stories/dcp-170-cookiebar-visual-semantic-audit.story.md
+    title: Cookiebar visual and semantic audit
+    status: ready-for-dev
+    dependencies: [6.3, 6.7, 8.5, 8.13]
+    parallel_set: 9
+    owned_scope: [laravel/Themes/Sixteen/docs/bmad/audits/cookiebar-visual-semantic-audit.md]
+  - id: DCP-171
+    file: ../laravel/Themes/Sixteen/docs/bmad/stories/dcp-171-disclaimer-content-and-route-verification.story.md
+    title: Disclaimer content and route verification
+    status: ready-for-dev
+    dependencies: [6.12, 6.13, 6.15]
+    parallel_set: 9
+    owned_scope: [laravel/Themes/Sixteen/docs/bmad/audits/disclaimer-verification.md]
+  - id: DCP-172
+    file: ../laravel/Themes/Sixteen/docs/bmad/stories/dcp-172-legal-surface-localization-regression.story.md
+    title: Legal surface localization regression
+    status: ready-for-dev
+    dependencies: ["6.10", 6.16, 6.17, 8.11]
+    parallel_set: 9
+    owned_scope: [laravel/Themes/Sixteen/docs/bmad/audits/legal-surface-localization-regression.md]
+  - id: DCP-173
+    file: ../laravel/Themes/Sixteen/docs/bmad/stories/dcp-173-design-guideline-evidence-retest.story.md
+    title: Designers Italia evidence retest
+    status: ready-for-dev
+    dependencies: [8.1, 8.18, DCP-170, DCP-171, DCP-172]
+    parallel_set: 10
+    owned_scope: [laravel/Themes/Sixteen/docs/bmad/audits/design-guideline-evidence-retest.md]
+  - id: 9.1
+    file: stories/9.1.candidate-environment-and-rollback.story.md
+    title: Candidate environment and rollback
+    status: ready-for-dev
+    dependencies: [1.4, 5.2]
+    parallel_set: 8
+    owned_scope: [bmad-output/candidate-environment-manifest.md]
+  - id: 9.2
+    file: stories/9.2.operations-backup-and-recovery.story.md
+    title: Operations, backup and recovery readiness
+    status: ready-for-dev
+    dependencies: [9.1, 4.1, 4.2, 5.2]
+    parallel_set: 9
+    owned_scope: [bmad-output/operations-readiness.md, bmad-output/backup-restore-evidence.md]
+  - id: 9.3
+    file: stories/9.3.legal-privacy-owner-approval.story.md
+    title: Legal and privacy owner approval
+    status: ready-for-dev
+    dependencies: [6.12, 6.13, 6.14, 6.15, 6.16, 6.17, DCP-170, DCP-171, DCP-172]
+    parallel_set: 9
+    owned_scope: [bmad-output/legal-go-live-approval.md]
+  - id: 9.4
+    file: stories/9.4.e2e-accessibility-candidate.story.md
+    title: Candidate E2E and accessibility validation
+    status: ready-for-dev
+    dependencies: [9.1, 2.1, 2.2, 3.1, 3.3, 6.1, 8.5]
+    parallel_set: 9
+    owned_scope: [bmad-output/candidate-e2e-accessibility-evidence.md]
+  - id: 9.5
+    file: stories/9.5.security-data-lifecycle-candidate.story.md
+    title: Candidate security and data lifecycle
+    status: ready-for-dev
+    dependencies: [9.1, 5.1, 6.6, 8.14]
+    parallel_set: 9
+    owned_scope: [bmad-output/candidate-security-data-lifecycle-evidence.md]
+  - id: 9.6
+    file: stories/9.6.go-live-sign-off-and-rollback.story.md
+    title: Go-live sign-off and rollback
+    status: blocked
+    dependencies: [9.1, 9.2, 9.3, 9.4, 9.5, 7.1, 8.18, DCP-173]
+    parallel_set: 10
+    owned_scope: [bmad-output/go-live-decision.md, bmad-output/go-live-gap-register.md]
+  - id: 10.1
+    file: stories/10.1.ai-tooling-allowlist-and-data-boundary.story.md
+    title: AI tooling allowlist and data boundary
+    status: ready-for-dev
+    dependencies: [9.3, 9.5]
+    parallel_set: 9
+    owned_scope: [bmad-output/ai-agent-tooling-governance.md]
+  - id: 10.2
+    file: stories/10.2.bmad-superpowers-development-loop.story.md
+    title: BMAD and development-loop execution
+    status: ready-for-dev
+    dependencies: [10.1]
+    parallel_set: 10
+    owned_scope: [bmad-output/ai-development-loop.md]
+  - id: 10.3
+    file: stories/10.3.security-plugin-release-gate.story.md
+    title: Security plugin release gate
+    status: ready-for-dev
+    dependencies: [10.1, 10.2, 9.5]
+    parallel_set: 11
+    owned_scope: [bmad-output/security-automation-gate.md]
+  - id: 10.4
+    file: stories/10.4.visual-ai-review-boundary.story.md
+    title: Visual AI review boundary
+    status: ready-for-dev
+    dependencies: [10.1, 10.2, DCP-170, DCP-171, DCP-172]
+    parallel_set: 11
+    owned_scope: [bmad-output/visual-review-evidence-standard.md]
+  - id: DCP-32
+    file: ../laravel/Themes/Sixteen/docs/bmad/stories/dcp-32-wizard-step1-privacy.story.md
+    title: Wizard privacy and consent parity
+    status: ready-for-dev
+    dependencies: [2.3]
+    parallel_set: 10
+    owned_scope: [laravel/Modules/Fixcity, laravel/Themes/Sixteen/resources/views/filament/widgets/create-ticket-wizard.blade.php]
+  - id: DCP-33
+    file: ../laravel/Themes/Sixteen/docs/bmad/stories/dcp-33-wizard-step2-dati.story.md
+    title: Wizard report data and map parity
+    status: ready-for-dev
+    dependencies: [DCP-32]
+    parallel_set: 11
+    owned_scope: [laravel/Modules/Fixcity/app/Filament/Resources/TicketResource/Schemas/TicketForm.php, laravel/Modules/Geo, laravel/Themes/Sixteen]
+  - id: DCP-34
+    file: ../laravel/Themes/Sixteen/docs/bmad/stories/dcp-34-wizard-step3-riepilogo.story.md
+    title: Wizard summary and readonly map parity
+    status: ready-for-dev
+    dependencies: [DCP-33]
+    parallel_set: 12
+    owned_scope: [laravel/Modules/Fixcity/app/Filament/Resources/TicketResource/Schemas/TicketFormReviewInfolist.php, laravel/Themes/Sixteen]
+  - id: DCP-42
+    file: ../laravel/Modules/Fixcity/docs/stories/dcp-42-tickets-create-auth-regressione.story.md
+    title: tickets/create authentication boundary and locale redirect
+    status: ready-for-dev
+    dependencies: [DCP-41]
+    parallel_set: 14
+    owned_scope: [laravel/config/local/fixcity/database/content/pages/tickets.create.json, laravel/config/eu/fixcity/database/content/pages/tickets.create.json, laravel/Modules/Fixcity/config/database/content/pages/tickets.create.json, laravel/Modules/Fixcity/tests/Feature/Pages]
+  - id: DCP-35
+    file: ../laravel/Themes/Sixteen/docs/bmad/stories/dcp-35-conferma-parity.story.md
+    title: Ticket confirmation parity
+    status: ready-for-dev
+    dependencies: [DCP-34]
+    parallel_set: 13
+    owned_scope: [laravel/Modules/Fixcity, laravel/Themes/Sixteen/resources/views/components/blocks/flow/ticket]
+  - id: DCP-32S
+    file: ../laravel/Themes/Sixteen/docs/bmad/stories/dcp-32-scope-data-dc-pagine-reali.story.md
+    title: Design Comuni data-dc scope for real pages
+    status: in-progress
+    dependencies: [1.1]
+    parallel_set: 10
+    owned_scope: [laravel/Themes/Sixteen/resources/css, laravel/Themes/Sixteen/resources/js, laravel/Themes/Sixteen/resources/views/pages]

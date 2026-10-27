@@ -26,11 +26,3 @@ Nessun file di prodotto e' stato modificato da W3-FORM: durante la prova (21:27 
 ## Cosa funziona (prova)
 - Scratch (127.0.0.1:8091, DB usa-e-getta): privacy, dati (indirizzo, tipo, titolo, descrizione, foto PNG, punto da GPS mockato), Avanti al riepilogo, Invia, redirect a `/it/tickets/confirmation?code=...`, ticket con `status=pending`, `priority=low`, media `attachments` salvato. Idem `/en/`.
 - Nessun testo con "https" o chiavi grezze (`fixcity::`, `ticket_form.`, `geo::`) in it/en/de/es nei passi 2 e 3.
-<<<<<<< .merge_file_owG9d9
-
---- BMAD + Second Brain ---
-- Scopo: documentazione tecnica del modulo.
-- Utilità: riferimento sviluppatori/audit.
-- Funzionalità: struttura, dipendenze, convenzioni (no date .md, git avanti).
-=======
->>>>>>> .merge_file_tqPeZc
