@@ -50,6 +50,10 @@ it('keeps FixCity brand slogan and real nav urls in every header.json copy', fun
             }
             Assert::assertSame('/auth/login', $account['url'] ?? null);
 
+            $region = $data['region'] ?? [];
+            Assert::assertIsArray($region);
+            Assert::assertSame('Demo', $region['name'] ?? null, $path.' '.$locale.' region.name');
+
             $navigation = $data['navigation'] ?? [];
             if (! is_array($navigation)) {
                 Assert::fail($path.' '.$locale.' navigation must be an array');
@@ -69,8 +73,8 @@ it('keeps FixCity brand slogan and real nav urls in every header.json copy', fun
     }
 });
 
-it('does not hardcode follow_us or search labels in the tailwind header vestito', function (): void {
-    $blade = file_get_contents(dirname(__DIR__, 4).'/Themes/Sixteen/resources/views/components/sections/header/tailwind.blade.php');
+it('does not hardcode follow_us or search labels in the v1 header', function (): void {
+    $blade = file_get_contents(dirname(__DIR__, 4).'/Themes/Sixteen/resources/views/components/sections/header/v1.blade.php');
     Assert::assertStringContainsString("\$d('follow_us')", $blade);
     Assert::assertStringContainsString("\$d('search.label')", $blade);
     Assert::assertStringNotContainsString('>Seguici su</span>', $blade);

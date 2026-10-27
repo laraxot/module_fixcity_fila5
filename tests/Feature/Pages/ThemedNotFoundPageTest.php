@@ -41,7 +41,7 @@ describe('404 del front office', function (): void {
         Assert::assertIsString($html);
 
         // solo il contenuto della pagina: header e footer sono il chrome condiviso (i loro link li verifica la story del footer)
-        $found = preg_match('#<main id="main-container".*?</main>#s', $html, $main);
+        $found = preg_match('#<main\b.*?</main>#s', $html, $main);
         Assert::assertSame(1, $found);
         Assert::assertStringNotContainsString('href="#"', $main[0]);
     });

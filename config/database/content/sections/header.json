@@ -23,8 +23,9 @@
                         "link_title": "Vai alla homepage di FixCity"
                     },
                     "region": {
-                        "title": "Vai al portale {Nome della Regione}",
-                        "aria_label": "Vai al portale {Nome della Regione} - link esterno - apertura nuova scheda"
+                        "name": "Demo",
+                        "title": "Vai al portale Demo",
+                        "aria_label": "Vai al portale Demo - link esterno - apertura nuova scheda"
                     },
                     "utility_links": [
                         {
@@ -157,8 +158,9 @@
                         "link_title": "Go to the FixCity homepage"
                     },
                     "region": {
-                        "title": "Go to the {Region name} portal",
-                        "aria_label": "Go to the {Region name} portal - external link - opens in a new tab"
+                        "name": "Demo",
+                        "title": "Go to the Demo portal",
+                        "aria_label": "Go to the Demo portal - external link - opens in a new tab"
                     },
                     "utility_links": [
                         {
@@ -291,8 +293,9 @@
                         "link_title": "Zur FixCity-Startseite"
                     },
                     "region": {
-                        "title": "Zum Portal {Name der Region}",
-                        "aria_label": "Zum Portal {Name der Region} - externer Link - öffnet in einem neuen Tab"
+                        "name": "Demo",
+                        "title": "Zum Demo-Portal",
+                        "aria_label": "Zum Demo-Portal - externer Link - öffnet in einem neuen Tab"
                     },
                     "utility_links": [
                         {
@@ -425,8 +428,9 @@
                         "link_title": "Ir a la página de inicio de FixCity"
                     },
                     "region": {
-                        "title": "Ir al portal de {Nombre de la Región}",
-                        "aria_label": "Ir al portal de {Nombre de la Región} - enlace externo - se abre en una pestaña nueva"
+                        "name": "Demo",
+                        "title": "Ir al portal de Demo",
+                        "aria_label": "Ir al portal de Demo - enlace externo - se abre en una pestaña nueva"
                     },
                     "utility_links": [
                         {

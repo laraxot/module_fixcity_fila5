@@ -70,7 +70,7 @@ it('goes to the home of the current language when no page was required', functio
         ->set('data.email', $user->email)
         ->set('data.password', 'password123')
         ->call('save')
-        ->assertRedirect(Route::has('dashboard') ? route('dashboard') : url('/'.app()->getLocale()));
+        ->assertRedirect(url('/'.app()->getLocale().'/area-personale'));
 });
 
 it('sends a newly registered user back to the required page, not to a missing route', function (): void {

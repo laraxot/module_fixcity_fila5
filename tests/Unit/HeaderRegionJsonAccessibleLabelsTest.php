@@ -27,6 +27,22 @@ it('replaces brace placeholders in region portal labels with the region name', f
     Assert::assertSame('Vai al portale Toscana - link esterno - apertura nuova scheda', $resolved['aria_label']);
 });
 
+/*
+ * D35: `header.json` scrive le etichette attorno a "Demo"; se vince il nome dell'ente il nome accessibile del link lo segue (WCAG 2.5.3).
+ */
+it('makes the accessible labels follow the ente region name that wins over the CMS name', function (): void {
+    $resolved = RegionPortalLinkLabels::resolve([
+        'name' => 'Demo',
+        'title' => 'Vai al portale Demo',
+        'aria_label' => 'Vai al portale Demo - link esterno - apertura nuova scheda',
+    ], 'Toscana');
+
+    Assert::assertSame('Toscana', $resolved['name']);
+    Assert::assertSame('Vai al portale Toscana', $resolved['title']);
+    Assert::assertSame('Vai al portale Toscana - link esterno - apertura nuova scheda', $resolved['aria_label']);
+    Assert::assertSame('Demo', RegionPortalLinkLabels::resolve(['name' => 'Demo'], null)['name']);
+});
+
 it('resolves header.json region accessible labels without literal braces for every locale', function (): void {
     $path = dirname(__DIR__, 4).'/config/local/fixcity/database/content/sections/header.json';
     $config = json_decode(file_get_contents($path), true, 512, JSON_THROW_ON_ERROR);

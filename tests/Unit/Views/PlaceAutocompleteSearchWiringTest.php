@@ -24,7 +24,7 @@ it('wires the place field to the map search on Enter and on leaving the field', 
         ->toContain('x-ref="field"')
         ->toContain('x-on:keydown.enter.prevent="search(true)"')
         ->toContain('x-on:change="search(false)"')
-        ->toContain("address-selected")
+        ->toContain('address-selected')
         ->toContain('.search-box');
 });
 
@@ -77,7 +77,7 @@ it('moves the focus to the first invalid field after a refused Next, from step 2
     expect($html)
         ->toContain('x-on:click="requestNextStep()"')
         ->and(substr_count($html, 'await requestNextStep(); await $nextTick();'))->toBe(1)
-        ->and($html)->toContain("[aria-invalid=true]")
+        ->and($html)->toContain('[aria-invalid=true]')
         ->and($html)->toContain('.focus()');
 });
 

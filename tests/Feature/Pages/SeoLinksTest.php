@@ -236,7 +236,7 @@ it('lists only detail urls whose page shows that article', function (): void {
 
     expect($detail)->toContain(url("/it/blog/{$post->slug}"))->toContain(url("/it/events/{$event->slug}"));
     foreach ([$post, $event] as $article) {
-        $section = $article->content_type === 'event' ? 'events' : 'blog';
+        $section = $article->type === 'event' ? 'events' : 'blog';
         $this->get("/it/{$section}/{$article->slug}")->assertOk()->assertSee($article->title);
     }
 });

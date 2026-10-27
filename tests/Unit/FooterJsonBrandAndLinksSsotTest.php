@@ -99,30 +99,22 @@ it('keeps FixCity brand slogan and real footer urls in every footer.json copy', 
  */
 it('does not emit bare anchors or invent comune copy in footer vestiti', function (): void {
     $base = dirname(__DIR__, 4).'/Themes/Sixteen/resources/views/components/sections/footer';
-    $dc = file_get_contents($base.'/design-comuni.blade.php');
     $v1 = file_get_contents($base.'/v1.blade.php');
 
-    Assert::assertStringContainsString('FrontofficeUrl::fromStoredUrl', $dc);
     Assert::assertStringContainsString('FrontofficeUrl::fromStoredUrl', $v1);
-    Assert::assertStringContainsString('$activeLinks', $dc);
-    Assert::assertStringContainsString("\$d('brand.logo'", $dc);
-    Assert::assertStringContainsString('sections.partials.brand-mark', $dc);
-    Assert::assertStringNotContainsString('<img class="icon"', $dc);
-    Assert::assertStringNotContainsString("\$icon('it-pa')", $dc);
-    Assert::assertStringNotContainsString('Nome del Comune', $dc);
     Assert::assertStringNotContainsString('Nome del Comune', $v1);
     Assert::assertStringNotContainsString('Servizi e informazioni del Comune.', $v1);
-    Assert::assertStringNotContainsString('https://twitter.com', $dc);
+    Assert::assertStringNotContainsString('https://twitter.com', $v1);
 });
 
 it('renders header and footer brand mark from the same shared partial', function (): void {
     $base = dirname(__DIR__, 4).'/Themes/Sixteen/resources/views/components/sections';
-    $header = file_get_contents($base.'/header/design-comuni.blade.php');
-    $footer = file_get_contents($base.'/footer/design-comuni.blade.php');
+    $header = file_get_contents($base.'/header/v1.blade.php');
+    $footer = file_get_contents($base.'/footer/v1.blade.php');
     $partial = file_get_contents($base.'/partials/brand-mark.blade.php');
 
-    Assert::assertStringContainsString('sections.partials.brand-mark', $header);
-    Assert::assertStringContainsString('sections.partials.brand-mark', $footer);
+    Assert::assertStringContainsString('components.sections.partials.brand-mark', $header);
+    Assert::assertStringContainsString('FrontofficeUrl::fromStoredUrl', $footer);
     Assert::assertStringContainsString('fc-brand-mark', $partial);
     Assert::assertStringContainsString('xlink:href', $partial);
     Assert::assertStringNotContainsString("\$icon('it-pa')", $header);

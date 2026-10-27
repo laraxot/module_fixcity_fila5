@@ -194,3 +194,12 @@ related:
 - **Creazione:** conferma al proprietario e avviso agli utenti con ruolo di `BasePolicy::PA_ROLES` (escluso il proprietario), con solo id e link al back office. Scoping per comune NON modellato (nessuna colonna sul ticket, tenant vuoti): DA DECIDERE (DD-1).
 - **Trappola:** il listener di `TicketCreatedEvent` e' registrato con `Event::listen` in `EventServiceProvider::boot()`, non in `$listen`: `bootstrap/cache/events.php` riporta `[]` per questo provider e la cache degli eventi ignora `$listen`.
 - **Artefatto:** [../stories/dcp-284-notifiche-del-ciclo-di-vita-della-segnalazione.story.md](../stories/dcp-284-notifiche-del-ciclo-di-vita-della-segnalazione.story.md)
+
+## [2026-10-26] dettaglio del proprietario, codice ai soli proprietari, ritorno dopo il login (DCP-287)
+
+- **Accesso al dettaglio:** ospite e altri vedono solo le segnalazioni pubbliche con posizione (invariato); il proprietario vede la propria in qualunque stato e anche senza posizione, tramite `BuildPublicTicketDetailAction` + `TicketPolicy::view`; `BuildPublicTicketsQueryAction` non cambia. Il personale PA resta nel back office (DD-1).
+- **Codice di tracciamento = capability:** solo il proprietario lo riceve (dettaglio, area personale, notifica, feed). Ai follower va il titolo e il link `/tickets/{id}` (`BuildTicketDetailUrlAction`, `TicketStatusChangedNotification::forFollower`). Chiude la prima metà di DCP-284 DD-3.
+- **Etichette di stato:** una sola fonte, `fixcity::ticket_status_enum.values.*.label`; `personal_area.status.*` rimosso. Un test confronta area personale e `TicketStatusEnum::getLabel()` in 4 lingue.
+- **Ritorno dopo il login:** il link del dettaglio porta `?redirect=<percorso>`, validato da `StoreIntendedUrlAction` (f5), nessun meccanismo nuovo.
+- **Azioni del proprietario (FO-2-17):** non implementate; disegno e piano in 3 story nella story DCP-287. `CloseTicketAction` autorizza `changeStatus` (solo PA): non riusabile dal cittadino.
+- **Artefatto:** [../stories/dcp-287-dettaglio-proprietario-follower-e-ritorno-dopo-il-login.story.md](../stories/dcp-287-dettaglio-proprietario-follower-e-ritorno-dopo-il-login.story.md)

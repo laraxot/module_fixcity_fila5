@@ -121,7 +121,7 @@
                                 {
                                     "icon": "it-mail",
                                     "label": "Richiedi assistenza",
-                                    "url": "#",
+                                    "ente": "email",
                                     "element": "contacts"
                                 },
                                 {
@@ -265,7 +265,7 @@
                                 {
                                     "icon": "it-mail",
                                     "label": "Request assistance",
-                                    "url": "#",
+                                    "ente": "email",
                                     "element": "contacts"
                                 },
                                 {
@@ -409,7 +409,7 @@
                                 {
                                     "icon": "it-mail",
                                     "label": "Hilfe anfordern",
-                                    "url": "#",
+                                    "ente": "email",
                                     "element": "contacts"
                                 },
                                 {
@@ -553,7 +553,7 @@
                                 {
                                     "icon": "it-mail",
                                     "label": "Solicita asistencia",
-                                    "url": "#",
+                                    "ente": "email",
                                     "element": "contacts"
                                 },
                                 {

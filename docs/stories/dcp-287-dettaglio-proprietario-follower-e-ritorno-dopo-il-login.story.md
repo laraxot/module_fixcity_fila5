@@ -154,6 +154,62 @@ Propongo, non decido. Ordinati per effetto.
 - DD-8 (cronologia): l'evento "Segnalazione ricevuta" e il messaggio libero del Comune richiedono modifiche a `BuildTicketTimelineAction`,
   che oggi ha un lock vecchio di giorni (vedi Esito, lock orfano). Proposta: sbloccare dopo verifica, poi farlo in una story propria.
 
+## Disegno delle azioni del proprietario (FO-2-17 restante, NON implementato)
+
+Perimetro: integra (testo e foto), ritira, riapri, conferma la risoluzione, valuta. Nessuna di queste e' stata costruita qui: sono
+funzioni nuove (L). Quello che esiste gia' e' misurato dal codice:
+
+- Valutazione: `SubmitCitizenTicketRatingAction::execute(Ticket, int $rating)` controlla da sola utente, 1..5, stato `resolved`, proprietario
+  e doppio voto (transazione con `lockForUpdate`). La UI esiste come widget Livewire `Filament\Widgets\TicketCitizenRatingPromptWidget`
+  (`XotBaseSchemaWidget`, vista `fixcity::filament.widgets.ticket-citizen-rating-prompt`, `mount(int $ticketId)`), ma nessun blocco del
+  tema lo monta nel dettaglio.
+- Riapertura: il workflow la prevede (`TicketStatusEnum::allowedTransitions()`: `resolved` -> `reopened` | `closed`; `reopened` ->
+  `in_progress`). `TransitionTicketStatusAction::execute(Ticket, string $target)` fa solo la transizione e NON autorizza.
+- Chiusura formale: `CloseTicketAction::execute(Ticket, string $reason)` fa `resolved` -> `closed` con evento `closed`, ma autorizza
+  `changeStatus`, che e' del personale PA (`TicketPolicy::changeStatus`): il proprietario non puo' usarla cosi' com'e'.
+- Traccia: `RecordTicketActivityAction` (evento, stato da/a, motivo, visibilita' `Public|Internal|AuthorOnly`, utente) e
+  `TicketActivityObserver` che notifica. Eventi gia' definiti: `status_change`, `approved`, `rejected`, `closed`, `media_added`, ecc.
+- Permesso: `TicketPolicy::update` e `view` lasciano passare il proprietario; non c'e' un'abilita' per le azioni del cittadino.
+  Nessun permesso Spatie nuovo e' necessario per iniziare: l'abilita' e' «sono il proprietario E lo stato lo consente».
+
+Disegno (alla maniera Filament, dentro Livewire, nessun Controller/Service/Job):
+
+1. Un widget Livewire unico del proprietario, `OwnerTicketActionsWidget` (estende `XotBaseSchemaWidget` come il widget valutazione),
+   montato dal blocco `ticket-detail` solo se `$detail['is_owner']` (il dato c'e' gia', D-2) con `@livewire(..., ['ticketId' => $id])`.
+   Il blocco passa solo l'id: il widget rilegge il ticket e rifa' il controllo (Policy), mai fiducia al parametro.
+2. Le azioni sono `Filament\Actions\Action` nel widget (con `HasActions` e `InteractsWithActions`), ognuna con `->visible(fn () => ...)`
+   legata allo stato e con la logica in UNA Queueable Action:
+   - `integrate` -> `IntegrateOwnTicketAction`: `schema([Textarea::make('note')->required()->maxLength(2000), FileUpload::make('photos')->image()->multiple()->maxFiles(3)->maxSize(5120)])`;
+     scrive una `TicketActivity` con evento `media_added` (se ci sono foto) e un nuovo evento `owner_note` (visibilita' `Internal`, nota e' dato
+     del cittadino: non pubblica). Visibile negli stati non terminali (`pending`, `in_review`, `in_progress`, `on_hold`, `reopened`).
+   - `withdraw` -> `WithdrawOwnTicketAction`: `requiresConfirmation()`, `color('danger')`, `Select::make('reason')`. Richiede la decisione
+     DD-7 (nuovo stato `withdrawn` o chiusura con motivo). `status` e' `varchar(191)`: nessuna migrazione, ma una nuova voce di enum
+     richiede matrice delle transizioni, etichette in quattro lingue e `canViewByAll()`.
+   - `reopen` -> `ReopenOwnTicketAction`: visibile solo per `resolved`, `requiresConfirmation()` e `Textarea('reason')->required()`;
+     usa `TransitionTicketStatusAction` (`resolved` -> `reopened`) e registra l'evento con motivo AuthorOnly + Public per lo stato.
+   - `confirmResolution` -> `ConfirmOwnTicketResolutionAction`: `resolved` -> `closed` ma con la sola abilita' di proprietario; NON riusare
+     `CloseTicketAction` (autorizza `changeStatus`): o si aggiunge un parametro di attore, o si crea una gemella piccola che condivide
+     l'evento `closed`. Scelta da fare in sede di story (sotto).
+   - `rate` -> riuso di `SubmitCitizenTicketRatingAction` cosi' com'e', con `ToggleButtons::make('score')->options([1 => '1', ... 5 => '5'])->inline()`
+     e `Textarea` facoltativa; il widget valutazione esistente puo' essere assorbito o montato accanto.
+3. Autorizzazione in due livelli: (a) `->visible()` e `->authorize()` sull'azione (esperienza), (b) la Queueable Action rifa' il controllo
+   proprietario + transizione legale (`assertCanTransitionTo`) dentro la transazione, come fa `SubmitCitizenTicketRatingAction`. Una
+   sola abilita' di Policy nuova, `ownerAct(Ticket)`, in `TicketPolicy` (oggi bloccata: altro agente) con test di matrice.
+4. Test (Pest, nel modulo): per ogni azione una matrice proprietario / altro cittadino / follower / ospite / PA x stati legali e
+   illegali; `Livewire::actingAs($owner)->test(OwnerTicketActionsWidget::class, [...])->callAction('reopen', [...])->assertHasNoActionErrors()`;
+   per la forma mail/notifica riuso di `TicketActivityObserver` (nessuna notifica nuova: l'evento esiste).
+5. Lingue: gruppo `fixcity::ticket_owner_actions` in it, en, de, es, con test di parita' come `PersonalAreaLangParityTest`.
+
+Piano in tre story piccole, in quest'ordine (ognuna rilasciabile da sola):
+
+| Slug proposto | Contenuto | Dipendenze |
+| --- | --- | --- |
+| `dcp-<N>-valutazione-e-conferma-risoluzione-del-proprietario` | Widget del proprietario con le sole azioni `rate` e `confirmResolution` (stato `resolved`); `OwnerTicketActionsWidget`, `ConfirmOwnTicketResolutionAction`, abilita' `ownerAct`, lingue, test. Parte da quello che esiste gia' (valutazione). | Questa story (D-2: `is_owner`) |
+| `dcp-<N+1>-riapertura-e-integrazione-del-proprietario` | Azioni `reopen` e `integrate` (testo e foto), eventi `owner_note`/`media_added`, visibilita' AuthorOnly/Internal, test della matrice stati. | prima story; DD-7 per il motivo della riapertura |
+| `dcp-<N+2>-ritiro-della-segnalazione-del-proprietario` | Azione `withdraw`: decisione sullo stato (`withdrawn` o chiusura con motivo), transizioni, etichette, effetto su mappa/elenco/follower, test. | DD-7 deve essere deciso prima |
+
+Le tre sono M o S ciascuna; insieme sono la L dell'audit. Il numero `<N>` lo assegna il coordinatore.
+
 ## Criteri di accettazione verificabili
 
 1. Matrice dettaglio (ospite, altro cittadino, proprietario, follower) x (pubblica, non pubblica): 200 solo per ospite/altro/follower
@@ -176,20 +232,102 @@ Propongo, non decido. Ordinati per effetto.
 
 Esecuzione solo con `PEST_OUT=<file> bash bashscripts/tools/pest-scratch-db.sh <percorso relativo a laravel/>`.
 
-(Si compila a fine lavoro: vedi Esito.)
+Test nuovi (rossi prima, verdi dopo): `TicketOwnerDetailAccessTest` (12), `FollowerNotificationHidesTrackingCodeTest` (4),
+`PersonalAreaStatusLabelsMatchPublicOnesTest` (4 lingue), due test in `TicketPublicDetailPageTest` (cronologia dei casi conclusi,
+prossimi passi di un caso riaperto) e uno per il ritorno dopo il login. Test aggiornati perche' codificavano il difetto o l'etichetta
+vecchia: `BuildPublicTicketDetailActionTest` (insieme esatto di chiavi), `FollowedTicketsPageTest`, `PersonalAreaPagesTest`,
+`BuildPersonalAreaFollowedDataActionTest`, `BuildPersonalAreaPracticesDataActionTest`, `TicketStatusNotificationTest`,
+`PersonalAreaLangParityTest` (non cerca piu' `personal_area.status`, controlla l'enum).
+
+Output reali (file in `scratchpad/w3b/out/`):
+
+- P1 rosso: `TicketOwnerDetailAccessTest` 5 failed, 7 passed; verde: 12 passed.
+- P3 rosso (per mutazione: riportata la riga `$loginUrl` a `route('login', [], false)`): 2 failed, 16 passed; ripristinata la
+  riga, 18 passed (poi 30 passed con `TicketOwnerDetailAccessTest`).
+- FO-2-16 rosso: `TicketPublicDetailPageTest` 3 failed, 18 passed; verde: 21 passed (223 assertions).
+- FO-2-32 rosso: `PersonalAreaStatusLabelsMatchPublicOnesTest` 4 failed (it/resolved: atteso `Risolto`, trovato `Risolta`); verde dopo
+  `BuildPersonalAreaTicketRowAction::statusLabel` e il tolto `personal_area.status.*`.
+- Ultima esecuzione dei miei file e dei vicini (14 file): `Tests: 9 failed, 139 passed (2157 assertions)`. Le 9 rosse NON sono mie:
+  8 = `PersonalAreaPagesTest > opens for a signed-in citizen with one h1...` (il titolo ora e' «Titolo | Nome sito» per
+  `Themes/Sixteen/app/Actions/Seo/ResolvePageHeadAction`, modificata alle 13:23 da DCP-288; il test cerca `<title>Titolo</title>` e
+  falliva gia' prima di ogni mia modifica di questo giro); 1 = `PersonalAreaSettingsPagesTest > points the rights link to the footer`
+  (il footer non mostra piu' `Via di Prova 1`: DCP-289).
+- Regressione larga (`Feature/Pages`, `Feature/Actions`, `Feature/Blocks`, `Unit/Actions`, `Unit/Notifications`, `Unit/Policies`,
+  parita' lingue, `BladeTemplatesCompileTest`, `PersonalAreaNavigationContractTest`): `Tests: 32 failed, 12 skipped, 1246 passed
+  (5760 assertions)`. Dei 32: 8 titoli (DCP-288, sopra), `PersonalAreaLangParityTest` 1 (MIO, corretto: ora 2 passed), 23 in test di
+  header, FAQ, traccia, conferma, elenco, 404, cookie, footer (`ContentLocaleParityTest`): file di DCP-286, 288, 289, 290, 291 e non
+  toccati da me. Non rieseguita per intero dopo la correzione di `PersonalAreaLangParityTest`: dichiaro solo i 14 file sopra.
+- PHPStan (livello della config unica, da `laravel/`) sui 19 file PHP toccati piu' i test: `[OK] No errors`; `PersonalAreaLangParityTest`:
+  `[OK] No errors`. Pint solo sui miei file: `{"tool":"pint","result":"passed"}`.
+
+Misure nel browser, istanza `http://127.0.0.1:8091` (script `scratchpad/w3b/m1-owner.mjs`, `m2-follower.mjs`, `m5-labels.mjs`,
+`m6-pratiche.mjs`):
+
+| Caso | Prima | Dopo |
+| --- | --- | --- |
+| Giulia apre `/it/tickets/13` (sua, `pending`, senza posizione) | 404 | 200, scheda «La tua segnalazione», avviso «Per ora la vedi solo tu», codice |
+| Paolo apre `/it/tickets/17` (sua, `pending`, con posizione) | 200 senza scheda | 200, scheda con avviso e codice |
+| Paolo su `/14`, `/13`; ospite su `/13`, `/17`; Giulia su `/17` | 404 | 404 (invariato) |
+| Paolo (follower della 5) su `/it/area-personale/seguite` | codice `DEMO-PUB-05` e link `track?code=` | 0 codici, 0 link `track?code=`, solo «Vedi il dettaglio» |
+| Giulia su `/it/area-personale/seguite` e `/pratiche` | codici | codici e link di tracciamento (proprietaria) |
+| Ospite su `/it/tickets/5`: link «Accedi per seguire» | `/it/auth/login` | `/it/auth/login?redirect=%2Fit%2Ftickets%2F5`; dopo il login l'URL e' `/it/tickets/5` |
+| Ospite su `/it/tickets/3` (risolta) | non misurato nel browser (rosso nel test; testo letto dalla vista e dall'audit FO-2-16) | «La segnalazione e' «Risolto». Nella cronologia pubblica non ci sono altri aggiornamenti.» |
+| Ospite su `/it/tickets/12` (riaperta), «Prossimi passi» | non misurato nel browser (rosso nel test; audit FO-2-16: «Lavorazione» come per Aperto) | «Segnalazione riaperta: La segnalazione e' stata riaperta e sara' riesaminata...» |
+| Giulia su `/it/area-personale/pratiche`, etichette (it) | non misurato nel browser (rosso nel test; audit FO-2-32: Aperta, Riaperta, Risolta, Chiusa) | In attesa, Aperto, Riaperto, Risolto, Chiuso (en/de/es = enum) |
+
+Non verificato: il feed `/area-personale/notifiche` di un follower nel browser (serve un cambio di stato fatto da un operatore: non ho
+credenziali del back office); e' coperto da `FollowerNotificationHidesTrackingCodeTest` (database, feed, pagina, mail). Una prima
+misura della pagina «Seguite» del follower mostrava ancora il codice (fatto 12): le due rimisure successive no.
 
 ## Owned file scope
 
-- `laravel/Modules/Fixcity/app/Actions/BuildPublicTicketDetailAction.php`
-- `laravel/Modules/Fixcity/app/Actions/BuildPersonalAreaTicketRowAction.php`
-- `laravel/Modules/Fixcity/app/Actions/BuildPersonalAreaFollowedDataAction.php`
-- `laravel/Modules/Fixcity/app/Actions/BuildPersonalAreaPracticesDataAction.php`
-- `laravel/Modules/Fixcity/lang/{it,en,de,es}/ticket_detail.php`
-- `laravel/Themes/Sixteen/resources/views/components/blocks/ticket-detail/design-comuni.blade.php` (solo la sezione "Cosa puoi fare" e una scheda del proprietario; mai le righe dei commenti)
-- `laravel/Themes/Sixteen/resources/views/components/blocks/personal-area-practices/section.blade.php`
-- test: `laravel/Modules/Fixcity/tests/Feature/Pages/TicketOwnerDetailAccessTest.php` (nuovo), `TicketPublicDetailPageTest.php`,
-  `Unit/Actions/BuildPublicTicketDetailActionTest.php`, `Feature/Pages/FollowedTicketsPageTest.php`
+Modulo Fixcity (`laravel/Modules/Fixcity/`):
+- `app/Actions/BuildPublicTicketDetailAction.php`, `BuildPersonalAreaTicketRowAction.php`, `BuildPersonalAreaFollowedDataAction.php`,
+  `BuildPersonalAreaPracticesDataAction.php`, `BuildPersonalAreaNotificationsDataAction.php`,
+  `NotifyTicketSubscribersOfStatusChangeAction.php`, `BuildTicketNextStepsAction.php`
+- `app/Actions/BuildTicketDetailUrlAction.php` (nuova)
+- `app/Notifications/TicketStatusChangedNotification.php`
+- `lang/{it,en,de,es}/ticket_detail.php`, `ticket_notification.php`, `personal_area_settings.php`, `personal_area.php`
+- test nuovi: `tests/Feature/Pages/TicketOwnerDetailAccessTest.php`, `tests/Feature/Actions/FollowerNotificationHidesTrackingCodeTest.php`,
+  `tests/Feature/Actions/PersonalAreaStatusLabelsMatchPublicOnesTest.php`
+- test modificati: `Unit/Actions/BuildPublicTicketDetailActionTest.php`, `Unit/PersonalAreaLangParityTest.php`,
+  `Feature/Pages/{TicketPublicDetailPageTest,FollowedTicketsPageTest,PersonalAreaPagesTest}.php`,
+  `Feature/Actions/{BuildPersonalAreaFollowedDataActionTest,BuildPersonalAreaPracticesDataActionTest,TicketStatusNotificationTest}.php`
+
+Tema Sixteen (`laravel/Themes/Sixteen/resources/views/components/blocks/`), percorsi al momento del lavoro (la sessione f5 rinomina i file
+`design-comuni`: chi legge dopo di lei cerchi il nuovo nome):
+- `ticket-detail/design-comuni.blade.php` (scheda del proprietario, azioni «Segui»/«Accedi», `$loginUrl`; mai le righe dei commenti)
+- `ticket-detail/timeline.blade.php` (testo con la cronologia vuota di un caso concluso)
+- `personal-area-practices/section.blade.php` (avviso «codice non disponibile» solo al proprietario)
+- `personal-area-settings/notifications-list.blade.php` (`ticket_label`)
+
+Fuori dal mio perimetro e non toccati: `BuildTicketTimelineAction` (lock orfano del 2026-09-26 di `fixcity-root`), `Modules/Comment/**`,
+`StoreIntendedUrlAction` e `LoginWidget` (usati cosi' come sono), `TicketPolicy`, `FixcityServiceProvider`, `routes/web.php`.
 
 ## Esito
 
-(Si compila a fine lavoro.)
+Stato per correzione (BMAD, TDD, prova reale):
+
+- **P1, FO-6-43 / FO-2-36 / FO-2-17 (visibilita'): FATTO e VERIFICATO.** Il proprietario apre la propria segnalazione in qualunque stato
+  e anche senza posizione (Giulia `/it/tickets/13`: 404 -> 200); ospite, altri e follower restano a 404 sulle non pubbliche
+  (`TicketOwnerDetailAccessTest` 12 passed; browser come nella tabella). Nessuna modifica a `BuildPublicTicketsQueryAction` ne' alla Policy.
+- **P2, FO-2-18: FATTO e VERIFICATO.** Il codice di tracciamento non compare piu' per chi non e' proprietario: ne' nella pagina «Seguite»,
+  ne' nel dettaglio, ne' nelle notifiche (database e mail) dei follower, ne' nel feed. Test rossi prima, verdi dopo; browser: Paolo 0 codici.
+  Il resto della pagina «Seguite» e' invariato.
+- **P3, FO-2-12: FATTO e VERIFICATO.** Il link «Accedi per seguire» porta `?redirect=` con il percorso del dettaglio, validato dal meccanismo
+  esistente di f5 (`StoreIntendedUrlAction`); dopo il login l'utente e' sul dettaglio. Nessun codice duplicato.
+- **FO-2-32 (etichette di stato): FATTO e VERIFICATO nei test; browser: dopo misurato, prima non misurato** (vedi tabella). La parola
+  «pratiche» e' DA DECIDERE (DD-6).
+- **FO-2-16 (testi di cronologia e prossimi passi): FATTO e VERIFICATO nei test e nel browser (dopo).** L'evento «Segnalazione ricevuta» e il
+  messaggio del Comune: DA DECIDERE (DD-8), servono modifiche a `BuildTicketTimelineAction` (lock orfano).
+- **FO-2-17 restante (azioni del proprietario): NON IMPLEMENTATO per istruzione; disegno e piano in 3 story qui sopra.** DA DECIDERE DD-7.
+- **Visti e non toccati** (audit di FO-2): FO-2-19 (contrasto del badge di `track`: richiede ricostruire il CSS, vietato qui, da segnalare
+  al coordinatore); FO-2-21 (noindex su `track`/`confirmation`: `Modules/Seo`, ambito di altra sessione); FO-2-33 («Smetti di seguire» dalla
+  lista: e' una funzione nuova, un'azione con conferma per riga, la lascio a una story propria); FO-2-34 (voci del feed per titolo: la
+  parte «titolo al posto del codice» e' fatta per i follower, vedi D-6; paginazione e contatore «non lette» sono funzioni nuove).
+- **Effetti collaterali voluti:** il proprietario ora vede il motivo di un rifiuto nella cronologia (D-7); chi segue la propria segnalazione
+  non vede piu' il modulo «Segui» (DD-3).
+
+Lock: tutti i miei lock rilasciati a fine lavoro (elenco nel report al coordinatore). Orfani non miei, segnalati e non rimossi:
+`app/Actions/BuildTicketTimelineAction.php.lock` (`fixcity-root`, task `tracking-timeline-fo`, 2026-09-26; il file risulta modificato
+il 2026-10-22, quindi il lock non e' stato rilasciato).

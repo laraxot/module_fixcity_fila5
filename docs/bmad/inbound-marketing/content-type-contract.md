@@ -1,13 +1,18 @@
 ---
 title: "Contratto contenuti Blog/Eventi — post agnostico"
 type: decision-record
-status: accepted
-updated: 2026-10-15
+status: superseded
+updated: 2026-10-27
+superseded_by: ../../../../Blog/docs/stories/article-type-parental-sti-post-event.story.md
 tags: [bmad, post, content-type, parental, blog]
 qmd: "content_type post event Article Parental type contratto"
 ---
 
 # Contratto `content_type` — post agnostico
+
+> **Superato (2026-10-27).** Il discriminatore reale e' `Article.type` (`post` | `event`, Parental STI con `Post` e `Event`), non
+> `content_type`. Il glossario a tre piani e il termine «post» agnostico restano utili come linguaggio; la regola sui campi no. Vedi la
+> [story Parental](../../../../Blog/docs/stories/article-type-parental-sti-post-event.story.md).
 
 Il dominio riusa `Modules\Blog\Models\Article`. Non si introduce un modulo
 `Event` né si usa Parental `type` come rubrica editoriale.

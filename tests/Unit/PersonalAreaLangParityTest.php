@@ -66,14 +66,21 @@ it('has the same keys, non-empty values and placeholders in it, en, de and es', 
     }
 });
 
-it('translates every ticket workflow status in every served language', function () use ($moduleLang): void {
+// DCP-287 (FO-2-32): l'area personale non ha piu' un proprio elenco di etichette di stato, usa quello dell'enum; qui si prova che
+// l'elenco dell'enum copra ogni stato in ogni lingua e che il vecchio elenco non torni.
+it('translates every ticket workflow status in every served language from the enum list only', function () use ($moduleLang): void {
     foreach (['it', 'en', 'de', 'es'] as $locale) {
-        $labels = personalAreaLang($moduleLang.'/'.$locale.'/personal_area.php')['status'] ?? null;
-        Assert::assertIsArray($labels, $locale.': status');
+        Assert::assertArrayNotHasKey('status', personalAreaLang($moduleLang.'/'.$locale.'/personal_area.php'), $locale.': second status list');
 
+        $enumLang = personalAreaLang($moduleLang.'/'.$locale.'/ticket_status_enum.php');
+        $values = $enumLang['values'] ?? null;
+        Assert::assertIsArray($values, $locale.': values');
         foreach (TicketStatusEnum::cases() as $status) {
-            Assert::assertArrayHasKey($status->value, $labels, $locale.': no label for status '.$status->value);
+            $entry = $values[$status->value] ?? null;
+            Assert::assertIsArray($entry, $locale.': no entry for status '.$status->value);
+            $label = $entry['label'] ?? null;
+            Assert::assertTrue(is_string($label) && trim($label) !== '', $locale.': no label for status '.$status->value);
         }
-        Assert::assertCount(count(TicketStatusEnum::cases()), $labels, $locale.': labels for statuses that do not exist');
+        Assert::assertCount(count(TicketStatusEnum::cases()), $values, $locale.': entries for statuses that do not exist');
     }
 });

@@ -81,7 +81,9 @@ it('has a complete block for every language', function (string $locale) use ($te
     }
     $items = data_get($data, 'contacts.main.items');
     Assert::assertIsArray($items);
-    Assert::assertCount(4, $items, "Il blocco contatti di {$locale} deve avere 4 voci.");
+    // DCP-286: via "Prenota appuntamento" (servizio che non esiste, `#`); restano FAQ, assistenza e numero verde (questi due li riallaccia DCP-289)
+    Assert::assertCount(3, $items, "Il blocco contatti di {$locale} deve avere 3 voci.");
+    Assert::assertNotContains('appointment-booking', array_column($items, 'element'), "Prenotazione appuntamento ancora presente in {$locale}.");
     Assert::assertSame("/{$locale}", data_get($data, 'breadcrumb.items.0.url'));
     Assert::assertSame("/{$locale}/tickets", data_get($data, 'breadcrumb.items.1.url'));
     Assert::assertSame("/{$locale}/domande-frequenti", data_get($data, 'contacts.main.items.0.url'));

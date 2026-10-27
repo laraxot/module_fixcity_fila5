@@ -64,14 +64,14 @@
                     "contact": {
                         "title": "Contatti",
                         "labels": {
-                            "hours": "Orari",
-                            "phone": "Telefono",
-                            "toll_free": "Numero verde",
-                            "email": "Email",
-                            "pec": "PEC",
-                            "tax_code": "Codice fiscale",
-                            "vat": "Partita IVA",
-                            "dpo_email": "Responsabile protezione dati"
+                            "hours_label": "Orari",
+                            "phone_label": "Telefono",
+                            "toll_free_label": "Numero verde",
+                            "email_label": "Posta elettronica",
+                            "pec_label": "PEC",
+                            "tax_code_label": "Codice fiscale",
+                            "vat_label": "Partita IVA",
+                            "dpo_email_label": "Responsabile protezione dati"
                         },
                         "links": [
                             {
@@ -237,14 +237,14 @@
                     "contact": {
                         "title": "Contacts",
                         "labels": {
-                            "hours": "Opening hours",
-                            "phone": "Phone",
-                            "toll_free": "Toll-free number",
-                            "email": "Email",
-                            "pec": "Certified email (PEC)",
-                            "tax_code": "Tax code",
-                            "vat": "VAT number",
-                            "dpo_email": "Data protection officer"
+                            "hours_label": "Opening hours",
+                            "phone_label": "Phone",
+                            "toll_free_label": "Toll-free number",
+                            "email_label": "Email",
+                            "pec_label": "Certified email (PEC)",
+                            "tax_code_label": "Tax code",
+                            "vat_label": "VAT number",
+                            "dpo_email_label": "Data protection officer"
                         },
                         "links": [
                             {
@@ -410,14 +410,14 @@
                     "contact": {
                         "title": "Kontakt",
                         "labels": {
-                            "hours": "Öffnungszeiten",
-                            "phone": "Telefon",
-                            "toll_free": "Gebührenfreie Nummer",
-                            "email": "E-Mail",
-                            "pec": "PEC (zertifizierte E-Mail)",
-                            "tax_code": "Steuernummer",
-                            "vat": "USt-IdNr.",
-                            "dpo_email": "Datenschutzbeauftragter"
+                            "hours_label": "Öffnungszeiten",
+                            "phone_label": "Telefon",
+                            "toll_free_label": "Gebührenfreie Nummer",
+                            "email_label": "E-Mail",
+                            "pec_label": "PEC (zertifizierte E-Mail)",
+                            "tax_code_label": "Steuernummer",
+                            "vat_label": "USt-IdNr.",
+                            "dpo_email_label": "Datenschutzbeauftragter"
                         },
                         "links": [
                             {
@@ -583,14 +583,14 @@
                     "contact": {
                         "title": "Contacto",
                         "labels": {
-                            "hours": "Horario",
-                            "phone": "Teléfono",
-                            "toll_free": "Número gratuito",
-                            "email": "Correo electrónico",
-                            "pec": "PEC (correo certificado)",
-                            "tax_code": "Código fiscal",
-                            "vat": "Número de IVA",
-                            "dpo_email": "Delegado de protección de datos"
+                            "hours_label": "Horario",
+                            "phone_label": "Teléfono",
+                            "toll_free_label": "Número gratuito",
+                            "email_label": "Correo electrónico",
+                            "pec_label": "PEC (correo certificado)",
+                            "tax_code_label": "Código fiscal",
+                            "vat_label": "Número de IVA",
+                            "dpo_email_label": "Delegado de protección de datos"
                         },
                         "links": [
                             {

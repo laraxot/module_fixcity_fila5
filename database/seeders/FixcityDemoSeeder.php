@@ -90,7 +90,7 @@ class FixcityDemoSeeder extends Seeder
         });
 
         $this->step('7/7 Blog + eventi demo (Novità/Eventi)', function (): void {
-            // Post demo: Article.content_type=post|event + Comment morph + immagini Design Comuni.
+            // Post demo: Article.type=post|event + Comment morph + immagini Design Comuni.
             // Nessun modulo Event: Ponytail / Existing Assets First.
             $this->call(DemoContentSeeder::class);
         });
