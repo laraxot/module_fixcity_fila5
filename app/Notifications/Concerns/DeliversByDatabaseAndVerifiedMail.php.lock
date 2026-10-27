@@ -1,0 +1,6 @@
+LOCKED at 2026-10-26T13:24:54+00:00
+Task: DCP-286
+Agent: w3a
+Session: unknown
+PID: 123887
+PID note: subshell di lock.sh, gia' terminato — NON usarlo per giudicare il lock stale, guarda 'LOCKED at'

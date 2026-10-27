@@ -59,6 +59,8 @@ repo (21 repo annidati + radice + bashscripts), senza perdere il lavoro altrui.
 | PHPMD (`phpmd.xml`, 11 moduli, solo `app/`) | 1302 violazioni in 548 file | MissingImport 616 (Xot), CamelCaseVariableName 326, CamelCasePropertyName 176, CouplingBetweenObjects 32; per modulo Xot 616, User 321, Geo 124, Cms 69 |
 | PHPInsights (code / complessita' / architettura / stile; soglia config 99) | Fixcity 77.3/77.5/82.3/84.3; User 79.3/92.2/76.4/81.9; Cms 82.4/88/82.3/90.3; Gdpr 91.7/99.1/82.3/91.5 | altri moduli in coda; nessuno raggiunge 99 |
 | Puppeteer MCP | non avviabile | Chromium senza `--no-sandbox` fallisce (AppArmor userns); il tool vieta l'opzione di default; serve consenso, copertura browser con Playwright |
+<<<<<<< .merge_file_Xcc2EG
+<<<<<<< .merge_file_rm1bdz
 | Giro ospite | da misurare | |
 | Giro loggato | da misurare | |
 | Git sync | da fare | |
@@ -66,6 +68,67 @@ repo (21 repo annidati + radice + bashscripts), senza perdere il lavoro altrui.
 ## Collisioni git: scelte e lezioni
 
 (vuoto: una riga per collisione, con repo, file, lato scelto, motivo, lezione.)
+=======
+| Giro ospite | in corso (agente di sola lettura, 4 lingue) | esito da aggiungere |
+| Giro loggato: auth e area personale (fixture 8091) | 20 difetti (A-01..A-20), nessuno alto | riprodotti da me: A-04 e A-13, corretti |
+| Giro loggato: wizard e ticket (fixture 8091) | 25 difetti (T-01..T-25), 4 alti | riprodotti da me: T-01 e T-02; T-02 corretto (solo cache); T-01 e' una decisione, vedi sotto |
+| Git sync | in corso | il peer DCP-385 ha pushato tutto fino alle 07:33 (23 repo, 0 avanti, 0 indietro); restano le mie correzioni |
+
+### Correzioni di questo giro
+
+| Id | Difetto | Causa verificata | Correzione | Prova |
+|---|---|---|---|---|
+| A-13 | `/auth/register`: pulsante e stato per screen reader dicevano «Accesso in corso...» | il blade del tema usava `fixcity::auth.login.loading.text` | nuova chiave `fixcity::auth.register.loading.text` in it/en/de/es e blade del tema sulle due occorrenze | curl 4 lingue; `RegisterLoadingTextTest` 5 verdi; sul blade di HEAD il test cade (2 occorrenze del testo del login) |
+| A-04 | tooltip dell'occhio password in `/en/auth/login` = `showPassword` | `Modules/User/lang/en/user_form.php` aveva label, tooltip e icona uguali al nome della chiave (DE e ES erano tradotte); l'ipotesi dell'agente su `login_widget.php` era sbagliata (esperimento: nessun effetto) | testo inglese e icone `heroicon-o-eye` / `heroicon-o-eye-slash` come DE/ES; 4 chiavi aggiunte a `AuthPagesLocalesTest` (rosso prima, 223 verdi dopo) | curl: tooltip `Show password` in en, tradotto in it/de/es |
+| T-02 | `|---LINE:68---|` visibile in `/{it,en,de,es}/tickets` e `/it/domande-frequenti`, `data-slug` corrotto | non e' il blade: sono 2 view compilate in `storage/framework/views` scritte alle 06:57 dall'exception renderer (`BladeMapper::compileSourcemap`) mentre Volt le salvava; `rg` senza `--no-ignore` non le vede | rimosse le 2 view (cache gitignorata, rigenerabile), non tutte le 2970 | 0 marker su 5 URL, 200 |
+
+### Decisioni aperte emerse dal giro (non decido io)
+
+- **T-01 foto nelle API pubbliche.** `/api/tickets/list` ha `images` valorizzato in 2 ticket su 20 (URL `/storage/...` serviti senza login) mentre privacy e note legali dicono «le foto allegate non sono mostrate al pubblico». O si toglie `images` dai payload pubblici (`BuildTicketPublicDetailsPayloadAction`, `api/tickets/list`; la mappa perde la foto nel popup) o si corregge il testo. D230-5 propone «solo miniatura senza EXIF» e aspetta titolare e DPO.
+- **File tracciati che non dovrebbero esserlo.** La radice tracciava 37 file di `laravel/storage/app/livewire-tmp/` (upload temporanei dei cittadini, commit automatico «.» del 17/10, anche sul remoto): 17 immagini, 1 con EXIF, 0 con GPS. Committo la cancellazione; restano nella storia (forward-only, niente riscrittura).
+
+## Collisioni git: scelte e lezioni
+
+| Repo | File | Lato scelto | Motivo | Lezione |
+|---|---|---|---|---|
+| (lock) | `/tmp/fixcity-git-sync.lock.d` di `claude-385-2026-10-27T07:03:39Z` | dichiarato orfano alle 07:49 | 45 minuti (soglia 40), nessun processo `git`, ultimo commit del peer 07:33 e ultima scrittura della story 07:34, tutto il suo lavoro e' gia' sul remoto (0 avanti, 0 indietro in 23 repo) | il lock senza heartbeat si distingue dall'attivo solo per l'assenza di scritture: serve leggere mtime di story e commit prima di toglierlo |
+>>>>>>> .merge_file_Z8iUEj
+=======
+| Giro ospite | circa 650 URL, 133 misurati col browser in it/en/de/es | 15 difetti (G-01..G-15): G-01 e' lo stesso T-02, corretto; G-02 Gravatar e' decisione aperta; G-03..G-06 sotto |
+| Giro loggato: auth e area personale (fixture 8091) | 20 difetti (A-01..A-20), nessuno alto | riprodotti da me: A-04 e A-13, corretti |
+| Giro loggato: wizard e ticket (fixture 8091) | 25 difetti (T-01..T-25), 4 alti | riprodotti da me: T-01 e T-02; T-02 corretto (solo cache); T-01 e' una decisione, vedi sotto |
+| Git sync | in corso | il peer DCP-385 ha pushato tutto fino alle 07:33 (23 repo, 0 avanti, 0 indietro); restano le mie correzioni |
+
+### Correzioni di questo giro
+
+| Id | Difetto | Causa verificata | Correzione | Prova |
+|---|---|---|---|---|
+| A-13 | `/auth/register`: pulsante e stato per screen reader dicevano «Accesso in corso...» | il blade del tema usava `fixcity::auth.login.loading.text` | nuova chiave `fixcity::auth.register.loading.text` in it/en/de/es e blade del tema sulle due occorrenze | curl 4 lingue; `RegisterLoadingTextTest` 5 verdi; sul blade di HEAD il test cade (2 occorrenze del testo del login) |
+| A-04 | tooltip dell'occhio password in `/en/auth/login` = `showPassword` | `Modules/User/lang/en/user_form.php` aveva label, tooltip e icona uguali al nome della chiave (DE e ES erano tradotte); l'ipotesi dell'agente su `login_widget.php` era sbagliata (esperimento: nessun effetto) | testo inglese e icone `heroicon-o-eye` / `heroicon-o-eye-slash` come DE/ES; 4 chiavi aggiunte a `AuthPagesLocalesTest` (rosso prima, 223 verdi dopo) | curl: tooltip `Show password` in en, tradotto in it/de/es |
+| T-02 | `|---LINE:68---|` visibile in `/{it,en,de,es}/tickets` e `/it/domande-frequenti`, `data-slug` corrotto | non e' il blade: sono 2 view compilate in `storage/framework/views` scritte alle 06:57 dall'exception renderer (`BladeMapper::compileSourcemap`) mentre Volt le salvava; `rg` senza `--no-ignore` non le vede | rimosse le 2 view (cache gitignorata, rigenerabile), non tutte le 2970 | 0 marker su 5 URL, 200 |
+
+| T-08 | consenso privacy mancante: «Il campo ho letto e compreso l'informativa sulla privacy deve essere accettato.» (EN: «The i have read ... rmust be accepted») | il checkbox `privacyAccepted` non aveva messaggi: `validation.accepted` metteva l'etichetta intera al posto di `:attribute` | chiave `ticket_form.validation.privacy_accepted` in 4 lingue e `->validationMessages()` su `accepted` e `required` | `PrivacyConsentValidationMessageTest` rosso (5) poi verde; 73 test verdi con parita' lang e DC; PHPStan 0 |
+
+### Difetti con causa verificata, non corretti (e perche')
+
+- **T-03 stelle di valutazione inutilizzabili con il mouse** (label 2x0 px). Il CSS servito (`app-B4jD5-HK.css`) ha 84 regole `.rating` solo daisyUI/Tailwind e tutte spente dentro `.page-content[data-dc]` (`:not(:where(body:has(.page-content[data-dc])...))`); il widget `ticket-citizen-rating-prompt.blade.php` usa la classe Bootstrap Italia ma senza l'icona stella nella `label`, e il CSS DC non porta le regole del rating. Il rimedio sta in `Themes/Sixteen/resources/css/app/20-dc-components.css`, che al momento ha un `.lock` di un'altra sessione: non l'ho toccato.
+- **G-05 testi italiani in `/{en,de,es}/blog` e `/events`** (riprodotto: «notizie trovate» e «Cerca per parola chiave» in en, de, es; «Quanto sono chiare le informazioni su questa pagina?» e «Valuta da 1 a 5 stelle» in `/en/events`). Causa: fallback italiani cablati in `Themes/Sixteen/resources/views/components/blocks/blog/index.blade.php` (righe 56 e 197: `' notizie trovate'`, `'Cerca per parola chiave'`) e `search_placeholder` solo nel blocco `it` di `config/local/fixcity/database/content/pages/blog/index.json`. Non corretto: quel JSON ha un `.lock` di un'altra sessione attiva. Rimedio: chiavi lang con `trans_choice` nel blade e `search_placeholder`/`search_label` nei blocchi en, de, es del JSON.
+- **G-04 contenuti blog/eventi di prova in italiano sotto `<html lang="de|es">`**: sono contenuti demo in una sola lingua, non un difetto di template; la sitemap pubblica comunque `hreflang` per tutte le lingue.
+- **G-03 `/it/tests`** risponde 200 e ha `robots.txt` con `Disallow`: le pagine `tests` sono per progetto dati+blocchi, non servono al pubblico.
+- **G-06 `/contatti` e `/mappa` 404**: dipende dal brief; il footer non ha un blocco Contatti.
+- **T-04 `[[ente.*]]` nell'informativa del passo 1**: i dati del Comune sono vuoti di proposito (`config/local/fixcity/ente.php`); resta il segnaposto finche' il titolare non li fornisce.
+
+### Decisioni aperte emerse dal giro (non decido io)
+
+- **T-01 foto nelle API pubbliche.** `/api/tickets/list` ha `images` valorizzato in 2 ticket su 20 (URL `/storage/...` serviti senza login) mentre privacy e note legali dicono «le foto allegate non sono mostrate al pubblico». O si toglie `images` dai payload pubblici (`BuildTicketPublicDetailsPayloadAction`, `api/tickets/list`; la mappa perde la foto nel popup) o si corregge il testo. D230-5 propone «solo miniatura senza EXIF» e aspetta titolare e DPO.
+- **File tracciati che non dovrebbero esserlo.** La radice tracciava 37 file di `laravel/storage/app/livewire-tmp/` (upload temporanei dei cittadini, commit automatico «.» del 17/10, anche sul remoto): 17 immagini, 1 con EXIF, 0 con GPS. Committo la cancellazione; restano nella storia (forward-only, niente riscrittura).
+
+## Collisioni git: scelte e lezioni
+
+| Repo | File | Lato scelto | Motivo | Lezione |
+|---|---|---|---|---|
+| (lock) | `/tmp/fixcity-git-sync.lock.d` di `claude-385-2026-10-27T07:03:39Z` | dichiarato orfano alle 07:49 | 45 minuti (soglia 40), nessun processo `git`, ultimo commit del peer 07:33 e ultima scrittura della story 07:34, tutto il suo lavoro e' gia' sul remoto (0 avanti, 0 indietro in 23 repo) | il lock senza heartbeat si distingue dall'attivo solo per l'assenza di scritture: serve leggere mtime di story e commit prima di toglierlo |
+>>>>>>> .merge_file_MiJn0h
 
 ## Coordinamento fra DCP-377 e DCP-385 (scritto da DCP-385, 2026-10-27 07:00)
 

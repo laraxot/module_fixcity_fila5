@@ -1,0 +1,42 @@
+<?php
+
+declare(strict_types=1);
+
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Schema;
+use Modules\Xot\Database\Migrations\XotBaseMigration;
+
+/**
+ * BMAD + Second Brain — D36: allineamento DB-codice users.id.
+ * @note Dati sacri: 0 righe in users (verificato), nessun dato perso.
+ * Colonna `users.id` passata da `int` (storico Fixcity) a `varchar(36)` (modello HasUuids).
+ * Non usare `migrate:fresh`; questa migrazione preserva la struttura.
+ */
+return new class extends XotBaseMigration
+{
+    protected ?string $model_class = \Modules\User\Models\User::class;
+
+    public function up(): void
+    {
+        // Verifica che non ci siano dati da perdere (regola D35/D36)
+        $count = DB::connection('fixcity')->table('users')->count();
+        if ($count > 0) {
+            // Se in futuro ci fossero dati, non modificare senza migrazione esplicita
+            return;
+        }
+
+        Schema::connection('fixcity')->table('users', function (Blueprint $table): void {
+            if (Schema::connection('fixcity')->getColumnType('users', 'id') === 'int') {
+                // Rimuovi PK esistente prima di ricrearlo con tipo corretto
+                DB::statement("ALTER TABLE users DROP PRIMARY KEY");
+                $table->string('id', 36)->primary()->change();
+            }
+        });
+    }
+
+    public function down(): void
+    {
+        // Non revertabile senza perdita dati — documentato per sicurezza
+    }
+};

@@ -13,6 +13,7 @@ return [
         'intro' => ['text' => 'Erstellen Sie ein Konto, um Meldungen einzureichen und zu verfolgen.'],
         'meta_description' => ['text' => 'Erstellen Sie ein FixCity-Konto, um Meldungen zu Missständen in Ihrer Gemeinde einzureichen und zu verfolgen.'],
         'text' => 'Konto erstellen',
+        'loading' => ['text' => 'Konto wird erstellt ...'],
     ],
     'remember' => 'Angemeldet bleiben',
     'email' => 'E-Mail',

@@ -172,6 +172,10 @@ class TicketForm extends XotBaseResourceForm
                 ->view('fixcity::filament.forms.components.privacy-consent-checkbox')
                 ->accepted()
                 ->required()
+                ->validationMessages([
+                    'accepted' => (string) __('fixcity::ticket_form.validation.privacy_accepted'),
+                    'required' => (string) __('fixcity::ticket_form.validation.privacy_accepted'),
+                ])
                 ->disabled(app(GetPublishedPrivacyPolicyAction::class)->execute() === null)
                 ->extraInputAttributes(static function (Checkbox $component): array {
                     $errorBag = $component->getLivewire()->getErrorBag();

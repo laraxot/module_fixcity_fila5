@@ -3,7 +3,7 @@ audit-coverage/
 build/
 cache/
 # claude-audit bridge (non committare)
-docs/archive/agentdb.rvf
+agentdb.rvf
 docs/cache/
 # Legacy PHPUnit (solo cartella maiuscola Tests/ — non confondere con Pest tests/)
 node_modules
@@ -19,3 +19,6 @@ graphify-out/
 .claude-audit/
 test-results/
 fixcity.code-workspace
+
+# Forbidden parallel documentation archive
+docs/archive/
