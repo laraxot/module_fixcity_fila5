@@ -59,7 +59,7 @@ repo (21 repo annidati + radice + bashscripts), senza perdere il lavoro altrui.
 | PHPMD (`phpmd.xml`, 11 moduli, solo `app/`) | 1302 violazioni in 548 file | MissingImport 616 (Xot), CamelCaseVariableName 326, CamelCasePropertyName 176, CouplingBetweenObjects 32; per modulo Xot 616, User 321, Geo 124, Cms 69 |
 | PHPInsights (code / complessita' / architettura / stile; soglia config 99) | Fixcity 77.3/77.5/82.3/84.3; User 79.3/92.2/76.4/81.9; Cms 82.4/88/82.3/90.3; Gdpr 91.7/99.1/82.3/91.5 | altri moduli in coda; nessuno raggiunge 99 |
 | Puppeteer MCP | non avviabile | Chromium senza `--no-sandbox` fallisce (AppArmor userns); il tool vieta l'opzione di default; serve consenso, copertura browser con Playwright |
-| Giro ospite | in corso (agente di sola lettura, 4 lingue) | esito da aggiungere |
+| Giro ospite | circa 650 URL, 133 misurati col browser in it/en/de/es | 15 difetti (G-01..G-15): G-01 e' lo stesso T-02, corretto; G-02 Gravatar e' decisione aperta; G-03..G-06 sotto |
 | Giro loggato: auth e area personale (fixture 8091) | 20 difetti (A-01..A-20), nessuno alto | riprodotti da me: A-04 e A-13, corretti |
 | Giro loggato: wizard e ticket (fixture 8091) | 25 difetti (T-01..T-25), 4 alti | riprodotti da me: T-01 e T-02; T-02 corretto (solo cache); T-01 e' una decisione, vedi sotto |
 | Git sync | in corso | il peer DCP-385 ha pushato tutto fino alle 07:33 (23 repo, 0 avanti, 0 indietro); restano le mie correzioni |
@@ -77,6 +77,10 @@ repo (21 repo annidati + radice + bashscripts), senza perdere il lavoro altrui.
 ### Difetti con causa verificata, non corretti (e perche')
 
 - **T-03 stelle di valutazione inutilizzabili con il mouse** (label 2x0 px). Il CSS servito (`app-B4jD5-HK.css`) ha 84 regole `.rating` solo daisyUI/Tailwind e tutte spente dentro `.page-content[data-dc]` (`:not(:where(body:has(.page-content[data-dc])...))`); il widget `ticket-citizen-rating-prompt.blade.php` usa la classe Bootstrap Italia ma senza l'icona stella nella `label`, e il CSS DC non porta le regole del rating. Il rimedio sta in `Themes/Sixteen/resources/css/app/20-dc-components.css`, che al momento ha un `.lock` di un'altra sessione: non l'ho toccato.
+- **G-05 testi italiani in `/{en,de,es}/blog` e `/events`** (riprodotto: «notizie trovate» e «Cerca per parola chiave» in en, de, es; «Quanto sono chiare le informazioni su questa pagina?» e «Valuta da 1 a 5 stelle» in `/en/events`). Causa: fallback italiani cablati in `Themes/Sixteen/resources/views/components/blocks/blog/index.blade.php` (righe 56 e 197: `' notizie trovate'`, `'Cerca per parola chiave'`) e `search_placeholder` solo nel blocco `it` di `config/local/fixcity/database/content/pages/blog/index.json`. Non corretto: quel JSON ha un `.lock` di un'altra sessione attiva. Rimedio: chiavi lang con `trans_choice` nel blade e `search_placeholder`/`search_label` nei blocchi en, de, es del JSON.
+- **G-04 contenuti blog/eventi di prova in italiano sotto `<html lang="de|es">`**: sono contenuti demo in una sola lingua, non un difetto di template; la sitemap pubblica comunque `hreflang` per tutte le lingue.
+- **G-03 `/it/tests`** risponde 200 e ha `robots.txt` con `Disallow`: le pagine `tests` sono per progetto dati+blocchi, non servono al pubblico.
+- **G-06 `/contatti` e `/mappa` 404**: dipende dal brief; il footer non ha un blocco Contatti.
 - **T-04 `[[ente.*]]` nell'informativa del passo 1**: i dati del Comune sono vuoti di proposito (`config/local/fixcity/ente.php`); resta il segnaposto finche' il titolare non li fornisce.
 
 ### Decisioni aperte emerse dal giro (non decido io)
