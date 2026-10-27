@@ -85,3 +85,17 @@ it('publishes media policy and terms with no placeholder in every locale', funct
         ->not->toContain('{{')
         ->not->toMatch('/\b(?:TODO|TBD|FIXME)\b|example\.(?:com|org|it)|lorem ipsum/i');
 })->with('legal locales')->with(['media-policy.md', 'terms.md']);
+
+it('links the tenant legal documents with locale-absolute paths, never relative to the page that shows them', function (string $locale, string $file): void {
+    config(['ente' => []]);
+    app()->setLocale($locale);
+
+    $markdown = (string) app(GetPublishedLegalDocumentAction::class)->execute($file);
+    preg_match_all('/\]\(([^)\s]+)\)/', $markdown, $matches);
+
+    // La stessa informativa e' mostrata in /<lingua>/privacy e nel passo privacy del wizard (/<lingua>/tickets/create): un link relativo
+    // (`cookie-policy`) nel secondo si risolveva in /<lingua>/tickets/cookie-policy (404).
+    foreach ($matches[1] as $target) {
+        expect($target)->toMatch('#^(?:https?://|mailto:|/'.$locale.'/)#');
+    }
+})->with('legal locales')->with(['policy.md']);
