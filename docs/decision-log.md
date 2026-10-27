@@ -103,3 +103,19 @@ User: «analizzare tutto il front office… bmad + second brain + filament bluep
 - **Decisione:** chrome unico `Themes/Sixteen/.../personal-area/heading.blade.php` + `navigation.blade.php` per pratiche, seguite, notifiche, impostazioni.
 - **Perche:** i tab sono la mappa dell'area; placement diverso o nav assente su una sorella e' bug di prodotto (DCP-110/111).
 - **Anti-regressione:** feature test sulle quattro rotte; docs Sixteen `personal-area-shared-nav-tabs-contract` + `why-personal-area-tabs-must-be-identical`.
+
+## 2026-10-26: Frontoffice ownership and superseded frontend plan
+
+- **Decision:** Sixteen owns presentation and responsive parity; Fixcity owns domain Actions, data and contracts. The old frontend implementation plan is superseded.
+- **Rationale:** ticket-list and footer are theme views, while tenant/contact resolution is domain-owned; keeping those boundaries prevents duplicate UI logic and semantic merge collisions.
+- **References:** `Modules/Fixcity/docs/bmad/design-comuni-frontend-plan.md`, `Themes/Sixteen/docs/MERGE_CONFLICT_RESOLUTION_LOG.md`.
+
+## 2026-10-26: Legal pages require tenant-approved facts
+- **Decision:** Do not replace `Testo non ancora completo` with fabricated municipality or DPO data. Keep the publication gate until the tenant supplies approved legal content and operational facts.
+- **Rationale:** `config/local/fixcity/ente.php` is intentionally empty; controller identity, legal bases, recipients, retention, cookies and accessibility status cannot be inferred safely from the application.
+- **Impact:** Added `docs/bmad/legal-content-completion.md`; privacy, legal notes, terms, media policy and accessibility remain blocked by tenant input, with official sources and a completion checklist recorded.
+## 2026-10-26 — Header CMS come fonte primaria
+
+- Il contratto del frontoffice mantiene `header.json` come sorgente di contenuti: il nome demo `Demo` non viene hardcodato nella Blade.
+- `header/v1.blade.php` usa `ente.region_name` solo quando è valorizzato; in caso contrario conserva `region.name` dal JSON (`Demo`). Questo evita sia placeholder vuoti sia la perdita dell’identità reale dell’ente.
+- La verifica deve includere il CTA area personale e l’avatar a 375, 768 e 1440px.

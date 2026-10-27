@@ -1,5 +1,5 @@
 <x-layouts.app :title="__('fixcity::privacy.page_title')">
-    <main id="main-container" class="container py-4 py-lg-5">
+    <main id="main-container" class="container py-4 py-lg-5" data-slug="privacy.index">
         <div class="row justify-content-center">
             <div class="col-12 col-lg-9">
                 @if (is_string($policyHtml))
