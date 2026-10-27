@@ -2,6 +2,8 @@
 
 declare(strict_types=1);
 
+use Illuminate\Auth\SessionGuard;
+use Illuminate\Support\Facades\Auth;
 use Modules\Fixcity\Tests\TestCase;
 use Modules\Gdpr\Actions\Cookie\GetCookieInventoryAction;
 use Modules\Gdpr\Enums\CookieCategory;
@@ -46,6 +48,23 @@ it('switches to consent as soon as a non technical cookie is declared', function
 
 it('keeps the consent for 6 months, the earliest the Garante allows to ask again', function (): void {
     Assert::assertSame(180, config('gdpr.config.cookie.consent_lifetime'));
+});
+
+/*
+ * "Ricordami" sul login imposta `remember_web_<hash>` per 400 giorni (Laravel, 576000 minuti): e' tecnico, ma la cookie policy lo
+ * ometteva. Il nome si ricava dalla guardia, non si scrive a mano.
+ */
+it('lists the remember-me cookie of the web guard with its real name and duration', function (): void {
+    config(['gdpr.config.cookie.extra' => []]);
+    app()->setLocale('it');
+    $guard = Auth::guard('web');
+    Assert::assertInstanceOf(SessionGuard::class, $guard);
+
+    $remember = collect(app(GetCookieInventoryAction::class)->execute()->cookies)->first(static fn ($cookie): bool => $cookie->name === $guard->getRecallerName());
+
+    Assert::assertNotNull($remember);
+    Assert::assertSame(CookieCategory::Necessary, $remember->category);
+    Assert::assertStringContainsString('400', $remember->duration);
 });
 
 it('describes the consent cookie with the configured lifetime', function (): void {

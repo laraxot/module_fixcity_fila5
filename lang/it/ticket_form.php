@@ -43,7 +43,7 @@ return [
             'error_count' => 'Puoi allegare al massimo :max file',
             'error_upload' => 'Caricamento non riuscito, riprova',
             'label' => 'Immagini',
-            'helper_text' => 'Seleziona una o più immagini da allegare alla segnalazione',
+            'helper_text' => 'Formati ammessi: :formats. Fino a :max_files file, massimo :max_size MB ciascuno.',
             'placeholder' => 'Aggiungi immagini (facoltativo)',
             'description' => 'Immagini a supporto della segnalazione',
         ],

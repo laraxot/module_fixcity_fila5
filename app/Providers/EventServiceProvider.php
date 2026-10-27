@@ -8,6 +8,8 @@ use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvi
 use Illuminate\Support\Facades\Event;
 use Modules\Fixcity\Events\TicketCreatedEvent;
 use Modules\Fixcity\Listeners\NotifyTicketReceivedListener;
+use Modules\Fixcity\Listeners\StripTicketPhotoMetadataListener;
+use Spatie\MediaLibrary\MediaCollections\Events\MediaHasBeenAddedEvent;
 
 class EventServiceProvider extends ServiceProvider
 {
@@ -23,6 +25,8 @@ class EventServiceProvider extends ServiceProvider
     public function boot(): void
     {
         Event::listen(TicketCreatedEvent::class, NotifyTicketReceivedListener::class);
+        // Privacy notice: report photos are stored without EXIF/GPS metadata.
+        Event::listen(MediaHasBeenAddedEvent::class, StripTicketPhotoMetadataListener::class);
     }
 
     /**

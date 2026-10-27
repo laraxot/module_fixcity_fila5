@@ -43,7 +43,7 @@ return [
             'error_count' => 'Puedes adjuntar como máximo :max archivos',
             'error_upload' => 'No se pudo subir, inténtalo de nuevo',
             'label' => 'Imágenes',
-            'helper_text' => 'Selecciona una o más imágenes para adjuntar a la incidencia',
+            'helper_text' => 'Formatos admitidos: :formats. Hasta :max_files archivos, de máximo :max_size MB cada uno.',
             'placeholder' => 'Añadir imágenes (opcional)',
             'description' => 'Imágenes de apoyo a la incidencia',
         ],

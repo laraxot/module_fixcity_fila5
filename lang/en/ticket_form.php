@@ -43,7 +43,7 @@ return [
             'error_count' => 'You can attach at most :max files',
             'error_upload' => 'Upload failed, please try again',
             'label' => 'Images',
-            'helper_text' => 'Select one or more images to attach to the report',
+            'helper_text' => 'Accepted formats: :formats. Up to :max_files files, :max_size MB each.',
             'placeholder' => 'Add images (optional)',
             'description' => 'Images supporting the report',
         ],

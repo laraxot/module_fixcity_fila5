@@ -22,6 +22,15 @@
     // iOS puo' consegnare alla fotocamera HEIC/HEIF: il picker li mostra solo per
     // convertirli in JPEG nel browser; la whitelist server resta invariata.
     $clientAccepted = array_values(array_unique([...$accepted, 'image/heic', 'image/heif']));
+    // l'aiuto elenca solo cio' che il server accetta davvero (`$accepted`), non i formati HEIC/HEIF che il client converte dove il browser li sa leggere
+    $formatLabels = collect($accepted)
+        ->map(static fn (string $mime): string => match ($mime) {
+            'image/jpeg' => 'JPG',
+            'image/png' => 'PNG',
+            'application/pdf' => 'PDF',
+            default => strtoupper((string) str($mime)->afterLast('/')),
+        })
+        ->implode(', ');
     $sprite = '/themes/Sixteen/design-comuni/assets/bootstrap-italia/dist/svg/sprites.svg';
     $serverErrors = collect([$errors->first($statePath)])
         ->merge(collect($errors->get($statePath . '.*'))->flatten())
@@ -174,7 +183,7 @@
             </span>
             <span>{{ __('fixcity::ticket_form.fields.images.upload_button') }}</span>
         </button>
-        <p id="{{ $id }}-help" class="title-xsmall u-grey-dark pt-10 mb-0">{{ __('fixcity::ticket_form.fields.images.helper_text') }}</p>
+        <p id="{{ $id }}-help" class="title-xsmall u-grey-dark pt-10 mb-0">{{ __('fixcity::ticket_form.fields.images.helper_text', ['formats' => $formatLabels, 'max_files' => $maxFiles, 'max_size' => $maxKb ? round($maxKb / 1024, 1) : 10]) }}</p>
         <p class="form-feedback just-validate-error-label" role="status" x-show="message" x-text="message" x-cloak></p>
     </div>
     @foreach ($serverErrors as $message)

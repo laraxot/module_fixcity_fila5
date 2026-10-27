@@ -43,7 +43,7 @@ return [
             'error_count' => 'Es können höchstens :max Dateien angehängt werden',
             'error_upload' => 'Hochladen fehlgeschlagen, bitte erneut versuchen',
             'label' => 'Bilder',
-            'helper_text' => 'Wählen Sie ein oder mehrere Bilder aus, die der Meldung beigefügt werden sollen',
+            'helper_text' => 'Zulässige Formate: :formats. Bis zu :max_files Dateien, jeweils höchstens :max_size MB.',
             'placeholder' => 'Bilder hinzufügen (optional)',
             'description' => 'Bilder zur Unterstützung der Meldung',
         ],
