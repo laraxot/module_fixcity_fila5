@@ -28,6 +28,7 @@ declare(strict_types=1);
                         for="ticket-rating-star-{{ $ticketId }}-{{ $star }}"
                         title="{{ __('fixcity::rating.fields.star.labels.'.$star.'.label') }}"
                     >
+                        <svg class="icon icon-sm" aria-hidden="true"><use href="/themes/Sixteen/design-comuni/assets/bootstrap-italia/dist/svg/sprites.svg#it-star-full"></use></svg>
                         <span class="visually-hidden">{{ __('fixcity::rating.fields.star.labels.'.$star.'.label') }}</span>
                     </label>
                 @endfor
