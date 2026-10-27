@@ -45,7 +45,6 @@ function mediaPolicySections(string $locale): array
 
     $sections = [];
     foreach ($parts as $part) {
-        Assert::assertIsString($part);
         [$title, $body] = array_pad(explode("\n", $part, 2), 2, '');
 
         $sections[] = ['title' => trim($title), 'body' => trim($body)];
