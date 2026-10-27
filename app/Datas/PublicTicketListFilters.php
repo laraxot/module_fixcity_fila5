@@ -102,7 +102,10 @@ final readonly class PublicTicketListFilters
         return array_diff_key($query, array_flip($except));
     }
 
-    private static function cleanQuery(mixed $raw): string
+    /**
+     * Testo libero sicuro per LIKE: riusato dalla ricerca globale (SearchFrontOfficeAction) per tutte le sorgenti.
+     */
+    public static function cleanQuery(mixed $raw): string
     {
         if (! is_string($raw)) {
             return '';
