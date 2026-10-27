@@ -33,6 +33,7 @@ return [
         'intro' => ['text' => 'Registrati per inviare e seguire le tue segnalazioni.'],
         'meta_description' => ['text' => 'Crea un account FixCity per inviare e seguire le tue segnalazioni di disservizi nel tuo Comune.'],
         'text' => 'Registrati',
+        'loading' => ['text' => 'Registrazione in corso...'],
     ],
     'remember' => 'Ricordami',
     'email' => 'Email',

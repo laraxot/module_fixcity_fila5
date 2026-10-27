@@ -13,6 +13,7 @@ return [
         'intro' => ['text' => 'Create an account to submit and follow your reports.'],
         'meta_description' => ['text' => 'Create a FixCity account to submit and follow your reports about local issues in your municipality.'],
         'text' => 'Create an account',
+        'loading' => ['text' => 'Creating your account...'],
     ],
     'remember' => 'Remember me',
     'email' => 'Email',
