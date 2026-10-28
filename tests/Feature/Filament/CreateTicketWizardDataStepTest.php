@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 use Dom\HTMLDocument;
+use Illuminate\Support\Str;
 use Livewire\Livewire;
 use Modules\Fixcity\Actions\GetPublishedPrivacyPolicyAction;
 use Modules\Fixcity\Filament\Widgets\CreateTicketWizardWidget;
@@ -52,14 +53,24 @@ describe('data step markup', function (): void {
         Assert::assertSame('200', $details?->getAttribute('maxlength'), 'il limite scritto e\' anche applicato dal browser');
         Assert::assertStringContainsString('200', (string) $document->querySelector('.cmp-text-area span.label')?->textContent);
 
-        $upload = $document->querySelector('.btn-wrapper input[type=file]');
+        // story Media media-mobile-camera-upload: `capture` apre solo la fotocamera, quindi sta su un input a parte;
+        // "Scegli file" resta libero per galleria e PDF. HEIC non in `accept`: iOS lo converte in JPEG da se'.
+        $camera = $document->querySelector('.btn-wrapper input[type=file][capture]');
+        Assert::assertNotNull($camera);
+        Assert::assertSame('environment', $camera->getAttribute('capture'));
+        Assert::assertSame('image/*', $camera->getAttribute('accept'));
+        Assert::assertNull($camera->getAttribute('multiple'), 'uno scatto per tocco');
+        $upload = $document->querySelector('.btn-wrapper input[type=file]:not([capture])');
         Assert::assertNotNull($upload);
-        Assert::assertSame('image/jpeg,image/png,application/pdf,image/heic,image/heif', $upload->getAttribute('accept'));
-        Assert::assertStringContainsString('normalizeCameraImage', $html);
-        Assert::assertStringContainsString('FixcityCameraUpload', $html);
-        Assert::assertStringContainsString("type: 'image/jpeg'", $html);
-        Assert::assertSame('environment', $upload->getAttribute('capture'));
+        Assert::assertSame('image/jpeg,image/png,application/pdf', $upload->getAttribute('accept'));
         Assert::assertNotNull($upload->getAttribute('multiple'));
+        foreach ([$camera, $upload] as $input) {
+            Assert::assertSame('-1', $input->getAttribute('tabindex'), 'gli input nascosti non prendono il Tab: lo prendono i pulsanti');
+        }
+        Assert::assertNotNull($document->querySelector('.btn-wrapper [role=group][aria-labelledby]'));
+        Assert::assertStringContainsString('Scatta una foto', $html);
+        Assert::assertStringContainsString('Scegli file', $html);
+        Assert::assertStringContainsString('window.MediaCameraImage.normalize(file, { maxSide: this.maxSide })', $html);
         Assert::assertNull($document->querySelector('.filepond--root'), 'il tema non carica il CSS di FilePond: il widget di Filament non va usato');
 
         // scheda Autore: dati veri dell'utente (nome, email), niente nome di esempio del riferimento
@@ -74,6 +85,17 @@ describe('data step markup', function (): void {
         Assert::assertStringContainsString('requestNextStep()', (string) $nav->querySelector('.steppers-btn-confirm')?->getAttribute('x-on:click'));
         Assert::assertNotNull($document->querySelector('p.title-xsmall.d-lg-none'), 'avviso dei campi obbligatori (< 992 px)');
         Assert::assertNotNull($document->querySelector('[data-element="location-map"]'));
+    });
+
+    // Il tetto che il browser rispetta e' quello del contratto Media (PHP, regola Livewire e campo), non una formula copiata nella Blade.
+    it('caps the upload at the Livewire temporary upload rule', function (): void {
+        $this->actingAs(UserFactory::new()->createOne());
+        app()->setLocale('it');
+        config(['livewire.temporary_file_upload.rules' => 'required|file|max:100']);
+
+        $html = Livewire::test(CreateTicketWizardWidget::class)->html();
+
+        Assert::assertSame((string) (100 * 1024), Str::match('/maxBytes:\s*(\d+)/', $html), 'il tetto in byte passato al client');
     });
 
     it('does not show the author card to a guest', function (): void {

@@ -36,7 +36,8 @@ $contentParityTargets = [
  * @var array<string, list<string>>
  */
 $contentParityIdenticalAllowed = [
-    '*' => ['FixCity', 'Twitter', 'Facebook', 'YouTube', 'Telegram', 'Whatsapp', 'WhatsApp', 'RSS', 'ITA', 'ENG', 'DEU', 'SPA'],
+    // "Demo": nome della regione segnaposto dell'header (D35 in sections/header/v1), nome proprio uguale in ogni lingua.
+    '*' => ['FixCity', 'Demo', 'Twitter', 'Facebook', 'YouTube', 'Telegram', 'Whatsapp', 'WhatsApp', 'RSS', 'ITA', 'ENG', 'DEU', 'SPA'],
     // "Cookie policy" e' il termine inglese stesso (in italiano e' un prestito): de ed es sono tradotte, verificato in local ed eu il 2026-10-14.
     'en' => ['Media policy', 'Cookie policy', 'Privacy'],
     'es' => ['Turismo'],

@@ -12,9 +12,10 @@ status: draft
 
 # Fixcity Module Documentation Index
 
-> Canonical navigation: BMAD stories describe intent and acceptance criteria; `docs/wiki`
-> stores reusable decisions; `docs/chat` is handoff only. The large historical reports
-> remain searchable but are not current evidence unless linked from a story.
+> Canonical navigation: BMAD stories describe intent, acceptance criteria, coordination,
+> handoffs and verification; `docs/wiki` stores reusable decisions. `docs/chat` is legacy
+> archive only. The large historical reports remain searchable but are not current evidence
+> unless linked from a story.
 
 Nuovi Markdown: nome lowercase, senza date/timestamp e mai con suffisso `-1`, `-2` o
 `-3`; i nomi storici si rinominano solo dopo una mappa dei riferimenti.

@@ -5,8 +5,8 @@ declare(strict_types=1);
 ?>
 <div class="cmp-ticket-citizen-rating">
     @if ($showPrompt)
-        <div class="alert alert-info border-0 shadow-sm mb-4" role="region" aria-labelledby="ticket-rating-prompt-title">
-            <h2 id="ticket-rating-prompt-title" class="title-small-semi-bold mb-2">
+        <div class="alert alert-info border-0 shadow-sm mb-4" role="region" aria-labelledby="ticket-rating-prompt-title-{{ $ticketId }}">
+            <h2 id="ticket-rating-prompt-title-{{ $ticketId }}" class="title-small-semi-bold mb-2">
                 {{ __('fixcity::ticket_citizen_rating.prompt.title.label') }}
             </h2>
             <p class="text-paragraph-small mb-3">
@@ -28,7 +28,7 @@ declare(strict_types=1);
                         for="ticket-rating-star-{{ $ticketId }}-{{ $star }}"
                         title="{{ __('fixcity::rating.fields.star.labels.'.$star.'.label') }}"
                     >
-                        <svg class="icon icon-sm" aria-hidden="true"><use href="/themes/Sixteen/design-comuni/assets/bootstrap-italia/dist/svg/sprites.svg#it-star-full"></use></svg>
+                        <svg class="icon icon-sm" aria-hidden="true"><use href="{{ \Themes\Sixteen\Infrastructure\Assets\DesignComuniAssets::base() }}/bootstrap-italia/dist/svg/sprites.svg#it-star-full"></use></svg>
                         <span class="visually-hidden">{{ __('fixcity::rating.fields.star.labels.'.$star.'.label') }}</span>
                     </label>
                 @endfor

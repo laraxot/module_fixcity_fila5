@@ -9,7 +9,6 @@ use Filament\Forms\Components\Checkbox;
 use Filament\Forms\Components\Field;
 use Filament\Forms\Components\Hidden;
 use Filament\Forms\Components\Select;
-use Filament\Forms\Components\SpatieMediaLibraryFileUpload;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
 use Filament\Schemas\Components\Component as SchemaComponent;
@@ -26,6 +25,7 @@ use Modules\Fixcity\Actions\BuildTicketReviewSummaryAction;
 use Modules\Fixcity\Actions\GetPublishedPrivacyPolicyAction;
 use Modules\Fixcity\Enums\TicketTypeEnum;
 use Modules\Geo\Filament\Forms\Components\CoordinatePicker;
+use Modules\Media\Filament\Forms\Components\CameraPhotoUpload;
 use Modules\Xot\Actions\Cast\SafeStringCastAction;
 use Modules\Xot\Filament\Resources\Schemas\XotBaseResourceForm;
 
@@ -333,13 +333,15 @@ class TicketForm extends XotBaseResourceForm
             ->required()
             ->minLength(10)
             ->rows(4);
-        $images = SpatieMediaLibraryFileUpload::make('images')
+        // CameraPhotoUpload (Media): FilePond riduce la foto nel browser, il server accetta 2 MB per richiesta; dc-file-upload legge lo stesso lato.
+        $images = CameraPhotoUpload::make('images')
             ->columnSpanFull()
             ->collection('attachments')
             ->maxFiles(5)
             // Gli stessi mime della collezione `attachments` (Ticket::registerMediaCollections): ammettere `image/*` faceva passare
             // SVG, GIF, WebP e la creazione dei media falliva dopo Ticket::create (ticket orfano, SEC-04 DCP-49).
             ->acceptedFileTypes(['image/jpeg', 'image/png', 'application/pdf'])
+            // `maxSize` si controlla sul file originale, prima della riduzione (CameraPhotoUpload::MAX_SIDE). Il wizard pubblico usa `MediaCameraImage`.
             ->maxSize(10 * 1024);
         $section = Section::make((string) __('fixcity::ticket_form.sections.issue.heading'))
             ->columnSpanFull();

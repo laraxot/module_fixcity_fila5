@@ -79,7 +79,7 @@ it('opens for a signed-in citizen with one h1, the localized title and no raw tr
     $headings = personalAreaElements($document, 'main h1');
     Assert::assertCount(1, $headings, 'La pagina deve avere un solo h1.');
     Assert::assertSame($titles[$page][$locale], trim($headings[0]->textContent ?? ''));
-    Assert::assertStringContainsString('<title>'.$titles[$page][$locale].'</title>', $html);
+    Assert::assertStringContainsString('<title>'.$titles[$page][$locale].' | ', $html);
     Assert::assertStringNotContainsString('personal_area.', $html, 'Chiave di traduzione grezza nella pagina.');
     Assert::assertStringNotContainsString('fixcity::', $html, 'Chiave di traduzione grezza nella pagina.');
     Assert::assertNotNull($document->querySelector('main #main-container'), 'Manca il bersaglio del link "Vai ai contenuti".');

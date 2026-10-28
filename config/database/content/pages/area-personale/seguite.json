@@ -1,0 +1,66 @@
+{
+  "id": "seguite",
+  "title": {
+    "it": "Segnalazioni che seguo",
+    "en": "Reports I follow",
+    "de": "Meldungen, denen ich folge",
+    "es": "Incidencias que sigo"
+  },
+  "slug": "seguite",
+  "layout": "design-comuni",
+  "middleware": [
+    "auth"
+  ],
+  "description": {
+    "it": "Le segnalazioni di cui l'utente autenticato segue gli aggiornamenti, con il collegamento al tracciamento per codice.",
+    "en": "The reports whose updates the signed-in user follows, with the link to tracking by code."
+  },
+  "content": null,
+  "sidebar_blocks": {
+    "it": [],
+    "en": [],
+    "de": [],
+    "es": []
+  },
+  "footer_blocks": null,
+  "content_blocks": {
+    "it": [
+      {
+        "type": "personal-area-followed",
+        "data": {
+          "view": "pub_theme::components.blocks.personal-area-practices.followed"
+        }
+      }
+    ],
+    "en": [
+      {
+        "type": "personal-area-followed",
+        "data": {
+          "view": "pub_theme::components.blocks.personal-area-practices.followed"
+        }
+      }
+    ],
+    "de": [
+      {
+        "type": "personal-area-followed",
+        "data": {
+          "view": "pub_theme::components.blocks.personal-area-practices.followed"
+        }
+      }
+    ],
+    "es": [
+      {
+        "type": "personal-area-followed",
+        "data": {
+          "view": "pub_theme::components.blocks.personal-area-practices.followed"
+        }
+      }
+    ]
+  },
+  "access_policy": {
+    "description": "Pagina dell'area personale: solo per utenti autenticati. Ogni segnalazione e' mostrata solo a chi ne e' proprietario o seguace; l'ospite va al login localizzato.",
+    "guest_access": false,
+    "guest_redirect": "login",
+    "source": "DCP-110, DCP-106"
+  }
+}

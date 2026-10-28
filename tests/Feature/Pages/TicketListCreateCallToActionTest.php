@@ -12,7 +12,7 @@ it('links the public reports page to canonical ticket creation', function (): vo
     $response = $this->get('/it/tickets');
 
     $response->assertOk()
-        ->assertSee('<title>Elenco segnalazioni</title>', false)
+        ->assertSee('<title>Elenco segnalazioni | ', false)
         ->assertSee('/it/tickets/create', false)
         ->assertDontSee('/it/tests/ticket-crea', false)
         ->assertDontSee('href="/it/segnalazione-crea"', false);

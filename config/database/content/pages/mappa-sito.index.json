@@ -1,0 +1,38 @@
+{
+    "id": "mappa-sito-index",
+    "slug": "mappa-sito.index",
+    "title": {
+        "it": "Mappa del sito",
+        "en": "Sitemap",
+        "de": "Sitemap",
+        "es": "Mapa del sitio"
+    },
+    "layout": "app",
+    "description": {
+        "it": "Indice delle sezioni principali del sito comunale.",
+        "en": "Index of the main sections of the municipal website.",
+        "de": "Übersicht der wichtigsten Bereiche der Gemeindewebsite.",
+        "es": "Índice de las secciones principales del sitio municipal."
+    },
+    "content": null,
+    "content_blocks": {
+        "it": [
+            {
+                "type": "sitemap-page",
+                "data": {
+                    "view": "pub_theme::components.pages.sitemap"
+                }
+            }
+        ],
+        "en": [
+            {
+                "type": "sitemap-page",
+                "data": {
+                    "view": "pub_theme::components.pages.sitemap"
+                }
+            }
+        ]
+    },
+    "sidebar_blocks": {"it": [], "en": []},
+    "footer_blocks": null
+}

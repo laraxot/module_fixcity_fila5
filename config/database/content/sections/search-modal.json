@@ -2,10 +2,10 @@
   "id": "sixteen-search-modal",
   "slug": "search-modal",
   "name": {
-    "it": "Modale di ricerca Design Comuni",
-    "en": "Design Comuni search modal",
-    "de": "Design-Comuni-Suchfenster",
-    "es": "Ventana de búsqueda Design Comuni"
+    "it": "Modale di ricerca FixCity",
+    "en": "FixCity search modal",
+    "de": "FixCity-Suchfenster",
+    "es": "Ventana de búsqueda FixCity"
   },
   "blocks": {
     "it": [
@@ -17,33 +17,33 @@
           "title": "Cerca",
           "back_label": "Chiudi e torna alla pagina precedente",
           "label": "Cerca nel sito",
-          "placeholder": "Cerca nel sito",
+          "placeholder": "Cerca nel sito: segnalazioni, notizie, eventi e pagine",
           "button": "Cerca",
           "suggestions_title": "FORSE STAVI CERCANDO",
           "suggestions": [
             {
-              "label": "Rilascio Carta Identità Elettronica (CIE)",
-              "url": "/services/anagrafe"
+              "label": "Elenco segnalazioni pubbliche",
+              "url": "/tickets"
             },
             {
-              "label": "Cambio di residenza",
-              "url": "/services/anagrafe"
+              "label": "Segnala un problema",
+              "url": "/tickets/create"
             },
             {
-              "label": "Tributi online",
-              "url": "/services/tributi"
+              "label": "Traccia una segnalazione",
+              "url": "/tickets/track"
             },
             {
-              "label": "Prenotazione appuntamenti",
-              "url": "/appointments"
+              "label": "Domande frequenti",
+              "url": "/domande-frequenti"
             },
             {
-              "label": "Rilascio tessera elettorale",
-              "url": "/services/anagrafe"
+              "label": "Categorie di segnalazione",
+              "url": "/lista-categorie"
             },
             {
-              "label": "Voucher connettività",
-              "url": "/services"
+              "label": "Novità e comunicazioni",
+              "url": "/blog"
             }
           ]
         }
@@ -58,33 +58,33 @@
           "title": "Search",
           "back_label": "Close and go back to the previous page",
           "label": "Search the site",
-          "placeholder": "Search the site",
+          "placeholder": "Search the site: reports, news, events and pages",
           "button": "Search",
           "suggestions_title": "YOU MIGHT BE LOOKING FOR",
           "suggestions": [
             {
-              "label": "Electronic Identity Card (CIE) issue",
-              "url": "/services"
+              "label": "Public reports list",
+              "url": "/tickets"
             },
             {
-              "label": "Change of residence",
-              "url": "/services"
+              "label": "Report a problem",
+              "url": "/tickets/create"
             },
             {
-              "label": "Online taxes",
-              "url": "/services"
+              "label": "Track a report",
+              "url": "/tickets/track"
             },
             {
-              "label": "Appointment booking",
-              "url": "/services"
+              "label": "Frequently asked questions",
+              "url": "/domande-frequenti"
             },
             {
-              "label": "Electoral card issue",
-              "url": "/services"
+              "label": "Report categories",
+              "url": "/lista-categorie"
             },
             {
-              "label": "Connectivity voucher",
-              "url": "/services"
+              "label": "News and updates",
+              "url": "/blog"
             }
           ]
         }
@@ -99,33 +99,33 @@
           "title": "Suchen",
           "back_label": "Schließen und zur vorherigen Seite zurückkehren",
           "label": "Website durchsuchen",
-          "placeholder": "Website durchsuchen",
+          "placeholder": "Website durchsuchen: Meldungen, Neuigkeiten, Veranstaltungen und Seiten",
           "button": "Suchen",
           "suggestions_title": "VIELLEICHT SUCHEN SIE",
           "suggestions": [
             {
-              "label": "Ausstellung des elektronischen Personalausweises (CIE)",
-              "url": "/services"
+              "label": "Öffentliche Meldungen",
+              "url": "/tickets"
             },
             {
-              "label": "Wohnsitzwechsel",
-              "url": "/services"
+              "label": "Problem melden",
+              "url": "/tickets/create"
             },
             {
-              "label": "Online-Abgaben",
-              "url": "/services"
+              "label": "Meldung verfolgen",
+              "url": "/tickets/track"
             },
             {
-              "label": "Terminbuchung",
-              "url": "/services"
+              "label": "Häufige Fragen",
+              "url": "/domande-frequenti"
             },
             {
-              "label": "Ausstellung der Wahlkarte",
-              "url": "/services"
+              "label": "Meldekategorien",
+              "url": "/lista-categorie"
             },
             {
-              "label": "Konnektivitätsgutschein",
-              "url": "/services"
+              "label": "Neuigkeiten",
+              "url": "/blog"
             }
           ]
         }
@@ -140,33 +140,33 @@
           "title": "Buscar",
           "back_label": "Cerrar y volver a la página anterior",
           "label": "Buscar en el sitio",
-          "placeholder": "Buscar en el sitio",
+          "placeholder": "Buscar en el sitio: incidencias, noticias, eventos y páginas",
           "button": "Buscar",
           "suggestions_title": "QUIZÁ ESTABAS BUSCANDO",
           "suggestions": [
             {
-              "label": "Emisión del Documento de Identidad Electrónico (CIE)",
-              "url": "/services"
+              "label": "Listado de incidencias públicas",
+              "url": "/tickets"
             },
             {
-              "label": "Cambio de residencia",
-              "url": "/services"
+              "label": "Informar de un problema",
+              "url": "/tickets/create"
             },
             {
-              "label": "Tributos en línea",
-              "url": "/services"
+              "label": "Seguir una incidencia",
+              "url": "/tickets/track"
             },
             {
-              "label": "Reserva de citas",
-              "url": "/services"
+              "label": "Preguntas frecuentes",
+              "url": "/domande-frequenti"
             },
             {
-              "label": "Emisión de la tarjeta electoral",
-              "url": "/services"
+              "label": "Categorías de incidencia",
+              "url": "/lista-categorie"
             },
             {
-              "label": "Bono de conectividad",
-              "url": "/services"
+              "label": "Novedades",
+              "url": "/blog"
             }
           ]
         }

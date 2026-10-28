@@ -24,6 +24,7 @@ it('renders the category directory in every language with a single main landmark
     $document = HTMLDocument::createFromString((string) $response->getContent(), LIBXML_NOERROR);
     Assert::assertCount(1, $document->querySelectorAll('main'), 'Piu\' di un landmark main.');
     Assert::assertCount(1, $document->querySelectorAll('h1'), 'Deve esserci un solo h1.');
+    Assert::assertNotNull($document->querySelector('#category-directory'), 'Manca il catalogo delle categorie.');
     Assert::assertNotNull($document->querySelector('a[href$="/'.$locale.'/tickets"]'), 'Manca il link all\'elenco segnalazioni localizzato.');
 })->with('locales');
 

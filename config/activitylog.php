@@ -10,10 +10,11 @@ return [
     'enabled' => (config('env.ACTIVITY_LOGGER_ENABLED') ?? true),
 
     /*
-     * When the clean-command is executed, all recording activities older than
-     * the number of days specified here will be deleted.
+     * Days an activity log row is kept: `activitylog:clean` (scheduled daily in routes/console.php) deletes older rows.
+     * 365 = the 12 months the privacy notice (lang/it/policy.md, "Periodo di conservazione") promises.
+     * spatie/laravel-activitylog v5 reads `clean_after_days`; the v4 key `delete_records_older_than_days` is no longer read.
      */
-    'delete_records_older_than_days' => 365,
+    'clean_after_days' => 365,
 
     /*
      * If no log name is passed to the activity() helper

@@ -88,6 +88,8 @@ fonte di verità.
 
 ## Documentation
 
+- [Lista categorie: contratto di prodotto](./bmad/lista-categorie-purpose.md) — scopo, ownership e confini della directory pubblica.
+
 - [Agent confidence brief](./agent-confidence-brief.md) — snapshot operativo
   verificato (stack, ownership, Sixteen pages, OmniRoute/Claude, memoria agenti).
 - [FAQ catalog ownership](./faq-catalog-ownership.md) — dominio FAQ in Fixcity,

@@ -1,0 +1,503 @@
+{
+  "id": "index",
+  "slug": "index",
+  "title": {
+    "it": "Domande frequenti",
+    "en": "Frequently asked questions",
+    "de": "Häufige Fragen",
+    "es": "Preguntas frecuentes"
+  },
+  "layout": "design-comuni",
+  "description": {
+    "it": "Risposte alle domande più frequenti su come segnalare un problema e seguire la pratica.",
+    "en": "Answers to the most common questions about reporting a problem and following the case.",
+    "de": "Antworten auf die häufigsten Fragen zum Melden eines Problems und zum Verfolgen des Vorgangs.",
+    "es": "Respuestas a las preguntas más frecuentes sobre cómo señalar un problema y seguir el expediente."
+  },
+  "content": null,
+  "content_blocks": {
+    "it": [
+      {
+        "type": "content-page",
+        "data": {
+          "view": "pub_theme::components.blocks.content-page.design-comuni",
+          "title": "Domande frequenti",
+          "breadcrumb": {
+            "items": [
+              {
+                "label": "Home",
+                "url": "/it"
+              }
+            ],
+            "current": "Domande frequenti"
+          },
+          "hero": {
+            "text": "Risposte alle domande più frequenti su come segnalare un problema e seguire la pratica.",
+            "shadow": false
+          },
+          "sections": [
+            {
+              "type": "search",
+              "search": {
+                "id": "faq-search",
+                "name": "faq-search",
+                "label": "Cerca nelle domande",
+                "placeholder": "Cerca",
+                "button_id": "faq-search-button",
+                "button": "Cerca",
+                "spacing": "mb-2 mb-lg-4",
+                "filter": "accordion-faq"
+              },
+              "col_class": "col-12 col-lg-8 offset-lg-2 px-sm-3 mt-2",
+              "style": "bare"
+            },
+            {
+              "type": "accordion",
+              "col_class": "col-12 col-lg-8 offset-lg-2 px-0 px-sm-3",
+              "accordion_id": "accordion-faq",
+              "more": {
+                "col_class": "col-12 col-lg-8 offset-lg-2 px-4",
+                "label": "Carica altre domande"
+              },
+              "style": "bare",
+              "source": "faq",
+              "visible": 5,
+              "filterable": true,
+              "empty": "Nessuna domanda corrisponde alla ricerca."
+            }
+          ],
+          "feedback": {
+            "title": "Quanto sono chiare le informazioni su questa pagina?",
+            "legend": "Valuta da 1 a 5 stelle la pagina",
+            "star_label": "Valuta %d stelle su 5",
+            "thanks": "Grazie, il tuo parere ci aiuterà a migliorare il servizio!",
+            "positive": {
+              "question": "Quali sono stati gli aspetti che hai preferito?",
+              "answers": [
+                "Le indicazioni erano chiare",
+                "Le indicazioni erano complete",
+                "Capivo sempre che stavo procedendo correttamente",
+                "Non ho avuto problemi tecnici",
+                "Altro"
+              ]
+            },
+            "negative": {
+              "question": "Dove hai incontrato le maggiori difficoltà?",
+              "answers": [
+                "A volte le indicazioni non erano chiare",
+                "A volte le indicazioni non erano complete",
+                "A volte non capivo se stavo procedendo correttamente",
+                "Ho avuto problemi tecnici",
+                "Altro"
+              ]
+            },
+            "detail": {
+              "question": "Vuoi aggiungere altri dettagli?",
+              "label": "Dettaglio",
+              "help": "Inserire massimo 200 caratteri"
+            },
+            "back": "Indietro",
+            "next": "Avanti",
+            "col_class": "p-lg-0 px-4"
+          },
+          "contacts": {
+            "main": {
+              "title": "Contatta il comune",
+              "items": [
+                {
+                  "icon": "it-map-marker-circle",
+                  "label": "Invia una segnalazione",
+                  "url": "/it/tickets/create"
+                },
+                {
+                  "icon": "it-search",
+                  "label": "Traccia una segnalazione",
+                  "url": "/it/tickets/track"
+                },
+                {
+                  "icon": "it-user",
+                  "label": "Accedi all'area personale",
+                  "url": "/it/auth/login"
+                }
+              ]
+            },
+            "problems": {
+              "title": "Problemi in città",
+              "items": [
+                {
+                  "icon": "it-map-marker-circle",
+                  "label": "Segnala un disservizio",
+                  "url": "/it/tickets/create"
+                }
+              ]
+            }
+          }
+        }
+      }
+    ],
+    "en": [
+      {
+        "type": "content-page",
+        "data": {
+          "view": "pub_theme::components.blocks.content-page.design-comuni",
+          "title": "Frequently asked questions",
+          "breadcrumb": {
+            "items": [
+              {
+                "label": "Home",
+                "url": "/en"
+              }
+            ],
+            "current": "Frequently asked questions"
+          },
+          "hero": {
+            "text": "Answers to the most common questions about reporting a problem and following the case.",
+            "shadow": false
+          },
+          "sections": [
+            {
+              "type": "search",
+              "search": {
+                "id": "faq-search",
+                "name": "faq-search",
+                "label": "Search questions",
+                "placeholder": "Search",
+                "button_id": "faq-search-button",
+                "button": "Search",
+                "spacing": "mb-2 mb-lg-4",
+                "filter": "accordion-faq"
+              },
+              "col_class": "col-12 col-lg-8 offset-lg-2 px-sm-3 mt-2",
+              "style": "bare"
+            },
+            {
+              "type": "accordion",
+              "col_class": "col-12 col-lg-8 offset-lg-2 px-0 px-sm-3",
+              "accordion_id": "accordion-faq",
+              "more": {
+                "col_class": "col-12 col-lg-8 offset-lg-2 px-4",
+                "label": "Load more questions"
+              },
+              "style": "bare",
+              "source": "faq",
+              "visible": 5,
+              "filterable": true,
+              "empty": "No questions match your search."
+            }
+          ],
+          "feedback": {
+            "title": "How clear is the information on this page?",
+            "legend": "Rate the clarity of this page from one to five stars",
+            "star_label": "Rate %d stars out of 5",
+            "thanks": "Thank you. Your feedback will help us improve the service.",
+            "positive": {
+              "question": "Which aspects did you find most useful?",
+              "answers": [
+                "The instructions were clear",
+                "The instructions were complete",
+                "I always knew what to do next",
+                "I had no technical problems",
+                "Other"
+              ]
+            },
+            "negative": {
+              "question": "Where did you experience the most difficulty?",
+              "answers": [
+                "The instructions were sometimes unclear",
+                "The instructions were sometimes incomplete",
+                "I did not always know what to do next",
+                "I had technical problems",
+                "Other"
+              ]
+            },
+            "detail": {
+              "question": "Would you like to add more details?",
+              "label": "Details",
+              "help": "Enter a maximum of 200 characters"
+            },
+            "back": "Back",
+            "next": "Next",
+            "col_class": "p-lg-0 px-4"
+          },
+          "contacts": {
+            "main": {
+              "title": "Contact the municipality",
+              "items": [
+                {
+                  "icon": "it-map-marker-circle",
+                  "label": "Submit a report",
+                  "url": "/en/tickets/create"
+                },
+                {
+                  "icon": "it-search",
+                  "label": "Track a report",
+                  "url": "/en/tickets/track"
+                },
+                {
+                  "icon": "it-user",
+                  "label": "Sign in to your personal area",
+                  "url": "/en/auth/login"
+                }
+              ]
+            },
+            "problems": {
+              "title": "Problems in the city",
+              "items": [
+                {
+                  "icon": "it-map-marker-circle",
+                  "label": "Report a problem",
+                  "url": "/en/tickets/create"
+                }
+              ]
+            }
+          }
+        }
+      }
+    ],
+    "de": [
+      {
+        "type": "content-page",
+        "data": {
+          "view": "pub_theme::components.blocks.content-page.design-comuni",
+          "title": "Häufige Fragen",
+          "breadcrumb": {
+            "items": [
+              {
+                "label": "Startseite",
+                "url": "/de"
+              }
+            ],
+            "current": "Häufige Fragen"
+          },
+          "hero": {
+            "text": "Praktische Informationen zum Einreichen einer Meldung und zum Verfolgen des Vorgangs.",
+            "shadow": false
+          },
+          "sections": [
+            {
+              "type": "search",
+              "search": {
+                "id": "faq-search",
+                "name": "faq-search",
+                "label": "Fragen durchsuchen",
+                "placeholder": "Suchen",
+                "button_id": "faq-search-button",
+                "button": "Suchen",
+                "spacing": "mb-2 mb-lg-4",
+                "filter": "accordion-faq"
+              },
+              "col_class": "col-12 col-lg-8 offset-lg-2 px-sm-3 mt-2",
+              "style": "bare"
+            },
+            {
+              "type": "accordion",
+              "col_class": "col-12 col-lg-8 offset-lg-2 px-0 px-sm-3",
+              "accordion_id": "accordion-faq",
+              "more": {
+                "col_class": "col-12 col-lg-8 offset-lg-2 px-4",
+                "label": "Weitere Fragen laden"
+              },
+              "style": "bare",
+              "source": "faq",
+              "visible": 5,
+              "filterable": true,
+              "empty": "Keine Frage passt zur Suche."
+            }
+          ],
+          "feedback": {
+            "title": "Wie klar sind die Informationen auf dieser Seite?",
+            "legend": "Klarheit dieser Seite von einem bis fünf Sternen bewerten",
+            "star_label": "%d von 5 Sternen vergeben",
+            "thanks": "Vielen Dank. Ihre Rückmeldung hilft uns, den Dienst zu verbessern.",
+            "positive": {
+              "question": "Welche Aspekte waren besonders hilfreich?",
+              "answers": [
+                "Die Hinweise waren klar",
+                "Die Hinweise waren vollständig",
+                "Ich wusste immer, wie ich fortfahren soll",
+                "Ich hatte keine technischen Probleme",
+                "Andere"
+              ]
+            },
+            "negative": {
+              "question": "Wo sind die größten Schwierigkeiten aufgetreten?",
+              "answers": [
+                "Die Hinweise waren manchmal nicht klar",
+                "Die Hinweise waren manchmal nicht vollständig",
+                "Ich wusste nicht immer, wie ich fortfahren soll",
+                "Ich hatte technische Probleme",
+                "Andere"
+              ]
+            },
+            "detail": {
+              "question": "Möchten Sie weitere Details hinzufügen?",
+              "label": "Details",
+              "help": "Maximal 200 Zeichen eingeben"
+            },
+            "back": "Zurück",
+            "next": "Weiter",
+            "col_class": "p-lg-0 px-4"
+          },
+          "contacts": {
+            "main": {
+              "title": "Gemeinde kontaktieren",
+              "items": [
+                {
+                  "icon": "it-map-marker-circle",
+                  "label": "Meldung senden",
+                  "url": "/de/tickets/create"
+                },
+                {
+                  "icon": "it-search",
+                  "label": "Meldung verfolgen",
+                  "url": "/de/tickets/track"
+                },
+                {
+                  "icon": "it-user",
+                  "label": "Zum persönlichen Bereich",
+                  "url": "/de/auth/login"
+                }
+              ]
+            },
+            "problems": {
+              "title": "Probleme in der Stadt",
+              "items": [
+                {
+                  "icon": "it-map-marker-circle",
+                  "label": "Problem melden",
+                  "url": "/de/tickets/create"
+                }
+              ]
+            }
+          }
+        }
+      }
+    ],
+    "es": [
+      {
+        "type": "content-page",
+        "data": {
+          "view": "pub_theme::components.blocks.content-page.design-comuni",
+          "title": "Preguntas frecuentes",
+          "breadcrumb": {
+            "items": [
+              {
+                "label": "Inicio",
+                "url": "/es"
+              }
+            ],
+            "current": "Preguntas frecuentes"
+          },
+          "hero": {
+            "text": "Información práctica para enviar un aviso y seguir el expediente.",
+            "shadow": false
+          },
+          "sections": [
+            {
+              "type": "search",
+              "search": {
+                "id": "faq-search",
+                "name": "faq-search",
+                "label": "Buscar preguntas",
+                "placeholder": "Buscar",
+                "button_id": "faq-search-button",
+                "button": "Buscar",
+                "spacing": "mb-2 mb-lg-4",
+                "filter": "accordion-faq"
+              },
+              "col_class": "col-12 col-lg-8 offset-lg-2 px-sm-3 mt-2",
+              "style": "bare"
+            },
+            {
+              "type": "accordion",
+              "col_class": "col-12 col-lg-8 offset-lg-2 px-0 px-sm-3",
+              "accordion_id": "accordion-faq",
+              "more": {
+                "col_class": "col-12 col-lg-8 offset-lg-2 px-4",
+                "label": "Cargar más preguntas"
+              },
+              "style": "bare",
+              "source": "faq",
+              "visible": 5,
+              "filterable": true,
+              "empty": "No hay preguntas que coincidan con la búsqueda."
+            }
+          ],
+          "feedback": {
+            "title": "¿Qué claridad tienen las informaciones de esta página?",
+            "legend": "Valora la claridad de esta página de una a cinco estrellas",
+            "star_label": "Valora %d estrellas de 5",
+            "thanks": "Gracias. Tu opinión nos ayudará a mejorar el servicio.",
+            "positive": {
+              "question": "¿Qué aspectos te han resultado más útiles?",
+              "answers": [
+                "Las indicaciones eran claras",
+                "Las indicaciones eran completas",
+                "Siempre sabía cómo continuar",
+                "No he tenido problemas técnicos",
+                "Otro"
+              ]
+            },
+            "negative": {
+              "question": "¿Dónde has encontrado más dificultades?",
+              "answers": [
+                "A veces las indicaciones no eran claras",
+                "A veces las indicaciones no eran completas",
+                "No siempre sabía cómo continuar",
+                "He tenido problemas técnicos",
+                "Otro"
+              ]
+            },
+            "detail": {
+              "question": "¿Quieres añadir más detalles?",
+              "label": "Detalle",
+              "help": "Introduce un máximo de 200 caracteres"
+            },
+            "back": "Atrás",
+            "next": "Siguiente",
+            "col_class": "p-lg-0 px-4"
+          },
+          "contacts": {
+            "main": {
+              "title": "Contacta con el municipio",
+              "items": [
+                {
+                  "icon": "it-map-marker-circle",
+                  "label": "Enviar un aviso",
+                  "url": "/es/tickets/create"
+                },
+                {
+                  "icon": "it-search",
+                  "label": "Seguir un aviso",
+                  "url": "/es/tickets/track"
+                },
+                {
+                  "icon": "it-user",
+                  "label": "Acceder al área personal",
+                  "url": "/es/auth/login"
+                }
+              ]
+            },
+            "problems": {
+              "title": "Problemas en la ciudad",
+              "items": [
+                {
+                  "icon": "it-map-marker-circle",
+                  "label": "Comunicar un problema",
+                  "url": "/es/tickets/create"
+                }
+              ]
+            }
+          }
+        }
+      }
+    ]
+  },
+  "sidebar_blocks": {
+    "it": [],
+    "en": [],
+    "de": [],
+    "es": []
+  },
+  "footer_blocks": null
+}

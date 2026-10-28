@@ -99,7 +99,7 @@ final class ListPublicTicketsAction
             'url' => route('container0.view', [
                 'container0' => 'tickets',
                 'slug0' => (string) $ticket->id,
-            ]),
+            ], false),
             'type' => $type->value ?? '',
             'type_label' => $type?->getLabel() ?? '',
             'status' => $status->value ?? '',

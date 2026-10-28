@@ -50,7 +50,6 @@ return [
         'followup' => 'Sollecito inviato',
         'media_added' => 'Allegato aggiunto',
         'recipient' => 'Destinatario: :recipient',
-        'attachment' => 'File: :file',
         'closed' => 'Segnalazione chiusa',
     ],
     'where' => [
@@ -59,6 +58,12 @@ return [
         'no_address' => 'Indirizzo non indicato',
         'map' => 'Mappa con la posizione della segnalazione',
         'map_at' => 'Mappa con la posizione della segnalazione: :address',
+    ],
+    'photos' => [
+        'title' => ['label' => 'Foto'],
+        'alt' => ['label' => 'Foto :number della segnalazione «:title»'],
+        'new_window' => ['label' => '(apre la foto intera in una nuova finestra)'],
+        'document' => ['label' => 'Documento :number (PDF)'],
     ],
     'description' => [
         'title' => 'Descrizione',

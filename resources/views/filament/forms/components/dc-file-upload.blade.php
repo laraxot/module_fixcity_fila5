@@ -11,6 +11,8 @@
     `getMaxFiles()`); il server le applica comunque a "Avanti" e ne mostra gli errori sotto il campo. `wire:ignore` sul blocco interattivo: la
     lista vive nel client, un morph di Livewire non deve azzerarla; gli errori del server stanno fuori da `wire:ignore`.
     Nessun Bootstrap JS, solo classi Bootstrap Italia gia' nel riferimento (le miniature sono dimensionate da overrides.css).
+    Due pulsanti (story Media `media-mobile-camera-upload`): "Scatta una foto" usa `capture`, che su iOS e Android apre solo la fotocamera;
+    "Scegli file" non lo usa, cosi' restano galleria e PDF. La riduzione delle foto e' `window.MediaCameraImage` (modulo Media).
 --}}
 @php
     $id = $getId();
@@ -18,11 +20,15 @@
     $isDisabledField = $isDisabled();
     $maxFiles = $getMaxFiles() ?? 5;
     $maxKb = $getMaxSize();
+    // DCP-378: il browser controlla il limite che il trasporto applica davvero (contratto Media: regola del campo, regola Livewire e 90% del
+    // limite reale di PHP), non solo la regola del campo: altrimenti un file da 3 MB passa qui e fallisce con un errore generico.
+    $maxBytes = app(\Modules\Media\Actions\Upload\GetEffectiveUploadLimitAction::class)->execute($maxKb ?: null);
     $accepted = array_values($getAcceptedFileTypes() ?? []);
-    // iOS puo' consegnare alla fotocamera HEIC/HEIF: il picker li mostra solo per
-    // convertirli in JPEG nel browser; la whitelist server resta invariata.
-    $clientAccepted = array_values(array_unique([...$accepted, 'image/heic', 'image/heif']));
-    // l'aiuto elenca solo cio' che il server accetta davvero (`$accepted`), non i formati HEIC/HEIF che il client converte dove il browser li sa leggere
+    // HEIC/HEIF non vanno in `accept`: se dichiarati iOS consegna l'HEIC originale, altrimenti lo converte in JPEG da se'.
+    // Un HEIC arrivato comunque (desktop, Android) lo converte il client; la whitelist server resta invariata.
+    // lato lungo della foto ridotta: lo stesso che FilePond usa nel pannello admin (`CameraPhotoUpload`)
+    $maxSide = (int) ($getAutomaticallyResizeImagesWidth() ?? \Modules\Media\Filament\Forms\Components\CameraPhotoUpload::MAX_SIDE);
+    $acceptsImages = $accepted === [] || collect($accepted)->contains(static fn (string $mime): bool => str_starts_with($mime, 'image/'));
     $formatLabels = collect($accepted)
         ->map(static fn (string $mime): string => match ($mime) {
             'image/jpeg' => 'JPG',
@@ -39,10 +45,12 @@
         ->values();
     $texts = [
         'type' => __('fixcity::ticket_form.fields.images.error_type'),
-        'size' => __('fixcity::ticket_form.fields.images.error_size', ['max' => $maxKb ? round($maxKb / 1024, 1) : 10]),
+        'size' => __('fixcity::ticket_form.fields.images.error_size', ['max' => round($maxBytes / 1048576, 1)]),
         'count' => __('fixcity::ticket_form.fields.images.error_count', ['max' => $maxFiles]),
         'upload' => __('fixcity::ticket_form.fields.images.error_upload'),
+        'prepare' => __('fixcity::ticket_form.fields.images.error_prepare'),
         'uploading' => __('fixcity::ticket_form.fields.images.uploading'),
+        'preparing' => __('fixcity::ticket_form.fields.images.preparing'),
         'remove' => __('fixcity::ticket_form.fields.images.remove', ['name' => ':name']),
     ];
     $wrapperAttributes = $getExtraAttributeBag()
@@ -56,9 +64,10 @@
         x-data="{
             statePath: @js($statePath),
             componentKey: @js($getKey()),
-            clientAccepted: @js($clientAccepted),
+            clientAccepted: @js($accepted),
+            maxSide: @js($maxSide),
             maxFiles: @js($maxFiles),
-            maxBytes: @js($maxKb ? $maxKb * 1024 : null),
+            maxBytes: @js($maxBytes),
             texts: @js($texts),
             files: [],
             message: '',
@@ -67,7 +76,7 @@
                 if (item) Object.assign(item, props)
             },
             isCameraFormat(file) {
-                return ['image/heic', 'image/heif'].includes((file.type || '').toLowerCase()) || /\.(heic|heif)$/i.test(file.name || '')
+                return window.MediaCameraImage?.isCameraFormat(file) ?? false
             },
             isAcceptedFile(file) {
                 const type = (file.type || '').toLowerCase()
@@ -77,43 +86,10 @@
 
                 return this.clientAccepted.includes(normalizedType) || ['jpg', 'jpeg', 'png', 'pdf'].includes(extension)
             },
+            // DCP-378: una foto da fotocamera (3-8 MB) supera il limite di upload del server (2 MB): la riduce il modulo Media.
+            // Senza bundle del tema (test, errore di rete) si invia l'originale e decide il server.
             async normalizeCameraImage(file) {
-                if (!this.isCameraFormat(file)) return file
-
-                if (window.FixcityCameraUpload?.toJpeg) {
-                    try {
-                        return await window.FixcityCameraUpload.toJpeg(file)
-                    } catch (error) {
-                        // Some browsers can decode HEIC natively even when the
-                        // converter is unavailable; keep that path as fallback.
-                    }
-                }
-
-                const source = URL.createObjectURL(file)
-                try {
-                    const image = new Image()
-                    image.src = source
-                    await image.decode()
-
-                    const canvas = document.createElement('canvas')
-                    canvas.width = image.naturalWidth
-                    canvas.height = image.naturalHeight
-                    const context = canvas.getContext('2d')
-                    if (!context || !canvas.width || !canvas.height) return null
-                    context.drawImage(image, 0, 0)
-
-                    const blob = await new Promise((resolve) => canvas.toBlob(resolve, 'image/jpeg', 0.92))
-                    if (!(blob instanceof Blob)) return null
-
-                    return new File([blob], file.name.replace(/\.(heic|heif)$/i, '.jpg'), {
-                        type: 'image/jpeg',
-                        lastModified: file.lastModified,
-                    })
-                } catch {
-                    return null
-                } finally {
-                    URL.revokeObjectURL(source)
-                }
+                return window.MediaCameraImage ? window.MediaCameraImage.normalize(file, { maxSide: this.maxSide }) : file
             },
             async pick(event) {
                 const picked = [...event.target.files]
@@ -122,16 +98,19 @@
                 for (const sourceFile of picked) {
                     if (this.files.length >= this.maxFiles) return void (this.message = this.texts.count)
                     if (this.clientAccepted.length && ! this.isAcceptedFile(sourceFile) && ! this.isCameraFormat(sourceFile)) { this.message = this.texts.type; continue }
+                    // chiave senza crypto.randomUUID (assente fuori da un contesto sicuro, es. HTTP su IP di rete locale)
+                    const key = 'f' + Date.now().toString(36) + Math.random().toString(36).slice(2, 8)
+                    // la riduzione dura 1-3 s su un telefono: la voce compare subito, non a lavoro finito
+                    this.files.push({ key, name: sourceFile.name, status: 'preparing', progress: 0, preview: null })
                     const file = await this.normalizeCameraImage(sourceFile)
-                    if (!file) { this.message = this.texts.upload; continue }
-                    if (this.maxBytes && file.size > this.maxBytes) { this.message = this.texts.size; continue }
-                    this.send(file)
+                    if (!this.files.some((item) => item.key === key)) continue
+                    if (!file) { this.drop(key); this.message = this.texts.prepare; continue }
+                    if (this.maxBytes && file.size > this.maxBytes) { this.drop(key); this.message = this.texts.size; continue }
+                    this.send(file, key)
                 }
             },
-            send(file) {
-                // chiave senza crypto.randomUUID (assente fuori da un contesto sicuro, es. HTTP su IP di rete locale)
-                const key = 'f' + Date.now().toString(36) + Math.random().toString(36).slice(2, 8)
-                this.files.push({ key, name: file.name, status: 'uploading', progress: 0, preview: file.type.startsWith('image/') ? URL.createObjectURL(file) : null })
+            send(file, key) {
+                this.patch(key, { name: file.name, status: 'uploading', preview: file.type.startsWith('image/') ? URL.createObjectURL(file) : null })
                 this.$wire.upload(
                     this.statePath + '.' + key,
                     file,
@@ -147,42 +126,57 @@
             },
             async remove(item) {
                 this.message = ''
+                // una foto ancora in riduzione non e' partita: basta toglierla dalla lista (pick la salta)
                 if (item.status === 'uploading') this.$wire.cancelUpload(this.statePath + '.' + item.key)
-                else await this.$wire.callSchemaComponentMethod(this.componentKey, 'removeUploadedFile', { fileKey: item.key })
+                else if (item.status === 'done') await this.$wire.callSchemaComponentMethod(this.componentKey, 'removeUploadedFile', { fileKey: item.key })
                 this.drop(item.key)
             },
         }"
     >
-        <label class="title-xsmall-bold u-grey-dark pb-2 ms-2" for="{{ $id }}">{{ $getLabel() }}</label>
+        <span id="{{ $id }}-label" class="d-block title-xsmall-bold u-grey-dark pb-2 ms-2">{{ $getLabel() }}</span>
         <template x-for="item in files" :key="item.key">
             <div class="upload-wrapper d-flex justify-content-between align-items-center">
                 <img x-show="item.preview" :src="item.preview" alt="" class="img">
                 <svg x-show="! item.preview" class="icon icon-primary icon-sm" aria-hidden="true"><use href="{{ $sprite }}#it-file"></use></svg>
-                <span class="t-primary fw-bold w-100 ms-2" x-text="item.status === 'uploading' ? item.name + ' - ' + texts.uploading + ' ' + item.progress + '%' : item.name"></span>
+                <span class="t-primary fw-bold w-100 ms-2" x-text="item.status === 'preparing' ? item.name + ' - ' + texts.preparing : (item.status === 'uploading' ? item.name + ' - ' + texts.uploading + ' ' + item.progress + '%' : item.name)"></span>
                 <button type="button" class="btn btn-link p-0 border-0 align-self-center" :aria-label="texts.remove.replace(':name', item.name)" x-on:click="remove(item)">
                     <svg class="icon icon-primary icon-sm mb-1" aria-hidden="true"><use href="{{ $sprite }}#it-close"></use></svg>
                 </button>
             </div>
         </template>
         <hr x-show="files.length" x-cloak>
+        {{-- input nascosti fuori dal Tab: si usano solo dai pulsanti, che hanno testo visibile (WCAG 2.5.3) --}}
+        @if ($acceptsImages)
+            <input type="file" id="{{ $id }}-camera" x-ref="camera" class="visually-hidden" tabindex="-1" aria-hidden="true" accept="image/*" capture="environment" @disabled($isDisabledField) x-on:change="pick($event)">
+        @endif
         <input
             type="file"
             id="{{ $id }}"
             x-ref="input"
             class="visually-hidden"
+            tabindex="-1"
+            aria-hidden="true"
             multiple
-            @if ($clientAccepted !== []) accept="{{ implode(',', $clientAccepted) }}" @endif
-            capture="environment"
+            @if ($accepted !== []) accept="{{ implode(',', $accepted) }}" @endif
             @disabled($isDisabledField)
-            aria-describedby="{{ $id }}-help"
             x-on:change="pick($event)"
         >
-        <button type="button" aria-label="{{ __('fixcity::ticket_form.fields.images.upload_aria') }}" class="btn btn-primary w-100 fw-bold" @disabled($isDisabledField) x-on:click="$refs.input.click()">
-            <span class="rounded-icon">
-                <svg class="icon icon-white icon-sm" aria-hidden="true"><use href="{{ $sprite }}#it-upload"></use></svg>
-            </span>
-            <span>{{ __('fixcity::ticket_form.fields.images.upload_button') }}</span>
-        </button>
+        <div role="group" aria-labelledby="{{ $id }}-label" class="d-flex flex-column gap-2">
+            @if ($acceptsImages)
+                <button type="button" class="btn btn-primary w-100 fw-bold" aria-describedby="{{ $id }}-help" @disabled($isDisabledField) x-on:click="$refs.camera.click()">
+                    <span class="rounded-icon">
+                        <svg class="icon icon-white icon-sm" aria-hidden="true"><use href="{{ $sprite }}#it-camera"></use></svg>
+                    </span>
+                    <span>{{ __('fixcity::ticket_form.fields.images.camera_button') }}</span>
+                </button>
+            @endif
+            <button type="button" @class(['btn w-100 fw-bold', 'btn-outline-primary' => $acceptsImages, 'btn-primary' => ! $acceptsImages]) aria-describedby="{{ $id }}-help" @disabled($isDisabledField) x-on:click="$refs.input.click()">
+                <span class="rounded-icon">
+                    <svg @class(['icon icon-sm', 'icon-primary' => $acceptsImages, 'icon-white' => ! $acceptsImages]) aria-hidden="true"><use href="{{ $sprite }}#it-upload"></use></svg>
+                </span>
+                <span>{{ __('fixcity::ticket_form.fields.images.upload_button') }}</span>
+            </button>
+        </div>
         <p id="{{ $id }}-help" class="title-xsmall u-grey-dark pt-10 mb-0">{{ __('fixcity::ticket_form.fields.images.helper_text', ['formats' => $formatLabels, 'max_files' => $maxFiles, 'max_size' => $maxKb ? round($maxKb / 1024, 1) : 10]) }}</p>
         <p class="form-feedback just-validate-error-label" role="status" x-show="message" x-text="message" x-cloak></p>
     </div>

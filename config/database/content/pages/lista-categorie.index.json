@@ -1,0 +1,38 @@
+{
+    "id": "lista-categorie-index",
+    "slug": "lista-categorie.index",
+    "title": {
+        "it": "Esplora le segnalazioni",
+        "en": "Explore public reports",
+        "de": "Öffentliche Meldungen entdecken",
+        "es": "Explora las incidencias públicas"
+    },
+    "layout": "app",
+    "description": {
+        "it": "Esplora le categorie di servizi e segnalazioni disponibili.",
+        "en": "Browse available service and report categories.",
+        "de": "Verfügbare Dienst- und Meldekategorien erkunden.",
+        "es": "Explore las categorías de servicios e incidencias disponibles."
+    },
+    "content": null,
+    "content_blocks": {
+        "it": [
+            {
+                "type": "categories-page",
+                "data": {
+                    "view": "pub_theme::components.pages.categories"
+                }
+            }
+        ],
+        "en": [
+            {
+                "type": "categories-page",
+                "data": {
+                    "view": "pub_theme::components.pages.categories"
+                }
+            }
+        ]
+    },
+    "sidebar_blocks": {"it": [], "en": []},
+    "footer_blocks": null
+}

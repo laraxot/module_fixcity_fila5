@@ -95,7 +95,7 @@ it('asks the owner to rate a resolved ticket on the track page', function (): vo
     $html = $this->actingAs($owner)->get('/it/tickets/track?ticket_id='.$ticket->id)->assertOk()->getContent();
     Assert::assertIsString($html);
 
-    Assert::assertStringContainsString('id="ticket-rating-prompt-title"', $html);
+    Assert::assertStringContainsString('id="ticket-rating-prompt-title-'.$ticket->id.'"', $html);
 });
 
 it('does not ask for a rating while the ticket is still open or to a guest', function (): void {

@@ -13,7 +13,7 @@ it('shows localized labels and retry guidance for an unknown Italian tracking co
     /** @var TestCase $this */
     $this->get('/it/tickets/track?code=TCK-NOTFOUND000000')
         ->assertOk()
-        ->assertSee('<title>Traccia la segnalazione</title>', false)
+        ->assertSee('<title>Traccia la segnalazione | ', false)
         ->assertSee('Codice segnalazione')
         ->assertSee('Nessuna segnalazione trovata per questo codice.')
         ->assertSee('aria-invalid="true"', false)
@@ -25,7 +25,7 @@ it('shows localized labels and retry guidance for an unknown English tracking co
     /** @var TestCase $this */
     $this->get('/en/tickets/track?code=TCK-NOTFOUND000000')
         ->assertOk()
-        ->assertSee('<title>Track a report</title>', false)
+        ->assertSee('<title>Track a report | ', false)
         ->assertSee('Report code')
         ->assertSee('No report was found for this code.')
         ->assertSee('aria-invalid="true"', false)
@@ -43,7 +43,7 @@ it('shows the status label for a valid Italian tracking result', function (): vo
 
     $this->get('/it/tickets/track?code=TCK-ITALIANLABEL01')
         ->assertOk()
-        ->assertSee('<title>Traccia la segnalazione</title>', false)
+        ->assertSee('<title>Traccia la segnalazione | ', false)
         ->assertSee('Codice segnalazione')
         ->assertSee('Stato')
         ->assertSee('In lavorazione')
@@ -64,7 +64,7 @@ it('shows the status label for a valid English tracking result', function (): vo
 
     $this->get('/en/tickets/track?code=TCK-ENGLISHLABEL01')
         ->assertOk()
-        ->assertSee('<title>Track a report</title>', false)
+        ->assertSee('<title>Track a report | ', false)
         ->assertSee('Report code')
         ->assertSee('Status')
         ->assertSee('In Progress')

@@ -103,7 +103,7 @@ describe('CreateTicketWizardWidget submit', function (): void {
 
         $this->get('/it/tickets/confirmation')
             ->assertOk()
-            ->assertSee('<title>Segnalazione inviata</title>', false)
+            ->assertSee('<title>Segnalazione inviata | ', false)
             ->assertSee((string) $ticket->code)
             ->assertSee($user->email);
     });

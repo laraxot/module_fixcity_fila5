@@ -42,7 +42,7 @@ return [
     'timeline' => [
         'update' => 'Update', 'assignment' => 'Report assigned', 'approved' => 'Report approved',
         'rejected' => 'Report rejected', 'mail_sent' => 'Message sent', 'mail_failed' => 'Message delivery failed', 'mail_received' => 'Reply received',
-        'followup' => 'Follow-up sent', 'media_added' => 'Attachment added', 'recipient' => 'Recipient: :recipient', 'attachment' => 'File: :file', 'closed' => 'Report closed',
+        'followup' => 'Follow-up sent', 'media_added' => 'Attachment added', 'recipient' => 'Recipient: :recipient', 'closed' => 'Report closed',
     ],
     'where' => [
         'title' => 'Where',
@@ -50,6 +50,12 @@ return [
         'no_address' => 'Address not provided',
         'map' => 'Map showing the location of the report',
         'map_at' => 'Map showing the location of the report: :address',
+    ],
+    'photos' => [
+        'title' => ['label' => 'Photos'],
+        'alt' => ['label' => 'Photo :number of the report «:title»'],
+        'new_window' => ['label' => '(opens the full photo in a new window)'],
+        'document' => ['label' => 'Document :number (PDF)'],
     ],
     'description' => [
         'title' => 'Description',

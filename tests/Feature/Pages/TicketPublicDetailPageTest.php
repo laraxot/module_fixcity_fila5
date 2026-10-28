@@ -2,7 +2,9 @@
 
 declare(strict_types=1);
 
+use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Illuminate\Support\Uri;
 use Illuminate\Testing\TestResponse;
@@ -163,7 +165,32 @@ describe('privacy and escaping', function (): void {
             ->assertDontSee('owner_id');
         $html = $this->get('/it/tickets/'.$id)->getContent();
         Assert::assertIsString($html);
-        Assert::assertSame([], detailNodes($html, '//*[@id="main-container"]//img'), 'nessuna immagine nel dettaglio pubblico');
+        Assert::assertSame([], detailNodes($html, '//*[@id="main-container"]//img'), 'nessuna immagine privata nel dettaglio pubblico');
+    });
+
+    test('shows public photos below the map without exposing technical filenames', function (): void {
+        /** @var TestCase $this */
+        Storage::fake('public');
+        $ticket = TicketFactory::new()->createOne([
+            'name' => 'Buca fotografata',
+            'status' => TicketStatusEnum::IN_PROGRESS,
+            'type' => TicketTypeEnum::ROAD_MAINTENANCE,
+            'location' => ['lat' => 43.7696, 'lng' => 11.2558, 'address' => 'Via Solferino - 50100 Firenze'],
+        ]);
+        $ticket->addMedia(UploadedFile::fake()->image('camera.jpg'))->toMediaCollection('attachments');
+
+        $html = $this->get('/it/tickets/'.$ticket->id)->assertOk()->getContent();
+        Assert::assertIsString($html);
+        Assert::assertStringContainsString(__('fixcity::ticket_detail.images'), $html);
+        Assert::assertStringNotContainsString('camera.jpg', implode(' ', detailNodes($html, '//section[@aria-labelledby="td-images"]//text()')));
+        Assert::assertCount(1, detailNodes($html, '//section[@aria-labelledby="td-images"]//img'));
+        Assert::assertNotSame([], detailNodes($html, '//section[@aria-labelledby="td-images"]//img/@src'));
+        Assert::assertContains(__('fixcity::ticket_detail.image_alt', ['name' => 'Buca fotografata']), detailNodes($html, '//section[@aria-labelledby="td-images"]//img/@alt'));
+        Assert::assertLessThan(
+            (int) (strpos($html, 'id="td-description"') ?: PHP_INT_MAX),
+            (int) (strpos($html, 'id="td-images"') ?: PHP_INT_MAX),
+            'la galleria deve stare prima della descrizione',
+        );
     });
 
     test('escapes hostile text in title and description and keeps line breaks without raw html', function (): void {

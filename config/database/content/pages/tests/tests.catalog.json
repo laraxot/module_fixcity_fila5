@@ -1,0 +1,33 @@
+{
+  "id": "catalog",
+  "slug": "catalog",
+  "layout": "test",
+  "title": "Catalogo",
+  "subtitle": "Pagine statiche Design Comuni",
+  "breadcrumb": [
+    {"label":"Home","url":"/tests/homepage"},
+    {"label":"Catalogo","url":"/tests/catalog","active":true}
+  ],
+  "hero": {
+    "title":"Catalogo Design Comuni",
+    "intro":"Anteprima delle pagine statiche di riferimento per la parità visiva Sixteen.",
+    "cta":"Scopri le pagine"
+  },
+  "blocks": [
+    {"name":"breadcrumb","component":"breadcrumb"},
+    {"name":"hero","component":"hero"},
+    {"name":"card-grid","component":"card-grid","cards":[
+      {"title":"Homepage","slug":"tests.homepage","label":"Base","token":"#007A52"},
+      {"title":"Domande frequenti","slug":"tests.domande-frequenti","label":"FAQ","token":"#007A52"},
+      {"title":"Ricerca","slug":"tests.risultati-ricerca","label":"Search","token":"#007A52"},
+      {"title":"Amministrazione","slug":"tests.amministrazione","label":"Admin","token":"#007A52"}
+    ]},
+    {"name":"link-list","component":"link-list","links":[
+      {"label":"Servizi","url":"tests.servizi-index"},
+      {"label":"Documenti e dati","url":"tests.documenti-dati"},
+      {"label":"Novità","url":"tests.eventi"},
+      {"label":"Segnalazioni","url":"tests.segnalazioni-elenco"}
+    ]},
+    {"name":"search-form","component":"search-form","placeholder":"Cerca pagine...","token":"#007A52"}
+  ]
+}

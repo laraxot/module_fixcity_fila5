@@ -3,6 +3,8 @@
 declare(strict_types=1);
 
 use Illuminate\Contracts\Auth\Authenticatable;
+use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Facades\Storage;
 use Modules\Fixcity\Actions\BuildPublicTicketDetailAction;
 use Modules\Fixcity\Actions\BuildTicketTimelineAction;
 use Modules\Fixcity\Database\Factories\TicketActivityFactory;
@@ -48,7 +50,7 @@ test('exposes exactly the public fields and nothing else', function (): void {
     $keys = array_keys($detail);
     sort($keys);
     Assert::assertSame(
-        ['address', 'created_date', 'description', 'id', 'is_following', 'is_owner', 'is_public', 'latitude', 'longitude', 'meta_description', 'status', 'status_label', 'timeline', 'title', 'tracking_code', 'type', 'type_label'],
+        ['address', 'created_date', 'description', 'id', 'images', 'is_following', 'is_owner', 'is_public', 'latitude', 'longitude', 'meta_description', 'status', 'status_label', 'timeline', 'title', 'tracking_code', 'type', 'type_label'],
         $keys,
     );
     Assert::assertStringNotContainsString('TCK-SEGRETO-0001', (string) json_encode($detail));
@@ -63,6 +65,20 @@ test('exposes exactly the public fields and nothing else', function (): void {
     Assert::assertSame(11.2558, $detail['longitude']);
     Assert::assertSame("Il cestino è staccato.\nNon chiude più.", $detail['description']);
     Assert::assertSame('Il cestino è staccato. Non chiude più.', $detail['meta_description']);
+});
+
+test('exposes image URLs and excludes non-image attachments', function (): void {
+    /** @var TestCase $this */
+    Storage::fake('public');
+    $ticket = detailActionTicket();
+    $ticket->addMedia(UploadedFile::fake()->image('camera.jpg'))->toMediaCollection('attachments');
+    $ticket->addMedia(UploadedFile::fake()->createWithContent('document.pdf', "%PDF-1.4\n"))->toMediaCollection('attachments');
+
+    $detail = app(BuildPublicTicketDetailAction::class)->execute($ticket->id);
+
+    Assert::assertIsArray($detail);
+    Assert::assertCount(1, $detail['images']);
+    Assert::assertStringContainsString('/storage/', $detail['images'][0]);
 });
 
 test('returns null when the report is not visible to the public or does not exist', function (): void {
@@ -98,6 +114,7 @@ test('lets the owner open the own report even without a position, and tells that
     Assert::assertIsArray($detail);
     Assert::assertTrue($detail['is_owner']);
     Assert::assertFalse($detail['is_public']);
+    Assert::assertSame([], $detail['images']);
     Assert::assertSame('TCK-SEGRETO-0001', $detail['tracking_code']);
     Assert::assertSame('', $detail['address']);
     Assert::assertNull($detail['latitude']);
@@ -202,4 +219,45 @@ test('adds the day-only date to the timeline without changing the existing keys'
     Assert::assertStringContainsString('09:30', $timeline[0]['occurred_at']);
     Assert::assertStringNotContainsString('09:30', $timeline[0]['occurred_date']);
     Assert::assertStringContainsString('15', $timeline[0]['occurred_date']);
+});
+
+test('reads an added attachment as an event, without the status and without the file name', function (): void {
+    /** @var TestCase $this */
+    $ticket = detailActionTicket();
+    TicketActivityFactory::new()->createOne([
+        'ticket_id' => $ticket->id,
+        'event_type' => 'media_added',
+        'payload' => ['from' => 'resolved', 'to' => 'resolved', 'file_name' => 'grcpCsCaeLkrP6SFPChfDkrqeQaXYZAoVsSG2siH.jpg'],
+        'visibility' => 'public',
+        'created_at' => '2026-03-15 09:30:00',
+    ]);
+
+    $timeline = app(BuildTicketTimelineAction::class)->execute($ticket);
+
+    Assert::assertCount(1, $timeline);
+    Assert::assertSame(__('fixcity::ticket_detail.timeline.media_added'), $timeline[0]['to_label']);
+    Assert::assertNull($timeline[0]['from_label']);
+    Assert::assertNull($timeline[0]['reason']);
+    Assert::assertStringNotContainsString('grcpCs', (string) json_encode($timeline));
+});
+
+/*
+ * DCP-379: su una segnalazione non ancora pubblica (es. `pending`, il caso del ticket 2) le foto le vede il proprietario e nessun altro.
+ */
+test('gives the photos of a report not yet public to the owner only', function (): void {
+    /** @var TestCase $this */
+    Storage::fake('public');
+    $owner = UserFactory::new()->createOne();
+    $ticket = detailActionTicket(['status' => TicketStatusEnum::PENDING, 'owner_id' => $owner->getKey()]);
+    $ticket->addMedia(UploadedFile::fake()->image('camera.jpg'))->toMediaCollection('attachments');
+    $action = app(BuildPublicTicketDetailAction::class);
+
+    $forOwner = $action->execute($ticket->id, $owner);
+
+    Assert::assertIsArray($forOwner);
+    Assert::assertCount(1, $forOwner['images']);
+    // Percorso relativo: con `APP_URL` sbagliato (in produzione era `http://fixcity.local`) un URL assoluto rompe la foto.
+    Assert::assertStringStartsWith('/storage/', $forOwner['images'][0]);
+    Assert::assertNull($action->execute($ticket->id, UserFactory::new()->createOne()));
+    Assert::assertNull($action->execute($ticket->id));
 });

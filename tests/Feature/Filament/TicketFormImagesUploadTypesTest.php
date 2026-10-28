@@ -7,6 +7,7 @@ use Filament\Schemas\Components\Component;
 use Modules\Fixcity\Filament\Resources\TicketResource\Schemas\TicketForm;
 use Modules\Fixcity\Models\Ticket;
 use Modules\Fixcity\Tests\TestCase;
+use Modules\Media\Filament\Forms\Components\CameraPhotoUpload;
 use PHPUnit\Framework\Assert;
 use Spatie\MediaLibrary\MediaCollections\MediaCollection;
 
@@ -53,4 +54,15 @@ it('restricts the images upload to the mime types its media collection accepts',
     }
     Assert::assertInstanceOf(MediaCollection::class, $collection, 'Collezione del campo non registrata sul modello.');
     Assert::assertEqualsCanonicalizing($collection->acceptsMimeTypes, $field->getAcceptedFileTypes() ?? []);
+});
+
+/*
+ * Story Media `media-mobile-camera-upload` / `camera-photo-upload-component`: dal pannello admin una foto da telefono (3-8 MB) moriva
+ * con HTTP 413 sul limite del server (2 MB). Il campo e' `CameraPhotoUpload` (Media): FilePond la riduce prima dell'upload.
+ */
+it('shrinks phone photos before the admin upload', function (): void {
+    $field = findImagesUpload(app(TicketForm::class)->getFormSchema());
+
+    Assert::assertInstanceOf(CameraPhotoUpload::class, $field);
+    Assert::assertSame((string) CameraPhotoUpload::MAX_SIDE, $field->getAutomaticallyResizeImagesWidth());
 });

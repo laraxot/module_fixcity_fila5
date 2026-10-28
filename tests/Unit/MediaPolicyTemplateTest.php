@@ -10,7 +10,14 @@ use function Safe\file_get_contents;
 use function Safe\preg_match;
 use function Safe\preg_match_all;
 
-uses(TestCase::class);
+class MediaPolicyTemplateTestCase extends TestCase
+{
+    // The fixtures are static and the rendered route uses a mocked action.
+    /** @var list<string> */
+    protected $connectionsToTransact = [];
+}
+
+uses(MediaPolicyTemplateTestCase::class);
 
 /*
  * DCP-231: modello della media policy (`resources/templates/media-policy.<lingua>.md`), da copiare nel tenant come

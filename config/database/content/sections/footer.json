@@ -1,706 +1,706 @@
 {
-    "id": "footer",
-    "slug": "footer",
-    "name": {
-        "it": "Footer Design Comuni",
-        "en": "Design Comuni footer",
-        "de": "Design-Comuni-Fußbereich",
-        "es": "Pie de página Design Comuni"
-    },
-    "blocks": {
-        "it": [
+  "id": "footer",
+  "slug": "footer",
+  "name": {
+    "it": "Footer Design Comuni",
+    "en": "Design Comuni footer",
+    "de": "Design-Comuni-Fußbereich",
+    "es": "Pie de página Design Comuni"
+  },
+  "blocks": {
+    "it": [
+      {
+        "type": "footer",
+        "slug": "design-comuni-footer",
+        "data": {
+          "view": "pub_theme::components.sections.footer.v1",
+          "brand": {
+            "name": "FixCity",
+            "description": "Segnala e segui i problemi della tua città",
+            "logo": "assets/fixcity/svg/logo.svg"
+          },
+          "columns": [
             {
-                "type": "footer",
-                "slug": "design-comuni-footer",
-                "data": {
-                    "view": "pub_theme::components.sections.footer.v1",
-                    "brand": {
-                        "name": "FixCity",
-                        "description": "Segnala e segui i problemi della tua città",
-                        "logo": "assets/fixcity/svg/logo.svg"
-                    },
-                    "columns": [
-                        {
-                            "title": "Segnalazioni",
-                            "links": [
-                                {
-                                    "label": "Elenco segnalazioni",
-                                    "url": "/tickets"
-                                },
-                                {
-                                    "label": "Invia segnalazione",
-                                    "url": "/tickets/create",
-                                    "data_element": "report-inefficiency"
-                                },
-                                {
-                                    "label": "Traccia segnalazione",
-                                    "url": "/tickets/track"
-                                }
-                            ]
-                        },
-                        {
-                            "title": "Informazioni",
-                            "links": [
-                                {
-                                    "label": "Domande frequenti",
-                                    "url": "/domande-frequenti",
-                                    "data_element": "faq"
-                                },
-                                {
-                                    "label": "Novità",
-                                    "url": "/blog"
-                                },
-                                {
-                                    "label": "Eventi",
-                                    "url": "/events"
-                                },
-                                {
-                                    "label": "Mappa del sito",
-                                    "url": "/mappa-sito"
-                                }
-                            ]
-                        }
-                    ],
-                    "contact": {
-                        "title": "Contatti",
-                        "labels": {
-                            "hours_label": "Orari",
-                            "phone_label": "Telefono",
-                            "toll_free_label": "Numero verde",
-                            "email_label": "Posta elettronica",
-                            "pec_label": "PEC",
-                            "tax_code_label": "Codice fiscale",
-                            "vat_label": "Partita IVA",
-                            "dpo_email_label": "Responsabile protezione dati"
-                        },
-                        "links": [
-                            {
-                                "label": "Leggi le FAQ",
-                                "url": "/domande-frequenti",
-                                "data_element": "faq"
-                            },
-                            {
-                                "label": "Segnalazione disservizio",
-                                "url": "/tickets/create",
-                                "data_element": "report-inefficiency"
-                            }
-                        ]
-                    },
-                    "legal_links": [
-                        {
-                            "label": "Informativa privacy",
-                            "url": "/privacy"
-                        },
-                        {
-                            "label": "Note legali",
-                            "url": "/note-legali"
-                        },
-                        {
-                            "label": "Dichiarazione di accessibilità",
-                            "url": "/accessibilita"
-                        }
-                    ],
-                    "footer_bottom_links": [
-                        {
-                            "label": "Media policy",
-                            "url": "/media-policy"
-                        },
-                        {
-                            "label": "Mappa del sito",
-                            "url": "/mappa-sito"
-                        },
-                        {
-                            "label": "Cookie policy",
-                            "url": "/cookie-policy"
-                        },
-                        {
-                            "label": "Gestisci cookie",
-                            "url": "/cookie-policy",
-                            "preferences": true
-                        }
-                    ],
-                    "social": [],
-                    "social_title": "Seguici su",
-                    "copyright": "© 2026 FixCity. Tutti i diritti riservati.",
-                    "eu_logo": {
-                        "src": "",
-                        "alt": ""
-                    },
-                    "groups": {
-                        "administration": {
-                            "title": "Segnalazioni",
-                            "links": [
-                                {
-                                    "label": "Elenco segnalazioni",
-                                    "url": "/tickets"
-                                },
-                                {
-                                    "label": "Invia segnalazione",
-                                    "url": "/tickets/create",
-                                    "data_element": "report-inefficiency"
-                                },
-                                {
-                                    "label": "Traccia segnalazione",
-                                    "url": "/tickets/track"
-                                }
-                            ]
-                        },
-                        "services": {
-                            "title": "Informazioni",
-                            "links": [
-                                {
-                                    "label": "Domande frequenti",
-                                    "url": "/domande-frequenti",
-                                    "data_element": "faq"
-                                },
-                                {
-                                    "label": "Mappa del sito",
-                                    "url": "/mappa-sito"
-                                }
-                            ]
-                        },
-                        "news": {
-                            "title": "Novità",
-                            "links": [
-                                {
-                                    "label": "Tutte le novità",
-                                    "url": "/blog"
-                                }
-                            ]
-                        },
-                        "living": {
-                            "title": "Vivere il comune",
-                            "links": [
-                                {
-                                    "label": "Eventi",
-                                    "url": "/events"
-                                }
-                            ]
-                        }
-                    }
+              "title": "Segnalazioni",
+              "links": [
+                {
+                  "label": "Elenco segnalazioni",
+                  "url": "/tickets"
+                },
+                {
+                  "label": "Invia segnalazione",
+                  "url": "/tickets/create",
+                  "data_element": "report-inefficiency"
+                },
+                {
+                  "label": "Traccia segnalazione",
+                  "url": "/tickets/track"
                 }
-            }
-        ],
-        "en": [
+              ]
+            },
             {
-                "type": "footer",
-                "slug": "design-comuni-footer",
-                "data": {
-                    "view": "pub_theme::components.sections.footer.v1",
-                    "brand": {
-                        "name": "FixCity",
-                        "description": "Report and track issues in your city",
-                        "logo": "assets/fixcity/svg/logo.svg"
-                    },
-                    "columns": [
-                        {
-                            "title": "Reports",
-                            "links": [
-                                {
-                                    "label": "Browse reports",
-                                    "url": "/tickets"
-                                },
-                                {
-                                    "label": "Submit a report",
-                                    "url": "/tickets/create",
-                                    "data_element": "report-inefficiency"
-                                },
-                                {
-                                    "label": "Track a report",
-                                    "url": "/tickets/track"
-                                }
-                            ]
-                        },
-                        {
-                            "title": "Information",
-                            "links": [
-                                {
-                                    "label": "Frequently asked questions",
-                                    "url": "/domande-frequenti",
-                                    "data_element": "faq"
-                                },
-                                {
-                                    "label": "News",
-                                    "url": "/blog"
-                                },
-                                {
-                                    "label": "Events",
-                                    "url": "/events"
-                                },
-                                {
-                                    "label": "Sitemap",
-                                    "url": "/mappa-sito"
-                                }
-                            ]
-                        }
-                    ],
-                    "contact": {
-                        "title": "Contacts",
-                        "labels": {
-                            "hours_label": "Opening hours",
-                            "phone_label": "Phone",
-                            "toll_free_label": "Toll-free number",
-                            "email_label": "Email",
-                            "pec_label": "Certified email (PEC)",
-                            "tax_code_label": "Tax code",
-                            "vat_label": "VAT number",
-                            "dpo_email_label": "Data protection officer"
-                        },
-                        "links": [
-                            {
-                                "label": "Read FAQs",
-                                "url": "/domande-frequenti",
-                                "data_element": "faq"
-                            },
-                            {
-                                "label": "Report a problem",
-                                "url": "/tickets/create",
-                                "data_element": "report-inefficiency"
-                            }
-                        ]
-                    },
-                    "legal_links": [
-                        {
-                            "label": "Privacy policy",
-                            "url": "/privacy"
-                        },
-                        {
-                            "label": "Legal notes",
-                            "url": "/note-legali"
-                        },
-                        {
-                            "label": "Accessibility statement",
-                            "url": "/accessibilita"
-                        }
-                    ],
-                    "footer_bottom_links": [
-                        {
-                            "label": "Media policy",
-                            "url": "/media-policy"
-                        },
-                        {
-                            "label": "Sitemap",
-                            "url": "/mappa-sito"
-                        },
-                        {
-                            "label": "Cookie policy",
-                            "url": "/cookie-policy"
-                        },
-                        {
-                            "label": "Manage cookies",
-                            "url": "/cookie-policy",
-                            "preferences": true
-                        }
-                    ],
-                    "social": [],
-                    "social_title": "Follow us on",
-                    "copyright": "© 2026 FixCity. All rights reserved.",
-                    "eu_logo": {
-                        "src": "",
-                        "alt": ""
-                    },
-                    "groups": {
-                        "administration": {
-                            "title": "Reports",
-                            "links": [
-                                {
-                                    "label": "Browse reports",
-                                    "url": "/tickets"
-                                },
-                                {
-                                    "label": "Submit a report",
-                                    "url": "/tickets/create",
-                                    "data_element": "report-inefficiency"
-                                },
-                                {
-                                    "label": "Track a report",
-                                    "url": "/tickets/track"
-                                }
-                            ]
-                        },
-                        "services": {
-                            "title": "Information",
-                            "links": [
-                                {
-                                    "label": "Frequently asked questions",
-                                    "url": "/domande-frequenti",
-                                    "data_element": "faq"
-                                },
-                                {
-                                    "label": "Sitemap",
-                                    "url": "/mappa-sito"
-                                }
-                            ]
-                        },
-                        "news": {
-                            "title": "News",
-                            "links": [
-                                {
-                                    "label": "All news",
-                                    "url": "/blog"
-                                }
-                            ]
-                        },
-                        "living": {
-                            "title": "Living in the municipality",
-                            "links": [
-                                {
-                                    "label": "Events",
-                                    "url": "/events"
-                                }
-                            ]
-                        }
-                    }
+              "title": "Informazioni",
+              "links": [
+                {
+                  "label": "Domande frequenti",
+                  "url": "/domande-frequenti",
+                  "data_element": "faq"
+                },
+                {
+                  "label": "Novità",
+                  "url": "/blog"
+                },
+                {
+                  "label": "Eventi",
+                  "url": "/events"
+                },
+                {
+                  "label": "Mappa del sito",
+                  "url": "/mappa-sito"
                 }
+              ]
             }
-        ],
-        "de": [
+          ],
+          "contact": {
+            "title": "Contatti",
+            "labels": {
+              "hours_label": "Orari",
+              "phone_label": "Telefono",
+              "toll_free_label": "Numero verde",
+              "email_label": "Posta elettronica",
+              "pec_label": "PEC",
+              "tax_code_label": "Codice fiscale",
+              "vat_label": "Partita IVA",
+              "dpo_email_label": "Responsabile protezione dati"
+            },
+            "links": [
+              {
+                "label": "Leggi le FAQ",
+                "url": "/domande-frequenti",
+                "data_element": "faq"
+              },
+              {
+                "label": "Segnalazione disservizio",
+                "url": "/tickets/create",
+                "data_element": "report-inefficiency"
+              }
+            ]
+          },
+          "legal_links": [
             {
-                "type": "footer",
-                "slug": "design-comuni-footer",
-                "data": {
-                    "view": "pub_theme::components.sections.footer.v1",
-                    "brand": {
-                        "name": "FixCity",
-                        "description": "Melden und verfolgen Sie Probleme in Ihrer Stadt",
-                        "logo": "assets/fixcity/svg/logo.svg"
-                    },
-                    "columns": [
-                        {
-                            "title": "Meldungen",
-                            "links": [
-                                {
-                                    "label": "Meldungen anzeigen",
-                                    "url": "/tickets"
-                                },
-                                {
-                                    "label": "Meldung senden",
-                                    "url": "/tickets/create",
-                                    "data_element": "report-inefficiency"
-                                },
-                                {
-                                    "label": "Meldung verfolgen",
-                                    "url": "/tickets/track"
-                                }
-                            ]
-                        },
-                        {
-                            "title": "Informationen",
-                            "links": [
-                                {
-                                    "label": "Häufige Fragen",
-                                    "url": "/domande-frequenti",
-                                    "data_element": "faq"
-                                },
-                                {
-                                    "label": "Neuigkeiten",
-                                    "url": "/blog"
-                                },
-                                {
-                                    "label": "Veranstaltungen",
-                                    "url": "/events"
-                                },
-                                {
-                                    "label": "Sitemap",
-                                    "url": "/mappa-sito"
-                                }
-                            ]
-                        }
-                    ],
-                    "contact": {
-                        "title": "Kontakt",
-                        "labels": {
-                            "hours_label": "Öffnungszeiten",
-                            "phone_label": "Telefon",
-                            "toll_free_label": "Gebührenfreie Nummer",
-                            "email_label": "E-Mail",
-                            "pec_label": "PEC (zertifizierte E-Mail)",
-                            "tax_code_label": "Steuernummer",
-                            "vat_label": "USt-IdNr.",
-                            "dpo_email_label": "Datenschutzbeauftragter"
-                        },
-                        "links": [
-                            {
-                                "label": "Häufige Fragen lesen",
-                                "url": "/domande-frequenti",
-                                "data_element": "faq"
-                            },
-                            {
-                                "label": "Störungsmeldung",
-                                "url": "/tickets/create",
-                                "data_element": "report-inefficiency"
-                            }
-                        ]
-                    },
-                    "legal_links": [
-                        {
-                            "label": "Datenschutzerklärung",
-                            "url": "/privacy"
-                        },
-                        {
-                            "label": "Rechtliche Hinweise",
-                            "url": "/note-legali"
-                        },
-                        {
-                            "label": "Erklärung zur Barrierefreiheit",
-                            "url": "/accessibilita"
-                        }
-                    ],
-                    "footer_bottom_links": [
-                        {
-                            "label": "Medienrichtlinie",
-                            "url": "/media-policy"
-                        },
-                        {
-                            "label": "Sitemap",
-                            "url": "/mappa-sito"
-                        },
-                        {
-                            "label": "Cookie-Richtlinie",
-                            "url": "/cookie-policy"
-                        },
-                        {
-                            "label": "Cookies verwalten",
-                            "url": "/cookie-policy",
-                            "preferences": true
-                        }
-                    ],
-                    "social": [],
-                    "social_title": "Folgen Sie uns auf",
-                    "copyright": "© 2026 FixCity. Alle Rechte vorbehalten.",
-                    "eu_logo": {
-                        "src": "",
-                        "alt": ""
-                    },
-                    "groups": {
-                        "administration": {
-                            "title": "Meldungen",
-                            "links": [
-                                {
-                                    "label": "Meldungen anzeigen",
-                                    "url": "/tickets"
-                                },
-                                {
-                                    "label": "Meldung senden",
-                                    "url": "/tickets/create",
-                                    "data_element": "report-inefficiency"
-                                },
-                                {
-                                    "label": "Meldung verfolgen",
-                                    "url": "/tickets/track"
-                                }
-                            ]
-                        },
-                        "services": {
-                            "title": "Informationen",
-                            "links": [
-                                {
-                                    "label": "Häufige Fragen",
-                                    "url": "/domande-frequenti",
-                                    "data_element": "faq"
-                                },
-                                {
-                                    "label": "Sitemap",
-                                    "url": "/mappa-sito"
-                                }
-                            ]
-                        },
-                        "news": {
-                            "title": "Neuigkeiten",
-                            "links": [
-                                {
-                                    "label": "Alle Neuigkeiten",
-                                    "url": "/blog"
-                                }
-                            ]
-                        },
-                        "living": {
-                            "title": "Das Gemeindeleben",
-                            "links": [
-                                {
-                                    "label": "Veranstaltungen",
-                                    "url": "/events"
-                                }
-                            ]
-                        }
-                    }
-                }
-            }
-        ],
-        "es": [
+              "label": "Informativa privacy",
+              "url": "/privacy"
+            },
             {
-                "type": "footer",
-                "slug": "design-comuni-footer",
-                "data": {
-                    "view": "pub_theme::components.sections.footer.v1",
-                    "brand": {
-                        "name": "FixCity",
-                        "description": "Reporta y sigue los problemas de tu ciudad",
-                        "logo": "assets/fixcity/svg/logo.svg"
-                    },
-                    "columns": [
-                        {
-                            "title": "Señalamientos",
-                            "links": [
-                                {
-                                    "label": "Listado de señalamientos",
-                                    "url": "/tickets"
-                                },
-                                {
-                                    "label": "Enviar señalamiento",
-                                    "url": "/tickets/create",
-                                    "data_element": "report-inefficiency"
-                                },
-                                {
-                                    "label": "Rastrear señalamiento",
-                                    "url": "/tickets/track"
-                                }
-                            ]
-                        },
-                        {
-                            "title": "Información",
-                            "links": [
-                                {
-                                    "label": "Preguntas frecuentes",
-                                    "url": "/domande-frequenti",
-                                    "data_element": "faq"
-                                },
-                                {
-                                    "label": "Novedades",
-                                    "url": "/blog"
-                                },
-                                {
-                                    "label": "Eventos",
-                                    "url": "/events"
-                                },
-                                {
-                                    "label": "Mapa del sitio",
-                                    "url": "/mappa-sito"
-                                }
-                            ]
-                        }
-                    ],
-                    "contact": {
-                        "title": "Contacto",
-                        "labels": {
-                            "hours_label": "Horario",
-                            "phone_label": "Teléfono",
-                            "toll_free_label": "Número gratuito",
-                            "email_label": "Correo electrónico",
-                            "pec_label": "PEC (correo certificado)",
-                            "tax_code_label": "Código fiscal",
-                            "vat_label": "Número de IVA",
-                            "dpo_email_label": "Delegado de protección de datos"
-                        },
-                        "links": [
-                            {
-                                "label": "Leer las preguntas frecuentes",
-                                "url": "/domande-frequenti",
-                                "data_element": "faq"
-                            },
-                            {
-                                "label": "Comunicar una incidencia",
-                                "url": "/tickets/create",
-                                "data_element": "report-inefficiency"
-                            }
-                        ]
-                    },
-                    "legal_links": [
-                        {
-                            "label": "Política de privacidad",
-                            "url": "/privacy"
-                        },
-                        {
-                            "label": "Aviso legal",
-                            "url": "/note-legali"
-                        },
-                        {
-                            "label": "Declaración de accesibilidad",
-                            "url": "/accessibilita"
-                        }
-                    ],
-                    "footer_bottom_links": [
-                        {
-                            "label": "Política de medios",
-                            "url": "/media-policy"
-                        },
-                        {
-                            "label": "Mapa del sitio",
-                            "url": "/mappa-sito"
-                        },
-                        {
-                            "label": "Política de cookies",
-                            "url": "/cookie-policy"
-                        },
-                        {
-                            "label": "Gestionar cookies",
-                            "url": "/cookie-policy",
-                            "preferences": true
-                        }
-                    ],
-                    "social": [],
-                    "social_title": "Síguenos en",
-                    "copyright": "© 2026 FixCity. Todos los derechos reservados.",
-                    "eu_logo": {
-                        "src": "",
-                        "alt": ""
-                    },
-                    "groups": {
-                        "administration": {
-                            "title": "Señalamientos",
-                            "links": [
-                                {
-                                    "label": "Listado de señalamientos",
-                                    "url": "/tickets"
-                                },
-                                {
-                                    "label": "Enviar señalamiento",
-                                    "url": "/tickets/create",
-                                    "data_element": "report-inefficiency"
-                                },
-                                {
-                                    "label": "Rastrear señalamiento",
-                                    "url": "/tickets/track"
-                                }
-                            ]
-                        },
-                        "services": {
-                            "title": "Información",
-                            "links": [
-                                {
-                                    "label": "Preguntas frecuentes",
-                                    "url": "/domande-frequenti",
-                                    "data_element": "faq"
-                                },
-                                {
-                                    "label": "Mapa del sitio",
-                                    "url": "/mappa-sito"
-                                }
-                            ]
-                        },
-                        "news": {
-                            "title": "Novedades",
-                            "links": [
-                                {
-                                    "label": "Todas las novedades",
-                                    "url": "/blog"
-                                }
-                            ]
-                        },
-                        "living": {
-                            "title": "Vivir el municipio",
-                            "links": [
-                                {
-                                    "label": "Eventos",
-                                    "url": "/events"
-                                }
-                            ]
-                        }
-                    }
-                }
+              "label": "Note legali",
+              "url": "/note-legali"
+            },
+            {
+              "label": "Dichiarazione di accessibilità",
+              "url": "/accessibilita"
             }
-        ]
-    },
-    "created_at": "2026-10-11T00:00:00.000000Z",
-    "updated_at": "2026-10-15T00:00:00.000000Z"
+          ],
+          "footer_bottom_links": [
+            {
+              "label": "Media policy",
+              "url": "/media-policy"
+            },
+            {
+              "label": "Mappa del sito",
+              "url": "/mappa-sito"
+            },
+            {
+              "label": "Cookie policy",
+              "url": "/cookie-policy"
+            },
+            {
+              "label": "Gestisci cookie",
+              "url": "/cookie-policy",
+              "preferences": true
+            }
+          ],
+          "social": [],
+          "social_title": "Seguici su",
+          "copyright": "© 2026 FixCity. Tutti i diritti riservati.",
+          "eu_logo": {
+            "src": "",
+            "alt": ""
+          },
+          "groups": {
+            "administration": {
+              "title": "Segnalazioni",
+              "links": [
+                {
+                  "label": "Elenco segnalazioni",
+                  "url": "/tickets"
+                },
+                {
+                  "label": "Invia segnalazione",
+                  "url": "/tickets/create",
+                  "data_element": "report-inefficiency"
+                },
+                {
+                  "label": "Traccia segnalazione",
+                  "url": "/tickets/track"
+                }
+              ]
+            },
+            "services": {
+              "title": "Informazioni",
+              "links": [
+                {
+                  "label": "Domande frequenti",
+                  "url": "/domande-frequenti",
+                  "data_element": "faq"
+                },
+                {
+                  "label": "Mappa del sito",
+                  "url": "/mappa-sito"
+                }
+              ]
+            },
+            "news": {
+              "title": "Novità",
+              "links": [
+                {
+                  "label": "Tutte le novità",
+                  "url": "/blog"
+                }
+              ]
+            },
+            "living": {
+              "title": "Vivere il comune",
+              "links": [
+                {
+                  "label": "Eventi",
+                  "url": "/events"
+                }
+              ]
+            }
+          }
+        }
+      }
+    ],
+    "en": [
+      {
+        "type": "footer",
+        "slug": "design-comuni-footer",
+        "data": {
+          "view": "pub_theme::components.sections.footer.v1",
+          "brand": {
+            "name": "FixCity",
+            "description": "Report and track issues in your city",
+            "logo": "assets/fixcity/svg/logo.svg"
+          },
+          "columns": [
+            {
+              "title": "Reports",
+              "links": [
+                {
+                  "label": "Browse reports",
+                  "url": "/tickets"
+                },
+                {
+                  "label": "Submit a report",
+                  "url": "/tickets/create",
+                  "data_element": "report-inefficiency"
+                },
+                {
+                  "label": "Track a report",
+                  "url": "/tickets/track"
+                }
+              ]
+            },
+            {
+              "title": "Information",
+              "links": [
+                {
+                  "label": "Frequently asked questions",
+                  "url": "/domande-frequenti",
+                  "data_element": "faq"
+                },
+                {
+                  "label": "News",
+                  "url": "/blog"
+                },
+                {
+                  "label": "Events",
+                  "url": "/events"
+                },
+                {
+                  "label": "Sitemap",
+                  "url": "/mappa-sito"
+                }
+              ]
+            }
+          ],
+          "contact": {
+            "title": "Contacts",
+            "labels": {
+              "hours_label": "Opening hours",
+              "phone_label": "Phone",
+              "toll_free_label": "Toll-free number",
+              "email_label": "Email",
+              "pec_label": "Certified email (PEC)",
+              "tax_code_label": "Tax code",
+              "vat_label": "VAT number",
+              "dpo_email_label": "Data protection officer"
+            },
+            "links": [
+              {
+                "label": "Read FAQs",
+                "url": "/domande-frequenti",
+                "data_element": "faq"
+              },
+              {
+                "label": "Report a problem",
+                "url": "/tickets/create",
+                "data_element": "report-inefficiency"
+              }
+            ]
+          },
+          "legal_links": [
+            {
+              "label": "Privacy policy",
+              "url": "/privacy"
+            },
+            {
+              "label": "Legal notes",
+              "url": "/note-legali"
+            },
+            {
+              "label": "Accessibility statement",
+              "url": "/accessibilita"
+            }
+          ],
+          "footer_bottom_links": [
+            {
+              "label": "Media policy",
+              "url": "/media-policy"
+            },
+            {
+              "label": "Sitemap",
+              "url": "/mappa-sito"
+            },
+            {
+              "label": "Cookie policy",
+              "url": "/cookie-policy"
+            },
+            {
+              "label": "Manage cookies",
+              "url": "/cookie-policy",
+              "preferences": true
+            }
+          ],
+          "social": [],
+          "social_title": "Follow us on",
+          "copyright": "© 2026 FixCity. All rights reserved.",
+          "eu_logo": {
+            "src": "",
+            "alt": ""
+          },
+          "groups": {
+            "administration": {
+              "title": "Reports",
+              "links": [
+                {
+                  "label": "Browse reports",
+                  "url": "/tickets"
+                },
+                {
+                  "label": "Submit a report",
+                  "url": "/tickets/create",
+                  "data_element": "report-inefficiency"
+                },
+                {
+                  "label": "Track a report",
+                  "url": "/tickets/track"
+                }
+              ]
+            },
+            "services": {
+              "title": "Information",
+              "links": [
+                {
+                  "label": "Frequently asked questions",
+                  "url": "/domande-frequenti",
+                  "data_element": "faq"
+                },
+                {
+                  "label": "Sitemap",
+                  "url": "/mappa-sito"
+                }
+              ]
+            },
+            "news": {
+              "title": "News",
+              "links": [
+                {
+                  "label": "All news",
+                  "url": "/blog"
+                }
+              ]
+            },
+            "living": {
+              "title": "Living in the municipality",
+              "links": [
+                {
+                  "label": "Events",
+                  "url": "/events"
+                }
+              ]
+            }
+          }
+        }
+      }
+    ],
+    "de": [
+      {
+        "type": "footer",
+        "slug": "design-comuni-footer",
+        "data": {
+          "view": "pub_theme::components.sections.footer.v1",
+          "brand": {
+            "name": "FixCity",
+            "description": "Melden und verfolgen Sie Probleme in Ihrer Stadt",
+            "logo": "assets/fixcity/svg/logo.svg"
+          },
+          "columns": [
+            {
+              "title": "Meldungen",
+              "links": [
+                {
+                  "label": "Meldungen anzeigen",
+                  "url": "/tickets"
+                },
+                {
+                  "label": "Meldung senden",
+                  "url": "/tickets/create",
+                  "data_element": "report-inefficiency"
+                },
+                {
+                  "label": "Meldung verfolgen",
+                  "url": "/tickets/track"
+                }
+              ]
+            },
+            {
+              "title": "Informationen",
+              "links": [
+                {
+                  "label": "Häufige Fragen",
+                  "url": "/domande-frequenti",
+                  "data_element": "faq"
+                },
+                {
+                  "label": "Neuigkeiten",
+                  "url": "/blog"
+                },
+                {
+                  "label": "Veranstaltungen",
+                  "url": "/events"
+                },
+                {
+                  "label": "Sitemap",
+                  "url": "/mappa-sito"
+                }
+              ]
+            }
+          ],
+          "contact": {
+            "title": "Kontakt",
+            "labels": {
+              "hours_label": "Öffnungszeiten",
+              "phone_label": "Telefon",
+              "toll_free_label": "Gebührenfreie Nummer",
+              "email_label": "E-Mail",
+              "pec_label": "PEC (zertifizierte E-Mail)",
+              "tax_code_label": "Steuernummer",
+              "vat_label": "USt-IdNr.",
+              "dpo_email_label": "Datenschutzbeauftragter"
+            },
+            "links": [
+              {
+                "label": "Häufige Fragen lesen",
+                "url": "/domande-frequenti",
+                "data_element": "faq"
+              },
+              {
+                "label": "Störungsmeldung",
+                "url": "/tickets/create",
+                "data_element": "report-inefficiency"
+              }
+            ]
+          },
+          "legal_links": [
+            {
+              "label": "Datenschutzerklärung",
+              "url": "/privacy"
+            },
+            {
+              "label": "Rechtliche Hinweise",
+              "url": "/note-legali"
+            },
+            {
+              "label": "Erklärung zur Barrierefreiheit",
+              "url": "/accessibilita"
+            }
+          ],
+          "footer_bottom_links": [
+            {
+              "label": "Medienrichtlinie",
+              "url": "/media-policy"
+            },
+            {
+              "label": "Sitemap",
+              "url": "/mappa-sito"
+            },
+            {
+              "label": "Cookie-Richtlinie",
+              "url": "/cookie-policy"
+            },
+            {
+              "label": "Cookies verwalten",
+              "url": "/cookie-policy",
+              "preferences": true
+            }
+          ],
+          "social": [],
+          "social_title": "Folgen Sie uns auf",
+          "copyright": "© 2026 FixCity. Alle Rechte vorbehalten.",
+          "eu_logo": {
+            "src": "",
+            "alt": ""
+          },
+          "groups": {
+            "administration": {
+              "title": "Meldungen",
+              "links": [
+                {
+                  "label": "Meldungen anzeigen",
+                  "url": "/tickets"
+                },
+                {
+                  "label": "Meldung senden",
+                  "url": "/tickets/create",
+                  "data_element": "report-inefficiency"
+                },
+                {
+                  "label": "Meldung verfolgen",
+                  "url": "/tickets/track"
+                }
+              ]
+            },
+            "services": {
+              "title": "Informationen",
+              "links": [
+                {
+                  "label": "Häufige Fragen",
+                  "url": "/domande-frequenti",
+                  "data_element": "faq"
+                },
+                {
+                  "label": "Sitemap",
+                  "url": "/mappa-sito"
+                }
+              ]
+            },
+            "news": {
+              "title": "Neuigkeiten",
+              "links": [
+                {
+                  "label": "Alle Neuigkeiten",
+                  "url": "/blog"
+                }
+              ]
+            },
+            "living": {
+              "title": "Das Gemeindeleben",
+              "links": [
+                {
+                  "label": "Veranstaltungen",
+                  "url": "/events"
+                }
+              ]
+            }
+          }
+        }
+      }
+    ],
+    "es": [
+      {
+        "type": "footer",
+        "slug": "design-comuni-footer",
+        "data": {
+          "view": "pub_theme::components.sections.footer.v1",
+          "brand": {
+            "name": "FixCity",
+            "description": "Reporta y sigue los problemas de tu ciudad",
+            "logo": "assets/fixcity/svg/logo.svg"
+          },
+          "columns": [
+            {
+              "title": "Señalamientos",
+              "links": [
+                {
+                  "label": "Listado de señalamientos",
+                  "url": "/tickets"
+                },
+                {
+                  "label": "Enviar señalamiento",
+                  "url": "/tickets/create",
+                  "data_element": "report-inefficiency"
+                },
+                {
+                  "label": "Rastrear señalamiento",
+                  "url": "/tickets/track"
+                }
+              ]
+            },
+            {
+              "title": "Información",
+              "links": [
+                {
+                  "label": "Preguntas frecuentes",
+                  "url": "/domande-frequenti",
+                  "data_element": "faq"
+                },
+                {
+                  "label": "Novedades",
+                  "url": "/blog"
+                },
+                {
+                  "label": "Eventos",
+                  "url": "/events"
+                },
+                {
+                  "label": "Mapa del sitio",
+                  "url": "/mappa-sito"
+                }
+              ]
+            }
+          ],
+          "contact": {
+            "title": "Contacto",
+            "labels": {
+              "hours_label": "Horario",
+              "phone_label": "Teléfono",
+              "toll_free_label": "Número gratuito",
+              "email_label": "Correo electrónico",
+              "pec_label": "PEC (correo certificado)",
+              "tax_code_label": "Código fiscal",
+              "vat_label": "Número de IVA",
+              "dpo_email_label": "Delegado de protección de datos"
+            },
+            "links": [
+              {
+                "label": "Leer las preguntas frecuentes",
+                "url": "/domande-frequenti",
+                "data_element": "faq"
+              },
+              {
+                "label": "Comunicar una incidencia",
+                "url": "/tickets/create",
+                "data_element": "report-inefficiency"
+              }
+            ]
+          },
+          "legal_links": [
+            {
+              "label": "Política de privacidad",
+              "url": "/privacy"
+            },
+            {
+              "label": "Aviso legal",
+              "url": "/note-legali"
+            },
+            {
+              "label": "Declaración de accesibilidad",
+              "url": "/accessibilita"
+            }
+          ],
+          "footer_bottom_links": [
+            {
+              "label": "Política de medios",
+              "url": "/media-policy"
+            },
+            {
+              "label": "Mapa del sitio",
+              "url": "/mappa-sito"
+            },
+            {
+              "label": "Política de cookies",
+              "url": "/cookie-policy"
+            },
+            {
+              "label": "Gestionar cookies",
+              "url": "/cookie-policy",
+              "preferences": true
+            }
+          ],
+          "social": [],
+          "social_title": "Síguenos en",
+          "copyright": "© 2026 FixCity. Todos los derechos reservados.",
+          "eu_logo": {
+            "src": "",
+            "alt": ""
+          },
+          "groups": {
+            "administration": {
+              "title": "Señalamientos",
+              "links": [
+                {
+                  "label": "Listado de señalamientos",
+                  "url": "/tickets"
+                },
+                {
+                  "label": "Enviar señalamiento",
+                  "url": "/tickets/create",
+                  "data_element": "report-inefficiency"
+                },
+                {
+                  "label": "Rastrear señalamiento",
+                  "url": "/tickets/track"
+                }
+              ]
+            },
+            "services": {
+              "title": "Información",
+              "links": [
+                {
+                  "label": "Preguntas frecuentes",
+                  "url": "/domande-frequenti",
+                  "data_element": "faq"
+                },
+                {
+                  "label": "Mapa del sitio",
+                  "url": "/mappa-sito"
+                }
+              ]
+            },
+            "news": {
+              "title": "Novedades",
+              "links": [
+                {
+                  "label": "Todas las novedades",
+                  "url": "/blog"
+                }
+              ]
+            },
+            "living": {
+              "title": "Vivir el municipio",
+              "links": [
+                {
+                  "label": "Eventos",
+                  "url": "/events"
+                }
+              ]
+            }
+          }
+        }
+      }
+    ]
+  },
+  "created_at": "2026-10-11T00:00:00.000000Z",
+  "updated_at": "2026-10-15T00:00:00.000000Z"
 }

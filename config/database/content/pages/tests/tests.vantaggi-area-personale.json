@@ -1,0 +1,574 @@
+{
+    "id": "vantaggi-area-personale",
+    "slug": "vantaggi-area-personale",
+    "parent_slug": "tests",
+    "title": {
+        "it": "Julie Crampton Smith",
+        "en": "Julie Crampton Smith"
+    },
+    "layout": "design-comuni-authenticated",
+    "sidebar_blocks": {
+        "it": [],
+        "en": []
+    },
+    "footer_blocks": null,
+    "description": "Pagina di prova vantaggi-area-personale (flusso vantaggi economici) da JSON, resa dal blocco service-flow del tema Sixteen.",
+    "content_blocks": {
+        "it": [
+            {
+                "type": "service-flow",
+                "data": {
+                    "view": "pub_theme::components.blocks.service-flow.design-comuni",
+                    "kind": "personal-area",
+                    "breadcrumb": {
+                        "items": [
+                            {
+                                "label": "Home",
+                                "url": "/it/tests/homepage"
+                            }
+                        ],
+                        "current": "Area personale"
+                    },
+                    "heading": {
+                        "title": "Julie Crampton Smith",
+                        "subtitles": [
+                            {
+                                "text": "CF: CRMJLU92H52Z826N",
+                                "class": "subtitle-small"
+                            }
+                        ]
+                    },
+                    "tabs": {
+                        "id": "myTab",
+                        "items": [
+                            {
+                                "label": "Scrivania",
+                                "icon": "it-pa",
+                                "target": "data-ex-tab1",
+                                "aria_controls": "tab1",
+                                "active": true
+                            },
+                            {
+                                "label": "Messaggi",
+                                "icon": "it-mail",
+                                "target": "data-ex-tab2",
+                                "aria_controls": "tab2"
+                            },
+                            {
+                                "label": "Attività",
+                                "icon": "it-files",
+                                "target": "data-ex-tab3",
+                                "aria_controls": "tab3"
+                            },
+                            {
+                                "label": "Servizi",
+                                "icon": "it-settings",
+                                "target": "data-ex-tab4",
+                                "aria_controls": "tab4"
+                            }
+                        ]
+                    },
+                    "panes": [
+                        {
+                            "id": "data-ex-tab1",
+                            "active": true,
+                            "side_nav": {
+                                "class": "col-12 col-lg-3 d-lg-block mb-4 d-none",
+                                "aria_label": "INDICE DI PAGINA",
+                                "title": "INDICE DI PAGINA",
+                                "items": [
+                                    {
+                                        "label": "Ultimi messaggi",
+                                        "anchor": "latest-posts"
+                                    },
+                                    {
+                                        "label": "Ultime attività",
+                                        "anchor": "latest-activities"
+                                    }
+                                ]
+                            },
+                            "col_class": "col-12 col-lg-8 offset-lg-1",
+                            "sections": [
+                                {
+                                    "type": "card",
+                                    "tag": "div",
+                                    "id": "latest-posts",
+                                    "class": "mb-40 mb-lg-60",
+                                    "wrapper_class": "",
+                                    "card_class": "card",
+                                    "header_class": "card-header border-0 p-0 mb-lg-20",
+                                    "title": "Ultimi messaggi",
+                                    "title_class": "title-xxlarge",
+                                    "content": {
+                                        "kind": "messages",
+                                        "category_label": "Categoria:",
+                                        "modal": "#modal-message",
+                                        "more": "Vedi altri messaggi",
+                                        "items": [
+                                            {
+                                                "date": "16/02/2022",
+                                                "title": "Richiesta assegno maternità",
+                                                "text": "La richiesta AN4059281 è stata accettata.."
+                                            },
+                                            {
+                                                "date": "14/02/2022",
+                                                "title": "Richiesta assegno maternità",
+                                                "text": "La richiesta AN4059281 è stata accettata.."
+                                            },
+                                            {
+                                                "date": "28/02/2022",
+                                                "title": "Iscrizione alla Scuola dell'Infanzia",
+                                                "text": "La richiesta AN4059281 è stata ricevut..."
+                                            }
+                                        ]
+                                    }
+                                },
+                                {
+                                    "type": "card",
+                                    "tag": "div",
+                                    "id": "latest-activities",
+                                    "class": "mb-50 mb-lg-90",
+                                    "wrapper_class": "",
+                                    "card_class": "card",
+                                    "header_class": "card-header border-0 p-0 mb-lg-20 m-0",
+                                    "title": "Ultime attività",
+                                    "title_class": "title-xxlarge mb-3",
+                                    "content": {
+                                        "kind": "activities",
+                                        "icon": "it-files",
+                                        "more": "Vedi altre attività",
+                                        "items": [
+                                            {
+                                                "date": "15/02/2022",
+                                                "title": "Richiesta assegno maternità"
+                                            },
+                                            {
+                                                "date": "02/01/2022",
+                                                "title": "Iscrizione alla scuola dell’infanzia"
+                                            },
+                                            {
+                                                "date": "12/11/2021",
+                                                "title": "Pagamento permesso ZTL"
+                                            }
+                                        ],
+                                        "title_class": "t-primary mb-2 underline title-small-semi-bold"
+                                    }
+                                }
+                            ]
+                        },
+                        {
+                            "id": "data-ex-tab2"
+                        },
+                        {
+                            "id": "data-ex-tab3",
+                            "side_nav": {
+                                "class": "d-none d-sm-none d-lg-block col-lg-3",
+                                "suffix": "Three",
+                                "aria_label": "INDICE DELLA PAGINA",
+                                "title": "INDICE DELLA PAGINA",
+                                "items": [
+                                    {
+                                        "label": "Pratiche",
+                                        "anchor": "practices"
+                                    },
+                                    {
+                                        "label": "Pagamenti",
+                                        "anchor": "payments"
+                                    }
+                                ]
+                            },
+                            "col_class": "col-12 col-lg-8 offset-lg-1 px-0 px-sm-3",
+                            "sections": [
+                                {
+                                    "type": "filtered-accordion",
+                                    "id": "practices",
+                                    "class": "mb-40 mb-lg-60",
+                                    "title": "Pratiche",
+                                    "filter": {
+                                        "label": "Filtra"
+                                    },
+                                    "sort": {
+                                        "id": "dropdownMenu-pratiche",
+                                        "label": "Ordina",
+                                        "items": [
+                                            "Azione 1",
+                                            "Azione 2",
+                                            "Azione 3"
+                                        ]
+                                    },
+                                    "search": {
+                                        "id": "autocomplete-pratiche",
+                                        "name": "pratiche",
+                                        "label": "Cerca nel sito",
+                                        "placeholder": "Cerca"
+                                    },
+                                    "attachment_class": "shadow p-0",
+                                    "more": "Vedi altre pratiche",
+                                    "more_class": "btn accordion-view-more mb-2 pt-3 t-primary title-xsmall-semi-bold ps-lg-3",
+                                    "items": [
+                                        {
+                                            "n": 1,
+                                            "title": "Richiesta assegno maternità",
+                                            "date": "20/02/2022",
+                                            "status": {
+                                                "label": "Conclusa",
+                                                "class": "",
+                                                "image": "folder-concluded.svg",
+                                                "alt": "folder Conclusa"
+                                            },
+                                            "details": [
+                                                {
+                                                    "label": "Pratica:",
+                                                    "value": "AN4059281"
+                                                }
+                                            ],
+                                            "link": "Scheda servizio",
+                                            "chips": [
+                                                "Vantaggio economico"
+                                            ],
+                                            "attachments": [
+                                                {
+                                                    "label": "Ricevuta richiesta",
+                                                    "aria": "Scarica la Ricevuta richiesta",
+                                                    "class": "shadow p-0"
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "n": 2,
+                                            "title": "Iscrizione alla scuola dell’infanzia",
+                                            "date": "01/10/2021",
+                                            "status": {
+                                                "label": "Conclusa",
+                                                "class": "",
+                                                "image": "folder-concluded.svg",
+                                                "alt": "folder Conclusa"
+                                            },
+                                            "details": [
+                                                {
+                                                    "label": "Pratica:",
+                                                    "value": "AN4059281"
+                                                }
+                                            ],
+                                            "link": "Scheda servizio",
+                                            "chips": [
+                                                "Vantaggio economico"
+                                            ],
+                                            "attachments": [
+                                                {
+                                                    "label": "Ricevuta richiesta",
+                                                    "aria": "Scarica la Ricevuta richiesta",
+                                                    "class": "shadow p-0"
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "n": 3,
+                                            "title": "Iscrizione corso di formazione",
+                                            "date": "02/09/2021",
+                                            "status": {
+                                                "label": "Conclusa",
+                                                "class": "",
+                                                "image": "folder-concluded.svg",
+                                                "alt": "folder Conclusa"
+                                            },
+                                            "details": [
+                                                {
+                                                    "label": "Pratica:",
+                                                    "value": "AN4059281"
+                                                }
+                                            ],
+                                            "link": "Scheda servizio",
+                                            "chips": [
+                                                "Vantaggio economico"
+                                            ],
+                                            "attachments": [
+                                                {
+                                                    "label": "Ricevuta richiesta",
+                                                    "aria": "Scarica la Ricevuta richiesta",
+                                                    "class": "shadow p-0"
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "n": 4,
+                                            "title": "Richiesta permesso ZTL",
+                                            "date": "06/08/2021",
+                                            "status": {
+                                                "label": "Conclusa",
+                                                "class": "",
+                                                "image": "folder-concluded.svg",
+                                                "alt": "folder Conclusa"
+                                            },
+                                            "details": [
+                                                {
+                                                    "label": "Pratica:",
+                                                    "value": "AN4059281"
+                                                }
+                                            ],
+                                            "link": "Scheda servizio",
+                                            "chips": [
+                                                "Vantaggio economico"
+                                            ],
+                                            "attachments": [
+                                                {
+                                                    "label": "Ricevuta richiesta",
+                                                    "aria": "Scarica la Ricevuta richiesta",
+                                                    "class": "shadow p-0"
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "n": 5,
+                                            "title": "Richiesta parcheggio residenti",
+                                            "date": "06/03/2021",
+                                            "status": {
+                                                "label": "Conclusa",
+                                                "class": "",
+                                                "image": "folder-concluded.svg",
+                                                "alt": "folder Conclusa"
+                                            },
+                                            "details": [
+                                                {
+                                                    "label": "Pratica:",
+                                                    "value": "AN4059281"
+                                                }
+                                            ],
+                                            "link": "Scheda servizio",
+                                            "chips": [
+                                                "Vantaggio economico"
+                                            ],
+                                            "attachments": [
+                                                {
+                                                    "label": "Ricevuta richiesta",
+                                                    "aria": "Scarica la Ricevuta richiesta",
+                                                    "class": "shadow p-0"
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                },
+                                {
+                                    "type": "filtered-accordion",
+                                    "id": "payments",
+                                    "class": "mb-50 mb-lg-90",
+                                    "title": "Pagamenti",
+                                    "filter": {
+                                        "label": "Filtra"
+                                    },
+                                    "sort": {
+                                        "id": "dropdownMenu-pagamenti",
+                                        "label": "Ordina",
+                                        "items": [
+                                            "Azione 1",
+                                            "Azione 2",
+                                            "Azione 3"
+                                        ]
+                                    },
+                                    "search": {
+                                        "id": "autocomplete-pagamenti",
+                                        "name": "pagamenti",
+                                        "label": "Cerca nel sito",
+                                        "placeholder": "Cerca"
+                                    },
+                                    "attachment_class": "shadow p-0",
+                                    "more": "Vedi altri pagamenti",
+                                    "more_class": "btn accordion-view-more mb-2 t-primary title-xsmall-semi-bold ps-lg-3",
+                                    "items": [
+                                        {
+                                            "n": 6,
+                                            "title": "Pagamento servizio mensa",
+                                            "date": "07/01/2022",
+                                            "status": {
+                                                "label": "Pagato",
+                                                "class": "",
+                                                "image": "folder-pay.svg",
+                                                "alt": "folder Pagato"
+                                            },
+                                            "details": [
+                                                {
+                                                    "label": "Pratica:",
+                                                    "value": "AN4059281"
+                                                }
+                                            ],
+                                            "link": "Scheda servizio",
+                                            "chips": [
+                                                "Vantaggio economico"
+                                            ],
+                                            "attachments": [
+                                                {
+                                                    "label": "Ricevuta richiesta",
+                                                    "aria": "Scarica la Ricevuta richiesta",
+                                                    "class": "shadow p-0"
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "n": 7,
+                                            "title": "Pagamento permesso ZTL",
+                                            "date": "04/03/2021",
+                                            "status": {
+                                                "label": "Pagato",
+                                                "class": "",
+                                                "image": "folder-pay.svg",
+                                                "alt": "folder Pagato"
+                                            },
+                                            "details": [
+                                                {
+                                                    "label": "Pratica:",
+                                                    "value": "AN4059281"
+                                                }
+                                            ],
+                                            "link": "Scheda servizio",
+                                            "chips": [
+                                                "Vantaggio economico"
+                                            ],
+                                            "attachments": [
+                                                {
+                                                    "label": "Ricevuta richiesta",
+                                                    "aria": "Scarica la Ricevuta richiesta",
+                                                    "class": "shadow p-0"
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "n": 8,
+                                            "title": "Pagamento contravvenzione",
+                                            "date": "24/06/2021",
+                                            "status": {
+                                                "label": "Pagato",
+                                                "class": "",
+                                                "image": "folder-pay.svg",
+                                                "alt": "folder Pagato"
+                                            },
+                                            "details": [
+                                                {
+                                                    "label": "Pratica:",
+                                                    "value": "AN4059281"
+                                                }
+                                            ],
+                                            "link": "Scheda servizio",
+                                            "chips": [
+                                                "Vantaggio economico"
+                                            ],
+                                            "attachments": [
+                                                {
+                                                    "label": "Ricevuta richiesta",
+                                                    "aria": "Scarica la Ricevuta richiesta",
+                                                    "class": "shadow p-0"
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "n": 9,
+                                            "title": "Pagamento contravvenzione",
+                                            "date": "10/05/2021",
+                                            "status": {
+                                                "label": "Pagato",
+                                                "class": "",
+                                                "image": "folder-pay.svg",
+                                                "alt": "folder Pagato"
+                                            },
+                                            "details": [
+                                                {
+                                                    "label": "Pratica:",
+                                                    "value": "AN4059281"
+                                                }
+                                            ],
+                                            "link": "Scheda servizio",
+                                            "chips": [
+                                                "Vantaggio economico"
+                                            ],
+                                            "attachments": [
+                                                {
+                                                    "label": "Ricevuta richiesta",
+                                                    "aria": "Scarica la Ricevuta richiesta",
+                                                    "class": "shadow p-0"
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "n": 10,
+                                            "title": "Pagamento contravvenzione",
+                                            "date": "01/10/2021",
+                                            "status": {
+                                                "label": "Pagato",
+                                                "class": "",
+                                                "image": "folder-pay.svg",
+                                                "alt": "folder Pagato"
+                                            },
+                                            "details": [
+                                                {
+                                                    "label": "Pratica:",
+                                                    "value": "AN4059281"
+                                                }
+                                            ],
+                                            "link": "Scheda servizio",
+                                            "chips": [
+                                                "Vantaggio economico"
+                                            ],
+                                            "attachments": [
+                                                {
+                                                    "label": "Ricevuta richiesta",
+                                                    "aria": "Scarica la Ricevuta richiesta",
+                                                    "class": "shadow p-0"
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "id": "data-ex-tab4"
+                        }
+                    ],
+                    "contacts": {
+                        "layout": "offset",
+                        "col": "col-12 col-lg-6",
+                        "main": {
+                            "title": "Contatta il comune",
+                            "items": [
+                                {
+                                    "icon": "it-help-circle",
+                                    "label": "Leggi le domande frequenti",
+                                    "url": "#"
+                                },
+                                {
+                                    "icon": "it-mail",
+                                    "label": "Richiedi assistenza",
+                                    "url": "#",
+                                    "element": "contacts"
+                                },
+                                {
+                                    "icon": "it-hearing",
+                                    "label": "Chiama il numero verde 05 0505",
+                                    "url": "#"
+                                },
+                                {
+                                    "icon": "it-calendar",
+                                    "label": "Prenota appuntamento",
+                                    "url": "#",
+                                    "element": "appointment-booking"
+                                }
+                            ]
+                        }
+                    },
+                    "modals": [
+                        {
+                            "type": "message",
+                            "id": "modal-message",
+                            "close_label": "Chiudi finestra modale",
+                            "date": "15/03/2022",
+                            "title": "Iscrizione alla scuola dell’infanzia",
+                            "subtitle": "Graduatoria 2022/23",
+                            "text": "La graduatoria per l’iscrizione alla Scuola dell’Infanzia, a.a. 2022/2023 è stata pubblicata. Consulta la graduatoria online e perfeziona la pratica.",
+                            "link": "Graduatoria Scuola dell'infanzia per l'anno scolastico 2022/23"
+                        }
+                    ]
+                }
+            }
+        ],
+        "en": []
+    }
+}

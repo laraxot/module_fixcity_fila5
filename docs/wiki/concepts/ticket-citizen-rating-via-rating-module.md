@@ -26,6 +26,15 @@ Motivi (grave):
 
 ## Implementazione corretta
 
+### Contratto di localizzazione
+
+Le etichette generiche delle stelle (`rating.fields.star.labels.*`) appartengono al
+modulo Rating e sono localizzate in tutte le lingue supportate. Il testo specifico
+del prompt cittadino (`ticket_citizen_rating.*`) appartiene a Fixcity e deve avere
+cataloghi completi in `it`, `en`, `de` ed `es`, inclusi messaggi di validazione e
+label amministrative. Evitare il fallback italiano per contenuti visibili sotto una
+lingua diversa.
+
 | Pezzo | Ruolo |
 |-------|--------|
 | `EnsureTicketCitizenRatingDefinitionAction` | `Rating` slug `fixcity-ticket-citizen-satisfaction` |
