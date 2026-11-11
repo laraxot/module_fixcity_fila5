@@ -17,6 +17,8 @@ class ChangeStatus
     /**
      * Execute the change status action.
      *
+     * Lo stato corrente si legge e si valida con la riga bloccata ({@see LockTicketForStatusChangeAction}, DB-07).
+     *
      * @param  Ticket  $ticket  The ticket to update
      * @param  string  $status  The new status (string value)
      * @param  string  $reason  The reason for the change
@@ -28,19 +30,6 @@ class ChangeStatus
             throw new \DomainException('Stato segnalazione non valido: '.$status);
         }
 
-        $currentValue = $ticket->resolveTicketStatusValue();
-        $current = $currentValue !== '' ? TicketStatusEnum::tryFrom($currentValue) : null;
-
-        if ($currentValue !== '' && ! $current instanceof TicketStatusEnum) {
-            throw new \DomainException('Lo stato corrente della segnalazione non è riconosciuto: '.$currentValue);
-        }
-
-        if ($current === $target) {
-            return;
-        }
-
-        $current?->assertCanTransitionTo($target);
-
         $visibility = in_array($target, TicketStatusEnum::canViewByAll(), true)
             ? TicketActivityVisibilityEnum::Public
             : TicketActivityVisibilityEnum::Internal;
@@ -48,11 +37,24 @@ class ChangeStatus
         $actorId = auth()->id();
         $userId = is_int($actorId) || is_string($actorId) ? $actorId : null;
 
-        $ticket->getConnection()->transaction(function () use ($ticket, $target, $current, $reason, $visibility, $userId): void {
-            $ticket->setStatus($target);
+        app(LockTicketForStatusChangeAction::class)->execute($ticket, static function (Ticket $locked) use ($target, $reason, $visibility, $userId): void {
+            $currentValue = $locked->resolveTicketStatusValue();
+            $current = $currentValue !== '' ? TicketStatusEnum::tryFrom($currentValue) : null;
+
+            if ($currentValue !== '' && ! $current instanceof TicketStatusEnum) {
+                throw new \DomainException('Lo stato corrente della segnalazione non è riconosciuto: '.$currentValue);
+            }
+
+            if ($current === $target) {
+                return;
+            }
+
+            $current?->assertCanTransitionTo($target);
+
+            $locked->setStatus($target);
 
             app(RecordTicketActivityAction::class)->execute(
-                $ticket,
+                $locked,
                 TicketActivityEventTypeEnum::StatusChange,
                 $current,
                 $target,

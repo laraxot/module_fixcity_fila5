@@ -7,6 +7,7 @@ namespace Modules\Fixcity\Providers;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Gate;
 use Laravel\Folio\Folio;
+use Modules\Fixcity\Actions\ResolveTicketMediaDiskAction;
 use Modules\Fixcity\Actions\Ticket\ListPublicTicketPathsAction;
 use Modules\Fixcity\Models\Ticket;
 use Modules\Fixcity\Models\TicketActivity;
@@ -39,9 +40,24 @@ class FixcityServiceProvider extends XotBaseServiceProvider
 
         Gate::policy(Ticket::class, TicketPolicy::class);
         TicketActivity::observe(TicketActivityObserver::class);
+        $this->registerTicketMediaDisk();
         Media::observe(TicketMediaObserver::class);
 
         $this->registerFolioApiRoutes();
+    }
+
+    /**
+     * Disco privato degli allegati dei ticket (SEC-04, DB-19), solo se la config del tenant non lo definisce gia'
+     * (per usare S3 o un altro percorso basta definire `filesystems.disks.<nome>` nel tenant).
+     */
+    protected function registerTicketMediaDisk(): void
+    {
+        $disk = app(ResolveTicketMediaDiskAction::class)->configuredName();
+        if ($disk === null || is_array(config('filesystems.disks.'.$disk))) {
+            return;
+        }
+
+        config(['filesystems.disks.'.$disk => ResolveTicketMediaDiskAction::defaultDiskConfig()]);
     }
 
     /**

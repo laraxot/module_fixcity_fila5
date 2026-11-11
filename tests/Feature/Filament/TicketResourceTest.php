@@ -6,6 +6,7 @@ namespace Tests\Modules\Fixcity\Feature\Filament;
 
 use Filament\Facades\Filament;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Gate;
 use Livewire\Livewire;
 use Modules\Fixcity\Actions\CreateTicketAction;
@@ -14,6 +15,7 @@ use Modules\Fixcity\Database\Factories\TicketFactory;
 use Modules\Fixcity\Enums\TicketPriorityEnum;
 use Modules\Fixcity\Enums\TicketStatusEnum;
 use Modules\Fixcity\Enums\TicketTypeEnum;
+use Modules\Fixcity\Events\TicketCreatedEvent;
 use Modules\Fixcity\Filament\Resources\TicketResource;
 use Modules\Fixcity\Filament\Resources\TicketResource\Pages\CreateTicket;
 use Modules\Fixcity\Filament\Resources\TicketResource\Pages\EditTicket;
@@ -227,19 +229,27 @@ describe('Ticket Resource', function (): void {
             ],
         ];
 
+        Event::fake([TicketCreatedEvent::class]);
+
         Livewire::test(CreateTicket::class)
             ->set('data', $ticketData)
             ->call('create')
             ->assertHasNoFormErrors();
 
+        // `status` e `priority` del form sono ignorati: lo stato iniziale lo decide il server, come nel wizard (EditTicket::WORKFLOW_FIELDS).
         $this->assertDatabaseHasRow('tickets', [
             'name' => 'Test Ticket',
             'content' => 'Test Description',
-            'priority' => TicketPriorityEnum::MEDIUM->value,
-            'status' => TicketStatusEnum::OPEN->value,
+            'priority' => TicketPriorityEnum::LOW->value,
+            'status' => TicketStatusEnum::PENDING->value,
             'type' => TicketTypeEnum::ROAD_MAINTENANCE->value,
             'owner_id' => $this->authAdmin()->id,
         ]);
+
+        // DB-10: anche il ticket dello sportello ha il codice di tracciamento e passa dall'evento (ricevuta, avviso alla PA).
+        $ticket = Ticket::query()->where('name', 'Test Ticket')->latest('id')->firstOrFail();
+        Assert::assertStringStartsWith('TCK-', (string) $ticket->code);
+        Event::assertDispatched(TicketCreatedEvent::class, static fn (TicketCreatedEvent $event): bool => $event->ticket->is($ticket));
     });
 
     test('create ticket page validates required fields', function (): void {
@@ -289,8 +299,9 @@ describe('Ticket Resource', function (): void {
             'id' => $ticket->id,
             'name' => 'Updated Ticket Title',
             'content' => 'Updated Description',
-            'priority' => TicketPriorityEnum::HIGH->value,
-            'status' => TicketStatusEnum::IN_PROGRESS->value,
+            // SEC-08: stato e priorita' passano solo dal workflow (EditTicket::WORKFLOW_FIELDS), il form non li riscrive
+            'priority' => $ticket->priority?->value,
+            'status' => $ticket->resolveTicketStatusValue(),
         ]);
     });
 

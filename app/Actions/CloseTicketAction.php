@@ -27,25 +27,26 @@ final class CloseTicketAction
             throw new \InvalidArgumentException('La motivazione di chiusura è obbligatoria.');
         }
 
-        $currentValue = $ticket->resolveTicketStatusValue();
-        $current = TicketStatusEnum::tryFrom($currentValue);
-        if ($current !== TicketStatusEnum::RESOLVED) {
-            throw new \DomainException(
-                'La segnalazione può essere chiusa solo dallo stato resolved. Stato corrente: '.($currentValue !== '' ? $currentValue : 'sconosciuto'),
-            );
-        }
-
-        $target = TicketStatusEnum::CLOSED;
-        $current->assertCanTransitionTo($target);
-
         $actorId = auth()->id();
         $userId = is_int($actorId) || is_string($actorId) ? $actorId : null;
 
-        $ticket->getConnection()->transaction(function () use ($ticket, $current, $target, $reason, $userId): void {
-            $ticket->setStatus($target);
+        // Stato riletto con la riga bloccata (DB-07).
+        app(LockTicketForStatusChangeAction::class)->execute($ticket, static function (Ticket $locked) use ($reason, $userId): void {
+            $currentValue = $locked->resolveTicketStatusValue();
+            $current = TicketStatusEnum::tryFrom($currentValue);
+            if ($current !== TicketStatusEnum::RESOLVED) {
+                throw new \DomainException(
+                    'La segnalazione può essere chiusa solo dallo stato resolved. Stato corrente: '.($currentValue !== '' ? $currentValue : 'sconosciuto'),
+                );
+            }
+
+            $target = TicketStatusEnum::CLOSED;
+            $current->assertCanTransitionTo($target);
+
+            $locked->setStatus($target);
 
             app(RecordTicketActivityAction::class)->execute(
-                $ticket,
+                $locked,
                 TicketActivityEventTypeEnum::Closed,
                 $current,
                 $target,

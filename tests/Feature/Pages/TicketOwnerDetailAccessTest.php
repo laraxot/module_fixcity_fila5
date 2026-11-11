@@ -72,10 +72,11 @@ it('opens the detail only to who may see it, for every combination of status and
     $other = ownerAccessUser();
     $follower = ownerAccessUser();
     $tickets = [
+        // tickets.code e' unique (DB-04): un codice diverso per ognuna delle quattro segnalazioni
         ownerAccessTicket($owner),
-        ownerAccessTicket($owner, ['location' => null]),
-        ownerAccessTicket($owner, ['status' => TicketStatusEnum::PENDING]),
-        ownerAccessTicket($owner, ['status' => TicketStatusEnum::PENDING, 'location' => null]),
+        ownerAccessTicket($owner, ['location' => null, 'code' => 'TCK-OWNER-CODE-0002']),
+        ownerAccessTicket($owner, ['status' => TicketStatusEnum::PENDING, 'code' => 'TCK-OWNER-CODE-0003']),
+        ownerAccessTicket($owner, ['status' => TicketStatusEnum::PENDING, 'location' => null, 'code' => 'TCK-OWNER-CODE-0004']),
     ];
     foreach ($tickets as $ticket) {
         TicketSubscriber::query()->create(['ticket_id' => $ticket->getKey(), 'user_id' => $follower->getKey()]);

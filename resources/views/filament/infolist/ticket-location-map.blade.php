@@ -24,7 +24,7 @@ use Modules\Fixcity\Models\Ticket;
                 detail-mode
                 ticket-id="{{ $record->id }}"
             @else
-                data-url="/data/tickets.json"
+                data-url="/api/tickets/geojson"
             @endif
         ></map-lit>
     </div>

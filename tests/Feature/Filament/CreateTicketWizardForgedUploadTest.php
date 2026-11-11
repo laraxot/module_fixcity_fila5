@@ -12,6 +12,7 @@ use Livewire\Features\SupportFileUploads\TemporaryUploadedFile;
 use Livewire\Features\SupportTesting\Testable;
 use Livewire\Livewire;
 use Modules\Fixcity\Actions\GetPublishedPrivacyPolicyAction;
+use Modules\Fixcity\Actions\ResolveTicketMediaDiskAction;
 use Modules\Fixcity\Enums\TicketTypeEnum;
 use Modules\Fixcity\Filament\Widgets\CreateTicketWizardWidget;
 use Modules\Fixcity\Models\Ticket;
@@ -113,6 +114,23 @@ function forgedJpegBytes(int $width = 64, int $height = 48, bool $noise = false)
 }
 
 /** Numero di righe `media` (modello configurato per la libreria, non quello di Spatie a prescindere). */
+/**
+ * Contenuto di ogni file sui dischi dove finiscono gli allegati: `public` e il disco privato dei ticket (SEC-04).
+ *
+ * @return array<string, string> `disco:percorso` => byte
+ */
+function forgedStoredFiles(): array
+{
+    $files = [];
+    foreach (['public', ResolveTicketMediaDiskAction::DEFAULT_DISK] as $disk) {
+        foreach (Storage::disk($disk)->allFiles() as $path) {
+            $files[$disk.':'.$path] = (string) Storage::disk($disk)->get($path);
+        }
+    }
+
+    return $files;
+}
+
 function forgedUploadMediaCount(): int
 {
     $model = config('media-library.media_model');
@@ -214,7 +232,7 @@ it('rejects forged content behind a harmless name and declared MIME, and writes 
     );
     Assert::assertSame($tickets, Ticket::query()->count(), 'Un file contraffatto ha lasciato un ticket.');
     Assert::assertSame($media, forgedUploadMediaCount(), 'Un file contraffatto ha lasciato un record media.');
-    Assert::assertSame([], Storage::disk('public')->allFiles(), 'Un file contraffatto e\' finito sul disco pubblico.');
+    Assert::assertSame([], array_keys(forgedStoredFiles()), 'Un file contraffatto e\' finito su disco.');
 })->with([
     'php source called foto.jpg' => ["<?php echo 'x'; system(\$_GET['c']);\n", 'foto.jpg', 'image/jpeg'],
     'html called foto.png' => ['<!DOCTYPE html><html><body><script>alert(1)</script></body></html>', 'foto.png', 'image/png'],
@@ -366,7 +384,7 @@ it('leaves no orphan ticket, media record or file when a JPEG cannot be decoded'
 
     forgedUploadSubmit([forgedUploadFile(forgedUnreadableJpeg($kind), 'foto.jpg', 'image/jpeg')], catch: true);
 
-    $after = ['tickets' => Ticket::query()->count(), 'media' => forgedUploadMediaCount(), 'files' => count(Storage::disk('public')->allFiles())];
+    $after = ['tickets' => Ticket::query()->count(), 'media' => forgedUploadMediaCount(), 'files' => count(forgedStoredFiles())];
     Assert::assertSame($before, $after, 'Guasto dopo Ticket::create: restano ticket, record media e file.');
 })->with(['cut inside the JFIF header', 'Exif with GPS, no image data']);
 
@@ -382,10 +400,10 @@ it('does not leave a photo with its GPS position on the disk when stripping fail
     forgedUploadSubmit([forgedUploadFile(forgedUnreadableJpeg('Exif with GPS, no image data'), 'foto.jpg', 'image/jpeg')], catch: true);
 
     $withGps = array_filter(
-        Storage::disk('public')->allFiles(),
-        static fn (string $path): bool => forgedHasGps((string) Storage::disk('public')->get($path)),
+        forgedStoredFiles(),
+        static fn (string $bytes): bool => forgedHasGps($bytes),
     );
-    Assert::assertSame([], array_values($withGps), 'Resta sul disco pubblico un originale con GPS, mai ripulito.');
+    Assert::assertSame([], array_values($withGps), 'Resta su disco un originale con GPS, mai ripulito.');
 });
 
 it('accepts a damaged but decodable JPEG and stores it re-encoded as a complete file', function (int $cut): void {

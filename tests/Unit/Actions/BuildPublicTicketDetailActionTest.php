@@ -78,7 +78,9 @@ test('exposes image URLs and excludes non-image attachments', function (): void 
 
     Assert::assertIsArray($detail);
     Assert::assertCount(1, $detail['images']);
-    Assert::assertStringContainsString('/storage/', $detail['images'][0]);
+    // disco privato dei ticket (SEC-04): URL relativo della route autorizzata
+    Assert::assertStringStartsWith('/api/ticket-media/', $detail['images'][0]);
+    Assert::assertStringEndsWith('camera.jpg', $detail['images'][0]);
 });
 
 test('returns null when the report is not visible to the public or does not exist', function (): void {
@@ -86,7 +88,7 @@ test('returns null when the report is not visible to the public or does not exis
     $action = app(BuildPublicTicketDetailAction::class);
 
     Assert::assertNull($action->execute(detailActionTicket(['status' => TicketStatusEnum::PENDING])->id));
-    Assert::assertNull($action->execute(detailActionTicket(['status' => TicketStatusEnum::DRAFT])->id));
+    Assert::assertNull($action->execute(detailActionTicket(['status' => TicketStatusEnum::DRAFT, 'code' => 'TCK-SEGRETO-0002'])->id));
     Assert::assertNull($action->execute(999999));
 });
 
@@ -257,7 +259,7 @@ test('gives the photos of a report not yet public to the owner only', function (
     Assert::assertIsArray($forOwner);
     Assert::assertCount(1, $forOwner['images']);
     // Percorso relativo: con `APP_URL` sbagliato (in produzione era `http://fixcity.local`) un URL assoluto rompe la foto.
-    Assert::assertStringStartsWith('/storage/', $forOwner['images'][0]);
+    Assert::assertStringStartsWith('/api/ticket-media/', $forOwner['images'][0]);
     Assert::assertNull($action->execute($ticket->id, UserFactory::new()->createOne()));
     Assert::assertNull($action->execute($ticket->id));
 });

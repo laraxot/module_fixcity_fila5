@@ -7,10 +7,12 @@ namespace Modules\Fixcity\Filament\Widgets;
 use Filament\Facades\Filament;
 use Filament\Schemas\Components\Wizard\Step;
 use Illuminate\Contracts\Cache\LockTimeoutException;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
 use Livewire\Attributes\Locked;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 use Modules\Fixcity\Actions\CreateTicketAction;
+use Modules\Fixcity\Actions\GetMissingEnteFieldsAction;
 use Modules\Fixcity\Actions\GetPublishedPrivacyPolicyAction;
 use Modules\Fixcity\Actions\SubmitTicketOnceAction;
 use Modules\Fixcity\Enums\TicketPriorityEnum;
@@ -19,6 +21,7 @@ use Modules\Fixcity\Filament\Concerns\HasTicketAuthorData;
 use Modules\Fixcity\Filament\Resources\TicketResource;
 use Modules\Fixcity\Filament\Resources\TicketResource\Schemas\TicketForm;
 use Modules\Fixcity\Models\Ticket;
+use Modules\User\Actions\Auth\HasVerifiedIdentityAction;
 use Modules\Xot\Actions\Cast\SafeStringCastAction;
 use Modules\Xot\Filament\Widgets\XotBaseWizardWidget;
 
@@ -63,6 +66,16 @@ class CreateTicketWizardWidget extends XotBaseWizardWidget
      */
     public function mount(array $blockData = []): void
     {
+        // PRD-02: la pagina /tickets/create servita dal tema non applica il middleware della pagina Folio del modulo
+        // (Folio si ferma alla prima pagina che corrisponde). Il controllo all'apertura evita di compilare tutto il modulo
+        // per poi essere rimandati alla verifica all'invio. Gli ospiti li gestisce il middleware `auth` della pagina.
+        $user = Filament::auth()->user();
+        if ($user !== null && ! app(HasVerifiedIdentityAction::class)->execute($user)) {
+            $this->redirect(route('verification.notice'));
+
+            return;
+        }
+
         $this->blockData = $blockData;
         $this->confirmationLocale = LaravelLocalization::getCurrentLocale();
         $this->submissionToken = (string) Str::uuid();
@@ -92,8 +105,28 @@ class CreateTicketWizardWidget extends XotBaseWizardWidget
             return;
         }
 
-        if (app(GetPublishedPrivacyPolicyAction::class)->execute() === null) {
+        // PRD-02: le richieste Livewire non ripassano dal middleware della pagina Folio; stesso controllo qui (email o SPID/CIE).
+        if (! app(HasVerifiedIdentityAction::class)->execute(Filament::auth()->user())) {
+            $this->redirect(route('verification.notice'));
+
+            return;
+        }
+
+        $policy = app(GetPublishedPrivacyPolicyAction::class)->execute();
+        if ($policy === null) {
             $this->addError('data.privacyAccepted', __('fixcity::ticket.privacy.not_configured'));
+
+            return;
+        }
+
+        // PRD-04: l'informativa esiste ma i dati dell'ente (titolare, DPO, PEC...) non sono compilati in `config/<tenant>/ente.php`:
+        // il cittadino presterebbe il consenso su un testo con segnaposto `[[ente.*]]`.
+        $missingEnteFields = app(GetMissingEnteFieldsAction::class)->execute($policy);
+        if ($missingEnteFields !== []) {
+            Log::warning('Fixcity ticket submission refused: authority (ente) data used by the privacy policy is not configured.', [
+                'missing_fields' => $missingEnteFields,
+            ]);
+            $this->addError('data.submit', __('fixcity::ticket_submit.ente_not_configured'));
 
             return;
         }
@@ -134,12 +167,16 @@ class CreateTicketWizardWidget extends XotBaseWizardWidget
      */
     private function createTicket(array $data): Ticket
     {
-        $ticket = app(CreateTicketAction::class)->execute($data, $this->confirmationLocale);
-
-        $this->form->model($ticket);
-        $this->form->saveRelationships();
-
-        return $ticket;
+        // Allegati nella stessa transazione del ticket (DB-06): se il salvataggio di una foto fallisce non resta un ticket senza foto,
+        // non parte la ricevuta e il token di invio non viene memorizzato, quindi il nuovo "Invia" crea una sola segnalazione.
+        return app(CreateTicketAction::class)->execute(
+            $data,
+            $this->confirmationLocale,
+            function (Ticket $ticket): void {
+                $this->form->model($ticket);
+                $this->form->saveRelationships();
+            },
+        );
     }
 
     /**

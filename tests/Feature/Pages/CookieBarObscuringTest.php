@@ -24,7 +24,8 @@ it('scrolls the focused element above the fixed bar instead of leaving it undern
     $html = renderCookieBar();
 
     // CSS iniziale (prima che giri lo script) e valore esatto aggiornato dallo script, come per il padding del body
-    Assert::assertMatchesRegularExpression('/html:has\(\.gdpr-cookiebar:not\(\[hidden\]\)\)\s*\{[^}]*scroll-padding-bottom:/', $html);
+    // `:not([hidden], [data-layout="flow"])`: in flusso la barra non copre nulla e non serve riserva (Gdpr cookie-consent::index)
+    Assert::assertMatchesRegularExpression('/html:has\(\.gdpr-cookiebar:not\(\[hidden\][^)]*\)\)\s*\{[^}]*scroll-padding-bottom:/', $html);
     Assert::assertStringContainsString('scrollPaddingBottom', $html);
 });
 
@@ -35,9 +36,11 @@ it('keeps the bar out of the printed page', function (): void {
 it('puts the bar in the page flow when the viewport is too short to share with it', function (): void {
     $html = renderCookieBar();
 
-    // 400% di zoom su 1280x1024 = 320x256: la barra alta 255 px copriva tutto lo schermo
-    Assert::assertMatchesRegularExpression('/@media \(max-height: 30rem\)\s*\{[^@]*\.gdpr-cookiebar\s*\{[^}]*position:\s*static/', $html);
-    Assert::assertMatchesRegularExpression('/@media \(max-height: 30rem\)\s*\{[^@]*body:has\(\.gdpr-cookiebar:not\(\[hidden\]\)\)\s*\{[^}]*padding-bottom:\s*0/', $html);
+    // 400% di zoom su 1280x1024 = 320x256: la barra alta 255 px copriva tutto lo schermo. Oggi il viewport basso non e' piu' una media
+    // query CSS: lo script (place()) mette `data-layout="flow"` e il CSS di quell'attributo rende la barra statica, senza riserva sotto.
+    Assert::assertStringContainsString("matchMedia('(max-height: 30rem)')", $html);
+    Assert::assertMatchesRegularExpression('/\.gdpr-cookiebar\[data-layout="flow"\]\s*\{[^}]*position:\s*static/', $html);
+    Assert::assertMatchesRegularExpression('/body:has\(\.gdpr-cookiebar:not\(\[hidden\],\s*\[data-layout="flow"\]\)\)\s*\{[^}]*padding-bottom:/', $html);
     // lo script non deve rimettere un padding inline quando la barra non e' fissa
     Assert::assertStringContainsString("getComputedStyle(bar).position === 'fixed'", $html);
 });

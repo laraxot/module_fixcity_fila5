@@ -156,12 +156,14 @@ describe('privacy and escaping', function (): void {
     test('never shows author data, tracking codes or private fields', function (): void {
         /** @var TestCase $this */
         $author = UserFactory::new()->createOne(['email' => 'autore.riservato@example.test']);
-        $id = detailTicket(['owner_id' => $author->getKey(), 'code' => 'TCK-RISERVATO-7731', 'email' => 'autore.riservato@example.test', 'created_by' => 'mario.rossi']);
+        // created_by e' l'UUID di un utente (colonna uuid): uno username come 'mario.rossi' MariaDB lo rifiuta.
+        $creatorId = '7d1f0c3e-5b2a-4c8e-9f61-2a4b6c8d0e12';
+        $id = detailTicket(['owner_id' => $author->getKey(), 'code' => 'TCK-RISERVATO-7731', 'email' => 'autore.riservato@example.test', 'created_by' => $creatorId]);
 
         $this->get('/it/tickets/'.$id)->assertOk()
             ->assertDontSee('TCK-RISERVATO-7731')
             ->assertDontSee('autore.riservato@example.test')
-            ->assertDontSee('mario.rossi')
+            ->assertDontSee($creatorId)
             ->assertDontSee('owner_id');
         $html = $this->get('/it/tickets/'.$id)->getContent();
         Assert::assertIsString($html);

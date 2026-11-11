@@ -26,3 +26,4 @@ fixcity.code-workspace
 
 # Forbidden parallel documentation archive
 docs/archive/
+*.lock

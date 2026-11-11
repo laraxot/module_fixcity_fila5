@@ -3,7 +3,7 @@ title: "Fixcity: documentazione del modulo"
 type: readme
 tags: [module, documentation, fixcity, ownership]
 created: 2026-09-26
-updated: 2026-10-20
+updated: 2026-11-10
 qmd: "Fixcity modulo ownership ticket FAQ documentazione"
 issues: []
 discussions: []
@@ -13,6 +13,11 @@ status: active
 # Modulo Fixcity
 
 This directory routes to the active documentation roots for the Laravel modules in this repository.
+
+## Manuale d'uso
+
+[`manuale/`](manuale/README.md): guide per cittadini, operatori, supervisori e amministratori, in Markdown con screenshot e
+in PDF (`manuale/pdf/`, anche in un unico file). I PDF si rigenerano con `python3 manuale/build-pdf.py`.
 
 ## Fixcity: identita, ownership e limiti (verificato nel codice il 2026-10-14)
 

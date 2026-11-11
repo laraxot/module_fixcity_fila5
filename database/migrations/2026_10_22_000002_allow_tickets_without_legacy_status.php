@@ -33,4 +33,10 @@ return new class extends XotBaseMigration
             }
         });
     }
+
+    /**
+     * Forward-only: migrazione di allineamento. Il down() ereditato da XotBaseMigration cancellerebbe
+     * l'intera tabella con tutti i dati.
+     */
+    public function down(): void {}
 };

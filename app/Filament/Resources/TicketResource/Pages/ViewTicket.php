@@ -10,6 +10,7 @@ use Filament\Actions\EditAction;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
+use Illuminate\Database\Eloquent\Model;
 use Modules\Fixcity\Actions\ApproveTicketAction;
 use Modules\Fixcity\Actions\AssignTicketAction;
 use Modules\Fixcity\Actions\CloseTicketAction;
@@ -165,13 +166,10 @@ class ViewTicket extends XotBaseViewRecord
                             }
 
                             $name = $this->record->assignee->name;
+                            $label = is_string($name) && $name !== '' ? $name : __('fixcity::ticket.actions.send_communication.assignee_fallback');
 
-                            $key = $this->record->assignee->getKey();
-                            if (! is_int($key) && ! is_string($key)) {
-                                return [];
-                            }
-
-                            return [$key => is_string($name) ? $name : __('fixcity::ticket.actions.send_communication.assignee_fallback')];
+                            // Il valore scelto finisce nella cronologia come destinatario: e' il nome, non l'id dell'utente.
+                            return [$label => $label];
                         })
                         ->helperText(__('fixcity::ticket.actions.send_communication.recipient_help'))
                         ->required(false),
@@ -270,11 +268,14 @@ class ViewTicket extends XotBaseViewRecord
                 }),
             'changePriority' => ChangePriority::make(),
             'edit' => EditAction::make(),
+            // using() e non action(): action() sostituisce quella di Filament e si perdevano notifica e redirect all'elenco.
             'delete' => DeleteAction::make()
                 ->authorize('delete')
-                ->action(function (): void {
-                    Assert::isInstanceOf($this->record, Ticket::class);
-                    app(DeleteTicketAction::class)->execute($this->record);
+                ->using(static function (Model $record): bool {
+                    Assert::isInstanceOf($record, Ticket::class);
+                    app(DeleteTicketAction::class)->execute($record);
+
+                    return true;
                 }),
         ];
     }

@@ -27,11 +27,11 @@ return new class extends XotBaseMigration
                 $table->string('status');
                 $table->json('metadata');
                 $table->timestamps();
+                $table->index('category');
 
-                $table->foreign('category')
-                    ->references('id')
-                    ->on('categories')
-                    ->onDelete('cascade');
+                // Nessuna FK verso `categories`: la migrazione 2026_06_12_181000 ricrea `categories` con id stringa quando e' vuota,
+                // e con questo vincolo su un database nuovo falliva ("Cannot delete or update a parent row"). Vale solo per le
+                // installazioni nuove: tableCreate() non tocca una tabella gia' esistente.
             }
         );
     }

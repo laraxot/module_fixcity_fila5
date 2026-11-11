@@ -145,9 +145,10 @@
             </div>
         </template>
         <hr x-show="files.length" x-cloak>
-        {{-- input nascosti fuori dal Tab: si usano solo dai pulsanti, che hanno testo visibile (WCAG 2.5.3) --}}
+        {{-- input nascosti fuori dal Tab: si usano solo dai pulsanti, che hanno testo visibile (WCAG 2.5.3); l'aria-label ripete quel testo,
+             cosi' nessun controllo del form resta senza nome accessibile (WCAG 4.1.2, Dcp146StepDatiTest) --}}
         @if ($acceptsImages)
-            <input type="file" id="{{ $id }}-camera" x-ref="camera" class="visually-hidden" tabindex="-1" aria-hidden="true" accept="image/*" capture="environment" @disabled($isDisabledField) x-on:change="pick($event)">
+            <input type="file" id="{{ $id }}-camera" x-ref="camera" class="visually-hidden" tabindex="-1" aria-hidden="true" aria-label="{{ __('fixcity::ticket_form.fields.images.camera_button') }}" accept="image/*" capture="environment" @disabled($isDisabledField) x-on:change="pick($event)">
         @endif
         <input
             type="file"
@@ -156,6 +157,7 @@
             class="visually-hidden"
             tabindex="-1"
             aria-hidden="true"
+            aria-label="{{ __('fixcity::ticket_form.fields.images.upload_button') }}"
             multiple
             @if ($accepted !== []) accept="{{ implode(',', $accepted) }}" @endif
             @disabled($isDisabledField)

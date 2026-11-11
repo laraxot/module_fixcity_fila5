@@ -38,12 +38,14 @@ class TicketFactory extends Factory
             'epic_id' => null,
             'sprint_id' => null,
             'type' => TicketTypeEnum::REPORT,
-            // MySQL decimal(20,18) accepts latitude [-90,90]; longitude needs
-            // decimal(21,18) so the full geographic range [-180,180] remains valid.
+            // latitude decimal(20,18) accepts [-90,90]; longitude is decimal(21,18)
+            // (migration 2026_11_10_000002) so the full range [-180,180] is valid.
             'latitude' => fake()->optional()->randomFloat(6, -90, 90),
             'longitude' => fake()->optional()->randomFloat(6, -180, 180),
-            'created_by' => fake()->optional()->userName(),
-            'updated_by' => fake()->optional()->userName(),
+            // created_by/updated_by sono UUID degli utenti (foreignIdFor User in XotBaseMigration): uno username finto passava solo su
+            // SQLite, MariaDB lo rifiuta ("Incorrect uuid value"). Null: li valorizza chi crea il ticket, non la factory.
+            'created_by' => null,
+            'updated_by' => null,
         ];
     }
 

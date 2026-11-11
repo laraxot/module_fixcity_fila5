@@ -16,8 +16,6 @@ use Modules\Xot\Actions\Cast\SafeStringCastAction;
 use Modules\Xot\Contracts\UserContract;
 use Spatie\QueueableAction\QueueableAction;
 
-use function Safe\parse_url;
-
 /**
  * Dettaglio pubblico di una segnalazione (/{lang}/tickets/{id}), DCP-148.
  *
@@ -29,7 +27,8 @@ use function Safe\parse_url;
  * `tracking_code` e SOLO per il proprietario; per ogni altro visitatore, follower compresi, e' `null`. L'indirizzo e' quello che l'elenco mostra oggi
  * (decisione aperta PP-02 della story DCP-104: civico e arrotondamento); le coordinate sono quelle gia' pubbliche nel geojson.
  * Il giorno di creazione e' `Y-m-d`, mai l'ora. Il test dell'insieme esatto di chiavi e' la guardia contro le fughe.
- * Le immagini (`images`) escono per i ticket pubblici e per il proprietario della pratica; PDF e dati del file restano esclusi.
+ * Le immagini (`images`) escono per i ticket pubblici e per il proprietario della pratica; PDF e dati del file restano esclusi
+ * ({@see BuildTicketPublicImageUrlsAction}, SEC-04).
  */
 final class BuildPublicTicketDetailAction
 {
@@ -97,40 +96,13 @@ final class BuildPublicTicketDetailAction
             'longitude' => $hasPoint ? $lng : null,
             'description' => $description,
             'meta_description' => Str::of($description)->squish()->limit(self::META_DESCRIPTION_LENGTH - 3)->toString(),
-            'images' => $isOwner || $isPublic ? $this->publicImageUrls($ticket) : [],
+            'images' => app(BuildTicketPublicImageUrlsAction::class)->execute($ticket, $viewer),
             'timeline' => app(BuildTicketTimelineAction::class)->execute($ticket, $viewer),
             'is_following' => $this->isFollowing($ticket, $viewer),
             'is_owner' => $isOwner,
             'is_public' => $isPublic,
             'tracking_code' => $trackingCode !== '' ? $trackingCode : null,
         ];
-    }
-
-    /**
-     * @return list<string>
-     */
-    private function publicImageUrls(Ticket $ticket): array
-    {
-        $urls = [];
-        $mediaItems = $ticket->getMedia('attachments');
-        if ($mediaItems->isEmpty()) {
-            $mediaItems = $ticket->getMedia('ticket');
-        }
-
-        foreach ($mediaItems as $media) {
-            if (! str_starts_with((string) $media->mime_type, 'image/')) {
-                continue;
-            }
-
-            // Disco `public`: solo il percorso (`/storage/...`), cosi' la foto si vede qualunque sia `APP_URL` (DCP-379).
-            $path = parse_url($media->getUrl(), PHP_URL_PATH);
-            $url = $media->disk === 'public' && is_string($path) ? $path : $media->getFullUrl();
-            if ($url !== '') {
-                $urls[] = $url;
-            }
-        }
-
-        return array_values(array_unique($urls));
     }
 
     /**

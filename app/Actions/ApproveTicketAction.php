@@ -27,23 +27,23 @@ final class ApproveTicketAction
             throw new \InvalidArgumentException('La motivazione di approvazione è obbligatoria.');
         }
 
-        $currentValue = $ticket->resolveTicketStatusValue();
-        $current = TicketStatusEnum::tryFrom($currentValue);
-        if (! $current instanceof TicketStatusEnum) {
-            throw new \DomainException('Lo stato corrente della segnalazione non è riconosciuto.');
-        }
-
-        $target = TicketStatusEnum::IN_REVIEW;
-        $current->assertCanTransitionTo($target);
-
         $actorId = auth()->id();
         $userId = is_int($actorId) || is_string($actorId) ? $actorId : null;
 
-        $ticket->getConnection()->transaction(function () use ($ticket, $current, $target, $reason, $userId): void {
-            $ticket->setStatus($target);
+        // Stato riletto con la riga bloccata (DB-07): due approvazioni concorrenti non registrano due transizioni dallo stesso stato.
+        app(LockTicketForStatusChangeAction::class)->execute($ticket, static function (Ticket $locked) use ($reason, $userId): void {
+            $current = TicketStatusEnum::tryFrom($locked->resolveTicketStatusValue());
+            if (! $current instanceof TicketStatusEnum) {
+                throw new \DomainException('Lo stato corrente della segnalazione non è riconosciuto.');
+            }
+
+            $target = TicketStatusEnum::IN_REVIEW;
+            $current->assertCanTransitionTo($target);
+
+            $locked->setStatus($target);
 
             app(RecordTicketActivityAction::class)->execute(
-                $ticket,
+                $locked,
                 TicketActivityEventTypeEnum::Approved,
                 $current,
                 $target,

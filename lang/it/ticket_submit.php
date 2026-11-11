@@ -5,6 +5,9 @@ declare(strict_types=1);
 // DCP-286: messaggi dell'invio del wizard di segnalazione (invio gia' in corso, sessione scaduta). Stesse chiavi in it, en, de, es.
 return [
     'in_progress' => 'Stiamo ancora inviando questa segnalazione. Attendi qualche secondo e controlla le tue segnalazioni nell’area personale prima di riprovare.',
+    // PRD-04: informativa con dati dell'ente mancanti (segnaposto [[ente.*]]).
+    'auth_required' => 'Accedi per inviare una segnalazione.',
+    'ente_not_configured' => 'Il Comune non ha ancora completato i propri dati nell\'informativa privacy (titolare, responsabile della protezione dei dati, recapiti). L\'invio delle segnalazioni è temporaneamente disabilitato: riprova più tardi.',
     'session_expired' => [
         'title' => 'Sessione scaduta',
         'text' => 'La tua sessione è scaduta, quindi la segnalazione non è stata inviata. I dati che hai inserito sono ancora in questa pagina: accedi di nuovo in una nuova scheda, poi torna qui e premi Invia.',

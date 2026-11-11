@@ -98,3 +98,9 @@ it('attaches the user-login limiter to the api login route', function (): void {
     Assert::assertNotNull($route);
     Assert::assertContains('throttle:user-login', $route->gatherMiddleware());
 });
+
+it('answers 422, not 500, when the login payload is malformed', function (): void {
+    /** @var TestCase $this */
+    $this->postJson('/api/user/login', ['email' => ['a@example.test'], 'password' => 'x'])->assertStatus(422);
+    $this->postJson('/api/user/login', ['email' => randomApiEmail()])->assertStatus(422);
+});

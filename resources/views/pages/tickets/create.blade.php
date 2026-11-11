@@ -6,6 +6,7 @@ use Illuminate\View\View;
 use Modules\Cms\Http\Middleware\PageSlugMiddleware;
 use Modules\Cms\Http\Middleware\SetFolioLocale;
 use Modules\Cms\Models\Page;
+use Modules\User\Http\Middleware\EnsureVerifiedIdentity;
 
 use function Laravel\Folio\middleware;
 use function Laravel\Folio\name;
@@ -15,6 +16,8 @@ name('tickets.create');
 middleware(PageSlugMiddleware::class);
 middleware(SetFolioLocale::class);
 middleware('auth');
+// Solo con identita' verificata (PRD-02, SEC-14): email confermata oppure accesso SPID/CIE. Gli altri vanno a `verification.notice`.
+middleware(EnsureVerifiedIdentity::class);
 
 render(function (View $view): View {
     return $view->with(['data' => []]);
