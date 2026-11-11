@@ -94,7 +94,7 @@ class TicketsTable extends XotBaseResourceTable
                 ->searchable()
                 ->preload(),
             'assignment_status' => Filter::make('assignment_status')
-                ->form([
+                ->schema([
                     Select::make('assignment_status')->options([
                         'assigned' => __('fixcity::ticket_filter.assignment_status.assigned'),
                         'unassigned' => __('fixcity::ticket_filter.assignment_status.unassigned'),
@@ -114,7 +114,7 @@ class TicketsTable extends XotBaseResourceTable
                     return $query;
                 }),
             'created_at' => Filter::make('created_at')
-                ->form([
+                ->schema([
                     DatePicker::make('created_from'),
                     DatePicker::make('created_until'),
                 ])

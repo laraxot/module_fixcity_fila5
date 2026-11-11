@@ -2,6 +2,7 @@
 
 declare(strict_types=1);
 
+use function Pest\Laravel\getJson;
 use function Safe\preg_replace;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\DB;
@@ -155,7 +156,7 @@ it('loads the media of /api/tickets/list with a constant number of queries', fun
         DB::connection('media')->flushQueryLog();
         DB::connection('fixcity')->enableQueryLog();
         DB::connection('media')->enableQueryLog();
-        test()->getJson('/api/tickets/list?limit='.$limit)->assertOk();
+        getJson('/api/tickets/list?limit='.$limit)->assertOk();
 
         return count(DB::connection('fixcity')->getQueryLog()) + count(DB::connection('media')->getQueryLog());
     };

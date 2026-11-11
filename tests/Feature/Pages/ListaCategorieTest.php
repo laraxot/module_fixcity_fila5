@@ -23,6 +23,4 @@ test('lista categorie page contains expected content', function () {
     if ($response->getStatusCode() === 200) {
         $response->assertSee('Categorie');
     }
-
-    expect(true)->toBeTrue(); // Always pass - content check is conditional
 });
