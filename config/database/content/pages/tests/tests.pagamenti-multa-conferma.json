@@ -1,0 +1,153 @@
+{
+    "id": "pagamenti-multa-conferma",
+    "slug": "pagamenti-multa-conferma",
+    "parent_slug": "tests",
+    "title": {
+        "it": "Pagamento multa - pagamento effettuato",
+        "en": "Pagamento multa - pagamento effettuato"
+    },
+    "layout": "test",
+    "sidebar_blocks": {
+        "it": [],
+        "en": []
+    },
+    "footer_blocks": null,
+    "description": "Pagina di prova pagamenti-multa-conferma (flusso pagamento multa) da JSON, resa dal blocco service-flow del tema Sixteen.",
+    "content_blocks": {
+        "it": [
+            {
+                "type": "service-flow",
+                "data": {
+                    "view": "pub_theme::components.blocks.service-flow.design-comuni",
+                    "kind": "confirmation",
+                    "breadcrumb": {
+                        "items": [
+                            {
+                                "label": "Home",
+                                "url": "/it/tests/homepage"
+                            },
+                            {
+                                "label": "Servizi",
+                                "url": "#"
+                            },
+                            {
+                                "label": "Tributi, finanze e contravvenzioni",
+                                "url": "#"
+                            }
+                        ],
+                        "current": "Pagamento Multa"
+                    },
+                    "heading": {
+                        "title": "Pagamento effettuato",
+                        "icon": {
+                            "name": "it-check-circle",
+                            "class": "icon-success mr-10 big-lg-icon mb-1"
+                        },
+                        "subtitles": [
+                            {
+                                "class": "subtitle-small",
+                                "text": "Grazie abbiamo ricevuto il **pagamento PA3028** per la **richiesta AN4059281 pagamento multa.**"
+                            },
+                            {
+                                "class": "mt-4 mb-0",
+                                "text": "Importo: **38,92 €**"
+                            },
+                            {
+                                "class": "m-0",
+                                "text": "Inviato il: **21/07/2022**"
+                            },
+                            {
+                                "class": "pt-4 pt-lg-40 mb-0",
+                                "text": "Abbiamo inviato il riepilogo all’email:\n**giulia.rossi@gmail.com**"
+                            }
+                        ],
+                        "buttons": [
+                            {
+                                "label": "Scarica la ricevuta (PDF 100KB)",
+                                "class": "btn btn-outline-primary fw-bold",
+                                "icon": "it-download"
+                            }
+                        ]
+                    },
+                    "after_heading": {
+                        "class": "mt-4 mt-lg-3 mb-40 mb-lg-80",
+                        "text": "Puoi consultare il resoconto del pagamento e scaricare la ricevuta in qualunque momento dalla tua",
+                        "link": {
+                            "label": "area personale.",
+                            "url": "#",
+                            "class": "t-primary"
+                        }
+                    },
+                    "feedback": {
+                        "col_class": "col-12 col-lg-6 p-lg-0 px-4",
+                        "title": "Quanto è stato facile usare questo servizio?",
+                        "legend": "Valuta da 1 a 5 stelle la pagina",
+                        "star_label": "Valuta %d stelle su 5",
+                        "thanks": "Grazie, il tuo parere ci aiuterà a migliorare il servizio!",
+                        "positive": {
+                            "question": "Quali sono stati gli aspetti che hai preferito?",
+                            "answers": [
+                                "Le indicazioni erano chiare",
+                                "Le indicazioni erano complete",
+                                "Capivo sempre che stavo procedendo correttamente",
+                                "Non ho avuto problemi tecnici",
+                                "Altro"
+                            ]
+                        },
+                        "negative": {
+                            "question": "Dove hai incontrato le maggiori difficoltà?",
+                            "answers": [
+                                "A volte le indicazioni non erano chiare",
+                                "A volte le indicazioni non erano complete",
+                                "A volte non capivo se stavo procedendo correttamente",
+                                "Ho avuto problemi tecnici",
+                                "Altro"
+                            ]
+                        },
+                        "detail": {
+                            "question": "Vuoi aggiungere altri dettagli?",
+                            "label": "Dettaglio",
+                            "help": "Inserire massimo 200 caratteri"
+                        },
+                        "back": "Indietro",
+                        "next": "Avanti"
+                    },
+                    "contacts": {
+                        "layout": "offset",
+                        "col": "col-12 col-lg-6",
+                        "main": {
+                            "title": "Contatta il comune",
+                            "items": [
+                                {
+                                    "icon": "it-help-circle",
+                                    "label": "Leggi le domande frequenti",
+                                    "url": "#"
+                                },
+                                {
+                                    "icon": "it-mail",
+                                    "label": "Richiedi assistenza",
+                                    "url": "#",
+                                    "element": "contacts"
+                                },
+                                {
+                                    "icon": "it-hearing",
+                                    "label": "Chiama il numero verde 05 0505",
+                                    "url": "#"
+                                },
+                                {
+                                    "icon": "it-calendar",
+                                    "label": "Prenota appuntamento",
+                                    "url": "#",
+                                    "element": "appointment-booking"
+                                }
+                            ]
+                        }
+                    },
+                    "modals": [],
+                    "header_active": "all-services"
+                }
+            }
+        ],
+        "en": []
+    }
+}

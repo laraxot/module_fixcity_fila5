@@ -19,6 +19,8 @@ final class BuildTicketPublicDetailsPayloadAction
 
     /**
      * @param  Ticket|array<string, mixed>  $ticket
+     * @param  bool  $accessGranted  true SOLO se il chiamante ha gia' autorizzato chi guarda (pagina track: codice di tracciamento o
+     *                               `Gate::authorize('view')`): le foto escono in ogni stato, firmate. L'API pubblica passa false.
      * @return array{
      *     id: int,
      *     title: string,
@@ -29,21 +31,14 @@ final class BuildTicketPublicDetailsPayloadAction
      *     slug: string
      * }
      */
-    public function execute(Ticket|array $ticket): array
+    public function execute(Ticket|array $ticket, bool $accessGranted = false): array
     {
         if (is_array($ticket)) {
             return $this->payloadFromGeoJsonFeature($ticket);
         }
 
-        $images = $ticket->getMedia('attachments');
-        if ($images->isEmpty()) {
-            $images = $ticket->getMedia('ticket');
-        }
-
-        /** @var list<string> $imageUrls */
-        $imageUrls = array_values($images
-            ->map(static fn (mixed $media): string => $media->getFullUrl())
-            ->all());
+        // Solo foto, mai PDF; senza accesso concesso solo per ticket pubblici o per il proprietario (SEC-04).
+        $imageUrls = app(BuildTicketPublicImageUrlsAction::class)->execute($ticket, auth()->user(), $accessGranted);
 
         return [
             'id' => $ticket->id,

@@ -1,0 +1,17 @@
+{
+    "id": "tickets-track",
+    "title": {"it": "Traccia la segnalazione", "en": "Track your report", "de": "Meldung verfolgen", "es": "Seguir la incidencia"},
+    "slug": "track",
+    "layout": "app",
+    "description": {
+        "it": "Inserisci il codice di tracciamento ricevuto alla conferma per vedere lo stato della tua segnalazione.",
+        "en": "Enter the tracking code you received at confirmation to see the status of your report.",
+        "de": "Geben Sie den bei der Bestätigung erhaltenen Code ein, um den Stand Ihrer Meldung zu sehen.",
+        "es": "Introduce el código de seguimiento recibido en la confirmación para ver el estado de tu incidencia."
+    },
+    "content": null,
+    "content_blocks": {"it": [], "en": [], "de": [], "es": []},
+    "sidebar_blocks": {"it": [], "en": [], "de": [], "es": []},
+    "footer_blocks": null,
+    "middleware": ["throttle:10,1"]
+}

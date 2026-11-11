@@ -6,6 +6,10 @@ declare(strict_types=1);
 // File: lang/de/ticket_detail.php
 // Texte der öffentlichen Detailseite /{lang}/tickets/{id} und der Meldung zu "Folgen" (Story DCP-148).
 return [
+    'not_found' => 'Meldung nicht gefunden oder nicht sichtbar.',
+    'not_available' => 'N/A',
+    'images' => 'Bilder',
+    'image_alt' => 'Bild der Meldung :name',
     'breadcrumb' => [
         'home' => 'Home',
         'list' => 'Liste der Meldungen',
@@ -37,7 +41,7 @@ return [
     'timeline' => [
         'update' => 'Aktualisierung', 'assignment' => 'Meldung zugewiesen', 'approved' => 'Meldung genehmigt',
         'rejected' => 'Meldung abgelehnt', 'mail_sent' => 'Nachricht gesendet', 'mail_failed' => 'Nachricht konnte nicht gesendet werden', 'mail_received' => 'Antwort erhalten',
-        'followup' => 'Erinnerung gesendet', 'media_added' => 'Anhang hinzugefügt', 'recipient' => 'Empfänger: :recipient', 'attachment' => 'Datei: :file', 'closed' => 'Meldung geschlossen',
+        'followup' => 'Erinnerung gesendet', 'media_added' => 'Anhang hinzugefügt', 'recipient' => 'Empfänger: :recipient', 'closed' => 'Meldung geschlossen',
     ],
     'where' => [
         'title' => 'Wo',
@@ -45,6 +49,12 @@ return [
         'no_address' => 'Adresse nicht angegeben',
         'map' => 'Karte mit dem Ort der Meldung',
         'map_at' => 'Karte mit dem Ort der Meldung: :address',
+    ],
+    'photos' => [
+        'title' => ['label' => 'Fotos'],
+        'alt' => ['label' => 'Foto :number der Meldung «:title»'],
+        'new_window' => ['label' => '(öffnet das ganze Foto in einem neuen Fenster)'],
+        'document' => ['label' => 'Dokument :number (PDF)'],
     ],
     'description' => [
         'title' => 'Beschreibung',

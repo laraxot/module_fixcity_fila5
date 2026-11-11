@@ -13,14 +13,7 @@ return [
         'intro' => ['text' => 'Crea una cuenta para enviar y seguir tus incidencias.'],
         'meta_description' => ['text' => 'Crea una cuenta de FixCity para enviar y seguir tus incidencias sobre problemas de tu municipio.'],
         'text' => 'Crear una cuenta',
-<<<<<<< .merge_file_SaCK11
-<<<<<<< .merge_file_UNBrFv
-=======
         'loading' => ['text' => 'Creando tu cuenta...'],
->>>>>>> .merge_file_cWcSC3
-=======
-        'loading' => ['text' => 'Creando tu cuenta...'],
->>>>>>> .merge_file_8H66HB
     ],
     'remember' => 'Recordarme',
     'email' => 'Correo electrónico',

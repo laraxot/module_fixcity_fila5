@@ -1,0 +1,49 @@
+{
+    "data": [
+        {
+            "id": "strade",
+            "type": "category",
+            "attributes": {
+                "name": "Strade",
+                "description": "Problemi relativi a strade e marciapiedi",
+                "icon": "road"
+            }
+        },
+        {
+            "id": "illuminazione",
+            "type": "category",
+            "attributes": {
+                "name": "Illuminazione",
+                "description": "Problemi di illuminazione pubblica",
+                "icon": "lightbulb"
+            }
+        },
+        {
+            "id": "rifiuti",
+            "type": "category",
+            "attributes": {
+                "name": "Rifiuti",
+                "description": "Problemi relativi ai rifiuti e pulizia",
+                "icon": "trash"
+            }
+        },
+        {
+            "id": "verde_pubblico",
+            "type": "category",
+            "attributes": {
+                "name": "Verde Pubblico",
+                "description": "Manutenzione aree verdi e parchi",
+                "icon": "tree"
+            }
+        },
+        {
+            "id": "arredo_urbano",
+            "type": "category",
+            "attributes": {
+                "name": "Arredo Urbano",
+                "description": "Problemi con panchine, cestini, etc",
+                "icon": "bench"
+            }
+        }
+    ]
+} 

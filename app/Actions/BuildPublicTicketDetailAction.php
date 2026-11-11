@@ -23,10 +23,12 @@ use Spatie\QueueableAction\QueueableAction;
  * dell'elenco ({@see BuildPublicTicketsQueryAction}: stati visibili a tutti, piu' le segnalazioni del proprietario se e' loggato).
  * In piu' il PROPRIETARIO apre la propria segnalazione in qualunque stato anche senza posizione (DCP-287, FO-6-43): la posizione
  * obbligatoria serve a mappa ed elenco, non puo' negare al cittadino la propria pratica. Per chiunque altro nulla cambia.
- * Mai: `owner_id`, email, autore, immagini originali. Il codice di tracciamento (capability token) esce SOLO nel campo
+ * Mai: `owner_id`, email, autore. Il codice di tracciamento (capability token) esce SOLO nel campo
  * `tracking_code` e SOLO per il proprietario; per ogni altro visitatore, follower compresi, e' `null`. L'indirizzo e' quello che l'elenco mostra oggi
  * (decisione aperta PP-02 della story DCP-104: civico e arrotondamento); le coordinate sono quelle gia' pubbliche nel geojson.
  * Il giorno di creazione e' `Y-m-d`, mai l'ora. Il test dell'insieme esatto di chiavi e' la guardia contro le fughe.
+ * Le immagini (`images`) escono per i ticket pubblici e per il proprietario della pratica; PDF e dati del file restano esclusi
+ * ({@see BuildTicketPublicImageUrlsAction}, SEC-04).
  */
 final class BuildPublicTicketDetailAction
 {
@@ -49,6 +51,7 @@ final class BuildPublicTicketDetailAction
      *     description: string,
      *     meta_description: string,
      *     timeline: list<array{occurred_at: string, occurred_date: string, occurred_on: string, from_label: string|null, to_label: string|null, reason: string|null}>,
+     *     images: list<string>,
      *     is_following: bool,
      *     is_owner: bool,
      *     is_public: bool,
@@ -78,6 +81,7 @@ final class BuildPublicTicketDetailAction
         $typeValue = $this->stringValue($type instanceof TicketTypeEnum ? $type->value : $type);
         $statusValue = $this->stringValue($status instanceof TicketStatusEnum ? $status->value : $status);
         $statusEnum = $status instanceof TicketStatusEnum ? $status : TicketStatusEnum::tryFrom($statusValue);
+        $isPublic = $statusEnum instanceof TicketStatusEnum && in_array($statusEnum, TicketStatusEnum::canViewByAll(), true);
 
         return [
             'id' => $ticket->id,
@@ -92,10 +96,11 @@ final class BuildPublicTicketDetailAction
             'longitude' => $hasPoint ? $lng : null,
             'description' => $description,
             'meta_description' => Str::of($description)->squish()->limit(self::META_DESCRIPTION_LENGTH - 3)->toString(),
+            'images' => app(BuildTicketPublicImageUrlsAction::class)->execute($ticket, $viewer),
             'timeline' => app(BuildTicketTimelineAction::class)->execute($ticket, $viewer),
             'is_following' => $this->isFollowing($ticket, $viewer),
             'is_owner' => $isOwner,
-            'is_public' => $statusEnum instanceof TicketStatusEnum && in_array($statusEnum, TicketStatusEnum::canViewByAll(), true),
+            'is_public' => $isPublic,
             'tracking_code' => $trackingCode !== '' ? $trackingCode : null,
         ];
     }

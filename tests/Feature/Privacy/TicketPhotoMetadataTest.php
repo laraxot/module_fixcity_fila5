@@ -54,7 +54,7 @@ it('stores a report photo without EXIF and GPS data', function (): void {
 
     $media = $ticket->addMedia(jpegWithGps())->toMediaCollection('attachments');
 
-    $stored = Storage::disk('public')->path($media->getPathRelativeToRoot());
+    $stored = Storage::disk($media->disk)->path($media->getPathRelativeToRoot());
     $exif = exif_read_data($stored);
     expect($exif)->toBeArray()->not->toHaveKey('GPSLatitudeRef')->not->toHaveKey('Make')
         ->and(getimagesize($stored))->toBeArray()
@@ -69,5 +69,5 @@ it('leaves a report PDF untouched', function (): void {
 
     $media = $ticket->addMedia($pdf)->toMediaCollection('attachments');
 
-    expect(Storage::disk('public')->get($media->getPathRelativeToRoot()))->toBe($bytes);
+    expect(Storage::disk($media->disk)->get($media->getPathRelativeToRoot()))->toBe($bytes);
 });

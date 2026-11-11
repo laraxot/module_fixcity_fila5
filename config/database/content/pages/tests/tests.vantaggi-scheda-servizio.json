@@ -1,0 +1,469 @@
+{
+    "id": "vantaggi-scheda-servizio",
+    "slug": "vantaggi-scheda-servizio",
+    "parent_slug": "tests",
+    "title": {
+        "it": "Assegno di maternità",
+        "en": "Assegno di maternità"
+    },
+    "layout": "test",
+    "sidebar_blocks": {
+        "it": [],
+        "en": []
+    },
+    "footer_blocks": null,
+    "description": "Pagina di prova vantaggi-scheda-servizio (flusso vantaggi economici) da JSON, resa dal blocco service-flow del tema Sixteen.",
+    "content_blocks": {
+        "it": [
+            {
+                "type": "service-flow",
+                "data": {
+                    "view": "pub_theme::components.blocks.service-flow.design-comuni",
+                    "kind": "service-sheet",
+                    "breadcrumb": {
+                        "items": [
+                            {
+                                "label": "Home",
+                                "url": "/it/tests/homepage"
+                            },
+                            {
+                                "label": "Servizi",
+                                "url": "#"
+                            }
+                        ],
+                        "current": "Assegno di maternità"
+                    },
+                    "heading": {
+                        "title": "Assegno di maternità",
+                        "title_element": "service-title",
+                        "chips": [
+                            {
+                                "label": "Servizio attivo",
+                                "element": "service-status"
+                            }
+                        ],
+                        "subtitles": [
+                            {
+                                "text": "L’assegno di maternità è a disposizione di famiglie con risorse limitate in caso di nascita, adozione o affido preadottivo",
+                                "class": "subtitle-small mb-3"
+                            }
+                        ],
+                        "buttons": [
+                            {
+                                "label": "Richiedi online",
+                                "class": "btn btn-primary fw-bold"
+                            }
+                        ],
+                        "actions": [
+                            {
+                                "id": "shareActions",
+                                "aria_label": "condividi sui social",
+                                "icon": "it-share",
+                                "label": "Condividi",
+                                "items": [
+                                    {
+                                        "label": "Facebook",
+                                        "icon": "it-facebook",
+                                        "url": "#"
+                                    },
+                                    {
+                                        "label": "Twitter",
+                                        "icon": "it-twitter",
+                                        "url": "#"
+                                    },
+                                    {
+                                        "label": "Linkedin",
+                                        "icon": "it-linkedin",
+                                        "url": "#"
+                                    },
+                                    {
+                                        "label": "Whatsapp",
+                                        "icon": "it-whatsapp",
+                                        "url": "#"
+                                    }
+                                ]
+                            },
+                            {
+                                "id": "viewActions",
+                                "aria_label": "vedi azioni da compiere sulla pagina",
+                                "icon": "it-more-items",
+                                "label": "Vedi azioni",
+                                "items": [
+                                    {
+                                        "label": "Stampa",
+                                        "icon": "it-print",
+                                        "url": "#"
+                                    },
+                                    {
+                                        "label": "Ascolta",
+                                        "icon": "it-hearing",
+                                        "url": "#"
+                                    },
+                                    {
+                                        "label": "Invia",
+                                        "icon": "it-mail",
+                                        "url": "#"
+                                    }
+                                ]
+                            }
+                        ],
+                        "row": "row justify-content-center mb-40 mb-lg-80",
+                        "col": "col-12 col-lg-10 pb-2",
+                        "rule": "d-none d-lg-block mb-0"
+                    },
+                    "side_nav": {
+                        "class": "col-12 col-lg-3 mb-4 border-col",
+                        "aria_label": "INDICE DELLA PAGINA",
+                        "title": "INDICE DELLA PAGINA",
+                        "items": [
+                            {
+                                "label": "A chi è rivolto",
+                                "anchor": "who-needs"
+                            },
+                            {
+                                "label": "Descrizione",
+                                "anchor": "description"
+                            },
+                            {
+                                "label": "Come fare",
+                                "anchor": "how-to"
+                            },
+                            {
+                                "label": "Cosa serve",
+                                "anchor": "needed"
+                            },
+                            {
+                                "label": "Cosa si ottiene",
+                                "anchor": "obtain"
+                            },
+                            {
+                                "label": "Tempi e scadenze",
+                                "anchor": "deadlines"
+                            },
+                            {
+                                "label": "Accedi al servizio",
+                                "anchor": "service-access"
+                            },
+                            {
+                                "label": "Condizioni di servizio",
+                                "anchor": "conditions"
+                            },
+                            {
+                                "label": "Contatti",
+                                "anchor": "contacts"
+                            }
+                        ]
+                    },
+                    "body": {
+                        "row": "row row-column-menu-left pb-4 pb-lg-80"
+                    },
+                    "sections": [
+                        {
+                            "type": "flow",
+                            "id": "who-needs",
+                            "class": "mb-30",
+                            "title": "A chi è rivolto",
+                            "items": [
+                                {
+                                    "type": "nested-list",
+                                    "items": [
+                                        "Cittadine italiane",
+                                        "Cittadine comunitarie",
+                                        {
+                                            "text": "Cittadine di paesi terzi, in possesso di uno dei seguenti titoli:",
+                                            "items": [
+                                                "persona titolare del permesso di soggiorno CE per soggiornanti di lungo periodo",
+                                                "familiare di cittadini italiani, dell’Unione o di cittadini soggiornanti di lungo periodo non aventi la cittadinanza di uno Stato membro, che sia titolare del diritto di soggiorno o del diritto di soggiorno permanente;",
+                                                "rifugiata politica, i suoi familiari e superstiti;",
+                                                "persona titolare della protezione sussidiaria;",
+                                                "cittadina/lavoratrice del Marocco, Tunisia, Algeria e Turchia, e i suoi familiari;"
+                                            ]
+                                        },
+                                        "persona titolare del permesso unico per lavoro o con autorizzazione al lavoro e i suoi familiari, ad eccezione delle categorie espressamente escluse dal D.lgs. 40/2014;",
+                                        "persona che abbia soggiornato legalmente in almeno 2 stati membri, i suoi familiari e superstiti;",
+                                        "persona apolide, i suoi familiari e superstiti;"
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "type": "flow",
+                            "id": "description",
+                            "class": "mb-30",
+                            "title": "Descrizione",
+                            "items": [
+                                {
+                                    "type": "paragraph",
+                                    "text": "L'assegno è riconosciuto alle persone che non beneficiano di nessuna indennità di maternità o che percepiscono un’indennità inferiore all’importo del contributo stesso e che dispongono di patrimoni e redditi limitati (Assegno di maternità di base - Art. 74 del D.Lgs 151/2011).",
+                                    "class": "text-paragraph lora"
+                                }
+                            ]
+                        },
+                        {
+                            "type": "flow",
+                            "id": "how-to",
+                            "class": "mb-30",
+                            "title": "Come fare",
+                            "items": [
+                                {
+                                    "type": "paragraph",
+                                    "text": "Per ottenere l’assegno occorre inviare la richiesta entro sei mesi dalla data di nascita del minore o dall’ingresso in famiglia del bambino adottato o in affido preadottivo.\n\nLe cittadine extracomunitarie devono allegare il permesso di soggiorno.\n\nDopo la verifica dei requisiti da parte del Comune, è disposta la richiesta di pagamento all’Inps.",
+                                    "class": "text-paragraph lora"
+                                }
+                            ]
+                        },
+                        {
+                            "type": "flow",
+                            "id": "needed",
+                            "class": "mb-30 has-bg-grey p-3",
+                            "title": "Cosa serve",
+                            "items": [
+                                {
+                                    "type": "paragraph",
+                                    "text": "Per accedere al servizio, assicurati di avere:"
+                                },
+                                {
+                                    "type": "nested-list",
+                                    "items": [
+                                        "Attestazione ISEE e relativa Dichiarazione sostitutiva unica (Dsu), valida nell’anno che includa il bambino o la bambina;",
+                                        "Copia del codice Iban intestato o cointestato alla richiedente dell’assegno di maternità;",
+                                        "Permesso di soggiorno o copia ricevuta di avvenuta richiesta del permesso;",
+                                        "Documento d'identità della richiedente."
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "type": "flow",
+                            "id": "obtain",
+                            "class": "mb-30",
+                            "title": "Cosa si ottiene",
+                            "items": [
+                                {
+                                    "type": "paragraph",
+                                    "text": "L’erogazione avviene entro 45 giorni dalla data di ricezione dei dati. L'assegno viene erogato in un unica soluzione. Nel caso di parti gemellari, l'importo dell'assegno viene moltiplicato per il numero di figli nati.",
+                                    "class": "text-paragraph lora"
+                                }
+                            ]
+                        },
+                        {
+                            "type": "timeline",
+                            "id": "deadlines",
+                            "class": "mb-30",
+                            "title": "Tempi e scadenze",
+                            "entries": [
+                                {
+                                    "year": "",
+                                    "day": "",
+                                    "month": "",
+                                    "label": "Esito richiesta",
+                                    "info": "Dopo 30 giorni dalla presentazione della richiesta"
+                                },
+                                {
+                                    "year": "",
+                                    "day": "05",
+                                    "month": "giorni",
+                                    "label": "Ricevi l'assegno"
+                                }
+                            ]
+                        },
+                        {
+                            "type": "flow",
+                            "id": "service-access",
+                            "class": "mb-30 has-bg-grey p-3 p-lg-4",
+                            "title": "Accedi al servizio",
+                            "title_class": "mb-3",
+                            "items": [
+                                {
+                                    "type": "paragraph",
+                                    "text": "Puoi richiedere l’assegno di maternità direttamente online tramite identità digitale.",
+                                    "class": "text-paragraph lora mb-4"
+                                },
+                                {
+                                    "type": "button",
+                                    "label": "Richiedi online",
+                                    "class": "btn btn-primary mobile-full",
+                                    "bare": true
+                                },
+                                {
+                                    "type": "paragraph",
+                                    "text": "Oppure, puoi prenotare un appuntamento e presentarti presso gli uffici.",
+                                    "class": "text-paragraph lora mt-4"
+                                },
+                                {
+                                    "type": "button",
+                                    "label": "Prenota appuntamento",
+                                    "class": "btn btn-outline-primary t-primary bg-white mobile-full",
+                                    "bare": true
+                                }
+                            ]
+                        },
+                        {
+                            "type": "flow",
+                            "id": "conditions",
+                            "class": "mb-30",
+                            "title": "Condizioni di servizio",
+                            "items": [
+                                {
+                                    "type": "paragraph",
+                                    "text": "Per conoscere i dettagli di scadenze, requisiti e altre informazioni importanti, leggi i termini e le condizioni di servizio.",
+                                    "class": "text-paragraph lora"
+                                },
+                                {
+                                    "type": "attachment",
+                                    "label": "Termini e condizioni di servizio (PDF 1MB)",
+                                    "aria": "Scarica Termini e condizioni di servizio (PDF 1MB)",
+                                    "title": "Scarica Termini e condizioni di servizio (PDF 1MB)",
+                                    "url": "#"
+                                }
+                            ]
+                        },
+                        {
+                            "type": "service-contacts",
+                            "id": "contacts",
+                            "title": "Contatti",
+                            "office": {
+                                "name": "Ufficio sussidi",
+                                "url": "#",
+                                "lines": [
+                                    "Via Dei Transiti 21, 50302",
+                                    "05 0505"
+                                ],
+                                "email": "ufficiosussidi@email.it",
+                                "email_aria": "Invia una email a ufficiosussidi@email.it",
+                                "image": {
+                                    "src": "https://picsum.photos/200/200",
+                                    "alt": "Immagine"
+                                },
+                                "card_class": "card card-teaser card-teaser-info align-items-center rounded shadow-sm p-3",
+                                "title_class": "title-small mb-2"
+                            },
+                            "topics": {
+                                "label": "Argomenti:",
+                                "items": [
+                                    "Sussidi",
+                                    "Famiglia",
+                                    "Madri",
+                                    "Servizi Sociali"
+                                ]
+                            },
+                            "updated": "Pagina aggiornata il 14/04/2022"
+                        }
+                    ],
+                    "feedback": {
+                        "col_class": "col-12 col-lg-6 p-lg-0 px-4",
+                        "title": "Quanto è stato facile usare questo servizio?",
+                        "legend": "Valuta da 1 a 5 stelle la pagina",
+                        "star_label": "Valuta %d stelle su 5",
+                        "thanks": "Grazie, il tuo parere ci aiuterà a migliorare il servizio!",
+                        "positive": {
+                            "question": "Quali sono stati gli aspetti che hai preferito?",
+                            "answers": [
+                                "Le indicazioni erano chiare",
+                                "Le indicazioni erano complete",
+                                "Capivo sempre che stavo procedendo correttamente",
+                                "Non ho avuto problemi tecnici",
+                                "Altro"
+                            ]
+                        },
+                        "negative": {
+                            "question": "Dove hai incontrato le maggiori difficoltà?",
+                            "answers": [
+                                "A volte le indicazioni non erano chiare",
+                                "A volte le indicazioni non erano complete",
+                                "A volte non capivo se stavo procedendo correttamente",
+                                "Ho avuto problemi tecnici",
+                                "Altro"
+                            ]
+                        },
+                        "detail": {
+                            "question": "Vuoi aggiungere altri dettagli?",
+                            "label": "Dettaglio",
+                            "help": "Inserire massimo 200 caratteri"
+                        },
+                        "back": "Indietro",
+                        "next": "Avanti"
+                    },
+                    "related": {
+                        "title": "Contenuti correlati",
+                        "cards": [
+                            {
+                                "icon": "it-pa",
+                                "title": "Amministrazione",
+                                "links": [
+                                    "Area Servizi Civici"
+                                ]
+                            },
+                            {
+                                "icon": "it-settings",
+                                "title": "Servizi",
+                                "links": [
+                                    "Pagamento retta scolastica",
+                                    "Servizio di trasporto scolastico"
+                                ]
+                            },
+                            {
+                                "icon": "it-file",
+                                "title": "Documenti",
+                                "links": [
+                                    "Attestazione ISEE",
+                                    "Carta dei servizi educativi all'infanzia"
+                                ]
+                            },
+                            {
+                                "icon": "it-calendar",
+                                "title": "Notizie",
+                                "links": [
+                                    "Justo eget magna fermentum",
+                                    "Dolor magna eget est lorem",
+                                    "Justo eget magna fermentum",
+                                    "Dolor magna eget est lorem"
+                                ],
+                                "more": {
+                                    "label": "Vedi altri 2",
+                                    "items": [
+                                        "Servizio di trasporto scolastico",
+                                        "Servizio di trasporto scolastico"
+                                    ]
+                                }
+                            }
+                        ]
+                    },
+                    "contacts": {
+                        "layout": "offset",
+                        "col": "col-12 col-lg-6",
+                        "main": {
+                            "title": "Contatta il comune",
+                            "items": [
+                                {
+                                    "icon": "it-help-circle",
+                                    "label": "Leggi le domande frequenti",
+                                    "url": "#"
+                                },
+                                {
+                                    "icon": "it-mail",
+                                    "label": "Richiedi assistenza",
+                                    "url": "#",
+                                    "element": "contacts"
+                                },
+                                {
+                                    "icon": "it-hearing",
+                                    "label": "Chiama il numero verde 05 0505",
+                                    "url": "#"
+                                },
+                                {
+                                    "icon": "it-calendar",
+                                    "label": "Prenota appuntamento",
+                                    "url": "#",
+                                    "element": "appointment-booking"
+                                }
+                            ]
+                        }
+                    },
+                    "header_active": "all-services"
+                }
+            }
+        ],
+        "en": []
+    }
+}

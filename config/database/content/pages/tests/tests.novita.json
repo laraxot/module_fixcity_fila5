@@ -1,0 +1,287 @@
+{
+  "id": "novita",
+  "slug": "novita",
+  "parent_slug": "tests",
+  "title": {
+    "it": "Novità",
+    "en": "News"
+  },
+  "layout": "test",
+  "description": "Novità: notizie, comunicati e avvisi. Contenuto da JSON, reso dal blocco news-page del tema Sixteen.",
+  "content_blocks": {
+    "it": [
+      {
+        "type": "news-page",
+        "data": {
+          "view": "pub_theme::components.blocks.news-page.design-comuni",
+          "title": "Novità",
+          "breadcrumb": {
+            "items": [
+              {
+                "label": "Home",
+                "url": "/it/tests/homepage"
+              }
+            ],
+            "current": "Novità"
+          },
+          "hero": {
+            "text": "Le notizie, i comunicati e gli avvisi per restare aggiornati sulle ultime novità, opportunità e cosa succede nel territorio comunale."
+          },
+          "featured": {
+            "title": "In evidenza",
+            "items": [
+              {
+                "image": {
+                  "file": "notizia-sport-nel-verde.png",
+                  "title": "titolo immagine",
+                  "alt": "descrizione immagine"
+                },
+                "category": {
+                  "label": "NOTIZIE",
+                  "url": "#"
+                },
+                "date": "28 FEB 2023",
+                "title": "Sport nel verde: le iniziative della prossima edizione",
+                "url": "/it/tests/novita-dettaglio",
+                "text": "Le informazioni per partecipare all’iniziativa rivolta a tutte le fasce d’età per promuovere l’attività motoria nelle aree verdi della città"
+              },
+              {
+                "image": {
+                  "file": "notizia-torneo-bici.png",
+                  "title": "titolo immagine",
+                  "alt": "descrizione immagine"
+                },
+                "category": {
+                  "label": "NOTIZIE",
+                  "url": "#"
+                },
+                "date": "10 GEN 2023",
+                "title": "Torneo di beneficienza “Tutti in pista”",
+                "url": "/it/tests/novita-dettaglio",
+                "text": "Dal 2 al 3 giugno torna il torneo di beneficienza “Tutti in pista”. La raccolta fondi finanzierà progetti sportivi per ragazzi e ragazze"
+              },
+              {
+                "category": {
+                  "label": "AVVISI",
+                  "url": "#"
+                },
+                "date": "10 FEB 2023",
+                "title": "Chiusa per ristrutturazione la piscina Minghetti",
+                "url": "/it/tests/novita-dettaglio",
+                "text": "Partiti i lavori per l’adeguamento dell’impianto. La riapertura è prevista per giugno 2023"
+              }
+            ]
+          },
+          "explore": {
+            "title": "Esplora tutte le novità",
+            "search": {
+              "id": "autocomplete-autocomplete-three",
+              "name": "autocomplete-three",
+              "label": "cerca",
+              "placeholder": "Cerca per parola chiave",
+              "button_id": "button-3",
+              "button": "Invio"
+            },
+            "items": [
+              {
+                "image": {
+                  "file": "notizia-dialoghi-biblioteca.png",
+                  "title": "titolo immagine",
+                  "alt": "descrizione immagine"
+                },
+                "category": {
+                  "label": "NOTIZIE",
+                  "url": "#"
+                },
+                "date": "28 FEB 2023",
+                "title": "Dialoghi in Biblioteca - “Il viaggio delle donne”",
+                "url": "/it/tests/novita-dettaglio",
+                "text": "Presentazione del libro di Alessandra Beltrame per la rassegna 'Dialoghi in Biblioteca0 alla Joppi"
+              },
+              {
+                "image": {
+                  "file": "notizia-ludoteca.png",
+                  "title": "titolo immagine",
+                  "alt": "descrizione immagine"
+                },
+                "category": {
+                  "label": "NOTIZIE",
+                  "url": "#"
+                },
+                "date": "03 MAR 2023",
+                "title": "I giovedì dei piccoli",
+                "url": "/it/tests/novita-dettaglio",
+                "text": "Attività dedicate ai più piccoli in tutte le ludoteche comunali"
+              },
+              {
+                "image": {
+                  "file": "notizia-sicurezza.png",
+                  "title": "titolo immagine",
+                  "alt": "descrizione immagine"
+                },
+                "category": {
+                  "label": "COMUNICATI",
+                  "url": "#"
+                },
+                "date": "1 MAR 2023",
+                "title": "Messa in sicurezza del silos vecchio di viale La Playa",
+                "url": "/it/tests/novita-dettaglio",
+                "text": "I lavori saranno consegnati con procedura d’urgenza e prevedono una durata di 33 giorni naturali e consecutivi"
+              },
+              {
+                "image": {
+                  "file": "notizia-asfaltatura.png",
+                  "title": "titolo immagine",
+                  "alt": "descrizione immagine"
+                },
+                "category": {
+                  "label": "NOTIZIE",
+                  "url": "#"
+                },
+                "date": "27 FEB 2023",
+                "title": "Iniziano le asfaltature dei controviali in Viale Venezia",
+                "url": "/it/tests/novita-dettaglio",
+                "text": "A partire da lunedì 27.02.2023 e fino a venerdì 17.03.2023 sarà eseguito il rifacimento della pavimentazione bituminosa dei controviali Nord e Sud"
+              },
+              {
+                "category": {
+                  "label": "AVVISI",
+                  "url": "#"
+                },
+                "date": "18 FEB 2023",
+                "title": "Avviso per adesione strutture convenzionate nido",
+                "url": "/it/tests/novita-dettaglio",
+                "text": "Le strutture per la prima infanzia (asili nido), che offrono i loro servizi nel territorio comunale, possono richiedere di convenzionarsi con il Comune per l'anno educativo 2023/2024"
+              },
+              {
+                "image": {
+                  "file": "notizia-sgombero.png",
+                  "title": "titolo immagine",
+                  "alt": "descrizione immagine"
+                },
+                "category": {
+                  "label": "NOTIZIE",
+                  "url": "#"
+                },
+                "date": "07 FEB 2023",
+                "title": "Via San Paolo: sgomberata la baraccopoli",
+                "url": "/it/tests/novita-dettaglio",
+                "text": "Polizia municipale al lavoro tutta la giornata di sabato 4 febbraio"
+              }
+            ],
+            "pagination": {
+              "aria_label": "Navigazione centrata",
+              "previous": "Pagina precedente",
+              "next": "Pagina successiva",
+              "page_label": "Pagina",
+              "pages": [
+                "1",
+                "2",
+                "3"
+              ]
+            }
+          },
+          "categories": {
+            "title": "Esplora per categoria",
+            "items": [
+              {
+                "title": "Notizie",
+                "text": "Gli ultimi aggiornamenti sugli avvenimenti e la vita culturale nel Comune.",
+                "url": "#"
+              },
+              {
+                "title": "Comunicati",
+                "text": "Le comunicazioni ufficiali del Sindaco, degli organi politici e degli uffici comunali.",
+                "url": "#"
+              },
+              {
+                "title": "Avvisi",
+                "text": "Bandi di gara, avvisi di concorso e tutte le opportunità per cittadini e imprese.",
+                "url": "#"
+              }
+            ]
+          },
+          "feedback": {
+            "title": "Quanto sono chiare le informazioni su questa pagina?",
+            "legend": "Valuta da 1 a 5 stelle la pagina",
+            "star_label": "Valuta %d stelle su 5",
+            "thanks": "Grazie, il tuo parere ci aiuterà a migliorare il servizio!",
+            "positive": {
+              "question": "Quali sono stati gli aspetti che hai preferito?",
+              "answers": [
+                "Le indicazioni erano chiare",
+                "Le indicazioni erano complete",
+                "Capivo sempre che stavo procedendo correttamente",
+                "Non ho avuto problemi tecnici",
+                "Altro"
+              ]
+            },
+            "negative": {
+              "question": "Dove hai incontrato le maggiori difficoltà?",
+              "answers": [
+                "A volte le indicazioni non erano chiare",
+                "A volte le indicazioni non erano complete",
+                "A volte non capivo se stavo procedendo correttamente",
+                "Ho avuto problemi tecnici",
+                "Altro"
+              ]
+            },
+            "detail": {
+              "question": "Vuoi aggiungere altri dettagli?",
+              "label": "Dettaglio",
+              "help": "Inserire massimo 200 caratteri"
+            },
+            "back": "Indietro",
+            "next": "Avanti"
+          },
+          "contacts": {
+            "main": {
+              "title": "Contatta il comune",
+              "items": [
+                {
+                  "icon": "it-help-circle",
+                  "label": "Leggi le domande frequenti",
+                  "url": "#"
+                },
+                {
+                  "icon": "it-mail",
+                  "label": "Richiedi assistenza",
+                  "url": "#",
+                  "element": "contacts"
+                },
+                {
+                  "icon": "it-hearing",
+                  "label": "Chiama il numero verde 05 0505",
+                  "url": "#"
+                },
+                {
+                  "icon": "it-calendar",
+                  "label": "Prenota appuntamento",
+                  "url": "#",
+                  "element": "appointment-booking"
+                }
+              ]
+            },
+            "problems": {
+              "title": "Problemi in città",
+              "items": [
+                {
+                  "icon": "it-map-marker-circle",
+                  "label": "Segnala disservizio",
+                  "url": "#"
+                }
+              ]
+            }
+          },
+          "header_active": "news"
+        }
+      }
+    ],
+    "en": []
+  },
+  "sidebar_blocks": {
+    "it": [],
+    "en": []
+  },
+  "footer_blocks": null
+}

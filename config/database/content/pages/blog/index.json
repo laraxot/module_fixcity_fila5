@@ -1,0 +1,160 @@
+{
+  "id": "index",
+  "slug": "index",
+  "title": {
+    "it": "Novità",
+    "en": "News",
+    "de": "Neuigkeiten",
+    "es": "Novedades"
+  },
+  "layout": "design-comuni",
+  "description": {
+    "it": "Notizie, comunicati e avvisi per restare aggiornati sul territorio e sui servizi civici.",
+    "en": "News, notices and updates about the municipality and civic services.",
+    "de": "Nachrichten, Mitteilungen und Hinweise zu Gebiet und kommunalen Diensten.",
+    "es": "Noticias, comunicados y avisos sobre el territorio y los servicios cívicos."
+  },
+  "content_blocks": {
+    "it": [
+      {
+        "type": "blog.index",
+        "data": {
+          "view": "pub_theme::components.blocks.blog.index",
+          "parity_page": "lista-risorse",
+          "title": "Novità",
+          "intro": "Le notizie, i comunicati e gli avvisi per restare aggiornati sulle ultime novità, opportunità e cosa succede nel territorio.",
+          "featured_title": "Notizie in evidenza",
+          "explore_title": "Esplora tutte le novità",
+          "home_label": "Home",
+          "search_placeholder": "Cerca per parola chiave",
+          "search_submit": "Invio",
+          "empty": "Non ci sono ancora novità pubblicate.",
+          "pagination_label": "Paginazione delle novità",
+          "feedback": {
+            "title": "Quanto sono chiare le informazioni su questa pagina?",
+            "legend": "Valuta da 1 a 5 stelle la pagina",
+            "star_label": "Valuta %d stelle su 5",
+            "thanks": "Grazie, il tuo parere ci aiuterà a migliorare il servizio!",
+            "positive": {
+              "question": "Quali sono stati gli aspetti che hai preferito?",
+              "answers": [
+                "Le indicazioni erano chiare",
+                "Le indicazioni erano complete",
+                "Capivo sempre che stavo procedendo correttamente",
+                "Non ho avuto problemi tecnici",
+                "Altro"
+              ]
+            },
+            "negative": {
+              "question": "Dove hai incontrato le maggiori difficoltà?",
+              "answers": [
+                "A volte le indicazioni non erano chiare",
+                "A volte le indicazioni non erano complete",
+                "A volte non capivo se stavo procedendo correttamente",
+                "Ho avuto problemi tecnici",
+                "Altro"
+              ]
+            },
+            "detail": {
+              "question": "Vuoi aggiungere altri dettagli?",
+              "label": "Dettaglio",
+              "help": "Inserire massimo 200 caratteri"
+            },
+            "back": "Indietro",
+            "next": "Avanti"
+          },
+          "contacts": {
+            "main": {
+              "title": "Contatta il comune",
+              "items": [
+                {
+                  "icon": "it-help-circle",
+                  "label": "Leggi le domande frequenti",
+                  "url": "/domande-frequenti"
+                },
+                {
+                  "icon": "it-mail",
+                  "label": "Richiedi assistenza",
+                  "url": "/tickets/create",
+                  "element": "contacts"
+                },
+                {
+                  "icon": "it-hearing",
+                  "label": "Chiama il numero verde :value",
+                  "ente": "toll_free"
+                },
+                {
+                  "icon": "it-calendar",
+                  "label": "Prenota appuntamento",
+                  "url": "/lista-categorie",
+                  "element": "appointment-booking"
+                }
+              ]
+            },
+            "problems": {
+              "title": "Problemi in città",
+              "items": [
+                {
+                  "icon": "it-map-marker-circle",
+                  "label": "Segnala disservizio",
+                  "url": "/tickets/create"
+                }
+              ]
+            }
+          }
+        }
+      }
+    ],
+    "en": [
+      {
+        "type": "blog.index",
+        "data": {
+          "view": "pub_theme::components.blocks.blog.index",
+          "title": "News",
+          "intro": "News, notices and updates to stay informed about the municipality and civic services.",
+          "featured_title": "Featured",
+          "explore_title": "Explore all news",
+          "home_label": "Home",
+          "read_more": "Read more",
+          "empty": "There are no published posts yet.",
+          "pagination_label": "News pagination",
+          "parity_page": "lista-risorse"
+        }
+      }
+    ],
+    "de": [
+      {
+        "type": "blog.index",
+        "data": {
+          "view": "pub_theme::components.blocks.blog.index",
+          "title": "Neuigkeiten",
+          "intro": "Nachrichten und Mitteilungen zu Gebiet und kommunalen Diensten.",
+          "featured_title": "Im Fokus",
+          "explore_title": "Alle Neuigkeiten entdecken",
+          "home_label": "Startseite",
+          "read_more": "Weiterlesen",
+          "empty": "Noch keine Beiträge veröffentlicht.",
+          "pagination_label": "Seitennavigation der Neuigkeiten",
+          "parity_page": "lista-risorse"
+        }
+      }
+    ],
+    "es": [
+      {
+        "type": "blog.index",
+        "data": {
+          "view": "pub_theme::components.blocks.blog.index",
+          "title": "Novedades",
+          "intro": "Noticias, comunicados y avisos para seguir el territorio y los servicios cívicos.",
+          "featured_title": "Destacados",
+          "explore_title": "Explorar todas las novedades",
+          "home_label": "Inicio",
+          "read_more": "Leer más",
+          "empty": "Todavía no hay publicaciones.",
+          "pagination_label": "Paginación de novedades",
+          "parity_page": "lista-risorse"
+        }
+      }
+    ]
+  }
+}

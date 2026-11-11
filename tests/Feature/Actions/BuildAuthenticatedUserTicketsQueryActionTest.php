@@ -13,14 +13,16 @@ it('returns tickets owned by the authenticated citizen and excludes other citize
     /** @var TestCase $this */
     $citizen = UserFactory::new()->createOne();
     $otherCitizen = UserFactory::new()->createOne();
+    // Il ticket lo ha inserito un altro utente (operatore): created_by e' l'UUID di un utente, uno username come 'system' MariaDB lo rifiuta.
+    $operator = UserFactory::new()->createOne();
 
     $ownedTicket = TicketFactory::new()->createOne([
         'owner_id' => $citizen->getKey(),
-        'created_by' => 'system',
+        'created_by' => $operator->getKey(),
     ]);
     TicketFactory::new()->createOne([
         'owner_id' => $otherCitizen->getKey(),
-        'created_by' => 'system',
+        'created_by' => $operator->getKey(),
     ]);
 
     $this->actingAs($citizen);

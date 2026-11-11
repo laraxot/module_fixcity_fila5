@@ -56,6 +56,22 @@ it('hides ticket deletion from an ordinary PA operator', function (): void {
         ->assertTableBulkActionHidden('delete');
 });
 
+it('hides ticket deletion from an operator who also has the panel role fixcity::admin', function (): void {
+    // Come nella realta': l'operatore riceve `operator` + `fixcity::admin` (quest'ultimo solo per aprire il pannello).
+    $operator = UserFactory::new()->createOne();
+    $operator->assignRole(Role::firstOrCreate(['name' => 'operator', 'guard_name' => 'web']));
+    $operator->assignRole(Role::firstOrCreate(['name' => 'fixcity::admin', 'guard_name' => 'web']));
+    grantFixcityMediaPermissions($operator);
+    $ticket = TicketFactory::new()->createOne();
+    Filament::setCurrentPanel('fixcity::admin');
+    $this->actingAs($operator);
+
+    Livewire::test(ViewTicket::class, ['record' => $ticket->getRouteKey()])
+        ->assertSuccessful()
+        ->assertActionHidden('delete');
+    \PHPUnit\Framework\Assert::assertFalse($operator->can('delete', $ticket));
+});
+
 it('shows soft-delete to an administrator', function (): void {
     $administrator = UserFactory::new()->createOne();
     $administrator->assignRole(Role::firstOrCreate(['name' => 'admin', 'guard_name' => 'web']));

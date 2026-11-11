@@ -7,10 +7,13 @@ use Modules\Fixcity\Actions\BuildPublicTicketsQueryAction;
 use Modules\Fixcity\Actions\BuildTicketPublicDetailsPayloadAction;
 use Modules\Fixcity\Actions\LoadPublicTicketsGeoJsonAction;
 use Modules\Fixcity\Models\Ticket;
+use function Laravel\Folio\middleware;
 use function Laravel\Folio\name;
 use function Laravel\Folio\render;
 
 name('api.ticket-details');
+// SEC-12: endpoint pubblico senza autenticazione, limite per IP.
+middleware(['throttle:240,1']);
 
 render(function (int|string $ticket): JsonResponse {
     $payloadAction = app(BuildTicketPublicDetailsPayloadAction::class);
@@ -26,7 +29,8 @@ render(function (int|string $ticket): JsonResponse {
     }
 
     // Un ticket reale non visibile (es. in attesa di moderazione) non deve ricadere sul GeoJSON demo con lo stesso id.
-    abort_if(Ticket::query()->whereKey($ticket)->exists(), 404);
+    // withTrashed: anche un ticket cancellato non deve ricadere sul GeoJSON demo (titolo e indirizzo resterebbero pubblici).
+    abort_if(Ticket::withTrashed()->whereKey($ticket)->exists(), 404);
 
     $ticketId = (int) $ticket;
     $geoJson = app(LoadPublicTicketsGeoJsonAction::class)->execute();

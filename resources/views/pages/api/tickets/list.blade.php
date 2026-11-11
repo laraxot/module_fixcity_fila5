@@ -6,11 +6,15 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Str;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 use Modules\Fixcity\Actions\BuildPublicTicketsQueryAction;
+use Modules\Fixcity\Actions\BuildTicketPublicImageUrlsAction;
 use Modules\Fixcity\Models\Ticket;
+use function Laravel\Folio\middleware;
 use function Laravel\Folio\name;
 use function Laravel\Folio\render;
 
 name('api.tickets.list');
+// SEC-12: endpoint pubblico senza autenticazione, limite per IP.
+middleware(['throttle:120,1']);
 
 render(function (): JsonResponse {
     /** @var array<int, string> $types */
@@ -28,17 +32,15 @@ render(function (): JsonResponse {
     $limit = min(50, max(1, (int) request()->query('limit', 20)));
 
     $total = (clone $query)->count();
+    // `media` caricata in una query sola (DB-13): prima era una query per riga.
     /** @var \Illuminate\Support\Collection<int, Ticket> $tickets */
-    $tickets = (clone $query)->latest()->skip($offset)->take($limit)->get();
+    $tickets = (clone $query)->with('media')->latest()->skip($offset)->take($limit)->get();
+    $imageUrls = app(BuildTicketPublicImageUrlsAction::class);
+    $viewer = auth()->user();
 
-    $items = $tickets->map(static function (Ticket $ticket): array {
+    $items = $tickets->map(static function (Ticket $ticket) use ($imageUrls, $viewer): array {
         $location = is_array($ticket->location) ? $ticket->location : [];
         $address = (string) ($location['address'] ?? $location['display_name'] ?? '');
-
-        $images = $ticket->getMedia('attachments');
-        if ($images->isEmpty()) {
-            $images = $ticket->getMedia('ticket');
-        }
 
         return [
             'id' => $ticket->getKey(),
@@ -46,7 +48,8 @@ render(function (): JsonResponse {
             'type_label' => (string) $ticket->type_label,
             'address' => $address,
             'content' => Str::limit((string) $ticket->content, 200),
-            'images' => array_values($images->map(static fn (mixed $media): string => $media->getFullUrl())->all()),
+            // Solo foto di ticket pubblici (o del proprietario), mai PDF: SEC-04.
+            'images' => $imageUrls->execute($ticket, $viewer),
             'url' => (string) LaravelLocalization::localizeURL('/tickets/'.$ticket->getKey()),
         ];
     })->all();

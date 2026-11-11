@@ -60,8 +60,9 @@ test('fixcity configuration keeps user-owned tables outside the data database', 
         ->toContain('if ($userDatabase === $applicationDatabase)')
         ->toContain("\$userDatabase = 'fixcity_user';");
 
+    // Modules/Fixcity/config/database.php usa ora gli stessi nomi camelCase del config del tenant ($userDatabase, $applicationDatabase).
     expect($moduleDatabase)
-        ->toContain('if ($user_database_name === $database_name)')
-        ->toContain("\$user_database_name = 'fixcity_user';")
-        ->toContain("'database' => \$user_database_name,");
+        ->toContain('if ($userDatabase === $applicationDatabase)')
+        ->toContain("\$userDatabase = 'fixcity_user';")
+        ->toContain("'database' => \$userDatabase,");
 });

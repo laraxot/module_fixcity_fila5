@@ -1,0 +1,137 @@
+{
+    "id": "appuntamento-04-richiedente-autenticato",
+    "slug": "appuntamento-04-richiedente-autenticato",
+    "parent_slug": "tests",
+    "title": {
+        "it": "Prenotazione appuntamento",
+        "en": "Appointment booking"
+    },
+    "description": "Passo 4 della prenotazione di un appuntamento con utente autenticato: scheda del richiedente. Contenuto da JSON, reso dal blocco appointment-step del tema Sixteen.",
+    "layout": "test",
+    "content_blocks": {
+        "it": [
+            {
+                "type": "appointment-step",
+                "data": {
+                    "view": "pub_theme::components.blocks.appointment-step.design-comuni",
+                    "title": "Prenotazione appuntamento",
+                    "breadcrumb": {
+                        "items": [
+                            {
+                                "label": "Home",
+                                "url": "/it/tests/homepage"
+                            }
+                        ],
+                        "current": "Prenotazione appuntamento"
+                    },
+                    "steps": {
+                        "items": [
+                            {
+                                "label": "Luogo",
+                                "state": "confirmed"
+                            },
+                            {
+                                "label": "Data e orario",
+                                "state": "confirmed"
+                            },
+                            {
+                                "label": "Dettagli appuntamento",
+                                "state": "confirmed"
+                            },
+                            {
+                                "label": "Richiedente",
+                                "state": "active"
+                            },
+                            {
+                                "label": "Riepilogo",
+                                "state": ""
+                            }
+                        ],
+                        "index": "4/5",
+                        "confirmed_label": "Confermato",
+                        "active_label": "Attivo",
+                        "required_notice": "I campi contraddistinti dal simbolo asterisco sono obbligatori"
+                    },
+                    "side_nav": {
+                        "aria_label": "INFORMAZIONI RICHIESTE",
+                        "title": "INFORMAZIONI RICHIESTE",
+                        "items": [
+                            {
+                                "label": "Richiedente",
+                                "anchor": "applicant"
+                            }
+                        ]
+                    },
+                    "sections": [
+                        {
+                            "type": "applicant-card",
+                            "id": "applicant",
+                            "title": "Richiedente",
+                            "title_class": "mb-1",
+                            "subtitle": "Informazioni su di te",
+                            "name": "Giulia Bianchi",
+                            "tax_label": "Codice Fiscale",
+                            "tax_code": "GLABNC72H25H501Y",
+                            "toggle_label": "Mostra tutto",
+                            "collapse_id": "collapse-parents",
+                            "summary": {
+                                "title": "Contatti",
+                                "class": "bg-white has-border",
+                                "edit": "Modifica",
+                                "edit_class": "d-none text-decoration-none",
+                                "footer_class": "p-0 d-none",
+                                "rows": [
+                                    {
+                                        "label": "Telefono",
+                                        "value": "+39 331 1234567"
+                                    },
+                                    {
+                                        "label": "Email",
+                                        "value": "mario.rossi@gmail.com"
+                                    }
+                                ]
+                            }
+                        }
+                    ],
+                    "nav": {
+                        "aria_label": "Step",
+                        "back": "Indietro",
+                        "next": "Avanti",
+                        "saved_message": "Richiesta salvata con successo",
+                        "save": "Salva Richiesta",
+                        "save_short": "Salva"
+                    },
+                    "contacts": {
+                        "main": {
+                            "title": "Contatta il comune",
+                            "items": [
+                                {
+                                    "icon": "it-help-circle",
+                                    "label": "Leggi le domande frequenti",
+                                    "url": "#"
+                                },
+                                {
+                                    "icon": "it-mail",
+                                    "label": "Richiedi assistenza",
+                                    "url": "#"
+                                },
+                                {
+                                    "icon": "it-hearing",
+                                    "label": "Chiama il numero verde 05 0505",
+                                    "url": "#"
+                                }
+                            ]
+                        }
+                    },
+                    "header_active": "all-services"
+                }
+            }
+        ],
+        "en": []
+    },
+    "sidebar_blocks": {
+        "it": [],
+        "en": []
+    },
+    "footer_blocks": null
+}

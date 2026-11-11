@@ -9,7 +9,6 @@ use Filament\Forms\Components\Checkbox;
 use Filament\Forms\Components\Field;
 use Filament\Forms\Components\Hidden;
 use Filament\Forms\Components\Select;
-use Filament\Forms\Components\SpatieMediaLibraryFileUpload;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
 use Filament\Schemas\Components\Component as SchemaComponent;
@@ -17,15 +16,19 @@ use Filament\Schemas\Components\Html;
 use Filament\Schemas\Components\Section;
 use Filament\Schemas\Components\View;
 use Filament\Schemas\Components\Wizard\Step;
+use Illuminate\Http\UploadedFile;
 use Illuminate\Support\HtmlString;
 use Illuminate\Support\MessageBag;
 use Illuminate\Support\Str;
+use Intervention\Image\Drivers\Gd\Driver as GdDriver;
+use Intervention\Image\ImageManager;
 use Livewire\Component as LivewireComponent;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 use Modules\Fixcity\Actions\BuildTicketReviewSummaryAction;
 use Modules\Fixcity\Actions\GetPublishedPrivacyPolicyAction;
 use Modules\Fixcity\Enums\TicketTypeEnum;
 use Modules\Geo\Filament\Forms\Components\CoordinatePicker;
+use Modules\Media\Filament\Forms\Components\CameraPhotoUpload;
 use Modules\Xot\Actions\Cast\SafeStringCastAction;
 use Modules\Xot\Filament\Resources\Schemas\XotBaseResourceForm;
 
@@ -209,6 +212,32 @@ class TicketForm extends XotBaseResourceForm
     }
 
     /**
+     * SEC-04 (DCP-49): un file con firma JPEG/PNG valida ma che GD non sa decodificare (intestazione troncata, Exif con GPS e nessun dato
+     * immagine) superava `acceptedFileTypes` e faceva fallire `StripImageMetadataAction` DOPO `Ticket::create`: eccezione non gestita
+     * (500 per il cittadino) e originale con GPS rimasto sul disco. La foto si decodifica qui, con lo stesso decoder (Intervention, GD)
+     * che poi la ripulisce: se non si legge e' un errore di validazione sul campo allegati, prima di scrivere ticket, media o file.
+     * Filament applica la regola a ogni file caricato (BaseFileUpload::getValidationRules); PDF e altri tipi non sono toccati.
+     */
+    protected static function decodableImageRule(): \Closure
+    {
+        return static function (string $attribute, mixed $value, \Closure $fail): void {
+            if (! $value instanceof UploadedFile || ! \in_array($value->getMimeType(), ['image/jpeg', 'image/png'], true)) {
+                return;
+            }
+
+            try {
+                $bytes = $value->get();
+                if (! \is_string($bytes) || $bytes === '') {
+                    throw new \RuntimeException('Empty upload.');
+                }
+                (new ImageManager(new GdDriver))->decodeBinary($bytes);
+            } catch (\Throwable) {
+                $fail((string) __('fixcity::ticket_form.fields.images.error_prepare'));
+            }
+        };
+    }
+
+    /**
      * Messaggi di validazione dei campi del passo dati (solo front office). `Modules/Lang` applica a OGNI campo `user::validation`, che in en e de e'
      * una copia dell'italiano e in es non esiste: l'errore "Il campo X e' obbligatorio" compariva in italiano in tutte le lingue (misurato 2026-10-13).
      *
@@ -333,14 +362,17 @@ class TicketForm extends XotBaseResourceForm
             ->required()
             ->minLength(10)
             ->rows(4);
-        $images = SpatieMediaLibraryFileUpload::make('images')
+        // CameraPhotoUpload (Media): FilePond riduce la foto nel browser, il server accetta 2 MB per richiesta; dc-file-upload legge lo stesso lato.
+        $images = CameraPhotoUpload::make('images')
             ->columnSpanFull()
             ->collection('attachments')
             ->maxFiles(5)
             // Gli stessi mime della collezione `attachments` (Ticket::registerMediaCollections): ammettere `image/*` faceva passare
             // SVG, GIF, WebP e la creazione dei media falliva dopo Ticket::create (ticket orfano, SEC-04 DCP-49).
             ->acceptedFileTypes(['image/jpeg', 'image/png', 'application/pdf'])
-            ->maxSize(10 * 1024);
+            // `maxSize` si controlla sul file originale, prima della riduzione (CameraPhotoUpload::MAX_SIDE). Il wizard pubblico usa `MediaCameraImage`.
+            ->maxSize(10 * 1024)
+            ->rule(static fn (): \Closure => static::decodableImageRule());
         $section = Section::make((string) __('fixcity::ticket_form.sections.issue.heading'))
             ->columnSpanFull();
 

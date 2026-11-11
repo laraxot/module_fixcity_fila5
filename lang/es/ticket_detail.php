@@ -6,6 +6,10 @@ declare(strict_types=1);
 // File: lang/es/ticket_detail.php
 // Textos de la página pública de detalle /{lang}/tickets/{id} y del mensaje de "Seguir" (story DCP-148).
 return [
+    'not_found' => 'Incidencia no encontrada o no visible.',
+    'not_available' => 'N/D',
+    'images' => 'Imágenes',
+    'image_alt' => 'Imagen de la incidencia :name',
     'breadcrumb' => [
         'home' => 'Home',
         'list' => 'Lista de incidencias',
@@ -37,7 +41,7 @@ return [
     'timeline' => [
         'update' => 'Actualización', 'assignment' => 'Incidencia asignada', 'approved' => 'Incidencia aprobada',
         'rejected' => 'Incidencia descartada', 'mail_sent' => 'Mensaje enviado', 'mail_failed' => 'No se pudo enviar el mensaje', 'mail_received' => 'Respuesta recibida',
-        'followup' => 'Recordatorio enviado', 'media_added' => 'Adjunto añadido', 'recipient' => 'Destinatario: :recipient', 'attachment' => 'Archivo: :file', 'closed' => 'Incidencia cerrada',
+        'followup' => 'Recordatorio enviado', 'media_added' => 'Adjunto añadido', 'recipient' => 'Destinatario: :recipient', 'closed' => 'Incidencia cerrada',
     ],
     'where' => [
         'title' => 'Dónde',
@@ -45,6 +49,12 @@ return [
         'no_address' => 'Dirección no indicada',
         'map' => 'Mapa con la ubicación de la incidencia',
         'map_at' => 'Mapa con la ubicación de la incidencia: :address',
+    ],
+    'photos' => [
+        'title' => ['label' => 'Fotos'],
+        'alt' => ['label' => 'Foto :number de la incidencia «:title»'],
+        'new_window' => ['label' => '(abre la foto completa en una ventana nueva)'],
+        'document' => ['label' => 'Documento :number (PDF)'],
     ],
     'description' => [
         'title' => 'Descripción',

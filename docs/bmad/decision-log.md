@@ -16,6 +16,23 @@ related:
 
 # Decision log — Fixcity
 
+## 2026-10-27 — Story map upload camera mobile
+
+- **Decisione:** il lavoro è suddiviso in cinque BMAD stories coordinate dalla story Fixcity: contratto wizard, normalizzazione Sixteen, fallback Imagick Media, runtime ImageMagick/libheif e quality gate.
+- **Razionale:** separare browser, dominio upload, infrastruttura e verifica riduce conflitti tra agenti e rende verificabile il punto di fallimento.
+- **Riferimento:** [epic mobile-camera-upload](./epics/mobile-camera-upload.epic.md).
+
+## 2026-10-27 — Coordinamento operativo nelle BMAD stories
+
+- **Decisione:** per le iniziative attive, le BMAD stories sono la fonte operativa di coordinamento, claim, handoff, decisioni e verifiche; `docs/chat/` resta archivio storico.
+- **Motivo:** evitare doppia fonte di verità tra chat e planning BMAD e mantenere il contesto vicino al codice owner.
+- **Impatto:** `FIXCITY-MEDIA-001` è l’unica story operativa; Media e Sixteen
+  mantengono soltanto supporting handoff nei rispettivi `docs/bmad/stories/`.
+  La cronologia di `docs/chat/` non viene riscritta automaticamente.
+- **Riferimenti:** [story owner](./stories/mobile-camera-upload.story.md),
+  [Media handoff](../../../Media/docs/bmad/stories/fix-mobile-camera-upload.story.md),
+  [Sixteen handoff](../../../../Themes/Sixteen/docs/bmad/stories/camera-upload-mobile-fix.story.md).
+
 ## 2026-10-26 - Igiene di sicurezza: radice web, gate, bootstrap, login API, proxy fidati, auto-writer (DCP-282)
 
 - **Radice web:** i file di prova e debug di `public_html` (`info.php` con `phpinfo()`, `test.txt`, `serve-root-test.txt`, `hot.stale*`,

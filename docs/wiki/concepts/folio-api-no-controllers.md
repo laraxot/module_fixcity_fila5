@@ -20,8 +20,12 @@ Vietato `app/Http/Controllers/**`. Entry HTTP: `resources/views/pages/api/` + `r
 
 | URL | Folio | Action |
 |-----|-------|--------|
-| `/api/tickets/geojson` | `api/tickets/geojson.blade.php` | `BuildTicketsGeoJsonAction` |
+| `/api/tickets/geojson` | `api/tickets/geojson.blade.php` | `BuildPublicTicketsGeoJsonResponseAction` (limite, `bbox`, cache 60 s ospiti) |
 | `/api/ticket-details/{ticket}` | `api/ticket-details/[ticket].blade.php` | `BuildTicketPublicDetailsPayloadAction` |
+| `/api/tickets/list` | `api/tickets/list.blade.php` | `BuildTicketPublicImageUrlsAction` (solo foto) |
+| `/api/ticket-media/{media_id}/{file}` | `api/ticket-media/[...segments].blade.php` | `CanViewTicketMediaAction`, `SignTicketMediaUrlAction` |
+
+Dettagli: `../../stories/public-api-media-and-geojson.story.md`.
 
 Registrazione: `FixcityServiceProvider::registerFolioApiRoutes()` — `Folio::path(.../pages/api)->uri('/api')`.
 

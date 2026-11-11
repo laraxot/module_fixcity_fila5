@@ -95,7 +95,7 @@ describe('CreateTicketWizardWidget submit', function (): void {
         Assert::assertCount(1, $attachments);
         $attachment = $attachments->first();
         Assert::assertNotNull($attachment);
-        Assert::assertTrue(Storage::disk('public')->exists($attachment->getPathRelativeToRoot()));
+        Assert::assertTrue(Storage::disk((string) $attachment->disk)->exists($attachment->getPathRelativeToRoot()));
         Assert::assertSame(
             $user->email,
             app(BuildTicketConfirmationDataAction::class)->execute($ticket)['email'],
@@ -103,7 +103,7 @@ describe('CreateTicketWizardWidget submit', function (): void {
 
         $this->get('/it/tickets/confirmation')
             ->assertOk()
-            ->assertSee('<title>Segnalazione inviata</title>', false)
+            ->assertSee('<title>Segnalazione inviata | ', false)
             ->assertSee((string) $ticket->code)
             ->assertSee($user->email);
     });

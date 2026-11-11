@@ -6,6 +6,7 @@ use Illuminate\Auth\SessionGuard;
 use Illuminate\Support\Facades\Auth;
 use Modules\Fixcity\Tests\TestCase;
 use Modules\Gdpr\Actions\Cookie\GetCookieInventoryAction;
+use Modules\Gdpr\Datas\GdprConfigData;
 use Modules\Gdpr\Enums\CookieCategory;
 use PHPUnit\Framework\Assert;
 
@@ -47,7 +48,8 @@ it('switches to consent as soon as a non technical cookie is declared', function
 });
 
 it('keeps the consent for 6 months, the earliest the Garante allows to ask again', function (): void {
-    Assert::assertSame(180, config('gdpr.config.cookie.consent_lifetime'));
+    // `consent_lifetime` non e' piu' in gdpr.config.cookie: ha un'unica definizione in GdprConfigData (SettingPage del modulo Gdpr).
+    Assert::assertSame(180, GdprConfigData::make()->consent_lifetime);
 });
 
 /*

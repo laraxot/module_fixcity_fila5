@@ -70,6 +70,13 @@ per i dispositivi iOS, ma `dc-file-upload.blade.php` li converte in JPEG prima d
 la conversione client mantiene una sola regola di sicurezza e impedisce il messaggio
 generico di upload fallito per le foto scattate dalla fotocamera.
 
+Il testo mostrato dal picker non vive nel Blade o nel JavaScript: arriva dalle chiavi
+`fixcity::ticket_form.fields.images.*`, presenti in `it`, `en`, `de` ed `es`. La soglia
+applicativa resta 10 MB per file; il web-root `public_html/.user.ini` imposta 12 MB per
+file e 16 MB per la richiesta multipart. Nginx deve avere `client_max_body_size 16M`
+(o superiore) e il runtime PHP deve consentire gli stessi valori, altrimenti PHP
+risponde `validation.uploaded` prima che Laravel possa validare il campo.
+
 ## Etichette ciclo su ViewTicket (qualita)
 
 Le azioni header (`approve`, `reject`, `resolve`, `close`, `changeStatus`,
@@ -82,6 +89,8 @@ Il blocco test `segnalazione-dettaglio` e il dettaglio pubblico usano
 `fixcity::ticket_detail.*` (breadcrumb, meta, where, description). Nessun
 `->label()` / stringa UI nel blade. Widget rating cittadino: solo `@auth` +
 `TicketCitizenRatingPromptWidget` (XotBase), montaggio esplicito.
+Gli ID del titolo della regione rating derivano dal ticket ID e `aria-labelledby`
+deve puntare a quello stesso ID, anche quando la view e' riusata.
 
 ## FO link / navigazione (non Filament)
 

@@ -1,0 +1,37 @@
+{
+  "id": "register",
+  "title": {
+    "it": "Crea il tuo account — FixCity",
+    "en": "Create your account — FixCity",
+    "de": "Konto erstellen — FixCity",
+    "es": "Crea tu cuenta — FixCity"
+  },
+  "slug": "register",
+  "layout": "design-comuni",
+  "description": {
+    "it": "Crea il tuo account FixCity per segnalare disservizi, seguire le pratiche e ricevere aggiornamenti.",
+    "en": "Create your FixCity account to report service issues, track requests and receive updates.",
+    "de": "Erstellen Sie Ihr FixCity-Konto, um Störungen zu melden, Vorgänge zu verfolgen und Updates zu erhalten.",
+    "es": "Crea tu cuenta de FixCity para reportar incidencias, seguir tus trámites y recibir actualizaciones."
+  },
+  "content": null,
+  "content_blocks": {
+    "it": [{"type": "auth.register", "data": {"view": "pub_theme::components.pages.auth-register", "heading": "Crea il tuo account", "intro": "Registrati per segnalare disservizi e seguire le tue pratiche."}}],
+    "en": [{"type": "auth.register", "data": {"view": "pub_theme::components.pages.auth-register", "heading": "Create your account", "intro": "Sign up to report issues and track your requests."}}],
+    "de": [{"type": "auth.register", "data": {"view": "pub_theme::components.pages.auth-register", "heading": "Konto erstellen", "intro": "Registrieren Sie sich, um Störungen zu melden und Vorgänge zu verfolgen."}}],
+    "es": [{"type": "auth.register", "data": {"view": "pub_theme::components.pages.auth-register", "heading": "Crea tu cuenta", "intro": "Regístrate para reportar incidencias y seguir tus trámites."}}]
+  },
+  "sidebar_blocks": {"it": [], "en": [], "de": [], "es": []},
+  "footer_blocks": null,
+  "meta": {
+    "layout": "design-comuni",
+    "theme": "design-comuni",
+    "body_class": "auth-register-page",
+    "accessibility": {"contrast": "AA", "focus_ring": true, "aria_labels": true, "font_scale": "base-16"},
+    "translations": {"namespace": "fixcity", "convention": "namespace::context.collection.key.type", "note": "Usare fixcity::auth.register.* per chiavi di traduzione"}
+  },
+  "status": 1,
+  "published_at": "2026-10-18 13:50:00",
+  "created_at": "2026-01-01 00:00:00",
+  "updated_at": "2026-10-18 13:51:00"
+}

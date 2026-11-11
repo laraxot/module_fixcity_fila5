@@ -48,7 +48,7 @@ return new class extends XotBaseMigration
                     $table->decimal('latitude', 20, 18)->nullable();
                 }
                 if (! $this->hasColumn('longitude')) {
-                    $table->decimal('longitude', 20, 18)->nullable();
+                    $table->decimal('longitude', 21, 18)->nullable();
                 }
                 if (! $this->hasColumn('status')) {
                     $table->string('status')->nullable();

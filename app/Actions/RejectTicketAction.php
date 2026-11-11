@@ -29,26 +29,26 @@ final class RejectTicketAction
             throw new \InvalidArgumentException('La motivazione di scarto è obbligatoria.');
         }
 
-        $currentValue = $ticket->resolveTicketStatusValue();
-        $current = TicketStatusEnum::tryFrom($currentValue) ?? TicketStatusEnum::PENDING;
-
-        if (! in_array($current, [TicketStatusEnum::PENDING, TicketStatusEnum::DRAFT, TicketStatusEnum::IN_REVIEW], true)) {
-            throw new \DomainException(
-                'Si può scartare solo una segnalazione in bozza, in attesa o in revisione.',
-            );
-        }
-
         $actorId = auth()->id();
         $userId = is_int($actorId) || is_string($actorId) ? $actorId : null;
 
-        $ticket->getConnection()->transaction(function () use ($ticket, $current, $reason, $userId): void {
+        // Stato riletto con la riga bloccata (DB-07): uno scarto non puo' piu' riportare a pending un ticket appena passato in lavorazione.
+        app(LockTicketForStatusChangeAction::class)->execute($ticket, static function (Ticket $locked) use ($reason, $userId): void {
+            $current = TicketStatusEnum::tryFrom($locked->resolveTicketStatusValue()) ?? TicketStatusEnum::PENDING;
+
+            if (! in_array($current, [TicketStatusEnum::PENDING, TicketStatusEnum::DRAFT, TicketStatusEnum::IN_REVIEW], true)) {
+                throw new \DomainException(
+                    'Si può scartare solo una segnalazione in bozza, in attesa o in revisione.',
+                );
+            }
+
             // Resta pending: non è di competenza pubblica e non è "risolta".
             if ($current !== TicketStatusEnum::PENDING) {
-                $ticket->setStatus(TicketStatusEnum::PENDING);
+                $locked->setStatus(TicketStatusEnum::PENDING);
             }
 
             app(RecordTicketActivityAction::class)->execute(
-                $ticket,
+                $locked,
                 TicketActivityEventTypeEnum::Rejected,
                 $current,
                 TicketStatusEnum::PENDING,

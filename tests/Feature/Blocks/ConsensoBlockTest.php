@@ -26,7 +26,7 @@ uses(TestCase::class);
  * Il difetto che questo blocco aveva — due `x-data` fratelli, l'uno sul checkbox e l'altro
  * sul bottone — non si vede in un HTML statico: l'HTML e' identico, e il difetto e' che a
  * runtime lo stato non e' condiviso. Un test di interattizione con browser lo trova, ma
- * la pagina di verifica sta sotto un percorco che il middleware `BlockLegacyPublicPages`
+ * la pagina di verifica sta sotto un percorco che il middleware `BlockShowcasePages`
  * chiude al pubblico, e quindi non e' raggiungibile in modo affidabile.
  *
  * La difesa che resta sempre attiva e' l'asserzione strutturale: **un solo `x-data`**, sul

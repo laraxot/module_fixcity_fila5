@@ -64,12 +64,15 @@ final class BuildTicketTimelineAction
                 : null;
             $from = $fromValue !== null ? TicketStatusEnum::tryFrom($fromValue) : null;
 
+            // DCP-379: un evento senza cambio di stato (es. media_added, from = to) si legge con la sua etichetta, non come lo stato attuale
+            $isTransition = $to !== null && $to !== $from;
+
             $timeline[] = [
                 'occurred_at' => $activity->created_at?->translatedFormat('d F Y H:i') ?? '',
                 'occurred_date' => $activity->created_at?->translatedFormat('j F Y') ?? '',
                 'occurred_on' => $activity->created_at?->toDateString() ?? '',
-                'from_label' => $from?->getLabel(),
-                'to_label' => $to?->getLabel() ?? $this->eventLabel($activity),
+                'from_label' => $isTransition ? $from?->getLabel() : null,
+                'to_label' => $isTransition ? $to->getLabel() : $this->eventLabel($activity),
                 'reason' => $this->safeReason($activity),
             ];
         }
@@ -113,14 +116,9 @@ final class BuildTicketTimelineAction
                 : null;
         }
 
+        // DCP-379: il nome del file e' l'hash casuale dell'upload (o un nome privato): le foto si vedono nella sezione dedicata
         if ($activity->event_type === TicketActivityEventTypeEnum::MediaAdded->value) {
-            $fileName = is_array($payload) && is_string($payload['file_name'] ?? null)
-                ? trim($payload['file_name'])
-                : '';
-
-            return $fileName !== ''
-                ? (string) __('fixcity::ticket_detail.timeline.attachment', ['file' => $fileName])
-                : null;
+            return null;
         }
 
         return $activity->reason;

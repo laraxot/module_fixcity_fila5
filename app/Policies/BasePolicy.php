@@ -40,6 +40,18 @@ abstract class BasePolicy extends UserBasePolicy
     public const array PA_ROLES = ['operator', 'supervisor', 'admin'];
 
     /**
+     * Solo il super-admin passa a priori.
+     *
+     * XotBasePolicy::before() concede tutto a chi ha `fixcity::admin`, ma quel ruolo serve solo ad aprire il pannello e ce
+     * l'hanno tutti gli operatori (manuale, "Dare l'accesso a un nuovo operatore"): con il bypass un operatore poteva
+     * cancellare segnalazioni e saltare ogni regola sotto. Qui decidono i ruoli PA (operator, supervisor, admin).
+     */
+    public function before(UserContract $user, string $_ability): ?bool
+    {
+        return $user->hasRole('super-admin') ? true : null;
+    }
+
+    /**
      * L'utente agisce come PA (non come cittadino proprietario)?
      */
     protected function isPaOperator(UserContract $user): bool

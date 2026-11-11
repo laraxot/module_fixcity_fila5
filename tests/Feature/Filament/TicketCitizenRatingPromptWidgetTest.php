@@ -23,6 +23,7 @@ it('shows the rating prompt on the resolved ticket detail to its owner', functio
 
     Livewire::test(ViewWidget::class, ['slug0' => (string) $ticket->id])
         ->assertStatus(200)
+        ->assertSee('id="ticket-rating-prompt-title-'.$ticket->id.'"', false)
         ->assertSee('ticket-rating-star-'.$ticket->id.'-5', false);
 });
 

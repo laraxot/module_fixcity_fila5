@@ -1,0 +1,16 @@
+flowchart LR
+  A["In attesa<br/><small>non pubblica</small>"] -->|Approva| B[In revisione]
+  B -->|"Scarta: torna non pubblica"| A
+  B --> C[In lavorazione]
+  B --> D[In sospeso]
+  C --> D
+  D --> C
+  C --> E[Risolto]
+  D --> E
+  E --> F[Riaperto]
+  F --> C
+  E --> G["Chiuso<br/><small>stato finale</small>"]
+  classDef hidden fill:#fff4e5,stroke:#b26a00,color:#5c3700;
+  classDef done fill:#e8f5e9,stroke:#2e7d32,color:#1b4d20;
+  classDef final fill:#eceff1,stroke:#455a64,color:#263238;
+  class A hidden; class E done; class G final;

@@ -1,0 +1,181 @@
+{
+    "id": "graduatoria-messaggio",
+    "slug": "graduatoria-messaggio",
+    "parent_slug": "tests",
+    "title": {
+        "it": "Graduatoria scuola dell'infanzia per l'anno educativo 2022/23",
+        "en": "Graduatoria scuola dell'infanzia per l'anno educativo 2022/23"
+    },
+    "layout": "design-comuni-authenticated",
+    "sidebar_blocks": {
+        "it": [],
+        "en": []
+    },
+    "footer_blocks": null,
+    "description": "Pagina di prova graduatoria-messaggio (flusso graduatoria) da JSON, resa dal blocco service-flow del tema Sixteen.",
+    "content_blocks": {
+        "it": [
+            {
+                "type": "service-flow",
+                "data": {
+                    "view": "pub_theme::components.blocks.service-flow.design-comuni",
+                    "kind": "wizard-step",
+                    "breadcrumb": {
+                        "items": [
+                            {
+                                "label": "Home",
+                                "url": "/it/tests/homepage"
+                            }
+                        ],
+                        "current": "Documenti"
+                    },
+                    "heading": {
+                        "title": "Graduatoria scuola dell'infanzia per l'anno educativo 2022/23",
+                        "row": "row justify-content-center",
+                        "rule": "d-none d-lg-block mb-2"
+                    },
+                    "body": {
+                        "layout": "centered",
+                        "sections_container": false,
+                        "row": "row mt-3 mt-lg-40 justify-content-center",
+                        "col": "col-12 col-lg-8"
+                    },
+                    "sections": [
+                        {
+                            "type": "graduatoria-text-card",
+                            "items": [
+                                {
+                                    "type": "paragraph",
+                                    "text": "Ultima graduatoria disponibile: 14 luglio 2022 La graduatoria qui pubblicata riguarda tutte le richieste pervenute nel mese di febbraio 2022 ed è distinta in:",
+                                    "class": "text-paragraph mb-3"
+                                },
+                                {
+                                    "type": "bullets",
+                                    "class": "mb-3 mt-3",
+                                    "items": [
+                                        {
+                                            "label": "Ammessi",
+                                            "text": "- Elencati in ordine alfabetico"
+                                        },
+                                        {
+                                            "label": "Lista d'attesa",
+                                            "text": "- Elencati secondo la posizione in graduatoria"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "type": "paragraph",
+                                    "text": "È valida per inserimenti alla scuola dell’infanzia comunale o servizi accreditati, secondo quanto previsto dal regolamento vigente, articolo 8 comma 6. Le età dei bambini indicate nella graduatoria si intendono compiuti al 1° settembre",
+                                    "class": "text-paragraph mb-3"
+                                },
+                                {
+                                    "type": "paragraph",
+                                    "text": "Si ricorda che eventuali variazioni, legate alla composizione del nucleo familiare o alla situazione lavorativa di uno o entrambi i genitori, potranno essere comunicate nel periodo settembre/novembre 2021 per integrare l'attuale graduatoria che, unitamente alle richieste che perverranno in tale periodo, sarà tenuta in considerazione per eventuali posti disponibili da gennaio 2022.",
+                                    "class": "text-paragraph mb-3"
+                                }
+                            ]
+                        },
+                        {
+                            "type": "graduatoria-attachments",
+                            "title": "Allegati",
+                            "title_class": "title-xxlarge mt-40 mb-2 mb-lg-4",
+                            "wrapper_class": "link-list-wrapper default",
+                            "items": [
+                                {
+                                    "label": "Ammessi",
+                                    "aria": "scarica il documento ammessi elenco dei bambini ammessi alle scuole dellinfanzia comunali per lanno educativo 202223",
+                                    "description": "Elenco dei bambini ammessi alle scuole dell’Infanzia comunali per l'anno educativo 2022/23",
+                                    "class": "",
+                                    "description_class": "ml-40 text-paragraph-regular-medium text-black"
+                                },
+                                {
+                                    "label": "Lista d'attesa",
+                                    "aria": "scarica il documento lista dattesa lista dattesa per le scuole dellinfanzia comunali per lanno educativo 202223",
+                                    "description": "Lista d'attesa per le scuole dell’Infanzia comunali per l'anno educativo 2022/23",
+                                    "class": "",
+                                    "description_class": "ml-40 text-paragraph-regular-medium text-black"
+                                }
+                            ]
+                        },
+                        {
+                            "type": "timeline",
+                            "bare": true,
+                            "title": "Tempi e scadenze",
+                            "entries": [
+                                {
+                                    "year": "2022",
+                                    "day": "10",
+                                    "month": "feb",
+                                    "label": "Apertura domande"
+                                },
+                                {
+                                    "year": "2022",
+                                    "day": "28",
+                                    "month": "feb",
+                                    "label": "Termine presentazione domande"
+                                },
+                                {
+                                    "year": "2022",
+                                    "day": "02",
+                                    "month": "mar",
+                                    "label": "Pubblicazione graduatorie"
+                                },
+                                {
+                                    "year": "2022",
+                                    "day": "02",
+                                    "month": "apr",
+                                    "label": "Perfezionamento richieste"
+                                }
+                            ]
+                        },
+                        {
+                            "type": "graduatoria-closing",
+                            "class": "mb-40 mb-lg-90 mt-lg-30 mt-4",
+                            "text": "Le graduatorie verranno aggiornate ogni mese con nuove assegnazioni e trasferimenti in base ai posti che si renderanno disponibili.",
+                            "text_class": "text-paragraph mb-3",
+                            "link": {
+                                "label": "Consulta la richiesta",
+                                "url": "#",
+                                "class": "t-primary text-paragraph"
+                            },
+                            "suffix": "nella tua area riservata",
+                            "suffix_class": "text-paragraph"
+                        }
+                    ],
+                    "contacts": {
+                        "layout": "center",
+                        "col": "col-12 col-lg-5",
+                        "main": {
+                            "title": "Contatta il comune",
+                            "items": [
+                                {
+                                    "icon": "it-help-circle",
+                                    "label": "Leggi le domande frequenti",
+                                    "url": "#"
+                                },
+                                {
+                                    "icon": "it-mail",
+                                    "label": "Richiedi assistenza",
+                                    "url": "#",
+                                    "element": "contacts"
+                                },
+                                {
+                                    "icon": "it-hearing",
+                                    "label": "Chiama il numero verde 05 0505",
+                                    "url": "#"
+                                },
+                                {
+                                    "icon": "it-calendar",
+                                    "label": "Prenota appuntamento",
+                                    "url": "#",
+                                    "element": "appointment-booking"
+                                }
+                            ]
+                        }
+                    }
+                }
+            }
+        ],
+        "en": []
+    }
+}

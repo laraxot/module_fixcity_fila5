@@ -37,8 +37,9 @@ render(function (View $view): View {
     } elseif ($codeString !== '') {
         $ticket = app(GetPublicTicketByCodeAction::class)->execute($codeString);
     }
+    // Accesso gia' concesso sopra (codice di tracciamento o Gate::authorize): foto in ogni stato, con URL firmati (SEC-04).
     $payload = $ticket instanceof Ticket
-        ? app(BuildTicketPublicDetailsPayloadAction::class)->execute($ticket)
+        ? app(BuildTicketPublicDetailsPayloadAction::class)->execute($ticket, accessGranted: true)
         : null;
     $timeline = $ticket instanceof Ticket
         ? app(BuildTicketTimelineAction::class)->execute($ticket)

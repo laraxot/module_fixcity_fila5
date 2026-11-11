@@ -2,8 +2,8 @@
 
 declare(strict_types=1);
 
-$app_url = config('env.APP_URL');
-$app_url = is_string($app_url) ? $app_url : '';
+$appUrl = (config('env.APP_URL') ?? '');
+$appUrl = is_string($appUrl) ? $appUrl : '';
 
 return [
     /*
@@ -54,7 +54,7 @@ return [
         'public' => [
             'driver' => 'local',
             'root' => storage_path('app/public'),
-            'url' => $app_url.'/storage',
+            'url' => $appUrl.'/storage',
             'visibility' => 'public',
             'throw' => true,
         ],
@@ -86,7 +86,7 @@ return [
             'driver' => 'local',
             // 'root' => storage_path('app/public'),
             'root' => base_path('../cache'),
-            // 'url' => config("env.APP_URL").'/storage',
+            // 'url' => (config('env.APP_URL') ?? '').'/storage',
             'visibility' => 'public',
             'throw' => true,
         ],

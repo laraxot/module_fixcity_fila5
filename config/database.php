@@ -4,17 +4,16 @@ declare(strict_types=1);
 
 use Illuminate\Support\Arr;
 
-$database_name = (config('env.DB_DATABASE') ?? 'database');
-$database_name = is_string($database_name) ? $database_name : 'database';
-$user_database_name = (config('env.DB_DATABASE_USER') ?? 'fixcity_user');
-$user_database_name = is_string($user_database_name) ? $user_database_name : 'fixcity_user';
+$applicationDatabase = (config('env.DB_DATABASE') ?? 'fixcity_data');
+$applicationDatabase = is_string($applicationDatabase) ? $applicationDatabase : 'fixcity_data';
+$userDatabase = (config('env.DB_DATABASE_USER') ?? 'fixcity_user');
+$userDatabase = is_string($userDatabase) ? $userDatabase : 'fixcity_user';
 
-// User-owned tables (users, devices, authentication_logs, permissions/roles) must never fall
-// back to the application database. A copied production .env historically
-// set DB_DATABASE_USER equal to DB_DATABASE; keep the boundary safe even when
-// that deployment mistake is present.
-if ($user_database_name === $database_name) {
-    $user_database_name = 'fixcity_user';
+// The User module owns users, devices, authentication logs and Spatie permissions/roles. Never point
+// its connection at the application database, even if production has a stale
+// DB_DATABASE_USER value copied from DB_DATABASE.
+if ($userDatabase === $applicationDatabase) {
+    $userDatabase = 'fixcity_user';
 }
 
 $res = [
@@ -55,17 +54,22 @@ $res = [
         ],
 
         'sqlite' => [
-            'driver' => 'sqlite',
-            'url' => config('env.DATABASE_URL'),
-            'database' => database_path($database_name.'.sqlite'),
+            'driver' => 'mysql',
+            'host' => (config('env.DB_HOST') ?? '127.0.0.1'),
+            'port' => (config('env.DB_PORT') ?? '3306'),
+            'database' => (config('env.DB_DATABASE') ?? 'fixcity_data'),
+            'username' => (config('env.DB_USERNAME') ?? 'fixcity_usr'),
+            'password' => (config('env.DB_PASSWORD') ?? ''),
+            'charset' => 'utf8mb4',
+            'collation' => 'utf8mb4_unicode_ci',
             'prefix' => '',
-            'foreign_key_constraints' => (config('env.DB_FOREIGN_KEYS') ?? true),
+            'strict' => false,
         ],
 
         'user_sqlite' => [
             'driver' => 'sqlite',
             'url' => config('env.DATABASE_URL'),
-            'database' => database_path($user_database_name.'.sqlite'),
+            'database' => database_path($userDatabase.'.sqlite'),
             'prefix' => '',
             'foreign_key_constraints' => (config('env.DB_FOREIGN_KEYS') ?? true),
         ],
@@ -75,7 +79,7 @@ $res = [
             'host' => (config('env.DB_HOST') ?? '127.0.0.1'),
             'port' => (config('env.DB_PORT') ?? '3306'),
             // 'unix_socket' => '/Applications/MAMP/tmp/mysql/mysql.sock',
-            'database' => $user_database_name,
+            'database' => $userDatabase,
             'username' => (config('env.DB_USERNAME_USER') ?? 'forge_user_04_1b'),
             'password' => (config('env.DB_PASSWORD_USER') ?? ''),
             'charset' => 'utf8mb4',
@@ -90,7 +94,7 @@ $res = [
             'host' => (config('env.DB_HOST') ?? '127.0.0.1'),
             'port' => (config('env.DB_PORT') ?? '3306'),
             // 'unix_socket' => '/Applications/MAMP/tmp/mysql/mysql.sock',
-            'database' => $user_database_name,
+            'database' => $userDatabase,
             'username' => (config('env.DB_USERNAME_USER') ?? 'forge_user_02_1'),
             'password' => (config('env.DB_PASSWORD_USER') ?? ''),
             'charset' => 'utf8mb4',
@@ -118,8 +122,8 @@ $res = [
     ],
 ];
 
-$database_default = config('database.default');
-$database_connection = is_string($database_default) ? $database_default : 'mysql';
-Arr::set($res, 'connections.user', Arr::get($res, 'connections.user_'.$database_connection));
+$databaseDefault = config('database.default', 'mysql');
+$databaseDefault = is_string($databaseDefault) ? $databaseDefault : 'mysql';
+Arr::set($res, 'connections.user', Arr::get($res, 'connections.user_'.$databaseDefault));
 
 return $res;

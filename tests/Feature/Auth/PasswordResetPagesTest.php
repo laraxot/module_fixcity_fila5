@@ -5,6 +5,7 @@ declare(strict_types=1);
 use Dom\HTMLDocument;
 use Dom\Node;
 use Illuminate\Auth\Notifications\ResetPassword;
+use Illuminate\Auth\Passwords\PasswordBroker;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Notification;
@@ -56,6 +57,7 @@ function dcp290Citizen(string $password = 'Vecchia-Password-2026!'): array
 function dcp290Token(string $email): string
 {
     $broker = Password::broker();
+    Assert::assertInstanceOf(PasswordBroker::class, $broker);
     $user = $broker->getUser(['email' => $email]);
     Assert::assertNotNull($user, 'Utente di prova non trovato dal broker.');
 
@@ -137,7 +139,11 @@ it('answers the same way for a known and an unknown email, in a status region', 
         Assert::assertNotNull($status, 'Regione role=status assente.');
         Assert::assertSame($expected, dcp290Text($status));
     }
-    Notification::assertSentToTimes(Password::broker()->getUser(['email' => $citizen['email']]), ResetPassword::class, 1);
+    $broker = Password::broker();
+    Assert::assertInstanceOf(PasswordBroker::class, $broker);
+    $recipient = $broker->getUser(['email' => $citizen['email']]);
+    Assert::assertNotNull($recipient);
+    Notification::assertSentToTimes($recipient, ResetPassword::class, 1);
     Notification::assertCount(1);
 })->with(['it', 'en', 'de', 'es']);
 

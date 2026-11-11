@@ -1,0 +1,55 @@
+{
+  "id": "view",
+  "slug": "view",
+  "title": {
+    "it": "Vivere il comune",
+    "en": "Events",
+    "de": "Veranstaltungen",
+    "es": "Eventos"
+  },
+  "layout": "design-comuni",
+  "description": {
+    "it": "Dettaglio di un evento pubblico.",
+    "en": "A published public event.",
+    "de": "Detail einer öffentlichen Veranstaltung.",
+    "es": "Detalle de un evento público."
+  },
+  "content_blocks": {
+    "it": [
+      {
+        "type": "events.view",
+        "data": {
+          "view": "pub_theme::components.blocks.events.detail",
+          "header_active": "live"
+        }
+      }
+    ],
+    "en": [
+      {
+        "type": "events.view",
+        "data": {
+          "view": "pub_theme::components.blocks.events.detail",
+          "header_active": "live"
+        }
+      }
+    ],
+    "de": [
+      {
+        "type": "events.view",
+        "data": {
+          "view": "pub_theme::components.blocks.events.detail",
+          "header_active": "live"
+        }
+      }
+    ],
+    "es": [
+      {
+        "type": "events.view",
+        "data": {
+          "view": "pub_theme::components.blocks.events.detail",
+          "header_active": "live"
+        }
+      }
+    ]
+  }
+}

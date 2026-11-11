@@ -35,7 +35,7 @@ Contratto **trasversale** per ogni `laravel/Modules/<Nome>/docs/`.
 
 | # | Gate | Verifica |
 |---|------|----------|
-| 0 | Bootstrap | `docs/chat/INDEX.md`, trigger map, QMD `-n 5` |
+| 0 | Bootstrap | story BMAD owner (`docs/stories/`), trigger map, QMD `-n 5` |
 | 1 | Git | Forward-only; scope isolato (Tip 001) |
 | 2 | Piano | Story/dev-story se task non banale (Tip 003/008) |
 | 3 | GitHub | Issue+discussion owner modulo nel frontmatter |

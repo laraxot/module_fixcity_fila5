@@ -1,0 +1,38 @@
+{
+    "id": "index",
+    "slug": "index",
+    "title": {
+        "it": "Servizi",
+        "en": "Services",
+        "de": "Dienste",
+        "es": "Servicios"
+    },
+    "layout": "app",
+    "description": {
+        "it": "Accedi ai servizi digitali del Comune: segnala, consulta e segui le pratiche.",
+        "en": "Access municipal digital services: report, browse and track cases.",
+        "de": "Zugang zu digitalen Gemeindediensten: melden, einsehen und verfolgen.",
+        "es": "Acceda a los servicios digitales municipales: denuncie, consulte y haga seguimiento."
+    },
+    "content": null,
+    "content_blocks": {
+        "it": [
+            {
+                "type": "services-page",
+                "data": {
+                    "view": "pub_theme::components.pages.services"
+                }
+            }
+        ],
+        "en": [
+            {
+                "type": "services-page",
+                "data": {
+                    "view": "pub_theme::components.pages.services"
+                }
+            }
+        ]
+    },
+    "sidebar_blocks": {"it": [], "en": []},
+    "footer_blocks": null
+}

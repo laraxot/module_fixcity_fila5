@@ -23,13 +23,14 @@ use Illuminate\Support\Str;
 use Illuminate\Validation\Rule;
 use Illuminate\Validation\Rules\In;
 use Modules\Fixcity\Actions\CreateTicketAction;
+use Modules\Fixcity\Actions\GetMissingEnteFieldsAction;
 use Modules\Fixcity\Actions\GetPublishedPrivacyPolicyAction;
 use Modules\Fixcity\Enums\TicketPriorityEnum;
 use Modules\Fixcity\Enums\TicketStatusEnum;
 use Modules\Fixcity\Enums\TicketTypeEnum;
-use Modules\Fixcity\Events\TicketCreatedEvent;
 use Modules\Fixcity\Filament\Resources\TicketResource\Schemas\TicketForm;
 use Modules\Fixcity\Models\Ticket;
+use Modules\User\Actions\Auth\HasVerifiedIdentityAction;
 use Modules\Xot\Filament\Widgets\XotBaseWidget;
 
 /**
@@ -190,6 +191,13 @@ class CreateTicketWidget extends XotBaseWidget
             return;
         }
 
+        // Widget legacy, oggi non montato: stessi controlli del wizard (identita' verificata PRD-02, dati dell'ente PRD-04).
+        if (! app(HasVerifiedIdentityAction::class)->execute(auth()->user())) {
+            $this->redirect(route('verification.notice'));
+
+            return;
+        }
+
         if (app(GetPublishedPrivacyPolicyAction::class)->execute() === null) {
             $this->passesDeclaredRules();
             $this->addError('data.accept_terms', __('fixcity::ticket.privacy.not_configured'));
@@ -223,23 +231,36 @@ class CreateTicketWidget extends XotBaseWidget
 
     public function create(): void
     {
-        if (app(GetPublishedPrivacyPolicyAction::class)->execute() === null) {
+        // Widget legacy, oggi non montato: stessi controlli del wizard (identita' verificata PRD-02, dati dell'ente PRD-04).
+        if (! app(HasVerifiedIdentityAction::class)->execute(auth()->user())) {
+            $this->redirect(route('verification.notice'));
+
+            return;
+        }
+
+        $policy = app(GetPublishedPrivacyPolicyAction::class)->execute();
+        if ($policy === null) {
             $this->addError('data.accept_terms', __('fixcity::ticket.privacy.not_configured'));
 
             return;
         }
 
-        // Ottieni i dati dal form
+        if (app(GetMissingEnteFieldsAction::class)->execute($policy) !== []) {
+            $this->addError('data.accept_terms', __('fixcity::ticket_submit.ente_not_configured'));
+
+            return;
+        }
+
+        /** @var array<string, mixed> $data */
         $data = $this->form->getState();
+        // Stato iniziale deciso dal server, come in submit().
+        $data['status'] = TicketStatusEnum::PENDING->value;
+        $data['priority'] = TicketPriorityEnum::LOW->value;
 
-        // Crea il ticket senza le immagini
-        $ticket = Ticket::create($data);
-
-        // Salva le immagini usando saveRelationships()
-        $this->form->model($ticket)->saveRelationships();
-
-        // Dispatch dell'evento
-        TicketCreatedEvent::dispatch($ticket);
+        // Stesso percorso del wizard (DB-10, DB-06): codice di tracciamento, ticket e immagini in una transazione, evento dopo il commit.
+        app(CreateTicketAction::class)->execute($data, null, function (Ticket $ticket): void {
+            $this->form->model($ticket)->saveRelationships();
+        });
 
         // Redirect alla pagina principale
         redirect('/');
