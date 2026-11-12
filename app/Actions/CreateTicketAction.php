@@ -72,9 +72,6 @@ class CreateTicketAction
     }
 
     /**
-     * @param  array<string, mixed>  $data
-     */
-    /**
      * Prima voce della cronologia: "segnalazione ricevuta" nello stato iniziale. Senza, il cittadino vedeva come unico
      * aggiornamento "Allegato aggiunto" (la foto caricata insieme alla segnalazione). Visibile all'autore e all'ufficio:
      * il ticket non e' ancora pubblico.
@@ -96,6 +93,9 @@ class CreateTicketAction
         );
     }
 
+    /**
+     * @param  array<string, mixed>  $data
+     */
     private function insert(array $data): Ticket
     {
         $allocate = SafeStringCastAction::cast($data['code'] ?? null) === '';
