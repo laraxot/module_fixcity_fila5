@@ -261,8 +261,7 @@ class TicketForm extends XotBaseResourceForm
         ];
 
         // DCP-456: il passo 1 mostra l'avviso breve (`gdpr_notice`), non l'informativa integrale —
-        // il testo completo vive su /privacy. L'avviso nomina il sistema (FixCity), non un ente:
-        // `ente.name` resta vuoto finche' un ente non si abbina. `$policy` serve solo a sapere se e' pubblicata.
+        // Il testo completo vive su /privacy; `$policy` serve solo a sapere se è pubblicata.
         return new HtmlString(view('fixcity::components.gdpr-notice', [
             'hasPolicy' => $policy !== null,
             'notice' => __('fixcity::ticket.gdpr_notice.text'),
