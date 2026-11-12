@@ -45,8 +45,10 @@ describe('CreateTicketWizardWidget privacy step notice', function (): void {
         });
 
         Livewire::test(CreateTicketWizardWidget::class)
-            ->assertSee('gestisce i dati personali')
+            ->assertSee('usa i dati che inserisci')
             ->assertSeeHtml('/it/privacy')
+            ->assertSeeHtml('/it/terms')
+            ->assertSeeHtml('/it/cookie-policy')
             ->assertDontSee('TESTO_INTEGRUALE_MARCATORE');
     });
 });

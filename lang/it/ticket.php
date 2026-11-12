@@ -565,9 +565,9 @@ return [
         ],
     ],
     'gdpr_notice' => [
-        'text' => 'Il Comune di :municipality gestisce i dati personali forniti e liberamente comunicati sulla base dell\'articolo 13 del Regolamento (UE) 2016/679 General Data Protection Regulation (GDPR) e degli articoli 13 e successive modifiche e integrazione del decreto legislativo (di seguito d.lgs) 267/2000 (Testo unico enti locali).',
-        'text_no_name' => 'Il Comune gestisce i dati personali forniti e liberamente comunicati sulla base dell\'articolo 13 del Regolamento (UE) 2016/679 General Data Protection Regulation (GDPR) e degli articoli 13 e successive modifiche e integrazione del decreto legislativo (di seguito d.lgs) 267/2000 (Testo unico enti locali).',
-        'privacy_link' => 'informativa sulla privacy.',
+        'text' => 'Il sistema FixCity usa i dati che inserisci per ricevere la segnalazione di un disservizio, gestirla e comunicarti gli aggiornamenti.',
+        'text_no_name' => 'Il sistema FixCity usa i dati che inserisci per ricevere la segnalazione di un disservizio, gestirla e comunicarti gli aggiornamenti.',
+        'privacy_link' => 'informativa sulla privacy',
     ],
     'privacy' => [
         'title' => [
@@ -577,7 +577,7 @@ return [
             'text' => 'Leggi l\'informativa sulla privacy e acconsenti al trattamento dei dati personali.',
         ],
         'intro' => [
-            'text' => 'Il Comune deve pubblicare l\'informativa privacy del servizio prima che possano essere raccolti dati personali.',
+            'text' => 'Il sistema deve avere un\'informativa privacy pubblicata prima di poter raccogliere dati personali.',
         ],
         'detail_prefix' => [
             'text' => 'Per i dettagli sul trattamento dei dati personali consulta l\'',
@@ -592,8 +592,20 @@ return [
             'not_accepted' => 'Devi accettare l\'informativa sulla privacy per continuare.',
         ],
         'page_title' => 'Informativa privacy',
-        'not_configured' => 'Il Comune non ha ancora pubblicato l\'informativa privacy del servizio. L\'invio delle segnalazioni è temporaneamente disabilitato.',
+        'not_configured' => 'Il sistema non ha ancora un\'informativa privacy pubblicata. L\'invio delle segnalazioni è temporaneamente disabilitato.',
         'open_notice' => 'Leggi l\'informativa privacy',
+        'links_prefix' => [
+            'text' => 'Approfondisci:',
+        ],
+        'terms_label' => [
+            'label' => 'Termini e disclaimer',
+        ],
+        'cookie_label' => [
+            'label' => 'Cookie policy',
+        ],
+        'legal_label' => [
+            'label' => 'Note legali',
+        ],
     ],
     'privacy_geolocation' => [
         'title' => [
@@ -612,7 +624,7 @@ return [
             'label' => 'Ho letto e compreso l\'informativa sulla privacy',
         ],
         'intro' => [
-            'text' => 'Il Comune deve pubblicare l\'informativa privacy del servizio prima che possano essere raccolti dati personali.',
+            'text' => 'Il sistema deve avere un\'informativa privacy pubblicata prima di poter raccogliere dati personali.',
         ],
         'detail_prefix' => [
             'text' => 'Per i dettagli sul trattamento dei dati personali consulta l\'',

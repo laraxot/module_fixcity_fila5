@@ -19,9 +19,12 @@ related:
   - ../CreateTicketWizardWidget.md
   - ../../../../Themes/Sixteen/docs/stories/front-office-production-readiness-audit.story.md
   - ../../../../Themes/Sixteen/docs/stories/ticket-create-privacy-design-comuni-decision.story.md
-issues: []
+issues:
+  - "https://github.com/laraxot/theme_sixteen_fila5/issues/98"
+  - "https://github.com/laraxot/theme_sixteen_fila5/issues/115"
 discussions:
   - "https://github.com/laraxot/theme_sixteen_fila5/discussions/96"
+  - "https://github.com/laraxot/theme_sixteen_fila5/discussions/114"
   - "https://github.com/laraxot/theme_sixteen_fila5/discussions/94"
 ---
 
@@ -81,8 +84,8 @@ Alternative scartate (valide anche per la soluzione adottata dalla DCP-456): tro
 `[[ente.name]]` (non dipende da ciò che l'ente ha scritto), per le quattro lingue servite:
 
 - non più di 150 parole nel passo; nessuna riga dell'informativa; 0 segnaposto `[[ente`; 0 chiavi grezze `fixcity::`; nessun `<h1-6>` né `<li>`;
-- un solo link a `/privacy`, nella lingua corrente;
-- il nome dell'ente compare solo se `ente.name` è valorizzato, senza «:municipality» né «:name» residui;
+- tre link localizzati a `/privacy`, `/terms` e `/cookie-policy`;
+- il testo non usa Comune/ente/municipality e non attribuisce al sistema una qualifica giuridica;
 - informativa non pubblicata: resta l'alert `role="alert"`;
 - `ticket.gdpr_notice.text` e `text_no_name` esistono e sono diversi nelle quattro lingue (un fallback it che si nasconde farebbe due testi uguali).
 
@@ -140,6 +143,24 @@ un'imperfezione e il testo del link letto da uno screen reader include la punteg
 - [x] `TicketForm.php` formattato: gli `use` sono senza righe vuote doppie (controllato alle 07:5x UTC, file fermo dalle 07:50:22). Non ho lanciato io Pint su quel file.
 
 ## Decisioni aperte (non mie)
+
+## Correzione semantica del primo livello — 2026-11-12
+
+La frase del primo livello non deve presentare il Comune come attore del sistema:
+nel contesto del wizard l'utente sta usando FixCity per inviare una segnalazione,
+non sta leggendo una delega organizzativa dell'ente. Il testo deve quindi descrivere
+il comportamento osservabile del servizio, senza attribuire il trattamento a un
+ente configurabile e senza lasciare un nome dell'ente vuoto o incoerente.
+
+Decisione: usare una formulazione neutra centrata sull'azione dell'utente e sul
+servizio («i dati che inserisci servono a ricevere, gestire e comunicare l'esito
+della segnalazione») e mantenere l'informativa completa come fonte legale su
+`/privacy`. Il primo livello espone inoltre link separati a privacy, termini e
+cookie policy, così l'utente può approfondire senza riportare il documento
+integrale dentro il wizard.
+
+Le pagine `/privacy`, `/terms` e `/cookie-policy` sono già servite dal CMS e
+verificate dai test di pagina; non si creano copie dedicate al wizard.
 
 - **«sulla base dell'articolo 13 del Regolamento»**: è la copy del riferimento, ma l'art. 13 è l'articolo dell'informativa, non una base giuridica (quelle sono nell'art. 6).
   Non la cambio: dipende da DCP-134 (`needs-decision`, presa visione contro consenso) e il DPO dell'ente approva il testo.

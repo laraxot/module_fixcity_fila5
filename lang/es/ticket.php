@@ -132,7 +132,7 @@ return [
         'title' => 'Actualización del aviso',
     ],
     'privacy' => [
-        'not_configured' => 'El ayuntamiento todavía no ha publicado la política de privacidad del servicio. El envío de avisos está desactivado temporalmente.',
+        'not_configured' => 'El sistema todavía no tiene publicada la política de privacidad. El envío de avisos está desactivado temporalmente.',
         'open_notice' => 'Leer la política de privacidad',
         'detail_prefix' => [
             'text' => 'Para más detalles sobre el tratamiento de los datos personales, consulta la ',
@@ -140,11 +140,23 @@ return [
         'link' => [
             'label' => 'política de privacidad.',
         ],
+        'links_prefix' => [
+            'text' => 'Más información:',
+        ],
+        'terms_label' => [
+            'label' => 'Términos y aviso legal',
+        ],
+        'cookie_label' => [
+            'label' => 'Política de cookies',
+        ],
+        'legal_label' => [
+            'label' => 'Aviso legal',
+        ],
     ],
     'gdpr_notice' => [
-        'text' => 'El ayuntamiento de :municipality trata los datos personales facilitados y comunicados libremente sobre la base del artículo 13 del Reglamento (UE) 2016/679 (Reglamento general de protección de datos) y de los artículos 13 y siguientes del decreto legislativo 267/2000 (Texto único de las entidades locales).',
-        'text_no_name' => 'El ayuntamiento trata los datos personales facilitados y comunicados libremente sobre la base del artículo 13 del Reglamento (UE) 2016/679 (Reglamento general de protección de datos) y de los artículos 13 y siguientes del decreto legislativo 267/2000 (Texto único de las entidades locales).',
-        'privacy_link' => 'política de privacidad.',
+        'text' => 'FixCity usa los datos que introduces para recibir tu aviso sobre un problema local, gestionarlo y comunicarte las actualizaciones.',
+        'text_no_name' => 'FixCity usa los datos que introduces para recibir tu aviso sobre un problema local, gestionarlo y comunicarte las actualizaciones.',
+        'privacy_link' => 'política de privacidad',
     ],
     'sections' => [
         'author' => [

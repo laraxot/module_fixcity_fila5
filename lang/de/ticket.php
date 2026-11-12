@@ -132,7 +132,7 @@ return [
         'title' => 'Aktualisierung der Meldung',
     ],
     'privacy' => [
-        'not_configured' => 'Die Gemeinde hat die Datenschutzerklärung für diesen Dienst noch nicht veröffentlicht. Das Senden von Meldungen ist vorübergehend nicht möglich.',
+        'not_configured' => 'Das System hat noch keine Datenschutzerklärung veröffentlicht. Das Senden von Meldungen ist vorübergehend nicht möglich.',
         'open_notice' => 'Datenschutzerklärung lesen',
         'detail_prefix' => [
             'text' => 'Einzelheiten zur Verarbeitung personenbezogener Daten finden Sie in der ',
@@ -140,11 +140,23 @@ return [
         'link' => [
             'label' => 'Datenschutzerklärung.',
         ],
+        'links_prefix' => [
+            'text' => 'Mehr erfahren:',
+        ],
+        'terms_label' => [
+            'label' => 'Nutzungsbedingungen und Haftungshinweis',
+        ],
+        'cookie_label' => [
+            'label' => 'Cookie-Richtlinie',
+        ],
+        'legal_label' => [
+            'label' => 'Impressum',
+        ],
     ],
     'gdpr_notice' => [
-        'text' => 'Die Gemeinde :municipality verarbeitet die freiwillig mitgeteilten personenbezogenen Daten auf der Grundlage von Artikel 13 der Verordnung (EU) 2016/679 (Datenschutz-Grundverordnung) und den Artikeln 13 ff. des Legislativdekrets 267/2000 (Einheitlicher Text der Gebietskörperschaften).',
-        'text_no_name' => 'Die Gemeinde verarbeitet die freiwillig mitgeteilten personenbezogenen Daten auf der Grundlage von Artikel 13 der Verordnung (EU) 2016/679 (Datenschutz-Grundverordnung) und den Artikeln 13 ff. des Legislativdekrets 267/2000 (Einheitlicher Text der Gebietskörperschaften).',
-        'privacy_link' => 'Datenschutzerklärung.',
+        'text' => 'FixCity verwendet die von Ihnen eingegebenen Daten, um Ihre Meldung zu einem lokalen Problem entgegenzunehmen, zu bearbeiten und Sie über Aktualisierungen zu informieren.',
+        'text_no_name' => 'FixCity verwendet die von Ihnen eingegebenen Daten, um Ihre Meldung zu einem lokalen Problem entgegenzunehmen, zu bearbeiten und Sie über Aktualisierungen zu informieren.',
+        'privacy_link' => 'Datenschutzerklärung',
     ],
     'sections' => [
         'author' => [

@@ -28,7 +28,6 @@ use Modules\Fixcity\Actions\GetPublishedPrivacyPolicyAction;
 use Modules\Fixcity\Enums\TicketTypeEnum;
 use Modules\Geo\Filament\Forms\Components\CoordinatePicker;
 use Modules\Media\Filament\Forms\Components\CameraPhotoUpload;
-use Modules\Tenant\Actions\Ente\GetEnteDataAction;
 use Modules\Xot\Actions\Cast\SafeStringCastAction;
 use Modules\Xot\Filament\Resources\Schemas\XotBaseResourceForm;
 
@@ -253,17 +252,24 @@ class TicketForm extends XotBaseResourceForm
     public static function getGdprHtml(): HtmlString
     {
         $policy = app(GetPublishedPrivacyPolicyAction::class)->execute();
-        $privacyUrl = LaravelLocalization::getLocalizedURL(app()->getLocale(), '/privacy');
-        $municipality = app(GetEnteDataAction::class)->execute()->name;
+        $locale = app()->getLocale();
+        $legalLinks = [
+            'privacy' => ['label' => (string) __('fixcity::ticket.privacy.link.label'), 'url' => LaravelLocalization::getLocalizedURL($locale, '/privacy')],
+            'terms' => ['label' => (string) __('fixcity::ticket.privacy.terms_label.label'), 'url' => LaravelLocalization::getLocalizedURL($locale, '/terms')],
+            'legal' => ['label' => (string) __('fixcity::ticket.privacy.legal_label.label'), 'url' => LaravelLocalization::getLocalizedURL($locale, '/note-legali')],
+            'cookies' => ['label' => (string) __('fixcity::ticket.privacy.cookie_label.label'), 'url' => LaravelLocalization::getLocalizedURL($locale, '/cookie-policy')],
+        ];
 
         // DCP-456: il passo 1 mostra l'avviso breve (`gdpr_notice`), non l'informativa integrale —
-        // il testo completo vive su /privacy. `$policy` serve solo a sapere se e' pubblicata.
+        // il testo completo vive su /privacy. L'avviso nomina il sistema (FixCity), non un ente:
+        // `ente.name` resta vuoto finche' un ente non si abbina. `$policy` serve solo a sapere se e' pubblicata.
         return new HtmlString(view('fixcity::components.gdpr-notice', [
             'hasPolicy' => $policy !== null,
-            'notice' => $municipality === ''
-                ? __('fixcity::ticket.gdpr_notice.text_no_name')
-                : __('fixcity::ticket.gdpr_notice.text', ['municipality' => $municipality]),
-            'privacyUrl' => is_string($privacyUrl) ? $privacyUrl : '/privacy',
+            'notice' => __('fixcity::ticket.gdpr_notice.text'),
+            'legalLinks' => array_map(
+                static fn (array $link): array => ['label' => $link['label'], 'url' => is_string($link['url']) ? $link['url'] : '#'],
+                $legalLinks,
+            ),
         ])->render());
     }
 

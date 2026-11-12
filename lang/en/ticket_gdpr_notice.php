@@ -8,8 +8,8 @@ declare(strict_types=1);
 // File: lang/en/ticket_gdpr_notice.php
 return [
     'gdpr_notice' => [
-        'text' => 'The Municipality of :municipality manages the personal data provided and freely communicated on the basis of Article 13 of Regulation (EU) 2016/679 General Data Protection Regulation (GDPR) and Articles 13 and subsequent amendments and additions of Legislative Decree (hereinafter d.lgs) 267/2000 (Consolidated Law on Local Authorities).',
-        'text_no_name' => 'The Municipality manages the personal data provided and freely communicated on the basis of Article 13 of Regulation (EU) 2016/679 General Data Protection Regulation (GDPR) and Articles 13 and subsequent amendments and additions of Legislative Decree (hereinafter d.lgs) 267/2000 (Consolidated Law on Local Authorities).',
-        'privacy_link' => 'privacy policy.',
+        'text' => 'FixCity uses the data you enter to receive your report about a local issue, manage it and keep you updated.',
+        'text_no_name' => 'FixCity uses the data you enter to receive your report about a local issue, manage it and keep you updated.',
+        'privacy_link' => 'privacy policy',
     ],
 ];

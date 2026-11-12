@@ -247,7 +247,7 @@ Esempio: `fixcity::segnalazione.steps.privacy.label`.
 
 **Regola di scelta componente**: usare **Infolist** quando si mostrano dati read-only strutturati (summary, card autore, label/value); usare invece contenuto read-only nel **Form Schema** quando il blocco e editoriale o legale, come nello step privacy. Il primo step non e un record viewer: e una soglia di consenso informato. Story dedicata: [7-47 segnalazione-crea step1 privacy notice parity](../../../../_bmad-output/implementation-artifacts/7-47-segnalazione-crea-step1-privacy-notice-design-comuni-parity.md).
 
-**Parity step 1 (gdpr notice)**: il testo "Il Comune di Firenze gestisce i dati personali..." deve essere visibile nello step privacy prima del checkbox, con link a informativa (`privacy_link` da `blockData`).
+**Parity step 1 (gdpr notice)**: il testo breve descrive il sistema FixCity e il suo scopo operativo (ricevere segnalazioni di disservizi, gestirle e comunicarne l'esito), senza nominare un Comune o inventare un titolare. Prima del checkbox sono disponibili i link localizzati a privacy, termini, note legali e cookie policy; il testo completo resta nella pagina `/privacy`.
 
 Il file principale è `laravel/Modules/Fixcity/lang/{locale}/segnalazione.php`.
 

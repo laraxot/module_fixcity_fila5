@@ -13,7 +13,7 @@ tags: [wizard, privacy, gdpr, design-comuni, passo-1, parity]
 qmd: "dcp-456 tickets create wizard passo 1 privacy gdpr avviso breve link informativa integrale parity"
 depends_on: [Modules/Fixcity/docs/stories/dcp-46-wizard-passo1-privacy-markup.story.md, Modules/Fixcity/docs/stories/dcp-35-tickets-create-privacy-dati-coordinamento.story.md]
 related: [Modules/Fixcity/docs/stories/dcp-130-informativa-privacy-art13-e-pagina-servita.story.md]
-issues: []
+issues: ["https://github.com/laraxot/theme_sixteen_fila5/issues/98"]
 discussions: ["https://github.com/laraxot/theme_sixteen_fila5/discussions/96"]
 reference: https://italia.github.io/design-comuni-pagine-statiche/sito/segnalazione-01-privacy.html
 local: http://192.168.1.40:8000/it/tickets/create
@@ -35,28 +35,26 @@ riferimento `segnalazione-01-privacy` mostra poco testo con link di approfondime
 informativa privacy pubblicata (`$policyHtml` = markdown completo, tutti i paragrafi)
 e la vista lo stampa tutto nel passo 1. Il riferimento Design Comuni mostra invece:
 
-1. un breve avviso legale di un paragrafo ("Il Comune di X gestisce i dati personali…
-   art. 13 GDPR… d.lgs 267/2000");
-2. "Per i dettagli sul trattamento dei dati personali consulta l'informativa sulla
-   privacy" con link;
+1. un breve avviso operativo centrato sul sistema FixCity e sulla segnalazione;
+2. link separati all'informativa privacy, ai termini e alla cookie policy;
 3. la checkbox "Ho letto e compreso l'informativa sulla privacy".
 
 Il testo integrale vive già sulla pagina dedicata `/privacy` (CMS `privacy.index`,
 blocco `legal_document`): duplicarlo nel wizard allunga il passo, distrae dal compito
 e crea una seconda copia di un contenuto mantenuto altrove.
 
-Esiste già la chiave `fixcity::ticket.gdpr_notice.text` (identica al riferimento,
-con `:municipality`) in `it` (inline in `ticket.php`) e `in` (`ticket_gdpr_notice.php`),
-mai usata. Mancante in `de`/`es`.
+Esisteva già la chiave `fixcity::ticket.gdpr_notice.text`, ma il copy ereditato
+attribuiva impropriamente il trattamento al Comune tramite `:municipality`.
+La chiave è stata mantenuta per compatibilità e resa neutra in tutte le lingue.
 
 ## Decisione
 
-- Passo 1 = avviso breve `gdpr_notice.text` con `:municipality` da
-  `GetEnteDataAction` (nome ente; se vuoto, varianti `text_no_name`) + link
-  `privacy.detail_prefix`/`privacy.link` verso `/privacy` localizzata + checkbox.
+- Passo 1 = avviso breve `gdpr_notice.text` neutro, senza `Comune`, `ente` o
+  qualifica di titolare/responsabile, più link localizzati verso `/privacy`,
+  `/terms` e `/cookie-policy` + checkbox.
 - Informativa non pubblicata → resta l'alert `privacy.not_configured` e checkbox
   disabilitato (comportamento attuale, invariato).
-- Aggiungere `gdpr_notice` (+`text_no_name`) in `de` ed `es`.
+- Mantenere `gdpr_notice` (+`text_no_name`) coerente e nativo in tutte le lingue.
 - `getGdprHtml()` non renderizza più il markdown della policy: serve solo a sapere se
   l'informativa è pubblicata.
 
@@ -92,14 +90,14 @@ la validazione del consenso, la policy legale, il CMS o il flusso anonimo.
 **2026-10-14 — implementato**
 
 - `TicketForm::getGdprHtml()`: non renderizza più `$policy` in markdown; passa alla
-  vista `hasPolicy` (solo per l'alert "non configurata"), `notice` (testo breve con
-  `:municipality` da `GetEnteDataAction`, fallback `text_no_name`) e `privacyUrl`.
+  vista `hasPolicy` (solo per l'alert "non configurata"), `notice` (testo breve
+  neutro) e gli URL localizzati di privacy, termini e cookie policy.
   Rimossi import `Str`/`preg_replace` diventati inutili.
 - `components/gdpr-notice.blade.php`: nuovo contratto — avviso breve + link
   `privacy.detail_prefix`/`privacy.link` verso `/privacy` localizzata; alert
   `not_configured` invariato quando la policy non è pubblicata.
-- Lang: `gdpr_notice.text_no_name` aggiunto in `it`/`en`; blocco `gdpr_notice`
-  (text, text_no_name, privacy_link) aggiunto in `de`/`es`.
+- Lang: `gdpr_notice` contiene copy native equivalenti e neutrali in `it`, `en`,
+  `de` ed `es`; nessun placeholder dell'ente viene interpolato.
 - Test di regressione in `CreateTicketWizardWidgetTest` ("privacy step notice"):
   mock della policy con marcatore → `assertSee` avviso breve, `assertSeeHtml`
   `/it/privacy`, `assertDontSee` marcatore (l'integrale non è più inline).

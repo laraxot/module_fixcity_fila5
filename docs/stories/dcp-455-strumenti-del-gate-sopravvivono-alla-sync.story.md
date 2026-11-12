@@ -52,7 +52,7 @@ tutti chiamati dal gate o dalla checklist:
 **Prova:** ripristinati **identici** (`cmp`) dal commit `f7a39cc23`; il gate è stato lanciato **due volte** (prima e dopo la ricostruzione dell'altra sessione) con
 lo stesso esito, NON pubblicabile, 11 FAIL bloccanti.
 
-Stato: i cinque file sono **non committati e non tracciati** nel repository annidato. Finché restano così, la prossima sync può cancellarli di nuovo.
+Stato (aggiornato 2026-11-12): i cinque file sono **tracciati, committati e pushati** nel repository annidato `bashscripts` (commit `c79a9e893`, branch `dev`, identici al remoto; verificato con `git ls-files --error-unmatch` e `git diff laraxot/dev`). Li ha committati la sync fra le due macchine, non una richiesta esplicita dell'utente né questa sessione. *(Correzione: la versione di stamattina diceva «non committati e non tracciati».)* Essere tracciati **non** li protegge: la stessa sync ha già adottato cancellazioni in passato, per questo restano la decisione 2 e il test di esistenza.
 
 ## Decisioni aperte (utente)
 
@@ -79,7 +79,7 @@ Dopo la decisione 1, lo strumento dovrebbe ripulirle da sé a fine giro.
 - [x] Gate lanciato due volte con esito identico (NON pubblicabile, 11 FAIL bloccanti, tutti spiegati nella story madre).
 - [ ] Decisione 1 registrata nel registro DCP-200 (`DEC-62` e seguenti) con data.
 - [ ] Test da file nel modulo (`Modules/Fixcity/tests/Unit`), rosso su una copia senza uno dei cinque file, poi verde.
-- [ ] Strumenti committati nel repository annidato (solo su richiesta dell'utente).
+- [x] Strumenti committati nel repository annidato: `c79a9e893`, pushati, identici al remoto (2026-11-12). Fatto dalla sync, non su richiesta: la decisione 3 e' superata dai fatti.
 - [ ] Le 8 basi di prova rimosse (solo con conferma).
 
 ## Lezioni

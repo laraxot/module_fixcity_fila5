@@ -54,28 +54,41 @@ it('shows a short first-layer notice instead of the whole published policy', fun
     Assert::assertDoesNotMatchRegularExpression('/<h[1-6]\b|<li\b/', $html, "{$locale}: titoli o elenchi dell'informativa nel passo");
 })->with('privacy_step_locales');
 
-it('links to the complete notice of the same language', function (string $locale): void {
+it('links to the complete notice and related legal pages in the same language', function (string $locale): void {
     app()->setLocale($locale);
     privacyStepFakeLongPublishedPolicy();
 
     $html = (string) TicketForm::getGdprHtml();
-    $found = preg_match_all('/<a\b[^>]*href="([^"]*\/privacy)"/', $html, $links);
+    $found = preg_match_all('/<a\b[^>]*href="([^"]*)"/', $html, $links);
 
-    Assert::assertSame(1, $found, "{$locale}: serve un solo link, all'informativa completa");
-    Assert::assertStringContainsString('/'.$locale.'/', (string) $links[1][0], "{$locale}: il link deve restare nella lingua corrente");
+    Assert::assertSame(4, $found, "{$locale}: il primo livello deve offrire quattro approfondimenti legali");
+    Assert::assertStringContainsString('/'.$locale.'/privacy', $html, "{$locale}: manca l'informativa privacy");
+    Assert::assertStringContainsString('/'.$locale.'/terms', $html, "{$locale}: mancano i termini");
+    Assert::assertStringContainsString('/'.$locale.'/note-legali', $html, "{$locale}: mancano le note legali");
+    Assert::assertStringContainsString('/'.$locale.'/cookie-policy', $html, "{$locale}: manca la cookie policy");
 })->with('privacy_step_locales');
 
-it('names the data controller only when the authority has configured its name', function (): void {
+it('names the system, not a municipality, as the data controller', function (): void {
     app()->setLocale('it');
     privacyStepFakeLongPublishedPolicy();
 
-    config(['ente.name' => 'Comune di Prova']);
-    Assert::assertStringContainsString('Comune di Prova', privacyStepText());
+    $text = privacyStepText();
 
-    config(['ente.name' => '']);
-    $withoutName = privacyStepText();
-    Assert::assertStringNotContainsString('Titolare del trattamento', $withoutName);
-    Assert::assertStringNotContainsString(':name', $withoutName);
+    Assert::assertStringContainsString('FixCity', $text);
+    Assert::assertStringNotContainsString('Comune', $text);
+    Assert::assertStringNotContainsString(':entity', $text);
+    Assert::assertStringNotContainsString(':name', $text);
+});
+
+it('describes the FixCity purpose instead of claiming that the municipality manages data', function (): void {
+    app()->setLocale('it');
+    privacyStepFakeLongPublishedPolicy();
+
+    $text = privacyStepText();
+
+    Assert::assertStringContainsString('ricevere la segnalazione di un disservizio', $text);
+    Assert::assertStringContainsString('gestirla e comunicarti gli aggiornamenti', $text);
+    Assert::assertStringNotContainsString('gestisce i dati personali', $text);
 });
 
 it('keeps the warning when no privacy policy is published', function (): void {
@@ -91,13 +104,14 @@ it('keeps the warning when no privacy policy is published', function (): void {
     Assert::assertStringContainsString('role="alert"', (string) TicketForm::getGdprHtml());
 });
 
-it('has a first-layer text in every language, with and without the authority name', function (string $key): void {
+it('has a neutral first-layer text in every language', function (string $key): void {
     $texts = [];
     foreach (['it', 'en', 'de', 'es'] as $locale) {
         app()->setLocale($locale);
-        $texts[$locale] = (string) __('fixcity::ticket.gdpr_notice.'.$key, ['municipality' => 'Comune di Prova']);
+        $texts[$locale] = (string) __('fixcity::ticket.gdpr_notice.'.$key);
         Assert::assertNotSame('fixcity::ticket.gdpr_notice.'.$key, $texts[$locale], "{$locale}: chiave non tradotta");
-        Assert::assertStringNotContainsString(':municipality', $texts[$locale], "{$locale}: segnaposto non sostituito");
+        Assert::assertStringNotContainsString(':entity', $texts[$locale], "{$locale}: segnaposto non sostituito");
+        Assert::assertStringNotContainsString(':municipality', $texts[$locale], "{$locale}: segnaposto ente non sostituito");
     }
 
     Assert::assertCount(4, array_unique($texts), 'il primo livello e\' uguale in due lingue: fallback it nascosto');

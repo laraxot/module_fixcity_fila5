@@ -129,6 +129,7 @@ DCP-33, DCP-34 e DCP-35 qui sono le story del modulo Fixcity; lo stesso numero e
 ### Story aggiunte all'indice (2026-11-12)
 
 - [DCP-455](./dcp-455-strumenti-del-gate-sopravvivono-alla-sync.story.md) - DCP-455: gli strumenti del gate di rilascio devono sopravvivere alla sync (5 strumenti ripristinati, 3 decisioni aperte); discussion [#95](https://github.com/laraxot/theme_sixteen_fila5/discussions/95)
+- [DCP-456](./ticket-create-privacy-avviso-breve.story.md) - avviso privacy breve nel wizard; issue [#98](https://github.com/laraxot/theme_sixteen_fila5/issues/98), discussion [#96](https://github.com/laraxot/theme_sixteen_fila5/discussions/96)
 
 ## collegamenti bidirezionali
 

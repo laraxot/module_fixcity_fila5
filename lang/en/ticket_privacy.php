@@ -24,13 +24,25 @@ return [
             'label' => 'I have read and understood the privacy policy',
         ],
         'intro' => [
-            'text' => 'The municipality must publish the privacy notice for this service before personal data can be collected.',
+            'text' => 'The system must have a published privacy notice before personal data can be collected.',
         ],
         'detail_prefix' => [
             'text' => 'For details on the processing of personal data, see the ',
         ],
         'link' => [
             'label' => 'privacy policy.',
+        ],
+        'links_prefix' => [
+            'text' => 'Learn more:',
+        ],
+        'terms_label' => [
+            'label' => 'Terms and disclaimer',
+        ],
+        'cookie_label' => [
+            'label' => 'Cookie policy',
+        ],
+        'legal_label' => [
+            'label' => 'Legal notice',
         ],
         'checkbox' => [
             'label' => 'I have read and understood the privacy policy',
@@ -39,7 +51,7 @@ return [
             'not_accepted' => 'You must accept the privacy policy to continue.',
         ],
         'page_title' => 'Privacy notice',
-        'not_configured' => 'The municipality has not published the privacy notice for this service yet. Report submission is temporarily unavailable.',
+        'not_configured' => 'The system does not have a published privacy notice yet. Report submission is temporarily unavailable.',
         'open_notice' => 'Read the privacy notice',
     ],
 ];
