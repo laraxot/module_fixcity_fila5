@@ -22,5 +22,12 @@ return [
         'photos_title' => 'Attached photos',
         'photo_alt' => 'Photo :number of the report “:title”',
         'photo_opens_new_window' => '(opens the full image in a new window)',
+        'my_tickets_title' => 'Your reports',
+        'my_tickets_intro' => 'The latest reports sent with your account. Choose one to see its status and updates.',
+        'my_tickets_empty' => 'You have not sent any reports yet.',
+        'my_tickets_all' => 'See all in your personal area',
+        'my_tickets_sent_on' => 'Sent on :date',
+        'login_hint' => 'Do you have an account? :link to see the list of your reports without a code.',
+        'login_link' => 'Log in',
     ],
 ];

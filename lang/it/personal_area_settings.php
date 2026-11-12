@@ -16,7 +16,7 @@ return [
         'list_title' => 'Aggiornamenti ricevuti',
         'count' => '{0} Nessuna notifica|{1} :count notifica|[2,*] :count notifiche',
         'unread' => '{0} nessuna da leggere|{1} :count da leggere|[2,*] :count da leggere',
-        'item_text' => 'La segnalazione :code ha un nuovo stato: :status.',
+        'item_text' => 'Segnalazione :code: :status.', // evento (Ricevuta, Presa in carico...), non lo stato del ticket
         'followed_label' => '«:title»',
         'new_badge' => 'Nuova',
         'open_report' => 'Apri la segnalazione',

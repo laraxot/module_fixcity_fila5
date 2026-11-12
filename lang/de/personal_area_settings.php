@@ -16,7 +16,7 @@ return [
         'list_title' => 'Erhaltene Aktualisierungen',
         'count' => '{0} Keine Benachrichtigungen|{1} :count Benachrichtigung|[2,*] :count Benachrichtigungen',
         'unread' => '{0} keine ungelesen|{1} :count ungelesen|[2,*] :count ungelesen',
-        'item_text' => 'Die Meldung :code hat einen neuen Status: :status.',
+        'item_text' => 'Meldung :code: :status.',
         'followed_label' => '„:title“',
         'new_badge' => 'Neu',
         'open_report' => 'Meldung öffnen',

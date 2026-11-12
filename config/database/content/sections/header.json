@@ -99,11 +99,13 @@
             },
             {
               "label": "Novità",
-              "url": "/blog"
+              "url": "/blog",
+              "element": "news"
             },
             {
               "label": "Eventi",
-              "url": "/events"
+              "url": "/events",
+              "element": "live"
             },
             {
               "label": "Domande frequenti",
@@ -240,11 +242,13 @@
             },
             {
               "label": "News",
-              "url": "/blog"
+              "url": "/blog",
+              "element": "news"
             },
             {
               "label": "Events",
-              "url": "/events"
+              "url": "/events",
+              "element": "live"
             },
             {
               "label": "FAQ",
@@ -381,11 +385,13 @@
             },
             {
               "label": "Neuigkeiten",
-              "url": "/blog"
+              "url": "/blog",
+              "element": "news"
             },
             {
               "label": "Veranstaltungen",
-              "url": "/events"
+              "url": "/events",
+              "element": "live"
             },
             {
               "label": "Häufige Fragen",
@@ -522,11 +528,13 @@
             },
             {
               "label": "Novedades",
-              "url": "/blog"
+              "url": "/blog",
+              "element": "news"
             },
             {
               "label": "Eventos",
-              "url": "/events"
+              "url": "/events",
+              "element": "live"
             },
             {
               "label": "Preguntas frecuentes",

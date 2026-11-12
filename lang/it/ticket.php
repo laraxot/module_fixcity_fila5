@@ -43,6 +43,13 @@ return [
         'photos_title' => 'Foto allegate',
         'photo_alt' => 'Foto :number della segnalazione «:title»',
         'photo_opens_new_window' => '(apre l’immagine intera in una nuova finestra)',
+        'my_tickets_title' => 'Le tue segnalazioni',
+        'my_tickets_intro' => 'Le ultime segnalazioni inviate con il tuo account. Scegline una per vederne lo stato e gli aggiornamenti.',
+        'my_tickets_empty' => 'Non hai ancora inviato segnalazioni.',
+        'my_tickets_all' => 'Vedi tutte nell\'area personale',
+        'my_tickets_sent_on' => 'Inviata il :date',
+        'login_hint' => 'Hai un account? :link per vedere l\'elenco delle tue segnalazioni senza codice.',
+        'login_link' => 'Accedi',
     ],
     'pratiche' => [
         'description' => 'Elenco delle tue segnalazioni.',

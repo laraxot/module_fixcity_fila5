@@ -37,7 +37,9 @@ it('never puts the tracking code in the canonical url', function (): void {
     /** @var TestCase $this */
     $html = (string) $this->get('/it/tickets/track?code=ABC123SECRET')->getContent();
 
-    expect($html)->toContain('<link rel="canonical" href="'.url('/it/tickets/track').'">');
+    // Traccia e' noindex per decisione del tenant (config/local/fixcity/head.php, noindex_paths, D-3): niente canonical
+    // obbligatorio, ma il codice di tracciamento non deve comparire in nessun link del head.
+    expect($html)->toContain('noindex');
     preg_match_all('/<link rel="(?:canonical|alternate)"[^>]*>/', $html, $links);
     expect(implode('', $links[0]))->not->toContain('ABC123SECRET');
 });
@@ -52,7 +54,7 @@ it('serves a valid sitemap with the public pages in every language and nothing p
     $locs = array_map('strval', $xml->xpath('//s:url/s:loc') ?: []);
 
     foreach (['it', 'en', 'de', 'es'] as $lang) {
-        expect($locs)->toContain(url("/{$lang}"))->toContain(url("/{$lang}/privacy"))->toContain(url("/{$lang}/tickets/track"));
+        expect($locs)->toContain(url("/{$lang}"))->toContain(url("/{$lang}/privacy"))->not->toContain(url("/{$lang}/tickets/track"));
     }
     foreach ($locs as $loc) {
         expect($loc)->not->toMatch('#/(tests|auth|area-personale|admin)(/|$)|confirmation|segnalazione-dettaglio|\?#');
