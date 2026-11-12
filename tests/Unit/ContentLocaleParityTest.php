@@ -28,6 +28,12 @@ $contentParityTargets = [
     'sections/footer.json' => 'blocks',
     'sections/search-modal.json' => 'blocks',
     'pages/home.json' => 'content_blocks',
+    // Pagine con soli blocchi-vista (nessun testo nel JSON): senza de/es la lingua non e' "scritta" (Cms `ResolveWrittenLocalesAction`),
+    // quindi `<head>` noindex e fuori da sitemap/hreflang pur essendo tradotta dai file lang.
+    'pages/tickets/index.json' => 'content_blocks',
+    'pages/services/index.json' => 'content_blocks',
+    'pages/lista-categorie.index.json' => 'content_blocks',
+    'pages/mappa-sito.index.json' => 'content_blocks',
 ];
 
 /**
@@ -105,7 +111,7 @@ function contentParityIsText(string $path, mixed $value): bool
         return false;
     }
     $leaf = substr($path, (int) strrpos($path, '.') + 1);
-    if (in_array($leaf, ['url', 'view', 'icon', 'logo', 'element', 'locale', 'data_element', 'src', 'office_url', 'email', 'phone', 'height', 'map_height', 'type', 'slug', 'class', 'style'], true) || str_ends_with($leaf, '_url')) {
+    if (in_array($leaf, ['url', 'view', 'icon', 'logo', 'element', 'locale', 'data_element', 'src', 'office_url', 'email', 'phone', 'height', 'map_height', 'type', 'slug', 'class', 'style', 'header_active'], true) || str_ends_with($leaf, '_url')) {
         return false;
     }
 
@@ -186,6 +192,42 @@ it('has no text identical to the Italian one outside the documented list', funct
             }
         }
     }
+    Assert::assertSame([], $problems, "\n".implode("\n", $problems));
+});
+
+/**
+ * WCAG 2.5.3: il nome accessibile di un link deve contenere il testo che si vede, altrimenti chi comanda la pagina a voce
+ * ("clic su Alle anzeigen") non lo trova. Il 2026-11-11 il tedesco aveva "Alle anzeigen" e `aria-label` "Alle Neuigkeiten anzeigen".
+ *
+ * @param  array<array-key, mixed>  $node
+ * @return list<string>
+ */
+function contentParityAriaMissesVisibleLabel(array $node, string $path = ''): array
+{
+    $problems = [];
+    $label = $node['view_all_label'] ?? null;
+    $aria = $node['view_all_aria'] ?? null;
+    if (is_string($label) && is_string($aria) && ! str_contains(mb_strtolower($aria), mb_strtolower($label))) {
+        $problems[] = $path.': aria-label "'.$aria.'" does not contain the visible text "'.$label.'"';
+    }
+    foreach ($node as $key => $value) {
+        if (is_array($value)) {
+            $problems = [...$problems, ...contentParityAriaMissesVisibleLabel($value, $path.'.'.$key)];
+        }
+    }
+
+    return $problems;
+}
+
+it('keeps the visible text of a "view all" link inside its aria-label in every locale', function () use ($laravelRoot): void {
+    $json = contentParityLoad($laravelRoot.'/config/local/fixcity/database/content/pages/home.json');
+    $checked = 0;
+    array_walk_recursive($json, static function (mixed $value, string|int $key) use (&$checked): void {
+        $checked += $key === 'view_all_aria' ? 1 : 0;
+    });
+
+    Assert::assertGreaterThan(7, $checked, 'troppe poche etichette controllate: la guardia passerebbe a vuoto');
+    $problems = contentParityAriaMissesVisibleLabel($json);
     Assert::assertSame([], $problems, "\n".implode("\n", $problems));
 });
 

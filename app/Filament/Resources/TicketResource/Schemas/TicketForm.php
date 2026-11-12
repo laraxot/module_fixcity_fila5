@@ -19,7 +19,6 @@ use Filament\Schemas\Components\Wizard\Step;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\HtmlString;
 use Illuminate\Support\MessageBag;
-use Illuminate\Support\Str;
 use Intervention\Image\Drivers\Gd\Driver as GdDriver;
 use Intervention\Image\ImageManager;
 use Livewire\Component as LivewireComponent;
@@ -29,10 +28,9 @@ use Modules\Fixcity\Actions\GetPublishedPrivacyPolicyAction;
 use Modules\Fixcity\Enums\TicketTypeEnum;
 use Modules\Geo\Filament\Forms\Components\CoordinatePicker;
 use Modules\Media\Filament\Forms\Components\CameraPhotoUpload;
+use Modules\Tenant\Actions\Ente\GetEnteDataAction;
 use Modules\Xot\Actions\Cast\SafeStringCastAction;
 use Modules\Xot\Filament\Resources\Schemas\XotBaseResourceForm;
-
-use function Safe\preg_replace;
 
 class TicketForm extends XotBaseResourceForm
 {
@@ -256,18 +254,16 @@ class TicketForm extends XotBaseResourceForm
     {
         $policy = app(GetPublishedPrivacyPolicyAction::class)->execute();
         $privacyUrl = LaravelLocalization::getLocalizedURL(app()->getLocale(), '/privacy');
-        $reportUrl = LaravelLocalization::getLocalizedURL(app()->getLocale(), '/tickets/create');
+        $municipality = app(GetEnteDataAction::class)->execute()->name;
 
+        // DCP-456: il passo 1 mostra l'avviso breve (`gdpr_notice`), non l'informativa integrale —
+        // il testo completo vive su /privacy. `$policy` serve solo a sapere se e' pubblicata.
         return new HtmlString(view('fixcity::components.gdpr-notice', [
-            // Il titolo del documento (`# ...`) e' ridondante: il passo ha gia' l'h1 della pagina.
-            'policyHtml' => $policy === null
-                ? null
-                : (string) Str::markdown((string) preg_replace('/\A#[^\r\n]*\R*/', '', $policy), [
-                    'html_input' => 'strip',
-                    'allow_unsafe_links' => false,
-                ]),
+            'hasPolicy' => $policy !== null,
+            'notice' => $municipality === ''
+                ? __('fixcity::ticket.gdpr_notice.text_no_name')
+                : __('fixcity::ticket.gdpr_notice.text', ['municipality' => $municipality]),
             'privacyUrl' => is_string($privacyUrl) ? $privacyUrl : '/privacy',
-            'reportUrl' => is_string($reportUrl) ? $reportUrl : '/tickets/create',
         ])->render());
     }
 

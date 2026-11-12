@@ -38,6 +38,6 @@ Dev + verifica. Nasce da DCP-126 (i percorsi inesistenti ora rispondono 404 vero
 Per la prova "rosso senza correzione" ho sostituito per qualche minuto `bootstrap/app.php` con la copia precedente, con un altro agente che sta modificando lo stesso file (registrazione di `SecurityHeaders`). Ho controllato dopo: la copia di backup conteneva gia' la sua modifica e la differenza e' solo il mio gestore; nessuna modifica persa. Per i file condivisi la prova inversa va fatta su una copia del test o con `git stash` mirato, non sostituendo il file vivo.
 
 ## Non coperto
-- 403, 419, 500, 503 e il 429 di login/registrazione restano la pagina standard (il 429 di tracciamento e conferma e' gia' a tema, DCP-149). I 500 vanno tenuti minimali di proposito (il layout potrebbe essere la causa).
+- 403 e 419 **ora sono a tema** (vista `errors/access.blade.php`, gestore `HttpException` in `bootstrap/app.php`, guardia `ThemedAccessErrorPagesTest`; vedi L-12 in `Themes/Sixteen/docs/stories/front-office-production-readiness-audit.story.md`). 500, 503 e il 429 di login/registrazione restano la pagina standard (il 429 di tracciamento e conferma e' gia' a tema, DCP-149). I 500 vanno tenuti minimali di proposito (il layout potrebbe essere la causa).
 - `/it/api/tickets/geojson` risponde 200 con la pagina del tema invece di 404 (PP-09 di DCP-104): non toccato.
 - Nessun suggerimento "forse cercavi": serve un indice delle pagine e una ricerca.

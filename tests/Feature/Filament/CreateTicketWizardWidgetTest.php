@@ -33,6 +33,24 @@ describe('CreateTicketWizardWidget view resolution', function (): void {
     });
 });
 
+describe('CreateTicketWizardWidget privacy step notice', function (): void {
+    it('shows the short gdpr notice and a link to /privacy, not the full policy text', function (): void {
+        app()->setLocale('it');
+        $this->instance(GetPublishedPrivacyPolicyAction::class, new class extends GetPublishedPrivacyPolicyAction
+        {
+            public function execute(): string
+            {
+                return "# Informativa di test\n\nTESTO_INTEGRUALE_MARCATORE";
+            }
+        });
+
+        Livewire::test(CreateTicketWizardWidget::class)
+            ->assertSee('gestisce i dati personali')
+            ->assertSeeHtml('/it/privacy')
+            ->assertDontSee('TESTO_INTEGRUALE_MARCATORE');
+    });
+});
+
 describe('CreateTicketWizardWidget submit', function (): void {
     it('exposes submit and save entry points on the widget class', function (): void {
         Assert::assertContains('submit', get_class_methods(CreateTicketWizardWidget::class));

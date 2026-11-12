@@ -11,4 +11,15 @@ return [
         'list' => 'See the reports',
         'create' => 'Report a problem',
     ],
+    // 419 (session expired) and 403 (access denied): same page, same buttons (view errors/access.blade.php)
+    'expired' => [
+        'title' => 'Session expired',
+        'message' => 'You were inactive for too long and the session ended for security reasons. Nothing was submitted: sign in again and try once more.',
+    ],
+    'forbidden' => [
+        'title' => 'Access not allowed',
+        'message' => 'You do not have permission to open this page. If you think this is a mistake, sign in with the right account or choose one of these options.',
+    ],
+    'login' => 'Sign in',
+    'home' => 'Go to the home page',
 ];

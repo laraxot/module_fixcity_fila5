@@ -31,8 +31,24 @@
                     "view": "pub_theme::components.pages.sitemap"
                 }
             }
+        ],
+        "de": [
+            {
+                "type": "sitemap-page",
+                "data": {
+                    "view": "pub_theme::components.pages.sitemap"
+                }
+            }
+        ],
+        "es": [
+            {
+                "type": "sitemap-page",
+                "data": {
+                    "view": "pub_theme::components.pages.sitemap"
+                }
+            }
         ]
     },
-    "sidebar_blocks": {"it": [], "en": []},
+    "sidebar_blocks": {"it": [], "en": [], "de": [], "es": []},
     "footer_blocks": null
 }

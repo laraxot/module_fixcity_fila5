@@ -79,7 +79,9 @@ final class BuildTicketPublicImageUrlsAction
             return $signed ? $this->signUrl->execute($path) : $path;
         }
 
-        if ($media->disk === 'public') {
+        // Dischi locali (public o altri `local`): solo il percorso. L'URL assoluto nasce da APP_URL e, se APP_URL non e' il
+        // dominio pubblico, il browser non raggiunge l'host (issue module_fixcity_fila5#71). Assoluto solo per dischi remoti (S3...).
+        if ($media->disk === 'public' || config('filesystems.disks.'.$media->disk.'.driver') === 'local') {
             $path = parse_url($media->getUrl(), PHP_URL_PATH);
 
             return is_string($path) ? $path : '';

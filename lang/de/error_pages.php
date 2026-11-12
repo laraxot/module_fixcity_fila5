@@ -11,4 +11,15 @@ return [
         'list' => 'Meldungen ansehen',
         'create' => 'Ein Problem melden',
     ],
+    // 419 (Sitzung abgelaufen) und 403 (Zugriff verweigert): dieselbe Seite, dieselben Schaltflächen (View errors/access.blade.php)
+    'expired' => [
+        'title' => 'Sitzung abgelaufen',
+        'message' => 'Sie waren zu lange inaktiv und die Sitzung wurde aus Sicherheitsgründen beendet. Es wurden keine Daten gesendet: Melden Sie sich erneut an und versuchen Sie es noch einmal.',
+    ],
+    'forbidden' => [
+        'title' => 'Zugriff nicht erlaubt',
+        'message' => 'Sie haben keine Berechtigung, diese Seite zu öffnen. Wenn Sie einen Fehler vermuten, melden Sie sich mit dem richtigen Konto an oder wählen Sie eine dieser Möglichkeiten.',
+    ],
+    'login' => 'Anmelden',
+    'home' => 'Zur Startseite',
 ];

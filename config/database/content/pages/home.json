@@ -279,7 +279,7 @@
                     "view": "pub_theme::components.blocks.home.news",
                     "heading": "Neuigkeiten",
                     "view_all_label": "Alle anzeigen",
-                    "view_all_aria": "Alle Neuigkeiten anzeigen",
+                    "view_all_aria": "Alle anzeigen: Neuigkeiten",
                     "category_fallback": "Nachrichten",
                     "limit": 3
                 }
@@ -290,7 +290,7 @@
                     "view": "pub_theme::components.blocks.home.events",
                     "heading": "Veranstaltungen",
                     "view_all_label": "Alle anzeigen",
-                    "view_all_aria": "Alle Veranstaltungen anzeigen",
+                    "view_all_aria": "Alle anzeigen: Veranstaltungen",
                     "limit": 6
                 }
             },

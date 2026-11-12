@@ -109,7 +109,7 @@ Percorsi relativi a `laravel/Modules/` salvo diversa indicazione.
 7. Contitolari o altri enti destinatari delle segnalazioni (es. gestori di servizi pubblici).
 8. Soglia di eta del servizio e minori.
 9. Fornitori di mappe: la policy Nominatim vieta l'autocompletamento lato client; valutare tile e geocodifica self-hosted o proxy per non trasmettere l'IP dei cittadini a terzi.
-10. Il passo 1 del wizard mostra l'intera informativa (lunga): valutare una informativa a livelli (sintesi + testo completo).
+10. ~~Il passo 1 del wizard mostra l'intera informativa (lunga): valutare una informativa a livelli (sintesi + testo completo).~~ Fatto il 2026-11-12: il passo mostra un avviso breve e il link a `/privacy` ([DCP-456](../stories/ticket-create-privacy-avviso-breve.story.md), guardia e misure in [DCP-457](../stories/dcp-457-guardia-e-misure-del-primo-livello-informativa-passo-1.story.md); misura nel browser ancora da riportare). Resta aperto: link a sezione di `/privacy` (servono id stabili sui titoli, modulo Gdpr) e approvazione del DPO sulla copy del primo livello.
 11. Chiave Google Maps scritta nel codice in `laravel/config/local/fixcity/google.php` e `Fixcity/config/google.php` (non riportata qui): ruotare e spostare in `.env`.
 12. Commento obsoleto nel blade sulla "posizione approssimativa da IP": il codice usa il fuso orario del browser.
 13. Regex del guard (`AssessPrivacyPolicyAction`) case-insensitive: la parola spagnola "todo" attiverebbe il segnaposto (evitata nel testo); valutare `\b` con maiuscole.

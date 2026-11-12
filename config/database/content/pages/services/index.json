@@ -31,8 +31,24 @@
                     "view": "pub_theme::components.pages.services"
                 }
             }
+        ],
+        "de": [
+            {
+                "type": "services-page",
+                "data": {
+                    "view": "pub_theme::components.pages.services"
+                }
+            }
+        ],
+        "es": [
+            {
+                "type": "services-page",
+                "data": {
+                    "view": "pub_theme::components.pages.services"
+                }
+            }
         ]
     },
-    "sidebar_blocks": {"it": [], "en": []},
+    "sidebar_blocks": {"it": [], "en": [], "de": [], "es": []},
     "footer_blocks": null
 }

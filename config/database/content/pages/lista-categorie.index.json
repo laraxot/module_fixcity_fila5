@@ -31,8 +31,24 @@
                     "view": "pub_theme::components.pages.categories"
                 }
             }
+        ],
+        "de": [
+            {
+                "type": "categories-page",
+                "data": {
+                    "view": "pub_theme::components.pages.categories"
+                }
+            }
+        ],
+        "es": [
+            {
+                "type": "categories-page",
+                "data": {
+                    "view": "pub_theme::components.pages.categories"
+                }
+            }
         ]
     },
-    "sidebar_blocks": {"it": [], "en": []},
+    "sidebar_blocks": {"it": [], "en": [], "de": [], "es": []},
     "footer_blocks": null
 }

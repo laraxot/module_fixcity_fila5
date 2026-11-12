@@ -8,9 +8,10 @@ priority: P0
 owner: module:Fixcity
 module: Fixcity
 created: 2026-10-14
-updated: 2026-10-14
+updated: 2026-11-12
 qmd: "gate messa in produzione go-live publication-gate production-checklist https debugbar app_debug mail from secure cookie csp"
 related: [dcp-112, dcp-130, dcp-132, dcp-133, dcp-139, dcp-153]
+discussions: ["https://github.com/laraxot/theme_sixteen_fila5/discussions/95"]
 ---
 # DCP-154: gate di messa in produzione, un solo comando che dice se si puo' pubblicare
 
@@ -67,3 +68,38 @@ Misura: `python3 -I bashscripts/tools/release/go-live-gate.py --skip-pest` su `h
 | **Fornitore** | `.env` di produzione: `APP_ENV=production`, `APP_DEBUG=false`, `DEBUGBAR_ENABLED=false`, `SESSION_SECURE_COOKIE=true`; HTTPS valido e controlli `production-checklist.sh`; posta che arriva davvero (SMTP, non `sendmail`); backup con ripristino provato, worker delle code e scheduler, intestazioni di cache lunghe per `/themes/Sixteen/` (vedi DCP-183); **cambiare la password FTP del disco `photos` di prova, che resta nella storia di git** | ENV-01/02/03/06, NET-01, ENV-08 |
 Non bloccanti ma richiesti dalle Linee guida: data di ultimo aggiornamento su ogni pagina (`DCP-167`, serve la regola su quale data), valutazione della pagina (`DCP-169`, serve dove memorizzare), licenza dei contenuti (`DCP-170`, decisione dell'ente), `security.txt` (serve un contatto per le segnalazioni di sicurezza), ricerca interna (campo che non risponde: collegarla o toglierla).
 
+
+## Stato misurato sul dev il 2026-11-11, due giri (sessione 85)
+
+Discussione con le decisioni e le alternative scartate: [#95](https://github.com/laraxot/theme_sixteen_fila5/discussions/95), complementare a [#93](https://github.com/laraxot/theme_sixteen_fila5/discussions/93) e [#94](https://github.com/laraxot/theme_sixteen_fila5/discussions/94).
+
+Comando: `python3 -I bashscripts/tools/release/go-live-gate.py --base http://127.0.0.1:8081 --skip-pest --json`, lanciato **due volte**: prima e dopo la ricostruzione dell'altra sessione. **Esito identico**, controllo per controllo:
+34 controlli, **16 PASS, 16 FAIL, 2 WARN**; 11 FAIL bloccanti, 5 requisiti LG non soddisfatti. Verdetto: **NON pubblicabile**. I cinque strumenti che il gate chiama erano stati cancellati da una sync e sono stati ripristinati: vedi [DCP-455](./dcp-455-strumenti-del-gate-sopravvivono-alla-sync.story.md).
+
+| Controllo | Esito | Gravita' | Chi | Cosa lo chiude | Decisione |
+|---|---|---|---|---|---|
+| `ENV-01` APP_ENV=production | FAIL | blocca | sviluppo / fornitore | DCP-154 (deploy) | nessuna: `.env` di produzione |
+| `ENV-02` APP_DEBUG=false | FAIL | blocca | sviluppo / fornitore | DCP-154 (deploy) | nessuna |
+| `ENV-03` DEBUGBAR_ENABLED=false | FAIL | blocca | sviluppo / fornitore | DCP-154 (deploy) | nessuna |
+| `ENV-06` SESSION_SECURE_COOKIE=true | FAIL | blocca | sviluppo / fornitore | DCP-154 (deploy) | nessuna |
+| `ENV-04` APP_URL https e dominio reale | FAIL | blocca | titolare / fornitore | DCP-155 | dominio definitivo |
+| `ENV-05` MAIL_FROM_ADDRESS sul dominio | FAIL | blocca | titolare / fornitore | DCP-155 | dominio definitivo |
+| `ENV-08` MAIL_MAILER recapita davvero | WARN | blocca | fornitore | DCP-155 | nessuna |
+| `NET-01` controlli HTTPS reali | FAIL | blocca | fornitore | DCP-139 | HTTPS valido |
+| `REPO-02` nomi `.md` senza date e suffissi | FAIL | blocca | sviluppo | DCP-201 | DEC-51 |
+| `LEG-04` testi legali e dichiarazione di accessibilita' | FAIL | blocca | ente (testi) | DCP-130, DCP-162, DCP-178, DCP-282 | testi dell'ente |
+| `LEG-01` guardie di pubblicazione | FAIL | blocca | ente (testi) / sviluppo | DCP-130, DCP-132, DCP-162 | rosso per costruzione con `--skip-pest` e finche' mancano i testi |
+| `LG-02` contatto del DPO raggiungibile | FAIL | blocca | ente (dati) / sviluppo | DCP-164 | dati dell'ente |
+| `LG-03` canonical su ogni pagina | FAIL | LG | sviluppo | DCP-166, [chiusura head](../../../Cms/docs/stories/head-sixteen-parity-closeout.story.md) | **DEC-62** (D-7) |
+| `LG-04` hreflang su ogni pagina | FAIL | LG | sviluppo | DCP-166, [chiusura head](../../../Cms/docs/stories/head-sixteen-parity-closeout.story.md) | **DEC-62** (D-7); influenzata da DEC-63 |
+| `LG-06` data di ultimo aggiornamento | FAIL | LG | sviluppo | DCP-167 | regola su quale data |
+| `LG-07` valutazione della pagina | FAIL | LG | sviluppo | DCP-169 | dove memorizzare |
+| `LG-08` licenza dei contenuti | FAIL | LG | ente (decisione) | DCP-170 | licenza |
+| `SITE-04` security.txt presente | WARN | LG | titolare / sviluppo | DCP-155 | contatto di sicurezza |
+
+### Come leggere questa tabella
+
+1. I controlli `ENV-*` leggono il `.env` **di destinazione**: sul dev falliscono per costruzione e vanno rilanciati sul `.env` di produzione. Non sono difetti del front office.
+2. Le due righe `LG-03`/`LG-04` sono le sole che dipendono da una decisione di prodotto sul front office: la causa e' la D-7 della migrazione dell'head (36 URL su 128 senza canonical e hreflang). Registro: [DCP-200](./dcp-200-registro-unico-delle-decisioni-aperte.story.md), sezione F2 (DEC-62..72).
+3. Un rebuild o un ripristino che non cambia nessun esito e' una prova utile quanto un miglioramento: per questo i due giri sono confrontati per id di controllo.
+4. Metodo dello sweep, soglie e trappole: `Themes/Sixteen/docs/how-to/front-office-anonymous-sweep.md`. Piano delle guardie: `Themes/Sixteen/docs/plans/front-office-hardening-plan.md`.

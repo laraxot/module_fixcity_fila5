@@ -141,6 +141,11 @@ return [
             'label' => 'Datenschutzerklärung.',
         ],
     ],
+    'gdpr_notice' => [
+        'text' => 'Die Gemeinde :municipality verarbeitet die freiwillig mitgeteilten personenbezogenen Daten auf der Grundlage von Artikel 13 der Verordnung (EU) 2016/679 (Datenschutz-Grundverordnung) und den Artikeln 13 ff. des Legislativdekrets 267/2000 (Einheitlicher Text der Gebietskörperschaften).',
+        'text_no_name' => 'Die Gemeinde verarbeitet die freiwillig mitgeteilten personenbezogenen Daten auf der Grundlage von Artikel 13 der Verordnung (EU) 2016/679 (Datenschutz-Grundverordnung) und den Artikeln 13 ff. des Legislativdekrets 267/2000 (Einheitlicher Text der Gebietskörperschaften).',
+        'privacy_link' => 'Datenschutzerklärung.',
+    ],
     'sections' => [
         'author' => [
             'label' => 'Verfasser der Meldung',

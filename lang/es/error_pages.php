@@ -11,4 +11,15 @@ return [
         'list' => 'Ver las incidencias',
         'create' => 'Comunicar un problema',
     ],
+    // 419 (sesión caducada) y 403 (acceso denegado): misma página, mismos botones (vista errors/access.blade.php)
+    'expired' => [
+        'title' => 'Sesión caducada',
+        'message' => 'Has estado inactivo demasiado tiempo y, por seguridad, la sesión ha terminado. No se ha enviado ningún dato: inicia sesión de nuevo e inténtalo otra vez.',
+    ],
+    'forbidden' => [
+        'title' => 'Acceso no permitido',
+        'message' => 'No tienes permiso para abrir esta página. Si crees que es un error, inicia sesión con la cuenta correcta o elige una de estas opciones.',
+    ],
+    'login' => 'Iniciar sesión',
+    'home' => 'Ir a la página de inicio',
 ];

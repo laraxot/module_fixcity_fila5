@@ -141,6 +141,11 @@ return [
             'label' => 'política de privacidad.',
         ],
     ],
+    'gdpr_notice' => [
+        'text' => 'El ayuntamiento de :municipality trata los datos personales facilitados y comunicados libremente sobre la base del artículo 13 del Reglamento (UE) 2016/679 (Reglamento general de protección de datos) y de los artículos 13 y siguientes del decreto legislativo 267/2000 (Texto único de las entidades locales).',
+        'text_no_name' => 'El ayuntamiento trata los datos personales facilitados y comunicados libremente sobre la base del artículo 13 del Reglamento (UE) 2016/679 (Reglamento general de protección de datos) y de los artículos 13 y siguientes del decreto legislativo 267/2000 (Texto único de las entidades locales).',
+        'privacy_link' => 'política de privacidad.',
+    ],
     'sections' => [
         'author' => [
             'label' => 'Autor del aviso',

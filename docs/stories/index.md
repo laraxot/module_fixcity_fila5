@@ -77,6 +77,8 @@ DCP-33, DCP-34 e DCP-35 qui sono le story del modulo Fixcity; lo stesso numero e
 - [2026-10-14-dcp-150-ricerca-elenco-per-indirizzo-sensibile-alle-maiuscole](./dcp-150-ricerca-elenco-per-indirizzo-sensibile-alle-maiuscole.story.md) - DCP-150: la ricerca dell'elenco pubblico per indirizzo distingueva le maiuscole
 - [2026-10-14-dcp-151-pagina-404-del-front-office-con-il-layout-del-tema](./dcp-151-pagina-404-del-front-office-con-il-layout-del-tema.story.md) - DCP-151: pagina 404 del front office con il layout del tema, in quattro lingue
 - [2026-10-14-dcp-180-audit-sicurezza-filament-blueprint](./dcp-180-audit-sicurezza-filament-blueprint.story.md) - DCP-180: audit di sicurezza del pannello Filament con Blueprint (F-01 corretto, F-02 e F-03 aperti)
+- [2026-10-14-dcp-456-ticket-create-privacy-avviso-breve](./ticket-create-privacy-avviso-breve.story.md) - DCP-456: wizard tickets/create passo 1 — avviso privacy breve + link, non l'informativa integrale
+- [2026-11-12-dcp-457-guardia-e-misure-primo-livello-informativa](./dcp-457-guardia-e-misure-del-primo-livello-informativa-passo-1.story.md) - DCP-457: guardia, misure e decisioni aperte; discussion tema #96
 - [STORY-493-critical-functional-deficiency-audit](./STORY-493-critical-functional-deficiency-audit.md) - STORY-493: Critical Functional Deficiency Audit
 - [STORY-494-wizard-critical-path-implementation](./STORY-494-wizard-critical-path-implementation.md) - STORY-494: Wizard Implementation
 - [STORY-495-citizen-auth](./STORY-495-citizen-auth.md) - STORY-495: Citizen Authentication
@@ -123,6 +125,10 @@ DCP-33, DCP-34 e DCP-35 qui sono le story del modulo Fixcity; lo stesso numero e
 - [DCP-202](./dcp-202-sicurezza-filament-finding-aperti.story.md) - DCP-202: sicurezza del back office e delle API, finding aperti
 - [DCP-205](./dcp-205-test-rossi-e-debito-di-qualita.story.md) - DCP-205: test rossi, strumenti di prova e debito di qualita
 - [DCP-208](./dcp-208-messa-online-compiti-del-fornitore-e-dell-ente.story.md) - DCP-208: messa online, compiti del fornitore e dell'ente
+
+### Story aggiunte all'indice (2026-11-12)
+
+- [DCP-455](./dcp-455-strumenti-del-gate-sopravvivono-alla-sync.story.md) - DCP-455: gli strumenti del gate di rilascio devono sopravvivere alla sync (5 strumenti ripristinati, 3 decisioni aperte); discussion [#95](https://github.com/laraxot/theme_sixteen_fila5/discussions/95)
 
 ## collegamenti bidirezionali
 
