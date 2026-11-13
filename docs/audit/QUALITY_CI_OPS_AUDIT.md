@@ -3,7 +3,7 @@ title: "Fixcity — Audit test, CI e operatività"
 type: audit
 tags: [fixcity, audit, quality]
 created: 2026-11-05
-updated: 2026-11-05
+updated: 2026-11-12
 status: active
 related:
   - ./README.md
@@ -14,6 +14,15 @@ related:
 > Lo stato aggiornato di ogni rilievo (risolto/aperto) è in [COMPLETION_ROADMAP.md](./COMPLETION_ROADMAP.md).
 
 # Audit qualità, test, CI/CD e operatività — Fixcity
+
+## Aggiornamento operativo — 12 novembre 2026
+
+L'audit front-office ha rilevato che `deploy.sh` eliminava tutte le migration con
+`rm -rf database/migrations/*` prima di eseguire `artisan migrate`. La riga è stata
+rimossa: le migration versionate devono restare nel checkout per mantenere deploy,
+audit dello schema e correzioni forward-only riproducibili. Il controllo resta da
+verificare su un deploy staging/live, perché questa sessione non ha accesso SSH al
+server di produzione.
 
 ## Sintesi
 
@@ -473,6 +482,12 @@ Tutti gli altri workflow puntano a `main`, `master` o `develop`, che non esiston
 5. OPS-16 … OPS-21, QA-09: igiene del repository e documentazione.
 
 ## Cosa non ho potuto verificare
+
+### Aggiornamento audit front office — 12 novembre 2026
+
+Il controllo browser guest ha rilevato un difetto axe condiviso nel footer: il link alla home aveva un `aria-label` sovrascritto non coerente con il contenuto visibile. La correzione è stata applicata nel tema Sixteen (`components/sections/footer/v1.blade.php`); resta da verificare dopo deploy sugli URL pubblici e con le viewport 375, 768 e 1440 px.
+
+La verifica completa per utente autenticato resta aperta perché manca una fixture browser isolata. Non sono state eseguite migration o modifiche distruttive sul database di produzione.
 
 - **Esecuzione di PHPStan, Pest, Pint e Rector**: niente `vendor/`, packagist bloccato e PHP locale 8.3. Lo stato reale di PHPStan e quanti test passano o falliscono restano ignoti.
 - **Esito reale dei workflow su GitHub**: non ho controllato la cronologia di Actions con `gh`. I giudizi "rosso/verde" sono dedotti dalla configurazione.

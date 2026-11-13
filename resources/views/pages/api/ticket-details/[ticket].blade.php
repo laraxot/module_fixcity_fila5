@@ -29,8 +29,9 @@ render(function (int|string $ticket): JsonResponse {
     }
 
     // Un ticket reale non visibile (es. in attesa di moderazione) non deve ricadere sul GeoJSON demo con lo stesso id.
-    // withTrashed: anche un ticket cancellato non deve ricadere sul GeoJSON demo (titolo e indirizzo resterebbero pubblici).
-    abort_if(Ticket::withTrashed()->whereKey($ticket)->exists(), 404);
+    // Ticket non usa SoftDeletes: la query semplice trova anche le righe con deleted_at valorizzato, quindi anche un
+    // ticket cancellato non ricade sul GeoJSON demo (titolo e indirizzo resterebbero pubblici).
+    abort_if(Ticket::query()->whereKey($ticket)->exists(), 404);
 
     $ticketId = (int) $ticket;
     $geoJson = app(LoadPublicTicketsGeoJsonAction::class)->execute();

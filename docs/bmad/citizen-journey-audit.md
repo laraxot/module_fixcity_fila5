@@ -4,7 +4,7 @@ type: bmad-journey-audit
 status: static-audit-with-navigation-fix-runtime-pending
 module: Fixcity
 created: 2026-10-07
-updated: 2026-10-07
+updated: 2026-11-12
 tags: [bmad, journeys, citizen, auth, tickets, tracking, homepage, second-brain]
 issues:
   - "https://github.com/laraxot/base_fixcity_fila5/issues/572"
@@ -64,8 +64,10 @@ Homepage guest
 
 - Folio mostra le route runtime con `php artisan folio:list`; `/it` usa
   `Themes/Sixteen/resources/views/pages/index.blade.php`.
-- `/it/auth/register`, `/it/auth/login`, `/it/auth/verify` appartengono alle view
-  Sixteen; i widget di autenticazione appartengono a User.
+- `/it/auth/register`, `/it/auth/login` e `/it/auth/verify` sono route Folio
+  localizzate: la logica/runtime appartiene a User, mentre la presentazione attiva
+  è Sixteen quando esiste l'override del tema. La notice `/it/auth/verify` e
+  l'endpoint firmato `/email/verify/{id}/{hash}` sono percorsi distinti.
 - `/it/tickets/create`, `/it/tickets/confirmation`, `/it/tickets/track` e il dettaglio
   appartengono al modulo Fixcity.
 - `HomepageDesignContractTest` passa e protegge la view attiva da slug `tests`, CSS

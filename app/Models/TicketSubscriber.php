@@ -7,6 +7,7 @@ namespace Modules\Fixcity\Models;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Carbon;
 use Modules\Fixcity\Database\Factories\TicketSubscriberFactory;
 use Modules\Xot\Contracts\UserContract;
@@ -50,6 +51,8 @@ use Modules\Xot\Datas\XotData;
  */
 class TicketSubscriber extends BaseModel
 {
+    use SoftDeletes;
+
     protected $connection = 'user';
 
     protected $fillable = [

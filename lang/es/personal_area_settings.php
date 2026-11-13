@@ -16,7 +16,7 @@ return [
         'list_title' => 'Actualizaciones recibidas',
         'count' => '{0} Ninguna notificación|{1} :count notificación|[2,*] :count notificaciones',
         'unread' => '{0} ninguna sin leer|{1} :count sin leer|[2,*] :count sin leer',
-        'item_text' => 'La incidencia :code tiene un nuevo estado: :status.',
+        'item_text' => 'Incidencia :code: :status.',
         'followed_label' => '«:title»',
         'new_badge' => 'Nueva',
         'open_report' => 'Abrir la incidencia',

@@ -12,7 +12,6 @@ use Modules\Xot\Models\XotBaseModel;
  */
 abstract class BaseModel extends XotBaseModel
 {
-    use SoftDeletes;
 
     public $incrementing = true;
 

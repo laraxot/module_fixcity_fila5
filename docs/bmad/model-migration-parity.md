@@ -15,7 +15,7 @@ qmd: "bmad + second brain   model-migration parity check (fixcity module) fixcit
 
 ## Analyze (Root Cause)
 - `Modules/Fixcity/app/Models/User.php` estende `Modules\User\Models\User as BaseUser`
-- Quindi `Fixcity\User` usa la stessa tabella `users` definita in `Modules/User/` (`2026_09_01_150113_create_users_table.php`)
+- Quindi `Fixcity\User` usa la stessa tabella `users` definita in `Modules/User/` (`2026_11_12_120000_create_users_table.php`)
 - **Second Brain insight**: il modello è *cross-module inheritance*, non *new table*. R3 (1 model = 1 migration) è rispettato perché l'owner della migration è il modulo `User`, non `Fixcity`.
 - Altri modelli (Ticket, Category, etc.) hanno migrazione `create_*` nel modulo `Fixcity`.
 

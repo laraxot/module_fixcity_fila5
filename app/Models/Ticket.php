@@ -7,6 +7,7 @@ namespace Modules\Fixcity\Models;
 use Carbon\CarbonInterval;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Carbon;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 use Modules\Comment\Models\Comment;
@@ -145,6 +146,7 @@ class Ticket extends BaseModel implements Commentable, HasMedia
 {
     use HasComments;
     use HasSlug;
+    use SoftDeletes;
 
     // The domain stores the current workflow state in the `status` column and
     // casts it to TicketStatusEnum. Alias the package's legacy status accessor

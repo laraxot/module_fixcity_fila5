@@ -62,6 +62,24 @@ Stato (aggiornato 2026-11-12): i cinque file sono **tracciati, committati e push
 | 2 | **Come proteggerli dalla sync** | (a) test da file nel modulo Fixcity che fallisce se uno dei cinque manca; (b) regola della sync: non adottare cancellazioni dentro `bashscripts/tools/` senza revisione; (c) solo committarli | **(a) + (c)**. (b) tocca lo script di sync: va deciso a parte |
 | 3 | **Quando committare** | su richiesta esplicita, dopo aver controllato `/tmp/fixcity-git-sync.lock.d` | nessun commit finché l'utente non lo chiede |
 
+## Seconda perdita: la suite di parità visiva (26 file, 2026-10-28)
+
+**Misurato il 2026-11-12** (sessione Claude, richiesta «controlla la parità Sixteen / Design Comuni»): `bashscripts/tools/visual/` contiene solo `scratch-auth-fixture.sh` (ripristinato) e `fo-sweep.mjs` (nuovo). Il resto della suite su cui poggia l'epic DCP-00 (gate di parità, confronto pixel e HTML) **non c'è più nell'albero**.
+
+| Fatto | Evidenza |
+|---|---|
+| Commit che li toglie | `eb98b388e` del 2026-10-28 12:51, repo annidato `bashscripts`, messaggio `.` (sync): **40.745 file** toccati (39.707 aggiunti, 206 cancellati, 800 modificati), cioè un mirror, non una pulizia mirata |
+| File cancellati sotto `tools/visual/` (26) | `parity-gate.sh`, `parity-sweep.sh`, `parity-wizard-steps.sh`, `compare-body-html.mjs`, `compare-computed.mjs`, `compare-screenshots.mjs`, `compact-markup.mjs`, `dom-diff-after-click.mjs`, `explain-style.mjs`, `extract-used-css.mjs`, `find-important-overrides.mjs`, `derive-dc-chrome-css.py`, `outline-geometry.mjs`, `keyboard-audit.mjs`, `wcag-aa-check.mjs`, `a11y-page-probe.mjs`, `guest-fo-smoke.mjs`, `guest-fo-http-smoke.sh`, `fo-session.mjs`, `fo-probe-comments.mjs`, `fo-comment-flow-probe.mjs`, `geo-picker-centering-probe.mjs`, `net-hosts-probe.mjs`, `wizard-summary-photos-probe.mjs`, `map-popup-contrast.cjs`, `scratch-auth-fixture.sh` (quest'ultimo tornato) |
+| Come si verifica | `git -C bashscripts log --diff-filter=D --name-only -- tools/visual/` |
+| Nessuna copia altrove | `find bashscripts -name parity-gate.sh` non trova nulla |
+| Cosa ho fatto | **Non li ho rimessi nel repository.** Ne ho estratti 9 da `eb98b388e^` in una cartella di lavoro fuori dal repo (scratchpad della sessione) e li ho usati per il confronto; ho scritto lì due sonde nuove (stato responsive e bande dei breakpoint) |
+
+**Perche' conta:** la guardia di esistenza proposta qui (decisione 2a) copre i cinque strumenti del gate, non questi 26: la prossima sync puo' ripetere la perdita e nessun test lo direbbe. Le note del second brain parlano ancora di `bashscripts/tools/visual/parity-gate.sh` come strumento vivo.
+
+| # | Decisione | Opzioni | Proposta |
+|---|---|---|---|
+| 4 | **Ripristinare la suite di parità visiva** | (a) rimetterla in avanti con `git show eb98b388e^:tools/visual/<file>` e proteggerla con la guardia della decisione 2a; (b) riscrivere solo cio' che serve (gia' fatto: `fo-sweep.mjs`) e togliere i riferimenti dalle note; (c) lasciare com'e' | **(a)** per `parity-gate.sh`, `compare-*.mjs`, `compact-markup.mjs`, `explain-style.mjs`: servono a ogni nuova pagina del riferimento. Il resto (probe di una pagina specifica) solo se serve. La decisione e' dell'utente: il mirror del 28/10 potrebbe aver tolto i file apposta |
+
 ## Basi di prova rimaste (F-04)
 
 Dopo i giri del gate restano **8 basi di prova** (sqlite scratch). Non le ho cancellate: la pulizia è un'azione su dati e aspetta conferma.

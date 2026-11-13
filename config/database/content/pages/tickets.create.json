@@ -7,6 +7,12 @@
         "es": "Comunicar una incidencia"
     },
     "slug": "tickets.create",
+    "description": {
+        "it": "Descrivi il problema, indica il luogo sulla mappa e, se vuoi, aggiungi una foto: il comune riceve la tua segnalazione.",
+        "en": "Describe the problem, pin the place on the map and, if you wish, add a photo: the municipality receives your report.",
+        "de": "Beschreiben Sie das Problem, markieren Sie den Ort auf der Karte und fügen Sie bei Bedarf ein Foto hinzu: Die Gemeinde erhält Ihre Meldung.",
+        "es": "Describe el problema, marca el lugar en el mapa y, si quieres, añade una foto: el ayuntamiento recibe tu incidencia."
+    },
     "content": null,
     "content_blocks": {
         "it": [
@@ -68,7 +74,7 @@
                             ]
                         }
                     },
-                    "header_active": "all-services"
+                    "header_active": "report"
                 }
             }
         ],
@@ -131,7 +137,7 @@
                             ]
                         }
                     },
-                    "header_active": "all-services"
+                    "header_active": "report"
                 }
             }
         ],
@@ -194,7 +200,7 @@
                             ]
                         }
                     },
-                    "header_active": "all-services"
+                    "header_active": "report"
                 }
             }
         ],
@@ -257,7 +263,7 @@
                             ]
                         }
                     },
-                    "header_active": "all-services"
+                    "header_active": "report"
                 }
             }
         ]

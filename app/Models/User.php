@@ -26,7 +26,7 @@ use Modules\User\Models\Role;
 use Modules\User\Models\Team;
 use Modules\User\Models\Tenant;
 use Modules\User\Models\TenantUser;
-use Modules\User\Models\User as BaseUser;
+use Modules\User\Models\BaseUser;
 use Modules\Xot\Contracts\ProfileContract;
 
 /**

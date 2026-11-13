@@ -18,7 +18,8 @@ uses(TestCase::class);
 $laravelRoot = dirname(__DIR__, 4);
 
 it('uses only known menu elements as header_active in page json', function () use ($laravelRoot): void {
-    $allowed = ['all-services', 'news', 'management', 'live'];
+    // Elementi del menu principale (sections/header.json): i quattro Design Comuni e quelli propri di FixCity (Segnala, Traccia, FAQ).
+    $allowed = ['all-services', 'news', 'management', 'live', 'report', 'track', 'faq'];
     $files = glob($laravelRoot.'/{config/*/*,Modules/*/config}/database/content/pages/{tests.,tickets.}*.json', GLOB_BRACE);
     Assert::assertNotSame([], $files, 'No page json found: the guard would pass vacuously.');
 

@@ -107,7 +107,7 @@ describe('notifications page', function (): void {
         $citizen = UserFactory::new()->createOne();
         notifyStatusChange($citizen, 'TCK-PAGE-DE', TicketStatusEnum::RESOLVED);
 
-        foreach (['de' => 'Die Meldung TCK-PAGE-DE hat einen neuen Status: ', 'es' => 'La incidencia TCK-PAGE-DE tiene un nuevo estado: '] as $locale => $sentence) {
+        foreach (['de' => 'Meldung TCK-PAGE-DE: ', 'es' => 'Incidencia TCK-PAGE-DE: '] as $locale => $sentence) {
             $status = trans('fixcity::ticket_status_enum.values.resolved.label', [], $locale);
             expect($status)->not->toBe(trans('fixcity::ticket_status_enum.values.resolved.label', [], 'it'));
 

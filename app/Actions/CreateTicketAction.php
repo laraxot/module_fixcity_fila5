@@ -9,6 +9,9 @@ use Illuminate\Database\Connection;
 use Illuminate\Database\UniqueConstraintViolationException;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Validation\ValidationException;
+use Modules\Fixcity\Enums\TicketActivityEventTypeEnum;
+use Modules\Fixcity\Enums\TicketActivityVisibilityEnum;
+use Modules\Fixcity\Enums\TicketStatusEnum;
 use Modules\Fixcity\Events\TicketCreatedEvent;
 use Modules\Fixcity\Models\Ticket;
 use Modules\Media\Models\Media;
@@ -51,6 +54,7 @@ class CreateTicketAction
 
         $ticket = $this->transaction(function () use ($data, $afterCreate): Ticket {
             $ticket = $this->insert($data);
+            $this->recordSubmission($ticket);
             if ($afterCreate instanceof Closure) {
                 $afterCreate($ticket);
             }
@@ -65,6 +69,28 @@ class CreateTicketAction
         }
 
         return $ticket;
+    }
+
+    /**
+     * Prima voce della cronologia: "segnalazione ricevuta" nello stato iniziale. Senza, il cittadino vedeva come unico
+     * aggiornamento "Allegato aggiunto" (la foto caricata insieme alla segnalazione). Visibile all'autore e all'ufficio:
+     * il ticket non e' ancora pubblico.
+     */
+    private function recordSubmission(Ticket $ticket): void
+    {
+        $status = TicketStatusEnum::tryFrom($ticket->resolveTicketStatusValue()) ?? TicketStatusEnum::PENDING;
+        $ownerId = $ticket->owner_id;
+
+        app(RecordTicketActivityAction::class)->execute(
+            $ticket,
+            TicketActivityEventTypeEnum::StatusChange,
+            null,
+            $status,
+            null,
+            TicketActivityVisibilityEnum::AuthorOnly,
+            is_int($ownerId) || is_string($ownerId) ? $ownerId : null,
+            ['source' => 'submission'],
+        );
     }
 
     /**

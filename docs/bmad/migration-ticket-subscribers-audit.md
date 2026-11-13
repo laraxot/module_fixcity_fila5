@@ -65,6 +65,16 @@ php artisan tinker --execute='dump(config("database.connections.user.database"))
 Il valore stampato deve essere `fixcity_user`; altrimenti il deploy sta
 caricando un `.env` o una cache diversa dal repository.
 
+Per questa repair non usare il comando generico `migrate --database=user` in
+un'installazione incompleta: può tentare migration di altri moduli sul database
+utenti. Usare la migration repair esplicita:
+
+```bash
+php artisan config:clear
+php artisan migrate --database=user --path=Modules/Fixcity/database/migrations/2026_11_12_180000_repair_ticket_subscribers_user_connection.php --force --no-interaction
+php artisan config:cache
+```
+
 ## Incident 2026-10-18 — installazioni con migration registrata ma tabella assente
 
 L'area personale usava `TicketSubscriber` sulla connessione `user`, ma alcune
@@ -77,3 +87,13 @@ solo se manca e lascia intatti i dati presenti.
 Prima di verificare il deploy: `config:clear`, `migrate --no-interaction` e
 `migrate:status` sulla connessione reale; mai `migrate:fresh`, `refresh`,
 `reset` o `db:wipe`.
+
+## Repair aggiuntiva del 12 novembre 2026
+
+Il frontoffice ha rilevato un'installazione in cui la migration originaria era
+registrata ma `ticket_subscribers` non esisteva sul database della connessione
+`user`. La migration
+`2026_11_12_180000_repair_ticket_subscribers_user_connection.php` è
+forward-only e idempotente: usa `TicketSubscriber::$connection = 'user'`, crea
+la tabella solo se manca e completa colonne, timestamp, soft delete e indice
+unique senza toccare dati esistenti.

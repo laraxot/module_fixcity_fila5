@@ -35,11 +35,13 @@ it('keeps the three copies of tickets.create.json identical', function () use ($
     $copies = [
         'config/local/fixcity/database/content/pages/tickets/create.json',
         'Modules/Fixcity/config/database/content/pages/tickets.create.json',
+        'Modules/Fixcity/config/database/content/pages/tickets/create.json',
     ];
     $hashes = array_unique(array_map(static function (string $path) use ($laravelRoot): string {
         $json = json_decode(file_get_contents($laravelRoot.'/'.$path), true);
         Assert::assertIsArray($json);
         unset($json['id'], $json['slug']);
+
         return md5(json_encode($json));
     }, $copies));
 
