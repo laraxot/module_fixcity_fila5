@@ -20,7 +20,7 @@ return new class extends XotBaseMigration
     {
         // Create the ticket_subscribers table if it doesn't exist
         $this->tableCreate(
-            static function (Blueprint $table): void {
+            function (Blueprint $table): void {
                 $table->id();
                 $table->string('user_id', 36)->index();
                 $table->unsignedBigInteger('ticket_id')->index();

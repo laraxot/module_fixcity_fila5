@@ -132,14 +132,13 @@ class TimelineStep extends BaseModel
      */
     public function getClosureLabel(): ?string
     {
-        $map = [
+        return match ($this->getClosureType()) {
             'resolved' => 'Risolto',
             'rejected' => 'Scartato',
-            'delegato' => 'Delegato',
+            'delegated' => 'Delegato',
             'not_resolved' => 'Non risolto',
-        ];
-
-        return $map[$this->getClosureType()] ?? null;
+            default => null,
+        };
     }
 
     /**
