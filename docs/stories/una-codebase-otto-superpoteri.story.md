@@ -43,7 +43,7 @@ ogni riga «c'e'» e' verificabile aprendo il file citato.
 
 ## Decisioni prese qui
 - Gli interruttori per Comune restano **configurazione per tenant** finche' non serve cambiarli senza deploy; Pennant entra solo
-  quando un amministratore del Comune deve poter accendere o spegnere una funzione dal pannello. L'issue sui flag lo decide.
+  quando un amministratore del Comune deve poter accendere o spegnere una funzione dal pannello. La #728 lo decide.
 - L'onboarding parte da un **tenant modello neutro** (non dalla cartella di Fixcity), cosi' un nuovo Comune non eredita i testi di
   un altro.
 
