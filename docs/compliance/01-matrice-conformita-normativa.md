@@ -5,7 +5,7 @@ status: draft-for-dpo-legal-review
 story: dcp-112
 owner: module:Fixcity
 created: 2026-10-13
-updated: 2026-10-13
+updated: 2026-11-18
 tags: [compliance, gdpr, cad, accessibilita, cookie, sicurezza, nis2, bmad]
 related:
   - ./00-scopo-del-progetto.md
@@ -51,6 +51,8 @@ Rischio: alto (esposizione dell'ente o dei cittadini, blocca la messa in produzi
 | non applicabile | 3 |
 | NON VERIFICATO | 18 |
 | Totale | 39 |
+
+Con le righe della sezione 6 (2026-11-18): 45 righe, di cui 13 assenti e 11 parziali; i cambi di stato delle righe esistenti sono in fondo, nella sezione «Aggiornamento 2026-11-18».
 
 Rischio delle righe: alto 10, medio 18, basso 11. Nessuna riga e' pienamente «conforme»: i controlli riusciti sono parziali (per esempio la separazione delle caselle di consenso, N-02). Matrice di interfaccia (accessibilita', lingue, design, cookie e mobile): [27 righe](../../../../Themes/Sixteen/docs/compliance/01-matrice-conformita-interfaccia.md). Totale delle due matrici: 66 righe. Il registro delle fonti conta 237 voci normative lette (187 verificate, 44 parziali, 6 non verificate).
 
@@ -118,6 +120,19 @@ Rischio delle righe: alto 10, medio 18, basso 11. Nessuna riga e' pienamente «c
 | N-38 | CAD art. 68 e 69 c. 1 e 2-bis; AgID, Linee guida su acquisizione e riuso di software (data 9.5.2019; numero di determinazione 115/2019 letto solo in un documento AgID di livello superiore, registro 03) | Il software sviluppato su specifiche di un committente pubblico va rilasciato con licenza aperta in un repertorio pubblico; la PA committente e' titolare dei diritti (c. 2). Le Linee guida consigliano EUPL-1.2 o, per software usato via rete, AGPL-3.0-or-later | `composer.json` di `laravel/`, del modulo Fixcity e del tema Sixteen dichiarano `"license": "MIT"`; non esiste un file `LICENSE` in radice, in `Modules/Fixcity` e in `Themes/Sixteen` (c'e' solo `Modules/Gdpr/LICENSE`, MIT, 2023 laraxot). Se il codice sia pubblicato in un repertorio pubblico e se il Comune sia titolare dei diritti non e' nel repository | parziale | medio | DCP-145 |
 | N-39 | Bootstrap Italia e Design Comuni (pagine statiche): licenza BSD-3-Clause (`italia/bootstrap-italia`, `italia/design-comuni-pagine-statiche`, file LICENSE e AUTHORS letti su GitHub, registro 03 sez. 15) | Ridistribuzione e modifica consentite se si conservano avviso di copyright, condizioni e disclaimer (per i binari anche nella documentazione o in altri materiali); i nomi dei titolari non si usano per promuovere i derivati | Vedi la riga I-27 della matrice di interfaccia: avviso breve nel CSS, senza testo completo ne' elenco dei titolari. Il tema WordPress di Design Comuni e' AGPL-3.0: non e' usato qui (nessuna copia verificata) | parziale | medio | DCP-145 |
 
+
+## 6. Cloud della PA (ACN), continuita' operativa e interoperabilita'
+
+Aggiunta il 2026-11-18. Fonti lette quel giorno: commenti al Regolamento ACN per le infrastrutture digitali e i servizi cloud della PA (in vigore dal 1.8.2024) e alle sue tabelle dei livelli; il testo del regolamento sul portale ACN non e' stato scaricato (PARZIALE).
+
+| ID | Riferimento | Cosa impone | Come lo rispettiamo oggi (prova) | Stato | Rischio | Story |
+|---|---|---|---|---|---|---|
+| N-40 | Regolamento ACN cloud PA (1.8.2024): qualificazione dei servizi; livelli QC1-QC4 cumulativi (QC1 dati ordinari, QC2 anche critici, QC3/QC4 anche strategici) | Un SaaS acquistato da una PA e' qualificato nel catalogo ACN a un livello adeguato alla classe dei dati; QC1 richiede ISO/IEC 27001 con 27017 e 27018 (o CSA STAR L2); il SaaS non supera il livello dell'infrastruttura, che dev'essere qualificata | Fixcity non risulta nel catalogo; nessuna documentazione di qualificazione o ISO 27001 nella repo; hosting di produzione non documentato (domanda 17). Classe dei dati probabile: ordinari (QC1), da confermare dal Comune | assente | alto | [#721](https://github.com/laraxot/base_fixcity_fila5/issues/721) |
+| N-41 | Regolamento ACN, Allegato 3 (localizzazione) | Dati, backup, continuita' e disaster recovery in infrastrutture UE; metadati in UE | Nessun backup pianificato (nessuno `schedule` di backup, nessun `config/backup.php`); l'unico backup e' il dump di `deploy.sh` a ogni deploy, in `$HOME/fixcity-backups/db` sullo stesso server; allegati senza backup | assente | alto | [#722](https://github.com/laraxot/base_fixcity_fila5/issues/722) |
+| N-42 | Regolamento ACN (continuita'); PRD Fixcity NFR-003 (backup giornaliero, RTO < 4 ore) | RTO e RPO dichiarati e rispettati | Nessun RTO o RPO dichiarato; nessuna prova di ripristino; runbook assente; `docs/architecture-fixcity.md` cita `pg_dump` ma il database e' MariaDB | assente | alto | [#722](https://github.com/laraxot/base_fixcity_fila5/issues/722) |
+| N-43 | Regolamento ACN (portabilita', reversibilita'; obblighi in caso di revoca: avviso, migrazione, cancellazione) | L'amministrazione si riprende i dati e cambia fornitore | `/api/tickets/geojson` (solo segnalazioni pubbliche, pochi campi) ed export delle tabelle Filament; nessun export completo (allegati, cronologia, commenti, utenti, consensi) ne' procedura di uscita | parziale | medio | [#723](https://github.com/laraxot/base_fixcity_fila5/issues/723) |
+| N-44 | AgID, Linee guida sull'interoperabilita' tecnica (ModI); PDND | API REST documentate OpenAPI 3, profili di sicurezza ModI, catalogo PDND quando servono ad altri enti | API esistenti senza specifica OpenAPI; nessun endpoint Open311 GeoReport v2; le 11 rotte del modulo AI non sono caricate (`$module_ns`); #440 chiusa dal bot «stale» | assente | medio | [#727](https://github.com/laraxot/base_fixcity_fila5/issues/727) |
+| N-45 | Circolare AgID 2/2017 (misure minime, autenticazione degli amministratori); GDPR art. 32 | Autenticazione robusta per chi amministra | Nessuna autenticazione a due fattori nei pannelli Filament (nessun `multiFactorAuthentication()` nei PanelProvider); policy delle password e limite ai tentativi presenti | assente | medio | [#726](https://github.com/laraxot/base_fixcity_fila5/issues/726) |
 
 ## Appendice A: comandi di verifica riproducibili
 
@@ -203,3 +218,15 @@ Le righe sotto cambiano di stato; le prove sono nelle story (comandi e output). 
 
 Story: DCP-130 (`../stories/dcp-130-informativa-privacy-art13-e-pagina-servita.story.md`), DCP-131 e DCP-132 (`Themes/Sixteen/docs/bmad/stories/`).
 
+## Aggiornamento 2026-11-18: terze parti, intestazioni, accessibilita', SPID
+
+Misure ripetute il 2026-11-18 (Playwright con rete tracciata, `curl -I`, axe-core 4.10). Il testo delle righe originali resta com'e'.
+
+| Riga | Prima | Ora |
+|---|---|---|
+| N-14 | assente | **parziale.** Intestazioni attive (`SecurityHeaders`, `config/security.php`): `X-Content-Type-Options`, `X-Frame-Options`, `Referrer-Policy`, `Permissions-Policy`, CSP `frame-ancestors`; HSTS solo su HTTPS; `X-Powered-By` tolto. CSP completa ancora in report-only: tolti Google Fonts e Nominatim, 0 violazioni su 18 pagine pubbliche; manca la scansione del pannello admin per passare a enforce ([#726](https://github.com/laraxot/base_fixcity_fila5/issues/726)) |
+| N-17 | NON VERIFICATO | **parziale.** Il browser non contatta terzi prima della scelta: font in casa, tile e geocoding dal proxy del modulo Geo (`/api/geo/...`), Gravatar spento; 0 richieste a domini terzi su 13 pagine. Restano diretti solo gli strati scelti dal cittadino (Esri, OSM France). Il server chiede a OSMF porzioni di mappa e indirizzi cercati, senza IP del visitatore. Informativa e cookie policy aggiornate; resta la valutazione del DPO. ADR: `Modules/Geo/docs/adr/osm-proxy-tile-nominatim.md`, `Modules/Comment/docs/adr/gravatar-switch.md` |
+| N-24 | assente | invariato (**assente**), con un rischio in piu': il codice SPID/CIE del tema (`Themes/Sixteen/routes/auth.php`, `SpidAuthAction`) e' spento, e la verifica della firma SAML scritta a mano e' vulnerabile al signature wrapping: da non attivare cosi' ([#724](https://github.com/laraxot/base_fixcity_fila5/issues/724)) |
+| I-01 (matrice interfaccia) | parziale | controllo automatico axe-core WCAG 2.2 AA + best practice su 17 pagine a 1366 e 390 px: 0 violazioni (prima 5). Restano la verifica manuale e i dati della dichiarazione da parte del Comune ([#725](https://github.com/laraxot/base_fixcity_fila5/issues/725)) |
+
+Righe nuove N-40...N-45 nella sezione 6. Conteggio delle righe nuove: assente 5, parziale 1.
