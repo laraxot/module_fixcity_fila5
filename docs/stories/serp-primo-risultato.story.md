@@ -107,7 +107,8 @@ provinciali»
 ### Prossimi passi tecnici (issue)
 - [ ] Velocità: cache delle pagine pubbliche per gli ospiti e intestazioni cacheabili; TTFB < 0,8 s (#735).
 - [ ] CSS e JS pubblici: niente asset Filament sulle pagine del sito, CSS critico (theme #102).
-- [ ] `lastmod` in sitemap con date vere (contratto `SitemapPathsContract` con date) (#736).
+- [x] `lastmod` in sitemap con date vere (`SitemapLastModifiedContract`: segnalazioni e articoli) e IndexNow anche per
+  le URL cambiate (#736).
 - [ ] Pagine di categoria con contenuto proprio e segnalazioni del Comune; `Place`/`GeoCoordinates` sulle segnalazioni.
 - [ ] Pagina «FixCity per i Comuni» e confronto, con i dati di Marco (#737).
 
