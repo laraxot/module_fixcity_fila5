@@ -1,0 +1,272 @@
+{
+  "id": "documenti-dati",
+  "slug": "documenti-dati",
+  "parent_slug": "tests",
+  "title": {
+    "it": "Documenti e dati",
+    "en": "Documents and data"
+  },
+  "layout": "test",
+  "description": "Documenti e dati: documenti in evidenza, ricerca e categorie. Contenuto da JSON, reso dal blocco content-page del tema Sixteen.",
+  "content_blocks": {
+    "it": [
+      {
+        "type": "content-page",
+        "data": {
+          "view": "pub_theme::components.blocks.content-page.design-comuni",
+          "title": "Documenti e Dati",
+          "breadcrumb": {
+            "items": [
+              {
+                "label": "Home",
+                "url": "/it/tests/homepage"
+              },
+              {
+                "label": "Amministrazione",
+                "url": "#"
+              }
+            ],
+            "current": "Documenti e Dati"
+          },
+          "hero": {
+            "text": "La documentazione prodotta e pubblicata dal Comune come atti, accordi, statistiche, progetti e modulistica.",
+            "shadow": true
+          },
+          "sections": [
+            {
+              "type": "cards-document",
+              "style": "plain",
+              "title": "In evidenza",
+              "nested": true,
+              "col_class": "col-md-6 col-xl-4",
+              "items": [
+                {
+                  "category": {
+                    "label": "Modulistica",
+                    "url": "#",
+                    "icon": "it-file"
+                  },
+                  "title": "Certificato di destinazione urbanistica",
+                  "text": "Modello di domanda per richiedere il certificato di destinazione urbanistica",
+                  "url": "#",
+                  "element": "news-category-link"
+                },
+                {
+                  "category": {
+                    "label": "Atto normativo",
+                    "url": "#",
+                    "icon": "it-file"
+                  },
+                  "title": "Contributo una tantum per i nati nell'anno 2022",
+                  "text": "Avviso per richiedere il contributo economico destinato ai nati nell'anno 2022 e residenti nel tuo Comune",
+                  "url": "#",
+                  "element": "news-category-link"
+                },
+                {
+                  "category": {
+                    "label": "Documento Albro Pretorio",
+                    "url": "#",
+                    "icon": "it-file"
+                  },
+                  "title": "Accesso agli atti documentale",
+                  "text": "L'accesso agli atti è il diritto riconosciuto ed esercitato da tutti i soggetti che dimostrano di avere un interesse diretto, concreto e attuale",
+                  "url": "#",
+                  "element": "news-category-link"
+                }
+              ]
+            },
+            {
+              "type": "search-list",
+              "style": "grey",
+              "title": "Esplora i documenti",
+              "col_class": "col-md-6 col-xl-4",
+              "search": {
+                "id": "autocomplete-autocomplete-three",
+                "name": "autocomplete-three",
+                "label": "cerca",
+                "placeholder": "Cerca per parola chiave",
+                "button_id": "button-3",
+                "button": "Invio",
+                "result": "3 documenti trovati in ordine alfabetico",
+                "spacing": "mb-0"
+              },
+              "items": [
+                {
+                  "category": {
+                    "label": "Modulistica",
+                    "url": "#",
+                    "icon": "it-file"
+                  },
+                  "title": "Certificato di destinazione urbanistica",
+                  "text": "Modello di domanda per richiedere il certificato di destinazione urbanistica",
+                  "url": "#",
+                  "element": "news-category-link"
+                },
+                {
+                  "category": {
+                    "label": "Atto normativo",
+                    "url": "#",
+                    "icon": "it-file"
+                  },
+                  "title": "Contributo una tantum per i nati nell'anno 2022",
+                  "text": "Avviso per richiedere il contributo economico destinato ai nati nell'anno 2022 e residenti nel tuo Comune",
+                  "url": "#",
+                  "element": "news-category-link"
+                },
+                {
+                  "category": {
+                    "label": "Documento Albro Pretorio",
+                    "url": "#",
+                    "icon": "it-file"
+                  },
+                  "title": "Accesso agli atti documentale",
+                  "text": "L'accesso agli atti è il diritto riconosciuto ed esercitato da tutti i soggetti che dimostrano di avere un interesse diretto, concreto e attuale",
+                  "url": "#",
+                  "element": "news-category-link"
+                }
+              ],
+              "none": "Nessun altro risultato"
+            },
+            {
+              "type": "cards-simple",
+              "style": "plain",
+              "id": "argomento",
+              "title": "Esplora per categoria",
+              "col_class": "col-md-6 col-xl-4",
+              "items": [
+                {
+                  "title": "Accordi tra enti",
+                  "text": "Gli accordi del Comune con altre istituzioni, fondazioni ed enti.",
+                  "url": "#"
+                },
+                {
+                  "title": "Atti normativi",
+                  "text": "Statuto, regolamenti dell'Ente e altre norme ufficiali.",
+                  "url": "#"
+                },
+                {
+                  "title": "Dataset",
+                  "text": "Le statistiche e i dati strutturati riguardanti le attività produttive, la qualità della vita e la popolazione del Comune.",
+                  "url": "#"
+                },
+                {
+                  "title": "Documenti Albo Pretorio",
+                  "text": "Gli atti amministrativi per i quali è previsto l'obbligo di pubblicità legale.",
+                  "url": "#"
+                },
+                {
+                  "title": "Documenti attività politica",
+                  "text": "Sedute, ordini del giorno e interrogazioni degli organi di governo comunali.",
+                  "url": "#"
+                },
+                {
+                  "title": "Documenti funzionamento interno",
+                  "text": "I regolamenti interni, i provvedimenti dirigenziali e i codici disciplinari degli organi di indirizzo politico.",
+                  "url": "#"
+                },
+                {
+                  "title": "Documenti tecnici di supporto",
+                  "text": "I rapporti tecnici e la documentazione di progetto.",
+                  "url": "#"
+                },
+                {
+                  "title": "Documenti di programmazione e rendicontazione",
+                  "text": "Rendiconti, procedure, bilanci consuntivi e preventivi.",
+                  "url": "#"
+                },
+                {
+                  "title": "Istanze",
+                  "text": "Le richieste private rivolte agli organi amministrativi o giurisdizionali del Comune.",
+                  "url": "#"
+                },
+                {
+                  "title": "Modulistica",
+                  "text": "Tutti i moduli predisposti per la stesura di documenti o scritture.",
+                  "url": "#"
+                }
+              ]
+            }
+          ],
+          "feedback": {
+            "title": "Quanto sono chiare le informazioni su questa pagina?",
+            "legend": "Valuta da 1 a 5 stelle la pagina",
+            "star_label": "Valuta %d stelle su 5",
+            "thanks": "Grazie, il tuo parere ci aiuterà a migliorare il servizio!",
+            "positive": {
+              "question": "Quali sono stati gli aspetti che hai preferito?",
+              "answers": [
+                "Le indicazioni erano chiare",
+                "Le indicazioni erano complete",
+                "Capivo sempre che stavo procedendo correttamente",
+                "Non ho avuto problemi tecnici",
+                "Altro"
+              ]
+            },
+            "negative": {
+              "question": "Dove hai incontrato le maggiori difficoltà?",
+              "answers": [
+                "A volte le indicazioni non erano chiare",
+                "A volte le indicazioni non erano complete",
+                "A volte non capivo se stavo procedendo correttamente",
+                "Ho avuto problemi tecnici",
+                "Altro"
+              ]
+            },
+            "detail": {
+              "question": "Vuoi aggiungere altri dettagli?",
+              "label": "Dettaglio",
+              "help": "Inserire massimo 200 caratteri"
+            },
+            "back": "Indietro",
+            "next": "Avanti"
+          },
+          "contacts": {
+            "main": {
+              "title": "Contatta il comune",
+              "items": [
+                {
+                  "icon": "it-help-circle",
+                  "label": "Leggi le domande frequenti",
+                  "url": "#"
+                },
+                {
+                  "icon": "it-mail",
+                  "label": "Richiedi assistenza",
+                  "url": "#",
+                  "element": "contacts"
+                },
+                {
+                  "icon": "it-hearing",
+                  "label": "Chiama il numero verde 05 0505",
+                  "url": "#"
+                },
+                {
+                  "icon": "it-calendar",
+                  "label": "Prenota appuntamento",
+                  "url": "#",
+                  "element": "appointment-booking"
+                }
+              ]
+            },
+            "problems": {
+              "title": "Problemi in città",
+              "items": [
+                {
+                  "icon": "it-map-marker-circle",
+                  "label": "Segnala disservizio",
+                  "url": "#"
+                }
+              ]
+            }
+          },
+          "header_active": "management"
+        }
+      }
+    ]
+  },
+  "sidebar_blocks": {
+    "it": [],
+    "en": []
+  },
+  "footer_blocks": null
+}

@@ -1,0 +1,297 @@
+{
+    "id": "servizi",
+    "slug": "servizi",
+    "parent_slug": "tests",
+    "title": {
+        "it": "Servizi",
+        "en": "Services"
+    },
+    "layout": "test",
+    "sidebar_blocks": {
+        "it": [],
+        "en": []
+    },
+    "footer_blocks": null,
+    "description": "Elenco dei servizi con ricerca e categorie (riferimento sito/servizi). Contenuto da JSON, reso dal blocco service-page-list del tema Sixteen.",
+    "content_blocks": {
+        "it": [
+            {
+                "type": "service-page-list",
+                "data": {
+                    "view": "pub_theme::components.blocks.service-page-list.design-comuni",
+                    "breadcrumb": {
+                        "items": [
+                            {
+                                "label": "Home",
+                                "url": "/it/tests/homepage"
+                            }
+                        ],
+                        "current": "Servizi"
+                    },
+                    "hero": {
+                        "text": "Tutti i servizi comunali per i cittadini, disponibili online o a sportello, per richiedere documenti e permessi, iscriversi a graduatorie ed effettuare pagamenti.",
+                        "row_shadow": false
+                    },
+                    "title": "Servizi",
+                    "sections": [
+                        {
+                            "type": "service-search",
+                            "variant": "catalog",
+                            "title": "Esplora tutti i servizi",
+                            "category_label": "Categoria:",
+                            "search": {
+                                "label": "Cerca una parola chiave",
+                                "placeholder": "Cerca una parola chiave",
+                                "button": "Invio"
+                            },
+                            "count": {
+                                "value": "620",
+                                "text": "servizi trovati in ordine alfabetico"
+                            },
+                            "items": [
+                                {
+                                    "title": "Abbandono di rifiuti in aree private",
+                                    "url": "#",
+                                    "text": "Il servizio gestisce gli esposti e le segnalazioni riguardanti l'abbandono di rifiuti in aree private",
+                                    "category": {
+                                        "label": "Ambiente",
+                                        "url": "#"
+                                    }
+                                },
+                                {
+                                    "title": "Abbonamento bike sharing",
+                                    "url": "#",
+                                    "text": "Sottoscrizione dell’abbonameno al servizio di bike sharing",
+                                    "category": {
+                                        "label": "Mobilità e trasporti",
+                                        "url": "#"
+                                    }
+                                },
+                                {
+                                    "title": "Albo dei giudici popolari",
+                                    "url": "#",
+                                    "text": "Tenuta e aggiornamento dell'Albo dei giudici popolari di Corte di assise e di Corte di assise di appello",
+                                    "category": {
+                                        "label": "Anagrafe e stato civile",
+                                        "url": "#"
+                                    }
+                                },
+                                {
+                                    "title": "Abbandono di rifiuti in aree private",
+                                    "url": "#",
+                                    "text": "Albo delle persone idonee a svolgere le funzioni di presidente di seggio in occasione delle elezioni",
+                                    "category": {
+                                        "label": "Anagrafe e stato civile",
+                                        "url": "#"
+                                    }
+                                },
+                                {
+                                    "title": "Albo scrutatori di seggio",
+                                    "url": "#",
+                                    "text": "Tenuta e aggiornamento dell'Albo degli scrutatori di seggio: l'elenco delle persone idonee a svolgere le funzioni di scrutatore in occasione delle elezioni",
+                                    "category": {
+                                        "label": "Anagrafe e stato civile",
+                                        "url": "#"
+                                    }
+                                }
+                            ],
+                            "load_more": {
+                                "label": "Carica altri risultati",
+                                "element": "load-other-cards"
+                            },
+                            "sidebar": {
+                                "title": "SERVIZI IN EVIDENZA",
+                                "items": [
+                                    {
+                                        "label": "Rilascio Carta Identità Elettronica (CIE)",
+                                        "url": "#"
+                                    },
+                                    {
+                                        "label": "Cambio di residenza",
+                                        "url": "#"
+                                    },
+                                    {
+                                        "label": "Tributi online",
+                                        "url": "#"
+                                    },
+                                    {
+                                        "label": "Prenotazione appuntamenti",
+                                        "url": "#"
+                                    },
+                                    {
+                                        "label": "Rilascio tessera elettorale",
+                                        "url": "#"
+                                    },
+                                    {
+                                        "label": "Voucher connettività",
+                                        "url": "#"
+                                    }
+                                ]
+                            }
+                        },
+                        {
+                            "type": "category-cards",
+                            "id": "",
+                            "title": "Esplora per categoria",
+                            "heading": "xxlarge",
+                            "items": [
+                                {
+                                    "title": "Agricoltura e pesca",
+                                    "text": "Autorizzazioni e politiche alimentari per agricoltura e pesca.",
+                                    "url": "#"
+                                },
+                                {
+                                    "title": "Ambiente",
+                                    "text": "Aree verdi e parchi, inquinamento, igiene urbana e rifiuti.",
+                                    "url": "#"
+                                },
+                                {
+                                    "title": "Anagrafe e stato civile",
+                                    "text": "Documenti d’identità, cambio di residenza, servizi elettorali, cimiteriali e certificati per nascita, matrimoni e unioni civili.",
+                                    "url": "#"
+                                },
+                                {
+                                    "title": "Appalti pubblici",
+                                    "text": "Gare d’appalto e avvisi per lavori, servizi e forniture al Comune.",
+                                    "url": "#"
+                                },
+                                {
+                                    "title": "Autorizzazioni",
+                                    "text": "Autorizzazioni, permessi, licenze, concessioni di suolo, passi carrabili e prestito di beni del Comune.",
+                                    "url": "#"
+                                },
+                                {
+                                    "title": "Catasto e urbanistica",
+                                    "text": "Piani urbanistici, piani paesaggistici e tutti i certificati per immobili, case, terreni ed edifici.",
+                                    "url": "#"
+                                },
+                                {
+                                    "title": "Cultura e tempo libero",
+                                    "text": "Luoghi della cultura e dell’arte, impianti sportivi e richieste di contributi per la cultura, lo spettacolo e lo sport.",
+                                    "url": "#"
+                                },
+                                {
+                                    "title": "Educazione e formazione",
+                                    "text": "Iscrizioni, agevolazioni e servizi per nidi, scuole e università.",
+                                    "url": "#"
+                                },
+                                {
+                                    "title": "Giustizia e sicurezza pubblica",
+                                    "text": "Polizia municipale, tribunale e Protezione civile.",
+                                    "url": "#"
+                                },
+                                {
+                                    "title": "Imprese e commercio",
+                                    "text": "Avvio di un’attività, commercio, autorizzazioni e concessioni per attività produttive, mercati, incentivi e supporto alle imprese.",
+                                    "url": "#"
+                                },
+                                {
+                                    "title": "Mobilità e trasporti",
+                                    "text": "Parcheggi, viabilità, automobili e trasporto pubblico.",
+                                    "url": "#"
+                                },
+                                {
+                                    "title": "Salute, benessere e assistenza",
+                                    "text": "Servizi santirari e di sostegno per minori, famiglie, anziani e persone con disabilità.",
+                                    "url": "#"
+                                },
+                                {
+                                    "title": "Tributi, finanze e contravvenzioni",
+                                    "text": "Tasse e tributi su immobili, rifiuti, affissioni e pubblicità.",
+                                    "url": "#"
+                                },
+                                {
+                                    "title": "Turismo",
+                                    "text": "Sostegno e sviluppo del turismo, strutture ricettive e informazioni turistiche.",
+                                    "url": "#"
+                                },
+                                {
+                                    "title": "Vita lavorativa",
+                                    "text": "Lavoro, concorsi e selezioni, licenze, abilitazioni professionali e sicurezza sul lavoro.",
+                                    "url": "#"
+                                }
+                            ],
+                            "link_element": "service-category-link",
+                            "described": false,
+                            "variant": "grid"
+                        }
+                    ],
+                    "feedback": {
+                        "title": "Quanto sono chiare le informazioni su questa pagina?",
+                        "legend": "Valuta da 1 a 5 stelle la pagina",
+                        "star_label": "Valuta %d stelle su 5",
+                        "thanks": "Grazie, il tuo parere ci aiuterà a migliorare il servizio!",
+                        "positive": {
+                            "question": "Quali sono stati gli aspetti che hai preferito?",
+                            "answers": [
+                                "Le indicazioni erano chiare",
+                                "Le indicazioni erano complete",
+                                "Capivo sempre che stavo procedendo correttamente",
+                                "Non ho avuto problemi tecnici",
+                                "Altro"
+                            ]
+                        },
+                        "negative": {
+                            "question": "Dove hai incontrato le maggiori difficoltà?",
+                            "answers": [
+                                "A volte le indicazioni non erano chiare",
+                                "A volte le indicazioni non erano complete",
+                                "A volte non capivo se stavo procedendo correttamente",
+                                "Ho avuto problemi tecnici",
+                                "Altro"
+                            ]
+                        },
+                        "detail": {
+                            "question": "Vuoi aggiungere altri dettagli?",
+                            "label": "Dettaglio",
+                            "help": "Inserire massimo 200 caratteri"
+                        },
+                        "back": "Indietro",
+                        "next": "Avanti"
+                    },
+                    "contacts": {
+                        "main": {
+                            "title": "Contatta il comune",
+                            "items": [
+                                {
+                                    "icon": "it-help-circle",
+                                    "label": "Leggi le domande frequenti",
+                                    "url": "#"
+                                },
+                                {
+                                    "icon": "it-mail",
+                                    "label": "Richiedi assistenza",
+                                    "url": "#",
+                                    "element": "contacts"
+                                },
+                                {
+                                    "icon": "it-hearing",
+                                    "label": "Chiama il numero verde 05 0505",
+                                    "url": "#"
+                                },
+                                {
+                                    "icon": "it-calendar",
+                                    "label": "Prenota appuntamento",
+                                    "url": "#",
+                                    "element": "appointment-booking"
+                                }
+                            ]
+                        },
+                        "problems": {
+                            "title": "Problemi in città",
+                            "items": [
+                                {
+                                    "icon": "it-map-marker-circle",
+                                    "label": "Segnala disservizio",
+                                    "url": "#"
+                                }
+                            ]
+                        }
+                    },
+                    "header_active": "all-services"
+                }
+            }
+        ],
+        "en": []
+    }
+}

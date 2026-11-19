@@ -1,0 +1,68 @@
+{
+    "id": "area-personale.notifiche",
+    "title": {
+        "it": "Notifiche",
+        "en": "Notifications",
+        "de": "Benachrichtigungen",
+        "es": "Notificaciones"
+    },
+    "slug": "area-personale.notifiche",
+    "layout": "design-comuni",
+    "description": {
+        "it": "Gli aggiornamenti di stato ricevuti sulle tue segnalazioni e su quelle che segui, con la possibilità di segnarli come letti.",
+        "en": "The status updates you received about your reports and the ones you follow, with the option to mark them as read.",
+        "de": "Die Statusänderungen zu deinen Meldungen und zu den Meldungen, denen du folgst, mit der Möglichkeit, sie als gelesen zu markieren.",
+        "es": "Las actualizaciones de estado recibidas sobre tus incidencias y las que sigues, con la posibilidad de marcarlas como leídas."
+    },
+    "content": null,
+    "content_blocks": {
+        "it": [
+            {
+                "type": "personal_area_notifications",
+                "data": {
+                    "view": "pub_theme::components.blocks.personal-area-settings.notifications"
+                }
+            }
+        ],
+        "en": [
+            {
+                "type": "personal_area_notifications",
+                "data": {
+                    "view": "pub_theme::components.blocks.personal-area-settings.notifications"
+                }
+            }
+        ],
+        "de": [
+            {
+                "type": "personal_area_notifications",
+                "data": {
+                    "view": "pub_theme::components.blocks.personal-area-settings.notifications"
+                }
+            }
+        ],
+        "es": [
+            {
+                "type": "personal_area_notifications",
+                "data": {
+                    "view": "pub_theme::components.blocks.personal-area-settings.notifications"
+                }
+            }
+        ]
+    },
+    "sidebar_blocks": {
+        "it": [],
+        "en": [],
+        "de": [],
+        "es": []
+    },
+    "footer_blocks": null,
+    "middleware": [
+        "auth"
+    ],
+    "access_policy": {
+        "description": "Le notifiche sono dell'utente: la pagina richiede un utente autenticato e mostra solo le sue notifiche di stato (tabella notifications, canale database).",
+        "guest_access": false,
+        "guest_redirect": "login",
+        "source": "DCP-111, DCP-106"
+    }
+}

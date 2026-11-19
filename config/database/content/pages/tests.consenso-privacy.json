@@ -1,0 +1,133 @@
+{
+    "id": "tests.consenso-privacy",
+    "slug": "tests.consenso-privacy",
+    "parent_slug": "tests",
+    "title": {
+        "it": "Titolo del servizio",
+        "en": "Titolo del servizio"
+    },
+    "layout": "test",
+    "sidebar_blocks": {
+        "it": [],
+        "en": []
+    },
+    "footer_blocks": null,
+    "description": "Pagina di prova consenso-privacy (flusso graduatoria) da JSON, resa dal blocco service-flow del tema Sixteen.",
+    "content_blocks": {
+        "it": [
+            {
+                "type": "service-flow",
+                "data": {
+                    "view": "pub_theme::components.blocks.service-flow.design-comuni",
+                    "kind": "graduatoria-consent",
+                    "breadcrumb": {
+                        "items": [
+                            {
+                                "label": "Home",
+                                "url": "/it/tests/homepage"
+                            },
+                            {
+                                "label": "Servizi",
+                                "url": "#"
+                            }
+                        ],
+                        "current": "Titolo del servizio"
+                    },
+                    "title": "Titolo del servizio",
+                    "title_class": "title-xxxlarge mb-4",
+                    "stepper": {
+                        "items": [
+                            {
+                                "label": "Informativa sulla privacy",
+                                "state": "active"
+                            },
+                            {
+                                "label": "Dati Generali",
+                                "state": ""
+                            },
+                            {
+                                "label": "Preferenze di servizio",
+                                "state": ""
+                            },
+                            {
+                                "label": "Riepilogo",
+                                "state": ""
+                            }
+                        ],
+                        "confirmed_label": "",
+                        "active_label": "Attivo",
+                        "index": "1/4"
+                    },
+                    "body": {
+                        "col": "col-12 col-lg-8 pb-40 pb-lg-80"
+                    },
+                    "sections": [
+                        {
+                            "type": "graduatoria-consent",
+                            "paragraphs": [
+                                {
+                                    "text": "Il Comune di Firenze gestisce i dati personali forniti e liberamente comunicati sulla base dell’articolo 13 del Regolamento (UE) 2016/679 General data protection regulation (Gdpr) e degli articoli 13 e successive modifiche e integrazione del decreto legislativo (di seguito d.lgs) 267/2000 (Testo unico enti locali).",
+                                    "class": "text-paragraph mb-lg-4"
+                                },
+                                {
+                                    "text": "Per i dettagli sul trattamento dei dati personali consulta l’",
+                                    "class": "text-paragraph mb-0",
+                                    "link": {
+                                        "label": "informativa sulla privacy.",
+                                        "url": "#",
+                                        "class": "t-primary"
+                                    }
+                                }
+                            ],
+                            "checkbox": {
+                                "class": "form-check mt-4 mb-3 mt-md-40 mb-lg-40",
+                                "body_class": "checkbox-body d-flex align-items-center",
+                                "id": "privacy",
+                                "name": "privacy-field",
+                                "label": "Ho letto e compreso l’informativa sulla privacy",
+                                "label_class": "title-small-semi-bold pt-1"
+                            },
+                            "button": {
+                                "label": "Avanti",
+                                "class": "btn btn-primary mobile-full"
+                            }
+                        }
+                    ],
+                    "contacts": {
+                        "layout": "offset",
+                        "col": "col-12 col-lg-6",
+                        "main": {
+                            "title": "Contatta il comune",
+                            "items": [
+                                {
+                                    "icon": "it-help-circle",
+                                    "label": "Leggi le domande frequenti",
+                                    "url": "#"
+                                },
+                                {
+                                    "icon": "it-mail",
+                                    "label": "Richiedi assistenza",
+                                    "url": "#",
+                                    "element": "contacts"
+                                },
+                                {
+                                    "icon": "it-hearing",
+                                    "label": "Chiama il numero verde 05 0505",
+                                    "url": "#"
+                                },
+                                {
+                                    "icon": "it-calendar",
+                                    "label": "Prenota appuntamento",
+                                    "url": "#",
+                                    "element": "appointment-booking"
+                                }
+                            ]
+                        }
+                    },
+                    "header_active": "all-services"
+                }
+            }
+        ],
+        "en": []
+    }
+}

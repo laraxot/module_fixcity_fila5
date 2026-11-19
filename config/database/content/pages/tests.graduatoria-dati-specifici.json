@@ -1,0 +1,251 @@
+{
+    "id": "tests.graduatoria-dati-specifici",
+    "slug": "tests.graduatoria-dati-specifici",
+    "parent_slug": "tests",
+    "title": {
+        "it": "Iscrizione alla scuola dell'infanzia",
+        "en": "Iscrizione alla scuola dell'infanzia"
+    },
+    "layout": "test",
+    "sidebar_blocks": {
+        "it": [],
+        "en": []
+    },
+    "footer_blocks": null,
+    "description": "Pagina di prova graduatoria-dati-specifici (flusso graduatoria) da JSON, resa dal blocco service-flow del tema Sixteen.",
+    "content_blocks": {
+        "it": [
+            {
+                "type": "service-flow",
+                "data": {
+                    "view": "pub_theme::components.blocks.service-flow.design-comuni",
+                    "kind": "wizard-step",
+                    "breadcrumb": {
+                        "items": [
+                            {
+                                "label": "Home",
+                                "url": "/it/tests/homepage"
+                            },
+                            {
+                                "label": "Servizi",
+                                "url": "#"
+                            },
+                            {
+                                "label": "Educazione e Formazione",
+                                "url": "#"
+                            }
+                        ],
+                        "current": "Iscrizione alla Scuola dell'infanzia"
+                    },
+                    "heading": {
+                        "title": "Iscrizione alla scuola dell'infanzia",
+                        "subtitles": [
+                            {
+                                "text": "Hai bisogno di assistenza?",
+                                "class": "subtitle-small",
+                                "link": {
+                                    "label": "Contattaci",
+                                    "url": "#",
+                                    "class": "title-small-semi-bold t-primary"
+                                }
+                            }
+                        ]
+                    },
+                    "stepper": {
+                        "items": [
+                            {
+                                "label": "Informativa sulla privacy",
+                                "state": "confirmed"
+                            },
+                            {
+                                "label": "Dati Generali",
+                                "state": "confirmed"
+                            },
+                            {
+                                "label": "Preferenze di servizio",
+                                "state": "active"
+                            },
+                            {
+                                "label": "Riepilogo",
+                                "state": ""
+                            }
+                        ],
+                        "confirmed_label": "Confermato",
+                        "active_label": "Attivo",
+                        "index": "3/4"
+                    },
+                    "nav": {
+                        "aria_label": "Step",
+                        "back": "Indietro",
+                        "save": {
+                            "long": "Salva Richiesta",
+                            "short": "Salva"
+                        },
+                        "next": {
+                            "label": "Avanti",
+                            "icon": "it-chevron-right",
+                            "class": "",
+                            "modal": "#"
+                        },
+                        "saved_message": "Richiesta salvata con successo"
+                    },
+                    "side_nav": {
+                        "class": "col-12 col-lg-3 d-lg-block mb-4 d-none",
+                        "aria_label": "INFORMAZIONI RICHIESTE",
+                        "title": "INFORMAZIONI RICHIESTE",
+                        "items": [
+                            {
+                                "label": "Scegli la scuola",
+                                "anchor": "school-choice"
+                            },
+                            {
+                                "label": "Religione cattolica",
+                                "anchor": "religion-choice"
+                            },
+                            {
+                                "label": "Uscite didattiche",
+                                "anchor": "outings-choice"
+                            },
+                            {
+                                "label": "Riprese multimediali",
+                                "anchor": "media-choice"
+                            }
+                        ]
+                    },
+                    "body": {
+                        "layout": "sidebar",
+                        "steps_content": "inner",
+                        "col": "col-12 col-lg-8 offset-lg-1 mt-2 mt-lg-0"
+                    },
+                    "sections": [
+                        {
+                            "type": "card",
+                            "id": "school-choice",
+                            "class": "",
+                            "wrapper_class": "mb-40",
+                            "card_class": "card has-bkg-grey shadow-sm p-big",
+                            "header_class": "card-header border-0 p-0 mb-lg-20",
+                            "title": "Seleziona Istituto",
+                            "title_class": "title-xxlarge mb-0 icon-required",
+                            "content": {
+                                "kind": "select",
+                                "class": "select-wrapper p-big select-partials",
+                                "id": "school-option",
+                                "label": "Seleziona Istituto*",
+                                "placeholder": "Scegli un'opzione",
+                                "required": true,
+                                "options": [
+                                    "Istituto Narcisi",
+                                    "Istituto Narcisi",
+                                    "Istituto Narcisi",
+                                    "Istituto Narcisi"
+                                ]
+                            }
+                        },
+                        {
+                            "type": "card",
+                            "id": "religion-choice",
+                            "class": "",
+                            "wrapper_class": "mb-40",
+                            "card_class": "card has-bkg-grey shadow-sm p-big",
+                            "header_class": "card-header border-0 p-0 mb-lg-20",
+                            "title": "Religione cattolica",
+                            "title_class": "title-xxlarge mb-0 icon-required",
+                            "subtitle": "Vuoi avvalerti dell'insegnamento della religione cattolica?",
+                            "subtitle_class": "subtitle-small mb-0",
+                            "content": {
+                                "kind": "radios",
+                                "legend": "Vuoi avvalerti dell'insegnamento della religione cattolica?",
+                                "name": "religione",
+                                "required": true,
+                                "options": [
+                                    "Sì",
+                                    "No"
+                                ]
+                            }
+                        },
+                        {
+                            "type": "card",
+                            "id": "outings-choice",
+                            "class": "",
+                            "wrapper_class": "mb-40",
+                            "card_class": "card has-bkg-grey shadow-sm p-big",
+                            "header_class": "card-header border-0 p-0 mb-lg-20",
+                            "title": "Uscite didattiche",
+                            "title_class": "title-xxlarge mb-1 icon-required",
+                            "subtitle": "Autorizzi le uscite didattiche?",
+                            "subtitle_class": "subtitle-small mb-0",
+                            "content": {
+                                "kind": "radios",
+                                "legend": "Autorizzi le uscite didattiche?",
+                                "name": "uscite",
+                                "required": true,
+                                "options": [
+                                    "Sì",
+                                    "No"
+                                ]
+                            }
+                        },
+                        {
+                            "type": "card",
+                            "id": "media-choice",
+                            "class": "",
+                            "wrapper_class": "mb-40",
+                            "card_class": "card has-bkg-grey shadow-sm p-big",
+                            "header_class": "card-header border-0 p-0 mb-lg-20",
+                            "title": "Riprese multimediali",
+                            "title_class": "title-xxlarge mb-1 icon-required",
+                            "title_id": "media-choice",
+                            "subtitle": "Autorizzi la scuola a produrre e utilizzare foto e video in cui compare tua figlia o tuo figlio?",
+                            "subtitle_class": "subtitle-small mb-0",
+                            "content": {
+                                "kind": "radios",
+                                "legend": "Autorizzi la scuola a produrre e utilizzare foto e video in cui compare tua figlia o tuo figlio?",
+                                "name": "multimedia",
+                                "required": true,
+                                "options": [
+                                    "Sì",
+                                    "No"
+                                ]
+                            }
+                        }
+                    ],
+                    "contacts": {
+                        "layout": "center",
+                        "col": "col-12 col-lg-5",
+                        "main": {
+                            "title": "Contatta il comune",
+                            "items": [
+                                {
+                                    "icon": "it-help-circle",
+                                    "label": "Leggi le domande frequenti",
+                                    "url": "#"
+                                },
+                                {
+                                    "icon": "it-mail",
+                                    "label": "Richiedi assistenza",
+                                    "url": "#",
+                                    "element": "contacts"
+                                },
+                                {
+                                    "icon": "it-hearing",
+                                    "label": "Chiama il numero verde 05 0505",
+                                    "url": "#"
+                                },
+                                {
+                                    "icon": "it-calendar",
+                                    "label": "Prenota appuntamento",
+                                    "url": "#",
+                                    "element": "appointment-booking"
+                                }
+                            ]
+                        }
+                    },
+                    "modals": [],
+                    "header_active": "all-services"
+                }
+            }
+        ],
+        "en": []
+    }
+}

@@ -1,0 +1,16 @@
+{
+    "id": "privacy-index",
+    "title": {"it": "Informativa privacy", "en": "Privacy notice", "de": "Datenschutzerklärung", "es": "Aviso de privacidad"},
+    "slug": "privacy.index",
+    "layout": "design-comuni",
+    "description": {"it": "Come il Comune tratta i dati personali raccolti con il servizio di segnalazioni, ai sensi dell’art. 13 del GDPR.", "en": "How the municipality processes the personal data collected through the reporting service, under art. 13 GDPR.", "de": "Wie die Gemeinde die über den Meldedienst erhobenen personenbezogenen Daten nach Art. 13 DSGVO verarbeitet.", "es": "Cómo el Ayuntamiento trata los datos personales recogidos con el servicio de incidencias, conforme al art. 13 del RGPD."},
+    "content": null,
+    "content_blocks": {
+        "it": [{"type": "legal_document", "data": {"view": "pub_theme::components.blocks.legal-document.design-comuni", "document": "privacy", "markdown": "policy.md", "assess": "gdpr-art13", "header_active": ""}}],
+        "en": [{"type": "legal_document", "data": {"view": "pub_theme::components.blocks.legal-document.design-comuni", "document": "privacy", "markdown": "policy.md", "assess": "gdpr-art13", "header_active": ""}}],
+        "de": [{"type": "legal_document", "data": {"view": "pub_theme::components.blocks.legal-document.design-comuni", "document": "privacy", "markdown": "policy.md", "assess": "gdpr-art13", "header_active": ""}}],
+        "es": [{"type": "legal_document", "data": {"view": "pub_theme::components.blocks.legal-document.design-comuni", "document": "privacy", "markdown": "policy.md", "assess": "gdpr-art13", "header_active": ""}}]
+    },
+    "sidebar_blocks": {"it": [], "en": [], "de": [], "es": []},
+    "footer_blocks": null
+}

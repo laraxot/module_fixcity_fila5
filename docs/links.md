@@ -1,0 +1,32 @@
+---
+title: "links"
+type: note
+tags: [documentation]
+created: 2026-09-26
+updated: 2026-09-26
+qmd: "links"
+issues: []
+discussions: []
+status: draft
+---
+
+# Collegamenti Utili - Modulo Fixcity
+
+## Design System
+https://italia.github.io/design-comuni-pagine-statiche/sito/
+
+## Documentazione Modulo Fixcity
+- [FO link conventions (religione)](./frontoffice-link-conventions.md) — `container0.view`, mai localizeUrl / tickets.show
+- [FO link coherence audit](./stories/fo-link-coherence-audit.story.md) — search-modal, profile/logout, area-personale
+- [README](./README.md) — indice principale del modulo
+- [CreateTicketWizardWidget](./CreateTicketWizardWidget.md) — dettaglio widget wizard frontoffice
+- [Ticket Wizard Frontoffice](./ticket-wizard-frontoffice.md) — wizard creazione ticket (`CreateTicketWizardWidget`, Filament `Wizard`/`Step`, un solo file sorgente di verità)
+- [Filament Wizard Pattern](./filament-wizard-pattern.md) — motivazione architetturale di `XotBaseWizardWidget`
+- [Wizard Governance Philosophy](./wizard-governance-philosophy.md) — perche/regola/visione/zen + anti-ridondanza
+- [Stories Index](./stories/index.md) — storie operative e rationale di refactor wizard
+- [Business Logic](./BUSINESS_LOGIC.md)
+- [Componenti View](./components.md)
+- [Strategia Testing](./TESTING_STRATEGY.md)
+- [Analisi Modulo](./module-analysis.md)
+- [Struttura](./structure.md)
+- [XotBaseWizardWidget](../../Xot/docs/wiki/concepts/filament-wizard-architecture-right-way.md) — base class condivisa Xot

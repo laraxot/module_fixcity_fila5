@@ -1,0 +1,99 @@
+{
+  "id": "assistenza-02-conferma",
+  "slug": "assistenza-02-conferma",
+  "parent_slug": "tests",
+  "title": {
+    "it": "Richiesta assistenza - conferma",
+    "en": "Assistance request - confirmation"
+  },
+  "layout": "test",
+  "description": "Richiesta di assistenza, passo di conferma con valutazione e contatti. Contenuto da JSON, reso dal blocco assistance-confirm del tema Sixteen.",
+  "content_blocks": {
+    "it": [
+      {
+        "type": "assistance-confirm",
+        "data": {
+          "view": "pub_theme::components.blocks.assistance-confirm.design-comuni",
+          "title": "Richiesta inviata",
+          "breadcrumb": {
+            "items": [
+              {
+                "label": "Home",
+                "url": "/it/tests/homepage"
+              }
+            ],
+            "current": "Richiesta assistenza"
+          },
+          "hero": {
+            "icon": "it-check-circle",
+            "message": "La richiesta di assistenza è stata inviata con successo, sarai ricontattato presto.",
+            "email_label": "Abbiamo inviato il riepilogo all’email:",
+            "email": "giulia.bianchi@gmail.com"
+          },
+          "feedback": {
+            "title": "Quanto è stato facile usare questo servizio?",
+            "legend": "Valuta da 1 a 5 stelle la pagina",
+            "star_label": "Valuta %d stelle su 5",
+            "thanks": "Grazie, il tuo parere ci aiuterà a migliorare il servizio!",
+            "positive": {
+              "question": "Quali sono stati gli aspetti che hai preferito?",
+              "answers": [
+                "Le indicazioni erano chiare",
+                "Le indicazioni erano complete",
+                "Capivo sempre che stavo procedendo correttamente",
+                "Non ho avuto problemi tecnici",
+                "Altro"
+              ]
+            },
+            "negative": {
+              "question": "Dove hai incontrato le maggiori difficoltà?",
+              "answers": [
+                "A volte le indicazioni non erano chiare",
+                "A volte le indicazioni non erano complete",
+                "A volte non capivo se stavo procedendo correttamente",
+                "Ho avuto problemi tecnici",
+                "Altro"
+              ]
+            },
+            "detail": {
+              "question": "Vuoi aggiungere altri dettagli?",
+              "label": "Dettaglio",
+              "help": "Inserire massimo 200 caratteri"
+            },
+            "back": "Indietro",
+            "next": "Avanti"
+          },
+          "contacts": {
+            "main": {
+              "title": "Contatta il comune",
+              "items": [
+                {
+                  "icon": "it-help-circle",
+                  "label": "Leggi le domande frequenti",
+                  "url": "#"
+                },
+                {
+                  "icon": "it-hearing",
+                  "label": "Chiama il numero verde 05 0505",
+                  "url": "#"
+                },
+                {
+                  "icon": "it-calendar",
+                  "label": "Prenota appuntamento",
+                  "url": "#"
+                }
+              ]
+            }
+          },
+          "header_active": "all-services"
+        }
+      }
+    ],
+    "en": []
+  },
+  "sidebar_blocks": {
+    "it": [],
+    "en": []
+  },
+  "footer_blocks": null
+}

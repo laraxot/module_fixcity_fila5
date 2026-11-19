@@ -1,0 +1,447 @@
+{
+    "id": "pagamenti-multa-scheda-servizio",
+    "slug": "pagamenti-multa-scheda-servizio",
+    "parent_slug": "tests",
+    "title": {
+        "it": "Pagamento multa",
+        "en": "Pagamento multa"
+    },
+    "layout": "test",
+    "sidebar_blocks": {
+        "it": [],
+        "en": []
+    },
+    "footer_blocks": null,
+    "description": "Pagina di prova pagamenti-multa-scheda-servizio (flusso pagamento multa) da JSON, resa dal blocco service-flow del tema Sixteen.",
+    "content_blocks": {
+        "it": [
+            {
+                "type": "service-flow",
+                "data": {
+                    "view": "pub_theme::components.blocks.service-flow.design-comuni",
+                    "kind": "service-sheet",
+                    "breadcrumb": {
+                        "items": [
+                            {
+                                "label": "Home",
+                                "url": "/it/tests/homepage"
+                            },
+                            {
+                                "label": "Servizi",
+                                "url": "#"
+                            },
+                            {
+                                "label": "Tributi, finanze e contravvenzioni",
+                                "url": "#"
+                            }
+                        ],
+                        "current": "Pagamento Multa"
+                    },
+                    "heading": {
+                        "title": "Pagamento multa",
+                        "title_element": "service-title",
+                        "chips": [
+                            {
+                                "label": "Servizio attivo",
+                                "element": "service-status"
+                            }
+                        ],
+                        "subtitles": [
+                            {
+                                "text": "Il servizio permette di pagare online le multe ricevute dalla polizia municipale o di prenotare un appuntamento per pagare presso gli uffici.",
+                                "class": "subtitle-small mb-3"
+                            }
+                        ],
+                        "buttons": [
+                            {
+                                "label": "Paga online",
+                                "class": "btn btn-primary fw-bold"
+                            }
+                        ],
+                        "actions": [
+                            {
+                                "id": "shareActions",
+                                "aria_label": "condividi sui social",
+                                "icon": "it-share",
+                                "label": "Condividi",
+                                "items": [
+                                    {
+                                        "label": "Facebook",
+                                        "icon": "it-facebook",
+                                        "url": "#"
+                                    },
+                                    {
+                                        "label": "Twitter",
+                                        "icon": "it-twitter",
+                                        "url": "#"
+                                    },
+                                    {
+                                        "label": "Linkedin",
+                                        "icon": "it-linkedin",
+                                        "url": "#"
+                                    },
+                                    {
+                                        "label": "Whatsapp",
+                                        "icon": "it-whatsapp",
+                                        "url": "#"
+                                    }
+                                ]
+                            },
+                            {
+                                "id": "viewActions",
+                                "aria_label": "vedi azioni da compiere sulla pagina",
+                                "icon": "it-more-items",
+                                "label": "Vedi azioni",
+                                "items": [
+                                    {
+                                        "label": "Stampa",
+                                        "icon": "it-print",
+                                        "url": "#"
+                                    },
+                                    {
+                                        "label": "Ascolta",
+                                        "icon": "it-hearing",
+                                        "url": "#"
+                                    },
+                                    {
+                                        "label": "Invia",
+                                        "icon": "it-mail",
+                                        "url": "#"
+                                    }
+                                ]
+                            }
+                        ],
+                        "row": "row justify-content-center",
+                        "col": "col-12 col-lg-10",
+                        "rule": "d-none d-lg-block mb-0 mt-2"
+                    },
+                    "side_nav": {
+                        "class": "col-12 col-lg-3 mb-4 border-col",
+                        "aria_label": "INDICE DELLA PAGINA",
+                        "title": "INDICE DELLA PAGINA",
+                        "items": [
+                            {
+                                "label": "A chi è rivolto",
+                                "anchor": "who-needs"
+                            },
+                            {
+                                "label": "Come fare",
+                                "anchor": "how-to"
+                            },
+                            {
+                                "label": "Cosa serve",
+                                "anchor": "needed"
+                            },
+                            {
+                                "label": "Tempi e scadenze",
+                                "anchor": "deadlines"
+                            },
+                            {
+                                "label": "Costi",
+                                "anchor": "costs"
+                            },
+                            {
+                                "label": "Accedi al servizio",
+                                "anchor": "service-access"
+                            },
+                            {
+                                "label": "Condizioni di servizio",
+                                "anchor": "conditions"
+                            },
+                            {
+                                "label": "Contatti",
+                                "anchor": "contacts"
+                            }
+                        ]
+                    },
+                    "body": {
+                        "row": "row row-column-menu-left mt-lg-80 mt-4"
+                    },
+                    "sections": [
+                        {
+                            "type": "flow",
+                            "id": "who-needs",
+                            "class": "mb-30",
+                            "title": "A chi è rivolto",
+                            "title_class": "mb-3",
+                            "items": [
+                                {
+                                    "type": "paragraph",
+                                    "text": "Il servizio è destinato a tutti i cittadini che devono pagare multe della polizia municipale, prese a seguito di infrazioni del codice della strada nel territorio comunale.",
+                                    "class": "text-paragraph lora mb-0"
+                                }
+                            ]
+                        },
+                        {
+                            "type": "flow",
+                            "id": "how-to",
+                            "class": "mb-30",
+                            "title": "Come fare",
+                            "title_class": "mb-3",
+                            "items": [
+                                {
+                                    "type": "paragraph",
+                                    "text": "Per pagare online, accedi con le tue credenziali di identità digitale e fornisci le informazioni su chi effettua il pagamento e gli estremi della multa. Puoi pagare con conto o carta tramite il servizio pagoPA e scaricare subito la ricevuta. Alternativamente, puoi prenotare un appuntamento e recarti presso gli uffici.",
+                                    "class": "text-paragraph lora mb-0"
+                                }
+                            ]
+                        },
+                        {
+                            "type": "flow",
+                            "id": "needed",
+                            "class": "mb-30 has-bg-grey p-3 p-lg-4",
+                            "title": "Cosa serve",
+                            "title_class": "mb-3",
+                            "items": [
+                                {
+                                    "type": "paragraph",
+                                    "text": "Per il pagamento delle multe, assicurati di avere:",
+                                    "class": "text-paragraph lora fw-semibold mb-0"
+                                },
+                                {
+                                    "type": "list",
+                                    "items": [
+                                        "la notifica della multa;",
+                                        "il Codice Avviso PagoPA, che puoi trovare sull’avviso di pagamento;",
+                                        "la targa del veicolo;",
+                                        "i dettagli del conto o della carta con cui vuoi effettuare il pagamento."
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "type": "flow",
+                            "id": "deadlines",
+                            "class": "mb-30",
+                            "title": "Tempi e scadenze",
+                            "title_class": "mb-3",
+                            "items": [
+                                {
+                                    "type": "list",
+                                    "items": [
+                                        "Per i pagamenti entro 5 giorni dalla notifica o dalla contestazione immediata, si applica uno sconto del 30% sull’importo;",
+                                        "Per i pagamenti entro 60 giorni, si paga una sanzione in misura ridotta;",
+                                        "Per i pagamenti oltre 60 giorni, si paga la sanzione raddoppiata più gli interessi."
+                                    ]
+                                },
+                                {
+                                    "type": "attachment",
+                                    "label": "Regolamento polizia municipale (PDF 80KB)",
+                                    "aria": "Scarica Regolamento polizia municipale (PDF 80KB)",
+                                    "title": "Scarica Regolamento polizia municipale (PDF 80KB)",
+                                    "url": "#",
+                                    "class": "list-item icon-left d-inline-block mt-3"
+                                }
+                            ]
+                        },
+                        {
+                            "type": "flow",
+                            "id": "costs",
+                            "class": "mb-30",
+                            "title": "Costi",
+                            "title_class": "mb-3",
+                            "items": [
+                                {
+                                    "type": "paragraph",
+                                    "text": "Il servizio di pagamento online prevede 0,50€ di costi di commissione.",
+                                    "class": "subtitle-small mb-0 lora"
+                                }
+                            ]
+                        },
+                        {
+                            "type": "flow",
+                            "id": "service-access",
+                            "class": "mb-30 has-bg-grey p-4",
+                            "title": "Accedi al servizio",
+                            "title_class": "mb-3",
+                            "items": [
+                                {
+                                    "type": "paragraph",
+                                    "text": "Puoi pagare la multa direttamente online tramite identità digitale.",
+                                    "class": "text-paragraph lora mb-4"
+                                },
+                                {
+                                    "type": "button",
+                                    "label": "Paga online",
+                                    "class": "btn btn-primary mobile-full mb-4",
+                                    "bare": true
+                                },
+                                {
+                                    "type": "paragraph",
+                                    "text": "Oppure, puoi pagare presso gli uffici di Polizia municipale.",
+                                    "class": "text-paragraph lora mb-4"
+                                },
+                                {
+                                    "type": "button",
+                                    "label": "Prenota appuntamento",
+                                    "class": "btn mobile-full btn-outline-primary t-primary bg-white",
+                                    "bare": true
+                                }
+                            ]
+                        },
+                        {
+                            "type": "flow",
+                            "id": "conditions",
+                            "class": "mb-30",
+                            "title": "Condizioni di servizio",
+                            "title_class": "mb-3",
+                            "items": [
+                                {
+                                    "type": "paragraph",
+                                    "text": "Per conoscere i dettagli di scadenze, requisiti e altre informazioni importanti, leggi i termini e le condizioni di servizio.",
+                                    "class": "text-paragraph lora"
+                                },
+                                {
+                                    "type": "attachment",
+                                    "label": "Termini e condizioni di servizio (PDF 1MB)",
+                                    "aria": "Scarica Termini e condizioni di servizio (PDF 1MB)",
+                                    "title": "Scarica Termini e condizioni di servizio (PDF 1MB)",
+                                    "url": "#",
+                                    "class": "list-item icon-left d-inline-block"
+                                }
+                            ]
+                        },
+                        {
+                            "type": "service-contacts",
+                            "id": "contacts",
+                            "title": "Contatti",
+                            "office": {
+                                "name": "Ufficio polizia municipale",
+                                "url": "#",
+                                "lines": [
+                                    "Via Dei Transiti 21, 50302",
+                                    "05 0505"
+                                ],
+                                "email": "ufficiotributi@email.it",
+                                "email_aria": "Invia una email a ufficiotributi@email.it",
+                                "image": {
+                                    "src": "https://picsum.photos/200/200",
+                                    "alt": "Immagine"
+                                }
+                            },
+                            "topics": {
+                                "label": "Argomenti:",
+                                "items": [
+                                    "Pagamenti"
+                                ]
+                            },
+                            "updated": "Pagina aggiornata il 14/04/2022"
+                        }
+                    ],
+                    "feedback": {
+                        "col_class": "col-12 col-lg-6 p-lg-0 px-4",
+                        "title": "Quanto è stato facile usare questo servizio?",
+                        "legend": "Valuta da 1 a 5 stelle la pagina",
+                        "star_label": "Valuta %d stelle su 5",
+                        "thanks": "Grazie, il tuo parere ci aiuterà a migliorare il servizio!",
+                        "positive": {
+                            "question": "Quali sono stati gli aspetti che hai preferito?",
+                            "answers": [
+                                "Le indicazioni erano chiare",
+                                "Le indicazioni erano complete",
+                                "Capivo sempre che stavo procedendo correttamente",
+                                "Non ho avuto problemi tecnici",
+                                "Altro"
+                            ]
+                        },
+                        "negative": {
+                            "question": "Dove hai incontrato le maggiori difficoltà?",
+                            "answers": [
+                                "A volte le indicazioni non erano chiare",
+                                "A volte le indicazioni non erano complete",
+                                "A volte non capivo se stavo procedendo correttamente",
+                                "Ho avuto problemi tecnici",
+                                "Altro"
+                            ]
+                        },
+                        "detail": {
+                            "question": "Vuoi aggiungere altri dettagli?",
+                            "label": "Dettaglio",
+                            "help": "Inserire massimo 200 caratteri"
+                        },
+                        "back": "Indietro",
+                        "next": "Avanti"
+                    },
+                    "related": {
+                        "title": "Contenuti correlati",
+                        "cards": [
+                            {
+                                "icon": "it-pa",
+                                "title": "Amministrazione",
+                                "links": [
+                                    "Area Servizi Civici"
+                                ]
+                            },
+                            {
+                                "icon": "it-settings",
+                                "title": "Servizi",
+                                "links": [
+                                    "Pagamento retta scolastica",
+                                    "Servizio di trasporto scolastico"
+                                ]
+                            },
+                            {
+                                "icon": "it-file",
+                                "title": "Documenti",
+                                "links": [
+                                    "Attestazione ISEE",
+                                    "Carta dei servizi educativi all'infanzia"
+                                ]
+                            },
+                            {
+                                "icon": "it-calendar",
+                                "title": "Notizie",
+                                "links": [
+                                    "Justo eget magna fermentum",
+                                    "Dolor magna eget est lorem",
+                                    "Justo eget magna fermentum",
+                                    "Dolor magna eget est lorem"
+                                ],
+                                "more": {
+                                    "label": "Vedi altri 2",
+                                    "items": [
+                                        "Servizio di trasporto scolastico",
+                                        "Servizio di trasporto scolastico"
+                                    ]
+                                }
+                            }
+                        ]
+                    },
+                    "contacts": {
+                        "layout": "offset",
+                        "col": "col-12 col-lg-6",
+                        "main": {
+                            "title": "Contatta il comune",
+                            "items": [
+                                {
+                                    "icon": "it-help-circle",
+                                    "label": "Leggi le domande frequenti",
+                                    "url": "#"
+                                },
+                                {
+                                    "icon": "it-mail",
+                                    "label": "Richiedi assistenza",
+                                    "url": "#",
+                                    "element": "contacts"
+                                },
+                                {
+                                    "icon": "it-hearing",
+                                    "label": "Chiama il numero verde 05 0505",
+                                    "url": "#"
+                                },
+                                {
+                                    "icon": "it-calendar",
+                                    "label": "Prenota appuntamento",
+                                    "url": "#",
+                                    "element": "appointment-booking"
+                                }
+                            ]
+                        }
+                    },
+                    "header_active": "all-services"
+                }
+            }
+        ],
+        "en": []
+    }
+}

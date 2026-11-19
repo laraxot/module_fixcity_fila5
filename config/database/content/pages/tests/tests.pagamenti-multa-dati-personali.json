@@ -1,0 +1,259 @@
+{
+    "id": "pagamenti-multa-dati-personali",
+    "slug": "pagamenti-multa-dati-personali",
+    "parent_slug": "tests",
+    "title": {
+        "it": "Pagamento multa - dati personali",
+        "en": "Pagamento multa - dati personali"
+    },
+    "layout": "test",
+    "sidebar_blocks": {
+        "it": [],
+        "en": []
+    },
+    "footer_blocks": null,
+    "description": "Pagina di prova pagamenti-multa-dati-personali (flusso pagamento multa) da JSON, resa dal blocco service-flow del tema Sixteen.",
+    "content_blocks": {
+        "it": [
+            {
+                "type": "service-flow",
+                "data": {
+                    "view": "pub_theme::components.blocks.service-flow.design-comuni",
+                    "kind": "wizard-step",
+                    "breadcrumb": {
+                        "items": [
+                            {
+                                "label": "Home",
+                                "url": "/it/tests/homepage"
+                            },
+                            {
+                                "label": "Servizi",
+                                "url": "#"
+                            },
+                            {
+                                "label": "Tributi, finanze e contravvenzioni",
+                                "url": "#"
+                            }
+                        ],
+                        "current": "Pagamento Multa"
+                    },
+                    "heading": {
+                        "title": "Pagamento multa",
+                        "subtitles": [
+                            {
+                                "class": "subtitle-small",
+                                "segments": [
+                                    "Inserisci le informazioni necessarie per il pagamento della multa.",
+                                    {
+                                        "br": "d-none d-md-block"
+                                    },
+                                    "Potrai ricontrollare tutti i dati nel riepilogo, prima di effettuare il pagamento."
+                                ]
+                            },
+                            {
+                                "class": "subtitle-small mt-lg-2",
+                                "text": "Hai bisogno di assistenza?",
+                                "link": {
+                                    "label": "Contattaci",
+                                    "url": "#",
+                                    "class": "title-small-semi-bold t-primary",
+                                    "class_first": true
+                                }
+                            }
+                        ]
+                    },
+                    "stepper": {
+                        "items": [
+                            {
+                                "label": "Informativa sulla privacy",
+                                "state": "confirmed"
+                            },
+                            {
+                                "label": "Dati generali",
+                                "state": "active"
+                            },
+                            {
+                                "label": "Dati specifici del servizio",
+                                "state": ""
+                            },
+                            {
+                                "label": "Riepilogo",
+                                "state": ""
+                            }
+                        ],
+                        "confirmed_label": "Confermato",
+                        "active_label": "Attivo",
+                        "index": "2/4"
+                    },
+                    "body": {
+                        "col": "col-12 col-lg-8",
+                        "layout": "centered",
+                        "steps_content": "outer",
+                        "sections_container": false
+                    },
+                    "sections": [
+                        {
+                            "type": "card",
+                            "wrapper_class": "mb-0",
+                            "card_class": "card has-bkg-grey shadow-sm p-big",
+                            "header_class": "card-header border-0 p-0 mb-lg-20",
+                            "title": "Effettuato da",
+                            "title_class": "title-xxlarge mb-1",
+                            "subtitle": "Informazioni sulla persona che effettua il pagamento, che può essere diversa da chi ha ricevuto la multa.",
+                            "subtitle_class": "subtitle-small mb-0",
+                            "content": {
+                                "kind": "info-cards",
+                                "cards": [
+                                    {
+                                        "title": "Giulia Rossi",
+                                        "info": {
+                                            "label": "Codice Fiscale",
+                                            "value": "GLABNC72H25H501Y"
+                                        },
+                                        "toggle_label": "Mostra tutto",
+                                        "collapse_id": "collapse-benef-1",
+                                        "header_id": "heading-collapse-benef-1",
+                                        "groups": [
+                                            {
+                                                "class": "bg-white has-border",
+                                                "rows": [
+                                                    {
+                                                        "label": "Nome",
+                                                        "value": "Giulia"
+                                                    },
+                                                    {
+                                                        "label": "Cognome",
+                                                        "value": "Bianchi"
+                                                    },
+                                                    {
+                                                        "label": "Codice fiscale",
+                                                        "value": "GLABNC72H25H501Y"
+                                                    }
+                                                ],
+                                                "last_row_class": "border-light border-0",
+                                                "title": "Anagrafica",
+                                                "edit": {
+                                                    "label": "Modifica",
+                                                    "url": "#",
+                                                    "tight": true
+                                                },
+                                                "footer_class": "card-footer p-0 d-none"
+                                            },
+                                            {
+                                                "class": "bg-white has-border",
+                                                "rows": [
+                                                    {
+                                                        "label": "Residenza",
+                                                        "value": "Via Roma 16, 00100 Roma, It"
+                                                    }
+                                                ],
+                                                "last_row_class": "border-light border-0",
+                                                "title": "Indirizzo",
+                                                "edit": {
+                                                    "label": "Modifica",
+                                                    "url": "#",
+                                                    "tight": true
+                                                },
+                                                "footer_class": "card-footer p-0 d-none"
+                                            }
+                                        ]
+                                    }
+                                ]
+                            },
+                            "tag": "none"
+                        }
+                    ],
+                    "nav": {
+                        "aria_label": "Step",
+                        "back": "Indietro",
+                        "save": {
+                            "long": "Salva Richiesta",
+                            "short": "Salva"
+                        },
+                        "next": {
+                            "label": "Avanti",
+                            "icon": "it-chevron-right",
+                            "class": "",
+                            "modal": "#modal-save-1"
+                        },
+                        "saved_message": "Richiesta salvata con successo"
+                    },
+                    "contacts": {
+                        "layout": "offset",
+                        "col": "col-12 col-lg-6",
+                        "main": {
+                            "title": "Contatta il comune",
+                            "items": [
+                                {
+                                    "icon": "it-help-circle",
+                                    "label": "Leggi le domande frequenti",
+                                    "url": "#"
+                                },
+                                {
+                                    "icon": "it-mail",
+                                    "label": "Richiedi assistenza",
+                                    "url": "#",
+                                    "element": "contacts"
+                                },
+                                {
+                                    "icon": "it-hearing",
+                                    "label": "Chiama il numero verde 05 0505",
+                                    "url": "#"
+                                },
+                                {
+                                    "icon": "it-calendar",
+                                    "label": "Prenota appuntamento",
+                                    "url": "#",
+                                    "element": "appointment-booking"
+                                }
+                            ]
+                        }
+                    },
+                    "modals": [
+                        {
+                            "type": "dialog",
+                            "id": "modal-save-1",
+                            "close_label": "Chiudi finestra modale",
+                            "header": {
+                                "title": "Salva i dati in area personale",
+                                "info": "Vuoi salvare le informazioni anche nella tua area personale? Potrai usarle anche in altre occasioni."
+                            },
+                            "footer": {
+                                "buttons": [
+                                    {
+                                        "label": "Salva nella mia area personale",
+                                        "variant": "primary",
+                                        "target": "#modal-save-2"
+                                    },
+                                    {
+                                        "label": "Salva solo per questa pratica",
+                                        "variant": "outline"
+                                    }
+                                ]
+                            }
+                        },
+                        {
+                            "type": "dialog",
+                            "id": "modal-save-2",
+                            "close_label": "Chiudi finestra modale",
+                            "header": {
+                                "title": "Salva i dati in area personale",
+                                "info": "Vuoi salvare le informazioni anche nella tua area personale? Potrai riutilizzarle in futuro per altre pratiche."
+                            },
+                            "success": {
+                                "icon": "it-check-circle",
+                                "message": "Salvataggio effettuato"
+                            }
+                        }
+                    ],
+                    "header_active": "all-services",
+                    "stepper_note": {
+                        "class": "title-xsmall d-lg-none my-5",
+                        "text": "I campi contraddistinti dal simbolo asterisco sono obbligatori"
+                    }
+                }
+            }
+        ],
+        "en": []
+    }
+}

@@ -1,0 +1,47 @@
+<?php
+
+declare(strict_types=1);
+
+// Fixcity translations — LangServiceProvider SSoT (never ->label() in Filament PHP).
+// claude-audit static: ≥5% comment lines on files >100 LOC.
+// Canon: Modules/Fixcity/docs/wiki — domain i18n only.
+// File: lang/it/homepage.php
+/**
+ * Homepage translations - Italian
+ *
+ * Translation namespace: fixcity::homepage.*
+ * Format: namespace::context.collection.element.type (5 levels)
+ *
+ * Used by: Themes/Sixteen/resources/views/components/blocks/ticket/map-preview.blade.php
+ */
+return [
+    'seo' => [
+        'title' => 'FixCity — Segnala un problema, segui la soluzione',
+        'description' => 'Segnala un disservizio al Comune, consulta la mappa delle segnalazioni e segui gli aggiornamenti della tua pratica.',
+    ],
+    'map_preview' => [
+        'eyebrow' => [
+            'label' => 'Mappa della comunità',
+        ],
+        'intro' => [
+            'text' => 'Consulta la mappa per conoscere i problemi già segnalati e gli interventi in corso.',
+        ],
+        'legend' => [
+            'label' => 'Segnalazioni pubbliche',
+        ],
+        'section' => [
+            'title' => [
+                'label' => 'Segnalazioni sul territorio',
+            ],
+        ],
+        'map' => [
+            'aria_label' => 'Mappa delle segnalazioni di disservizio sul territorio comunale',
+        ],
+        'cta_report' => [
+            'label' => 'Segnala un disservizio',
+        ],
+        'cta_list' => [
+            'label' => 'Vedi tutte le segnalazioni',
+        ],
+    ],
+];

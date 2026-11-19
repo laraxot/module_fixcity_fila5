@@ -1,0 +1,412 @@
+{
+  "id": "tests.servizi-index",
+  "slug": "tests.servizi-index",
+  "parent_slug": "tests",
+  "title": {
+    "it": "I templates HTML del modello per i comuni",
+    "en": "HTML templates for municipalities"
+  },
+  "layout": "design-comuni-bare",
+  "content_blocks": {
+    "it": [
+      {
+        "type": "tests-index",
+        "data": {
+          "view": "pub_theme::components.blocks.tests-index.design-comuni",
+          "title": "I templates HTML del modello per i comuni",
+          "release": {
+            "label": "v2.4.0",
+            "url": "https://github.com/italia/design-comuni-pagine-statiche/releases/latest",
+            "title": "Vai alla release",
+            "alt": "Link alla release su Github"
+          },
+          "tabs": [
+            {
+              "label": "Sito",
+              "url": "/it/tests",
+              "active": false
+            },
+            {
+              "label": "Flussi di servizio",
+              "url": "/it/tests/servizi-index",
+              "active": true
+            }
+          ],
+          "pane_id": "tab2",
+          "nav": {
+            "toggle_aria_label": "Toggle navigation",
+            "toggle_label": "Indice templates",
+            "close_label": "close",
+            "back_label": "Back",
+            "heading": "INDICE",
+            "items": [
+              {
+                "anchor": "generali",
+                "label": "Generali",
+                "active": true
+              },
+              {
+                "anchor": "graduatoria",
+                "label": "Iscrizione a graduatoria",
+                "active": false
+              },
+              {
+                "anchor": "permessi",
+                "label": "Permessi e autorizzazioni",
+                "active": false
+              },
+              {
+                "anchor": "vantaggi",
+                "label": "Vantaggi economici",
+                "active": false
+              },
+              {
+                "anchor": "pagamenti-dovuti-multa",
+                "label": "Pagamenti dovuti - multa",
+                "active": false
+              },
+              {
+                "anchor": "pagamenti-dovuti-imu",
+                "label": "Pagamenti dovuti - IMU",
+                "active": false
+              },
+              {
+                "anchor": "servizi-pagamento",
+                "label": "Servizi a pagamento",
+                "active": false
+              }
+            ]
+          },
+          "sections": [
+            {
+              "id": "generali",
+              "title": "Generali",
+              "intro": "Template comuni a tutti i flussi di servizio",
+              "pages": [
+                {
+                  "name": "Accedere al servizio",
+                  "description": "La schermata di accesso al servizio tramite identità digitale (SPID, CIE)",
+                  "file": "accesso-servizio.html",
+                  "url": "/it/tests/accesso-servizio"
+                },
+                {
+                  "name": "Acconsentire al trattamento dei dati personali",
+                  "description": "La schermata con l’informativa privacy e la possibilità di acconsentire al trattamento dei dati",
+                  "file": "consenso-privacy.html",
+                  "url": "/it/tests/consenso-privacy"
+                }
+              ]
+            },
+            {
+              "id": "graduatoria",
+              "title": "Iscrizione a graduatoria",
+              "intro": "Templates specifici per la tipologia di servizi che prevedono l'iscriziona ad una graduatoria",
+              "note": "Esempio realizzato: Iscrizione alla scuola dell'infanzia",
+              "pages": [
+                {
+                  "name": "Trovare informazioni sul servizio",
+                  "description": "La scheda di presentazione del servizio di iscrizione a graduatoria con tutte le informazioni necessarie e l’accesso alla procedura di richiesta online",
+                  "file": "graduatoria-scheda-servizio.html",
+                  "url": "/it/tests/graduatoria-scheda-servizio"
+                },
+                {
+                  "name": "Step 1 - Inserire/controllare i dati personali",
+                  "description": "La schermata per inserire i dati personali, come il richiedente, il beneficiario e l’ISEE",
+                  "file": "graduatoria-dati-personali.html",
+                  "url": "/it/tests/graduatoria-dati-personali"
+                },
+                {
+                  "name": "Step 2 - Inserire/controllare i dati specifici del servizio",
+                  "description": "La schermata per inserire le preferenze per il servizio specifico a cui si vuole accedere tramite graduatoria",
+                  "file": "graduatoria-dati-specifici.html",
+                  "url": "/it/tests/graduatoria-dati-specifici"
+                },
+                {
+                  "name": "Step 3 - Riepilogo delle informazioni",
+                  "description": "La schermata con il riepilogo delle informazioni inserite e la possibilità di confermare o tornare indietro per modificare",
+                  "file": "graduatoria-riepilogo.html",
+                  "url": "/it/tests/graduatoria-riepilogo"
+                },
+                {
+                  "name": "Step 4 - Ricevere conferma dal sistema",
+                  "description": "La schermata con la conferma dell’avvenuto invio della richiesta con il codice di riferimento, informazioni sui prossimi passi e la possibilità di scaricare il riepilogo",
+                  "file": "graduatoria-conferma.html",
+                  "url": "/it/tests/graduatoria-conferma"
+                },
+                {
+                  "name": "Area personale",
+                  "description": "La schermata dell’area personale con l’avviso di pubblicazione della graduatoria",
+                  "file": "graduatoria-area-personale.html",
+                  "url": "/it/tests/graduatoria-area-personale"
+                },
+                {
+                  "name": "Messaggio in area personale",
+                  "description": "La schermata del messaggio in area personale con l’avviso di pubblicazione della graduatoria e le indicazioni per il perfezionamento della richiesta",
+                  "file": "graduatoria-messaggio.html",
+                  "url": "/it/tests/graduatoria-messaggio"
+                },
+                {
+                  "name": "Perfezionare la richiesta",
+                  "description": "La schermata per selezionare ulteriori preferenze di servizio e concludere la richiesta",
+                  "file": "graduatoria-perfezionamento.html",
+                  "url": "/it/tests/graduatoria-perfezionamento"
+                }
+              ]
+            },
+            {
+              "id": "permessi",
+              "title": "Permessi e autorizzazioni",
+              "intro": "Templates specifici per la tipologia di servizi che prevedono il rilascio di permessi e/o autorizzazioni",
+              "note": "Esempio realizzato: Permezzo ZTL",
+              "pages": [
+                {
+                  "name": "Trovare informazioni sul servizio",
+                  "description": "La scheda di presentazione del servizio per richiedere permessi e autorizzazioni con tutte le informazioni necessarie e l’accesso alla procedura di richiesta online",
+                  "file": "permessi-scheda-servizio.html",
+                  "url": "/it/tests/permessi-scheda-servizio"
+                },
+                {
+                  "name": "Step 1 - Inserire / controllare i dati personali",
+                  "description": "La schermata per inserire i dati personali necessari a inviare una richiesta per il permesso o l’autorizzazione",
+                  "file": "permessi-dati-personali.html",
+                  "url": "/it/tests/permessi-dati-personali"
+                },
+                {
+                  "name": "Step 2 - Inserire i dati specifici",
+                  "description": "La schermata per inserire le preferenze per il permesso o l’autorizzazione che si vuole richiedere, come la tipologia e la validità",
+                  "file": "permessi-dati-specifici.html",
+                  "url": "/it/tests/permessi-dati-specifici"
+                },
+                {
+                  "name": "Step 3 - Riepilogo delle informazioni",
+                  "description": "La schermata con il riepilogo delle informazioni inserite e la possibilità di confermare o tornare indietro per modificare",
+                  "file": "permessi-riepilogo.html",
+                  "url": "/it/tests/permessi-riepilogo"
+                },
+                {
+                  "name": "Step 4 - Ricevere conferma dal sistema",
+                  "description": "La schermata con la conferma dell’avvenuto invio della richiesta con il codice di riferimento, informazioni sui prossimi passi e la possibilità di scaricare il riepilogo",
+                  "file": "permessi-conferma.html",
+                  "url": "/it/tests/permessi-conferma"
+                },
+                {
+                  "name": "Messaggio in area personale",
+                  "description": "La schermata dell’area personale con il messaggio di risposta alla richiesta",
+                  "file": "permessi-area-personale.html",
+                  "url": "/it/tests/permessi-area-personale"
+                },
+                {
+                  "name": "Effettuare il pagamento",
+                  "description": "La schermata per effettuare un eventuale pagamento per ottenere il permesso o l’autorizzazione",
+                  "file": "permessi-pagamento.html",
+                  "url": "/it/tests/permessi-pagamento"
+                }
+              ]
+            },
+            {
+              "id": "vantaggi",
+              "title": "Vantaggi economici",
+              "intro": "Templates specifici per la tipologia di servizi che prevedono la richiesta di prestazioni economiche a supporto del reddito",
+              "note": "Esempio realizzato: Assegno di maternità",
+              "pages": [
+                {
+                  "name": "Trovare informazioni sul servizio",
+                  "description": "La scheda di presentazione del servizio per richiedere un vantaggio economico con tutte le informazioni necessarie e l’accesso alla procedura di richiesta online",
+                  "file": "vantaggi-scheda-servizio.html",
+                  "url": "/it/tests/vantaggi-scheda-servizio"
+                },
+                {
+                  "name": "Step 1 - Inserire / controllare i dati personali",
+                  "description": "La schermata per inserire i dati personali necessari per richiedere un vantaggio economico, come il richiedente, il minore, l’ISEE e il conto bancario per l’accredito",
+                  "file": "vantaggi-dati-personali.html",
+                  "url": "/it/tests/vantaggi-dati-personali"
+                },
+                {
+                  "name": "Step 2 - Riepilogo delle informazioni",
+                  "description": "La schermata per inserire i dati personali necessari per richiedere un vantaggio economico, come il richiedente, il minore, l’ISEE e il conto bancario per l’accredito",
+                  "file": "vantaggi-riepilogo.html",
+                  "url": "/it/tests/vantaggi-riepilogo"
+                },
+                {
+                  "name": "Ricevere conferma dal sistema",
+                  "description": "La schermata con il riepilogo delle informazioni inserite e la possibilità di confermare o tornare indietro per modificare",
+                  "file": "vantaggi-conferma.html",
+                  "url": "/it/tests/vantaggi-conferma"
+                },
+                {
+                  "name": "Messaggio in area personale",
+                  "description": "La schermata dell’area personale con il messaggio di risposta alla richiesta",
+                  "file": "vantaggi-area-personale.html",
+                  "url": "/it/tests/vantaggi-area-personale"
+                }
+              ]
+            },
+            {
+              "id": "pagamenti-dovuti-multa",
+              "title": "Pagamenti dovuti - pagoPA",
+              "intro": "Templates specifici per la tipologia di servizi che prevedono il pagamento di importi dovuti tramite integrazione di pagoPA",
+              "note": "Esempio realizzato: Pagamento multa",
+              "pages": [
+                {
+                  "name": "Trovare informazioni sul servizio",
+                  "description": "La scheda di presentazione del servizio per pagare una multa con tutte le informazioni necessarie e l’accesso alla procedura online",
+                  "file": "pagamenti-multa-scheda-servizio.html",
+                  "url": "/it/tests/pagamenti-multa-scheda-servizio"
+                },
+                {
+                  "name": "Step 1 - Inserire / controllare i dati personali",
+                  "description": "La schermata per inserire i dati personali di chi sta pagando la multa",
+                  "file": "pagamenti-multa-dati-personali.html",
+                  "url": "/it/tests/pagamenti-multa-dati-personali"
+                },
+                {
+                  "name": "Step 2 - Inserire i dati specifici del servizio (fase 1)",
+                  "description": "La schermata per inserire i dati personali di chi sta pagando la multa",
+                  "file": "pagamenti-multa-dati-specifici-fase1.html",
+                  "url": "/it/tests/pagamenti-multa-dati-specifici-fase1"
+                },
+                {
+                  "name": "Step 2 - Inserire i dati specifici del servizio (fase 2)",
+                  "description": "La schermata che presenta tutti i dettagli della multa dopo aver inserito il codice e il box dove indicare la data di ricezione avviso per il calcolo dell’importo",
+                  "file": "pagamenti-multa-dati-specifici-fase2.html",
+                  "url": "/it/tests/pagamenti-multa-dati-specifici-fase2"
+                },
+                {
+                  "name": "Step 2 - Inserire i dati specifici del servizio (fase 3)",
+                  "description": "La schermata che presenta l’importo dovuto dopo aver specificato la data di ricezione dell’avviso",
+                  "file": "pagamenti-multa-dati-specifici-fase3.html",
+                  "url": "/it/tests/pagamenti-multa-dati-specifici-fase3"
+                },
+                {
+                  "name": "Step 3 - Riepilogo delle informazioni",
+                  "description": "La schermata con il riepilogo delle informazioni inserite e la possibilità di confermare o tornare indietro per modificare",
+                  "file": "pagamenti-multa-riepilogo.html",
+                  "url": "/it/tests/pagamenti-multa-riepilogo"
+                },
+                {
+                  "name": "Conferma dal sistema",
+                  "description": "La schermata con la conferma dell’avvenuto pagamento della multa, il codice di riferimento e la possibilità di scaricare la ricevuta",
+                  "file": "pagamenti-multa-conferma.html",
+                  "url": "/it/tests/pagamenti-multa-conferma"
+                },
+                {
+                  "name": "Messaggio in area personale",
+                  "description": "La schermata dell’area personale con il messaggio di conferma del pagamento della multa",
+                  "file": "pagamenti-multa-area-personale.html",
+                  "url": "/it/tests/pagamenti-multa-area-personale"
+                }
+              ]
+            },
+            {
+              "id": "pagamenti-dovuti-imu",
+              "title": "Pagamenti dovuti - F24",
+              "intro": "Templates specifici per la tipologia di servizi prevedono il pagamento di importi dovuti tramite F24",
+              "note": "Esempio realizzato: Pagamento IMU",
+              "pages": [
+                {
+                  "name": "Trovare informazioni sul servizio",
+                  "description": "La scheda di presentazione del servizio per pagare l’IMU con tutte le informazioni necessarie e l’accesso alla procedura online",
+                  "file": "pagamenti-imu-scheda-servizio.html",
+                  "url": "/it/tests/pagamenti-imu-scheda-servizio"
+                },
+                {
+                  "name": "Step 1 - Inserire / controllare i dati personali",
+                  "description": "La schermata per inserire i dati del contribuente, del coobbligato e dell’immobile",
+                  "file": "pagamenti-imu-dati-personali.html",
+                  "url": "/it/tests/pagamenti-imu-dati-personali"
+                },
+                {
+                  "name": "Step 2 - Riepilogo delle informazioni",
+                  "description": "La schermata con il riepilogo delle informazioni inserite e la possibilità di confermare o tornare indietro per modificare",
+                  "file": "pagamenti-imu-riepilogo.html",
+                  "url": "/it/tests/pagamenti-imu-riepilogo"
+                },
+                {
+                  "name": "Step 3 - Preferenze di pagamento",
+                  "description": "La schermata per indicare eventuali acconti già versati e calcolare l’importo dovuto",
+                  "file": "pagamenti-imu-preferenze.html",
+                  "url": "/it/tests/pagamenti-imu-preferenze"
+                },
+                {
+                  "name": "Step 4 - Creazione del documento F24",
+                  "description": "La schermata per controllare i dati per la creazione del documento F24",
+                  "file": "pagamenti-imu-anteprima-F24.html",
+                  "url": "/it/tests/pagamenti-imu-anteprima-F24"
+                },
+                {
+                  "name": "Ricevere conferma dal sistema",
+                  "description": "La schermata con la conferma dell’avvenuta creazione del documento F24, il codice di riferimento e la possibilità di scaricare il documento",
+                  "file": "pagamenti-imu-conferma.html",
+                  "url": "/it/tests/pagamenti-imu-conferma"
+                },
+                {
+                  "name": "Messaggio in area personale",
+                  "description": "La schermata dell’area personale con il messaggio di conferma della creazione del documento F24",
+                  "file": "pagamenti-imu-area-personale.html",
+                  "url": "/it/tests/pagamenti-imu-area-personale"
+                }
+              ]
+            },
+            {
+              "id": "servizi-pagamento",
+              "title": "Servizi a pagamento",
+              "intro": "Templates specifici per la tipologia di servizi il cui utilizzo da parte delle persone prevede il pagamento di un importo",
+              "note": "Esempio realizzato: Mensa scolastica",
+              "pages": [
+                {
+                  "name": "Trovare informazioni sul servizio",
+                  "description": "La scheda di presentazione del servizio per richiedere un servizio a pagamento con tutte le informazioni necessarie e l’accesso alla procedura di richiesta online",
+                  "file": "servizi-pagamento-scheda-servizio.html",
+                  "url": "/it/tests/servizi-pagamento-scheda-servizio"
+                },
+                {
+                  "name": "Step 1 - Inserire / controllare i dati personali",
+                  "description": "La schermata per inserire i dati personali necessari per richiedere un servizio a pagamento, come il richiedente, il beneficiario e l’ISEE",
+                  "file": "servizi-pagamento-dati-personali.html",
+                  "url": "/it/tests/servizi-pagamento-dati-personali"
+                },
+                {
+                  "name": "Step 2 - Inserire i dati specifici del servizio",
+                  "description": "La schermata per inserire le preferenze specifiche per il servizio richiesto",
+                  "file": "servizi-pagamento-dati-specifici.html",
+                  "url": "/it/tests/servizi-pagamento-dati-specifici"
+                },
+                {
+                  "name": "Step 3 - Riepilogo delle informazioni",
+                  "description": "La schermata con il riepilogo delle informazioni inserite e la possibilità di confermare o tornare indietro per modificare",
+                  "file": "servizi-pagamento-riepilogo.html",
+                  "url": "/it/tests/servizi-pagamento-riepilogo"
+                },
+                {
+                  "name": "Ricevere conferma dal sistema",
+                  "description": "La schermata con la conferma dell’avvenuto invio della richiesta con il codice di riferimento, informazioni sui prossimi passi e la possibilità di scaricare il riepilogo",
+                  "file": "servizi-pagamento-conferma.html",
+                  "url": "/it/tests/servizi-pagamento-conferma"
+                },
+                {
+                  "name": "Messaggio in area personale",
+                  "description": "La schermata dell’area personale con il messaggio di risposta alla richiesta",
+                  "file": "servizi-pagamento-area-personale.html",
+                  "url": "/it/tests/servizi-pagamento-area-personale"
+                },
+                {
+                  "name": "Effettuare il pagamento",
+                  "description": "La schermata per effettuare il pagamento per usufruire del servizio",
+                  "file": "servizi-pagamento-pagamento.html",
+                  "url": "/it/tests/servizi-pagamento-pagamento"
+                }
+              ]
+            }
+          ]
+        }
+      }
+    ],
+    "en": []
+  },
+  "sidebar_blocks": {
+    "it": [],
+    "en": []
+  },
+  "footer_blocks": null,
+  "description": "Catalogo dei flussi di servizio del modello per i comuni (servizi/index.html): titolo e schede; il pannello e' commentato nel riferimento. Contenuto da JSON."
+}

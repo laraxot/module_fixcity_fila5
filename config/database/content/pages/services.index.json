@@ -1,0 +1,25 @@
+{
+  "id": "services.index",
+  "slug": "services.index",
+  "title": {
+    "it": "Servizi",
+    "en": "Services",
+    "de": "Dienstleistungen",
+    "es": "Servicios"
+  },
+  "description": {
+    "it": "Accedi ai servizi comunali, invia una segnalazione o segui una pratica.",
+    "en": "Access municipal services, submit a report or track a request.",
+    "de": "Greifen Sie auf kommunale Dienste zu, melden Sie ein Problem oder verfolgen Sie eine Anfrage.",
+    "es": "Accede a los servicios municipales, envía un aviso o consulta una solicitud."
+  },
+  "layout": "design-comuni",
+  "content_blocks": {
+    "it": [{"type": "services", "data": {"view": "pub_theme::components.pages.services", "header_active": "all-services"}}],
+    "en": [{"type": "services", "data": {"view": "pub_theme::components.pages.services", "header_active": "all-services"}}],
+    "de": [{"type": "services", "data": {"view": "pub_theme::components.pages.services", "header_active": "all-services"}}],
+    "es": [{"type": "services", "data": {"view": "pub_theme::components.pages.services", "header_active": "all-services"}}]
+  },
+  "sidebar_blocks": {"it": [], "en": [], "de": [], "es": []},
+  "footer_blocks": null
+}

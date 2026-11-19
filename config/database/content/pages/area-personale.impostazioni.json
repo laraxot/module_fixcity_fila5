@@ -1,0 +1,68 @@
+{
+    "id": "area-personale.impostazioni",
+    "title": {
+        "it": "Impostazioni e privacy",
+        "en": "Settings and privacy",
+        "de": "Einstellungen und Datenschutz",
+        "es": "Ajustes y privacidad"
+    },
+    "slug": "area-personale.impostazioni",
+    "layout": "design-comuni",
+    "description": {
+        "it": "Preferenze di notifica, dati del tuo account in sola lettura e informazioni su come esercitare i diritti sui dati personali.",
+        "en": "Notification preferences, your account data in read-only form and information on how to exercise your personal data rights.",
+        "de": "Benachrichtigungseinstellungen, die Daten deines Kontos zur Ansicht und Informationen zur Ausübung deiner Rechte an personenbezogenen Daten.",
+        "es": "Preferencias de notificación, los datos de tu cuenta en solo lectura e información sobre cómo ejercer tus derechos sobre los datos personales."
+    },
+    "content": null,
+    "content_blocks": {
+        "it": [
+            {
+                "type": "personal_area_settings",
+                "data": {
+                    "view": "pub_theme::components.blocks.personal-area-settings.settings"
+                }
+            }
+        ],
+        "en": [
+            {
+                "type": "personal_area_settings",
+                "data": {
+                    "view": "pub_theme::components.blocks.personal-area-settings.settings"
+                }
+            }
+        ],
+        "de": [
+            {
+                "type": "personal_area_settings",
+                "data": {
+                    "view": "pub_theme::components.blocks.personal-area-settings.settings"
+                }
+            }
+        ],
+        "es": [
+            {
+                "type": "personal_area_settings",
+                "data": {
+                    "view": "pub_theme::components.blocks.personal-area-settings.settings"
+                }
+            }
+        ]
+    },
+    "sidebar_blocks": {
+        "it": [],
+        "en": [],
+        "de": [],
+        "es": []
+    },
+    "footer_blocks": null,
+    "middleware": [
+        "auth"
+    ],
+    "access_policy": {
+        "description": "Preferenze e dati sono dell'utente: la pagina richiede un utente autenticato e mostra solo i suoi dati.",
+        "guest_access": false,
+        "guest_redirect": "login",
+        "source": "DCP-111, DCP-106"
+    }
+}

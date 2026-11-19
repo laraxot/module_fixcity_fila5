@@ -1,0 +1,181 @@
+{
+  "id": "tests.amministrazione",
+  "slug": "tests.amministrazione",
+  "parent_slug": "tests",
+  "title": {
+    "it": "Amministrazione",
+    "en": "Administration"
+  },
+  "layout": "test",
+  "description": "Amministrazione: aree, organi, uffici e documenti del Comune. Contenuto da JSON, reso dal blocco content-page del tema Sixteen.",
+  "content_blocks": {
+    "it": [
+      {
+        "type": "content-page",
+        "data": {
+          "view": "pub_theme::components.blocks.content-page.design-comuni",
+          "title": "Amministrazione",
+          "breadcrumb": {
+            "items": [
+              {
+                "label": "Home",
+                "url": "/it/tests/homepage"
+              }
+            ],
+            "current": "Amministrazione"
+          },
+          "hero": {
+            "text": "Tutte le informazioni sulla struttura amministrativa del Comune. Scopri gli organi politici, gli uffici e il personale e consulta i documenti pubblici, le statistiche e i bandi di gara.",
+            "shadow": false
+          },
+          "sections": [
+            {
+              "type": "cards-simple",
+              "style": "grey",
+              "title": "In evidenza",
+              "col_class": "col-md-6 col-lg-4",
+              "items": [
+                {
+                  "title": "Sindaco",
+                  "text": "Il sindaco, o primo cittadino, è a capo del governo del Comune e dell’amministrazione comunale.",
+                  "url": "#",
+                  "element": "management-category-link"
+                },
+                {
+                  "title": "Turismo",
+                  "text": "Sportello unico per le attività produttive e l'edilizia (Suape), commercio e somministrazione, commercio su area pubblica, concessioni suolo, turismo, incentivi alle imprese, mercati",
+                  "url": "#",
+                  "element": "management-category-link"
+                },
+                {
+                  "title": "Pianificazione strategica e territoriale",
+                  "text": "Predisposizione, aggiornamento e attuazione degli strumenti urbanistici generali, di settore e attuativi. Supporto per tutte le attività progettuali interne ed esterne all'amministrazione",
+                  "url": "#",
+                  "element": "management-category-link"
+                }
+              ]
+            },
+            {
+              "type": "cards-simple",
+              "style": "plain",
+              "title": "Esplora l'amministrazione",
+              "col_class": "col-12 col-md-6 col-lg-4",
+              "items": [
+                {
+                  "title": "Aree amministrative",
+                  "text": "La struttura organizzativa è suddivisa in aree di competenze che gestiscono i servizi erogati alla comunità.",
+                  "url": "#",
+                  "element": "management-category-link"
+                },
+                {
+                  "title": "Documenti e dati",
+                  "text": "Bandi di concorso, avvisi, graduatorie, statistiche e documenti pubblici.",
+                  "url": "#",
+                  "element": "management-category-link"
+                },
+                {
+                  "title": "Enti e fondazioni",
+                  "text": "I consorzi, gli enti e le società partecipate di cui il Comune fa parte per rappresentare al meglio gli interessi della comunità.",
+                  "url": "#",
+                  "element": "management-category-link"
+                },
+                {
+                  "title": "Organi di governo",
+                  "text": "Le informazioni sulla Giunta e il Consiglio comunale, incluse le convocazioni, le registrazioni delle sedute e i verbali.",
+                  "url": "#",
+                  "element": "management-category-link"
+                },
+                {
+                  "title": "Personale amministrativo",
+                  "text": "Personale da contattare per informazioni e supporto ai servizi erogati dagli uffici.",
+                  "url": "#",
+                  "element": "management-category-link"
+                },
+                {
+                  "title": "Politici",
+                  "text": "Tutti i rappresentanti dei cittadini che compongono gli organi di indirizzo politico del Comune.",
+                  "url": "#",
+                  "element": "management-category-link"
+                },
+                {
+                  "title": "Uffici",
+                  "text": "Le informazioni e i contatti degli Uffici di Città, gli uffici aperti al pubblico e gli uffici assistenziali.",
+                  "url": "#",
+                  "element": "management-category-link"
+                }
+              ]
+            }
+          ],
+          "feedback": {
+            "title": "Quanto sono chiare le informazioni su questa pagina?",
+            "legend": "Valuta da 1 a 5 stelle la pagina",
+            "star_label": "Valuta %d stelle su 5",
+            "thanks": "Grazie, il tuo parere ci aiuterà a migliorare il servizio!",
+            "positive": {
+              "question": "Quali sono stati gli aspetti che hai preferito?",
+              "answers": [
+                "Le indicazioni erano chiare",
+                "Le indicazioni erano complete",
+                "Capivo sempre che stavo procedendo correttamente",
+                "Non ho avuto problemi tecnici",
+                "Altro"
+              ]
+            },
+            "negative": {
+              "question": "Dove hai incontrato le maggiori difficoltà?",
+              "answers": [
+                "A volte le indicazioni non erano chiare",
+                "A volte le indicazioni non erano complete",
+                "A volte non capivo se stavo procedendo correttamente",
+                "Ho avuto problemi tecnici",
+                "Altro"
+              ]
+            },
+            "detail": {
+              "question": "Vuoi aggiungere altri dettagli?",
+              "label": "Dettaglio",
+              "help": "Inserire massimo 200 caratteri"
+            },
+            "back": "Indietro",
+            "next": "Avanti"
+          },
+          "contacts": {
+            "main": {
+              "title": "Contatta il comune",
+              "items": [
+                {
+                  "icon": "it-help-circle",
+                  "label": "Leggi le domande frequenti",
+                  "url": "#"
+                },
+                {
+                  "icon": "it-mail",
+                  "label": "Richiedi assistenza",
+                  "url": "#",
+                  "element": "contacts"
+                },
+                {
+                  "icon": "it-hearing",
+                  "label": "Chiama il numero verde 05 0505",
+                  "url": "#"
+                },
+                {
+                  "icon": "it-calendar",
+                  "label": "Prenota appuntamento",
+                  "url": "#",
+                  "element": "appointment-booking"
+                }
+              ]
+            }
+          },
+          "header_active": "management"
+        }
+      }
+    ]
+  },
+  "sidebar_blocks": {
+    "it": [],
+    "en": []
+  },
+  "footer_blocks": null
+}

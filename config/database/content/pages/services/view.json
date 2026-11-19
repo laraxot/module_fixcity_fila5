@@ -1,0 +1,91 @@
+{
+  "id": "view",
+  "slug": "view",
+  "title": {
+    "it": "Servizio",
+    "en": "Service",
+    "de": "Dienst",
+    "es": "Servicio"
+  },
+  "layout": "design-comuni",
+  "description": {
+    "it": "Scheda di un servizio del Comune.",
+    "en": "A municipal service sheet.",
+    "de": "Steckbrief eines kommunalen Dienstes.",
+    "es": "Ficha de un servicio municipal."
+  },
+  "content_blocks": {
+    "it": [
+      {
+        "type": "services.view",
+        "data": {
+          "view": "pub_theme::components.blocks.service-page-detail.design-comuni",
+          "header_active": "all-services",
+          "title": "Servizio",
+          "subtitle": "Scheda del servizio comunale.",
+          "breadcrumb": {
+            "items": [
+              {"label": "Home", "url": "/it"},
+              {"label": "Servizi", "url": "/it/services"}
+            ],
+            "current": "Servizio"
+          }
+        }
+      }
+    ],
+    "en": [
+      {
+        "type": "services.view",
+        "data": {
+          "view": "pub_theme::components.blocks.service-page-detail.design-comuni",
+          "header_active": "all-services",
+          "title": "Service",
+          "subtitle": "Municipal service sheet.",
+          "breadcrumb": {
+            "items": [
+              {"label": "Home", "url": "/en"},
+              {"label": "Services", "url": "/en/services"}
+            ],
+            "current": "Service"
+          }
+        }
+      }
+    ],
+    "de": [
+      {
+        "type": "services.view",
+        "data": {
+          "view": "pub_theme::components.blocks.service-page-detail.design-comuni",
+          "header_active": "all-services",
+          "title": "Dienst",
+          "subtitle": "Steckbrief des kommunalen Dienstes.",
+          "breadcrumb": {
+            "items": [
+              {"label": "Home", "url": "/de"},
+              {"label": "Dienste", "url": "/de/services"}
+            ],
+            "current": "Dienst"
+          }
+        }
+      }
+    ],
+    "es": [
+      {
+        "type": "services.view",
+        "data": {
+          "view": "pub_theme::components.blocks.service-page-detail.design-comuni",
+          "header_active": "all-services",
+          "title": "Servicio",
+          "subtitle": "Ficha del servicio municipal.",
+          "breadcrumb": {
+            "items": [
+              {"label": "Home", "url": "/es"},
+              {"label": "Servicios", "url": "/es/services"}
+            ],
+            "current": "Servicio"
+          }
+        }
+      }
+    ]
+  }
+}

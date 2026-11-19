@@ -1,0 +1,98 @@
+project: fixcity-inbound-marketing
+source_of_truth: laravel/Modules/Fixcity/docs/bmad/inbound-marketing
+status: concerns
+updated: 2026-10-15
+notes: |
+  Readiness CONCERNS — no Epic III runtime until GO.
+  Skills/rules/memories wiki: fixcity-inbound-editorial*.
+stories:
+  # Epic I — governance / policy
+  - id: IM-BLOG-001
+    status: blocked
+    parallel_set: 1
+  - id: IM-GDPR-001
+    status: blocked
+    parallel_set: 1
+  - id: IM-MEDIA-001
+    status: backlog
+    parallel_set: 1
+  - id: IM-TENANT-001
+    status: backlog
+    parallel_set: 2
+    depends_on: [IM-BLOG-002, IM-GDPR-001]
+  - id: IM-LANG-001
+    status: backlog
+    parallel_set: 3
+    depends_on: [IM-BLOG-002, IM-SEO-001]
+  # Epic II — contenuti pilota
+  - id: IM-BLOG-005
+    status: backlog
+    parallel_set: 1
+  - id: IM-BLOG-006
+    status: backlog
+    parallel_set: 2
+    depends_on: [IM-BLOG-001, IM-CMS-001]
+  - id: IM-CMS-001
+    status: backlog
+    parallel_set: 3
+    depends_on: [IM-BLOG-005]
+  - id: IM-UI-001
+    status: backlog
+    parallel_set: 3
+    depends_on: [IM-BLOG-002]
+  - id: IM-MEETUP-001
+    status: backlog
+    parallel_set: 4
+    depends_on: [IM-BLOG-003, IM-GDPR-001]
+  - id: IM-FIXCITY-005
+    status: ready-for-dev
+    parallel_set: 2
+    depends_on: [IM-BLOG-001]
+    note: demo seeding (docs+seeder); no production FO wiring
+  # Epic III — Filament / FO (blocked by readiness)
+  - id: IM-BLOG-002
+    status: backlog
+    parallel_set: 2
+    depends_on: [IM-BLOG-001]
+  - id: IM-BLOG-003
+    status: backlog
+    parallel_set: 2
+    depends_on: [IM-BLOG-002]
+  - id: IM-SEO-001
+    status: backlog
+    parallel_set: 3
+    depends_on: [IM-BLOG-002, IM-BLOG-003]
+  - id: IM-SIXTEEN-001
+    status: blocked
+    parallel_set: 4
+    depends_on: [IM-CMS-001, IM-UI-001, IM-SEO-001]
+  - id: IM-FIXCITY-004
+    status: blocked
+    parallel_set: 4
+    depends_on: [IM-BLOG-002, IM-CMS-001, IM-SIXTEEN-001]
+  # Epic IV — deferred
+  - id: IM-NOTIFY-001
+    status: deferred
+    parallel_set: 5
+    depends_on: [IM-GDPR-001, IM-BLOG-004]
+  # Epic V — sistema / fiducia / adozione
+  - id: IM-BLOG-004
+    status: backlog
+    parallel_set: 2
+    depends_on: [IM-BLOG-001]
+  - id: IM-FIXCITY-001
+    status: backlog
+    parallel_set: 2
+    depends_on: [IM-BLOG-004, IM-BLOG-005]
+  - id: IM-FIXCITY-002
+    status: backlog
+    parallel_set: 1
+    depends_on: [IM-BLOG-001]
+  - id: IM-FIXCITY-003
+    status: backlog
+    parallel_set: 2
+    depends_on: [IM-BLOG-001, IM-BLOG-005]
+  - id: IM-BLOG-007
+    status: done
+    parallel_set: 2
+    note: DemoContentSeeder post|event + Comment + media

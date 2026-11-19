@@ -1,0 +1,429 @@
+{
+    "id": "tests.pagamenti-imu-riepilogo",
+    "slug": "tests.pagamenti-imu-riepilogo",
+    "parent_slug": "tests",
+    "title": {
+        "it": "Pagamento IMU",
+        "en": "Pagamento IMU"
+    },
+    "layout": "test",
+    "sidebar_blocks": {
+        "it": [],
+        "en": []
+    },
+    "footer_blocks": null,
+    "description": "Pagina di prova pagamenti-imu-riepilogo (flusso pagamento IMU) da JSON, resa dal blocco service-flow del tema Sixteen.",
+    "content_blocks": {
+        "it": [
+            {
+                "type": "service-flow",
+                "data": {
+                    "view": "pub_theme::components.blocks.service-flow.design-comuni",
+                    "kind": "wizard-step",
+                    "breadcrumb": {
+                        "items": [
+                            {
+                                "label": "Home",
+                                "url": "/it/tests/homepage"
+                            },
+                            {
+                                "label": "Servizi",
+                                "url": "#"
+                            },
+                            {
+                                "label": "Tributi, finanze e contravvenzioni",
+                                "url": "#"
+                            }
+                        ],
+                        "current": "Pagamento IMU"
+                    },
+                    "heading": {
+                        "title": "Pagamento IMU",
+                        "subtitles": [
+                            {
+                                "text": "Hai bisogno di assistenza?",
+                                "class": "subtitle-small",
+                                "link": {
+                                    "label": "Contattaci",
+                                    "url": "",
+                                    "class": "title-small-semi-bold t-primary"
+                                }
+                            }
+                        ]
+                    },
+                    "stepper": {
+                        "items": [
+                            {
+                                "label": "Informativa sulla privacy",
+                                "state": "confirmed"
+                            },
+                            {
+                                "label": "Dati generali",
+                                "state": "confirmed"
+                            },
+                            {
+                                "label": "Riepilogo",
+                                "state": "active"
+                            },
+                            {
+                                "label": "Preferenze",
+                                "state": ""
+                            },
+                            {
+                                "label": "Anteprima",
+                                "state": ""
+                            }
+                        ],
+                        "confirmed_label": "Confermato",
+                        "active_label": "Attivo",
+                        "index": "3/5"
+                    },
+                    "nav": {
+                        "aria_label": "Step",
+                        "back": "Indietro",
+                        "save": {
+                            "long": "Salva Richiesta",
+                            "short": "Salva"
+                        },
+                        "next": {
+                            "label": "Avanti",
+                            "icon": "it-chevron-right",
+                            "class": "",
+                            "modal": "#modal-terms"
+                        },
+                        "saved_message": "Richiesta salvata con successo"
+                    },
+                    "body": {
+                        "layout": "centered",
+                        "steps_content": "none",
+                        "sections_container": false,
+                        "col": "col-12 col-lg-8"
+                    },
+                    "sections": [
+                        {
+                            "type": "callout",
+                            "class": "callout callout-highlight ps-3 warning",
+                            "icon": "it-horn",
+                            "title": "Attenzione",
+                            "text": "Le informazioni che hai fornito hanno valore di dichiarazione.",
+                            "text_block": "Verifica che siano corrette.",
+                            "text_block_class": "d-lg-block"
+                        },
+                        {
+                            "type": "title",
+                            "tag": "h2",
+                            "class": "title-xxlarge mb-4 mt-40",
+                            "text": "Dati Generali"
+                        },
+                        {
+                            "type": "summary",
+                            "wrapper_class": "mb-40 mb-lg-4",
+                            "card_class": "card has-bkg-grey shadow-sm mb-0",
+                            "header_class": "card-header border-0 p-0 mb-lg-20",
+                            "title": "Contribuente",
+                            "title_tag": "h3",
+                            "title_class": "subtitle-large mb-0",
+                            "groups": [
+                                {
+                                    "class": "bg-white mb-4 mb-lg-30 p-3 p-lg-4",
+                                    "header_class": "d-flex justify-content-between d-flex justify-content-end",
+                                    "title": "Giulia Rossi",
+                                    "edit": {
+                                        "label": "Modifica",
+                                        "url": "#"
+                                    },
+                                    "rows": [
+                                        {
+                                            "label": "Codice Fiscale",
+                                            "value": "GLABNC72H25H501Y"
+                                        },
+                                        {
+                                            "label": "Data di nascita",
+                                            "value": "02/03/1975"
+                                        },
+                                        {
+                                            "label": "Luogo di nascita",
+                                            "value": "Roma"
+                                        },
+                                        {
+                                            "label": "Sesso",
+                                            "value": "Femmina"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "class": "bg-white p-3 p-lg-4 mb-0",
+                                    "header_class": "d-flex justify-content-between d-flex justify-content-end",
+                                    "title": "Indirizzo",
+                                    "edit": {
+                                        "label": "Modifica",
+                                        "url": "#"
+                                    },
+                                    "rows": [
+                                        {
+                                            "label": "Domicilio fiscale",
+                                            "value": "Via Roma 16, 00100 Roma, It"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "bare": true
+                        },
+                        {
+                            "type": "summary",
+                            "wrapper_class": "mb-40 mb-lg-4",
+                            "card_class": "card has-bkg-grey shadow-sm mb-0",
+                            "header_class": "card-header border-0 p-0 mb-lg-20",
+                            "title": "Coobligato",
+                            "title_tag": "h3",
+                            "title_class": "subtitle-large mb-0",
+                            "groups": [
+                                {
+                                    "class": "bg-white p-3 p-lg-4",
+                                    "header_class": "d-flex justify-content-between d-flex justify-content-end",
+                                    "title": "Giovanni Rossi",
+                                    "edit": {
+                                        "label": "Modifica",
+                                        "url": "#"
+                                    },
+                                    "rows": [
+                                        {
+                                            "label": "Codice Fiscale",
+                                            "value": "GVNRSS72H25H501Y"
+                                        },
+                                        {
+                                            "label": "Data di nascita",
+                                            "value": "03/12/1938"
+                                        },
+                                        {
+                                            "label": "Luogo di nascita",
+                                            "value": "Roma"
+                                        },
+                                        {
+                                            "label": "Sesso",
+                                            "value": "Maschio"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "bare": true
+                        },
+                        {
+                            "type": "summary",
+                            "wrapper_class": "",
+                            "card_class": "card has-bkg-grey shadow-sm mb-0",
+                            "header_class": "card-header border-0 p-0 mb-lg-20",
+                            "title": "Immobili",
+                            "title_tag": "h3",
+                            "title_class": "subtitle-large mb-0",
+                            "groups": [
+                                {
+                                    "class": "bg-white mb-4 mb-lg-30 p-3 p-lg-4",
+                                    "header_class": "d-flex justify-content-between d-flex justify-content-end",
+                                    "title": "H501 - Roma",
+                                    "edit": {
+                                        "label": "Modifica",
+                                        "url": "#"
+                                    },
+                                    "rows": [
+                                        {
+                                            "label": "Tipologia Immobile",
+                                            "value": "Abitazione Principale"
+                                        },
+                                        {
+                                            "label": "Rendita catastale",
+                                            "value": "471,00€"
+                                        },
+                                        {
+                                            "label": "Aliquota IMU",
+                                            "value": "2%"
+                                        },
+                                        {
+                                            "label": "Aliquota acconto / base IMU",
+                                            "value": "2%"
+                                        },
+                                        {
+                                            "label": "Quota di possesso",
+                                            "value": "100%"
+                                        },
+                                        {
+                                            "label": "Mesi di possesso",
+                                            "value": "12"
+                                        },
+                                        {
+                                            "label": "Immobile storico / inagibile",
+                                            "value": "No"
+                                        },
+                                        {
+                                            "label": "Ulteriori contitolari",
+                                            "value": "0"
+                                        },
+                                        {
+                                            "label": "Pertinenze",
+                                            "value": "No"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "class": "bg-white mb-4 mb-lg-30 p-3 p-lg-4",
+                                    "header_class": "d-flex justify-content-between d-flex justify-content-end",
+                                    "title": "L736 - Venezia",
+                                    "edit": {
+                                        "label": "Modifica",
+                                        "url": "#"
+                                    },
+                                    "rows": [
+                                        {
+                                            "label": "Tipologia Immobile",
+                                            "value": "Altro immobile"
+                                        },
+                                        {
+                                            "label": "Rendita catastale",
+                                            "value": "471,00€"
+                                        },
+                                        {
+                                            "label": "Aliquota IMU",
+                                            "value": "2%"
+                                        },
+                                        {
+                                            "label": "Aliquota acconto / base IMU",
+                                            "value": "2%"
+                                        },
+                                        {
+                                            "label": "Quota di possesso",
+                                            "value": "100%"
+                                        },
+                                        {
+                                            "label": "Mesi di possesso",
+                                            "value": "12"
+                                        },
+                                        {
+                                            "label": "Immobile storico / inagibile",
+                                            "value": "No"
+                                        },
+                                        {
+                                            "label": "Ulteriori contitolari",
+                                            "value": "0"
+                                        },
+                                        {
+                                            "label": "Pertinenze",
+                                            "value": "No"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "class": "bg-white p-3 p-lg-4",
+                                    "header_class": "d-flex justify-content-between d-flex justify-content-end",
+                                    "title": "L065 - Tavagnacco",
+                                    "edit": {
+                                        "label": "Modifica",
+                                        "url": "#"
+                                    },
+                                    "rows": [
+                                        {
+                                            "label": "Tipologia Immobile",
+                                            "value": "Altra abitazione"
+                                        },
+                                        {
+                                            "label": "Rendita catastale",
+                                            "value": "471,00€"
+                                        },
+                                        {
+                                            "label": "Aliquota IMU",
+                                            "value": "2%"
+                                        },
+                                        {
+                                            "label": "Aliquota acconto / base IMU",
+                                            "value": "2%"
+                                        },
+                                        {
+                                            "label": "Quota di possesso",
+                                            "value": "100%"
+                                        },
+                                        {
+                                            "label": "Mesi di possesso",
+                                            "value": "12"
+                                        },
+                                        {
+                                            "label": "Immobile storico / inagibile",
+                                            "value": "No"
+                                        },
+                                        {
+                                            "label": "Ulteriori contitolari",
+                                            "value": "0"
+                                        },
+                                        {
+                                            "label": "Pertinenze",
+                                            "value": "No"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "bare": true
+                        }
+                    ],
+                    "contacts": {
+                        "layout": "offset",
+                        "col": "col-12 col-lg-6",
+                        "main": {
+                            "title": "Contatta il comune",
+                            "items": [
+                                {
+                                    "icon": "it-help-circle",
+                                    "label": "Leggi le domande frequenti",
+                                    "url": "#"
+                                },
+                                {
+                                    "icon": "it-mail",
+                                    "label": "Richiedi assistenza",
+                                    "url": "#",
+                                    "element": "contacts"
+                                },
+                                {
+                                    "icon": "it-hearing",
+                                    "label": "Chiama il numero verde 05 0505",
+                                    "url": "#"
+                                },
+                                {
+                                    "icon": "it-calendar",
+                                    "label": "Prenota appuntamento",
+                                    "url": "#",
+                                    "element": "appointment-booking"
+                                }
+                            ]
+                        }
+                    },
+                    "modals": [
+                        {
+                            "type": "dialog",
+                            "id": "modal-terms",
+                            "close_label": "Chiudi finestra modale",
+                            "header": {
+                                "title": "Termini e condizioni",
+                                "info": "Cliccando su Conferma e invia confermi di aver preso visione dei termini e delle condizioni di servizio.",
+                                "link": {
+                                    "label": "Leggi termini e condizioni",
+                                    "url": "#"
+                                }
+                            },
+                            "footer": {
+                                "buttons": [
+                                    {
+                                        "label": "Conferma e invia",
+                                        "variant": "primary"
+                                    },
+                                    {
+                                        "label": "Annulla",
+                                        "variant": "outline"
+                                    }
+                                ]
+                            }
+                        }
+                    ],
+                    "header_active": "all-services"
+                }
+            }
+        ],
+        "en": []
+    }
+}

@@ -1,0 +1,66 @@
+{
+  "id": "pratiche",
+  "title": {
+    "it": "Le mie segnalazioni",
+    "en": "My reports",
+    "de": "Meine Meldungen",
+    "es": "Mis incidencias"
+  },
+  "slug": "pratiche",
+  "layout": "design-comuni",
+  "middleware": [
+    "auth"
+  ],
+  "description": {
+    "it": "Le segnalazioni inviate dall'utente autenticato, per stato, con i collegamenti al dettaglio e al tracciamento.",
+    "en": "The reports sent by the signed-in user, by status, with links to the details and to tracking."
+  },
+  "content": null,
+  "sidebar_blocks": {
+    "it": [],
+    "en": [],
+    "de": [],
+    "es": []
+  },
+  "footer_blocks": null,
+  "content_blocks": {
+    "it": [
+      {
+        "type": "personal-area-practices",
+        "data": {
+          "view": "pub_theme::components.blocks.personal-area-practices.design-comuni"
+        }
+      }
+    ],
+    "en": [
+      {
+        "type": "personal-area-practices",
+        "data": {
+          "view": "pub_theme::components.blocks.personal-area-practices.design-comuni"
+        }
+      }
+    ],
+    "de": [
+      {
+        "type": "personal-area-practices",
+        "data": {
+          "view": "pub_theme::components.blocks.personal-area-practices.design-comuni"
+        }
+      }
+    ],
+    "es": [
+      {
+        "type": "personal-area-practices",
+        "data": {
+          "view": "pub_theme::components.blocks.personal-area-practices.design-comuni"
+        }
+      }
+    ]
+  },
+  "access_policy": {
+    "description": "Pagina dell'area personale: solo per utenti autenticati. Ogni segnalazione e' mostrata solo a chi ne e' proprietario o seguace; l'ospite va al login localizzato.",
+    "guest_access": false,
+    "guest_redirect": "login",
+    "source": "DCP-110, DCP-106"
+  }
+}

@@ -1,0 +1,16 @@
+{
+    "id": "media-policy-index",
+    "title": {"it": "Media policy", "en": "Media policy", "de": "Media Policy", "es": "Política de medios"},
+    "slug": "media-policy.index",
+    "layout": "design-comuni",
+    "description": {"it": "Media policy: regole di uso dei canali di comunicazione del Comune.", "en": "Media policy: rules for using the municipality’s communication channels.", "de": "Media Policy: Regeln für die Nutzung der Kommunikationskanäle der Gemeinde.", "es": "Política de medios: reglas de uso de los canales de comunicación del Ayuntamiento."},
+    "content": null,
+    "content_blocks": {
+        "it": [{"type": "legal_document", "data": {"view": "pub_theme::components.blocks.legal-document.design-comuni", "document": "media_policy", "markdown": "media-policy.md", "header_active": ""}}],
+        "en": [{"type": "legal_document", "data": {"view": "pub_theme::components.blocks.legal-document.design-comuni", "document": "media_policy", "markdown": "media-policy.md", "header_active": ""}}],
+        "de": [{"type": "legal_document", "data": {"view": "pub_theme::components.blocks.legal-document.design-comuni", "document": "media_policy", "markdown": "media-policy.md", "header_active": ""}}],
+        "es": [{"type": "legal_document", "data": {"view": "pub_theme::components.blocks.legal-document.design-comuni", "document": "media_policy", "markdown": "media-policy.md", "header_active": ""}}]
+    },
+    "sidebar_blocks": {"it": [], "en": [], "de": [], "es": []},
+    "footer_blocks": null
+}

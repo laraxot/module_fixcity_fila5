@@ -1,0 +1,614 @@
+{
+    "id": "permessi-dati-personali",
+    "slug": "permessi-dati-personali",
+    "parent_slug": "tests",
+    "title": {
+        "it": "Permesso ZTL",
+        "en": "Permesso ZTL"
+    },
+    "layout": "test",
+    "sidebar_blocks": {
+        "it": [],
+        "en": []
+    },
+    "footer_blocks": null,
+    "description": "Pagina di prova permessi-dati-personali (flusso permessi) da JSON, resa dal blocco service-flow del tema Sixteen.",
+    "content_blocks": {
+        "it": [
+            {
+                "type": "service-flow",
+                "data": {
+                    "view": "pub_theme::components.blocks.service-flow.design-comuni",
+                    "kind": "wizard-step",
+                    "breadcrumb": {
+                        "items": [
+                            {
+                                "label": "Home",
+                                "url": "/it/tests/homepage"
+                            },
+                            {
+                                "label": "Servizi",
+                                "url": "#"
+                            },
+                            {
+                                "label": "Mobilità e trasporti",
+                                "url": "#"
+                            }
+                        ],
+                        "current": "Permesso ZTL"
+                    },
+                    "heading": {
+                        "title": "Permesso ZTL",
+                        "subtitles": [
+                            {
+                                "text": "Inserisci le informazioni necessarie per richiedere il permesso ZTL.",
+                                "class": "subtitle-small",
+                                "span": {
+                                    "text": "Potrai ricontrollare tutti i dati nel riepilogo, prima di inviare la richiesta.",
+                                    "class": "d-block d-lg-inline"
+                                }
+                            },
+                            {
+                                "text": "Hai bisogno di assistenza?",
+                                "class": "subtitle-small mt-lg-2",
+                                "link": {
+                                    "label": "Contattaci",
+                                    "url": "#",
+                                    "class": "title-small-semi-bold t-primary",
+                                    "class_first": true
+                                }
+                            }
+                        ]
+                    },
+                    "stepper": {
+                        "items": [
+                            {
+                                "label": "Informativa sulla privacy",
+                                "state": "confirmed"
+                            },
+                            {
+                                "label": "Dati Generali",
+                                "state": "active"
+                            },
+                            {
+                                "label": "Preferenze di servizio",
+                                "state": ""
+                            },
+                            {
+                                "label": "Riepilogo",
+                                "state": ""
+                            }
+                        ],
+                        "confirmed_label": "Confermato",
+                        "active_label": "Attivo",
+                        "index": "2/4"
+                    },
+                    "body": {
+                        "layout": "sidebar",
+                        "steps_content": "outer",
+                        "col": "col-12 col-lg-8 offset-lg-1 mt-2 mt-lg-0",
+                        "sections_container": true,
+                        "before": [
+                            {
+                                "type": "warning-box",
+                                "icon": "it-info-circle",
+                                "icon_xlink": "it-warning",
+                                "title": "ATTENZIONE",
+                                "text": "Ci sono alcune informazioni mancanti o errate",
+                                "links": [
+                                    {
+                                        "label": "Richiedente - Documenti",
+                                        "url": "#applicant-warning"
+                                    },
+                                    {
+                                        "label": "Veicolo",
+                                        "url": "#vehicles-warning"
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    "side_nav": {
+                        "class": "col-12 col-lg-3 mb-4 d-none d-lg-block",
+                        "aria_label": "INFORMAZIONI RICHIESTE",
+                        "title": "INFORMAZIONI RICHIESTE",
+                        "items": [
+                            {
+                                "label": "Richiedente",
+                                "anchor": "applicant-info"
+                            },
+                            {
+                                "label": "Veicolo",
+                                "anchor": "vehicles-info"
+                            }
+                        ]
+                    },
+                    "sections": [
+                        {
+                            "type": "card",
+                            "id": "applicant-info",
+                            "class": "",
+                            "wrapper_class": "mb-40",
+                            "card_class": "card has-bkg-grey shadow-sm",
+                            "header_class": "card-header border-0 p-0 mb-lg-20",
+                            "title": "Richiedente",
+                            "title_class": "title-xxlarge mb-1",
+                            "subtitle": "Informazione su di te",
+                            "subtitle_class": "subtitle-small mb-0",
+                            "content": {
+                                "kind": "info-cards",
+                                "cards": [
+                                    {
+                                        "title": "Mario Rossi",
+                                        "info": {
+                                            "label": "Codice Fiscale",
+                                            "value": "MRARSS72H25H501Y"
+                                        },
+                                        "toggle_label": "Mostra tutto",
+                                        "collapse_id": "collapse-parents",
+                                        "collapse_class": "accordion-collapse collapse show",
+                                        "header_id": "heading-collapse-parents",
+                                        "button_class": "accordion-button",
+                                        "groups": [
+                                            {
+                                                "class": "bg-white has-border",
+                                                "header_class": "d-flex justify-content-between d-flex justify-content-end",
+                                                "title": "Anagrafica",
+                                                "edit": {
+                                                    "label": "Modifica",
+                                                    "url": "#"
+                                                },
+                                                "rows": [
+                                                    {
+                                                        "label": "Nome",
+                                                        "value": "Mario"
+                                                    },
+                                                    {
+                                                        "label": "Cognome",
+                                                        "value": "Rossi"
+                                                    },
+                                                    {
+                                                        "label": "Codice fiscale",
+                                                        "value": "MRARSS72H25H501Y"
+                                                    },
+                                                    {
+                                                        "label": "Data di Nascita",
+                                                        "value": "03/07/1975"
+                                                    },
+                                                    {
+                                                        "label": "Luogo di Nascita",
+                                                        "value": "Roma"
+                                                    },
+                                                    {
+                                                        "label": "Sesso",
+                                                        "value": "Maschio"
+                                                    }
+                                                ]
+                                            },
+                                            {
+                                                "class": "bg-white has-border",
+                                                "header_class": "d-flex justify-content-between d-flex justify-content-end",
+                                                "title": "Indirizzi",
+                                                "edit": {
+                                                    "label": "Modifica",
+                                                    "url": "#"
+                                                },
+                                                "rows": [
+                                                    {
+                                                        "label": "Residenza",
+                                                        "value": "Via Roma 16, 00100 Roma, IT"
+                                                    },
+                                                    {
+                                                        "label": "Domicilio",
+                                                        "value": "Piazza Risorgimento 16, 00100 Roma, It"
+                                                    }
+                                                ]
+                                            },
+                                            {
+                                                "class": "bg-white has-border",
+                                                "header_class": "d-flex justify-content-between d-flex justify-content-end",
+                                                "title": "Contatti",
+                                                "edit": {
+                                                    "label": "Modifica",
+                                                    "url": "#"
+                                                },
+                                                "rows": [
+                                                    {
+                                                        "label": "Telefono",
+                                                        "value": "+39 331 1234567"
+                                                    },
+                                                    {
+                                                        "label": "Email",
+                                                        "value": "mario.rossi@gmail.com"
+                                                    },
+                                                    {
+                                                        "label": "Recapito postale",
+                                                        "value": "P.zza Risorgimento 16, 00100 Roma"
+                                                    }
+                                                ]
+                                            },
+                                            {
+                                                "class": "bg-white has-border",
+                                                "header_class": "d-flex justify-content-between d-flex justify-content-end",
+                                                "title": "Documenti",
+                                                "edit": {
+                                                    "label": "Modifica",
+                                                    "url": "#",
+                                                    "hidden": true
+                                                },
+                                                "rows": [
+                                                    {
+                                                        "id": "applicant-warning",
+                                                        "label": "Patente auto",
+                                                        "status": {
+                                                            "tone": "alert",
+                                                            "text": "Documento mancante",
+                                                            "icon": "it-error"
+                                                        }
+                                                    }
+                                                ],
+                                                "footer_button": {
+                                                    "label": "Aggiungi",
+                                                    "icon": "it-pencil",
+                                                    "modal": "#modal-vehicle"
+                                                }
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        },
+                        {
+                            "type": "card",
+                            "id": "vehicles-info",
+                            "class": "",
+                            "wrapper_class": "",
+                            "card_class": "card has-bkg-grey shadow-sm",
+                            "header_class": "card-header border-0 p-0 mb-lg-20",
+                            "title": "Veicolo",
+                            "title_class": "title-xxlarge mb-1",
+                            "subtitle": "Seleziona o aggiungi il veicolo per il quale vuoi richiedere il permesso",
+                            "subtitle_class": "subtitle-small mb-0",
+                            "content": {
+                                "kind": "info-cards",
+                                "radio_name": "vehicles",
+                                "cards": [
+                                    {
+                                        "id": "vehicle1",
+                                        "title": "Mini Countryman F60",
+                                        "info": {
+                                            "label": "Targa",
+                                            "value": "CK 345 HB"
+                                        },
+                                        "toggle_label": "Mostra tutto",
+                                        "collapse_id": "collapse-benef-1",
+                                        "collapse_class": "accordion-collapse collapse show",
+                                        "header_id": "heading-collapse-benef-1",
+                                        "button_class": "collapsed accordion-button",
+                                        "groups": [
+                                            {
+                                                "class": "bg-white border border-light p-3 p-lg-4",
+                                                "header_class": "d-flex justify-content-between d-flex justify-content-end",
+                                                "title": "Dati veicolo",
+                                                "edit": {
+                                                    "label": "Modifica",
+                                                    "url": "#",
+                                                    "hidden": true
+                                                },
+                                                "rows": [
+                                                    {
+                                                        "label": "Marca",
+                                                        "value": "Mini"
+                                                    },
+                                                    {
+                                                        "label": "Modello",
+                                                        "value": "Countryman F60 SD"
+                                                    },
+                                                    {
+                                                        "label": "Intestatario",
+                                                        "value": "Mario Rossi"
+                                                    },
+                                                    {
+                                                        "label": "Tipo",
+                                                        "value": "Auto"
+                                                    },
+                                                    {
+                                                        "label": "Targa",
+                                                        "value": "CK 345 HB"
+                                                    },
+                                                    {
+                                                        "label": "Relazione",
+                                                        "value": "Uso esclusivo"
+                                                    },
+                                                    {
+                                                        "id": "vehicles-warning",
+                                                        "label": "Dichiarazione di concessione",
+                                                        "status": {
+                                                            "tone": "alert",
+                                                            "text": "Documento mancante",
+                                                            "icon": "it-error"
+                                                        }
+                                                    },
+                                                    {
+                                                        "id": "",
+                                                        "label": "Libretto di circolazione",
+                                                        "status": {
+                                                            "tone": "alert",
+                                                            "text": "Documento mancante",
+                                                            "icon": "it-error"
+                                                        }
+                                                    }
+                                                ],
+                                                "footer_button": {
+                                                    "label": "Aggiungi",
+                                                    "icon": "it-pencil",
+                                                    "modal": "#modal-vehicle-data"
+                                                }
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "id": "vehicle2",
+                                        "title": "Opel Zafira Life",
+                                        "info": {
+                                            "label": "Targa",
+                                            "value": "EF 123 JR"
+                                        },
+                                        "toggle_label": "Mostra tutto",
+                                        "collapse_id": "collapse-benef-2",
+                                        "collapse_class": "accordion-collapse collapse",
+                                        "header_id": "heading-collapse-benef-2",
+                                        "button_class": "collapsed accordion-button",
+                                        "groups": [
+                                            {
+                                                "class": "bg-white border border-light p-3 p-lg-4",
+                                                "header_class": "d-flex justify-content-between d-flex justify-content-end",
+                                                "title": "Opel Zafira Life",
+                                                "edit": {
+                                                    "label": "Modifica",
+                                                    "url": "#",
+                                                    "hidden": true
+                                                },
+                                                "rows": [
+                                                    {
+                                                        "label": "Intestatario",
+                                                        "value": "Mario Rossi"
+                                                    },
+                                                    {
+                                                        "label": "Tipo",
+                                                        "value": "Auto"
+                                                    },
+                                                    {
+                                                        "label": "Targa",
+                                                        "value": "EF 123 JR"
+                                                    },
+                                                    {
+                                                        "label": "Relazione",
+                                                        "value": "Uso esclusivo"
+                                                    },
+                                                    {
+                                                        "label": "Dichiarazione di concessione",
+                                                        "value": "dichiarazione_concessione.pdf",
+                                                        "status": {
+                                                            "tone": "success",
+                                                            "text": "Documento caricato con successo",
+                                                            "icon": "it-check-circle"
+                                                        }
+                                                    },
+                                                    {
+                                                        "label": "Libretto di circolazione",
+                                                        "value": "libretto_circolazione.pdf",
+                                                        "status": {
+                                                            "tone": "success",
+                                                            "text": "Documento caricato con successo",
+                                                            "icon": "it-check-circle"
+                                                        }
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    }
+                                ],
+                                "add": {
+                                    "label": "Aggiungi veicolo",
+                                    "icon": "it-plus-circle"
+                                },
+                                "legend": "Seleziona o aggiungi il veicolo per il quale vuoi richiedere il permesso"
+                            }
+                        }
+                    ],
+                    "nav": {
+                        "aria_label": "Step",
+                        "back": "Indietro",
+                        "save": {
+                            "long": "Salva Richiesta",
+                            "short": "Salva"
+                        },
+                        "next": {
+                            "label": "Avanti",
+                            "icon": "it-chevron-right",
+                            "class": "",
+                            "modal": "#modal-save-1"
+                        },
+                        "saved_message": "Richiesta salvata con successo"
+                    },
+                    "contacts": {
+                        "layout": "offset",
+                        "col": "col-12 col-lg-6",
+                        "row_class": "row",
+                        "main": {
+                            "title": "Contatta il comune",
+                            "items": [
+                                {
+                                    "icon": "it-help-circle",
+                                    "label": "Leggi le domande frequenti",
+                                    "url": "#"
+                                },
+                                {
+                                    "icon": "it-mail",
+                                    "label": "Richiedi assistenza",
+                                    "url": "#",
+                                    "element": "contacts"
+                                },
+                                {
+                                    "icon": "it-hearing",
+                                    "label": "Chiama il numero verde 05 0505",
+                                    "url": "#"
+                                },
+                                {
+                                    "icon": "it-calendar",
+                                    "label": "Prenota appuntamento",
+                                    "url": "#",
+                                    "element": "appointment-booking"
+                                }
+                            ]
+                        }
+                    },
+                    "modals": [
+                        {
+                            "type": "upload",
+                            "id": "modal-vehicle",
+                            "close_label": "Chiudi finestra modale",
+                            "title": "Documenti",
+                            "info": "I campi contraddistinti dal simbolo asterisco sono obbligatori",
+                            "form_id": "vehicle-form",
+                            "uploads": [
+                                {
+                                    "label": "Patente di guida",
+                                    "label_class": "cmp-upload__label",
+                                    "files": [
+                                        {
+                                            "state": "success",
+                                            "name": "mario_rossi-patente.pdf",
+                                            "visually_hidden": "File caricato:",
+                                            "remove_label": "Elimina il documento"
+                                        }
+                                    ],
+                                    "input_id": "upload-license-id",
+                                    "link_label": "Carica documento",
+                                    "info": "Caricare uno o più file in formato pdf, jpg, png con fronte e retro del documento"
+                                }
+                            ],
+                            "cancel": "Annulla",
+                            "save": "Salva"
+                        },
+                        {
+                            "type": "permessi-form",
+                            "id": "modal-vehicle-data",
+                            "close_label": "Chiudi finestra modale",
+                            "title": "Veicolo",
+                            "info": "I campi contraddistinti dal simbolo asterisco sono obbligatori",
+                            "form_id": "vehicle-data-form",
+                            "form_class": "text-black",
+                            "fields": [
+                                {
+                                    "type": "input",
+                                    "id": "accountholder",
+                                    "label": "Intestatario*",
+                                    "placeholder": "Mario Rossi",
+                                    "disabled": true,
+                                    "hint": "Campo non modificabile"
+                                },
+                                {
+                                    "type": "input",
+                                    "id": "vehicle-type",
+                                    "label": "Tipo*",
+                                    "placeholder": "Auto",
+                                    "disabled": true,
+                                    "hint": "Campo non modificabile"
+                                },
+                                {
+                                    "type": "input",
+                                    "id": "vehicle-model",
+                                    "label": "Modello*",
+                                    "placeholder": "Mini Countryman F60",
+                                    "disabled": true,
+                                    "hint": "Campo non modificabile"
+                                },
+                                {
+                                    "type": "input",
+                                    "id": "vehicle-plate",
+                                    "label": "Targa*",
+                                    "placeholder": "CK 345 HB",
+                                    "disabled": true,
+                                    "hint": "Campo non modificabile"
+                                },
+                                {
+                                    "type": "select",
+                                    "id": "relation-type",
+                                    "label": "Relazione*",
+                                    "placeholder": "Uso esclusivo",
+                                    "options": [
+                                        "Uso esclusivo",
+                                        "Uso esclusivo",
+                                        "Uso esclusivo",
+                                        "Uso esclusivo",
+                                        "Uso esclusivo"
+                                    ],
+                                    "hint": "Seleziona la tipologia di relazione"
+                                },
+                                {
+                                    "type": "upload",
+                                    "label": "Dichiarazione di concessione*",
+                                    "label_class": "cmp-upload__label",
+                                    "files": [],
+                                    "input_id": "upload-concession",
+                                    "link_label": "Carica documento",
+                                    "info": "Caricare uno o più file in formato pdf, jpg, png"
+                                },
+                                {
+                                    "type": "upload",
+                                    "label": "Libretto di circolazione*",
+                                    "label_class": "cmp-upload__label",
+                                    "files": [],
+                                    "input_id": "upload-vehicle-document",
+                                    "link_label": "Carica documento",
+                                    "info": "Caricare uno o più file in formato pdf, jpg, png"
+                                }
+                            ],
+                            "cancel": "Annulla",
+                            "save": "Salva"
+                        },
+                        {
+                            "type": "dialog",
+                            "id": "modal-save-1",
+                            "close_label": "Chiudi finestra modale",
+                            "header": {
+                                "title": "Salva i dati in area personale",
+                                "info": "Vuoi salvare le informazioni anche nella tua area personale? Potrai usarle anche in altre occasioni."
+                            },
+                            "footer": {
+                                "buttons": [
+                                    {
+                                        "label": "Salva nella mia area personale",
+                                        "variant": "primary",
+                                        "target": "#modal-save-2"
+                                    },
+                                    {
+                                        "label": "Salva solo per questa pratica",
+                                        "variant": "outline"
+                                    }
+                                ]
+                            }
+                        },
+                        {
+                            "type": "dialog",
+                            "id": "modal-save-2",
+                            "close_label": "Chiudi finestra modale",
+                            "header": {
+                                "title": "Salva i dati in area personale",
+                                "info": "Vuoi salvare le informazioni anche nella tua area personale? Potrai riutilizzarle in futuro per altre pratiche."
+                            },
+                            "success": {
+                                "icon": "it-check-circle",
+                                "message": "Salvataggio effettuato"
+                            }
+                        }
+                    ],
+                    "header_active": "all-services"
+                }
+            }
+        ],
+        "en": []
+    }
+}

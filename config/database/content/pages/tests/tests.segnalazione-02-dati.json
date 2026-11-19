@@ -1,0 +1,290 @@
+{
+    "id": "segnalazione-02-dati",
+    "slug": "segnalazione-02-dati",
+    "parent_slug": "tests",
+    "title": {
+        "it": "Dati di segnalazione",
+        "en": "Report data"
+    },
+    "layout": "test",
+    "description": "Step 2 della segnalazione disservizio: luogo, tipo di disservizio, titolo, dettagli e immagini. Contenuto da JSON, reso dal blocco report-step del tema Sixteen.",
+    "sidebar_blocks": {
+        "it": [],
+        "en": []
+    },
+    "footer_blocks": null,
+    "content_blocks": {
+        "it": [
+            {
+                "type": "report-step",
+                "data": {
+                    "view": "pub_theme::components.blocks.report-step.design-comuni",
+                    "layout": "sidebar",
+                    "title": "Segnalazione disservizio",
+                    "breadcrumb": {
+                        "items": [
+                            {
+                                "label": "Home",
+                                "url": "/it/tests/homepage"
+                            },
+                            {
+                                "label": "Servizi",
+                                "url": "#"
+                            }
+                        ],
+                        "current": "Segnalazione disservizio"
+                    },
+                    "steps": {
+                        "items": [
+                            {
+                                "label": "Informativa sulla privacy",
+                                "state": "confirmed"
+                            },
+                            {
+                                "label": "Dati di segnalazione",
+                                "state": "active"
+                            },
+                            {
+                                "label": "Riepilogo",
+                                "state": ""
+                            }
+                        ],
+                        "index": "2/3",
+                        "confirmed_label": "Confermato",
+                        "active_label": "Attivo",
+                        "required_notice": "I campi contraddistinti dal simbolo asterisco sono obbligatori"
+                    },
+                    "side_nav": {
+                        "suffix": "one",
+                        "title": "INFORMAZIONI RICHIESTE",
+                        "items": [
+                            {
+                                "anchor": "report-place",
+                                "label": "Luogo"
+                            },
+                            {
+                                "anchor": "report-info",
+                                "label": "Disservizio"
+                            },
+                            {
+                                "anchor": "report-author",
+                                "label": "Autore della segnalazione"
+                            }
+                        ]
+                    },
+                    "sections": [
+                        {
+                            "id": "report-place",
+                            "type": "place",
+                            "title": "Luogo",
+                            "subtitle": "Indica il luogo del disservizio",
+                            "card_class": "p-big p-lg-4",
+                            "field_id": "autocomplete-regioni",
+                            "placeholder": "Cerca un luogo*",
+                            "location_label": "Usa la tua posizione",
+                            "suggestions": [
+                                {
+                                    "text": "Abruzzo",
+                                    "link": "#"
+                                },
+                                {
+                                    "text": "Basilicata",
+                                    "link": "#"
+                                },
+                                {
+                                    "text": "Calabria",
+                                    "link": "#"
+                                },
+                                {
+                                    "text": "Campania",
+                                    "link": "#"
+                                },
+                                {
+                                    "text": "Emilia Romagna",
+                                    "link": "#"
+                                },
+                                {
+                                    "text": "Friuli Venezia Giulia",
+                                    "link": "#"
+                                },
+                                {
+                                    "text": "Lazio",
+                                    "link": "#"
+                                },
+                                {
+                                    "text": "Liguria",
+                                    "link": "#"
+                                },
+                                {
+                                    "text": "Lombardia",
+                                    "link": "#"
+                                },
+                                {
+                                    "text": "Marche",
+                                    "link": "#"
+                                },
+                                {
+                                    "text": "Molise",
+                                    "link": "#"
+                                },
+                                {
+                                    "text": "Piemonte",
+                                    "link": "#"
+                                },
+                                {
+                                    "text": "Puglia",
+                                    "link": "#"
+                                },
+                                {
+                                    "text": "Sardegna",
+                                    "link": "#"
+                                },
+                                {
+                                    "text": "Sicilia",
+                                    "link": "#"
+                                },
+                                {
+                                    "text": "Toscana",
+                                    "link": "#"
+                                },
+                                {
+                                    "text": "Trentino Alto Adige",
+                                    "link": "#"
+                                },
+                                {
+                                    "text": "Umbria",
+                                    "link": "#"
+                                },
+                                {
+                                    "text": "Valle d’Aosta",
+                                    "link": "#"
+                                },
+                                {
+                                    "text": "Veneto",
+                                    "link": "#"
+                                }
+                            ]
+                        },
+                        {
+                            "id": "report-info",
+                            "type": "fields",
+                            "title": "Disservizio",
+                            "required": true,
+                            "card_class": "p-big",
+                            "fields": [
+                                {
+                                    "type": "select",
+                                    "id": "inefficiency",
+                                    "label": "Tipo di disservizio**",
+                                    "placeholder": "Tipo di disservizio*",
+                                    "options": [
+                                        "Danneggiamento proprietà pubblica"
+                                    ]
+                                },
+                                {
+                                    "type": "text",
+                                    "id": "title",
+                                    "label": "Titolo*"
+                                },
+                                {
+                                    "type": "textarea",
+                                    "id": "details",
+                                    "label": "Dettagli**",
+                                    "help": "Inserire al massimo 200 caratteri"
+                                },
+                                {
+                                    "type": "upload",
+                                    "label": "Immagini",
+                                    "thumbnail": "img-disservizio-thumbnail.png",
+                                    "file_name": "6yhakandsahm413d8.jpg",
+                                    "remove_label": "elimina immagina caricata",
+                                    "button_aria": "Carica file per il disservizio",
+                                    "button_label": "Carica file",
+                                    "help": "Seleziona una o più immagini da allegare alla segnalazione"
+                                }
+                            ]
+                        },
+                        {
+                            "id": "report-author",
+                            "type": "person",
+                            "title": "Autore della segnalazione",
+                            "subtitle": "Informazione su di te",
+                            "card": {
+                                "class": "mt-3",
+                                "title": "Giulia Bianchi",
+                                "title_class": "big-title",
+                                "info": {
+                                    "label": "Codice Fiscale",
+                                    "value": "GLABNC72H25H501Y"
+                                },
+                                "header_id": "heading-collapse-parents",
+                                "toggle_id": "collapse-parents",
+                                "toggle_label": "Mostra tutto",
+                                "summary": {
+                                    "class": "has-border",
+                                    "title": "Contatti",
+                                    "edit": {
+                                        "label": "Modifica",
+                                        "url": "#",
+                                        "hidden": true
+                                    },
+                                    "footer_hidden": true,
+                                    "rows": [
+                                        {
+                                            "label": "Telefono",
+                                            "value": "+39 331 1234567"
+                                        },
+                                        {
+                                            "label": "Email",
+                                            "value": "mario.rossi@gmail.com"
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    ],
+                    "nav": {
+                        "aria_label": "Step",
+                        "back": "Indietro",
+                        "save": "Salva Richiesta",
+                        "save_short": "Salva",
+                        "next": "Avanti",
+                        "saved_message": "Richiesta salvata con successo"
+                    },
+                    "contacts": {
+                        "layout": "narrow",
+                        "main": {
+                            "title": "Contatta il comune",
+                            "items": [
+                                {
+                                    "icon": "it-help-circle",
+                                    "label": "Leggi le domande frequenti",
+                                    "url": "#"
+                                },
+                                {
+                                    "icon": "it-mail",
+                                    "label": "Richiedi assistenza",
+                                    "url": "#",
+                                    "element": "contacts"
+                                },
+                                {
+                                    "icon": "it-hearing",
+                                    "label": "Chiama il numero verde 05 0505",
+                                    "url": "#"
+                                },
+                                {
+                                    "icon": "it-calendar",
+                                    "label": "Prenota appuntamento",
+                                    "url": "#",
+                                    "element": "appointment-booking"
+                                }
+                            ]
+                        }
+                    },
+                    "header_active": "all-services"
+                }
+            }
+        ],
+        "en": []
+    }
+}

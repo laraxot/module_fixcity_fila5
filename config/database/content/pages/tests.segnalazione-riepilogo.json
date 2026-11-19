@@ -1,0 +1,22 @@
+{
+    "id": "tests.segnalazione-riepilogo",
+    "slug": "tests.segnalazione-riepilogo",
+    "parent_slug": "tests",
+    "title": {"it": "Riepilogo - Segnalazione disservizio", "en": "Summary - Report a problem"},
+    "layout": "test",
+    "description": "Step 3 della segnalazione disservizio: riepilogo dei dati inseriti con checkbox dei termini.",
+    "content_blocks": {
+        "it": [
+            {
+                "type": "segnalazione-03-riepilogo",
+                "data": {
+                    "view": "pub_theme::components.blocks.flow.segnalazione.03-riepilogo",
+                    "title": "Riepilogo"
+                }
+            }
+        ],
+        "en": []
+    },
+    "sidebar_blocks": {"it": [], "en": []},
+    "footer_blocks": null
+}

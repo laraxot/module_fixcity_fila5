@@ -1,0 +1,72 @@
+{
+  "meta": {
+    "name": "Design Comuni static templates — FixCity adaptation",
+    "description": "Design DNA extracted from the official Design Comuni templates, with emphasis on homepage, services directory, service detail and public reports.",
+    "source_references": [
+      "https://italia.github.io/design-comuni-pagine-statiche/index.html",
+      "https://italia.github.io/design-comuni-pagine-statiche/servizi/index.html",
+      "https://italia.github.io/design-comuni-pagine-statiche/sito/servizi.html",
+      "https://italia.github.io/design-comuni-pagine-statiche/sito/servizi-categoria.html",
+      "https://italia.github.io/design-comuni-pagine-statiche/sito/servizio-dettaglio.html",
+      "https://italia.github.io/design-comuni-pagine-statiche/sito/segnalazioni-elenco.html",
+      "https://italia.github.io/design-comuni-pagine-statiche/sito/segnalazione-dettaglio.html"
+    ],
+    "created_at": "2026-09-27"
+  },
+  "design_system": {
+    "color": {
+      "palette_type": "complementary",
+      "primary": {"hex": "#0066CC", "role": "institutional actions and links"},
+      "secondary": {"hex": "#17324D", "role": "deep institutional text and footer"},
+      "accent": {"hex": "#E94F35", "role": "status and attention emphasis"},
+      "neutral": {"scale": ["#FFFFFF", "#F5F5F5", "#E6E6E6", "#5C6F82", "#17324D"], "usage": "white surfaces, soft section bands, dividers, muted metadata, high-contrast text"},
+      "semantic": {"success": "#008758", "warning": "#A66300", "error": "#D9364F", "info": "#007A9E"},
+      "surface": {"background": "#FFFFFF", "card": "#FFFFFF", "elevated": "#F5F5F5"},
+      "contrast_strategy": "high contrast dark-on-light with institutional blue reserved for actions"
+    },
+    "typography": {
+      "type_scale": {
+        "display": {"size": "3rem", "weight": 700, "line_height": 1.15, "tracking": "-0.02em"},
+        "heading_1": {"size": "2.5rem", "weight": 700, "line_height": 1.2, "tracking": "-0.01em"},
+        "heading_2": {"size": "2rem", "weight": 700, "line_height": 1.25, "tracking": "0"},
+        "heading_3": {"size": "1.5rem", "weight": 700, "line_height": 1.3, "tracking": "0"},
+        "body": {"size": "1rem", "weight": 400, "line_height": 1.5, "tracking": "0"},
+        "body_small": {"size": "0.875rem", "weight": 400, "line_height": 1.45, "tracking": "0"},
+        "caption": {"size": "0.75rem", "weight": 400, "line_height": 1.35, "tracking": "0.01em"},
+        "overline": {"size": "0.75rem", "weight": 700, "line_height": 1.2, "tracking": "0.08em"}
+      },
+      "font_families": {"heading": "Titillium Web, sans-serif", "body": "Titillium Web, sans-serif", "mono": "Roboto Mono, monospace"},
+      "font_style_notes": "Humanist sans-serif, generous line height, strong heading hierarchy and readable long-form content"
+    },
+    "spacing": {"base_unit": "4px", "scale": [4, 8, 12, 16, 24, 32, 48, 64, 80], "content_density": "comfortable", "section_rhythm": "large section separation with compact card internals"},
+    "layout": {"grid_system": "12-column responsive Bootstrap Italia grid", "max_content_width": "1200px", "columns": 12, "gutter": "24px", "breakpoints": ["576px", "768px", "992px", "1200px"], "alignment_tendency": "strict grid with left-aligned content"},
+    "shape": {"border_radius": {"small": "4px", "medium": "8px", "large": "12px", "pill": "999px"}, "border_usage": "subtle 1px borders on cards and inputs", "divider_style": "1px neutral divider"},
+    "elevation": {"shadow_style": "soft diffused", "levels": {"low": "0 1px 2px rgba(0,0,0,.08)", "medium": "0 4px 12px rgba(0,0,0,.12)", "high": "0 12px 32px rgba(0,0,0,.16)"}, "depth_cues": "border and restrained shadow, never decoration-first"},
+    "iconography": {"style": "outlined institutional icons", "stroke_weight": "2px", "size_scale": [16, 20, 24, 32], "preferred_set": "Bootstrap Italia / Heroicons outline"},
+    "motion": {"easing": "ease-out", "duration_scale": {"micro": "120ms", "normal": "220ms", "macro": "350ms"}, "entrance_pattern": "none or subtle fade-up", "exit_pattern": "immediate state change", "philosophy": "minimal functional"},
+    "components": {"button_style": "solid primary and outlined secondary, 44px minimum target", "input_style": "high-contrast bordered inputs with explicit labels", "card_style": "white bordered cards with clear title, metadata and action", "navigation_pattern": "skip links, institutional header, breadcrumbs and footer taxonomy", "modal_style": "lightweight focus-managed detail overlay", "list_style": "scannable alphabetic or chronological lists with filters", "component_notes": "Every page ends with feedback, contact/help and structured footer navigation"}
+  },
+  "design_style": {
+    "aesthetic": {"mood": ["trustworthy", "calm", "inclusive", "practical"], "visual_metaphor": "a clear civic service desk", "era_influence": "contemporary public-sector web", "genre": "accessible institutional service portal", "personality_traits": ["transparent", "helpful", "meticulous", "non-commercial"], "adjectives": ["structured", "legible", "welcoming", "action-oriented"]},
+    "visual_language": {"complexity": "moderate", "ornamentation": "subtle accents", "whitespace_usage": "generous around headings and sections", "visual_weight_distribution": "content-first with restrained colored bands", "focal_strategy": "progressive reveal from task to detail", "contrast_level": "high", "texture_usage": "none"},
+    "composition": {"hierarchy_method": "typographic hierarchy and spatial isolation", "balance_type": "symmetric", "flow_direction": "top-to-bottom task progression", "grouping_strategy": "semantic sections with repeated card/list patterns", "negative_space_role": "separates tasks and reduces cognitive load"},
+    "imagery": {"photo_treatment": "documentary and optional", "illustration_style": "simple civic illustration", "graphic_elements": "icons, maps and status markers", "pattern_usage": "none", "image_shape": "rectangular with restrained radius"},
+    "interaction_feel": {"feedback_style": "explicit inline status and validation", "hover_behavior": "subtle elevation and color shift", "transition_personality": "snappy", "loading_style": "content-preserving skeleton or spinner", "microinteraction_density": "low"},
+    "brand_voice_in_ui": {"tone": "clear and reassuring", "formality": "formal but plain language", "cta_style": "direct imperative", "empty_state_approach": "explain what is missing and offer the next action", "error_tone": "specific, calm and corrective"}
+  },
+  "visual_effects": {
+    "overview": {"effect_intensity": "subtle-accent", "performance_tier": "lightweight", "fallback_strategy": "static content and accessible controls", "primary_technology": "CSS only"},
+    "background_effects": {"type": "none", "description": "Solid institutional bands and neutral surfaces", "technology": "CSS", "params": {"color_palette": ["#0066CC", "#FFFFFF", "#F5F5F5"], "speed": 0, "density": 0, "opacity": 1, "blend_mode": "normal"}},
+    "particle_systems": {"enabled": false, "type": "none", "description": "No particles", "technology": "none", "params": {"count": 0, "shape": "none", "size_range": "none", "movement_pattern": "none", "color_behavior": "none", "interaction": "none", "spawn_area": "none"}},
+    "3d_elements": {"enabled": false, "type": "none", "description": "No 3D elements", "technology": "none", "params": {"renderer": "none", "lighting": "none", "camera": "none", "materials": "none", "geometry": "none", "post_processing": "none", "interaction_model": "none"}},
+    "shader_effects": {"enabled": false, "type": "none", "description": "No shaders", "technology": "none", "params": {"uniforms": "none", "vertex_manipulation": "none", "fragment_output": "none", "noise_type": "none", "distortion": "none"}},
+    "scroll_effects": {"parallax": {"enabled": false, "layers": 0, "depth_range": "none", "speed_curve": "none"}, "scroll_triggered_animations": {"enabled": false, "trigger_points": "none", "animation_type": "none", "scrub_behavior": "none"}, "scroll_morphing": {"enabled": false, "description": "No scroll morphing"}},
+    "text_effects": {"type": "none", "description": "Static readable text", "technology": "CSS", "params": {"split_strategy": "none", "animation_per_unit": "none", "stagger": "none", "effect_style": "none"}},
+    "cursor_effects": {"enabled": false, "type": "none", "description": "No custom cursor", "params": {"shape": "none", "size": "none", "blend_mode": "none", "trail": "none", "interaction_zone": "none"}},
+    "image_effects": {"type": "none", "description": "Images remain documentary and stable", "technology": "CSS", "params": {"filter_pipeline": "none", "hover_transform": "none", "reveal_animation": "none", "distortion_type": "none"}},
+    "glassmorphism_neumorphism": {"enabled": false, "style": "none", "params": {"blur_radius": "0", "transparency": "0", "border_treatment": "none", "shadow_type": "none", "light_source_angle": "none"}},
+    "canvas_drawings": {"enabled": false, "type": "none", "description": "No canvas drawings", "technology": "none", "params": {"draw_method": "none", "animation_loop": "none", "color_scheme": "none", "responsiveness": "none", "interaction": "none"}},
+    "svg_animations": {"enabled": false, "type": "none", "description": "Static icons and maps only", "params": {"animation_method": "none", "path_morphing": "none", "stroke_animation": "none", "filter_effects": "none"}},
+    "composite_notes": "The reference intentionally avoids visual effects that compete with public-service tasks. FixCity may use map interaction and restrained card hover states, but must preserve keyboard access, reduced-motion behavior and fast rendering."
+  }
+}

@@ -1,0 +1,114 @@
+{
+    "id": "tests",
+    "title": {"it": "Design Comuni — Indice template", "en": "Design Comuni — Template index"},
+    "slug": "tests",
+    "layout": "test",
+    "description": "Pagina indice dei template Design Comuni replicati nel tema Sixteen.",
+    "content_blocks": {
+        "it": [
+            {
+                "type": "breadcrumb",
+                "data": {
+                    "view": "pub_theme::components.blocks.breadcrumb.default",
+                    "items": [
+                        {"label": "Home", "url": "{{ route('home') }}"},
+                        {"label": "Design Comuni", "is_current": true}
+                    ]
+                }
+            },
+            {
+                "type": "hero",
+                "data": {
+                    "view": "pub_theme::components.blocks.hero.default",
+                    "eyebrow": "Design Comuni v2.4.0",
+                    "heading": "Template del modello per i comuni",
+                    "intro": "Replica dei template HTML del modello Design Comuni (https://italia.github.io/design-comuni-pagine-statiche/) usando TailwindCSS + Alpine.js + Lit + DaisyUI. Nessun Bootstrap Italia runtime.",
+                    "primary_label": "Homepage",
+                    "primary_url": "{{ route('tests.view', ['slug' => 'homepage']) }}",
+                    "secondary_label": "Argomenti",
+                    "secondary_url": "{{ route('tests.view', ['slug' => 'argomenti']) }}"
+                }
+            },
+            {
+                "type": "indice",
+                "data": {
+                    "view": "pub_theme::components.blocks.template-index",
+                    "title": "I templates HTML del modello per i comuni",
+                    "version_label": "v2.4.0",
+                    "version_url": "https://github.com/italia/design-comuni-pagine-statiche/releases/latest",
+                    "navigation": [
+                        {"label": "Sito", "url": "#", "active": true},
+                        {"label": "Flussi di servizio", "url": "{{ route('tests.view', ['slug' => 'servizi']) }}"}
+                    ],
+                    "tabs": [
+                        {
+                            "id": "generali",
+                            "label": "Generali",
+                            "active": true,
+                            "pages": [
+                                {"name": "Homepage", "description": "La homepage del sito comunale", "url": "{{ route('tests.view', ['slug' => 'homepage']) }}", "file": "sito/homepage.html"},
+                                {"name": "Domande frequenti (FAQ)", "description": "La pagina per la presentazione delle domande frequenti (FAQ)", "url": "{{ route('tests.view', ['slug' => 'domande-frequenti']) }}", "file": "sito/domande-frequenti.html"},
+                                {"name": "Risultati di ricerca", "description": "La pagina per la presentazione dei risultati di ricerca", "url": "{{ route('tests.view', ['slug' => 'risultati-ricerca']) }}", "file": "sito/risultati-ricerca.html"},
+                                {"name": "Argomenti", "description": "La pagina con la lista di tutti gli argomenti a cui sono associati i contenuti del sito", "url": "{{ route('tests.view', ['slug' => 'argomenti']) }}", "file": "sito/argomenti.html"},
+                                {"name": "Argomento", "description": "La pagina di presentazione dei contenuti di uno specifico argomento", "url": "{{ route('tests.view', ['slug' => 'argomento']) }}", "file": "sito/argomento.html"},
+                                {"name": "Lista contenuti/risorse", "description": "Il template di una pagina lista di secondo o terzo livello", "url": "{{ route('tests.view', ['slug' => 'lista-risorse']) }}", "file": "sito/lista-risorse.html"},
+                                {"name": "Lista categorie", "description": "Il template di una pagina lista categorie di secondo o terzo livello", "url": "{{ route('tests.view', ['slug' => 'lista-categorie']) }}", "file": "sito/lista-categorie.html"},
+                                {"name": "Lista risorse e categorie", "description": "Il template di una pagina lista di secondo o terzo livello che riunisce sia risorse che categorie", "url": "{{ route('tests.view', ['slug' => 'lista-risorse-categorie']) }}", "file": "sito/lista-risorse-categorie.html"},
+                                {"name": "Mappa del sito", "description": "Il template della pagina mappa del sito", "url": "{{ route('tests.view', ['slug' => 'mappa-sito']) }}", "file": "sito/mappa-sito.html"}
+                            ]
+                        },
+                        {
+                            "id": "sito",
+                            "label": "Sito",
+                            "active": false,
+                            "pages": [
+                                {"group": "Amministrazione", "pages": [
+                                    {"name": "Amministrazione", "description": "La pagina lista di primo livello per la sezione Amministrazione", "url": "{{ route('tests.view', ['slug' => 'amministrazione']) }}", "file": "sito/amministrazione.html"},
+                                    {"name": "Documenti e dati", "description": "La pagina principale della sottosezione Documenti e dati", "url": "{{ route('tests.view', ['slug' => 'documenti-dati']) }}", "file": "sito/documenti-dati.html"}
+                                ]},
+                                {"group": "Novità", "pages": [
+                                    {"name": "Novità", "description": "La pagina lista di primo livello per la sezione Novità", "url": "{{ route('tests.view', ['slug' => 'novita']) }}", "file": "sito/novita.html"},
+                                    {"name": "Novita-dettaglio", "description": "La pagina di dettaglio per le notizie, i comunicati e gli avvisi", "url": "{{ route('tests.view', ['slug' => 'novita-dettaglio']) }}", "file": "sito/novita-dettaglio.html"}
+                                ]},
+                                {"group": "Servizi", "pages": [
+                                    {"name": "Servizi", "description": "La pagina lista di primo livello per la sezione Servizi", "url": "{{ route('tests.view', ['slug' => 'servizi']) }}", "file": "sito/servizi.html"},
+                                    {"name": "Categoria di servizio", "description": "La pagina dei servizi appartenenti a una specifica categoria", "url": "{{ route('tests.view', ['slug' => 'servizi-categoria']) }}", "file": "sito/servizi-categoria.html"},
+                                    {"name": "Scheda servizio", "description": "La pagina di dettaglio di un servizio specifico", "url": "{{ route('tests.view', ['slug' => 'servizio-dettaglio']) }}", "file": "sito/servizio-dettaglio.html"}
+                                ]},
+                                {"group": "Vivere il Comune", "pages": [
+                                    {"name": "Eventi", "description": "La pagina lista di primo livello per la sezione Vivere il Comune", "url": "{{ route('tests.view', ['slug' => 'eventi']) }}", "file": "sito/eventi.html"},
+                                    {"name": "Evento", "description": "La pagina di dettaglio di un evento", "url": "{{ route('tests.view', ['slug' => 'evento-dettaglio']) }}", "file": "sito/evento-dettaglio.html"}
+                                ]},
+                                {"group": "Prenotazione Appuntamento", "pages": [
+                                    {"name": "Step 1 - Selezione ufficio (1 di 2)", "url": "{{ route('tests.view', ['slug' => 'appuntamento-01-ufficio']) }}", "file": "sito/appuntamento-01-ufficio.html"},
+                                    {"name": "Step 1 - Selezione ufficio (2 di 2)", "url": "{{ route('tests.view', ['slug' => 'appuntamento-01-ufficio-luogo']) }}", "file": "sito/appuntamento-01-ufficio-luogo.html"},
+                                    {"name": "Step 2 - Scelta appuntamento", "url": "{{ route('tests.view', ['slug' => 'appuntamento-02-data-orario']) }}", "file": "sito/appuntamento-02-data-orario.html"},
+                                    {"name": "Step 3 - Dettagli", "url": "{{ route('tests.view', ['slug' => 'appuntamento-03-dettagli']) }}", "file": "sito/appuntamento-03-dettagli.html"},
+                                    {"name": "Step 4 - Richiedente (non autenticato)", "url": "{{ route('tests.view', ['slug' => 'appuntamento-04-richiedente']) }}", "file": "sito/appuntamento-04-richiedente.html"},
+                                    {"name": "Step 5 - Riepilogo", "url": "{{ route('tests.view', ['slug' => 'appuntamento-05-riepilogo']) }}", "file": "sito/appuntamento-05-riepilogo.html"},
+                                    {"name": "Step 6 - Conferma", "url": "{{ route('tests.view', ['slug' => 'appuntamento-06-conferma']) }}", "file": "sito/appuntamento-06-conferma.html"}
+                                ]},
+                                {"group": "Richiesta Assistenza", "pages": [
+                                    {"name": "Step 1 - Inserimento dati", "url": "{{ route('tests.view', ['slug' => 'assistenza-01-dati']) }}", "file": "sito/assistenza-01-dati.html"},
+                                    {"name": "Step 2 - Conferma", "url": "{{ route('tests.view', ['slug' => 'assistenza-02-conferma']) }}", "file": "sito/assistenza-02-conferma.html"}
+                                ]},
+                                {"group": "Segnalazione Disservizio", "pages": [
+                                    {"name": "Scheda segnalazione", "url": "{{ route('tests.view', ['slug' => 'segnalazione-dettaglio']) }}", "file": "sito/segnalazione-dettaglio.html"},
+                                    {"name": "Step 1 - Privacy", "url": "{{ route('tests.view', ['slug' => 'segnalazione-01-privacy']) }}", "file": "sito/segnalazione-01-privacy.html"},
+                                    {"name": "Step 2 - Dati", "url": "{{ route('tests.view', ['slug' => 'segnalazione-02-dati']) }}", "file": "sito/segnalazione-02-dati.html"},
+                                    {"name": "Step 3 - Riepilogo", "url": "{{ route('tests.view', ['slug' => 'segnalazione-03-riepilogo']) }}", "file": "sito/segnalazione-03-riepilogo.html"},
+                                    {"name": "Step 4 - Conferma", "url": "{{ route('tests.view', ['slug' => 'segnalazione-04-conferma']) }}", "file": "sito/segnalazione-04-conferma.html"},
+                                    {"name": "Area personale", "url": "{{ route('tests.view', ['slug' => 'segnalazione-area-personale']) }}", "file": "sito/segnalazione-area-personale.html"},
+                                    {"name": "Elenco segnalazioni", "url": "{{ route('tests.view', ['slug' => 'segnalazioni-elenco']) }}", "file": "sito/segnalazioni-elenco.html"}
+                                ]}
+                            ]
+                        }
+                    ]
+                }
+            }
+        ],
+        "en": []
+    },
+    "sidebar_blocks": {"it": [], "en": []},
+    "footer_blocks": null
+}

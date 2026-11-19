@@ -1,0 +1,360 @@
+{
+    "id": "tests.eventi",
+    "title": {
+        "it": "Eventi",
+        "en": "Events"
+    },
+    "slug": "tests.eventi",
+    "middleware": null,
+    "content": null,
+    "description": "Vivere il comune: eventi e luoghi in evidenza. Contenuto da JSON, reso dal blocco events-page del tema Sixteen.",
+    "layout": "test",
+    "blocks": null,
+    "content_blocks": {
+        "it": [
+            {
+                "type": "events-page",
+                "data": {
+                    "view": "pub_theme::components.blocks.events-page.design-comuni",
+                    "title": "Vivere il comune",
+                    "breadcrumb": {
+                        "items": [
+                            {
+                                "label": "Home",
+                                "url": "/it/tests/homepage"
+                            }
+                        ],
+                        "current": "Vivere il comune"
+                    },
+                    "hero": {
+                        "text": "Tutti gli eventi, le iniziative e i luoghi d’interesse per scoprire e vivere il territorio comunale.",
+                        "image": {
+                            "file": "roma-colosseo.png",
+                            "title": "titolo immagine",
+                            "alt": "descrizione immagine"
+                        },
+                        "caption": "Colosseo, Roma. Foto di Griffin Wooldridge."
+                    },
+                    "card": {
+                        "read_more": "Leggi di più",
+                        "read_more_aria": "Leggi di più sulla pagina di %s",
+                        "read_more_hidden": "su Lorem ipsum dolor sit amet, consectetur adipiscing elit…"
+                    },
+                    "sections": [
+                        {
+                            "style": "grey",
+                            "title": "Eventi in evidenza",
+                            "items": [
+                                {
+                                    "image": {
+                                        "file": "eventi-estate.png",
+                                        "title": "titolo immagine",
+                                        "alt": "descrizione immagine"
+                                    },
+                                    "category": {
+                                        "label": "Categoria",
+                                        "url": "#"
+                                    },
+                                    "title": "Un'estate indimenticabile",
+                                    "url": "",
+                                    "text": "Una iniziativa di invito alla lettura nel parco della Vittoria, dove verrà presentato il concorso “vivere il comune”",
+                                    "read_more_url": "#",
+                                    "calendar": {
+                                        "date": "26",
+                                        "day": "Agosto"
+                                    }
+                                },
+                                {
+                                    "image": {
+                                        "file": "eventi-biblioteca-parco.png",
+                                        "title": "titolo immagine",
+                                        "alt": "descrizione immagine"
+                                    },
+                                    "category": {
+                                        "label": "Categoria",
+                                        "url": "#"
+                                    },
+                                    "title": "La biblioteca nel parco",
+                                    "url": "",
+                                    "text": "Una iniziativa di invito alla lettura nel parco della Vittoria, dove verrà presentato il concorso “vivere il comune”.",
+                                    "read_more_url": "#",
+                                    "calendar": {
+                                        "date": "03",
+                                        "day": "Luglio"
+                                    }
+                                },
+                                {
+                                    "image": {
+                                        "file": "eventi-festa-associazioni.png",
+                                        "title": "titolo immagine",
+                                        "alt": "descrizione immagine"
+                                    },
+                                    "category": {
+                                        "label": "Categoria",
+                                        "url": "#"
+                                    },
+                                    "title": "Festa delle associazioni della sesta circoscrizione",
+                                    "url": "",
+                                    "text": "Le associazioni della sesta circoscrizione si troveranno nell’auditorium della musica per presentare le attività dell’anno in corso e per fare festa.",
+                                    "read_more_url": "#",
+                                    "calendar": {
+                                        "date": "10",
+                                        "day": "Giugno"
+                                    }
+                                },
+                                {
+                                    "image": {
+                                        "file": "eventi-celluloide-festival.png",
+                                        "title": "titolo immagine",
+                                        "alt": "descrizione immagine"
+                                    },
+                                    "category": {
+                                        "label": "Festival",
+                                        "url": "#"
+                                    },
+                                    "title": "Celluloide film festival",
+                                    "url": "",
+                                    "text": "Sono più di 120 i film in programma: 27 anteprime mondiali, 13 internazionali e 37 italiane, ben oltre metà del programma sarà composta da film mai visti prima in Italia",
+                                    "read_more_url": "#",
+                                    "calendar": {
+                                        "date": "30",
+                                        "day": "Maggio"
+                                    },
+                                    "date": "18 MAG 2018"
+                                },
+                                {
+                                    "image": {
+                                        "file": "eventi-street-art.png",
+                                        "title": "titolo immagine",
+                                        "alt": "descrizione immagine"
+                                    },
+                                    "category": {
+                                        "label": "Categoria",
+                                        "url": "#"
+                                    },
+                                    "title": "Street art e murales in città",
+                                    "url": "",
+                                    "text": "Lo sapevi che il nostro Territorio, se imbocchi il vicolo giusto, nasconde opere di street art e bellissimi murales? Scopri con noi dove poterli ammirare.",
+                                    "read_more_url": "#",
+                                    "calendar": {
+                                        "date": "27",
+                                        "day": "Aprile"
+                                    }
+                                },
+                                {
+                                    "image": {
+                                        "file": "eventi-tram-via.png",
+                                        "title": "titolo immagine",
+                                        "alt": "descrizione immagine"
+                                    },
+                                    "category": {
+                                        "label": "Categoria",
+                                        "url": "#"
+                                    },
+                                    "title": "Tramvia, dibattito aperto a tutti i cittadini",
+                                    "url": "",
+                                    "text": "In questi giorni si sono aperti o apriranno cantieri che prevedono lavori di risistemazione del fondo stradale, di riqualificazione di spazi verdi..",
+                                    "read_more_url": "#",
+                                    "calendar": {
+                                        "date": "16",
+                                        "day": "Marzo"
+                                    }
+                                }
+                            ],
+                            "button": {
+                                "label": "Tutti gli eventi",
+                                "url": "#",
+                                "element": "live-button-events"
+                            }
+                        },
+                        {
+                            "style": "plain",
+                            "title": "Luoghi in evidenza",
+                            "items": [
+                                {
+                                    "image": {
+                                        "file": "luoghi-castello-1.png",
+                                        "title": "titolo immagine",
+                                        "alt": "descrizione immagine"
+                                    },
+                                    "category": {
+                                        "label": "Categoria",
+                                        "url": "#"
+                                    },
+                                    "title": "Il castello normanno",
+                                    "url": "",
+                                    "text": "Sorta a metà Seicento come residenza di caccia di Carlo Emanuele II, che fece del centrale Salone di Diana uno snodo ideale fra palazzo e giardini.",
+                                    "read_more_url": "#"
+                                },
+                                {
+                                    "image": {
+                                        "file": "luoghi-castello-2.png",
+                                        "title": "titolo immagine",
+                                        "alt": "descrizione immagine"
+                                    },
+                                    "category": {
+                                        "label": "Categoria",
+                                        "url": "#"
+                                    },
+                                    "title": "Il castello normanno",
+                                    "url": "",
+                                    "text": "Scopri il programma degli eventi dell’estate, fra feste, cultura, attività all’aperto e momenti di socializzazione.",
+                                    "read_more_url": "#"
+                                },
+                                {
+                                    "image": {
+                                        "file": "luoghi-castello-3.png",
+                                        "title": "titolo immagine",
+                                        "alt": "descrizione immagine"
+                                    },
+                                    "category": {
+                                        "label": "Categoria",
+                                        "url": "#"
+                                    },
+                                    "title": "Il castello normanno",
+                                    "url": "",
+                                    "text": "Scopri il programma degli eventi dell’estate, fra feste, cultura, attività all’aperto e momenti di socializzazione.",
+                                    "read_more_url": "#"
+                                },
+                                {
+                                    "image": {
+                                        "file": "luoghi-gipsoteca.png",
+                                        "title": "titolo immagine",
+                                        "alt": "descrizione immagine"
+                                    },
+                                    "category": {
+                                        "label": "Categoria",
+                                        "url": "#"
+                                    },
+                                    "title": "La Gipsoteca canoviana",
+                                    "url": "",
+                                    "text": "Il complesso è situato a Possagno e contiene i modelli in gesso e i bozzetti in argilla dello scultore neoclassico Antonio Canova.",
+                                    "read_more_url": "#",
+                                    "date": "18 MAG 2018"
+                                },
+                                {
+                                    "image": {
+                                        "file": "luoghi-tomba.png",
+                                        "title": "titolo immagine",
+                                        "alt": "descrizione immagine"
+                                    },
+                                    "category": {
+                                        "label": "Categoria",
+                                        "url": "#"
+                                    },
+                                    "title": "Tomba Brion",
+                                    "url": "",
+                                    "text": "La Tomba Brion si trova in via Brioni a San Vito di Altivole. Luogo estremamente affascinante e carico di simbologia, si può raggiungere solamente in auto.",
+                                    "read_more_url": "#"
+                                },
+                                {
+                                    "image": {
+                                        "file": "luoghi-castello-4.png",
+                                        "title": "titolo immagine",
+                                        "alt": "descrizione immagine"
+                                    },
+                                    "category": {
+                                        "label": "Categoria",
+                                        "url": "#"
+                                    },
+                                    "title": "Il castello normanno",
+                                    "url": "",
+                                    "text": "Scopri il programma degli eventi dell’estate, fra feste, cultura, attività all’aperto e momenti di socializzazione.",
+                                    "read_more_url": "#"
+                                }
+                            ],
+                            "button": {
+                                "label": "Tutti i luoghi",
+                                "url": "#",
+                                "element": "live-button-locations"
+                            }
+                        }
+                    ],
+                    "feedback": {
+                        "title": "Quanto sono chiare le informazioni su questa pagina?",
+                        "legend": "Valuta da 1 a 5 stelle la pagina",
+                        "star_label": "Valuta %d stelle su 5",
+                        "thanks": "Grazie, il tuo parere ci aiuterà a migliorare il servizio!",
+                        "positive": {
+                            "question": "Quali sono stati gli aspetti che hai preferito?",
+                            "answers": [
+                                "Le indicazioni erano chiare",
+                                "Le indicazioni erano complete",
+                                "Capivo sempre che stavo procedendo correttamente",
+                                "Non ho avuto problemi tecnici",
+                                "Altro"
+                            ]
+                        },
+                        "negative": {
+                            "question": "Dove hai incontrato le maggiori difficoltà?",
+                            "answers": [
+                                "A volte le indicazioni non erano chiare",
+                                "A volte le indicazioni non erano complete",
+                                "A volte non capivo se stavo procedendo correttamente",
+                                "Ho avuto problemi tecnici",
+                                "Altro"
+                            ]
+                        },
+                        "detail": {
+                            "question": "Vuoi aggiungere altri dettagli?",
+                            "label": "Dettaglio",
+                            "help": "Inserire massimo 200 caratteri"
+                        },
+                        "back": "Indietro",
+                        "next": "Avanti"
+                    },
+                    "contacts": {
+                        "main": {
+                            "title": "Contatta il comune",
+                            "items": [
+                                {
+                                    "icon": "it-help-circle",
+                                    "label": "Leggi le domande frequenti",
+                                    "url": "#"
+                                },
+                                {
+                                    "icon": "it-mail",
+                                    "label": "Richiedi assistenza",
+                                    "url": "#",
+                                    "element": "contacts"
+                                },
+                                {
+                                    "icon": "it-hearing",
+                                    "label": "Chiama il numero verde 05 0505",
+                                    "url": "#"
+                                },
+                                {
+                                    "icon": "it-calendar",
+                                    "label": "Prenota appuntamento",
+                                    "url": "#",
+                                    "element": "appointment-booking"
+                                }
+                            ]
+                        },
+                        "problems": {
+                            "title": "Problemi in città",
+                            "items": [
+                                {
+                                    "icon": "it-map-marker-circle",
+                                    "label": "Segnala disservizio",
+                                    "url": "#"
+                                }
+                            ]
+                        }
+                    },
+                    "header_active": "live"
+                }
+            }
+        ],
+        "en": []
+    },
+    "sidebar_blocks": {
+        "it": [],
+        "en": []
+    },
+    "footer_blocks": null,
+    "created_at": null,
+    "updated_at": "2026-10-13T09:46:27.000000Z",
+    "created_by": null,
+    "updated_by": null
+}

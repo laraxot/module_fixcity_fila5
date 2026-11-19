@@ -1,0 +1,176 @@
+{
+  "id": "sixteen-search-modal",
+  "slug": "search-modal",
+  "name": {
+    "it": "Modale di ricerca FixCity",
+    "en": "FixCity search modal",
+    "de": "FixCity-Suchfenster",
+    "es": "Ventana de búsqueda FixCity"
+  },
+  "blocks": {
+    "it": [
+      {
+        "type": "search-modal",
+        "slug": "design-comuni-search-modal",
+        "data": {
+          "view": "pub_theme::components.sections.search-modal.design-comuni",
+          "title": "Cerca",
+          "back_label": "Chiudi e torna alla pagina precedente",
+          "label": "Cerca nel sito",
+          "placeholder": "Cerca nel sito: segnalazioni, notizie, eventi e pagine",
+          "button": "Cerca",
+          "suggestions_title": "FORSE STAVI CERCANDO",
+          "suggestions": [
+            {
+              "label": "Elenco segnalazioni pubbliche",
+              "url": "/tickets"
+            },
+            {
+              "label": "Segnala un problema",
+              "url": "/tickets/create"
+            },
+            {
+              "label": "Traccia una segnalazione",
+              "url": "/tickets/track"
+            },
+            {
+              "label": "Domande frequenti",
+              "url": "/domande-frequenti"
+            },
+            {
+              "label": "Categorie di segnalazione",
+              "url": "/lista-categorie"
+            },
+            {
+              "label": "Novità e comunicazioni",
+              "url": "/blog"
+            }
+          ]
+        }
+      }
+    ],
+    "en": [
+      {
+        "type": "search-modal",
+        "slug": "design-comuni-search-modal",
+        "data": {
+          "view": "pub_theme::components.sections.search-modal.design-comuni",
+          "title": "Search",
+          "back_label": "Close and go back to the previous page",
+          "label": "Search the site",
+          "placeholder": "Search the site: reports, news, events and pages",
+          "button": "Search",
+          "suggestions_title": "YOU MIGHT BE LOOKING FOR",
+          "suggestions": [
+            {
+              "label": "Public reports list",
+              "url": "/tickets"
+            },
+            {
+              "label": "Report a problem",
+              "url": "/tickets/create"
+            },
+            {
+              "label": "Track a report",
+              "url": "/tickets/track"
+            },
+            {
+              "label": "Frequently asked questions",
+              "url": "/domande-frequenti"
+            },
+            {
+              "label": "Report categories",
+              "url": "/lista-categorie"
+            },
+            {
+              "label": "News and updates",
+              "url": "/blog"
+            }
+          ]
+        }
+      }
+    ],
+    "de": [
+      {
+        "type": "search-modal",
+        "slug": "design-comuni-search-modal",
+        "data": {
+          "view": "pub_theme::components.sections.search-modal.design-comuni",
+          "title": "Suchen",
+          "back_label": "Schließen und zur vorherigen Seite zurückkehren",
+          "label": "Website durchsuchen",
+          "placeholder": "Website durchsuchen: Meldungen, Neuigkeiten, Veranstaltungen und Seiten",
+          "button": "Suchen",
+          "suggestions_title": "VIELLEICHT SUCHEN SIE",
+          "suggestions": [
+            {
+              "label": "Öffentliche Meldungen",
+              "url": "/tickets"
+            },
+            {
+              "label": "Problem melden",
+              "url": "/tickets/create"
+            },
+            {
+              "label": "Meldung verfolgen",
+              "url": "/tickets/track"
+            },
+            {
+              "label": "Häufige Fragen",
+              "url": "/domande-frequenti"
+            },
+            {
+              "label": "Meldekategorien",
+              "url": "/lista-categorie"
+            },
+            {
+              "label": "Neuigkeiten",
+              "url": "/blog"
+            }
+          ]
+        }
+      }
+    ],
+    "es": [
+      {
+        "type": "search-modal",
+        "slug": "design-comuni-search-modal",
+        "data": {
+          "view": "pub_theme::components.sections.search-modal.design-comuni",
+          "title": "Buscar",
+          "back_label": "Cerrar y volver a la página anterior",
+          "label": "Buscar en el sitio",
+          "placeholder": "Buscar en el sitio: incidencias, noticias, eventos y páginas",
+          "button": "Buscar",
+          "suggestions_title": "QUIZÁ ESTABAS BUSCANDO",
+          "suggestions": [
+            {
+              "label": "Listado de incidencias públicas",
+              "url": "/tickets"
+            },
+            {
+              "label": "Informar de un problema",
+              "url": "/tickets/create"
+            },
+            {
+              "label": "Seguir una incidencia",
+              "url": "/tickets/track"
+            },
+            {
+              "label": "Preguntas frecuentes",
+              "url": "/domande-frequenti"
+            },
+            {
+              "label": "Categorías de incidencia",
+              "url": "/lista-categorie"
+            },
+            {
+              "label": "Novedades",
+              "url": "/blog"
+            }
+          ]
+        }
+      }
+    ]
+  }
+}

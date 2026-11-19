@@ -1,0 +1,16 @@
+{
+    "id": "note-legali-index",
+    "title": {"it": "Note legali", "en": "Legal notes", "de": "Rechtliche Hinweise", "es": "Notas legales"},
+    "slug": "note-legali.index",
+    "layout": "design-comuni",
+    "description": {"it": "Note legali del servizio di segnalazioni, a cura del Comune.", "en": "Legal notes of the reporting service, provided by the municipality.", "de": "Rechtliche Hinweise zum Meldedienst, bereitgestellt von der Gemeinde.", "es": "Notas legales del servicio de incidencias, a cargo del Ayuntamiento."},
+    "content": null,
+    "content_blocks": {
+        "it": [{"type": "legal_document", "data": {"view": "pub_theme::components.blocks.legal-document.design-comuni", "document": "legal_notes", "markdown": "legal-notes.md", "assess": "legal-notes", "header_active": ""}}],
+        "en": [{"type": "legal_document", "data": {"view": "pub_theme::components.blocks.legal-document.design-comuni", "document": "legal_notes", "markdown": "legal-notes.md", "assess": "legal-notes", "header_active": ""}}],
+        "de": [{"type": "legal_document", "data": {"view": "pub_theme::components.blocks.legal-document.design-comuni", "document": "legal_notes", "markdown": "legal-notes.md", "assess": "legal-notes", "header_active": ""}}],
+        "es": [{"type": "legal_document", "data": {"view": "pub_theme::components.blocks.legal-document.design-comuni", "document": "legal_notes", "markdown": "legal-notes.md", "assess": "legal-notes", "header_active": ""}}]
+    },
+    "sidebar_blocks": {"it": [], "en": [], "de": [], "es": []},
+    "footer_blocks": null
+}

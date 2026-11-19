@@ -1,0 +1,145 @@
+{
+    "id": "tests.pagamenti-imu-conferma",
+    "slug": "tests.pagamenti-imu-conferma",
+    "parent_slug": "tests",
+    "title": {
+        "it": "Documento creato",
+        "en": "Documento creato"
+    },
+    "layout": "test",
+    "sidebar_blocks": {
+        "it": [],
+        "en": []
+    },
+    "footer_blocks": null,
+    "description": "Pagina di prova pagamenti-imu-conferma (flusso pagamento IMU) da JSON, resa dal blocco service-flow del tema Sixteen.",
+    "content_blocks": {
+        "it": [
+            {
+                "type": "service-flow",
+                "data": {
+                    "view": "pub_theme::components.blocks.service-flow.design-comuni",
+                    "kind": "confirmation",
+                    "breadcrumb": {
+                        "items": [
+                            {
+                                "label": "Home",
+                                "url": "/it/tests/homepage"
+                            },
+                            {
+                                "label": "Servizi",
+                                "url": "#"
+                            },
+                            {
+                                "label": "Tributi, finanze e contravvenzioni",
+                                "url": "#"
+                            }
+                        ],
+                        "current": "Pagamento IMU"
+                    },
+                    "heading": {
+                        "title": "Documento creato",
+                        "icon": {
+                            "name": "it-check-circle",
+                            "class": "icon-success mr-10 big-lg-icon mb-1"
+                        },
+                        "subtitles": [
+                            {
+                                "text": "Il documento F24 per la **richiesta AN4059281 calcolo IMU** è stato generato.",
+                                "class": "subtitle-small"
+                            },
+                            {
+                                "text": "Abbiamo inviato il riepilogo all’email:\n**giulia.rossi@gmail.com**",
+                                "class": "pt-3 pt-lg-4 mb-0"
+                            }
+                        ],
+                        "buttons": [
+                            {
+                                "label": "Scarica F24 (PDF 100KB)",
+                                "class": "btn btn-outline-primary fw-bold",
+                                "icon": "it-download"
+                            }
+                        ]
+                    },
+                    "after_heading": {
+                        "class": "mt-4 mt-lg-3 mb-40 mb-lg-100",
+                        "link": {
+                            "label": "Consulta la richiesta",
+                            "url": "#",
+                            "class": "t-primary"
+                        },
+                        "text": "nella tua area riservata.",
+                        "link_first": true
+                    },
+                    "feedback": {
+                        "col_class": "col-12 col-lg-6 p-lg-0 px-4",
+                        "title": "Quanto è stato facile usare questo servizio?",
+                        "legend": "Valuta da 1 a 5 stelle la pagina",
+                        "star_label": "Valuta %d stelle su 5",
+                        "thanks": "Grazie, il tuo parere ci aiuterà a migliorare il servizio!",
+                        "positive": {
+                            "question": "Quali sono stati gli aspetti che hai preferito?",
+                            "answers": [
+                                "Le indicazioni erano chiare",
+                                "Le indicazioni erano complete",
+                                "Capivo sempre che stavo procedendo correttamente",
+                                "Non ho avuto problemi tecnici",
+                                "Altro"
+                            ]
+                        },
+                        "negative": {
+                            "question": "Dove hai incontrato le maggiori difficoltà?",
+                            "answers": [
+                                "A volte le indicazioni non erano chiare",
+                                "A volte le indicazioni non erano complete",
+                                "A volte non capivo se stavo procedendo correttamente",
+                                "Ho avuto problemi tecnici",
+                                "Altro"
+                            ]
+                        },
+                        "detail": {
+                            "question": "Vuoi aggiungere altri dettagli?",
+                            "label": "Dettaglio",
+                            "help": "Inserire massimo 200 caratteri"
+                        },
+                        "back": "Indietro",
+                        "next": "Avanti"
+                    },
+                    "contacts": {
+                        "layout": "offset",
+                        "col": "col-12 col-lg-6",
+                        "main": {
+                            "title": "Contatta il comune",
+                            "items": [
+                                {
+                                    "icon": "it-help-circle",
+                                    "label": "Leggi le domande frequenti",
+                                    "url": "#"
+                                },
+                                {
+                                    "icon": "it-mail",
+                                    "label": "Richiedi assistenza",
+                                    "url": "#",
+                                    "element": "contacts"
+                                },
+                                {
+                                    "icon": "it-hearing",
+                                    "label": "Chiama il numero verde 05 0505",
+                                    "url": "#"
+                                },
+                                {
+                                    "icon": "it-calendar",
+                                    "label": "Prenota appuntamento",
+                                    "url": "#",
+                                    "element": "appointment-booking"
+                                }
+                            ]
+                        }
+                    },
+                    "header_active": "all-services"
+                }
+            }
+        ],
+        "en": []
+    }
+}

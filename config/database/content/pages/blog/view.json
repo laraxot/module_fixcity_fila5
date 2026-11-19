@@ -1,0 +1,55 @@
+{
+  "id": "view",
+  "slug": "view",
+  "title": {
+    "it": "Novità",
+    "en": "News",
+    "de": "Neuigkeiten",
+    "es": "Novedades"
+  },
+  "layout": "design-comuni",
+  "description": {
+    "it": "Dettaglio di una novità pubblicata.",
+    "en": "A published news article.",
+    "de": "Detail eines veröffentlichten Beitrags.",
+    "es": "Detalle de una novedad publicada."
+  },
+  "content_blocks": {
+    "it": [
+      {
+        "type": "blog.view",
+        "data": {
+          "view": "pub_theme::components.blocks.blog.detail",
+          "header_active": "news"
+        }
+      }
+    ],
+    "en": [
+      {
+        "type": "blog.view",
+        "data": {
+          "view": "pub_theme::components.blocks.blog.detail",
+          "header_active": "news"
+        }
+      }
+    ],
+    "de": [
+      {
+        "type": "blog.view",
+        "data": {
+          "view": "pub_theme::components.blocks.blog.detail",
+          "header_active": "news"
+        }
+      }
+    ],
+    "es": [
+      {
+        "type": "blog.view",
+        "data": {
+          "view": "pub_theme::components.blocks.blog.detail",
+          "header_active": "news"
+        }
+      }
+    ]
+  }
+}

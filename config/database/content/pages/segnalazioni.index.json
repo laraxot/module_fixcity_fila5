@@ -1,0 +1,38 @@
+{
+    "id": "segnalazioni-index",
+    "slug": "segnalazioni.index",
+    "title": {
+        "it": "Elenco segnalazioni",
+        "en": "Reported issues",
+        "de": "Liste der Meldungen",
+        "es": "Lista de incidencias"
+    },
+    "layout": "app",
+    "description": {
+        "it": "Elenco pubblico delle segnalazioni: mappa, filtri e accesso alla nuova segnalazione.",
+        "en": "Public list of reports: map, filters and access to a new report.",
+        "de": "Öffentliche Meldeliste: Karte, Filter und Zugang zu einer neuen Meldung.",
+        "es": "Lista pública de incidencias: mapa, filtros y acceso a una nueva denuncia."
+    },
+    "content": null,
+    "content_blocks": {
+        "it": [
+            {
+                "type": "segnalazioni-page",
+                "data": {
+                    "view": "pub_theme::components.pages.segnalazioni"
+                }
+            }
+        ],
+        "en": [
+            {
+                "type": "segnalazioni-page",
+                "data": {
+                    "view": "pub_theme::components.pages.segnalazioni"
+                }
+            }
+        ]
+    },
+    "sidebar_blocks": {"it": [], "en": []},
+    "footer_blocks": null
+}

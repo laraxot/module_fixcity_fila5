@@ -1,0 +1,218 @@
+{
+    "id": "lista-categorie",
+    "slug": "lista-categorie",
+    "parent_slug": "tests",
+    "title": {
+        "it": "Lista con categorie",
+        "en": "List with categories"
+    },
+    "layout": "test",
+    "sidebar_blocks": {
+        "it": [],
+        "en": []
+    },
+    "footer_blocks": null,
+    "description": "Pagina lista con risorse in evidenza e categorie (riferimento sito/lista-categorie). Contenuto da JSON, reso dal blocco list-page del tema Sixteen.",
+    "content_blocks": {
+        "it": [
+            {
+                "type": "list-page",
+                "data": {
+                    "view": "pub_theme::components.blocks.list-page.design-comuni",
+                    "breadcrumb": {
+                        "items": [
+                            {
+                                "label": "Home",
+                                "url": "/it/tests/homepage"
+                            }
+                        ],
+                        "current": "Novità"
+                    },
+                    "hero": {
+                        "text": "Breve sommario dei contenuti presenti in questa pagina, generalmene intesa con la descrizione della tipologia di contenuti",
+                        "row_shadow": true
+                    },
+                    "title": "Titolo della pagina lista con risorse in evidenza e categorie",
+                    "sections": [
+                        {
+                            "type": "news-cards",
+                            "style": "plain",
+                            "title": "In evidenza",
+                            "heading": "xxlarge",
+                            "items": [
+                                {
+                                    "category": {
+                                        "label": "NOTIZIE",
+                                        "url": "#"
+                                    },
+                                    "date": "28 FEB 2023",
+                                    "url": "novita-dettaglio.html",
+                                    "title": "Sport nel verde: le iniziative della prossima edizione",
+                                    "text": "Le informazioni per partecipare all’iniziativa rivolta a tutte le fasce d’età per promuovere l’attività motoria nelle aree verdi della città",
+                                    "image": {
+                                        "file": "notizia-sport-nel-verde.png",
+                                        "title": "titolo immagine",
+                                        "alt": "descrizione immagine"
+                                    }
+                                },
+                                {
+                                    "category": {
+                                        "label": "NOTIZIE",
+                                        "url": "#"
+                                    },
+                                    "date": "10 GEN 2023",
+                                    "url": "novita-dettaglio.html",
+                                    "title": "Torneo di beneficienza “Tutti in pista”",
+                                    "text": "Dal 2 al 3 giugno torna il torneo di beneficienza “Tutti in pista”. La raccolta fondi finanzierà progetti sportivi per ragazzi e ragazze",
+                                    "image": {
+                                        "file": "notizia-torneo-bici.png",
+                                        "title": "titolo immagine",
+                                        "alt": "descrizione immagine"
+                                    }
+                                },
+                                {
+                                    "category": {
+                                        "label": "AVVISI",
+                                        "url": "#"
+                                    },
+                                    "date": "10 FEB 2023",
+                                    "url": "novita-dettaglio.html",
+                                    "title": "Chiusa per ristrutturazione la piscina Minghetti",
+                                    "text": "Partiti i lavori per l’adeguamento dell’impianto. La riapertura è prevista per giugno 2023"
+                                }
+                            ]
+                        },
+                        {
+                            "type": "category-cards",
+                            "id": "argomento",
+                            "title": "Esplora per categoria",
+                            "heading": "xxlarge",
+                            "described": true,
+                            "items": [
+                                {
+                                    "title": "{Nome categoria}",
+                                    "text": "Descrizione della categoria",
+                                    "url": "#"
+                                },
+                                {
+                                    "title": "{Nome categoria}",
+                                    "text": "Descrizione della categoria",
+                                    "url": "#"
+                                },
+                                {
+                                    "title": "{Nome categoria}",
+                                    "text": "Descrizione della categoria",
+                                    "url": "#"
+                                },
+                                {
+                                    "title": "{Nome categoria}",
+                                    "text": "Descrizione della categoria",
+                                    "url": "#"
+                                },
+                                {
+                                    "title": "{Nome categoria}",
+                                    "text": "Descrizione della categoria",
+                                    "url": "#"
+                                },
+                                {
+                                    "title": "{Nome categoria}",
+                                    "text": "Descrizione della categoria",
+                                    "url": "#"
+                                },
+                                {
+                                    "title": "{Nome categoria}",
+                                    "text": "Descrizione della categoria",
+                                    "url": "#"
+                                },
+                                {
+                                    "title": "{Nome categoria}",
+                                    "text": "Descrizione della categoria",
+                                    "url": "#"
+                                },
+                                {
+                                    "title": "{Nome categoria}",
+                                    "text": "Descrizione della categoria",
+                                    "url": "#"
+                                }
+                            ]
+                        }
+                    ],
+                    "feedback": {
+                        "title": "Quanto sono chiare le informazioni su questa pagina?",
+                        "legend": "Valuta da 1 a 5 stelle la pagina",
+                        "star_label": "Valuta %d stelle su 5",
+                        "thanks": "Grazie, il tuo parere ci aiuterà a migliorare il servizio!",
+                        "positive": {
+                            "question": "Quali sono stati gli aspetti che hai preferito?",
+                            "answers": [
+                                "Le indicazioni erano chiare",
+                                "Le indicazioni erano complete",
+                                "Capivo sempre che stavo procedendo correttamente",
+                                "Non ho avuto problemi tecnici",
+                                "Altro"
+                            ]
+                        },
+                        "negative": {
+                            "question": "Dove hai incontrato le maggiori difficoltà?",
+                            "answers": [
+                                "A volte le indicazioni non erano chiare",
+                                "A volte le indicazioni non erano complete",
+                                "A volte non capivo se stavo procedendo correttamente",
+                                "Ho avuto problemi tecnici",
+                                "Altro"
+                            ]
+                        },
+                        "detail": {
+                            "question": "Vuoi aggiungere altri dettagli?",
+                            "label": "Dettaglio",
+                            "help": "Inserire massimo 200 caratteri"
+                        },
+                        "back": "Indietro",
+                        "next": "Avanti"
+                    },
+                    "contacts": {
+                        "main": {
+                            "title": "Contatta il comune",
+                            "items": [
+                                {
+                                    "icon": "it-help-circle",
+                                    "label": "Leggi le domande frequenti",
+                                    "url": "#"
+                                },
+                                {
+                                    "icon": "it-mail",
+                                    "label": "Richiedi assistenza",
+                                    "url": "#",
+                                    "element": "contacts"
+                                },
+                                {
+                                    "icon": "it-hearing",
+                                    "label": "Chiama il numero verde 05 0505",
+                                    "url": "#"
+                                },
+                                {
+                                    "icon": "it-calendar",
+                                    "label": "Prenota appuntamento",
+                                    "url": "#",
+                                    "element": "appointment-booking"
+                                }
+                            ]
+                        },
+                        "problems": {
+                            "title": "Problemi in città",
+                            "items": [
+                                {
+                                    "icon": "it-map-marker-circle",
+                                    "label": "Segnala disservizio",
+                                    "url": "#"
+                                }
+                            ]
+                        }
+                    },
+                    "header_active": "news"
+                }
+            }
+        ],
+        "en": []
+    }
+}

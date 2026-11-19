@@ -1,0 +1,80 @@
+{
+  "id": "login",
+  "title": {
+    "it": "Accedi — FixCity",
+    "en": "Login — FixCity",
+    "de": "Anmelden — FixCity",
+    "es": "Inicia sesión — FixCity"
+  },
+  "slug": "login",
+  "layout": "design-comuni",
+  "description": {
+    "it": "Accedi alla piattaforma FixCity per segnalare disservizi, consultare le mappe e seguire le tue pratiche.",
+    "en": "Sign in to FixCity to report service issues, view maps and track your requests.",
+    "de": "Melden Sie sich bei FixCity an, um Störungen zu melden und Ihre Vorgänge zu verfolgen.",
+    "es": "Inicia sesión en FixCity para reportar incidencias, consultar mapas y seguir tus trámites."
+  },
+  "content": null,
+  "content_blocks": {
+    "it": [
+      {
+        "type": "auth.login",
+        "data": {
+          "view": "pub_theme::components.pages.auth-login",
+          "heading": "Accedi",
+          "intro": "Entra per segnalare e seguire le tue pratiche."
+        }
+      }
+    ],
+    "en": [
+      {
+        "type": "auth.login",
+        "data": {
+          "view": "pub_theme::components.pages.auth-login",
+          "heading": "Login",
+          "intro": "Sign in to report and track your requests."
+        }
+      }
+    ],
+    "de": [
+      {
+        "type": "auth.login",
+        "data": {
+          "view": "pub_theme::components.pages.auth-login",
+          "heading": "Anmelden",
+          "intro": "Melden Sie sich an, um Vorgänge zu melden und zu verfolgen."
+        }
+      }
+    ],
+    "es": [
+      {
+        "type": "auth.login",
+        "data": {
+          "view": "pub_theme::components.pages.auth-login",
+          "heading": "Inicia sesión",
+          "intro": "Entra para reportar incidencias y seguir tus trámites."
+        }
+      }
+    ]
+  },
+  "meta": {
+    "layout": "design-comuni",
+    "theme": "design-comuni",
+    "body_class": "auth-login-page",
+    "accessibility": {
+      "contrast": "AA",
+      "focus_ring": true,
+      "aria_labels": true,
+      "font_scale": "base-16"
+    },
+    "translations": {
+      "namespace": "fixcity",
+      "convention": "namespace::context.collection.key.type",
+      "note": "Usare fixcity::auth.login.* per chiavi di traduzione"
+    }
+  },
+  "status": 1,
+  "published_at": "2026-10-18 13:50:00",
+  "created_at": "2026-01-01 00:00:00",
+  "updated_at": "2026-10-18 13:51:00"
+}

@@ -1,0 +1,341 @@
+{
+    "id": "tests.segnalazione-area-personale",
+    "slug": "tests.segnalazione-area-personale",
+    "parent_slug": "tests",
+    "title": {
+        "it": "Area personale - Segnalazione disservizio",
+        "en": "Personal area"
+    },
+    "layout": "design-comuni-authenticated",
+    "description": "Pagina area personale con le segnalazioni inviate, i dati salvati e le impostazioni dell'account. Contenuto da JSON, reso dal blocco report-area del tema Sixteen.",
+    "sidebar_blocks": {
+        "it": [],
+        "en": []
+    },
+    "footer_blocks": null,
+    "content_blocks": {
+        "it": [
+            {
+                "type": "report-area",
+                "data": {
+                    "view": "pub_theme::components.blocks.report-area.design-comuni",
+                    "title": "Giulia Rossi",
+                    "subtitle": "CF: GLARSS72H25H501Y",
+                    "breadcrumb": {
+                        "items": [
+                            {
+                                "label": "Home",
+                                "url": "/it/tests/homepage"
+                            }
+                        ],
+                        "current": "Area personale"
+                    },
+                    "tabs": [
+                        {
+                            "label": "Scrivania",
+                            "icon": "it-pa"
+                        },
+                        {
+                            "label": "Messaggi",
+                            "icon": "it-mail"
+                        },
+                        {
+                            "label": "Attività",
+                            "icon": "it-files"
+                        },
+                        {
+                            "label": "Servizi",
+                            "icon": "it-settings"
+                        }
+                    ],
+                    "panes": [
+                        {
+                            "variant": "cards",
+                            "nav": {
+                                "suffix": "one",
+                                "title": "INDICE DELLA PAGINA",
+                                "items": [
+                                    {
+                                        "anchor": "latest-posts",
+                                        "label": "Ultimi messaggi"
+                                    },
+                                    {
+                                        "anchor": "latest-activities",
+                                        "label": "Ultime attività"
+                                    }
+                                ]
+                            },
+                            "sections": [
+                                {
+                                    "type": "messages",
+                                    "id": "latest-posts",
+                                    "class": "mb-40 mb-lg-60",
+                                    "title": "Ultimi messaggi",
+                                    "category_label": "Categoria:",
+                                    "more": "Vedi altri messaggi",
+                                    "items": [
+                                        {
+                                            "date": "05/04/2022",
+                                            "title": "Richiesta servizio mensa scolastica",
+                                            "excerpt": "La richiesta AN4059281 è stata approv..."
+                                        },
+                                        {
+                                            "date": "20/03/2022",
+                                            "title": "Richiesta servizio mensa scolastica",
+                                            "excerpt": "La richiesta AN4059281 è stata ricevu..."
+                                        },
+                                        {
+                                            "date": "15/02/2022",
+                                            "title": "Iscrizione alla scuola dell’infanzia",
+                                            "excerpt": "La richiesta AFG059281 è stata ricevu..."
+                                        }
+                                    ]
+                                },
+                                {
+                                    "type": "activities",
+                                    "id": "latest-activities",
+                                    "class": "mb-50 mb-lg-90",
+                                    "title": "Ultime attività",
+                                    "icon": "it-files",
+                                    "more": "Vedi altre attività",
+                                    "items": [
+                                        {
+                                            "title": "Segnalazione disservizio",
+                                            "date": "15/04/2022"
+                                        },
+                                        {
+                                            "title": "Pagamento contravvenzione",
+                                            "date": "23/01/2022"
+                                        },
+                                        {
+                                            "title": "Richiesta assegno maternità",
+                                            "date": "01/10/2021"
+                                        }
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "variant": "cards",
+                            "sections": []
+                        },
+                        {
+                            "variant": "list",
+                            "nav": {
+                                "suffix": "Three",
+                                "title": "INDICE DELLA PAGINA",
+                                "items": [
+                                    {
+                                        "anchor": "practices",
+                                        "label": "Pratiche"
+                                    },
+                                    {
+                                        "anchor": "payments",
+                                        "label": "Pagamenti"
+                                    }
+                                ]
+                            },
+                            "sections": [
+                                {
+                                    "filter_label": "Filtra",
+                                    "sort_label": "Ordina",
+                                    "sort_items": [
+                                        "Azione 1",
+                                        "Azione 2",
+                                        "Azione 3"
+                                    ],
+                                    "search_label": "Cerca nel sito",
+                                    "search_placeholder": "Cerca",
+                                    "code_label": "Pratica:",
+                                    "service_label": "Scheda servizio",
+                                    "chip_label": "Servizio non digitale",
+                                    "attachment_label": "Ricevuta pagamento (PDF 80KB)",
+                                    "attachment_aria": "Scarica la %s",
+                                    "action_label": "Perfeziona la richiesta",
+                                    "type": "practices",
+                                    "id": "practices",
+                                    "slug": "pratiche",
+                                    "class": "mb-40 mb-lg-60",
+                                    "title": "Pratiche",
+                                    "more": "Vedi altre pratiche",
+                                    "more_padded": true,
+                                    "items": [
+                                        {
+                                            "n": 1,
+                                            "title": "Segnalazione disservizio",
+                                            "status": {
+                                                "icon": "folder-wating.svg",
+                                                "alt": "folder In attesa",
+                                                "label": "In attesa",
+                                                "class": "u-main-black"
+                                            },
+                                            "date": "20/03/2022",
+                                            "code": "AN4059281"
+                                        },
+                                        {
+                                            "n": 2,
+                                            "title": "Iscrizione corso di formazione",
+                                            "status": {
+                                                "icon": "folder-concluded.svg",
+                                                "alt": "folder Conclusa",
+                                                "label": "Conclusa",
+                                                "class": ""
+                                            },
+                                            "date": "24/06/2021",
+                                            "code": "AN4059281"
+                                        },
+                                        {
+                                            "n": 3,
+                                            "title": "Richiesta permesso ZTL",
+                                            "status": {
+                                                "icon": "folder-concluded.svg",
+                                                "alt": "folder Conclusa",
+                                                "label": "Conclusa",
+                                                "class": ""
+                                            },
+                                            "date": "10/05/2021",
+                                            "code": "AN4059281"
+                                        },
+                                        {
+                                            "n": 4,
+                                            "title": "Richiesta parcheggio residenti",
+                                            "status": {
+                                                "icon": "folder-concluded.svg",
+                                                "alt": "folder Conclusa",
+                                                "label": "Conclusa",
+                                                "class": ""
+                                            },
+                                            "date": "06/03/2021",
+                                            "code": "AN4059281"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "filter_label": "Filtra",
+                                    "sort_label": "Ordina",
+                                    "sort_items": [
+                                        "Azione 1",
+                                        "Azione 2",
+                                        "Azione 3"
+                                    ],
+                                    "search_label": "Cerca nel sito",
+                                    "search_placeholder": "Cerca",
+                                    "code_label": "Pratica:",
+                                    "service_label": "Scheda servizio",
+                                    "chip_label": "Servizio non digitale",
+                                    "attachment_label": "Ricevuta pagamento (PDF 80KB)",
+                                    "attachment_aria": "Scarica la %s",
+                                    "action_label": "Perfeziona la richiesta",
+                                    "type": "practices",
+                                    "id": "payments",
+                                    "slug": "pagamenti",
+                                    "class": "mb-50 mb-lg-90",
+                                    "title": "Pagamenti",
+                                    "more": "Vedi altri pagamenti",
+                                    "more_padded": false,
+                                    "items": [
+                                        {
+                                            "n": 5,
+                                            "title": "Pagamento contravvenzione",
+                                            "status": {
+                                                "icon": "folder-pay.svg",
+                                                "alt": "folder Pagato",
+                                                "label": "Pagato",
+                                                "class": ""
+                                            },
+                                            "date": "01/10/2021",
+                                            "code": "AN4059281"
+                                        },
+                                        {
+                                            "n": 6,
+                                            "title": "Pagamento contravvenzione",
+                                            "status": {
+                                                "icon": "folder-pay.svg",
+                                                "alt": "folder Pagato",
+                                                "label": "Pagato",
+                                                "class": ""
+                                            },
+                                            "date": "24/06/2021",
+                                            "code": "AN4059281"
+                                        },
+                                        {
+                                            "n": 7,
+                                            "title": "Pagamento contravvenzione",
+                                            "status": {
+                                                "icon": "folder-pay.svg",
+                                                "alt": "folder Pagato",
+                                                "label": "Pagato",
+                                                "class": ""
+                                            },
+                                            "date": "10/05/2021",
+                                            "code": "AN4059281"
+                                        },
+                                        {
+                                            "n": 8,
+                                            "title": "Pagamento contravvenzione",
+                                            "status": {
+                                                "icon": "folder-pay.svg",
+                                                "alt": "folder Pagato",
+                                                "label": "Pagato",
+                                                "class": ""
+                                            },
+                                            "date": "06/03/2021",
+                                            "code": "AN4059281"
+                                        }
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "variant": "cards",
+                            "sections": []
+                        }
+                    ],
+                    "contacts": {
+                        "layout": "offset",
+                        "main": {
+                            "title": "Contatta il comune",
+                            "items": [
+                                {
+                                    "icon": "it-help-circle",
+                                    "label": "Leggi le domande frequenti",
+                                    "url": "#"
+                                },
+                                {
+                                    "icon": "it-mail",
+                                    "label": "Richiedi assistenza",
+                                    "url": "#",
+                                    "element": "contacts"
+                                },
+                                {
+                                    "icon": "it-hearing",
+                                    "label": "Chiama il numero verde 05 0505",
+                                    "url": "#"
+                                },
+                                {
+                                    "icon": "it-calendar",
+                                    "label": "Prenota appuntamento",
+                                    "url": "#",
+                                    "element": "appointment-booking"
+                                }
+                            ]
+                        }
+                    },
+                    "modal": {
+                        "id": "modal-message",
+                        "date": "15/03/2022",
+                        "title": "Iscrizione alla scuola dell’infanzia",
+                        "subtitle": "Graduatoria 2022/23",
+                        "text": "La graduatoria per l’iscrizione alla Scuola dell’Infanzia, a.a. 2022/2023 è stata pubblicata. Consulta la graduatoria online e perfeziona la pratica.",
+                        "link": {
+                            "label": "Graduatoria Scuola dell'infanzia per l'anno scolastico 2022/23",
+                            "url": "#"
+                        },
+                        "close_label": "Chiudi finestra modale"
+                    }
+                }
+            }
+        ],
+        "en": []
+    }
+}

@@ -1,0 +1,63 @@
+{
+    "id": "ricerca-index",
+    "slug": "ricerca.index",
+    "title": {
+        "it": "Cerca nel sito",
+        "en": "Search the site",
+        "de": "Website durchsuchen",
+        "es": "Buscar en el sitio"
+    },
+    "layout": "app",
+    "description": {
+        "it": "Cerca tra segnalazioni pubbliche, notizie, eventi e pagine del sito comunale.",
+        "en": "Search public reports, news, events and pages of the municipal website.",
+        "de": "Durchsuchen Sie öffentliche Meldungen, Neuigkeiten, Veranstaltungen und Seiten der Gemeindewebsite.",
+        "es": "Busca entre incidencias públicas, noticias, eventos y páginas del sitio municipal."
+    },
+    "content": null,
+    "content_blocks": {
+        "it": [
+            {
+                "type": "search-results",
+                "data": {
+                    "view": "pub_theme::components.blocks.search-results.design-comuni",
+                    "source": "site_search"
+                }
+            }
+        ],
+        "en": [
+            {
+                "type": "search-results",
+                "data": {
+                    "view": "pub_theme::components.blocks.search-results.design-comuni",
+                    "source": "site_search"
+                }
+            }
+        ],
+        "de": [
+            {
+                "type": "search-results",
+                "data": {
+                    "view": "pub_theme::components.blocks.search-results.design-comuni",
+                    "source": "site_search"
+                }
+            }
+        ],
+        "es": [
+            {
+                "type": "search-results",
+                "data": {
+                    "view": "pub_theme::components.blocks.search-results.design-comuni",
+                    "source": "site_search"
+                }
+            }
+        ]
+    },
+    "sidebar_blocks": {
+        "it": [],
+        "en": [],
+        "de": [],
+        "es": []
+    },
+    "footer_blocks": null
+}

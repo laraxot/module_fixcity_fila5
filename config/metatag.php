@@ -1,0 +1,36 @@
+<?php
+
+declare(strict_types=1);
+
+return [
+    'author' => '',
+    'charset' => 'UTF-8',
+    'color_banner' => '#000',
+    'color_hamburger' => '#000',
+    'color_megamenu' => '#d60021',
+    'color_primary' => '#0071b0',
+    'color_title' => 'white',
+    'description' => '',
+    'facebook_href' => 'aa',
+    'fastlink' => false,
+    'generator' => '',
+    'hero_type' => 'with_megamenu_bottom',
+    'hide_megamenu' => false,
+    'keywords' => '',
+    'logo_alt' => 'Logo',
+    'logo_footer_img' => 'fixcity::images/logo.svg',
+    'logo_header' => 'fixcity::images/logo.svg',
+    'logo_header_dark' => 'fixcity::images/logo.svg',
+    'logo_height' => '2em',
+    'logo_img' => 'fixcity::images/logo.svg',
+    'logo_square' => 'fixcity::images/logo.svg',
+    'nome_comune' => '',
+    'nome_regione' => '',
+    'site_title' => '',
+    'sitename' => 'foodfriendfinder',
+    'sottotitolo_comune' => '',
+    'subtitle' => 'Find restaurants, specials, and coupons for free',
+    'title' => 'Test',
+    'twitter_href' => '',
+    'youtube_href' => '',
+];

@@ -1,0 +1,141 @@
+{
+    "id": "tests.appuntamento-04-richiedente",
+    "slug": "tests.appuntamento-04-richiedente",
+    "parent_slug": "tests",
+    "title": {
+        "it": "Prenotazione appuntamento",
+        "en": "Appointment booking"
+    },
+    "description": "Passo 4 della prenotazione di un appuntamento: dati del richiedente. Contenuto da JSON, reso dal blocco appointment-step del tema Sixteen.",
+    "layout": "test",
+    "content_blocks": {
+        "it": [
+            {
+                "type": "appointment-step",
+                "data": {
+                    "view": "pub_theme::components.blocks.appointment-step.design-comuni",
+                    "title": "Prenotazione appuntamento",
+                    "breadcrumb": {
+                        "items": [
+                            {
+                                "label": "Home",
+                                "url": "/it/tests/homepage"
+                            }
+                        ],
+                        "current": "Prenotazione appuntamento"
+                    },
+                    "steps": {
+                        "items": [
+                            {
+                                "label": "Luogo",
+                                "state": "confirmed"
+                            },
+                            {
+                                "label": "Data e orario",
+                                "state": "confirmed"
+                            },
+                            {
+                                "label": "Dettagli appuntamento",
+                                "state": "confirmed"
+                            },
+                            {
+                                "label": "Richiedente",
+                                "state": "active"
+                            },
+                            {
+                                "label": "Riepilogo",
+                                "state": ""
+                            }
+                        ],
+                        "index": "4/5",
+                        "confirmed_label": "Confermato",
+                        "active_label": "Attivo",
+                        "required_notice": "I campi contraddistinti dal simbolo asterisco sono obbligatori"
+                    },
+                    "side_nav": {
+                        "aria_label": "INFORMAZIONI RICHIESTE",
+                        "title": "INFORMAZIONI RICHIESTE",
+                        "items": [
+                            {
+                                "label": "Richiedente",
+                                "anchor": "applicant"
+                            }
+                        ]
+                    },
+                    "sections": [
+                        {
+                            "type": "form",
+                            "id": "applicant",
+                            "title": "Richiedente",
+                            "title_class": "mb-3",
+                            "header_class": "m-0",
+                            "fields": [
+                                {
+                                    "id": "name",
+                                    "name": "name",
+                                    "type": "text",
+                                    "label": "Nome*",
+                                    "help": "Inserisci il tuo nome",
+                                    "required": true
+                                },
+                                {
+                                    "id": "surname",
+                                    "name": "surname",
+                                    "type": "text",
+                                    "label": "Cognome*",
+                                    "help": "Inserisci il tuo cognome",
+                                    "required": true
+                                },
+                                {
+                                    "id": "email",
+                                    "name": "email",
+                                    "type": "email",
+                                    "label": "Email*",
+                                    "help": "Inserisci la tua email",
+                                    "required": true
+                                }
+                            ]
+                        }
+                    ],
+                    "nav": {
+                        "aria_label": "Step",
+                        "back": "Indietro",
+                        "next": "Avanti",
+                        "saved_message": "Richiesta salvata con successo",
+                        "save": "Salva Richiesta",
+                        "save_short": "Salva"
+                    },
+                    "contacts": {
+                        "main": {
+                            "title": "Contatta il comune",
+                            "items": [
+                                {
+                                    "icon": "it-help-circle",
+                                    "label": "Leggi le domande frequenti",
+                                    "url": "#"
+                                },
+                                {
+                                    "icon": "it-mail",
+                                    "label": "Richiedi assistenza",
+                                    "url": "#"
+                                },
+                                {
+                                    "icon": "it-hearing",
+                                    "label": "Chiama il numero verde 05 0505",
+                                    "url": "#"
+                                }
+                            ]
+                        }
+                    },
+                    "header_active": "all-services"
+                }
+            }
+        ],
+        "en": []
+    },
+    "sidebar_blocks": {
+        "it": [],
+        "en": []
+    },
+    "footer_blocks": null
+}

@@ -1,0 +1,768 @@
+{
+    "id": "tests.vantaggi-dati-personali",
+    "slug": "tests.vantaggi-dati-personali",
+    "parent_slug": "tests",
+    "title": {
+        "it": "Assegno di maternità",
+        "en": "Assegno di maternità"
+    },
+    "layout": "test",
+    "sidebar_blocks": {
+        "it": [],
+        "en": []
+    },
+    "footer_blocks": null,
+    "description": "Pagina di prova vantaggi-dati-personali (flusso vantaggi economici) da JSON, resa dal blocco service-flow del tema Sixteen.",
+    "content_blocks": {
+        "it": [
+            {
+                "type": "service-flow",
+                "data": {
+                    "view": "pub_theme::components.blocks.service-flow.design-comuni",
+                    "kind": "wizard-step",
+                    "breadcrumb": {
+                        "items": [
+                            {
+                                "label": "Home",
+                                "url": "/it/tests/homepage"
+                            },
+                            {
+                                "label": "Servizi",
+                                "url": "#"
+                            }
+                        ],
+                        "current": "Assegno di maternità"
+                    },
+                    "heading": {
+                        "title": "Assegno di maternità",
+                        "title_class": "title-xxxlarge w-75",
+                        "subtitles": [
+                            {
+                                "text": "Inserisci le informazioni necessarie per richiedere l’assegno di maternità.\nPotrai ricontrollare tutti i dati nel riepilogo, prima di inviare la richiesta.",
+                                "class": "subtitle-small"
+                            },
+                            {
+                                "text": "Hai bisogno di assistenza?",
+                                "class": "subtitle-small mt-lg-2",
+                                "link": {
+                                    "label": "Contattaci",
+                                    "url": "#",
+                                    "class": "title-small-semi-bold t-primary",
+                                    "class_first": true
+                                }
+                            }
+                        ]
+                    },
+                    "stepper": {
+                        "items": [
+                            {
+                                "label": "Informativa sulla privacy",
+                                "state": "confirmed"
+                            },
+                            {
+                                "label": "Dati Generali",
+                                "state": "active"
+                            },
+                            {
+                                "label": "Riepilogo",
+                                "state": ""
+                            }
+                        ],
+                        "confirmed_label": "Confermato",
+                        "active_label": "Attivo",
+                        "index": "2/3"
+                    },
+                    "nav": {
+                        "aria_label": "Step",
+                        "back": "Indietro",
+                        "save": {
+                            "long": "Salva Richiesta",
+                            "short": "Salva"
+                        },
+                        "next": {
+                            "label": "Avanti",
+                            "icon": "it-chevron-right",
+                            "class": "",
+                            "modal": "#modal-save-1"
+                        },
+                        "saved_message": "Richiesta salvata con successo"
+                    },
+                    "side_nav": {
+                        "class": "col-12 col-lg-3 mb-4 d-none d-lg-block",
+                        "aria_label": "INFORMAZIONI RICHIESTE",
+                        "title": "INFORMAZIONI RICHIESTE",
+                        "items": [
+                            {
+                                "label": "Richiedente",
+                                "anchor": "applicant-info"
+                            },
+                            {
+                                "label": "Minore",
+                                "anchor": "minor"
+                            },
+                            {
+                                "label": "ISEE",
+                                "anchor": "isee-info"
+                            },
+                            {
+                                "label": "Conto bancario per l'accredito",
+                                "anchor": "bank-account"
+                            }
+                        ]
+                    },
+                    "body": {
+                        "layout": "sidebar",
+                        "steps_content": "outer",
+                        "col": "col-12 col-lg-8 offset-lg-1 mt-2 mt-lgo-0",
+                        "before": [
+                            {
+                                "type": "warning-box",
+                                "icon": "it-info-circle",
+                                "icon_xlink": "it-warning",
+                                "title": "ATTENZIONE",
+                                "text": "Ci sono alcune informazioni mancanti o errate",
+                                "links": [
+                                    {
+                                        "label": "Richiedente - Indirizzo",
+                                        "url": "#applicant-warning"
+                                    },
+                                    {
+                                        "label": "Minore",
+                                        "url": "#minor-warning"
+                                    },
+                                    {
+                                        "label": "Conto bancario per l’accredito",
+                                        "url": "#bank-warning"
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    "sections": [
+                        {
+                            "type": "card",
+                            "id": "applicant-info",
+                            "class": "",
+                            "wrapper_class": "mb-40",
+                            "card_class": "card has-bkg-grey shadow-sm",
+                            "header_class": "card-header border-0 p-0 mb-lg-20",
+                            "title": "Richiedente",
+                            "title_class": "title-xxlarge mb-1",
+                            "subtitle": "Informazione su di te",
+                            "subtitle_class": "subtitle-small mb-0",
+                            "content": {
+                                "kind": "info-cards",
+                                "cards": [
+                                    {
+                                        "title": "Julie Crampton Smith",
+                                        "info": {
+                                            "label": "Codice Fiscale",
+                                            "value": "CRMJLU92H52Z826N"
+                                        },
+                                        "toggle_label": "Mostra tutto",
+                                        "collapse_id": "collapse-1",
+                                        "collapse_class": "accordion-collapse collapse show",
+                                        "button_class": "accordion-button",
+                                        "header_id": "heading-collapse-1",
+                                        "expanded": true,
+                                        "groups": [
+                                            {
+                                                "class": "bg-white has-border",
+                                                "header_class": "d-flex justify-content-between d-flex justify-content-end",
+                                                "title": "Anagrafica",
+                                                "edit": {
+                                                    "label": "Modifica",
+                                                    "url": "#"
+                                                },
+                                                "rows": [
+                                                    {
+                                                        "label": "Nome",
+                                                        "value": "Julie"
+                                                    },
+                                                    {
+                                                        "label": "Cognome",
+                                                        "value": "Crampton Smith"
+                                                    },
+                                                    {
+                                                        "label": "Codice fiscale",
+                                                        "value": "CRMJLU92H52Z826N"
+                                                    },
+                                                    {
+                                                        "label": "Data di Nascita",
+                                                        "value": "12/05/1992"
+                                                    },
+                                                    {
+                                                        "label": "Luogo di Nascita",
+                                                        "value": "Liverpool"
+                                                    },
+                                                    {
+                                                        "label": "Sesso",
+                                                        "value": "Femmina"
+                                                    },
+                                                    {
+                                                        "label": "Nazionalità",
+                                                        "value": "Inglese"
+                                                    },
+                                                    {
+                                                        "label": "Professione",
+                                                        "value": "Disoccupata"
+                                                    },
+                                                    {
+                                                        "label": "Scolarità",
+                                                        "value": "Laurea Triennale"
+                                                    }
+                                                ]
+                                            },
+                                            {
+                                                "class": "bg-white has-border",
+                                                "header_class": "d-flex justify-content-between d-flex justify-content-end",
+                                                "title": "Indirizzi",
+                                                "edit": {
+                                                    "label": "Modifica",
+                                                    "url": "#",
+                                                    "hidden": true
+                                                },
+                                                "rows": [
+                                                    {
+                                                        "label": "Residenza",
+                                                        "value": "Via Roma 16, 00100 Roma, It"
+                                                    },
+                                                    {
+                                                        "id": "applicant-warning",
+                                                        "label": "Domicilio",
+                                                        "value": "Yellow Street 16, 00100 Liverpool, UK",
+                                                        "status": {
+                                                            "tone": "alert",
+                                                            "text": "Domicilio non valido",
+                                                            "icon": "it-error"
+                                                        }
+                                                    }
+                                                ],
+                                                "footer_button": {
+                                                    "label": "Correggi",
+                                                    "icon": "it-pencil",
+                                                    "modal": "#modal-address"
+                                                }
+                                            },
+                                            {
+                                                "class": "bg-white has-border",
+                                                "header_class": "d-flex justify-content-between d-flex justify-content-end",
+                                                "title": "Contatti",
+                                                "edit": {
+                                                    "label": "Modifica",
+                                                    "url": "#"
+                                                },
+                                                "rows": [
+                                                    {
+                                                        "label": "Telefono",
+                                                        "value": "+39 331 1234567"
+                                                    },
+                                                    {
+                                                        "label": "Email",
+                                                        "value": "jsc@gmail.com"
+                                                    },
+                                                    {
+                                                        "label": "Recapito postale",
+                                                        "value": "Via Roma 16, 00100 Roma IT"
+                                                    }
+                                                ]
+                                            },
+                                            {
+                                                "class": "bg-white has-border",
+                                                "header_class": "d-flex justify-content-between d-flex justify-content-end",
+                                                "title": "Documenti",
+                                                "edit": {
+                                                    "label": "Modifica",
+                                                    "url": "#"
+                                                },
+                                                "rows": [
+                                                    {
+                                                        "label": "Carta d'identità",
+                                                        "value": "jsc_carta_di_identità.pdf"
+                                                    },
+                                                    {
+                                                        "label": "Permesso di soggiorno",
+                                                        "value": "permesso_soggiorno.pdf"
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        },
+                        {
+                            "type": "card",
+                            "id": "minor",
+                            "class": "",
+                            "wrapper_class": "mb-40",
+                            "card_class": "card has-bkg-grey shadow-sm",
+                            "header_class": "card-header border-0 p-0 mb-lg-20 m-0",
+                            "title": "Minore",
+                            "title_class": "title-xxlarge mb-1",
+                            "subtitle": "Informazioni sul minore per cui chiedi l’assegno di maternità",
+                            "subtitle_class": "subtitle-small mb-0",
+                            "content": {
+                                "kind": "info-cards",
+                                "cards": [],
+                                "empty": {
+                                    "id": "minor-warning",
+                                    "class": "bg-white mt-3",
+                                    "text": "Nessun dato disponibile. Aggiungi un minore per proseguire con la richiesta."
+                                },
+                                "add": {
+                                    "label": "Aggiungi minore",
+                                    "icon": "it-plus-circle",
+                                    "modal": "#modal-minor"
+                                }
+                            }
+                        },
+                        {
+                            "type": "card",
+                            "id": "isee-info",
+                            "class": "",
+                            "wrapper_class": "mb-40",
+                            "card_class": "card has-bkg-grey shadow-sm",
+                            "header_class": "card-header border-0 p-0 mb-lg-20",
+                            "title": "ISEE",
+                            "title_class": "title-xxlarge mb-1",
+                            "subtitle": "Informazioni sul valore dell’ISEE del tuo nucleo familiare basato sulla tua ultima dichiarazione",
+                            "subtitle_class": "subtitle-small mb-0",
+                            "content": {
+                                "kind": "info-cards",
+                                "cards": [
+                                    {
+                                        "title": "ISEE: 18.000,00€",
+                                        "info": {
+                                            "label": "Scadenza ISEE",
+                                            "value": "01/03/2022"
+                                        },
+                                        "toggle_label": "Mostra tutto",
+                                        "collapse_id": "collapse2",
+                                        "collapse_class": "accordion-collapse collapse rounded",
+                                        "button_class": "accordion-button collapsed",
+                                        "groups": [
+                                            {
+                                                "class": "bg-white border border-light p-3 p-lg-4",
+                                                "header_class": "d-flex justify-content-between d-flex justify-content-end",
+                                                "title": "Dati ISEE",
+                                                "edit": {
+                                                    "label": "Modifica",
+                                                    "url": "#"
+                                                },
+                                                "rows": [
+                                                    {
+                                                        "label": "Valore ISEE",
+                                                        "value": "18.000,00€"
+                                                    },
+                                                    {
+                                                        "label": "Scadenza ISEE",
+                                                        "value": "06/10/2023"
+                                                    },
+                                                    {
+                                                        "label": "Anno protocollo",
+                                                        "value": "2022"
+                                                    },
+                                                    {
+                                                        "label": "Numero protocollo",
+                                                        "value": "12345678"
+                                                    },
+                                                    {
+                                                        "label": "Codice filiale protocollo",
+                                                        "value": "12345678"
+                                                    },
+                                                    {
+                                                        "label": "Certificato ISEE",
+                                                        "value": "documento_ISEE-2019.pdf",
+                                                        "status": {
+                                                            "tone": "success",
+                                                            "text": "Documento inserito con successo",
+                                                            "icon": "it-check-circle"
+                                                        }
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        },
+                        {
+                            "type": "card",
+                            "id": "bank-account",
+                            "class": "",
+                            "wrapper_class": "",
+                            "card_class": "card has-bkg-grey shadow-sm",
+                            "header_class": "card-header border-0 p-0 mb-lg-20",
+                            "title": "Conto bancario per l’accredito",
+                            "title_class": "title-xxlarge mb-1",
+                            "subtitle": "Seleziona o aggiungi il conto su cui vuoi ricevere l'assegno",
+                            "subtitle_class": "subtitle-small mb-0",
+                            "content": {
+                                "kind": "info-cards",
+                                "radio_name": "bank-accounts",
+                                "cards": [
+                                    {
+                                        "id": "accounts",
+                                        "title": "Intesa Sanpaolo",
+                                        "info": {
+                                            "label": "Iban",
+                                            "value": "IT12 3456 7890 123456"
+                                        },
+                                        "toggle_label": "Mostra tutto",
+                                        "collapse_id": "collapse-bank-1",
+                                        "collapse_class": "accordion-collapse collapse show",
+                                        "button_class": "collapsed accordion-button",
+                                        "header_id": "heading-collapse-bank-1",
+                                        "groups": [
+                                            {
+                                                "class": "bg-white border border-light p-3 p-lg-4",
+                                                "header_class": "d-flex justify-content-between d-flex justify-content-end",
+                                                "title": "Intesa Sanpaolo",
+                                                "edit": {
+                                                    "label": "Modifica",
+                                                    "url": "#",
+                                                    "hidden": true
+                                                },
+                                                "rows": [
+                                                    {
+                                                        "label": "Intestatario",
+                                                        "value": "Julie Crampton Smith"
+                                                    },
+                                                    {
+                                                        "id": "bank-warning",
+                                                        "label": "Filiale",
+                                                        "status": {
+                                                            "tone": "alert",
+                                                            "text": "Dato mancante",
+                                                            "icon": "it-error"
+                                                        }
+                                                    },
+                                                    {
+                                                        "label": "Indirizzo istituto",
+                                                        "value": "Via Roma 16, 00100 Roma, IT"
+                                                    },
+                                                    {
+                                                        "label": "Iban",
+                                                        "value": "IT12 3456 7890 123456"
+                                                    },
+                                                    {
+                                                        "label": "Documento Iban",
+                                                        "value": "documento_iban.pdf"
+                                                    }
+                                                ],
+                                                "footer_button": {
+                                                    "label": "Aggiungi",
+                                                    "icon": "it-pencil",
+                                                    "modal": "#modal-bank-account"
+                                                }
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "id": "accounts-2",
+                                        "title": "Banca Popolare di Roma",
+                                        "info": {
+                                            "label": "Iban",
+                                            "value": "IT12 3456 7890 123456"
+                                        },
+                                        "toggle_label": "Mostra tutto",
+                                        "collapse_id": "collapse-bank-2",
+                                        "collapse_class": "accordion-collapse collapse",
+                                        "button_class": "collapsed accordion-button",
+                                        "header_id": "heading-collapse-bank-2",
+                                        "groups": [
+                                            {
+                                                "class": "bg-white border border-light p-3 p-lg-4",
+                                                "header_class": "d-flex justify-content-between d-flex justify-content-end",
+                                                "title": "Banca Popolare di Roma",
+                                                "edit": {
+                                                    "label": "Modifica",
+                                                    "url": "#"
+                                                },
+                                                "rows": [
+                                                    {
+                                                        "label": "Intestatario",
+                                                        "value": "Julie Crampton Smith"
+                                                    },
+                                                    {
+                                                        "label": "Filiale",
+                                                        "value": "Roma"
+                                                    },
+                                                    {
+                                                        "label": "Indirizzo istituto",
+                                                        "value": "Via Roma 16, 00100 Roma, IT"
+                                                    },
+                                                    {
+                                                        "label": "Iban",
+                                                        "value": "IT12 3456 7890 123456"
+                                                    },
+                                                    {
+                                                        "label": "Documento Iban",
+                                                        "value": "documento_iban.pdf"
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    }
+                                ],
+                                "add": {
+                                    "label": "Aggiungi conto bancario",
+                                    "icon": "it-plus-circle",
+                                    "modal": "#modal-bank-account"
+                                }
+                            }
+                        }
+                    ],
+                    "contacts": {
+                        "layout": "offset",
+                        "col": "col-12 col-lg-6",
+                        "main": {
+                            "title": "Contatta il comune",
+                            "items": [
+                                {
+                                    "icon": "it-help-circle",
+                                    "label": "Leggi le domande frequenti",
+                                    "url": "#"
+                                },
+                                {
+                                    "icon": "it-mail",
+                                    "label": "Richiedi assistenza",
+                                    "url": "#",
+                                    "element": "contacts"
+                                },
+                                {
+                                    "icon": "it-hearing",
+                                    "label": "Chiama il numero verde 05 0505",
+                                    "url": "#"
+                                },
+                                {
+                                    "icon": "it-calendar",
+                                    "label": "Prenota appuntamento",
+                                    "url": "#",
+                                    "element": "appointment-booking"
+                                }
+                            ]
+                        }
+                    },
+                    "modals": [
+                        {
+                            "type": "vantaggi-form",
+                            "id": "modal-bank-account",
+                            "close_label": "Chiudi finestra modale",
+                            "title": "Conto bancario per l’accredito",
+                            "info": "I campi contraddistinti dal simbolo asterisco sono obbligatori",
+                            "form": {
+                                "id": "bank-account-form"
+                            },
+                            "items": [
+                                {
+                                    "type": "field",
+                                    "id": "nameSurname",
+                                    "name": "nameSurname",
+                                    "label": "Intestatario*",
+                                    "hint": "Inserisci nome e cognome dell’intestatario"
+                                },
+                                {
+                                    "type": "field",
+                                    "id": "bank",
+                                    "name": "bank",
+                                    "label": "Istituto di credito*",
+                                    "hint": "Inserisci Istituto di credito"
+                                },
+                                {
+                                    "type": "field",
+                                    "id": "branch",
+                                    "name": "branch",
+                                    "label": "Filiale*",
+                                    "hint": "Inserisci filiale"
+                                },
+                                {
+                                    "type": "field",
+                                    "id": "address",
+                                    "name": "address",
+                                    "label": "Indirizzo istituto*",
+                                    "hint": "Inserisci indirizzo istituto di credito"
+                                },
+                                {
+                                    "type": "field",
+                                    "id": "iban",
+                                    "name": "iban",
+                                    "label": "Iban*",
+                                    "hint": "Inserisci Inserisci iban"
+                                },
+                                {
+                                    "type": "upload",
+                                    "label": "Documento iban*",
+                                    "label_class": "cmp-upload__label",
+                                    "files": [
+                                        {
+                                            "state": "success",
+                                            "visually_hidden": "File caricato:",
+                                            "name": "documento_iban.pdf",
+                                            "remove_label": "Elimina il documento"
+                                        }
+                                    ],
+                                    "input_id": "upload-doc-id",
+                                    "link_label": "Carica documento",
+                                    "info": "Caricare uno o più file in formato pdf, jpg, png"
+                                }
+                            ],
+                            "cancel": "Annulla",
+                            "save": "Salva",
+                            "save_form": "bank-account-form"
+                        },
+                        {
+                            "type": "vantaggi-form",
+                            "id": "modal-address",
+                            "close_label": "Chiudi finestra modale",
+                            "title": "Indirizzi",
+                            "info": "I campi contraddistinti dal simbolo asterisco sono obbligatori",
+                            "body_class": "modal-address",
+                            "form": {
+                                "id": "address-form"
+                            },
+                            "items": [
+                                {
+                                    "type": "field",
+                                    "id": "residence",
+                                    "name": "residence",
+                                    "label": "Residenza*",
+                                    "hint": "Campo non modificabile",
+                                    "placeholder": "Via Roma 16, 00100 Roma"
+                                },
+                                {
+                                    "type": "toggle",
+                                    "id": "toggleAddress",
+                                    "label": "Il domicilio coincide con residenza"
+                                },
+                                {
+                                    "type": "group",
+                                    "class": "mt-50",
+                                    "items": [
+                                        {
+                                            "type": "field",
+                                            "id": "domicile",
+                                            "name": "domicile",
+                                            "label": "Domicilio*",
+                                            "hint": "Inserisci il domicilio"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "cancel": "Annulla",
+                            "save": "Salva",
+                            "save_form": ""
+                        },
+                        {
+                            "type": "vantaggi-form",
+                            "id": "modal-minor",
+                            "close_label": "Chiudi finestra modale",
+                            "title": "Minore",
+                            "info": "I campi contraddistinti dal simbolo asterisco sono obbligatori",
+                            "form": {
+                                "id": "minor-form",
+                                "class": "text-black",
+                                "enctype": "multipart/form-data"
+                            },
+                            "items": [
+                                {
+                                    "type": "group",
+                                    "class": "mb-4",
+                                    "items": [
+                                        {
+                                            "type": "field",
+                                            "id": "name",
+                                            "name": "name",
+                                            "label": "Nome*",
+                                            "hint": "Inserisci nome"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "type": "group",
+                                    "class": "mb-4",
+                                    "items": [
+                                        {
+                                            "type": "field",
+                                            "id": "surname",
+                                            "name": "surname",
+                                            "label": "Cognome*",
+                                            "hint": "Inserisci cognome"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "type": "group",
+                                    "class": "mb-4",
+                                    "items": [
+                                        {
+                                            "type": "field",
+                                            "id": "fiscal-code",
+                                            "name": "fiscal-code",
+                                            "label": "Codice fiscale*",
+                                            "hint": "Inserisci codice fiscale"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "type": "group",
+                                    "class": "mb-4",
+                                    "items": [
+                                        {
+                                            "type": "field",
+                                            "id": "birth-date",
+                                            "name": "birth-date",
+                                            "label": "Data di nascita*",
+                                            "hint": "Inserisci data di nascita gg/mm/aaaa"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "cancel": "Annulla",
+                            "save": "Salva",
+                            "save_form": ""
+                        },
+                        {
+                            "type": "dialog",
+                            "id": "modal-save-1",
+                            "close_label": "Chiudi finestra modale",
+                            "header": {
+                                "title": "Salva i dati in area personale",
+                                "info": "Vuoi salvare le informazioni anche nella tua area personale? Potrai usarle anche in altre occasioni."
+                            },
+                            "footer": {
+                                "buttons": [
+                                    {
+                                        "label": "Salva nella mia area personale",
+                                        "variant": "primary",
+                                        "target": "#modal-save-2"
+                                    },
+                                    {
+                                        "label": "Salva solo per questa pratica",
+                                        "variant": "outline"
+                                    }
+                                ]
+                            }
+                        },
+                        {
+                            "type": "dialog",
+                            "id": "modal-save-2",
+                            "close_label": "Chiudi finestra modale",
+                            "header": {
+                                "title": "Salva i dati in area personale",
+                                "info": "Vuoi salvare le informazioni anche nella tua area personale? Potrai riutilizzarle in futuro per altre pratiche."
+                            },
+                            "success": {
+                                "icon": "it-check-circle",
+                                "message": "Salvataggio effettuato"
+                            }
+                        }
+                    ],
+                    "header_active": "all-services"
+                }
+            }
+        ],
+        "en": []
+    }
+}

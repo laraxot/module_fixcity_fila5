@@ -1,0 +1,159 @@
+{
+    "id": "appuntamento-06-conferma",
+    "slug": "appuntamento-06-conferma",
+    "parent_slug": "tests",
+    "title": {
+        "it": "Appuntamento confermato",
+        "en": "Appointment confirmed"
+    },
+    "description": "Passo 6 della prenotazione di un appuntamento: conferma. Contenuto da JSON, reso dal blocco appointment-confirmation del tema Sixteen.",
+    "layout": "test",
+    "content_blocks": {
+        "it": [
+            {
+                "type": "appointment-confirmation",
+                "data": {
+                    "view": "pub_theme::components.blocks.appointment-confirmation.design-comuni",
+                    "title": "Appuntamento confermato",
+                    "breadcrumb": {
+                        "items": [
+                            {
+                                "label": "Home",
+                                "url": "/it/tests/homepage"
+                            }
+                        ],
+                        "current": "Prenotazione appuntamento"
+                    },
+                    "hero": {
+                        "icon": "it-check-circle",
+                        "intro": "L’appuntamento è fissato per",
+                        "when": "Giovedì 11 marzo 2022 dalle ore 10:00 alle ore 10:30",
+                        "email_intro": "Abbiamo inviato il riepilogo all’email:",
+                        "email": "giulia.bianchi@gmail.com"
+                    },
+                    "side_nav": {
+                        "aria_label": "INDICE DELLA PAGINA",
+                        "title": "INDICE DELLA PAGINA",
+                        "items": [
+                            {
+                                "label": "Cosa serve",
+                                "anchor": "needed"
+                            },
+                            {
+                                "label": "Indirizzo",
+                                "anchor": "address"
+                            },
+                            {
+                                "label": "Aggiungi al tuo calendario",
+                                "anchor": "calendar"
+                            }
+                        ]
+                    },
+                    "sections": [
+                        {
+                            "type": "checklist",
+                            "id": "needed",
+                            "title": "Cosa serve",
+                            "items": [
+                                "Documento di identità"
+                            ]
+                        },
+                        {
+                            "type": "address",
+                            "id": "address",
+                            "title": "Indirizzo",
+                            "name": "Ufficio anagrafe 03",
+                            "url": "#",
+                            "lines": [
+                                "Via Grazia Deledda 9/a - 20127",
+                                "Milano",
+                                "anagrafe@comune.it"
+                            ]
+                        },
+                        {
+                            "type": "calendar-links",
+                            "id": "calendar",
+                            "title": "Aggiungi al tuo calendario",
+                            "items": [
+                                {
+                                    "label": "Outlook",
+                                    "url": "#"
+                                },
+                                {
+                                    "label": "Google Calendar",
+                                    "url": "#"
+                                },
+                                {
+                                    "label": "iCloud Calendar",
+                                    "url": "#"
+                                }
+                            ]
+                        }
+                    ],
+                    "feedback": {
+                        "title": "Quanto è stato facile usare questo servizio?",
+                        "legend": "Valuta da 1 a 5 stelle la pagina",
+                        "star_label": "Valuta %d stelle su 5",
+                        "thanks": "Grazie, il tuo parere ci aiuterà a migliorare il servizio!",
+                        "positive": {
+                            "question": "Quali sono stati gli aspetti che hai preferito?",
+                            "answers": [
+                                "Le indicazioni erano chiare",
+                                "Le indicazioni erano complete",
+                                "Capivo sempre che stavo procedendo correttamente",
+                                "Non ho avuto problemi tecnici",
+                                "Altro"
+                            ]
+                        },
+                        "negative": {
+                            "question": "Dove hai incontrato le maggiori difficoltà?",
+                            "answers": [
+                                "A volte le indicazioni non erano chiare",
+                                "A volte le indicazioni non erano complete",
+                                "A volte non capivo se stavo procedendo correttamente",
+                                "Ho avuto problemi tecnici",
+                                "Altro"
+                            ]
+                        },
+                        "detail": {
+                            "question": "Vuoi aggiungere altri dettagli?",
+                            "label": "Dettaglio",
+                            "help": "Inserire massimo 200 caratteri"
+                        },
+                        "back": "Indietro",
+                        "next": "Avanti"
+                    },
+                    "contacts": {
+                        "main": {
+                            "title": "Contatta il comune",
+                            "items": [
+                                {
+                                    "icon": "it-help-circle",
+                                    "label": "Leggi le domande frequenti",
+                                    "url": "#"
+                                },
+                                {
+                                    "icon": "it-mail",
+                                    "label": "Richiedi assistenza",
+                                    "url": "#"
+                                },
+                                {
+                                    "icon": "it-hearing",
+                                    "label": "Chiama il numero verde 05 0505",
+                                    "url": "#"
+                                }
+                            ]
+                        }
+                    },
+                    "header_active": "all-services"
+                }
+            }
+        ],
+        "en": []
+    },
+    "sidebar_blocks": {
+        "it": [],
+        "en": []
+    },
+    "footer_blocks": null
+}

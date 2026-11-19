@@ -1,0 +1,396 @@
+{
+  "id": "tests.mappa-sito",
+  "slug": "tests.mappa-sito",
+  "parent_slug": "tests",
+  "title": {
+    "it": "Mappa del sito",
+    "en": "Sitemap"
+  },
+  "layout": "test",
+  "description": "Mappa del sito: albero dei link del sito. Contenuto da JSON, reso dal blocco content-sitemap del tema Sixteen.",
+  "content_blocks": {
+    "it": [
+      {
+        "type": "content-sitemap",
+        "data": {
+          "view": "pub_theme::components.blocks.content-sitemap.design-comuni",
+          "title": "Mappa del sito",
+          "items": [
+            {
+              "label": "Homepage",
+              "url": "#",
+              "sublist_id": "",
+              "children": [
+                {
+                  "label": "Area personale",
+                  "url": "#"
+                },
+                {
+                  "label": "Amministratione Trasparente",
+                  "url": "#"
+                },
+                {
+                  "label": "Informativa privacy",
+                  "url": "#"
+                },
+                {
+                  "label": "Dichiarazione di accessibilità",
+                  "url": "#"
+                },
+                {
+                  "label": "Note legali",
+                  "url": "#"
+                },
+                {
+                  "label": "Domande frequenti (FAQ)",
+                  "url": "#"
+                },
+                {
+                  "label": "Richiesta di assistenza",
+                  "url": "#"
+                },
+                {
+                  "label": "Prenotazione appuntamento",
+                  "url": "#"
+                },
+                {
+                  "label": "Segnalazione disservizio",
+                  "url": "#"
+                },
+                {
+                  "label": "Mappa del sito",
+                  "url": "#"
+                }
+              ]
+            },
+            {
+              "label": "Amministrazione",
+              "url": "#",
+              "sublist_id": "",
+              "children": [
+                {
+                  "label": "/ Organi di governo",
+                  "url": "#",
+                  "emphasis": true,
+                  "sublist_id": "",
+                  "children": [
+                    {
+                      "label": "Giunta comunale",
+                      "url": "#"
+                    },
+                    {
+                      "label": "Consiglio comunale",
+                      "url": "#"
+                    },
+                    {
+                      "label": "Commissione",
+                      "url": "#"
+                    }
+                  ]
+                },
+                {
+                  "label": "/ Aree amministrative",
+                  "url": "#",
+                  "emphasis": true,
+                  "sublist_id": "",
+                  "children": [
+                    {
+                      "label": "Area 1",
+                      "url": "#"
+                    },
+                    {
+                      "label": "Area 2",
+                      "url": "#"
+                    },
+                    {
+                      "label": "Area 3",
+                      "url": "#"
+                    }
+                  ]
+                },
+                {
+                  "label": "/ Uffici",
+                  "url": "#",
+                  "emphasis": true,
+                  "sublist_id": "",
+                  "children": [
+                    {
+                      "label": "Ufficio 1",
+                      "url": "#"
+                    },
+                    {
+                      "label": "Ufficio 2",
+                      "url": "#"
+                    },
+                    {
+                      "label": "Ufficio 3",
+                      "url": "#"
+                    }
+                  ]
+                },
+                {
+                  "label": "/ Enti e fondazioni",
+                  "url": "#",
+                  "emphasis": true,
+                  "sublist_id": "",
+                  "children": [
+                    {
+                      "label": "Ente 1",
+                      "url": "#"
+                    },
+                    {
+                      "label": "Ente 2",
+                      "url": "#"
+                    },
+                    {
+                      "label": "Ente 3",
+                      "url": "#"
+                    }
+                  ]
+                },
+                {
+                  "label": "/ Politici",
+                  "url": "#",
+                  "emphasis": true,
+                  "sublist_id": "",
+                  "children": [
+                    {
+                      "label": "Persona 1",
+                      "url": "#"
+                    },
+                    {
+                      "label": "Persona 2",
+                      "url": "#"
+                    },
+                    {
+                      "label": "Persona 3",
+                      "url": "#"
+                    }
+                  ]
+                },
+                {
+                  "label": "/ Personale amministrativo",
+                  "url": "#",
+                  "emphasis": true,
+                  "sublist_id": "",
+                  "children": [
+                    {
+                      "label": "Persona 1",
+                      "url": "#"
+                    },
+                    {
+                      "label": "Persona 2",
+                      "url": "#"
+                    },
+                    {
+                      "label": "Persona 3",
+                      "url": "#"
+                    }
+                  ]
+                },
+                {
+                  "label": "/ Documenti e dati",
+                  "url": "#",
+                  "emphasis": true,
+                  "sublist_id": "",
+                  "children": [
+                    {
+                      "label": "/ Categoria 1",
+                      "url": "#",
+                      "emphasis": true
+                    },
+                    {
+                      "label": "/ Categoria 2",
+                      "url": "#",
+                      "emphasis": true
+                    },
+                    {
+                      "label": "/ Categoria 3",
+                      "url": "#",
+                      "emphasis": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "label": "Novità",
+              "url": "#",
+              "children": [
+                {
+                  "label": "/ Notizie",
+                  "url": "#",
+                  "emphasis": true
+                },
+                {
+                  "label": "/ Comunicati",
+                  "url": "#",
+                  "emphasis": true
+                },
+                {
+                  "label": "/ Avvisi",
+                  "url": "#",
+                  "emphasis": true
+                }
+              ]
+            },
+            {
+              "label": "Servizi",
+              "url": "#",
+              "children": [
+                {
+                  "label": "/ Categoria 1",
+                  "url": "#",
+                  "emphasis": true,
+                  "children": [
+                    {
+                      "label": "Servizio 1",
+                      "url": "#"
+                    },
+                    {
+                      "label": "Servizio 2",
+                      "url": "#"
+                    },
+                    {
+                      "label": "Servizio 3",
+                      "url": "#"
+                    }
+                  ]
+                },
+                {
+                  "label": "/ Categoria 2",
+                  "url": "#",
+                  "emphasis": true
+                },
+                {
+                  "label": "/ Categoria 3",
+                  "url": "#",
+                  "emphasis": true
+                }
+              ]
+            },
+            {
+              "label": "Vivere il Comune",
+              "url": "#",
+              "children": [
+                {
+                  "label": "/ Luoghi",
+                  "url": "#",
+                  "emphasis": true,
+                  "children": [
+                    {
+                      "label": "/ Categoria 1",
+                      "url": "#",
+                      "emphasis": true,
+                      "children": [
+                        {
+                          "label": "Luogo 1",
+                          "url": "#"
+                        },
+                        {
+                          "label": "Luogo 2",
+                          "url": "#"
+                        },
+                        {
+                          "label": "Luogo 3",
+                          "url": "#"
+                        }
+                      ]
+                    },
+                    {
+                      "label": "/ Categoria 2",
+                      "url": "#",
+                      "emphasis": true,
+                      "children": [
+                        {
+                          "label": "Luogo 1",
+                          "url": "#"
+                        },
+                        {
+                          "label": "Luogo 2",
+                          "url": "#"
+                        },
+                        {
+                          "label": "Luogo 3",
+                          "url": "#"
+                        }
+                      ]
+                    },
+                    {
+                      "label": "/ Categoria 3",
+                      "url": "#",
+                      "emphasis": true,
+                      "children": [
+                        {
+                          "label": "Luogo 1",
+                          "url": "#"
+                        },
+                        {
+                          "label": "Luogo 2",
+                          "url": "#"
+                        },
+                        {
+                          "label": "Luogo 3",
+                          "url": "#"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "label": "/ Eventi",
+                  "url": "#",
+                  "emphasis": true,
+                  "children": [
+                    {
+                      "label": "/ Categoria 1",
+                      "url": "#",
+                      "emphasis": true
+                    },
+                    {
+                      "label": "/ Categoria 2",
+                      "url": "#",
+                      "emphasis": true
+                    },
+                    {
+                      "label": "/ Categoria 3",
+                      "url": "#",
+                      "emphasis": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "label": "Argomenti",
+              "url": "#",
+              "children": [
+                {
+                  "label": "Argomento 1",
+                  "url": "#"
+                },
+                {
+                  "label": "Argomento 2",
+                  "url": "#"
+                },
+                {
+                  "label": "Argomento 3",
+                  "url": "#"
+                },
+                {
+                  "label": "Argomento 4",
+                  "url": "#"
+                }
+              ]
+            }
+          ]
+        }
+      }
+    ]
+  },
+  "sidebar_blocks": {
+    "it": [],
+    "en": []
+  },
+  "footer_blocks": null
+}

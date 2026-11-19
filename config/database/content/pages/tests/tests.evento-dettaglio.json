@@ -1,0 +1,490 @@
+{
+    "id": "evento-dettaglio",
+    "slug": "evento-dettaglio",
+    "title": {
+        "it": "363^ Festa di Sant'Efisio",
+        "en": "363rd Feast of Sant'Efisio"
+    },
+    "description": "Dettaglio di un evento: sezioni, galleria, costi, contatti. Contenuto da JSON, reso dal blocco event-detail del tema Sixteen.",
+    "layout": "test",
+    "content_blocks": {
+        "it": [
+            {
+                "type": "event-detail",
+                "data": {
+                    "view": "pub_theme::components.blocks.event-detail.design-comuni",
+                    "title": "363^ Festa di Sant'Efisio",
+                    "subtitle": "Festival - dal 01 maggio 2019 al 04 maggio 2019",
+                    "lead": "Il 1° maggio 2019 Cagliari e tutta la Sardegna festeggiano la 363ª Festa di Sant'Efisio. Un intenso momento di devozione, fede, cultura e tradizioni centenarie che si fondono in una processione che non ha eguali.",
+                    "breadcrumb": {
+                        "items": [
+                            {
+                                "label": "Home",
+                                "url": "/it/tests/homepage"
+                            },
+                            {
+                                "label": "Vivere il Comune",
+                                "url": "#"
+                            },
+                            {
+                                "label": "Eventi",
+                                "url": "#"
+                            }
+                        ],
+                        "current": "363^ Festa di Sant'Efisio"
+                    },
+                    "actions": [
+                        {
+                            "id": "shareActions",
+                            "icon": "it-share",
+                            "aria_label": "condividi sui social",
+                            "label": "Condividi",
+                            "items": [
+                                {
+                                    "icon": "it-facebook",
+                                    "label": "Facebook",
+                                    "url": "#"
+                                },
+                                {
+                                    "icon": "it-twitter",
+                                    "label": "Twitter",
+                                    "url": "#"
+                                },
+                                {
+                                    "icon": "it-linkedin",
+                                    "label": "Linkedin",
+                                    "url": "#"
+                                },
+                                {
+                                    "icon": "it-whatsapp",
+                                    "label": "Whatsapp",
+                                    "url": "#"
+                                }
+                            ]
+                        },
+                        {
+                            "id": "viewActions",
+                            "icon": "it-more-items",
+                            "aria_label": "vedi azioni da compiere sulla pagina",
+                            "label": "Vedi azioni",
+                            "items": [
+                                {
+                                    "icon": "it-print",
+                                    "label": "Stampa",
+                                    "url": "#"
+                                },
+                                {
+                                    "icon": "it-hearing",
+                                    "label": "Ascolta",
+                                    "url": "#"
+                                },
+                                {
+                                    "icon": "it-mail",
+                                    "label": "Invia",
+                                    "url": "#"
+                                }
+                            ]
+                        }
+                    ],
+                    "topics": {
+                        "title": "Argomenti",
+                        "items": [
+                            "Cultura",
+                            "Vivere la città"
+                        ]
+                    },
+                    "hero": {
+                        "src": "https://picsum.photos/800/400",
+                        "alt": "Un'immagine generica segnaposto con angoli arrotondati in una figura.",
+                        "caption": "Una didascalia per l'immagine sopra."
+                    },
+                    "side_nav": {
+                        "aria_label": "INDICE DELLA PAGINA",
+                        "title": "INDICE DELLA PAGINA",
+                        "items": [
+                            {
+                                "anchor": "cos-e",
+                                "label": "Cos'è"
+                            },
+                            {
+                                "anchor": "destinatari",
+                                "label": "A chi è rivolto"
+                            },
+                            {
+                                "anchor": "luogo",
+                                "label": "Luogo"
+                            },
+                            {
+                                "anchor": "date-e-orari",
+                                "label": "Date e orari"
+                            },
+                            {
+                                "anchor": "costi",
+                                "label": "Costi"
+                            },
+                            {
+                                "anchor": "allegati",
+                                "label": "Allegati"
+                            },
+                            {
+                                "anchor": "appuntamenti",
+                                "label": "Appuntamenti"
+                            },
+                            {
+                                "anchor": "contatti",
+                                "label": "Contatti"
+                            },
+                            {
+                                "anchor": "patrocinio",
+                                "label": "Patrocinato da"
+                            },
+                            {
+                                "anchor": "sponsor",
+                                "label": "Sponsor"
+                            }
+                        ]
+                    },
+                    "sections": [
+                        {
+                            "id": "cos-e",
+                            "type": "rich",
+                            "title": "Cos'è?",
+                            "audio": true,
+                            "paragraphs": [
+                                "Sant'Efisio, nato in una città dell'Asia Minore, visse all'epoca dell'Imperatore Diocleziano nel III sec. d.C. Giovanissimo intraprese la carriera militare e, inviato in Italia per contrastare la diffusione del cristianesimo, la tradizione vuole che si convertì in seguito alla visione straordinaria di una croce splendente nel cielo che successivamente si impresse nel palmo della mano e sentendo la voce di Cristo che lo rimproverava per la sua missione sanguinaria.",
+                                "Giunto in Sardegna, mentre i suoi soldati combattevano i barbari, Sant'Efisio si convertì al cristianesimo e ne divenne difensore, disobbedendo agli ordini di Diocleziano il quale ne comandò il martirio che avvenne il 15 gennaio del 303 d.C. nella prigione di Nora. Il rito ha origine da un Voto del 1652 della Municipalità di Cagliari, oggi custodito presso l’Archivio storico, nel quale s’invoca l’intercessione di Sant’Efisio per far terminare la peste e ci si impegna a celebrare ogni anno e perpetuamente una Festa solenne.",
+                                "Dal 1657 si ripete annualmente con una cerimonia solenne la Festa di Sant’Efisio, il Pellegrinaggio da Cagliari al luogo del martirio del Santo e i riti di scioglimento del Voto voluto dalla Municipalità di Cagliari."
+                            ],
+                            "chips": {
+                                "title": "Parteciperanno",
+                                "items": [
+                                    "Valerio Alfio Boi",
+                                    "Marco Murgia"
+                                ]
+                            },
+                            "gallery": {
+                                "title": "Galleria di immagini",
+                                "items": [
+                                    {
+                                        "src": "https://via.placeholder.com/250x250/ebebeb/808080/?text=Thumb",
+                                        "alt": "Festa di Sant'Efisio",
+                                        "caption": "Festa di Sant'Efisio"
+                                    },
+                                    {
+                                        "src": "https://via.placeholder.com/250x250/ebebeb/808080/?text=Thumb",
+                                        "alt": "Festa di Sant'Efisio",
+                                        "caption": "Festa di Sant'Efisio"
+                                    },
+                                    {
+                                        "src": "https://via.placeholder.com/250x250/ebebeb/808080/?text=Thumb",
+                                        "alt": "Festa di Sant'Efisio",
+                                        "caption": "Festa di Sant'Efisio"
+                                    },
+                                    {
+                                        "src": "https://via.placeholder.com/250x250/ebebeb/808080/?text=Thumb",
+                                        "alt": "Festa di Sant'Efisio",
+                                        "caption": "Festa di Sant'Efisio"
+                                    },
+                                    {
+                                        "src": "https://via.placeholder.com/250x250/ebebeb/808080/?text=Thumb",
+                                        "alt": "Festa di Sant'Efisio",
+                                        "caption": "Festa di Sant'Efisio"
+                                    },
+                                    {
+                                        "src": "https://via.placeholder.com/250x250/ebebeb/808080/?text=Thumb",
+                                        "alt": "Festa di Sant'Efisio",
+                                        "caption": "Festa di Sant'Efisio"
+                                    }
+                                ]
+                            },
+                            "video": {
+                                "title": "Video",
+                                "iframe_title": "Video YouTube",
+                                "src": "https://www.youtube.com/embed/0rIBULTnWuQ",
+                                "transcript": {
+                                    "title": "Trascrizione del video",
+                                    "text": "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ipsa necessitatibus odit, quasi quaerat inventore molestiae repellendus, harum eius adipisci porro, voluptas itaque corporis tempore pariatur veniam cupiditate! Pariatur, sint amet. Quis, nam quod assumenda fugiat perspiciatis tenetur necessitatibus. Expedita aliquid ipsa at magni, quas tempora minima voluptas asperiores eaque nesciunt dicta laborum. Modi repudiandae unde impedit nisi doloremque est tempore dolor labore id veritatis. Ut dolores perspiciatis placeat totam sint quibusdam nostrum quia ea."
+                                }
+                            }
+                        },
+                        {
+                            "id": "destinatari",
+                            "type": "text",
+                            "title": "A chi è rivolto",
+                            "text": "Cittadini di tutte l'età."
+                        },
+                        {
+                            "id": "luogo",
+                            "type": "place",
+                            "title": "Luogo",
+                            "icon": "it-pin",
+                            "name": "Cagliari",
+                            "address": "Via Sant'Efisio, 14 - 09124",
+                            "details": "Ulteriori dettagli",
+                            "map": {
+                                "src": "https://via.placeholder.com/320x180/ebebeb/808080/?text=Map",
+                                "alt": "Festa di Sant'Efisio"
+                            }
+                        },
+                        {
+                            "id": "date-e-orari",
+                            "type": "schedule",
+                            "title": "Date e orari",
+                            "items": [
+                                {
+                                    "day": "01",
+                                    "month": "mag",
+                                    "text": "09:00 - Inizio evento",
+                                    "tag": "span"
+                                },
+                                {
+                                    "day": "04",
+                                    "month": "mag",
+                                    "text": "18:00 - Fine evento",
+                                    "tag": "div"
+                                }
+                            ],
+                            "note": "Per informazioni sul programma dettagliato degli appuntamenti religiosi e civili, consultare il programma nella sezione documenti."
+                        },
+                        {
+                            "id": "costi",
+                            "type": "costs",
+                            "title": "Costi",
+                            "items": [
+                                {
+                                    "name": "Tribuna 1 e 4",
+                                    "price": "€ 30",
+                                    "text": "Tribune coperte site nella via Roma lato Palazzo Vivanet (tribuna n. 1) e nella via Roma fronte palazzo Civico (tribuna n. 4), per circa 770 posti a sedere."
+                                },
+                                {
+                                    "name": "Tribuna 3",
+                                    "price": "€ 30",
+                                    "text": "Tribuna coperta con la pedana riservata alle persone con disabilità motorie sita nella via Roma fronte Palazzo Vivanet, per circa 190 posti a sedere, di cui circa 30 posti nella pedana anzi detta. L’accesso sarà consentito con unico biglietto alla persona con disabilità motoria e al proprio accompagnatore. Saranno pertanto venduti circa 30 titoli di ingresso per i soggetti con disabilità motorie, con i quali potranno accedere altrettanti accompagnatori e circa 130 biglietti ordinari."
+                                },
+                                {
+                                    "name": "Tribuna 5",
+                                    "price": "€ 25",
+                                    "text": "Tribuna coperta fronte largo Carlo Felice, dislocata nell'incrocio, nello spazio compreso tra i due semafori della via Roma, per circa 400 posti a sedere."
+                                },
+                                {
+                                    "name": "Tribuna 2",
+                                    "price": "€ 15",
+                                    "text": "Tribuna coperta dislocata nella piazza Matteotti, antistante la Stazione Ferroviaria, per circa 370 posti a sedere."
+                                }
+                            ]
+                        },
+                        {
+                            "id": "allegati",
+                            "type": "attachments",
+                            "title": "Allegati",
+                            "icon": "it-clip",
+                            "items": [
+                                {
+                                    "label": "Locandina Sant'Efisio 2019 (PDF - 1MB)",
+                                    "title": "Scarica la locandina sant'efisio 2019",
+                                    "aria": "Scarica la locandina sant'efisio 2019"
+                                }
+                            ]
+                        },
+                        {
+                            "id": "appuntamenti",
+                            "type": "related",
+                            "title": "Appuntamenti",
+                            "read_more": "Leggi di più",
+                            "read_more_hidden": "su Lorem ipsum dolor sit amet, consectetur adipiscing elit…",
+                            "items": [
+                                {
+                                    "image": {
+                                        "src": "https://picsum.photos/400/200",
+                                        "title": "titolo immagine",
+                                        "alt": "descrizione immagine"
+                                    },
+                                    "date": "31",
+                                    "month": "dicembre",
+                                    "title": "Il ballo dell'isola in festa",
+                                    "aria": "Leggi di più - Il ballo dell'isola in festa"
+                                },
+                                {
+                                    "image": {
+                                        "src": "https://picsum.photos/400/200",
+                                        "title": "titolo immagine",
+                                        "alt": "descrizione immagine"
+                                    },
+                                    "date": "31",
+                                    "month": "dicembre",
+                                    "title": "La coralità sarda per Sant'Efisio",
+                                    "aria": "leggi di più - la coralità sarda per Sant'Efisio"
+                                },
+                                {
+                                    "image": {
+                                        "src": "https://picsum.photos/400/200",
+                                        "title": "titolo immagine",
+                                        "alt": "descrizione immagine"
+                                    },
+                                    "date": "31",
+                                    "month": "dicembre",
+                                    "title": "Il ballo dell'isola in festa",
+                                    "aria": "leggi di più - il ballo dell'isola in festa"
+                                }
+                            ]
+                        },
+                        {
+                            "id": "contatti",
+                            "type": "contacts",
+                            "title": "Contatti",
+                            "supported_by": "Con il supporto di:",
+                            "items": [
+                                {
+                                    "icon": "it-telephone",
+                                    "name": "Arciconfraternita del Gonfalone sotto l’invocazione di Sant'Efisio martire",
+                                    "lines": [
+                                        "Via Sant'Efisio, 14 - 09124",
+                                        "T +39 070 668632"
+                                    ],
+                                    "links": [
+                                        {
+                                            "label": "www.festadisantelfisio.com",
+                                            "url": "#",
+                                            "aria": "scopri di più su www.festadisantelfisio.com - link esterno - apertura nuova scheda",
+                                            "title": "vai sul sito del festival di sant'elfisio",
+                                            "external": true
+                                        },
+                                        {
+                                            "label": "arcisantefisio@tiscali.it",
+                                            "url": "mailto:arcisantefisio@tiscali.it",
+                                            "aria": "invia un'email a arcisantefisio@tiscali.it< - apertura casella postale",
+                                            "title": "invia un'email a arcisantefisio@tiscali.it< - apertura casella postale",
+                                            "external": false
+                                        }
+                                    ]
+                                },
+                                {
+                                    "icon": "it-pa",
+                                    "name": "Ufficio delle Attività Produttive",
+                                    "lines": [
+                                        "Piazza Alcide De Gasperi, 2",
+                                        "T +39 070 6776430"
+                                    ],
+                                    "links": [
+                                        {
+                                            "label": "produttive@comune.cagliari.it",
+                                            "url": "mailto:produttive@comune.cagliari.it",
+                                            "aria": "invia un'email a produttive@comune.cagliari.it - apertura casella portale",
+                                            "title": "invia un'email a produttive@comune.cagliari.it - apertura casella portale",
+                                            "external": false
+                                        }
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "id": "patrocinio",
+                            "type": "links",
+                            "title": "Patrocinato da",
+                            "items": [
+                                "Regione Autonome della Sardegna"
+                            ]
+                        },
+                        {
+                            "id": "sponsor",
+                            "type": "links",
+                            "title": "Sponsor",
+                            "items": [
+                                "Provincia di Cagliari",
+                                "Sogaer - Aeroporto di Cagliari",
+                                "Autorità Portuale di Cagliari",
+                                "ARST",
+                                "CTM Cagliari",
+                                "Trenitalia",
+                                "Camera di Commercio di Cagliari"
+                            ]
+                        }
+                    ],
+                    "updated": {
+                        "label": "Ultimo aggiornamento:",
+                        "value": "10/06/2019, 16:00"
+                    },
+                    "feedback": {
+                        "title": "Quanto sono chiare le informazioni su questa pagina?",
+                        "legend": "Valuta da 1 a 5 stelle la pagina",
+                        "star_label": "Valuta %d stelle su 5",
+                        "thanks": "Grazie, il tuo parere ci aiuterà a migliorare il servizio!",
+                        "positive": {
+                            "question": "Quali sono stati gli aspetti che hai preferito?",
+                            "answers": [
+                                "Le indicazioni erano chiare",
+                                "Le indicazioni erano complete",
+                                "Capivo sempre che stavo procedendo correttamente",
+                                "Non ho avuto problemi tecnici",
+                                "Altro"
+                            ]
+                        },
+                        "negative": {
+                            "question": "Dove hai incontrato le maggiori difficoltà?",
+                            "answers": [
+                                "A volte le indicazioni non erano chiare",
+                                "A volte le indicazioni non erano complete",
+                                "A volte non capivo se stavo procedendo correttamente",
+                                "Ho avuto problemi tecnici",
+                                "Altro"
+                            ]
+                        },
+                        "detail": {
+                            "question": "Vuoi aggiungere altri dettagli?",
+                            "label": "Dettaglio",
+                            "help": "Inserire massimo 200 caratteri"
+                        },
+                        "back": "Indietro",
+                        "next": "Avanti"
+                    },
+                    "contacts": {
+                        "main": {
+                            "title": "Contatta il comune",
+                            "items": [
+                                {
+                                    "icon": "it-help-circle",
+                                    "label": "Leggi le domande frequenti",
+                                    "url": "#"
+                                },
+                                {
+                                    "icon": "it-mail",
+                                    "label": "Richiedi assistenza",
+                                    "url": "#",
+                                    "element": "contacts"
+                                },
+                                {
+                                    "icon": "it-hearing",
+                                    "label": "Chiama il numero verde 05 0505",
+                                    "url": "#"
+                                },
+                                {
+                                    "icon": "it-calendar",
+                                    "label": "Prenota appuntamento",
+                                    "url": "#",
+                                    "element": "appointment-booking"
+                                }
+                            ]
+                        },
+                        "problems": {
+                            "title": "Problemi in città",
+                            "items": [
+                                {
+                                    "icon": "it-map-marker-circle",
+                                    "label": "Segnala disservizio",
+                                    "url": "#"
+                                }
+                            ]
+                        }
+                    },
+                    "header_active": "news"
+                }
+            }
+        ],
+        "en": []
+    },
+    "sidebar_blocks": {
+        "it": [],
+        "en": []
+    },
+    "footer_blocks": null
+}

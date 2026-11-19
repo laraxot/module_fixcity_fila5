@@ -1,0 +1,12 @@
+{
+    "name": "Fixcity",
+    "alias": "fixcity",
+    "description": "",
+    "keywords": [],
+    "priority": 0,
+    "providers": [
+        "Modules\\Fixcity\\Providers\\FixcityServiceProvider",
+        "Modules\\Fixcity\\Providers\\Filament\\AdminPanelProvider"
+    ],
+    "files": []
+}

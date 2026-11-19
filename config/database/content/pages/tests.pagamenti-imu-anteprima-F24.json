@@ -1,0 +1,344 @@
+{
+    "id": "tests.pagamenti-imu-anteprima-F24",
+    "slug": "tests.pagamenti-imu-anteprima-F24",
+    "parent_slug": "tests",
+    "title": {
+        "it": "Calcolo IMU",
+        "en": "Calcolo IMU"
+    },
+    "layout": "test",
+    "sidebar_blocks": {
+        "it": [],
+        "en": []
+    },
+    "footer_blocks": null,
+    "description": "Pagina di prova pagamenti-imu-anteprima-F24 (flusso pagamento IMU) da JSON, resa dal blocco service-flow del tema Sixteen.",
+    "content_blocks": {
+        "it": [
+            {
+                "type": "service-flow",
+                "data": {
+                    "view": "pub_theme::components.blocks.service-flow.design-comuni",
+                    "kind": "wizard-step",
+                    "breadcrumb": {
+                        "items": [
+                            {
+                                "label": "Home",
+                                "url": "/it/tests/homepage"
+                            },
+                            {
+                                "label": "Servizi",
+                                "url": "#"
+                            },
+                            {
+                                "label": "Tributi, finanze e contravvenzioni",
+                                "url": "#"
+                            }
+                        ],
+                        "current": "Pagamento IMU"
+                    },
+                    "heading": {
+                        "title": "Calcolo IMU"
+                    },
+                    "stepper": {
+                        "items": [
+                            {
+                                "label": "Informativa sulla privacy",
+                                "state": "confirmed"
+                            },
+                            {
+                                "label": "Dati generali",
+                                "state": "confirmed"
+                            },
+                            {
+                                "label": "Riepilogo",
+                                "state": "confirmed"
+                            },
+                            {
+                                "label": "Preferenze",
+                                "state": "confirmed"
+                            },
+                            {
+                                "label": "Anteprima F24",
+                                "state": "active"
+                            }
+                        ],
+                        "confirmed_label": "Confermato",
+                        "active_label": "Attivo",
+                        "index": "5/5"
+                    },
+                    "nav": {
+                        "aria_label": "Step",
+                        "back": "Indietro",
+                        "save": {
+                            "long": "Salva Richiesta",
+                            "short": "Salva"
+                        },
+                        "next": {
+                            "label": "Invia",
+                            "icon": "",
+                            "class": "send",
+                            "modal": "#modal-terms"
+                        },
+                        "saved_message": "Richiesta salvata con successo"
+                    },
+                    "body": {
+                        "layout": "centered",
+                        "steps_content": "none",
+                        "sections_container": false,
+                        "col": "col-12 col-lg-8",
+                        "lead": {
+                            "col_class": "col-12 d-lg-none mb-40 mt-4",
+                            "class": "text-paragraph",
+                            "text": "Rivedi le informazioni da inserire nel documento F24. Conferma e continua per scaricare il documento: lo troverai sempre disponibile nella tua area personale."
+                        }
+                    },
+                    "sections": [
+                        {
+                            "type": "summary",
+                            "wrapper_class": "",
+                            "card_class": "card has-bkg-grey shadow-sm mb-0",
+                            "header_class": "card-header border-0 p-0 mb-lg-20",
+                            "title": "Motivo del pagamento",
+                            "title_tag": "h3",
+                            "title_class": "subtitle-large",
+                            "groups": [
+                                {
+                                    "class": "bg-white p-4",
+                                    "header_class": "d-flex justify-content-between d-flex justify-content-end",
+                                    "title": "Contribuente",
+                                    "edit": {
+                                        "label": "Modifica",
+                                        "url": "#"
+                                    },
+                                    "rows": [
+                                        {
+                                            "label": "Nome:",
+                                            "value": "Giulia"
+                                        },
+                                        {
+                                            "label": "Cognome:",
+                                            "value": "Rossi"
+                                        },
+                                        {
+                                            "label": "Data di nascita:",
+                                            "value": "02/03/1975"
+                                        },
+                                        {
+                                            "label": "Domicilio Fiscale:",
+                                            "value": "Via Roma 16, 00100 Roma, It"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "class": "bg-white mt-4 mb-30 p-4",
+                                    "header_class": "d-flex justify-content-between d-flex justify-content-end",
+                                    "title": "H501-Roma",
+                                    "edit": {
+                                        "label": "Modifica",
+                                        "url": "#"
+                                    },
+                                    "rows": [
+                                        {
+                                            "label": "Ravvedimento:",
+                                            "value": "Si"
+                                        },
+                                        {
+                                            "label": "Imm. var.:",
+                                            "value": "No"
+                                        },
+                                        {
+                                            "label": "Acconto:",
+                                            "value": "Si"
+                                        },
+                                        {
+                                            "label": "Saldo:",
+                                            "value": "No"
+                                        },
+                                        {
+                                            "label": "Rateaz/ mese rif:",
+                                            "value": "01"
+                                        },
+                                        {
+                                            "label": "Anno di rif:",
+                                            "value": "2022"
+                                        },
+                                        {
+                                            "label": "Detrazione:",
+                                            "value": "100,00 €"
+                                        },
+                                        {
+                                            "label": "Importi a debito versati:",
+                                            "value": "500,00 €"
+                                        },
+                                        {
+                                            "label": "Importi a credito compensati:",
+                                            "value": "700,00 €"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "class": "bg-white mt-4 mb-30 p-4",
+                                    "header_class": "d-flex justify-content-between d-flex justify-content-end",
+                                    "title": "L736-Venezia",
+                                    "edit": {
+                                        "label": "Modifica",
+                                        "url": "#"
+                                    },
+                                    "rows": [
+                                        {
+                                            "label": "Ravvedimento:",
+                                            "value": "Si"
+                                        },
+                                        {
+                                            "label": "Imm. var.:",
+                                            "value": "No"
+                                        },
+                                        {
+                                            "label": "Acconto:",
+                                            "value": "Si"
+                                        },
+                                        {
+                                            "label": "Saldo:",
+                                            "value": "No"
+                                        },
+                                        {
+                                            "label": "Rateaz/ mese rif:",
+                                            "value": "01"
+                                        },
+                                        {
+                                            "label": "Anno di rif:",
+                                            "value": "2022"
+                                        },
+                                        {
+                                            "label": "Detrazione:",
+                                            "value": "-- €"
+                                        },
+                                        {
+                                            "label": "Importi a debito versati:",
+                                            "value": "-- €"
+                                        },
+                                        {
+                                            "label": "Importi a credito compensati:",
+                                            "value": "200,00 €"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "class": "bg-white mt-4 mb-30 p-4",
+                                    "header_class": "d-flex justify-content-between d-flex justify-content-end",
+                                    "title": "L065-Tavagnacco",
+                                    "edit": {
+                                        "label": "Modifica",
+                                        "url": "#"
+                                    },
+                                    "rows": [
+                                        {
+                                            "label": "Ravvedimento:",
+                                            "value": "Si"
+                                        },
+                                        {
+                                            "label": "Imm. var.:",
+                                            "value": "No"
+                                        },
+                                        {
+                                            "label": "Acconto:",
+                                            "value": "Si"
+                                        },
+                                        {
+                                            "label": "Saldo:",
+                                            "value": "No"
+                                        },
+                                        {
+                                            "label": "Rateaz/ mese rif:",
+                                            "value": "01"
+                                        },
+                                        {
+                                            "label": "Anno di rif:",
+                                            "value": "2022"
+                                        },
+                                        {
+                                            "label": "Detrazione:",
+                                            "value": "-- €"
+                                        },
+                                        {
+                                            "label": "Importi a debito versati:",
+                                            "value": "-- €"
+                                        },
+                                        {
+                                            "label": "Importi a credito compensati:",
+                                            "value": "900,00 €"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "total": "Importo pagamento: 1800,00 €",
+                            "total_class": "title-large-semi-bold card-white",
+                            "bare": true
+                        }
+                    ],
+                    "contacts": {
+                        "layout": "offset",
+                        "col": "col-12 col-lg-6",
+                        "main": {
+                            "title": "Contatta il comune",
+                            "items": [
+                                {
+                                    "icon": "it-help-circle",
+                                    "label": "Leggi le domande frequenti",
+                                    "url": "#"
+                                },
+                                {
+                                    "icon": "it-mail",
+                                    "label": "Richiedi assistenza",
+                                    "url": "#",
+                                    "element": "contacts"
+                                },
+                                {
+                                    "icon": "it-hearing",
+                                    "label": "Chiama il numero verde 05 0505",
+                                    "url": "#"
+                                },
+                                {
+                                    "icon": "it-calendar",
+                                    "label": "Prenota appuntamento",
+                                    "url": "#",
+                                    "element": "appointment-booking"
+                                }
+                            ]
+                        }
+                    },
+                    "modals": [
+                        {
+                            "type": "dialog",
+                            "id": "modal-terms",
+                            "close_label": "Chiudi finestra modale",
+                            "header": {
+                                "title": "Termini e condizioni",
+                                "info": "Cliccando su Conferma e invia confermi di aver preso visione dei termini e delle condizioni di servizio.",
+                                "link": {
+                                    "label": "Leggi termini e condizioni",
+                                    "url": "#"
+                                }
+                            },
+                            "footer": {
+                                "buttons": [
+                                    {
+                                        "label": "Conferma e invia",
+                                        "variant": "primary"
+                                    },
+                                    {
+                                        "label": "Annulla",
+                                        "variant": "outline"
+                                    }
+                                ]
+                            }
+                        }
+                    ],
+                    "header_active": "all-services"
+                }
+            }
+        ],
+        "en": []
+    }
+}

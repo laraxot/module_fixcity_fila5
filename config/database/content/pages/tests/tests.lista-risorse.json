@@ -1,0 +1,276 @@
+{
+    "id": "lista-risorse",
+    "slug": "lista-risorse",
+    "parent_slug": "tests",
+    "title": {
+        "it": "Lista con risorse",
+        "en": "List with resources"
+    },
+    "layout": "test",
+    "sidebar_blocks": {
+        "it": [],
+        "en": []
+    },
+    "footer_blocks": null,
+    "description": "Pagina lista con risorse in evidenza ed elenco risorse (riferimento sito/lista-risorse). Contenuto da JSON, reso dal blocco list-page del tema Sixteen.",
+    "content_blocks": {
+        "it": [
+            {
+                "type": "list-page",
+                "data": {
+                    "view": "pub_theme::components.blocks.list-page.design-comuni",
+                    "breadcrumb": {
+                        "items": [
+                            {
+                                "label": "Home",
+                                "url": "/it/tests/homepage"
+                            }
+                        ],
+                        "current": "Novità"
+                    },
+                    "hero": {
+                        "text": "Breve sommario dei contenuti presenti in questa pagina, generalmene intesa con la descrizione della tipologia di contenuti",
+                        "row_shadow": true
+                    },
+                    "title": "Titolo della pagina lista con risorse in evidenza e lista risorse",
+                    "sections": [
+                        {
+                            "type": "news-cards",
+                            "style": "plain",
+                            "title": "Notizie in evidenza",
+                            "heading": "xxlarge",
+                            "items": [
+                                {
+                                    "category": {
+                                        "label": "NOTIZIE",
+                                        "url": "#"
+                                    },
+                                    "date": "28 FEB 2023",
+                                    "url": "novita-dettaglio.html",
+                                    "title": "Sport nel verde: le iniziative della prossima edizione",
+                                    "text": "Le informazioni per partecipare all’iniziativa rivolta a tutte le fasce d’età per promuovere l’attività motoria nelle aree verdi della città",
+                                    "image": {
+                                        "file": "notizia-sport-nel-verde.png",
+                                        "title": "titolo immagine",
+                                        "alt": "descrizione immagine"
+                                    }
+                                },
+                                {
+                                    "category": {
+                                        "label": "NOTIZIE",
+                                        "url": "#"
+                                    },
+                                    "date": "10 GEN 2023",
+                                    "url": "novita-dettaglio.html",
+                                    "title": "Torneo di beneficienza “Tutti in pista”",
+                                    "text": "Dal 2 al 3 giugno torna il torneo di beneficienza “Tutti in pista”. La raccolta fondi finanzierà progetti sportivi per ragazzi e ragazze",
+                                    "image": {
+                                        "file": "notizia-torneo-bici.png",
+                                        "title": "titolo immagine",
+                                        "alt": "descrizione immagine"
+                                    }
+                                },
+                                {
+                                    "category": {
+                                        "label": "AVVISI",
+                                        "url": "#"
+                                    },
+                                    "date": "10 FEB 2023",
+                                    "url": "novita-dettaglio.html",
+                                    "title": "Chiusa per ristrutturazione la piscina Minghetti",
+                                    "text": "Partiti i lavori per l’adeguamento dell’impianto. La riapertura è prevista per giugno 2023"
+                                }
+                            ]
+                        },
+                        {
+                            "type": "news-cards",
+                            "style": "grey",
+                            "title": "Esplora tutte le novità",
+                            "heading": "xxlarge",
+                            "search": {
+                                "label": "",
+                                "placeholder": "Cerca per parola chiave",
+                                "button": "Invio",
+                                "status": "62 notizie trovate in ordine alfabetico",
+                                "muted": true
+                            },
+                            "items": [
+                                {
+                                    "category": {
+                                        "label": "NOTIZIE",
+                                        "url": "#"
+                                    },
+                                    "date": "28 FEB 2023",
+                                    "url": "novita-dettaglio.html",
+                                    "title": "Dialoghi in Biblioteca - “Il viaggio delle donne”",
+                                    "text": "Presentazione del libro di Alessandra Beltrame per la rassegna 'Dialoghi in Biblioteca0 alla Joppi",
+                                    "image": {
+                                        "file": "notizia-dialoghi-biblioteca.png",
+                                        "title": "titolo immagine",
+                                        "alt": "descrizione immagine"
+                                    }
+                                },
+                                {
+                                    "category": {
+                                        "label": "NOTIZIE",
+                                        "url": "#"
+                                    },
+                                    "date": "03 MAR 2023",
+                                    "url": "novita-dettaglio.html",
+                                    "title": "I giovedì dei piccoli",
+                                    "text": "Attività dedicate ai più piccoli in tutte le ludoteche comunali",
+                                    "image": {
+                                        "file": "notizia-ludoteca.png",
+                                        "title": "titolo immagine",
+                                        "alt": "descrizione immagine"
+                                    }
+                                },
+                                {
+                                    "category": {
+                                        "label": "COMUNICATI",
+                                        "url": "#"
+                                    },
+                                    "date": "1 MAR 2023",
+                                    "url": "novita-dettaglio.html",
+                                    "title": "Messa in sicurezza del silos vecchio di viale La Playa",
+                                    "text": "I lavori saranno consegnati con procedura d’urgenza e prevedono una durata di 33 giorni naturali e consecutivi",
+                                    "image": {
+                                        "file": "notizia-sicurezza.png",
+                                        "title": "titolo immagine",
+                                        "alt": "descrizione immagine"
+                                    }
+                                },
+                                {
+                                    "category": {
+                                        "label": "NOTIZIE",
+                                        "url": "#"
+                                    },
+                                    "date": "27 FEB 2023",
+                                    "url": "novita-dettaglio.html",
+                                    "title": "Iniziano le asfaltature dei controviali in Viale Venezia",
+                                    "text": "A partire da lunedì 27.02.2023 e fino a venerdì 17.03.2023 sarà eseguito il rifacimento della pavimentazione bituminosa dei controviali Nord e Sud",
+                                    "image": {
+                                        "file": "notizia-asfaltatura.png",
+                                        "title": "titolo immagine",
+                                        "alt": "descrizione immagine"
+                                    }
+                                },
+                                {
+                                    "category": {
+                                        "label": "AVVISI",
+                                        "url": "#"
+                                    },
+                                    "date": "18 FEB 2023",
+                                    "url": "novita-dettaglio.html",
+                                    "title": "Avviso per adesione strutture convenzionate nido",
+                                    "text": "Le strutture per la prima infanzia (asili nido), che offrono i loro servizi nel territorio comunale, possono richiedere di convenzionarsi con il Comune per l'anno educativo 2023/2024"
+                                },
+                                {
+                                    "category": {
+                                        "label": "NOTIZIE",
+                                        "url": "#"
+                                    },
+                                    "date": "07 FEB 2023",
+                                    "url": "novita-dettaglio.html",
+                                    "title": "Via San Paolo: sgomberata la baraccopoli",
+                                    "text": "Polizia municipale al lavoro tutta la giornata di sabato 4 febbraio",
+                                    "image": {
+                                        "file": "notizia-sgombero.png",
+                                        "title": "titolo immagine",
+                                        "alt": "descrizione immagine"
+                                    }
+                                }
+                            ],
+                            "pagination": {
+                                "aria_label": "Navigazione centrata",
+                                "previous": "Pagina precedente",
+                                "next": "Pagina successiva",
+                                "page_label": "Pagina",
+                                "pages": [
+                                    "1",
+                                    "2",
+                                    "3"
+                                ],
+                                "current": 0
+                            }
+                        }
+                    ],
+                    "feedback": {
+                        "title": "Quanto sono chiare le informazioni su questa pagina?",
+                        "legend": "Valuta da 1 a 5 stelle la pagina",
+                        "star_label": "Valuta %d stelle su 5",
+                        "thanks": "Grazie, il tuo parere ci aiuterà a migliorare il servizio!",
+                        "positive": {
+                            "question": "Quali sono stati gli aspetti che hai preferito?",
+                            "answers": [
+                                "Le indicazioni erano chiare",
+                                "Le indicazioni erano complete",
+                                "Capivo sempre che stavo procedendo correttamente",
+                                "Non ho avuto problemi tecnici",
+                                "Altro"
+                            ]
+                        },
+                        "negative": {
+                            "question": "Dove hai incontrato le maggiori difficoltà?",
+                            "answers": [
+                                "A volte le indicazioni non erano chiare",
+                                "A volte le indicazioni non erano complete",
+                                "A volte non capivo se stavo procedendo correttamente",
+                                "Ho avuto problemi tecnici",
+                                "Altro"
+                            ]
+                        },
+                        "detail": {
+                            "question": "Vuoi aggiungere altri dettagli?",
+                            "label": "Dettaglio",
+                            "help": "Inserire massimo 200 caratteri"
+                        },
+                        "back": "Indietro",
+                        "next": "Avanti"
+                    },
+                    "contacts": {
+                        "main": {
+                            "title": "Contatta il comune",
+                            "items": [
+                                {
+                                    "icon": "it-help-circle",
+                                    "label": "Leggi le domande frequenti",
+                                    "url": "#"
+                                },
+                                {
+                                    "icon": "it-mail",
+                                    "label": "Richiedi assistenza",
+                                    "url": "#",
+                                    "element": "contacts"
+                                },
+                                {
+                                    "icon": "it-hearing",
+                                    "label": "Chiama il numero verde 05 0505",
+                                    "url": "#"
+                                },
+                                {
+                                    "icon": "it-calendar",
+                                    "label": "Prenota appuntamento",
+                                    "url": "#",
+                                    "element": "appointment-booking"
+                                }
+                            ]
+                        },
+                        "problems": {
+                            "title": "Problemi in città",
+                            "items": [
+                                {
+                                    "icon": "it-map-marker-circle",
+                                    "label": "Segnala disservizio",
+                                    "url": "#"
+                                }
+                            ]
+                        }
+                    },
+                    "header_active": "news"
+                }
+            }
+        ],
+        "en": []
+    }
+}
