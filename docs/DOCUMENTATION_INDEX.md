@@ -470,7 +470,7 @@ status: draft
 
 **Related:**
 - `Xot/docs/translation-rules-1.md`
-- `UI/docs/translations-update-january-2026.md`
+- `UI/docs/translations-update.md`
 
 ---
 
