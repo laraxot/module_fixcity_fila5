@@ -112,7 +112,7 @@ Se il codice JS/CSS/Blade va perso, ricostruire in ordine:
 1. JSON: `GenerateTicketsJsonAction` → `public_html/data/tickets.json`
 2. Geo: [geo-map-lit-reconstruction-guide.md](../../../../Geo/docs/wiki/concepts/geo-map-lit-reconstruction-guide.md)
 3. Tema Sixteen: [geo-map-popup-leaflet-boundary.md](../../../../../Themes/Sixteen/docs/wiki/concepts/geo-map-popup-leaflet-boundary.md) · [global-header-css-leak-leaflet-popup.md](../../../../../Themes/Sixteen/docs/wiki/troubleshooting/global-header-css-leak-leaflet-popup.md)
-4. Incidenti noti: [map-lit-it-incidents-2026-06.md](../../../../Geo/docs/wiki/troubleshooting/map-lit-it-incidents-2026-06.md)
+4. Incidenti noti: [map-lit-it-incidents-2026-06.md](../../../../Geo/docs/wiki/troubleshooting/map-lit-it-incidents.md)
 
 ## Riferimenti
 

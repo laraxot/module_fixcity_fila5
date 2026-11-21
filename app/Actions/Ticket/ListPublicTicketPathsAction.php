@@ -4,7 +4,9 @@ declare(strict_types=1);
 
 namespace Modules\Fixcity\Actions\Ticket;
 
+use DateTimeInterface;
 use Modules\Fixcity\Actions\BuildPublicTicketsQueryAction;
+use Modules\Seo\Contracts\SitemapLastModifiedContract;
 use Modules\Seo\Contracts\SitemapPathsContract;
 use Spatie\QueueableAction\QueueableAction;
 
@@ -16,7 +18,7 @@ use Spatie\QueueableAction\QueueableAction;
  * `includeOwnTickets: false`: la sitemap e' uguale per tutti anche quando la genera un utente loggato (un ticket non ancora pubblico
  * del suo proprietario risponde 404 a chiunque altro).
  */
-final class ListPublicTicketPathsAction implements SitemapPathsContract
+final class ListPublicTicketPathsAction implements SitemapLastModifiedContract, SitemapPathsContract
 {
     use QueueableAction;
 
@@ -33,5 +35,25 @@ final class ListPublicTicketPathsAction implements SitemapPathsContract
         }
 
         return $paths;
+    }
+
+    /**
+     * Ultima modifica di ogni segnalazione pubblica (`updated_at`), stessa query di execute(): `<lastmod>` in sitemap e
+     * reinvio a IndexNow quando cambia (#736).
+     *
+     * @see Modules/Seo/docs/adr/search-engine-presence.md
+     *
+     * @return array<string, DateTimeInterface>
+     */
+    public function lastModified(): array
+    {
+        $dates = [];
+        foreach (app(BuildPublicTicketsQueryAction::class)->execute(includeOwnTickets: false)->pluck('updated_at', 'id') as $id => $updatedAt) {
+            if (is_int($id) && $updatedAt instanceof DateTimeInterface) {
+                $dates['tickets/'.$id] = $updatedAt;
+            }
+        }
+
+        return $dates;
     }
 }

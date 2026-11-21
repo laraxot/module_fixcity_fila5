@@ -27,6 +27,9 @@ use Throwable;
  *   se un allegato fallisce non resta un ticket a meta'.
  * - `TicketCreatedEvent` parte solo dopo il commit: un rollback non manda la ricevuta. La ricevuta al cittadino e'
  *   una sola, quella del listener (`NotifyTicketReceivedAction`, DB-05).
+ *
+ * Contratto di comportamento: docs/contracts/create-ticket-action.md (sei sezioni: input, output, invarianti, effetti
+ * collaterali, errori, non fa).
  */
 class CreateTicketAction
 {
