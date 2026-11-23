@@ -24,6 +24,7 @@ use Intervention\Image\ImageManager;
 use Livewire\Component as LivewireComponent;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 use Modules\Fixcity\Actions\BuildTicketReviewSummaryAction;
+use Modules\Fixcity\Actions\FindNearbyPublicTicketsAction;
 use Modules\Fixcity\Actions\GetPublishedPrivacyPolicyAction;
 use Modules\Fixcity\Enums\TicketTypeEnum;
 use Modules\Geo\Filament\Forms\Components\CoordinatePicker;
@@ -31,6 +32,7 @@ use Modules\Media\Filament\Forms\Components\CameraPhotoUpload;
 use Modules\Xot\Actions\Cast\SafeStringCastAction;
 use Modules\Xot\Filament\Resources\Schemas\XotBaseResourceForm;
 
+/** @see docs/stories/dcp-287-dettaglio-proprietario-follower-e-ritorno-dopo-il-login.story.md */
 class TicketForm extends XotBaseResourceForm
 {
     /**
@@ -57,6 +59,8 @@ class TicketForm extends XotBaseResourceForm
      * mappa e navigazione. `getSummarySchema()` (schema piatto) resta per il back office.
      *
      * @return array<string, SchemaComponent>
+     *
+     * @see docs/stories/dcp-287-dettaglio-proprietario-follower-e-ritorno-dopo-il-login.story.md
      */
     public static function getReviewStepSchema(): array
     {
@@ -72,6 +76,23 @@ class TicketForm extends XotBaseResourceForm
                     'withShell' => false,
                     'wired' => true,
                 ])
+                ->columnSpanFull(),
+            'similarTickets' => View::make('fixcity::components.wizard.similar-tickets')
+                ->viewData(static function (object $livewire): array {
+                    $state = (array) data_get($livewire, 'data', []);
+                    $rawType = data_get($state, 'type');
+                    $type = $rawType instanceof TicketTypeEnum ? $rawType->value : $rawType;
+                    $latitude = data_get($state, 'location.latitude');
+                    $longitude = data_get($state, 'location.longitude');
+
+                    if (! is_string($type) || ! is_numeric($latitude) || ! is_numeric($longitude)) {
+                        return [];
+                    }
+
+                    return ['similarTickets' => app(FindNearbyPublicTicketsAction::class)->execute(
+                        $type, (float) $latitude, (float) $longitude,
+                    )];
+                })
                 ->columnSpanFull(),
         ];
     }
