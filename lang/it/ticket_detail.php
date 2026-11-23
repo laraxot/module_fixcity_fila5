@@ -91,4 +91,16 @@ return [
         'unfollowed' => 'Non segui più questa segnalazione.',
         'list_link' => 'Vai alle segnalazioni che segui',
     ],
+    'resolution' => [
+        'title' => 'Verifica la risoluzione',
+        'confirm' => 'Confermo che il problema è risolto',
+        'dispute' => 'Il problema non è risolto',
+        'reason_label' => 'Spiega cosa manca',
+        'reason_required' => 'Descrivi perché il problema non è risolto (massimo 2000 caratteri).',
+        'only_resolved' => 'Puoi verificare soltanto una segnalazione nello stato risolto.',
+        'confirmed_audit' => 'Risoluzione confermata dal cittadino',
+        'confirmed' => 'Grazie, hai confermato la risoluzione.',
+        'disputed' => 'La contestazione è stata registrata e la segnalazione riaperta.',
+        'dispute_notice' => 'La motivazione sarà visibile a te e agli operatori autorizzati.',
+    ],
 ];
