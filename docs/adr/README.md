@@ -41,6 +41,9 @@ Pro, contro, debito che resta, cosa misurare. Chi cambia la decisione scrive un 
 ## Decisioni
 
 - [ADR — Il deploy tiene la cache delle rotte per lingua](route-trans-cache-deploy.md)
+- [Il ciclo di vita Ticket è governato da Actions](ticket-lifecycle-is-action-owned.md)
+- [Il dettaglio pubblico del ticket è un contenitore CMS con dati governati da Fixcity](public-ticket-detail-route-ownership.md)
+- [Le Policy sono registrate tramite autodiscovery](policy-autodiscovery.md)
 
 ## Decisioni precedenti (formato libero, non ancora ADR)
 

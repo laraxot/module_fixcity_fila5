@@ -13,5 +13,5 @@
     "content_blocks": {"it": [], "en": [], "de": [], "es": []},
     "sidebar_blocks": {"it": [], "en": [], "de": [], "es": []},
     "footer_blocks": null,
-    "middleware": ["throttle:10,1"]
+    "middleware": ["throttle:10,1", "Modules\\Fixcity\\Http\\Middleware\\RedirectTicketTrackCodeMiddleware"]
 }

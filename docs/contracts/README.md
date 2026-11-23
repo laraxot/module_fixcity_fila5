@@ -30,4 +30,7 @@ Chi cambia il comportamento aggiorna il contratto nello stesso commit.
 
 ## Contratti
 
+- [Registrazione automatica delle Policy](policy-registration.md)
 - [CreateTicketAction](create-ticket-action.md)
+- [BuildPublicTicketDetailAction](build-public-ticket-detail-action.md)
+- [RedirectTicketTrackCodeMiddleware](redirect-ticket-track-code-middleware.md)

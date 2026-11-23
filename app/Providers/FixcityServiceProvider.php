@@ -5,19 +5,23 @@ declare(strict_types=1);
 namespace Modules\Fixcity\Providers;
 
 use Illuminate\Support\Facades\File;
-use Illuminate\Support\Facades\Gate;
 use Laravel\Folio\Folio;
 use Modules\Fixcity\Actions\ResolveTicketMediaDiskAction;
 use Modules\Fixcity\Actions\Ticket\ListPublicTicketPathsAction;
+use Modules\Fixcity\Http\Middleware\RedirectTicketTrackCodeMiddleware;
 use Modules\Fixcity\Models\Ticket;
 use Modules\Fixcity\Models\TicketActivity;
 use Modules\Fixcity\Observers\TicketActivityObserver;
 use Modules\Fixcity\Observers\TicketMediaObserver;
-use Modules\Fixcity\Policies\TicketPolicy;
 use Modules\Media\Models\Media;
 use Modules\Seo\Contracts\SitemapPathsContract;
 use Modules\Xot\Providers\XotBaseServiceProvider;
 
+/**
+ * Registers Fixcity's application services and CMS middleware extensions.
+ *
+ * @see Modules/Fixcity/docs/adr/public-ticket-detail-route-ownership.md
+ */
 class FixcityServiceProvider extends XotBaseServiceProvider
 {
     public string $name = 'Fixcity';
@@ -26,6 +30,9 @@ class FixcityServiceProvider extends XotBaseServiceProvider
 
     protected string $module_ns = __NAMESPACE__;
 
+    /**
+     * @see Modules/Fixcity/docs/adr/public-ticket-detail-route-ownership.md
+     */
     public function register(): void
     {
         parent::register();
@@ -34,11 +41,47 @@ class FixcityServiceProvider extends XotBaseServiceProvider
         $this->app->tag([ListPublicTicketPathsAction::class], SitemapPathsContract::TAG);
     }
 
+    /**
+     * Registers Fixcity-owned middleware with the generic CMS page pipeline.
+     *
+     * CMS remains reusable in installations that do not include Fixcity; the
+     * application module opts into the pipeline from its own service provider.
+     *
+     * @see Modules/Fixcity/docs/contracts/redirect-ticket-track-code-middleware.md
+     */
+    private function registerPageMiddleware(): void
+    {
+        $configured = config('cms.config.page_middleware_allowlist');
+        $allowlist = is_array($configured) ? $configured : [];
+
+        config([
+            'cms.config.page_middleware_allowlist' => array_values(array_unique([
+                ...array_filter($allowlist, is_string(...)),
+                RedirectTicketTrackCodeMiddleware::class,
+            ])),
+        ]);
+    }
+
+    /**
+     * @see Modules/Fixcity/docs/adr/public-ticket-detail-route-ownership.md
+     * @see Modules/Fixcity/docs/adr/policy-autodiscovery.md
+     * @see Modules/Fixcity/docs/contracts/policy-registration.md
+     */
     public function boot(): void
     {
         parent::boot();
 
-        Gate::policy(Ticket::class, TicketPolicy::class);
+        $this->app->booted(function (): void {
+            $this->registerPageMiddleware();
+
+            config([
+                'xra.container0_model_map' => array_replace(
+                    (array) config('xra.container0_model_map', []),
+                    ['tickets' => Ticket::class],
+                ),
+            ]);
+        });
+
         TicketActivity::observe(TicketActivityObserver::class);
         $this->registerTicketMediaDisk();
         Media::observe(TicketMediaObserver::class);

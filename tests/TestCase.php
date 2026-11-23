@@ -7,9 +7,12 @@ namespace Modules\Fixcity\Tests;
 use Illuminate\Contracts\Console\Kernel;
 use Illuminate\Database\DatabaseManager;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
+use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\ServiceProvider;
 use Modules\Fixcity\Actions\ResolveTicketMediaDiskAction;
+use Modules\Fixcity\Providers\FixcityServiceProvider;
 use Modules\Fixcity\Models\Ticket;
 use Modules\User\Models\User;
 use Modules\Xot\Tests\XotBaseTestCase;
@@ -41,6 +44,15 @@ abstract class TestCase extends XotBaseTestCase
     public ?Ticket $ticket = null;
 
     public ?\Closure $callStatic = null;
+
+    /**
+     * @return array<int, class-string<ServiceProvider>>
+     * @see Modules/Fixcity/docs/contracts/redirect-ticket-track-code-middleware.md
+     */
+    protected function getPackageProviders(Application $app): array
+    {
+        return [...parent::getPackageProviders($app), FixcityServiceProvider::class];
+    }
 
     /** @var list<string> */
     protected $connectionsToTransact = ['fixcity', 'user', 'comment', 'media', 'blog'];

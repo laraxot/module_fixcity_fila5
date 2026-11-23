@@ -29,6 +29,10 @@ use Spatie\QueueableAction\QueueableAction;
  * Il giorno di creazione e' `Y-m-d`, mai l'ora. Il test dell'insieme esatto di chiavi e' la guardia contro le fughe.
  * Le immagini (`images`) escono per i ticket pubblici e per il proprietario della pratica; PDF e dati del file restano esclusi
  * ({@see BuildTicketPublicImageUrlsAction}, SEC-04).
+ *
+ * @contract docs/contracts/build-public-ticket-detail-action.md
+ *
+ * @see Modules/Fixcity/docs/contracts/build-public-ticket-detail-action.md
  */
 final class BuildPublicTicketDetailAction
 {
