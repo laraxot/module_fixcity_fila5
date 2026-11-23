@@ -313,3 +313,14 @@ automaticamente `ente.email` (contatto pubblico) o `ente.pec` (non e' una ricevu
 invio reale e' stato eseguito. In questa sessione mancavano checkout PHP 8.4 e dipendenze: i test sono stati aggiunti
 ma non eseguiti. Non esiste ricevuta istituzionale di lettura/accettazione; l'integrazione multi-Comune resta un progetto
 separato. Il trattamento dei retry simultanei richiede un futuro controllo transazionale/idempotente persistente.
+
+
+## Correzione KPI SLA (2026-11-23)
+
+`GetTicketSlaMetricsAction` ora misura la durata dalla creazione fino all'ultima attivita'
+`status_change` con destinazione `resolved`, anziche' usare incondizionatamente
+`tickets.updated_at` (che puo' cambiare dopo l'intervento). L'Action elabora i ticket
+in chunk da 500. Per i ticket storici senza evento di risoluzione continua a usare
+`updated_at`, in modo esplicitamente approssimativo. Un nuovo test mostra il caso in
+cui `updated_at` e' successivo alla risoluzione. I test non sono stati eseguiti
+in questa sessione per mancanza di ambiente PHP.
