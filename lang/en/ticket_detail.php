@@ -83,4 +83,16 @@ return [
         'unfollowed' => 'You no longer follow this report.',
         'list_link' => 'Go to the reports you follow',
     ],
+    'resolution' => [
+        'title' => 'Verify the resolution',
+        'confirm' => 'I confirm the issue is resolved',
+        'dispute' => 'The issue is not resolved',
+        'reason_label' => 'Explain what remains unresolved',
+        'reason_required' => 'Explain why the issue is not resolved (up to 2000 characters).',
+        'only_resolved' => 'You can verify only a report marked as resolved.',
+        'confirmed_audit' => 'Resolution confirmed by the citizen',
+        'confirmed' => 'Thank you, you confirmed the resolution.',
+        'disputed' => 'Your dispute was recorded and the report reopened.',
+        'dispute_notice' => 'Your explanation will be visible to you and authorised staff.',
+    ],
 ];
