@@ -429,9 +429,9 @@ class Ticket extends BaseModel implements Commentable, HasMedia
             ->acceptsMimeTypes(['image/jpeg', 'image/png', 'application/pdf']);
         $this->addMediaCollection('ticket')
             ->acceptsMimeTypes(['image/jpeg', 'image/png']);
+        // Preserve subsequent completion evidence instead of silently deleting earlier photos.
         $this->addMediaCollection('completion_photo')
-            ->acceptsMimeTypes(['image/jpeg', 'image/png'])
-            ->singleFile();
+            ->acceptsMimeTypes(['image/jpeg', 'image/png']);
     }
 
     /**
