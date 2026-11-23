@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Modules\Fixcity\Actions;
 
 use Illuminate\Support\Facades\Gate;
+use Illuminate\Validation\ValidationException;
 use Modules\Fixcity\Enums\TicketActivityEventTypeEnum;
 use Modules\Fixcity\Enums\TicketActivityVisibilityEnum;
 use Modules\Fixcity\Enums\TicketStatusEnum;
@@ -18,10 +19,20 @@ final class AssignTicketAction
 
     /**
      * Assign a ticket to a PA operator, or remove its assignment.
+     *
+     * @see docs/stories/dcp-281-rinforzo-back-office-e-pagine-legacy.story.md
      */
     public function execute(Ticket $ticket, ?string $responsibleId): Ticket
     {
         Gate::authorize('assign', $ticket);
+
+        // Check the actual PA-role allowlist at the Action boundary, not only in the Filament form.
+        // This also protects callers that invoke the Action without the UI picker.
+        if ($responsibleId !== null && ! array_key_exists($responsibleId, app(ListAssignableTicketOperatorsAction::class)->execute())) {
+            throw ValidationException::withMessages([
+                'responsible_id' => [__('validation.in', ['attribute' => 'responsabile'])],
+            ]);
+        }
 
         /** @var array{ticket: Ticket, activity: TicketActivity|null} $result */
         $result = $ticket->getConnection()->transaction(function () use ($ticket, $responsibleId): array {
