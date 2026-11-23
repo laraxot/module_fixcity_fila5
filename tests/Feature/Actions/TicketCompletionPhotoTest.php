@@ -22,6 +22,7 @@ it('registers a JPEG PNG only completion photo collection', function (): void {
     $ticket = new Ticket;
     $collection = $ticket->getRegisteredMediaCollections()->firstWhere('name', 'completion_photo');
 
+    Assert::assertNotNull($collection);
     if (! $collection instanceof MediaCollection) {
         throw new RuntimeException('Collection completion_photo non registrata.');
     }
