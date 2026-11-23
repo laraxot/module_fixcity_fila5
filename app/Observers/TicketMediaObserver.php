@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Modules\Fixcity\Observers;
 
+use Illuminate\Auth\Access\AuthorizationException;
+use Illuminate\Support\Facades\Gate;
 use Modules\Fixcity\Actions\RecordTicketActivityAction;
 use Modules\Fixcity\Actions\ResolveTicketMediaDiskAction;
 use Modules\Fixcity\Enums\TicketActivityEventTypeEnum;
@@ -12,6 +14,7 @@ use Modules\Fixcity\Enums\TicketStatusEnum;
 use Modules\Fixcity\Models\Ticket;
 use Modules\Media\Models\Media;
 
+/** @see docs/stories/dcp-379-foto-nel-dettaglio-della-segnalazione.story.md */
 final class TicketMediaObserver
 {
     /**
@@ -23,10 +26,24 @@ final class TicketMediaObserver
      * Qui e non in `Ticket::registerMediaCollections()->useDisk()` per non toccare il modello; vale per ogni percorso di upload
      * (wizard pubblico, back office, seeder) perche' tutti passano da Media Library.
      */
+    /** @see docs/stories/dcp-379-foto-nel-dettaglio-della-segnalazione.story.md */
     public function creating(Media $media): void
     {
         if (! $this->isTicketMedia($media)) {
             return;
+        }
+
+        if ($media->collection_name === 'completion_photo') {
+            $ticket = Ticket::query()->find($media->model_id);
+            if (! $ticket instanceof Ticket || ! in_array(
+                TicketStatusEnum::tryFrom($ticket->resolveTicketStatusValue()),
+                [TicketStatusEnum::RESOLVED, TicketStatusEnum::CLOSED],
+                true,
+            )) {
+                throw new AuthorizationException('A completion photo requires a resolved ticket.');
+            }
+
+            Gate::authorize('changeStatus', $ticket);
         }
 
         $privateDisk = app(ResolveTicketMediaDiskAction::class)->execute();
