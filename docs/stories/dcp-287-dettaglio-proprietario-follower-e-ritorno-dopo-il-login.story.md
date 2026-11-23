@@ -344,3 +344,19 @@ il 2026-10-22, quindi il lock non e' stato rilasciato).
 - Questa e' una ricerca di **possibili** duplicati: non unisce ticket automaticamente e non afferma
   che due segnalazioni rappresentino con certezza lo stesso problema.
 - In questa sessione non era disponibile un checkout PHP 8.4, quindi i test sono presenti ma non eseguiti.
+
+
+## Estensione: conferma o contestazione della risoluzione (2026-11-23)
+
+- `ConfirmTicketResolutionAction` e POST autenticato `/{lang}/tickets/{ticket}/resolution` con
+  CSRF e throttle. Il controllo proprietario avviene sulla riga bloccata; il solo stato
+  accettato in ingresso e' `resolved`. Le transizioni seguono `TicketStatusEnum`:
+  conferma `resolved -> closed`, contestazione `resolved -> reopened`.
+- La motivazione e' obbligatoria (massimo 2000 caratteri) per la contestazione. Il cambio di stato
+  e' pubblico per aggiornare i follower, mentre il testo del cittadino viene scritto in una
+  seconda attivita' `author_only` e non appare nelle API o timeline pubbliche.
+- Test `ConfirmTicketResolutionActionTest.php`: permessi proprietario, chiusura, riapertura,
+  motivazione privata e doppio invio. Traduzioni in it/en/de/es.
+- **Integrazione UI ancora da completare**: i form nel dettaglio sono di proprieta' del tema Sixteen,
+  che ha un repository autonomo; serve sincronizzarlo esplicitamente in `dev`.
+- I test sono stati aggiunti ma non eseguiti: non era disponibile il checkout PHP 8.4.
