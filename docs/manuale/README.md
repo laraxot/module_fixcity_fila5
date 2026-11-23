@@ -2,7 +2,7 @@
 title: "Manuale d'uso FixCity"
 type: manual
 audience: tutti
-updated: 2026-11-10
+updated: 2026-11-23
 ---
 
 # Manuale d'uso FixCity
@@ -25,11 +25,13 @@ Tutto il manuale in un solo file: [manuale-fixcity.pdf](pdf/manuale-fixcity.pdf)
 
 ## Per chi mantiene il manuale
 
-- **Fonte:** questi file Markdown. La versione online condivisibile è un documento Claude
-  ([Manuale d'uso FixCity](https://claude.ai/artifact/XHExSba9dg6k78bfFqYdF8)); quando cambia uno, va allineato l'altro.
-- **Screenshot:** in `img/`, presi da fixcity.eu il 5 novembre 2026 e annotati con cerchi rossi numerati. Mancano ancora le
-  schermate del modulo di segnalazione, dell'area personale e dei pannelli di gestione: servono un account di prova e il
-  rilascio del branch `dev`.
+- **Fonte:** questi file Markdown; i PDF sono derivati da qui. Il documento online esterno non è una fonte verificabile del
+  repository e non viene usato per dichiarare funzionalità.
+- **Screenshot:** le immagini JPG annotate preesistenti restano nella cartella `img/`. Il 23 novembre 2026 sono state
+  verificati anche il front office pubblico, l'elenco delle segnalazioni e la pagina di accesso su `fixcity.eu`; le catture
+  PNG corrispondenti sono `cittadini-01-pagina-iniziale.png`, `cittadini-03-segnalazioni-mappa.png` e
+  `cittadini-07-accedi.png`. Non sono stati inventati screenshot del pannello autenticato: per quello serve un account di
+  prova con i ruoli effettivi.
 - **PDF:** si rigenerano con `python3 manuale/build-pdf.py` dalla cartella `docs/` del modulo (serve `pandoc` e Chromium
   con Playwright).
 - **Diagramma degli stati:** sorgente Mermaid in `img/stati-segnalazione.mmd`, immagine con

@@ -2,7 +2,7 @@
 title: "FixCity - Guida per gli operatori del Comune"
 type: manual
 audience: operatori
-updated: 2026-11-10
+updated: 2026-11-23
 ---
 
 # Guida per gli operatori del Comune

@@ -2,7 +2,7 @@
 title: "FixCity - Guida per supervisori e responsabili"
 type: manual
 audience: supervisori
-updated: 2026-11-10
+updated: 2026-11-23
 ---
 
 # Guida per supervisori e responsabili

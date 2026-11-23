@@ -23,6 +23,6 @@ Le transizioni devono passare dalle Actions e dalle policy Fixcity.
 
 ## Evidenza visuale reale
 
-![Flusso reale di segnalazione](../../manuale/img/cittadini-01-pagina-iniziale.jpg)
+![Flusso reale di segnalazione](../manuale/img/cittadini-01-pagina-iniziale.jpg)
 
 Screenshot reale della documentazione cittadino FixCity.

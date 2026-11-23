@@ -2,7 +2,7 @@
 title: "FixCity - Guida per gli amministratori"
 type: manual
 audience: amministratori
-updated: 2026-11-10
+updated: 2026-11-23
 ---
 
 # Guida per gli amministratori

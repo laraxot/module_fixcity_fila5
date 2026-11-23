@@ -2,7 +2,7 @@
 title: "FixCity - Guida per i cittadini"
 type: manual
 audience: cittadini
-updated: 2026-11-10
+updated: 2026-11-23
 ---
 
 # Guida per i cittadini
@@ -28,8 +28,8 @@ Alcune parole che troverai:
 | Area personale | La tua pagina privata, dove trovi le segnalazioni che hai inviato |
 | Stato | A che punto è la segnalazione: In attesa, In lavorazione, Risolto e così via |
 
-Nelle immagini di questa guida i **cerchi rossi numerati** indicano dove cliccare. Il numero corrisponde al passo spiegato
-sotto l'immagine.
+Nelle immagini JPG annotate di questa guida i **cerchi rossi numerati** indicano dove cliccare. Il numero corrisponde al
+passo spiegato sotto l'immagine. Le nuove catture PNG di verifica sono schermate complete senza annotazioni.
 
 ## Guardare le segnalazioni senza account
 
@@ -132,7 +132,8 @@ Se hai già un account, premi **Accedi all'area personale** in alto a destra (in
 4. **Password dimenticata?**: inserisci la tua email e segui il collegamento che ricevi per sceglierne una nuova. Se l'email
    non arriva entro qualche minuto, guarda nella cartella spam.
 
-L'accesso con SPID o CIE non è ancora disponibile.
+L'accesso con SPID o CIE dipende dalla configurazione del Comune; il codice prevede identità verificate anche da questi
+provider, ma questa guida non dichiara l'attivazione senza una verifica del tenant.
 
 ## Inviare una segnalazione
 

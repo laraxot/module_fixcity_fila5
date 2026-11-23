@@ -218,7 +218,10 @@ cd laravel/Modules/Fixcity && PLAYWRIGHT_BASE_URL=http://127.0.0.1:8000 \
   npx playwright test tests/Playwright/ticket-create-wizard.spec.js
 ```
 
-**Debito test (Playwright)**: lo spec `ticket-create-wizard.spec.js` visita `/it/tests/segnalazione-crea`, che oggi non contiene il wizard (0 `fi-sc-wizard`, verificato con curl il 2026-10-13): va puntato a `/it/tickets/create`.
+**Debito test (Playwright)**: il percorso canonico verificato dello spec
+`ticket-create-wizard.spec.js` è `/it/tickets/create`. Il vecchio percorso
+`/it/tests/segnalazione-crea` restituisce una pagina di compatibilità senza il
+wizard (0 `fi-sc-wizard`); non va usato come smoke target.
 
 **Debito test**: submit Livewire end-to-end con auth e creazione `Ticket` resta bloccato dal test harness multi-connessione (`user` vs `fixcity`).
 

@@ -13,12 +13,18 @@ use Modules\Fixcity\Models\Ticket;
 use Modules\Fixcity\Models\TicketActivity;
 use Spatie\QueueableAction\QueueableAction;
 
+/**
+ * @contract docs/contracts/assign-ticket-action.md
+ * @see docs/contracts/assign-ticket-action.md
+ */
 final class AssignTicketAction
 {
     use QueueableAction;
 
     /**
      * Assign a ticket to a PA operator, or remove its assignment.
+     *
+     * @see docs/contracts/assign-ticket-action.md
      *
      * @see docs/stories/dcp-281-rinforzo-back-office-e-pagine-legacy.story.md
      */

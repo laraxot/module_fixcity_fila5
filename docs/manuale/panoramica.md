@@ -2,7 +2,7 @@
 title: "FixCity - Panoramica"
 type: manual
 audience: tutti
-updated: 2026-11-10
+updated: 2026-11-23
 ---
 
 # Manuale d'uso FixCity - Panoramica
@@ -13,8 +13,13 @@ FixCity è il portale con cui i cittadini segnalano al Comune un problema sul te
 spento o i rifiuti abbandonati, e ne seguono la soluzione. Il personale del Comune riceve le segnalazioni in un pannello di
 gestione, le valuta, le assegna e aggiorna lo stato fino alla chiusura.
 
-Il manuale descrive il funzionamento previsto dal codice del progetto al 10 novembre 2026. Le schermate possono cambiare
+Il manuale descrive il funzionamento previsto dal codice del progetto e verificato, dove indicato, il 23 novembre 2026. Le schermate possono cambiare
 leggermente da un Comune all'altro.
+
+Le schermate pubbliche verificate durante questa revisione sono raccolte anche
+nei PNG `cittadini-01-pagina-iniziale.png`, `cittadini-03-segnalazioni-mappa.png`
+e `cittadini-07-accedi.png`. Le superfici che richiedono autenticazione di ruolo
+non sono dichiarate verificate senza credenziali effettive.
 
 **Chi sei? Apri la tua guida.**
 
@@ -66,14 +71,15 @@ cartella spam. Lo stato aggiornato è comunque sempre nel dettaglio della segnal
 **Posso modificare o ritirare una segnalazione inviata?** Scrivi un commento nel dettaglio della segnalazione con la
 correzione. Un operatore può scartarla se non è più necessaria.
 
-**Posso accedere con SPID o CIE?** Non ancora: oggi l'accesso avviene con email e password, o con Google se il Comune l'ha
-attivato.
+**Posso accedere con SPID o CIE?** Il codice del flusso contempla identità verificate anche tramite SPID o CIE, ma
+l'attivazione effettiva dipende dal tenant e non è stata verificata con un account di prova in questa revisione. L'accesso
+con email e password è disponibile; Google è condizionale alla configurazione del Comune.
 
 ## Problemi noti al 10 novembre 2026
 
 | Problema | Chi è coinvolto | Cosa fare |
 | --- | --- | --- |
-| Il pannello di gestione risponde con un errore su fixcity.eu | Operatori e amministratori | La correzione è pronta; serve un nuovo rilascio sul server |
+| I flussi autenticati dei pannelli non sono verificabili senza credenziali di ruolo | Operatori e amministratori | La pagina di login dei pannelli risponde; resta da verificare il comportamento dopo l'accesso |
 | Il riquadro di dettaglio della mappa non si apre con la tastiera | Chi naviga senza mouse | Usa la vista **Elenco** della pagina Segnalazioni, che mostra le stesse informazioni |
 | Alcune pagine informative in tedesco e spagnolo compaiono in italiano | Utenti in de ed es | Nessuna azione; notifiche e modulo di segnalazione sono già tradotti |
 | La descrizione accetta al massimo 200 caratteri | Cittadini | Aggiungi i dettagli in un commento dopo l'invio |

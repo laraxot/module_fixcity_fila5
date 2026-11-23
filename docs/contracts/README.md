@@ -8,6 +8,10 @@ updated: 2026-11-18
 
 # Contratti
 
+Gli asset pubblici del modulo seguono il percorso dichiarato in
+[ADR del logo FixCity](../adr/fixcity-public-logo-path.md); le Action e le
+route non devono introdurre un secondo percorso per lo stesso asset.
+
 Cosa promette la superficie pubblica di questo pacchetto: le Action che scrivono dati, chiamano servizi esterni o hanno
 effetti collaterali, e le interfacce (`app/Contracts`). Regola: `Modules/Xot/docs/rules/action-behavioral-contract.md`.
 
@@ -34,3 +38,6 @@ Chi cambia il comportamento aggiorna il contratto nello stesso commit.
 - [CreateTicketAction](create-ticket-action.md)
 - [BuildPublicTicketDetailAction](build-public-ticket-detail-action.md)
 - [RedirectTicketTrackCodeMiddleware](redirect-ticket-track-code-middleware.md)
+- [AssignTicketAction](assign-ticket-action.md)
+- [TransitionTicketStatusAction](transition-ticket-status-action.md)
+- [SubmitTicketOnceAction](submit-ticket-once-action.md)

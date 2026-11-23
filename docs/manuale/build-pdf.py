@@ -79,11 +79,17 @@ def markdown_body(md_file: str, *, combined: bool) -> str:
 
 
 def to_html(markdown: str) -> str:
-    result = subprocess.run(
-        ["pandoc", "--from=gfm+pipe_tables", "--to=html5", "--wrap=none"],
-        input=markdown, capture_output=True, text=True, check=True,
-    )
-    return result.stdout
+    try:
+        result = subprocess.run(
+            ["pandoc", "--from=gfm+pipe_tables", "--to=html5", "--wrap=none"],
+            input=markdown, capture_output=True, text=True, check=True,
+        )
+        return result.stdout
+    except (FileNotFoundError, subprocess.CalledProcessError):
+        # Fallback for documentation-only environments without a usable Pandoc data directory.
+        import markdown as markdown_lib
+
+        return markdown_lib.markdown(markdown, extensions=["tables", "fenced_code"])
 
 
 def page(title: str, body: str) -> str:

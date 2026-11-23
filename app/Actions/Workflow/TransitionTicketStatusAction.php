@@ -12,6 +12,9 @@ use Spatie\QueueableAction\QueueableAction;
  * Spatie Queueable Action — conversione da WorkflowService (No-Services BMAD).
  * Lo scopo originale: gestire transizioni stato ticket (draft→pending→assigned→in_progress→approved→closed).
  * La fonte dell'errore PHPStan (`method.notFound` su `canTransitionTo`) era che il servizio era un monolite da eliminare.
+ *
+ * @contract docs/contracts/transition-ticket-status-action.md
+ * @see docs/contracts/transition-ticket-status-action.md
  */
 final class TransitionTicketStatusAction
 {
@@ -22,6 +25,8 @@ final class TransitionTicketStatusAction
      *
      * The concrete workflow operations remain separate Actions; this class is the small
      * state-transition primitive that replaced the old service monolith.
+     *
+     * @see docs/contracts/transition-ticket-status-action.md
      */
     public function execute(Ticket $ticket, string $targetStatus): bool
     {
