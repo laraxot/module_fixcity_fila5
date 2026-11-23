@@ -82,4 +82,16 @@ return [
         'unfollowed' => 'Sie folgen dieser Meldung nicht mehr.',
         'list_link' => 'Zu den Meldungen, denen Sie folgen',
     ],
+    'resolution' => [
+        'title' => 'Lösung überprüfen',
+        'confirm' => 'Ich bestätige, dass das Problem behoben ist',
+        'dispute' => 'Das Problem ist nicht behoben',
+        'reason_label' => 'Beschreiben Sie das verbleibende Problem',
+        'reason_required' => 'Beschreiben Sie, warum das Problem nicht behoben ist (maximal 2000 Zeichen).',
+        'only_resolved' => 'Sie können nur eine als gelöst markierte Meldung bestätigen.',
+        'confirmed_audit' => 'Lösung durch die meldende Person bestätigt',
+        'confirmed' => 'Vielen Dank, Sie haben die Lösung bestätigt.',
+        'disputed' => 'Ihr Einspruch wurde gespeichert und die Meldung erneut geöffnet.',
+        'dispute_notice' => 'Ihre Begründung ist nur für Sie und berechtigte Mitarbeitende sichtbar.',
+    ],
 ];
