@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /**
  * StatusBadge Component
  *
@@ -10,6 +12,8 @@
  * - delegato (delegated) → blue
  * - non risolto (not resolved) → orange
  * - in attesa (waiting) → orange light
+ *
+ * @see docs/ticket-wizard-frontoffice.md
  */
 
 namespace Modules\Fixcity\Filament\Components;

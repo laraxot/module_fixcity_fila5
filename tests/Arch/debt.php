@@ -16,8 +16,4 @@ return [
         'Modules\Fixcity\Actions\BuildPublicTicketsGeoJsonResponseAction',
         'Modules\Fixcity\Actions\GenerateClusterTestJsonAction',
     ],
-    // file senza declare(strict_types=1)
-    'strict' => [
-        'Modules\Fixcity\Filament\Components\StatusBadge',
-    ],
 ];
