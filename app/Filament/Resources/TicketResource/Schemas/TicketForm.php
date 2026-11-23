@@ -408,7 +408,7 @@ class TicketForm extends XotBaseResourceForm
             $completionPhoto = CameraPhotoUpload::make('completionPhoto')
                 ->label((string) __('fixcity::ticket_form.completion_photo.label'))
                 ->collection('completion_photo')
-                ->maxFiles(1)
+                ->maxFiles(5)
                 ->acceptedFileTypes(['image/jpeg', 'image/png'])
                 ->maxSize(10 * 1024)
                 ->rule(static fn (): \Closure => static::decodableImageRule())
