@@ -72,7 +72,7 @@ final class SendTicketToEnteAction
             ->where('ticket_id', $ticket->getKey())
             ->where('event_type', TicketActivityEventTypeEnum::MailSent->value)
             ->get()
-            ->contains(static fn (TicketActivity $activity): bool => ($activity->payload ?? [])['source'] ?? null) === 'ente_ticket_intake');
+            ->contains(static fn (TicketActivity $activity): bool => (($activity->payload ?? [])['source'] ?? null) === 'ente_ticket_intake');
     }
 
     /**
