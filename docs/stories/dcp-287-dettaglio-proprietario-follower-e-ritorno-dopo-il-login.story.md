@@ -360,3 +360,16 @@ il 2026-10-22, quindi il lock non e' stato rilasciato).
 - **Integrazione UI ancora da completare**: i form nel dettaglio sono di proprieta' del tema Sixteen,
   che ha un repository autonomo; serve sincronizzarlo esplicitamente in `dev`.
 - I test sono stati aggiunti ma non eseguiti: non era disponibile il checkout PHP 8.4.
+
+
+## Estensione: statistiche aggregate per quartiere (2026-11-23)
+
+- `BuildPublicNeighborhoodStatsAction` usa **solo** `BuildPublicTicketsQueryAction::execute(false)`,
+  quindi il dataset non comprende segnalazioni private. Raggruppa per `location.suburb`,
+  con fallback a `location.city`, per periodi di 7, 30 o 365 giorni.
+- Endpoint Folio pubblico con throttle `/api/tickets/neighborhood-stats?days=30`: restituisce soltanto
+  periodo, conteggio totale, senza area e gruppi `name/reports/active/resolved`, non ID,
+  coordinate, nominativi o contenuti dei ticket. Test Pest Action/API aggiunti.
+- La pagina grafica di presentazione al cittadino richiede il tema Sixteen e la
+  sincronizzazione del suo repository; l'API aggregata e' gia' disponibile nel modulo.
+- Non sono stati eseguiti test/runtime perche' il checkout PHP 8.4 non era presente.
