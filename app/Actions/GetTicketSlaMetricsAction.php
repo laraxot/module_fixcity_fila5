@@ -54,7 +54,7 @@ final class GetTicketSlaMetricsAction
 
                 foreach ($activities as $activity) {
                     if (! $activity instanceof TicketActivity
-                        || ($activity->payload ?? [])['to'] !== TicketStatusEnum::RESOLVED->value
+                        || (($activity->payload ?? [])['to'] ?? null) !== TicketStatusEnum::RESOLVED->value
                         || ! $activity->created_at instanceof Carbon) {
                         continue;
                     }
