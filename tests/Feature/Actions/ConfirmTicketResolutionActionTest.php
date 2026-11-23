@@ -3,6 +3,8 @@
 declare(strict_types=1);
 
 use Illuminate\Support\Facades\Notification;
+use Illuminate\Support\Facades\Route;
+use Modules\Fixcity\Actions\ConfirmTicketResolutionAction;
 use Modules\Fixcity\Database\Factories\TicketFactory;
 use Modules\Fixcity\Enums\TicketActivityVisibilityEnum;
 use Modules\Fixcity\Enums\TicketStatusEnum;
@@ -11,6 +13,15 @@ use Modules\Fixcity\Tests\TestCase;
 use Modules\User\Database\Factories\UserFactory;
 
 uses(TestCase::class);
+
+// The standalone module's Testbench does not load laravel/routes/web.php from the host app.
+beforeEach(function (): void {
+    if (! Route::has('tickets.resolution')) {
+        Route::post('/{lang}/tickets/{ticket}/resolution', ConfirmTicketResolutionAction::class)
+            ->middleware(['web', 'auth'])
+            ->name('tickets.resolution');
+    }
+});
 
 /** @see docs/stories/dcp-287-dettaglio-proprietario-follower-e-ritorno-dopo-il-login.story.md */
 it('lets the owner confirm a resolved ticket exactly once', function (): void {
