@@ -286,4 +286,7 @@ return [
         'title' => 'Segnalazioni simili nelle vicinanze',
         'description' => 'Il problema potrebbe essere già stato segnalato. Apri una segnalazione esistente per seguirla e ricevere aggiornamenti.',
     ],
+    'completion_photo' => [
+        'label' => 'Foto dopo l\'intervento',
+    ],
 ];
