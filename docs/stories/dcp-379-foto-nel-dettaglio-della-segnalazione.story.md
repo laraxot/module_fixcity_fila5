@@ -98,7 +98,7 @@ Fatto in questo giro oltre al codice: `19-ticket-detail.css` (`contain`, fondo `
 
 ## Estensione: foto di completamento nel back office (2026-11-23)
 
-- `Ticket::registerMediaCollections()`: collezione `completion_photo`, singola immagine JPEG/PNG.
+- `Ticket::registerMediaCollections()`: collezione `completion_photo`, immagini JPEG/PNG con storico preservato (massimo 5 nel form).
 - `TicketForm::getIssueSection(false)`: nel form back office di modifica appare l'upload
   soltanto su segnalazioni `resolved`/`closed` e per operatori con permesso `changeStatus`.
   Il wizard pubblico di creazione non cambia.
