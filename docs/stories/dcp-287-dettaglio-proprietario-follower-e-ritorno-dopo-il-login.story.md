@@ -8,7 +8,7 @@ priority: P0
 owner: module:Fixcity
 module: Fixcity
 created: 2026-10-26
-updated: 2026-10-26
+updated: 2026-11-23
 qmd: "dcp 287 dettaglio proprietario segnalazione non pubblica location FO-6-43 FO-2-36 FO-2-17 FO-2-18 follower codice di tracciamento capability FO-2-12 accedi per seguire ritorno login redirect BuildPublicTicketDetailAction BuildPersonalAreaTicketRowAction"
 related: [dcp-104, dcp-110, dcp-124, dcp-148, dcp-149, dcp-150, dcp-284, dcp-286, dcp-288]
 tags: [front-office, privacy, proprietario, follower, login, test, bmad]
@@ -331,3 +331,45 @@ Stato per correzione (BMAD, TDD, prova reale):
 Lock: tutti i miei lock rilasciati a fine lavoro (elenco nel report al coordinatore). Orfani non miei, segnalati e non rimossi:
 `app/Actions/BuildTicketTimelineAction.php.lock` (`fixcity-root`, task `tracking-timeline-fo`, 2026-09-26; il file risulta modificato
 il 2026-10-22, quindi il lock non e' stato rilasciato).
+
+
+## Estensione: suggerimento segnalazioni simili nel wizard (2026-11-23)
+
+- Nuova `FindNearbyPublicTicketsAction`: massimo cinque ticket visibili a tutti, stesso tipo, entro 50 m
+  dal punto inserito e creati negli ultimi 30 giorni. Esclude i ticket risolti/chiusi e non restituisce
+  mai le segnalazioni private del cittadino o di altri utenti.
+- Nuova vista `fixcity::components.wizard.similar-tickets` nel riepilogo del wizard, con link al
+  dettaglio pubblico e quindi al pulsante Segui gia' esistente. La vista non blocca la creazione.
+- Traduzioni `ticket_form.similar_tickets.*` aggiunte in it/en/de/es. Test Pest dedicati all'Action.
+- Questa e' una ricerca di **possibili** duplicati: non unisce ticket automaticamente e non afferma
+  che due segnalazioni rappresentino con certezza lo stesso problema.
+- In questa sessione non era disponibile un checkout PHP 8.4, quindi i test sono presenti ma non eseguiti.
+
+
+## Estensione: conferma o contestazione della risoluzione (2026-11-23)
+
+- `ConfirmTicketResolutionAction` e POST autenticato `/{lang}/tickets/{ticket}/resolution` con
+  CSRF e throttle. Il controllo proprietario avviene sulla riga bloccata; il solo stato
+  accettato in ingresso e' `resolved`. Le transizioni seguono `TicketStatusEnum`:
+  conferma `resolved -> closed`, contestazione `resolved -> reopened`.
+- La motivazione e' obbligatoria (massimo 2000 caratteri) per la contestazione. Il cambio di stato
+  e' pubblico per aggiornare i follower, mentre il testo del cittadino viene scritto in una
+  seconda attivita' `author_only` e non appare nelle API o timeline pubbliche.
+- Test `ConfirmTicketResolutionActionTest.php`: permessi proprietario, chiusura, riapertura,
+  motivazione privata e doppio invio. Traduzioni in it/en/de/es.
+- **Integrazione UI ancora da completare**: i form nel dettaglio sono di proprieta' del tema Sixteen,
+  che ha un repository autonomo; serve sincronizzarlo esplicitamente in `dev`.
+- I test sono stati aggiunti ma non eseguiti: non era disponibile il checkout PHP 8.4.
+
+
+## Estensione: statistiche aggregate per quartiere (2026-11-23)
+
+- `BuildPublicNeighborhoodStatsAction` usa **solo** `BuildPublicTicketsQueryAction::execute(false)`,
+  quindi il dataset non comprende segnalazioni private. Raggruppa per `location.suburb`,
+  con fallback a `location.city`, per periodi di 7, 30 o 365 giorni.
+- Endpoint Folio pubblico con throttle `/api/tickets/neighborhood-stats?days=30`: restituisce soltanto
+  periodo, conteggio totale, senza area e gruppi `name/reports/active/resolved`, non ID,
+  coordinate, nominativi o contenuti dei ticket. Test Pest Action/API aggiunti.
+- La pagina grafica di presentazione al cittadino richiede il tema Sixteen e la
+  sincronizzazione del suo repository; l'API aggregata e' gia' disponibile nel modulo.
+- Non sono stati eseguiti test/runtime perche' il checkout PHP 8.4 non era presente.

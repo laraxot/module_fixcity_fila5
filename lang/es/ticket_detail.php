@@ -82,4 +82,16 @@ return [
         'unfollowed' => 'Ya no sigues esta incidencia.',
         'list_link' => 'Ir a las incidencias que sigues',
     ],
+    'resolution' => [
+        'title' => 'Verifica la resolución',
+        'confirm' => 'Confirmo que el problema está resuelto',
+        'dispute' => 'El problema no está resuelto',
+        'reason_label' => 'Explica qué falta por resolver',
+        'reason_required' => 'Explica por qué el problema no está resuelto (máximo 2000 caracteres).',
+        'only_resolved' => 'Solo puedes verificar una incidencia marcada como resuelta.',
+        'confirmed_audit' => 'Resolución confirmada por la persona que informó',
+        'confirmed' => 'Gracias, has confirmado la resolución.',
+        'disputed' => 'Tu reclamación se ha registrado y la incidencia se ha reabierto.',
+        'dispute_notice' => 'Tu explicación solo será visible para ti y el personal autorizado.',
+    ],
 ];

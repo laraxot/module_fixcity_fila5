@@ -8,7 +8,7 @@ priority: P0
 owner: module:Fixcity
 module: Fixcity
 created: 2026-10-26
-updated: 2026-10-26
+updated: 2026-11-23
 qmd: "dcp 284 notifiche ciclo di vita segnalazione A-01 trasparenza stato TicketLifecycleNotification NotifyTicketOwnerOfLifecycleEventAction NotifyTicketReceivedAction TicketCreatedEvent TicketActivityObserver EventServiceProvider approvata scartata presa in carico chiusa PA_ROLES lang it en de es"
 related: [dcp-111, dcp-148, dcp-200, dcp-208, dcp-281]
 tags: [notifiche, trasparenza, ciclo-di-vita, lang, test, bmad]
@@ -291,3 +291,36 @@ cache degli eventi (fatto 4), e un helper di test usava `App::withLocale`, che n
 - A-22: `TicketStatusChangedNotification` e `TicketAssignedNotification` non portano la lingua del destinatario; i follower ricevono il codice di
   tracciamento nella notifica di stato (DD-3); la logica dei canali e' ripetuta in tre punti (due vecchie notifiche piu' il trait nuovo).
 - `FixcityServiceProvider.php`, `AssignTicketAction.php`, `ChangeStatus.php` risultano modificati nel working tree da altre sessioni: non li ho toccati.
+
+
+## Estensione: recapito email opzionale all'ente (2026-11-23)
+
+Decisione utente: recapito tramite email, senza attribuire all'invio il significato di presa in carico formale. Il tenant
+configura una casella **dedicata** in `ente.ticket_reports_email`; il valore iniziale rimane vuoto. Non si usano
+automaticamente `ente.email` (contatto pubblico) o `ente.pec` (non e' una ricevuta PEC).
+
+- `ResolveEnteTicketEmailAction`: valida e normalizza la casella, rifiutando stringhe non valide e caratteri di controllo.
+- `SendTicketToEnteAction`: dopo `TicketCreatedEvent` post-commit inoltra soltanto il numero interno del ticket e
+  l'invito ad accedere al pannello riservato; non invia dati personali, foto, coordinate o codice di tracciamento.
+- `NotifyTicketReceivedAction`: conserva conferma al proprietario e alert agli operatori e richiama la nuova Action.
+- L'esito SMTP e' registrato come attivita' interna `mail_sent`/`mail_failed` con `payload.source=ente_ticket_intake`.
+  `mail_sent` significa che il sistema di trasporto ha accettato l'email; NON prova lettura, consegna finale o accettazione
+  da parte del Comune. Un evento di successo gia' presente impedisce reinvii seriali dello stesso ticket.
+- Test introdotti: `SendTicketToEnteActionTest.php` (casella assente/malformata, messaggio minimo, duplicati,
+  audit e fallimento del trasporto).
+
+**Limiti espliciti:** `ente.ticket_reports_email` e' vuoto fino alla configurazione verificata dell'ente; nessun
+invio reale e' stato eseguito. In questa sessione mancavano checkout PHP 8.4 e dipendenze: i test sono stati aggiunti
+ma non eseguiti. Non esiste ricevuta istituzionale di lettura/accettazione; l'integrazione multi-Comune resta un progetto
+separato. Il trattamento dei retry simultanei richiede un futuro controllo transazionale/idempotente persistente.
+
+
+## Correzione KPI SLA (2026-11-23)
+
+`GetTicketSlaMetricsAction` ora misura la durata dalla creazione fino all'ultima attivita'
+`status_change` con destinazione `resolved`, anziche' usare incondizionatamente
+`tickets.updated_at` (che puo' cambiare dopo l'intervento). L'Action elabora i ticket
+in chunk da 500. Per i ticket storici senza evento di risoluzione continua a usare
+`updated_at`, in modo esplicitamente approssimativo. Un nuovo test mostra il caso in
+cui `updated_at` e' successivo alla risoluzione. I test non sono stati eseguiti
+in questa sessione per mancanza di ambiente PHP.

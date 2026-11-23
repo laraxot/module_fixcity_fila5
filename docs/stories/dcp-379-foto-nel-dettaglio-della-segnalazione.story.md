@@ -4,7 +4,7 @@ type: story
 status: review
 module: Fixcity
 created: 2026-10-27
-updated: 2026-10-27
+updated: 2026-11-23
 tags: [bmad, story, dettaglio, foto, timeline, privacy, ux, design-comuni]
 qmd: "dettaglio segnalazione foto sotto la mappa timeline file nome hash media_added allegato aggiunto app_url fixcity.local url relativo D230-5"
 related:
@@ -94,3 +94,18 @@ Fatto in questo giro oltre al codice: `19-ticket-detail.css` (`contain`, fondo `
 - Restano: `APP_URL=http://fixcity.local` in `.env` (miniature di `/tickets/track` e API elenco con host sbagliato); decisione D230-5 per le foto pubbliche.
 
 **Merge 2026-10-28 (sessione da07dfb1):** al merge con `laraxot/dev` si tiene il codice remoto (`images`, `$isOwner || $isPublic`, `td-gallery`), piu' verificato; la versione `photos` esce. D230-5 resta aperta e la decide l'utente.
+
+
+## Estensione: foto di completamento nel back office (2026-11-23)
+
+- `Ticket::registerMediaCollections()`: collezione `completion_photo`, immagini JPEG/PNG con storico preservato (massimo 5 nel form).
+- `TicketForm::getIssueSection(false)`: nel form back office di modifica appare l'upload
+  soltanto su segnalazioni `resolved`/`closed` e per operatori con permesso `changeStatus`.
+  Il wizard pubblico di creazione non cambia.
+- `TicketMediaObserver::creating`: controlla lato server status e permessi anche se un
+  client tenta di bypassare il campo nascosto. Restano attivi il disco privato,
+  la pulizia EXIF e la registrazione degli allegati.
+- **Da completare**: URL dedicati e confronto pubblico prima/dopo nella pagina del
+  tema Sixteen; richiede la sincronizzazione del repository del tema, distinta dal
+  modulo. Non si inventano foto dimostrative.
+- Test/runtime non eseguiti in questa sessione per mancanza del checkout PHP 8.4.

@@ -27,10 +27,12 @@ final class NotifyTicketReceivedAction
 {
     use QueueableAction;
 
+    /** @see docs/stories/dcp-284-notifiche-del-ciclo-di-vita-della-segnalazione.story.md */
     public function execute(Ticket $ticket): void
     {
         $this->confirmToOwner($ticket);
         $this->alertStaff($ticket);
+        app(SendTicketToEnteAction::class)->execute($ticket);
     }
 
     private function confirmToOwner(Ticket $ticket): void

@@ -54,6 +54,7 @@ describe('Segnalazioni Filter View Model', function (): void {
         Assert::assertCount(1, $viewModel->getStatusFilterItems());
         Assert::assertSame(1, $viewModel->getFilteredCount(['other'], ['open']));
         Assert::assertSame(0, $viewModel->getFilteredCount(['waste'], ['open']));
+        Assert::assertSame([2], $viewModel->getFilteredFeatureIds(['other'], ['open']));
     });
 
     test('_it_supplements_list_items_from_aggregate_features', function (): void {

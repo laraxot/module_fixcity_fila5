@@ -21,9 +21,12 @@ test('ticket subscribers has one active migration owner', function (): void {
         ->not->toContain('$table->timestamps();')
         ->not->toContain('$table->softDeletes();');
 
+    // Una sola migrazione possiede la creazione del modello. Le migrazioni
+    // successive `fix`/`repair` sono ledger forward-only per installazioni
+    // gia' migrate e non sono owner concorrenti.
     $ticketSubscriberOwners = array_filter(
-        glob($migrationPath.'/*ticket_subscribers*.php') ?: [],
-        static fn (mixed $path): bool => is_string($path) && ! str_contains(basename($path), '_repair_'),
+        glob($migrationPath.'/*create_ticket_subscribers_table.php') ?: [],
+        static fn (mixed $path): bool => is_string($path),
     );
 
     expect($ticketSubscriberOwners)

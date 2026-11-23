@@ -19,7 +19,7 @@
             {
                 "type": "ticket_create",
                 "data": {
-                    "view": "pub_theme::components.blocks.tests.ticket-crea",
+                    "view": "pub_theme::components.blocks.ticket-create.design-comuni",
                     "title": "Segnalazione disservizio",
                     "breadcrumb": {
                         "items": [
@@ -82,7 +82,7 @@
             {
                 "type": "ticket_create",
                 "data": {
-                    "view": "pub_theme::components.blocks.tests.ticket-crea",
+                    "view": "pub_theme::components.blocks.ticket-create.design-comuni",
                     "title": "Report an issue",
                     "breadcrumb": {
                         "items": [
@@ -145,7 +145,7 @@
             {
                 "type": "ticket_create",
                 "data": {
-                    "view": "pub_theme::components.blocks.tests.ticket-crea",
+                    "view": "pub_theme::components.blocks.ticket-create.design-comuni",
                     "title": "Störung melden",
                     "breadcrumb": {
                         "items": [
@@ -208,7 +208,7 @@
             {
                 "type": "ticket_create",
                 "data": {
-                    "view": "pub_theme::components.blocks.tests.ticket-crea",
+                    "view": "pub_theme::components.blocks.ticket-create.design-comuni",
                     "title": "Comunicar una incidencia",
                     "breadcrumb": {
                         "items": [

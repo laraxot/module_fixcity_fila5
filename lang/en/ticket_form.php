@@ -294,4 +294,11 @@ return [
             'label' => 'Authorisations and conditions',
         ],
     ],
+    'similar_tickets' => [
+        'title' => 'Similar reports nearby',
+        'description' => 'This issue may already have been reported. Open an existing report to follow it and receive updates.',
+    ],
+    'completion_photo' => [
+        'label' => 'Photo after the intervention',
+    ],
 ];

@@ -95,3 +95,12 @@ qmd: "story 031 segnalazioni parity fixcity"
 - [ ] Responsive design
 - [ ] WCAG 2.1 AA accessibility
 - [ ] Design Comuni parity verified
+
+## SSoT implementation note (homepage filters and map)
+
+The public homepage projection now reads `public_html/data/tickets.json` through
+`LoadPublicTicketsGeoJsonAction`. `BuildSegnalazioniFilterAggregateAction`, the
+filter counts, the filtered card IDs, and `map-lit` therefore consume the same
+feature set; no live DB query can add a marker or count that is absent from the
+public GeoJSON. The map keeps its existing marker renderer and applies the
+initial URL selection after `geo-map-loaded`.

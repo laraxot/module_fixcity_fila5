@@ -302,4 +302,11 @@ return [
             'label' => 'Einwilligungen und Bedingungen',
         ],
     ],
+    'similar_tickets' => [
+        'title' => 'Ähnliche Meldungen in der Nähe',
+        'description' => 'Dieses Problem wurde möglicherweise bereits gemeldet. Öffnen Sie eine bestehende Meldung, um ihr zu folgen und Aktualisierungen zu erhalten.',
+    ],
+    'completion_photo' => [
+        'label' => 'Foto nach Abschluss des Einsatzes',
+    ],
 ];

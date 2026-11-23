@@ -4,9 +4,11 @@ declare(strict_types=1);
 
 use Filament\Facades\Filament;
 use Illuminate\Support\Facades\Notification;
+use Illuminate\Validation\ValidationException;
 use Modules\Fixcity\Actions\AssignTicketAction;
 use Modules\Fixcity\Actions\SetFixcityEmailNotificationPreferenceAction;
 use Modules\Fixcity\Database\Factories\TicketFactory;
+use Modules\Fixcity\Models\Ticket;
 use Modules\Fixcity\Notifications\TicketAssignedNotification;
 use Modules\Fixcity\Tests\TestCase;
 use Modules\User\Database\Factories\UserFactory;
@@ -22,6 +24,7 @@ it('notifies the newly assigned operator after the assignment commits', function
     $actor = UserFactory::new()->createOne();
     $operator = UserFactory::new()->createOne();
     $actor->assignRole(Role::firstOrCreate(['name' => 'admin', 'guard_name' => 'web']));
+    $operator->assignRole(Role::firstOrCreate(['name' => 'operator', 'guard_name' => 'web']));
     $this->actingAs($actor);
     $ticket = TicketFactory::new()->createOne([
         'owner_id' => $owner->getAuthIdentifier(),
@@ -35,6 +38,60 @@ it('notifies the newly assigned operator after the assignment commits', function
 
     Notification::assertSentToTimes($operator, TicketAssignedNotification::class, 1);
     Notification::assertNotSentTo($owner, TicketAssignedNotification::class);
+});
+
+/** @see docs/stories/dcp-281-rinforzo-back-office-e-pagine-legacy.story.md */
+it('rejects assigning a ticket to a user without a PA role', function (): void {
+    Notification::fake();
+
+    $owner = UserFactory::new()->createOne();
+    $actor = UserFactory::new()->createOne();
+    $citizen = UserFactory::new()->createOne();
+    $actor->assignRole(Role::firstOrCreate(['name' => 'admin', 'guard_name' => 'web']));
+    $this->actingAs($actor);
+
+    $ticket = TicketFactory::new()->createOne([
+        'owner_id' => $owner->getAuthIdentifier(),
+        'responsible_id' => null,
+    ]);
+
+    expect(fn () => app(AssignTicketAction::class)->execute(
+        $ticket,
+        SafeStringCastAction::cast($citizen->getAuthIdentifier()),
+    ))->toThrow(ValidationException::class);
+
+    $fresh = $ticket->fresh();
+    if (! $fresh instanceof Ticket) {
+        throw new RuntimeException('Ticket non trovato dopo la rimozione assegnazione.');
+    }
+    expect($fresh->responsible_id)->toBeNull();
+    Notification::assertNotSentTo($citizen, TicketAssignedNotification::class);
+});
+
+/** @see docs/stories/dcp-281-rinforzo-back-office-e-pagine-legacy.story.md */
+it('allows an authorized operator to remove a ticket assignment', function (): void {
+    Notification::fake();
+
+    $owner = UserFactory::new()->createOne();
+    $actor = UserFactory::new()->createOne();
+    $operator = UserFactory::new()->createOne();
+    $actor->assignRole(Role::firstOrCreate(['name' => 'admin', 'guard_name' => 'web']));
+    $operator->assignRole(Role::firstOrCreate(['name' => 'operator', 'guard_name' => 'web']));
+    $this->actingAs($actor);
+
+    $ticket = TicketFactory::new()->createOne([
+        'owner_id' => $owner->getAuthIdentifier(),
+        'responsible_id' => SafeStringCastAction::cast($operator->getAuthIdentifier()),
+    ]);
+
+    app(AssignTicketAction::class)->execute($ticket, null);
+
+    $fresh = $ticket->fresh();
+    if (! $fresh instanceof Ticket) {
+        throw new RuntimeException('Ticket non trovato dopo la rimozione assegnazione.');
+    }
+    expect($fresh->responsible_id)->toBeNull();
+    Notification::assertNotSentTo($operator, TicketAssignedNotification::class);
 });
 
 it('emails an assignment only to an operator with a verified email address', function (): void {

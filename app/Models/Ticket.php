@@ -422,13 +422,16 @@ class Ticket extends BaseModel implements Commentable, HasMedia
         }
     }
 
+    /** @see docs/stories/dcp-379-foto-nel-dettaglio-della-segnalazione.story.md */
     public function registerMediaCollections(): void
     {
         $this->addMediaCollection('attachments')
             ->acceptsMimeTypes(['image/jpeg', 'image/png', 'application/pdf']);
         $this->addMediaCollection('ticket')
             ->acceptsMimeTypes(['image/jpeg', 'image/png']);
-        // ->maxFileSize(10 * 1024 * 1024); // 10MB
+        // Preserve subsequent completion evidence instead of silently deleting earlier photos.
+        $this->addMediaCollection('completion_photo')
+            ->acceptsMimeTypes(['image/jpeg', 'image/png']);
     }
 
     /**

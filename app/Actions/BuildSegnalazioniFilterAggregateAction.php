@@ -5,12 +5,15 @@ declare(strict_types=1);
 namespace Modules\Fixcity\Actions;
 
 use Modules\Fixcity\Enums\TicketStatusEnum;
+use Modules\Fixcity\Actions\LoadPublicTicketsGeoJsonAction;
 use Modules\Xot\Actions\Cast\SafeIntCastAction;
 use Modules\Xot\Actions\Cast\SafeStringCastAction;
 use Spatie\QueueableAction\QueueableAction;
 
 /**
- * Aggregati live per i filtri pubblici; stessa query e stessi marker della mappa.
+ * Aggregati pubblici per i filtri; la fonte e' lo stesso GeoJSON letto dalla mappa.
+ *
+ * @see \Modules\Fixcity\Actions\LoadPublicTicketsGeoJsonAction
  */
 class BuildSegnalazioniFilterAggregateAction
 {
@@ -28,9 +31,9 @@ class BuildSegnalazioniFilterAggregateAction
      */
     public function execute(): array
     {
-        $geoJson = app(BuildTicketsGeoJsonAction::class)->execute(
-            app(BuildPublicTicketsQueryAction::class)->execute(),
-        );
+        // La homepage non deve ricostruire un dataset diverso da quello che il browser
+        // usa per i marker: il file pubblico e' la SSoT della pagina guest.
+        $geoJson = app(LoadPublicTicketsGeoJsonAction::class)->execute();
         $features = $geoJson['features'] ?? [];
 
         /** @var array<string, int> $counts */

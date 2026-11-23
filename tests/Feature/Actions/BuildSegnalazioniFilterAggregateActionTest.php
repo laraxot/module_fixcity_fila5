@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 use Modules\Fixcity\Actions\BuildSegnalazioniFilterAggregateAction;
+use Modules\Fixcity\Actions\LoadPublicTicketsGeoJsonAction;
 use Modules\Fixcity\Database\Factories\TicketFactory;
 use Modules\Fixcity\Enums\TicketStatusEnum;
 use Modules\Fixcity\Enums\TicketTypeEnum;
@@ -11,9 +12,9 @@ use PHPUnit\Framework\Assert;
 
 uses(TestCase::class);
 
-it('builds public filter aggregates from current ticket records', function (): void {
+it('builds public filter aggregates from the GeoJSON source used by the map', function (): void {
     /** @var TestCase $this */
-    $ticket = TicketFactory::new()->createOne([
+    TicketFactory::new()->createOne([
         'name' => 'Segnalazione live aggregato 2026',
         'type' => TicketTypeEnum::REPORT,
         'status' => TicketStatusEnum::IN_PROGRESS,
@@ -21,19 +22,16 @@ it('builds public filter aggregates from current ticket records', function (): v
         'code' => 'TCK-AGGREGATE-SECRET',
     ]);
 
+    $source = app(LoadPublicTicketsGeoJsonAction::class)->execute();
     $aggregate = app(BuildSegnalazioniFilterAggregateAction::class)->execute();
-    $matchingFeatures = array_values(array_filter(
-        $aggregate['features'],
-        static fn (array $feature): bool => is_array($feature['properties'] ?? null)
-            && ($feature['properties']['id'] ?? null) === $ticket->id,
-    ));
+    $sourceTotal = isset($source['total']) ? $source['total'] : count($source['features']);
 
-    expect($aggregate['totalCount'])->toBeGreaterThan(0)
-        ->and($matchingFeatures)->toHaveCount(1);
+    expect($aggregate['features'])->toBe($source['features'])
+        ->and($aggregate['totalCount'])->toBe($sourceTotal);
 
-    $properties = $matchingFeatures[0]['properties'] ?? null;
-    Assert::assertIsArray($properties);
-    Assert::assertArrayNotHasKey('code', $properties);
-
-    expect($aggregate['countsPerType'][TicketTypeEnum::REPORT->value])->toBeGreaterThan(0);
+    foreach ($aggregate['features'] as $feature) {
+        $properties = $feature['properties'] ?? [];
+        Assert::assertIsArray($properties);
+        Assert::assertArrayNotHasKey('code', $properties);
+    }
 });

@@ -302,4 +302,11 @@ return [
             'label' => 'Autorizaciones y condiciones',
         ],
     ],
+    'similar_tickets' => [
+        'title' => 'Incidencias similares cercanas',
+        'description' => 'Es posible que este problema ya se haya notificado. Abre una incidencia existente para seguirla y recibir actualizaciones.',
+    ],
+    'completion_photo' => [
+        'label' => 'Foto después de la intervención',
+    ],
 ];

@@ -176,6 +176,43 @@ class SegnalazioniFilterViewModel
     }
 
     /**
+     * IDs presenti nel GeoJSON e compatibili con i filtri homepage.
+     *
+     * @see \Modules\Fixcity\Actions\LoadPublicTicketsGeoJsonAction
+     * @param  array<int, string>  $selectedTypes
+     * @param  array<int, string>  $selectedStatuses
+     * @return list<int>
+     */
+    public function getFilteredFeatureIds(array $selectedTypes = [], array $selectedStatuses = []): array
+    {
+        $typeSet = $selectedTypes === [] ? null : array_fill_keys($selectedTypes, true);
+        $statusSet = $selectedStatuses === [] ? null : array_fill_keys($selectedStatuses, true);
+        $ids = [];
+
+        foreach ($this->features as $feature) {
+            if (! is_array($feature) || ! is_array($feature['properties'] ?? null)) {
+                continue;
+            }
+
+            /** @var array<string, mixed> $properties */
+            $properties = $feature['properties'];
+            if ($typeSet !== null && ! isset($typeSet[$this->extractTypeValue($properties)])) {
+                continue;
+            }
+            if ($statusSet !== null && ! isset($statusSet[$this->extractStatusValue($properties)])) {
+                continue;
+            }
+
+            $id = filter_var($properties['id'] ?? null, FILTER_VALIDATE_INT);
+            if ($id !== false && $id !== null) {
+                $ids[] = $id;
+            }
+        }
+
+        return array_values(array_unique($ids));
+    }
+
+    /**
      * @param  array<int, string>  $selectedTypes
      * @param  array<int, string>  $selectedStatuses
      */
