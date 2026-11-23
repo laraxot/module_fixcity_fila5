@@ -31,6 +31,8 @@ return [
     'phone' => '',
     'email' => '',
     'pec' => '',
+    // Opt-in: casella dedicata a nuove segnalazioni. Vuota finche' l'ente non la verifica.
+    'ticket_reports_email' => '',
     'tax_code' => '',
     'vat' => '',
     // Numero verde: riquadro "Hai bisogno di aiuto?" / "Contatta il comune".
