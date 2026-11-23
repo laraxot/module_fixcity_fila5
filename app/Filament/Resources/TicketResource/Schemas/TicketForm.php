@@ -16,6 +16,8 @@ use Filament\Schemas\Components\Html;
 use Filament\Schemas\Components\Section;
 use Filament\Schemas\Components\View;
 use Filament\Schemas\Components\Wizard\Step;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\HtmlString;
 use Illuminate\Support\MessageBag;
@@ -26,7 +28,9 @@ use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 use Modules\Fixcity\Actions\BuildTicketReviewSummaryAction;
 use Modules\Fixcity\Actions\FindNearbyPublicTicketsAction;
 use Modules\Fixcity\Actions\GetPublishedPrivacyPolicyAction;
+use Modules\Fixcity\Enums\TicketStatusEnum;
 use Modules\Fixcity\Enums\TicketTypeEnum;
+use Modules\Fixcity\Models\Ticket;
 use Modules\Geo\Filament\Forms\Components\CoordinatePicker;
 use Modules\Media\Filament\Forms\Components\CameraPhotoUpload;
 use Modules\Xot\Actions\Cast\SafeStringCastAction;
@@ -370,6 +374,7 @@ class TicketForm extends XotBaseResourceForm
         });
     }
 
+    /** @see docs/stories/dcp-379-foto-nel-dettaglio-della-segnalazione.story.md */
     protected static function getIssueSection(bool $designComuni): Section
     {
         $type = Select::make('type')
@@ -399,7 +404,19 @@ class TicketForm extends XotBaseResourceForm
             ->columnSpanFull();
 
         if (! $designComuni) {
-            return $section->schema([$type->searchable(), $name, $content, $images]);
+            // Only staff handling a resolved ticket can add its final photograph.
+            $completionPhoto = CameraPhotoUpload::make('completionPhoto')
+                ->label((string) __('fixcity::ticket_form.completion_photo.label'))
+                ->collection('completion_photo')
+                ->maxFiles(1)
+                ->acceptedFileTypes(['image/jpeg', 'image/png'])
+                ->maxSize(10 * 1024)
+                ->rule(static fn (): \Closure => static::decodableImageRule())
+                ->visible(static fn (?Model $record): bool => $record instanceof Ticket
+                    && in_array(TicketStatusEnum::tryFrom($record->resolveTicketStatusValue()), [TicketStatusEnum::RESOLVED, TicketStatusEnum::CLOSED], true)
+                    && Gate::allows('changeStatus', $record));
+
+            return $section->schema([$type->searchable(), $name, $content, $images, $completionPhoto]);
         }
 
         // Select nativo con prima opzione "Tipo di disservizio*"; "Titolo" al posto di "Nome"; dettagli con limite di 200 caratteri APPLICATO
