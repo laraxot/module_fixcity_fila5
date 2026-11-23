@@ -8,7 +8,7 @@ priority: P0
 owner: module:Fixcity
 module: Fixcity
 created: 2026-10-26
-updated: 2026-10-26
+updated: 2026-11-23
 qmd: "dcp 287 dettaglio proprietario segnalazione non pubblica location FO-6-43 FO-2-36 FO-2-17 FO-2-18 follower codice di tracciamento capability FO-2-12 accedi per seguire ritorno login redirect BuildPublicTicketDetailAction BuildPersonalAreaTicketRowAction"
 related: [dcp-104, dcp-110, dcp-124, dcp-148, dcp-149, dcp-150, dcp-284, dcp-286, dcp-288]
 tags: [front-office, privacy, proprietario, follower, login, test, bmad]
@@ -331,3 +331,16 @@ Stato per correzione (BMAD, TDD, prova reale):
 Lock: tutti i miei lock rilasciati a fine lavoro (elenco nel report al coordinatore). Orfani non miei, segnalati e non rimossi:
 `app/Actions/BuildTicketTimelineAction.php.lock` (`fixcity-root`, task `tracking-timeline-fo`, 2026-09-26; il file risulta modificato
 il 2026-10-22, quindi il lock non e' stato rilasciato).
+
+
+## Estensione: suggerimento segnalazioni simili nel wizard (2026-11-23)
+
+- Nuova `FindNearbyPublicTicketsAction`: massimo cinque ticket visibili a tutti, stesso tipo, entro 50 m
+  dal punto inserito e creati negli ultimi 30 giorni. Esclude i ticket risolti/chiusi e non restituisce
+  mai le segnalazioni private del cittadino o di altri utenti.
+- Nuova vista `fixcity::components.wizard.similar-tickets` nel riepilogo del wizard, con link al
+  dettaglio pubblico e quindi al pulsante Segui gia' esistente. La vista non blocca la creazione.
+- Traduzioni `ticket_form.similar_tickets.*` aggiunte in it/en/de/es. Test Pest dedicati all'Action.
+- Questa e' una ricerca di **possibili** duplicati: non unisce ticket automaticamente e non afferma
+  che due segnalazioni rappresentino con certezza lo stesso problema.
+- In questa sessione non era disponibile un checkout PHP 8.4, quindi i test sono presenti ma non eseguiti.
