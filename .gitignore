@@ -27,3 +27,7 @@ fixcity.code-workspace
 # Forbidden parallel documentation archive
 docs/archive/
 *.lock
+
+# screenshot di comparazione visiva (artefatti locali)
+docs/project/visual-comparison/
+docs/visual-comparison/
