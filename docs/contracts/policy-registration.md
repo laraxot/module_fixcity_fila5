@@ -1,43 +1,57 @@
 ---
 title: "Contratto di registrazione delle Policy Fixcity"
-type: framework-contract
-contract: Modules\\Fixcity\\Policies\\TicketPolicy
-owner: Fixcity
+type: contract
+action: "Modules\\Fixcity\\Policies\\TicketPolicy"
+module: Fixcity
 status: accepted
-updated: 2026-11-23
+tags: [contract, policy, autodiscovery, provider]
+created: 2026-11-23
+updated: 2026-11-26
 ---
 
 # Registrazione automatica delle Policy
 
-Le Policy del modulo sono scoperte e registrate dal meccanismo Laravel di
-autodiscovery delle Policy. Il service provider del dominio non deve duplicare
-questa registrazione con `Gate::policy()`.
+Come `TicketPolicy` arriva al `Gate` (il perche' sta nell'ADR [policy-autodiscovery](../adr/policy-autodiscovery.md)). Le regole
+di autorizzazione della Policy hanno un contratto a parte: [ticket-policy.md](ticket-policy.md).
 
-## Promessa
+## Input
 
-- `TicketPolicy` resta nella directory `Modules/Fixcity/app/Policies`.
-- Il modello `Ticket` e la Policy mantengono la convenzione di naming Laravel.
-- Le chiamate a `Gate`, `authorize()` e ai Filament Resource usano la Policy
-  risolta dal framework.
-- Il provider Fixcity si occupa soltanto dell'infrastruttura realmente propria
-  del modulo: osservatori, route API, configurazione e registrazioni esplicite
-  non coperte dall'autodiscovery.
+- Una chiamata a `Gate`, `authorize()`, `$user->can()` o a una risorsa Filament su un `Modules\Fixcity\Models\Ticket`.
+
+## Output
+
+- Il `Gate` risolve `Modules\Fixcity\Policies\TicketPolicy` con l'autodiscovery di Laravel (modello `Ticket` in `Models`,
+  Policy `TicketPolicy` in `Policies` dello stesso modulo), senza registrazione esplicita.
+
+## Invarianti
+
+| ID | Regola | Group Pest |
+|---|---|---|
+| TICKET-POLICY-REG-INV-1 | `FixcityServiceProvider` (e nessun altro file di `app/`) non registra `TicketPolicy` a mano: nessun `Gate::policy()` ne' `Gate::define()` in `Modules/Fixcity/app`. Violata: due fonti di verita' per l'associazione modello-Policy. Controllo manuale: l'ultimo comando della sezione Verifica non deve trovare nulla. | — (non dimostrato) |
+| TICKET-POLICY-REG-INV-2 | `TicketPolicy` resta in `Modules/Fixcity/app/Policies` e il suo nome segue la convenzione `Ticket` -> `TicketPolicy`: le chiamate al `Gate` su un `Ticket` raggiungono le sue regole (un amministratore vede l'azione `delete`, un operatore no). | `TICKET-POLICY-REG-INV-2` |
+
+## Effetti collaterali
+
+- Nessuno a runtime: l'associazione la calcola il framework alla prima autorizzazione. Il provider si occupa solo
+  dell'infrastruttura propria del modulo (osservatori, route API, configurazione, middleware nell'allowlist CMS).
+
+## Errori
+
+- Nessuna eccezione propria. Se la convenzione di naming si rompe il `Gate` non trova la Policy e **nega per default**: i sintomi
+  sono azioni nascoste e risposte 403, non un errore di bootstrap. Se una Policy non puo' seguire l'autodiscovery serve un ADR
+  con test di bootstrap (come dice l'ADR).
 
 ## Non fa
 
-- Non aggiunge una registrazione manuale ridondante in
-  `FixcityServiceProvider`.
+- Non aggiunge una registrazione manuale ridondante in `FixcityServiceProvider`.
 - Non sposta la Policy in Cms o Xot.
-- Non modifica le regole di autorizzazione della Policy.
+- Non modifica le regole di autorizzazione della Policy (vedi `ticket-policy.md`).
 
 ## Verifica
 
 ```bash
 cd laravel
-vendor/bin/pest Modules/Fixcity/tests/Unit/Policies/TicketPolicyTest.php
+vendor/bin/pest Modules/Fixcity/tests --group=TICKET-POLICY-REG-INV-2
 vendor/bin/phpstan analyse Modules/Fixcity
+rg -n "Gate::policy|Gate::define" Modules/Fixcity/app
 ```
-
-## Correzione applicata
-
-Nessuna registrazione manuale in `FixcityServiceProvider::boot()`: `TicketPolicy` è risolta dall'autodiscovery. Vedi `laravel/Modules/Fixcity/app/Providers/FixcityServiceProvider.php`.
