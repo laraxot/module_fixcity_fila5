@@ -72,8 +72,8 @@ core rispondono 200/302 atteso.
 
 SSoT UI: JSON `header` + pagine CMS `area-personale.*` (auth). `profile.edit` e' la pagina Volt del
 modulo User e il FO non la linka. Blueprint Filament non governa queste pagine FO: vedi
-[filament-blueprint.md](../bmad/filament-blueprint.md) e
-[design-comuni-information-architecture.md](../bmad/design-comuni-information-architecture.md).
+[filament-blueprint.md](../../archive/docs-legacy/bmad/filament-blueprint.md) e
+[design-comuni-information-architecture.md](../../archive/docs-legacy/bmad/design-comuni-information-architecture.md).
 
 ## Correzione (2026-10-22): niente pagina nel tema per riparare un 404
 

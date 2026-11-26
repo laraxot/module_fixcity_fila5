@@ -26,12 +26,12 @@ Richiesta dell'utente del 2026-10-26: analizzare a fondo il progetto e l'intero 
 
 ## Documenti del completamento
 
-- [Registro delle lacune](../bmad/completion-gap-register.md): 491 righe, due analisi.
-- [Architettura](../bmad/completion-architecture.md): contratti e proprieta'.
-- [Brainstorming](../bmad/completion-brainstorming.md): cause, rischi, domande al titolare.
-- [Piano](../bmad/completion-planning.md): onde, file di chi, percorso critico, calendario.
-- [Blueprint Filament](../bmad/completion-front-office-blueprint.md): come si costruiscono le funzioni mancanti.
-- [Audit del front office](../bmad/completion-front-office-audit.md) e i tredici rapporti per intero in `bmad/completion-audit/`.
+- [Registro delle lacune](../../archive/docs-legacy/bmad/completion-gap-register.md): 491 righe, due analisi.
+- [Architettura](../../archive/docs-legacy/bmad/completion-architecture.md): contratti e proprieta'.
+- [Brainstorming](../../archive/docs-legacy/bmad/completion-brainstorming.md): cause, rischi, domande al titolare.
+- [Piano](../../archive/docs-legacy/bmad/completion-planning.md): onde, file di chi, percorso critico, calendario.
+- [Blueprint Filament](../../archive/docs-legacy/bmad/completion-front-office-blueprint.md): come si costruiscono le funzioni mancanti.
+- [Audit del front office](../../archive/docs-legacy/bmad/completion-front-office-audit.md) e i tredici rapporti per intero in `bmad/completion-audit/`.
 - Vista per proprietario: `docs/bmad/completion-gap-analysis.md` in ogni modulo e tema.
 
 ## Storie figlie
@@ -39,7 +39,7 @@ Richiesta dell'utente del 2026-10-26: analizzare a fondo il progetto e l'intero 
 | Storia | Oggetto | Stato |
 |---|---|---|
 | [DCP-281](dcp-281-rinforzo-back-office-e-pagine-legacy.story.md) | Pannello operatore e pagine legacy | In corso (aperti A-23 e la schermata Mobile) |
-| [DCP-282](dcp-282-igiene-di-sicurezza-radice-web-bootstrap-e-gate.story.md) | Igiene della radice web, bootstrap, controllo di go-live | Fatta |
+| [DCP-282](../../archive/docs-legacy/stories/dcp-282-igiene-di-sicurezza-radice-web-bootstrap-e-gate.story.md) | Igiene della radice web, bootstrap, controllo di go-live | Fatta |
 | DCP-283 | Esecuzione dinamica e fail-open in Cms e Notify | Fatta |
 | [DCP-284](dcp-284-notifiche-del-ciclo-di-vita-della-segnalazione.story.md) | Notifiche del ciclo di vita | Fatta, con DD-1..DD-6 aperti |
 | DCP-285 | Policy utenti, reset password, revoca consensi | Fatta, schema da chiedere |

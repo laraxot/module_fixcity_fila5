@@ -19,7 +19,7 @@ related:
 
 ## Contesto
 
-L'audit (vedi [README](../audit/README.md)) ha trovato in produzione su fixcity.eu, con sole GET:
+L'audit (vedi [README](../../archive/docs-legacy/audit/README.md)) ha trovato in produzione su fixcity.eu, con sole GET:
 
 - ogni pannello Filament (`/fixcity/admin`, `/user/admin`, `/cms/admin`, `/geo/admin`, `/notify/admin`, `/tenant/admin`, `/xot/admin`)
   rispondeva 500 per `ViteManifestNotFoundException` su `public_html/assets/geo/manifest.json`;
@@ -86,4 +86,4 @@ Un agente separato ha rivisto le modifiche dopo il primo commit (`04fd40d2d9`). 
 - Per vedere le pagine demo in locale: `SHOWCASE_PAGES=true` nel `.env` (default già vero se `APP_ENV` non è `production`).
 - SPID/CIE restano spenti finché `SpidAuthAction::validateSamlResponse` non verifica firma, Issuer, Audience, `InResponseTo` e
   scadenza, e il callback non ha l'eccezione CSRF corretta. Valutare un proxy SPID certificato invece di un SP fatto in casa.
-- Azioni umane aperte (rotazione segreti, env di produzione, worker, cron): elenco nel [README dell'audit](../audit/README.md).
+- Azioni umane aperte (rotazione segreti, env di produzione, worker, cron): elenco nel [README dell'audit](../../archive/docs-legacy/audit/README.md).

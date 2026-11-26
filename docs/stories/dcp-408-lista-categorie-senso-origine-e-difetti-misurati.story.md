@@ -80,9 +80,9 @@ Una sola modifica mia in codice: `HasMany` nella closure di `ListPublicCategorie
 | Difetto o decisione | Story |
 |---------------------|-------|
 | LC-02, LC-03, LC-04 (classi Design Comuni al posto di Tailwind) | [DCP-430](../../../../Themes/Sixteen/docs/stories/dcp-430-lista-categorie-classi-design-comuni-al-posto-di-tailwind.story.md) |
-| LC-05 (titolo), LC-06 (radici DC, D-LC-04), LC-09 (link in ingresso, D-LC-03) | [DCP-423](./dcp-423-lista-categorie-titolo-link-in-ingresso-e-tassonomia.story.md) |
-| LC-07 (legame categoria e tipo, D-LC-02) | [DCP-421](./dcp-421-lista-categorie-legame-tra-categoria-e-tipo-di-segnalazione.story.md) |
-| LC-08 (CategoryResource) | [DCP-422](./dcp-422-categoryresource-filament-per-le-categorie.story.md) |
+| LC-05 (titolo), LC-06 (radici DC, D-LC-04), LC-09 (link in ingresso, D-LC-03) | [DCP-423](../../archive/docs-legacy/stories/dcp-423-lista-categorie-titolo-link-in-ingresso-e-tassonomia.story.md) |
+| LC-07 (legame categoria e tipo, D-LC-02) | [DCP-421](../../archive/docs-legacy/stories/dcp-421-lista-categorie-legame-tra-categoria-e-tipo-di-segnalazione.story.md) |
+| LC-08 (CategoryResource) | [DCP-422](../../archive/docs-legacy/stories/dcp-422-categoryresource-filament-per-le-categorie.story.md) |
 | LC-10 (piano docs di Sixteen), con la prova di `folio:list` | [DCP-439](../../../../Themes/Sixteen/docs/stories/dcp-439-piano-docs-sixteen-dice-il-falso-su-chi-serve-lista-categorie.story.md); e' anche il criterio 2 di DCP-423, chi chiude una spunta l'altra |
 
 LC-01 non ha una story: non e' un difetto aperto. Le decisioni D-LC-02, D-LC-03 e D-LC-04 restano all'utente.

@@ -61,8 +61,8 @@ Contratti collegati alle decisioni: [policy-registration](../contracts/policy-re
 
 ## Decisioni precedenti (formato libero, non ancora ADR)
 
-- [wizard-submission-states](../wiki/decisions/wizard-submission-states.md)
-- [bmad-plan-services-to-actions](../decisions/bmad-plan-services-to-actions.md)
-- [no-services-final-status](../decisions/no-services-final-status.md)
-- [themed-access-errors-through-http-exception-handler](../decisions/themed-access-errors-through-http-exception-handler.md)
-- [ticket-hours-user-boundary](../decisions/ticket-hours-user-boundary.md)
+- [wizard-submission-states](../../archive/docs-legacy/wiki/decisions/wizard-submission-states.md)
+- [bmad-plan-services-to-actions](../../archive/docs-legacy/decisions/bmad-plan-services-to-actions.md)
+- [no-services-final-status](../../archive/docs-legacy/decisions/no-services-final-status.md)
+- [themed-access-errors-through-http-exception-handler](../../archive/docs-legacy/decisions/themed-access-errors-through-http-exception-handler.md)
+- [ticket-hours-user-boundary](../../archive/docs-legacy/decisions/ticket-hours-user-boundary.md)

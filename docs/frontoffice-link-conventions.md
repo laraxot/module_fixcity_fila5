@@ -125,5 +125,5 @@ Canon: [translation-key-governance.md](../../Lang/docs/wiki/rules/translation-ke
 
 ## Related
 
-- [decision-log.md](./decision-log.md) · [filament-blueprint.md](./bmad/filament-blueprint.md)
+- [decision-log.md](../archive/docs-legacy/decision-log.md) · [filament-blueprint.md](../archive/docs-legacy/bmad/filament-blueprint.md)
 - [fo-folio-named-routes-header.md](../../../Themes/Sixteen/docs/wiki/concepts/fo-folio-named-routes-header.md)

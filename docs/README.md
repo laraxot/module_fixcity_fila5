@@ -31,7 +31,7 @@ in PDF (`manuale/pdf/`, anche in un unico file). I PDF si rigenerano con `python
   - analisi statica: `./vendor/bin/phpstan analyse Modules/Fixcity` (config unica `laravel/phpstan.neon`, senza `--level`). Misura del 2026-10-14: 122 errori, tutti in `config/*.php` (105 `larastan.noEnvCallsOutsideOfConfig`, 12 `array.duplicateKey` in `morph_map.php`, 4 `class.notFound`, 1 `binaryOp.invalid`); 0 in `app/`, `tests/`, `database/`;
   - test su database usa-e-getta (mai sul DB di sviluppo): `export DB_DATABASE_LIMESURVEY= APP_CONFIG_CACHE=/nonexistent/config.php` poi, dalla root del repo, `bash bashscripts/tools/heavy-slot.sh bash bashscripts/tools/pest-scratch-db.sh Modules/Fixcity/tests/Unit/Enums/TicketStatusEnumTest.php`. Esito del 2026-10-14 con anche `TicketPriorityEnumTest.php`: 16 test passati, 127 asserzioni. La suite completa (128 file PHP in `tests/`) non e' stata eseguita in questa verifica;
   - dati demo (scrive sul database, non eseguito qui): `php artisan db:seed --class='Modules\Fixcity\Database\Seeders\FixcityDatabaseSeeder'`, attivo solo in ambiente `local`, `testing` o `demo`.
-- **Limiti noti**: nella radice di `docs/` ci sono 99 file `.md` (524 in tutto l'albero; molti rapporti storici, non evidenza corrente) e 13 `.lock` di sessioni vecchie (60 nell'albero); i link a `_bmad-output/implementation-artifacts/7-*` non hanno bersaglio nel repo; molti documenti storici descrivono nomi superati (`Segnalazione`, `/it/tests/segnalazione-crea`, `FixcitySeeder`). Fonte di verita' per cio' che e' attuale: [00-INDEX.md](./00-INDEX.md), le story in [stories/](./stories/) e il [decision log](./decision-log.md).
+- **Limiti noti**: `docs/` e' stato consolidato il 2026-11-26 a 100 file `.md`: restano ADR, contratti, story attive, manuale, regole e guide correnti; tutto il materiale storico (report, audit, piani BMAD, story completate) e' in [archive/docs-legacy/](../archive/docs-legacy/README.md). Molti documenti storici descrivono nomi superati (`Segnalazione`, `/it/tests/segnalazione-crea`, `FixcitySeeder`). Fonte di verita' per cio' che e' attuale: [00-INDEX.md](./00-INDEX.md) e le story in [stories/](./stories/).
 
 ## How To Use This Index
 
@@ -76,7 +76,7 @@ fonte di verità.
 ## Documentation Rules For Modules
 
 - The active documentation home for a module is `laravel/Modules/<Module>/docs/README.md`.
-- Never create `lang/lang/` or `_docs/` in a module; see [directory-structure-rules.md](./directory-structure-rules.md).
+- Never create `lang/lang/` or `_docs/` in a module; see [directory-structure-rules.md](../archive/docs-legacy/directory-structure-rules.md).
 - Do not create new parallel entry files if `README.md` already exists.
 - Prefer links over copied explanations across modules.
 - Keep implementation details inside topic files, not inside indexes.
@@ -88,16 +88,16 @@ fonte di verità.
 - Project documentation governance: [DOCUMENTATION_GOVERNANCE.md](../../../../docs/DOCUMENTATION_GOVERNANCE.md)
 - Theme docs: [laravel/Themes/docs/README.md](../../../Themes/docs/README.md); each theme owns its docs, for example [Sixteen](../../../Themes/Sixteen/docs/README.md)
 - LLM wiki workflow: [docs/wiki/README.md](../../../../docs/wiki/README.md)
-- Modules note: [llm-wiki.md](./llm-wiki.md)
+- Modules note: [llm-wiki.md](../archive/docs-legacy/llm-wiki.md)
 - Agent rules: [AGENTS.md](../../../AGENTS.md)
 
 ## Documentation
 
-- [Lista categorie: contratto di prodotto](./bmad/lista-categorie-purpose.md) — scopo, ownership e confini della directory pubblica.
+- [Lista categorie: contratto di prodotto](../archive/docs-legacy/bmad/lista-categorie-purpose.md) — scopo, ownership e confini della directory pubblica.
 
-- [Agent confidence brief](./agent-confidence-brief.md) — snapshot operativo
+- [Agent confidence brief](../archive/docs-legacy/agent-confidence-brief.md) — snapshot operativo
   verificato (stack, ownership, Sixteen pages, OmniRoute/Claude, memoria agenti).
-- [FAQ catalog ownership](./faq-catalog-ownership.md) — dominio FAQ in Fixcity,
+- [FAQ catalog ownership](../archive/docs-legacy/faq-catalog-ownership.md) — dominio FAQ in Fixcity,
   composizione in Cms e renderer nel tema Sixteen.
 
 Il modulo possiede significato, catalogo, pubblicazione e fallback delle FAQ;
@@ -106,16 +106,16 @@ risposte parte da `CivicFaqCatalog`/`ListPublishedFaqsAction`; una modifica
 visuale parte dal blocco Sixteen. Non creare view FAQ nel tema per compensare
 un difetto del catalogo.
 
-- [On-Demand Pattern](./ON-DEMAND-PATTERN.md) — Pattern per caricamento efficiente
-- [QMD Setup](./QMD-SETUP.md) — Configurazione ricerca locale
-- [Performance](./PERFORMANCE-OPTIMIZATION.md) — Metriche e best practice
-- [Project Structure](./PROJECT-STRUCTURE.md) — Directory layout
-- [File di contenuto delle pagine /it/tests](./tests-pages-content-files.md) — `tests.<slug>.json`, stato e regole (2026-10-13)
-- [Indice canonico del modulo](./00-INDEX.md), [mappa delle sottocartelle](./index.md), [panoramica](./index.md)
-- [Scopo e conformita' normativa](./compliance/00-scopo-del-progetto.md), [decision log](./decision-log.md), [wiki](./wiki/index.md), [story](./stories/index.md)
+- [On-Demand Pattern](../archive/docs-legacy/ON-DEMAND-PATTERN.md) — Pattern per caricamento efficiente
+- [QMD Setup](../archive/docs-legacy/QMD-SETUP.md) — Configurazione ricerca locale
+- [Performance](../archive/docs-legacy/PERFORMANCE-OPTIMIZATION.md) — Metriche e best practice
+- [Project Structure](../archive/docs-legacy/PROJECT-STRUCTURE.md) — Directory layout
+- [File di contenuto delle pagine /it/tests](../archive/docs-legacy/tests-pages-content-files.md) — `tests.<slug>.json`, stato e regole (2026-10-13)
+- [Indice canonico del modulo](./00-INDEX.md), [mappa delle sottocartelle](../archive/docs-legacy/index.md), [panoramica](../archive/docs-legacy/index.md)
+- [Scopo e conformita' normativa](../archive/docs-legacy/compliance/00-scopo-del-progetto.md), [decision log](../archive/docs-legacy/decision-log.md), [wiki](../archive/docs-legacy/wiki/index.md), [story](../archive/docs-legacy/stories/index.md)
 
 ## BMAD — inbound marketing (blog + eventi)
 
-SSoT: [bmad/inbound-marketing/README.md](./bmad/inbound-marketing/README.md)
+SSoT: [bmad/inbound-marketing/README.md](../archive/docs-legacy/bmad/inbound-marketing/README.md)
 
 Wiki: skill/rule/memory `fixcity-inbound-editorial*` in `docs/wiki/`.

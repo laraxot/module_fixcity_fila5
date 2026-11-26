@@ -18,7 +18,7 @@ discussions: []
 
 ## Scopo
 
-Il job fa reverse-geocode Nominatim dalle coordinate del ticket e scrive l'indirizzo leggibile. **Non esiste colonna `address`**: la SSoT e' `location.address` / `location.display_name` ([ticket-location-json-architecture](../wiki/concepts/ticket-location-json-architecture.md)). Serve cache per coordinate uguali, warning se mancano lat/lng, retry su HTTP 500.
+Il job fa reverse-geocode Nominatim dalle coordinate del ticket e scrive l'indirizzo leggibile. **Non esiste colonna `address`**: la SSoT e' `location.address` / `location.display_name` ([ticket-location-json-architecture](../../archive/docs-legacy/wiki/concepts/ticket-location-json-architecture.md)). Serve cache per coordinate uguali, warning se mancano lat/lng, retry su HTTP 500.
 
 ## Causa radice
 

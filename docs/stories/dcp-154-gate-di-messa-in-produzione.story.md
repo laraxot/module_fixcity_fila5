@@ -74,7 +74,7 @@ Non bloccanti ma richiesti dalle Linee guida: data di ultimo aggiornamento su og
 Discussione con le decisioni e le alternative scartate: [#95](https://github.com/laraxot/theme_sixteen_fila5/discussions/95), complementare a [#93](https://github.com/laraxot/theme_sixteen_fila5/discussions/93) e [#94](https://github.com/laraxot/theme_sixteen_fila5/discussions/94).
 
 Comando: `python3 -I bashscripts/tools/release/go-live-gate.py --base http://127.0.0.1:8081 --skip-pest --json`, lanciato **due volte**: prima e dopo la ricostruzione dell'altra sessione. **Esito identico**, controllo per controllo:
-34 controlli, **16 PASS, 16 FAIL, 2 WARN**; 11 FAIL bloccanti, 5 requisiti LG non soddisfatti. Verdetto: **NON pubblicabile**. I cinque strumenti che il gate chiama erano stati cancellati da una sync e sono stati ripristinati: vedi [DCP-455](./dcp-455-strumenti-del-gate-sopravvivono-alla-sync.story.md).
+34 controlli, **16 PASS, 16 FAIL, 2 WARN**; 11 FAIL bloccanti, 5 requisiti LG non soddisfatti. Verdetto: **NON pubblicabile**. I cinque strumenti che il gate chiama erano stati cancellati da una sync e sono stati ripristinati: vedi [DCP-455](../../archive/docs-legacy/stories/dcp-455-strumenti-del-gate-sopravvivono-alla-sync.story.md).
 
 | Controllo | Esito | Gravita' | Chi | Cosa lo chiude | Decisione |
 |---|---|---|---|---|---|
@@ -100,6 +100,6 @@ Comando: `python3 -I bashscripts/tools/release/go-live-gate.py --base http://127
 ### Come leggere questa tabella
 
 1. I controlli `ENV-*` leggono il `.env` **di destinazione**: sul dev falliscono per costruzione e vanno rilanciati sul `.env` di produzione. Non sono difetti del front office.
-2. Le due righe `LG-03`/`LG-04` sono le sole che dipendono da una decisione di prodotto sul front office: la causa e' la D-7 della migrazione dell'head (36 URL su 128 senza canonical e hreflang). Registro: [DCP-200](./dcp-200-registro-unico-delle-decisioni-aperte.story.md), sezione F2 (DEC-62..72).
+2. Le due righe `LG-03`/`LG-04` sono le sole che dipendono da una decisione di prodotto sul front office: la causa e' la D-7 della migrazione dell'head (36 URL su 128 senza canonical e hreflang). Registro: [DCP-200](../../archive/docs-legacy/stories/dcp-200-registro-unico-delle-decisioni-aperte.story.md), sezione F2 (DEC-62..72).
 3. Un rebuild o un ripristino che non cambia nessun esito e' una prova utile quanto un miglioramento: per questo i due giri sono confrontati per id di controllo.
 4. Metodo dello sweep, soglie e trappole: `Themes/Sixteen/docs/how-to/front-office-anonymous-sweep.md`. Piano delle guardie: `Themes/Sixteen/docs/plans/front-office-hardening-plan.md`.

@@ -49,7 +49,7 @@ Questa sessione, in `bashscripts/ai/wiki/` (stessa cartella di `docs/wiki/`): `r
 
 ## Aperto
 
-Story figlie (2026-10-27): [DCP-425](./dcp-425-docs-chat-copie-divergenti-ed-esempi-da-ritirare.story.md) copie ed esempi, [DCP-426](./dcp-426-docs-chat-script-sh-che-nominano-la-cartella.story.md) script `.sh`, [DCP-427](./dcp-427-docs-chat-lock-orfani-e-riferimenti-rotti.story.md) lock e riferimenti rotti.
+Story figlie (2026-10-27): [DCP-425](../../archive/docs-legacy/stories/dcp-425-docs-chat-copie-divergenti-ed-esempi-da-ritirare.story.md) copie ed esempi, [DCP-426](../../archive/docs-legacy/stories/dcp-426-docs-chat-script-sh-che-nominano-la-cartella.story.md) script `.sh`, [DCP-427](../../archive/docs-legacy/stories/dcp-427-docs-chat-lock-orfani-e-riferimenti-rotti.story.md) lock e riferimenti rotti.
 
 - `rules/github-multi-agent-coordination.md`: 23 menzioni restano negli esempi bash lunghi (handoff, merge conflict, QUALITY_GATES). Hanno in cima un avviso che li traduce in «claim nella story owner»; riscriverli tutti e' sproporzionato finche' nessuno li usa.
 - Copie in `rules/11-forms/` (agent-chat-directory, multi-agent-file-lock-protocol, multi-agent-coordination.mdc, 00-TRIGGER_MAP righe 78/289/293, docs-chat-filename-no-dates, reports-build-directory.mdc) e `rules/07-documentation/docs-chat-filename-no-dates`: divergenti, non toccate. Decidere se rigenerarle dal canone o ritirarle.
