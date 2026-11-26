@@ -75,4 +75,4 @@ it('records the UUID of the acting operator when the status changes', function (
 
     expect(dcp281RecordedActorId($ticket, TicketActivityEventTypeEnum::StatusChange))
         ->toBe(SafeStringCastAction::cast($actor->getAuthIdentifier()));
-});
+})->group('TICKET-STATUS-CHANGE-INV-6');

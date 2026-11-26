@@ -45,7 +45,7 @@ it('deletes an account deleted longer ago than the retention, with its profile, 
         ->and(userExists($user))->toBeFalse()
         ->and(XotData::make()->getProfileClass()::query()->where('user_id', $user->getKey())->exists())->toBeFalse()
         ->and(Ticket::query()->whereKey($ticket->getKey())->exists())->toBeTrue();
-});
+})->group('PRIVACY-PURGE-INV-1', 'PRIVACY-PURGE-INV-2');
 
 it('keeps an account deleted less than the retention ago', function (): void {
     $user = deletedCitizen(29);
@@ -53,7 +53,7 @@ it('keeps an account deleted less than the retention ago', function (): void {
     app(PurgeDeletedAccountsAction::class)->execute();
 
     expect(userExists($user))->toBeTrue();
-});
+})->group('PRIVACY-PURGE-INV-3');
 
 it('keeps a deleted account while one of its reports is still open', function (): void {
     $user = deletedCitizen(90);
@@ -62,7 +62,7 @@ it('keeps a deleted account while one of its reports is still open', function ()
     app(PurgeDeletedAccountsAction::class)->execute();
 
     expect(userExists($user))->toBeTrue();
-});
+})->group('PRIVACY-PURGE-INV-4');
 
 it('never touches an active account', function (): void {
     $user = UserFactory::new()->createOne();
@@ -70,4 +70,4 @@ it('never touches an active account', function (): void {
     app(PurgeDeletedAccountsAction::class)->execute();
 
     expect(userExists($user))->toBeTrue();
-});
+})->group('PRIVACY-PURGE-INV-5');

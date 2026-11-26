@@ -47,7 +47,7 @@ test('it geocodes ticket address successfully', function () use ($addressOf): vo
             && $query['lat'] === '45.4642'
             && $query['lon'] === '9.1900';
     });
-});
+})->group('TICKET-GEOCODE-INV-2');
 
 test('it caches geocoding results', function () use ($addressOf): void {
     $ticket = TicketFactory::new()->createOne([
@@ -72,7 +72,7 @@ test('it caches geocoding results', function () use ($addressOf): void {
 
     Http::assertSentCount(1);
     Assert::assertSame('Milano, Lombardia, Italia', $addressOf($ticket2));
-});
+})->group('TICKET-GEOCODE-INV-3');
 
 test('it handles missing coordinates gracefully', function () use ($addressOf): void {
     $log = Log::spy();
@@ -85,7 +85,7 @@ test('it handles missing coordinates gracefully', function () use ($addressOf): 
 
     $log->shouldHaveReceived('warning', ['Ticket missing coordinates', ['ticket_id' => $ticket->getKey()]]);
     Assert::assertNull($addressOf($ticket));
-});
+})->group('TICKET-GEOCODE-INV-1');
 
 test('it handles nominatim API errors', function () use ($addressOf): void {
     $log = Log::spy();
@@ -102,7 +102,7 @@ test('it handles nominatim API errors', function () use ($addressOf): void {
 
     $log->shouldHaveReceived('error', ['Nominatim API error', ['ticket_id' => $ticket->getKey(), 'status' => 500]]);
     Assert::assertNull($addressOf($ticket));
-});
+})->group('TICKET-GEOCODE-INV-4');
 
 test('it handles invalid response format', function () use ($addressOf): void {
     $ticket = TicketFactory::new()->createOne([
@@ -117,7 +117,7 @@ test('it handles invalid response format', function () use ($addressOf): void {
     app(GeocodeTicketAddressAction::class)->execute($ticket);
 
     Assert::assertNull($addressOf($ticket));
-});
+})->group('TICKET-GEOCODE-INV-5');
 
 test('it handles missing display_name in response', function () use ($addressOf): void {
     $ticket = TicketFactory::new()->createOne([
@@ -135,7 +135,7 @@ test('it handles missing display_name in response', function () use ($addressOf)
     app(GeocodeTicketAddressAction::class)->execute($ticket);
 
     Assert::assertNull($addressOf($ticket));
-});
+})->group('TICKET-GEOCODE-INV-5');
 
 test('it retries on failure', function () use ($addressOf): void {
     $ticket = TicketFactory::new()->createOne([
@@ -153,4 +153,4 @@ test('it retries on failure', function () use ($addressOf): void {
 
     Assert::assertSame('Milano, Lombardia, Italia', $addressOf($ticket));
     Http::assertSentCount(2);
-});
+})->group('TICKET-GEOCODE-INV-4');

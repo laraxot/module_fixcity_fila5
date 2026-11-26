@@ -20,4 +20,4 @@ it('rejects rating outside 1-5 range', function (): void {
     } catch (ValidationException $exception) {
         Assert::assertSame(ValidationException::class, $exception::class);
     }
-});
+})->group('TICKET-RATING-INV-1');

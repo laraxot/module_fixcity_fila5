@@ -53,7 +53,7 @@ it('sends the owner exactly one receipt when a ticket is created', function (): 
                 && $data['status'] === TicketStatusEnum::PENDING->value;
         },
     );
-});
+})->group('FIXCITY-CREATE-INV-7');
 
 it('promises the email on the confirmation page only when the receipt is mailed', function (): void {
     /** @var TestCase $this */

@@ -14,6 +14,11 @@ use Modules\Xot\Contracts\UserContract;
 use Spatie\QueueableAction\QueueableAction;
 use Throwable;
 
+/**
+ * @see docs/contracts/notify-ticket-assignee-of-assignment-action.md
+ *
+ * @contract docs/contracts/notify-ticket-assignee-of-assignment-action.md
+ */
 final class NotifyTicketAssigneeOfAssignmentAction
 {
     use QueueableAction;

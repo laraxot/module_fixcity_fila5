@@ -10,6 +10,11 @@ use Modules\Fixcity\Models\TicketSubscriber;
 use Modules\Xot\Contracts\UserContract;
 use Spatie\QueueableAction\QueueableAction;
 
+/**
+ * @see docs/contracts/set-ticket-subscription-action.md
+ *
+ * @contract docs/contracts/set-ticket-subscription-action.md
+ */
 final class SetTicketSubscriptionAction
 {
     use QueueableAction;

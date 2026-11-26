@@ -26,7 +26,7 @@ it('sets the authenticated citizen ticket subscription idempotently', function (
     Assert::assertFalse($action->execute($ticket, $citizen, false));
     Assert::assertFalse($action->execute($ticket, $citizen, false));
     Assert::assertSame(0, TicketSubscriber::query()->where('ticket_id', $ticket->getKey())->count());
-});
+})->group('TICKET-FOLLOW-INV-2');
 
 it('does not allow following a private ticket owned by another citizen', function (): void {
     $citizen = UserFactory::new()->createOne();
@@ -37,4 +37,4 @@ it('does not allow following a private ticket owned by another citizen', functio
 
     expect(fn (): bool => app(SetTicketSubscriptionAction::class)->execute($ticket, $citizen, true))
         ->toThrow(AuthorizationException::class);
-});
+})->group('TICKET-FOLLOW-INV-1');

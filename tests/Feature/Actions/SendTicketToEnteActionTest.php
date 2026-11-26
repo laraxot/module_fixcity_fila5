@@ -24,7 +24,7 @@ it('does not email a public contact or PEC address without an explicit intake ma
 
     expect(app(SendTicketToEnteAction::class)->execute($ticket))->toBeFalse();
     Mail::assertNothingSent();
-});
+})->group('TICKET-ENTE-MAIL-INV-1');
 
 /** @see docs/stories/dcp-284-notifiche-del-ciclo-di-vita-della-segnalazione.story.md */
 it('rejects malformed authority mailbox addresses', function (): void {
@@ -35,7 +35,7 @@ it('rejects malformed authority mailbox addresses', function (): void {
 
     expect(app(SendTicketToEnteAction::class)->execute($ticket))->toBeFalse();
     Mail::assertNothingSent();
-});
+})->group('TICKET-ENTE-MAIL-INV-2');
 
 /** @see docs/stories/dcp-284-notifiche-del-ciclo-di-vita-della-segnalazione.story.md */
 it('sends a minimal report email once and audits SMTP transport success', function (): void {
@@ -68,7 +68,7 @@ it('sends a minimal report email once and audits SMTP transport success', functi
     expect($events)->toHaveCount(1)
         ->and($events->first()?->visibility)->toBe('internal')
         ->and(($events->first()->payload ?? [])['source'] ?? null)->toBe('ente_ticket_intake');
-});
+})->group('TICKET-ENTE-MAIL-INV-3', 'TICKET-ENTE-MAIL-INV-4', 'TICKET-ENTE-MAIL-INV-5');
 
 /** @see docs/stories/dcp-284-notifiche-del-ciclo-di-vita-della-segnalazione.story.md */
 it('records failed SMTP handoff without interrupting ticket creation', function (): void {
@@ -83,4 +83,4 @@ it('records failed SMTP handoff without interrupting ticket creation', function 
         ->where('ticket_id', $ticket->getKey())
         ->where('event_type', TicketActivityEventTypeEnum::MailFailed->value)
         ->count())->toBe(1);
-});
+})->group('TICKET-ENTE-MAIL-INV-5', 'TICKET-ENTE-MAIL-INV-6');

@@ -28,4 +28,4 @@ it('configures bounded retry and backoff after the database commit', function ()
             ->and($job->backoff())->toBe([60, 300])
             ->and($job->afterCommit)->toBeTrue();
     }
-});
+})->group('TICKET-NOTIFY-STATUS-INV-8', 'TICKET-NOTIFY-ASSIGN-INV-6');

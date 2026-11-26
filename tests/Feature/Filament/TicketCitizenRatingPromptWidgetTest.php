@@ -64,7 +64,7 @@ it('rejects an out of range rating submitted through the livewire widget', funct
     ])->set('selectedRating', 6)
         ->call('submitRating')
         ->assertHasErrors(['rating']);
-});
+})->group('TICKET-RATING-INV-1');
 
 it('persists an eligible owner rating and displays confirmation', function (): void {
     /** @var TestCase $this */
@@ -99,7 +99,7 @@ it('persists an eligible owner rating and displays confirmation', function (): v
     } finally {
         $ratingConnection->rollBack();
     }
-});
+})->group('TICKET-RATING-INV-5', 'TICKET-RATING-INV-7');
 
 it('does not allow audit metadata to grant rating ownership', function (): void {
     /** @var TestCase $this */
@@ -131,4 +131,4 @@ it('does not allow audit metadata to grant rating ownership', function (): void 
     } finally {
         $ratingConnection->rollBack();
     }
-});
+})->group('TICKET-RATING-INV-3');

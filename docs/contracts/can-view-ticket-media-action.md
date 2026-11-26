@@ -32,7 +32,8 @@ fuori da `/storage`: questo e' l'unico accesso HTTP.
 |---|---|---|
 | TICKET-MEDIA-ACCESS-INV-1 | Un allegato che non appartiene al ticket (`model_type` e `model_id` diversi) e' negato, qualunque sia il visitatore (`belongsTo`). | — (non dimostrato) |
 | TICKET-MEDIA-ACCESS-INV-2 | Una foto (`image/*`) e' accessibile solo a chi puo' vedere il ticket per `TicketPolicy::view`: ticket in stato pubblico, proprietario, operatore PA o permesso `ticket.view`. La foto di un ticket `pending` e' negata a ospiti e ad altri cittadini, non al proprietario. | `TICKET-MEDIA-ACCESS-INV-2` |
-| TICKET-MEDIA-ACCESS-INV-3 | Un file non immagine (PDF, documenti, ricevute) e' accessibile solo al proprietario o a chi ha `viewAny` sui ticket (back office); mai a un ospite, nemmeno quando il ticket e' pubblico. Il cittadino non pubblica i propri documenti. | `TICKET-MEDIA-ACCESS-INV-3` |
+| TICKET-MEDIA-ACCESS-INV-3 | Un file non immagine (PDF, documenti, ricevute) e' accessibile al proprietario e mai a un ospite, nemmeno quando il ticket e' pubblico. Il cittadino non pubblica i propri documenti. | `TICKET-MEDIA-ACCESS-INV-3` |
+| TICKET-MEDIA-ACCESS-INV-4 | Un file non immagine e' accessibile anche a chi ha `viewAny` sui ticket (back office), non solo al proprietario. | — (non dimostrato: nessun test apre un PDF con un ruolo PA) |
 
 ## Effetti collaterali
 

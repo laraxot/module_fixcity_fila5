@@ -10,6 +10,10 @@ use Spatie\QueueableAction\QueueableAction;
 /**
  * "Segna come letta" dell'area personale (DCP-111): scrive solo `read_at` (colonna gia' presente) e solo sulle notifiche
  * di stato del cittadino (query condivisa con l'elenco). Un id altrui o inesistente non cambia nulla e restituisce 0.
+ *
+ * @see docs/contracts/mark-personal-area-notifications-as-read-action.md
+ *
+ * @contract docs/contracts/mark-personal-area-notifications-as-read-action.md
  */
 final class MarkPersonalAreaNotificationsAsReadAction
 {

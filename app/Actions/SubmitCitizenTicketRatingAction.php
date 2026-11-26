@@ -18,12 +18,17 @@ use Spatie\QueueableAction\QueueableAction;
 
 /**
  * Valutazione cittadino 1–5 su ticket risolto — persistenza RatingMorph (modulo Rating).
+ *
+ * @see docs/contracts/submit-citizen-ticket-rating-action.md
+ *
+ * @contract docs/contracts/submit-citizen-ticket-rating-action.md
  */
+
+// Laraxot module file — see docs/wiki for domain contract.
+// Laraxot module file — see docs/wiki for domain contract.
+// Laraxot module file — see docs/wiki for domain contract.
+// Laraxot module file — see docs/wiki for domain contract.
 final class SubmitCitizenTicketRatingAction
-// Laraxot module file — see docs/wiki for domain contract.
-// Laraxot module file — see docs/wiki for domain contract.
-// Laraxot module file — see docs/wiki for domain contract.
-// Laraxot module file — see docs/wiki for domain contract.
 {
     use QueueableAction;
 

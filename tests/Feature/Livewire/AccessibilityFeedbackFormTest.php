@@ -52,7 +52,7 @@ it('sends the report to the mailbox declared by the municipality and confirms to
         && $mail->problem === 'Il pulsante di invio non si raggiunge con la tastiera.'
         && $mail->page === '/it/tickets');
     Mail::assertSentCount(1);
-});
+})->group('A11Y-FEEDBACK-INV-1', 'A11Y-FEEDBACK-INV-5');
 
 it('validates the report before sending anything', function (): void {
     declareFeedbackMailbox('segnalazioni@ente.test');
@@ -64,7 +64,7 @@ it('validates the report before sending anything', function (): void {
         ->assertHasErrors(['problem', 'contact']);
 
     Mail::assertNothingSent();
-});
+})->group('A11Y-FEEDBACK-INV-3');
 
 it('sends nothing and says so when the municipality has not declared a mailbox', function (?string $mailbox): void {
     declareFeedbackMailbox($mailbox);
@@ -77,14 +77,14 @@ it('sends nothing and says so when the municipality has not declared a mailbox',
         ->assertSee(__('fixcity::accessibility.form.unavailable'));
 
     Mail::assertNothingSent();
-})->with(['no mailbox' => [null], 'invalid mailbox' => ['non-una-email']]);
+})->with(['no mailbox' => [null], 'invalid mailbox' => ['non-una-email']])->group('A11Y-FEEDBACK-INV-2');
 
 it('does not let the client choose the recipient', function (): void {
     declareFeedbackMailbox('segnalazioni@ente.test');
 
     expect(fn () => Livewire::test(AccessibilityFeedbackForm::class)->set('recipient', 'altro@esempio.test'))->toThrow(Exception::class);
     expect(property_exists(AccessibilityFeedbackForm::class, 'recipient'))->toBeFalse();
-});
+})->group('A11Y-FEEDBACK-INV-1');
 
 it('stops after five reports an hour from the same address', function (): void {
     declareFeedbackMailbox('segnalazioni@ente.test');
@@ -96,4 +96,4 @@ it('stops after five reports an hour from the same address', function (): void {
     $form->set('problem', 'Un altro problema descritto con parole.')->call('submit')->assertSet('outcome', 'throttled');
 
     Mail::assertSentCount(AccessibilityFeedbackForm::MAX_PER_HOUR);
-});
+})->group('A11Y-FEEDBACK-INV-4');

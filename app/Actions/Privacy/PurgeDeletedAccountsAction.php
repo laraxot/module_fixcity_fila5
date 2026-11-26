@@ -21,6 +21,10 @@ use Spatie\QueueableAction\QueueableAction;
  * (any status but draft, resolved, closed). Profile, notifications and Google links go with it. Reports, comments and ratings stay:
  * the notice keeps them under the municipality's archive plan. Consents and the access log age out on their own retention.
  * Scheduled daily in routes/console.php.
+ *
+ * @see docs/contracts/purge-deleted-accounts-action.md
+ *
+ * @contract docs/contracts/purge-deleted-accounts-action.md
  */
 final class PurgeDeletedAccountsAction
 {

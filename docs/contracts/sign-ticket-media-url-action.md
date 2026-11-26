@@ -30,7 +30,7 @@ nessuna dipendenza dai nomi delle route Folio.
 
 | ID | Regola | Group Pest |
 |---|---|---|
-| TICKET-MEDIA-SIGN-INV-1 | Un URL firmato da `execute` e' accettato da `isValid` e dalla route per la foto di un ticket non pubblico, senza login. | `TICKET-MEDIA-SIGN-INV-1` |
+| TICKET-MEDIA-SIGN-INV-1 | Un URL firmato da `execute` e' accettato dalla route per la foto di un ticket non pubblico, senza login. | `TICKET-MEDIA-SIGN-INV-1` |
 | TICKET-MEDIA-SIGN-INV-2 | Una firma alterata (stessa query, `signature` sostituita) e' rifiutata: la route risponde 404. Il confronto e' `hash_equals`. | `TICKET-MEDIA-SIGN-INV-2` |
 | TICKET-MEDIA-SIGN-INV-3 | Una firma scaduta (`expires` nel passato), con `expires` non numerico o con `signature` vuota o non stringa e' rifiutata. | — (non dimostrato) |
 | TICKET-MEDIA-SIGN-INV-4 | La firma copre percorso e scadenza (`HMAC-SHA256('fixcity-ticket-media|{path}|{expires}', app.key)`): non vale per un altro file ne' con un'altra scadenza. | — (non dimostrato) |

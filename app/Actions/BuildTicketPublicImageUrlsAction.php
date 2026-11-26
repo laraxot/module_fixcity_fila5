@@ -27,6 +27,10 @@ use function Safe\parse_url;
  * firma a scadenza ({@see SignTicketMediaUrlAction}), perche' la route dei media non conosce il codice.
  *
  * Il chiamante che elabora molti ticket deve caricare `media` con `with('media')` (DB-13).
+ *
+ * @see docs/contracts/build-ticket-public-image-urls-action.md
+ *
+ * @contract docs/contracts/build-ticket-public-image-urls-action.md
  */
 final class BuildTicketPublicImageUrlsAction
 {

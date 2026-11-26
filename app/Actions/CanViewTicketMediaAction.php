@@ -17,6 +17,10 @@ use Spatie\QueueableAction\QueueableAction;
  * - Foto (`image/*`): chi puo' vedere il ticket (`TicketPolicy::view`: ticket pubblico, proprietario, operatore PA).
  * - Altri file (PDF): solo il proprietario e chi puo' vedere l'elenco dei ticket nel back office (`TicketPolicy::viewAny`).
  *   Un PDF del cittadino (documenti, ricevute) non e' mai pubblico, nemmeno quando il ticket lo e'.
+ *
+ * @see docs/contracts/can-view-ticket-media-action.md
+ *
+ * @contract docs/contracts/can-view-ticket-media-action.md
  */
 final class CanViewTicketMediaAction
 {

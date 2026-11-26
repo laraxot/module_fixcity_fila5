@@ -13,6 +13,10 @@ use Spatie\QueueableAction\QueueableAction;
  * Serve a chi ha gia' superato un controllo d'accesso che la route dei media non puo' ripetere: il possessore del codice
  * di tracciamento (pagina /tickets/track?code=...) vede le foto della propria segnalazione anche se non e' ancora pubblica e
  * non ha fatto login. L'URL resta relativo (DCP-379). HMAC propria con `app.key`: nessuna dipendenza dai nomi delle route Folio.
+ *
+ * @see docs/contracts/sign-ticket-media-url-action.md
+ *
+ * @contract docs/contracts/sign-ticket-media-url-action.md
  */
 final class SignTicketMediaUrlAction
 {

@@ -24,6 +24,9 @@ use Throwable;
  * is transmitted; citizen identity, tracking code, photos and location are not included.
  *
  * @see docs/stories/dcp-284-notifiche-del-ciclo-di-vita-della-segnalazione.story.md
+ * @see docs/contracts/send-ticket-to-ente-action.md
+ *
+ * @contract docs/contracts/send-ticket-to-ente-action.md
  */
 final class SendTicketToEnteAction
 {

@@ -9,7 +9,7 @@ issues: []
 discussions: []
 related:
   - docs/wiki/rules/folio-page-shell-no-props-extends.md
-  - docs/wiki/memories/cms-owns-page-resolution.md
+  - docs/wiki/memories/0001-cms-owns-page-resolution.md
 ---
 
 # Story: Remove ticket logic from PageSlugMiddleware — ADR 0010

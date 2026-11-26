@@ -38,7 +38,7 @@ it('notifies the newly assigned operator after the assignment commits', function
 
     Notification::assertSentToTimes($operator, TicketAssignedNotification::class, 1);
     Notification::assertNotSentTo($owner, TicketAssignedNotification::class);
-});
+})->group('TICKET-ASSIGN-INV-5', 'TICKET-NOTIFY-ASSIGN-INV-1');
 
 /** @see docs/stories/dcp-281-rinforzo-back-office-e-pagine-legacy.story.md */
 it('rejects assigning a ticket to a user without a PA role', function (): void {
@@ -66,7 +66,7 @@ it('rejects assigning a ticket to a user without a PA role', function (): void {
     }
     expect($fresh->responsible_id)->toBeNull();
     Notification::assertNotSentTo($citizen, TicketAssignedNotification::class);
-});
+})->group('TICKET-ASSIGN-INV-2');
 
 /** @see docs/stories/dcp-281-rinforzo-back-office-e-pagine-legacy.story.md */
 it('allows an authorized operator to remove a ticket assignment', function (): void {
@@ -92,7 +92,7 @@ it('allows an authorized operator to remove a ticket assignment', function (): v
     }
     expect($fresh->responsible_id)->toBeNull();
     Notification::assertNotSentTo($operator, TicketAssignedNotification::class);
-});
+})->group('TICKET-ASSIGN-INV-5', 'TICKET-NOTIFY-ASSIGN-INV-2');
 
 it('emails an assignment only to an operator with a verified email address', function (): void {
     $operator = UserFactory::new()->createOne();
@@ -111,7 +111,7 @@ it('emails an assignment only to an operator with a verified email address', fun
     expect($mail->subject)->toBe(__('fixcity::ticket.notification.assignment_title'))
         ->and($mail->introLines)->toContain(__('fixcity::ticket.notification.assigned_to_you', ['ticket_id' => 123]))
         ->and($mail->actionUrl)->toContain('/123');
-});
+})->group('TICKET-NOTIFY-ASSIGN-INV-4');
 
 it('keeps in-app assignment notifications when an operator opts out of email', function (): void {
     $operator = UserFactory::new()->createOne();
@@ -119,4 +119,4 @@ it('keeps in-app assignment notifications when an operator opts out of email', f
     $notification = new TicketAssignedNotification(123);
 
     expect($notification->via($operator))->toBe(['database']);
-});
+})->group('TICKET-NOTIFY-ASSIGN-INV-4');

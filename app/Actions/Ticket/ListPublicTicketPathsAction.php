@@ -41,7 +41,7 @@ final class ListPublicTicketPathsAction implements SitemapLastModifiedContract, 
      * Ultima modifica di ogni segnalazione pubblica (`updated_at`), stessa query di execute(): `<lastmod>` in sitemap e
      * reinvio a IndexNow quando cambia (#736).
      *
-     * @see Modules/Seo/docs/adr/search-engine-presence.md
+     * @see Modules/Seo/docs/adr/0002-search-engine-presence.md
      *
      * @return array<string, DateTimeInterface>
      */

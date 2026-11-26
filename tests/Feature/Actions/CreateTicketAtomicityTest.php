@@ -39,7 +39,7 @@ it('rolls back the ticket and sends nothing when saving the attachments fails', 
     Assert::assertFalse(Ticket::query()->where('name', 'Buca con foto rifiutata')->exists());
     Notification::assertNothingSentTo($owner);
     Assert::assertFalse(Session::has(BuildTicketConfirmationDataAction::SESSION_KEY));
-});
+})->group('FIXCITY-CREATE-INV-3', 'FIXCITY-CREATE-INV-6');
 
 it('runs the attachment callback on the persisted ticket before the event', function (): void {
     /** @var TestCase $this */
@@ -79,7 +79,7 @@ it('dispatches the created event only after the surrounding transaction commits'
     });
 
     Event::assertDispatched(TicketCreatedEvent::class);
-});
+})->group('FIXCITY-CREATE-INV-4');
 
 it('does not flash the citizen confirmation when asked not to (back office)', function (): void {
     /** @var TestCase $this */
@@ -96,4 +96,4 @@ it('does not flash the citizen confirmation when asked not to (back office)', fu
 
     Assert::assertNotSame('', (string) $ticket->code);
     Assert::assertFalse(Session::has(BuildTicketConfirmationDataAction::SESSION_KEY));
-});
+})->group('FIXCITY-CREATE-INV-6');

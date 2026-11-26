@@ -11,6 +11,11 @@ use Modules\Fixcity\Models\Ticket;
 use Modules\Xot\Actions\Cast\SafeStringCastAction;
 use Webmozart\Assert\Assert;
 
+/**
+ * @see docs/contracts/change-ticket-priority-action.md
+ *
+ * @contract docs/contracts/change-ticket-priority-action.md
+ */
 final class ChangeTicketPriorityAction
 {
     public function execute(Ticket $ticket, string $priority): Ticket

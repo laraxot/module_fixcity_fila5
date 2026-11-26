@@ -13,7 +13,7 @@ updated: 2026-11-26
 
 Contratto del payload per `/{lang}/tickets/{id}` (DCP-148). E' l'UNICA fonte dei campi che il dettaglio pubblico espone: un
 array esplicito, mai il modello serializzato. Il perche' della catena pagina -> Action sta nell'ADR
-[public-ticket-detail-route-ownership](../adr/public-ticket-detail-route-ownership.md).
+[public-ticket-detail-route-ownership](../adr/0003-public-ticket-detail-route-ownership.md).
 
 ## Input
 
@@ -31,8 +31,8 @@ array esplicito, mai il modello serializzato. Il perche' della catena pagina -> 
 | ID | Regola | Group Pest |
 |---|---|---|
 | TICKET-DETAIL-INV-1 | Il payload ha esattamente le 18 chiavi sopra, nient'altro: `owner_id`, email, autore, dati interni del file e il modello Eloquent non escono mai. Aggiungere un campo rompe il test dell'insieme esatto di chiavi (guardia contro le fughe). | `TICKET-DETAIL-INV-1` |
-| TICKET-DETAIL-INV-2 | Un visitatore qualunque (ospite o altro utente) apre solo le segnalazioni pubbliche: stato in `TicketStatusEnum::canViewByAll()` e posizione valorizzata, come mappa ed elenco. Ticket inesistente e ticket non visibile restituiscono entrambi `null`, indistinguibili. | `TICKET-DETAIL-INV-2` |
-| TICKET-DETAIL-INV-3 | Il proprietario apre la propria segnalazione in qualunque stato e anche senza posizione, se `TicketPolicy::view` lo consente; `is_public` dice se e' gia' pubblica. Un altro cittadino, anche se la segue, non la apre. | `TICKET-DETAIL-INV-3` |
+| TICKET-DETAIL-INV-2 | Un visitatore qualunque (ospite o altro utente) apre solo le segnalazioni pubbliche: stato in `TicketStatusEnum::canViewByAll()`, come mappa ed elenco. Ticket inesistente e ticket non visibile (`pending`, `draft`) restituiscono entrambi `null`, indistinguibili. | `TICKET-DETAIL-INV-2` |
+| TICKET-DETAIL-INV-3 | Il proprietario apre la propria segnalazione in qualunque stato e anche senza posizione, se `TicketPolicy::view` lo consente; `is_public` dice se e' gia' pubblica. Un altro cittadino non la apre finche' non e' pubblica. | `TICKET-DETAIL-INV-3` |
 | TICKET-DETAIL-INV-4 | `tracking_code` (capability token) e' valorizzato solo per il proprietario; per ospiti, altri cittadini e follower e' `null`, e il codice non compare altrove nel payload. Ticket senza codice: `null` anche per il proprietario. | `TICKET-DETAIL-INV-4` |
 | TICKET-DETAIL-INV-5 | `images` contiene solo URL di immagini (`image/*`) e solo per ticket pubblici o per il proprietario; PDF e altri allegati non escono. | `TICKET-DETAIL-INV-5` |
 | TICKET-DETAIL-INV-6 | `meta_description` e' il contenuto con spazi normalizzati, lungo al massimo 160 caratteri (troncato con `...`). | `TICKET-DETAIL-INV-6` |
@@ -55,6 +55,7 @@ Non modifica ticket, iscrizioni, media ne' sessione.
 - Record non visibile o inesistente: `null`; la pagina che consuma il risultato lo traduce in 404 (guardia lato tema:
   `Themes/Sixteen/tests/Feature/Pages/DetailNotFoundTest.php`).
 - Nessuna eccezione propria; errori del DB risalgono al chiamante.
+- Limite noto: la query pubblica esclude anche i ticket con `location` nulla (`BuildPublicTicketsQueryAction`, riga `whereNotNull('location')`): nessun test lo isola da un ticket non pubblico, quindi non e' coperto da un gruppo.
 - Limite noto: `description` e' il testo libero scritto dal cittadino (`content`), pubblicato per intero sui ticket pubblici;
   puo' contenere dati personali che il cittadino ha scritto. L'Action non lo filtra.
 - Limite noto: l'indirizzo e' quello che l'elenco mostra oggi, con civico e senza arrotondamento (decisione aperta PP-02 della

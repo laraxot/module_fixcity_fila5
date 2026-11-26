@@ -27,4 +27,4 @@ it('returns a host-less path for media on a local disk', function (string $disk)
     Assert::assertStringStartsWith('/', $url);
     Assert::assertStringNotContainsString('localhost', $url);
     Assert::assertStringEndsWith('/42/buca.jpg', $url);
-})->with(['public', 'tenant_local']);
+})->with(['public', 'tenant_local'])->group('TICKET-MEDIA-URLS-INV-3');

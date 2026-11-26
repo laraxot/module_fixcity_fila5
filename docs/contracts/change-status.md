@@ -32,11 +32,12 @@ non e' questo percorso (vedi `transition-ticket-status-action.md`).
 
 | ID | Regola | Group Pest |
 |---|---|---|
-| TICKET-STATUS-CHANGE-INV-1 | Lo stato destinazione deve essere un valore di `TicketStatusEnum`; altrimenti `DomainException` e nessuna scrittura. | `TICKET-STATUS-CHANGE-INV-1` |
+| TICKET-STATUS-CHANGE-INV-1 | Lo stato destinazione deve essere un valore di `TicketStatusEnum`; altrimenti `DomainException`. | `TICKET-STATUS-CHANGE-INV-1` |
 | TICKET-STATUS-CHANGE-INV-2 | Lo stato corrente si legge con la riga bloccata (`SELECT ... FOR UPDATE`) e la transizione si valida su quello: due operatori sullo stesso ticket (o un doppio clic) non superano entrambi il controllo sullo stesso stato vecchio; il secondo trova lo stato aggiornato e riceve la `DomainException`. | `TICKET-STATUS-CHANGE-INV-2` |
 | TICKET-STATUS-CHANGE-INV-3 | Una transizione fuori da `TicketStatusEnum::allowedTransitions()` (unica fonte) lancia `DomainException` e non scrive ne' stato ne' cronologia. | `TICKET-STATUS-CHANGE-INV-3` |
 | TICKET-STATUS-CHANGE-INV-4 | Se lo stato destinazione e' gia' quello attuale non succede nulla: nessuna scrittura, nessuna voce di cronologia, nessuna notifica. | — (non dimostrato) |
-| TICKET-STATUS-CHANGE-INV-5 | Ogni cambio scrive una voce `StatusChange` con `from`/`to`, il motivo e la visibilita' `Public` se lo stato destinazione e' in `TicketStatusEnum::canViewByAll()`, altrimenti `Internal`; stato e voce stanno nella stessa transazione. | `TICKET-STATUS-CHANGE-INV-5` |
+| TICKET-STATUS-CHANGE-INV-5 | Ogni cambio scrive una voce `StatusChange` con `from`, `to` e il motivo, a visibilita' `Public` quando lo stato destinazione e' in `TicketStatusEnum::canViewByAll()`. | `TICKET-STATUS-CHANGE-INV-5` |
+| TICKET-STATUS-CHANGE-INV-8 | Con uno stato destinazione non pubblico la voce e' `Internal`; stato e voce stanno nella stessa transazione, quindi un errore nella voce annulla anche il cambio di stato. | — (non dimostrato: i test provano solo il ramo pubblico) |
 | TICKET-STATUS-CHANGE-INV-6 | L'autore della voce e' l'utente autenticato che agisce, salvato come identificativo stringa (uuid), mai perso. | `TICKET-STATUS-CHANGE-INV-6` |
 | TICKET-STATUS-CHANGE-INV-7 | Dopo il commit l'istanza del chiamante riflette lo stato salvato. | `TICKET-STATUS-CHANGE-INV-7` |
 

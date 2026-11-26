@@ -45,7 +45,7 @@ it('allows PA operators to assign tickets and change their status and priority',
     Assert::assertTrue($policy->assign($user, $ticket));
     Assert::assertTrue($policy->changeStatus($user, $ticket));
     Assert::assertTrue($policy->changePriority($user, $ticket));
-});
+})->group('TICKET-POLICY-INV-1');
 
 it('allows supervisors and admins the same PA ticket capabilities', function (): void {
     $policy = new TicketPolicy;
@@ -59,7 +59,7 @@ it('allows supervisors and admins the same PA ticket capabilities', function ():
         Assert::assertTrue($policy->changeStatus($user, $ticket));
         Assert::assertTrue($policy->changePriority($user, $ticket));
     }
-});
+})->group('TICKET-POLICY-INV-1');
 
 it('allows ticket deletion only to administrators or an explicit delete permission', function (): void {
     $policy = new TicketPolicy;
@@ -74,7 +74,7 @@ it('allows ticket deletion only to administrators or an explicit delete permissi
     Assert::assertTrue($policy->deleteAny(ticketPolicyUser(roles: ['admin'])));
     Assert::assertTrue($policy->delete(ticketPolicyUser(permissions: ['ticket.delete']), $ticket));
     Assert::assertTrue($policy->deleteAny(ticketPolicyUser(permissions: ['ticket.delete'])));
-});
+})->group('TICKET-POLICY-INV-3');
 
 it('denies citizens ticket assignment, status changes, and priority changes', function (): void {
     $policy = new TicketPolicy;
@@ -84,7 +84,7 @@ it('denies citizens ticket assignment, status changes, and priority changes', fu
     Assert::assertFalse($policy->assign($user, $ticket));
     Assert::assertFalse($policy->changeStatus($user, $ticket));
     Assert::assertFalse($policy->changePriority($user, $ticket));
-});
+})->group('TICKET-POLICY-INV-1');
 
 it('allows explicit assignment permission without granting status or priority changes', function (): void {
     $policy = new TicketPolicy;
@@ -94,7 +94,7 @@ it('allows explicit assignment permission without granting status or priority ch
     Assert::assertTrue($policy->assign($user, $ticket));
     Assert::assertFalse($policy->changeStatus($user, $ticket));
     Assert::assertFalse($policy->changePriority($user, $ticket));
-});
+})->group('TICKET-POLICY-INV-2');
 
 it('grants a citizen access to their own ticket but not a ticket identified only by audit fields', function (): void {
     $policy = new TicketPolicy;
@@ -126,4 +126,4 @@ it('grants a citizen access to their own ticket but not a ticket identified only
     Assert::assertTrue($policy->view($auditActor, $ticket));
     Assert::assertFalse($policy->update($auditActor, $ticket));
     Assert::assertFalse($policy->delete($auditActor, $ticket));
-});
+})->group('TICKET-POLICY-INV-4', 'TICKET-POLICY-INV-9');

@@ -30,6 +30,8 @@ use Spatie\QueueableAction\QueueableAction;
  * Le immagini (`images`) escono per i ticket pubblici e per il proprietario della pratica; PDF e dati del file restano esclusi
  * ({@see BuildTicketPublicImageUrlsAction}, SEC-04).
  *
+ * @see docs/contracts/build-public-ticket-detail-action.md
+ *
  * @contract docs/contracts/build-public-ticket-detail-action.md
  *
  * @see Modules/Fixcity/docs/contracts/build-public-ticket-detail-action.md

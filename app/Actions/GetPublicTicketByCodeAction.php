@@ -17,6 +17,10 @@ use Spatie\QueueableAction\QueueableAction;
  *
  * Proprio perche' e' un token, indovinarlo e' l'attacco: i tentativi a vuoto sono limitati per indirizzo (DCP-149). Il freno sta qui perche'
  * da qui passano la pagina di tracciamento e quella di conferma (`?code=`); sulla pagina Folio del modulo era oscurato dalla pagina del tema.
+ *
+ * @see docs/contracts/get-public-ticket-by-code-action.md
+ *
+ * @contract docs/contracts/get-public-ticket-by-code-action.md
  */
 final class GetPublicTicketByCodeAction
 {

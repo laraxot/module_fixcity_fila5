@@ -99,7 +99,7 @@ it('creates one ticket when the same page submits twice', function (): void {
     $component->assertRedirectContains(SafeStringCastAction::cast($ticket->code));
     // gli allegati si salvano una volta sola
     Assert::assertCount(1, $ticket->getMedia('attachments'));
-});
+})->group('TICKET-SUBMIT-ONCE-INV-1');
 
 it('answers a repeated submit with the same confirmation code, without validating the form again', function (): void {
     /** @var TestCase $this */
@@ -184,7 +184,7 @@ describe('SubmitTicketOnceAction', function (): void {
         Assert::assertInstanceOf(Ticket::class, $stored);
         Assert::assertTrue($stored->is($first));
         Assert::assertNull($action->existing($ownerId, 'token-mai-usato'));
-    });
+    })->group('TICKET-SUBMIT-ONCE-INV-1', 'TICKET-SUBMIT-ONCE-INV-2');
 
     it('refuses to run the creation while another request holds the same token', function (): void {
         $ownerId = userIdForIdempotencyTest(UserFactory::new()->createOne());
@@ -200,7 +200,7 @@ describe('SubmitTicketOnceAction', function (): void {
         } finally {
             $held->release();
         }
-    });
+    })->group('TICKET-SUBMIT-ONCE-INV-5');
 
     it('does not remember a token whose creation failed', function (): void {
         $ownerId = userIdForIdempotencyTest(UserFactory::new()->createOne());
@@ -217,5 +217,5 @@ describe('SubmitTicketOnceAction', function (): void {
         $stored = $action->existing($ownerId, 'token-c');
         Assert::assertInstanceOf(Ticket::class, $stored);
         Assert::assertTrue($stored->is($retry));
-    });
+    })->group('TICKET-SUBMIT-ONCE-INV-4');
 });

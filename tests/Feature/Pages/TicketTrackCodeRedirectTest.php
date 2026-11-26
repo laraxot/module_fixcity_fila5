@@ -23,9 +23,9 @@ it('sends the receipt link to the localized tracking form with the code', functi
     Assert::assertIsString($location);
     Assert::assertSame('/'.$locale.'/tickets/track', parse_url($location, PHP_URL_PATH));
     Assert::assertSame('code=TCK-REDIR01', parse_url($location, PHP_URL_QUERY));
-})->with(['it', 'en']);
+})->with(['it', 'en'])->group('TRACK-REDIRECT-INV-1', 'TRACK-REDIRECT-INV-2');
 
 it('does not redirect other three-segment pages handled by the same theme page', function (): void {
     /** @var TestCase $this */
     Assert::assertFalse($this->get('/it/auth/password/reset')->isRedirect());
-});
+})->group('TRACK-REDIRECT-INV-4');

@@ -20,7 +20,7 @@ use Modules\Xot\Providers\XotBaseServiceProvider;
 /**
  * Registers Fixcity's application services and CMS middleware extensions.
  *
- * @see Modules/Fixcity/docs/adr/public-ticket-detail-route-ownership.md
+ * @see Modules/Fixcity/docs/adr/0003-public-ticket-detail-route-ownership.md
  */
 class FixcityServiceProvider extends XotBaseServiceProvider
 {
@@ -31,7 +31,7 @@ class FixcityServiceProvider extends XotBaseServiceProvider
     protected string $module_ns = __NAMESPACE__;
 
     /**
-     * @see Modules/Fixcity/docs/adr/public-ticket-detail-route-ownership.md
+     * @see Modules/Fixcity/docs/adr/0003-public-ticket-detail-route-ownership.md
      */
     public function register(): void
     {
@@ -63,8 +63,8 @@ class FixcityServiceProvider extends XotBaseServiceProvider
     }
 
     /**
-     * @see Modules/Fixcity/docs/adr/public-ticket-detail-route-ownership.md
-     * @see Modules/Fixcity/docs/adr/policy-autodiscovery.md
+     * @see Modules/Fixcity/docs/adr/0003-public-ticket-detail-route-ownership.md
+     * @see Modules/Fixcity/docs/adr/0002-policy-autodiscovery.md
      * @see Modules/Fixcity/docs/contracts/policy-registration.md
      */
     public function boot(): void

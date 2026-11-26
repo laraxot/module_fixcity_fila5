@@ -11,8 +11,8 @@ updated: 2026-11-26
 
 Indice operativo della cartella owner-local. Il formato e la governance condivisi sono in [Xot](../../../Xot/docs/adr/README.md).
 
-- [fixcity-public-logo-path.md](fixcity-public-logo-path.md)
-- [policy-autodiscovery.md](policy-autodiscovery.md)
-- [public-ticket-detail-route-ownership.md](public-ticket-detail-route-ownership.md)
-- [route-trans-cache-deploy.md](route-trans-cache-deploy.md)
-- [ticket-lifecycle-is-action-owned.md](ticket-lifecycle-is-action-owned.md)
+- [0001-fixcity-public-logo-path.md](0001-fixcity-public-logo-path.md)
+- [0002-policy-autodiscovery.md](0002-policy-autodiscovery.md)
+- [0003-public-ticket-detail-route-ownership.md](0003-public-ticket-detail-route-ownership.md)
+- [0004-route-trans-cache-deploy.md](0004-route-trans-cache-deploy.md)
+- [0005-ticket-lifecycle-is-action-owned.md](0005-ticket-lifecycle-is-action-owned.md)

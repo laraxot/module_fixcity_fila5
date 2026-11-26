@@ -30,7 +30,7 @@ test('a lookup with a known code is never throttled', function (): void {
         $found = $action->execute((string) $ticket->code);
         expect($found)->toBeInstanceOf(Ticket::class);
     }
-});
+})->group('TICKET-TRACK-LOOKUP-INV-4');
 
 test('guessing codes is throttled after ten misses and answers 429 with a retry delay', function (): void {
     /** @var TestCase $this */
@@ -47,7 +47,7 @@ test('guessing codes is throttled after ten misses and answers 429 with a retry 
         expect($exception->getStatusCode())->toBe(429);
         expect($exception->getHeaders())->toHaveKey('Retry-After');
     }
-});
+})->group('TICKET-TRACK-LOOKUP-INV-3');
 
 test('a blocked address cannot even use a valid code until the window ends', function (): void {
     /** @var TestCase $this */
@@ -59,7 +59,7 @@ test('a blocked address cannot even use a valid code until the window ends', fun
     }
 
     expect(fn () => $action->execute((string) $ticket->code))->toThrow(ThrottleRequestsException::class);
-});
+})->group('TICKET-TRACK-LOOKUP-INV-5');
 
 test('an empty code is not a lookup and does not use the budget', function (): void {
     /** @var TestCase $this */
@@ -69,7 +69,7 @@ test('an empty code is not a lookup and does not use the budget', function (): v
         expect($action->execute(null))->toBeNull();
         expect($action->execute('   '))->toBeNull();
     }
-});
+})->group('TICKET-TRACK-LOOKUP-INV-2');
 
 test('the tracking page answers 429 after repeated wrong codes and keeps answering 200 before that', function (): void {
     /** @var TestCase $this */

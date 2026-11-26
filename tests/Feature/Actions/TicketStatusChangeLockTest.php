@@ -55,7 +55,7 @@ it('rejects a transition decided on a stale copy of the ticket', function (): vo
 
     Assert::assertSame(TicketStatusEnum::RESOLVED, $ticket->refresh()->status);
     Assert::assertSame($before + 1, db07TransitionsOf($ticket));
-});
+})->group('TICKET-STATUS-CHANGE-INV-2', 'TICKET-STATUS-CHANGE-INV-3');
 
 it('does not record the same transition twice on a double click', function (): void {
     $ticket = db07Ticket(TicketStatusEnum::RESOLVED);
@@ -88,4 +88,4 @@ it('updates the caller instance with the saved status', function (): void {
 
     Assert::assertSame(TicketStatusEnum::IN_REVIEW, $ticket->status);
     Assert::assertSame(TicketStatusEnum::IN_REVIEW->value, $ticket->resolveTicketStatusValue());
-});
+})->group('TICKET-STATUS-CHANGE-INV-7');

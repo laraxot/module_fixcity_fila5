@@ -18,7 +18,7 @@ tags: [seo, serp, marketing, go-live, bmad]
 
 ## Fase BMAD
 Analyze → Plan → (Do in corso). Decisioni tecniche nel modulo Seo:
-[ADR presenza nei motori](../../../Seo/docs/adr/search-engine-presence.md).
+[ADR presenza nei motori](../../../Seo/docs/adr/0002-search-engine-presence.md).
 
 ## Da dove partiamo (misurato il 2026-11-19 su https://fixcity.eu)
 

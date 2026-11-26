@@ -17,6 +17,11 @@ use Modules\Fixcity\Models\TicketActivity;
 use Spatie\QueueableAction\QueueableAction;
 use Throwable;
 
+/**
+ * @see docs/contracts/record-ticket-communication-action.md
+ *
+ * @contract docs/contracts/record-ticket-communication-action.md
+ */
 final class RecordTicketCommunicationAction
 {
     use QueueableAction;

@@ -12,11 +12,13 @@ use Symfony\Component\HttpFoundation\Response;
 /**
  * Redirects legacy public ticket receipt URLs to the canonical tracking page.
  *
- * @see Modules/Fixcity/docs/contracts/redirect-ticket-track-code-middleware.md
+ * @see docs/contracts/redirect-ticket-track-code-middleware.md
+ *
+ * @contract docs/contracts/redirect-ticket-track-code-middleware.md
  */
 final class RedirectTicketTrackCodeMiddleware
 {
-    /** @see Modules/Fixcity/docs/contracts/redirect-ticket-track-code-middleware.md */
+    /** @see docs/contracts/redirect-ticket-track-code-middleware.md */
     public function handle(Request $request, Closure $next): Response
     {
         $route = $request->route();

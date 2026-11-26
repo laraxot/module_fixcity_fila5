@@ -62,7 +62,7 @@ it('notifies the owner and followers once for a public status change', function 
             && ! array_key_exists('ticket_code', $data)
             && ! str_contains(json_encode($data), (string) $ticket->code);
     });
-});
+})->group('TICKET-NOTIFY-STATUS-INV-3', 'TICKET-NOTIFY-STATUS-INV-4');
 
 it('emails public status updates only to users with a verified email address', function (): void {
     $verifiedUser = UserFactory::new()->createOne();
@@ -82,7 +82,7 @@ it('emails public status updates only to users with a verified email address', f
             'status' => TicketStatusEnum::RESOLVED->getLabel(),
         ]))
         ->and($mail->actionUrl)->toContain('code=TCK-0123456789ABCDEF');
-});
+})->group('TICKET-NOTIFY-STATUS-INV-6');
 
 it('does not notify followers about internal status changes', function (): void {
     Notification::fake();
@@ -98,7 +98,7 @@ it('does not notify followers about internal status changes', function (): void 
     ]);
 
     Notification::assertNothingSent();
-});
+})->group('TICKET-NOTIFY-STATUS-INV-1');
 
 it('keeps in-app status updates when the citizen opts out of email', function (): void {
     $user = UserFactory::new()->createOne();
@@ -106,7 +106,7 @@ it('keeps in-app status updates when the citizen opts out of email', function ()
     $notification = new TicketStatusChangedNotification('TCK-0123456789ABCDEF', TicketStatusEnum::RESOLVED);
 
     expect($notification->via($user))->toBe(['database']);
-});
+})->group('TICKET-NOTIFY-STATUS-INV-6');
 
 it('does not send an unusable tracking notification for legacy tickets without a code', function (): void {
     Notification::fake();
@@ -125,4 +125,4 @@ it('does not send an unusable tracking notification for legacy tickets without a
     ]);
 
     Notification::assertNothingSent();
-});
+})->group('TICKET-NOTIFY-STATUS-INV-5');

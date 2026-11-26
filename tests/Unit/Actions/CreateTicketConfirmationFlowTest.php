@@ -25,7 +25,7 @@ describe('Ticket confirmation and tracking flow', function (): void {
 
         Assert::assertStringStartsWith('TCK-', $code);
         Assert::assertSame(20, strlen($code));
-    });
+    })->group('FIXCITY-CREATE-INV-1');
 
     test('create ticket action allocates code and flashes confirmation bag', function (): void {
         $user = UserFactory::new()->createOne();
@@ -50,7 +50,7 @@ describe('Ticket confirmation and tracking flow', function (): void {
         Assert::assertStringContainsString('Thank you', $englishData['summary_html']);
         Assert::assertSame('Track report '.$ticket->code, $englishData['receipt']['label']);
         Assert::assertStringContainsString('/en/tickets/track/', $englishData['receipt']['url']);
-    });
+    })->group('FIXCITY-CREATE-INV-1', 'FIXCITY-CREATE-INV-6');
 
     test('guest with the capability code can retrieve a pending ticket', function (): void {
         $ticket = TicketFactory::new()->createOne([
@@ -62,11 +62,11 @@ describe('Ticket confirmation and tracking flow', function (): void {
 
         Assert::assertNotNull($found);
         Assert::assertSame($ticket->id, $found->id);
-    });
+    })->group('TICKET-TRACK-LOOKUP-INV-1');
 
     test('invalid capability code finds no ticket', function (): void {
         Assert::assertNull(app(GetPublicTicketByCodeAction::class)->execute('TCK-UNKNOWN01'));
-    });
+    })->group('TICKET-TRACK-LOOKUP-INV-1');
 
     test('guest can retrieve a ticket in a public status by code', function (): void {
         $ticket = TicketFactory::new()->createOne([
@@ -78,7 +78,7 @@ describe('Ticket confirmation and tracking flow', function (): void {
 
         Assert::assertNotNull($found);
         Assert::assertSame($ticket->id, $found->id);
-    });
+    })->group('TICKET-TRACK-LOOKUP-INV-1');
 
     test('public details payload includes status and code', function (): void {
         $owner = UserFactory::new()->createOne();

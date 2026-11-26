@@ -53,7 +53,7 @@ it('schedules the activity log clean, the access log prune and the deleted accou
     expect($find('activitylog:clean'))->toBe('0 0 * * *')
         ->and($find('model:prune'))->toBe('0 0 * * *')
         ->and($find('purge-deleted-accounts'))->toBe('0 0 * * *');
-});
+})->group('PRIVACY-PURGE-INV-6');
 
 it('removes activity log rows older than 12 months and keeps the recent ones', function (): void {
     config(['activitylog.enabled' => true]);

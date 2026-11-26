@@ -2,8 +2,6 @@
 
 declare(strict_types=1);
 
-use function Pest\Laravel\getJson;
-use function Safe\preg_replace;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\DB;
 use Modules\Fixcity\Actions\BuildTicketPublicImageUrlsAction;
@@ -18,6 +16,9 @@ use Modules\Media\Models\Media;
 use Modules\User\Database\Factories\UserFactory;
 use Modules\Xot\Actions\Cast\SafeStringCastAction;
 use PHPUnit\Framework\Assert;
+
+use function Pest\Laravel\getJson;
+use function Safe\preg_replace;
 
 uses(TestCase::class);
 
@@ -89,7 +90,7 @@ it('never returns PDFs from /api/tickets/list and /api/ticket-details', function
     Assert::assertIsArray($details);
     Assert::assertCount(1, $details);
     Assert::assertStringNotContainsString('.pdf', implode(' ', array_map(SafeStringCastAction::cast(...), $details)));
-});
+})->group('TICKET-MEDIA-URLS-INV-2');
 
 it('gives no image URL of a non-public ticket to a stranger', function (): void {
     $ticket = mediaVisibilityTicket(['status' => TicketStatusEnum::PENDING]);
@@ -97,7 +98,7 @@ it('gives no image URL of a non-public ticket to a stranger', function (): void 
 
     Assert::assertSame([], app(BuildTicketPublicImageUrlsAction::class)->execute($ticket, null));
     Assert::assertSame([], app(BuildTicketPublicImageUrlsAction::class)->execute($ticket, UserFactory::new()->createOne()));
-});
+})->group('TICKET-MEDIA-URLS-INV-1');
 
 it('serves the photo of a public ticket to a guest', function (): void {
     /** @var TestCase $this */
@@ -107,7 +108,7 @@ it('serves the photo of a public ticket to a guest', function (): void {
 
     Assert::assertStringContainsString('private', SafeStringCastAction::cast($response->headers->get('Cache-Control')));
     Assert::assertSame('nosniff', $response->headers->get('X-Content-Type-Options'));
-});
+})->group('TICKET-MEDIA-ACCESS-INV-2');
 
 it('hides the photo of a pending ticket from guests and other users, not from the owner', function (): void {
     /** @var TestCase $this */
@@ -118,7 +119,7 @@ it('hides the photo of a pending ticket from guests and other users, not from th
     $this->get($url)->assertNotFound();
     $this->actingAs(UserFactory::new()->createOne())->get($url)->assertNotFound();
     $this->actingAs($owner)->get($url)->assertOk();
-});
+})->group('TICKET-MEDIA-ACCESS-INV-2');
 
 it('never serves a PDF of a public ticket to a guest, only to its owner', function (): void {
     /** @var TestCase $this */
@@ -129,7 +130,7 @@ it('never serves a PDF of a public ticket to a guest, only to its owner', functi
     $this->get($url)->assertNotFound();
     $response = $this->actingAs($owner)->get($url)->assertOk();
     Assert::assertStringStartsWith('attachment', SafeStringCastAction::cast($response->headers->get('Content-Disposition')));
-});
+})->group('TICKET-MEDIA-ACCESS-INV-3');
 
 it('accepts a valid signature for a pending photo and rejects a forged one', function (): void {
     /** @var TestCase $this */
@@ -138,7 +139,7 @@ it('accepts a valid signature for a pending photo and rejects a forged one', fun
 
     $this->get($signed)->assertOk();
     $this->get(preg_replace('/signature=[0-9a-f]+/', 'signature='.str_repeat('0', 64), $signed))->assertNotFound();
-});
+})->group('TICKET-MEDIA-SIGN-INV-1', 'TICKET-MEDIA-SIGN-INV-2');
 
 it('rejects paths outside the media folder', function (): void {
     /** @var TestCase $this */

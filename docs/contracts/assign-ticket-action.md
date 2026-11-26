@@ -30,7 +30,7 @@ Sorgente: `app/Actions/AssignTicketAction.php`. Chiamata dalla pagina `ViewTicke
 | TICKET-ASSIGN-INV-2 | Un `responsibleId` non nullo deve essere uno degli utenti con ruolo PA (`ListAssignableTicketOperatorsAction`, ruoli `BasePolicy::PA_ROLES`); un cittadino come responsabile da' `ValidationException` su `responsible_id` e il ticket resta com'era. Il controllo sta nell'Action, non solo nel form Filament. | `TICKET-ASSIGN-INV-2` |
 | TICKET-ASSIGN-INV-3 | Lettura con `lockForUpdate`, scrittura del responsabile e voce di cronologia `Assignment` (visibilita' interna) stanno in una sola transazione: non esiste un cambio di responsabile senza la sua voce. | — (non dimostrato) |
 | TICKET-ASSIGN-INV-4 | Se il responsabile non cambia (`previous === nuovo`) non si registra nessuna attivita' e non parte nessuna notifica. | — (non dimostrato) |
-| TICKET-ASSIGN-INV-5 | Dopo il commit, solo l'operatore appena assegnato riceve `TicketAssignedNotification` (una volta); il proprietario del ticket non riceve nulla; togliere l'assegnazione non notifica nessuno. | `TICKET-ASSIGN-INV-5` |
+| TICKET-ASSIGN-INV-5 | Dopo il commit, l'operatore appena assegnato riceve `TicketAssignedNotification` una volta sola; il proprietario del ticket non la riceve; togliere l'assegnazione non la invia al responsabile uscente. | `TICKET-ASSIGN-INV-5` |
 | TICKET-ASSIGN-INV-6 | La voce di cronologia registra come autore l'UUID dell'operatore che agisce (`auth()->id()`), non quello del responsabile. | — (non dimostrato: `TicketActivityActorUuidTest` assegna a un utente senza ruolo PA, che oggi l'invariante 2 respinge; il test va riallineato, vedi Backlog test) |
 
 ## Effetti collaterali

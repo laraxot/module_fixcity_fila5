@@ -12,6 +12,11 @@ use Modules\Xot\Actions\Cast\SafeStringCastAction;
 use Modules\Xot\Contracts\UserContract;
 use Webmozart\Assert\Assert;
 
+/**
+ * @see docs/contracts/delete-ticket-action.md
+ *
+ * @contract docs/contracts/delete-ticket-action.md
+ */
 final class DeleteTicketAction
 {
     public function execute(Ticket $ticket): void

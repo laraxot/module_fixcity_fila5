@@ -17,6 +17,11 @@ use Modules\Xot\Datas\XotData;
 use Spatie\QueueableAction\QueueableAction;
 use Throwable;
 
+/**
+ * @see docs/contracts/notify-ticket-subscribers-of-status-change-action.md
+ *
+ * @contract docs/contracts/notify-ticket-subscribers-of-status-change-action.md
+ */
 final class NotifyTicketSubscribersOfStatusChangeAction
 {
     use QueueableAction;

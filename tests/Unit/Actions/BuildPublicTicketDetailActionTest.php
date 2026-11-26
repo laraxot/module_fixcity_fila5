@@ -65,7 +65,7 @@ test('exposes exactly the public fields and nothing else', function (): void {
     Assert::assertSame(11.2558, $detail['longitude']);
     Assert::assertSame("Il cestino è staccato.\nNon chiude più.", $detail['description']);
     Assert::assertSame('Il cestino è staccato. Non chiude più.', $detail['meta_description']);
-});
+})->group('TICKET-DETAIL-INV-1', 'TICKET-DETAIL-INV-4', 'TICKET-DETAIL-INV-6');
 
 test('exposes image URLs and excludes non-image attachments', function (): void {
     /** @var TestCase $this */
@@ -81,7 +81,7 @@ test('exposes image URLs and excludes non-image attachments', function (): void 
     // disco privato dei ticket (SEC-04): URL relativo della route autorizzata
     Assert::assertStringStartsWith('/api/ticket-media/', $detail['images'][0]);
     Assert::assertStringEndsWith('camera.jpg', $detail['images'][0]);
-});
+})->group('TICKET-DETAIL-INV-5', 'TICKET-MEDIA-URLS-INV-3');
 
 test('returns null when the report is not visible to the public or does not exist', function (): void {
     /** @var TestCase $this */
@@ -90,7 +90,7 @@ test('returns null when the report is not visible to the public or does not exis
     Assert::assertNull($action->execute(detailActionTicket(['status' => TicketStatusEnum::PENDING])->id));
     Assert::assertNull($action->execute(detailActionTicket(['status' => TicketStatusEnum::DRAFT, 'code' => 'TCK-SEGRETO-0002'])->id));
     Assert::assertNull($action->execute(999999));
-});
+})->group('TICKET-DETAIL-INV-2');
 
 test('lets the owner open the own report even when it is not public yet', function (): void {
     /** @var TestCase $this */
@@ -100,7 +100,7 @@ test('lets the owner open the own report even when it is not public yet', functi
     $this->actingAs($owner);
 
     Assert::assertIsArray(app(BuildPublicTicketDetailAction::class)->execute($ticket->id));
-});
+})->group('TICKET-DETAIL-INV-3');
 
 test('lets the owner open the own report even without a position, and tells that it is not public', function (): void {
     /** @var TestCase $this */
@@ -120,7 +120,7 @@ test('lets the owner open the own report even without a position, and tells that
     Assert::assertSame('TCK-SEGRETO-0001', $detail['tracking_code']);
     Assert::assertSame('', $detail['address']);
     Assert::assertNull($detail['latitude']);
-});
+})->group('TICKET-DETAIL-INV-3', 'TICKET-DETAIL-INV-7');
 
 test('gives the tracking code to the owner only, never to a follower or another citizen', function (): void {
     /** @var TestCase $this */
@@ -144,7 +144,7 @@ test('gives the tracking code to the owner only, never to a follower or another 
     Assert::assertTrue($forFollower['is_following']);
     Assert::assertNull($forGuest['tracking_code']);
     Assert::assertStringNotContainsString('TCK-SEGRETO-0001', (string) json_encode([$forFollower, $forGuest]));
-});
+})->group('TICKET-DETAIL-INV-4', 'TICKET-DETAIL-INV-8');
 
 test('gives no tracking code when the owner report has none', function (): void {
     /** @var TestCase $this */
@@ -156,7 +156,7 @@ test('gives no tracking code when the owner report has none', function (): void 
     Assert::assertIsArray($detail);
     Assert::assertTrue($detail['is_owner']);
     Assert::assertNull($detail['tracking_code']);
-});
+})->group('TICKET-DETAIL-INV-4');
 
 test('tells whether the viewer follows the report', function (): void {
     /** @var TestCase $this */
@@ -176,7 +176,7 @@ test('tells whether the viewer follows the report', function (): void {
 
     Assert::assertTrue($isFollowing($ticket->id, $citizen));
     Assert::assertFalse($isFollowing($ticket->id));
-});
+})->group('TICKET-DETAIL-INV-8');
 
 test('limits the meta description to 160 characters', function (): void {
     /** @var TestCase $this */
@@ -187,7 +187,7 @@ test('limits the meta description to 160 characters', function (): void {
     Assert::assertIsArray($detail);
     Assert::assertLessThanOrEqual(160, mb_strlen($detail['meta_description']));
     Assert::assertStringEndsWith('...', $detail['meta_description']);
-});
+})->group('TICKET-DETAIL-INV-6');
 
 test('has no map point when the coordinates are missing or zero', function (): void {
     /** @var TestCase $this */
@@ -199,7 +199,7 @@ test('has no map point when the coordinates are missing or zero', function (): v
     Assert::assertNull($detail['latitude']);
     Assert::assertNull($detail['longitude']);
     Assert::assertSame('Indirizzo senza punto', $detail['address']);
-});
+})->group('TICKET-DETAIL-INV-7');
 
 test('adds the day-only date to the timeline without changing the existing keys', function (): void {
     /** @var TestCase $this */
@@ -262,4 +262,4 @@ test('gives the photos of a report not yet public to the owner only', function (
     Assert::assertStringStartsWith('/api/ticket-media/', $forOwner['images'][0]);
     Assert::assertNull($action->execute($ticket->id, UserFactory::new()->createOne()));
     Assert::assertNull($action->execute($ticket->id));
-});
+})->group('TICKET-DETAIL-INV-5');

@@ -48,7 +48,7 @@ describe('Change Status', function (): void {
         Assert::assertSame(TicketActivityVisibilityEnum::Public->value, $activity->visibility);
         Assert::assertSame(TicketStatusEnum::PENDING->value, $activity->payload['from'] ?? null);
         Assert::assertSame(TicketStatusEnum::IN_REVIEW->value, $activity->payload['to'] ?? null);
-    });
+    })->group('TICKET-STATUS-CHANGE-INV-5');
 
     test('_handles_status_transition_to_in_progress', function (): void {
         $action = new ChangeStatus;
@@ -94,7 +94,7 @@ describe('Change Status', function (): void {
 
         expect(fn () => $action->execute($ticket, 'invalid_status', 'Testing invalid status handling'))
             ->toThrow(\DomainException::class);
-    });
+    })->group('TICKET-STATUS-CHANGE-INV-1');
 
     test('_updates_ticket_timestamps_when_status_changes', function (): void {
         $action = new ChangeStatus;

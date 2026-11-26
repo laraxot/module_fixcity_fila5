@@ -15,6 +15,7 @@ use Modules\User\Models\Permission;
 use Modules\User\Models\Role;
 use Modules\User\Models\User;
 use Modules\Xot\Actions\Cast\SafeStringCastAction;
+use PHPUnit\Framework\Assert;
 
 uses(TestCase::class);
 
@@ -54,7 +55,7 @@ it('hides ticket deletion from an ordinary PA operator', function (): void {
 
     Livewire::test(ListTickets::class)
         ->assertTableBulkActionHidden('delete');
-});
+})->group('TICKET-POLICY-INV-3', 'TICKET-POLICY-REG-INV-2');
 
 it('hides ticket deletion from an operator who also has the panel role fixcity::admin', function (): void {
     // Come nella realta': l'operatore riceve `operator` + `fixcity::admin` (quest'ultimo solo per aprire il pannello).
@@ -69,8 +70,8 @@ it('hides ticket deletion from an operator who also has the panel role fixcity::
     Livewire::test(ViewTicket::class, ['record' => $ticket->getRouteKey()])
         ->assertSuccessful()
         ->assertActionHidden('delete');
-    \PHPUnit\Framework\Assert::assertFalse($operator->can('delete', $ticket));
-});
+    Assert::assertFalse($operator->can('delete', $ticket));
+})->group('TICKET-POLICY-INV-6');
 
 it('shows soft-delete to an administrator', function (): void {
     $administrator = UserFactory::new()->createOne();
@@ -87,7 +88,7 @@ it('shows soft-delete to an administrator', function (): void {
     Livewire::test(EditTicket::class, ['record' => $ticket->getRouteKey()])
         ->assertSuccessful()
         ->assertActionVisible('delete');
-});
+})->group('TICKET-POLICY-REG-INV-2');
 
 it('records the deleting administrator when applying soft delete', function (): void {
     $administrator = UserFactory::new()->createOne();
@@ -101,7 +102,7 @@ it('records the deleting administrator when applying soft delete', function (): 
     expect($ticket->fresh()?->deleted_at)->not->toBeNull()
         ->and(SafeStringCastAction::cast($ticket->fresh()?->deleted_by))
         ->toBe(SafeStringCastAction::cast($administrator->getAuthIdentifier()));
-});
+})->group('TICKET-DELETE-INV-2', 'TICKET-DELETE-INV-3');
 
 it('records the deleting administrator for each bulk soft delete', function (): void {
     $administrator = UserFactory::new()->createOne();
@@ -118,4 +119,4 @@ it('records the deleting administrator for each bulk soft delete', function (): 
     expect($ticket->fresh()?->deleted_at)->not->toBeNull()
         ->and(SafeStringCastAction::cast($ticket->fresh()?->deleted_by))
         ->toBe(SafeStringCastAction::cast($administrator->getAuthIdentifier()));
-});
+})->group('TICKET-DELETE-INV-3');

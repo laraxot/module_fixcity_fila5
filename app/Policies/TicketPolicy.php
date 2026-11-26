@@ -8,6 +8,15 @@ use Modules\Fixcity\Models\Ticket;
 use Modules\Xot\Actions\Cast\SafeStringCastAction;
 use Modules\Xot\Contracts\UserContract;
 
+/**
+ * @see docs/contracts/policy-registration.md
+ *
+ * @contract docs/contracts/policy-registration.md
+ *
+ * @see docs/contracts/ticket-policy.md
+ *
+ * @contract docs/contracts/ticket-policy.md
+ */
 final class TicketPolicy extends BasePolicy
 {
     public function viewAny(UserContract $user): bool

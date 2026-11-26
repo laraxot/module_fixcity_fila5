@@ -11,6 +11,10 @@ use Spatie\QueueableAction\QueueableAction;
 /**
  * Spedisce alla casella dell'ente la segnalazione di accessibilita' (DCP-132). Il destinatario lo sceglie il chiamante leggendo la
  * dichiarazione lato server: questa Action non lo prende mai da dati del visitatore.
+ *
+ * @see docs/contracts/send-accessibility-feedback-action.md
+ *
+ * @contract docs/contracts/send-accessibility-feedback-action.md
  */
 final class SendAccessibilityFeedbackAction
 {

@@ -50,7 +50,7 @@ it('inserts a missing permission once and never writes again on later checks', f
         ->and($second)->toBe([])
         ->and($third)->toBe([])
         ->and(Permission::query()->where('name', $name)->count())->toBe(1);
-});
+})->group('TICKET-POLICY-INV-8');
 
 it('keeps the authorization outcome: false without the permission, true once granted', function (): void {
     $user = UserFactory::new()->createOne();
@@ -61,4 +61,4 @@ it('keeps the authorization outcome: false without the permission, true once gra
     $user->givePermissionTo($name);
 
     expect($user->hasPermissionToOrCreate($name))->toBeTrue();
-});
+})->group('TICKET-POLICY-INV-8');

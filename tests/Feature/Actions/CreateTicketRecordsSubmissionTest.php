@@ -41,4 +41,4 @@ it('records the submission as the first author-only timeline entry', function ()
 
     // Il ticket non e' pubblico: chi non e' l'autore non vede la voce.
     Assert::assertSame([], app(BuildTicketTimelineAction::class)->execute($ticket, null));
-});
+})->group('FIXCITY-CREATE-INV-5');

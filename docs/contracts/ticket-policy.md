@@ -30,14 +30,17 @@ tramite il `Gate`. Come arriva al `Gate`: [policy-registration.md](policy-regist
 
 | ID | Regola | Group Pest |
 |---|---|---|
-| TICKET-POLICY-INV-1 | `viewAny`, `assign`, `changeStatus`, `communicate` e `changePriority` sono concesse a chi ha un ruolo PA (`operator`, `supervisor`, `admin`) o il permesso `ticket.<abilita'>`; a un cittadino senza permessi sono negate. Violata: un cittadino assegnerebbe o cambierebbe lo stato delle segnalazioni. | `TICKET-POLICY-INV-1` |
+| TICKET-POLICY-INV-1 | `assign`, `changeStatus` e `changePriority` sono concesse ai ruoli PA (`operator`, `supervisor`, `admin`) e negate a un cittadino senza permessi. Violata: un cittadino assegnerebbe o cambierebbe lo stato delle segnalazioni. | `TICKET-POLICY-INV-1` |
 | TICKET-POLICY-INV-2 | I permessi nominali sono granulari: `ticket.assign` concede `assign` e non `changeStatus` ne' `changePriority`. | `TICKET-POLICY-INV-2` |
-| TICKET-POLICY-INV-3 | `delete` e `deleteAny` sono concesse solo al ruolo `admin` o al permesso `ticket.delete`: ne' un operatore PA, ne' un supervisore, ne' il proprietario cancellano una segnalazione (la traccia pubblica non si cancella). | `TICKET-POLICY-INV-3` |
-| TICKET-POLICY-INV-4 | Per `view` e `update` il proprietario e' deciso solo da `owner_id`: i campi di audit (`created_by`, `updated_by`) non danno mai accesso. Il proprietario puo' vedere e modificare, non cancellare. | `TICKET-POLICY-INV-4` |
-| TICKET-POLICY-INV-5 | `view` per un ospite (`null`) e' vera solo se il ticket e' visibile sul front office pubblico (stato in `TicketStatusEnum::canViewByAll()`); per un utente autenticato e' vera anche per PA, permesso `ticket.view` e proprietario. | — (non dimostrato) |
-| TICKET-POLICY-INV-6 | Solo il ruolo `super-admin` supera la Policy a priori (`BasePolicy::before()`); il ruolo `fixcity::admin`, che serve solo ad aprire il pannello e ce l'hanno tutti gli operatori, non concede nulla: un operatore con `fixcity::admin` non cancella. | `TICKET-POLICY-INV-6` |
+| TICKET-POLICY-INV-3 | `delete` e `deleteAny` sono concesse solo al ruolo `admin` o al permesso `ticket.delete`: ne' un operatore PA, ne' un supervisore, ne' un cittadino le hanno (la traccia pubblica non si cancella). | `TICKET-POLICY-INV-3` |
+| TICKET-POLICY-INV-4 | Per `view` e `update` il proprietario e' deciso solo da `owner_id`: i campi di audit (`created_by`, `updated_by`) non danno mai accesso. Il proprietario vede e modifica ma non cancella. | `TICKET-POLICY-INV-4` |
+| TICKET-POLICY-INV-5 | `view` per un ospite (`null`) e' vera solo se il ticket e' visibile sul front office pubblico (`Ticket::isVisibleOnPublicFrontoffice()`: stato in `TicketStatusEnum::canViewByAll()`); per un utente autenticato lo e' anche per PA, permesso `ticket.view` e proprietario. | — (non dimostrato: nessun test chiama `view` con `null`, con un ruolo PA o con `ticket.view`) |
+| TICKET-POLICY-INV-6 | Il ruolo `fixcity::admin`, che serve ad aprire il pannello e ce l'hanno tutti gli operatori, non supera la Policy: un operatore con `fixcity::admin` non cancella una segnalazione. | `TICKET-POLICY-INV-6` |
 | TICKET-POLICY-INV-7 | `create` e' concessa a ogni utente autenticato (identificativo non nullo) oltre che a chi ha `ticket.create`: il permesso, da solo, non restringe nulla. | — (non dimostrato) |
 | TICKET-POLICY-INV-8 | Controllare un permesso nominale non ancora esistente lo crea (una `INSERT` in `permissions`, solo al primo controllo di quel nome) e non scrive piu' ai controlli successivi; l'esito dell'autorizzazione non cambia: falso senza permesso, vero dopo averlo concesso. | `TICKET-POLICY-INV-8` |
+| TICKET-POLICY-INV-9 | Un utente autenticato che non e' il proprietario vede un ticket pubblico ma non lo modifica ne' lo cancella. | `TICKET-POLICY-INV-9` |
+| TICKET-POLICY-INV-10 | `viewAny` e `communicate` sono concesse a un ruolo PA o al permesso nominale (`ticket.viewAny`, `ticket.communicate`). | — (non dimostrato: `viewAny` e' provata solo per `supervisor` e `admin`, `communicate` mai) |
+| TICKET-POLICY-INV-11 | Solo il ruolo `super-admin` passa a priori (`BasePolicy::before()`): nessun altro ruolo ottiene un si' prima della valutazione dell'abilita'. | — (non dimostrato: nessun test usa il ruolo `super-admin`) |
 
 ## Effetti collaterali
 
@@ -52,6 +55,8 @@ tramite il `Gate`. Come arriva al `Gate`: [policy-registration.md](policy-regist
 - Limite noto: `view` si basa sullo stato (`canViewByAll`), non sulla posizione: un ticket in stato pubblico ma senza posizione e'
   "visibile" per la Policy mentre la mappa, l'elenco e il dettaglio pubblico lo escludono (`BuildPublicTicketsQueryAction` richiede `location`).
 - Limite noto: `create` concesso a ogni autenticato rende ornamentale `ticket.create` (INV-7).
+- Limite noto: `Ticket::isVisibleOnPublicFrontoffice()` guarda anche `auth()` della richiesta (proprietario autenticato), non l'utente passato alla Policy: con `Gate::forUser($altro)`
+  l'esito di `view` puo' dipendere da chi e' autenticato nella sessione, non da `$altro`.
 
 ## Non fa
 

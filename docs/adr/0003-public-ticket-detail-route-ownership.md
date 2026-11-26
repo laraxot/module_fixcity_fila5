@@ -1,10 +1,11 @@
 ---
-title: "ADR — Il dettaglio pubblico del ticket è un contenitore CMS con dati governati da Fixcity"
+title: "Il dettaglio pubblico del ticket è un contenitore CMS con dati governati da Fixcity"
 type: decision
 status: accepted
-module: Fixcity
 created: 2026-11-23
-updated: 2026-11-23
+updated: 2026-11-26
+module: Fixcity
+decision-makers: [team Laraxot]
 issues: []
 ---
 
@@ -67,3 +68,20 @@ non conosce il modello.
   per slug e record inesistenti.
 - `Modules/Fixcity/tests/Unit/Actions/BuildPublicTicketDetailActionTest.php`
   verifica il payload e la privacy dell'Action.
+
+Da `laravel/`:
+
+```bash
+vendor/bin/pest Modules/Fixcity/tests/Feature/Pages/TicketPublicDetailPageTest.php Modules/Fixcity/tests/Unit/Actions/BuildPublicTicketDetailActionTest.php Themes/Sixteen/tests/Feature/Pages/DetailNotFoundTest.php
+```
+
+Le regole del payload sono in [build-public-ticket-detail-action.md](../contracts/build-public-ticket-detail-action.md) (`TICKET-DETAIL-INV-1..8`).
+
+## Stato attuale
+
+La catena sopra vale per `/{lang}/tickets/{id}`. Nel codice esiste un secondo costruttore di payload pubblico, `BuildTicketPublicDetailsPayloadAction`
+(`Modules/Fixcity/app/Actions/BuildTicketPublicDetailsPayloadAction.php`), usato dalla pagina di tracciamento (`Modules/Fixcity/resources/views/pages/tickets/track.blade.php:42`,
+`Themes/Sixteen/resources/views/components/pages/ticket-track.blade.php:37`) e dall'API del popup della mappa (`Modules/Fixcity/resources/views/pages/api/ticket-details/[ticket].blade.php:19`).
+Espone `id`, `title`, `description`, `images`, `status`, `code` (solo al proprietario), `slug`. Le due Action non condividono la regola di visibilita': `BuildPublicTicketDetailAction` la applica in
+proprio; la seconda non controlla nulla e la visibilita' e' del chiamante (la query `BuildPublicTicketsQueryAction` nell'API della mappa; il possesso del codice di tracciamento, con `accessGranted: true`,
+nella pagina di tracciamento). La decisione "fonte unica" resta vera per il dettaglio `/tickets/{id}`, non per i payload di tracciamento e mappa.

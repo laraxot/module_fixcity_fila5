@@ -12,7 +12,11 @@ use Modules\Fixcity\Models\Ticket;
 use Modules\Geo\Infrastructure\Config\GeoApiEndpoints;
 use Spatie\QueueableAction\QueueableAction;
 
-/** Fills the ticket JSON location with a cached Nominatim reverse geocode. */
+/** Fills the ticket JSON location with a cached Nominatim reverse geocode.
+ * @see docs/contracts/geocode-ticket-address-action.md
+ *
+ * @contract docs/contracts/geocode-ticket-address-action.md
+ */
 final class GeocodeTicketAddressAction
 {
     use QueueableAction;

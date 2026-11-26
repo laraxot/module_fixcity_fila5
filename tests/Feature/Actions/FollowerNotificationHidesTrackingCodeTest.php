@@ -85,7 +85,7 @@ it('stores for a follower a notification without the tracking code and with the 
     Assert::assertStringContainsString('/tickets/'.$ticket->id, $payloads[0]);
     Assert::assertStringContainsString('Lampione spento in via Verdi', $payloads[0]);
     Assert::assertStringContainsString('TCK-FOLLOWER-NOTIF1', followerNotificationPayloads($owner)[0] ?? '', 'il proprietario riceve ancora il codice');
-});
+})->group('TICKET-NOTIFY-STATUS-INV-4');
 
 it('lists the follower notification by title, linked to the detail, and the owner one by code, linked to the tracking', function (): void {
     $owner = followerNotificationUser();
@@ -127,7 +127,7 @@ it('keeps the tracking code out of the notifications page and of the email of a 
     Assert::assertStringContainsString('/tickets/'.$ticket->id, (string) $mail->actionUrl);
     Assert::assertStringNotContainsString('code=', (string) $mail->actionUrl);
     Assert::assertStringNotContainsString('TCK-FOLLOWER-NOTIF1', json_encode($mail->introLines).' '.$mail->subject);
-});
+})->group('TICKET-NOTIFY-STATUS-INV-4');
 
 it('sends the owner who also follows the own report one notification, with the code', function (): void {
     $owner = followerNotificationUser();
@@ -138,4 +138,4 @@ it('sends the owner who also follows the own report one notification, with the c
     $payloads = followerNotificationPayloads($owner);
     Assert::assertCount(1, $payloads);
     Assert::assertStringContainsString('TCK-FOLLOWER-NOTIF1', $payloads[0]);
-});
+})->group('TICKET-NOTIFY-STATUS-INV-3');

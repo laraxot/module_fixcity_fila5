@@ -374,7 +374,7 @@ describe('Ticket Resource', function (): void {
             'id' => $ticket->id,
             'priority' => TicketPriorityEnum::HIGH->value,
         ]);
-    });
+    })->group('TICKET-PRIORITY-INV-4');
 
     test('admin can delete ticket', function (): void {
         $ticket = TicketFactory::new()->createOne();
@@ -387,7 +387,7 @@ describe('Ticket Resource', function (): void {
             'id' => $ticket->id,
         ]);
         Assert::assertNotNull($ticket->fresh()?->deleted_at);
-    });
+    })->group('TICKET-DELETE-INV-2');
 
     test('admin can bulk delete tickets', function (): void {
         /** @var Collection<int, Ticket> $tickets */

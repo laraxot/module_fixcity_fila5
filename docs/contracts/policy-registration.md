@@ -11,7 +11,7 @@ updated: 2026-11-26
 
 # Registrazione automatica delle Policy
 
-Come `TicketPolicy` arriva al `Gate` (il perche' sta nell'ADR [policy-autodiscovery](../adr/policy-autodiscovery.md)). Le regole
+Come `TicketPolicy` arriva al `Gate` (il perche' sta nell'ADR [policy-autodiscovery](../adr/0002-policy-autodiscovery.md)). Le regole
 di autorizzazione della Policy hanno un contratto a parte: [ticket-policy.md](ticket-policy.md).
 
 ## Input
@@ -27,8 +27,16 @@ di autorizzazione della Policy hanno un contratto a parte: [ticket-policy.md](ti
 
 | ID | Regola | Group Pest |
 |---|---|---|
-| TICKET-POLICY-REG-INV-1 | `FixcityServiceProvider` (e nessun altro file di `app/`) non registra `TicketPolicy` a mano: nessun `Gate::policy()` ne' `Gate::define()` in `Modules/Fixcity/app`. Violata: due fonti di verita' per l'associazione modello-Policy. Controllo manuale: l'ultimo comando della sezione Verifica non deve trovare nulla. | — (non dimostrato) |
+| TICKET-POLICY-REG-INV-1 | `FixcityServiceProvider` (e nessun altro file di `app/`) non registra `TicketPolicy` a mano: nessun `Gate::policy()` ne' `Gate::define()` in `Modules/Fixcity/app`. Violata: due fonti di verita' per l'associazione modello-Policy. Controllo manuale: il comando `rg` sotto la tabella non deve trovare nulla. | — (non dimostrato) |
 | TICKET-POLICY-REG-INV-2 | `TicketPolicy` resta in `Modules/Fixcity/app/Policies` e il suo nome segue la convenzione `Ticket` -> `TicketPolicy`: le chiamate al `Gate` su un `Ticket` raggiungono le sue regole (un amministratore vede l'azione `delete`, un operatore no). | `TICKET-POLICY-REG-INV-2` |
+
+Verifica, da `laravel/` (la terza riga e' il controllo manuale di `TICKET-POLICY-REG-INV-1`, che non trova nulla):
+
+```bash
+vendor/bin/pest Modules/Fixcity/tests --group=TICKET-POLICY-REG-INV-2
+vendor/bin/phpstan analyse Modules/Fixcity
+rg -n "Gate::policy|Gate::define" Modules/Fixcity/app
+```
 
 ## Effetti collaterali
 
@@ -46,12 +54,3 @@ di autorizzazione della Policy hanno un contratto a parte: [ticket-policy.md](ti
 - Non aggiunge una registrazione manuale ridondante in `FixcityServiceProvider`.
 - Non sposta la Policy in Cms o Xot.
 - Non modifica le regole di autorizzazione della Policy (vedi `ticket-policy.md`).
-
-## Verifica
-
-```bash
-cd laravel
-vendor/bin/pest Modules/Fixcity/tests --group=TICKET-POLICY-REG-INV-2
-vendor/bin/phpstan analyse Modules/Fixcity
-rg -n "Gate::policy|Gate::define" Modules/Fixcity/app
-```

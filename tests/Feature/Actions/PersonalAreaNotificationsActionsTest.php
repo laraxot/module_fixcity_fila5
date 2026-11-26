@@ -91,7 +91,7 @@ it('marks one notification as read and only the citizen own ones', function (): 
     $after = app(BuildPersonalAreaNotificationsDataAction::class)->execute($citizen);
     expect($after['unread_count'])->toBe(0)
         ->and($after['items'][0]['is_read'])->toBeTrue();
-});
+})->group('PERSONAL-NOTIF-READ-INV-1', 'PERSONAL-NOTIF-READ-INV-4');
 
 it('marks all the citizen notifications as read without touching other users', function (): void {
     $citizen = UserFactory::new()->createOne();
@@ -103,7 +103,7 @@ it('marks all the citizen notifications as read without touching other users', f
     expect(app(MarkPersonalAreaNotificationsAsReadAction::class)->execute($citizen))->toBe(2)
         ->and(app(BuildPersonalAreaNotificationsDataAction::class)->execute($citizen)['unread_count'])->toBe(0)
         ->and(app(BuildPersonalAreaNotificationsDataAction::class)->execute($stranger)['unread_count'])->toBe(1);
-});
+})->group('PERSONAL-NOTIF-READ-INV-2');
 
 it('caps the list and says when older notifications exist', function (): void {
     $citizen = UserFactory::new()->createOne();

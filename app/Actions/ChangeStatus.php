@@ -10,6 +10,11 @@ use Modules\Fixcity\Enums\TicketStatusEnum;
 use Modules\Fixcity\Models\Ticket;
 use Spatie\QueueableAction\QueueableAction;
 
+/**
+ * @see docs/contracts/change-status.md
+ *
+ * @contract docs/contracts/change-status.md
+ */
 class ChangeStatus
 {
     use QueueableAction;
